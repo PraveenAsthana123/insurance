@@ -1,0 +1,243 @@
+{
+  "department": "manufacturing",
+  "display_name": "Manufacturing",
+  "left_nav": [
+    {
+      "process": "Production Planning",
+      "slug": "production-planning",
+      "sub_processes": [
+        {
+          "name": "Production schedule",
+          "slug": "production-schedule",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Production schedule \u2014 Optimization model applied to Demand, capacity, inventory.",
+            "Data": "Demand, capacity, inventory",
+            "Input Data Type": "Tabular",
+            "AI Model": "Optimization model",
+            "Output": "Production plan",
+            "KPI": "OEE"
+          }
+        },
+        {
+          "name": "Changeover optimization",
+          "slug": "changeover-optimization",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Changeover optimization \u2014 Optimization AI applied to Recipe + line constraints.",
+            "Data": "Recipe + line constraints",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization AI",
+            "Output": "Optimal changeover sequence",
+            "KPI": "Changeover time"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Machine Monitoring",
+      "slug": "machine-monitoring",
+      "sub_processes": [
+        {
+          "name": "Predictive maintenance",
+          "slug": "predictive-maintenance",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Predictive maintenance \u2014 Predictive ML applied to IoT sensor streams.",
+            "Data": "IoT sensor streams",
+            "Input Data Type": "Streaming IoT",
+            "AI Model": "Predictive ML",
+            "Output": "Failure risk",
+            "KPI": "Downtime"
+          }
+        },
+        {
+          "name": "Anomaly detection",
+          "slug": "anomaly-detection",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Anomaly detection \u2014 Anomaly ML applied to Vibration + acoustics.",
+            "Data": "Vibration + acoustics",
+            "Input Data Type": "Time-series IoT",
+            "AI Model": "Anomaly ML",
+            "Output": "Anomaly alerts",
+            "KPI": "MTTR"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Quality Control",
+      "slug": "quality-control",
+      "sub_processes": [
+        {
+          "name": "Mixing/formulation",
+          "slug": "mixing-formulation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Mixing/formulation \u2014 ML regression applied to Recipe, batch data.",
+            "Data": "Recipe, batch data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "ML regression",
+            "Output": "Batch quality prediction",
+            "KPI": "Defect rate"
+          }
+        },
+        {
+          "name": "Visual inspection",
+          "slug": "visual-inspection",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Visual inspection \u2014 Computer vision applied to Images/video.",
+            "Data": "Images/video",
+            "Input Data Type": "Image + video",
+            "AI Model": "Computer vision",
+            "Output": "Defect detection",
+            "KPI": "Defect rate"
+          }
+        },
+        {
+          "name": "Label verification",
+          "slug": "label-verification",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Label verification \u2014 CV + OCR applied to Images + OCR.",
+            "Data": "Images + OCR",
+            "Input Data Type": "Image + text",
+            "AI Model": "CV + OCR",
+            "Output": "Label validation",
+            "KPI": "Compliance %"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Energy & Sustainability",
+      "slug": "energy-and-sustainability",
+      "sub_processes": [
+        {
+          "name": "Energy optimization",
+          "slug": "energy-optimization",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Energy optimization \u2014 Optimization AI applied to Sub-meter telemetry.",
+            "Data": "Sub-meter telemetry",
+            "Input Data Type": "Streaming IoT",
+            "AI Model": "Optimization AI",
+            "Output": "Energy reduction plan",
+            "KPI": "kWh per unit"
+          }
+        },
+        {
+          "name": "Water-use forecasting",
+          "slug": "water-use-forecasting",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Water-use forecasting \u2014 Forecasting ML applied to Process telemetry + weather.",
+            "Data": "Process telemetry + weather",
+            "Input Data Type": "Streaming + tabular",
+            "AI Model": "Forecasting ML",
+            "Output": "Water demand forecast",
+            "KPI": "Water per unit"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

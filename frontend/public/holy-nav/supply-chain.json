@@ -1,0 +1,296 @@
+{
+  "department": "supply-chain",
+  "display_name": "Supply Chain",
+  "left_nav": [
+    {
+      "process": "Demand Forecasting",
+      "slug": "demand-forecasting",
+      "sub_processes": [
+        {
+          "name": "Time-series forecast",
+          "slug": "time-series-forecast",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Time-series forecast \u2014 Prophet / XGBoost forecasting applied to Sales, weather, promos.",
+            "Data": "Sales, weather, promos",
+            "Input Data Type": "CSV time-series",
+            "AI Model": "Prophet / XGBoost forecasting",
+            "Output": "Demand forecast",
+            "KPI": "Forecast MAPE"
+          }
+        },
+        {
+          "name": "New-product launch forecast",
+          "slug": "new-product-launch-forecast",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "New-product launch forecast \u2014 Forecasting ML + analogy AI applied to Analogous SKUs, market intel.",
+            "Data": "Analogous SKUs, market intel",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "Forecasting ML + analogy AI",
+            "Output": "Launch volume forecast",
+            "KPI": "Launch MAPE"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Inventory & Replenishment",
+      "slug": "inventory-and-replenishment",
+      "sub_processes": [
+        {
+          "name": "Inventory analysis",
+          "slug": "inventory-analysis",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Inventory analysis \u2014 ML forecasting applied to Stock, warehouse, POS.",
+            "Data": "Stock, warehouse, POS",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "ML forecasting",
+            "Output": "Reorder signals",
+            "KPI": "Stockout rate"
+          }
+        },
+        {
+          "name": "Replenishment trigger",
+          "slug": "replenishment-trigger",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Replenishment trigger \u2014 Predictive model applied to POS + inventory.",
+            "Data": "POS + inventory",
+            "Input Data Type": "Streaming + tabular",
+            "AI Model": "Predictive model",
+            "Output": "Auto replenishment",
+            "KPI": "Inventory cost"
+          }
+        },
+        {
+          "name": "Safety-stock optimization",
+          "slug": "safety-stock-optimization",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Safety-stock optimization \u2014 Optimization model applied to Demand variance + lead-time.",
+            "Data": "Demand variance + lead-time",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization model",
+            "Output": "Optimal safety stock",
+            "KPI": "Service level"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Supplier & Logistics",
+      "slug": "supplier-and-logistics",
+      "sub_processes": [
+        {
+          "name": "Supplier risk scoring",
+          "slug": "supplier-risk-scoring",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Supplier risk scoring \u2014 Risk scoring ML applied to Supplier history, delays.",
+            "Data": "Supplier history, delays",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Risk scoring ML",
+            "Output": "Supplier risk score",
+            "KPI": "Supplier reliability"
+          }
+        },
+        {
+          "name": "Route optimization",
+          "slug": "route-optimization",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Route optimization \u2014 Optimization AI applied to Route, fuel, delivery.",
+            "Data": "Route, fuel, delivery",
+            "Input Data Type": "GPS + tabular",
+            "AI Model": "Optimization AI",
+            "Output": "Delivery schedule",
+            "KPI": "Delivery efficiency"
+          }
+        },
+        {
+          "name": "Shipment tracking",
+          "slug": "shipment-tracking",
+          "audiences": [
+            "b2b",
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Shipment tracking \u2014 Anomaly detection applied to GPS, IoT, ERP.",
+            "Data": "GPS, IoT, ERP",
+            "Input Data Type": "Streaming IoT",
+            "AI Model": "Anomaly detection",
+            "Output": "Delay alerts",
+            "KPI": "On-time delivery"
+          }
+        },
+        {
+          "name": "Carrier selection",
+          "slug": "carrier-selection",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Carrier selection \u2014 Optimization AI applied to Carrier KPIs + cost.",
+            "Data": "Carrier KPIs + cost",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization AI",
+            "Output": "Carrier assignment",
+            "KPI": "Cost per shipment"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Resilience & Risk",
+      "slug": "resilience-and-risk",
+      "sub_processes": [
+        {
+          "name": "Disruption forecasting",
+          "slug": "disruption-forecasting",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Disruption forecasting \u2014 Predictive ML + NLP applied to News, weather, supplier signals.",
+            "Data": "News, weather, supplier signals",
+            "Input Data Type": "Text + tabular",
+            "AI Model": "Predictive ML + NLP",
+            "Output": "Disruption risk score",
+            "KPI": "Disruption days/year"
+          }
+        },
+        {
+          "name": "Multi-scenario simulation",
+          "slug": "multi-scenario-simulation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Multi-scenario simulation \u2014 Discrete-event simulation applied to Demand/supply scenarios.",
+            "Data": "Demand/supply scenarios",
+            "Input Data Type": "Tabular + simulation",
+            "AI Model": "Discrete-event simulation",
+            "Output": "Scenario impact ranking",
+            "KPI": "Scenario coverage"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

@@ -1,0 +1,240 @@
+{
+  "department": "product-rd",
+  "display_name": "Product Rd",
+  "left_nav": [
+    {
+      "process": "Consumer Insight",
+      "slug": "consumer-insight",
+      "sub_processes": [
+        {
+          "name": "Trend analysis",
+          "slug": "trend-analysis",
+          "audiences": [
+            "b2c",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Trend analysis \u2014 NLP applied to Reviews, social, surveys.",
+            "Data": "Reviews, social, surveys",
+            "Input Data Type": "Text",
+            "AI Model": "NLP",
+            "Output": "Preference insights",
+            "KPI": "Innovation pipeline"
+          }
+        },
+        {
+          "name": "Flavor preference clustering",
+          "slug": "flavor-preference-clustering",
+          "audiences": [
+            "b2c",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Flavor preference clustering \u2014 Clustering ML applied to Sensory + survey data.",
+            "Data": "Sensory + survey data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Clustering ML",
+            "Output": "Flavor archetypes",
+            "KPI": "Hit-rate of new SKUs"
+          }
+        },
+        {
+          "name": "Health-trend monitoring",
+          "slug": "health-trend-monitoring",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Health-trend monitoring \u2014 NLP topic modeling applied to News + research feeds.",
+            "Data": "News + research feeds",
+            "Input Data Type": "Text",
+            "AI Model": "NLP topic modeling",
+            "Output": "Trend report",
+            "KPI": "Trend lead time"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Formulation",
+      "slug": "formulation",
+      "sub_processes": [
+        {
+          "name": "Ingredient research",
+          "slug": "ingredient-research",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Ingredient research \u2014 RAG + knowledge graph applied to Nutrition DB, ingredient docs.",
+            "Data": "Nutrition DB, ingredient docs",
+            "Input Data Type": "Structured + text",
+            "AI Model": "RAG + knowledge graph",
+            "Output": "Ingredient intelligence",
+            "KPI": "R&D speed"
+          }
+        },
+        {
+          "name": "Formula optimization",
+          "slug": "formula-optimization",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Formula optimization \u2014 Bayesian optimization applied to Lab test results.",
+            "Data": "Lab test results",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Bayesian optimization",
+            "Output": "Best formula",
+            "KPI": "Launch success"
+          }
+        },
+        {
+          "name": "Cost-aware reformulation",
+          "slug": "cost-aware-reformulation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Cost-aware reformulation \u2014 Constraint optimization applied to Ingredient costs + targets.",
+            "Data": "Ingredient costs + targets",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Constraint optimization",
+            "Output": "Reformulated recipe",
+            "KPI": "Margin per SKU"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Validation & Launch",
+      "slug": "validation-and-launch",
+      "sub_processes": [
+        {
+          "name": "Nutrition validation",
+          "slug": "nutrition-validation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Nutrition validation \u2014 Rule engine + NLP applied to Ingredient + nutrition facts.",
+            "Data": "Ingredient + nutrition facts",
+            "Input Data Type": "Structured + text",
+            "AI Model": "Rule engine + NLP",
+            "Output": "Nutrition compliance",
+            "KPI": "Compliance %"
+          }
+        },
+        {
+          "name": "Taste-prediction model",
+          "slug": "taste-prediction-model",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Taste-prediction model \u2014 ML regression applied to Sensory training data.",
+            "Data": "Sensory training data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "ML regression",
+            "Output": "Predicted consumer rating",
+            "KPI": "Test-panel correlation"
+          }
+        },
+        {
+          "name": "Launch-readiness score",
+          "slug": "launch-readiness-score",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Launch-readiness score \u2014 Predictive ML applied to Test + market + ops data.",
+            "Data": "Test + market + ops data",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "Predictive ML",
+            "Output": "Go/no-go score",
+            "KPI": "Launch success rate"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

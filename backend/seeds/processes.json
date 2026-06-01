@@ -1,0 +1,532 @@
+[
+  {
+    "department_route": "sales",
+    "name": "baseline_forecasting",
+    "description": "Generate statistical baseline demand forecasts using historical sales data without promotional effects",
+    "inputs": "Historical sales data, seasonality calendars, product master",
+    "outputs": "Baseline forecast by SKU/store/week, confidence intervals",
+    "pain_points": "Data quality gaps, intermittent demand, long-tail SKUs, computational scale",
+    "kpi": "MAPE < 15%, Bias < 5%, Forecast accuracy by segment",
+    "data_needed": "2+ years POS data, product hierarchy, store master, calendar"
+  },
+  {
+    "department_route": "sales",
+    "name": "promo_uplift",
+    "description": "Model incremental demand lift from trade promotions, pricing changes, and marketing activities",
+    "inputs": "Promotion calendar, historical promo data, baseline forecast, trade spend",
+    "outputs": "Promo uplift factors, adjusted forecast, ROI by promotion type",
+    "pain_points": "Cannibalization effects, overlapping promotions, new promo types, retailer variations",
+    "kpi": "Promo lift accuracy, trade spend ROI, incremental units sold",
+    "data_needed": "Promo event history, sell-through data, spend tracking, competitor promos"
+  },
+  {
+    "department_route": "sales",
+    "name": "seasonal_planning",
+    "description": "Identify and model seasonal demand patterns including holidays, events, and weather impacts",
+    "inputs": "Multi-year historical sales, holiday calendars, weather data, event schedules",
+    "outputs": "Seasonal indices, adjusted annual plan, peak demand windows",
+    "pain_points": "Shifting holidays, climate variability, new markets, short product lifecycles",
+    "kpi": "Seasonal forecast accuracy, stockout rate during peaks, overstock during troughs",
+    "data_needed": "3+ years POS, weather history, event calendars, geo-location data"
+  },
+  {
+    "department_route": "sales",
+    "name": "channel_demand",
+    "description": "Disaggregate total demand across retail, e-commerce, wholesale, and direct-to-consumer channels",
+    "inputs": "Channel sales history, market share data, distribution agreements",
+    "outputs": "Channel-level forecasts, channel mix recommendations, distribution plans",
+    "pain_points": "Channel conflict, data fragmentation across systems, e-commerce volatility",
+    "kpi": "Channel forecast accuracy, share-of-shelf, on-shelf availability by channel",
+    "data_needed": "Channel POS, e-commerce clickstream, distributor sell-through, market panel data"
+  },
+  {
+    "department_route": "sales",
+    "name": "new_product_forecast",
+    "description": "Forecast demand for new product launches using analogous product performance and market research",
+    "inputs": "Analogue product history, launch plans, market research, innovation pipeline",
+    "outputs": "Launch curve forecast, initial stocking quantities, ramp-up timeline",
+    "pain_points": "No historical data, analogue selection bias, cannibalisation of existing lines",
+    "kpi": "Launch accuracy vs plan, days-to-velocity, initial sell-through rate",
+    "data_needed": "Analogue product trajectories, distribution rollout plan, consumer research surveys"
+  },
+  {
+    "department_route": "sales",
+    "name": "forecast_reconciliation",
+    "description": "Reconcile top-down financial targets with bottom-up statistical forecasts across all planning horizons",
+    "inputs": "Statistical forecast, financial plan, sales team adjustments, S&OP inputs",
+    "outputs": "Consensus forecast, reconciliation log, override justifications",
+    "pain_points": "Political overrides, misaligned incentives, slow reconciliation cycle times",
+    "kpi": "Bias introduced by overrides, cycle time, consensus achievement rate",
+    "data_needed": "All forecast layers, financial targets, category plans, regional inputs"
+  },
+  {
+    "department_route": "sales",
+    "name": "exception_management",
+    "description": "Identify and surface forecast anomalies, outliers, and events requiring planner attention",
+    "inputs": "Current forecast, actuals, alert thresholds, historical variance patterns",
+    "outputs": "Exception queue, prioritized alerts, recommended actions",
+    "pain_points": "Alert fatigue, unclear ownership, lack of root cause visibility",
+    "kpi": "Exception resolution rate, mean time to resolve, false positive rate",
+    "data_needed": "Real-time POS, forecast vs actual variance, inventory alerts"
+  },
+  {
+    "department_route": "sales",
+    "name": "demand_sensing",
+    "description": "Use near-real-time signals (POS, social, weather) to adjust short-horizon forecasts within the planning cycle",
+    "inputs": "Daily POS feeds, social media signals, weather forecast, search trends",
+    "outputs": "Adjusted 2-4 week forecast, signal contribution breakdown",
+    "pain_points": "Data latency, signal noise, integration complexity, model drift",
+    "kpi": "Short-horizon MAPE improvement vs statistical baseline, signal freshness",
+    "data_needed": "Daily/hourly POS, weather APIs, social listening feeds, web analytics"
+  },
+  {
+    "department_route": "sales",
+    "name": "reporting",
+    "description": "Generate standardized demand planning performance reports for stakeholders across the business",
+    "inputs": "Forecast vs actual data, KPI targets, prior period benchmarks",
+    "outputs": "Weekly/monthly accuracy dashboards, root cause commentary, trend analysis",
+    "pain_points": "Manual report building, inconsistent definitions, delayed data availability",
+    "kpi": "Report timeliness, stakeholder satisfaction, KPI trend direction",
+    "data_needed": "Forecast archive, actuals, approved KPI definitions, hierarchy master"
+  },
+  {
+    "department_route": "sales",
+    "name": "forecast_explanation",
+    "description": "Provide interpretable explanations for forecast drivers and variance to enable planner trust and override decisions",
+    "inputs": "Model outputs, feature importance scores, SHAP values, historical actuals",
+    "outputs": "Driver narrative, top contributing factors, what-if scenario comparisons",
+    "pain_points": "Black-box ML models, planner distrust, regulatory explainability requirements",
+    "kpi": "Override rate (lower is better), planner adoption score, explanation accuracy",
+    "data_needed": "Model artifacts, SHAP outputs, feature metadata, business glossary"
+  },
+  {
+    "department_route": "supply-chain",
+    "name": "inventory_optimization",
+    "description": "Compute optimal inventory targets (safety stock, reorder points, max levels) across the network",
+    "inputs": "Demand forecast, lead times, service level targets, holding costs",
+    "outputs": "Optimal inventory targets by SKU/location, safety stock recommendations",
+    "pain_points": "Lead time variability, demand uncertainty, multi-echelon complexity",
+    "kpi": "Inventory turns, days of supply, stockout rate, working capital tied up",
+    "data_needed": "Demand forecast, supplier lead times, cost of holding, service targets"
+  },
+  {
+    "department_route": "supply-chain",
+    "name": "replenishment_planning",
+    "description": "Generate automated replenishment orders based on inventory positions and demand signals",
+    "inputs": "Current inventory, demand forecast, lead times, order constraints",
+    "outputs": "Replenishment orders, shipment schedules, supplier alerts",
+    "pain_points": "Bullwhip effect, supplier unreliability, minimum order quantities",
+    "kpi": "Order fulfillment rate, lead time adherence, fill rate, OTIF",
+    "data_needed": "Real-time inventory, PO history, supplier performance, demand signals"
+  },
+  {
+    "department_route": "supply-chain",
+    "name": "stock_balancing",
+    "description": "Reallocate excess inventory across locations to prevent stockouts and reduce write-offs",
+    "inputs": "Inventory by location, demand forecasts, transfer costs, capacity constraints",
+    "outputs": "Inter-site transfer recommendations, write-off reduction plan",
+    "pain_points": "High transfer costs, perishable goods, system integration gaps",
+    "kpi": "Days of excess inventory, write-off value, transfer cost per unit",
+    "data_needed": "Warehouse inventory, demand by location, logistics costs, shelf life data"
+  },
+  {
+    "department_route": "supply-chain",
+    "name": "supplier_lead_time_prediction",
+    "description": "Predict supplier delivery lead times using historical PO data and external disruption signals",
+    "inputs": "PO history, supplier performance data, geopolitical risk feeds",
+    "outputs": "Lead time distribution forecasts, risk flags, buffer stock recommendations",
+    "pain_points": "Incomplete supplier data, global disruptions, single-source dependencies",
+    "kpi": "Lead time forecast accuracy, on-time delivery rate, disruption response time",
+    "data_needed": "PO receipt history, supplier scorecards, shipping lane data, risk indices"
+  },
+  {
+    "department_route": "supply-chain",
+    "name": "network_design",
+    "description": "Optimize the physical supply chain network — warehouse locations, distribution centers, and flow paths",
+    "inputs": "Demand by region, facility costs, transportation costs, service level requirements",
+    "outputs": "Network topology recommendations, cost-to-serve analysis, scenario comparisons",
+    "pain_points": "Long planning horizons, capital investment decisions, political constraints",
+    "kpi": "Total logistics cost, service level coverage, network resilience score",
+    "data_needed": "Demand heatmaps, facility operating costs, freight rates, service zone maps"
+  },
+  {
+    "department_route": "logistics",
+    "name": "route_optimization",
+    "description": "Optimize delivery routes for minimum cost, distance, and time while meeting delivery windows",
+    "inputs": "Order locations, vehicle capacity, time windows, road network data",
+    "outputs": "Optimized route plans, driver assignments, estimated delivery times",
+    "pain_points": "Dynamic order additions, traffic variability, driver availability, multi-stop complexity",
+    "kpi": "Cost per delivery, on-time delivery rate, vehicle utilization, miles driven",
+    "data_needed": "Order manifest, GPS/map data, vehicle master, delivery window constraints"
+  },
+  {
+    "department_route": "logistics",
+    "name": "shipment_scheduling",
+    "description": "Plan outbound shipment schedules to balance carrier capacity, cost, and delivery commitments",
+    "inputs": "Order book, carrier capacity, freight rates, delivery commitments",
+    "outputs": "Shipment schedule, carrier assignments, load plans",
+    "pain_points": "Carrier capacity shortages, rate volatility, last-minute order changes",
+    "kpi": "Load factor, freight cost per unit, carrier OTIF, shipment consolidation rate",
+    "data_needed": "Open orders, carrier contracts, rate cards, capacity commitments"
+  },
+  {
+    "department_route": "logistics",
+    "name": "delivery_tracking",
+    "description": "Monitor shipment status in real-time and predict delivery exceptions before they occur",
+    "inputs": "Carrier track-and-trace data, GPS feeds, weather data, historical delay patterns",
+    "outputs": "Live shipment dashboard, exception alerts, revised ETA predictions",
+    "pain_points": "Multiple carrier systems, data latency, customer expectation management",
+    "kpi": "Tracking coverage rate, exception detection lead time, customer complaint rate",
+    "data_needed": "EDI 214 feeds, carrier APIs, weather API, historical delay data"
+  },
+  {
+    "department_route": "logistics",
+    "name": "freight_cost_optimization",
+    "description": "Analyze and optimize freight spend across lanes, carriers, and modes using market intelligence",
+    "inputs": "Freight invoices, lane data, carrier rates, market benchmarks",
+    "outputs": "Savings opportunities, carrier negotiation data, mode shift recommendations",
+    "pain_points": "Rate volatility, invoice errors, limited market visibility, long-term contracts",
+    "kpi": "Freight cost per unit, savings vs benchmark, carrier performance score",
+    "data_needed": "Historical invoices, lane volumes, DAT/Spot market rates, contract terms"
+  },
+  {
+    "department_route": "manufacturing",
+    "name": "production_planning",
+    "description": "Create detailed production schedules to meet demand forecasts within capacity constraints",
+    "inputs": "Demand forecast, machine capacity, raw material availability, labor plans",
+    "outputs": "Production schedule, resource allocation plan, capacity utilization report",
+    "pain_points": "Short runs, changeover time, shared resources, last-minute demand changes",
+    "kpi": "OEE (Overall Equipment Effectiveness), schedule adherence, output vs plan",
+    "data_needed": "BOM, routing sheets, machine capacity, demand forecast, raw material inventory"
+  },
+  {
+    "department_route": "manufacturing",
+    "name": "batch_scheduling",
+    "description": "Sequence and schedule production batches to minimize changeover costs and maximize throughput",
+    "inputs": "Order backlog, batch sizes, changeover matrix, line capacity, allergen constraints",
+    "outputs": "Optimized batch sequence, changeover schedule, throughput projection",
+    "pain_points": "Allergen/cleaning constraints, minimum batch sizes, shared ingredients, regulatory holds",
+    "kpi": "Changeover time, batch success rate, throughput per shift, waste per batch",
+    "data_needed": "Product families, changeover matrix, line speeds, batch history, quality specs"
+  },
+  {
+    "department_route": "manufacturing",
+    "name": "yield_optimization",
+    "description": "Maximize product yield and minimize waste by analyzing production parameters and process variables",
+    "inputs": "Process sensor data, recipe parameters, input material quality, yield history",
+    "outputs": "Optimal process parameters, yield improvement recommendations, waste reduction plan",
+    "pain_points": "Raw material variability, equipment wear, operator skill variation, seasonal inputs",
+    "kpi": "Yield %, raw material waste, cost per unit produced, first-pass quality rate",
+    "data_needed": "Process sensor data, lab results, raw material specs, equipment logs"
+  },
+  {
+    "department_route": "manufacturing",
+    "name": "capacity_planning",
+    "description": "Project long-term capacity requirements and identify gaps requiring capital investment or outsourcing",
+    "inputs": "Demand plan, current capacity, planned investments, growth projections",
+    "outputs": "Capacity gap analysis, investment recommendations, make-vs-buy analysis",
+    "pain_points": "Long equipment lead times, demand uncertainty, CapEx approval cycles",
+    "kpi": "Capacity utilization, bottleneck identification, CapEx ROI, make/buy cost delta",
+    "data_needed": "5-year demand plan, line capacity data, investment pipeline, outsourcing costs"
+  },
+  {
+    "department_route": "maintenance",
+    "name": "predictive_maintenance",
+    "description": "Predict equipment failures before they occur using sensor data and ML anomaly detection",
+    "inputs": "IoT sensor data (vibration, temperature, pressure), maintenance history, equipment specs",
+    "outputs": "Failure predictions with lead time, maintenance work orders, risk priority ranking",
+    "pain_points": "Sensor data quality, model drift over equipment aging, alert fatigue",
+    "kpi": "Unplanned downtime reduction, MTBF improvement, false positive rate, maintenance cost",
+    "data_needed": "Time-series sensor data, equipment master, maintenance log, failure history"
+  },
+  {
+    "department_route": "maintenance",
+    "name": "equipment_monitoring",
+    "description": "Continuously monitor equipment health indicators and surface anomalies in real time",
+    "inputs": "Live sensor streams, equipment thresholds, baseline health profiles",
+    "outputs": "Real-time equipment health dashboard, anomaly alerts, trend reports",
+    "pain_points": "Legacy equipment without sensors, network connectivity, data storage costs",
+    "kpi": "Sensor uptime, anomaly detection latency, alert accuracy, coverage rate",
+    "data_needed": "SCADA/IoT feeds, equipment specs, historical baselines, threshold definitions"
+  },
+  {
+    "department_route": "maintenance",
+    "name": "maintenance_scheduling",
+    "description": "Optimize preventive and corrective maintenance schedules to minimize production impact",
+    "inputs": "Maintenance plan, production schedule, technician availability, spare parts inventory",
+    "outputs": "Optimized maintenance calendar, resource plan, downtime impact estimate",
+    "pain_points": "Competing priorities with production, technician skill matching, parts availability",
+    "kpi": "Planned vs reactive maintenance ratio, schedule compliance rate, mean time to repair",
+    "data_needed": "PM schedules, production calendar, technician rosters, spare parts data"
+  },
+  {
+    "department_route": "maintenance",
+    "name": "spare_parts_optimization",
+    "description": "Optimize spare parts inventory levels to balance service availability against carrying costs",
+    "inputs": "Failure probability forecasts, part lead times, equipment criticality, holding costs",
+    "outputs": "Recommended stocking levels, critical parts list, replenishment triggers",
+    "pain_points": "Long lead time parts, obsolescence risk, limited storage space, global supply",
+    "kpi": "Parts availability rate, stockout frequency, inventory carrying cost, obsolescence write-off",
+    "data_needed": "Parts consumption history, lead times, equipment criticality ratings, cost data"
+  },
+  {
+    "department_route": "retail",
+    "name": "shelf_optimization",
+    "description": "Determine optimal shelf space allocation and product placement to maximize category revenue",
+    "inputs": "Sales velocity by SKU, shelf dimensions, planogram constraints, shopper flow data",
+    "outputs": "Recommended planogram, facings by SKU, space-to-sales ratio analysis",
+    "pain_points": "Retailer compliance, frequent assortment changes, physical measurement accuracy",
+    "kpi": "Sales per linear foot, out-of-stock rate, planogram compliance rate, velocity improvement",
+    "data_needed": "POS by store/SKU, shelf dimensions, space management data, shopper behavior"
+  },
+  {
+    "department_route": "retail",
+    "name": "product_assortment",
+    "description": "Optimize product range selection by store cluster to maximize relevance and financial performance",
+    "inputs": "Product performance data, store demographics, shopper profiles, space constraints",
+    "outputs": "Recommended assortment by cluster, rationalization candidates, listing priorities",
+    "pain_points": "Retailer gatekeepers, local demand variation, distribution cost constraints",
+    "kpi": "Revenue per assortment item, assortment efficiency, delisted SKU impact, distribution coverage",
+    "data_needed": "Item-level POS, store cluster definitions, shopper demographics, competitor range"
+  },
+  {
+    "department_route": "retail",
+    "name": "store_analytics",
+    "description": "Analyze store-level performance patterns and identify growth opportunities by geography and format",
+    "inputs": "Store POS, store attributes, market data, competitive intelligence",
+    "outputs": "Store performance ranking, opportunity map, peer-group benchmarks",
+    "pain_points": "Inconsistent retailer data formats, geographic data granularity, attribution complexity",
+    "kpi": "Same-store sales growth, market share by store cluster, store execution score",
+    "data_needed": "Weekly POS, store attributes, panel market share, retail audit data"
+  },
+  {
+    "department_route": "retail",
+    "name": "pricing_optimization",
+    "description": "Set optimal retail prices by analyzing price elasticity, competitive positioning, and margin targets",
+    "inputs": "Price history, volume response, competitor prices, margin targets, promotional calendar",
+    "outputs": "Recommended prices by SKU/channel, elasticity coefficients, scenario P&L",
+    "pain_points": "Retailer price control, cross-SKU cannibalization, rapid competitor response",
+    "kpi": "Price index vs competition, volume response, category margin, revenue realization",
+    "data_needed": "Price point history, volume data, competitor price tracking, margin structure"
+  },
+  {
+    "department_route": "customer",
+    "name": "customer_segmentation",
+    "description": "Cluster customers into behaviorally and demographically distinct segments for targeted marketing",
+    "inputs": "Transaction history, demographics, behavioral signals, loyalty data",
+    "outputs": "Customer segments, segment profiles, migration analysis",
+    "pain_points": "Data privacy regulations, segment drift over time, actionability of segments",
+    "kpi": "Segment stability, within-segment homogeneity, uplift from targeted campaigns",
+    "data_needed": "Transaction history, loyalty program data, demographic enrichment, web/app behavior"
+  },
+  {
+    "department_route": "customer",
+    "name": "churn_prediction",
+    "description": "Identify customers at risk of churning and enable proactive retention interventions",
+    "inputs": "Purchase frequency trends, engagement signals, NPS/survey data, competitor offers",
+    "outputs": "Churn probability scores, at-risk customer list, intervention recommendations",
+    "pain_points": "Defining churn for BEV (no subscription), indirect measurement via loyalty data",
+    "kpi": "Churn rate reduction, retention campaign ROI, model AUC, intervention lead time",
+    "data_needed": "Purchase history, loyalty engagement, survey responses, redemption data"
+  },
+  {
+    "department_route": "customer",
+    "name": "clv_prediction",
+    "description": "Forecast customer lifetime value to prioritize acquisition spend and retention investments",
+    "inputs": "Historical purchase data, channel behavior, product adoption patterns",
+    "outputs": "CLV scores by customer, CLV segments, acquisition cost thresholds",
+    "pain_points": "Short loyalty membership periods, household vs individual tracking, private label competition",
+    "kpi": "CLV prediction accuracy, average CLV growth, acquisition ROI, high-value customer retention",
+    "data_needed": "Full transaction history, loyalty tenure, product mix, channel usage patterns"
+  },
+  {
+    "department_route": "customer",
+    "name": "personalization",
+    "description": "Deliver personalized product recommendations and offers through digital and physical channels",
+    "inputs": "Customer profiles, purchase history, real-time context, product catalog",
+    "outputs": "Personalized recommendations, offer triggers, A/B test results",
+    "pain_points": "Cold start for new customers, consent management, channel coordination",
+    "kpi": "Click-through rate, offer redemption rate, incremental sales lift, personalization coverage",
+    "data_needed": "Individual transaction data, email/app engagement, product catalog, consent records"
+  },
+  {
+    "department_route": "customer",
+    "name": "campaign_effectiveness",
+    "description": "Measure and attribute marketing campaign performance using test/control and multi-touch attribution",
+    "inputs": "Campaign data, media spend, sales uplift, control groups",
+    "outputs": "Campaign ROI, attribution scores, incrementality measurement",
+    "pain_points": "Attribution in multi-channel world, long purchase cycles, lack of holdout groups",
+    "kpi": "Marketing ROI, incremental revenue, cost per acquisition, brand awareness lift",
+    "data_needed": "Media spend by channel, sales by test/control, campaign exposure data, survey data"
+  },
+  {
+    "department_route": "finance",
+    "name": "revenue_forecasting",
+    "description": "Forecast revenue by product, channel, and geography to support financial planning and investor reporting",
+    "inputs": "Demand forecast, pricing assumptions, trade spend plan, market share trends",
+    "outputs": "Revenue forecast P&L, scenario analysis, variance to budget",
+    "pain_points": "Integration with multiple ERP systems, assumption alignment with commercial teams",
+    "kpi": "Revenue forecast accuracy, variance to plan, forecast cycle time",
+    "data_needed": "Demand forecast, price realization history, trade spend actuals, market share data"
+  },
+  {
+    "department_route": "finance",
+    "name": "profitability_analysis",
+    "description": "Analyze profitability by SKU, customer, and channel to identify margin improvement opportunities",
+    "inputs": "Revenue actuals, COGS breakdown, trade spend, overhead allocations",
+    "outputs": "P&L by product/customer/channel, margin waterfall, improvement opportunities",
+    "pain_points": "Overhead allocation methodologies, trade spend net-back complexity, data silos",
+    "kpi": "Gross margin %, net margin by segment, cost-to-serve by customer, trade spend efficiency",
+    "data_needed": "SAP/ERP actuals, trade fund system data, cost allocation models, volume data"
+  },
+  {
+    "department_route": "finance",
+    "name": "trade_spend_management",
+    "description": "Plan, execute, and reconcile trade promotion investments against financial targets",
+    "inputs": "Promo calendar, contracted trade rates, deduction claims, sell-through data",
+    "outputs": "Trade spend forecast, accrual recommendations, deduction validation",
+    "pain_points": "Deduction disputes, post-event reconciliation delays, system fragmentation",
+    "kpi": "Trade spend as % of revenue, deduction accuracy, ROI by event type, accrual accuracy",
+    "data_needed": "Trade fund contracts, retailer deduction data, sell-through reports, event calendar"
+  },
+  {
+    "department_route": "finance",
+    "name": "cashflow_forecasting",
+    "description": "Forecast operating cash flows to optimize working capital and treasury operations",
+    "inputs": "Revenue forecast, collection terms, payment schedules, inventory investment plan",
+    "outputs": "13-week cash flow forecast, working capital requirements, liquidity alerts",
+    "pain_points": "Receivables timing uncertainty, cross-border FX complexity, system data gaps",
+    "kpi": "Cash forecast accuracy, days sales outstanding, days payable outstanding, liquidity headroom",
+    "data_needed": "AR aging, AP schedule, revenue forecast, inventory plan, bank position data"
+  },
+  {
+    "department_route": "procurement",
+    "name": "supplier_selection",
+    "description": "Evaluate and score suppliers using a multi-criteria framework to support sourcing decisions",
+    "inputs": "Supplier bids, quality audits, financial health data, sustainability scores",
+    "outputs": "Supplier scorecard, recommended selection, risk-adjusted cost analysis",
+    "pain_points": "Limited supplier transparency, sustainability data gaps, single-source concentration",
+    "kpi": "Supplier qualification rate, dual-source coverage, cost competitiveness, sustainability score",
+    "data_needed": "Supplier financial reports, audit results, cost benchmarks, ESG ratings"
+  },
+  {
+    "department_route": "procurement",
+    "name": "contract_management",
+    "description": "Manage supplier contract lifecycle from negotiation through expiry, including compliance tracking",
+    "inputs": "Contract terms, spend actuals, renewal calendars, compliance audit data",
+    "outputs": "Contract compliance report, renewal alerts, renegotiation priorities",
+    "pain_points": "Manual contract repositories, expired terms, lack of spend linkage",
+    "kpi": "Contract compliance rate, savings vs contracted terms, renewal timeliness, renegotiation cycle time",
+    "data_needed": "Contract database, purchase orders, invoice actuals, compliance audit records"
+  },
+  {
+    "department_route": "procurement",
+    "name": "vendor_performance",
+    "description": "Track and score vendor performance across quality, delivery, cost, and service dimensions",
+    "inputs": "Delivery records, quality inspection results, invoice accuracy, service interactions",
+    "outputs": "Vendor scorecards, performance trends, corrective action plans",
+    "pain_points": "Data collection burden, subjective scoring, vendor pushback on metrics",
+    "kpi": "OTIF rate, defect rate, invoice accuracy, response time, relationship NPS",
+    "data_needed": "PO receipts, quality inspection logs, invoice data, service tickets"
+  },
+  {
+    "department_route": "procurement",
+    "name": "commodity_price_forecasting",
+    "description": "Forecast commodity input prices to inform hedging strategy and budget planning",
+    "inputs": "Commodity futures prices, macroeconomic indicators, supply/demand reports",
+    "outputs": "Price forecasts, hedge recommendations, budget sensitivity analysis",
+    "pain_points": "Market volatility, geopolitical shocks, model instability in crisis periods",
+    "kpi": "Forecast MAPE, hedge effectiveness, cost avoidance vs spot, budget accuracy",
+    "data_needed": "Futures market data, Bloomberg/Reuters feeds, supplier indices, consumption volumes"
+  },
+  {
+    "department_route": "quality",
+    "name": "defect_detection",
+    "description": "Detect product defects in real time during production using computer vision and sensor analytics",
+    "inputs": "Camera images, spectral data, weight/dimension sensors, product specs",
+    "outputs": "Defect classifications, rejection signals, defect rate trends",
+    "pain_points": "Lighting variability, product variation, high throughput speed, model retraining",
+    "kpi": "Defect detection accuracy, false reject rate, throughput impact, cost of quality",
+    "data_needed": "Labeled image datasets, sensor readings, product specification files"
+  },
+  {
+    "department_route": "quality",
+    "name": "batch_validation",
+    "description": "Validate production batch compliance against regulatory and internal quality specifications before release",
+    "inputs": "Lab test results, process parameters, batch records, regulatory thresholds",
+    "outputs": "Batch release decision, non-conformance report, corrective action triggers",
+    "pain_points": "Manual review bottlenecks, LIMS integration, regulatory variation by market",
+    "kpi": "Batch release cycle time, first-pass release rate, non-conformance rate, recall risk score",
+    "data_needed": "LIMS results, batch manufacturing records, regulatory limits, historical batch data"
+  },
+  {
+    "department_route": "quality",
+    "name": "supplier_quality_management",
+    "description": "Monitor and manage incoming raw material quality from suppliers to prevent production quality failures",
+    "inputs": "Incoming inspection results, supplier quality history, specification documents",
+    "outputs": "Supplier quality scorecard, incoming rejection alerts, risk-ranked supplier list",
+    "pain_points": "Supplier non-disclosure, testing cost and time, limited visibility into sub-suppliers",
+    "kpi": "Incoming acceptance rate, supplier defect PPM, line stoppages from quality, audit score",
+    "data_needed": "Incoming QC records, supplier audit reports, specification libraries, field complaint data"
+  },
+  {
+    "department_route": "quality",
+    "name": "consumer_complaint_analysis",
+    "description": "Analyze consumer complaint patterns to identify product quality issues and drive improvement",
+    "inputs": "Consumer complaint records, product batch codes, social listening data, call center logs",
+    "outputs": "Complaint cluster analysis, root cause hypotheses, product alert recommendations",
+    "pain_points": "Unstructured text data, batch traceability gaps, volume vs severity trade-offs",
+    "kpi": "Complaints per million units, time-to-detect quality event, complaint resolution rate",
+    "data_needed": "CRM complaint logs, batch traceability data, social media mentions, product returns"
+  },
+  {
+    "department_route": "governance",
+    "name": "regulatory_compliance_tracking",
+    "description": "Monitor product and process compliance against regulatory requirements across all operating markets",
+    "inputs": "Regulatory frameworks, product formulations, labelling data, market-specific rules",
+    "outputs": "Compliance status dashboard, gap analysis, remediation action plan",
+    "pain_points": "Frequent regulatory changes, multi-market complexity, product reformulation costs",
+    "kpi": "Compliance coverage rate, time-to-remediate, regulatory incident count, penalty avoidance",
+    "data_needed": "Regulatory databases, product specifications, labelling records, market registration data"
+  },
+  {
+    "department_route": "governance",
+    "name": "audit_management",
+    "description": "Plan, execute, and track internal and external audits to ensure operational and financial compliance",
+    "inputs": "Audit schedule, prior findings, process documentation, risk assessments",
+    "outputs": "Audit reports, finding severity ratings, corrective action tracking",
+    "pain_points": "Resource availability, auditee resistance, finding recurrence, documentation gaps",
+    "kpi": "Audit completion rate, repeat finding rate, corrective action closure rate, audit cycle time",
+    "data_needed": "Audit plans, previous reports, SOPs, risk register, corrective action log"
+  },
+  {
+    "department_route": "governance",
+    "name": "risk_assessment",
+    "description": "Identify, quantify, and prioritize enterprise risks across supply chain, operational, and regulatory domains",
+    "inputs": "Risk registers, operational data, external intelligence, scenario models",
+    "outputs": "Risk heat map, prioritized risk list, mitigation recommendations",
+    "pain_points": "Subjectivity in risk scoring, emerging risk identification, cross-functional silos",
+    "kpi": "Risk coverage %, high-risk mitigation rate, risk event frequency, impact vs mitigation cost",
+    "data_needed": "Risk event history, process data, external risk feeds, insurance claims data"
+  },
+  {
+    "department_route": "governance",
+    "name": "data_governance",
+    "description": "Establish and enforce data quality standards, lineage tracking, and access controls across enterprise data",
+    "inputs": "Data quality metrics, data catalog, access logs, lineage metadata",
+    "outputs": "Data quality scorecard, lineage maps, access violation alerts, remediation backlog",
+    "pain_points": "Organizational resistance, tool fragmentation, lack of data ownership accountability",
+    "kpi": "Data quality score, lineage coverage %, policy compliance rate, time-to-resolve data issues",
+    "data_needed": "Data profiling results, catalog metadata, access logs, master data records"
+  },
+  {
+    "department_route": "governance",
+    "name": "esg_reporting",
+    "description": "Collect, validate, and report Environmental, Social, and Governance metrics for regulatory and investor disclosure",
+    "inputs": "Energy consumption, waste data, emissions records, social metrics, governance indicators",
+    "outputs": "ESG scorecard, GHG emissions report, regulatory disclosures, investor materials",
+    "pain_points": "Data collection from operations, evolving reporting standards (CSRD, SEC), third-party verification",
+    "kpi": "GHG emissions intensity, water use per unit, diversity metrics, reporting accuracy, audit pass rate",
+    "data_needed": "Utility data, logistics emissions, waste records, HR diversity data, governance policies"
+  }
+]

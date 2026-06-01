@@ -1,0 +1,58 @@
+{
+  "commands": {
+    "health": "./scripts/agent_fleet.sh supervisor-health",
+    "platform_status": "./scripts/agent_fleet.sh platform-status",
+    "setup_kivi_host": "./scripts/setup_kivi_model.py --ollama-host http://localhost:11434 --base-model gemma3:1b --kivi-model kivi:local",
+    "setup_ollama": "./scripts/agent_fleet.sh ollama-setup",
+    "start_100_kivi": "./scripts/agent_fleet.sh start-100-kivi 100 100",
+    "supervisor": "./scripts/agent_fleet.sh supervisor-watch"
+  },
+  "default_runtime": {
+    "agent_model": "kivi:local",
+    "base_model": "gemma3:1b",
+    "council_agents": 5,
+    "kivi_model": "kivi:local",
+    "simple_agents": 100
+  },
+  "name": "holy-agent-services",
+  "services": {
+    "agent_platform": {
+      "cua": "POST /api/v1/agent-platform/cua/execute",
+      "governance": "POST /api/v1/agent-platform/governance/evaluate",
+      "manifest": "GET /api/v1/agent-platform/manifest",
+      "status": "GET /api/v1/agent-platform/status"
+    },
+    "api": {
+      "docker_url": "http://backend:8000",
+      "local_url": "http://localhost:8000"
+    },
+    "ollama": {
+      "docker_url": "http://ollama:11434",
+      "local_url": "http://localhost:11434",
+      "model": "kivi:local"
+    },
+    "openclaw": {
+      "create_task": "POST /api/v1/openclaw/tasks",
+      "get_task": "GET /api/v1/openclaw/tasks/{task_id}?mode=council",
+      "manifest": "GET /api/v1/openclaw/manifest",
+      "status": "GET /api/v1/openclaw/status"
+    },
+    "paperclip": {
+      "clips": "/api/v1/paperclip/clips",
+      "context_pack": "POST /api/v1/paperclip/context-pack",
+      "status": "GET /api/v1/paperclip/status"
+    },
+    "redis": {
+      "docker_url": "redis://redis:6379/0",
+      "queues": [
+        "tasks",
+        "done",
+        "council_tasks",
+        "council_done",
+        "test_tasks",
+        "test_results"
+      ]
+    }
+  },
+  "version": 1
+}

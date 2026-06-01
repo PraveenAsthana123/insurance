@@ -1,0 +1,36 @@
+name: insur-api-change-governance
+description: BEV-specific workflow for API/router/schema/service changes with human approval, catalog and inventory governance, validation, and final approval.
+provider: codex
+modelReasoningEffort: medium
+interactive: true
+nodes:
+  - id: governance
+    command: insur-governance-check
+
+  - id: approve-api-plan
+    approval:
+      message: "Review API impact, required docs, and test plan before implementation. Approve to continue."
+      capture_response: true
+      on_reject:
+        prompt: "Revise the API implementation plan using this rejection reason: $REJECTION_REASON"
+        max_attempts: 3
+    depends_on: [governance]
+
+  - id: implement
+    command: insur-implement-with-docs
+    depends_on: [approve-api-plan]
+    context: fresh
+
+  - id: validate
+    command: insur-validate
+    depends_on: [implement]
+    context: fresh
+
+  - id: approve-api-handoff
+    approval:
+      message: "Review API docs/catalog updates, tests, and final diff. Approve to complete or reject with required fixes."
+      capture_response: true
+      on_reject:
+        prompt: "Fix final API review feedback before handoff: $REJECTION_REASON"
+        max_attempts: 3
+    depends_on: [validate]

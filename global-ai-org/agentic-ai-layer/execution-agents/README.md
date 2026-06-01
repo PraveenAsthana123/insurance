@@ -1,0 +1,7 @@
+# Execution Agents
+
+**Local scope:** Execution agents (perform actions).
+
+> Path: `agentic-ai-layer/execution-agents`
+> See `GLOBAL_README.md` in this folder for how it fits into the global org structure.
+> See global CLAUDE.md §63 + `~/.claude/policies/global-ai-org-structure.md` for the full standard.

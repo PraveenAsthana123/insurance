@@ -1,0 +1,79 @@
+[
+  {
+    "name": "Sales & Demand Planning",
+    "icon": "🛒",
+    "description": "Demand forecasting, promotion planning, sales prediction",
+    "color": "#10b981",
+    "route": "sales"
+  },
+  {
+    "name": "Supply Chain & Inventory",
+    "icon": "📦",
+    "description": "Inventory optimization, replenishment, stock balancing",
+    "color": "#f59e0b",
+    "route": "supply-chain"
+  },
+  {
+    "name": "Logistics & Transportation",
+    "icon": "🚚",
+    "description": "Route planning, shipment scheduling, delivery tracking",
+    "color": "#ef4444",
+    "route": "logistics"
+  },
+  {
+    "name": "Manufacturing / Production",
+    "icon": "🏭",
+    "description": "Production planning, batch scheduling, yield optimization",
+    "color": "#8b5cf6",
+    "route": "manufacturing"
+  },
+  {
+    "name": "Maintenance",
+    "icon": "🛠️",
+    "description": "Predictive maintenance, equipment monitoring, downtime tracking",
+    "color": "#06b6d4",
+    "route": "maintenance"
+  },
+  {
+    "name": "Retail & Merchandising",
+    "icon": "🏬",
+    "description": "Shelf optimization, product assortment, store analytics",
+    "color": "#ec4899",
+    "route": "retail"
+  },
+  {
+    "name": "Customer Analytics / Marketing",
+    "icon": "👥",
+    "description": "Segmentation, personalization, CLV, churn prediction",
+    "color": "#14b8a6",
+    "route": "customer"
+  },
+  {
+    "name": "Finance",
+    "icon": "💰",
+    "description": "Revenue analysis, profitability, budgeting, cost tracking",
+    "color": "#eab308",
+    "route": "finance"
+  },
+  {
+    "name": "Procurement / Supplier Management",
+    "icon": "🧾",
+    "description": "Supplier selection, contract management, vendor evaluation",
+    "color": "#a855f7",
+    "route": "procurement"
+  },
+  {
+    "name": "Quality Control",
+    "icon": "⚠️",
+    "description": "Defect detection, quality inspection, batch validation",
+    "color": "#f97316",
+    "route": "quality"
+  },
+  {
+    "name": "Governance / Compliance",
+    "icon": "🧠",
+    "description": "Regulatory compliance, audit, risk assessment",
+    "color": "#64748b",
+    "route": "governance"
+  }
+]

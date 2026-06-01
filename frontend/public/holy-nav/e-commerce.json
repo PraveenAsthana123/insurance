@@ -1,0 +1,345 @@
+{
+  "department": "e-commerce",
+  "display_name": "E Commerce",
+  "left_nav": [
+    {
+      "process": "Storefront",
+      "slug": "storefront",
+      "sub_processes": [
+        {
+          "name": "Catalog optimization",
+          "slug": "catalog-optimization",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Catalog optimization \u2014 Recommendation AI applied to Product metadata.",
+            "Data": "Product metadata",
+            "Input Data Type": "Tabular + JSON",
+            "AI Model": "Recommendation AI",
+            "Output": "Optimized catalog",
+            "KPI": "Conversion rate"
+          }
+        },
+        {
+          "name": "Search ranking",
+          "slug": "search-ranking",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Search ranking \u2014 Ranking AI applied to Search telemetry.",
+            "Data": "Search telemetry",
+            "Input Data Type": "Streaming",
+            "AI Model": "Ranking AI",
+            "Output": "Ranked products",
+            "KPI": "Search conversion"
+          }
+        },
+        {
+          "name": "Visual search",
+          "slug": "visual-search",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Visual search \u2014 CLIP / multimodal applied to Product images + queries.",
+            "Data": "Product images + queries",
+            "Input Data Type": "Image + text",
+            "AI Model": "CLIP / multimodal",
+            "Output": "Visual search results",
+            "KPI": "Search latency"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Subscription",
+      "slug": "subscription",
+      "sub_processes": [
+        {
+          "name": "Renewal prediction",
+          "slug": "renewal-prediction",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Renewal prediction \u2014 Predictive ML applied to Subscription telemetry.",
+            "Data": "Subscription telemetry",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Predictive ML",
+            "Output": "Renewal forecast",
+            "KPI": "Renewal %"
+          }
+        },
+        {
+          "name": "Churn detection",
+          "slug": "churn-detection",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Churn detection \u2014 Churn AI applied to Subscription telemetry.",
+            "Data": "Subscription telemetry",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Churn AI",
+            "Output": "Churn alerts",
+            "KPI": "Subscription churn"
+          }
+        },
+        {
+          "name": "Tier-upgrade recommendation",
+          "slug": "tier-upgrade-recommendation",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Tier-upgrade recommendation \u2014 Recommendation AI applied to Usage + tier data.",
+            "Data": "Usage + tier data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Recommendation AI",
+            "Output": "Tier upgrade offer",
+            "KPI": "Upgrade conversion"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Checkout & Payments",
+      "slug": "checkout-and-payments",
+      "sub_processes": [
+        {
+          "name": "Cart abandonment",
+          "slug": "cart-abandonment",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Cart abandonment \u2014 Predictive ML applied to Cart telemetry.",
+            "Data": "Cart telemetry",
+            "Input Data Type": "Streaming",
+            "AI Model": "Predictive ML",
+            "Output": "Abandonment alerts",
+            "KPI": "Abandonment rate"
+          }
+        },
+        {
+          "name": "Payment fraud",
+          "slug": "payment-fraud",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Payment fraud \u2014 Fraud AI applied to Payment telemetry.",
+            "Data": "Payment telemetry",
+            "Input Data Type": "Streaming",
+            "AI Model": "Fraud AI",
+            "Output": "Fraud alerts",
+            "KPI": "Fraud loss"
+          }
+        },
+        {
+          "name": "Checkout-flow optimization",
+          "slug": "checkout-flow-optimization",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Checkout-flow optimization \u2014 Experimentation AI applied to Funnel telemetry.",
+            "Data": "Funnel telemetry",
+            "Input Data Type": "Streaming",
+            "AI Model": "Experimentation AI",
+            "Output": "UX improvements",
+            "KPI": "Checkout conversion"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Personalization",
+      "slug": "personalization",
+      "sub_processes": [
+        {
+          "name": "Product recommendation",
+          "slug": "product-recommendation",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Product recommendation \u2014 Recommendation AI applied to Purchase telemetry.",
+            "Data": "Purchase telemetry",
+            "Input Data Type": "Tabular + streaming",
+            "AI Model": "Recommendation AI",
+            "Output": "Product suggestions",
+            "KPI": "AOV"
+          }
+        },
+        {
+          "name": "Real-time personalization",
+          "slug": "real-time-personalization",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Real-time personalization \u2014 Real-time AI applied to Live session telemetry.",
+            "Data": "Live session telemetry",
+            "Input Data Type": "Streaming",
+            "AI Model": "Real-time AI",
+            "Output": "Dynamic content",
+            "KPI": "Engagement uplift"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Promotions",
+      "slug": "promotions",
+      "sub_processes": [
+        {
+          "name": "Dynamic coupon recommendation",
+          "slug": "dynamic-coupon-recommendation",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Dynamic coupon recommendation \u2014 Recommendation AI applied to Customer + promo data.",
+            "Data": "Customer + promo data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Recommendation AI",
+            "Output": "Personalized coupon",
+            "KPI": "Coupon ROI"
+          }
+        },
+        {
+          "name": "Promotion-abuse detection",
+          "slug": "promotion-abuse-detection",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Promotion-abuse detection \u2014 Fraud AI applied to Coupon-redemption patterns.",
+            "Data": "Coupon-redemption patterns",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Fraud AI",
+            "Output": "Abuse alerts",
+            "KPI": "Fraud loss"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

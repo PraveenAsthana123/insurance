@@ -1,0 +1,642 @@
+/* HOLY Nav Page — per-dept process/sub-process explorer with tabs */
+
+.holy-nav-container {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.holy-nav-container h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #1b1b32;
+}
+
+.holy-subtitle {
+  color: #555;
+  margin: 0 0 24px;
+  font-size: 15px;
+}
+
+.holy-dept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.holy-dept-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid #e0e0e8;
+  border-radius: 10px;
+  background: #ffffff;
+  text-decoration: none;
+  color: #1b1b32;
+  transition: all 0.15s;
+}
+
+.holy-dept-card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+.holy-dept-name {
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+}
+
+.holy-dept-cta {
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Main layout: sidebar + content */
+.holy-nav-page {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: calc(100vh - 60px);
+  background: #ffffff;
+}
+
+.holy-sidebar {
+  border-right: 1px solid #e0e0e8;
+  background: #f8f9fb;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px);
+}
+
+.holy-sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid #e0e0e8;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.holy-back-link {
+  display: inline-block;
+  font-size: 12px;
+  color: #6366f1;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.holy-back-link:hover {
+  text-decoration: underline;
+}
+
+.holy-sidebar-header h2 {
+  margin: 0;
+  font-size: 18px;
+  text-transform: capitalize;
+  color: #1b1b32;
+}
+
+.holy-sidebar-sub {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.holy-sidebar-nav {
+  padding: 8px 0;
+}
+
+/* HOLY_SPEC link */
+.holy-spec-link-wrap {
+  margin-top: 12px;
+}
+
+.holy-spec-link {
+  display: inline-block;
+  font-size: 12px;
+  color: #1b1b32;
+  text-decoration: none;
+  padding: 4px 8px;
+  background: #eef2ff;
+  border-radius: 4px;
+  border: 1px solid #c7d2fe;
+  transition: all 0.1s;
+}
+
+.holy-spec-link:hover {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+/* Audience filter */
+.holy-audience-filter {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed #e0e0e8;
+}
+
+.holy-audience-label {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.holy-audience-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.holy-audience-chip {
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.holy-audience-chip:hover {
+  background: #e5e7eb;
+}
+
+.holy-audience-chip--active {
+  background: #3b82f6;
+  color: white;
+  border-color: #2563eb;
+}
+
+.holy-empty-nav {
+  padding: 16px 20px;
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+}
+
+/* Sub-process audience badge (when filtered) */
+.holy-sub-aud-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 700;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+}
+
+.holy-sub-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Main title row with audience badges */
+.holy-main-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.holy-sub-audiences {
+  display: flex;
+  gap: 6px;
+}
+
+.holy-aud-badge {
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.holy-proc-group {
+  margin-bottom: 8px;
+}
+
+.holy-proc-title {
+  padding: 12px 16px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+}
+
+.holy-sub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.holy-sub-list li {
+  margin: 0;
+}
+
+.holy-sub-link {
+  display: block;
+  width: 100%;
+  padding: 8px 16px 8px 24px;
+  font-size: 14px;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  text-align: left;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.holy-sub-link:hover {
+  background: #eef2ff;
+  color: #3b82f6;
+}
+
+.holy-sub-link--active {
+  background: #eef2ff;
+  border-left-color: #3b82f6;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* Main content area */
+.holy-main {
+  padding: 32px 40px;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px);
+}
+
+.holy-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #888;
+}
+
+.holy-main-header {
+  margin-bottom: 24px;
+}
+
+.holy-breadcrumb {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #888;
+}
+
+.holy-breadcrumb-current {
+  color: #1b1b32;
+  font-weight: 500;
+}
+
+.holy-main-header h1 {
+  margin: 0;
+  font-size: 26px;
+  color: #1b1b32;
+}
+
+/* Tabs */
+.holy-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #e0e0e8;
+  margin-bottom: 24px;
+}
+
+.holy-tab {
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.1s;
+}
+
+.holy-tab:hover {
+  color: #3b82f6;
+}
+
+.holy-tab--active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+  font-weight: 600;
+}
+
+/* Tab content */
+.holy-tab-content {
+  padding: 16px 20px;
+  background: #f8f9fb;
+  border-radius: 8px;
+  border: 1px solid #e0e0e8;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #2a2a3a;
+  margin-bottom: 24px;
+}
+
+.holy-debug {
+  margin-top: 32px;
+  font-size: 12px;
+  color: #666;
+}
+
+.holy-debug summary {
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 0;
+}
+
+.holy-debug pre {
+  background: #1b1b32;
+  color: #e0e0e8;
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.holy-error {
+  color: #ef4444;
+  padding: 16px;
+  background: #fef2f2;
+  border-radius: 6px;
+  border: 1px solid #fecaca;
+}
+
+.holy-back {
+  display: inline-block;
+  margin-top: 16px;
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.holy-back:hover {
+  text-decoration: underline;
+}
+
+/* Spec link is now a button (was an anchor) */
+.holy-spec-link {
+  display: inline-block;
+  font-size: 12px;
+  color: #1b1b32;
+  text-decoration: none;
+  padding: 4px 8px;
+  background: #eef2ff;
+  border-radius: 4px;
+  border: 1px solid #c7d2fe;
+  transition: all 0.1s;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.holy-spec-link:hover {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+/* HOLY_SPEC.md modal */
+.holy-spec-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.holy-spec-modal {
+  background: white;
+  width: min(900px, 90vw);
+  max-height: 85vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+}
+
+.holy-spec-modal-header {
+  padding: 16px 24px;
+  background: #1b1b32;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.holy-spec-modal-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.holy-spec-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.holy-spec-close:hover {
+  opacity: 0.7;
+}
+
+.holy-spec-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2a2a3a;
+}
+
+.holy-spec-modal-body h1 {
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+.holy-spec-modal-body h2 {
+  font-size: 18px;
+  margin: 24px 0 8px;
+  color: #3b82f6;
+}
+
+.holy-spec-modal-body h3 {
+  font-size: 15px;
+  margin: 16px 0 8px;
+}
+
+.holy-spec-modal-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.holy-spec-modal-body th, .holy-spec-modal-body td {
+  border: 1px solid #e0e0e8;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.holy-spec-modal-body th {
+  background: #f8f9fb;
+  font-weight: 600;
+}
+
+.holy-spec-modal-body code {
+  background: #f3f4f6;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* Council section */
+.holy-council-section {
+  margin-top: 32px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fafbff 0%, #f0f4ff 100%);
+  border: 1px solid #c7d2fe;
+  border-radius: 10px;
+}
+
+.holy-council-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.holy-council-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #1b1b32;
+}
+
+.holy-council-btn {
+  padding: 8px 16px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.holy-council-btn:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.holy-council-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.holy-council-status {
+  margin: 8px 0;
+  color: #666;
+  font-size: 13px;
+}
+
+.holy-council-status code {
+  background: white;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+.holy-council-error {
+  margin: 8px 0;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #991b1b;
+  font-size: 13px;
+}
+
+.holy-council-result {
+  margin-top: 12px;
+}
+
+.holy-council-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: #666;
+}
+
+.holy-council-meta code {
+  background: white;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.holy-council-stage {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border-left: 3px solid #c7d2fe;
+}
+
+.holy-council-stage--final {
+  border-left-color: #3b82f6;
+  background: #eef2ff;
+}
+
+.holy-council-stage-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6366f1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.holy-council-stage-title code {
+  background: rgba(99, 102, 241, 0.1);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.holy-council-stage-body {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #2a2a3a;
+  white-space: pre-wrap;
+}

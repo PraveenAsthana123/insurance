@@ -1,0 +1,224 @@
+{
+  "department": "retail-operations",
+  "display_name": "Retail Operations",
+  "left_nav": [
+    {
+      "process": "Store Demand",
+      "slug": "store-demand",
+      "sub_processes": [
+        {
+          "name": "Store-level forecast",
+          "slug": "store-level-forecast",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Store-level forecast \u2014 Forecasting model applied to POS, region, seasonality.",
+            "Data": "POS, region, seasonality",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Forecasting model",
+            "Output": "Store demand",
+            "KPI": "Store revenue"
+          }
+        },
+        {
+          "name": "Footfall prediction",
+          "slug": "footfall-prediction",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Footfall prediction \u2014 Forecasting ML applied to Foot-traffic counter + weather.",
+            "Data": "Foot-traffic counter + weather",
+            "Input Data Type": "Time-series",
+            "AI Model": "Forecasting ML",
+            "Output": "Hourly footfall",
+            "KPI": "Conversion %"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Shelf Operations",
+      "slug": "shelf-operations",
+      "sub_processes": [
+        {
+          "name": "Shelf monitoring",
+          "slug": "shelf-monitoring",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Shelf monitoring \u2014 Computer vision applied to Shelf images/video.",
+            "Data": "Shelf images/video",
+            "Input Data Type": "Image + video",
+            "AI Model": "Computer vision",
+            "Output": "Shelf availability",
+            "KPI": "Shelf availability %"
+          }
+        },
+        {
+          "name": "Planogram validation",
+          "slug": "planogram-validation",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Planogram validation \u2014 CV + rule engine applied to Images, layout rules.",
+            "Data": "Images, layout rules",
+            "Input Data Type": "Image + rules",
+            "AI Model": "CV + rule engine",
+            "Output": "Compliance score",
+            "KPI": "Compliance %"
+          }
+        },
+        {
+          "name": "Out-of-stock detection",
+          "slug": "out-of-stock-detection",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Out-of-stock detection \u2014 CV + anomaly applied to Shelf images + POS gap.",
+            "Data": "Shelf images + POS gap",
+            "Input Data Type": "Image + tabular",
+            "AI Model": "CV + anomaly",
+            "Output": "OOS alerts",
+            "KPI": "Lost sales $"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Promotions",
+      "slug": "promotions",
+      "sub_processes": [
+        {
+          "name": "Promotion impact",
+          "slug": "promotion-impact",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Promotion impact \u2014 Causal ML applied to Sales + promo data.",
+            "Data": "Sales + promo data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Causal ML",
+            "Output": "Promo impact",
+            "KPI": "Promo ROI"
+          }
+        },
+        {
+          "name": "Dynamic promotion optimization",
+          "slug": "dynamic-promotion-optimization",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Dynamic promotion optimization \u2014 Reinforcement learning applied to Real-time POS + inventory.",
+            "Data": "Real-time POS + inventory",
+            "Input Data Type": "Streaming",
+            "AI Model": "Reinforcement learning",
+            "Output": "Live promo adjustment",
+            "KPI": "Margin lift"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Workforce",
+      "slug": "workforce",
+      "sub_processes": [
+        {
+          "name": "Store-staffing optimization",
+          "slug": "store-staffing-optimization",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Store-staffing optimization \u2014 Optimization AI applied to Footfall + sales forecast.",
+            "Data": "Footfall + sales forecast",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization AI",
+            "Output": "Shift schedule",
+            "KPI": "Labor cost %"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

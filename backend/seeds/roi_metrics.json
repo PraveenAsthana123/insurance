@@ -1,0 +1,170 @@
+[
+  {
+    "department_route": "sales",
+    "benefit_area": "Forecast Accuracy Improvement",
+    "impact_range": "15-25% MAPE reduction",
+    "description": "AI-driven demand forecasting reduces forecast error, enabling better supply chain synchronization",
+    "measurement_method": "Weekly MAPE tracking vs statistical baseline; compared to prior 12-month average"
+  },
+  {
+    "department_route": "sales",
+    "benefit_area": "Promotion ROI Improvement",
+    "impact_range": "10-20% increase in promo ROI",
+    "description": "ML-based uplift modeling identifies high-performing promotion types and eliminates unprofitable events",
+    "measurement_method": "Post-event analysis comparing actual sell-through vs forecast; ROI = (incremental revenue - cost) / cost"
+  },
+  {
+    "department_route": "sales",
+    "benefit_area": "Planner Productivity",
+    "impact_range": "30-50% reduction in manual effort",
+    "description": "Exception-based management reduces manual overrides; planners focus on high-value decisions",
+    "measurement_method": "Hours per planning cycle before/after; exception queue volume; override frequency"
+  },
+  {
+    "department_route": "supply-chain",
+    "benefit_area": "Inventory Reduction",
+    "impact_range": "10-20% working capital reduction",
+    "description": "Optimized safety stock and reorder points eliminate excess inventory while maintaining service levels",
+    "measurement_method": "Days of supply reduction; inventory value change; stockout events before/after implementation"
+  },
+  {
+    "department_route": "supply-chain",
+    "benefit_area": "Service Level Improvement",
+    "impact_range": "2-5% OTIF improvement",
+    "description": "Better replenishment signals reduce stockouts and improve on-shelf availability for customers",
+    "measurement_method": "Fill rate %; OTIF tracking vs retailer scorecards; lost sales estimation"
+  },
+  {
+    "department_route": "supply-chain",
+    "benefit_area": "Write-off Reduction",
+    "impact_range": "15-30% reduction in obsolescence",
+    "description": "Stock balancing and demand-driven replenishment prevent excess stock buildup that leads to write-offs",
+    "measurement_method": "Monthly write-off value as % of COGS; slow-moving inventory reduction"
+  },
+  {
+    "department_route": "logistics",
+    "benefit_area": "Transportation Cost Reduction",
+    "impact_range": "8-15% freight cost savings",
+    "description": "Route optimization and shipment consolidation reduce per-unit freight costs",
+    "measurement_method": "Cost per case shipped; total freight spend as % of revenue; miles per delivery"
+  },
+  {
+    "department_route": "logistics",
+    "benefit_area": "Delivery Performance",
+    "impact_range": "3-7% OTIF improvement",
+    "description": "Proactive exception management and accurate ETAs improve customer delivery compliance",
+    "measurement_method": "On-time delivery rate; customer complaint rate; carrier performance scores"
+  },
+  {
+    "department_route": "manufacturing",
+    "benefit_area": "OEE Improvement",
+    "impact_range": "5-15% OEE increase",
+    "description": "Optimized scheduling and yield improvement reduce downtime and waste in production",
+    "measurement_method": "OEE = Availability x Performance x Quality; tracked weekly by production line"
+  },
+  {
+    "department_route": "manufacturing",
+    "benefit_area": "Raw Material Waste Reduction",
+    "impact_range": "10-20% yield improvement",
+    "description": "Process parameter optimization reduces raw material consumption per unit of output",
+    "measurement_method": "Yield % per batch; raw material cost per unit produced; waste value per month"
+  },
+  {
+    "department_route": "maintenance",
+    "benefit_area": "Unplanned Downtime Reduction",
+    "impact_range": "20-40% reduction",
+    "description": "Predictive maintenance prevents unexpected equipment failures that halt production",
+    "measurement_method": "Unplanned downtime hours per month; MTBF improvement; cost of unplanned stoppages"
+  },
+  {
+    "department_route": "maintenance",
+    "benefit_area": "Maintenance Cost Reduction",
+    "impact_range": "15-25% maintenance cost reduction",
+    "description": "Condition-based maintenance replaces time-based schedules, reducing unnecessary maintenance events",
+    "measurement_method": "Maintenance cost as % of asset replacement value; planned vs reactive maintenance ratio"
+  },
+  {
+    "department_route": "retail",
+    "benefit_area": "Category Revenue Growth",
+    "impact_range": "3-8% revenue increase",
+    "description": "Optimized shelf allocation and assortment improves shopper conversion and basket size",
+    "measurement_method": "Sales per linear foot; category revenue vs control stores; planogram compliance rate"
+  },
+  {
+    "department_route": "retail",
+    "benefit_area": "Out-of-Stock Reduction",
+    "impact_range": "20-40% OOS reduction",
+    "description": "Better shelf intelligence and reorder triggers reduce on-shelf stockouts",
+    "measurement_method": "OOS rate at shelf; phantom inventory incidents; lost sales estimation via demand model"
+  },
+  {
+    "department_route": "customer",
+    "benefit_area": "Customer Retention",
+    "impact_range": "5-15% churn reduction",
+    "description": "Proactive churn interventions retain high-value customers before they lapse",
+    "measurement_method": "Retention rate in at-risk cohort vs control; revenue saved from retained customers"
+  },
+  {
+    "department_route": "customer",
+    "benefit_area": "Marketing ROI Improvement",
+    "impact_range": "20-35% marketing efficiency gain",
+    "description": "Targeted personalization reduces marketing waste and improves campaign response rates",
+    "measurement_method": "Campaign ROI; response rate uplift vs control; cost per acquired/retained customer"
+  },
+  {
+    "department_route": "finance",
+    "benefit_area": "Forecast Accuracy",
+    "impact_range": "10-20% revenue forecast error reduction",
+    "description": "AI-integrated financial forecasting improves accuracy of revenue and P&L projections",
+    "measurement_method": "Monthly revenue forecast MAPE; budget vs actual variance; reforecast frequency reduction"
+  },
+  {
+    "department_route": "finance",
+    "benefit_area": "Trade Spend Efficiency",
+    "impact_range": "5-10% trade spend ROI improvement",
+    "description": "Better deduction management and event ROI analytics reduce wasteful trade investments",
+    "measurement_method": "Trade spend as % of gross revenue; deduction accuracy rate; ROI per promotional event"
+  },
+  {
+    "department_route": "procurement",
+    "benefit_area": "Procurement Cost Savings",
+    "impact_range": "3-8% COGS reduction",
+    "description": "Data-driven supplier selection and commodity hedging reduce input material costs",
+    "measurement_method": "Price paid vs benchmark; savings vs budget; contract compliance savings"
+  },
+  {
+    "department_route": "procurement",
+    "benefit_area": "Supply Risk Mitigation",
+    "impact_range": "30-50% reduction in supply disruptions",
+    "description": "Supplier risk monitoring and dual-sourcing strategies reduce exposure to supply chain shocks",
+    "measurement_method": "Supply disruption events per quarter; at-risk spend exposure; dual-source coverage %"
+  },
+  {
+    "department_route": "quality",
+    "benefit_area": "Defect Rate Reduction",
+    "impact_range": "40-60% defect reduction",
+    "description": "Automated vision inspection catches defects that manual inspection misses at production speed",
+    "measurement_method": "PPM (parts per million) defect rate; consumer complaint rate per million units; recall frequency"
+  },
+  {
+    "department_route": "quality",
+    "benefit_area": "Recall Risk Reduction",
+    "impact_range": "50-70% reduction in quality incidents",
+    "description": "Early batch validation and complaint signal detection prevent product recalls",
+    "measurement_method": "Product recall frequency and cost; quality incident rate; CAPA closure time"
+  },
+  {
+    "department_route": "governance",
+    "benefit_area": "Compliance Coverage",
+    "impact_range": "90-99% regulatory compliance rate",
+    "description": "Automated regulatory tracking ensures complete coverage of applicable requirements across markets",
+    "measurement_method": "Compliance coverage %; regulatory incidents per year; remediation cycle time"
+  },
+  {
+    "department_route": "governance",
+    "benefit_area": "Audit Efficiency",
+    "impact_range": "30-50% reduction in audit preparation time",
+    "description": "Automated evidence collection and audit trail maintenance reduces manual audit preparation burden",
+    "measurement_method": "Audit preparation hours; finding recurrence rate; corrective action closure time"
+  }
+]

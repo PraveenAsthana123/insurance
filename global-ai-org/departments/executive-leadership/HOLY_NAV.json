@@ -1,0 +1,267 @@
+{
+  "department": "executive-leadership",
+  "display_name": "Executive Leadership",
+  "left_nav": [
+    {
+      "process": "Enterprise Intelligence",
+      "slug": "enterprise-intelligence",
+      "sub_processes": [
+        {
+          "name": "KPI aggregation",
+          "slug": "kpi-aggregation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "KPI aggregation \u2014 Data integration applied to Cross-dept KPIs.",
+            "Data": "Cross-dept KPIs",
+            "Input Data Type": "Tabular + JSON",
+            "AI Model": "Data integration",
+            "Output": "Unified KPI layer",
+            "KPI": "Decision speed"
+          }
+        },
+        {
+          "name": "Market intelligence",
+          "slug": "market-intelligence",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Market intelligence \u2014 NLP + RAG applied to News, competitor, trends.",
+            "Data": "News, competitor, trends",
+            "Input Data Type": "Text + web",
+            "AI Model": "NLP + RAG",
+            "Output": "Market insight",
+            "KPI": "Strategic alignment"
+          }
+        },
+        {
+          "name": "Investor-relations briefing",
+          "slug": "investor-relations-briefing",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Investor-relations briefing \u2014 GenAI summarization applied to Earnings + market data.",
+            "Data": "Earnings + market data",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "GenAI summarization",
+            "Output": "Briefing pack",
+            "KPI": "Briefing cycle time"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Strategic Planning",
+      "slug": "strategic-planning",
+      "sub_processes": [
+        {
+          "name": "Scenario simulation",
+          "slug": "scenario-simulation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Scenario simulation \u2014 Simulation model applied to Finance, demand, supply.",
+            "Data": "Finance, demand, supply",
+            "Input Data Type": "Tabular + JSON",
+            "AI Model": "Simulation model",
+            "Output": "What-if scenarios",
+            "KPI": "Forecasting confidence"
+          }
+        },
+        {
+          "name": "Risk prediction",
+          "slug": "risk-prediction",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Risk prediction \u2014 Predictive ML applied to Ops, finance, market.",
+            "Data": "Ops, finance, market",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Predictive ML",
+            "Output": "Risk score",
+            "KPI": "Risk mitigation"
+          }
+        },
+        {
+          "name": "Strategy recommendation",
+          "slug": "strategy-recommendation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Strategy recommendation \u2014 Decision AI applied to Enterprise data.",
+            "Data": "Enterprise data",
+            "Input Data Type": "Mixed structured",
+            "AI Model": "Decision AI",
+            "Output": "Strategy options",
+            "KPI": "Strategy success"
+          }
+        },
+        {
+          "name": "M&A target screening",
+          "slug": "m&a-target-screening",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "M&A target screening \u2014 Scoring ML applied to Market + financial data.",
+            "Data": "Market + financial data",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "Scoring ML",
+            "Output": "Target candidate list",
+            "KPI": "Pipeline quality"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Reporting",
+      "slug": "reporting",
+      "sub_processes": [
+        {
+          "name": "Executive reporting",
+          "slug": "executive-reporting",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Executive reporting \u2014 GenAI summarization applied to KPI + insight data.",
+            "Data": "KPI + insight data",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "GenAI summarization",
+            "Output": "Board-ready report",
+            "KPI": "Reporting cycle"
+          }
+        },
+        {
+          "name": "Anomaly-flagged briefings",
+          "slug": "anomaly-flagged-briefings",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Anomaly-flagged briefings \u2014 Anomaly ML applied to All KPI streams.",
+            "Data": "All KPI streams",
+            "Input Data Type": "Streaming",
+            "AI Model": "Anomaly ML",
+            "Output": "Auto-flagged anomalies",
+            "KPI": "Time-to-detect"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Governance",
+      "slug": "governance",
+      "sub_processes": [
+        {
+          "name": "Decision-audit lineage",
+          "slug": "decision-audit-lineage",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Decision-audit lineage \u2014 Provenance AI applied to Decisions + supporting data.",
+            "Data": "Decisions + supporting data",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "Provenance AI",
+            "Output": "Lineage graph per decision",
+            "KPI": "Audit cycle time"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

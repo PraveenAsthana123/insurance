@@ -1,0 +1,246 @@
+{
+  "department": "finance",
+  "display_name": "Finance",
+  "left_nav": [
+    {
+      "process": "Forecasting",
+      "slug": "forecasting",
+      "sub_processes": [
+        {
+          "name": "Revenue forecast",
+          "slug": "revenue-forecast",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Revenue forecast \u2014 Time-series ML applied to Sales, orders, subscriptions.",
+            "Data": "Sales, orders, subscriptions",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Time-series ML",
+            "Output": "Revenue forecast",
+            "KPI": "Forecast MAPE"
+          }
+        },
+        {
+          "name": "Cashflow forecast",
+          "slug": "cashflow-forecast",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Cashflow forecast \u2014 Time-series ML applied to AR/AP + working capital.",
+            "Data": "AR/AP + working capital",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Time-series ML",
+            "Output": "13-week cash forecast",
+            "KPI": "Cash variance"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Cost & Margin",
+      "slug": "cost-and-margin",
+      "sub_processes": [
+        {
+          "name": "Budget planning",
+          "slug": "budget-planning",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Budget planning \u2014 Optimization model applied to Spend, campaign, OPEX.",
+            "Data": "Spend, campaign, OPEX",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization model",
+            "Output": "Budget allocation",
+            "KPI": "Budget variance"
+          }
+        },
+        {
+          "name": "Margin analysis",
+          "slug": "margin-analysis",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Margin analysis \u2014 ML analytics applied to Cost, price, promotion.",
+            "Data": "Cost, price, promotion",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "ML analytics",
+            "Output": "Margin insights",
+            "KPI": "Gross margin"
+          }
+        },
+        {
+          "name": "Spend categorization",
+          "slug": "spend-categorization",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Spend categorization \u2014 NLP + classification ML applied to Vendor invoices.",
+            "Data": "Vendor invoices",
+            "Input Data Type": "PDF + tabular",
+            "AI Model": "NLP + classification ML",
+            "Output": "Auto-categorized spend",
+            "KPI": "Manual review %"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Risk & Compliance",
+      "slug": "risk-and-compliance",
+      "sub_processes": [
+        {
+          "name": "Fraud detection",
+          "slug": "fraud-detection",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Fraud detection \u2014 Anomaly detection applied to Transactions, invoices.",
+            "Data": "Transactions, invoices",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Anomaly detection",
+            "Output": "Fraud alerts",
+            "KPI": "Fraud rate"
+          }
+        },
+        {
+          "name": "AP-anomaly detection",
+          "slug": "ap-anomaly-detection",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "AP-anomaly detection \u2014 Anomaly ML applied to Vendor payment patterns.",
+            "Data": "Vendor payment patterns",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Anomaly ML",
+            "Output": "Suspicious-payment alerts",
+            "KPI": "Audit findings"
+          }
+        },
+        {
+          "name": "Audit-evidence generation",
+          "slug": "audit-evidence-generation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Audit-evidence generation \u2014 GenAI summarization applied to Transaction trail.",
+            "Data": "Transaction trail",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "GenAI summarization",
+            "Output": "Audit packet",
+            "KPI": "Audit cycle time"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Executive Reporting",
+      "slug": "executive-reporting",
+      "sub_processes": [
+        {
+          "name": "CFO copilot",
+          "slug": "cfo-copilot",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "CFO copilot \u2014 GenAI + RAG applied to Finance KPIs + variance.",
+            "Data": "Finance KPIs + variance",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "GenAI + RAG",
+            "Output": "Board-ready commentary",
+            "KPI": "Reporting cycle"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

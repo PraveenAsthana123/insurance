@@ -1,0 +1,212 @@
+[
+  {
+    "department_route": "sales",
+    "process_name": "baseline_forecasting",
+    "ai_type": "Time Series Forecasting",
+    "use_case": "Generate statistical baseline demand forecasts using Prophet, SARIMA, or XGBoost",
+    "example_output": "Weekly forecast: Product A at Store 001 — 142 units (±18 units, 90% CI)"
+  },
+  {
+    "department_route": "sales",
+    "process_name": "promo_uplift",
+    "ai_type": "Causal ML / Uplift Modeling",
+    "use_case": "Estimate incremental demand from promotions using XGBoost and causal inference",
+    "example_output": "BOGO promotion yields +38% uplift for Product B, ROI: 2.4x"
+  },
+  {
+    "department_route": "sales",
+    "process_name": "seasonal_planning",
+    "ai_type": "Seasonal Decomposition",
+    "use_case": "Decompose time series into trend, seasonality, and residual components",
+    "example_output": "Holiday season index: 1.42 (42% above baseline) for insurerage category"
+  },
+  {
+    "department_route": "sales",
+    "process_name": "new_product_forecast",
+    "ai_type": "Analogue-based ML",
+    "use_case": "Match new products to similar historical launches using embedding similarity",
+    "example_output": "New energy drink launch ramp curve mirrors Product X (2022) — 85% match confidence"
+  },
+  {
+    "department_route": "sales",
+    "process_name": "demand_sensing",
+    "ai_type": "Real-time Signal Processing",
+    "use_case": "Fuse daily POS, weather, and social signals using gradient boosting ensemble",
+    "example_output": "Heat wave signal adjusts forecast +22% for cold insurerage category next 7 days"
+  },
+  {
+    "department_route": "sales",
+    "process_name": "forecast_explanation",
+    "ai_type": "Explainable AI (SHAP)",
+    "use_case": "Apply SHAP values to decompose forecast drivers for planner interpretation",
+    "example_output": "Top drivers: Promo (+15%), weather (+8%), trend (+5%), stockout correction (-3%)"
+  },
+  {
+    "department_route": "sales",
+    "process_name": "exception_management",
+    "ai_type": "Anomaly Detection",
+    "use_case": "Detect forecast anomalies using Isolation Forest and statistical control charts",
+    "example_output": "12 exceptions flagged: 3 critical (>50% variance), 9 moderate — priority queue generated"
+  },
+  {
+    "department_route": "supply-chain",
+    "process_name": "inventory_optimization",
+    "ai_type": "Optimization / Stochastic Simulation",
+    "use_case": "Compute safety stock and reorder points using Monte Carlo simulation",
+    "example_output": "Safety stock for SKU-1234 at DC-West: 450 units (95% service level target)"
+  },
+  {
+    "department_route": "supply-chain",
+    "process_name": "replenishment_planning",
+    "ai_type": "Reinforcement Learning",
+    "use_case": "RL agent learns optimal order quantities across multi-echelon network",
+    "example_output": "Auto-generated PO: 2,400 units of SKU-5678 to Supplier XYZ — delivery 2024-05-12"
+  },
+  {
+    "department_route": "supply-chain",
+    "process_name": "supplier_lead_time_prediction",
+    "ai_type": "Regression / Survival Analysis",
+    "use_case": "Predict delivery lead time distribution using Cox proportional hazards model",
+    "example_output": "Supplier ABC lane — P50 lead time: 12 days, P90: 18 days; 15% delay risk flagged"
+  },
+  {
+    "department_route": "logistics",
+    "process_name": "route_optimization",
+    "ai_type": "Combinatorial Optimization (VRP)",
+    "use_case": "Vehicle routing problem solver using Google OR-Tools with ML-based time windows",
+    "example_output": "28 routes optimized — 12% distance reduction, 4 fewer vehicles required vs manual plan"
+  },
+  {
+    "department_route": "logistics",
+    "process_name": "delivery_tracking",
+    "ai_type": "Classification / NLP",
+    "use_case": "Predict delivery exceptions using ML on carrier events and NLP on exception notes",
+    "example_output": "Shipment SHP-9921 — 78% probability of delay, ETA revised from Day 3 to Day 5"
+  },
+  {
+    "department_route": "manufacturing",
+    "process_name": "production_planning",
+    "ai_type": "Constraint-based Optimization",
+    "use_case": "Mixed-integer programming to optimize production schedules across lines and shifts",
+    "example_output": "Week 22 schedule: 94% utilization, 3 changeovers eliminated vs baseline plan"
+  },
+  {
+    "department_route": "manufacturing",
+    "process_name": "yield_optimization",
+    "ai_type": "Process Mining / Regression",
+    "use_case": "Identify yield-driving process parameters using LASSO regression on sensor data",
+    "example_output": "Increasing mixing temp to 72°C improves yield by 1.8% — estimated saving $24K/month"
+  },
+  {
+    "department_route": "maintenance",
+    "process_name": "predictive_maintenance",
+    "ai_type": "Anomaly Detection / Survival Analysis",
+    "use_case": "Predict time-to-failure using LSTM neural network on multivariate sensor streams",
+    "example_output": "Motor M-14: failure predicted in 8-12 days (87% confidence) — schedule maintenance now"
+  },
+  {
+    "department_route": "maintenance",
+    "process_name": "equipment_monitoring",
+    "ai_type": "Real-time Streaming ML",
+    "use_case": "Online anomaly detection on equipment sensor streams using statistical process control",
+    "example_output": "Vibration anomaly detected on Conveyor C-3 — frequency: 48Hz (threshold: 40Hz)"
+  },
+  {
+    "department_route": "retail",
+    "process_name": "shelf_optimization",
+    "ai_type": "Space Optimization / Computer Vision",
+    "use_case": "Recommend shelf facings using sales velocity and computer vision planogram analysis",
+    "example_output": "Category reset recommendation: +2 facings for Brand A, -1 for Brand C — +$1,200/store/year"
+  },
+  {
+    "department_route": "retail",
+    "process_name": "pricing_optimization",
+    "ai_type": "Price Elasticity Modeling",
+    "use_case": "Estimate price response curves using hierarchical Bayesian models per store cluster",
+    "example_output": "Elasticity of -2.1 for Product X — optimal price point $3.49 maximizes category revenue"
+  },
+  {
+    "department_route": "customer",
+    "process_name": "customer_segmentation",
+    "ai_type": "Clustering / Unsupervised ML",
+    "use_case": "K-means and hierarchical clustering on RFM features with demographic enrichment",
+    "example_output": "6 segments identified: Champions (18%), Loyalists (24%), At-Risk (12%), Lost (8%)"
+  },
+  {
+    "department_route": "customer",
+    "process_name": "churn_prediction",
+    "ai_type": "Binary Classification",
+    "use_case": "Gradient boosting classifier on purchase recency, frequency, and engagement signals",
+    "example_output": "2,340 customers flagged as high churn risk (>70% probability) — intervention list generated"
+  },
+  {
+    "department_route": "customer",
+    "process_name": "clv_prediction",
+    "ai_type": "BG/NBD + Gamma-Gamma Model",
+    "use_case": "Probabilistic CLV model using BG/NBD for purchase frequency and Gamma-Gamma for spend",
+    "example_output": "Average 12-month CLV: $127; top 10% customers account for 42% of predicted value"
+  },
+  {
+    "department_route": "customer",
+    "process_name": "personalization",
+    "ai_type": "Collaborative Filtering / NLP",
+    "use_case": "Matrix factorization and content-based filtering for product recommendations",
+    "example_output": "Recommended bundle for Customer 4521: Products A+C+F — predicted basket uplift $8.40"
+  },
+  {
+    "department_route": "finance",
+    "process_name": "revenue_forecasting",
+    "ai_type": "Ensemble Forecasting",
+    "use_case": "Ensemble of ARIMA, XGBoost, and neural network models with Bayesian model averaging",
+    "example_output": "Q3 revenue forecast: $142.3M (±$4.1M), 95% CI; 3% above internal budget target"
+  },
+  {
+    "department_route": "finance",
+    "process_name": "trade_spend_management",
+    "ai_type": "Classification / NLP",
+    "use_case": "Automate deduction validation using ML classifier and NLP on invoice descriptions",
+    "example_output": "847 deductions reviewed: 92% auto-approved, 67 flagged for manual review ($1.2M exposure)"
+  },
+  {
+    "department_route": "procurement",
+    "process_name": "supplier_selection",
+    "ai_type": "Multi-Criteria Decision Analysis",
+    "use_case": "AHP-based supplier scoring with ML risk adjustment from financial and ESG signals",
+    "example_output": "Supplier ranking: Vendor A (82pts), Vendor B (74pts), Vendor C (68pts) — recommend A"
+  },
+  {
+    "department_route": "procurement",
+    "process_name": "commodity_price_forecasting",
+    "ai_type": "Time Series Forecasting",
+    "use_case": "LSTM model on commodity futures, macro indicators, and supply/demand balances",
+    "example_output": "Palm oil 90-day forecast: $985/MT (+8% vs current) — recommend hedge 60% of Q3 volume"
+  },
+  {
+    "department_route": "quality",
+    "process_name": "defect_detection",
+    "ai_type": "Computer Vision / Deep Learning",
+    "use_case": "CNN-based real-time defect detection on production line camera feeds",
+    "example_output": "Line 4: 2 defect types detected in last hour — label misalignment (0.3%), fill weight (0.1%)"
+  },
+  {
+    "department_route": "quality",
+    "process_name": "consumer_complaint_analysis",
+    "ai_type": "NLP / Text Classification",
+    "use_case": "Topic modeling and sentiment analysis on consumer complaint text using BERT",
+    "example_output": "Cluster identified: 34 complaints about 'texture change' in batch 20240312 — quality alert triggered"
+  },
+  {
+    "department_route": "governance",
+    "process_name": "regulatory_compliance_tracking",
+    "ai_type": "NLP / Knowledge Graph",
+    "use_case": "Extract regulatory requirements from regulatory texts using NLP and map to products",
+    "example_output": "EU Regulation 2024/1234 — 3 products require label update by 2024-09-01; action plan generated"
+  },
+  {
+    "department_route": "governance",
+    "process_name": "risk_assessment",
+    "ai_type": "Probabilistic Risk Modeling",
+    "use_case": "Bayesian network model for enterprise risk quantification and scenario simulation",
+    "example_output": "Supply disruption risk score: 7.2/10 (HIGH) — top driver: single-source dependence for Ingredient X"
+  }
+]

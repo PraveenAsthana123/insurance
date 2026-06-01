@@ -1,0 +1,428 @@
+{
+  "department": "digital-marketing",
+  "display_name": "Digital Marketing",
+  "left_nav": [
+    {
+      "process": "Trend Analysis",
+      "slug": "trend-analysis",
+      "sub_processes": [
+        {
+          "name": "Social trend mining",
+          "slug": "social-trend-mining",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Social trend mining \u2014 NLP + trend detection applied to Social text, hashtags, videos.",
+            "Data": "Social text, hashtags, videos",
+            "Input Data Type": "Text + image streams",
+            "AI Model": "NLP + trend detection",
+            "Output": "Trending topics",
+            "KPI": "Trend volume"
+          }
+        },
+        {
+          "name": "Influencer scoring",
+          "slug": "influencer-scoring",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Influencer scoring \u2014 ML scoring applied to Engagement metrics.",
+            "Data": "Engagement metrics",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "ML scoring",
+            "Output": "Influencer ranking",
+            "KPI": "Influencer ROI"
+          }
+        },
+        {
+          "name": "SEO keyword forecasting",
+          "slug": "seo-keyword-forecasting",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "SEO keyword forecasting \u2014 Forecasting ML applied to Search Console + GA data.",
+            "Data": "Search Console + GA data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Forecasting ML",
+            "Output": "Keyword opportunity list",
+            "KPI": "Organic conversion"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Customer Segmentation",
+      "slug": "customer-segmentation",
+      "sub_processes": [
+        {
+          "name": "Behavioral clustering",
+          "slug": "behavioral-clustering",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Behavioral clustering \u2014 Clustering ML applied to CRM, orders, clickstream.",
+            "Data": "CRM, orders, clickstream",
+            "Input Data Type": "Tabular + clickstream JSON",
+            "AI Model": "Clustering ML",
+            "Output": "Customer segments",
+            "KPI": "Segment retention"
+          }
+        },
+        {
+          "name": "Account-based marketing scoring",
+          "slug": "account-based-marketing-scoring",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Account-based marketing scoring \u2014 Lead-scoring ML applied to B2B CRM, intent data.",
+            "Data": "B2B CRM, intent data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Lead-scoring ML",
+            "Output": "Account priority list",
+            "KPI": "ABM pipeline"
+          }
+        },
+        {
+          "name": "Employee advocacy segmentation",
+          "slug": "employee-advocacy-segmentation",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Employee advocacy segmentation \u2014 Clustering ML applied to HRIS, social engagement.",
+            "Data": "HRIS, social engagement",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Clustering ML",
+            "Output": "Advocate segments",
+            "KPI": "Employee NPS"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Campaign Planning",
+      "slug": "campaign-planning",
+      "sub_processes": [
+        {
+          "name": "Campaign recommendation",
+          "slug": "campaign-recommendation",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Campaign recommendation \u2014 Predictive ML applied to Past campaigns, budget.",
+            "Data": "Past campaigns, budget",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Predictive ML",
+            "Output": "Campaign plan",
+            "KPI": "ROAS"
+          }
+        },
+        {
+          "name": "Brand review",
+          "slug": "brand-review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Brand review \u2014 NLP classifier applied to Text, image, claims.",
+            "Data": "Text, image, claims",
+            "Input Data Type": "Text + image",
+            "AI Model": "NLP classifier",
+            "Output": "Approved/rejected",
+            "KPI": "Brand violation rate"
+          }
+        },
+        {
+          "name": "Channel-mix optimization",
+          "slug": "channel-mix-optimization",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Channel-mix optimization \u2014 Optimization AI applied to Spend + revenue per channel.",
+            "Data": "Spend + revenue per channel",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization AI",
+            "Output": "Optimal channel mix",
+            "KPI": "Marketing ROI"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Content Creation",
+      "slug": "content-creation",
+      "sub_processes": [
+        {
+          "name": "Ad copy generation",
+          "slug": "ad-copy-generation",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Ad copy generation \u2014 GenAI + RAG applied to Brand docs, product catalog.",
+            "Data": "Brand docs, product catalog",
+            "Input Data Type": "Text + product JSON",
+            "AI Model": "GenAI + RAG",
+            "Output": "Ad copy / email / social",
+            "KPI": "Content cost"
+          }
+        },
+        {
+          "name": "Personalized landing page generation",
+          "slug": "personalized-landing-page-generation",
+          "audiences": [
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Personalized landing page generation \u2014 GenAI applied to User segment + brand kit.",
+            "Data": "User segment + brand kit",
+            "Input Data Type": "JSON + GenAI prompts",
+            "AI Model": "GenAI",
+            "Output": "Landing page HTML/JSX",
+            "KPI": "Conversion rate"
+          }
+        },
+        {
+          "name": "Sales enablement deck generation",
+          "slug": "sales-enablement-deck-generation",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Sales enablement deck generation \u2014 GenAI applied to Win/loss data + product specs.",
+            "Data": "Win/loss data + product specs",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "GenAI",
+            "Output": "Sales deck",
+            "KPI": "Deal velocity"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Performance & Optimization",
+      "slug": "performance-and-optimization",
+      "sub_processes": [
+        {
+          "name": "Live campaign optimization",
+          "slug": "live-campaign-optimization",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Live campaign optimization \u2014 Reinforcement / optimization AI applied to Campaign metrics.",
+            "Data": "Campaign metrics",
+            "Input Data Type": "Streaming telemetry",
+            "AI Model": "Reinforcement / optimization AI",
+            "Output": "Budget/content adjustment",
+            "KPI": "CAC, conversion"
+          }
+        },
+        {
+          "name": "Attribution modeling",
+          "slug": "attribution-modeling",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Attribution modeling \u2014 Markov / Shapley attribution applied to Touch-point data.",
+            "Data": "Touch-point data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Markov / Shapley attribution",
+            "Output": "Channel-level credit",
+            "KPI": "Attribution accuracy"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Compliance & Brand Safety",
+      "slug": "compliance-and-brand-safety",
+      "sub_processes": [
+        {
+          "name": "Claim validation",
+          "slug": "claim-validation",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Claim validation \u2014 NLP classifier applied to Marketing copy, regulations.",
+            "Data": "Marketing copy, regulations",
+            "Input Data Type": "Text + rules",
+            "AI Model": "NLP classifier",
+            "Output": "Risk score per claim",
+            "KPI": "Compliance violations"
+          }
+        },
+        {
+          "name": "Brand voice consistency",
+          "slug": "brand-voice-consistency",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Brand voice consistency \u2014 NLP similarity applied to All published content.",
+            "Data": "All published content",
+            "Input Data Type": "Text",
+            "AI Model": "NLP similarity",
+            "Output": "Voice-drift alerts",
+            "KPI": "Brand consistency score"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

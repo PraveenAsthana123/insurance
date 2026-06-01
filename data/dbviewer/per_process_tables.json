@@ -1,0 +1,159 @@
+{
+  "_meta": {
+    "policy": "§68.2 — Per-function DB design (primary + secondary tables per process)",
+    "schema_version": "1.0",
+    "generated_at_note": "Hand-maintained catalog; keep aligned with backend/migrations/*.sql + routers/pipelines.py PIPELINE_CATALOG. Updated 2026-05-26 from migration files 001 / 003 / 010 / 011 / 012.",
+    "engine": "postgres",
+    "default_database": "holy",
+    "default_schema": "public",
+    "tenant_column": "tenant_id",
+    "primary_table_meaning": "The fact/transaction table the process WRITES to or DERIVES its primary output from.",
+    "secondary_table_meaning": "Dimensional / reference / join-target tables the process READS to enrich the primary."
+  },
+  "processes": [
+    {
+      "dept": "sales",
+      "process_id": "lead_scoring",
+      "process_name": "Lead Scoring",
+      "primary_table": "dim_customer",
+      "secondary_tables": ["roi_metrics", "model_metrics"],
+      "join_keys": [
+        {"left": "dim_customer.customer_id", "right": "roi_metrics.customer_id"}
+      ],
+      "pii_columns": ["dim_customer.email", "dim_customer.phone"],
+      "tenant_column": "(none — fleet table)",
+      "status": "annotated"
+    },
+    {
+      "dept": "sales",
+      "process_id": "churn_prediction",
+      "process_name": "Churn Prediction",
+      "primary_table": "fact_churn_label",
+      "secondary_tables": ["dim_customer_pilot", "fact_customer_interaction"],
+      "join_keys": [
+        {"left": "fact_churn_label.customer_id", "right": "dim_customer_pilot.customer_id"},
+        {"left": "fact_customer_interaction.customer_id", "right": "dim_customer_pilot.customer_id"}
+      ],
+      "pii_columns": ["dim_customer_pilot.full_name", "dim_customer_pilot.email"],
+      "tenant_column": "(none — pilot table)",
+      "status": "annotated"
+    },
+    {
+      "dept": "sales",
+      "process_id": "demand_forecast",
+      "process_name": "Demand Forecast",
+      "primary_table": "fact_sales",
+      "secondary_tables": ["dim_store", "dim_date", "product_dim", "store_dim", "forecast_output", "forecast_versions", "forecast_overrides"],
+      "join_keys": [
+        {"left": "fact_sales.store_id", "right": "dim_store.store_id"},
+        {"left": "fact_sales.date_id", "right": "dim_date.date_id"}
+      ],
+      "pii_columns": [],
+      "tenant_column": "(none — public test data)",
+      "status": "annotated"
+    },
+    {
+      "dept": "finance",
+      "process_id": "fraud_detection",
+      "process_name": "Fraud Detection",
+      "primary_table": "process_transactions",
+      "secondary_tables": ["pipeline_logs", "model_metrics", "model_drift"],
+      "join_keys": [
+        {"left": "process_transactions.process_id", "right": "processes.id"}
+      ],
+      "pii_columns": ["process_transactions.payload_json (PII may appear here)"],
+      "tenant_column": "process_transactions.tenant_id",
+      "status": "annotated"
+    },
+    {
+      "dept": "finance",
+      "process_id": "cash_flow_forecast",
+      "process_name": "Cash Flow Forecast",
+      "primary_table": "(to-be-created: fact_cash_flow)",
+      "secondary_tables": ["forecast_output", "forecast_versions"],
+      "join_keys": [],
+      "pii_columns": [],
+      "tenant_column": "(pending)",
+      "status": "stub — primary table not yet migrated"
+    },
+    {
+      "dept": "finance",
+      "process_id": "month_end_close",
+      "process_name": "Month-End Close",
+      "primary_table": "(to-be-created: fact_gl_entries)",
+      "secondary_tables": ["pipeline_logs"],
+      "join_keys": [],
+      "pii_columns": [],
+      "tenant_column": "(pending)",
+      "status": "stub — primary table not yet migrated"
+    },
+    {
+      "dept": "manufacturing",
+      "process_id": "defect_detection_cv",
+      "process_name": "Defect Detection (CV)",
+      "primary_table": "(to-be-created: fact_defect_inspection)",
+      "secondary_tables": ["pipeline_logs", "model_metrics", "ml_models"],
+      "join_keys": [],
+      "pii_columns": [],
+      "tenant_column": "(pending)",
+      "status": "stub — primary table not yet migrated"
+    },
+    {
+      "dept": "manufacturing",
+      "process_id": "predictive_maintenance",
+      "process_name": "Predictive Maintenance",
+      "primary_table": "(to-be-created: fact_machine_telemetry)",
+      "secondary_tables": ["pipeline_logs", "model_metrics"],
+      "join_keys": [],
+      "pii_columns": [],
+      "tenant_column": "(pending)",
+      "status": "stub — primary table not yet migrated"
+    },
+    {
+      "dept": "manufacturing",
+      "process_id": "oee_optimization",
+      "process_name": "OEE Optimization",
+      "primary_table": "(to-be-created: fact_production_log)",
+      "secondary_tables": ["model_metrics"],
+      "join_keys": [],
+      "pii_columns": [],
+      "tenant_column": "(pending)",
+      "status": "stub — primary table not yet migrated"
+    },
+    {
+      "dept": "customer-experience",
+      "process_id": "ticket_auto_reply",
+      "process_name": "Ticket Auto-Reply",
+      "primary_table": "(to-be-created: fact_support_ticket)",
+      "secondary_tables": ["pipeline_logs", "model_metrics"],
+      "join_keys": [],
+      "pii_columns": ["fact_support_ticket.body (PII may appear)"],
+      "tenant_column": "(pending)",
+      "status": "stub — primary table not yet migrated"
+    },
+    {
+      "dept": "supply-chain",
+      "process_id": "demand_sensing",
+      "process_name": "Demand Sensing",
+      "primary_table": "fact_shipment",
+      "secondary_tables": ["dim_sku", "dim_supplier", "dim_customer", "external_features"],
+      "join_keys": [
+        {"left": "fact_shipment.sku_id", "right": "dim_sku.sku_id"},
+        {"left": "fact_shipment.supplier_id", "right": "dim_supplier.supplier_id"},
+        {"left": "fact_shipment.customer_id", "right": "dim_customer.customer_id"}
+      ],
+      "pii_columns": ["dim_customer.email"],
+      "tenant_column": "(none — pilot table)",
+      "status": "annotated"
+    }
+  ],
+  "registered_databases": [
+    {
+      "db_id": "holy",
+      "engine": "postgres",
+      "purpose": "primary application + ML pipeline data",
+      "schemas": ["public"],
+      "readonly_in_viewer": true
+    }
+  ]
+}

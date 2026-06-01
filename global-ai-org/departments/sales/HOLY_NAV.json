@@ -1,0 +1,269 @@
+{
+  "department": "sales",
+  "display_name": "Sales",
+  "left_nav": [
+    {
+      "process": "Lead Management",
+      "slug": "lead-management",
+      "sub_processes": [
+        {
+          "name": "Lead identification",
+          "slug": "lead-identification",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Lead identification \u2014 Lead scoring model applied to CRM, retailer data.",
+            "Data": "CRM, retailer data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Lead scoring model",
+            "Output": "Qualified leads",
+            "KPI": "Lead conversion"
+          }
+        },
+        {
+          "name": "Account prioritization",
+          "slug": "account-prioritization",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Account prioritization \u2014 Predictive ML applied to Sales history, revenue.",
+            "Data": "Sales history, revenue",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Predictive ML",
+            "Output": "Account priority",
+            "KPI": "Account value"
+          }
+        },
+        {
+          "name": "Intent-signal mining",
+          "slug": "intent-signal-mining",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Intent-signal mining \u2014 Predictive ML applied to Third-party intent + CRM.",
+            "Data": "Third-party intent + CRM",
+            "Input Data Type": "Tabular + text",
+            "AI Model": "Predictive ML",
+            "Output": "Hot-account list",
+            "KPI": "Win rate"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Pricing & Proposals",
+      "slug": "pricing-and-proposals",
+      "sub_processes": [
+        {
+          "name": "Proposal generation",
+          "slug": "proposal-generation",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Proposal generation \u2014 GenAI + RAG applied to Product catalog, pricing.",
+            "Data": "Product catalog, pricing",
+            "Input Data Type": "Text + tabular",
+            "AI Model": "GenAI + RAG",
+            "Output": "Sales proposal",
+            "KPI": "Proposal win rate"
+          }
+        },
+        {
+          "name": "Pricing recommendation",
+          "slug": "pricing-recommendation",
+          "audiences": [
+            "b2b",
+            "b2c"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Pricing recommendation \u2014 Optimization model applied to Margin, competitor data.",
+            "Data": "Margin, competitor data",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization model",
+            "Output": "Suggested price",
+            "KPI": "Margin"
+          }
+        },
+        {
+          "name": "Quote-to-close prediction",
+          "slug": "quote-to-close-prediction",
+          "audiences": [
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Quote-to-close prediction \u2014 Predictive ML applied to Pipeline telemetry.",
+            "Data": "Pipeline telemetry",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Predictive ML",
+            "Output": "Win probability",
+            "KPI": "Forecast accuracy"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Sales Operations",
+      "slug": "sales-operations",
+      "sub_processes": [
+        {
+          "name": "Cross-sell/upsell",
+          "slug": "cross-sell-upsell",
+          "audiences": [
+            "b2c",
+            "b2b"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Cross-sell/upsell \u2014 Recommendation model applied to Purchase history.",
+            "Data": "Purchase history",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Recommendation model",
+            "Output": "Offer recommendation",
+            "KPI": "AOV"
+          }
+        },
+        {
+          "name": "Sales forecast",
+          "slug": "sales-forecast",
+          "audiences": [
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Sales forecast \u2014 Forecasting model applied to Pipeline, orders.",
+            "Data": "Pipeline, orders",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Forecasting model",
+            "Output": "Sales forecast",
+            "KPI": "Forecast accuracy"
+          }
+        },
+        {
+          "name": "Territory optimization",
+          "slug": "territory-optimization",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Territory optimization \u2014 Optimization AI applied to Account distribution + travel.",
+            "Data": "Account distribution + travel",
+            "Input Data Type": "Tabular CSV",
+            "AI Model": "Optimization AI",
+            "Output": "Territory assignments",
+            "KPI": "Revenue per rep"
+          }
+        }
+      ]
+    },
+    {
+      "process": "Enablement",
+      "slug": "enablement",
+      "sub_processes": [
+        {
+          "name": "Call-coaching analytics",
+          "slug": "call-coaching-analytics",
+          "audiences": [
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Data",
+            "Input Data Type",
+            "AI Model",
+            "Output",
+            "KPI"
+          ],
+          "tab_content": {
+            "Overview": "Call-coaching analytics \u2014 STT + NLP scoring applied to Sales call recordings.",
+            "Data": "Sales call recordings",
+            "Input Data Type": "Audio + text",
+            "AI Model": "STT + NLP scoring",
+            "Output": "Coaching recommendations",
+            "KPI": "Ramp time"
+          }
+        }
+      ]
+    }
+  ],
+  "audiences_available": [
+    "b2b",
+    "b2c",
+    "b2e"
+  ],
+  "schema_note": "Each sub_process has audiences[] (subset of b2b/b2c/b2e). UI can filter by audience. Selecting a sub-process loads tabs[] with tab_content[<tab>]."
+}

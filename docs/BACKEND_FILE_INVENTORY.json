@@ -1,0 +1,3676 @@
+[
+  {
+    "file": "backend/__init__.py",
+    "layer": "unknown",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/__init__.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/config.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "Settings"
+    ],
+    "functions": [
+      "get_settings"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "functools",
+      "pydantic",
+      "pydantic_settings",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/dependencies.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "get_cached_settings",
+      "get_department_repo",
+      "get_process_repo",
+      "get_dataset_repo",
+      "get_model_repo",
+      "get_job_repo",
+      "get_department_service",
+      "get_process_service",
+      "get_dataset_service",
+      "get_ml_service",
+      "get_job_service",
+      "get_db_connection"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextlib",
+      "core.config",
+      "functools",
+      "logging",
+      "psycopg2",
+      "psycopg2.extensions",
+      "repositories.dataset_repo",
+      "repositories.department_repo",
+      "repositories.job_repo",
+      "repositories.model_repo",
+      "repositories.process_repo",
+      "services.dataset_service",
+      "services.department_service",
+      "services.job_service",
+      "services.ml_service",
+      "services.process_service",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/error_handlers.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "_get_correlation_id",
+      "app_error_handler",
+      "generic_error_handler",
+      "register_error_handlers"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.exceptions",
+      "fastapi",
+      "fastapi.responses",
+      "logging"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/exceptions.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "AppError",
+      "NotFoundError",
+      "ValidationError",
+      "DataError",
+      "ModelError",
+      "ExternalServiceError"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/holy_audit.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "Shared \u00a738.3 audit-trail helper for HOLY/* routers under \u00a764.43 #7 federation.",
+    "classes": [],
+    "functions": [
+      "log_holy_access"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.middleware",
+      "fastapi",
+      "json",
+      "os",
+      "pathlib",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/idempotency.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "Generic \u00a710.3 idempotency cache layer \u2014 namespace-scoped.",
+    "classes": [],
+    "functions": [
+      "_disk_path",
+      "_ttl_seconds",
+      "_load_from_disk",
+      "_append_to_disk",
+      "lookup",
+      "store",
+      "extract_key"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi",
+      "json",
+      "os",
+      "pathlib",
+      "threading",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/logging_config.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "JsonFormatter"
+    ],
+    "functions": [
+      "setup_logging"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "datetime",
+      "json",
+      "logging",
+      "traceback",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/middleware.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "CorrelationIdMiddleware",
+      "TenantIdMiddleware",
+      "SecurityHeadersMiddleware",
+      "RateLimitMiddleware"
+    ],
+    "functions": [
+      "current_tenant_id"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "collections",
+      "core.structured_logger",
+      "fastapi",
+      "fastapi.responses",
+      "os",
+      "re",
+      "starlette.middleware.base",
+      "starlette.types",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/rbac_middleware.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "rbac_middleware \u2014 demo-mode RBAC. Reads X-Demo-Role header, enforces matrix.",
+    "classes": [
+      "RBACMiddleware"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "logging",
+      "re",
+      "starlette.middleware.base",
+      "starlette.requests",
+      "starlette.responses",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/structured_logger.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "structured_logger \u2014 JSON log emitter with correlation_id contextvar.",
+    "classes": [],
+    "functions": [
+      "new_correlation_id",
+      "set_correlation_id",
+      "get_correlation_id",
+      "emit_event",
+      "_safe"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextvars",
+      "datetime",
+      "json",
+      "logging",
+      "sys",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/core/utils.py",
+    "layer": "trust/infra",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "sanitize_table_name"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "re"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/database.py",
+    "layer": "unknown",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "run_migrations"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.config",
+      "logging",
+      "os",
+      "pathlib",
+      "psycopg2"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/main.py",
+    "layer": "unknown",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "lifespan",
+      "create_app"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextlib",
+      "core.config",
+      "core.error_handlers",
+      "core.logging_config",
+      "core.middleware",
+      "core.rbac_middleware",
+      "database",
+      "fastapi",
+      "fastapi.middleware.cors",
+      "fastapi.middleware.gzip",
+      "logging",
+      "routers.admin",
+      "routers.agent_platform",
+      "routers.ai_explain",
+      "routers.customer",
+      "routers.datasets",
+      "routers.dbviewer",
+      "routers.demo_stories",
+      "routers.departments",
+      "routers.downloads",
+      "routers.graph",
+      "routers.health",
+      "routers.holy",
+      "routers.jobs",
+      "routers.master_data",
+      "routers.models",
+      "routers.monitoring",
+      "routers.openclaw",
+      "routers.paperclip",
+      "routers.pipelines",
+      "routers.processes",
+      "routers.reports",
+      "routers.sales",
+      "routers.supply_chain",
+      "routers.transactions",
+      "seeds.seed_runner",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/__init__.py",
+    "layer": "ml/model",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/features/__init__.py",
+    "layer": "ml/model",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/features/text_features.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Basic NLP feature extraction utilities.",
+    "classes": [],
+    "functions": [
+      "clean_text",
+      "word_count",
+      "char_count",
+      "avg_word_length",
+      "exclamation_count",
+      "question_count",
+      "polarity_score",
+      "add_text_features",
+      "tfidf_features"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "numpy",
+      "pandas",
+      "re",
+      "sklearn.feature_extraction.text",
+      "string",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/features/time_features.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Time-series feature engineering utilities.",
+    "classes": [],
+    "functions": [
+      "add_time_features",
+      "add_lag_features",
+      "add_rolling_features",
+      "add_ewm_features"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "numpy",
+      "pandas"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/pipelines/__init__.py",
+    "layer": "ml/model",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/pipelines/customer_segmentation.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Customer Segmentation Pipeline \u2014 Customer department.",
+    "classes": [
+      "CustomerSegmentationPipeline"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "json",
+      "logging",
+      "mlflow",
+      "numpy",
+      "pandas",
+      "sklearn.cluster",
+      "sklearn.metrics",
+      "sklearn.preprocessing",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/pipelines/defect_detection.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Defect Detection Pipeline \u2014 Quality department.",
+    "classes": [
+      "DefectDetectionPipeline"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "logging",
+      "mlflow",
+      "numpy",
+      "pandas",
+      "sklearn.ensemble",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "sklearn.preprocessing",
+      "tensorflow",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/pipelines/demand_forecast.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Demand Forecasting Pipeline \u2014 Sales / Retail departments.",
+    "classes": [
+      "DemandForecastPipeline"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "logging",
+      "ml.features.time_features",
+      "mlflow",
+      "numpy",
+      "pandas",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "typing",
+      "xgboost"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/pipelines/inventory_optimizer.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Inventory Optimizer Pipeline \u2014 Supply Chain / Procurement / Logistics departments.",
+    "classes": [
+      "InventoryOptimizerPipeline"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "logging",
+      "mlflow",
+      "numpy",
+      "pandas",
+      "sklearn.ensemble",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "sklearn.preprocessing",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/pipelines/predictive_maintenance.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Predictive Maintenance Pipeline \u2014 Manufacturing / Maintenance departments.",
+    "classes": [
+      "PredictiveMaintenancePipeline"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "logging",
+      "mlflow",
+      "numpy",
+      "pandas",
+      "sklearn.ensemble",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "sklearn.preprocessing",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/pipelines/sentiment_analysis.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Sentiment Analysis / NLP Pipeline \u2014 Governance department.",
+    "classes": [
+      "SentimentAnalysisPipeline"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "logging",
+      "ml.features.text_features",
+      "mlflow",
+      "numpy",
+      "pandas",
+      "sklearn.feature_extraction.text",
+      "sklearn.linear_model",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "sklearn.pipeline",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/__init__.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference ML/RAG lifecycle implementations.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/agent_orchestration.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: agentic orchestration patterns (\u00a764.43).",
+    "classes": [
+      "DagNode",
+      "DagExecutionError",
+      "DagCycleError",
+      "DagExecutor",
+      "ReflectionStep",
+      "ReflectionResult",
+      "ReflectionLoop",
+      "AgentVote",
+      "MoAResult",
+      "MixtureOfAgents",
+      "DebateRound",
+      "DebateResult",
+      "DebateOrchestrator",
+      "BlackboardEntry",
+      "BlackboardConcurrencyError",
+      "Blackboard",
+      "OrchestrationManifest",
+      "OrchestrationDemo"
+    ],
+    "functions": [
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "collections",
+      "dataclasses",
+      "json",
+      "logging",
+      "pathlib",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/agentic_stack.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: 10-layer agentic execution stack per \u00a764.40.",
+    "classes": [
+      "Task",
+      "AgenticRun",
+      "PlannerAgent",
+      "Decomposer",
+      "PolicyEngine",
+      "StagehandAdapter",
+      "PlaywrightAdapter",
+      "OpenClawAdapter",
+      "PaperclipAdapter",
+      "CuaOrchestrator",
+      "CouncilAdapter",
+      "AgenticStackRunner"
+    ],
+    "functions": [
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "httpx",
+      "json",
+      "logging",
+      "pathlib",
+      "re",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/anomaly_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: anomaly-detection lifecycle with multi-detector comparison.",
+    "classes": [
+      "AnomalyManifest",
+      "AnomalyLifecycle"
+    ],
+    "functions": [
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pandas",
+      "pathlib",
+      "seaborn",
+      "sklearn.ensemble",
+      "sklearn.metrics",
+      "sklearn.neighbors",
+      "sklearn.preprocessing",
+      "sklearn.svm",
+      "time",
+      "torch",
+      "torch.utils.data",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/attack_simulators.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: attack-simulation payload generators (\u00a764.32.3 + \u00a764.42).",
+    "classes": [
+      "AttackPayload",
+      "AttackCorpus"
+    ],
+    "functions": [
+      "_check_executor_authorization",
+      "gen_sql_injection",
+      "gen_xss",
+      "gen_csrf",
+      "gen_auth_bypass",
+      "gen_prompt_injection",
+      "gen_model_theft",
+      "gen_data_poisoning",
+      "gen_ddos",
+      "gen_phishing",
+      "gen_deepfake",
+      "gen_synthetic_identity",
+      "gen_brute_force",
+      "generate_corpus",
+      "generate_all_classes",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "random",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/cv_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: CV lifecycle with multi-model score comparison.",
+    "classes": [
+      "CvManifest",
+      "SimpleCNN",
+      "ResNetTransfer",
+      "CvLifecycle"
+    ],
+    "functions": [
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pathlib",
+      "seaborn",
+      "sklearn.linear_model",
+      "sklearn.metrics",
+      "time",
+      "torch",
+      "torch.utils.data",
+      "torchvision",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/dl_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: Deep Learning sequence-classification lifecycle (\u00a764.20).",
+    "classes": [
+      "DlManifest",
+      "LstmClassifier",
+      "TransformerClassifier",
+      "DlLifecycle"
+    ],
+    "functions": [
+      "generate_synthetic_sequences",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pathlib",
+      "seaborn",
+      "sklearn.linear_model",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "time",
+      "torch",
+      "torch.utils.data",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/ensemble_compare.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: ensemble model comparison (Voting + Stacking) per \u00a765.1 #5.",
+    "classes": [
+      "EnsembleManifest"
+    ],
+    "functions": [
+      "_score_classifier",
+      "_score_regressor",
+      "default_classifiers",
+      "default_regressors",
+      "compare_ensemble",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "dataclasses",
+      "json",
+      "logging",
+      "numpy",
+      "sklearn.base",
+      "sklearn.dummy",
+      "sklearn.ensemble",
+      "sklearn.linear_model",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/fraud_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: fraud-detection lifecycle (\u00a764.23 + \u00a740).",
+    "classes": [
+      "FraudDecision",
+      "FraudManifest",
+      "RuleLayer",
+      "MlLayer",
+      "LlmLayer",
+      "DecisionLayer",
+      "FraudLifecycle"
+    ],
+    "functions": [
+      "generate_synthetic_transactions",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pathlib",
+      "seaborn",
+      "sklearn.ensemble",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "time",
+      "typing",
+      "uuid",
+      "xgboost"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/full_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: full structured-ML lifecycle.",
+    "classes": [
+      "LifecycleManifest",
+      "FullLifecycle"
+    ],
+    "functions": [
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "lightgbm",
+      "logging",
+      "matplotlib",
+      "mlflow",
+      "numpy",
+      "optuna",
+      "pandas",
+      "pathlib",
+      "seaborn",
+      "shap",
+      "sklearn.compose",
+      "sklearn.dummy",
+      "sklearn.ensemble",
+      "sklearn.feature_selection",
+      "sklearn.impute",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "sklearn.pipeline",
+      "sklearn.preprocessing",
+      "time",
+      "typing",
+      "uuid",
+      "xgboost"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/nlp_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: NLP lifecycle with multiple-technique score comparison.",
+    "classes": [
+      "NlpManifest",
+      "NlpLifecycle"
+    ],
+    "functions": [
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pathlib",
+      "seaborn",
+      "sentence_transformers",
+      "sklearn.feature_extraction.text",
+      "sklearn.linear_model",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "sklearn.svm",
+      "time",
+      "transformers",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/noise_handling.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: noise-handling utility per data type (\u00a764.19 + \u00a764.26 + \u00a765.1 #5).",
+    "classes": [
+      "TabularNoiseReport",
+      "ImageNoiseReport",
+      "TextNoiseReport",
+      "TimeseriesNoiseReport"
+    ],
+    "functions": [
+      "clean_tabular",
+      "clean_image_batch",
+      "clean_text_batch",
+      "clean_timeseries"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "dataclasses",
+      "logging",
+      "numpy",
+      "pandas",
+      "re",
+      "scipy.ndimage",
+      "skimage.transform",
+      "sklearn.ensemble",
+      "typing",
+      "unicodedata"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/rag_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: full RAG lifecycle (chunking \u2192 embed \u2192 vector DB \u2192 retrieve \u2192 rerank \u2192 LLM \u2192 cite \u2192 eval).",
+    "classes": [
+      "CircuitBreaker",
+      "RagManifest",
+      "RagLifecycle"
+    ],
+    "functions": [
+      "chunk_fixed_size",
+      "chunk_sentence_aware",
+      "chunk_semantic_paragraph",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "chromadb",
+      "dataclasses",
+      "httpx",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pathlib",
+      "re",
+      "sentence_transformers",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/recommendation_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: recommendation lifecycle with content + CF + hybrid comparison.",
+    "classes": [
+      "RecoManifest",
+      "PopularityReco",
+      "ContentReco",
+      "CollabReco",
+      "HybridReco",
+      "RecoLifecycle"
+    ],
+    "functions": [
+      "generate_synthetic_data",
+      "precision_at_k",
+      "recall_at_k",
+      "ndcg_at_k",
+      "average_precision_at_k",
+      "diversity",
+      "novelty",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pathlib",
+      "scipy.sparse",
+      "seaborn",
+      "sklearn.decomposition",
+      "sklearn.metrics.pairwise",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/role_dashboard_catalog.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Shared catalog for HOLY role dashboards + reports (\u00a764.37).",
+    "classes": [
+      "Tile",
+      "ChartSpec",
+      "ReportSpec"
+    ],
+    "functions": [
+      "synthesize_tile_value",
+      "synthesize_chart_data",
+      "build_dashboard_payload",
+      "build_reports_payload",
+      "_now_iso"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "dataclasses",
+      "datetime",
+      "hashlib",
+      "random",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/simulation_engine.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: per-process simulation engine (manual vs automatic).",
+    "classes": [
+      "SimEvent",
+      "StepDef",
+      "SimRunSummary",
+      "SimManifest",
+      "ProcessSimulator"
+    ],
+    "functions": [
+      "_three_step",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "pathlib",
+      "random",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/reference/timeseries_lifecycle.py",
+    "layer": "ml/model",
+    "business_logic_gist": "HOLY reference: time-series lifecycle with multi-technique score comparison.",
+    "classes": [
+      "TimeSeriesManifest",
+      "TimeSeriesLifecycle"
+    ],
+    "functions": [
+      "_mape",
+      "_smape",
+      "_main"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "json",
+      "logging",
+      "matplotlib",
+      "numpy",
+      "pandas",
+      "pathlib",
+      "sklearn.metrics",
+      "statsmodels.tsa.holtwinters",
+      "time",
+      "typing",
+      "uuid",
+      "xgboost"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/ml/utils.py",
+    "layer": "ml/model",
+    "business_logic_gist": "Shared ML utilities for the Insur Analytics platform.",
+    "classes": [],
+    "functions": [
+      "load_dataset",
+      "calculate_metrics",
+      "format_results",
+      "describe_dataset"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "logging",
+      "numpy",
+      "pandas",
+      "pathlib",
+      "sklearn.metrics",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/__init__.py",
+    "layer": "data/sql",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/base.py",
+    "layer": "data/sql",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "BaseRepository"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextlib",
+      "core.config",
+      "logging",
+      "psycopg2",
+      "psycopg2.extensions",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/customer_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "customer_repo.py \u2014 read-only repository for the customer-pilot star schema.",
+    "classes": [
+      "CustomerRepo"
+    ],
+    "functions": [
+      "_pg_dsn"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextlib",
+      "os",
+      "psycopg",
+      "psycopg.rows",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/dataset_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "DatasetRepository"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "json",
+      "psycopg2",
+      "repositories.base",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/department_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "DepartmentRepository"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "psycopg2",
+      "repositories.base",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/job_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "JobRepository"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "json",
+      "psycopg2",
+      "repositories.base",
+      "schemas.job",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/model_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "ModelRepository"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "json",
+      "psycopg2",
+      "repositories.base",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/process_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "ProcessRepository"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "psycopg2",
+      "repositories.base",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/sales_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "sales_repo.py \u2014 read-only repository for the sales star schema.",
+    "classes": [
+      "SalesRepo"
+    ],
+    "functions": [
+      "_pg_dsn"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextlib",
+      "datetime",
+      "os",
+      "psycopg",
+      "psycopg.rows",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/repositories/supply_chain_repo.py",
+    "layer": "data/sql",
+    "business_logic_gist": "supply_chain_repo.py \u2014 read-only repository for supply chain star schema.",
+    "classes": [
+      "SupplyChainRepo"
+    ],
+    "functions": [
+      "_pg_dsn"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextlib",
+      "os",
+      "psycopg",
+      "psycopg.rows",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/__init__.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/admin.py",
+    "layer": "http/api",
+    "business_logic_gist": "Admin API \u2014 cross-tenant compliance + reporting surfaces.",
+    "classes": [],
+    "functions": [
+      "get_agent_platform_service",
+      "admin_list_cua_audit"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi",
+      "schemas.agent_platform",
+      "services.agent_platform_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/agent_platform.py",
+    "layer": "http/api",
+    "business_logic_gist": "Unified agent platform setup/status API.",
+    "classes": [],
+    "functions": [
+      "get_agent_platform_service",
+      "get_status",
+      "get_manifest",
+      "evaluate_governance",
+      "execute_cua",
+      "decide_approval_broker",
+      "run_typed_council",
+      "list_cua_audit",
+      "get_adapters_status",
+      "get_tenant_activity"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.middleware",
+      "fastapi",
+      "schemas.agent_platform",
+      "services.agent_platform_service",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/ai_explain.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "_rag_for",
+      "get_rag_service",
+      "explain",
+      "feedback"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "fastapi",
+      "functools",
+      "logging",
+      "schemas.ai_explain",
+      "services.rag_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/customer.py",
+    "layer": "http/api",
+    "business_logic_gist": "customer.py \u2014 HTTP-only FastAPI routes for the Customer Analytics pilot.",
+    "classes": [],
+    "functions": [
+      "_repo",
+      "_churn_service",
+      "get_repo",
+      "get_churn_service",
+      "churn_predict",
+      "churn_top",
+      "churn_metrics"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi",
+      "functools",
+      "logging",
+      "repositories.customer_repo",
+      "schemas.customer",
+      "services.churn_model_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/datasets.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "list_datasets",
+      "get_dataset",
+      "create_dataset",
+      "upload_dataset",
+      "preview_dataset"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.config",
+      "core.dependencies",
+      "fastapi",
+      "logging",
+      "schemas.common",
+      "schemas.dataset",
+      "services.dataset_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/dbviewer.py",
+    "layer": "http/api",
+    "business_logic_gist": "\u00a768.1 + \u00a768.2 \u2014 HOLY DB Viewer + per-function table catalog.",
+    "classes": [],
+    "functions": [
+      "_validate_db_id",
+      "_validate_ident",
+      "_validate_dept",
+      "global_overview",
+      "database_info",
+      "schema_tables",
+      "table_detail",
+      "table_sample",
+      "process_tables_global",
+      "process_tables_dept",
+      "process_tables_detail"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "core.middleware",
+      "fastapi",
+      "re",
+      "services",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/demo_stories.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY demo-stories router \u2014 per-dept \u00d7 per-role demo scripts.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "_validate_role",
+      "_demo_for",
+      "global_inventory",
+      "dept_catalog",
+      "role_demo_detail"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/departments.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "list_departments",
+      "get_department",
+      "list_department_processes",
+      "get_department_ai_stack",
+      "get_department_roi"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.dependencies",
+      "fastapi",
+      "schemas.common",
+      "schemas.department",
+      "schemas.process",
+      "services.department_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/downloads.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY data-downloads router \u2014 per-dept downloadable sample data.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "_datasets_for",
+      "_file_urls",
+      "global_inventory",
+      "dept_catalog",
+      "serve_file"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "fastapi.responses",
+      "pathlib",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/graph.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY Graph AI router \u2014 per-dept relationship graph (Cytoscape-compatible).",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "_build_graph",
+      "global_summary",
+      "dept_graph",
+      "dept_nodes_filtered",
+      "dept_neighbors"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/health.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "_health_payload",
+      "health_check_v1",
+      "health_check_unversioned"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/holy.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY endpoints \u2014 nav (live HOLY_NAV.json) + council (Redis queue/poll).",
+    "classes": [],
+    "functions": [
+      "get_nav",
+      "list_depts",
+      "get_spec",
+      "council_ask",
+      "council_result",
+      "_safe_run_dir",
+      "list_runs",
+      "get_manifest",
+      "get_plot",
+      "get_latest",
+      "_safe_sim_dir",
+      "list_reference_processes",
+      "run_simulation",
+      "list_sim_runs",
+      "get_sim_manifest",
+      "get_fleet_stats",
+      "get_recent_done",
+      "fanout_tasks",
+      "list_attack_classes",
+      "generate_attack_corpus",
+      "list_attack_corpora",
+      "get_attack_corpus",
+      "agentic_execute",
+      "list_agentic_runs",
+      "get_agentic_run",
+      "orchestration_demo",
+      "list_test_tiers",
+      "dispatch_test",
+      "get_test_results",
+      "get_test_result",
+      "list_roles",
+      "get_role_dashboard",
+      "get_role_reports",
+      "run_role_report",
+      "get_sim_events"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "dataclasses",
+      "fastapi",
+      "fastapi.responses",
+      "json",
+      "logging",
+      "ml.reference.agent_orchestration",
+      "ml.reference.agentic_stack",
+      "ml.reference.attack_simulators",
+      "ml.reference.role_dashboard_catalog",
+      "ml.reference.simulation_engine",
+      "os",
+      "pathlib",
+      "random",
+      "redis",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/jobs.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "list_jobs",
+      "create_job",
+      "get_job",
+      "get_job_results",
+      "create_schedule",
+      "list_schedules",
+      "get_schedule",
+      "pause_schedule",
+      "resume_schedule",
+      "delete_schedule",
+      "run_schedule_now"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.dependencies",
+      "fastapi",
+      "schemas.common",
+      "schemas.job",
+      "services.job_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/master_data.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY master-data router \u2014 per-dept SAP-style master + reference data.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "_validate_entity",
+      "global_catalog",
+      "dept_catalog",
+      "entity_sample"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/models.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "list_models",
+      "create_model",
+      "get_model",
+      "predict",
+      "get_model_metrics"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.dependencies",
+      "fastapi",
+      "schemas.common",
+      "schemas.model",
+      "services.ml_service",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/monitoring.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY monitoring AI router \u2014 per-dept job + pipeline health surface.",
+    "classes": [],
+    "functions": [
+      "_log_monitoring_access",
+      "_validate_dept",
+      "_validate_job",
+      "_scan_runs",
+      "_job_health",
+      "global_rollup",
+      "dept_monitoring",
+      "list_runs",
+      "get_run"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.middleware",
+      "datetime",
+      "fastapi",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/openclaw.py",
+    "layer": "http/api",
+    "business_logic_gist": "OpenClaw bridge API.",
+    "classes": [],
+    "functions": [
+      "get_openclaw_service",
+      "get_status",
+      "get_manifest",
+      "create_task",
+      "get_task_result"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core",
+      "core.middleware",
+      "fastapi",
+      "schemas.openclaw",
+      "services.openclaw_gateway_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/paperclip.py",
+    "layer": "http/api",
+    "business_logic_gist": "Paperclip local artifact/context adapter API.",
+    "classes": [],
+    "functions": [
+      "get_paperclip_service",
+      "get_status",
+      "create_clip",
+      "list_clips",
+      "get_clip",
+      "delete_clip",
+      "build_context_pack"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core",
+      "core.middleware",
+      "fastapi",
+      "schemas.paperclip",
+      "services.paperclip_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/pipelines.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY automated-pipelines router \u2014 5-phase per-process catalog per dept.",
+    "classes": [],
+    "functions": [
+      "_catalog_for",
+      "_validate_dept",
+      "global_inventory",
+      "dept_catalog",
+      "process_detail"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/processes.py",
+    "layer": "http/api",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "get_process",
+      "get_process_data_flow",
+      "get_process_models",
+      "get_process_ai_mappings",
+      "get_process_test_cases"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.dependencies",
+      "fastapi",
+      "schemas.common",
+      "schemas.model",
+      "schemas.process",
+      "services.ml_service",
+      "services.process_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/reports.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY reports-catalog router \u2014 dept-level rollup of standard reports.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "_title_for",
+      "_enrich",
+      "global_inventory",
+      "dept_catalog",
+      "report_detail"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/sales.py",
+    "layer": "http/api",
+    "business_logic_gist": "sales.py \u2014 HTTP-only FastAPI routes for the Sales deep-dive.",
+    "classes": [],
+    "functions": [
+      "_repo",
+      "_forecast_service",
+      "_simulation_service",
+      "get_repo",
+      "get_forecast_service",
+      "get_simulation_service",
+      "list_stores",
+      "forecast",
+      "simulate"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi",
+      "functools",
+      "logging",
+      "repositories.sales_repo",
+      "schemas.sales",
+      "services.forecast_service",
+      "services.simulation_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/supply_chain.py",
+    "layer": "http/api",
+    "business_logic_gist": "supply_chain.py \u2014 HTTP-only FastAPI routes for Supply Chain deep-dive.",
+    "classes": [],
+    "functions": [
+      "_repo",
+      "_stockout_service",
+      "_eta_service",
+      "_score_service",
+      "_simulation_service",
+      "get_repo",
+      "get_stockout_service",
+      "get_eta_service",
+      "get_score_service",
+      "get_simulation_service",
+      "list_skus",
+      "list_suppliers",
+      "stockout_risk",
+      "eta",
+      "simulate"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi",
+      "functools",
+      "logging",
+      "repositories.supply_chain_repo",
+      "schemas.supply_chain",
+      "services.eta_service",
+      "services.stockout_service",
+      "services.supplier_score_service",
+      "services.supply_chain_simulation_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/routers/transactions.py",
+    "layer": "http/api",
+    "business_logic_gist": "HOLY transactional history router \u2014 unified chronological audit feed per dept.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "_ts_from_run_id",
+      "_redact_pii",
+      "_scan_cron_events",
+      "_scan_ml_events",
+      "_scan_sim_events",
+      "_wildcard_match",
+      "global_summary",
+      "list_transactions",
+      "get_event"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "json",
+      "logging",
+      "pathlib",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/__init__.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/agent_platform.py",
+    "layer": "api/schema",
+    "business_logic_gist": "Unified agent platform integration schemas.",
+    "classes": [
+      "AgentToolStatus",
+      "AgentPlatformStatusResponse",
+      "AgentPlatformManifestResponse",
+      "AgentPolicyEvaluationRequest",
+      "AgentPolicyEvaluationResponse",
+      "ApprovalBrokerRequest",
+      "ApprovalBrokerResponse",
+      "TypedCouncilRunRequest",
+      "TypedCouncilRunResponse",
+      "CuaExecutionRequest",
+      "CuaExecutionResponse",
+      "CuaAuditRow",
+      "CuaAuditListResponse",
+      "TenantActivityItem",
+      "TenantActivityResponse",
+      "AdminCuaAuditListResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/ai_explain.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "ExplainContext",
+      "ExplainRequest",
+      "Citation",
+      "ExplainResponse",
+      "FeedbackRequest"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/common.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "PaginatedResponse",
+      "ErrorResponse",
+      "SuccessResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/customer.py",
+    "layer": "api/schema",
+    "business_logic_gist": "customer.py \u2014 Pydantic schemas for the Customer Analytics pilot API.",
+    "classes": [
+      "ChurnDriver",
+      "ChurnPredictionRequest",
+      "ChurnPredictionResponse",
+      "AtRiskCustomer",
+      "ChurnTopNResponse",
+      "ChurnMetricsResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/dataset.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "DatasetCreate",
+      "DatasetResponse",
+      "DatasetSummary",
+      "DatasetPreview"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/department.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "DepartmentResponse",
+      "DepartmentSummary",
+      "DepartmentCreate"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/job.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "JobCreate",
+      "ScheduleCreate",
+      "ScheduleResponse",
+      "ScheduleSummary",
+      "JobResponse",
+      "JobSummary",
+      "JobResultResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "datetime",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/model.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "ModelCreate",
+      "ModelResponse",
+      "ModelSummary",
+      "PredictRequest",
+      "PredictResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "datetime",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/openclaw.py",
+    "layer": "api/schema",
+    "business_logic_gist": "OpenClaw bridge schemas.",
+    "classes": [
+      "OpenClawTaskRequest",
+      "OpenClawTaskResponse",
+      "OpenClawTaskResultResponse",
+      "OpenClawQueueStatus",
+      "OpenClawStatusResponse",
+      "OpenClawManifestResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/paperclip.py",
+    "layer": "api/schema",
+    "business_logic_gist": "Paperclip local context/artifact adapter schemas.",
+    "classes": [
+      "PaperclipCreateRequest",
+      "PaperclipArtifactResponse",
+      "PaperclipArtifactDetail",
+      "PaperclipContextPackRequest",
+      "PaperclipContextPackResponse",
+      "PaperclipStatusResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/process.py",
+    "layer": "api/schema",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "ProcessResponse",
+      "ProcessSummary",
+      "ProcessCreate",
+      "AIMappingResponse",
+      "DataFlowStepResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/sales.py",
+    "layer": "api/schema",
+    "business_logic_gist": "sales.py \u2014 Pydantic schemas for the Sales deep-dive API.",
+    "classes": [
+      "StoreSummary",
+      "ForecastRequest",
+      "ForecastPoint",
+      "ForecastComponents",
+      "ForecastResponse",
+      "SimulationRequest",
+      "WaterfallStep",
+      "SimulationResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "datetime",
+      "pydantic",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/schemas/supply_chain.py",
+    "layer": "api/schema",
+    "business_logic_gist": "supply_chain.py \u2014 Pydantic request/response models for Supply Chain deep-dive.",
+    "classes": [
+      "SkuSummary",
+      "SupplierScored",
+      "StockoutRiskRequest",
+      "StockoutRiskResponse",
+      "ETARequest",
+      "ETAResponse",
+      "SimulationRequest",
+      "SimulationResponse"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pydantic"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/seeds/__init__.py",
+    "layer": "data/seed",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/seeds/seed_runner.py",
+    "layer": "data/seed",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [
+      "_load_json",
+      "run_seeds"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.config",
+      "json",
+      "logging",
+      "os",
+      "psycopg2"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/__init__.py",
+    "layer": "service/business",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/agent_platform_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "Unified agent platform integration service.",
+    "classes": [
+      "_AgentOpsSession",
+      "AgentPlatformIntegrationService"
+    ],
+    "functions": [
+      "_idempotency_disk_load",
+      "_idempotency_disk_append",
+      "_playwright_allowlist",
+      "_target_in_allowlist",
+      "_write_cua_audit_row",
+      "_agentops_enabled"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "agentops",
+      "hashlib",
+      "importlib",
+      "json",
+      "os",
+      "pathlib",
+      "playwright.sync_api",
+      "re",
+      "schemas.agent_platform",
+      "schemas.openclaw",
+      "services",
+      "services.openclaw_gateway_service",
+      "services.paperclip_service",
+      "sys",
+      "time",
+      "typing",
+      "urllib",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/churn_model_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "churn_model_service.py \u2014 scikit-learn churn model with lazy-fit + in-proc cache.",
+    "classes": [
+      "_Fitted",
+      "ChurnModelService"
+    ],
+    "functions": [
+      "_precision_at_top_k",
+      "_segment_for",
+      "_human_label"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "dataclasses",
+      "datetime",
+      "logging",
+      "numpy",
+      "pandas",
+      "repositories.customer_repo",
+      "sklearn.ensemble",
+      "sklearn.linear_model",
+      "sklearn.metrics",
+      "sklearn.model_selection",
+      "sklearn.preprocessing",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/dataset_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "DatasetService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.exceptions",
+      "csv",
+      "logging",
+      "os",
+      "pathlib",
+      "psycopg2",
+      "re",
+      "repositories.dataset_repo",
+      "schemas.dataset",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/dbviewer_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "\u00a768 HOLY Observability + Data Hub \u2014 DB Viewer service.",
+    "classes": [],
+    "functions": [
+      "_process_tables_path",
+      "load_process_tables",
+      "is_pii_column",
+      "redact_row",
+      "safe_ident",
+      "_connect_pg",
+      "list_registered_databases",
+      "get_database_info",
+      "list_schemas",
+      "list_tables",
+      "describe_table",
+      "sample_rows",
+      "process_tables_global",
+      "process_tables_for_dept",
+      "process_tables_for_process"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.config",
+      "json",
+      "logging",
+      "pathlib",
+      "psycopg2",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/department_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "DepartmentService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.exceptions",
+      "logging",
+      "repositories.department_repo",
+      "repositories.process_repo",
+      "schemas.department",
+      "schemas.process",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/dspy_optimizer.py",
+    "layer": "service/business",
+    "business_logic_gist": "DSPy RAG prompt optimizer \u2014 \u00a756 Stage-1 adapter (4th in the series).",
+    "classes": [
+      "DSPyOptimizationResult"
+    ],
+    "functions": [
+      "is_enabled",
+      "is_importable",
+      "_write_audit_row",
+      "_base_row",
+      "_validate_inputs",
+      "_build_metric",
+      "_score_program",
+      "run_optimization",
+      "status"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "dataclasses",
+      "dspy",
+      "dspy.teleprompt",
+      "importlib",
+      "json",
+      "os",
+      "pathlib",
+      "sys",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/eta_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "eta_service \u2014 rule-based ETA prediction per transportation mode.",
+    "classes": [
+      "ETAService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "repositories.supply_chain_repo",
+      "schemas.supply_chain",
+      "statistics"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/forecast_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "forecast_service.py \u2014 Prophet per-store forecast wrapper with an LRU cache.",
+    "classes": [
+      "_FittedModel",
+      "ForecastService"
+    ],
+    "functions": [
+      "_to_points",
+      "_mape"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "dataclasses",
+      "datetime",
+      "functools",
+      "logging",
+      "pandas",
+      "prophet",
+      "repositories.sales_repo",
+      "schemas.sales",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/job_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "JobService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.exceptions",
+      "logging",
+      "repositories.job_repo",
+      "schemas.job",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/llm_gateway.py",
+    "layer": "service/business",
+    "business_logic_gist": "LiteLLM provider-agnostic LLM gateway (\u00a756 Stage-1 adapter).",
+    "classes": [
+      "LlmCompletion"
+    ],
+    "functions": [
+      "is_enabled",
+      "is_importable",
+      "_write_audit_row",
+      "_provider_from_model",
+      "complete",
+      "status"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "dataclasses",
+      "importlib",
+      "json",
+      "litellm",
+      "os",
+      "pathlib",
+      "sys",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/ml_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "MLService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.exceptions",
+      "logging",
+      "repositories.model_repo",
+      "schemas.model",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/openclaw_gateway_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "OpenClaw bridge service.",
+    "classes": [
+      "OpenClawGatewayService"
+    ],
+    "functions": [
+      "_result_matches",
+      "_redact_url"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.config",
+      "json",
+      "logging",
+      "redis",
+      "schemas.openclaw",
+      "time",
+      "typing",
+      "urllib.parse",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/paperclip_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "Local Paperclip artifact/context adapter service.",
+    "classes": [
+      "PaperclipService"
+    ],
+    "functions": [
+      "_redact",
+      "_preview",
+      "_read_json",
+      "_write_json"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi",
+      "hashlib",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "re",
+      "schemas.paperclip",
+      "time",
+      "typing",
+      "uuid"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/process_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [
+      "ProcessService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.exceptions",
+      "logging",
+      "repositories.process_repo",
+      "schemas.process",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/rag_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "rag_service.py \u2014 hybrid retrieval + Ollama generation + citation extraction.",
+    "classes": [
+      "Chunk",
+      "RAGService"
+    ],
+    "functions": [
+      "_tokenize"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "dataclasses",
+      "logging",
+      "numpy",
+      "pathlib",
+      "rank_bm25",
+      "re",
+      "requests",
+      "schemas.ai_explain",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/simulation_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "simulation_service.py \u2014 price \u00d7 promo simulation using beta forecast as baseline.",
+    "classes": [
+      "SimulationService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "logging",
+      "schemas.sales",
+      "services.forecast_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/stockout_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "stockout_service \u2014 heuristic stockout-risk assessment for a single SKU.",
+    "classes": [
+      "StockoutService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "repositories.supply_chain_repo",
+      "schemas.supply_chain"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/supplier_score_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "supplier_score_service \u2014 composite 0-100 score per supplier.",
+    "classes": [
+      "SupplierScoreService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "repositories.supply_chain_repo",
+      "schemas.supply_chain"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/supply_chain_simulation_service.py",
+    "layer": "service/business",
+    "business_logic_gist": "supply_chain_simulation_service \u2014 what-if delay impact per supplier.",
+    "classes": [
+      "SupplyChainSimulationService"
+    ],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "repositories.supply_chain_repo",
+      "schemas.supply_chain"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/typed_council.py",
+    "layer": "service/business",
+    "business_logic_gist": "Pydantic AI typed council \u2014 \u00a756 Stage-1 adapter.",
+    "classes": [
+      "CouncilAuthorOutput",
+      "CouncilReviewerOutput",
+      "CouncilChairDecision",
+      "CouncilResult"
+    ],
+    "functions": [
+      "is_enabled",
+      "is_importable",
+      "_write_audit_row",
+      "_base_row",
+      "run_typed_council",
+      "status"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "dataclasses",
+      "importlib",
+      "json",
+      "os",
+      "pathlib",
+      "pydantic",
+      "pydantic_ai",
+      "sys",
+      "time",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/__init__.py",
+    "layer": "unknown",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/eval/__init__.py",
+    "layer": "unknown",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/eval/test_rag_groundedness.py",
+    "layer": "unknown",
+    "business_logic_gist": "RAG eval harness \u2014 groundedness only for Phase gamma.",
+    "classes": [],
+    "functions": [
+      "_ollama_judge_groundedness",
+      "test_groundedness_across_5_questions"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.schemas.ai_explain",
+      "backend.services.rag_service",
+      "pytest",
+      "re",
+      "requests"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_agent_platform_router.py",
+    "layer": "unknown",
+    "business_logic_gist": "Tests for the unified agent platform setup/status API.",
+    "classes": [],
+    "functions": [
+      "ensure_agent_platform_router_mounted",
+      "client",
+      "test_agent_platform_status_lists_requested_tools",
+      "test_agent_platform_manifest_contract",
+      "test_poliysai_governance_denies_secret_target",
+      "test_cua_dry_run_allowed_for_manager",
+      "test_cua_real_write_requires_manager_or_tester_rbac",
+      "test_typed_council_run_default_disabled_is_tenant_scoped",
+      "test_typed_council_run_rbac_blocks_team_member",
+      "test_approval_broker_auto_approves_safe_local_work",
+      "test_approval_broker_requires_human_for_production_secret",
+      "test_approval_broker_submit_next_uses_openclaw_when_safe",
+      "test_approval_broker_rbac_blocks_team_member"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.rbac_middleware",
+      "fastapi.testclient",
+      "main",
+      "pytest",
+      "re",
+      "routers.agent_platform",
+      "schemas.openclaw",
+      "services",
+      "services.agent_platform_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_ai_explain_router.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_ai_explain_router.py \u2014 router-level tests for /api/v1/ai/*.",
+    "classes": [],
+    "functions": [
+      "client",
+      "test_feedback_positive_returns_204",
+      "test_feedback_negative_minimal_payload_returns_204",
+      "test_feedback_rejects_invalid_rating",
+      "test_feedback_rejects_unknown_field"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.main",
+      "fastapi.testclient",
+      "pytest"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_churn_model_service.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_churn_model_service.py \u2014 smoke + quality checks for the churn model.",
+    "classes": [],
+    "functions": [
+      "svc",
+      "test_fit_and_metrics",
+      "test_rank_top_n",
+      "test_predict_single_customer",
+      "test_predict_unknown_customer",
+      "test_predict_cached_same_result"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pytest",
+      "repositories.customer_repo",
+      "services.churn_model_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_customer_corpus.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_customer_corpus.py \u2014 smoke-check the customer RAG corpus.",
+    "classes": [],
+    "functions": [
+      "test_corpus_files_exist",
+      "test_corpus_chunks_parseable",
+      "test_corpus_covers_all_four_files",
+      "test_explainrequest_accepts_customer_corpus",
+      "test_explainrequest_rejects_unknown_corpus",
+      "test_corpus_content_includes_key_vocab"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pathlib",
+      "pydantic",
+      "pytest",
+      "schemas.ai_explain",
+      "services.rag_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_customer_ingestion.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_customer_ingestion.py \u2014 smoke-check the customer pilot schema after ingest.",
+    "classes": [],
+    "functions": [
+      "_dsn",
+      "conn",
+      "_count",
+      "_ingested",
+      "test_customer_pilot_row_count",
+      "test_churn_label_matches_customers",
+      "test_interaction_count_reasonable",
+      "test_churn_rate_matches_benchmark",
+      "test_contract_types_complete"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "os",
+      "psycopg2",
+      "pytest"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_customer_router.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_customer_router.py \u2014 end-to-end HTTP tests for /api/v1/customer/*.",
+    "classes": [],
+    "functions": [
+      "client",
+      "test_churn_metrics",
+      "test_churn_top",
+      "test_churn_top_limit_bounds",
+      "test_churn_predict_known",
+      "test_churn_predict_unknown",
+      "test_churn_predict_validation",
+      "test_rbac_reporting_monitoring_allowed",
+      "test_rbac_invalid_role_400"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi.testclient",
+      "main",
+      "pytest",
+      "repositories.customer_repo"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_forecast_service.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_forecast_service.py \u2014 unit tests for ForecastService.",
+    "classes": [],
+    "functions": [
+      "_make_synthetic_history",
+      "mock_repo",
+      "test_mape_zero_when_perfect",
+      "test_mape_skips_zero_actual",
+      "test_forecast_returns_schema",
+      "test_forecast_mape_reasonable_on_synthetic",
+      "test_cache_hit_skips_refit",
+      "test_missing_history_raises",
+      "test_insufficient_history_raises"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.services.forecast_service",
+      "datetime",
+      "pytest",
+      "unittest.mock"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_openclaw_router.py",
+    "layer": "unknown",
+    "business_logic_gist": "OpenClaw bridge router tests.",
+    "classes": [
+      "FakeOpenClawService"
+    ],
+    "functions": [
+      "ensure_openclaw_router_mounted",
+      "client",
+      "test_openclaw_status_contract",
+      "test_openclaw_manifest_contract",
+      "test_openclaw_create_task_manager_allowed",
+      "test_openclaw_create_task_non_manager_forbidden",
+      "test_openclaw_get_task_result",
+      "test_openclaw_rejects_blank_prompt",
+      "test_openclaw_create_task_idempotency_replays_cached_response"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.rbac_middleware",
+      "fastapi.testclient",
+      "main",
+      "pathlib",
+      "pytest",
+      "re",
+      "routers.openclaw",
+      "schemas.openclaw",
+      "typing"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_paperclip_router.py",
+    "layer": "unknown",
+    "business_logic_gist": "Tests for the local Paperclip context/artifact adapter API.",
+    "classes": [],
+    "functions": [
+      "ensure_paperclip_router_mounted",
+      "client",
+      "test_paperclip_status",
+      "test_create_get_list_and_context_pack_redacts_pii",
+      "test_non_manager_cannot_create_or_delete",
+      "test_manager_can_delete",
+      "test_create_clip_idempotency_replays_cached_response",
+      "test_create_clip_idempotency_is_tenant_isolated"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.rbac_middleware",
+      "fastapi.testclient",
+      "main",
+      "pathlib",
+      "pytest",
+      "re",
+      "routers.paperclip",
+      "services.paperclip_service"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_rag_service.py",
+    "layer": "unknown",
+    "business_logic_gist": "Unit tests for RAGService. Mock Ollama HTTP calls \u2014 no network needed.",
+    "classes": [],
+    "functions": [
+      "corpus_tmp",
+      "_mock_embed",
+      "test_tokenize_lowercases_and_splits",
+      "test_pii_redacts_email_and_phone",
+      "test_read_chunks_splits_on_h2",
+      "test_retrieval_returns_relevant_chunks",
+      "test_explain_calls_ollama_and_returns_citations",
+      "test_explain_soft_fails_when_response_missing_ref",
+      "test_default_corpus_dir_points_at_sales_context",
+      "test_corpus_dir_override_reads_from_specified_dir",
+      "test_router_per_corpus_cache_returns_distinct_services",
+      "test_explain_request_accepts_corpus_field"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.routers.ai_explain",
+      "backend.schemas.ai_explain",
+      "backend.services.rag_service",
+      "pytest",
+      "unittest.mock"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_rbac_middleware.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_rbac_middleware \u2014 permission matrix enforcement for Sales + AI endpoints.",
+    "classes": [],
+    "functions": [
+      "client",
+      "test_stores_allowed_for_all_roles",
+      "test_simulate_manager_only",
+      "test_unknown_role_returns_400",
+      "test_missing_role_defaults_to_manager",
+      "test_non_matrix_path_is_allowed",
+      "test_supply_chain_simulate_manager_only",
+      "test_supply_chain_stockout_allowed_for_all_roles",
+      "test_tester_can_hit_stores",
+      "test_tester_cannot_simulate"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi.testclient",
+      "main",
+      "pytest"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_rossmann_ingestion.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_rossmann_ingestion.py \u2014 data-quality assertions against the ingested tables.",
+    "classes": [],
+    "functions": [
+      "repo",
+      "counts",
+      "_require_ingested",
+      "test_dim_store_row_count_matches_expected",
+      "test_fact_sales_row_count_is_order_of_magnitude_correct",
+      "test_dim_date_row_count_is_reasonable",
+      "test_no_null_sales",
+      "test_store_123_exists",
+      "test_get_sales_history_returns_nonempty"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.repositories.sales_repo",
+      "pytest"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_sales_repo.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_sales_repo.py \u2014 unit tests for SalesRepo that exercise SQL shape without needing Postgres.",
+    "classes": [],
+    "functions": [
+      "mock_repo",
+      "test_list_stores_executes_expected_sql",
+      "test_get_store_parameterized",
+      "test_get_sales_history_no_dates",
+      "test_get_sales_history_with_dates"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.repositories.sales_repo",
+      "contextlib",
+      "datetime",
+      "pytest",
+      "unittest.mock"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_sales_router.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_sales_router.py \u2014 integration tests against FastAPI TestClient.",
+    "classes": [],
+    "functions": [
+      "client",
+      "_require_ingested",
+      "test_list_stores_returns_1115",
+      "test_forecast_happy_path",
+      "test_forecast_bad_store_returns_404",
+      "test_forecast_rejects_unknown_field",
+      "test_forecast_bounds",
+      "test_simulate_happy_path",
+      "test_simulate_bad_discount_returns_422",
+      "test_simulate_unknown_field_returns_422"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.main",
+      "backend.repositories.sales_repo",
+      "fastapi.testclient",
+      "pytest"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_simulation_service.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_simulation_service.py \u2014 unit tests for the price \u00d7 promo simulation.",
+    "classes": [],
+    "functions": [
+      "_mock_forecast_service",
+      "test_simulate_baseline_revenue_matches_forecast_sum",
+      "test_simulate_elasticity_uplift_sign",
+      "test_simulate_zero_discount_zero_uplift",
+      "test_simulate_waterfall_has_four_steps",
+      "test_simulate_constants_returned"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "datetime",
+      "schemas.sales",
+      "services.simulation_service",
+      "unittest.mock"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_structured_logger.py",
+    "layer": "unknown",
+    "business_logic_gist": "Unit tests for core.structured_logger \u2014 JSON emitter + correlation_id contextvar.",
+    "classes": [],
+    "functions": [
+      "_capture_logs",
+      "test_new_correlation_id_is_16_chars_hex",
+      "test_emit_event_includes_correlation_id",
+      "test_emit_event_default_correlation_id",
+      "test_emit_event_stringifies_nonjson_values"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.structured_logger",
+      "io",
+      "json",
+      "logging"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_supply_chain_ingestion.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_supply_chain_ingestion.py \u2014 data-quality assertions against ingested tables.",
+    "classes": [],
+    "functions": [
+      "repo",
+      "counts",
+      "_require_ingested",
+      "test_fact_shipment_has_rows",
+      "test_dim_sku_has_at_least_one_entry_per_product_type",
+      "test_dim_supplier_has_unique_locations",
+      "test_get_shipments_for_known_sku_returns_records"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pytest",
+      "repositories.supply_chain_repo"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_supply_chain_repo.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_supply_chain_repo.py \u2014 unit tests for SupplyChainRepo SQL shape.",
+    "classes": [],
+    "functions": [
+      "mock_repo",
+      "test_list_skus_sql",
+      "test_list_suppliers_sql",
+      "test_get_sku_parameterized",
+      "test_get_shipments_for_sku"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "contextlib",
+      "pytest",
+      "repositories.supply_chain_repo",
+      "unittest.mock"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_supply_chain_router.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_supply_chain_router \u2014 TestClient integration tests against real DB.",
+    "classes": [],
+    "functions": [
+      "client",
+      "_require_ingested",
+      "test_list_skus",
+      "test_list_suppliers_scored",
+      "test_stockout_risk_happy_path",
+      "test_stockout_risk_unknown_sku_returns_404",
+      "test_stockout_risk_rejects_unknown_field",
+      "test_eta_happy_path",
+      "test_simulate_happy_path",
+      "test_simulate_rejects_out_of_range"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "backend.main",
+      "backend.repositories.supply_chain_repo",
+      "fastapi.testclient",
+      "pytest"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/tests/test_supply_chain_services.py",
+    "layer": "unknown",
+    "business_logic_gist": "test_supply_chain_services \u2014 unit tests for 4 Supply Chain services.",
+    "classes": [
+      "_NoDBSupplierScoreService",
+      "_FixedRevenueSim"
+    ],
+    "functions": [
+      "_mock_repo",
+      "test_stockout_high_risk_when_cover_short",
+      "test_stockout_unknown_sku_raises",
+      "test_eta_predict_uses_cached_stats",
+      "test_eta_predict_unknown_sku_raises",
+      "test_supplier_score_ranks_descending",
+      "test_supplier_score_inspection_mapping",
+      "test_simulation_zero_delay_has_no_impact",
+      "test_simulation_linear_scaling_with_delay"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "pytest",
+      "schemas.supply_chain",
+      "services.eta_service",
+      "services.stockout_service",
+      "services.supplier_score_service",
+      "services.supply_chain_simulation_service",
+      "unittest.mock"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/workers/__init__.py",
+    "layer": "worker/orchestration",
+    "business_logic_gist": "No module docstring yet. Add file-level input/process/output/flow documentation.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/workers/celery_app.py",
+    "layer": "worker/orchestration",
+    "business_logic_gist": "Celery application factory for Insur Analytics background workers.",
+    "classes": [],
+    "functions": [],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "celery",
+      "core.config",
+      "os",
+      "sys"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/workers/tasks.py",
+    "layer": "worker/orchestration",
+    "business_logic_gist": "Celery tasks for the Insur Analytics platform.",
+    "classes": [],
+    "functions": [
+      "_get_pipeline",
+      "train_model",
+      "predict",
+      "run_pipeline",
+      "run_structured_lifecycle",
+      "run_rag_lifecycle",
+      "dispatch_test_fanout",
+      "_cron_audit_dir",
+      "_cron_disabled",
+      "refresh_data_artifacts",
+      "retrain_models",
+      "eval_accuracy_drift",
+      "analysis_rollup"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "celery",
+      "celery.exceptions",
+      "core.config",
+      "importlib",
+      "json",
+      "logging",
+      "ml.pipelines.customer_segmentation",
+      "ml.pipelines.defect_detection",
+      "ml.pipelines.demand_forecast",
+      "ml.pipelines.inventory_optimizer",
+      "ml.pipelines.predictive_maintenance",
+      "ml.pipelines.sentiment_analysis",
+      "ml.reference.anomaly_lifecycle",
+      "ml.reference.full_lifecycle",
+      "ml.reference.noise_handling",
+      "ml.reference.rag_lifecycle",
+      "ml.reference.recommendation_lifecycle",
+      "ml.reference.role_dashboard_catalog",
+      "os",
+      "pandas",
+      "pathlib",
+      "redis",
+      "sys",
+      "time",
+      "typing",
+      "uuid",
+      "workers.celery_app"
+    ],
+    "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
+  },
+  {
+    "file": "backend/services/pii_inventory_service.py",
+    "layer": "service",
+    "business_logic_gist": "\u00a768.6 PII inventory \u2014 aggregates PII column annotations from per_process_tables + master_data ENTITY_CATALOG into cross-dept + per-dept views. scan_leaks heuristic over federated holy_reads audit log returns redacted match metadata (never raw PII). Honors HOLY_AUDIT_PATH env.",
+    "classes": [],
+    "functions": [
+      "_audit_log_path",
+      "cross_dept_inventory",
+      "per_dept_inventory",
+      "scan_leaks"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "re",
+      "routers.master_data",
+      "services.dbviewer_service",
+      "time",
+      "typing"
+    ],
+    "flow_note": "/pii/_global aggregates catalog; /pii/leaks scans audit log with FP-allowlist blanking + leak regex catalog; results carry redacted match strings."
+  },
+  {
+    "file": "backend/routers/pii.py",
+    "layer": "router",
+    "business_logic_gist": "\u00a768.6 PII inventory router \u2014 3 endpoints federated via core.holy_audit (surface=pii). Validators 404 BEFORE audit per \u00a747.6.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "pii_global",
+      "pii_leaks",
+      "pii_dept"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "services",
+      "time",
+      "typing"
+    ],
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response with \u00a738.3 audit row."
+  },
+  {
+    "file": "backend/services/guardrails_service.py",
+    "layer": "service",
+    "business_logic_gist": "\u00a768.5 Guardrails \u2014 read-only aggregation over data/agent-supervisor/guardrail_decisions.jsonl (HOLY_GUARDRAIL_LOG env). Returns cross-dept rollup, per-dept decisions with filters, single-decision lookup. PII never in row, only input_hash.",
+    "classes": [],
+    "functions": [
+      "_log_path",
+      "_read_rows",
+      "global_summary",
+      "per_dept_decisions",
+      "get_decision"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "collections",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "/_global aggregates by_type/by_decision/by_type\u00d7decision/by_dept/by_filter. /{dept} filters rows newest-first. /decision/{id} linear scan match on decision_id or request_id."
+  },
+  {
+    "file": "backend/routers/guardrails.py",
+    "layer": "router",
+    "business_logic_gist": "\u00a768.5 Guardrails router \u2014 3 endpoints federated via core.holy_audit (surface=guardrails). Validators 404/400 BEFORE audit per \u00a747.6.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "guardrails_global",
+      "guardrails_decision",
+      "guardrails_dept"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "re",
+      "services",
+      "typing"
+    ],
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response with \u00a738.3 audit row."
+  },
+  {
+    "file": "backend/services/security_posture_service.py",
+    "layer": "service",
+    "business_logic_gist": "\u00a768.7 Security posture \u2014 aggregates compliance gates (live probe) + CVE snapshot (HOLY_SECURITY_POSTURE_PATH env) + attack-attempt scan (rbac_denial / scope_denial / malformed_path patterns over holy_reads audit log). Graceful when snapshot missing per \u00a757.7.",
+    "classes": [],
+    "functions": [
+      "_posture_path",
+      "_audit_log_path",
+      "_load_posture",
+      "_compliance_gates",
+      "_scan_attacks",
+      "global_summary",
+      "per_dept_score",
+      "list_attacks"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "collections",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "/_global loads posture + probes 6 compliance gates + scans 24h attacks. /{dept} dept-slice + spec_doc pointer. /attacks scans audit log with attack-type regex."
+  },
+  {
+    "file": "backend/routers/security.py",
+    "layer": "router",
+    "business_logic_gist": "\u00a768.7 Security posture router \u2014 3 endpoints federated via core.holy_audit (surface=security). Validators 404 BEFORE audit per \u00a747.6.",
+    "classes": [],
+    "functions": [
+      "_validate_dept",
+      "security_global",
+      "security_attacks",
+      "security_dept"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "services",
+      "typing"
+    ],
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response."
+  },
+  {
+    "file": "backend/services/functional_eval_service.py",
+    "layer": "service",
+    "business_logic_gist": "\u00a768.8 Functional eval \u2014 leaderboard + per-model history with drift_summary + single-run detail over HOLY_EVAL_FUNCTIONAL_LOG JSONL. Best-effort missing/corrupt.",
+    "classes": [],
+    "functions": [
+      "_log_path",
+      "_read_rows",
+      "_latest_per_model",
+      "global_summary",
+      "model_history",
+      "run_detail"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "collections",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "/_global aggregates leaderboard (latest-per-model, sorted by accuracy/f1/auc/map desc); /{model_id} dataset-filterable newest-first with drift_summary; /runs/{run_id} linear match."
+  },
+  {
+    "file": "backend/routers/evals_functional.py",
+    "layer": "router",
+    "business_logic_gist": "\u00a768.8 Functional eval router \u2014 3 endpoints federated via core.holy_audit (surface=evals_functional). Validators 400/404 BEFORE audit per \u00a747.6.",
+    "classes": [],
+    "functions": [
+      "functional_global",
+      "functional_model",
+      "functional_run"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "services",
+      "typing"
+    ],
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response."
+  },
+  {
+    "file": "backend/services/cost_eval_service.py",
+    "layer": "service",
+    "business_logic_gist": "\u00a768.9 Cost eval \u2014 24h/7d/30d windows + all-time + per-tenant + per-model ranking + per-request lookup over HOLY_EVAL_COST_LOG JSONL.",
+    "classes": [],
+    "functions": [
+      "_log_path",
+      "_read_rows",
+      "_sum_cost",
+      "global_summary",
+      "per_tenant_breakdown",
+      "by_model_ranking",
+      "by_request"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "collections",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "/_global 3 windows + all_time; /{tenant_id} per-model nested; /by-model ranks desc; /by-request linear match."
+  },
+  {
+    "file": "backend/routers/evals_cost.py",
+    "layer": "router",
+    "business_logic_gist": "\u00a768.9 Cost eval router \u2014 4 endpoints federated via core.holy_audit (surface=evals_cost). Validators 400/404 BEFORE audit per \u00a747.6.",
+    "classes": [],
+    "functions": [
+      "cost_global",
+      "cost_by_model",
+      "cost_by_request",
+      "cost_per_tenant"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "services",
+      "typing"
+    ],
+    "flow_note": "RBAC catch-all /evals/* gates this surface; literal sub-paths registered BEFORE /{tenant_id} per \u00a766.3."
+  },
+  {
+    "file": "backend/services/safety_eval_service.py",
+    "layer": "service",
+    "business_logic_gist": "\u00a768.10 Safety eval \u2014 classifies each row's verdict (safe/review/unsafe/unknown) by \u00a748+\u00a764.21 thresholds. fairness_gate distinguishes 'review' (missing metric, no fail) from 'safe'.",
+    "classes": [],
+    "functions": [
+      "_log_path",
+      "_read_rows",
+      "_classify",
+      "_latest_per_model",
+      "global_scorecard",
+      "per_model_history",
+      "list_incidents"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "re",
+      "time",
+      "typing"
+    ],
+    "flow_note": "/_global scorecard sorted unsafe\u2192review\u2192unknown\u2192safe; /{model_id} per-row verdict_summary; /incidents unsafe + n_safety_incidents>0."
+  },
+  {
+    "file": "backend/routers/evals_safety.py",
+    "layer": "router",
+    "business_logic_gist": "\u00a768.10 Safety eval router \u2014 3 endpoints federated via core.holy_audit (surface=evals_safety). RBAC catch-all /evals/* gates this.",
+    "classes": [],
+    "functions": [
+      "safety_global",
+      "safety_incidents",
+      "safety_per_model"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "services",
+      "typing"
+    ],
+    "flow_note": "Literal sub-paths (/_global, /incidents) BEFORE /{model_id} per \u00a766.3."
+  },
+  {
+    "file": "backend/services/observability_hub_service.py",
+    "layer": "service",
+    "business_logic_gist": "\u00a768 Observability Hub aggregator \u2014 probes all 7 \u00a768 read surfaces in one call. Per \u00a757.7 the try/except is at the call site so a monkeypatched probe that raises still surfaces as status='probe_error'.",
+    "classes": [],
+    "functions": [
+      "_resolve_path",
+      "_probe_jsonl",
+      "_probe_json",
+      "_probe_one",
+      "overview"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "json",
+      "logging",
+      "os",
+      "pathlib",
+      "time",
+      "typing"
+    ],
+    "flow_note": "overview() iterates _SURFACES registry, calls _probe_one(s) inside try/except, accumulates results."
+  },
+  {
+    "file": "backend/routers/observability_hub.py",
+    "layer": "router",
+    "business_logic_gist": "\u00a768 aggregator router \u2014 single endpoint /_overview federated via core.holy_audit (surface=observability_hub).",
+    "classes": [],
+    "functions": [
+      "hub_overview"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "core.holy_audit",
+      "fastapi",
+      "services",
+      "typing"
+    ],
+    "flow_note": "GET /_overview \u2192 log_holy_access \u2192 ohub.overview() \u2192 aggregated snapshot."
+  }
+]

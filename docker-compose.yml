@@ -1,0 +1,217 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: insur_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: insur_analytics
+      POSTGRES_USER: insur_user
+      POSTGRES_PASSWORD: insur_secret_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U insur_user -d insur_analytics"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: insur_redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: insur_ollama
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    # No host port mapping — host already runs Ollama on 11434.
+    # Agents reach insur_ollama via docker network at http://ollama:11434.
+    # NOTE: GPU passthrough disabled until nvidia-container-toolkit is installed.
+    # To enable (one-time setup):
+    #   sudo apt-get install -y nvidia-container-toolkit
+    #   sudo nvidia-ctk runtime configure --runtime=docker
+    #   sudo systemctl restart docker
+    # Then uncomment the deploy block below + `docker compose up -d --force-recreate ollama`
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.12.1
+    container_name: insur_mlflow
+    ports:
+      - "5001:5000"
+    environment:
+      MLFLOW_BACKEND_STORE_URI: postgresql://insur_user:insur_secret_password@postgres:5432/mlflow_db
+      MLFLOW_DEFAULT_ARTIFACT_ROOT: /mlartifacts
+    volumes:
+      - mlartifacts:/mlartifacts
+    command: >
+      bash -c "pip install --quiet psycopg2-binary &&
+      mlflow server
+      --backend-store-uri postgresql://insur_user:insur_secret_password@postgres:5432/mlflow_db
+      --default-artifact-root /mlartifacts
+      --host 0.0.0.0
+      --port 5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: insur_backend
+    ports:
+      - "8000:8000"
+    environment:
+      BEV_POSTGRES_HOST: postgres
+      BEV_POSTGRES_PORT: 5432
+      BEV_POSTGRES_DB: insur_analytics
+      BEV_POSTGRES_USER: insur_user
+      BEV_POSTGRES_PASSWORD: insur_secret_password
+      BEV_REDIS_HOST: redis
+      BEV_REDIS_PORT: 6379
+      BEV_MLFLOW_TRACKING_URI: http://mlflow:5000
+      BEV_OLLAMA_HOST: http://ollama:11434
+      BEV_CORS_ORIGINS: "http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173,http://frontend:3000"
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+      - ./global-ai-org:/global-ai-org:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: insur_worker
+    command: celery -A workers.celery_app worker --loglevel=info
+    environment:
+      BEV_POSTGRES_HOST: postgres
+      BEV_POSTGRES_PORT: 5432
+      BEV_POSTGRES_DB: insur_analytics
+      BEV_POSTGRES_USER: insur_user
+      BEV_POSTGRES_PASSWORD: insur_secret_password
+      BEV_REDIS_HOST: redis
+      BEV_REDIS_PORT: 6379
+      BEV_MLFLOW_TRACKING_URI: http://mlflow:5000
+      BEV_OLLAMA_HOST: http://ollama:11434
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+      - ./global-ai-org:/global-ai-org:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: insur_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+
+  # 100-agent background workers. Default model is AGENT_MODEL=kivi:local.
+  # Scale with: docker compose up -d --scale agents=100
+  agents:
+    build:
+      context: ./agents
+      dockerfile: Dockerfile
+    # No container_name — replicas need unique auto-names
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      OLLAMA_URL: http://ollama:11434
+      MODEL: ${AGENT_MODEL:-kivi:local}
+      POLL_TIMEOUT: "5"
+      OLLAMA_TIMEOUT: "60"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+
+  # Test-tier agent fleet — picks tasks from Redis `test_tasks`, runs per tier,
+  # pushes results to `test_results`. Per global CLAUDE.md §65.1 #8 + §65.8.
+  # Scale per tier-role: TIER_ROLE=pytest-agent docker compose up -d --scale test_agents=8
+  test_agents:
+    build:
+      context: ./agents
+      dockerfile: Dockerfile
+    command: ["python", "-u", "test_agent.py"]
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      TIER_ROLE: "${TIER_ROLE:-pytest-agent}"
+      POLL_TIMEOUT: "5"
+      REPO_ROOT: /repo
+    volumes:
+      - .:/repo:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+
+  # Council-of-agents (3-stage: author/reviewer/chair) using gemma3:4b + gemma3:1b
+  # Scale with: docker compose up -d --scale council_agents=N
+  council_agents:
+    build:
+      context: ./agents
+      dockerfile: Dockerfile
+    command: ["python", "-u", "council_agent.py"]
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      OLLAMA_URL: http://ollama:11434
+      AUTHOR_MODEL: ${COUNCIL_AUTHOR_MODEL:-kivi:local}
+      REVIEWER_MODEL: ${COUNCIL_REVIEWER_MODEL:-kivi:local}
+      CHAIR_MODEL: ${COUNCIL_CHAIR_MODEL:-kivi:local}
+      POLL_TIMEOUT: "5"
+      STAGE_TIMEOUT: "120"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  ollama_data:
+  mlartifacts:

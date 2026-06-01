@@ -1,0 +1,36 @@
+name: insur-project-doctor-fix
+description: BEV-specific workflow to inspect governance, get approval, fix a project_doctor failure, update required docs, validate, and pause for final approval.
+provider: codex
+modelReasoningEffort: medium
+interactive: true
+nodes:
+  - id: governance
+    command: insur-governance-check
+
+  - id: approve-plan
+    approval:
+      message: "Review the governance summary and approve before implementation. Reject with required changes if scope/docs/tests are wrong."
+      capture_response: true
+      on_reject:
+        prompt: "Revise the governance summary and implementation approach using this rejection reason: $REJECTION_REASON"
+        max_attempts: 3
+    depends_on: [governance]
+
+  - id: implement
+    command: insur-implement-with-docs
+    depends_on: [approve-plan]
+    context: fresh
+
+  - id: validate
+    command: insur-validate
+    depends_on: [implement]
+    context: fresh
+
+  - id: approve-handoff
+    approval:
+      message: "Review the validation result and final diff before handoff. Approve to complete or reject with required fixes."
+      capture_response: true
+      on_reject:
+        prompt: "Address final review feedback before handoff: $REJECTION_REASON"
+        max_attempts: 3
+    depends_on: [validate]

@@ -1,0 +1,1233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "migration": {
+    "name": "cpg-to-insur",
+    "date": "2026-05-21",
+    "purpose": "Project rebrand from CPG (Consumer Packaged Goods) to BEV (Beverages) \u2014 covers brand mentions, identifiers, env vars, container names, DB identifiers, domain terms, file renames, directory rename",
+    "operator": "Claude via /mnt/deepa/Holy_insurarage session",
+    "policy_refs": [
+      "\u00a742 operational autonomy (gated destructive operation completed under user direction)",
+      "\u00a760 path verification (verified new path with lsblk/stat before/after rename)",
+      "\u00a762 checklist updates (status reported as ## Done / ## Pending throughout)"
+    ],
+    "completed": true
+  },
+  "replacement_rules": [
+    {
+      "pattern": "Consumer Packaged Goods (CPG)",
+      "replacement": "Beverages (BEV)",
+      "kind": "domain term"
+    },
+    {
+      "pattern": "Consumer Packaged Goods",
+      "replacement": "Beverages",
+      "kind": "domain term"
+    },
+    {
+      "pattern": "CPG Analytics",
+      "replacement": "Insur Analytics",
+      "kind": "brand"
+    },
+    {
+      "pattern": "CPG Platform",
+      "replacement": "BEV Platform",
+      "kind": "brand"
+    },
+    {
+      "pattern": "CPG Dashboard",
+      "replacement": "BEV Dashboard",
+      "kind": "brand"
+    },
+    {
+      "pattern": "CPG AI Platform",
+      "replacement": "BEV AI Platform",
+      "kind": "brand"
+    },
+    {
+      "pattern": "CPG dashboard",
+      "replacement": "BEV dashboard",
+      "kind": "brand (lowercase)"
+    },
+    {
+      "pattern": "CPG_*",
+      "replacement": "BEV_*",
+      "kind": "env var prefix"
+    },
+    {
+      "pattern": "cpg_*",
+      "replacement": "insur_*",
+      "kind": "snake_case identifier"
+    },
+    {
+      "pattern": "cpg-*",
+      "replacement": "insur-*",
+      "kind": "kebab-case identifier"
+    },
+    {
+      "pattern": "cpg.role",
+      "replacement": "insur.role",
+      "kind": "localStorage key"
+    },
+    {
+      "pattern": "cpg.events",
+      "replacement": "insur.events",
+      "kind": "logger name"
+    },
+    {
+      "pattern": "cpg:role-change",
+      "replacement": "insur:role-change",
+      "kind": "DOM event"
+    },
+    {
+      "pattern": "CPG grocery",
+      "replacement": "BEV grocery",
+      "kind": "domain term"
+    },
+    {
+      "pattern": "/mnt/deepa/cpg",
+      "replacement": "/mnt/deepa/insur",
+      "kind": "absolute path"
+    },
+    {
+      "pattern": "\\bCPG\\b",
+      "replacement": "BEV",
+      "kind": "regex: standalone CPG"
+    },
+    {
+      "pattern": "\\bcpg\\b",
+      "replacement": "insur",
+      "kind": "regex: standalone cpg"
+    }
+  ],
+  "directory_rename": {
+    "from": "/mnt/deepa/cpg",
+    "to": "/mnt/deepa/insur",
+    "venv_map_updated": true,
+    "venv_map_path": "/home/praveen/.claude/python-venv-map.json"
+  },
+  "file_renames": {
+    "png_screenshots": [
+      {
+        "from": "cpg-automation-tab.png",
+        "to": "insur-automation-tab.png"
+      },
+      {
+        "from": "cpg-dashboard-home.png",
+        "to": "insur-dashboard-home.png"
+      },
+      {
+        "from": "cpg-data-tab.png",
+        "to": "insur-data-tab.png"
+      },
+      {
+        "from": "cpg-demo-enhanced.png",
+        "to": "insur-demo-enhanced.png"
+      },
+      {
+        "from": "cpg-demo-interactive.png",
+        "to": "insur-demo-interactive.png"
+      },
+      {
+        "from": "cpg-demo-viewport.png",
+        "to": "insur-demo-viewport.png"
+      },
+      {
+        "from": "cpg-dept-chatbot.png",
+        "to": "insur-dept-chatbot.png"
+      },
+      {
+        "from": "cpg-docs-full.png",
+        "to": "insur-docs-full.png"
+      },
+      {
+        "from": "cpg-docs-sequence.png",
+        "to": "insur-docs-sequence.png"
+      },
+      {
+        "from": "cpg-docs-tab.png",
+        "to": "insur-docs-tab.png"
+      },
+      {
+        "from": "cpg-eda-panel.png",
+        "to": "insur-eda-panel.png"
+      },
+      {
+        "from": "cpg-flowcharts.png",
+        "to": "insur-flowcharts.png"
+      },
+      {
+        "from": "cpg-governance-tab.png",
+        "to": "insur-governance-tab.png"
+      },
+      {
+        "from": "cpg-home.png",
+        "to": "insur-home.png"
+      },
+      {
+        "from": "cpg-manual-runner.png",
+        "to": "insur-manual-runner.png"
+      },
+      {
+        "from": "cpg-ml-workbench.png",
+        "to": "insur-ml-workbench.png"
+      },
+      {
+        "from": "cpg-model-categories.png",
+        "to": "insur-model-categories.png"
+      },
+      {
+        "from": "cpg-models-tab.png",
+        "to": "insur-models-tab.png"
+      },
+      {
+        "from": "cpg-models-workbench.png",
+        "to": "insur-models-workbench.png"
+      },
+      {
+        "from": "cpg-overview-userstories.png",
+        "to": "insur-overview-userstories.png"
+      },
+      {
+        "from": "cpg-process-detail.png",
+        "to": "insur-process-detail.png"
+      },
+      {
+        "from": "cpg-process-page.png",
+        "to": "insur-process-page.png"
+      },
+      {
+        "from": "cpg-sales-dept-chatbot.png",
+        "to": "insur-sales-dept-chatbot.png"
+      },
+      {
+        "from": "cpg-sales-dept.png",
+        "to": "insur-sales-dept.png"
+      },
+      {
+        "from": "cpg-sequence-diagram.png",
+        "to": "insur-sequence-diagram.png"
+      },
+      {
+        "from": "cpg-sequence-final.png",
+        "to": "insur-sequence-final.png"
+      },
+      {
+        "from": "cpg-sidebar-expanded.png",
+        "to": "insur-sidebar-expanded.png"
+      },
+      {
+        "from": "cpg-tabs-scroll.png",
+        "to": "insur-tabs-scroll.png"
+      },
+      {
+        "from": "cpg-testing-tab.png",
+        "to": "insur-testing-tab.png"
+      }
+    ],
+    "count": 29
+  },
+  "files_modified": {
+    "count": 63,
+    "total_cpg_lines_removed": 283,
+    "total_insur_lines_added": 285,
+    "list": [
+      {
+        "path": ".env.template",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "README.md",
+        "cpg_lines_removed": 4,
+        "insur_lines_added": 4
+      },
+      {
+        "path": "backend/core/config.py",
+        "cpg_lines_removed": 4,
+        "insur_lines_added": 4
+      },
+      {
+        "path": "backend/core/structured_logger.py",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/main.py",
+        "cpg_lines_removed": 4,
+        "insur_lines_added": 4
+      },
+      {
+        "path": "backend/migrations/001_initial.sql",
+        "cpg_lines_removed": 0,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/ml/utils.py",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/repositories/customer_repo.py",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      },
+      {
+        "path": "backend/repositories/sales_repo.py",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      },
+      {
+        "path": "backend/repositories/supply_chain_repo.py",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      },
+      {
+        "path": "backend/routers/health.py",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/seeds/processes.json",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/services/rag_service.py",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/services/simulation_service.py",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/tests/test_customer_ingestion.py",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      },
+      {
+        "path": "backend/tests/test_rossmann_ingestion.py",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "backend/tests/test_structured_logger.py",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "backend/workers/celery_app.py",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "backend/workers/tasks.py",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "data/customer-context/churn-playbook.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "data/customer-context/ltv-calculation-guide.md",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "data/customer-context/nps-interpretation.md",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "data/sales-context/promo-playbook.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "data/sales-context/sales-kpi-definitions.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "data/supply-chain-context/supplier-scorecard-methodology.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "docker-compose.yml",
+        "cpg_lines_removed": 32,
+        "insur_lines_added": 32
+      },
+      {
+        "path": "docs/STATUS.md",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "docs/architecture/DEPARTMENT_OPERATING_SYSTEM.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "docs/architecture/ENTERPRISE_AI_REFERENCE_ARCHITECTURE.md",
+        "cpg_lines_removed": 7,
+        "insur_lines_added": 7
+      },
+      {
+        "path": "docs/demo/customer-analytics-walkthrough.md",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "docs/demo/sales-walkthrough.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "docs/diagrams/sales-architecture.md",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "docs/diagrams/sales-rbac-flow.md",
+        "cpg_lines_removed": 3,
+        "insur_lines_added": 3
+      },
+      {
+        "path": "docs/specs/ROLE_ENHANCEMENT_PROCESSES.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "docs/specs/SUPPLY_CHAIN_SCENARIOS.md",
+        "cpg_lines_removed": 3,
+        "insur_lines_added": 3
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-18-cpg-dashboard-plan.md",
+        "cpg_lines_removed": 28,
+        "insur_lines_added": 29
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-dept-admin-manager-hubs-phase1.md",
+        "cpg_lines_removed": 19,
+        "insur_lines_added": 19
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-alpha-data-ingestion.md",
+        "cpg_lines_removed": 31,
+        "insur_lines_added": 31
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-beta-forecast.md",
+        "cpg_lines_removed": 9,
+        "insur_lines_added": 9
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-delta-simulation.md",
+        "cpg_lines_removed": 3,
+        "insur_lines_added": 3
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-epsilon-frontend.md",
+        "cpg_lines_removed": 8,
+        "insur_lines_added": 8
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-eta-rbac.md",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-gamma-rag.md",
+        "cpg_lines_removed": 4,
+        "insur_lines_added": 4
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-theta-demo-docs.md",
+        "cpg_lines_removed": 8,
+        "insur_lines_added": 8
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-sales-zeta-observability.md",
+        "cpg_lines_removed": 4,
+        "insur_lines_added": 4
+      },
+      {
+        "path": "docs/superpowers/plans/2026-04-19-supply-chain-alpha-data.md",
+        "cpg_lines_removed": 12,
+        "insur_lines_added": 12
+      },
+      {
+        "path": "docs/superpowers/specs/2026-04-18-cpg-analytics-dashboard-design.md",
+        "cpg_lines_removed": 3,
+        "insur_lines_added": 3
+      },
+      {
+        "path": "docs/superpowers/specs/2026-04-19-phase2-deep-dive-roadmap.md",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "frontend/e2e/admin-manager-hubs.spec.js",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "frontend/e2e/capture-screenshots.spec.js",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "frontend/package-lock.json",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "frontend/package.json",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "frontend/src/data/datasets.js",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "frontend/src/data/departments.js",
+        "cpg_lines_removed": 3,
+        "insur_lines_added": 3
+      },
+      {
+        "path": "frontend/src/data/models.js",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "frontend/src/hooks/useRole.js",
+        "cpg_lines_removed": 1,
+        "insur_lines_added": 1
+      },
+      {
+        "path": "frontend/src/services/apiFetch.js",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "frontend/vite.config.js",
+        "cpg_lines_removed": 2,
+        "insur_lines_added": 2
+      },
+      {
+        "path": "scripts/download_kaggle_data.py",
+        "cpg_lines_removed": 4,
+        "insur_lines_added": 4
+      },
+      {
+        "path": "scripts/generate_sample_data.py",
+        "cpg_lines_removed": 3,
+        "insur_lines_added": 3
+      },
+      {
+        "path": "scripts/ingest_customer_telco.py",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      },
+      {
+        "path": "scripts/ingest_rossmann.py",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      },
+      {
+        "path": "scripts/ingest_supply_chain.py",
+        "cpg_lines_removed": 5,
+        "insur_lines_added": 5
+      }
+    ]
+  },
+  "residual_cpg_references": {
+    "count_files": 2,
+    "count_lines": 126,
+    "files": [
+      {
+        "path": "migration-cpg-to-insur.json",
+        "count": 123,
+        "occurrences": [
+          {
+            "line": 4,
+            "content": "\"name\": \"cpg-to-insur\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 6,
+            "content": "\"purpose\": \"Project rebrand from CPG (Consumer Packaged Goods) to BEV (Beverages) \\u2014 covers brand mentions, identifiers, env vars, conta",
+            "reason": "unclassified"
+          },
+          {
+            "line": 16,
+            "content": "\"pattern\": \"Consumer Packaged Goods (CPG)\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 26,
+            "content": "\"pattern\": \"CPG Analytics\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 31,
+            "content": "\"pattern\": \"CPG Platform\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 36,
+            "content": "\"pattern\": \"CPG Dashboard\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 41,
+            "content": "\"pattern\": \"CPG AI Platform\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 46,
+            "content": "\"pattern\": \"CPG_*\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 51,
+            "content": "\"pattern\": \"cpg_*\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 56,
+            "content": "\"pattern\": \"cpg-*\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 61,
+            "content": "\"pattern\": \"cpg.role\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 66,
+            "content": "\"pattern\": \"cpg.events\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 71,
+            "content": "\"pattern\": \"cpg:role-change\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 76,
+            "content": "\"pattern\": \"CPG grocery\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 81,
+            "content": "\"pattern\": \"/mnt/deepa/cpg\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 86,
+            "content": "\"pattern\": \"\\\\bCPG\\\\b\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 88,
+            "content": "\"kind\": \"regex: standalone CPG\"",
+            "reason": "unclassified"
+          },
+          {
+            "line": 91,
+            "content": "\"pattern\": \"\\\\bcpg\\\\b\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 93,
+            "content": "\"kind\": \"regex: standalone cpg\"",
+            "reason": "unclassified"
+          },
+          {
+            "line": 99,
+            "content": "\"from\": \"cpg-automation-tab.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 103,
+            "content": "\"from\": \"cpg-dashboard-home.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 107,
+            "content": "\"from\": \"cpg-data-tab.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 111,
+            "content": "\"from\": \"cpg-demo-enhanced.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 115,
+            "content": "\"from\": \"cpg-demo-interactive.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 119,
+            "content": "\"from\": \"cpg-demo-viewport.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 123,
+            "content": "\"from\": \"cpg-dept-chatbot.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 127,
+            "content": "\"from\": \"cpg-docs-full.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 131,
+            "content": "\"from\": \"cpg-docs-sequence.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 135,
+            "content": "\"from\": \"cpg-docs-tab.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 139,
+            "content": "\"from\": \"cpg-eda-panel.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 143,
+            "content": "\"from\": \"cpg-flowcharts.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 147,
+            "content": "\"from\": \"cpg-governance-tab.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 151,
+            "content": "\"from\": \"cpg-home.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 155,
+            "content": "\"from\": \"cpg-manual-runner.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 159,
+            "content": "\"from\": \"cpg-ml-workbench.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 163,
+            "content": "\"from\": \"cpg-model-categories.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 167,
+            "content": "\"from\": \"cpg-models-tab.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 171,
+            "content": "\"from\": \"cpg-models-workbench.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 175,
+            "content": "\"from\": \"cpg-overview-userstories.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 179,
+            "content": "\"from\": \"cpg-process-detail.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 183,
+            "content": "\"from\": \"cpg-process-page.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 187,
+            "content": "\"from\": \"cpg-sales-dept-chatbot.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 191,
+            "content": "\"from\": \"cpg-sales-dept.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 195,
+            "content": "\"from\": \"cpg-sequence-diagram.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 199,
+            "content": "\"from\": \"cpg-sequence-final.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 203,
+            "content": "\"from\": \"cpg-sidebar-expanded.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 207,
+            "content": "\"from\": \"cpg-tabs-scroll.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 211,
+            "content": "\"from\": \"cpg-testing-tab.png\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 221,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 226,
+            "content": "\"cpg_lines_removed\": 4,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 231,
+            "content": "\"cpg_lines_removed\": 4,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 236,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 241,
+            "content": "\"cpg_lines_removed\": 4,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 246,
+            "content": "\"cpg_lines_removed\": 0,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 251,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 256,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 261,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 266,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 271,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 276,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 281,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 286,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 291,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 296,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 301,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 306,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 311,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 316,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 321,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 326,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 331,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 336,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 341,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 346,
+            "content": "\"cpg_lines_removed\": 32,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 351,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 356,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 361,
+            "content": "\"cpg_lines_removed\": 7,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 366,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 371,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 376,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 381,
+            "content": "\"cpg_lines_removed\": 3,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 386,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 391,
+            "content": "\"cpg_lines_removed\": 3,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 395,
+            "content": "\"path\": \"docs/superpowers/plans/2026-04-18-cpg-dashboard-plan.md\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 396,
+            "content": "\"cpg_lines_removed\": 28,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 401,
+            "content": "\"cpg_lines_removed\": 19,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 406,
+            "content": "\"cpg_lines_removed\": 31,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 411,
+            "content": "\"cpg_lines_removed\": 9,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 416,
+            "content": "\"cpg_lines_removed\": 3,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 421,
+            "content": "\"cpg_lines_removed\": 8,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 426,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 431,
+            "content": "\"cpg_lines_removed\": 4,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 436,
+            "content": "\"cpg_lines_removed\": 8,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 441,
+            "content": "\"cpg_lines_removed\": 4,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 446,
+            "content": "\"cpg_lines_removed\": 12,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 450,
+            "content": "\"path\": \"docs/superpowers/specs/2026-04-18-cpg-analytics-dashboard-design.md\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 451,
+            "content": "\"cpg_lines_removed\": 3,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 456,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 461,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 466,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 471,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 476,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 481,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 486,
+            "content": "\"cpg_lines_removed\": 3,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 491,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 496,
+            "content": "\"cpg_lines_removed\": 1,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 501,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 506,
+            "content": "\"cpg_lines_removed\": 2,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 511,
+            "content": "\"cpg_lines_removed\": 4,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 516,
+            "content": "\"cpg_lines_removed\": 3,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 521,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 526,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 531,
+            "content": "\"cpg_lines_removed\": 5,",
+            "reason": "unclassified"
+          },
+          {
+            "line": 536,
+            "content": "\"residual_cpg_references\": {",
+            "reason": "unclassified"
+          },
+          {
+            "line": 545,
+            "content": "\"content\": \"\\\"integrity\\\": \\\"sha512-+d0F4MKMCbeVUJwG96uQ4SgAznZNSq93I3V+9NHA4OpvqG8mRCpGdKmK8l/dl02h2CCDHwW2FqilnTyDcAnqjA==\\\",\",",
+            "reason": "crypto hash \u2014 random substring containing 'cpg'; DO NOT change (would break npm integrity check)"
+          },
+          {
+            "line": 550,
+            "content": "\"content\": \"\\\"integrity\\\": \\\"sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==\\\",\",",
+            "reason": "crypto hash \u2014 random substring containing 'cpg'; DO NOT change (would break npm integrity check)"
+          },
+          {
+            "line": 555,
+            "content": "\"content\": \"\\\"integrity\\\": \\\"sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==\\\",\",",
+            "reason": "crypto hash \u2014 random substring containing 'cpg'; DO NOT change (would break npm integrity check)"
+          },
+          {
+            "line": 564,
+            "content": "\"grep -rn -iE 'cpg' /mnt/deepa/cpg --include='*.py' --include='*.js' --include='*.json' --include='*.md' --include='*.yml' --include='*.sh' ",
+            "reason": "absolute path \u2014 may be a stale reference"
+          },
+          {
+            "line": 565,
+            "content": "\"find /mnt/deepa/cpg -type f -name 'cpg-*' -not -path '*/__pycache__/*' -not -path '*/.git/*' -not -path '*/node_modules/*' | wc -l  # expec",
+            "reason": "absolute path \u2014 may be a stale reference"
+          },
+          {
+            "line": 566,
+            "content": "\"find /mnt/deepa/cpg -type f -name 'insur-*' -not -path '*/__pycache__/*' -not -path '*/.git/*' -not -path '*/node_modules/*' | wc -l  # expec",
+            "reason": "absolute path \u2014 may be a stale reference"
+          },
+          {
+            "line": 570,
+            "content": "\"Rename directory: /mnt/deepa/cpg -> /mnt/deepa/insur\",",
+            "reason": "absolute path \u2014 may be a stale reference"
+          },
+          {
+            "line": 571,
+            "content": "\"Update venv map: ~/.claude/python-venv-map.json key '/mnt/deepa/cpg' -> '/mnt/deepa/insur'\",",
+            "reason": "unclassified"
+          },
+          {
+            "line": 574,
+            "content": "\"Optional cleanup: docker volume rm cpg_pgdata cpg_mlartifacts cpg_ollama_data\"",
+            "reason": "unclassified"
+          }
+        ]
+      },
+      {
+        "path": "frontend/package-lock.json",
+        "count": 3,
+        "occurrences": [
+          {
+            "line": 869,
+            "content": "\"integrity\": \"sha512-+d0F4MKMCbeVUJwG96uQ4SgAznZNSq93I3V+9NHA4OpvqG8mRCpGdKmK8l/dl02h2CCDHwW2FqilnTyDcAnqjA==\",",
+            "reason": "crypto hash \u2014 random substring containing 'cpg'; DO NOT change (would break npm integrity check)"
+          },
+          {
+            "line": 996,
+            "content": "\"integrity\": \"sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==\",",
+            "reason": "crypto hash \u2014 random substring containing 'cpg'; DO NOT change (would break npm integrity check)"
+          },
+          {
+            "line": 2347,
+            "content": "\"integrity\": \"sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==\",",
+            "reason": "crypto hash \u2014 random substring containing 'cpg'; DO NOT change (would break npm integrity check)"
+          }
+        ]
+      }
+    ]
+  },
+  "docker_state_at_migration": {
+    "stopped_containers": [
+      "cpg_postgres"
+    ],
+    "orphaned_volumes": [
+      "cpg_pgdata",
+      "cpg_mlartifacts",
+      "cpg_ollama_data"
+    ],
+    "cleanup_commands": [
+      "docker volume rm cpg_pgdata cpg_mlartifacts cpg_ollama_data",
+      "docker rm cpg_postgres cpg_redis cpg_ollama cpg_mlflow cpg_backend cpg_worker cpg_frontend 2>/dev/null"
+    ],
+    "fresh_start": "cd /mnt/deepa/insur && docker-compose up -d  # creates insur_* containers + volumes",
+    "data_reingest": [
+      "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python scripts/ingest_rossmann.py",
+      "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python scripts/ingest_supply_chain.py",
+      "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python scripts/ingest_customer_telco.py"
+    ]
+  },
+  "verification_commands": [
+    "grep -rn -iE '\\bcpg\\b' /mnt/deepa/insur --include='*.py' --include='*.js' --include='*.json' --include='*.md' --include='*.yml' --include='*.sh' --include='*.sql' | grep -v '/__pycache__/' | grep -v '/node_modules/' | grep -v '/.git/' | grep -v 'migration-cpg-to-insur'",
+    "find /mnt/deepa/insur -type f -name 'cpg-*' -not -path '*/__pycache__/*' -not -path '*/.git/*' -not -path '*/node_modules/*' | wc -l  # expect 0",
+    "find /mnt/deepa/insur -type f -name 'insur-*' -not -path '*/__pycache__/*' -not -path '*/.git/*' -not -path '*/node_modules/*' | wc -l  # expect 30+ (29 PNGs + manifest)",
+    "ls /mnt/deepa/cpg 2>&1  # expect 'No such file or directory'",
+    "ls /mnt/deepa/insur 2>&1 | wc -l  # expect 30+ top-level entries",
+    "python3 -c \"import json; print(json.load(open('/home/praveen/.claude/python-venv-map.json'))['project_overrides'].get('/mnt/deepa/insur', 'MISSING'))\"  # expect cuda venv path"
+  ],
+  "rollback": {
+    "files": "git -C /mnt/deepa/insur checkout .  # reverts all string changes",
+    "png_renames": "cd /mnt/deepa/insur && for f in insur-*.png; do mv \"$f\" \"${f/#insur-/cpg-}\"; done",
+    "directory_rename": "mv /mnt/deepa/insur /mnt/deepa/cpg",
+    "venv_map": "cp /home/praveen/.claude/python-venv-map.json.bak-2026-05-21-pre-insur-rename /home/praveen/.claude/python-venv-map.json"
+  }
+}

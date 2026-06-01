@@ -1,0 +1,45 @@
+# BEV local Archon approval policy
+#
+# Purpose:
+#   Reduce repetitive approval clicks for low-risk local developer workflows
+#   while keeping destructive, external, deployment, production, browser/CUA,
+#   secret, and broad-permission actions human-approved.
+#
+# This file is consumed by scripts/archon_auto_approve_safe.py. Archon itself
+# still owns workflow execution and approval state.
+version: 1
+mode: safe-local-auto-approval
+
+allow_auto_approve:
+  workflows:
+    - insur-project-doctor-fix
+    - insur-api-change-governance
+  gates:
+    - approve-plan
+    - approve-api-plan
+    - approve-handoff
+    - approve-api-handoff
+  only_when:
+    - local_developer_workflow
+    - no_external_deploy
+    - no_production_data_access
+    - no_secret_or_token_scope
+    - no_destructive_shell_action
+    - no_real_browser_or_cua_side_effect
+    - project_docs_and_tests_required
+
+require_human_approval:
+  - production_deploy
+  - database_migration_or_destructive_data_change
+  - secret_token_or_private_key_access
+  - external_saas_write_or_connector_auth
+  - real_cua_browser_keyboard_mouse_action
+  - broad_copilot_or_agent_allow_all_session
+  - git_push_merge_release_or_branch_protection_change
+  - deleting_files_or_resetting_git_state
+  - changing_this_policy
+
+commands:
+  dry_run: python3 scripts/archon_auto_approve_safe.py --dry-run
+  approve_once: python3 scripts/archon_auto_approve_safe.py --approve
+  watch: python3 scripts/archon_auto_approve_safe.py --watch --approve
