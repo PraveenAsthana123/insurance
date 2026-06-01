@@ -44,6 +44,8 @@ REQUIRED_BL_FILES = [
     "INSUR_KPIS.md",
     "INSUR_PIPELINES.md",
     "INSUR_MANUAL_VS_AUTO_FLOW.md",
+    "INSUR_SIMULATION_UI.md",
+    "INSUR_SYSTEM_DESIGN.md",
 ]
 
 ROLES = [
@@ -207,7 +209,25 @@ def main() -> int:
         fail("expected per-dataset refresh entries with --only flag")
     ok(f"cron: {n_audit} audit + {cron_out.count('--only')} per-dataset refresh entries")
 
-    step(16, "NEGATIVE — data manifest exists and not 100% failure")
+    step(16, "insurance router responds + denies bogus paths (anti-enum)")
+    sys.path.insert(0, str(REPO_ROOT / "backend"))
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+    from routers.insurance import router as insur_router
+    app = FastAPI(); app.include_router(insur_router)
+    client = TestClient(app)
+    r = client.get("/api/v1/insurance/depts")
+    if r.status_code != 200 or len(r.json()["depts"]) != 4:
+        fail(f"insurance /depts failed: {r.status_code}")
+    r = client.get("/api/v1/insurance/depts/claims/spec")
+    if r.status_code != 200 or len(r.text) < 1000:
+        fail(f"insurance /depts/claims/spec failed: {r.status_code}")
+    r = client.get("/api/v1/insurance/depts/bogus/spec")
+    if r.status_code != 404:
+        fail(f"insurance bogus dept should 404, got {r.status_code}")
+    ok("insurance router: list + read + 404 on bogus all pass")
+
+    step(17, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
     if not manifest.is_file():
         fail(f"missing data manifest: {manifest}")
@@ -218,7 +238,7 @@ def main() -> int:
         fail(f"zero successful downloads in manifest: {statuses}")
     ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
 
-    print(f"\nALL 16 STEPS PASSED")
+    print(f"\nALL 17 STEPS PASSED")
     return 0
 
 
