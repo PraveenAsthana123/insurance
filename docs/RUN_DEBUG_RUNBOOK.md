@@ -34,6 +34,34 @@ BMAD is local planning/review methodology. The dark factory flow is documented i
 ./scripts/bmad.sh status
 ```
 
+## Codex Approval Cron
+
+Install or refresh the safe local approval cron:
+
+```bash
+scripts/install_codex_approval_cron.sh
+```
+
+Inspect the installed block:
+
+```bash
+crontab -l | sed -n "/CODEX-SAFE-APPROVAL/,/CODEX-SAFE-APPROVAL (insur_project) - end/p"
+```
+
+Watch approval cron logs:
+
+```bash
+tail -f jobs/logs/codex_approval_cron.log
+```
+
+Actively watch and approve safe local gates every 2 seconds:
+
+```bash
+scripts/watch_codex_approvals.sh
+```
+
+The cron job is governed by `docs/CODEX_APPROVAL_CRON_POLICY.md`, `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md`, and `.archon/approval-policy.yaml`. It only scans safe local Archon approval gates.
+
 ## Approval Governance
 
 Approval flow docs live in `docs/APPROVAL_GOVERNANCE.md`. Main commands:

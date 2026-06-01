@@ -1,0 +1,77 @@
+{
+  "_comment": "Cloudflare zone config for insur.example.com. Apply via `cf-terraforming` or Cloudflare API. Per global §41.3 multi-tenant + §47 architecture.",
+  "zone": {
+    "name": "insur.example.com",
+    "plan": "pro",
+    "ssl": "full_strict"
+  },
+  "settings": {
+    "always_use_https": "on",
+    "automatic_https_rewrites": "on",
+    "min_tls_version": "1.2",
+    "tls_1_3": "zrt",
+    "opportunistic_encryption": "on",
+    "ipv6": "on",
+    "h2_prioritization": "on",
+    "0rtt": "on",
+    "browser_check": "on",
+    "challenge_ttl": 1800,
+    "security_level": "medium",
+    "brotli": "on",
+    "minify": {"css": "on", "html": "off", "js": "on"},
+    "polish": "lossless",
+    "webp": "on",
+    "cache_level": "aggressive",
+    "browser_cache_ttl": 14400,
+    "edge_cache_ttl": 7200,
+    "always_online": "on",
+    "rocket_loader": "off"
+  },
+  "page_rules": [
+    {
+      "targets": [{"target": "url", "constraint": {"operator": "matches", "value": "*insur.example.com/api/v1/holy/*"}}],
+      "actions": [
+        {"id": "cache_level", "value": "bypass"}
+      ],
+      "priority": 1,
+      "status": "active"
+    },
+    {
+      "targets": [{"target": "url", "constraint": {"operator": "matches", "value": "*insur.example.com/api/v1/insurance/depts/*/spec"}}],
+      "actions": [
+        {"id": "cache_level", "value": "cache_everything"},
+        {"id": "edge_cache_ttl", "value": 3600},
+        {"id": "browser_cache_ttl", "value": 1800}
+      ],
+      "priority": 2,
+      "status": "active"
+    },
+    {
+      "targets": [{"target": "url", "constraint": {"operator": "matches", "value": "*insur.example.com/static/*"}}],
+      "actions": [
+        {"id": "cache_level", "value": "cache_everything"},
+        {"id": "edge_cache_ttl", "value": 31536000},
+        {"id": "browser_cache_ttl", "value": 31536000}
+      ],
+      "priority": 3,
+      "status": "active"
+    }
+  ],
+  "cache_keys": {
+    "_comment": "Per §41.3 — multi-tenant cache MUST include X-Tenant-ID in key. Configured via Cloudflare Cache Rules (paid plans).",
+    "include_headers": ["X-Tenant-ID", "Accept-Language"],
+    "ignore_querystring": false
+  },
+  "firewall_rules": [
+    {"description": "block known scrapers", "expression": "(http.user_agent contains \"semrush\") or (http.user_agent contains \"ahrefsbot\")", "action": "block"},
+    {"description": "rate-limit auth endpoints", "expression": "(http.request.uri.path contains \"/api/v1/admin/auth\")", "action": "challenge"}
+  ],
+  "rate_limits": [
+    {
+      "match": {"request": {"url": "*insur.example.com/api/v1/*"}},
+      "threshold": 100,
+      "period": 60,
+      "action": {"mode": "ban", "timeout": 300}
+    }
+  ]
+}

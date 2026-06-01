@@ -7,9 +7,35 @@ from pathlib import Path
 import psycopg2
 import psycopg2.extras
 
+from contextlib import contextmanager
+from typing import Generator
 from core.config import get_settings
 
 logger = logging.getLogger(__name__)
+
+
+@contextmanager
+def _connect() -> Generator["psycopg2.extensions.connection", None, None]:
+    """Project-local connection context manager.
+
+    Mirrors `core.dependencies.get_db_connection` but is imported by
+    routers as `from database import _connect` for legacy compatibility.
+    """
+    settings = get_settings()
+    conn = None
+    try:
+        conn = psycopg2.connect(
+            host=settings.postgres_host,
+            port=settings.postgres_port,
+            dbname=settings.postgres_db,
+            user=settings.postgres_user,
+            password=settings.postgres_password,
+            connect_timeout=10,
+        )
+        yield conn
+    finally:
+        if conn is not None:
+            conn.close()
 
 MIGRATIONS_DIR = Path(__file__).parent / "migrations"
 

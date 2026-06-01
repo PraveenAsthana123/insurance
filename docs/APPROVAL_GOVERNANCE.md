@@ -2,6 +2,8 @@
 
 This repo uses a layered approval model for AI-assisted development.
 
+For day-to-day coding-agent behavior, use `docs/NO_APPROVAL_AUTONOMY_POLICY.md` first. Agents should proceed without asking for approval on safe repo-local work, and only request approval for hard gates such as dependency downloads, sandbox escalation, destructive commands, credentials, production changes, external writes, or files outside the writable workspace.
+
 ## Local AI Workflow Gates
 
 Archon workflows in `.archon/workflows/` pause at human approval gates before implementation and before final handoff.
@@ -14,6 +16,16 @@ archon workflow status --json
 archon workflow approve <run-id> --comment "approved"
 archon workflow reject <run-id> --reason "revise tests/docs"
 ```
+
+## Codex Approval Cron
+
+Safe local approval scans can be installed as a cron job with:
+
+```bash
+scripts/install_codex_approval_cron.sh
+```
+
+The cron policy is `docs/CODEX_APPROVAL_CRON_POLICY.md`. It runs `scripts/archon_auto_approve_safe.py --approve` on a schedule and remains constrained by `.archon/approval-policy.yaml`. It does not bypass Codex sandbox prompts, dependency downloads, destructive commands, credentials, production changes, external writes, GitHub gates, or real browser/CUA side effects.
 
 ## Safe Local Auto-Approval
 

@@ -14,7 +14,16 @@ from functools import lru_cache
 from typing import Iterable
 
 import pandas as pd
-from prophet import Prophet
+
+# Prophet is heavy (CmdStanPy) and not required for backend boot. Lazy-load it
+# inside the methods that need it; raise a clear error if the dep is absent
+# AND the forecasting endpoint is actually invoked.
+try:
+    from prophet import Prophet  # type: ignore[import-untyped]
+    _PROPHET_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    Prophet = None  # type: ignore[assignment,misc]
+    _PROPHET_AVAILABLE = False
 
 from core.structured_logger import emit_event
 from repositories.sales_repo import SalesRepo
@@ -119,6 +128,12 @@ class ForecastService:
 
         train = df.iloc[:-BACKTEST_TAIL_DAYS].copy()
         holdout = df.iloc[-BACKTEST_TAIL_DAYS:].copy()
+
+        if not _PROPHET_AVAILABLE:
+            raise RuntimeError(
+                "prophet is not installed; forecast endpoint disabled. "
+                "Install with `pip install prophet` to enable."
+            )
 
         t0 = time.perf_counter()
         model = Prophet(

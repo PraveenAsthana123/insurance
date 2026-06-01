@@ -30,6 +30,8 @@ When an agent changes code, it must update relevant docs:
 - API behavior changes -> `docs/API_ENDPOINT_CATALOG.md` and `docs/API_CATALOG.json`
 - backend file responsibility changes -> `docs/BACKEND_FILE_INVENTORY.md` and `.json`
 
+Agents should follow `docs/NO_APPROVAL_AUTONOMY_POLICY.md`: do safe repo-local work without asking for approval, and ask only for hard gates such as dependency downloads, sandbox escalation, destructive commands, credentials, production changes, external writes, or files outside the writable workspace.
+
 ## Validation
 
 Run the default health check before handing back production-facing changes:

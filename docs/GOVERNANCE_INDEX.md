@@ -11,7 +11,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | Run/debug locally | `docs/RUN_DEBUG_RUNBOOK.md` |
 | Default health check | `scripts/project_doctor.sh` |
 | Claude/Codex operating rules | `AGENTS.md`, `CLAUDE.md` |
-| Approval workflow and gates | `docs/APPROVAL_GOVERNANCE.md`, `.archon/approval-policy.yaml` |
+| Approval workflow and gates | `docs/NO_APPROVAL_AUTONOMY_POLICY.md`, `docs/CODEX_APPROVAL_CRON_POLICY.md`, `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md`, `docs/APPROVAL_GOVERNANCE.md`, `.archon/approval-policy.yaml` |
 | Tenant + idempotency header contracts | `docs/TENANT_ID_IDEMPOTENCY_CONTRACT.md` |
 
 ## Universal Policies
@@ -22,6 +22,9 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/DESIGN_METHODOLOGY_POLICY.md` | Domain-driven, model-driven, output-evaluation-first, governance-AI-driven, and test-driven design. |
 | `docs/BACKEND_GLOBAL_POLICY.md` | Repo-specific backend layering, API, database, service, observability, testing, and AI governance rules. |
 | `docs/UI_GLOBAL_POLICY.md` | React/Next.js frontend policy: lazy loading, freshness, status, SEO, accessibility, debugability. |
+| `docs/NO_APPROVAL_AUTONOMY_POLICY.md` | Agent autonomy policy: do safe repo-local work without asking, while preserving hard approval gates. |
+| `docs/CODEX_APPROVAL_CRON_POLICY.md` | Scheduled safe local approval policy for Codex/Archon workflow gates. |
+| `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md` | Operational checklist for installing and running the Codex approval cron job. |
 
 ## Architecture Maps
 
@@ -66,6 +69,9 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/global-services/agent-service-manifest.json` | Machine-readable service manifest for cross-project integration. |
 | `docs/AGENT_TOOL_SELECTION_MATRIX.md` | Tool selection matrix for Hermes Agent, OpenClaw, Kilo Code, Descript, Archon, Copilot, and similar tools. |
 | `docs/APPROVAL_GOVERNANCE.md` | Human approval model for Archon gates, CODEOWNERS, CI governance checks, and deployment approval. |
+| `docs/NO_APPROVAL_AUTONOMY_POLICY.md` | Minimum-interruption policy for coding agents and local validation work. |
+| `docs/CODEX_APPROVAL_CRON_POLICY.md` | Cron policy and installer for safe local approval scans. |
+| `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md` | Run plan and evidence checklist for safe local approval scans. |
 | `docs/AGENTIC_BROWSER_WIRING_STATUS.md` | Honest status of Stagehand, Browser Use, Open Operator, OpenClaude, Playwright, Paperclip/Piperclip, Istio, Circuit Breaker. |
 
 ## Testing Governance

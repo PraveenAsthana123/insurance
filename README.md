@@ -118,7 +118,7 @@ archon workflow run insur-project-doctor-fix "fix the current project_doctor fai
 archon workflow run insur-api-change-governance "add or change an API endpoint"
 ```
 
-Use Archon workflows only with the governance requirements in `docs/GOVERNANCE_INDEX.md`, `docs/APPROVAL_GOVERNANCE.md`, and `docs/AGENT_TOOL_SELECTION_MATRIX.md`. Safe local approval automation is documented in `docs/APPROVAL_GOVERNANCE.md` and can be dry-run with `python3 scripts/archon_auto_approve_safe.py --dry-run`; API-based approve/submit/next routing is available at `POST /api/v1/agent-platform/approval-broker/decide`.
+Use Archon workflows only with the governance requirements in `docs/GOVERNANCE_INDEX.md`, `docs/APPROVAL_GOVERNANCE.md`, and `docs/AGENT_TOOL_SELECTION_MATRIX.md`. Safe local approval automation is documented in `docs/APPROVAL_GOVERNANCE.md` and `docs/CODEX_APPROVAL_CRON_POLICY.md`; it can be dry-run with `python3 scripts/archon_auto_approve_safe.py --dry-run`, scheduled with `scripts/install_codex_approval_cron.sh`, and API-based approve/submit/next routing is available at `POST /api/v1/agent-platform/approval-broker/decide`.
 
 ## BMAD And Dark Factory Governance
 

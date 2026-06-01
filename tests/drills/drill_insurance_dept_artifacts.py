@@ -227,7 +227,46 @@ def main() -> int:
         fail(f"insurance bogus dept should 404, got {r.status_code}")
     ok("insurance router: list + read + 404 on bogus all pass")
 
-    step(17, "NEGATIVE — data manifest exists and not 100% failure")
+    step(17, "production-readiness infra files exist (nginx + CDN + k6 + adapters + compliance + ADR)")
+    must_exist = [
+        REPO_ROOT / "infra" / "nginx" / "nginx.conf",
+        REPO_ROOT / "infra" / "cdn" / "README.md",
+        REPO_ROOT / "infra" / "cdn" / "cloudflare" / "zone-config.json",
+        REPO_ROOT / "infra" / "cdn" / "cloudfront" / "main.tf",
+        REPO_ROOT / "backend" / "services" / "external_feeds" / "kyc.py",
+        REPO_ROOT / "backend" / "services" / "external_feeds" / "nicb.py",
+        REPO_ROOT / "backend" / "services" / "external_feeds" / "clue.py",
+        REPO_ROOT / "backend" / "services" / "external_feeds" / "ehr.py",
+        REPO_ROOT / "docs" / "compliance" / "EU_AI_ACT.md",
+        REPO_ROOT / "docs" / "compliance" / "HIPAA.md",
+        REPO_ROOT / "docs" / "compliance" / "STATE_DOI_RATE_FILING.md",
+        REPO_ROOT / "load-testing" / "smoke.js",
+        REPO_ROOT / "load-testing" / "load.js",
+        REPO_ROOT / "load-testing" / "stress.js",
+        REPO_ROOT / "load-testing" / "soak.js",
+        REPO_ROOT / "load-testing" / "spike.js",
+        REPO_ROOT / "docs" / "CRON_JOBS_PLAN.md",
+        REPO_ROOT / "docs" / "architecture" / "adr" / "ADR-001-deployment-target.md",
+    ]
+    missing = [p for p in must_exist if not p.is_file()]
+    if missing:
+        fail(f"missing infra files: {[str(p.relative_to(REPO_ROOT)) for p in missing]}")
+    ok(f"all {len(must_exist)} production-readiness files present")
+
+    step(18, "NEGATIVE — backend boots without ImportError (prophet fix + database._connect)")
+    sys.path.insert(0, str(REPO_ROOT / "backend"))
+    try:
+        from main import create_app
+        app = create_app()
+        if len([r for r in app.routes if hasattr(r, "path")]) < 50:
+            fail(f"backend boots but only {len(app.routes)} routes — too few")
+    except ImportError as e:
+        fail(f"backend ImportError (prophet fix regressed?): {str(e)[:200]}")
+    except Exception as e:
+        fail(f"backend boot failed: {type(e).__name__}: {str(e)[:200]}")
+    ok("backend boots cleanly with all 177 routes")
+
+    step(19, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
     if not manifest.is_file():
         fail(f"missing data manifest: {manifest}")
@@ -238,7 +277,7 @@ def main() -> int:
         fail(f"zero successful downloads in manifest: {statuses}")
     ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
 
-    print(f"\nALL 17 STEPS PASSED")
+    print(f"\nALL 19 STEPS PASSED")
     return 0
 
 

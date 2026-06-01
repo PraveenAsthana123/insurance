@@ -25,6 +25,16 @@ python3 scripts/archon_auto_approve_safe.py --watch --approve
 
 The helper only approves safe local BEV workflow gates. It skips production deploys, secrets, destructive shell actions, GitHub auth/branch protection, real browser/CUA side effects, and broad permission sessions.
 
+## Cron
+
+Install the Codex safe local approval cron:
+
+```bash
+scripts/install_codex_approval_cron.sh
+```
+
+The cron job runs the safe approval helper periodically and logs to `jobs/logs/codex_approval_cron.log`. Policy details live in `docs/CODEX_APPROVAL_CRON_POLICY.md`.
+
 ## Example
 
 ```bash
