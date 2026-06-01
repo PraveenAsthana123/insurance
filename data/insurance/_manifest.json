@@ -1,14 +1,8 @@
 {
-  "generated_at": "2026-06-01T22:16:17.904748+00:00",
+  "generated_at": "2026-06-01T22:29:35.507175+00:00",
   "dry_run": false,
+  "refresh": true,
   "downloads": [
-    {
-      "slug": "claims/auto_insurance_claims",
-      "dataset": "buntyshah/auto-insurance-claims-data",
-      "desc": "Auto claims with fraud flags",
-      "status": "ok",
-      "message": "already present (1 files)"
-    },
     {
       "slug": "claims/vehicle_insurance_fraud",
       "dataset": "shivamb/vehicle-claim-fraud-detection",
@@ -43,13 +37,6 @@
       "desc": "Auto UW + claims features",
       "status": "ok",
       "message": "already present (2 files)"
-    },
-    {
-      "slug": "underwriting/medical_cost",
-      "dataset": "mirichoi0218/insurance",
-      "desc": "Medical cost personal dataset",
-      "status": "ok",
-      "message": "already present (1 files)"
     },
     {
       "slug": "customer-service/call_center_data",
@@ -106,6 +93,20 @@
       "desc": "IEEE-CIS fraud",
       "status": "skipped",
       "reason": "skipped: competition-only, requires acceptance"
+    },
+    {
+      "slug": "claims/auto_insurance_claims",
+      "dataset": "buntyshah/auto-insurance-claims-data",
+      "desc": "Auto claims with fraud flags",
+      "status": "ok",
+      "message": "already present (1 files)"
+    },
+    {
+      "slug": "underwriting/medical_cost",
+      "dataset": "mirichoi0218/insurance",
+      "desc": "Medical cost personal dataset",
+      "status": "ok",
+      "message": "downloaded (1 files): insurance.csv"
     }
   ]
 }

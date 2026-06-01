@@ -42,6 +42,14 @@ REQUIRED_BL_FILES = [
     "INSUR_INCIDENT_MGMT.md",
     "INSUR_AI_AGENTS.md",
     "INSUR_KPIS.md",
+    "INSUR_PIPELINES.md",
+]
+
+ROLES = [
+    "admin", "manager", "team-member", "tester", "security",
+    "devops", "ai-reviewer", "digital-transformation", "system-architect",
+    "test-architect", "database-architect", "api-architect",
+    "data-owner", "ai-strategy", "information-security",
 ]
 
 FRD_PREFIX_MAP = {
@@ -72,13 +80,13 @@ def main() -> int:
             if not p.is_file(): fail(f"missing {d}/{f}")
         ok(f"{d}: README + GLOBAL_README present")
 
-    step(3, "each dept has 12 INSUR_*.md business-layer files")
+    step(3, "each dept has 13 INSUR_*.md business-layer files (incl. PIPELINES)")
     for d in INSURANCE_DEPTS:
         bl = DEPT_ROOT / d / "business-layer"
         for f in REQUIRED_BL_FILES:
             p = bl / f
             if not p.is_file(): fail(f"missing {d}/business-layer/{f}")
-        ok(f"{d}: all 12 INSUR_*.md present")
+        ok(f"{d}: all {len(REQUIRED_BL_FILES)} INSUR_*.md present")
 
     step(4, "each dept has BRD + FRD")
     for d in INSURANCE_DEPTS:
@@ -145,7 +153,36 @@ def main() -> int:
         fail(f"insurance dept files still contain HOLY_ references: {holy_refs[:3]}")
     ok("no HOLY_*.md references in active insurance depts")
 
-    step(11, "NEGATIVE — data manifest exists and not 100% failure")
+    step(11, "each dept has 15 role dashboards + 15 role reports (§64.37)")
+    for d in INSURANCE_DEPTS:
+        for role in ROLES:
+            dash = DEPT_ROOT / d / "dashboards-by-role" / role / "INSUR_DASHBOARD.md"
+            rpt = DEPT_ROOT / d / "reports-by-role" / role / "INSUR_REPORTS.md"
+            if not dash.is_file(): fail(f"missing dashboard: {d}/{role}")
+            if not rpt.is_file(): fail(f"missing reports: {d}/{role}")
+        ok(f"{d}: 15 role dashboards + 15 role reports present")
+
+    step(12, "INSUR_PIPELINES.md per dept references existing backend/ml/reference/* pipelines")
+    for d in INSURANCE_DEPTS:
+        txt = (DEPT_ROOT / d / "business-layer" / "INSUR_PIPELINES.md").read_text()
+        if "backend/ml/reference/" not in txt:
+            fail(f"{d}: INSUR_PIPELINES.md does not reference backend/ml/reference/*")
+        if "rag_lifecycle" not in txt:
+            fail(f"{d}: INSUR_PIPELINES.md missing rag_lifecycle reference")
+        ok(f"{d}: INSUR_PIPELINES.md wires reference impls correctly")
+
+    step(13, "cron has 1 audit + 13 per-dataset refresh entries")
+    import subprocess as _sp
+    cron_out = _sp.run(["crontab", "-l"], capture_output=True, text=True).stdout
+    n_audit = cron_out.count("audit_insurance_artifacts")
+    n_refresh = cron_out.count("download_insurance_datasets") - cron_out.count("# ")
+    if n_audit != 1:
+        fail(f"expected exactly 1 audit cron entry, found {n_audit}")
+    if "--only" not in cron_out:
+        fail("expected per-dataset refresh entries with --only flag")
+    ok(f"cron: {n_audit} audit + {cron_out.count('--only')} per-dataset refresh entries")
+
+    step(14, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
     if not manifest.is_file():
         fail(f"missing data manifest: {manifest}")
@@ -156,7 +193,7 @@ def main() -> int:
         fail(f"zero successful downloads in manifest: {statuses}")
     ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
 
-    print(f"\nALL 11 STEPS PASSED")
+    print(f"\nALL 14 STEPS PASSED")
     return 0
 
 
