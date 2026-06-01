@@ -23,16 +23,16 @@ DOWNLOADS = [
     # claims
     ("claims/auto_insurance_claims", "buntyshah/auto-insurance-claims-data", "Auto claims with fraud flags", None),
     ("claims/vehicle_insurance_fraud", "shivamb/vehicle-claim-fraud-detection", "Vehicle claim fraud detection", None),
-    ("claims/health_insurance_claims", "thedevastator/prediction-of-insurance-charges-using-age-gend", "Health insurance charge prediction", None),
-    ("claims/property_claims", "natashalan/insurance-claims", "Property + auto claims", None),
+    ("claims/health_insurance_claims", "teertha/ushealthinsurancedataset", "US Health Insurance dataset", None),
+    ("claims/property_claims", "litvinenko630/insurance-claims", "Insurance Claims Dataset (Litvinenko)", None),
     # underwriting
-    ("underwriting/life_insurance_data", "broaniki/insurance", "Health insurance dataset", None),
+    ("underwriting/life_insurance_data", "bhanageviraj/life-insurance-death-claims-dataindia-2018-2022", "Life Insurance Death Claims (India 2018-2022)", None),
     ("underwriting/auto_insurance_underwriting", "easonlai/sample-insurance-claim-prediction-dataset", "Auto UW + claims features", None),
     ("underwriting/medical_cost", "mirichoi0218/insurance", "Medical cost personal dataset", None),
     # customer-service
-    ("customer-service/call_center_data", "banuprakashv/call-center-data", "Call center metrics", None),
-    ("customer-service/customer_complaints", "anandhuh/insurance-customer-complaints", "Insurance complaints", None),
-    ("customer-service/customer_churn", "thedevastator/customer-churn-prediction-dataset", "Customer churn", None),
+    ("customer-service/call_center_data", "satvicoder/call-center-data", "Call Center metrics dataset", None),
+    ("customer-service/customer_complaints", "adelanseur/insurance-company-complaints", "Insurance Company Complaints", None),
+    ("customer-service/customer_churn", "blastchar/telco-customer-churn", "Telco Customer Churn (Kaggle classic, 550K downloads)", None),
     ("customer-service/nlp_intent_classification", "bittlingmayer/amazonreviews", "Sentiment / intent corpus", "skipped: ~3GB too large for scaffold"),
     # fraud-siu
     ("fraud-siu/vehicle_claim_fraud", "shivamb/vehicle-claim-fraud-detection", "Vehicle fraud (also in claims)", None),
