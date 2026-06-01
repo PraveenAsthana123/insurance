@@ -1,0 +1,111 @@
+{
+  "generated_at": "2026-06-01T22:08:45.451735+00:00",
+  "dry_run": false,
+  "downloads": [
+    {
+      "slug": "claims/auto_insurance_claims",
+      "dataset": "buntyshah/auto-insurance-claims-data",
+      "desc": "Auto claims with fraud flags",
+      "status": "ok",
+      "message": "downloaded (1 files): insurance_claims.csv"
+    },
+    {
+      "slug": "claims/vehicle_insurance_fraud",
+      "dataset": "shivamb/vehicle-claim-fraud-detection",
+      "desc": "Vehicle claim fraud detection",
+      "status": "ok",
+      "message": "downloaded (1 files): fraud_oracle.csv"
+    },
+    {
+      "slug": "claims/health_insurance_claims",
+      "dataset": "thedevastator/prediction-of-insurance-charges-using-age-gend",
+      "desc": "Health insurance charge prediction",
+      "status": "fail",
+      "message": "kaggle error: unknown"
+    },
+    {
+      "slug": "claims/property_claims",
+      "dataset": "natashalan/insurance-claims",
+      "desc": "Property + auto claims",
+      "status": "fail",
+      "message": "kaggle error: unknown"
+    },
+    {
+      "slug": "underwriting/life_insurance_data",
+      "dataset": "broaniki/insurance",
+      "desc": "Health insurance dataset",
+      "status": "fail",
+      "message": "kaggle error: unknown"
+    },
+    {
+      "slug": "underwriting/auto_insurance_underwriting",
+      "dataset": "easonlai/sample-insurance-claim-prediction-dataset",
+      "desc": "Auto UW + claims features",
+      "status": "ok",
+      "message": "downloaded (2 files): insurance2.csv, insurance3r2.csv"
+    },
+    {
+      "slug": "underwriting/medical_cost",
+      "dataset": "mirichoi0218/insurance",
+      "desc": "Medical cost personal dataset",
+      "status": "ok",
+      "message": "already present (1 files)"
+    },
+    {
+      "slug": "customer-service/call_center_data",
+      "dataset": "banuprakashv/call-center-data",
+      "desc": "Call center metrics",
+      "status": "fail",
+      "message": "kaggle error: unknown"
+    },
+    {
+      "slug": "customer-service/customer_complaints",
+      "dataset": "anandhuh/insurance-customer-complaints",
+      "desc": "Insurance complaints",
+      "status": "fail",
+      "message": "kaggle error: unknown"
+    },
+    {
+      "slug": "customer-service/customer_churn",
+      "dataset": "thedevastator/customer-churn-prediction-dataset",
+      "desc": "Customer churn",
+      "status": "fail",
+      "message": "kaggle error: unknown"
+    },
+    {
+      "slug": "customer-service/nlp_intent_classification",
+      "dataset": "bittlingmayer/amazonreviews",
+      "desc": "Sentiment / intent corpus",
+      "status": "skipped",
+      "reason": "skipped: ~3GB too large for scaffold"
+    },
+    {
+      "slug": "fraud-siu/vehicle_claim_fraud",
+      "dataset": "shivamb/vehicle-claim-fraud-detection",
+      "desc": "Vehicle fraud (also in claims)",
+      "status": "ok",
+      "message": "downloaded (1 files): fraud_oracle.csv"
+    },
+    {
+      "slug": "fraud-siu/creditcard_fraud",
+      "dataset": "mlg-ulb/creditcardfraud",
+      "desc": "Credit-card fraud benchmark",
+      "status": "ok",
+      "message": "downloaded (1 files): creditcard.csv"
+    },
+    {
+      "slug": "fraud-siu/auto_insurance_fraud",
+      "dataset": "buntyshah/auto-insurance-claims-data",
+      "desc": "Auto fraud (also in claims)",
+      "status": "ok",
+      "message": "downloaded (1 files): insurance_claims.csv"
+    },
+    {
+      "slug": "fraud-siu/ieee_fraud",
+      "dataset": "ieee-fraud-detection/ieee-fraud-detection",
+      "desc": "IEEE-CIS fraud",
+      "status": "skipped",
+      "reason": "skipped: competition-only, requires acceptance"
+    }
+  ]
+}

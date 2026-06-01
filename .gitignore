@@ -163,3 +163,11 @@ __pycache__
 # Phase 100 autonomous-build runtime state (per-clone)
 .phase100-build-state
 
+
+# --- Insurance project (2026-06-01) — Kaggle data re-downloadable via scripts/download_insurance_datasets.py ---
+data/insurance/**/*.csv
+data/insurance/**/*.zip
+
+# Audit reports + logs (re-generated per cron run)
+jobs/reports/
+jobs/logs/

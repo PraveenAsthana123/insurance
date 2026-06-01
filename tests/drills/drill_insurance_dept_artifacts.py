@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""Drill: insurance dept artifacts (§64 + §66 + §43).
+
+Steps (10 total; 4 negative):
+    1. (+) 4 insurance depts exist: claims, underwriting, customer-service, fraud-siu
+    2. (+) each dept has README.md + GLOBAL_README.md
+    3. (+) each dept has all 12 INSUR_*.md business-layer files
+    4. (+) each dept has docs/brd/INSUR_BRD.md + docs/frd/INSUR_FRD.md
+    5. (+) FRD prefixes are correct per dept (CLM/UWR/CSV/FRD)
+    6. (+) PROCESS_FLOW + ARCHITECTURE_FLOW contain valid Mermaid blocks
+    7. (+) BUSINESS_MODELS covers B2C + B2B + B2E sections per dept
+    8. (-) NEGATIVE — no insurance dept artifacts under _legacy/ (preserved generic depts unchanged)
+    9. (-) NEGATIVE — no INSUR_*.md file is empty (< 200 bytes)
+   10. (-) NEGATIVE — FRD does NOT contain HOLY_ prefix references in active depts
+   11. (-) NEGATIVE — data manifest exists and has no 100% failure rate
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+"""
+from __future__ import annotations
+import json
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DEPT_ROOT = REPO_ROOT / "global-ai-org" / "departments"
+
+INSURANCE_DEPTS = ["claims", "underwriting", "customer-service", "fraud-siu"]
+
+REQUIRED_BL_FILES = [
+    "INSUR_DEPT_SPEC.md",
+    "INSUR_DEMO_STORY.md",
+    "INSUR_ASIS_ASSESSMENT.md",
+    "INSUR_DT_STRATEGY.md",
+    "INSUR_PROCESS_FLOW.md",
+    "INSUR_ARCHITECTURE_FLOW.md",
+    "INSUR_BUSINESS_MODELS.md",
+    "INSUR_DATA_MGMT.md",
+    "INSUR_USE_CASES.md",
+    "INSUR_INCIDENT_MGMT.md",
+    "INSUR_AI_AGENTS.md",
+    "INSUR_KPIS.md",
+]
+
+FRD_PREFIX_MAP = {
+    "claims": "CLM",
+    "underwriting": "UWR",
+    "customer-service": "CSV",
+    "fraud-siu": "FRD",
+}
+
+
+def ok(msg: str) -> None: print(f"  ✓ {msg}")
+def fail(msg: str) -> None: print(f"  ✗ {msg}"); sys.exit(1)
+
+
+def step(n: int, name: str) -> None: print(f"\n[step {n}] {name}")
+
+
+def main() -> int:
+    step(1, "4 insurance depts exist")
+    missing = [d for d in INSURANCE_DEPTS if not (DEPT_ROOT / d).is_dir()]
+    if missing: fail(f"missing depts: {missing}")
+    ok(f"all 4 depts present: {INSURANCE_DEPTS}")
+
+    step(2, "each dept has README.md + GLOBAL_README.md")
+    for d in INSURANCE_DEPTS:
+        for f in ("README.md", "GLOBAL_README.md"):
+            p = DEPT_ROOT / d / f
+            if not p.is_file(): fail(f"missing {d}/{f}")
+        ok(f"{d}: README + GLOBAL_README present")
+
+    step(3, "each dept has 12 INSUR_*.md business-layer files")
+    for d in INSURANCE_DEPTS:
+        bl = DEPT_ROOT / d / "business-layer"
+        for f in REQUIRED_BL_FILES:
+            p = bl / f
+            if not p.is_file(): fail(f"missing {d}/business-layer/{f}")
+        ok(f"{d}: all 12 INSUR_*.md present")
+
+    step(4, "each dept has BRD + FRD")
+    for d in INSURANCE_DEPTS:
+        brd = DEPT_ROOT / d / "docs" / "brd" / "INSUR_BRD.md"
+        frd = DEPT_ROOT / d / "docs" / "frd" / "INSUR_FRD.md"
+        if not brd.is_file(): fail(f"missing BRD: {brd}")
+        if not frd.is_file(): fail(f"missing FRD: {frd}")
+        ok(f"{d}: BRD + FRD present")
+
+    step(5, "FRD prefixes correct per dept (CLM/UWR/CSV/FRD)")
+    for d, prefix in FRD_PREFIX_MAP.items():
+        frd = (DEPT_ROOT / d / "docs" / "frd" / "INSUR_FRD.md").read_text()
+        pattern = rf"FR-{prefix}-\d{{3}}"
+        matches = re.findall(pattern, frd)
+        if not matches:
+            fail(f"{d}: no FR-{prefix}-NNN ids found in FRD")
+        ok(f"{d}: {len(matches)} FR-{prefix}-NNN ids found")
+
+    step(6, "PROCESS_FLOW + ARCHITECTURE_FLOW contain valid Mermaid blocks")
+    mermaid_pattern = re.compile(r"```mermaid\n.*?\n```", re.DOTALL)
+    for d in INSURANCE_DEPTS:
+        for fname in ("INSUR_PROCESS_FLOW.md", "INSUR_ARCHITECTURE_FLOW.md"):
+            txt = (DEPT_ROOT / d / "business-layer" / fname).read_text()
+            blocks = mermaid_pattern.findall(txt)
+            if len(blocks) < 2:
+                fail(f"{d}/{fname}: expected ≥2 mermaid blocks, found {len(blocks)}")
+        ok(f"{d}: PROCESS_FLOW + ARCHITECTURE_FLOW have mermaid")
+
+    step(7, "BUSINESS_MODELS covers B2C + B2B + B2E sections")
+    for d in INSURANCE_DEPTS:
+        txt = (DEPT_ROOT / d / "business-layer" / "INSUR_BUSINESS_MODELS.md").read_text()
+        for model in ("B2C", "B2B", "B2E"):
+            if f"## {model}" not in txt:
+                fail(f"{d}: missing '## {model}' section in BUSINESS_MODELS")
+        ok(f"{d}: B2C + B2B + B2E sections present")
+
+    step(8, "NEGATIVE — no insurance artifacts in _legacy/ (generic depts unchanged)")
+    legacy_root = DEPT_ROOT / "_legacy"
+    if not legacy_root.is_dir():
+        fail("expected _legacy/ directory (preserves generic depts)")
+    bad_legacy = list(legacy_root.rglob("INSUR_*.md"))
+    if bad_legacy:
+        fail(f"INSUR_*.md should not appear under _legacy/ ({len(bad_legacy)} found)")
+    ok(f"_legacy/ contains {sum(1 for _ in legacy_root.iterdir())} preserved generic dept dirs; no INSUR_*.md contamination")
+
+    step(9, "NEGATIVE — no INSUR_*.md file is empty (< 200 bytes)")
+    small_files = []
+    for d in INSURANCE_DEPTS:
+        for p in (DEPT_ROOT / d).rglob("INSUR_*.md"):
+            if p.stat().st_size < 200:
+                small_files.append(str(p))
+    if small_files:
+        fail(f"empty/tiny INSUR_*.md files: {small_files}")
+    ok("all INSUR_*.md ≥ 200 bytes")
+
+    step(10, "NEGATIVE — active depts contain no HOLY_ prefix file references")
+    holy_refs = []
+    for d in INSURANCE_DEPTS:
+        for p in (DEPT_ROOT / d).rglob("*.md"):
+            txt = p.read_text()
+            if re.search(r"HOLY_[A-Z]+\.md", txt):
+                holy_refs.append(str(p))
+    if holy_refs:
+        fail(f"insurance dept files still contain HOLY_ references: {holy_refs[:3]}")
+    ok("no HOLY_*.md references in active insurance depts")
+
+    step(11, "NEGATIVE — data manifest exists and not 100% failure")
+    manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
+    if not manifest.is_file():
+        fail(f"missing data manifest: {manifest}")
+    m = json.loads(manifest.read_text())
+    statuses = [d["status"] for d in m["downloads"]]
+    n_ok = sum(1 for s in statuses if s == "ok")
+    if n_ok == 0:
+        fail(f"zero successful downloads in manifest: {statuses}")
+    ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
+
+    print(f"\nALL 11 STEPS PASSED")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
