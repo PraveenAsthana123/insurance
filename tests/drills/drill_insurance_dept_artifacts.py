@@ -43,6 +43,7 @@ REQUIRED_BL_FILES = [
     "INSUR_AI_AGENTS.md",
     "INSUR_KPIS.md",
     "INSUR_PIPELINES.md",
+    "INSUR_MANUAL_VS_AUTO_FLOW.md",
 ]
 
 ROLES = [
@@ -171,7 +172,31 @@ def main() -> int:
             fail(f"{d}: INSUR_PIPELINES.md missing rag_lifecycle reference")
         ok(f"{d}: INSUR_PIPELINES.md wires reference impls correctly")
 
-    step(13, "cron has 1 audit + 13 per-dataset refresh entries")
+    step(13, "pipeline runner --list works for all 4 depts")
+    runner = REPO_ROOT / "backend" / "ml" / "insurance" / "run_dept_pipelines.py"
+    if not runner.is_file():
+        fail(f"missing runner: {runner}")
+    import subprocess as _sp
+    r = _sp.run([sys.executable, str(runner), "--list"], capture_output=True, text=True, timeout=30)
+    if r.returncode != 0:
+        fail(f"runner --list failed: {r.stderr[:300]}")
+    for dept in INSURANCE_DEPTS:
+        if dept not in r.stdout:
+            fail(f"runner --list missing dept: {dept}")
+    ok("runner --list returns all 4 depts")
+
+    step(14, "INSUR_MANUAL_VS_AUTO_FLOW.md has both manual + automated mermaid blocks")
+    for d in INSURANCE_DEPTS:
+        txt = (DEPT_ROOT / d / "business-layer" / "INSUR_MANUAL_VS_AUTO_FLOW.md").read_text()
+        if "## Manual sequence" not in txt:
+            fail(f"{d}: missing manual sequence section")
+        if "## Automated sequence" not in txt:
+            fail(f"{d}: missing automated sequence section")
+        if "Cycle-time delta" not in txt:
+            fail(f"{d}: missing cycle-time delta table")
+        ok(f"{d}: manual + automated + delta sections present")
+
+    step(15, "cron has 1 audit + 13 per-dataset refresh entries")
     import subprocess as _sp
     cron_out = _sp.run(["crontab", "-l"], capture_output=True, text=True).stdout
     n_audit = cron_out.count("audit_insurance_artifacts")
@@ -182,7 +207,7 @@ def main() -> int:
         fail("expected per-dataset refresh entries with --only flag")
     ok(f"cron: {n_audit} audit + {cron_out.count('--only')} per-dataset refresh entries")
 
-    step(14, "NEGATIVE — data manifest exists and not 100% failure")
+    step(16, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
     if not manifest.is_file():
         fail(f"missing data manifest: {manifest}")
@@ -193,7 +218,7 @@ def main() -> int:
         fail(f"zero successful downloads in manifest: {statuses}")
     ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
 
-    print(f"\nALL 14 STEPS PASSED")
+    print(f"\nALL 16 STEPS PASSED")
     return 0
 
 
