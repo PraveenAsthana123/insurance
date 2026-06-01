@@ -19,7 +19,10 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from fastapi import HTTPException
+# Per global §1 — services must NOT raise HTTPException directly.
+# We raise domain exceptions (NotFoundError / ValidationError / AppError) and
+# let backend/core/error_handlers.py map them to HTTP responses.
+from core.exceptions import AppError, NotFoundError, ValidationError
 
 from schemas.paperclip import (
     PaperclipArtifactDetail,
@@ -124,18 +127,18 @@ class PaperclipService:
         # Per §47.6 — return 404 (not 403) on cross-tenant read so attackers
         # cannot enumerate which clip_ids exist in other tenants.
         if data.get("tenant_id", "default") != tenant_id:
-            raise HTTPException(status_code=404, detail=f"Paperclip artifact not found: {clip_id}")
+            raise NotFoundError(f"Paperclip artifact not found: {clip_id}")
         return PaperclipArtifactDetail(**data)
 
     def delete(self, clip_id: str, tenant_id: str = "default") -> dict[str, str]:
         path = self._path_for(clip_id)
         if not path.exists():
-            raise HTTPException(status_code=404, detail=f"Paperclip artifact not found: {clip_id}")
+            raise NotFoundError(f"Paperclip artifact not found: {clip_id}")
         data = _read_json(path)
         if data is None or data.get("tenant_id", "default") != tenant_id:
             # 404 not 403 — anti-enumeration; cross-tenant DELETE looks identical
             # to a missing-id DELETE so probing tells the attacker nothing.
-            raise HTTPException(status_code=404, detail=f"Paperclip artifact not found: {clip_id}")
+            raise NotFoundError(f"Paperclip artifact not found: {clip_id}")
         path.unlink()
         logger.info("paperclip.artifact.deleted id=%s tenant=%s", clip_id, tenant_id)
         return {"message": "deleted", "id": clip_id}
@@ -159,7 +162,7 @@ class PaperclipService:
         for clip_id in request.clip_ids:
             try:
                 artifact = self._load(clip_id)
-            except HTTPException:
+            except (NotFoundError, ValidationError):
                 missing.append(clip_id)
                 continue
             # Cross-tenant clip → looks identical to missing
@@ -191,16 +194,16 @@ class PaperclipService:
 
     def _path_for(self, clip_id: str) -> Path:
         if not re.fullmatch(r"clip-[a-f0-9]{12}", clip_id):
-            raise HTTPException(status_code=400, detail="invalid Paperclip artifact id")
+            raise ValidationError("invalid Paperclip artifact id")
         return self.storage_root / f"{clip_id}.json"
 
     def _load(self, clip_id: str) -> dict[str, Any]:
         path = self._path_for(clip_id)
         if not path.exists():
-            raise HTTPException(status_code=404, detail=f"Paperclip artifact not found: {clip_id}")
+            raise NotFoundError(f"Paperclip artifact not found: {clip_id}")
         data = _read_json(path)
         if data is None:
-            raise HTTPException(status_code=500, detail=f"Paperclip artifact unreadable: {clip_id}")
+            raise AppError(f"Paperclip artifact unreadable: {clip_id}", error_code="STORAGE_ERROR")
         return data
 
 

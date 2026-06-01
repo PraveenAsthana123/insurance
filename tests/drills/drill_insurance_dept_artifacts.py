@@ -266,7 +266,52 @@ def main() -> int:
         fail(f"backend boot failed: {type(e).__name__}: {str(e)[:200]}")
     ok("backend boots cleanly with all 177 routes")
 
-    step(19, "NEGATIVE — data manifest exists and not 100% failure")
+    step(19, "ADR backfill — at least 10 ADRs exist (addresses §47.3)")
+    adrs = sorted((REPO_ROOT / "docs" / "architecture" / "adr").glob("ADR-*.md"))
+    if len(adrs) < 10:
+        fail(f"expected ≥10 ADRs, found {len(adrs)}: {[p.name for p in adrs]}")
+    ok(f"ADRs filed: {len(adrs)} (ADR-001 through ADR-{len(adrs):03d})")
+
+    step(20, "OpenAPI snapshot at docs/openapi.json (per §6.4)")
+    openapi = REPO_ROOT / "docs" / "openapi.json"
+    if not openapi.is_file():
+        fail(f"missing openapi snapshot: {openapi}")
+    import json as _json
+    spec = _json.loads(openapi.read_text())
+    n_paths = len(spec.get("paths", {}))
+    if n_paths < 50:
+        fail(f"openapi snapshot has only {n_paths} paths — should be > 50")
+    ok(f"OpenAPI snapshot: {n_paths} paths")
+
+    step(21, "NEGATIVE — no HTTPException in services (per §1)")
+    bad = []
+    services_dir = REPO_ROOT / "backend" / "services"
+    for p in services_dir.rglob("*.py"):
+        txt = p.read_text()
+        for ln_no, ln in enumerate(txt.splitlines(), 1):
+            stripped = ln.strip()
+            if stripped.startswith("#") or stripped.startswith('"') or "comment" in stripped.lower():
+                continue
+            if "raise HTTPException" in ln:
+                bad.append(f"{p.relative_to(REPO_ROOT)}:{ln_no}")
+    if bad:
+        fail(f"services contain raise HTTPException: {bad}")
+    ok("no services raise HTTPException (§1 layer rule honored)")
+
+    step(22, "NEGATIVE — no f-string SQL on table names in repositories (per §1 rule 12)")
+    import re as _re
+    bad = []
+    repos_dir = REPO_ROOT / "backend" / "repositories"
+    pat = _re.compile(r'f"SELECT[^"]*\{[a-zA-Z_]+\}')
+    for p in repos_dir.rglob("*.py"):
+        for ln_no, ln in enumerate(p.read_text().splitlines(), 1):
+            if pat.search(ln):
+                bad.append(f"{p.relative_to(REPO_ROOT)}:{ln_no}")
+    if bad:
+        fail(f"f-string SQL violations: {bad}")
+    ok("no f-string SQL on table names in repositories")
+
+    step(23, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
     if not manifest.is_file():
         fail(f"missing data manifest: {manifest}")
@@ -277,7 +322,7 @@ def main() -> int:
         fail(f"zero successful downloads in manifest: {statuses}")
     ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
 
-    print(f"\nALL 19 STEPS PASSED")
+    print(f"\nALL 23 STEPS PASSED")
     return 0
 
 

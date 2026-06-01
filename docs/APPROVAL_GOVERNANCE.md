@@ -27,6 +27,16 @@ scripts/install_codex_approval_cron.sh
 
 The cron policy is `docs/CODEX_APPROVAL_CRON_POLICY.md`. It runs `scripts/archon_auto_approve_safe.py --approve` on a schedule and remains constrained by `.archon/approval-policy.yaml`. It does not bypass Codex sandbox prompts, dependency downloads, destructive commands, credentials, production changes, external writes, GitHub gates, or real browser/CUA side effects.
 
+## Advanced Codex Approval Watcher
+
+For active workflows that hit multiple safe local approval gates, start advanced mode:
+
+```bash
+scripts/install_codex_approval_advanced.sh
+```
+
+Advanced mode is documented in `docs/CODEX_APPROVAL_ADVANCED_POLICY.md`. It runs the same safe approver continuously and keeps the one-minute cron as fallback.
+
 ## Safe Local Auto-Approval
 
 Repeated local Archon approval clicks can be automated for low-risk developer workflow gates. The policy lives at `.archon/approval-policy.yaml` and is executed by `scripts/archon_auto_approve_safe.py`.

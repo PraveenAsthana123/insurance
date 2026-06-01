@@ -13,6 +13,50 @@ copilot -p "explain the project_doctor failure" --allow-tool="shell(./scripts/pr
 
 For headless use, Copilot CLI checks `COPILOT_GITHUB_TOKEN`, then `GH_TOKEN`, then `GITHUB_TOKEN`. Prefer narrow tool permissions over `--allow-all`/`--yolo`.
 
+## Claude Autonomy Setup
+
+Verify Claude's repo-local autonomy policy and start the safe approval automation:
+
+```bash
+scripts/setup_claude_autonomy.sh
+```
+
+Policy: `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md`. This reduces repo-local approval loops, but cannot bypass Claude Code platform-level permission prompts.
+
+## Voice/Text Automation
+
+Plan and execute transcribed voice or typed text through Ollama and OpenClaw:
+
+```bash
+scripts/automation_job_runner.py status
+scripts/automation_job_runner.py run-once --department sales --mode council --text "Review sales anomalies and create next actions"
+```
+
+Schedule with cron:
+
+```bash
+scripts/automation_job_runner.py install-cron --name sales-voice-review --cron "*/30 * * * *" --department sales --mode council --text "Review sales anomalies and create next actions"
+```
+
+Full runbook: `docs/VOICE_TEXT_AUTOMATION_RUNBOOK.md`.
+
+## Advanced Agentic Stack
+
+Set up BMAD, Archon, advanced approval watcher, OpenClaw, and agent platform status from one command:
+
+```bash
+scripts/setup_advanced_agentic_stack.sh setup
+scripts/setup_advanced_agentic_stack.sh status
+```
+
+Run one OpenClaw smoke submission:
+
+```bash
+scripts/setup_advanced_agentic_stack.sh smoke
+```
+
+Run reports are written to `jobs/reports/advanced_agentic_stack_status.txt`. Policy and usage live in `docs/ADVANCED_AGENTIC_STACK_SETUP.md`.
+
 ## Archon Developer Workflow Harness
 
 Archon is installed as an optional local developer workflow harness, not as production runtime infrastructure. Repo-local workflows live in `.archon/`.
@@ -33,6 +77,23 @@ BMAD is local planning/review methodology. The dark factory flow is documented i
 ```bash
 ./scripts/bmad.sh status
 ```
+
+## Codex Approval Advanced Mode
+
+Start the continuous safe local approval watcher:
+
+```bash
+scripts/install_codex_approval_advanced.sh
+scripts/install_codex_approval_advanced.sh status
+```
+
+Stop it when needed:
+
+```bash
+scripts/install_codex_approval_advanced.sh stop
+```
+
+Policy: `docs/CODEX_APPROVAL_ADVANCED_POLICY.md`.
 
 ## Codex Approval Cron
 

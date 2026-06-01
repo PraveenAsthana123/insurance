@@ -64,9 +64,14 @@ class SalesRepo:
 
     def total_row_counts(self) -> dict:
         """Smoke check — for health / data-quality tests."""
+        # Hardcoded table allowlist + psycopg.sql.Identifier for safe
+        # dynamic-identifier injection. Per global §1 rule 12 (no f-string SQL).
+        from psycopg import sql
         with self._conn() as c, c.cursor() as cur:
             out = {}
             for t in ("dim_store", "dim_date", "fact_sales"):
-                cur.execute(f"SELECT COUNT(*) AS n FROM {t}")
+                cur.execute(
+                    sql.SQL("SELECT COUNT(*) AS n FROM {}").format(sql.Identifier(t))
+                )
                 out[t] = cur.fetchone()["n"]
             return out

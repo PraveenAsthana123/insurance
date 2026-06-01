@@ -30,6 +30,14 @@ Installed command:
 cd /mnt/deepa/insur_project && /home/praveen/venv-ardupilot/bin/python3 /mnt/deepa/insur_project/scripts/archon_auto_approve_safe.py --approve >> /mnt/deepa/insur_project/jobs/logs/codex_approval_cron.log 2>&1
 ```
 
+## Advanced Mode
+
+For repeated gates, start the continuous watcher first:
+
+```bash
+scripts/install_codex_approval_advanced.sh
+```
+
 ## Execution Steps
 
 1. Refresh the managed crontab block:

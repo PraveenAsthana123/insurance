@@ -2,6 +2,10 @@
 
 This policy defines the scheduled approval behavior for Codex-assisted local development in this repository.
 
+## Advanced Mode
+
+For active workflows with repeated safe local gates, use `docs/CODEX_APPROVAL_ADVANCED_POLICY.md` and `scripts/install_codex_approval_advanced.sh`. Cron remains the fallback.
+
 ## Purpose
 
 The cron job reduces repeated local approval clicks for safe Archon developer workflow gates. It supports the no-approval autonomy policy by keeping low-risk local workflow gates moving without operator interruption.

@@ -110,9 +110,13 @@ class CustomerRepo:
             return list(cur.fetchall())
 
     def total_row_counts(self) -> dict:
+        # Per global §1 rule 12 — no f-string SQL. Use psycopg.sql.Identifier.
+        from psycopg import sql
         with self._conn() as c, c.cursor() as cur:
             out = {}
             for t in ("dim_customer_pilot", "fact_customer_interaction", "fact_churn_label"):
-                cur.execute(f"SELECT COUNT(*) AS n FROM {t}")
+                cur.execute(
+                    sql.SQL("SELECT COUNT(*) AS n FROM {}").format(sql.Identifier(t))
+                )
                 out[t] = cur.fetchone()["n"]
             return out

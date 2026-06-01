@@ -8,10 +8,10 @@ This is the single entry point for project governance, architecture, testing, AP
 |---|---|
 | Current project scope and requirement history | `docs/PROJECT_REQUIREMENTS.md` |
 | Current implementation status | `docs/STATUS.md` |
-| Run/debug locally | `docs/RUN_DEBUG_RUNBOOK.md` |
+| Run/debug locally | `docs/RUN_DEBUG_RUNBOOK.md`, `docs/ADVANCED_AGENTIC_STACK_SETUP.md` |
 | Default health check | `scripts/project_doctor.sh` |
-| Claude/Codex operating rules | `AGENTS.md`, `CLAUDE.md` |
-| Approval workflow and gates | `docs/NO_APPROVAL_AUTONOMY_POLICY.md`, `docs/CODEX_APPROVAL_CRON_POLICY.md`, `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md`, `docs/APPROVAL_GOVERNANCE.md`, `.archon/approval-policy.yaml` |
+| Claude/Codex operating rules | `AGENTS.md`, `CLAUDE.md`, `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md` |
+| Approval workflow and gates | `docs/NO_APPROVAL_AUTONOMY_POLICY.md`, `docs/CODEX_APPROVAL_CRON_POLICY.md`, `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md`, `docs/CODEX_APPROVAL_ADVANCED_POLICY.md`, `docs/APPROVAL_GOVERNANCE.md`, `.archon/approval-policy.yaml` |
 | Tenant + idempotency header contracts | `docs/TENANT_ID_IDEMPOTENCY_CONTRACT.md` |
 
 ## Universal Policies
@@ -23,8 +23,10 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/BACKEND_GLOBAL_POLICY.md` | Repo-specific backend layering, API, database, service, observability, testing, and AI governance rules. |
 | `docs/UI_GLOBAL_POLICY.md` | React/Next.js frontend policy: lazy loading, freshness, status, SEO, accessibility, debugability. |
 | `docs/NO_APPROVAL_AUTONOMY_POLICY.md` | Agent autonomy policy: do safe repo-local work without asking, while preserving hard approval gates. |
+| `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md` | Claude-specific safe local autonomy and approval policy. |
 | `docs/CODEX_APPROVAL_CRON_POLICY.md` | Scheduled safe local approval policy for Codex/Archon workflow gates. |
 | `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md` | Operational checklist for installing and running the Codex approval cron job. |
+| `docs/CODEX_APPROVAL_ADVANCED_POLICY.md` | Continuous safe local approval watcher policy for active Codex/Archon workflows. |
 
 ## Architecture Maps
 
@@ -59,6 +61,8 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/AGENT_HARNESS_GUIDE.md` | Run/debug agent and council workers, including OpenClaw and Paperclip local adapter flows. |
 | `docs/AGENT_SUPERVISOR_RUNBOOK.md` | Monitor/supervise all local agents, queues, schedules, process tests, health gates, reports, and task status. |
 | `docs/AGENT_PLATFORM_SETUP.md` | Unified setup/status for Harness Agent, OpenClaw, Paperclip, PoliysAI, CUA, Stagehand, Playwright, policy gates, and commands. |
+| `docs/ADVANCED_AGENTIC_STACK_SETUP.md` | Advanced local setup for BMAD, Archon, approval watcher, OpenClaw, and agent fleet readiness. |
+| `docs/VOICE_TEXT_AUTOMATION_RUNBOOK.md` | Voice/transcribed-text automation, planning, scheduling, cron, Ollama, and OpenClaw execution. |
 | `docs/DARK_FACTORY_OPERATING_MODEL.md` | AI-assisted delivery operating model tying BMAD, Archon, coding agents, local agent-platform adapters, CI, security, monitoring, and human approvals together. |
 | `docs/BMAD_RECIPES.md` | Project-specific BMAD recipes, including the full AI Dark Factory flow from idea to monitoring. |
 | `docs/global-services/GLOBAL_AGENT_SERVICE_POLICY.md` | Global policy for other projects to access agent services, Ollama/Kivi, OpenClaw, Paperclip, governance, and monitoring. |
@@ -72,6 +76,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/NO_APPROVAL_AUTONOMY_POLICY.md` | Minimum-interruption policy for coding agents and local validation work. |
 | `docs/CODEX_APPROVAL_CRON_POLICY.md` | Cron policy and installer for safe local approval scans. |
 | `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md` | Run plan and evidence checklist for safe local approval scans. |
+| `docs/CODEX_APPROVAL_ADVANCED_POLICY.md` | Advanced watcher mode for minimizing repeated local approval clicks. |
 | `docs/AGENTIC_BROWSER_WIRING_STATUS.md` | Honest status of Stagehand, Browser Use, Open Operator, OpenClaude, Playwright, Paperclip/Piperclip, Istio, Circuit Breaker. |
 
 ## Testing Governance
