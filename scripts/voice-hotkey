@@ -1,0 +1,159 @@
+#!/usr/bin/env bash
+# voice-hotkey — Tier-B #2: global hotkey daemon for push-to-talk.
+#
+# Listens for a global keyboard shortcut anywhere in your desktop session.
+# Default: F12. When pressed, records one VAD-driven phrase + types result.
+#
+# CPU when idle: <0.1% (no audio capture until hotkey).
+# Works from any window — no terminal focus needed.
+#
+# Usage:
+#   bash scripts/voice-hotkey                # F12 = trigger
+#   bash scripts/voice-hotkey --key f9       # F9 instead
+#   bash scripts/voice-hotkey --key '<ctrl>+<alt>+v'   # combo
+
+set -uo pipefail
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python}"
+HOTKEY="${HOTKEY:-<f12>}"
+MODEL="${MODEL:-base}"
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --key)   HOTKEY="$2"; shift 2;;
+        --model) MODEL="$2"; shift 2;;
+        *) echo "unknown arg: $1"; exit 1;;
+    esac
+done
+
+printf "\n\033[1;34m═══ voice-hotkey daemon ═══\033[0m\n"
+echo "  hotkey:  $HOTKEY  (configurable via --key)"
+echo "  model:   whisper-${MODEL}"
+echo "  ► Press hotkey from ANY window to capture one phrase."
+echo "  ► Speak; the phrase types into the focused window."
+echo "  ► Ctrl+C in this terminal to stop the daemon."
+echo
+
+"$PYTHON" - "$HOTKEY" "$MODEL" "$REPO" <<'PYEOF'
+import os, sys, time, warnings, threading
+warnings.filterwarnings("ignore")
+
+HOTKEY = sys.argv[1]; MODEL = sys.argv[2]; REPO = sys.argv[3]
+
+try:
+    import numpy as np
+    import sounddevice as sd
+    import torch
+    from silero_vad import load_silero_vad
+    from faster_whisper import WhisperModel
+    from pynput import keyboard
+    from pynput.keyboard import Controller, Key
+except ImportError as e:
+    print(f"missing dep: {e}"); sys.exit(1)
+
+print("[loading] whisper + silero-vad...")
+t0 = time.time()
+asr = WhisperModel(MODEL, device="cpu", compute_type="int8")
+vad = load_silero_vad()
+kbd = Controller()
+print(f"[ready] in {time.time()-t0:.1f}s. Press {HOTKEY} to capture.\n")
+
+SR = 16000
+VAD_BLOCK = 512
+SILENCE_FRAMES = int(0.6 * SR / VAD_BLOCK)
+MIN_VOICED = int(0.3 * SR / VAD_BLOCK)
+MAX_BUF = int(20 * SR / VAD_BLOCK)
+
+_recording_lock = threading.Lock()
+
+def capture_phrase():
+    """Record one VAD-bounded phrase + type the transcript."""
+    if not _recording_lock.acquire(blocking=False):
+        print("[busy] already recording — ignoring hotkey")
+        return
+    try:
+        print("\n[record] listening (start speaking)...")
+        try:
+            stream = sd.RawInputStream(samplerate=SR, blocksize=VAD_BLOCK,
+                                        channels=1, dtype="int16")
+            stream.start()
+        except Exception as e:
+            print(f"[err] mic open: {e}")
+            return
+
+        buf = []; silence = 0; voiced = 0
+        warmup_frames = int(2.0 * SR / VAD_BLOCK)  # 2s grace to start
+        warmup = 0
+
+        try:
+            while True:
+                block, _ = stream.read(VAD_BLOCK)
+                npb = np.frombuffer(block, dtype=np.int16).astype(np.float32) / 32768.0
+                prob = vad(torch.from_numpy(npb), SR).item()
+                speaking = prob > 0.5
+
+                if not buf:
+                    warmup += 1
+                    if speaking:
+                        buf = [npb]; voiced = 1; silence = 0
+                    elif warmup >= warmup_frames:
+                        print("[silence] no speech within 2s — aborting")
+                        return
+                else:
+                    buf.append(npb)
+                    if speaking: voiced += 1; silence = 0
+                    else: silence += 1
+                    if silence >= SILENCE_FRAMES and voiced >= MIN_VOICED:
+                        break
+                    if len(buf) >= MAX_BUF:
+                        print("[max-buf] 20s reached")
+                        break
+        finally:
+            stream.stop(); stream.close()
+
+        if not buf:
+            return
+
+        audio = np.concatenate(buf)
+        t = time.time()
+        segs, _ = asr.transcribe(audio, language="en", beam_size=5)
+        text = " ".join(s.text for s in segs).strip()
+        latency = int((time.time() - t) * 1000)
+        if not text:
+            print(f"[empty] ({latency}ms)")
+            return
+
+        norm = text.lower().strip(" .,!?")
+        if norm in {"stop","exit","quit"}:
+            print(f"[exit] {text!r}")
+            os._exit(0)
+        if norm in {"send","submit"}:
+            print(f"[send] {text!r} ({latency}ms)")
+            kbd.press(Key.enter); kbd.release(Key.enter)
+            return
+
+        print(f"[type] {text!r} ({latency}ms)")
+        try:
+            kbd.type(text + " ")
+        except Exception as e:
+            print(f"[err] type: {e}")
+    finally:
+        _recording_lock.release()
+
+
+def on_hotkey():
+    threading.Thread(target=capture_phrase, daemon=True).start()
+
+
+# Parse hotkey string (e.g. '<f12>', '<ctrl>+<alt>+v')
+try:
+    listener = keyboard.GlobalHotKeys({HOTKEY: on_hotkey})
+    listener.start()
+    print(f"[daemon] {HOTKEY} listening. Press Ctrl+C to exit.")
+    listener.join()
+except Exception as e:
+    print(f"[err] hotkey listener failed: {e}")
+    print("  (pynput global hotkeys need X11 — make sure DISPLAY is set)")
+    print(f"  (try a single key like --key '<f12>' not 'F12')")
+    sys.exit(1)
+PYEOF

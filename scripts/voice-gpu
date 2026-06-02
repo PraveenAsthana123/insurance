@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# voice-gpu — Tier-B #4: detect CUDA + benchmark whisper on GPU vs CPU.
+#
+# Run this once. If GPU is faster (it usually is, 5-10×), the script
+# tells you exactly which env var to set so voice-vad/voice-wake/voice-pro
+# use the GPU.
+#
+# Usage:
+#   bash scripts/voice-gpu
+
+set -uo pipefail
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python}"
+
+printf "\n\033[1;34m═══ voice-gpu — CUDA check + benchmark ═══\033[0m\n\n"
+
+"$PYTHON" - <<'PYEOF'
+import os, time, warnings
+warnings.filterwarnings("ignore")
+
+print("=== nvidia-smi ===")
+import subprocess
+try:
+    r = subprocess.run(["nvidia-smi", "-L"], capture_output=True, text=True, timeout=5)
+    if r.returncode == 0:
+        print(r.stdout.strip())
+    else:
+        print("nvidia-smi failed — no NVIDIA driver detected"); raise SystemExit(0)
+except FileNotFoundError:
+    print("nvidia-smi not installed — no NVIDIA GPU usable"); raise SystemExit(0)
+except subprocess.TimeoutExpired:
+    print("nvidia-smi timeout"); raise SystemExit(0)
+
+print()
+print("=== torch CUDA ===")
+import torch
+print(f"  torch: {torch.__version__}")
+print(f"  CUDA available: {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    print(f"  device count:  {torch.cuda.device_count()}")
+    print(f"  device 0:      {torch.cuda.get_device_name(0)}")
+    print(f"  memory (GB):   {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f}")
+else:
+    print("  torch built without CUDA — install with: pip install torch --index-url https://download.pytorch.org/whl/cu118")
+    raise SystemExit(0)
+
+print()
+print("=== faster-whisper benchmark (10s sample) ===")
+import numpy as np
+from faster_whisper import WhisperModel
+
+# Generate 10s of silence (just to measure infra speed)
+sample = np.zeros(160000, dtype=np.float32)
+
+results = []
+for device, compute in [("cpu", "int8"), ("cuda", "int8_float16"), ("cuda", "int8")]:
+    try:
+        print(f"\n  loading whisper-base on {device}...")
+        t = time.time()
+        m = WhisperModel("base", device=device, compute_type=compute)
+        load_t = time.time() - t
+
+        # 3 runs, average
+        times = []
+        for _ in range(3):
+            t = time.time()
+            segs, _ = m.transcribe(sample, language="en")
+            list(segs)
+            times.append(time.time() - t)
+        avg = sum(times) / len(times)
+        results.append((device, load_t, avg))
+        print(f"    load:    {load_t:.2f}s")
+        print(f"    avg run: {avg*1000:.0f}ms (3 runs)")
+    except Exception as e:
+        print(f"    FAIL on {device}: {e}")
+
+print()
+print("=== verdict ===")
+if len(results) == 2:
+    cpu = next(r for r in results if r[0] == "cpu")
+    gpu = next(r for r in results if r[0] == "cuda")
+    speedup = cpu[2] / gpu[2] if gpu[2] > 0 else 0
+    print(f"  CPU: {cpu[2]*1000:.0f}ms/run")
+    print(f"  GPU: {gpu[2]*1000:.0f}ms/run")
+    print(f"  speedup: {speedup:.1f}×")
+    if speedup > 1.5:
+        print()
+        print("  → USE GPU. Add to your shell:")
+        print("       export VOICE_WHISPER_DEVICE=cuda")
+        print("       export VOICE_WHISPER_COMPUTE=float16")
+        print("    (or edit voice-vad/voice-wake/voice-pro to add device=cuda)")
+elif len(results) == 1:
+    print(f"  only {results[0][0]} works. Stick with it.")
+PYEOF
