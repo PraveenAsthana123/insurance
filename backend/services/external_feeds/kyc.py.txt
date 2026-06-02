@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/external_feeds/kyc.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+KYC adapter — Identity verification bureau integration.
+
+Per §56 Stage-1: feature-flag opt-in. Real production wiring would integrate
+with Onfido / Jumio / Trulioo / LexisNexis InstantID.
+
+ENV:
+  INSUR_KYC_ENABLED       — "true" to enable
+  INSUR_KYC_PROVIDER      — onfido | jumio | trulioo | lexisnexis (default: onfido)
+  INSUR_KYC_API_BASE      — provider API base URL
+  INSUR_KYC_API_KEY       — provider API key (from secrets manager in prod)
+  INSUR_KYC_TIMEOUT       — seconds (default 30)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `is_enabled()`: (no docstring)
+- `fetch(person_id, full_name, date_of_birth, address, document_type)`: Run KYC verification against the configured provider.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Real provider wiring (lazy-imported to avoid prod-dep cost in dev)

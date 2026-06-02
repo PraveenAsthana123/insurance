@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/sales/security/test_security.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Tier 11-12 — Security tests for sales.
+
+Per global §64.32 + §64.42: covers OWASP Top 10, AI-specific (prompt
+injection / model theft / data poisoning), and infrastructure (DDoS).
+
+⚠ §42 gated: pen + DDoS testing only in authorized envs.
+
+Recommended OSS:
+  - OWASP ZAP (DAST)
+  - Garak (prompt injection / hallucination)
+  - Semgrep (SAST)
+  - Trivy (container scan)
+  - Kubescape (K8s)
+
+## Imports
+- from `_` import pytest
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `test_sql_injection_payload_sample()`: Smoke: SQL-injection payload library not empty.
+- `test_prompt_injection_payload_sample()`: Smoke: prompt-injection payload library not empty.
+- `test_sales_owasp_zap_scan()`: REPLACE — invoke OWASP ZAP CLI against sales surface (auth env only).
+- `test_sales_garak_prompt_injection()`: REPLACE — Garak adversarial prompt injection sweep.
+
+## Outputs
+- Return values from functions above

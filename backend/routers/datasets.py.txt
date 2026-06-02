@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/datasets.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `fastapi` import APIRouter, Depends, Query, UploadFile, File
+- from `core.config` import get_settings
+- from `core.dependencies` import get_dataset_service
+- from `schemas.common` import PaginatedResponse
+- from `schemas.dataset` import DatasetCreate, DatasetPreview, DatasetResponse, DatasetSummary
+- from `services.dataset_service` import DatasetService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_datasets(offset, limit, service)`: (no docstring)
+- `get_dataset(dataset_id, service)`: (no docstring)
+- `create_dataset(payload, service)`: (no docstring)
+- `async upload_dataset(dataset_id, file, service)`: (no docstring)
+- `preview_dataset(dataset_id, service)`: (no docstring)
+
+## Outputs
+- Return values from functions above

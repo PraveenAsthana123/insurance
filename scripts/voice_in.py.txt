@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/voice_in.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Voice INPUT — record mic OR transcribe WAV → text via OpenAI Whisper.
+
+Usage:
+  scripts/voice_in.py --wav /tmp/sample.wav                # transcribe existing WAV
+  scripts/voice_in.py --record 5                           # record 5s from mic, transcribe
+  scripts/voice_in.py --record 5 --model base              # use 'base' model (39MB, faster)
+  scripts/voice_in.py --wav file.wav --model small         # 'small' (244MB, more accurate)
+
+Models: tiny (39MB) / base (74MB) / small (244MB) / medium (769MB) / large (1.5GB)
+First use of each model triggers a one-time download to ~/.cache/whisper/.
+
+The recorded/transcribed text goes to stdout — pipe it to xclip, Claude,
+or any other consumer. Per global §42 — local mic capture is pre-approved
+when invoked explicitly by the operator (push-to-talk model, not always-on).
+
+Drill: tests/drills/drill_voice_pipeline.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import shutil
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import tempfile
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --wav, --record, --model, --keep-record-at
+
+## Process
+### Functions
+- `_record(duration_sec, out_path)`: Record mono 16kHz WAV from the default ALSA mic via arecord.
+- `_transcribe(wav_path, model_name)`: Drive openai-whisper and return the transcribed text. Errors propagate.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,59 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_cua_idempotency.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §10.3 idempotency keys on /api/v1/agent-platform/cua/execute.
+
+A network retry, double-click, or queued-publisher dedup should NOT cause
+a second real Chromium navigation, a second Stripe-like side-effect, or a
+duplicated audit row. The idempotency cache holds the first executed
+response per (tenant_id, idempotency_key) and replays it for subsequent
+calls within the TTL window.
+
+Steps (12 total; 5 negative):
+  1. (+) Fresh call without key → status='dry-run', no idempotent_replay flag
+  2. (+) Fresh call with key='K1' → executes; result missing idempotent_replay
+  3. (+) Replay with same key='K1' → returns SAME response + idempotent_replay=True
+  4. (+) Replay preserves the FIRST call's target (not the replay's target)
+  5. (-) NEG: same key='K1' but different X-Tenant-ID → fresh execution
+        (cross-tenant cache isolation)
+  6. (-) NEG: different key='K2' for same tenant → fresh execution
+  7. (-) NEG: no key submitted → never cached, always fresh
+  8. (+) Idempotency-Key header honored when body field is absent
+  9. (+) Body idempotency_key wins over Idempotency-Key header when both set
+  10.(-) NEG: failed exec (status='blocked' from policy denial) is NOT cached
+        — retry after fixing the cause should re-execute
+  11.(-) NEG: status='error' (dead localhost) is NOT cached
+  12.(+) TTL expiry: after CUA_IDEMPOTENCY_TTL_SECONDS, replay is fresh again
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: CUA_AUDIT_PATH, CUA_IDEMPOTENCY_TTL_SECONDS, PLAYWRIGHT_ALLOWLIST
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(ttl_seconds)`: Minimal app with TenantId + agent-platform router, configurable TTL.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: no key, no replay flag ----
+- ---- Step 2: fresh with key K1 ----
+- ---- Step 3: replay with SAME key returns idempotent_replay=True ----
+- ---- Step 4: replay preserves FIRST call's content (not replay's) ----

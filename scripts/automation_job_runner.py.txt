@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/automation_job_runner.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Voice/text automation runner for BMAD + Archon + OpenClaw + Ollama.
+
+This runner treats "voice" as already-transcribed text. It does not record audio
+or perform speech-to-text. It turns text into an execution plan with Ollama,
+submits tasks through the OpenClaw-compatible API, and can install managed cron
+entries for repeated execution.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `_` import urllib.error
+- from `_` import urllib.request
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --api-url, --ollama-url, --model, --text, --file, --mode, --department, --mode, --department, --skip-plan
+- Env vars: AGENT_MODEL, API_URL, OLLAMA_MODEL, OLLAMA_URL
+
+## Process
+### Functions
+- `read_text(args)`: (no docstring)
+- `http_json(method, url, payload, headers)`: (no docstring)
+- `ollama_plan(text, model, ollama_url)`: (no docstring)
+- `save_plan(text, plan, model)`: (no docstring)
+- `openclaw_submit(text, api_url, mode, department, source)`: (no docstring)
+- `add_interval_schedule(name, every, mode, department, prompt)`: (no docstring)
+- `cron_command(name, text, mode, department, api_url)`: (no docstring)
+- `install_cron(name, cron_expr, command)`: (no docstring)
+- `cmd_plan(args)`: (no docstring)
+- `cmd_execute(args)`: (no docstring)
+- `cmd_run_once(args)`: (no docstring)
+- `cmd_schedule_interval(args)`: (no docstring)
+- `cmd_install_cron(args)`: (no docstring)
+- `cmd_status(args)`: (no docstring)
+- `parser()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

@@ -1,0 +1,64 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_typed_council.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: Pydantic AI typed council Stage-1 adapter (backend/services/typed_council.py).
+
+§56.2 Stage-1 contract: lazy import + feature-flag opt-in + never default-on
++ original code path always wins. Drill mocks pydantic_ai.Agent so no real
+LLM call is made; verifies the typed-output schema enforcement contract.
+
+Steps (11 total; 5 negative):
+  1. (+) Default env → outcome='disabled' + audit row written
+  2. (-) NEG: disabled response has no creds/model leak
+  3. (+) Enabled + mocked Pydantic AI → outcome='executed' with all 3
+        typed outputs (author / reviewer / chair) populated
+  4. (+) 3 audit rows written (one per stage) on successful run
+  5. (-) NEG: schema validation failure → outcome='schema_error' (not crash);
+        partial state preserved
+  6. (-) NEG: Pydantic AI raises non-validation exception → outcome='error'
+        wrapped (latency_ms still recorded)
+  7. (+) tenant_id + request_id propagated through every audit row
+  8. (-) NEG: API key value NEVER appears in audit rows OR CouncilResult
+  9. (+) status() returns adapter snapshot without making any LLM call
+  10.(-) NEG: pydantic_ai package not importable → outcome='unavailable'
+        (no crash) — drill uses a SimpleNamespace with no required attrs
+  11.(+) Council schemas validate their own constraints (confidence ∈ [0,1],
+        score ∈ [1,10], decision ∈ {approve, reject, revise})
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+- from `types` import SimpleNamespace
+- from `unittest.mock` import patch
+
+## Inputs
+- Env vars: HOLY_LLM_MODEL, HOLY_TYPED_COUNCIL_AUDIT_PATH, HOLY_TYPED_COUNCIL_ENABLED, OPENAI_API_KEY
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_reset_modules()`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `_make_mock_pydantic_ai(behavior)`: Build a mock pydantic_ai module with Agent class controlled by `behavior`:
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- Route by output_type class NAME (set on construction) —
+- `is` comparison fails when sys.modules has been reset between
+- the drill's setup and FakeAgent's invocation (the class identity
+- changes across re-imports). Name comparison is identity-free.

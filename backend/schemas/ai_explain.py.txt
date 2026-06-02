@@ -1,0 +1,25 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/ai_explain.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Literal
+- from `pydantic` import BaseModel, ConfigDict, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ExplainContext`: Payload passed from UI — screen + situation details the user wants explained.
+- `ExplainRequest`: (no docstring)
+- `Citation`: (no docstring)
+- `ExplainResponse`: (no docstring)
+- `FeedbackRequest`: UI-submitted thumbs-up/down feedback on an AI explanation.
+
+## Outputs
+- Return values from functions above

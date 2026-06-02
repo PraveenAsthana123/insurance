@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/reports.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reports-catalog router — dept-level rollup of standard reports.
+
+Sibling to the per-role reports at
+    global-ai-org/departments/<dept>/reports-by-role/<role>/HOLY_REPORTS.md
+This endpoint surfaces the DEPT-level unified catalog: every standard
+report the dept publishes (15 archetypes per §64.37.2) with cadence,
+format, owner role, and audience.
+
+Composes with global §38 (audit per report generation) + §47.6 (RBAC
+per audience) + §57.6 (canonical envelope) + §59 MDD + §64.37 (per-role
+reports sibling) + §66.
+
+Endpoints:
+  GET /api/v1/holy/reports/{dept}
+  GET /api/v1/holy/reports/{dept}/{report_id}
+  GET /api/v1/holy/reports/_global
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import time
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Request
+- from `core.holy_audit` import log_holy_access
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_validate_dept(dept)`: (no docstring)
+- `_title_for(dept, report_id)`: (no docstring)
+- `_enrich(dept, base)`: Decorate a standard-report row with dept-specific title.
+- `global_inventory(http_request)`: Cross-dept report inventory + counts.
+- `dept_catalog(http_request, dept)`: Per-dept catalog — 15 standard reports with full envelope.
+- `report_detail(http_request, dept, report_id)`: Single report detail.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Canonical 15 owner roles per global §63 scaffold (15 roles per dept).
+- The 15 standard report archetypes per global §64.37.2 — same shape
+- every dept, dept-specific titles. KEEP ALIGNED with the scaffolder's
+- standard_reports list in scaffold-holy-reports-catalog.py.
+- IMPORTANT — _global BEFORE /{dept} per §66.3 FastAPI greedy-match trap.

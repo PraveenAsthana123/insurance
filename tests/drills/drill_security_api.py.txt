@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_security_api.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: HOLY security API endpoints (§43, §64.32).
+
+Steps (8 total; 3 negative):
+    1. (+) GET /attack-classes returns 12 classes
+    2. (+) GET /attack-classes shows executor_authorized flag
+    3. (+) POST /generate-corpus enqueues payloads (n=3) + returns audit info
+    4. (+) GET /corpora lists the newly-generated corpus
+    5. (+) GET /corpora/<class>/<id> returns full payload list
+    6. (-) NEGATIVE: POST with bogus attack_class returns 400
+    7. (-) NEGATIVE: GET corpora/<class>/<bogus_id> returns 404
+    8. (-) NEGATIVE: path-traversal in corpus_id (../) rejected
+
+# RESOURCES: http_local
+
+Requires insur_backend running. Skips gracefully if not.
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `_` import httpx
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: http_local
+- Prereq: backend reachable
+- ----- Step 1: 12 attack classes -----
+- ----- Step 2: executor_authorized flag present -----
+- ----- Step 3: POST /generate-corpus -----

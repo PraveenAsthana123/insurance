@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/graph.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY Graph AI router — per-dept relationship graph (Cytoscape-compatible).
+
+Unifies per-dept artifacts (master entities, processes, pipelines, roles,
+reports, demos, audit event types, dashboards) into one queryable graph.
+
+Composes with global §38 (audit on traversal) + §39 (knowledge graph
+requirement) + §45 (KG non-negotiable) + §47 (C4 L5 dep view) + §49
+(compose-footer derivable from edges) + §59 MDD + §63 + §64 + §66.
+
+Endpoints:
+  GET /api/v1/holy/graph/{dept}                       — full graph
+  GET /api/v1/holy/graph/{dept}/nodes?type=<type>     — filtered nodes
+  GET /api/v1/holy/graph/{dept}/neighbors/{node_id}   — 1-hop neighbors
+  GET /api/v1/holy/graph/_global                      — cross-dept counts
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import time
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_validate_dept(dept)`: (no docstring)
+- `_build_graph(dept)`: Materialize the per-dept graph from the canonical source catalogs.
+- `global_summary(http_request)`: Cross-dept summary: node + edge counts per dept.
+- `dept_graph(http_request, dept)`: Full per-dept relationship graph.
+- `dept_nodes_filtered(http_request, dept, type)`: Per-dept node list, optionally filtered by type.
+- `dept_neighbors(http_request, dept, node_id)`: 1-hop neighbors of a node (both incoming and outgoing edges).
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Canonical 15 §63 roles.
+- Master entities — keep aligned with master_data.ENTITY_CATALOG keys.
+- 15 standard report archetypes per §64.37.2 — keep aligned with
+- reports.STANDARD_REPORTS report_id values.
+- Audit event prefixes per HOLY_TRANSACTIONS event taxonomy.

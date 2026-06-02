@@ -1,0 +1,50 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_supply_chain_services.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_supply_chain_services — unit tests for 4 Supply Chain services.
+
+Services that run direct SQL (ETAService._stats, SupplierScoreService._avg_defect_rate,
+SupplyChainSimulationService._supplier_revenue) are tested by subclassing and
+overriding those helpers, so we never have to mock the psycopg cursor chain.
+Repo-level reads (get_sku, list_suppliers, get_shipments_for_sku) are mocked
+with MagicMock.
+
+## Imports
+- from `__future__` import annotations
+- from `unittest.mock` import MagicMock
+- from `_` import pytest
+- from `schemas.supply_chain` import ETARequest, SimulationRequest, StockoutRiskRequest
+- from `services.eta_service` import ETAService
+- from `services.stockout_service` import StockoutService
+- from `services.supplier_score_service` import SupplierScoreService
+- from `services.supply_chain_simulation_service` import SupplyChainSimulationService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `_NoDBSupplierScoreService`: Override DB-hitting _avg_defect_rate so tests never touch Postgres.
+- `_FixedRevenueSim`: Override _supplier_revenue so sim tests don't hit Postgres.
+### Functions
+- `_mock_repo(sku, shipments)`: (no docstring)
+- `test_stockout_high_risk_when_cover_short()`: (no docstring)
+- `test_stockout_unknown_sku_raises()`: (no docstring)
+- `test_eta_predict_uses_cached_stats()`: (no docstring)
+- `test_eta_predict_unknown_sku_raises()`: (no docstring)
+- `test_supplier_score_ranks_descending()`: (no docstring)
+- `test_supplier_score_inspection_mapping()`: (no docstring)
+- `test_simulation_zero_delay_has_no_impact()`: (no docstring)
+- `test_simulation_linear_scaling_with_delay()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────── StockoutService ────────────────────────
+- 10 units of stock, 14-day lead time, 30 units sold in 30 days → 10d cover vs 14d lead
+- ─────────────────────────── ETAService ─────────────────────────
+- Pre-populate the mode cache so _stats() never touches the DB.
+- confidence = 1 - (1/4) = 0.75

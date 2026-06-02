@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/evals_functional.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.8 Functional eval router.
+
+3 endpoints under /api/v1/holy/evals/functional/* federated via
+core.holy_audit (surface=evals_functional). Sibling routers for §68.9
+cost and §68.10 safety follow the same pattern under
+/api/v1/holy/evals/{cost,safety}/*.
+
+Composes with §38.3 + §47.6 + §57.7 + §64.20 + §68.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+- from `services` import functional_eval_service
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `functional_global(http_request, since)`: Cross-model leaderboard + dataset coverage.
+- `functional_model(http_request, model_id, dataset, since, limit)`: Per-model eval history with optional dataset filter.
+- `functional_run(http_request, model_id, run_id)`: Single eval run detail.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- _global BEFORE /{model_id} per §66.3.

@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/paperclip.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Paperclip local context/artifact adapter schemas.
+
+The project uses Paperclip as a local artifact/context-pack adapter. It is not an
+external Paperclip framework integration. These schemas describe how callers add
+small text artifacts, inspect them, and compose context packs for agent tasks.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any, Literal
+- from `pydantic` import BaseModel, Field, field_validator
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PaperclipCreateRequest`: Input model for creating a local Paperclip artifact.
+- `PaperclipArtifactResponse`: Response model for a stored Paperclip artifact.
+- `PaperclipArtifactDetail`: Detailed artifact response that includes stored content.
+- `PaperclipContextPackRequest`: Input model for composing several artifacts into one context pack.
+- `PaperclipContextPackResponse`: Composed context pack returned to agents or orchestration layers.
+- `PaperclipStatusResponse`: Runtime status for the local Paperclip adapter.
+
+## Outputs
+- Return values from functions above

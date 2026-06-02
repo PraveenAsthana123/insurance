@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/processes.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends
+- from `core.dependencies` import get_ml_service, get_process_service
+- from `schemas.common` import PaginatedResponse
+- from `schemas.model` import ModelSummary
+- from `schemas.process` import AIMappingResponse, DataFlowStepResponse, ProcessResponse
+- from `services.ml_service` import MLService
+- from `services.process_service` import ProcessService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `get_process(process_id, service)`: (no docstring)
+- `get_process_data_flow(process_id, service)`: (no docstring)
+- `get_process_models(process_id, service)`: (no docstring)
+- `get_process_ai_mappings(process_id, service)`: (no docstring)
+- `get_process_test_cases(process_id, service)`: Returns suggested test case categories for this process.
+
+## Outputs
+- Return values from functions above

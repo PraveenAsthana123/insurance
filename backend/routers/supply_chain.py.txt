@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/supply_chain.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+supply_chain.py — HTTP-only FastAPI routes for Supply Chain deep-dive.
+
+Mirrors backend/routers/sales.py structure: lru_cache dependency factories,
+thin route handlers that translate ValueError → 404, everything else to the
+service layer.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `functools` import lru_cache
+- from `fastapi` import APIRouter, Depends, HTTPException, status
+- from `repositories.supply_chain_repo` import SupplyChainRepo
+- from `schemas.supply_chain` import ETARequest, ETAResponse, SimulationRequest, SimulationResponse, SkuSummary
+- from `services.eta_service` import ETAService
+- from `services.stockout_service` import StockoutService
+- from `services.supplier_score_service` import SupplierScoreService
+- from `services.supply_chain_simulation_service` import SupplyChainSimulationService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_repo()`: (no docstring)
+- `_stockout_service()`: (no docstring)
+- `_eta_service()`: (no docstring)
+- `_score_service()`: (no docstring)
+- `_simulation_service()`: (no docstring)
+- `get_repo()`: (no docstring)
+- `get_stockout_service()`: (no docstring)
+- `get_eta_service()`: (no docstring)
+- `get_score_service()`: (no docstring)
+- `get_simulation_service()`: (no docstring)
+- `list_skus(repo)`: (no docstring)
+- `list_suppliers(svc)`: (no docstring)
+- `stockout_risk(req, svc)`: (no docstring)
+- `eta(req, svc)`: (no docstring)
+- `simulate(req, svc)`: (no docstring)
+
+## Outputs
+- Return values from functions above

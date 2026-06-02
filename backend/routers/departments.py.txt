@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/departments.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends, Query
+- from `core.dependencies` import get_department_service
+- from `schemas.common` import PaginatedResponse
+- from `schemas.department` import DepartmentResponse, DepartmentSummary
+- from `schemas.process` import AIMappingResponse, ProcessSummary
+- from `services.department_service` import DepartmentService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_departments(offset, limit, service)`: (no docstring)
+- `get_department(dept_id, service)`: (no docstring)
+- `list_department_processes(dept_id, offset, limit, service)`: (no docstring)
+- `get_department_ai_stack(dept_id, service)`: (no docstring)
+- `get_department_roi(dept_id, service)`: (no docstring)
+
+## Outputs
+- Return values from functions above

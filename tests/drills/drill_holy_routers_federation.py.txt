@@ -1,0 +1,75 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_holy_routers_federation.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: §64.43 #7 federation extended to the 7 remaining /api/v1/holy/* routers
+via the shared `core.holy_audit.log_holy_access` helper.
+
+Closes the federation gap left after the monitoring router landed alone
+(drill_holy_monitoring_federation.py). One drill covers ALL 7 surfaces in
+one place because the contract is identical:
+
+  - Every read attributes the access to caller's tenant_id + actor
+  - Validators (e.g. _validate_dept) MUST run BEFORE log_holy_access so
+    failed-enumeration attempts do NOT pollute the audit trail
+  - Best-effort disk persistence (read path NEVER broken by audit layer)
+  - Audit row schema carries §38.3 required fields
+
+Steps (12 total; ≥4 negative):
+  1. (+) Shared helper writes to data/agent-supervisor/holy_reads.jsonl
+        (configurable via HOLY_AUDIT_PATH env var). Default location is
+        the unified holy-fleet audit trail.
+  2. (+) master_data /_global with X-Tenant-ID echoed in row + tenant
+        column = "tenant-a"
+  3. (+) transactions /{dept} writes row tagged with dept + endpoint
+  4. (+) pipelines /{dept}/{process_id} writes row with extra={process_id}
+  5. (+) reports /{dept}/{report_id} writes row with extra={report_id}
+  6. (+) demo_stories /{dept}/{role} writes row with extra={role}
+  7. (+) graph /{dept}/nodes writes row with extra={type}
+  8. (+) downloads /_global writes row with surface=downloads
+  9. (-) NEG: master_data invalid dept → 404, NO new audit row (validator
+        runs BEFORE log_holy_access per §47.6 anti-info-leak)
+  10.(-) NEG: pipelines invalid process_id → 400, NO new audit row
+        (validator-before-audit ordering preserved)
+  11.(-) NEG: default tenant when no X-Tenant-ID header → row tagged
+        with tenant_id='default' on the master_data surface
+  12.(-) NEG: disk write failure → request STILL succeeds (best-effort
+        audit; §57.7 read path never blocked by observability layer)
+
+  Plus invariant: every audit row across the drill carries §38.3 fields
+  (ts, tenant_id, actor, tool, request_id, endpoint, surface, outcome).
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path)`: Boot a fresh FastAPI with all 7 federated routers + middleware stack.
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: helper-target path created on first write ----
+- ---- Step 2: master_data /_global → tenant echo + audit row ----
+- ---- Step 3: transactions /{dept} → dept-tagged row ----
+- ---- Step 4: pipelines /{dept}/{process_id} → process_id in extras ----

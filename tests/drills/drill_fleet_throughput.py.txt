@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_fleet_throughput.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: HOLY agent-fleet throughput (§43, §65.8).
+
+Steps (8 total; 3 negative):
+    1. (+) GET /fleet/stats returns the 3 fleet sections (simple, council, test)
+    2. (+) Every fleet section has queued + completed_total numeric
+    3. (+) POST /fleet/fanout enqueues N tasks
+    4. (+) After fan-out, /fleet/stats shows queued >= N (briefly) OR completed grew
+    5. (+) After 30s wait, completed_total grew by >= N (100 agents drained it)
+    6. (-) NEGATIVE: POST /fleet/fanout with n=0 returns 400
+    7. (-) NEGATIVE: POST /fleet/fanout with n=999 returns 400 (cap=200)
+    8. (-) NEGATIVE: GET /fleet/recent-done?fleet=bogus returns 400
+
+# RESOURCES: http_local agent_fleet
+
+Requires insur_backend + Redis + at least 1 insur-agents-* container running.
+Skips gracefully if backend not reachable.
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `_` import httpx
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: http_local agent_fleet
+- Prereq: backend reachable
+- ----- Step 1: /fleet/stats sections -----
+- ----- Step 2: numeric fields present -----
+- ----- Step 3: fan-out enqueues N tasks -----

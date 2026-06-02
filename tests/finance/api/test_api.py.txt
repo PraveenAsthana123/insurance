@@ -1,0 +1,23 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/finance/api/test_api.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Tier 3 — API tests for finance.
+
+Recommended: pytest + httpx + schemathesis.
+Per global §64.30 tier 3: every endpoint × every status code.
+
+## Imports
+- from `_` import pytest
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `test_finance_list_returns_200()`: REPLACE — GET /api/v1/holy/depts (smoke that backend reachable).
+- `test_finance_invalid_input_returns_400()`: REPLACE — verify bad input is rejected with 4xx (no silent success).
+
+## Outputs
+- Return values from functions above

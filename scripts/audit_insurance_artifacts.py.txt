@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_insurance_artifacts.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Insurance dept artifact audit — per global §70/§71.
+
+Runs twice daily via cron (09:00 + 21:00). Output written to:
+  - jobs/reports/insurance_audit_summary_<TS>.md (human-readable)
+  - jobs/reports/insurance_audit_summary_latest.md (symlink to most recent)
+  - jobs/logs/insurance_audit_<TS>.log (raw output)
+
+Exits 0 if all checks green, 1 otherwise.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `audit_dept(slug)`: (no docstring)
+- `audit_data()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

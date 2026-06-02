@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/supply_chain.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+supply_chain.py — Pydantic request/response models for Supply Chain deep-dive.
+
+Mirrors the Sales schema style: extra='forbid' on request bodies, flat response
+models that the frontend can render without type gymnastics.
+
+## Imports
+- from `__future__` import annotations
+- from `pydantic` import BaseModel, ConfigDict, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `SkuSummary`: Row from dim_sku surfaced to the UI for picker/overview tiles.
+- `SupplierScored`: Supplier with a computed composite score (0-100) and sub-scores.
+- `StockoutRiskRequest`: (no docstring)
+- `StockoutRiskResponse`: (no docstring)
+- `ETARequest`: (no docstring)
+- `ETAResponse`: (no docstring)
+- `SimulationRequest`: (no docstring)
+- `SimulationResponse`: (no docstring)
+
+## Outputs
+- Return values from functions above

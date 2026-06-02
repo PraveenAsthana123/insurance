@@ -1,0 +1,62 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/functional_eval_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.8 Functional eval — "does the model still work?"
+
+Read-only aggregation over data/agent-supervisor/functional_eval_runs.jsonl
+(env-overridable via HOLY_EVAL_FUNCTIONAL_LOG). Each row is one eval run:
+
+  ts, run_id, model_id, model_version, dataset, dept, tenant_id,
+  accuracy, f1, auc, precision, recall, n_examples, latency_p95_ms,
+  drift_score, ground_truth_hash, eval_set_hash
+
+PII never appears — only hashes for dataset + ground truth.
+
+The WRITE side (MLflow integration / scheduled eval job that appends a
+row per run) is a separate iteration. This commit ships the READ
+surface so operators can answer "which model wins on rag_qa_v1?"
+"what's the accuracy trend for kivi:local?" the moment any eval job
+starts writing rows.
+
+Per §57.7: missing log → empty envelope. Per §48 explainability:
+every row carries enough metadata (model_version + eval_set_hash +
+ground_truth_hash) to reproduce the eval that produced the number.
+
+Composes with §38.3 (audit on read) + §47.6 (read-only at boundary) +
+§57.7 (graceful degradation) + §64.20 (per-dept ML lifecycle —
+functional eval surface IS the per-pipeline scorecard) + §68
+(Observability Hub iter 4).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `collections` import defaultdict
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: HOLY_EVAL_FUNCTIONAL_LOG
+
+## Process
+### Functions
+- `_log_path()`: (no docstring)
+- `_read_rows(since_epoch, max_rows)`: Read JSONL rows. Missing file / corrupt lines → graceful (§57.7).
+- `_latest_per_model(rows)`: Return one latest-ts row per model_id.
+- `global_summary(since_epoch)`: Cross-model leaderboard + dataset coverage.
+- `model_history(model_id)`: Per-model eval history, newest-first. Returns None if model unseen.
+- `run_detail(model_id, run_id)`: Single eval run by (model_id, run_id).
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Metric names we expose first-class. Other fields pass through but
+- don't get aggregated under these canonical keys.
+- Leaderboard sorts by accuracy desc when present, else f1, else map
+- Drift summary: most recent two rows' delta on accuracy/f1

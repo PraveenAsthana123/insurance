@@ -1,0 +1,59 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_bmad_installed.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: BMad methodology installed in the project (§56 gate-2 follow-through).
+
+Verifies that `scripts/bmad.sh install --modules bmm --tools claude-code`
+produced a usable _bmad/ tree and that `bmad status` reports installed.
+The shim contract from drill_operator_readiness step 6 stays in place;
+this drill is about the install OUTPUT, not the runnability of the CLI.
+
+Steps (8 total; 3 negative):
+  1. (+) _bmad/ directory exists at project root
+  2. (+) _bmad/config.toml + config.user.toml present
+  3. (+) _bmad/_config/skill-manifest.csv lists ≥ 20 bmad skills
+        (proves the install enumerated skills, not just dropped configs)
+  4. (+) .claude/skills/ has ≥ 20 bmad-* skill dirs (the --tools
+        claude-code wiring landed)
+  5. (+) `scripts/bmad.sh status` reports installed (no "No BMAD
+        installation found" line)
+  6. (-) NEG: _bmad/ does NOT contain absolute paths from the install
+        host (smoke-check that the install is portable to other
+        contributors)
+  7. (-) NEG: no .env, no *.key, no credentials.* files in _bmad/
+        (BMad install must not introduce secrets)
+  8. (-) NEG: drill itself catches a fake/missing install (audit logic
+        not silently passing on absent _bmad/)
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import re
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: _bmad/ exists ----
+- ---- Step 2: config files present ----
+- ---- Step 3: skill manifest enumerates ≥ 20 bmad skills ----
+- First line is header; data lines are bmad skill entries

@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_cv_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY CV lifecycle (§43, §64.20 + §64.32).
+
+Steps (8 total; 3 negative assertions):
+    1. (+) CV lifecycle runs end-to-end on MNIST subset (3 models)
+    2. (+) ≥ 2 models score (some may fail; verify at least baseline + 1 NN)
+    3. (+) Every successful model has accuracy + F1 + confusion matrix
+    4. (+) Best model selected + reported in manifest.best_model
+    5. (+) ≥ 4 PNG plots generated (comparison + confusion + loss + samples)
+    6. (-) NEGATIVE — n_train=0 raises (no silent empty-training)
+    7. (-) NEGATIVE — invalid epoch=0 still trains nothing on NN models
+    8. (-) NEGATIVE — confusion matrix shape matches n_classes (no fabrication)
+
+# RESOURCES: ml_cv_lifecycle gpu_optional disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: ml_cv_lifecycle gpu_optional disk_io
+- ----- Step 1: end-to-end run -----
+- ----- Step 2: ≥ 2 successful models -----
+- ----- Step 3: each scored model has full metrics + confusion matrix -----
+- ----- Step 4: best model selected -----

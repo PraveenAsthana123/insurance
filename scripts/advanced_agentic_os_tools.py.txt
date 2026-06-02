@@ -1,0 +1,27 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/advanced_agentic_os_tools.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Inspect the governed Advanced Agentic OS tool catalog.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --stage, --verbose, --markdown, --verbose
+
+## Process
+### Functions
+- `load_catalog()`: (no docstring)
+- `cmd_list(args)`: (no docstring)
+- `cmd_markdown(_)`: (no docstring)
+- `cmd_ladder(args)`: (no docstring)
+- `parser()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

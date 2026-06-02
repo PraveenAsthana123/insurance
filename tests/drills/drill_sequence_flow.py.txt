@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_sequence_flow.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY sequence-flow docs per dept (§47 C4-L4 + §38 audit + §49 compose).
+
+Steps (10 total; 3 negative):
+    1. (+) all 19 docs/sequence/HOLY_SEQUENCE.md exist + ≥ 4000B
+    2. (+) every doc carries ≥ 6 mermaid sequenceDiagram blocks
+           (canonical / cron / dept-primary / agentic-10-layer / RAG / incident)
+    3. (+) every mermaid block opens with sequenceDiagram + has ≥ 1 participant
+    4. (-) NEGATIVE — no mermaid block is unclosed (every ```mermaid has ```)
+    5. (+) every dept's sequence file names a dept-specific primary process
+           (different from the canonical ones — proves MDD per-dept render)
+    6. (+) every doc terminates each sequence in an audit row (§38 contract:
+           "a sequence that doesn't write an audit row is incomplete")
+    7. (-) NEGATIVE — no doc references HOLY_*.md files that don't exist
+           in this dept (broken compose-footer link = release blocker per §49)
+    8. (+) every doc compose-footer cites ≥ 6 sibling artifacts (§49)
+    9. (-) NEGATIVE — fake dept absent (audit doesn't false-positive pass)
+   10. (+) Mermaid arrow syntax sane (->>  -->>  ->  --) no broken arrows
+
+# RESOURCES: disk_io readonly
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io readonly
+- Per global §59 MDD — each dept advertises a different primary process
+- in §3 of its sequence doc; the scaffolder's DEPT_FLOWS dict drives this.
+- ----- Step 1: all docs exist + size -----
+- ----- Step 2: ≥ 6 mermaid blocks per doc -----

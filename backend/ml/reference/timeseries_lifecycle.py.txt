@@ -1,0 +1,56 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/timeseries_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: time-series lifecycle with multi-technique score comparison.
+
+Per operator 2026-05-22: "time series data ...each technique must apply and show in score"
+
+Techniques compared on the same series + same horizon:
+
+  1. Naive (last-value)              — baseline
+  2. Naive (seasonal weekly)         — baseline-with-seasonality
+  3. Exponential smoothing (HW)      — Holt-Winters triple-exp
+  4. Prophet                          — Facebook (if installed)
+  5. XGBoost on lag features         — ML approach
+
+Metrics: MAE / RMSE / MAPE / SMAPE per technique.
+Plots: actual vs predicted (per technique) + metric comparison bar.
+
+Artifacts: data/eval/<dept>/<pipeline>/<run_id>/manifest.json + plots/
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import matplotlib
+- from `_` import matplotlib.pyplot
+
+## Inputs
+- CLI args: --dataset, --date-col, --target, --dept, --pipeline, --horizon, --sample, --artifacts-root
+
+## Process
+### Classes
+- `TimeSeriesManifest`: (no docstring)
+- `TimeSeriesLifecycle`: Compare multiple time-series forecasting techniques.
+### Functions
+- `_mape(y_true, y_pred)`: (no docstring)
+- `_smape(y_true, y_pred)`: (no docstring)
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ------------------------------------------------------------------
+- ------------------------------------------------------------------
+- Re-run inference for each (cheap) to render aligned predictions
+- We don't have the per-technique predictions stored — re-run cheap ones
+- If multiple groups (e.g. Rossmann has Store dim), pick one

@@ -1,0 +1,73 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_holy_monitoring_federation.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §64.43 #7 federation extended to /api/v1/holy/monitoring/* — first
+of 9 holy/* router federations.
+
+Monitoring DATA is fleet-wide infrastructure telemetry (ML pipeline +
+cron job health across all depts). It is NOT tenant-scoped data — the
+data layout stays dept-scoped. What IS tenant-scoped is the ACCESS
+TRAIL: every monitoring read writes a §38.3 audit row attributing the
+read to the caller's tenant_id + actor.
+
+This is the right pattern for fleet telemetry under multi-tenant
+governance — auditors can answer "which tenant looked at the pricing
+model accuracy curve last week?" without artificially partitioning
+infrastructure data per tenant.
+
+Steps (10 total; 4 negative):
+  1. (+) GET /_global with X-Tenant-ID=tenant-a → 200, X-Tenant-ID echo
+        header set, monitoring_reads.jsonl row written with tenant_id=tenant-a
+  2. (+) GET /{dept} → audit row tagged with dept
+  3. (+) GET /{dept}/jobs/{job}/runs → audit row tagged with dept + job
+  4. (+) GET /{dept}/jobs/{job}/runs/{run_id} → row tagged with dept+job+run_id
+  5. (-) NEG: invalid dept name → 400 (existing validator preserved); NO
+        audit row written (validator runs before _log_monitoring_access)
+  6. (-) NEG: invalid job name → 400 (existing validator preserved);
+        audit row count unchanged
+  7. (-) NEG: default tenant when no X-Tenant-ID header → row tagged
+        with tenant_id='default'
+  8. (+) Cross-tenant reads ARE allowed (fleet telemetry is intentionally
+        non-tenant-scoped); both tenants see same payload — only the
+        audit trail distinguishes them
+  9. (+) Audit row schema: every row has §38.3 fields
+        (ts, tenant_id, actor, tool, request_id, endpoint, outcome)
+  10.(-) NEG: disk failure when writing audit row → request STILL
+        succeeds (best-effort persistence; observability never breaks
+        the read path)
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_MONITORING_AUDIT_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path)`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: /_global with X-Tenant-ID → echo + audit row ----
+- ---- Step 2: /{dept} → audit row with dept ----
+- ---- Step 3: /{dept}/jobs/{job}/runs → dept + job tags ----
+- ---- Step 4: /{dept}/jobs/{job}/runs/{run_id} → dept+job+run_id tags ----

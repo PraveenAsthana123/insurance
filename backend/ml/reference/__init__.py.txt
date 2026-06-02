@@ -1,0 +1,24 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/__init__.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference ML/RAG lifecycle implementations.
+
+Each module here demonstrates the FULL lifecycle for a class of pipelines:
+- full_lifecycle: structured ML (regression + classification)
+- rag_lifecycle: RAG (chunking + embed + vector + retrieve + LLM)
+
+These are the *reference templates* the other 339 sub-processes copy from.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

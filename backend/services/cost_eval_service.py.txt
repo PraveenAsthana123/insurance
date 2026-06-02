@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/cost_eval_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.9 Cost eval — "what does the model cost?"
+
+Read-only aggregation over data/agent-supervisor/cost_runs.jsonl
+(HOLY_EVAL_COST_LOG env). Each row is one LLM/inference call:
+
+  ts, request_id, tenant_id, model_id, prompt_tokens,
+  completion_tokens, total_tokens, cost_usd, dept, surface, endpoint
+
+The WRITE side (LLM-gateway / LiteLLM adapter appending a row per
+completion) is a separate iteration. This commit ships the READ
+surface so operators can answer "what does the model cost?" + "which
+tenant is burning the budget?" the moment any inference path writes
+rows.
+
+Composes with §41.1 (FinOps — every project budgets per env), §41.3
+(tenant isolation — cost rollup is per-tenant by construction),
+§56.2 (LLM gateway is the natural WRITE-side hook), §57.7 (graceful
+when log missing) + §68 (Observability Hub iter 5).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `collections` import defaultdict
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: HOLY_EVAL_COST_LOG
+
+## Process
+### Functions
+- `_log_path()`: (no docstring)
+- `_read_rows(since_epoch, max_rows)`: (no docstring)
+- `_sum_cost(rows)`: Return (total_cost_usd, total_tokens, n_calls).
+- `global_summary()`: Total cost over 24h / 7d / 30d + per-window breakdown.
+- `per_tenant_breakdown(tenant_id)`: Per-tenant cost breakdown. Returns None if tenant unseen.
+- `by_model_ranking()`: Per-model cost ranking, highest-cost first.
+- `by_request(request_id)`: Single-request cost lookup.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Time-window bucket sizes (seconds).
+- Fall back to prompt + completion
+- All-time totals
+- Per-model breakdown within this tenant
+- Round costs for response

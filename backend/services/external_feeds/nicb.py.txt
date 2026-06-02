@@ -1,0 +1,37 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/external_feeds/nicb.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+NICB adapter — National Insurance Crime Bureau watchlist + claim history.
+
+Per §56 Stage-1: feature-flag opt-in. Real production wiring would integrate
+with NICB ISO ClaimSearch or the NICB API.
+
+ENV:
+  INSUR_NICB_ENABLED     — "true" to enable
+  INSUR_NICB_API_BASE    — NICB API base URL
+  INSUR_NICB_API_KEY     — API key (from secrets manager in prod)
+  INSUR_NICB_TIMEOUT     — seconds (default 30)
+
+NICB queries are PER-CLAIM (or per-VIN, per-person, per-incident) and
+contribute to fraud detection per [INSUR_PIPELINES.md](../../../global-ai-org/departments/fraud-siu/business-layer/INSUR_PIPELINES.md).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `is_enabled()`: (no docstring)
+- `fetch(query_type, query_value, claim_id, date_of_loss)`: Query NICB watchlist + claim history.
+
+## Outputs
+- Return values from functions above

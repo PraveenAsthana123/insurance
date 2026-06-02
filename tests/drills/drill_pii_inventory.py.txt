@@ -1,0 +1,68 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_pii_inventory.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §68.6 PII inventory surface — iteration 2 of HOLY Observability Hub.
+
+The dbviewer iter 1 surface shipped the per-process PII annotations; this
+iter 2 surface aggregates them + adds the leak-scan layer that answers
+"has PII ever leaked into the audit log?"
+
+Steps (12 total; 4 negative + raw-PII invariant):
+  1. (+) GET /pii/_global → 200, policy='§68.6 PII inventory', n_processes
+        ≥ 11, distinct_pii_columns non-empty, entity_inventory present
+  2. (+) GET /pii/{dept} → 200 with per-process PII slice for the dept
+  3. (-) NEG: GET /pii/unknown-dept → 404 (validator-first per §47.6,
+        NO audit row written)
+  4. (+) GET /pii/leaks → 200, returns envelope even when no audit log
+        exists (graceful per §57.7)
+  5. (+) Leak-scan with a seeded audit-log line containing a plaintext
+        email → 1 hit, pii_type='email', match_redacted is NOT the raw
+        email (returns 'X***m' form)
+  6. (-) NEG: leak scan MUST NOT return the raw PII string in any field
+        of any hit (raw-PII-in-response invariant)
+  7. (+) Leak-scan skips false-positive hints (request_id values that
+        look like emails do NOT count as leaks)
+  8. (+) Leak-scan handles corrupt JSON lines (skipped, doesn't crash)
+  9. (+) /pii/_global response carries NO raw PII column VALUES — only
+        column NAMES (the catalog never sees a row, just a schema)
+  10.(-) NEG: malformed dept name (uppercase) → 404 not 400 (no info
+        leak about which validators ran first)
+  11.(-) NEG: unknown role → 400 from RBAC (router never sees request)
+  12.(+) Tenant attribution preserved on /_global (X-Tenant-ID echoed)
+
+  Plus invariant: every audit row carries §38.3 fields.
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path)`: (no docstring)
+- `_audit_rows(path)`: Tolerant audit-log reader — skips corrupt lines (step 8 seeds one).
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- Also force pii_inventory_service to re-read _AUDIT_LOG_CANDIDATES
+- against the temp dir audit path.
+- ---- Step 1: /_global ----
+- ---- Step 2: /pii/{dept} ----

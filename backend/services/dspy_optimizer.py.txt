@@ -1,0 +1,81 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/dspy_optimizer.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+DSPy RAG prompt optimizer — §56 Stage-1 adapter (4th in the series).
+
+DSPy (https://dspy.ai/) is the de-facto framework for *systematic* prompt
+engineering: you declare a Signature (typed input/output contract), pick
+a Module (Predict / ChainOfThought / etc.), and an Optimizer compiles
+the prompt — including few-shot demos selected from labelled examples
+— by running the program against a validation set and keeping what
+scores best.
+
+HOLY's existing prompt path is whatever the caller hand-writes in
+`prompts/`. This adapter is the COMPLEMENTARY in-process synchronous
+path for *RAG QA* prompts specifically:
+
+  Input  → labelled examples [(question, context, answer), ...]
+  Output → an optimized program (signature + bootstrapped few-shot
+           demos) the caller can serialize, version, and load later
+
+Per global CLAUDE.md §56.2 Stage-1 contract:
+  - Lazy import of dspy (SDK absence → unavailable, never crash)
+  - Feature-flag opt-in: HOLY_DSPY_OPTIMIZER_ENABLED=true
+  - Default model from HOLY_LLM_MODEL (reuses gateway env contract)
+  - Never default-on; existing hand-written prompts keep working
+
+Per §38.3:
+  - Every optimization run writes one audit row to
+    data/agent-supervisor/dspy_optimizer_runs.jsonl
+
+Per §57.7:
+  - Validation failures wrapped → outcome='validation_error'
+  - Provider exceptions wrapped → outcome='error'
+  - LM credentials NEVER appear in audit row or response
+
+Per §59.4 + §48 (RAG explainability):
+  - Optimizer choice + n_demos_compiled + before/after metric are
+    persisted so a downstream reviewer can defend why this prompt
+    shipped vs the baseline
+
+Drill: tests/drills/drill_dspy_optimizer.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import importlib.util
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `dataclasses` import dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: HOLY_DSPY_AUDIT_PATH, HOLY_DSPY_OPTIMIZER_ENABLED, HOLY_LLM_MODEL
+
+## Process
+### Classes
+- `DSPyOptimizationResult`: Normalized result — never raises out of `run_optimization`.
+### Functions
+- `is_enabled()`: True only when explicitly opted-in. Never default-on (§56.2).
+- `is_importable()`: Probe the dspy package without triggering side effects.
+- `_write_audit_row(row)`: Best-effort §38.3 audit. Disk errors never crash the request (§57.7).
+- `_base_row(tenant_id, request_id, stage, model)`: (no docstring)
+- `_validate_inputs(train_examples, optimizer, metric, max_bootstrapped_demos)`: Return a list of validation errors (empty list = valid).
+- `_build_metric(metric_name)`: Return a callable matching DSPy's metric contract: (example, pred, trace) -> bool.
+- `_score_program(program, examples, metric)`: Compute accuracy of `program` on `examples` using `metric`.
+- `run_optimization(train_examples)`: Compile a RAG QA prompt with DSPy. Returns a result object — never raises.
+- `status()`: Snapshot of the DSPy optimizer adapter for the agent-platform status surface.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Whitelist of optimizer names exposed via this adapter. Other DSPy
+- optimizers exist (MIPROv2, COPRO, BootstrapFinetune, ...) but they
+- need additional config (validation set, separate prompt LM, etc.) —
+- add them when a caller actually needs them rather than expose them
+- half-wired.

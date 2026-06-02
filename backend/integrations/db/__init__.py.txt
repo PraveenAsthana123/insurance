@@ -1,0 +1,58 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/integrations/db/__init__.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+backend/integrations/db — unified ORM-style accessors for ALL storage layers.
+
+Per operator 2026-06-02 — ORM stubs for graph / historical / vector / search.
+Composes with §3 (no SQL in routers) + §47.2 (data layer) + §77 (memory stack).
+
+Exposes 5 clients, each lazy-imported:
+  sqlite_local   - 5 SQLite dbs (voice, token, blackboard, hitl, vibecheck)
+  postgres       - via psycopg (10 migrations, holy.* + holy_audit + tenants)
+  chromadb       - vector store (data/eval/end_to_end/<run>/chroma)
+  neo4j          - graph (if docker compose neo4j service is up)
+  elasticsearch  - vector-less keyword + dense (running on :9200)
+
+All clients respect:
+  - tenant_id at the query boundary (per §41.3)
+  - PII redaction by default (per §68.4)
+  - audit row writes (per §38.3)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `contextlib` import contextmanager
+- from `pathlib` import Path
+- from `typing` import Any, Iterator
+
+## Inputs
+- Env vars: ELASTICSEARCH_URL, NEO4J_PASSWORD, NEO4J_URI, NEO4J_USER
+
+## Process
+### Functions
+- `sqlite(name)`: Open a named SQLite DB with WAL + busy_timeout. Auto-commits.
+- `pg_dsn()`: Build DSN from env. Falls back to docker-compose defaults.
+- `postgres()`: Open a psycopg connection. Auto-commits.
+- `postgres_tenant(tenant_id)`: Per §41.3 + §47.6 SOC2 CC6.1: tenant-scoped session via RLS.
+- `chroma_client(run_id)`: Get a ChromaDB persistent client. Defaults to latest e2e run.
+- `chroma_collection(collection_name, run_id)`: (no docstring)
+- `neo4j_uri()`: (no docstring)
+- `neo4j_auth()`: (no docstring)
+- `neo4j_session()`: Open a Neo4j session. Requires neo4j-driver pip + docker neo4j service.
+- `es_url()`: (no docstring)
+- `es_client()`: Get an Elasticsearch client. Verifies connection at startup.
+- `es_index_chunk(index, doc_id, text, metadata)`: Index one chunk for vector-less BM25 search.
+- `es_search(index, query, k)`: BM25 search — vector-less retrieval per §77 row 1442.
+- `health()`: Probe every DB. Returns per-store status.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ────────────────────────────────────────────────────────────────
+- 1. SQLite (local KV / queue / audit stores)
+- ────────────────────────────────────────────────────────────────
+- ────────────────────────────────────────────────────────────────
+- 2. Postgres (10 migrations: tenants/departments/audit/...)

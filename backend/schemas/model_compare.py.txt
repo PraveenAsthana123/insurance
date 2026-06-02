@@ -1,0 +1,22 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/model_compare.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Schemas for §68.11 multi-model comparison.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `pydantic` import BaseModel, Field, field_validator
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ModelCompareRequest`: Input: a list of model_ids to compare on a named eval_set.
+- `ModelCompareResponse`: Normalized comparison result.
+
+## Outputs
+- Return values from functions above

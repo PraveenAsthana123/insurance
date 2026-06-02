@@ -1,0 +1,54 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# infra/orchestration/langgraph_workflow.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+LangGraph workflow template — parallel planner → coder → reviewer → tester DAG.
+
+Per ADR-008 + global §64.40 (10-layer agentic stack) + operator 2026-06-01
+("100+ agent for each task, plan, act, parallel orchestration").
+
+Replaces ad-hoc hub-and-spoke with explicit state graph: retries, fallbacks,
+human-in-loop branches all visible in one place. Composes with the existing
+100-agent fleet (this is the orchestrator layer ABOVE them).
+
+Usage:
+    workflow = build_workflow()
+    result = await workflow.ainvoke({"goal": "Add /healthz endpoint", "actor": "alice"})
+    print(result["final_artifact"])
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `typing` import Annotated, Any, Literal, TypedDict
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AgentState`: Shared state passed between nodes. Per global §57.6 canonical fields.
+### Functions
+- `async planner_node(state)`: Decompose user goal into ordered task DAG. §64.40 layer 3.
+- `async policy_node(state)`: Gate the plan through OPA policy-engine. §64.40 layer 5.
+- `async coder_node(state)`: Generate code artifacts. Per project's coder-agent contract.
+- `async reviewer_node(state)`: Review the code artifacts. §64.43 #2 council pattern.
+- `async tester_node(state)`: Run drills against the artifacts.
+- `async finalize_node(state)`: Bundle everything into the final artifact + write audit row.
+- `_route_after_policy(state)`: Conditional edge: policy gate decides who runs next.
+- `build_workflow()`: Construct the LangGraph DAG.
+- `async run_goal(goal, actor, tenant_id)`: Execute a single goal through the workflow.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Lazy-import LangGraph so projects that don't use this module don't pay the cost
+- ─────────────────────────────────────────────────────────────────────────
+- Node implementations — each is a pure (state) -> partial-state function
+- ─────────────────────────────────────────────────────────────────────────
+- Integrates with the `policy-engine` module (OPA).

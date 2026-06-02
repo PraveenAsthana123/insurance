@@ -1,0 +1,68 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_dbviewer.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §68.1 DB Viewer + §68.2 per-function tables — first iteration of
+the §68 HOLY Observability + Data Hub Standard.
+
+This drill is intentionally OFFLINE-CAPABLE: it locks the SHAPE +
+INVARIANTS of the dbviewer surface without requiring docker-compose
+postgres to be up. Per §57.7 + §68.3 #8, the service must degrade
+gracefully when the DB is unreachable — the drill exercises that
+degradation as a positive case (status='unreachable' surfaces in the
+response, request never raises).
+
+A separate pytest integration test (NOT this drill) covers live-DB
+behavior; that one gates on `docker compose ps postgres healthy`.
+
+Steps (12 total; 4 negative):
+  1. (+) GET /_global → 200, lists registered databases + endpoints + invariants
+  2. (+) GET /databases/{db_id} → 200; response carries NO connection-string fields
+        (defense in depth — even if catalog ever leaks a `dsn` key, router strips it)
+  3. (+) GET /databases/{db_id}/schemas/{schema} → 200, status='unreachable'
+        when docker postgres is offline (graceful degradation)
+  4. (+) PII redaction is pure: redact_row redacts known PII columns
+  5. (+) is_pii_column heuristic matches common patterns + does NOT match neutral cols
+  6. (+) safe_ident accepts safe identifiers + rejects injection attempts
+  7. (-) NEG: invalid db_id → 400, NO audit row (validator-first per §47.6)
+  8. (-) NEG: unknown db_id → 404, NO audit row
+  9. (-) NEG: malformed schema name (SQL-injection attempt) → 400, NO audit row
+  10.(+) GET /process-tables/_global → 200, ≥3 processes annotated with primary+secondary
+  11.(+) GET /process-tables/sales/lead_scoring → 200, carries primary_table + secondary_tables
+  12.(-) NEG: unknown process_id → 404; audit row count unchanged
+
+  Plus invariant: every audit row carries §38.3 fields.
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path)`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: /_global ----
+- ---- Step 2: /databases/{db_id} — no connection strings in response ----
+- ---- Step 3: /databases/{db_id}/schemas/{schema} → graceful degradation ----
+- ---- Step 4: PII redaction is pure ----

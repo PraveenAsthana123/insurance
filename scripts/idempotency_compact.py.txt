@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/idempotency_compact.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Compact the §10.3 CUA idempotency JSONL by removing expired entries.
+
+The append-only JSONL backing file at CUA_IDEMPOTENCY_PATH grows unbounded
+because every successful CUA call appends one line. Compaction reads the
+file, drops entries past CUA_IDEMPOTENCY_TTL_SECONDS, dedupes on
+(tenant_id, idempotency_key) keeping the latest write, and atomically
+replaces the file via a .tmp + os.replace().
+
+Per global §10.3 + §57.7:
+  - Skip corrupt JSON lines (never crash)
+  - Atomic replace so a crash mid-compaction does not corrupt the live cache
+  - Dry-run mode prints stats without touching disk
+  - Never drops fresh entries (within TTL)
+  - Audit row to data/agent-supervisor/idempotency_compact_runs.jsonl
+
+Usage:
+  scripts/idempotency_compact.py                # compact in-place
+  scripts/idempotency_compact.py --dry-run      # show what would change
+  scripts/idempotency_compact.py --path /tmp/idem.jsonl --ttl 60
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --path, --ttl, --dry-run
+- Env vars: CUA_IDEMPOTENCY_PATH, CUA_IDEMPOTENCY_TTL_SECONDS
+
+## Process
+### Functions
+- `compact(path, ttl_seconds, dry_run)`: Compact path in place. Returns stats dict.
+- `_write_audit_row(stats)`: Append one row to idempotency_compact_runs.jsonl. Best-effort.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- (tenant_id, key) -> (stored_at, line_text)
+- Atomic write: tempfile in same dir → os.replace.
+- Sort by stored_at so the file is monotonically ordered after compact.
+- Best-effort cleanup; never leave a half-written tmp file lying around.

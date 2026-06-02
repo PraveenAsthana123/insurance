@@ -1,0 +1,63 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/dbviewer.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.1 + §68.2 — HOLY DB Viewer + per-function table catalog.
+
+Read-only API over registered databases. Composes with global §68 (HOLY
+Observability + Data Hub Standard) + the existing TenantId + RBAC +
+holy_audit federation (§64.43 #7) + PII redaction (§47.6).
+
+Endpoints (8 total):
+  §68.1 DB Viewer:
+    GET /api/v1/holy/dbviewer/_global
+    GET /api/v1/holy/dbviewer/databases/{db_id}
+    GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}
+    GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}
+    GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample
+
+  §68.2 Per-function tables:
+    GET /api/v1/holy/dbviewer/process-tables/_global
+    GET /api/v1/holy/dbviewer/process-tables/{dept}
+    GET /api/v1/holy/dbviewer/process-tables/{dept}/{process_id}
+
+All validators (db_id / schema / table / process_id format checks) run
+BEFORE log_holy_access per §47.6 anti-info-leak.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import time
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+- from `core.middleware` import current_tenant_id
+- from `services` import dbviewer_service
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_validate_db_id(db_id)`: (no docstring)
+- `_validate_ident(label, value)`: (no docstring)
+- `_validate_dept(dept)`: (no docstring)
+- `global_overview(http_request)`: Cross-database overview — registered DBs + counts.
+- `database_info(http_request, db_id)`: Return registered DB info + list of schemas.
+- `schema_tables(http_request, db_id, schema)`: List tables in a schema with PII + tenant_id flags + row estimates.
+- `table_detail(http_request, db_id, schema, table)`: Column list + PK + FK + PII flags for a single table.
+- `table_sample(http_request, db_id, schema, table, limit)`: Sample rows (PII-redacted by default, tenant-scoped at SQL).
+- `process_tables_global(http_request)`: Whole per-process table catalog (§68.2).
+- `process_tables_dept(http_request, dept)`: Per-dept process table catalog.
+- `process_tables_detail(http_request, dept, process_id)`: Single process — primary + secondary tables + join keys + PII columns.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 19 HOLY departments — single source of truth for cross-dept validation.
+- Identifier regex shared with the service module.
+- --- §68.1 DB Viewer surface --------------------------------------------
+- IMPORTANT — _global BEFORE the parameterized paths per §66.3 FastAPI
+- greedy-match trap.

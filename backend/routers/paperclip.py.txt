@@ -1,0 +1,33 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/paperclip.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Paperclip local artifact/context adapter API.
+
+Per §64.43 #7 — every write+read+delete is tenant-scoped via X-Tenant-ID
+middleware. Cross-tenant access returns 404 (anti-enumeration), not 403.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends, Request, Response, status
+- from `core` import idempotency
+- from `core.middleware` import current_tenant_id
+- from `schemas.paperclip` import PaperclipArtifactDetail, PaperclipArtifactResponse, PaperclipContextPackRequest, PaperclipContextPackResponse, PaperclipCreateRequest
+- from `services.paperclip_service` import PaperclipService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `get_paperclip_service()`: Dependency provider for the local Paperclip service.
+- `get_status(service)`: Return local Paperclip adapter status and artifact count.
+- `create_clip(http_request, response, request, service)`: Store a text artifact stamped with the caller's tenant_id.
+- `list_clips(http_request, service)`: List ONLY the caller's tenant's artifacts. Cross-tenant rows hidden.
+- `get_clip(http_request, clip_id, service)`: Return one artifact only if it belongs to the caller's tenant. 404 otherwise.
+- `delete_clip(http_request, clip_id, service)`: Delete an artifact only if it belongs to the caller's tenant. 404 otherwise.
+- `build_context_pack(http_request, request, service)`: Compose a context pack from the caller's tenant's artifacts only.
+
+## Outputs
+- Return values from functions above

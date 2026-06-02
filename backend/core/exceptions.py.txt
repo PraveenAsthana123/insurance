@@ -1,0 +1,24 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/exceptions.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AppError`: Base application error. All domain errors inherit from this.
+- `NotFoundError`: Raised when a requested resource does not exist.
+- `ValidationError`: Raised when input data fails validation.
+- `DataError`: Raised for data integrity or processing errors.
+- `ModelError`: Raised for ML model training, loading, or inference errors.
+- `ExternalServiceError`: Raised when an external service (Ollama, MLflow, etc.) is unavailable or fails.
+
+## Outputs
+- Return values from functions above

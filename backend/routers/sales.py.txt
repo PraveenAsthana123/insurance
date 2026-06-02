@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/sales.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+sales.py — HTTP-only FastAPI routes for the Sales deep-dive.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `functools` import lru_cache
+- from `fastapi` import APIRouter, Depends, HTTPException, status
+- from `repositories.sales_repo` import SalesRepo
+- from `schemas.sales` import ForecastRequest, ForecastResponse, SimulationRequest, SimulationResponse, StoreSummary
+- from `services.forecast_service` import ForecastService
+- from `services.simulation_service` import SimulationService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_repo()`: (no docstring)
+- `_forecast_service()`: (no docstring)
+- `_simulation_service()`: (no docstring)
+- `get_repo()`: (no docstring)
+- `get_forecast_service()`: (no docstring)
+- `get_simulation_service()`: (no docstring)
+- `list_stores(repo)`: (no docstring)
+- `forecast(req, svc)`: (no docstring)
+- `simulate(req, svc)`: (no docstring)
+
+## Outputs
+- Return values from functions above

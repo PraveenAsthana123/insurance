@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_customer_corpus.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_customer_corpus.py — smoke-check the customer RAG corpus.
+
+Validates that:
+  1. The 4 customer-context markdown files exist and parse into chunks.
+  2. The RAG corpus selector accepts 'customer' (schema literal).
+  3. Pydantic rejects unknown corpus values.
+
+We do NOT exercise the Ollama embedding path here — that's tested in the
+opt-in eval harness. These tests run without Ollama.
+
+## Imports
+- from `__future__` import annotations
+- from `pathlib` import Path
+- from `_` import pytest
+- from `pydantic` import ValidationError
+- from `schemas.ai_explain` import ExplainRequest
+- from `services.rag_service` import CUSTOMER_CONTEXT_DIR, RAGService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `test_corpus_files_exist()`: (no docstring)
+- `test_corpus_chunks_parseable()`: (no docstring)
+- `test_corpus_covers_all_four_files()`: (no docstring)
+- `test_explainrequest_accepts_customer_corpus()`: (no docstring)
+- `test_explainrequest_rejects_unknown_corpus()`: (no docstring)
+- `test_corpus_content_includes_key_vocab()`: A lightweight sanity check: the corpus should include domain terms we
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Each file has multiple ## sections → expect at least 4 × 3 = 12 chunks.
+- Unique ids.

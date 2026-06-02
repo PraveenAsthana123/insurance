@@ -1,0 +1,68 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_dspy_optimizer.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: §56 Stage-1 adapter — DSPy RAG prompt optimizer (4th in series).
+
+The earlier 3 Stage-1 adapters (AgentOps wrap, LiteLLM gateway, Pydantic AI
+typed council) all share an identical contract:
+  - Lazy import, never default-on, feature-flag opt-in
+  - Audit row per run with §38.3 required fields
+  - Structured error envelope for SDK/provider failures
+  - Drill ≥3 negative + a schema invariant
+
+This drill locks the same invariants for DSPy. Offline-friendly via
+dspy.utils.dummies.DummyLM — no Ollama / OpenAI / Anthropic needed.
+
+Steps (10 total; 4 negative + a schema invariant):
+  1. (+) Disabled fallback when HOLY_DSPY_OPTIMIZER_ENABLED unset →
+        outcome='disabled'; audit row written
+  2. (+) Unavailable fallback when dspy import probe says no →
+        outcome='unavailable'; audit row written
+  3. (-) NEG validation: empty train_examples → outcome='validation_error',
+        NO compile attempted (gate before LM)
+  4. (-) NEG validation: optimizer not in whitelist → outcome='validation_error'
+  5. (-) NEG validation: metric not in whitelist → outcome='validation_error'
+  6. (-) NEG validation: example missing required keys → outcome='validation_error'
+  7. (+) End-to-end with DummyLM: enabled + valid examples + LM configured →
+        outcome='executed', n_demos_compiled > 0, accuracy_after >= accuracy_before
+  8. (+) §38.3 audit row schema invariant: all rows carry required fields
+        (ts, request_id, tenant_id, actor, tool, outcome)
+  9. (+) status() returns the adapter snapshot for the agent-platform surface
+  10.(-) NEG disk-write failure → run STILL returns a result object
+        (best-effort audit per §57.7)
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_DSPY_AUDIT_PATH, HOLY_DSPY_OPTIMIZER_ENABLED
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_reset_modules()`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- Start in disabled-state for step 1
+- ---- Step 1: disabled fallback ----
+- ---- Step 2: unavailable fallback (monkeypatch import probe) ----
+- ---- Step 3: NEG empty train_examples → validation_error, no compile ----

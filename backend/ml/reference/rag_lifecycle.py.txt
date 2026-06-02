@@ -1,0 +1,63 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/rag_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: full RAG lifecycle (chunking → embed → vector DB → retrieve → rerank → LLM → cite → eval).
+
+Demonstrates the operator's ask: chunking, RAG, vector DB, Ollama integration,
+all in one runnable reference. Copy this file for every dept's RAG pipeline.
+
+Pipeline stages:
+    1. Document ingest — read .md from data/{customer,sales,supply-chain}-context/
+    2. Chunking — 3 strategies (fixed-size, sentence-aware, semantic-paragraph)
+    3. Embedding — sentence-transformers/all-MiniLM-L6-v2
+    4. Vector DB index — ChromaDB (in-process, persistent)
+    5. Query → retrieve top-k → keyword rerank
+    6. LLM answer — Ollama (gemma3:1b) with retry + circuit breaker
+    7. Citation map — answer span → chunk id
+    8. Eval — Precision@k, MRR, faithfulness heuristic
+
+Outputs land in: data/eval/{dept}/rag_{name}/{run_id}/
+    - manifest.json            full run record
+    - chunks_summary.json      chunking stats per strategy
+    - retrieval_plot.png       precision@k bar
+    - chunk_distribution.png   token-length histogram
+    - queries.json             query → retrieved → answer → citations
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import matplotlib
+
+## Inputs
+- CLI args: --corpus, --dept, --pipeline, --llm, --ollama-url, --top-k, --artifacts-root
+
+## Process
+### Classes
+- `CircuitBreaker`: Minimal circuit breaker — opens after N consecutive failures.
+- `RagManifest`: (no docstring)
+- `RagLifecycle`: Run the full RAG lifecycle on a folder of text documents.
+### Functions
+- `chunk_fixed_size(text)`: (no docstring)
+- `chunk_sentence_aware(text)`: (no docstring)
+- `chunk_semantic_paragraph(text)`: (no docstring)
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- Circuit breaker for Ollama
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- Chunking strategies (3 options)

@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/test_advanced_agentic_os_tools.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Readiness tests for the Advanced Agentic OS maturity ladder.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import importlib
+- from `_` import importlib.metadata
+- from `_` import json
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `_` import urllib.error
+
+## Inputs
+- CLI args: --json, --fail-on-missing
+- Env vars: API_URL, OLLAMA_URL
+
+## Process
+### Classes
+- `Check`: (no docstring)
+- `ToolResult`: (no docstring)
+### Functions
+- `path_exists(path)`: (no docstring)
+- `command_ok(name, command, timeout)`: (no docstring)
+- `import_check(import_name, dist_name)`: (no docstring)
+- `dist_check(dist_name)`: (no docstring)
+- `http_check(name, url, timeout)`: (no docstring)
+- `env_check(name, env_var)`: (no docstring)
+- `result(order, name, checks)`: (no docstring)
+- `test_spec_kit()`: (no docstring)
+- `test_bmad()`: (no docstring)
+- `test_langgraph()`: (no docstring)
+- `test_openai_agents_sdk()`: (no docstring)
+- `test_autogen()`: (no docstring)
+- `test_crewai()`: (no docstring)
+- `test_agentic_os()`: (no docstring)
+- `test_mem0_letta()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Avoid import `agents` because this repo has an `agents/` source directory.
+- Load catalog to catch malformed JSON before running tests.

@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_rag_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Unit tests for RAGService. Mock Ollama HTTP calls — no network needed.
+
+## Imports
+- from `__future__` import annotations
+- from `unittest.mock` import MagicMock, patch
+- from `_` import pytest
+- from `backend.schemas.ai_explain` import ExplainRequest
+- from `backend.services.rag_service` import RAGService, _PII_RE, _tokenize
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `corpus_tmp(tmp_path)`: (no docstring)
+- `_mock_embed()`: Deterministic embed: hash-based pseudo-vector.
+- `test_tokenize_lowercases_and_splits()`: (no docstring)
+- `test_pii_redacts_email_and_phone()`: (no docstring)
+- `test_read_chunks_splits_on_h2(corpus_tmp)`: (no docstring)
+- `test_retrieval_returns_relevant_chunks(corpus_tmp)`: (no docstring)
+- `test_explain_calls_ollama_and_returns_citations(corpus_tmp)`: (no docstring)
+- `test_explain_soft_fails_when_response_missing_ref(corpus_tmp)`: (no docstring)
+- `test_default_corpus_dir_points_at_sales_context()`: Constructing RAGService with no args reads from data/sales-context.
+- `test_corpus_dir_override_reads_from_specified_dir(tmp_path)`: Passing corpus_dir= reads chunks from that dir, not the default.
+- `test_router_per_corpus_cache_returns_distinct_services()`: ai_explain._rag_for caches one RAGService per corpus key.
+- `test_explain_request_accepts_corpus_field()`: ExplainRequest validates the new corpus literal.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Return a 8-dim vector based on word hashes so semantically similar
+- texts have deterministic but distinct embeddings.
+- Xylophone is in Alpha + Gamma; they should rank above Beta.
+- Guardrail appends a [ref 1] if missing.
+- Same key → same instance (cached).

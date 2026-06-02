@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/sales.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+sales.py — Pydantic schemas for the Sales deep-dive API.
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import date
+- from `typing` import Literal
+- from `pydantic` import BaseModel, ConfigDict, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `StoreSummary`: Short store record for list views.
+- `ForecastRequest`: (no docstring)
+- `ForecastPoint`: (no docstring)
+- `ForecastComponents`: (no docstring)
+- `ForecastResponse`: (no docstring)
+- `SimulationRequest`: (no docstring)
+- `WaterfallStep`: (no docstring)
+- `SimulationResponse`: (no docstring)
+
+## Outputs
+- Return values from functions above

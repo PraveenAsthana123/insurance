@@ -1,0 +1,64 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_compact.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Compact the §38.3 CUA audit log (data/agent-supervisor/cua_runs.jsonl).
+
+Unlike the idempotency JSONL (which has a TTL — compactable), the audit
+log is the §38.3 SOC2 trail and MUST NOT lose rows. This script enforces
+that by NEVER dropping rows — it only:
+
+  1. Counts rows per outcome class
+  2. Reports tenant distribution + admin-of-audit count
+  3. Rotates the file when it crosses a size threshold
+     (default 50MB — env CUA_AUDIT_ROTATE_BYTES)
+
+Rotation moves the live file to `cua_runs.YYYY-MM-DD.jsonl.gz` (gzipped)
+and starts a fresh empty file. Operators can offload the rotated
+archives to long-term storage; the SOC2 retention contract is preserved.
+
+Per global CLAUDE.md §38.3 + §57.7:
+  - NEVER drops audit rows; rotation preserves all history
+  - Atomic rotation (rename live → archive, touch new live)
+  - Skips corrupt JSON lines in stats (counts them, never deletes)
+  - Dry-run reports stats without touching disk
+
+Usage:
+  scripts/audit_compact.py                         # rotate if > 50MB
+  scripts/audit_compact.py --dry-run               # stats only
+  scripts/audit_compact.py --force                 # rotate regardless
+  scripts/audit_compact.py --path /tmp/audit.jsonl --rotate-bytes 1024
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import datetime
+- from `_` import gzip
+- from `_` import json
+- from `_` import os
+- from `_` import shutil
+- from `_` import sys
+- from `_` import time
+- from `collections` import Counter
+
+## Inputs
+- CLI args: --path, --rotate-bytes, --dry-run, --force
+- Env vars: CUA_AUDIT_PATH, CUA_AUDIT_ROTATE_BYTES
+
+## Process
+### Functions
+- `compact(path, rotate_bytes, dry_run, force)`: Report stats; rotate if size threshold crossed (or --force).
+- `_write_audit_row(stats)`: Audit-of-audit at idempotency_compact_runs.jsonl-style sibling.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Atomic rotation: write to .new, gzip the live file into archive, replace.
+- Use the path's stem so different audit files don't collide on archive name.
+- If same-day archive exists already, suffix with epoch-ms for uniqueness
+- 1. Compress live file → temp gz
+- 2. Atomic rename of compressed temp → final archive

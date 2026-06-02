@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_sales_repo.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_sales_repo.py — unit tests for SalesRepo that exercise SQL shape without needing Postgres.
+
+Uses an in-memory SQLite via SQLAlchemy? No — we want psycopg semantics.
+Instead: monkeypatch the repo's _conn to return a mock with recorded queries.
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import date
+- from `unittest.mock` import MagicMock
+- from `_` import pytest
+- from `backend.repositories.sales_repo` import SalesRepo
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `mock_repo(monkeypatch)`: (no docstring)
+- `test_list_stores_executes_expected_sql(mock_repo)`: (no docstring)
+- `test_get_store_parameterized(mock_repo)`: (no docstring)
+- `test_get_sales_history_no_dates(mock_repo)`: (no docstring)
+- `test_get_sales_history_with_dates(mock_repo)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Prepare a mock connection + cursor that records executed SQL.
+- _conn is a @contextmanager

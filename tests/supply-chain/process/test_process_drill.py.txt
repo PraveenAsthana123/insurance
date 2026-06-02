@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/supply-chain/process/test_process_drill.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Tier 7 — Process / drill tests for supply-chain.
+
+Per global §43 drill discipline. Each drill MUST have ≥ 1 negative assertion.
+
+These tests are RUNNABLE end-to-end (no skips). They invoke the dept's
+backend, frontend, or simulator and verify the contract holds.
+
+## Imports
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `test_supply_chain_drill_smoke()`: Smoke drill: dept directory exists in scaffold.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Negative: directory traversal protection

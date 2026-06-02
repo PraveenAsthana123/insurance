@@ -1,0 +1,23 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/common.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Generic, List, Optional, TypeVar
+- from `pydantic` import BaseModel
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PaginatedResponse`: (no docstring)
+- `ErrorResponse`: (no docstring)
+- `SuccessResponse`: (no docstring)
+
+## Outputs
+- Return values from functions above

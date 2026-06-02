@@ -1,0 +1,20 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/utils.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `sanitize_table_name(name)`: Strip any characters that are not alphanumeric or underscores from a
+
+## Outputs
+- Return values from functions above

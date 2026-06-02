@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/pipelines/defect_detection.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+Defect Detection Pipeline — Quality department.
+
+Classifies manufacturing defects using:
+  - scikit-learn's GradientBoostingClassifier on tabular metadata (current default)
+  - TensorFlow/Keras CNN placeholder for image-based classification
+
+The pipeline is designed so the sklearn path works without a GPU or
+TensorFlow installation. Swap to the CNN path when image data is available
+and TensorFlow is installed.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any
+- from `_` import mlflow
+- from `_` import mlflow.sklearn
+- from `_` import numpy
+- from `_` import pandas
+- from `sklearn.ensemble` import GradientBoostingClassifier
+- from `sklearn.metrics` import accuracy_score, classification_report, f1_score, roc_auc_score
+- from `sklearn.model_selection` import train_test_split
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `DefectDetectionPipeline`: Defect detection pipeline.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ------------------------------------------------------------------
+- Feature engineering (tabular)
+- ------------------------------------------------------------------
+- ------------------------------------------------------------------
+- CNN placeholder (TensorFlow)

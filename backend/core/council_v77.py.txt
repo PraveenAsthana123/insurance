@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/council_v77.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+council_v77 — Agent Arbitration via 3-stage Council (author → reviewer → chair).
+
+Per global §77 row 1415 (Agent Arbitration: Custom → build via §64.43 #2 Council).
+Per global §64.43 #2 — Council of Agents pattern.
+Per global §38.3 — every council decision writes an audit row.
+Per global §50.3 — model diversity catches mis-interpretations.
+
+Three roles, three different Ollama models (configurable):
+  AUTHOR    proposes a draft answer/decision
+  REVIEWER  critiques the proposal (must flag at least one weakness or
+             confirm soundness with reasoning)
+  CHAIR     synthesizes the final decision + records dissent
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import requests
+
+## Inputs
+- CLI args: --context
+- Env vars: COUNCIL_AUTHOR, COUNCIL_CHAIR, COUNCIL_REVIEWER, OLLAMA_URL
+
+## Process
+### Classes
+- `CouncilDecision`: (no docstring)
+### Functions
+- `_generate(model, prompt, timeout)`: (no docstring)
+- `deliberate(question, context, author, reviewer, chair)`: (no docstring)
+
+## Outputs
+- Return values from functions above

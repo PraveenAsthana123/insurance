@@ -1,0 +1,60 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_cua_idempotency_persistence.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: disk persistence of the §10.3 CUA idempotency cache.
+
+The in-memory cache (drill_cua_idempotency.py) survives only the lifetime
+of the Python process. This drill exercises the JSONL-backed persistence
+layer that survives process restarts and supports multi-replica deploys
+where multiple workers share the same disk path.
+
+Steps (10 total; 4 negative):
+  1. (+) Store K1 -> JSONL file exists on disk with one valid entry
+  2. (+) Simulated restart (clear in-memory cache) -> next lookup returns
+        cached response from disk + idempotent_replay=True
+  3. (+) Cross-tenant isolation survives the restart (tenant-b's K1 missing)
+  4. (-) NEG: TTL-expired entry on disk -> load skips it (treated as absent)
+  5. (-) NEG: corrupt JSON line in JSONL -> load skips it (doesn't crash)
+  6. (-) NEG: blank line in JSONL -> silently skipped
+  7. (+) Multiple stores -> multiple lines (append-only, not overwrite)
+  8. (+) Latest write wins when same (tenant, key) appears twice
+  9. (-) NEG: missing parent dir on first write -> created automatically
+  10.(+) /dev/null persistence path: in-memory cache still works in-process
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: CUA_AUDIT_PATH, CUA_IDEMPOTENCY_PATH, CUA_IDEMPOTENCY_TTL_SECONDS
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_reset_service_state()`: Force re-import + clear module-level cache between scenarios.
+- `_make_service(idem_path, audit_path, ttl)`: Build a fresh service instance with the given disk paths.
+- `_call(svc, RequestCls, tenant_id, key, target)`: Helper: dry-run call with optional idempotency key.
+- `_make_response_dict()`: Return a minimal valid CuaExecutionResponse dict for hand-seeded entries.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: Store K1 -> file exists with valid entry ----
+- ---- Step 2: Simulated restart - fresh service from same path ----
+- ---- Step 3: Cross-tenant isolation survives restart ----
+- ---- Step 4: NEG - TTL-expired entry on disk -> skipped on load ----

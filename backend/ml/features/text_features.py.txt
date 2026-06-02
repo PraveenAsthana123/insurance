@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/features/text_features.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+Basic NLP feature extraction utilities.
+
+These helpers transform raw text columns into numeric features suitable for
+scikit-learn pipelines. They intentionally avoid heavy dependencies (no NLTK
+data download required) so they work out of the box.
+
+For production sentiment analysis, replace the placeholder `polarity_score`
+with a proper model (TextBlob, VADER, or a fine-tuned transformer).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import string
+- from `typing` import Sequence
+- from `_` import numpy
+- from `_` import pandas
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `clean_text(text)`: Lowercase, strip punctuation, collapse whitespace.
+- `word_count(text)`: Return the number of whitespace-separated tokens in *text*.
+- `char_count(text)`: Return number of characters (excluding whitespace) in *text*.
+- `avg_word_length(text)`: Return average word length; 0.0 for empty strings.
+- `exclamation_count(text)`: Count exclamation marks — a rough proxy for emphatic language.
+- `question_count(text)`: Count question marks.
+- `polarity_score(text)`: Naive lexicon-based sentiment polarity score in [-1, 1].
+- `add_text_features(df, text_col, clean)`: Add a suite of text-derived numeric features to *df*.
+- `tfidf_features(texts, max_features, ngram_range)`: Compute TF-IDF matrix for a sequence of texts.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- Text cleaning
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- Basic numeric features

@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/repositories/supply_chain_repo.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+supply_chain_repo.py — read-only repository for supply chain star schema.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `contextlib` import contextmanager
+- from `typing` import Iterator
+- from `_` import psycopg
+- from `psycopg.rows` import dict_row
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `SupplyChainRepo`: (no docstring)
+### Functions
+- `_pg_dsn()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per global §1 rule 12 — no f-string SQL. Use psycopg.sql.Identifier.

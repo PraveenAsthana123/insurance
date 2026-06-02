@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/openclaw_gateway_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+OpenClaw bridge service.
+
+This service makes OpenClaw usable in this project without pretending that an
+external OpenClaw gateway SDK is installed. It exposes an OpenClaw-compatible
+API contract and routes work into the existing Redis-backed worker queues:
+
+- council mode: council_tasks -> council_done
+- simple mode: tasks -> done
+
+The router owns HTTP concerns. This service owns task serialization, Redis IO,
+queue selection, polling, and operational logging.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `typing` import Any
+- from `urllib.parse` import urlsplit, urlunsplit
+- from `_` import redis
+- from `core.config` import Settings, get_settings
+- from `schemas.openclaw` import OpenClawManifestResponse, OpenClawMode, OpenClawQueueStatus, OpenClawStatusResponse, OpenClawTaskRequest
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `OpenClawGatewayService`: Service-layer adapter between OpenClaw-style calls and Redis workers.
+### Functions
+- `_result_matches(item, task_id)`: (no docstring)
+- `_redact_url(url)`: (no docstring)
+
+## Outputs
+- Return values from functions above

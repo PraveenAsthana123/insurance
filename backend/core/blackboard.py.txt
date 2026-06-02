@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/blackboard.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+blackboard — §77 row 1431, §64.43 #5 Shared Memory.
+
+CAS-locked key-value store with namespacing + version-on-read.
+SQLite WAL backend so multi-process agents can read/write without
+clobbering each other.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import sqlite3
+- from `_` import time
+- from `_` import uuid
+- from `contextlib` import contextmanager
+- from `pathlib` import Path
+- from `typing` import Any, Iterator
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `put(ns, key, value, expected_version, author)`: CAS write. Returns (succeeded, new_version). If expected_version is
+- `get(ns, key)`: (no docstring)
+- `list_ns(ns)`: (no docstring)
+- `delete(ns, key)`: (no docstring)
+
+## Outputs
+- Return values from functions above

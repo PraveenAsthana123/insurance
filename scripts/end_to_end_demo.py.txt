@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/end_to_end_demo.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+end_to_end_demo — actually wire all the pieces.
+
+Per operator: "all the process, data, model, accuracy, rag, bot UI,
+all the data vector, vector less, graph db"
+
+Phase 1 TRAIN     — UW medical_cost → sklearn + xgboost → R²/RMSE/MAE
+Phase 2 INDEX     — claims docs → chunk → embed (Ollama) → Chroma + BM25 + networkx
+Phase 3 QUERY     — 3 queries × (vector + bm25 + graph) → LLM answer + audit row
+Phase 4 METRICS   — summary.json
+
+Persistent state: ChromaDB (its own files); BM25 + graph as JSON
+(no pickle — per project security policy).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import sys
+- from `_` import time
+- from `_` import uuid
+- from `_` import warnings
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, name)`: (no docstring)
+- `info(msg)`: (no docstring)
+- `ok(msg)`: (no docstring)
+- `warn(msg)`: (no docstring)
+- `phase_1_train()`: (no docstring)
+- `chunk_text(text, size, overlap)`: (no docstring)
+- `embed_batch(texts)`: (no docstring)
+- `phase_2_index()`: (no docstring)
+- `llm_ask(prompt)`: (no docstring)
+- `phase_3_query(index_info)`: (no docstring)
+- `phase_4_metrics(train_res, index_res, query_res)`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────────
+- Phase 1 — TRAIN
+- ─────────────────────────────────────────────────────────────────────────
+- ─────────────────────────────────────────────────────────────────────────
+- Phase 2 — INDEX

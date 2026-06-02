@@ -1,0 +1,58 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/guardrails_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.5 Guardrails — answers "did the guardrails fire? what did they catch?"
+
+Read-only aggregation surface over a guardrail-decisions JSONL log
+(`data/agent-supervisor/guardrail_decisions.jsonl` by default; override
+via HOLY_GUARDRAIL_LOG env). The WRITE side (middleware that appends a
+row when a guardrail fires — prompt-injection filter, output toxicity
+classifier, scope-denial, rate-limit hit, etc.) is a separate iteration
+of §68.5; this commit ships only the READ surface so operators can
+answer "show me the last 24h of denials by dept" today.
+
+Per §68.5 schema: every row carries
+  ts, tenant_id, actor, guardrail_type, input_hash, decision,
+  filter_id, latency_ms
+
+Optional row fields: dept, request_id, surface, reason, transformation.
+
+PII never appears in the row — only the SHA-256 input_hash. That makes
+the surface tenant-shareable without re-redaction at read time.
+
+Per §57.7: missing file → empty envelope, not crash. Per §47.6: invalid
+filter / dept names rejected BEFORE log read so failed-enumeration
+attempts don't shape audit pollution.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `collections` import Counter, defaultdict
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: HOLY_GUARDRAIL_LOG
+
+## Process
+### Functions
+- `_log_path()`: Resolve the active guardrail log. HOLY_GUARDRAIL_LOG env wins
+- `_read_rows(since_epoch, max_rows)`: Read JSONL rows, newest-first up to max_rows, filtered by since.
+- `global_summary(since_epoch)`: Cross-dept rollup: counts per guardrail_type x decision, plus
+- `per_dept_decisions(dept)`: Per-dept guardrail decisions, newest-first, with optional filters.
+- `get_decision(decision_id)`: Look up a single guardrail decision by its row's request_id or
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Known guardrail families (advisory — service doesn't reject unknown
+- ones, just doesn't aggregate them under canonical names).
+- Even if override doesn't exist yet, prefer it — read may follow a write
+- Newest-first

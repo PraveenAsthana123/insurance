@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_attack_simulators.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY attack-simulation generators (§43, §64.32.3 + §42).
+
+Steps (10 total; 4 negative assertions):
+    1.  (+) All 12 mandatory attack classes have generators registered
+    2.  (+) generate_corpus produces >= 4 payloads per class
+    3.  (+) Every payload has expected_reject_reason populated (no silent omission)
+    4.  (+) Every payload has severity in {low, medium, high, critical}
+    5.  (+) Every payload has a CWE/OWASP-LLM reference
+    6.  (-) NEGATIVE - unknown attack_class raises ValueError
+    7.  (-) NEGATIVE - corpus is deterministic per seed (same seed -> identical ids)
+    8.  (+) corpus.json persisted to data/security-tests/<dept>/<class>/<id>/
+    9.  (-) NEGATIVE - executor authorization gate defaults to FALSE (BEV_AUTHORIZED_ENV unset)
+   10. (-) NEGATIVE - generator source uses chr-encoded dangerous-fn marker (not literal token)
+
+# RESOURCES: security_generators disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: BEV_AUTHORIZED_ENV
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: security_generators disk_io
+- ----- Step 1: 12 mandatory classes -----
+- ----- Step 2: >= 4 payloads per class -----
+- ----- Step 3: expected_reject_reason populated -----
+- ----- Step 4: severity is in allowed set -----

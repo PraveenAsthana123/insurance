@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/stockout_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+stockout_service — heuristic stockout-risk assessment for a single SKU.
+
+Dataset is tiny (100 SKUs) so we skip ML training in favor of a transparent
+`cover_ratio = days_to_stockout / lead_time` heuristic. Risk band thresholds
+are deliberately human-readable so the AI Explain layer can cite them.
+
+## Imports
+- from `__future__` import annotations
+- from `core.structured_logger` import emit_event
+- from `repositories.supply_chain_repo` import SupplyChainRepo
+- from `schemas.supply_chain` import StockoutRiskRequest, StockoutRiskResponse
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `StockoutService`: (no docstring)
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/admin.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Admin API — cross-tenant compliance + reporting surfaces.
+
+These endpoints intentionally bypass the per-tenant federation contract
+(§64.43 #7) because they are gated by RBAC role (compliance or reporting-
+monitoring) at the middleware layer. Every read here writes its own
+``admin.cua.audit.read`` audit-of-audit row (§38.3 + SOC2 CC4 + CC7).
+
+Do NOT add tenant-write endpoints here. Admin reads only.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends, Query, Request
+- from `schemas.agent_platform` import AdminCuaAuditListResponse
+- from `services.agent_platform_service` import AgentPlatformIntegrationService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `get_agent_platform_service()`: Dependency provider for the agent-platform service.
+- `admin_list_cua_audit(http_request, tenant_id, limit, since_ts, service)`: Cross-tenant CUA audit readback (compliance + reporting-monitoring roles).
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/reflection_loop.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+reflection_loop — §77 row 1419, §64.43 #10.
+
+Iterative self-improvement loop with bounded retries. Each iteration:
+  1. Generate / refine the proposed output via Ollama
+  2. Score against acceptance criteria (operator-provided callable)
+  3. Terminate on: (a) score ≥ threshold, (b) max_iters reached,
+     (c) cost cap hit, (d) score plateau (no improvement for 2 iters)
+
+Every iteration writes an audit row per §38.3.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `pathlib` import Path
+- from `typing` import Callable
+- from `_` import requests
+
+## Inputs
+- CLI args: --keyword
+- Env vars: OLLAMA_URL, REFLECTION_MODEL
+
+## Process
+### Functions
+- `reflect(task, scorer, threshold, max_iters, cost_cap_tokens)`: (no docstring)
+
+## Outputs
+- Return values from functions above

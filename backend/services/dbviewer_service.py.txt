@@ -1,0 +1,64 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/dbviewer_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68 HOLY Observability + Data Hub — DB Viewer service.
+
+Read-only Postgres introspection + per-process table catalog, behind the
+existing TenantIdMiddleware + RBAC + audit stack. Per §68.3 invariants:
+
+  1. Read-only (no SELECT * FROM ...; only catalog views + bounded samples)
+  2. PII redacted by default; ?include_pii=1 audited per §47.6 SOC2 CC6.2
+  3. Tenant-scoped at SQL boundary when the table has a tenant_id column
+  4. Sample-size capped at 100 rows per call
+  5. Audit row per call via core.holy_audit.log_holy_access (in router)
+  6. NO connection strings / passwords in responses (db_id label only)
+  7. Validators 404 BEFORE audit per §47.6 anti-info-leak (in router)
+  8. Best-effort persistence — DB unreachable does NOT crash the request;
+     returns a stub with status='unreachable' per §57.7
+  9. Cross-tenant isolation drill-tested (drill_dbviewer.py negative step)
+
+Composes with §38.3 (audit) + §41.3 (tenant) + §47.6 (PII) + §57.7
+(graceful degradation) + §63 (per-dept) + §64.43 #7 (federation) +
+§66 (per-dept artifacts).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import time
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_process_tables_path()`: Return first existing per_process_tables.json or None.
+- `load_process_tables()`: Load the per-process tables catalog from JSON (read-only).
+- `is_pii_column(col_name)`: Heuristic: column name matches a known PII pattern.
+- `redact_row(row, pii_columns)`: Return a copy of row with PII columns replaced by '***REDACTED***'.
+- `safe_ident(name)`: True if name is safe to interpolate into SQL identifier position.
+- `_connect_pg()`: Lazy Postgres connect. Returns None on any failure per §57.7.
+- `list_registered_databases()`: List databases known to the viewer (from catalog).
+- `get_database_info(db_id)`: Return one registered DB's info or None if not registered.
+- `list_schemas(db_id)`: Return schemas for a registered Postgres database.
+- `list_tables(db_id, schema)`: Return tables in a given schema with row-count + PII column flags.
+- `describe_table(db_id, schema, table)`: Return columns + PK + FK + indexes for a single table.
+- `sample_rows(db_id, schema, table)`: Sample up to `limit` rows from a table with PII redaction + tenant filter.
+- `process_tables_global()`: Whole per-process table catalog.
+- `process_tables_for_dept(dept)`: Per-dept slice of the catalog. Returns None if dept absent.
+- `process_tables_for_process(dept, process_id)`: Single process detail. Returns None if not found.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per-process table catalog file (§68.2).
+- Identifier safety — §47.6 anti-SQL-injection at the introspection
+- boundary. We use parameterized queries against information_schema for
+- data, but schema/table NAMES must come from a verified allow-list (the
+- introspection result) — never from raw caller input. Caller passes a

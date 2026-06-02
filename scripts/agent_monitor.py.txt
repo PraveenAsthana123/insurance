@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/agent_monitor.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Monitor the HOLY agent queues and live worker heartbeats.
+
+Shows queue depths, completion counts, success/error summary, and recently seen
+agent heartbeat records. It works for simple agents and council agents.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+- from `_` import redis
+
+## Inputs
+- CLI args: --redis-url, --watch, --interval, --sample
+- Env vars: BEV_REDIS_URL, REDIS_URL
+
+## Process
+### Functions
+- `parse_args()`: (no docstring)
+- `load_json(raw)`: (no docstring)
+- `summarize_results(client, key, limit)`: (no docstring)
+- `heartbeat_rows(client)`: (no docstring)
+- `print_snapshot(client, sample_size)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

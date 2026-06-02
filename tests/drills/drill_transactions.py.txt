@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_transactions.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY transactional history router (§38 + §41.3 + §47.6 + §57.5 + §57.6 + §64).
+
+Steps (10 total; 3 negative):
+    1. (+) transactions router imports + CRON_AUDIT_DIRS catalog populated
+    2. (+) per-dept GET returns 200 + events list (may be empty if no audit data yet)
+    3. (+) every returned event carries §57.6 canonical envelope keys
+    4. (-) NEGATIVE — unknown dept → 404 (no info leak)
+    5. (-) NEGATIVE — limit > 500 rejected with 400 (cap enforced)
+    6. (-) NEGATIVE — PII tokens redacted from default response payloads
+                     (data-class contract — operator must pass include_pii=1 to see)
+    7. (+) source=cron filter actually filters (no ml.* events leak through)
+    8. (+) since_epoch filter actually filters (events older are excluded)
+    9. (+) _global rollup returns per-dept counts for all 19 depts
+   10. (+) HOLY_TRANSACTIONS.md exists per dept (under business-layer/)
+
+# RESOURCES: transactions_router disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: transactions_router disk_io
+- ----- Step 1: router imports + catalog -----
+- ----- Spin up TestClient -----
+- ----- Step 2: per-dept GET 200 -----
+- ----- Step 3: canonical envelope on every event (if any present) -----

@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_supply_chain_ingestion.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_supply_chain_ingestion.py — data-quality assertions against ingested tables.
+
+Run against the live Postgres the backend points at. Skip gracefully when tables
+are empty (ingestion not yet run).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import pytest
+- from `repositories.supply_chain_repo` import SupplyChainRepo
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `repo()`: (no docstring)
+- `counts(repo)`: (no docstring)
+- `_require_ingested(counts)`: (no docstring)
+- `test_fact_shipment_has_rows(counts)`: (no docstring)
+- `test_dim_sku_has_at_least_one_entry_per_product_type(repo, counts)`: (no docstring)
+- `test_dim_supplier_has_unique_locations(repo, counts)`: (no docstring)
+- `test_get_shipments_for_known_sku_returns_records(repo, counts)`: (no docstring)
+
+## Outputs
+- Return values from functions above

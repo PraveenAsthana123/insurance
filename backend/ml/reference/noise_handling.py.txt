@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/noise_handling.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: noise-handling utility per data type (§64.19 + §64.26 + §65.1 #5).
+
+Per-type cleaners with deterministic invariants (drill-able):
+
+  Tabular  — drop dupes, IQR outlier flag, IsolationForest score, median impute
+  Image    — Gaussian denoise, median filter (per skimage), resize-normalize
+  Text     — strip control chars, collapse whitespace, unicode-NFC, optional lowercase
+  Timeseries — outlier flag (rolling-z), forward-fill bounded, dedup timestamps
+
+Every cleaner returns a (cleaned_data, report_dict) tuple. The report dict
+captures what was changed — drills assert before/after invariants.
+
+Composes with:
+  - §64.19 (data-prep deep dive) — these are the operative cleaners per category
+  - §64.26 (per-data-type use cases) — same 9 types share these primitives
+  - §57.6 (canonical fields) — report dicts use stable schema
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import re
+- from `_` import unicodedata
+- from `dataclasses` import dataclass, field
+- from `typing` import Any
+- from `_` import numpy
+- from `_` import pandas
+- from `sklearn.ensemble` import IsolationForest
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `TabularNoiseReport`: (no docstring)
+- `ImageNoiseReport`: (no docstring)
+- `TextNoiseReport`: (no docstring)
+- `TimeseriesNoiseReport`: (no docstring)
+### Functions
+- `clean_tabular(df)`: Clean a tabular DataFrame; flag outliers; impute NaNs.
+- `clean_image_batch(images)`: Clean a batch of grayscale images (NxHxW or NxHxWx1).
+- `clean_text_batch(texts)`: Clean a list of strings; preserve order; no drops.
+- `clean_timeseries(df)`: Clean a time-series DataFrame.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ===========================================================================
+- ===========================================================================
+- IQR outlier flag (flag only — do NOT drop, per §64.19 default)
+- IsolationForest score (multivariate)
+- ===========================================================================

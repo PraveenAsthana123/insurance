@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_test_tier_dispatch.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY test-tier dispatch (§43, §65.8).
+
+Steps (8 total; 3 negative):
+    1. (+) 8 tiers defined in canonical list
+    2. (+) Scaffolder produced 19 dept × 8 tier directories
+    3. (+) Every (dept, tier) dir has at least one starter test file
+    4. (+) Agent role qualification map covers all 8 tiers
+    5. (-) NEGATIVE — unknown tier rejects qualification check
+    6. (-) NEGATIVE — wrong-role-for-tier produces exit_code=98 (not 0)
+    7. (-) NEGATIVE — bogus runner subprocess raises FileNotFoundError safely
+    8. (+) RUNNERS map has matching keys for every tier (or documented gap)
+
+This drill validates the SCAFFOLDING + AGENT QUALIFICATION (deterministic).
+End-to-end Redis dispatch is covered by an optional smoke (skipped when
+Redis is not reachable).
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: TIER_ROLE
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ----- Step 1: canonical 8 tiers -----
+- ----- Step 2: scaffolder produced 19 × 8 dirs -----
+- ----- Step 3: at least one starter test file per (dept, tier) -----
+- ----- Step 4: role qualification covers all 8 tiers -----

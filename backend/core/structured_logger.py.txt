@@ -1,0 +1,37 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/structured_logger.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+structured_logger — JSON log emitter with correlation_id contextvar.
+
+Usage:
+    from core.structured_logger import emit_event, correlation_id_var
+
+    emit_event("sales.forecast", store_id=1, mape=0.147, fit_time_ms=100)
+
+Every event automatically includes:
+    {timestamp, correlation_id, event}
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import sys
+- from `_` import uuid
+- from `contextvars` import ContextVar
+- from `datetime` import datetime, timezone
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `new_correlation_id()`: Generate a new correlation id. Middleware sets it per request.
+- `set_correlation_id(cid)`: (no docstring)
+- `get_correlation_id()`: (no docstring)
+- `emit_event(event)`: Log a structured JSON event row. Drops non-JSON-serializable fields.
+- `_safe(v)`: (no docstring)
+
+## Outputs
+- Return values from functions above

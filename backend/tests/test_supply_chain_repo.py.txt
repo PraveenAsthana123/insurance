@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_supply_chain_repo.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_supply_chain_repo.py — unit tests for SupplyChainRepo SQL shape.
+
+Uses monkeypatched _conn to exercise SQL without a live Postgres.
+Pattern mirrors test_sales_repo.py.
+
+## Imports
+- from `__future__` import annotations
+- from `contextlib` import contextmanager
+- from `unittest.mock` import MagicMock
+- from `_` import pytest
+- from `repositories.supply_chain_repo` import SupplyChainRepo
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `mock_repo(monkeypatch)`: (no docstring)
+- `test_list_skus_sql(mock_repo)`: (no docstring)
+- `test_list_suppliers_sql(mock_repo)`: (no docstring)
+- `test_get_sku_parameterized(mock_repo)`: (no docstring)
+- `test_get_shipments_for_sku(mock_repo)`: (no docstring)
+
+## Outputs
+- Return values from functions above

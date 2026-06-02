@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_fraud_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY fraud-detection lifecycle (§43, §64.23 + §40).
+
+Steps (8 total; 3 negative):
+    1. (+) Lifecycle runs end-to-end on synthetic 2000 txn dataset
+    2. (+) All 4 layers represented in decisions (rule + ML + LLM + allow)
+    3. (+) §64.23 mandatory: recall @ FPR ≤ 5% ≥ 0.90
+    4. (+) Confusion matrix is 2×2; no leak of true fraud to allow
+    5. (-) NEGATIVE — fraud_rate=0 produces zero positive decisions
+    6. (-) NEGATIVE — rule layer fires on $1M txn even with low ML score
+    7. (+) DecisionLayer routes irreversible classes correctly (block + step_up exist)
+    8. (-) NEGATIVE — invalid block_threshold > 1 still produces decisions (not crash; just allow-everything)
+
+# RESOURCES: ml_fraud disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: ml_fraud disk_io
+- ----- Step 1: end-to-end -----
+- ----- Step 2: 4 layers represented -----
+- Layer 1 (rule) might be 0 if no rules fire; Layer 2 + 4 should always have hits
+- ----- Step 3: mandatory recall @ FPR ≤ 5% ≥ 0.90 -----

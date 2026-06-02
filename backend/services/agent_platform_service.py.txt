@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/agent_platform_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Unified agent platform integration service.
+
+This service provides one honest setup/status layer for the requested agent
+stack: Harness Agent, OpenClaw, Paperclip, PoliysAI governance, CUA, Stagehand,
+and Playwright. It does not claim external SDKs are installed. It reports local
+working bridges and blocks real side effects behind policy checks.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import importlib.util
+- from `_` import json
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `_` import urllib.error
+- from `_` import urllib.parse
+- from `_` import urllib.request
+
+## Inputs
+- Env vars: AGENTOPS_API_KEY, AGENTOPS_ENABLED, AGENT_MODEL, BEV_OLLAMA_HOST, BEV_PAPERCLIP_ROOT, BROWSERBASE_API_KEY, CUA_AUDIT_PATH, CUA_IDEMPOTENCY_MAX_ENTRIES, CUA_IDEMPOTENCY_PATH, CUA_IDEMPOTENCY_TTL_SECONDS, ENABLE_REAL_CUA, HOLY_LLM_MODEL, KIVI_MODEL, OLLAMA_HOST, PLAYWRIGHT_ALLOWLIST, POLIYSAI_API_KEY
+
+## Process
+### Classes
+- `_AgentOpsSession`: Context manager wrapping one CUA call. All AgentOps SDK calls are
+- `AgentPlatformIntegrationService`: Status, governance, and dry-run execution facade for agent tools.
+### Functions
+- `_idempotency_disk_load()`: Populate _idempotency_cache from the JSONL backing file. Called lazily
+- `_idempotency_disk_append(tenant_id, key, response, stored_at)`: Append one entry to the JSONL backing file. Best-effort — disk errors
+- `_playwright_allowlist()`: (no docstring)
+- `_target_in_allowlist(target, allowlist)`: (no docstring)
+- `_write_cua_audit_row(row)`: Append one §38.3-shaped audit row. Best-effort — disk errors are logged but
+- `_agentops_enabled()`: True only when explicitly opted-in. Default off; never default-on.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per §47.6 + §38.3 — every real Playwright session writes one audit row per nav.
+- Per §42 + §47.6 — default allowlist is localhost only. Operator can extend via env.
+- Per §10.3 — idempotency cache TTL in seconds (5 minutes). Configurable via env
+- for testing (e.g., CUA_IDEMPOTENCY_TTL_SECONDS=0.1 to exercise TTL-expiry path).
+- Max entries before LRU-style trim. Protects memory on long-running processes.

@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# infra/policy/opa_client.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+OPA policy client — consult the policy engine before taking action.
+
+Per Codex 2026-06-01 recommendation. Replaces Python regex / hardcoded
+allow-deny with policy-as-code (Rego) that can be tested + audited.
+
+Usage:
+    from backend.core.opa_client import check_approval
+
+    decision = check_approval(
+        action="git_push",
+        actor="claude",
+        environment="staging",
+        data_class="public",
+        risk_score=0.3,
+    )
+    if decision.allow:
+        do_thing()
+    elif decision.require_human:
+        escalate_to_operator()
+    else:
+        raise PermissionError(decision.reasons)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import os
+- from `dataclasses` import dataclass
+- from `typing` import Literal
+- from `_` import httpx
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PolicyDecision`: (no docstring)
+### Functions
+- `check_approval(action, actor, environment, data_class, risk_score)`: Consult OPA. Fail-closed (deny) if OPA unreachable.
+
+## Outputs
+- Return values from functions above

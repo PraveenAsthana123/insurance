@@ -1,0 +1,62 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/security_posture_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.7 Security posture — read surface for "is the system secure?"
+
+Aggregates three signals into one operator view:
+
+  1. Compliance gate state — derived from running-project invariants
+     (which RBAC entries are wired? is the federated audit helper in
+     place? are the drill files present?). This is the "did we hold the
+     line on the §42 / §47.6 / §38.3 baseline" check.
+  2. CVE / dep-vuln backlog — read from data/agent-supervisor/
+     security_posture.json (HOLY_SECURITY_POSTURE_PATH env override).
+     This file is populated by an external pip-audit/bandit/trivy job
+     (out-of-scope for this commit; service handles missing file
+     gracefully per §57.7).
+  3. Attack attempts — derived from the federated holy_reads audit log
+     by filtering for 403/401-shaped denial events (RBAC denied / role
+     unknown / scope-denied). The leak-scan from §68.6 sits adjacent.
+
+Composes with §38.3 (audit on read) + §47.6 (compliance gate check —
+the audit-helper + RBAC matrix presence ARE part of the posture) +
+§57.7 (graceful degradation — missing posture file → empty signal,
+never crash) + §64.32 (per-dept HOLY_SECURITY.md spec is the WRITE
+side; this is the READ surface) + §68 (Observability Hub iter 3).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `collections` import Counter
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH, HOLY_SECURITY_POSTURE_PATH
+
+## Process
+### Functions
+- `_posture_path()`: (no docstring)
+- `_audit_log_path()`: (no docstring)
+- `_load_posture()`: Load the external posture snapshot. Returns empty envelope if missing.
+- `_compliance_gates()`: Probe live invariants to score the §47.6 compliance posture.
+- `_scan_attacks(since_epoch, limit)`: Scan recent audit-log rows for attack-attempt signals.
+- `global_summary()`: Cross-dept security posture summary.
+- `per_dept_score(dept)`: Per-dept security score — currently a slice of the global view.
+- `list_attacks(since_epoch, limit)`: Recent attack attempts (rejected by middleware) with metadata.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- CVE/dep-vuln snapshot — populated externally by pip-audit / bandit /
+- trivy on a cadence. Service degrades gracefully if absent.
+- Audit log for attack-attempt scan (same as §68.6 leak scan).
+- Gate 1: federated audit helper present?
+- Gate 2: RBAC matrix wired for ≥10 patterns?

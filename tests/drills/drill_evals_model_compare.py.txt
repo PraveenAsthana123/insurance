@@ -1,0 +1,72 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_evals_model_compare.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §68.11 Multi-model comparison — operator-asked-for surface.
+
+Joins §68.8 functional + §68.9 cost + §68.10 safety logs for the named
+(model_id, eval_set) tuples and persists the scorecard to
+data/agent-supervisor/model_compare/<comparison_id>/manifest.json.
+
+The surface is interesting because it composes THREE source-of-truth
+logs into one read — and the drill exercises that all three sources
+gracefully degrade when their data is partial (e.g. model X has
+functional + safety but no cost data → found_in: ['functional',
+'safety']).
+
+Steps (12 total; 5 negative):
+  1. (+) POST with 2 models on empty logs → 200, comparison_id starts
+        with 'cmp-', scorecard has 2 entries with found_in=[]
+  2. (+) Seed functional + cost + safety logs for kivi:local on
+        rag_qa_v1 → POST returns scorecard with kivi:local
+        found_in=['functional','cost','safety']
+  3. (+) Seed ONLY functional for llama3.1:8b → POST shows it
+        found_in=['functional'] (partial data path)
+  4. (+) winners block populated: by_accuracy (kivi > llama),
+        by_safety_verdict (kivi=safe < llama=unknown → kivi wins)
+  5. (+) GET /_history returns the comparisons we ran (2+)
+  6. (+) GET /{comparison_id} returns the persisted manifest
+  7. (-) NEG: POST with empty models list → 422 (Pydantic min_length)
+  8. (-) NEG: POST with 9 models → 422 (Pydantic max_length)
+  9. (-) NEG: POST with malformed model_id (contains space) → 400
+        from service-side regex (validation_error wrapped in HTTP 400)
+  10.(-) NEG: GET unknown comparison_id → 404
+  11.(-) NEG: GET malformed comparison_id (no cmp- prefix) → 400
+  12.(-) NEG: POST with role 'team-member' → 403 (manager/tester only)
+
+  Plus invariant: §38.3 audit row schema + tenant attribution echoed.
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH, HOLY_EVAL_COST_LOG, HOLY_EVAL_FUNCTIONAL_LOG, HOLY_EVAL_SAFETY_LOG, HOLY_MODEL_COMPARE_DIR
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(tmp)`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: empty logs → 200, found_in=[] per model ----
+- ---- Step 2: seed full data for kivi:local on rag_qa_v1 ----
+- ---- Step 3: llama has only functional ----
+- ---- Step 4: winners populated ----

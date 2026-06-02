@@ -1,0 +1,50 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_agent_orchestration.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: HOLY agent orchestration patterns (§43, §64.43 #5/#8/#9/#10/#12).
+
+Steps (14 total; 6 negative assertions):
+    1.  (+) DAG executes 4-node linear chain in correct order
+    2.  (-) NEGATIVE — DAG with cycle is rejected (DagCycleError)
+    3.  (-) NEGATIVE — DAG with unknown depends_on rejected
+    4.  (+) DAG with mid-failure marks downstream nodes 'skipped' (not 'failed')
+    5.  (+) Reflection loop terminates within max_iters
+    6.  (-) NEGATIVE — Reflection with max_iters=0 rejected at __init__
+    7.  (+) Reflection termination_reason is one of the 4 allowed values
+    8.  (+) MoA majority method aggregates correctly
+    9.  (-) NEGATIVE — MoA below quorum sets requires_human=True (no silent aggregate)
+    10. (+) Full OrchestrationDemo runs end-to-end + persists manifest
+    11. (+) Debate terminates with one of 4 allowed reasons
+    12. (-) NEGATIVE — Debate cost budget hard-stops infinite-loop scenario
+    13. (+) Blackboard read returns (value, version) tuple — never bare value
+    14. (-) NEGATIVE — Blackboard CAS rejects stale expected_version
+
+# RESOURCES: ml_orchestration
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: ml_orchestration
+- ----- Step 1: DAG linear chain -----
+- ----- Step 2: NEGATIVE cycle -----
+- ----- Step 3: NEGATIVE unknown depends_on -----
+- ----- Step 4: parent failure cascades as 'skipped' -----

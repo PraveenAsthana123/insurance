@@ -1,0 +1,37 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/supply_chain_simulation_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+supply_chain_simulation_service — what-if delay impact per supplier.
+
+Inputs: supplier_id, delay_days (0-30), affected_sku_count (1-100).
+Outputs: service_level delta (%), stockout probability delta, revenue at risk.
+
+Model is a linear penalty (deliberately simple and explainable):
+    service_level_delta = -min(100, delay_days * 2 * (affected_skus / 20))
+    stockout_prob_change = min(1, delay_days * 0.02 * (affected_skus / 20))
+    revenue_at_risk = supplier_total_revenue * (|service_level_delta| / 100)
+
+Baseline supplier revenue comes from SUM(fact_shipment.revenue_generated)
+filtered to the supplier. If the supplier has no shipments, revenue_at_risk
+is 0 (and the other metrics still compute).
+
+## Imports
+- from `__future__` import annotations
+- from `core.structured_logger` import emit_event
+- from `repositories.supply_chain_repo` import SupplyChainRepo
+- from `schemas.supply_chain` import SimulationRequest, SimulationResponse
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `SupplyChainSimulationService`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Linear penalty: each day of delay cuts service level 2% per 20-SKU block.

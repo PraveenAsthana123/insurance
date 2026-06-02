@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_graph_ai.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY Graph AI per dept (§38 + §39 + §45 + §47 + §49 + §66).
+
+Steps (10 total; 3 negative):
+    1. (+) graph router imports + ALLOWED_NODE_TYPES = 8 canonical types
+    2. (+) per-dept GET returns 200 + ≥ 70 nodes + ≥ 50 edges
+    3. (+) every node has type ∈ ALLOWED_NODE_TYPES
+    4. (+) every edge.source AND edge.target resolve to existing node_ids
+           (no dangling edges — graph integrity invariant)
+    5. (-) NEGATIVE — unknown dept → 404
+    6. (-) NEGATIVE — node filter type=Bogus! → 400 (malformed)
+                                     type=unknown_type → 404 (no info leak)
+    7. (-) NEGATIVE — neighbors of nonexistent node → 404
+    8. (+) /nodes?type=role returns exactly 15 role nodes (per §63)
+    9. (+) /neighbors/<role:manager> returns demo + dashboard + ≥ 1 report (1-hop)
+   10. (+) _global rollup returns all 19 depts + totals.nodes/edges > 0
+
+# RESOURCES: graph_router disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: graph_router disk_io
+- ----- Step 1: router + ALLOWED_NODE_TYPES catalog -----
+- ----- Spin up TestClient -----
+- ----- Step 2: per-dept graph 200 + size -----
+- ----- Step 3: every node carries allowed type -----

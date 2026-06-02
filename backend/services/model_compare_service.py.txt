@@ -1,0 +1,62 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/model_compare_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.11 Multi-model comparison — "which model wins?"
+
+Joins functional + cost + safety logs for the requested (model_id,
+eval_set) tuples and returns a side-by-side scorecard. Persists the
+comparison_id + scorecard to data/agent-supervisor/model_compare/
+<comparison_id>/manifest.json so the operator can re-read.
+
+Composes with §68.8 (functional eval source-of-truth) + §68.9 (cost
+eval) + §68.10 (safety eval) — this surface is the **join**, not a
+new source. Adding §68.11 doesn't introduce any new JSONL log; it
+reuses the three existing ones.
+
+Per §57.7: if any source log is missing/unreadable, the matching
+sub-scorecard surfaces as `found_in: []` and the comparison still
+completes — partial data beats no data.
+
+Composes with §38.3 audit + §47.6 (PII never in row — only hashes)
++ §64.43 #7 (federation).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `_` import uuid
+- from `collections` import Counter
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: HOLY_MODEL_COMPARE_DIR
+
+## Process
+### Functions
+- `_manifest_dir()`: (no docstring)
+- `_safety_verdict_rank()`: Lower rank = better verdict.
+- `_latest_functional_for(model_id, eval_set)`: Find the most-recent functional eval row for (model_id, eval_set).
+- `_cost_for(model_id, tenant_id)`: Aggregate cost across all-time for (model_id, tenant_id).
+- `_latest_safety_for(model_id)`: Find the most-recent safety eval row + verdict for model_id.
+- `_build_scorecard(models, eval_set, tenant_id)`: Build the per-model scorecard rows + winner block.
+- `_persist_manifest(manifest)`: Write the manifest to data/agent-supervisor/model_compare/<id>/manifest.json.
+- `run_comparison(models)`: Execute a comparison. Returns the manifest + comparison_id.
+- `get_comparison(comparison_id)`: Read back a persisted comparison manifest.
+- `list_history(limit)`: List recent comparisons (newest-first by directory mtime).
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Hard caps to prevent runaway requests.
+- No tenant filter — pull from /by-model ranking
+- Functional headline metrics
+- Winner determination — per-axis, against rows that have data.
+- Safety verdict winner: lowest rank (best verdict) wins

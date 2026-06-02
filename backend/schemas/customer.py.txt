@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/customer.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+customer.py — Pydantic schemas for the Customer Analytics pilot API.
+
+Schemas backing /api/v1/customer/* endpoints used only by the Customer
+Manager hub (depth-pilot). No other department imports from here.
+
+## Imports
+- from `__future__` import annotations
+- from `pydantic` import BaseModel, ConfigDict, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ChurnDriver`: (no docstring)
+- `ChurnPredictionRequest`: (no docstring)
+- `ChurnPredictionResponse`: (no docstring)
+- `AtRiskCustomer`: (no docstring)
+- `ChurnTopNResponse`: (no docstring)
+- `ChurnMetricsResponse`: (no docstring)
+
+## Outputs
+- Return values from functions above

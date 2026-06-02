@@ -1,0 +1,55 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/simulation_engine.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: per-process simulation engine (manual vs automatic).
+
+Per operator 2026-05-22 §64.34: every dept must have a simulation tab where
+each process runs in both Manual + Automatic modes side-by-side, with all
+5 layers visible (backend / process / data / accuracy / reporting).
+
+This module provides a generic ProcessSimulator that:
+  - takes a process definition (list of steps + each step's manual+auto config)
+  - runs both modes against the same inputs
+  - emits a stream of layer-tagged events
+  - writes events.jsonl + manifest.json under data/eval/sim/<dept>/<process>/<sim_id>/
+  - returns a comparison report (Manual vs Auto on time/cost/error/accuracy)
+
+Reference process: sales / lead_scoring (3 steps: ingest → score → decide).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import random
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any, Callable, Literal
+
+## Inputs
+- CLI args: --dept, --process, --n-inputs, --seed, --artifacts-root
+
+## Process
+### Classes
+- `SimEvent`: (no docstring)
+- `StepDef`: Definition of one step in a process; runs differently in each mode.
+- `SimRunSummary`: (no docstring)
+- `SimManifest`: (no docstring)
+- `ProcessSimulator`: (no docstring)
+### Functions
+- `_three_step(p1_name, p1_actor, p1_man_sec, p1_man_cost, p1_man_err)`: (no docstring)
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- Event + step + manifest schemas
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- The simulator

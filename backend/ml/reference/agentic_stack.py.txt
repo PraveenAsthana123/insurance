@@ -1,0 +1,70 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/agentic_stack.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: 10-layer agentic execution stack per §64.40.
+
+Operator architecture brief 2026-05-22:
+
+    User Goal → Council → Planner → Task Decomposition → Policy/Governance
+    → Computer-Using Agent → Stagehand/Browser-Use → Playwright
+    → Browser/Desktop/API → Enterprise Applications
+
+This module ships:
+  - PlannerAgent  — decomposes goal → task DAG (uses Ollama)
+  - Decomposer    — refines high-level tasks to atomic actions with scope tags
+  - PolicyEngine  — allowlist / scope grants / cost gate / approval router
+  - CuaOrchestrator — chooses interface adapter (browser / desktop / API)
+  - StagehandAdapter (STUB) — would wrap Browserbase Stagehand
+  - PlaywrightAdapter (STUB) — would wrap Playwright sessions
+  - AgenticRun manifest — full per-layer audit trail
+
+Stubs for layers 7-10 because real browser automation requires a live
+session / Browserbase API key / target system. The CONTRACT is honored —
+audit rows for every layer, drill-able invariants — actual side-effects
+are dry-run by default.
+
+Run dry: `python -m backend.ml.reference.agentic_stack --goal "..."`
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any, Literal
+
+## Inputs
+- CLI args: --goal, --dept, --user, --scopes, --budget, --ollama-url, --ollama-model, --artifacts-root
+
+## Process
+### Classes
+- `Task`: (no docstring)
+- `AgenticRun`: (no docstring)
+- `PlannerAgent`: Decomposes a user goal into a task DAG.
+- `Decomposer`: (no docstring)
+- `PolicyEngine`: Allowlist + scope check + cost gate + approval router.
+- `StagehandAdapter`: STUB — real implementation would wrap browserbase/stagehand SDK.
+- `PlaywrightAdapter`: STUB — real implementation would use playwright-python sync API.
+- `OpenClawAdapter`: LIVE adapter — wraps the local OpenClaw bridge at /api/v1/openclaw/*.
+- `PaperclipAdapter`: LIVE adapter — wraps the local Paperclip artifact/context bridge at
+- `CuaOrchestrator`: Layer 6 — picks the right adapter per task action.
+- `CouncilAdapter`: Layer 2 — uses existing 3-stage council if available; trivial pass-through otherwise.
+- `AgenticStackRunner`: (no docstring)
+### Functions
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- Filled by lower layers
+- ---------------------------------------------------------------------------
+- Layer 3 — Planner Agent (LLM-driven, with rule-based fallback)

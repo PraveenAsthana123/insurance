@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/external_feeds/clue.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+CLUE adapter — LexisNexis Comprehensive Loss Underwriting Exchange.
+
+Per §56 Stage-1: feature-flag opt-in. Real production wiring would integrate
+with LexisNexis CLUE Auto / CLUE Property API.
+
+ENV:
+  INSUR_CLUE_ENABLED     — "true" to enable
+  INSUR_CLUE_API_BASE    — LexisNexis CLUE API base URL
+  INSUR_CLUE_CLIENT_ID   — OAuth client id
+  INSUR_CLUE_CLIENT_SECRET — OAuth secret
+  INSUR_CLUE_TIMEOUT     — seconds (default 30)
+
+CLUE provides 7-year loss history for personal-lines underwriting.
+Used by [INSUR_PIPELINES.md (underwriting)](../../../global-ai-org/departments/underwriting/business-layer/INSUR_PIPELINES.md).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `is_enabled()`: (no docstring)
+- `fetch(line_of_business, full_name, address, date_of_birth, vin)`: Pull CLUE loss history.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- OAuth token (cached in real impl; here per-call for simplicity)

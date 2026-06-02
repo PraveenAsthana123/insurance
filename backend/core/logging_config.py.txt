@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/logging_config.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import logging.config
+- from `_` import traceback
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `JsonFormatter`: Formats log records as single-line JSON objects with:
+### Functions
+- `setup_logging(level, json_format)`: Configure application-wide logging.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Include any extra fields attached to the record (excluding stdlib internals)
+- Quiet noisy third-party libraries

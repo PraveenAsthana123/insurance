@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# agents/agent.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+HOLY Beverage — 100-agent background worker.
+
+Each agent process:
+  1. Pulls a task from Redis queue (BRPOP)
+  2. Calls Ollama (gemma3:1b on host) with the task prompt
+  3. Pushes result to "done" list with agent_id + response + timing
+
+Environment:
+  REDIS_URL   redis://redis:6379/0
+  OLLAMA_URL  http://host.docker.internal:11434  (host Ollama with gemma3:1b)
+  MODEL       gemma3:1b
+  AGENT_ID    auto-set by container (hostname)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import socket
+- from `_` import sys
+- from `_` import time
+- from `typing` import Any
+- from `_` import httpx
+- from `_` import redis
+
+## Inputs
+- Env vars: AGENT_ID, MODEL, OLLAMA_TIMEOUT, OLLAMA_URL, POLL_TIMEOUT, REDIS_URL
+
+## Process
+### Functions
+- `call_ollama(prompt)`: Single inference call. Returns dict with response + timing.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Smoke-test connections
+- Idle — keep polling

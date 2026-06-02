@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/role_dashboard_catalog.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Shared catalog for HOLY role dashboards + reports (§64.37).
+
+Single source of truth used by:
+  - backend/routers/holy.py        (serves /dashboards/{dept}/{role})
+  - ~/.claude/scripts/scaffold-holy-role-dashboards.py (renders MD)
+  - tests/drills/drill_role_dashboards.py (asserts coverage)
+
+Keeps backend + scaffolder in lockstep — change once, both follow.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import random
+- from `dataclasses` import dataclass
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Tile`: (no docstring)
+- `ChartSpec`: (no docstring)
+- `ReportSpec`: (no docstring)
+### Functions
+- `synthesize_tile_value(dept, role, tile)`: Generate stable synthetic tile data — same dept+role+metric → same value.
+- `synthesize_chart_data(dept, role, chart)`: (no docstring)
+- `build_dashboard_payload(dept, role)`: (no docstring)
+- `build_reports_payload(dept, role)`: (no docstring)
+- `_now_iso()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Pick a value range based on the tile's unit
+- Status: green / amber / red vs target
+- 12 weeks of synthetic data
+- Generic spec placeholder — frontend uses Plotly's JSON contract

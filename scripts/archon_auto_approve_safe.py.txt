@@ -1,0 +1,55 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/archon_auto_approve_safe.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Safely auto-approve low-risk local Archon workflow gates.
+
+This helper reduces repeated manual clicks for BEV's local Archon workflows.
+It is intentionally conservative:
+
+- It only considers workflows listed in `.archon/approval-policy.yaml`.
+- It only approves runs that appear to be waiting for approval.
+- It never approves text containing high-risk terms such as production,
+  deploy, secret, token, browser/CUA real execution, destructive git, or rm.
+- It defaults to dry-run unless `--approve` is passed.
+
+Archon status JSON is treated defensively because CLI output can include log
+lines before the JSON object.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import re
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- CLI args: --approve, --dry-run, --watch, --interval
+
+## Process
+### Functions
+- `_extract_json(stdout)`: (no docstring)
+- `_status()`: (no docstring)
+- `_strings(obj)`: (no docstring)
+- `_run_id(run)`: (no docstring)
+- `_workflow_name(run)`: (no docstring)
+- `_gate_name(run)`: (no docstring)
+- `_waiting_for_approval(run)`: (no docstring)
+- `_safe(run)`: (no docstring)
+- `_approve(run_id, comment)`: (no docstring)
+- `scan_once(approve)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Archon may print structured log JSON lines before the final status JSON.
+- Decode each line and keep the last object that looks like status output.
+- Graceful skip if archon binary isn't installed — silent no-op for cron
+- Don't raise — log + return empty so the cron stops spamming

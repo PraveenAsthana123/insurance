@@ -1,0 +1,67 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# agents/test_agent.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+Test-tier agent — picks tasks from Redis `test_tasks`, runs the tier,
+pushes results to `test_results`. Per global §65.1 #8 + §65.8.
+
+Each agent self-tags with a TIER_ROLE env var so the fleet specializes:
+  pytest-agent       → unit + integration + boundary + security (pytest-based)
+  api-agent          → tier 3 (api)
+  drill-agent        → tier 7 (process drills)
+  perf-agent         → tier 9-10 (k6 / locust)
+  smoke-agent        → tier 8 (playwright)
+  security-agent     → tier 11-12 (ZAP / Garak — auth env only per §42)
+
+Task envelope (Redis LIST `test_tasks`):
+  {
+    "task_id": "...",
+    "tier": "unit|integration|api|boundary|process|perf|smoke|security",
+    "dept": "<dept>",
+    "path": "tests/<dept>/<tier>/",
+    "timeout_seconds": 600,
+    "agent_role_required": "pytest-agent"   # optional — for routing
+  }
+
+Result envelope (Redis LIST `test_results`):
+  {
+    "task_id": "...",
+    "agent_id": "...",
+    "tier": "...",
+    "dept": "...",
+    "exit_code": 0,
+    "stdout_tail": "...",
+    "duration_seconds": 12.4,
+    "completed_at": "2026-05-22T..."
+  }
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import socket
+- from `_` import subprocess
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `_` import redis
+
+## Inputs
+- Env vars: POLL_TIMEOUT, REDIS_URL, REPO_ROOT, TIER_ROLE
+
+## Process
+### Functions
+- `run_test_task(task)`: (no docstring)
+- `_qualifies(tier, role)`: Role → allowed tiers map.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Tier → runner mapping
+- Non-pytest tiers — defer to dedicated agents
+- Role-routing: only run the tiers this agent role is qualified for
+- Generalist for local dev

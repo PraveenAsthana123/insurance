@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/jobs.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends, HTTPException, Query
+- from `core.dependencies` import get_job_service
+- from `schemas.common` import PaginatedResponse, SuccessResponse
+- from `schemas.job` import JobCreate, JobResponse, JobResultResponse, JobSummary, ScheduleCreate
+- from `services.job_service` import JobService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_jobs(offset, limit, service)`: (no docstring)
+- `create_job(payload, service)`: (no docstring)
+- `get_job(job_id, service)`: (no docstring)
+- `get_job_results(job_id, service)`: (no docstring)
+- `create_schedule(schedule, service)`: Create a new job schedule.
+- `list_schedules(offset, limit, service)`: List all schedules with pagination.
+- `get_schedule(schedule_id, service)`: Get details of a specific schedule.
+- `pause_schedule(schedule_id, service)`: Pause a schedule so it no longer triggers automatically.
+- `resume_schedule(schedule_id, service)`: Resume a paused schedule.
+- `delete_schedule(schedule_id, service)`: Permanently delete a schedule.
+- `run_schedule_now(schedule_id, service)`: Trigger an immediate execution of a scheduled job outside its normal cadence.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ── Schedule router (separate prefix) ────────────────────────────────────────
+- ── Scheduling endpoints ──────────────────────────────────────────────────────

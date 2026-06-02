@@ -1,0 +1,60 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_agentops_adapter.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: AgentOps Stage-1 adapter wrap on execute_cua (§56 gate-2).
+
+Stage-1 adapter contract per global CLAUDE.md §56.2: feature flag opt-in,
+lazy import, NEVER default-on, original code path always wins. Observability
+MUST NOT change response shape OR fail the request even if the SDK is broken.
+
+Steps (10 total; 5 negative):
+  1. (+) Default (env unset) → no AgentOps activity; existing behavior intact
+  2. (-) NEG: AGENTOPS_ENABLED=true but AGENTOPS_API_KEY missing → still no
+        AgentOps activity (BOTH gates must be set)
+  3. (-) NEG: AGENTOPS_ENABLED=false + key set → still off (explicit toggle)
+  4. (+) Both env set + sdk import fails (simulated) → request still succeeds
+        with identical response shape (NEVER crashes the call)
+  5. (-) NEG: AgentOps SDK exception during start_session → request unaffected
+  6. (-) NEG: AgentOps SDK exception during record_outcome → request unaffected
+  7. (+) When wrap is enabled + functional, agentops.start_session was called
+        with tenant tag (verified via monkeypatch)
+  8. (+) Response shape unchanged across (default/enabled/broken) — adapter,
+        status, result keys all match
+  9. (-) NEG: AgentOps wrap never modifies the response object
+  10.(+) AGENTOPS_API_KEY value NEVER appears in the response (no creds leak)
+
+# RESOURCES: disk_io,playwright
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+- from `types` import SimpleNamespace
+- from `unittest.mock` import patch
+
+## Inputs
+- Env vars: AGENTOPS_API_KEY, AGENTOPS_ENABLED, CUA_AUDIT_PATH, CUA_IDEMPOTENCY_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_reset_modules()`: (no docstring)
+- `_baseline_request()`: A safe dry-run request shape used by every step.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io,playwright
+- ---- Step 1: default (env unset) → no AgentOps activity ----
+- ---- Step 2: NEG enabled=true but no key ----
+- Should still return normally
+- ---- Step 3: NEG enabled=false + key set ----

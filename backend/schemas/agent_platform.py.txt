@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/agent_platform.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Unified agent platform integration schemas.
+
+These models describe the local setup surface for Harness Agent, OpenClaw,
+Paperclip, PoliysAI governance, CUA, and Stagehand/Playwright browser
+adapters. The API is intentionally explicit about working-local vs dry-run vs
+external-not-installed status.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any, Literal
+- from `pydantic` import BaseModel, Field, field_validator
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AgentToolStatus`: Runtime/setup status for one agent-platform tool.
+- `AgentPlatformStatusResponse`: Aggregated setup/status response for all requested agent tooling.
+- `AgentPlatformManifestResponse`: Machine-readable integration manifest for orchestrators and operators.
+- `AgentPolicyEvaluationRequest`: Input for evaluating whether an agent/tool action is allowed.
+- `AgentPolicyEvaluationResponse`: Policy decision for one agent/tool action.
+- `ApprovalBrokerRequest`: Approve/submit/next broker request.
+- `ApprovalBrokerResponse`: Approval broker decision plus optional OpenClaw submission result.
+- `TypedCouncilRunRequest`: Input for the Pydantic AI typed 3-stage council.
+- `TypedCouncilRunResponse`: Normalized typed council result for author/reviewer/chair runs.
+- `CuaExecutionRequest`: Policy-gated CUA/browser execution request.
+- `CuaExecutionResponse`: Normalized response for a governed CUA/browser action.
+- `CuaAuditRow`: One §38.3 audit row read back from data/agent-supervisor/cua_runs.jsonl.
+- `CuaAuditListResponse`: Tenant-scoped readback of the CUA audit log.
+- `TenantActivityItem`: One row in the unified tenant-activity feed.
+- `TenantActivityResponse`: Unified per-tenant activity feed across CUA + admin + Paperclip + OpenClaw.
+- `AdminCuaAuditListResponse`: Compliance/auditor cross-tenant readback of the CUA audit log.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Outcome-specific (executed):
+- Outcome-specific (blocked):
+- Outcome-specific (error):
+- Outcome-specific (CUA executed)

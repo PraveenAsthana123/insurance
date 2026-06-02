@@ -1,0 +1,50 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/voice_out.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+Voice OUTPUT — pipe text → Piper TTS → WAV file or aplay.
+
+Usage:
+  echo "hello world" | scripts/voice_out.py                    # → speak via aplay
+  scripts/voice_out.py --text "hello world"                    # → speak via aplay
+  scripts/voice_out.py --text "hello" --out /tmp/out.wav       # → write WAV, don't play
+  scripts/voice_out.py --text "hello" --model en_US-lessac-medium
+
+The first run downloads the requested Piper model (~70-100MB) to
+~/.cache/piper-models/. Subsequent runs reuse the cached model.
+
+Per global §42 — local install pre-approved; voice output to local speaker
+is also pre-approved. Per global §38.3 — speaking audio is NOT logged (we
+log the text input, not the synthesized waveform).
+
+Drill: tests/drills/drill_voice_pipeline.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import os
+- from `_` import shutil
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import urllib.request
+- from `_` import wave
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --text, --out, --model
+- Env vars: PIPER_CACHE_DIR
+
+## Process
+### Functions
+- `_ensure_model(model_name)`: Return (onnx_path, json_path) for the named Piper voice. Download if absent.
+- `_synthesize(text, model_name, out_path)`: Drive piper to write a WAV file. Imports happen here so the script
+- `_play(path)`: Pipe WAV through aplay. Returns aplay's exit code (0 = ok).
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Only the default model has a baked-in download URL. Other models
+- must be pre-downloaded by the operator.

@@ -1,0 +1,62 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_audit_compact.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: scripts/audit_compact.py — CUA audit-log rotation (NEVER drops rows).
+
+Unlike the idempotency compaction (which has TTL semantics — drop expired),
+the §38.3 audit log is a SOC2 trail and MUST preserve every row. This
+drill verifies rotation preserves all data + the size threshold behaves
+deterministically.
+
+Steps (9 total; 4 negative):
+  1. (+) File below threshold + no --force → no rotation, stats correct
+  2. (+) File above threshold → rotation: live emptied, archive .gz created,
+        archive contains all original rows decompressed
+  3. (+) --force ignores threshold → rotation regardless of size
+  4. (+) stats.by_outcome counts every outcome class
+  5. (-) NEG: corrupt JSON line counted in stats.corrupt, NOT dropped
+        (in the gzipped archive — still preserved verbatim)
+  6. (-) NEG: blank lines counted in stats.blank, archive preserves them
+        (rotation is byte-for-byte preserving)
+  7. (-) NEG: dry-run does NOT rotate even if file is huge
+  8. (-) NEG: missing file → exit 0 with zero stats (no crash)
+  9. (+) Audit-of-audit row appended at data/agent-supervisor/
+        audit_compact_runs.jsonl on real rotation
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import gzip
+- from `_` import json
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_run(args, timeout)`: (no docstring)
+- `_make_row(tenant, outcome, request_id)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: below threshold → no rotation ----
+- ---- Step 2: above threshold → rotate + archive contains all rows ----
+- Make file artificially big by adding many rows then setting a tiny threshold
+- After rotation: live file empty, archive .gz exists

@@ -1,0 +1,68 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/insur_fleet.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+insur_fleet — 1000-agent (configurable) fleet for issue discovery + repair.
+
+Operator brief 2026-06-01: "how may agent working ...setup 1000 agent to fix all the issue"
+                          "error , missing software, testing, api,fornted, backed,porcess"
+
+Hub-and-spoke pattern per global §64.43 #1. File-backed task queue
+(jobs/fleet/tasks.jsonl), file-backed result log (jobs/fleet/results.jsonl).
+
+7 agent roles, each scoped to a category. Each worker thread:
+  1. Pulls one task from the queue (atomic via portalocker)
+  2. Runs a deterministic discovery probe for its category
+  3. Writes a result row with verdict (ok | issue_found | fix_attempted | escalate)
+  4. NEVER applies destructive fixes — §50.7: discovery deterministic, fix proposed,
+     verification deterministic. Operator gates apply.
+
+Modes:
+  python insur_fleet.py seed                # populate tasks.jsonl from repo scan
+  python insur_fleet.py run --workers 1000  # spawn N workers, drain queue
+  python insur_fleet.py status              # summary of last run
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import re
+- from `_` import shutil
+- from `_` import socket
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import threading
+
+## Inputs
+- CLI args: --workers
+- Env vars: FLEET_WORKERS, INSUR_BACKEND_URL
+
+## Process
+### Functions
+- `log_result(row)`: (no docstring)
+- `probe_error(task)`: Scan recent logs for ERROR/CRITICAL lines.
+- `probe_missing_software(task)`: Check a binary or python module is importable.
+- `probe_testing(task)`: Verify a drill or test file exists and is structurally valid.
+- `probe_api(task)`: Hit a backend endpoint and check status.
+- `probe_frontend(task)`: Check a frontend file/route exists and isn't a stub.
+- `probe_backend(task)`: Check a backend file imports cleanly + obeys layer rules.
+- `probe_process(task)`: Check a per-dept process artifact exists (per global §64).
+- `execute(task)`: (no docstring)
+- `seed_tasks()`: (no docstring)
+- `load_tasks()`: (no docstring)
+- `run_fleet(max_workers)`: (no docstring)
+- `show_status()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 2 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- 7 agent role categories — matches operator's enumeration
+- ── Discovery probes per role (deterministic, read-only) ─────────────────
+- §3 router layer rule: no SQL in routers
+- §3 service layer rule: no HTTPException in services
+- No bare print

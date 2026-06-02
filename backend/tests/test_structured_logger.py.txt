@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_structured_logger.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Unit tests for core.structured_logger — JSON emitter + correlation_id contextvar.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `io` import StringIO
+- from `core.structured_logger` import correlation_id_var, emit_event, get_correlation_id, new_correlation_id, set_correlation_id
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_capture_logs(func)`: Attach a temp StringIO handler to the insur.events logger, run func, return parsed JSON rows.
+- `test_new_correlation_id_is_16_chars_hex()`: (no docstring)
+- `test_emit_event_includes_correlation_id()`: (no docstring)
+- `test_emit_event_default_correlation_id()`: (no docstring)
+- `test_emit_event_stringifies_nonjson_values()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Round-trip via contextvar getter

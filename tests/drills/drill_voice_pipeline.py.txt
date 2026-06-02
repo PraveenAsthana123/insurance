@@ -1,0 +1,56 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_voice_pipeline.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: voice pipeline — Piper TTS → WAV → Whisper STT round-trip.
+
+Locks the install + behavior contract for scripts/voice_out.py and
+scripts/voice_in.py per the operator's "make voice-over command" ask.
+Real synthesis + transcription happen — no mocks. Drill skips mic
+capture (operator hardware) and exercises file-only paths.
+
+Steps (8 total; 3 negative):
+  1. (+) Piper voice model present (en_US-lessac-medium cached)
+  2. (+) Whisper 'tiny' model loadable
+  3. (+) voice_out.py synthesizes a WAV from --text (valid PCM 22050 Hz)
+  4. (-) NEG: voice_out.py with no text + no stdin → exit 2
+  5. (+) voice_in.py transcribes the Piper WAV back to text containing
+        the key phrase (substring match, case-insensitive)
+  6. (-) NEG: voice_in.py with non-existent WAV → exit 2 (no crash)
+  7. (-) NEG: voice_in.py without --wav or --record → argparse rejects (exit 2)
+  8. (+) Cleanup: WAV file deletable; no leftover model temp files
+
+# RESOURCES: disk_io,gpu_or_cpu_compute
+
+Exit 0 on PASS, 1 on any failure. ~15-30s wall-clock on first run
+(model loads); ~3s on subsequent runs once models are cached.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `_` import wave
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: PIPER_CACHE_DIR
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_run(args, timeout)`: Run a script + return (returncode, stdout, stderr). Never raises.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io,gpu_or_cpu_compute
+- ---- Step 1: Piper model present ----
+- ---- Step 2: whisper package + tiny model loadable ----
+- ---- Step 3: voice_out synthesizes WAV ----
+- Use common English words that Whisper tiny transcribes reliably.

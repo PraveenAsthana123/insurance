@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_frontend_consoles.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: AgenticConsole + TestingDashboard backend endpoints (§43, §64.40.5 + §65.8.3).
+
+These are frontend-only components consuming existing backend endpoints
+(already drilled separately by drill_agentic_stack + drill_test_tier_dispatch).
+This drill is the contract drill — proves the wire-up the frontend depends
+on hasn't regressed.
+
+Steps (8 total; 3 negative):
+    1. (+) GET /agentic/runs returns list (may be empty)
+    2. (+) POST /agentic/execute on a valid goal returns full run manifest with required fields
+    3. (+) The just-created run is retrievable by request_id
+    4. (+) GET /testing/tiers returns all 8 tiers + assigned agent roles
+    5. (+) POST /testing/dispatch enqueues a test task
+    6. (-) NEGATIVE: POST /agentic/execute with empty goal returns 400
+    7. (-) NEGATIVE: POST /testing/dispatch with bogus tier returns 400
+    8. (-) NEGATIVE: GET /agentic/runs/<bogus-id> returns 404
+
+# RESOURCES: http_local
+
+Requires insur_backend reachable. Skips if not.
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `_` import httpx
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: http_local
+- ----- Step 1: list runs -----
+- ----- Step 2: execute on a valid read goal -----
+- ----- Step 3: retrieve by id -----
+- ----- Step 4: testing tiers -----

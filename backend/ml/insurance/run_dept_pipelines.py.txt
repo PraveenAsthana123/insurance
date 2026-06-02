@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/insurance/run_dept_pipelines.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+Per-dept pipeline runner — wires INSUR_PIPELINES.md to backend/ml/reference/*.
+
+Per operator 2026-06-01 ("data preprocessing, model training, model evaluation,
+chunking, embedding, vector, ragas, deepeval, opentel"). Each pipeline runs the
+corresponding reference impl with the right dept-specific dataset + target.
+
+Output per run lands in `data/eval/insurance/<dept>/<pipeline_id>/<run_id>/`
+with manifest + plots + scores + audit row per global §38.3 + §64.7.
+
+Usage:
+  # List available pipelines per dept
+  python backend/ml/insurance/run_dept_pipelines.py --list
+
+  # Run one pipeline
+  python backend/ml/insurance/run_dept_pipelines.py --dept claims --pipeline 1
+
+  # Smoke (small sample, fast)
+  python backend/ml/insurance/run_dept_pipelines.py --dept underwriting --pipeline 1 --smoke
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import subprocess
+- from `_` import sys
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --list, --dept, --pipeline, --smoke, --all
+
+## Process
+### Functions
+- `list_pipelines()`: (no docstring)
+- `resolve_pipeline(dept, pipeline_id)`: (no docstring)
+- `run_pipeline(dept, p, smoke)`: Invoke the reference lifecycle module via subprocess.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- List available pipelines per dept
+- Run one pipeline
+- Smoke (small sample, fast)
+- ---------------------------------------------------------------------------
+- Per-dept pipeline registry (single source of truth per §59 MDD)

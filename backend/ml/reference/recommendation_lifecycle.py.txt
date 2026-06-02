@@ -1,0 +1,71 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/recommendation_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+HOLY reference: recommendation lifecycle with content + CF + hybrid comparison.
+
+Per §64.22 — every dept needs a recommender; this is the reference template.
+
+Algorithms compared on the same synthetic-but-realistic user × item matrix:
+
+  1. Popularity baseline           (always recommend most-popular items)
+  2. Content-based                 (item-feature cosine similarity)
+  3. Collaborative filtering       (ALS-style matrix factorization)
+  4. Hybrid (content + CF)         (weighted blend)
+
+Metrics per algorithm:
+  - Precision@k / Recall@k / nDCG@k / MAP@k (k=10)
+  - Diversity (intra-list, avg pairwise distance)
+  - Novelty (1 - mean log-popularity of recommended items)
+  - Latency p95 per user
+
+Synthetic dataset structure:
+  N=300 users, M=80 items, ~12 latent factors injected.
+  Train/test split: held-out 20% of each user's interactions for eval.
+
+Artifacts: data/evaluation/<dept>/<pipeline>/<run_id>/manifest.json + plots/
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import matplotlib
+- from `_` import matplotlib.pyplot
+
+## Inputs
+- CLI args: --dept, --pipeline, --n-users, --n-items, --top-k, --seed, --artifacts-root
+
+## Process
+### Classes
+- `RecoManifest`: (no docstring)
+- `PopularityReco`: (no docstring)
+- `ContentReco`: (no docstring)
+- `CollabReco`: (no docstring)
+- `HybridReco`: (no docstring)
+- `RecoLifecycle`: (no docstring)
+### Functions
+- `generate_synthetic_data(n_users, n_items, n_factors, interaction_density, seed)`: Generate user × item interaction matrix from latent factors.
+- `precision_at_k(recommended, relevant_set, k)`: (no docstring)
+- `recall_at_k(recommended, relevant_set, k)`: (no docstring)
+- `ndcg_at_k(recommended, relevant_set, k)`: (no docstring)
+- `average_precision_at_k(recommended, relevant_set, k)`: (no docstring)
+- `diversity(recommended_lists, item_features)`: Intra-list diversity = avg pairwise distance between recommended items.
+- `novelty(recommended_lists, popularity)`: Novelty = 1 - mean log-popularity of recommendations (higher = more novel).
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- Synthetic dataset generator
+- ---------------------------------------------------------------------------
+- Score matrix from dot product
+- Sigmoid + threshold → binary interactions

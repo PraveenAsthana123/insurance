@@ -1,0 +1,55 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/ingest_customer_telco.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+ingest_customer_telco.py — load IBM Telco Churn CSV into customer-pilot star schema.
+
+Part of the Customer Analytics depth-pilot. Mirrors ingest_rossmann.py /
+ingest_supply_chain.py pattern (TRUNCATE + COPY, idempotent).
+
+Reads from $TELCO_DIR (default data/customer-analytics/), loads:
+  WA_Fn-UseC_-Telco-Customer-Churn.csv  -> dim_customer_pilot (~7043 rows)
+                                         + fact_customer_interaction (~42k rows)
+                                         + fact_churn_label       (~7043 rows)
+
+Usage:
+  python scripts/ingest_customer_telco.py [--dir PATH] [--limit N]
+
+CSV column adaptation notes:
+  - customerID, gender, SeniorCitizen (0/1), Partner/Dependents (Yes/No),
+    tenure, MonthlyCharges, TotalCharges (may be blank), Contract,
+    PaymentMethod, PaperlessBilling, InternetService, PhoneService,
+    MultipleLines, plus 6 add-on service flags, plus Churn.
+  - The 6 add-on services (OnlineSecurity, OnlineBackup, DeviceProtection,
+    TechSupport, StreamingTV, StreamingMovies) plus PhoneService become
+    rows in fact_customer_interaction. service_count = count of "Yes".
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import csv
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `io` import StringIO
+- from `pathlib` import Path
+- from `_` import psycopg
+
+## Inputs
+- CLI args: --limit
+
+## Process
+### Functions
+- `_pg_dsn()`: (no docstring)
+- `_yn(v)`: (no docstring)
+- `_float_or_none(v)`: (no docstring)
+- `_copy_rows(cur, table, cols, rows)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Count how many add-on services the customer has subscribed ("Yes").
+- One interaction row per add-on service + phone service.

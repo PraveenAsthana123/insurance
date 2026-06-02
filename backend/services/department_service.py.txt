@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/department_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import List
+- from `core.exceptions` import NotFoundError
+- from `repositories.department_repo` import DepartmentRepository
+- from `repositories.process_repo` import ProcessRepository
+- from `schemas.department` import DepartmentResponse, DepartmentSummary
+- from `schemas.process` import AIMappingResponse, ProcessSummary
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `DepartmentService`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Ensure department exists

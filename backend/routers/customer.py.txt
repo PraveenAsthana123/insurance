@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/customer.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+customer.py — HTTP-only FastAPI routes for the Customer Analytics pilot.
+
+Only the Customer Manager hub consumes these endpoints. Follows the same
+pattern as routers/sales.py and routers/supply_chain.py (lru_cache DI,
+thin route handlers, domain exceptions → 4xx).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `functools` import lru_cache
+- from `fastapi` import APIRouter, Depends, HTTPException, Query, status
+- from `repositories.customer_repo` import CustomerRepo
+- from `schemas.customer` import AtRiskCustomer, ChurnMetricsResponse, ChurnPredictionRequest, ChurnPredictionResponse, ChurnTopNResponse
+- from `services.churn_model_service` import ChurnModelService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_repo()`: (no docstring)
+- `_churn_service()`: (no docstring)
+- `get_repo()`: (no docstring)
+- `get_churn_service()`: (no docstring)
+- `churn_predict(req, svc)`: Predict churn probability for a single customer.
+- `churn_top(n, svc)`: Return the top-N at-risk customers ranked by churn probability.
+- `churn_metrics(svc)`: Return training/backtest metrics for the fitted churn model.
+
+## Outputs
+- Return values from functions above

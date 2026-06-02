@@ -1,0 +1,60 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/transactions.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY transactional history router — unified chronological audit feed per dept.
+
+Surfaces 3 event sources in MVP:
+  - cron audit rows  data/eval/cron/<job>/<run_id>/manifest.json
+  - ML lifecycle runs data/eval/<dept>/<pipeline>/<run_id>/manifest.json
+  - simulation runs   data/eval/sim/<dept>/<process>/<sim_id>/events.jsonl
+
+Future sources (gated for follow-up work):
+  - test runs from Redis test_results list
+  - decision audit from Postgres decision_audit table
+
+Composes with global §38 audit + §41.3 tenant isolation + §47.6 SOC2
+CC6.2 access (PII redacted by default) + §57.6 canonical envelope.
+
+Endpoints (read-only — append-only event stream, no mutation API):
+  GET /api/v1/holy/transactions/{dept}
+  GET /api/v1/holy/transactions/{dept}/{event_id}
+  GET /api/v1/holy/transactions/_global
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import time
+- from `pathlib` import Path
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_validate_dept(dept)`: (no docstring)
+- `_ts_from_run_id(run_id)`: Extract epoch from canonical run_id format <unix-ts>-<hex6>.
+- `_redact_pii(obj)`: Recursively replace PII-keyed values with REDACTED marker.
+- `_scan_cron_events(dept, since_epoch, limit)`: Cron events apply to all depts (fan-out style); filter by since_epoch.
+- `_scan_ml_events(dept, since_epoch, limit)`: ML lifecycle events under data/eval/<dept>/<pipeline>/<run_id>/manifest.json.
+- `_scan_sim_events(dept, since_epoch, limit)`: Sim events under data/eval/sim/<dept>/<process>/<sim_id>/manifest.json.
+- `_wildcard_match(pattern, event_type)`: `cron.*` matches `cron.X`; `*` matches anything; exact match otherwise.
+- `global_summary(http_request)`: Cross-dept summary: per-dept event count for the last 24h.
+- `list_transactions(http_request, dept, source, event_type, since_epoch)`: Per-dept chronological transaction feed (newest first).
+- `get_event(http_request, dept, event_id, include_pii)`: Single-event detail by event_id.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Cron job catalog — keep aligned with monitoring.py CRON_JOBS.
+- PII tokens that MUST be redacted from default response payload bodies.
+- Locate data/ root same way monitoring.py does.
+- _global BEFORE /{dept} to dodge FastAPI greedy-match (per §66.3).
+- Event-type wildcard filter

@@ -1,0 +1,39 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/guardrails.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.5 Guardrails router.
+
+3 endpoints under /api/v1/holy/guardrails/* federated via core.holy_audit
+(surface=guardrails). Answers operator's question: "Did the guardrails
+fire? What did they catch? Show me the decision detail."
+
+Composes with §38.3 (audit on read) + §47.6 (validator-first; PII never
+in row, only input_hash) + §57.7 (graceful when no log yet) + §64.43 #7
+(federation) + §68 (Observability Hub iter 2).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+- from `services` import guardrails_service
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_validate_dept(dept)`: (no docstring)
+- `guardrails_global(http_request, since)`: Cross-dept rollup: counts per guardrail_type × decision + per-dept totals.
+- `guardrails_decision(http_request, decision_id)`: Look up one guardrail decision by decision_id or request_id.
+- `guardrails_dept(http_request, dept, decision, guardrail_type, since)`: Per-dept guardrail decisions, newest-first, with optional filters.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- _global BEFORE /{dept} per §66.3 FastAPI greedy-match trap.
+- Specific path BEFORE parameterized — `/decision/{id}` is literal-prefixed.

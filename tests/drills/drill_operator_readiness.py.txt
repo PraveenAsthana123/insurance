@@ -1,0 +1,65 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_operator_readiness.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: operator-readiness — honest scorecard of the agent/governance stack.
+
+Importable ≠ configured ≠ working end-to-end. This drill checks the
+configuration state of each surface the operator asked about (Archon,
+BMad, voice, monitoring, tracking, notifying) and surfaces real gaps
+rather than letting them hide behind "installed".
+
+Steps (10 total; 4 negative):
+  1. (+) Archon CLI is on $PATH
+  2. (+) Archon doctor reports DB + workspace + Codex provider OK
+  3. (-) NEG: Archon's GitHub auth NOT configured → drill calls this
+        out (no false-positive "ready" claim)
+  4. (-) NEG: Archon Slack + Telegram NOT configured → notifications
+        gap surfaced (operator must set tokens to close)
+  5. (+) Both BEV Archon workflows have ≥1 approval: node each
+        (closes "no approval gates" misclaim from earlier audit)
+  6. (-) NEG: BMad cannot run on this machine (Node 18.19 < required 20)
+        — honest constraint, NOT a "BMad is working" claim
+  7. (+) Voice pipeline tools present (Piper model + Whisper module)
+  8. (+) governance_diff_check.sh exists + executable
+  9. (+) CODEOWNERS exists + maps backend / frontend / .archon / .claude
+  10.(-) NEG: ~/.archon/.env has chmod 600 (NOT world-readable);
+        absence of this is a credential-leak class — drill catches.
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any false-positive readiness claim. This drill is
+intentionally a TRUTH detector: a passing run means the gaps are NAMED
+in the audit JSON; a failing run means a gap that should be named is
+silently being treated as ready.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import re
+- from `_` import shutil
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_archon_doctor_lines()`: Return the lines from `archon doctor` stdout. Empty list on failure.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: Archon CLI on PATH ----
+- ---- Step 2: Archon doctor: DB + workspace + at-least-one provider OK ----
+- ---- Step 3: NEG GitHub not configured → drill calls it out ----
+- ---- Step 4: NEG Slack + Telegram not configured ----

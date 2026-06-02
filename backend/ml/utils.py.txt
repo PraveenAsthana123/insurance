@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/utils.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Shared ML utilities for the BEV Analytics platform.
+
+Functions here are intentionally generic — they do not import from any
+specific pipeline so they can be used across all departments without
+circular dependencies.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import numpy
+- from `_` import pandas
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `load_dataset(path)`: Load a dataset from a CSV, Parquet, or JSON file.
+- `calculate_metrics(y_true, y_pred, task, y_prob)`: Compute a standard set of evaluation metrics for a given task type.
+- `format_results(run_id, metrics, extra)`: Format pipeline results into a standardised response envelope.
+- `describe_dataset(df)`: Produce a concise statistical summary of a DataFrame.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- Dataset loading
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- Metric calculation

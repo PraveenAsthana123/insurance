@@ -1,0 +1,63 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/dl_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: Deep Learning sequence-classification lifecycle (§64.20).
+
+CV lifecycle already covers CNN + ResNet (image domain). This module covers
+the explicit sequence-domain DL stack the operator asked for:
+
+  1. Logistic Regression on bag-of-features       (baseline, sklearn)
+  2. LSTM-based sequence classifier               (PyTorch, RNN family)
+  3. Transformer-encoder sequence classifier      (PyTorch, attention)
+
+Synthetic dataset: a binary sequence-classification task where positive
+class has a specific "trigger token" present in the sequence. Both NN
+models learn the trigger; LR baseline fails because it needs n-gram
+features the bag-of-features doesn't capture for positional triggers.
+
+Per-model output:
+  - Accuracy / precision / recall / F1 (weighted)
+  - Confusion matrix
+  - Training loss curve per epoch
+  - Per-model params count, batch_size, learning rate, optimizer
+  - SHAP-style attention map only for Transformer (token-level salience)
+
+Artifacts: data/evaluation/<dept>/<pipeline>/<run_id>/manifest.json + plots/
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import matplotlib
+- from `_` import matplotlib.pyplot
+
+## Inputs
+- CLI args: --dept, --pipeline, --n-total, --seq-len, --vocab-size, --trigger-token, --batch-size, --epochs, --seed, --artifacts-root
+
+## Process
+### Classes
+- `DlManifest`: (no docstring)
+- `LstmClassifier`: (no docstring)
+- `TransformerClassifier`: (no docstring)
+- `DlLifecycle`: (no docstring)
+### Functions
+- `generate_synthetic_sequences(n, seq_len, vocab_size, trigger_token, positive_rate)`: Positive class = sequences containing `trigger_token` anywhere.
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- Synthetic sequence generator
+- ---------------------------------------------------------------------------

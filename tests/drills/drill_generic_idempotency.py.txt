@@ -1,0 +1,63 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_generic_idempotency.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §10.3 generic idempotency module on OpenClaw + Paperclip create.
+
+Extends the CUA idempotency contract to two more create endpoints via
+the new backend/core/idempotency.py module. The contract is:
+  - Idempotency-Key header OR body field accepted
+  - First call: real service runs + response cached
+  - Second call within TTL: cached response returned with
+    X-Idempotent-Replay: true header
+  - Cross-tenant isolation: tenant-b's K1 NEVER returns tenant-a's K1
+  - Disk persistence: cache survives process restart
+
+Steps (12 total; 5 negative):
+  1. (+) OpenClaw: first call with K1 → fresh enqueue
+  2. (+) OpenClaw: second call SAME K1 → replay (X-Idempotent-Replay: true);
+        service.enqueue NOT called a second time
+  3. (-) NEG: OpenClaw cross-tenant SAME K1 → fresh (cache isolation)
+  4. (+) OpenClaw: Idempotency-Key HEADER honored when body absent
+  5. (-) NEG: OpenClaw no key submitted → never cached
+  6. (+) Paperclip: first POST /clips with K2 → fresh create (artifact written)
+  7. (+) Paperclip: second SAME K2 → replay (no second disk write)
+  8. (-) NEG: Paperclip cross-tenant SAME K2 → fresh
+  9. (-) NEG: empty idempotency_key (whitespace only) → never cached
+  10.(+) Disk persistence: simulated restart loads cache from JSONL
+  11.(-) NEG: corrupt JSONL line skipped on load (graceful)
+  12.(+) Replay response identical content to original
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+- from `unittest.mock` import MagicMock
+
+## Inputs
+- Env vars: IDEMPOTENCY_PATH_OPENCLAW, IDEMPOTENCY_PATH_PAPERCLIP, IDEMPOTENCY_TTL_SECONDS
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(paperclip_root, openclaw_path, paperclip_path)`: Minimal app with TenantId + openclaw + paperclip routers.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: OpenClaw fresh K1 ----
+- ---- Step 2: OpenClaw replay K1 ----
+- ---- Step 3: NEG cross-tenant same K1 → fresh ----
+- ---- Step 4: Idempotency-Key HEADER honored ----

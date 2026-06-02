@@ -1,0 +1,61 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/cv_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: CV lifecycle with multi-model score comparison.
+
+Per operator 2026-05-22: "CV: image classification + segmentation + detection
+for image data ...compare each model with hyperparam + loss + batch + score"
+
+Image classification on MNIST with three architectures compared side-by-side:
+
+  1. Logistic Regression on flattened pixels   (baseline, sklearn)
+  2. Simple CNN (Conv-Conv-FC)                  (custom PyTorch)
+  3. ResNet18 (pretrained backbone, frozen)     (transfer learning)
+
+Per-model output:
+  - Accuracy / precision / recall / F1 (weighted)
+  - Confusion matrix
+  - Training loss curve per epoch
+  - Sample predictions grid (5 correct + 5 wrong)
+  - Loss function + optimizer + batch_size + epochs logged
+
+Detection + segmentation deferred — they need labeled bbox/mask data.
+Stubs noted in §64.20 + future commits.
+
+Artifacts: data/evaluation/<dept>/<pipeline>/<run_id>/manifest.json + plots/
+(Default artifact root mirrors the structured-ML lifecycle convention.)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import matplotlib
+- from `_` import matplotlib.pyplot
+
+## Inputs
+- CLI args: --dataset-root, --dept, --pipeline, --n-train, --n-test, --batch-size, --epochs, --artifacts-root
+
+## Process
+### Classes
+- `CvManifest`: (no docstring)
+- `SimpleCNN`: (no docstring)
+- `ResNetTransfer`: (no docstring)
+- `CvLifecycle`: (no docstring)
+### Functions
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Model 1: LR baseline
+- Model 2: SimpleCNN
+- Model 3: ResNet18 (frozen backbone + new head)

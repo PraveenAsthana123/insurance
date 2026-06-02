@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/features/time_features.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+Time-series feature engineering utilities.
+
+Functions here add calendar, lag, and rolling statistical features to a
+pandas DataFrame. Designed to be composable — call each function independently
+or chain them together before fitting a model.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import pandas
+- from `_` import numpy
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `add_time_features(df, date_col)`: Add calendar and temporal features derived from a date column.
+- `add_lag_features(df, target_col, lags)`: Add lag features for time-series forecasting.
+- `add_rolling_features(df, target_col, windows)`: Add rolling mean and standard deviation features.
+- `add_ewm_features(df, target_col, spans)`: Add exponentially weighted moving average features.
+
+## Outputs
+- Return values from functions above

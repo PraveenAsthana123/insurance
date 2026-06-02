@@ -1,0 +1,23 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/repositories/catalogs_repo.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+catalogs_repo — SQL extracted from backend/routers/catalogs.py
+per global §3 layer rule (no SQL in routers).
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `database` import _connect
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_phases(family)`: (no docstring)
+- `list_modules(phase_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above

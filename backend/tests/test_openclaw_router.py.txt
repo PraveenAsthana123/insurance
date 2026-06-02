@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_openclaw_router.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+OpenClaw bridge router tests.
+
+The tests replace the Redis-backed service dependency with a fake service. That
+keeps API contract and RBAC coverage deterministic while service-level Redis
+behavior remains isolated in OpenClawGatewayService.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `pathlib` import Path
+- from `_` import re
+- from `_` import pytest
+- from `fastapi.testclient` import TestClient
+- from `core.rbac_middleware` import PERMS_MATRIX, _READ_ROLES
+- from `main` import app
+- from `routers.openclaw` import get_openclaw_service, router
+- from `schemas.openclaw` import OpenClawManifestResponse, OpenClawQueueStatus, OpenClawStatusResponse, OpenClawTaskRequest, OpenClawTaskResponse
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `FakeOpenClawService`: (no docstring)
+### Functions
+- `ensure_openclaw_router_mounted()`: Mount OpenClaw routes/RBAC on the shared test app if import order omitted them.
+- `client()`: (no docstring)
+- `test_openclaw_status_contract(client)`: (no docstring)
+- `test_openclaw_manifest_contract(client)`: (no docstring)
+- `test_openclaw_create_task_manager_allowed(client)`: (no docstring)
+- `test_openclaw_create_task_non_manager_forbidden(client)`: (no docstring)
+- `test_openclaw_get_task_result(client)`: (no docstring)
+- `test_openclaw_rejects_blank_prompt(client)`: (no docstring)
+- `test_openclaw_create_task_idempotency_replays_cached_response(tmp_path, monkeypatch)`: (no docstring)
+
+## Outputs
+- Return values from functions above

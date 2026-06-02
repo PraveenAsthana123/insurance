@@ -1,0 +1,66 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_openclaw_paperclip_federation.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §64.43 #7 federation extended to OpenClaw + Paperclip routers.
+
+Builds on commits f57b255b (TenantIdMiddleware + CUA anti-spoof) and 5fc64d3e
+(audit readback) by propagating tenant_id through the other agent-platform-
+adjacent routers:
+
+  - /api/v1/openclaw/tasks  — task metadata gets middleware tenant_id
+                              (body metadata.tenant_id is overridden)
+  - /api/v1/paperclip/clips — stored artifact carries tenant_id
+                              list/get/delete enforce ownership
+                              context-pack filters cross-tenant clips
+
+Steps (14 total; 6 negative):
+  1. (+) OpenClaw create_task → enqueued task metadata.tenant_id == middleware
+  2. (-) NEG: OpenClaw body metadata.tenant_id=EVIL ignored — middleware wins
+  3. (+) Paperclip create stores tenant_id on disk
+  4. (+) Paperclip list as tenant-a shows tenant-a's clip
+  5. (-) NEG: Paperclip list as tenant-b → ZERO of tenant-a's clips
+  6. (-) NEG: Paperclip GET tenant-a's clip as tenant-b → 404 (anti-enumeration)
+  7. (-) NEG: Paperclip DELETE tenant-a's clip as tenant-b → 404 AND clip still exists
+  8. (+) Paperclip context-pack as tenant-b with tenant-a's clip_id → missing_ids
+  9. (-) NEG: Paperclip body metadata.tenant_id=EVIL does NOT change stored tenant_id
+  10.(+) Backward-compat: pre-existing artifact without tenant_id → 'default' tenant
+  11.(+) tenant-a CAN still GET + DELETE its OWN clip (federation isn't lockout)
+  12.(+) OpenClaw Idempotency-Key replay does not enqueue twice
+  13.(+) Paperclip Idempotency-Key replay does not create duplicate artifacts
+  14.(-) NEG: same Idempotency-Key is isolated across tenants
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+- from `unittest.mock` import MagicMock
+
+## Inputs
+- Env vars: IDEMPOTENCY_PATH_OPENCLAW, IDEMPOTENCY_PATH_PAPERCLIP
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(paperclip_root)`: Minimal app: middlewares + openclaw + paperclip routers. OpenClaw service
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- Capture-mock for OpenClaw service so we can inspect what the router passes.
+- ---- Step 1: OpenClaw create_task tenant injection ----
+- ---- Step 2: NEG anti-spoof on OpenClaw body metadata ----
+- ---- Step 3: Paperclip create stores tenant_id on disk ----

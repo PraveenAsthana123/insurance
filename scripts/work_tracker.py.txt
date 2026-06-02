@@ -1,0 +1,59 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/work_tracker.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+work_tracker — track + monitor every cron/fleet/agent job in the repo.
+
+Per operator 2026-06-01: "track all the work, monitor all the work and
+create the agent to speedup the work"
+
+Aggregates state from:
+  jobs/logs/*.log                — cron output (tail + tail-time)
+  jobs/fleet/{tasks,results,status}.jsonl — fleet state
+  data/eval/bot/audit.jsonl      — bot decision audit
+  data/rag/{chunks,embeddings}/  — RAG inventory
+  crontab -l                     — scheduled work
+
+Modes:
+  python work_tracker.py snapshot      # write data/work_tracker/latest.json
+  python work_tracker.py status        # print human summary
+  python work_tracker.py speedup       # parallel-run pending cron tasks now
+  python work_tracker.py watch         # tail every active log
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `concurrent.futures` import ThreadPoolExecutor
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `tail(path, n)`: (no docstring)
+- `mtime(path)`: (no docstring)
+- `snapshot()`: (no docstring)
+- `write_snapshot()`: (no docstring)
+- `print_status()`: (no docstring)
+- `speedup()`: Run every scheduled job NOW in parallel — no waiting for cron tick.
+- `watch()`: Live-print recent activity across all jobs.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- 1. Cron logs (recency + tail)
+- 2. Fleet status
+- 3. RAG inventory
+- 4. Bot audit volume
+- 5. Scheduled cron entries

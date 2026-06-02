@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_pipelines.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY automated-pipelines router (§38 + §40 + §47 + §57.5 + §57.6 + §66).
+
+Steps (10 total; 3 negative):
+    1. (+) pipelines router imports + PHASES canonical 5-tuple intact
+    2. (+) per-dept GET returns 200 + ≥ 1 pipeline + phase_sequence == PHASES
+    3. (+) every pipeline carries the canonical 5 phase keys
+           (input / data_process / model / output / report)
+    4. (+) per-process detail returns 200 + audit_row_template carries §57.6 envelope
+    5. (-) NEGATIVE — unknown dept → 404 (no info leak)
+    6. (-) NEGATIVE — unknown process_id → 404 + lists available process_ids
+    7. (-) NEGATIVE — malformed process_id (uppercase / special chars) → 400
+    8. (+) _global inventory returns all 19 depts + n_processes_total > 19
+    9. (+) HOLY_PIPELINES.md exists per dept (under business-layer/)
+   10. (+) phase ordering deterministic across all pipelines (Input → Report)
+
+# RESOURCES: pipelines_router disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: pipelines_router disk_io
+- ----- Step 1: router imports + PHASES intact -----
+- ----- Spin up TestClient -----
+- ----- Step 2: per-dept GET 200 + catalog + phase_sequence -----
+- ----- Step 3: every pipeline has all 5 phase keys -----

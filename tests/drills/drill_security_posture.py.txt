@@ -1,0 +1,69 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_security_posture.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §68.7 Security posture surface — iteration 3 of HOLY Observability Hub.
+
+Read-only aggregation over three signals: live-probed compliance gates,
+external CVE snapshot (HOLY_SECURITY_POSTURE_PATH env), attack-attempt
+scan of the holy_reads audit log.
+
+Steps (12 total; 5 negative):
+  1. (+) GET /_global → 200 with policy stamp, compliance gates with
+        score ∈ [0,1], vulnerabilities envelope, attack_attempts_24h
+  2. (+) Compliance gates include the 6 known gates (federated_audit,
+        rbac_matrix, tenant_id_middleware, pii_inventory, guardrails,
+        drill_discipline) and ALL pass in a healthy build (score=1.0)
+  3. (+) Vulnerabilities envelope graceful when no posture snapshot
+        exists: counts default to 0, status='no_posture_snapshot'
+  4. (+) Seeded posture snapshot → counts propagate (n_critical_cves
+        from the seeded JSON appears in /_global response)
+  5. (+) /attacks → 200 envelope with hits[], patterns_checked,
+        since_epoch metadata
+  6. (+) Seed an audit log row with 'rbac.denied' → /attacks finds it
+        with attack_type='rbac_denial'
+  7. (+) GET /{dept} → per-dept slice with spec_doc pointing at
+        HOLY_SECURITY.md path
+  8. (-) NEG: invalid dept → 404 (validator-first per §47.6)
+  9. (-) NEG: bad role → 400 from RBAC, NEVER reaches service
+  10.(-) NEG: malformed posture JSON → graceful envelope, not crash
+  11.(-) NEG: missing audit log → /attacks returns hits=[] (not crash)
+  12.(-) NEG: invalid `since` (negative number) → 422 from FastAPI
+
+  Plus invariants: §38.3 audit row schema; NO raw posture data in
+  unexpected fields.
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH, HOLY_SECURITY_POSTURE_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path, posture_path)`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: /_global envelope shape ----
+- ---- Step 2: 6 known compliance gates all pass ----
+- ---- Step 3: missing posture snapshot → graceful ----
+- ---- Step 4: seeded posture snapshot → counts propagate ----

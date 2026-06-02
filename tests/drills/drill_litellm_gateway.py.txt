@@ -1,0 +1,67 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_litellm_gateway.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: LiteLLM gateway Stage-1 adapter (backend/services/llm_gateway.py).
+
+Stage-1 adapter per §56.2: lazy import, feature-flag opt-in, NEVER
+default-on, original code path always wins. The drill exercises the
+default-off behavior + the env-enabled path with a monkeypatched LiteLLM
+so no real network call is made.
+
+Steps (11 total; 5 negative):
+  1. (+) Default (env unset) → complete() returns outcome='disabled'
+        + audit row written
+  2. (-) NEG: disabled outcome has empty text + no leak of model creds
+        in any field
+  3. (+) Enabled + importable + mocked SDK → outcome='executed' with
+        text from mocked response
+  4. (+) Provider extracted from model string: "ollama/kivi" → "ollama";
+        "gpt-4o-mini" → "openai" (default fallback)
+  5. (-) NEG: LiteLLM raises → outcome='error' with structured
+        error_type + error_msg; latency_ms still recorded
+  6. (-) NEG: LiteLLM timeout → outcome='error' (wrapped, not propagated)
+  7. (+) Audit row written for EVERY call (disabled, executed, error)
+  8. (-) NEG: API key / token values never appear in audit row OR
+        in LlmCompletion fields
+  9. (+) tenant_id + request_id from caller propagated to audit row
+  10.(+) status() returns a snapshot dict with enabled/importable/model
+        without making any LLM call
+  11.(-) NEG: when litellm package is hidden, importable=False AND
+        complete() returns outcome='unavailable' (still no crash)
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+- from `types` import SimpleNamespace
+- from `unittest.mock` import patch
+
+## Inputs
+- Env vars: HOLY_LLM_GATEWAY_AUDIT_PATH, HOLY_LLM_GATEWAY_ENABLED, HOLY_LLM_MODEL, OPENAI_API_KEY
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_reset_modules()`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: default disabled ----
+- ---- Step 2: NEG disabled response has empty text + no leak ----
+- ---- Step 3: enabled + mocked LiteLLM → executed ----
+- Mock the litellm module + its completion()

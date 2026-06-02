@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_run_drills.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: scripts/run_drills.py meta-drill (§43.2 resource-aware runner).
+
+Validates the runner's contract WITHOUT actually launching the 24 drills
+(that would be a 6+ minute recursion). Tests parsing + filtering +
+listing + scheduler-isolation invariants.
+
+Steps (10 total; 3 negative):
+    1. (+) scripts/run_drills.py imports cleanly + exposes discover()
+    2. (+) discover() returns ≥ 20 Drill objects
+    3. (+) every Drill has non-empty resources + name + path
+    4. (+) Drill.from_file() correctly parses `# RESOURCES:` tag
+    5. (+) Drill.from_file() correctly detects `# SLOW:` tag (drill_full_lifecycle)
+    6. (-) NEGATIVE — filter_drills(include_slow=False) excludes SLOW drills
+    7. (+) filter_drills(only=substr) returns only matching drills
+    8. (-) NEGATIVE — filter_drills(only=NONEXISTENT) returns empty list
+    9. (+) --list mode runs + exits 0 + names all drills
+   10. (-) NEGATIVE — --only NONEXISTENT exits 2 (not 0) with FATAL message
+
+# RESOURCES: disk_io readonly
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import asyncio
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io readonly
+- ----- Step 1: import + discover() exposed -----
+- ----- Step 2: discover() returns ≥ 20 drills -----
+- ----- Step 3: every drill has non-empty fields -----
+- ----- Step 4: RESOURCES parsing -----

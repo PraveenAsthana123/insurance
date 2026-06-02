@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_agentic_stack.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY 10-layer agentic execution stack (§43, §64.40).
+
+Steps (10 total; 4 negative assertions):
+    1. (+) Stack runs end-to-end on read goal (idempotent dry-run)
+    2. (+) Planner emits ≥ 1 task for non-trivial goal
+    3. (+) Every task has scope_required field populated (drill invariant #3)
+    4. (+) All 10 layers traversed (no skips on valid goal)
+    5. (-) NEGATIVE — empty goal rejected, no audit fabrication (invariant #1)
+    6. (-) NEGATIVE — trivial "hello" produces ≤ 1 task, never 50 (invariant #2)
+    7. (-) NEGATIVE — task lacking granted scope → policy DENY (invariant #4)
+    8. (-) NEGATIVE — denylist pattern (production.*delete) → DENY
+    9. (+) Reversible action stays reversible; irreversible+admin gets approval
+   10. (+) Run manifest persisted with per-layer audit per task
+
+# RESOURCES: ml_agentic_stack disk_io ollama
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: ml_agentic_stack disk_io ollama
+- ----- Step 1: end-to-end on read goal -----
+- ----- Step 2: planner emits ≥ 1 task -----
+- ----- Step 3: every task has scope_required -----
+- ----- Step 4: all 10 layers traversed -----

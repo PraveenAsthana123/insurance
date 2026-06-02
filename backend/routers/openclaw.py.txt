@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/openclaw.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+OpenClaw bridge API.
+
+HTTP layer for the repo-local OpenClaw compatibility bridge. It delegates all
+queue and polling behavior to OpenClawGatewayService so tests can replace the
+service without requiring Redis.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends, Request, Response
+- from `core` import idempotency
+- from `core.middleware` import current_tenant_id
+- from `schemas.openclaw` import OpenClawManifestResponse, OpenClawMode, OpenClawStatusResponse, OpenClawTaskRequest, OpenClawTaskResponse
+- from `services.openclaw_gateway_service` import OpenClawGatewayService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `get_openclaw_service()`: Dependency provider for OpenClawGatewayService.
+- `get_status(service)`: Return bridge availability and Redis queue status.
+- `get_manifest(service)`: Return the OpenClaw bridge contract and governance notes.
+- `create_task(http_request, response, request, service)`: Create an OpenClaw bridge task and enqueue it for workers.
+- `get_task_result(task_id, mode, service)`: Poll a queued OpenClaw bridge task result.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Idempotency check FIRST so retry storms don't re-enqueue the same task.

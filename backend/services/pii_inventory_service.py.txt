@@ -1,0 +1,58 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/pii_inventory_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.6 PII inventory — answers "where does PII live? what's redacted?"
+
+Source-of-truth is the per-process tables catalog (data/dbviewer/
+per_process_tables.json) PLUS live introspection via dbviewer_service
+when the DB is reachable. When the DB is unreachable, returns catalog-
+only view (graceful degradation per §57.7).
+
+Three operator questions this answers:
+  1. Which columns project-wide contain PII? (cross-dept inventory)
+  2. Which PII columns does this dept touch? (per-dept slice)
+  3. Has PII appeared in plaintext anywhere it shouldn't have?
+     (leak scan over recent audit-log lines — best-effort regex match)
+
+Composes with §38.3 (audit on read) + §41.3 (tenant isolation —
+per-dept is already implicitly tenant-scoped via dept filter) + §47.6
+(SOC2 CC6.2 PII handling) + §57.7 (graceful degradation) + §68
+(Observability Hub iter 2).
+
+The "leak" surface is intentionally heuristic-only: scans the holy_reads
+audit log for plaintext PII patterns that should have been redacted. A
+hit means either (a) a real leak (operator should investigate) OR (b)
+the PII heuristic over-redacted somewhere else. Both are actionable.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `pathlib` import Path
+- from `typing` import Any
+- from `services` import dbviewer_service
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH
+
+## Process
+### Functions
+- `_audit_log_path()`: Resolve the active audit log. HOLY_AUDIT_PATH env wins (matches
+- `cross_dept_inventory()`: Aggregate PII inventory across every annotated process + entity.
+- `per_dept_inventory(dept)`: PII inventory slice for one dept.
+- `scan_leaks(since_epoch, limit)`: Scan recent audit-log lines for plaintext PII patterns.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Audit log to scan for leaks. Same env var the federation helper writes
+- to (core.holy_audit) — HOLY_AUDIT_PATH wins, then well-known fallbacks.
+- Plaintext PII pattern catalog. Conservative — false positives are OK
+- (operator investigates), false negatives are NOT OK (leak undetected).
+- These patterns match RAW PII as it would appear in a log line, NOT just

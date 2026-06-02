@@ -1,0 +1,22 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/repositories/process_repo.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import List, Optional
+- from `_` import psycopg2.extras
+- from `repositories.base` import BaseRepository
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ProcessRepository`: All SQL for the processes, ai_mappings, and process_data_flow tables.
+
+## Outputs
+- Return values from functions above

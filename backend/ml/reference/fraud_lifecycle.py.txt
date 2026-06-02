@@ -1,0 +1,69 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/fraud_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: fraud-detection lifecycle (§64.23 + §40).
+
+4-layer detection per §64.23 (mandatory for finance / sales / e-commerce /
+security-operations / retail-operations / procurement):
+
+  Layer 1 — Rule layer (hard rules first; deterministic, instant block)
+            velocity / geo-anomaly / amount-threshold / blacklist
+  Layer 2 — ML layer (XGBoost on engineered features + Isolation Forest
+            for residual signal)
+  Layer 3 — LLM layer (narrative classifier — for transactions with
+            descriptive text fields; stubbed against Ollama if available)
+  Layer 4 — Decision layer (per §40)
+            rule_hit → block
+            ml_score > 0.9 → block + review
+            ml_score 0.5-0.9 → step_up_auth + human_review
+            ml_score < 0.5 → allow + log
+
+Cost-sensitive metrics per §64.23:
+  - Recall at FPR ≤ 5% MUST be ≥ 0.90
+  - Per-decision cost (false_negative cost >> false_positive cost)
+  - Decision audit row coverage = 100% (per §38.3)
+
+Synthetic dataset generator if no labeled fraud data provided.
+
+Artifacts: data/evaluation/<dept>/<pipeline>/<run_id>/manifest.json + plots/
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import matplotlib
+- from `_` import matplotlib.pyplot
+
+## Inputs
+- CLI args: --dept, --pipeline, --n-total, --fraud-rate, --block-threshold, --review-threshold, --seed, --artifacts-root
+
+## Process
+### Classes
+- `FraudDecision`: (no docstring)
+- `FraudManifest`: (no docstring)
+- `RuleLayer`: Hard rules — fires deterministically, instant block.
+- `MlLayer`: (no docstring)
+- `LlmLayer`: Stub: uses keyword heuristic in dry-run; calls Ollama when wired.
+- `DecisionLayer`: Combines rule hits + ML score + LLM flag → final decision per §40.
+- `FraudLifecycle`: (no docstring)
+### Functions
+- `generate_synthetic_transactions(n, fraud_rate, seed)`: Synthetic transaction matrix + labels + transaction-narrative texts.
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- Synthetic transaction generator
+- ---------------------------------------------------------------------------

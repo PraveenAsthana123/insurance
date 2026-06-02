@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/models.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any, Dict
+- from `fastapi` import APIRouter, Depends, Query
+- from `core.dependencies` import get_ml_service
+- from `schemas.common` import PaginatedResponse
+- from `schemas.model` import ModelCreate, ModelResponse, ModelSummary, PredictRequest, PredictResponse
+- from `services.ml_service` import MLService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_models(offset, limit, service)`: (no docstring)
+- `create_model(payload, service)`: (no docstring)
+- `get_model(model_id, service)`: (no docstring)
+- `predict(model_id, payload, service)`: (no docstring)
+- `get_model_metrics(model_id, service)`: (no docstring)
+
+## Outputs
+- Return values from functions above

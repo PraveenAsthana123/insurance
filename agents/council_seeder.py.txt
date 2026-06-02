@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# agents/council_seeder.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+HOLY Beverage — council task seeder.
+
+Pushes N tasks into Redis 'council_tasks' queue. Tasks are harder than
+the simple seeder — they require the 3-stage council to actually add
+value (vs. a single LLM call).
+
+Usage:
+  python council_seeder.py [N]   # default N=10
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import random
+- from `_` import sys
+- from `_` import time
+- from `_` import redis
+
+## Inputs
+- Env vars: REDIS_URL
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Harder tasks where a reviewer's critique helps

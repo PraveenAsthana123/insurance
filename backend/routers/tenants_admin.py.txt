@@ -1,0 +1,31 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/tenants_admin.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Tenants + Departments admin router — surfaces migration 017 tables.
+
+Read-only for now. Mutation endpoints (create_tenant, enable_dept,
+grant_role) deferred to a future migration once §47.6 RBAC contracts
+are fully wired.
+
+Composes with §41.3 multi-tenant, §47.6 SOC2 CC6.1+CC6.2, §63 19-dept
+scaffold, §66 per-dept artifacts.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `fastapi` import APIRouter, Query
+- from `repositories` import tenants_repo
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_tenants()`: (no docstring)
+- `list_departments(family, canonical_only)`: (no docstring)
+- `list_tenant_departments(tenant_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,45 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_simulation_engine.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY process simulation engine (§43, §64.34).
+
+Steps (8 total; 3 negative assertions):
+    1. (+) Simulator runs sales/lead_scoring × 10 leads in both modes
+    2. (+) Both modes produce equal step counts (steps × inputs each mode)
+    3. (+) Events.jsonl + manifest.json exist + non-empty
+    4. (+) Auto mode beats Manual on time + cost + errors (key invariant)
+    5. (-) NEGATIVE — unknown (dept, process) tuple raises (no silent fallback)
+    6. (-) NEGATIVE — n_inputs=0 produces empty events (does NOT silently fabricate)
+    7. (-) NEGATIVE — corrupted manifest path rejects (path-traversal guard)
+    8. (+) Events tagged with all 5 layers (backend/process/data/accuracy/reporting)
+
+# RESOURCES: ml_simulation disk_io
+
+Exit 0 on PASS, 1 on FAIL. Prints ✓/✗ per step.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: ml_simulation disk_io
+- ----- Step 1: run sales/lead_scoring × 10 -----
+- ----- Step 2: equal step counts per mode -----
+- ----- Step 3: artifacts on disk -----
+- ----- Step 4: auto beats manual (key business claim) -----

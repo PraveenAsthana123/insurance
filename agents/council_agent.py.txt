@@ -1,0 +1,55 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# agents/council_agent.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+HOLY Beverage — Council-of-Agents worker.
+
+Each task is processed by a 3-stage council:
+  1. AUTHOR    (gemma3:4b)  — generates initial response
+  2. REVIEWER  (gemma3:4b)  — critiques author's response + suggests improvement
+  3. CHAIR     (gemma3:1b)  — selects/merges; produces final answer
+
+Pulls from Redis 'council_tasks' queue; pushes results (full audit trail —
+all 3 stage outputs + final choice) to 'council_done' list.
+
+Pattern inspired by /mnt/deepa/rag/scripts/gemma_agent_council.py (Stage-1
+adapter, §56 compliance). Simplified to 3 stages for HOLY POC.
+
+Environment:
+  REDIS_URL          redis://redis:6379/0
+  OLLAMA_URL         http://ollama:11434
+  AUTHOR_MODEL       gemma3:4b
+  REVIEWER_MODEL     gemma3:4b
+  CHAIR_MODEL        gemma3:1b
+  POLL_TIMEOUT       5
+  STAGE_TIMEOUT      60
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import socket
+- from `_` import sys
+- from `_` import time
+- from `typing` import Any
+- from `_` import httpx
+- from `_` import redis
+
+## Inputs
+- Env vars: AGENT_ID, AUTHOR_MODEL, CHAIR_MODEL, OLLAMA_URL, POLL_TIMEOUT, REDIS_URL, REVIEWER_MODEL, STAGE_TIMEOUT
+
+## Process
+### Functions
+- `call_ollama(model, prompt, num_predict)`: (no docstring)
+- `run_council(task_prompt, department)`: Execute the 3-stage council on one task. Returns full audit trail.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Stage 1: AUTHOR generates initial response
+- Stage 2: REVIEWER critiques author's output
+- Stage 3: CHAIR synthesizes final answer

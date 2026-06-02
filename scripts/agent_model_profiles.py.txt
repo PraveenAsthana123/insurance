@@ -1,0 +1,36 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/agent_model_profiles.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Start or inspect OpenClaw/Ollama agent model profiles.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import urllib.request
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- CLI args: --agents, --council-agents
+- Env vars: OLLAMA_URL
+
+## Process
+### Functions
+- `load_profiles()`: (no docstring)
+- `local_models()`: (no docstring)
+- `env_for(profile)`: (no docstring)
+- `print_profile(name, profile, installed)`: (no docstring)
+- `cmd_list(_)`: (no docstring)
+- `cmd_export(args)`: (no docstring)
+- `cmd_start(args)`: (no docstring)
+- `parser()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

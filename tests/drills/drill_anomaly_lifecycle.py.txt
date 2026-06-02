@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_anomaly_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Drill: HOLY anomaly lifecycle (§43, §64.23 + §64.32).
+
+Steps (8 total; 3 negative assertions):
+    1. (+) Lifecycle runs end-to-end on Rossmann subset with injected anomalies
+    2. (+) ≥ 4 of 5 detectors score successfully
+    3. (+) IsolationForest beats Z-score baseline on F1 (multivariate > univariate on multi-feature data)
+    4. (+) Best detector has ROC_AUC ≥ 0.8 (above random)
+    5. (-) NEGATIVE — contamination=0 produces zero predicted anomalies (no fabrication)
+    6. (-) NEGATIVE — empty dataset rejects (FileNotFoundError or empty-row error)
+    7. (+) All confusion matrices are 2×2 (binary: normal vs anomaly)
+    8. (-) NEGATIVE — synthetic-anomaly-count matches contamination rate (drill catches off-by-one)
+
+# RESOURCES: ml_anomaly disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: ml_anomaly disk_io
+- ----- Step 1: end-to-end -----
+- ----- Step 2: ≥ 4 of 5 detectors -----
+- ----- Step 3: IsolationForest beats Z-score on F1 -----
+- ----- Step 4: best detector ROC_AUC ≥ 0.8 -----

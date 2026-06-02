@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/evals_safety.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.10 Safety eval router — completes the §68.8/9/10 eval triplet.
+
+3 endpoints under /api/v1/holy/evals/safety/* federated via core.holy_audit
+(surface=evals_safety). RBAC catch-all /evals/* already gates this.
+
+Composes with §48 + §57.7 + §64.21 + §64.36 + §68.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+- from `services` import safety_eval_service
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `safety_global(http_request)`: Cross-model safety scorecard, latest-per-model with verdicts.
+- `safety_incidents(http_request, since, limit)`: Recent safety incidents (verdict=unsafe OR n_safety_incidents > 0).
+- `safety_per_model(http_request, model_id, since, limit)`: Per-model safety history with per-row verdict_summary.
+
+## Outputs
+- Return values from functions above

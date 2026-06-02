@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_frd_brd.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY FRD + BRD content invariants per dept (§47 + §52 + §64).
+
+Steps (10 total; 3 negative):
+    1. (+) all 19 docs/brd/HOLY_BRD.md exist + ≥ 1500B
+    2. (+) all 19 docs/frd/HOLY_FRD.md exist + ≥ 2000B
+    3. (+) every BRD has §-numbered sections: Executive summary, Stakeholders,
+           Scope, Success metrics, Constraints, Risks, Dependencies, Approvals,
+           Compose-footer (per §49)
+    4. (+) every FRD has FR-rows with the canonical 10-field structure +
+           ≥ 1 row per category (Decision / Observability / Per-process / Compliance)
+    5. (-) NEGATIVE — a fake dept missing both docs is detected by the
+           per-dept audit (cross-check with drill_per_dept_artifacts)
+    6. (+) every FRD references its parent BRD (HOLY_BRD.md link present)
+    7. (+) every BRD references its child FRD (HOLY_FRD.md link present)
+    8. (-) NEGATIVE — no FRD contains TBD/TODO/XXX placeholder anti-patterns
+    9. (-) NEGATIVE — no BRD/FRD has duplicate FR-IDs across depts (would
+           confuse audit traceability under §38.3)
+   10. (+) every FRD's compose-footer (§49) cites ≥ 5 sibling artifacts
+
+# RESOURCES: disk_io readonly
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io readonly
+- ----- Step 1: BRDs exist + ≥ 1500B -----
+- ----- Step 2: FRDs exist + ≥ 2000B -----
+- ----- Step 3: BRD sections -----
+- ----- Step 4: FRD categories -----

@@ -1,0 +1,71 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_adapters_endpoint.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: /api/v1/agent-platform/adapters aggregator (§56.2 discovery surface).
+
+After landing the 4th Stage-1 adapter (DSPy RAG optimizer), the obvious
+operator question — "which adapters are installed, opt-in flag set, and
+ready to invoke RIGHT NOW?" — required hitting four different status()
+methods. This endpoint answers it in one GET. The drill locks:
+
+  - All 4 §56 Stage-1 adapters appear in the response (agentops,
+    llm-gateway, typed-council, dspy-optimizer) — keyed by stable
+    short names so the UI can render a fixed grid.
+  - Aggregate counts (n_enabled, n_importable) match per-adapter rows.
+  - Adapters with opt-in flag set surface as enabled=true ONLY when the
+    flag is true AND the SDK is importable (defense in depth).
+  - A broken adapter (module import raises) does NOT crash the endpoint
+    — the bad row surfaces with importable=false + error_type.
+  - RBAC catch-all matches the new path.
+
+Steps (10; 4 negative):
+  1. (+) GET /adapters → 200, top-level keys {scanned_at, n_adapters,
+        n_enabled, n_importable, stage, adapters}; n_adapters == 4.
+  2. (+) The 4 stable adapter keys are all present (set equality).
+  3. (+) Every adapter row carries (key, name, enabled, importable,
+        audit_path, detail) — schema invariant.
+  4. (-) NEG with all opt-in flags unset → n_enabled == 0 (default-off
+        §56.2 contract holds at the aggregator surface too).
+  5. (+) Enabling HOLY_DSPY_OPTIMIZER_ENABLED bumps n_enabled by 1
+        AND the dspy-optimizer row shows enabled=true.
+  6. (-) NEG with importable false (mocked) → enabled flag set, but
+        importable=false; aggregate n_importable < n_adapters.
+  7. (-) NEG: broken adapter import → endpoint still returns 200; the
+        broken row carries error_type AND importable=false.
+  8. (+) RBAC matrix has a catch entry for this path (regex test).
+  9. (+) X-Tenant-ID echoed in response header (TenantIdMiddleware
+        composes with the new endpoint as expected).
+  10.(-) NEG: bad role → 403 (RBAC enforces _READ_ROLES; unknown role
+        does NOT slip through).
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_DSPY_OPTIMIZER_ENABLED
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app()`: Boot a fresh app with TenantId + RBAC middleware + agent_platform router.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- Clean slate — no opt-in flags set
+- ---- Step 1: GET /adapters → 200 + top-level shape ----
+- ---- Step 2: all 4 stable keys present ----
+- ---- Step 3: per-row schema invariant ----

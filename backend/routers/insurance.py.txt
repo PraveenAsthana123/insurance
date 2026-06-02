@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/insurance.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Insurance dept router — filesystem-backed read-only views of the
+scaffolded INSUR_*.md content + pipeline runner invocation API.
+
+Per global §47 (HTTP only — no SQL here), §47.6 (tenant-aware), §38.3
+(every read writes an audit row when --include-pii=1).
+
+Endpoints:
+    GET  /api/v1/insurance/depts                         — list 4 depts
+    GET  /api/v1/insurance/depts/{dept}/spec             — INSUR_DEPT_SPEC.md
+    GET  /api/v1/insurance/depts/{dept}/dashboards/{role}— INSUR_DASHBOARD.md per role
+    GET  /api/v1/insurance/depts/{dept}/reports/{role}   — INSUR_REPORTS.md per role
+    GET  /api/v1/insurance/depts/{dept}/pipelines        — registered pipelines
+    POST /api/v1/insurance/depts/{dept}/pipelines/{pid}/run — invoke pipeline (smoke)
+    GET  /api/v1/insurance/depts/{dept}/manual_vs_auto   — manual-vs-auto flow
+    GET  /api/v1/insurance/depts/{dept}/simulation_ui    — simulation UI spec
+    GET  /api/v1/insurance/depts/{dept}/system_design    — system design doc
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import subprocess
+- from `_` import sys
+- from `pathlib` import Path
+- from `fastapi` import APIRouter, HTTPException, Response
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_validate(dept, role)`: Reject unknown depts/roles with 404 (anti-enumeration per §47.6).
+- `_read_md(path)`: (no docstring)
+- `list_depts()`: (no docstring)
+- `get_dept_spec(dept)`: (no docstring)
+- `get_role_dashboard(dept, role)`: (no docstring)
+- `get_role_reports(dept, role)`: (no docstring)
+- `list_pipelines(dept)`: (no docstring)
+- `run_pipeline(dept, pipeline_id, smoke)`: (no docstring)
+- `get_manual_vs_auto(dept)`: (no docstring)
+- `get_simulation_ui(dept)`: (no docstring)
+- `get_system_design(dept)`: (no docstring)
+- `health()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Anti-info-leak per §47.6 — validate path components before file access

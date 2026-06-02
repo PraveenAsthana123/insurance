@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/nlp_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: NLP lifecycle with multiple-technique score comparison.
+
+Per operator 2026-05-22: "for nlp all the technique with score"
+
+Techniques compared on the same text corpus + same task (binary
+sentiment / topic classification):
+
+  1. TF-IDF + Logistic Regression          (baseline)
+  2. TF-IDF + LinearSVC                    (linear margin)
+  3. Sentence-BERT embeddings + LR         (semantic)
+  4. Zero-shot (facebook/bart-large-mnli)  (no training)
+
+Side outputs (every run):
+  - Score comparison table + bar chart (accuracy / F1 / latency)
+  - Confusion matrix per technique
+  - Per-class precision/recall breakdown
+  - Sample misclassifications (interpretability)
+  - Loss function + hyperparams logged per technique
+
+Artifacts: data/eval/<dept>/<pipeline>/<run_id>/manifest.json + plots/
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import matplotlib
+- from `_` import matplotlib.pyplot
+
+## Inputs
+- CLI args: --corpus, --dept, --pipeline, --artifacts-root, --techniques
+
+## Process
+### Classes
+- `NlpManifest`: (no docstring)
+- `NlpLifecycle`: Compare multiple NLP techniques on the same labeled corpus.
+### Functions
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ------------------------------------------------------------------
+- ------------------------------------------------------------------
+- ------------------------------------------------------------------
+- ------------------------------------------------------------------

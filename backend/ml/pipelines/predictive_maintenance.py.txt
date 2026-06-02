@@ -1,0 +1,39 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/pipelines/predictive_maintenance.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+Predictive Maintenance Pipeline — Manufacturing / Maintenance departments.
+
+Combines a Random Forest classifier for failure prediction with an
+Isolation Forest for unsupervised anomaly detection. Results are logged
+to MLflow.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any
+- from `_` import mlflow
+- from `_` import mlflow.sklearn
+- from `_` import numpy
+- from `_` import pandas
+- from `sklearn.ensemble` import IsolationForest, RandomForestClassifier
+- from `sklearn.metrics` import accuracy_score, classification_report, f1_score, precision_score, recall_score
+- from `sklearn.model_selection` import train_test_split
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PredictiveMaintenancePipeline`: Two-stage maintenance pipeline:
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ------------------------------------------------------------------
+- Feature engineering
+- ------------------------------------------------------------------
+- Parse datetime columns to numeric (timestamp → unix epoch)
+- Try label encoding

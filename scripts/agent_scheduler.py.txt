@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/agent_scheduler.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Recurring task scheduler for HOLY Redis-backed agents.
+
+This is a lightweight local scheduler for demos and development. It stores job
+metadata in Redis, supports multiple interval jobs, and enqueues due tasks into
+simple or council queues. It is intentionally small; production cron should move
+to a durable scheduler with ownership, retries, and audit retention.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+- from `_` import redis
+
+## Inputs
+- CLI args: --redis-url, --name, --mode, --every, --department, --prompt, --source, --tick, --once
+- Env vars: BEV_REDIS_URL, REDIS_URL
+
+## Process
+### Functions
+- `parse_args()`: (no docstring)
+- `now()`: (no docstring)
+- `queue_for(mode)`: (no docstring)
+- `load_schedule(client, name)`: (no docstring)
+- `save_schedule(client, schedule)`: (no docstring)
+- `list_schedules(client)`: (no docstring)
+- `enqueue_due(client)`: (no docstring)
+- `iso(ts)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

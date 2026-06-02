@@ -1,0 +1,75 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/agent_orchestration.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: agentic orchestration patterns (§64.43).
+
+Three high-leverage patterns not previously implemented:
+
+  1. DagExecutor          (§64.43 #8 — DAG Workflow)
+                          topological-sort tasks; honor depends_on; halt
+                          dependents on parent failure
+  2. ReflectionLoop       (§64.43 #10 — Reflection)
+                          answer → critique → refine, bounded by max_iters
+                          AND quality-improvement threshold
+  3. MixtureOfAgents      (§64.43 #12 — Mixture-of-Agents)
+                          N models propose → majority vote OR judge-pick;
+                          quorum-miss routes to human
+
+Each pattern is a pure-Python class with no external framework dependency
+— no LangGraph / CrewAI / AutoGen — to keep the dependency footprint flat
+and the contract deterministic for drills.
+
+Reference: composes with agentic_stack.py (the 10-layer execution stack
+uses these patterns at Layer 3 (Planner emits a DAG), Layer 6 (CUA can
+use Reflection per task), and Layer 6 (CUA can use MoA for risky
+classification choices).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `collections` import Counter, defaultdict
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any, Callable, Iterable
+
+## Inputs
+- CLI args: --artifacts-root
+
+## Process
+### Classes
+- `DagNode`: (no docstring)
+- `DagExecutionError`: (no docstring)
+- `DagCycleError`: (no docstring)
+- `DagExecutor`: Topological execution with halt-on-parent-failure semantics.
+- `ReflectionStep`: (no docstring)
+- `ReflectionResult`: (no docstring)
+- `ReflectionLoop`: Answer → critique → refine loop with mandatory termination guarantees.
+- `AgentVote`: (no docstring)
+- `MoAResult`: (no docstring)
+- `MixtureOfAgents`: Ensemble pattern: N agents propose; aggregate by majority OR judge.
+- `DebateRound`: (no docstring)
+- `DebateResult`: (no docstring)
+- `DebateOrchestrator`: Agents challenge each other across N rounds with cost + progress gates.
+- `BlackboardEntry`: (no docstring)
+- `BlackboardConcurrencyError`: Raised when a CAS (compare-and-set) write loses the race.
+- `Blackboard`: Shared key-value memory for multi-agent collaboration.
+- `OrchestrationManifest`: (no docstring)
+- `OrchestrationDemo`: End-to-end demo: build a 4-node DAG, reflect on one node's output,
+### Functions
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ===========================================================================
+- Pattern 1 — DagExecutor (§64.43 #8)
+- ===========================================================================
+- Filled at execution time
+- Build id → node map + dependency adjacency

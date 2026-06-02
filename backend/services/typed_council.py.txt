@@ -1,0 +1,73 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/typed_council.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Pydantic AI typed council — §56 Stage-1 adapter.
+
+HOLY's existing council pattern runs via OpenClaw → Redis → worker
+(see council_agents service in docker-compose). That path returns raw
+text strings from each of the 3 stages (author / reviewer / chair).
+
+This module is the COMPLEMENTARY in-process synchronous path with
+*typed* Pydantic outputs at each stage:
+
+  CouncilAuthorOutput  — proposal + confidence + risks
+  CouncilReviewerOutput — critique + score + must_fix
+  CouncilChairDecision — decision + rationale + final_text
+
+Pydantic AI's Agent class enforces the output schema via function
+calling, so an LLM that hallucinates an off-schema field is caught at
+parse time rather than at downstream consumer time.
+
+Per global CLAUDE.md §56.2 Stage-1 contract:
+  - Lazy import of pydantic_ai (SDK absence → unavailable, never crash)
+  - Feature-flag opt-in: HOLY_TYPED_COUNCIL_ENABLED=true
+  - Default model from HOLY_LLM_MODEL (reuses gateway env contract)
+  - Never default-on; OpenClaw/Redis path keeps working
+
+Per §38.3:
+  - Every council run writes one audit row per stage to
+    data/agent-supervisor/typed_council_runs.jsonl
+
+Per §57.7:
+  - Schema-validation failures wrapped → outcome='schema_error'
+  - Provider exceptions wrapped → outcome='error'
+  - API keys NEVER appear in audit row or response
+
+Drill: tests/drills/drill_typed_council.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import importlib.util
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `dataclasses` import dataclass
+- from `pathlib` import Path
+- from `typing` import Any, Literal
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+- Env vars: HOLY_LLM_MODEL, HOLY_TYPED_COUNCIL_AUDIT_PATH, HOLY_TYPED_COUNCIL_ENABLED
+
+## Process
+### Classes
+- `CouncilAuthorOutput`: Stage 1 — author proposes.
+- `CouncilReviewerOutput`: Stage 2 — reviewer critiques.
+- `CouncilChairDecision`: Stage 3 — chair decides.
+- `CouncilResult`: Normalized result of a typed-council run.
+### Functions
+- `is_enabled()`: True only when explicitly opted-in.
+- `is_importable()`: Probe the pydantic_ai package without triggering side effects.
+- `_write_audit_row(row)`: Best-effort §38.3 audit. Disk errors never crash the request.
+- `_base_row(tenant_id, request_id, stage, model)`: (no docstring)
+- `run_typed_council(prompt)`: Drive a 3-stage typed council. Returns CouncilResult always — never raises.
+- `status()`: Snapshot of the typed-council adapter for the agent-platform status surface.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Distinguish schema validation errors from other failures

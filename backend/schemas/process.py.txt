@@ -1,0 +1,25 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/process.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Optional
+- from `pydantic` import BaseModel
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ProcessResponse`: (no docstring)
+- `ProcessSummary`: (no docstring)
+- `ProcessCreate`: (no docstring)
+- `AIMappingResponse`: (no docstring)
+- `DataFlowStepResponse`: (no docstring)
+
+## Outputs
+- Return values from functions above

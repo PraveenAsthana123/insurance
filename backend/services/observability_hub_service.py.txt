@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/observability_hub_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68 Observability Hub aggregator — single discovery view across all
+7 §68 read surfaces (dbviewer / pii / guardrails / security /
+evals_functional / evals_cost / evals_safety).
+
+Answers operator's question: "Are all the §68 surfaces wired, are they
+reading from real data, are any of them broken right now?" Without
+this, the operator hits 7 endpoints to learn the same.
+
+The aggregator is intentionally CHEAP: each surface contributes just
+its source-of-truth log status (path + exists + n_rows + last_ts),
+NOT its full aggregation. Click-through to the specific surface for
+detail. This keeps the overview snappy under load.
+
+Per §57.7: a single broken surface NEVER breaks the aggregator —
+each surface is probed with try/except so the bad one shows up as
+status='error' + error_type, others surface normally.
+
+Mirrors §56's /api/v1/agent-platform/adapters aggregator shape — same
+discipline applied to §68's read surfaces.
+
+Composes with §38.3 (audit on read) + §43 (drill-locked) + §47.6 +
+§57.7 + §64.43 #7 (federation) + §68.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import time
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_resolve_path(surface)`: Resolve a surface's source-of-truth log path.
+- `_probe_jsonl(path)`: Probe a JSONL source: exists? n_rows? last_ts? corrupt lines?
+- `_probe_json(path)`: Probe a JSON catalog/snapshot: exists? parsable? size?
+- `_probe_one(surface)`: Probe one §68 surface — defensive: any exception caught + reported.
+- `overview()`: Aggregated snapshot of all 7 §68 read surfaces.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per-surface registry: each entry describes how to probe one §68 surface.
+- key:             stable short name for the surface
+- policy:          the §68.x clause it implements
+- endpoint_prefix: caller's click-through path
+- source_env_var:  env override for the underlying JSONL log

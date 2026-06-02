@@ -1,0 +1,33 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/simulation_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+simulation_service.py — price × promo simulation using beta forecast as baseline.
+
+Elasticity + margin-factor are constants for Phase delta. Real per-store learning
+is deferred; see docs/superpowers/specs/2026-04-19-sales-revenue-deep-dive-design.md §9.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `core.structured_logger` import emit_event
+- from `schemas.sales` import SimulationRequest, SimulationResponse, WaterfallStep
+- from `services.forecast_service` import ForecastService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `SimulationService`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Industry benchmarks — see /docs/data/elasticity-methodology.md (Phase 1 simplification).
+- (Simplification: Rossmann "Sales" column is daily revenue, not units. We compute
+- the revenue waterfall directly.)
+- Get baseline forecast for the duration window. ForecastService enforces
+- horizon_days >= 7 via Prophet's stability, so bump when duration < 7.

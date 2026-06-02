@@ -1,0 +1,60 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_tenant_activity.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: GET /api/v1/agent-platform/activity — unified per-tenant feed.
+
+Composes audit rows from multiple agent-platform surfaces (CUA executes,
+admin reads, Paperclip artifacts) into one response. Locks the §64.43 #7
+tenant-isolation contract across the composed feed.
+
+Steps (10 total; 4 negative):
+  1. (+) Empty state → 200 with items=[], total_items=0
+  2. (+) CUA executed rows surface as source="cua"
+  3. (+) Admin audit-of-audit rows surface as source="admin"
+  4. (+) Paperclip artifacts surface as source="paperclip"
+        (file mtime / created_at as ts)
+  5. (-) NEG: cross-tenant rows EXCLUDED (tenant-b sees only tenant-b)
+  6. (-) NEG: no `?tenant_id=` query parameter accepted — pass
+        ?tenant_id=tenant-a as tenant-b → returns ONLY tenant-b's rows
+  7. (+) sources_available dict reports which sources contributed
+  8. (+) Items sorted descending by ts (most recent first)
+  9. (-) NEG: corrupt CUA line skipped (gracefully); valid rows still load
+  10.(-) NEG: limit=0 → 422 (Pydantic Query(ge=1))
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: BEV_PAPERCLIP_ROOT, CUA_AUDIT_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path, paperclip_root)`: (no docstring)
+- `_seed_cua(audit_path, rows)`: (no docstring)
+- `_make_cua(tenant, tool, outcome, ts, request_id)`: (no docstring)
+- `_make_paperclip_artifact(tenant, clip_id, title, ts)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: empty ----
+- ---- Step 2: CUA rows ----
+- ---- Step 3: admin rows ----
+- ---- Step 4: Paperclip artifacts ----

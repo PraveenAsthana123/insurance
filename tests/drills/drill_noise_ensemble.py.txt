@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_noise_ensemble.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY noise handling + ensemble compare (§43, §64.19 + §65.1 #5).
+
+Steps (10 total; 4 negative):
+    1. (+) Tabular cleaner: NaNs all filled, duplicates dropped
+    2. (+) Tabular cleaner: IQR outlier counts populated per col
+    3. (-) NEGATIVE — non-DataFrame input raises TypeError
+    4. (+) Image cleaner: batch shape preserved, target_size applied
+    5. (+) Text cleaner: list length preserved, NFC unicode normalize works
+    6. (-) NEGATIVE — text cleaner with non-list raises TypeError
+    7. (+) Timeseries cleaner: duplicate timestamps removed; rolling-z counts populated
+    8. (+) Ensemble compare: ≥ 1 of voting/stacking beats best base on signal-rich data
+    9. (-) NEGATIVE — ensemble with single base estimator rejected
+   10. (-) NEGATIVE — ensemble with unknown task rejected
+
+# RESOURCES: ml_noise_ensemble disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+- from `_` import numpy
+- from `_` import pandas
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: ml_noise_ensemble disk_io
+- ----- Step 1: tabular NaN + dedup -----
+- ----- Step 2: IQR outliers populated -----
+- ----- Step 3: NEGATIVE — non-DataFrame input -----
+- ----- Step 4: image cleaner shape + size -----

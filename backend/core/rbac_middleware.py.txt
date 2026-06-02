@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/rbac_middleware.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+rbac_middleware — demo-mode RBAC. Reads X-Demo-Role header, enforces matrix.
+
+NOT real auth — no token signing, no session. For demo + portfolio purposes.
+Real RBAC is Phase 2b (see roadmap §12).
+
+Permission matrix is a list of (method, path-regex, allowed-roles-set) tuples.
+If no entry matches the incoming request, the request is allowed (so health,
+docs, departments, processes, datasets, etc. continue to work).
+
+Default role when header absent = "manager" so existing unauthenticated flows
+(e.g., server-to-server tests) still work without modification.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import re
+- from `typing` import Callable
+- from `starlette.middleware.base` import BaseHTTPMiddleware
+- from `starlette.requests` import Request
+- from `starlette.responses` import JSONResponse, Response
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `RBACMiddleware`: Enforces the PERMS_MATRIX against the X-Demo-Role header.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ----- Permission matrix for Sales + Supply Chain + AI endpoints -----
+- Each entry: (method, path-regex) -> set of roles allowed.
+- If no entry matches, request is ALLOWED (so /health, /docs, etc. stay open).
+- Read-only endpoints are open to all four original roles + the Phase ζ "tester".
+- Write/simulate endpoints remain manager-only.

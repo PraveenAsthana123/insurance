@@ -1,0 +1,59 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_cua_audit_readback.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: GET /api/v1/agent-platform/cua/audit — tenant-scoped audit readback.
+
+Closes the §38.3 + §64.43 #7 loop: audit rows ARE written on every CUA
+session (commit f57b255b), but they were not queryable via API until now.
+The readback endpoint reads `data/agent-supervisor/cua_runs.jsonl`, filters
+by the middleware-set tenant_id (NEVER a query parameter), and returns
+sorted+paginated results.
+
+Steps (10 total; 4 negative):
+  1. (+) Empty audit log → 200 with rows=[], total_count=0
+  2. (+) After 3 executed calls for tenant-a, audit shows 3 rows
+  3. (-) NEGATIVE: tenant-b sees ZERO of tenant-a's rows (federated isolation)
+  4. (-) NEGATIVE: no `tenant_id=` query param exists — callers CANNOT
+        cross-read by URL manipulation. Pass it anyway → ignored,
+        middleware tenant_id wins
+  5. (+) limit=2 returns 2 most recent rows (sorted desc by ts)
+  6. (+) since_ts filter excludes rows older than the cursor
+  7. (-) NEGATIVE: limit=0 → 422 (Pydantic validates ge=1)
+  8. (-) NEGATIVE: corrupt line in audit file → skipped (NOT a crash)
+  9. (+) total_count counts ALL matching rows, NOT just limit
+  10.(+) Response includes tenant_id echo + audit_path
+
+# RESOURCES: disk_io,playwright
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: CUA_AUDIT_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app()`: Minimal app with only the middlewares + agent-platform router needed.
+- `_seed_audit_rows(audit_path, n_per_tenant, base_ts)`: Write seed rows for multiple tenants directly into the jsonl. Bypasses
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io,playwright
+- ---- Step 1: empty audit log ----
+- ---- Seed 3 rows for tenant-a, 2 for tenant-b ----
+- ---- Step 2: tenant-a sees 3 rows ----
+- ---- Step 3: NEGATIVE — tenant-b sees ZERO of tenant-a's rows ----

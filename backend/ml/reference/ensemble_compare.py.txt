@@ -1,0 +1,56 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/ensemble_compare.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+HOLY reference: ensemble model comparison (Voting + Stacking) per §65.1 #5.
+
+Generic wrapper that takes a list of base sklearn-compatible classifiers (or
+regressors) and produces a side-by-side comparison of:
+
+  - Each base model alone
+  - VotingClassifier / VotingRegressor (hard + soft for classification)
+  - StackingClassifier / StackingRegressor (with cross-validation)
+
+Returns a manifest with per-model metrics + a winner. Used inside
+`full_lifecycle.py` (when it benchmarks XGBoost + LightGBM + Dummy) and
+as a standalone tool when the operator wants ensemble exploration.
+
+Composes with §64.20 (mandatory tabular ML row) + §64.42 (no external
+framework lock-in — pure sklearn).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import time
+- from `dataclasses` import dataclass, field
+- from `typing` import Any, Literal
+- from `_` import numpy
+- from `sklearn.dummy` import DummyClassifier, DummyRegressor
+- from `sklearn.ensemble` import GradientBoostingClassifier, GradientBoostingRegressor, StackingClassifier, StackingRegressor, VotingClassifier
+- from `sklearn.linear_model` import LogisticRegression, Ridge
+- from `sklearn.metrics` import accuracy_score, f1_score, mean_absolute_error, mean_squared_error, r2_score
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `EnsembleManifest`: (no docstring)
+### Functions
+- `_score_classifier(y_true, y_pred, name, fit_seconds, predict_proba)`: (no docstring)
+- `_score_regressor(y_true, y_pred, name, fit_seconds)`: (no docstring)
+- `default_classifiers()`: Reasonable defaults if operator doesn't pass `base_estimators`.
+- `default_regressors()`: (no docstring)
+- `compare_ensemble(X, y)`: Compare base models + voting + stacking on the same train/test split.
+- `_main()`: Smoke: synthetic binary classification + regression sanity.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Score each base model alone (refit each from scratch — voting/stacking
+- will re-fit internally; that's fine, it lets us measure each in isolation).
+- Clone so the original isn't fitted (voting/stacking will fit clones too)
+- Pick winner (best primary metric across all approaches)
+- For regression: pick lowest RMSE

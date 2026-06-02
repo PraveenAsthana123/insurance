@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/schemas/openclaw.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+OpenClaw bridge schemas.
+
+These models define the repo-local OpenClaw-compatible contract. The bridge accepts
+external orchestration requests, normalizes them into the existing Redis-backed
+agent queues, and returns a stable polling shape for callers.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any, Literal
+- from `pydantic` import BaseModel, Field, field_validator
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `OpenClawTaskRequest`: Input payload for creating an OpenClaw bridge task.
+- `OpenClawTaskResponse`: Response returned after a task is accepted by the OpenClaw bridge.
+- `OpenClawTaskResultResponse`: Polling response for OpenClaw task completion.
+- `OpenClawQueueStatus`: Redis queue length snapshot for one OpenClaw bridge mode.
+- `OpenClawStatusResponse`: Runtime health response for the OpenClaw bridge.
+- `OpenClawManifestResponse`: Machine-readable contract for external OpenClaw-style orchestrators.
+
+## Outputs
+- Return values from functions above

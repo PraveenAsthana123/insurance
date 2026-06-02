@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/repositories/base.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `contextlib` import contextmanager
+- from `typing` import Generator
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `psycopg2.extensions` import connection
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `BaseRepository`: Base class for all repositories.
+
+## Outputs
+- Return values from functions above

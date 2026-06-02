@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/pipelines/inventory_optimizer.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+Inventory Optimizer Pipeline — Supply Chain / Procurement / Logistics departments.
+
+Uses a Random Forest regressor to predict optimal stock levels and demand,
+minimising stockouts and overstock situations. Results are logged to MLflow.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any
+- from `_` import mlflow
+- from `_` import mlflow.sklearn
+- from `_` import numpy
+- from `_` import pandas
+- from `sklearn.ensemble` import RandomForestRegressor
+- from `sklearn.metrics` import mean_absolute_error, mean_squared_error, r2_score
+- from `sklearn.model_selection` import train_test_split
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `InventoryOptimizerPipeline`: Random Forest-based inventory level / demand prediction pipeline.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ------------------------------------------------------------------
+- Feature engineering
+- ------------------------------------------------------------------
+- Drop rows where target is missing
+- Encode object / category columns

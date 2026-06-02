@@ -1,9 +1,18 @@
 {
-  "ts": "2026-06-02T06:20:01Z",
+  "ts": "2026-06-02T06:30:01Z",
   "cron_logs": {
+    "agent_test_runner.log": {
+      "size": 2686,
+      "last_modified": "2026-06-02T06:30:01Z",
+      "tail": [
+        "2026-06-02T06:21:08Z | test-runner | output \u2192 skip \u00b7 /mnt/deepa/insur_project/jobs/reports/test_output_20260602T062058Z.json",
+        "2026-06-02T06:21:08Z | test-runner | summary: /mnt/deepa/insur_project/jobs/reports/test_summary_20260602T062058Z.md",
+        "2026-06-02T06:30:01Z | test-runner | TDD check: every feature must have a paired drill (\u00a743)"
+      ]
+    },
     "codex_approval_cron.log": {
-      "size": 558981,
-      "last_modified": "2026-06-02T06:20:01Z",
+      "size": 559291,
+      "last_modified": "2026-06-02T06:30:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -11,8 +20,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 295739,
-      "last_modified": "2026-06-02T06:09:32Z",
+      "size": 303954,
+      "last_modified": "2026-06-02T06:21:03Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -88,12 +97,12 @@
       ]
     },
     "pending_boot.log": {
-      "size": 3448,
-      "last_modified": "2026-06-02T06:00:58Z",
+      "size": 3502,
+      "last_modified": "2026-06-02T06:30:01Z",
       "tail": [
-        "BOOT_OK routes=177",
         "[2026-06-02T06:00:01Z] verifying backend create_app()",
-        "BOOT_OK routes=177"
+        "BOOT_OK routes=177",
+        "[2026-06-02T06:30:01Z] verifying backend create_app()"
       ]
     },
     "pending_push-hint.log": {
@@ -106,12 +115,12 @@
       ]
     },
     "pending_push.log": {
-      "size": 3549,
-      "last_modified": "2026-06-02T06:15:08Z",
+      "size": 3718,
+      "last_modified": "2026-06-02T06:30:01Z",
       "tail": [
-        "[2026-06-02T06:15:02Z] push task",
-        "[2026-06-02T06:15:02Z] skip \u2014 no origin remote configured",
-        "[2026-06-02T06:15:02Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-02T06:30:01Z] push task",
+        "[2026-06-02T06:30:01Z] skip \u2014 no origin remote configured",
+        "[2026-06-02T06:30:01Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "rag_chunking.log": {
@@ -142,21 +151,21 @@
       ]
     },
     "rag_guardrail.log": {
-      "size": 1754,
-      "last_modified": "2026-06-02T06:20:01Z",
+      "size": 1850,
+      "last_modified": "2026-06-02T06:20:02Z",
       "tail": [
-        "[2026-06-02T06:00:01Z] guardrail probes",
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260602.jsonl",
-        "[2026-06-02T06:20:01Z] guardrail probes"
+        "[2026-06-02T06:20:01Z] guardrail probes",
+        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260602.jsonl"
       ]
     },
     "rag_ragas.log": {
-      "size": 514,
-      "last_modified": "2026-06-02T02:30:14Z",
+      "size": 549,
+      "last_modified": "2026-06-02T06:30:01Z",
       "tail": [
-        "ImportError(\"cannot import name 'std_to_otel' from 'opentelemetry._logs' (/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/opentelemetry/_logs/__init__.py)\")",
         "  plugins = get_plugins()",
-        "ragas: skipped (no audit)"
+        "ragas: skipped (no audit)",
+        "[2026-06-02T06:30:01Z] ragas suite"
       ]
     },
     "rag_token.log": {
@@ -168,13 +177,20 @@
         "token usage: 1 models tallied for 2026-06-02"
       ]
     },
-    "work_tracker.log": {
-      "size": 5670,
-      "last_modified": "2026-06-02T06:15:31Z",
+    "test_runner_tdd_hourly.log": {
+      "size": 80,
+      "last_modified": "2026-06-02T06:30:01Z",
       "tail": [
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=38, fleet=237)",
+        "\u001b[36m[test-runner]\u001b[0m TDD check: every feature must have a paired drill (\u00a743)"
+      ]
+    },
+    "work_tracker.log": {
+      "size": 5880,
+      "last_modified": "2026-06-02T06:25:01Z",
+      "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=39, fleet=237)",
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=39, fleet=237)"
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=39, fleet=237)",
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=42, fleet=237)"
       ]
     }
   },
@@ -198,12 +214,12 @@
     "audit_rows": 0,
     "last_modified": null
   },
-  "cron_entries": 39,
+  "cron_entries": 42,
   "e2e_runs": {
     "count": 1,
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 34
+    "count": 51
   }
 }

@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/forecast_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+forecast_service.py — Prophet per-store forecast wrapper with an LRU cache.
+
+Public API:
+    service = ForecastService(repo=SalesRepo())
+    resp = service.forecast(store_id=1, horizon_days=56)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import time
+- from `dataclasses` import dataclass
+- from `datetime` import date, timedelta
+- from `functools` import lru_cache
+- from `typing` import Iterable
+- from `_` import pandas
+- from `core.structured_logger` import emit_event
+- from `repositories.sales_repo` import SalesRepo
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `_FittedModel`: Cached fitted model + metadata for one store.
+- `ForecastService`: (no docstring)
+### Functions
+- `_to_points(df, col)`: (no docstring)
+- `_mape(actual, predicted)`: Mean absolute percentage error, skipping zero-actual rows.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Prophet is heavy (CmdStanPy) and not required for backend boot. Lazy-load it
+- inside the methods that need it; raise a clear error if the dep is absent
+- AND the forecasting endpoint is actually invoked.
+- ----- public -----
+- Split pred into historical (last BACKTEST_TAIL_DAYS) and forecast (next horizon_days)

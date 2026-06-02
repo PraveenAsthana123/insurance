@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/agent_platform.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Unified agent platform setup/status API.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `fastapi` import APIRouter, Depends, Query, Request
+- from `core.middleware` import current_tenant_id
+- from `schemas.agent_platform` import AgentPlatformManifestResponse, AgentPlatformStatusResponse, AgentPolicyEvaluationRequest, AgentPolicyEvaluationResponse, ApprovalBrokerRequest
+- from `services.agent_platform_service` import AgentPlatformIntegrationService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `get_agent_platform_service()`: Dependency provider for unified agent platform integrations.
+- `get_status(service)`: Return setup/runtime status for Harness, OpenClaw, Paperclip, PoliysAI, CUA, and Stagehand.
+- `get_manifest(service)`: Return the unified agent platform integration contract.
+- `evaluate_governance(request, service)`: Evaluate whether one agent/tool action is allowed.
+- `execute_cua(http_request, request, service)`: Run a policy-gated CUA/browser action envelope. Defaults to dry-run.
+- `decide_approval_broker(http_request, request, service)`: Classify approve/submit/next requests and optionally enqueue safe next work.
+- `run_typed_council(http_request, request, service)`: Run the opt-in Pydantic AI author/reviewer/chair council.
+- `list_cua_audit(http_request, limit, since_ts, service)`: Read back the CUA audit log, tenant-scoped from the X-Tenant-ID header.
+- `get_adapters_status(http_request, service)`: Aggregated snapshot of all §56 Stage-1 adapters.
+- `get_tenant_activity(http_request, limit, since_ts, service)`: Unified per-tenant activity feed across CUA + admin + Paperclip.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Pydantic v2: model has model_copy with update; mutate via metadata dict.
+- Merge Idempotency-Key header into request if body didn't supply one.
+- Body field wins over header (more explicit; matches user intent).

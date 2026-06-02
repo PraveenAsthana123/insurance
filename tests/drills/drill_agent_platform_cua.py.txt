@@ -1,0 +1,58 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_agent_platform_cua.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: Agent platform CUA execution paths (§64.40 layer 6/7/8 + §47.6 + §38.3).
+
+Verifies the real-Playwright wiring of `execute_cua` in
+`backend/services/agent_platform_service.py`. The drill locks five
+production-grade invariants that the previous dry-run-only implementation
+could not assert:
+
+  1. Dry-run path STILL returns status="dry-run" + no audit row written
+  2. Real navigation to a target NOT in PLAYWRIGHT_ALLOWLIST → "blocked"
+     with reason in audit row (NEGATIVE)
+  3. Real navigation to a dead localhost endpoint → status="error" with
+     structured error_type + latency_ms (NEGATIVE — never bare crash)
+  4. Real navigation to about:blank with extended allowlist → "executed"
+     with page_title + screenshot_sha256 + audit_row written
+  5. Policy denial precedes any browser action (NEGATIVE — secret/password
+     target NEVER reaches Playwright)
+  6. Audit row schema: required §38.3 fields (request_id, tenant_id, actor,
+     tool, target, outcome, ts) on every row regardless of outcome
+  7. Adapter='stagehand' + dry_run=False → "unavailable" (honest refusal,
+     not silent success)
+  8. Final scorecard: ≥1 audit row per outcome class (blocked/error/executed)
+
+# RESOURCES: playwright,disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import importlib.util
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: CUA_AUDIT_PATH, PLAYWRIGHT_ALLOWLIST
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: playwright,disk_io
+- Isolated audit path so this drill doesn't pollute the operator's local audit log.
+- Force re-import so env-derived module globals take effect.
+- ----- Step 1: dry-run path -----
+- ----- Step 2: NEGATIVE — off-allowlist target blocked -----

@@ -1,0 +1,27 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/voice_history_init.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Initialize the voice command history SQLite DB.
+
+Per operator 2026-06-01 ("save these command on sqlite as well").
+
+Schema: every voice transcript + trigger action + outcome stored for
+later replay / audit / search.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sqlite3
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `init_db()`: (no docstring)
+
+## Outputs
+- Return values from functions above

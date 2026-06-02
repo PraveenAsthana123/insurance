@@ -1,0 +1,71 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_approval_broker.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: POST /api/v1/agent-platform/approval-broker/decide — §69 compliance.
+
+Approval Broker is the runtime counterpart to global §69 (Approval-
+Minimization Helper). The settings.local.json fix reduces approvals at
+the SHELL boundary; the broker reduces approvals at the WORKFLOW boundary
+by classifying inbound requests and auto-approving safe local work +
+auto-submitting the next task to OpenClaw when risk is low.
+
+The drill locks the 4 risk lanes + the submission gate + the tenant
+attribution. Shipped in 9edd73a5 with pytest unit tests but NO drill —
+this closes that gap per §43 mandatory drill discipline.
+
+Steps (12 total; 6 negative):
+  1. (+) Safe local work ("validate docs") → auto_approved + risk=low
+  2. (+) Safe local work with submit_next=True + next_prompt → submitted +
+        openclaw_task populated with queue/task_id
+  3. (-) NEG: production action ("deploy to production") → require_human_approval
+        (the HUMAN regex catches "production" + "deploy")
+  4. (-) NEG: secret in target ("rotate slack_bot_token") → require_human_approval
+        (HUMAN regex catches "slack_bot_token")
+  5. (-) NEG: destructive shell ("rm -rf /var/log") → deny (DENY regex,
+        risk=high, controls include 'human-security-review')
+  6. (+) HUMAN-only lane: 'modify branch protection' → require_human_approval
+        (broker's HUMAN regex; not in upstream dangerous-target)
+  7. (-) NEG: medium-risk + submit_next=True → require_human_approval
+        (submit lane restricted to low-risk only)
+  8. (-) NEG: submit_next=True without next_prompt → require_human_approval
+        with reason mentioning "next_prompt is missing"
+  9. (+) Tenant attribution: X-Tenant-ID middleware wins; response carries
+        tenant_id=tenant-a even if body metadata says otherwise
+  10.(+) Audit envelope carries §38.3 fields (ts, request_id, tenant_id,
+        actor='approval-broker', tool='approval-broker', decision)
+  11.(+) Bare neutral action ("hello world") → falls through to medium risk
+        (not in SAFE regex, not in HUMAN, not in DENY) — auto_approved if
+        no submit_next, require_human_approval if submit_next set
+  12.(-) NEG: bad role (unknown user) → 400 from RBAC, NEVER reaches broker
+
+# RESOURCES: redis
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app()`: Boot a fresh app with the full middleware stack + agent_platform router.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: redis
+- ---- Step 1: safe local work → auto_approved, risk=low ----
+- ---- Step 2: submit_next=True + next_prompt + low-risk → submitted ----
+- ---- Step 3: NEG production action → require_human_approval ----
+- ---- Step 4: NEG secret in target → DENY (defense in depth) ----

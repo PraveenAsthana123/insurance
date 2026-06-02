@@ -1,0 +1,62 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# infra/orchestration/temporal_worker.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Temporal worker template — durable scheduled workflows.
+
+Per Codex 2026-06-01 recommendation + global ADR-004 (Redis+Celery now,
+Temporal for durable workflows).
+
+Use Temporal for:
+    - Long-running agent workflows that must survive restart
+    - Approval workflows (await human gate then resume)
+    - Scheduled per-tenant tasks
+    - Retries with exponential backoff
+    - Compensation / saga patterns
+
+Composes with LangGraph (LangGraph for DAG of agents within a single
+workflow; Temporal for durable orchestration of those workflows across
+time + restarts).
+
+Usage:
+    # Boot worker in long-running process
+    python -m insur_project.temporal_worker
+
+    # Trigger workflow from elsewhere
+    from temporalio.client import Client
+    client = await Client.connect("localhost:7233")
+    handle = await client.start_workflow(
+        DailyAuditWorkflow.run,
+        WorkflowInput(tenant_id="acme", scope="all"),
+        id=f"daily-audit-{tenant_id}-{date}",
+        task_queue="insur-tasks",
+    )
+
+## Imports
+- from `__future__` import annotations
+- from `_` import asyncio
+- from `_` import logging
+- from `_` import os
+- from `dataclasses` import dataclass
+- from `datetime` import timedelta
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `DailyAuditInput`: (no docstring)
+- `DailyAuditResult`: (no docstring)
+### Functions
+- `async run_worker()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Boot worker in long-running process
+- Trigger workflow from elsewhere
+- Lazy-import temporalio
+- ─────────────────────────────────────────────────────────────────────────
+- Workflow inputs / outputs

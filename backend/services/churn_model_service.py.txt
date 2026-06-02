@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/churn_model_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+churn_model_service.py — scikit-learn churn model with lazy-fit + in-proc cache.
+
+Pattern mirrors ForecastService (fit on first request → cache fitted model in
+instance attribute for subsequent calls). We deliberately avoid xgboost to
+keep the dependency surface lean — scikit-learn's GradientBoostingClassifier
+gives us comparable AUC on the IBM Telco benchmark (~0.83) with packages the
+backend already installs.
+
+Public API:
+    svc = ChurnModelService(repo=CustomerRepo())
+    out = svc.predict(customer_id="7590-VHVEG")
+    metrics = svc.backtest_metrics()           # {auc, precision_at_10, n_train, n_test}
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import time
+- from `dataclasses` import dataclass, field
+- from `datetime` import datetime, timezone
+- from `typing` import Iterable
+- from `_` import numpy
+- from `_` import pandas
+- from `sklearn.ensemble` import GradientBoostingClassifier
+- from `sklearn.linear_model` import LogisticRegression
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `_Fitted`: (no docstring)
+- `ChurnModelService`: (no docstring)
+### Functions
+- `_precision_at_top_k(y_true, y_score, k_frac)`: Precision among the top k_frac of scores.
+- `_segment_for(prob, tenure_months)`: (no docstring)
+- `_human_label(feature, value)`: Render a short English explanation for a feature value.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Cached per-customer probabilities (customer_id → prob), filled on first predict call.
+- ----- public -----
+- Fall back to single-customer lookup.
+- Score all customers once (cached), sort by prob desc.
+- ----- internal -----

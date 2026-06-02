@@ -1,0 +1,62 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/run_drills.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Resource-aware parallel drill runner per global §43.2.
+
+Discovers tests/drills/drill_*.py, parses `# RESOURCES:` and optional
+`# SLOW:` header tags, schedules drills so that drills sharing any
+resource serialize automatically while disjoint sets run in parallel.
+
+Usage:
+    scripts/run_drills.py                    # auto: fast lane, parallel=4
+    scripts/run_drills.py --full             # include SLOW drills
+    scripts/run_drills.py --parallel 8       # 8-wide scheduling
+    scripts/run_drills.py --only sequence    # substring match
+    scripts/run_drills.py --list             # list discovered drills + tags
+    scripts/run_drills.py --stop-on-fail     # exit on first failure
+    scripts/run_drills.py --json             # JSON output
+
+Exit code:
+    0   all selected drills passed
+    1   one or more drills failed
+    2   discovery / setup error
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import asyncio
+- from `_` import json
+- from `_` import re
+- from `_` import sys
+- from `_` import time
+- from `dataclasses` import dataclass, field
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --parallel, --timeout, --full, --only, --list, --stop-on-fail, --json
+
+## Process
+### Classes
+- `Drill`: (no docstring)
+- `Result`: (no docstring)
+- `Scheduler`: asyncio-based scheduler with per-resource locks.
+- `_nullctx`: (no docstring)
+### Functions
+- `discover()`: (no docstring)
+- `filter_drills(drills)`: (no docstring)
+- `print_text_summary(results, elapsed)`: (no docstring)
+- `print_json_summary(results, elapsed)`: (no docstring)
+- `async run_selected(selected, parallel, default_timeout, stop_on_fail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per global §61 — use the absolute venv interpreter, not `python` from PATH.
+- asyncio's safe subprocess launcher (uses execve-style API, NOT shell).
+- Aliased so the literal substring doesn't trip security hooks scanning
+- for shell-exec patterns from other languages.
+- Default fallback resource set when no `# RESOURCES:` tag exists — safe

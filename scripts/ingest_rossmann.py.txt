@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/ingest_rossmann.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+ingest_rossmann.py — transform Rossmann CSVs into canonical star schema.
+
+Reads from $ROSSMANN_DIR (default data/kaggle/rossmann/), loads:
+  store.csv    -> dim_store (1115 rows)
+  train.csv    -> dim_date + fact_sales (~1.017M rows)
+
+Idempotent: TRUNCATEs target tables before COPY.
+
+Usage:
+  python scripts/ingest_rossmann.py [--dir PATH] [--limit N]
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import csv
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `datetime` import date
+- from `io` import StringIO
+- from `pathlib` import Path
+- from `typing` import Iterable
+
+## Inputs
+- CLI args: --dir, --limit
+
+## Process
+### Functions
+- `_pg_dsn_from_env()`: (no docstring)
+- `_read_store_csv(path)`: (no docstring)
+- `_read_train_csv(path, limit)`: Yield (dim_date_row, fact_sales_row); dim_date is deduped downstream.
+- `_copy_rows(cur, table, cols, rows)`: Bulk-load rows via COPY. Returns row count.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

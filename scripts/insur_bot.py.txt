@@ -1,0 +1,55 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/insur_bot.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+insur_bot — chat over the end-to-end demo index.
+
+Modes:
+  python insur_bot.py ask "your question"        # one-shot CLI
+  python insur_bot.py repl                       # interactive CLI
+  python insur_bot.py serve [--port 8001]        # FastAPI HTTP + UI
+
+Uses artifacts produced by scripts/end_to_end_demo.py under
+data/eval/end_to_end/latest/ (vector + bm25 + graph).
+
+Per §38: every /bot/ask call writes an audit row.
+Per §42: read-only over local indexes; no external calls except Ollama.
+Per CLAUDE.md security: NO innerHTML — chat UI uses textContent + DOM.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `_` import uuid
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import requests
+
+## Inputs
+- CLI args: --port
+- Env vars: INSUR_EMBED_MODEL, INSUR_LLM_MODEL, OLLAMA_URL
+
+## Process
+### Functions
+- `latest_run()`: (no docstring)
+- `load_indexes(run_dir)`: (no docstring)
+- `embed(text)`: (no docstring)
+- `vector_search(chroma_dir, query, k)`: (no docstring)
+- `bm25_search(bm25_data, query, k)`: (no docstring)
+- `graph_neighbors(graph_data, query, k)`: (no docstring)
+- `build_context(query, idx, k)`: (no docstring)
+- `llm_answer(query, ctx)`: (no docstring)
+- `write_audit(req_id, query, ctx, answer, latency_ms)`: (no docstring)
+- `answer_query(query, idx)`: (no docstring)
+- `serve(port)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ── HTTP / UI mode (no innerHTML; safe DOM only) ─────────────────────────

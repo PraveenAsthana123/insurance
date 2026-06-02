@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/pipelines/demand_forecast.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+Demand Forecasting Pipeline — Sales / Retail departments.
+
+Uses XGBoost with calendar, lag, and rolling statistical features to
+forecast product demand. Results are logged to MLflow.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any
+- from `_` import mlflow
+- from `_` import mlflow.xgboost
+- from `_` import numpy
+- from `_` import pandas
+- from `_` import xgboost
+- from `sklearn.metrics` import mean_absolute_error, mean_squared_error
+- from `sklearn.model_selection` import train_test_split
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `DemandForecastPipeline`: XGBoost-based demand forecasting pipeline.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ------------------------------------------------------------------
+- Feature engineering
+- ------------------------------------------------------------------
+- ------------------------------------------------------------------
+- ------------------------------------------------------------------

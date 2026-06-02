@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/error_handlers.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `fastapi` import Request
+- from `fastapi.responses` import JSONResponse
+- from `core.exceptions` import AppError, DataError, ExternalServiceError, ModelError, NotFoundError
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_get_correlation_id(request)`: (no docstring)
+- `async app_error_handler(request, exc)`: (no docstring)
+- `async generic_error_handler(request, exc)`: (no docstring)
+- `register_error_handlers(app)`: Register all exception handlers on the FastAPI app.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Mapping from error_code to HTTP status code

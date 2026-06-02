@@ -1,0 +1,68 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_evals_functional.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §68.8 Functional eval surface — iteration 4 of HOLY Observability Hub.
+
+Read-only aggregation over data/agent-supervisor/functional_eval_runs.jsonl
+(env-overridable via HOLY_EVAL_FUNCTIONAL_LOG). The WRITE side (MLflow
+job / scheduled eval that appends a row per run) is a separate iteration.
+
+Steps (12 total; 5 negative):
+  1. (+) Empty log → /_global returns 200 with n_runs_total=0,
+        leaderboard=[], policy stamp present (§57.7 graceful)
+  2. (+) Seed 5 runs across 3 models on 2 datasets → /_global
+        leaderboard length=3 (one per model, latest-only), sorted by
+        accuracy descending
+  3. (+) GET /{model_id} returns history newest-first + drift_summary
+        between two most-recent runs
+  4. (+) dataset filter: /{model_id}?dataset=rag_qa_v1 → only those
+        runs (asserts the filter actually filters)
+  5. (+) GET /{model_id}/runs/{run_id} → 200 with status=found
+  6. (-) NEG: unknown model_id → 404 (no eval runs found)
+  7. (-) NEG: malformed model_id (regex reject) → 400
+  8. (-) NEG: unknown run_id under known model → 404
+  9. (-) NEG: malformed run_id (contains $/&/space) → 400
+  10.(-) NEG: bad role → 400 from RBAC, never reaches router
+  11.(+) Corrupt JSONL line skipped (no crash), other rows still surface
+  12.(+) Tenant attribution echoed on /_global
+
+  Plus invariant: §38.3 audit row schema.
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH, HOLY_EVAL_FUNCTIONAL_LOG
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path, eval_log)`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `_h(s)`: (no docstring)
+- `_seed_runs()`: 5 runs across 3 models × 2 datasets so the leaderboard is testable.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- llama3.1:8b earlier run
+- mistral:7b run
+- kivi:local on dataset 1
+- kivi:local on dataset 2 (older — kivi-1 stays latest)

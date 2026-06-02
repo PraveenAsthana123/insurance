@@ -1,0 +1,23 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/operations/boundary/test_boundary.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Tier 6 — Boundary / property-based tests for operations.
+
+Recommended: hypothesis + faker (per global §64.30 tier 6).
+
+## Imports
+- from `_` import pytest
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `test_string_empty_handled()`: Smoke: empty string MUST be handled (most common boundary).
+- `test_int_overflow_safe()`: Smoke: large int doesn't crash arithmetic.
+- `test_operations_property_idempotent()`: REPLACE — hypothesis: function f(f(x)) == f(x) for all valid x.
+
+## Outputs
+- Return values from functions above

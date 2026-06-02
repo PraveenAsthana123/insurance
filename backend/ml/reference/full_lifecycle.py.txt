@@ -1,0 +1,72 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/full_lifecycle.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: full structured-ML lifecycle.
+
+Demonstrates ALL 16 steps the operator asked about for one pipeline.
+Copy this file for every other sub-process; only the dataset path,
+target column, and task type need to change.
+
+Steps:
+    1.  Load data
+    2.  EDA — histograms, correlation heatmap, missing-value matrix,
+        target distribution
+    3.  Cleaning — dedup, type coercion, IQR-outlier flag
+    4.  Missing-value handling — median (numeric) / most-frequent (categorical)
+    5.  Normalization (MinMaxScaler)  + Standardization (StandardScaler) via
+        sklearn ColumnTransformer
+    6.  Feature engineering — calendar (year/month/dow), log-transform for
+        skewed numeric, interaction terms (top-2 correlated)
+    7.  Feature evaluation — Pearson correlation, mutual information
+    8.  Feature selection — VarianceThreshold → SelectKBest(MI)
+    9.  Loss function — explicit choice per task
+        (regression: 'reg:squarederror' or 'reg:pseudohubererror'
+         classification: 'binary:logistic' / 'multi:softprob')
+    10. Batch-size sweep — small grid documented in manifest
+    11. Hyperparameter tuning — Optuna TPESampler (20 trials)
+    12. Training — XGBoost on best params
+    13. Benchmarking — baseline (DummyRegressor / DummyClassifier) vs
+        XGBoost vs LightGBM
+    14. Evaluation —
+        regression:     MAE / RMSE / R² / residual plot / actual-vs-pred
+        classification: accuracy / precision / recall / F1 / ROC-AUC /
+                        confusion matrix / classification report
+    15. SHAP — global summary + local waterfall
+    16. Artifacts — every plot saved as PNG, metrics as JSON, manifest JSON
+
+Outputs land in: data/eval/{dept}/{pipeline}/{run_id}/
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any, Literal
+- from `_` import matplotlib
+- from `_` import matplotlib.pyplot
+
+## Inputs
+- CLI args: --dataset, --target, --task, --dept, --pipeline, --date-cols, --drop-cols, --n-trials, --sample, --artifacts-root
+
+## Process
+### Classes
+- `LifecycleManifest`: Single source of truth for what this run produced.
+- `FullLifecycle`: Run the full ML lifecycle on any tabular dataset.
+### Functions
+- `_main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Optional MLflow — degrade gracefully if missing
+- ---------------------------------------------------------------------------
+- Output manifest schema
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------

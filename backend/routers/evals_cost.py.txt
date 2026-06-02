@@ -1,0 +1,36 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/evals_cost.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+§68.9 Cost eval router.
+
+4 endpoints under /api/v1/holy/evals/cost/* federated via core.holy_audit
+(surface=evals_cost). Sibling of §68.8 functional + §68.10 safety; RBAC
+catch-all `/api/v1/holy/evals/*` already gates this surface.
+
+Composes with §38.3 + §41.1 (FinOps) + §41.3 (tenant) + §57.7 + §68.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+- from `services` import cost_eval_service
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `cost_global(http_request)`: Total cost across all tenants/models — 24h / 7d / 30d + all-time.
+- `cost_by_model(http_request, since)`: Per-model cost ranking, highest-cost first.
+- `cost_by_request(http_request, request_id)`: Single-request cost detail.
+- `cost_per_tenant(http_request, tenant_id, since)`: Per-tenant cost breakdown with per-model totals within the tenant.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Literal sub-paths BEFORE parameterized to dodge §66.3 greedy-match trap.
+- Parameterized LAST.

@@ -1,0 +1,39 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_supply_chain_router.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_supply_chain_router — TestClient integration tests against real DB.
+
+Mirrors backend/tests/test_sales_router.py pattern. Hits real Postgres via
+SupplyChainRepo. If any of the 4 supply-chain tables are empty, tests skip.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import pytest
+- from `fastapi.testclient` import TestClient
+- from `backend.main` import app
+- from `backend.repositories.supply_chain_repo` import SupplyChainRepo
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `client()`: (no docstring)
+- `_require_ingested()`: (no docstring)
+- `test_list_skus(client)`: (no docstring)
+- `test_list_suppliers_scored(client)`: (no docstring)
+- `test_stockout_risk_happy_path(client)`: (no docstring)
+- `test_stockout_risk_unknown_sku_returns_404(client)`: (no docstring)
+- `test_stockout_risk_rejects_unknown_field(client)`: (no docstring)
+- `test_eta_happy_path(client)`: (no docstring)
+- `test_simulate_happy_path(client)`: (no docstring)
+- `test_simulate_rejects_out_of_range(client)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Ranked descending by score
+- delay_days le=30

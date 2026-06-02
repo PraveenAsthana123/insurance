@@ -1,0 +1,50 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/master_data.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY master-data router — per-dept SAP-style master + reference data.
+
+Surfaces the entity catalog documented in
+    global-ai-org/departments/<dept>/business-layer/HOLY_MASTER_DATA.md
+as a queryable schema endpoint. Persistence of the actual rows belongs to
+the ERP/CRM/PIM source-of-truth systems; this endpoint is the *contract*
+(what entities exist, what fields they carry, who owns them) plus a
+deliberate stub for sample data.
+
+Composes with global §38 (audit on mutation) + §41.3 (tenant isolation
+header) + §47.6 (SOC2 CC6.2 access control) + §57.6 (canonical envelope)
++ §59 DDD (entities ARE the aggregates) + §64 per-dept artifact.
+
+Endpoints (read-only in MVP — write paths gated per §40 decision system):
+    GET /api/v1/holy/master-data/{dept}              — catalog
+    GET /api/v1/holy/master-data/{dept}/{entity}     — sample rows
+    GET /api/v1/holy/master-data/{dept}/org-structure — org tree slice
+
+## Imports
+- from `__future__` import annotations
+- from `_` import time
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.holy_audit` import log_holy_access
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_validate_dept(dept)`: (no docstring)
+- `_validate_entity(entity)`: (no docstring)
+- `global_catalog(http_request)`: Cross-dept catalog summary — what every dept publishes.
+- `dept_catalog(http_request, dept)`: Per-dept master-data catalog — entity list + ownership + field schema.
+- `entity_sample(http_request, dept, entity, limit, include_pii)`: Entity schema + (stub) sample rows.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 19 HOLY departments — single source of truth for cross-dept validation.
+- Per global §57.6 — every entity row carries this envelope.
+- Master entity catalog — what fields are exposed by default (no PII).
+- PII (customer name/email/phone, employee SSN, vendor bank account) is
+- redacted at this surface unless ?include_pii=1 with audit-row.

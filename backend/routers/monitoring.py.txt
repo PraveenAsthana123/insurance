@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/monitoring.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY monitoring AI router — per-dept job + pipeline health surface.
+
+Surfaces the 4 cron jobs (refresh_data / retrain / accuracy_drift /
+analysis_rollup) plus on-demand ML pipeline runs plus dispatched agent
+tasks. Composes with global §38 audit + §47 3-probe + §57.6 canonical
+fields + §64 per-dept artifact pattern + §65.1 #9 observability triad.
+
+Reads run manifests from:
+    data/eval/cron/<job_key>/<run_id>/manifest.json
+    data/eval/<dept>/<pipeline>/<run_id>/manifest.json
+
+Endpoints:
+    GET /api/v1/holy/monitoring/{dept}
+    GET /api/v1/holy/monitoring/{dept}/jobs/{job}/runs?limit=20
+    GET /api/v1/holy/monitoring/{dept}/jobs/{job}/runs/{run_id}
+    GET /api/v1/holy/monitoring/_global
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import time
+- from `pathlib` import Path
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+- from `core.middleware` import current_tenant_id
+
+## Inputs
+- Env vars: HOLY_MONITORING_AUDIT_PATH
+
+## Process
+### Functions
+- `_log_monitoring_access(http_request, endpoint)`: Append one §38.3-shaped read trail row. Best-effort — disk errors
+- `_validate_dept(dept)`: Raise 404 if dept not in the HOLY 19 — no info leakage.
+- `_validate_job(job)`: Raise 404 if cron job key unknown — no info leakage.
+- `_scan_runs(audit_dir, limit)`: Return last `limit` run summaries under audit_dir, newest first.
+- `_job_health(job_key)`: Compute liveness/readiness for one cron job per §47 3-probe contract.
+- `global_rollup(http_request)`: Cross-dept rollup (executive view).  Same job health, projected per dept.
+- `dept_monitoring(http_request, dept)`: Per-dept monitoring summary across all 4 cron jobs.
+- `list_runs(http_request, dept, job, limit)`: Recent runs of a cron job (cron audits are global, not per-dept; dept
+- `get_run(http_request, dept, job, run_id)`: Full manifest of one cron run.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per §38.3 + §47.6 + §64.43 #7 — monitoring data is INFRASTRUCTURE telemetry
+- (fleet-wide ML pipeline health), NOT tenant-scoped data. But every monitoring
+- READ is attributed to the caller's tenant for forensic + SOC2 CC4 auditing.
+- The data layout stays dept-scoped; the access trail is tenant-attributed.
+- Cron job catalog — keep aligned with backend/workers/celery_app.py beat_schedule.

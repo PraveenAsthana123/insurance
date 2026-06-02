@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/setup_agent_platform.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+Operator CLI for the local HOLY agent platform setup.
+
+It verifies the same requested stack as the API: Harness Agent, OpenClaw,
+Paperclip, PoliysAI governance, CUA, Stagehand, and Playwright.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+- from `services.agent_platform_service` import AgentPlatformIntegrationService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `parse_args()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

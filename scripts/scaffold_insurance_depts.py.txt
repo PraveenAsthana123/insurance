@@ -1,0 +1,61 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/scaffold_insurance_depts.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Insurance departments scaffolder (project-local, MDD per global §59).
+
+Generates the full §64 + §66 artifact set for 4 insurance departments:
+  - claims
+  - underwriting
+  - customer-service
+  - fraud-siu
+
+Plus three new artifact types per operator 2026-06-01:
+  - INSUR_PROCESS_FLOW.md     — Mermaid swimlane / flowchart per L2 process
+  - INSUR_ARCHITECTURE_FLOW.md — Mermaid C4 L2 architecture per dept
+  - INSUR_BUSINESS_MODELS.md  — B2C / B2B / B2E process flows per dept
+
+Source-of-truth: a single INSURANCE_DEPTS dict (this file). Edit dict →
+re-run → all 50+ files regenerate. Idempotent.
+
+Usage: python3 scripts/scaffold_insurance_depts.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import textwrap
+- from `pathlib` import Path
+- from `datetime` import datetime, timezone
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `w(path, content)`: (no docstring)
+- `md_table(headers, rows)`: Render a markdown table from headers + rows.
+- `render_dept_readme(slug, d)`: (no docstring)
+- `render_demo_story(slug, d)`: (no docstring)
+- `render_asis(slug, d)`: (no docstring)
+- `render_dt_strategy(slug, d)`: (no docstring)
+- `render_process_flow(slug, d)`: Mermaid swimlane / flowchart per L2 process. Per operator 2026-06-01.
+- `render_architecture_flow(slug, d)`: Mermaid C4 L2 architecture per dept. Per operator 2026-06-01.
+- `render_business_models(slug, d)`: B2C / B2B / B2E (+ B2G if present) flows per dept. Per operator 2026-06-01.
+- `render_data_mgmt(slug, d)`: (no docstring)
+- `render_use_cases(slug, d)`: Top 10 use cases per dept extracted from process_hierarchy + ai_matrix.
+- `render_incident_mgmt(slug, d)`: (no docstring)
+- `render_dept_spec(slug, d)`: (no docstring)
+- `render_ai_agents(slug, d)`: (no docstring)
+- `render_kpis(slug, d)`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- INSURANCE_DEPTS — single source of truth (per §59 MDD discipline)
+- Content sourced from operator's domain dump 2026-06-01.
+- ---------------------------------------------------------------------------
+- L1 process → list of (L2 process, [L3 sub-processes])

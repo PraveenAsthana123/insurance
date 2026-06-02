@@ -1,0 +1,40 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_customer_ingestion.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_customer_ingestion.py — smoke-check the customer pilot schema after ingest.
+
+Validates dim_customer_pilot / fact_customer_interaction / fact_churn_label row
+counts and basic invariants. Assumes `python scripts/ingest_customer_telco.py`
+has run against the test/dev database.
+
+If the tables are empty (fresh DB without ingest), tests skip rather than fail.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import psycopg2
+- from `_` import pytest
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_dsn()`: (no docstring)
+- `conn()`: (no docstring)
+- `_count(conn, table)`: (no docstring)
+- `_ingested(conn)`: Only run assertions if ingestion has populated the tables.
+- `test_customer_pilot_row_count(conn, _ingested)`: (no docstring)
+- `test_churn_label_matches_customers(conn, _ingested)`: (no docstring)
+- `test_interaction_count_reasonable(conn, _ingested)`: (no docstring)
+- `test_churn_rate_matches_benchmark(conn, _ingested)`: (no docstring)
+- `test_contract_types_complete(conn, _ingested)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 7043 customers × 7 service types = 49301 interactions.
+- Telco benchmark ≈ 0.265 (1869 / 7043)

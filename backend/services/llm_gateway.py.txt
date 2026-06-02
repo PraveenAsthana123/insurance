@@ -1,0 +1,68 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/llm_gateway.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+LiteLLM provider-agnostic LLM gateway (§56 Stage-1 adapter).
+
+Today, HOLY's agent flows reach Ollama via the OpenClaw → Redis → worker pool
+path (`docker-compose ... agents`). That path is async-fanout and works well
+for batched council/simple work.
+
+This module is the COMPLEMENTARY in-process synchronous path for code that
+needs a single LLM call without the queue overhead:
+  - Pydantic-AI typed validators that need a single retry on schema failure
+  - Debug tooling that wants to compare Ollama vs OpenAI vs Anthropic
+  - Tests that mock-out provider calls with the same call shape
+
+Per global CLAUDE.md §56.2 Stage-1 adapter contract:
+  - Lazy import (litellm SDK absence is fine — adapter degrades to honest
+    "unavailable" instead of crashing)
+  - Feature-flag opt-in via env: HOLY_LLM_GATEWAY_ENABLED=true
+  - Default model from env HOLY_LLM_MODEL (e.g. "ollama/kivi:local") so
+    no provider creds are required to drive the local Ollama path
+  - NEVER default-on; the original OpenClaw/Redis path keeps working
+    without this module being imported
+
+Per global §57.7:
+  - All LiteLLM exceptions wrapped → structured error response
+  - Hard timeout cap via HOLY_LLM_TIMEOUT_SECONDS (default 30s)
+  - API key values NEVER appear in responses (only model + provider names)
+
+Per global §38.3:
+  - Every `complete()` call writes one audit row to
+    data/agent-supervisor/llm_gateway_runs.jsonl with model, latency_ms,
+    outcome, tenant_id (caller-supplied), and request_id
+
+Drill: tests/drills/drill_litellm_gateway.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import importlib.util
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `dataclasses` import dataclass
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: HOLY_LLM_GATEWAY_AUDIT_PATH, HOLY_LLM_GATEWAY_ENABLED, HOLY_LLM_MODEL, HOLY_LLM_TIMEOUT_SECONDS
+
+## Process
+### Classes
+- `LlmCompletion`: Normalized LLM-call response. Same shape regardless of provider.
+### Functions
+- `is_enabled()`: Return True only when explicitly opted-in. Default off; never default-on.
+- `is_importable()`: Probe the litellm package without triggering side effects.
+- `_write_audit_row(row)`: Best-effort §38.3 audit row. Disk errors do NOT crash the request.
+- `_provider_from_model(model)`: Extract provider prefix from a LiteLLM-shaped model string.
+- `complete(prompt)`: Sync single LLM call via LiteLLM. Returns LlmCompletion regardless of outcome.
+- `status()`: Return a snapshot of gateway readiness for the agent-platform status surface.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- LiteLLM's `completion` is the OpenAI-shaped API across all providers.
+- Normalize LiteLLM response shape — it follows OpenAI's choices[].message.content

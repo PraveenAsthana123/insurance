@@ -1,0 +1,31 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_simulation_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_simulation_service.py — unit tests for the price × promo simulation.
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import date, timedelta
+- from `unittest.mock` import MagicMock
+- from `schemas.sales` import ForecastComponents, ForecastPoint, ForecastResponse, SimulationRequest
+- from `services.simulation_service` import DEFAULT_ELASTICITY, DEFAULT_MARGIN_FACTOR, SimulationService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_mock_forecast_service(daily_revenue, days)`: Produce a forecast service returning a flat daily_revenue per day for `days` days.
+- `test_simulate_baseline_revenue_matches_forecast_sum()`: (no docstring)
+- `test_simulate_elasticity_uplift_sign()`: Higher discount → higher uplift_units.
+- `test_simulate_zero_discount_zero_uplift()`: (no docstring)
+- `test_simulate_waterfall_has_four_steps()`: (no docstring)
+- `test_simulate_constants_returned()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- At 0% discount, promo == baseline: uplift = 0, margin_hit = 0, net = 0.

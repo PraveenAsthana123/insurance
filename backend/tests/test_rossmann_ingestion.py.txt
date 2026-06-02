@@ -1,0 +1,37 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_rossmann_ingestion.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+test_rossmann_ingestion.py — data-quality assertions against the ingested tables.
+
+These run against whatever Postgres the BEV backend points at. If the tables
+are empty (ingestion not run), tests are skipped with a clear message.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import pytest
+- from `backend.repositories.sales_repo` import SalesRepo
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `repo()`: (no docstring)
+- `counts(repo)`: (no docstring)
+- `_require_ingested(counts)`: (no docstring)
+- `test_dim_store_row_count_matches_expected(counts)`: (no docstring)
+- `test_fact_sales_row_count_is_order_of_magnitude_correct(counts)`: (no docstring)
+- `test_dim_date_row_count_is_reasonable(counts)`: (no docstring)
+- `test_no_null_sales(repo, counts)`: (no docstring)
+- `test_store_123_exists(repo, counts)`: (no docstring)
+- `test_get_sales_history_returns_nonempty(repo, counts)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Rossmann train.csv has 1,017,209 rows; allow ±1% tolerance.
+- Rossmann covers ~942 unique days across 2.5 years.
+- Use raw connection for a fast check.

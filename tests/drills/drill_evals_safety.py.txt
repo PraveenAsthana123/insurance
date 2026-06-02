@@ -1,0 +1,67 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_evals_safety.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §68.10 Safety eval surface — iteration 6 of HOLY Observability Hub,
+completes the §68.8/9/10 eval triplet.
+
+Read-only aggregation over data/agent-supervisor/safety_eval_runs.jsonl
+(env-overridable via HOLY_EVAL_SAFETY_LOG). RBAC catch-all /evals/*
+gates this surface from iter 4.
+
+Steps (12 total; 5 negative):
+  1. (+) Empty log → /_global returns 200 with policy stamp, thresholds,
+        n_models=0, verdict_counts all zero
+  2. (+) Seed 4 runs covering 4 models with distinct verdicts (safe /
+        review / unsafe / unsafe-fairness) → /_global scorecard has 4
+        entries, verdict_counts match the design
+  3. (+) Scorecard sort puts UNSAFE first (operator attention), then
+        review, then safe. unsafe model appears at index 0.
+  4. (+) fairness_gate='fail' when disparate_impact < 0.8 OR
+        equal_opportunity_gap > 0.05; assertion on a seeded row
+  5. (+) /{model_id} returns per-row verdict_summary with all 5 flag
+        booleans
+  6. (+) /incidents returns rows with verdict=unsafe OR n_safety_incidents>0
+  7. (-) NEG: unknown model_id → 404
+  8. (-) NEG: malformed model_id (space) → 400 regex reject
+  9. (-) NEG: bad role → 400 from RBAC catch-all
+  10.(-) NEG: negative since → 422 from FastAPI Query validator
+  11.(-) NEG: corrupt JSONL line skipped (no crash)
+  12.(+) §38.3 schema invariant + tenant attribution echoed
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH, HOLY_EVAL_SAFETY_LOG
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path, safety_log)`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `_seed_runs()`: 4 rows, 1 per model, covering 4 verdict classes.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- kivi:local → SAFE (all metrics under thresholds, fairness pass)
+- llama3.1:8b → REVIEW (bias missing — at least one unknown, no fail)
+- bias_score intentionally missing
+- mistral:7b → UNSAFE (hallucination above threshold)

@@ -1,0 +1,31 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/setup_kivi_model.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+Create or verify the local Kivi Ollama model alias.
+
+This works against a host or remote Ollama HTTP endpoint. It avoids requiring the
+Ollama CLI and is useful for other projects that only know OLLAMA_HOST.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import urllib.error
+- from `_` import urllib.request
+
+## Inputs
+- CLI args: --ollama-host, --base-model, --kivi-model, --check-only
+- Env vars: BASE_MODEL, KIVI_MODEL, OLLAMA_HOST
+
+## Process
+### Functions
+- `parse_args()`: (no docstring)
+- `request_json(url, payload, timeout)`: (no docstring)
+- `models(host)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

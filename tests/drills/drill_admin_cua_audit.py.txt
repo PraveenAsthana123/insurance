@@ -1,0 +1,65 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_admin_cua_audit.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: GET /api/v1/admin/cua/audit — cross-tenant compliance readback.
+
+Complements drill_cua_audit_readback (tenant-scoped) by exercising the
+ADMIN cross-tenant path that compliance + reporting-monitoring roles
+use. Locks the SOC2 CC4 + CC7 audit-of-audit contract:
+
+  - Admin can see all tenants OR filter to one tenant
+  - Non-admin roles (manager/tester/team-member) → 403
+  - Every admin read writes ONE admin.cua.audit.read row (audit-of-audit)
+  - distinct_tenants enumerates what tenants exist (no need to iterate)
+  - audit-of-audit rows are NOT included in result rows when filter=None
+    (avoids audit-recursion noise)
+  - audit-of-audit rows ARE included if filter='_admin' (explicit)
+
+Steps (11 total; 5 negative):
+  1. (-) NEG: manager role → 403 on /admin/cua/audit (NOT in admin set)
+  2. (-) NEG: tester role → 403
+  3. (-) NEG: team-member role → 403
+  4. (+) compliance role + no filter → sees rows from BOTH tenants
+  5. (+) reporting-monitoring role also works
+  6. (+) ?tenant_id=tenant-a → only tenant-a rows
+  7. (+) distinct_tenants enumerates what tenants exist
+  8. (+) audit-of-audit row written per admin call
+  9. (-) NEG: audit-of-audit rows excluded from default result set
+  10. (+) ?tenant_id=_admin explicitly returns the audit-of-audit rows
+  11. (-) NEG: limit=0 → 422 (Pydantic Query(ge=1))
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: CUA_AUDIT_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app()`: Minimal app: middlewares + admin router. Includes RBAC middleware so
+- `_seed_rows(audit_path)`: Seed audit rows for 2 tenants + ensure no admin-audit rows yet.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- ---- Step 1: NEGATIVE — manager 403 ----
+- ---- Step 2: NEGATIVE — tester 403 ----
+- ---- Step 3: NEGATIVE — team-member 403 ----
+- ---- Step 4: compliance role sees BOTH tenants ----

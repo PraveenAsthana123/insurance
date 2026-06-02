@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/dependencies.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `contextlib` import contextmanager
+- from `functools` import lru_cache
+- from `typing` import Generator
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `psycopg2.extensions` import connection
+- from `core.config` import Settings, get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `get_cached_settings()`: FastAPI Depends() factory — returns the cached Settings singleton.
+- `get_department_repo()`: (no docstring)
+- `get_process_repo()`: (no docstring)
+- `get_dataset_repo()`: (no docstring)
+- `get_model_repo()`: (no docstring)
+- `get_job_repo()`: (no docstring)
+- `get_department_service()`: (no docstring)
+- `get_process_service()`: (no docstring)
+- `get_dataset_service()`: (no docstring)
+- `get_ml_service()`: (no docstring)
+- `get_job_service()`: (no docstring)
+- `get_db_connection()`: Context manager that opens a psycopg2 connection to PostgreSQL and
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ── Repository factories ───────────────────────────────────────────────────────
+- ── Service factories ──────────────────────────────────────────────────────────

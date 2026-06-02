@@ -1,0 +1,60 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_ai_agent_tools_installed.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §56 gate-5 — AI/agent tools installed + auditable.
+
+Locks the install contract for the 11-tool evaluation in
+docs/AI_AGENT_TOOLS_EVALUATION.md. The audit script
+(scripts/techstack_audit.py) does the empirical import + version capture;
+this drill verifies the audit output is well-formed, complete, and that
+each expected-present tool actually imports.
+
+Steps (9 total; 3 negative):
+  1. (+) scripts/techstack_audit.py runs to completion + exits 0 (or
+        prints honest failure rows)
+  2. (+) Audit JSON written to data/agent-supervisor/techstack_audit.json
+        with the expected schema
+  3. (+) All 11 named tools present in the audit rows
+  4. (+) Every stage-1/2/3 tool reports either importable=True OR a
+        concrete error message (never a silent absence)
+  5. (-) NEG: OpenAI Swarm marked verdict=skip — NOT expected_present
+        (rejection criterion locked)
+  6. (-) NEG: BMad marked stage=document — NOT expected_present
+        (no Python install path)
+  7. (+) AI_AGENT_TOOLS_EVALUATION.md exists + names all 11 tools
+  8. (-) NEG: bogus tool name absent from evaluation doc
+        (no false-positive)
+  9. (+) techstack_audit.json freshness: audited_at is within the
+        last 24 hours (catches stale audit state)
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- Batch 1 (2026-05-25): 11 agent/RAG/observability tools
+- Batch 2 (2026-05-26): 9 orchestrators + LLM gateways + observability
+- ---- Step 1: audit script runs ----
+- Exit 0 = all good; exit 1 = some expected tools missing but audit

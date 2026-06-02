@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/process_test_plan.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Process test plan operator.
+
+Lists and runs the global per-process testing assignments from
+`docs/testing/PROCESS_AGENT_CRON_CATALOG.json`.
+
+The `run` command submits a governed task into the existing OpenClaw bridge.
+Use `--dry-run` to inspect the payload without making an HTTP request.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import urllib.error
+- from `_` import urllib.request
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- CLI args: --dept, --agent, --dept, --mode, --api-url, --python, --suite-id, --mode, --api-url, --dry-run
+- Env vars: API_URL
+
+## Process
+### Functions
+- `load_catalog()`: (no docstring)
+- `entries(catalog)`: (no docstring)
+- `find_suite(catalog, suite_id)`: (no docstring)
+- `build_prompt(entry, mode)`: (no docstring)
+- `build_payload(entry, mode)`: (no docstring)
+- `post_openclaw(api_url, payload)`: (no docstring)
+- `cmd_list(args)`: (no docstring)
+- `cmd_export_cron(args)`: (no docstring)
+- `cmd_run(args)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above

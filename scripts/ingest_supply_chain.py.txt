@@ -1,0 +1,50 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/ingest_supply_chain.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+ingest_supply_chain.py — load Supply Chain Analysis CSV into canonical star schema.
+
+Idempotent: TRUNCATEs targets before COPY.
+Usage:  python scripts/ingest_supply_chain.py [--dir PATH]
+
+CSV column adaptation notes (see docs/superpowers/plans/2026-04-19-supply-chain-alpha-data.md):
+  - The harshsingh2209/supply-chain-analysis dataset has no `SKU number` column.
+    We derive the integer sku_number from the `SKU` string (e.g. "SKU0" -> 0),
+    falling back to the row index.
+  - There is no `Product category` column either. We reuse `Product type` for
+    both `product_type` and `product_category` in dim_sku (canonical demo value).
+  - All other column names in the plan match the CSV verbatim.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import csv
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import sys
+- from `io` import StringIO
+- from `pathlib` import Path
+- from `_` import psycopg
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_pg_dsn()`: (no docstring)
+- `_parse_csv(path)`: (no docstring)
+- `_extract_sku_number(sku_value, fallback)`: Parse trailing digits from a SKU string like 'SKU0' -> 0. Fallback if missing.
+- `_upsert_rows(cur, table, cols, rows)`: Bulk-load via COPY. Dedupes rows by first column (primary key).
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- --- dim_sku ---
+- --- dim_supplier ---
+- --- dim_customer ---
+- --- fact_shipment ---
+- NOTE: fact_shipment has a SERIAL pk so we insert without shipment_id;

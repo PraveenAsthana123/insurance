@@ -1,0 +1,85 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml/reference/attack_simulators.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY reference: attack-simulation payload generators (§64.32.3 + §64.42).
+
+Per global CLAUDE.md §64.32.3 — every dept's security tab MUST have an
+"attack simulation" panel that generates realistic adversarial test data
+for every attack class. Per §42, executor-class actions are AUTHORIZED-
+ENV-ONLY (operator must opt in by setting BEV_AUTHORIZED_ENV=1).
+
+This module ships 12 attack-class generators. Each generator:
+  - Takes a deterministic `seed` (drill-reproducible)
+  - Returns a list of payload dicts: {payload, kind, expected_reject_reason}
+  - NEVER executes the payload — purely generates the corpus
+  - Writes audit-trail rows to `data/security-tests/<dept>/<attack-type>/<run_id>/`
+
+Attack classes (per §64.32.3 mandatory list):
+  1. SQL injection            (sqlmap-style payloads)
+  2. XSS                       (DOM + reflected + stored)
+  3. CSRF                      (state-changing requests w/o token)
+  4. Auth bypass               (JWT + path-traversal + token-stuffing)
+  5. Prompt injection          (LLM jailbreak / system-prompt extraction)
+  6. Model theft               (high-frequency query + extraction probes)
+  7. Data poisoning            (label-flip + backdoor-trigger)
+  8. DDoS                      (rate burst patterns — GENERATOR ONLY)
+  9. Phishing                  (LLM-generated suspicious-email corpus)
+ 10. Deepfake (image/video)   (StyleGAN-pattern test markers)
+ 11. Synthetic identity        (Faker-based identity records with red flags)
+ 12. Brute-force               (per-protocol wordlist samples)
+
+Composes with:
+  §42 (gated operations) — generators OK, executors §42-gated
+  §64.32 (security tab) — surfaces in the per-dept security UI
+  §64.42 (testing matrix) — Garak / OWASP ZAP / sqlmap recommended
+  §43 (drill) — every generator has a paired drill assertion
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import random
+- from `_` import time
+- from `_` import uuid
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Callable
+
+## Inputs
+- CLI args: --attack-class, --dept, --seed, --n, --artifacts-root
+- Env vars: BEV_AUTHORIZED_ENV
+
+## Process
+### Classes
+- `AttackPayload`: A single adversarial test sample. NEVER auto-executed.
+- `AttackCorpus`: (no docstring)
+### Functions
+- `_check_executor_authorization()`: Returns True only if env explicitly opts in. NEVER bypass.
+- `gen_sql_injection(seed, n)`: (no docstring)
+- `gen_xss(seed, n)`: (no docstring)
+- `gen_csrf(seed, n)`: (no docstring)
+- `gen_auth_bypass(seed, n)`: (no docstring)
+- `gen_prompt_injection(seed, n)`: (no docstring)
+- `gen_model_theft(seed, n)`: (no docstring)
+- `gen_data_poisoning(seed, n)`: (no docstring)
+- `gen_ddos(seed, n)`: DDoS generator builds *patterns*; the executor (if ever wired) is §42-gated.
+- `gen_phishing(seed, n)`: (no docstring)
+- `gen_deepfake(seed, n)`: (no docstring)
+- `gen_synthetic_identity(seed, n)`: (no docstring)
+- `gen_brute_force(seed, n)`: (no docstring)
+- `generate_corpus()`: Build + persist an adversarial corpus for one (attack_class, dept).
+- `generate_all_classes()`: Build corpora for ALL 12 attack classes.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- ---------------------------------------------------------------------------
+- §42 gate — payload GENERATION is always OK; EXECUTION is gated
+- ---------------------------------------------------------------------------

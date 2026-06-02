@@ -1,0 +1,65 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_observability_hub.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: §68 Observability Hub aggregator — completes the §68 read-surface story.
+
+One endpoint: GET /api/v1/holy/observability-hub/_overview that probes
+all 7 §68 read surfaces' source-of-truth logs in one call. Mirrors
+the §56 /api/v1/agent-platform/adapters shape.
+
+Steps (10 total; 4 negative):
+  1. (+) GET /_overview → 200, n_surfaces==7, policy stamp present
+  2. (+) All 7 expected surface keys present (dbviewer / pii /
+        guardrails / security / evals_functional / evals_cost /
+        evals_safety) — stable set
+  3. (+) Per-surface row carries (key, policy, endpoint_prefix,
+        write_status, source.{kind,path,status})
+  4. (+) On clean tmpdir (no log files), absent JSONL surfaces report
+        status='absent' n_rows=0; dbviewer json_catalog reports
+        status='present' (it ships with the repo)
+  5. (+) Seed one JSONL log → corresponding surface reports
+        status='present' + n_rows=2 + last_ts is the seeded ts
+  6. (+) Corrupt JSONL line counted in n_corrupt_lines; valid rows
+        still surface in n_rows
+  7. (-) NEG: broken surface (mocked _probe_one raising) → aggregator
+        still returns 200 with status='probe_error' on the bad row
+  8. (-) NEG: unknown role → 400 from RBAC catch-all
+  9. (-) NEG: no role + TENANT_ID_STRICT not set → defaults still work
+        (manager role assumed; tenant_id='default')
+  10.(+) §38.3 schema invariant on audit row; tenant attribution echo
+
+# RESOURCES: disk_io
+
+Exit 0 on PASS, 1 on any failure.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: HOLY_AUDIT_PATH, HOLY_EVAL_COST_LOG, HOLY_EVAL_FUNCTIONAL_LOG, HOLY_EVAL_SAFETY_LOG, HOLY_GUARDRAIL_LOG, HOLY_SECURITY_POSTURE_PATH
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `_build_app(audit_path)`: (no docstring)
+- `_audit_rows(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: disk_io
+- Point all §68 surface env vars at a per-test tmp dir so each
+- surface reports absent unless we seed it.
+- ---- Step 1: /_overview envelope ----
+- ---- Step 2: 7 expected keys present ----

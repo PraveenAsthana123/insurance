@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/techstack_audit.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Gate-4 empirical install verification per global CLAUDE.md §56.
+
+Imports each AI/agent tool listed in docs/AI_AGENT_TOOLS_EVALUATION.md and
+reports installed version (or honest absence). Writes a JSON snapshot to
+data/agent-supervisor/techstack_audit.json so the drill + governance check
+can read from a deterministic location.
+
+Exit 0 if all tools either import cleanly OR are explicitly verdict=skip.
+Exit 1 if any tool that should be installed (stage-1/2/3) is missing or
+unimportable. Detailed report on stdout.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import importlib
+- from `_` import importlib.metadata
+- from `_` import json
+- from `_` import sys
+- from `_` import time
+- from `dataclasses` import dataclass, field
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Tool`: One row in the techstack audit. Stage maps to §56 adoption stages.
+### Functions
+- `_try_import(tool)`: Set tool.importable/version/error. Never crashes the audit run.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- stage-1/2/3 are expected to be installed; skip/document are not.
+- ---- Batch 2 (2026-05-26): orchestrators + LLM gateways + observability
+- Prefer the PyPI package name for version metadata (some packages
+- use a different import name vs distribution name).
+- Pretty-print to stdout

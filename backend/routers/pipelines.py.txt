@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/pipelines.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY automated-pipelines router — 5-phase per-process catalog per dept.
+
+Each pipeline runs through:
+  Phase 1 INPUT        → data source + contract
+  Phase 2 DATA PROCESS → clean / normalize / feature-eng
+  Phase 3 MODEL        → algorithm + hyperparams + training
+  Phase 4 OUTPUT       → raw model output + decision-system routing (§40)
+  Phase 5 REPORT       → summary view + KPIs + persona who sees it
+
+Composes with global §38 (audit per phase boundary) + §40 (decision tier
+in Phase 4) + §47 (C4 L3 dynamic flow) + §57.5 (5-question runbook) +
+§57.6 (canonical envelope on every phase audit row) + §64.20 (lifecycle
+types) + §66 (operational AI surface).
+
+Endpoints:
+  GET /api/v1/holy/pipelines/{dept}                — dept catalog
+  GET /api/v1/holy/pipelines/{dept}/{process_id}   — single 5-phase spec
+  GET /api/v1/holy/pipelines/_global               — cross-dept inventory
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import time
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException, Request
+- from `core.holy_audit` import log_holy_access
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_catalog_for(dept)`: (no docstring)
+- `_validate_dept(dept)`: (no docstring)
+- `global_inventory(http_request)`: Cross-dept process inventory — names + counts per dept.
+- `dept_catalog(http_request, dept)`: Per-dept pipeline catalog with 5-phase spec for every process.
+- `process_detail(http_request, dept, process_id)`: Single-process 5-phase detail.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per-dept pipeline catalog — keep aligned with
+- ~/.claude/scripts/scaffold-holy-pipelines.py DEPT_PIPELINES dict.
+- Schema per pipeline:
+- {"process_id": str, "process_name": str, "lifecycle_type": str,
+- "phases": {phase_name: text}}

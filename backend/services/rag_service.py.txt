@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/rag_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+rag_service.py — hybrid retrieval + Ollama generation + citation extraction.
+
+Lean stack: BM25 keyword + numpy cosine over Ollama embeddings.
+No external vector DB; ~50 chunks fit comfortably in memory.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import re
+- from `_` import time
+- from `dataclasses` import dataclass
+- from `pathlib` import Path
+- from `typing` import Iterable
+- from `_` import numpy
+- from `_` import requests
+- from `rank_bm25` import BM25Okapi
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Chunk`: (no docstring)
+- `RAGService`: (no docstring)
+### Functions
+- `_tokenize(text)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- PII regex (phone + email only for Phase γ — Phase 2b adds full detection)
+- ----- public -----
+- Redact any PII in the user's question before sending to LLM.
+- Retrieve.
+- Generate.

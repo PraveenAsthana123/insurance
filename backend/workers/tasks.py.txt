@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/workers/tasks.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Celery tasks for the BEV Analytics platform.
+
+Tasks:
+    train_model       — load data, train a model, log to MLflow
+    predict           — load model from MLflow, run prediction
+    run_pipeline      — orchestrate a full ML pipeline for a department
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+- from `typing` import Any
+- from `celery` import Task
+- from `celery.exceptions` import SoftTimeLimitExceeded
+- from `workers.celery_app` import celery_app
+
+## Inputs
+- Env vars: BEV_DATA_ROOT, BEV_OLLAMA_HOST, REDIS_URL
+
+## Process
+### Functions
+- `_get_pipeline(department_id, pipeline_name)`: Lazy import a pipeline class by department / pipeline name.
+- `train_model(self, model_id, dataset_path, algorithm, params)`: Train an ML model and log artefacts to MLflow.
+- `predict(self, model_id, model_run_id, input_data, algorithm)`: Load a trained model from MLflow and run inference.
+- `run_pipeline(self, department_id, pipeline_name, dataset_path, params)`: Run a full ML pipeline for a department.
+- `run_structured_lifecycle(self)`: Run the full structured-ML lifecycle (EDA → eval → SHAP) and persist
+- `run_rag_lifecycle(self)`: Run the full RAG lifecycle: chunk → embed → index → retrieve → answer → cite.
+- `dispatch_test_fanout(self)`: Fan out a test-tier dispatch across all given depts.
+- `_cron_audit_dir(job_name)`: (no docstring)
+- `_cron_disabled(env_name)`: (no docstring)
+- `refresh_data_artifacts(self)`: DATA cron — per dept: re-ingest, dedup, IQR-flag, impute, freshness check.
+- `retrain_models(self)`: MODEL cron — per dept × pipeline: invoke the appropriate lifecycle.train().
+- `eval_accuracy_drift(self)`: ACCURACY cron — scan latest pipeline manifests for accuracy drift.
+- `analysis_rollup(self)`: ANALYSIS cron — per dept: aggregate KPIs from existing dashboard catalog.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Ensure backend package is importable when Celery starts the worker
+- ---------------------------------------------------------------------------
+- Pipeline registry — maps department names to pipeline classes
+- ---------------------------------------------------------------------------
+- Use explicit pipeline_name override if provided

@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/holy.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+HOLY endpoints — nav (live HOLY_NAV.json) + council (Redis queue/poll).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import redis
+- from `fastapi` import APIRouter, HTTPException
+
+## Inputs
+- Env vars: BEV_AUTHORIZED_ENV, BEV_REDIS_URL
+
+## Process
+### Functions
+- `get_nav(dept)`: Serve a dept's HOLY_NAV.json live from disk.
+- `list_depts()`: List HOLY-enabled departments that have a HOLY_NAV.json file.
+- `get_spec(dept)`: Serve a dept's HOLY_SPEC.md content (raw text).
+- `council_ask(payload)`: Enqueue a council task. Body: {prompt, department?}. Returns task_id.
+- `council_result(task_id)`: Poll for a council task's result. Returns 'pending' if not yet processed.
+- `_safe_run_dir(dept, pipeline, run_id)`: Resolve + path-traversal guard. Every component must stay under EVAL_ROOT.
+- `list_runs(dept, pipeline)`: List all completed runs for a pipeline (most recent first).
+- `get_manifest(dept, pipeline, run_id)`: Return the full manifest for a specific run.
+- `get_plot(dept, pipeline, run_id, plot_name)`: Serve a PNG plot file. Path-traversal guarded.
+- `get_latest(dept, pipeline, run_id)`: Convenience: return manifest of newest run (alias for /runs/<id>/manifest).
+- `_safe_sim_dir(dept, process, sim_id)`: (no docstring)
+- `list_reference_processes()`: List the (dept, process) pairs that have a defined simulation.
+- `run_simulation(dept, process, payload)`: Trigger a simulation in BOTH modes. Body: {n_inputs, seed}. Returns manifest.
+- `list_sim_runs(dept, process)`: List past simulation runs for (dept, process), newest first.
+- `get_sim_manifest(dept, process, sim_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Locate global-ai-org/ — assume backend runs from /app inside the insur/ project,
+- global-ai-org is a sibling at /app/../global-ai-org/ in the container.
+- Outside docker: /mnt/deepa/insur/global-ai-org
+- Redis (same as agents)
+- ============================================================

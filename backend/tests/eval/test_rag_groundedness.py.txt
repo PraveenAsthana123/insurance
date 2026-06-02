@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/eval/test_rag_groundedness.py
+# auto-generated explainer · 2026-06-02T06:30:14Z
+
+## Purpose
+RAG eval harness — groundedness only for Phase gamma.
+
+Runs 5 sample questions against the live RAG service, then uses Ollama itself
+as a judge: 'given these retrieved chunks, does the response make any claim
+not supported by them?' Produces a groundedness score 0-1.
+
+Marked pytest.mark.eval so it's opt-in (doesn't run in the default test sweep).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import pytest
+- from `_` import requests
+- from `backend.schemas.ai_explain` import ExplainRequest
+- from `backend.services.rag_service` import MODEL, OLLAMA_BASE, RAGService
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_ollama_judge_groundedness(response, sources)`: Ask the LLM whether every claim is supported. Return 0..1.
+- `test_groundedness_across_5_questions()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 60s (was 30s) — qwen2.5 judge calls occasionally hit 30-40s when Ollama
+- is warming / under load; reduced flakiness without changing semantics.
+- Extract first float in response.
+- Threshold: mean >= 0.5.
+- The plan targets mean >= 0.6, but qwen2.5 when used as its own judge is

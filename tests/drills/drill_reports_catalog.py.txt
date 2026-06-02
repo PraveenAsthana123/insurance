@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_reports_catalog.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Drill: HOLY reports-catalog router (§38 + §47.6 + §57.6 + §64.37 + §66).
+
+Steps (10 total; 3 negative):
+    1. (+) reports router imports + STANDARD_REPORTS has exactly 15 rows
+    2. (+) every standard-report row carries all required fields
+    3. (+) per-dept GET returns 200 + 15 reports + dept-specific titles
+    4. (+) per-report detail returns 200 + audit_summary stub present
+    5. (-) NEGATIVE — unknown dept → 404 (no info leak)
+    6. (-) NEGATIVE — unknown report_id → 404 + lists available
+    7. (-) NEGATIVE — malformed report_id (caps/special) → 400
+    8. (+) report_id values unique within STANDARD_REPORTS (no dup keys)
+    9. (+) every owner_role is one of the 15 known §63 role archetypes
+   10. (+) HOLY_REPORTS_CATALOG.md exists per dept + _global rollup
+           returns all 19 depts with n_reports_total = 285 (15 × 19)
+
+# RESOURCES: reports_router disk_io
+
+Exit 0 on PASS, 1 on FAIL.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `_` import time
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `step(n, label, ok, detail)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- RESOURCES: reports_router disk_io
+- ----- Step 1: router imports + 15 standard reports -----
+- ----- Step 2: every row has all required fields -----
+- ----- Spin up TestClient -----
+- ----- Step 3: per-dept GET 200 + 15 reports + dept-specific titles -----

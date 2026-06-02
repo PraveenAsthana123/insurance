@@ -1,0 +1,67 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/idempotency.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Generic §10.3 idempotency cache layer — namespace-scoped.
+
+The CUA execute path has its own bespoke cache in
+`services/agent_platform_service.py` because that path also drives the
+Playwright session + audit row + tenant federation. This module is the
+LIGHTER reusable version for routers that just need
+"don't double-process the same Idempotency-Key from the same tenant
+within TTL".
+
+Used by:
+  - POST /api/v1/openclaw/tasks  (don't re-enqueue the same task)
+  - POST /api/v1/paperclip/clips (don't store the same artifact twice)
+
+Per global CLAUDE.md §10.3 + §41.3 + §47.6:
+  - Cross-tenant isolated by construction — `(namespace, tenant_id, key)`
+    is the cache key
+  - Only successful responses are cached (caller may legitimately retry
+    after a 4xx/5xx)
+  - Disk-persisted JSONL backing (survives restart, multi-replica share)
+  - Replay marker via response header `X-Idempotent-Replay: true`
+    rather than mutating the response body (cleaner — no schema change
+    needed on the router-side response models)
+  - TTL via env override per namespace, defaults to 300s
+
+Per §57.7:
+  - Corrupt JSON lines on load are skipped (never crash)
+  - Disk errors do NOT crash the request (best-effort persistence)
+  - API key / token values in metadata are NEVER cached (only the
+    response body of the underlying service)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `pathlib` import Path
+- from `threading` import Lock
+- from `typing` import Any
+- from `fastapi` import HTTPException
+
+## Inputs
+- Env vars: IDEMPOTENCY_MAX_ENTRIES, IDEMPOTENCY_TTL_SECONDS
+
+## Process
+### Functions
+- `_disk_path(namespace)`: Per-namespace JSONL path; default `data/agent-supervisor/idempotency_{namespace}.jsonl`.
+- `_ttl_seconds()`: Read TTL fresh per call so test env overrides take effect.
+- `_load_from_disk(namespace)`: Populate in-memory cache for the given namespace from its JSONL file.
+- `_append_to_disk(namespace, tenant_id, key, response, stored_at)`: Best-effort JSONL append. Never crashes the request.
+- `lookup(namespace, tenant_id, key)`: Return the cached response dict for (namespace, tenant_id, key), or None.
+- `store(namespace, tenant_id, key, response)`: Persist response to disk + in-memory cache. No-op if `key` is None.
+- `extract_key(http_request, body_key)`: Helper for router-side: prefer body field, fall back to header.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- (namespace, tenant_id, key) → (cached_response_dict, stored_at_ts)
+- Track which on-disk path we last loaded from, per namespace. If env changes
+- (typical in tests), we drop the namespace's cached entries and reload.
+- Drop existing in-memory entries for this namespace before reloading
+- LRU trim to bound memory

@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/download_kaggle_data.py
+# auto-generated explainer · 2026-06-02T06:30:11Z
+
+## Purpose
+Download Kaggle datasets for all 11 BEV Analytics departments.
+
+Usage:
+    python scripts/download_kaggle_data.py [--dept DEPT_NAME] [--all]
+
+Requirements:
+    - kaggle CLI credentials at ~/.kaggle/kaggle.json
+    - pip install kaggle
+
+Fallback:
+    If Kaggle credentials are missing, run generate_sample_data.py instead.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import zipfile
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: BEV_DATA_DIR
+
+## Process
+### Functions
+- `_check_kaggle_credentials()`: Return True if kaggle credentials exist and are valid.
+- `_run_kaggle_download(dept, info, dest_dir)`: Download a single Kaggle dataset/competition into dest_dir.
+- `download_all(departments)`: Download datasets for the specified departments (default: all).
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Root data directory (can be overridden by BEV_DATA_DIR env var)
+- Competition download: kaggle competitions download -c <name> -p <path>
+- Dataset download: kaggle datasets download -d <owner/dataset> -p <path> --unzip
+- Unzip any .zip files left over (competitions don't auto-unzip)
+- List downloaded files

@@ -1,0 +1,37 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/generate_openapi_snapshot.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+Snapshot OpenAPI spec to docs/openapi.json for contract evolution tracking.
+
+Per global §6.4 + brutal review 2026-06-01 ("0 OpenAPI snapshots committed").
+
+Usage:
+    python scripts/generate_openapi_snapshot.py
+    # writes docs/openapi.json
+
+CI gate (recommended):
+    python scripts/generate_openapi_snapshot.py --check
+    # exits 1 if current spec diffs from committed docs/openapi.json
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- writes docs/openapi.json
+- exits 1 if current spec diffs from committed docs/openapi.json

@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/paperclip_service.py
+# auto-generated explainer · 2026-06-02T06:30:13Z
+
+## Purpose
+Local Paperclip artifact/context adapter service.
+
+This service makes Paperclip operational as a project-local context pack system.
+It stores small text artifacts as JSON files, applies basic PII redaction, hashes
+stored content, and composes selected artifacts into an agent-ready context pack.
+
+It does not install an external Paperclip framework. If a specific upstream tool
+is selected later, it should be wrapped behind this service boundary.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `_` import uuid
+- from `pathlib` import Path
+- from `typing` import Any
+
+## Inputs
+- Env vars: BEV_PAPERCLIP_ROOT
+
+## Process
+### Classes
+- `PaperclipService`: Service layer for local Paperclip artifact storage and context packs.
+### Functions
+- `_redact(content)`: (no docstring)
+- `_preview(content)`: (no docstring)
+- `_read_json(path)`: (no docstring)
+- `_write_json(path, data)`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Per global §1 — services must NOT raise HTTPException directly.
+- We raise domain exceptions (NotFoundError / ValidationError / AppError) and
+- let backend/core/error_handlers.py map them to HTTP responses.
+- Per §64.43 #7 — tenant_id is stored on the artifact so subsequent
+- list/get/delete can enforce tenant ownership. Body-supplied

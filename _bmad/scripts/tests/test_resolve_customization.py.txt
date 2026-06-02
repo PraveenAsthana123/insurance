@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# _bmad/scripts/tests/test_resolve_customization.py
+# auto-generated explainer · 2026-06-02T06:30:12Z
+
+## Purpose
+(no module docstring — add one to improve this)
+
+## Imports
+- from `_` import json
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import tempfile
+- from `_` import unittest
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ResolveCustomizationStdoutTests`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
