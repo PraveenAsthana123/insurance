@@ -1,31 +1,27 @@
 #!/usr/bin/env bash
-# voice-pro — continuous voice-to-input with trigger-word commands.
+# voice-pro — continuous voice-to-input with trigger words + TTS feedback + SQLite log.
 #
-# Listens in chunks, transcribes each chunk, types into the focused window
-# via pynput (no sudo / no xdotool needed). Recognizes trigger words to
-# control submit / edit / pause / stop.
+# Per operator 2026-06-01 cluster:
+#   "stop, send, go" / "wait, change, add, modify" / "delete the text"
+#   "save these commands on sqlite as well"
+#   "noise cancellation"
+#   "list of fallback, error handling, I should hear back"
 #
-# Trigger vocabulary:
-#   stop                        exit
-#   send / submit               press Enter (submit form)
-#   go / start                  start new dictation
-#   wait / pause                pause listening (resume with "go")
-#   change / modify / update    select & overwrite last sentence
-#   add                         append-only mode (default)
-#   delete / clear / delete the text   clear current input (Ctrl+A then Delete)
-#   new line                    press Enter without submitting (Shift+Enter)
+# FALLBACK CHAIN (auto-degrade) for mic capture:
+#   1. echo-cancel-source  (if voice-noise-cancel was enabled)
+#   2. first alsa_input.*  (real mic via pactl discovery)
+#   3. arecord -D hw:1,0 -c 2  (raw ALSA stereo)
+#   4. fail-with-TTS after 5 consecutive failures
 #
-# Usage:
-#   bash scripts/voice-pro
-#   bash scripts/voice-pro --chunk 4 --model small
-#
-# Pre-reqs:
-#   - parecord OR arecord -D hw:1,0
-#   - whisper (already installed)
-#   - pynput (already installed)
-#
-# The script types into whatever window has KEYBOARD FOCUS — click into
-# Claude Code's chat input before saying "go".
+# TRIGGER VOCABULARY (TTS-confirmed):
+#   stop / exit                   exit + speak "stopped"
+#   send / submit                 Enter + speak "sent"
+#   go / start                    activate + speak "listening"
+#   wait / pause                  pause + speak "paused"
+#   delete / clear                Ctrl+A + Delete + speak "cleared"
+#   change / modify / update      clear input + speak "ready"
+#   new line                      Shift+Enter
+#   (anything else)               typed via pynput
 
 set -uo pipefail
 
@@ -33,213 +29,230 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python}"
 CHUNK="${CHUNK:-4}"
 MODEL="${MODEL:-base}"
+TTS="${VOICE_TTS:-true}"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --chunk)  CHUNK="$2"; shift 2;;
         --model)  MODEL="$2"; shift 2;;
+        --no-tts) TTS="false"; shift;;
         *) echo "unknown arg: $1"; exit 1;;
     esac
 done
 
-find_mic_source() {
+find_mic() {
+    if pactl list sources short 2>/dev/null | grep -q "echo-cancel-source"; then
+        echo "echo-cancel-source"; return
+    fi
     pactl list sources short 2>/dev/null | \
-        awk '$2 ~ /^alsa_input\./ {print $2; exit}'
+        awk '$2 ~ /^alsa_input\./ && $2 !~ /\.monitor$/ {print $2; exit}'
 }
-MIC_SRC="$(find_mic_source)"
+MIC_SRC="${VOICE_MIC_SOURCE:-$(find_mic)}"
 
 red()   { printf "\033[1;31m%s\033[0m\n" "$*"; }
 green() { printf "\033[1;32m%s\033[0m\n" "$*"; }
 blue()  { printf "\033[1;34m%s\033[0m\n" "$*"; }
 
+if [[ ! -f "$REPO/data/voice_history.db" ]]; then
+    "$PYTHON" "$REPO/scripts/voice_history_init.py" >/dev/null
+fi
+
 blue "═══ voice-pro listener ═══"
-echo "  trigger words: stop, send, go, wait, change, add, delete, new line"
-echo "  chunk:         ${CHUNK}s"
-echo "  model:         whisper-${MODEL}"
-echo "  mic source:    ${MIC_SRC:-arecord hw:1,0}"
-echo "  ► click into your target input window NOW (Claude Code, etc.)"
-echo "  ► then say 'go' to start dictating, 'stop' to exit"
+echo "  mic source:  ${MIC_SRC:-arecord hw:1,0 (fallback)}"
+echo "  chunk:       ${CHUNK}s"
+echo "  model:       whisper-${MODEL}"
+echo "  TTS:         $TTS"
+echo "  SQLite:      $REPO/data/voice_history.db"
+echo
+echo "  TRIGGERS: stop · send · go · wait · change · add · delete · new line"
+echo "  ► focus your target window, say 'go' to start, 'stop' to exit"
 echo
 
-# ─── start the Python listener loop ─────────────────────────────────────
-"$PYTHON" - "$CHUNK" "$MODEL" "$MIC_SRC" <<'PYEOF'
-import os
-import re
-import subprocess
-import sys
-import tempfile
-import time
-import warnings
+"$PYTHON" - "$CHUNK" "$MODEL" "$MIC_SRC" "$TTS" "$REPO" <<'PYEOF'
+import os, re, subprocess, sqlite3, sys, tempfile, time, uuid, warnings
 from pathlib import Path
-
 warnings.filterwarnings("ignore")
 
-CHUNK = int(sys.argv[1])
-MODEL = sys.argv[2]
+CHUNK = int(sys.argv[1]); MODEL = sys.argv[2]
 MIC_SRC = sys.argv[3] if len(sys.argv) > 3 else ""
+TTS_ENABLED = sys.argv[4].lower() == "true" if len(sys.argv) > 4 else False
+REPO = Path(sys.argv[5])
+DB_PATH = REPO / "data" / "voice_history.db"
 
 import whisper
 from pynput.keyboard import Controller, Key
-
 kbd = Controller()
+
+print("[loading] whisper model...")
+t0 = time.time()
 model = whisper.load_model(MODEL)
-print(f"[ready] whisper-{MODEL} loaded")
+print(f"[ready] whisper-{MODEL} loaded in {time.time()-t0:.1f}s")
+SESSION_ID = f"sess-{int(time.time())}-{uuid.uuid4().hex[:6]}"
 
-# ── trigger vocabulary ─────────────────────────────────────────────────
-TRIGGERS_STOP   = {"stop", "stop listening", "exit", "quit"}
-TRIGGERS_SUBMIT = {"send", "submit", "send it", "send message"}
-TRIGGERS_START  = {"go", "start", "begin", "listening"}
-TRIGGERS_PAUSE  = {"wait", "pause", "hold"}
-TRIGGERS_CLEAR  = {"delete", "clear", "delete the text", "delete text",
-                   "clear input", "clear it", "clear the input"}
-TRIGGERS_EDIT   = {"change", "modify", "update", "change it", "modify it",
-                   "update text", "update the text"}
-TRIGGERS_NEWL   = {"new line", "newline", "line break", "break"}
-
-WORD = re.compile(r"\w+")
+TRIGGERS_STOP   = {"stop","stop listening","exit","quit"}
+TRIGGERS_SUBMIT = {"send","submit","send it","send message"}
+TRIGGERS_START  = {"go","start","begin","listening"}
+TRIGGERS_PAUSE  = {"wait","pause","hold"}
+TRIGGERS_CLEAR  = {"delete","clear","delete the text","delete text","clear input","clear it","clear the input"}
+TRIGGERS_EDIT   = {"change","modify","update","change it","modify it","update text","update the text"}
+TRIGGERS_NEWL   = {"new line","newline","line break"}
 
 
-def record_chunk(out_path: Path) -> bool:
-    if MIC_SRC and any(cmd in os.environ.get("PATH", "") + ":/usr/bin"
-                       for cmd in ["parecord"]):
-        proc = subprocess.Popen(
-            ["parecord", f"--device={MIC_SRC}", "--record",
-             "--rate=16000", "--channels=1", "--format=s16le",
-             "--file-format=wav", str(out_path)],
-            stderr=subprocess.DEVNULL,
-        )
-        time.sleep(CHUNK)
-        proc.terminate()
-        proc.wait(timeout=2)
-    else:
-        subprocess.run(
-            ["arecord", "-q", "-D", "hw:1,0", "-f", "S16_LE", "-r", "16000",
-             "-c", "2", "-d", str(CHUNK), str(out_path)],
-            check=True,
-        )
-    return out_path.exists() and out_path.stat().st_size > 0
-
-
-def transcribe(wav: Path) -> str:
-    try:
-        return model.transcribe(str(wav), fp16=False)["text"].strip()
-    except Exception as e:
-        print(f"[err] transcribe: {e}")
-        return ""
-
-
-def type_text(text: str) -> None:
-    """Inject text into focused window."""
-    if not text:
-        return
-    try:
-        kbd.type(text)
-    except Exception as e:
-        print(f"[err] type: {e}")
-
-
-def press(*keys) -> None:
-    try:
-        for k in keys[:-1]:
-            kbd.press(k)
-        kbd.press(keys[-1])
-        kbd.release(keys[-1])
-        for k in reversed(keys[:-1]):
-            kbd.release(k)
-    except Exception as e:
-        print(f"[err] press: {e}")
-
-
-def submit_message() -> None:
-    print("  → SEND (Enter)")
-    press(Key.enter)
-
-
-def clear_input() -> None:
-    print("  → CLEAR (Ctrl+A, Delete)")
-    press(Key.ctrl, "a")
-    time.sleep(0.05)
-    press(Key.delete)
-
-
-def newline() -> None:
-    print("  → NEWLINE (Shift+Enter)")
-    press(Key.shift, Key.enter)
-
-
-def has_trigger(text: str, triggers: set) -> str | None:
-    """Return matched trigger if present, else None."""
+def has_trigger(text, triggers):
     norm = text.lower().strip(" .,!?")
-    if norm in triggers:
-        return norm
-    for trig in triggers:
-        if norm.endswith(trig) or norm.startswith(trig):
-            return trig
+    if norm in triggers: return norm
+    for t in triggers:
+        if norm.endswith(t) or norm.startswith(t): return t
     return None
 
 
-# ── main loop ──────────────────────────────────────────────────────────
-listening = False
-print("\n[idle] say 'go' to start, 'stop' to exit\n")
+def log_chunk(idx, raw, trigger, action, typed, max_db, mean_db, latency_ms, ok, error=None):
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.execute("""INSERT INTO voice_history
+            (session_id, chunk_index, duration_sec, mic_source, model,
+             raw_transcript, trigger_word, action, typed_text,
+             audio_max_db, audio_mean_db, latency_ms, ok, error)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+            (SESSION_ID, idx, CHUNK, MIC_SRC, MODEL, raw, trigger, action,
+             typed, max_db, mean_db, latency_ms, ok, error))
+        conn.commit(); conn.close()
+    except Exception as e:
+        print(f"[err] sqlite: {e}")
+
+
+def speak(text):
+    if not TTS_ENABLED: return
+    try:
+        subprocess.Popen(["espeak", "-s", "180", text],
+                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).wait(timeout=3)
+    except (FileNotFoundError, subprocess.TimeoutExpired): pass
+
+
+def record_pacat(wav):
+    if not MIC_SRC: return False
+    proc = subprocess.Popen(
+        ["parecord", f"--device={MIC_SRC}", "--record", "--rate=16000",
+         "--channels=1", "--format=s16le", "--file-format=wav", str(wav)],
+        stderr=subprocess.DEVNULL)
+    time.sleep(CHUNK)
+    proc.terminate()
+    try: proc.wait(timeout=2)
+    except subprocess.TimeoutExpired: proc.kill()
+    return wav.exists() and wav.stat().st_size > 1000
+
+
+def record_arecord(wav):
+    try:
+        subprocess.run(["arecord","-q","-D","hw:1,0","-f","S16_LE","-r","16000",
+                        "-c","2","-d",str(CHUNK),str(wav)],
+                       check=True, timeout=CHUNK+5)
+        return wav.exists() and wav.stat().st_size > 1000
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired): return False
+
+
+def get_db(wav):
+    try:
+        r = subprocess.run(["ffmpeg","-i",str(wav),"-af","volumedetect","-vn","-sn","-dn","-f","null","/dev/null"],
+                           capture_output=True, text=True, timeout=5)
+        max_db = mean_db = None
+        for line in r.stderr.splitlines():
+            if "max_volume:" in line:
+                max_db = float(line.split(":")[-1].replace(" dB","").strip())
+            if "mean_volume:" in line:
+                mean_db = float(line.split(":")[-1].replace(" dB","").strip())
+        return max_db, mean_db
+    except Exception: return None, None
+
+
+def transcribe(wav):
+    try: return model.transcribe(str(wav), fp16=False)["text"].strip()
+    except Exception as e: return f"[ERR:{e}]"
+
+
+listening = False; chunk_idx = 0; consec_fail = 0
+print(f"\n[idle] session {SESSION_ID}")
+print("[idle] say 'go' to start, 'stop' to exit\n")
 
 while True:
-    wav_path = Path(tempfile.mkstemp(suffix=".wav")[1])
+    chunk_idx += 1
+    wav = Path(tempfile.mkstemp(suffix=".wav")[1])
+    t0 = time.time()
+
     try:
-        if not record_chunk(wav_path):
-            time.sleep(0.5)
+        captured = False
+        if MIC_SRC: captured = record_pacat(wav)
+        if not captured: captured = record_arecord(wav)
+
+        if not captured:
+            consec_fail += 1
+            print(f"[warn] capture failed ({consec_fail}/5)")
+            log_chunk(chunk_idx, "", None, "capture_failed", None,
+                      None, None, int((time.time()-t0)*1000), False, "no audio")
+            if consec_fail >= 5:
+                speak("audio capture failed"); print("[fatal] too many failures"); break
+            time.sleep(0.5); continue
+        consec_fail = 0
+
+        max_db, mean_db = get_db(wav)
+        text = transcribe(wav)
+
+        if not text or text.startswith("[ERR:"):
+            log_chunk(chunk_idx, text, None, "empty_or_err", None,
+                      max_db, mean_db, int((time.time()-t0)*1000), False, text or "empty")
             continue
 
-        text = transcribe(wav_path)
-        if not text:
-            continue
+        action = None; typed = None; trigger = None
 
-        norm = text.lower().strip(" .,!?")
-        print(f"[heard] {text!r}")
-
-        # ── trigger dispatch ──
         if has_trigger(text, TRIGGERS_STOP):
-            print("[exit] stopping")
+            trigger = has_trigger(text, TRIGGERS_STOP); action = "exit"
+            print(f"[exit] {text!r}"); speak("stopped")
+            log_chunk(chunk_idx, text, trigger, action, None, max_db, mean_db,
+                      int((time.time()-t0)*1000), True)
             break
+        elif has_trigger(text, TRIGGERS_START):
+            trigger = has_trigger(text, TRIGGERS_START); action = "activate"
+            listening = True; print(f"[active] {text!r}"); speak("listening")
+        elif has_trigger(text, TRIGGERS_PAUSE):
+            trigger = has_trigger(text, TRIGGERS_PAUSE); action = "pause"
+            listening = False; print(f"[paused] {text!r}"); speak("paused")
+        elif listening and has_trigger(text, TRIGGERS_SUBMIT):
+            trigger = has_trigger(text, TRIGGERS_SUBMIT); action = "submit"
+            print(f"[send] {text!r}"); speak("sent")
+            kbd.press(Key.enter); kbd.release(Key.enter)
+        elif listening and has_trigger(text, TRIGGERS_CLEAR):
+            trigger = has_trigger(text, TRIGGERS_CLEAR); action = "clear"
+            print(f"[clear] {text!r}"); speak("cleared")
+            kbd.press(Key.ctrl); kbd.press("a"); kbd.release("a"); kbd.release(Key.ctrl)
+            time.sleep(0.05); kbd.press(Key.delete); kbd.release(Key.delete)
+        elif listening and has_trigger(text, TRIGGERS_EDIT):
+            trigger = has_trigger(text, TRIGGERS_EDIT); action = "edit"
+            print(f"[edit] {text!r}"); speak("ready")
+            kbd.press(Key.ctrl); kbd.press("a"); kbd.release("a"); kbd.release(Key.ctrl)
+            time.sleep(0.05); kbd.press(Key.delete); kbd.release(Key.delete)
+        elif listening and has_trigger(text, TRIGGERS_NEWL):
+            trigger = has_trigger(text, TRIGGERS_NEWL); action = "newline"
+            print(f"[newline] {text!r}")
+            kbd.press(Key.shift); kbd.press(Key.enter); kbd.release(Key.enter); kbd.release(Key.shift)
+        elif listening:
+            action = "type"; typed = text + " "
+            print(f"[type] {text!r}")
+            try: kbd.type(typed)
+            except Exception as e:
+                print(f"[err] type: {e}"); speak("type failed")
+                log_chunk(chunk_idx, text, None, "type_failed", None,
+                          max_db, mean_db, int((time.time()-t0)*1000), False, str(e))
+                continue
+        else:
+            action = "idle"
+            print(f"[idle] heard {text!r} — say 'go' to activate")
 
-        if has_trigger(text, TRIGGERS_START):
-            listening = True
-            print("[active] listening — speak now")
-            continue
-
-        if has_trigger(text, TRIGGERS_PAUSE):
-            listening = False
-            print("[paused] say 'go' to resume")
-            continue
-
-        if not listening:
-            print("  (paused — say 'go' to activate)")
-            continue
-
-        if has_trigger(text, TRIGGERS_SUBMIT):
-            submit_message()
-            continue
-
-        if has_trigger(text, TRIGGERS_CLEAR):
-            clear_input()
-            continue
-
-        if has_trigger(text, TRIGGERS_NEWL):
-            newline()
-            continue
-
-        if has_trigger(text, TRIGGERS_EDIT):
-            # edit mode: clear last sentence, then await replacement
-            print("  → EDIT MODE (clearing last sentence; next chunk replaces)")
-            press(Key.ctrl, "a")
-            time.sleep(0.05)
-            press(Key.delete)
-            continue
-
-        # default: type the text + trailing space
-        type_text(text + " ")
+        log_chunk(chunk_idx, text, trigger, action, typed,
+                  max_db, mean_db, int((time.time()-t0)*1000), True)
 
     finally:
-        wav_path.unlink(missing_ok=True)
+        wav.unlink(missing_ok=True)
 
-print("[done]")
+print("[done] session ended.")
+print(f"[done] history: bash scripts/voice_log.sh")
 PYEOF
