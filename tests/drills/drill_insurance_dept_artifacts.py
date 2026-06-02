@@ -336,12 +336,14 @@ def main() -> int:
             "backup-strategy", "agent-orchestration", "policy-engine",
             "observability", "voice-command", "advanced-models",
             "multi-session-coord", "feature-flags", "secrets-management",
+            "a11y-testing", "chaos-engineering", "dependency-scanning",
+            "api-contract-testing",
         }
         actual = {p.name for p in g_templates.iterdir() if p.is_dir()}
         missing = expected - actual
         if missing:
             fail(f"global modules missing: {missing}")
-        ok(f"all 18 global modules present at {g_templates}")
+        ok(f"all {len(expected)} global modules present at {g_templates}")
 
     step(25, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
