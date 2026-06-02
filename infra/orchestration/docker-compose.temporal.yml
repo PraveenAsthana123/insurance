@@ -1,0 +1,65 @@
+# Temporal cluster — append/merge into project docker-compose.yml.
+# Per ADR-004 + Codex 2026-06-01 recommendation.
+
+services:
+  temporal-postgres:
+    image: postgres:16-alpine
+    container_name: insur_temporal_postgres
+    environment:
+      POSTGRES_PASSWORD: ${TEMPORAL_PG_PASSWORD:?required}
+      POSTGRES_USER: temporal
+      POSTGRES_DB: temporal
+    volumes:
+      - temporal_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U temporal -d temporal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  temporal:
+    image: temporalio/auto-setup:1.24
+    container_name: insur_temporal
+    environment:
+      DB: postgres12
+      DB_PORT: 5432
+      POSTGRES_USER: temporal
+      POSTGRES_PWD: ${TEMPORAL_PG_PASSWORD:?required}
+      POSTGRES_SEEDS: temporal-postgres
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/development.yaml
+    ports:
+      - "${TEMPORAL_PORT:-7233}:7233"
+    depends_on:
+      temporal-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  temporal-ui:
+    image: temporalio/ui:2.27
+    container_name: insur_temporal_ui
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CORS_ORIGINS: http://localhost:3000
+    ports:
+      - "${TEMPORAL_UI_PORT:-8233}:8080"
+    depends_on:
+      - temporal
+    restart: unless-stopped
+
+  insur-temporal-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: insur_temporal_worker
+    command: ["python", "-m", "temporal_worker"]
+    environment:
+      INSUR_TEMPORAL_ADDRESS: temporal:7233
+      INSUR_TEMPORAL_TASK_QUEUE: insur-tasks
+    depends_on:
+      temporal:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  temporal_pg:

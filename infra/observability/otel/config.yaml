@@ -1,0 +1,77 @@
+# OpenTelemetry Collector config — receives OTLP, exports to Jaeger + Prometheus + Phoenix.
+# Per Codex 2026-06-01 + global §47.6 + ADR-009.
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 10s
+    send_batch_size: 1024
+    send_batch_max_size: 2048
+
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+    spike_limit_mib: 128
+
+  # Add per-canonical-field attributes per global §57.6
+  attributes:
+    actions:
+      - key: project
+        value: insur
+        action: insert
+      - key: env
+        from_attribute: deployment.environment
+        action: insert
+
+exporters:
+  # Jaeger via OTLP (Jaeger 1.62+ supports OTLP natively)
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+
+  # Prometheus pulls metrics from this endpoint
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    const_labels:
+      project: insur
+
+  # Phoenix for LLM-specific traces (RAG spans + LLM calls)
+  otlp/phoenix:
+    endpoint: phoenix:4319
+    tls:
+      insecure: true
+
+  # Local debug
+  logging:
+    loglevel: warn
+    sampling_initial: 5
+    sampling_thereafter: 200
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, attributes]
+      exporters: [otlp/jaeger, otlp/phoenix, logging]
+
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, attributes]
+      exporters: [prometheus, logging]
+
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, attributes]
+      exporters: [logging]
+
+  telemetry:
+    logs:
+      level: info

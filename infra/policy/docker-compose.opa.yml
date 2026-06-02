@@ -1,0 +1,24 @@
+# OPA service — append/merge into project docker-compose.yml.
+# Per Codex 2026-06-01 recommendation + global §42.
+
+services:
+  opa:
+    image: openpolicyagent/opa:0.68.0
+    container_name: insur_opa
+    command:
+      - "run"
+      - "--server"
+      - "--addr=:8181"
+      - "--log-level=info"
+      - "--log-format=json"
+      - "/policies"
+    volumes:
+      - ./infra/policy/policies:/policies:ro
+    ports:
+      - "${OPA_PORT:-8181}:8181"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8181/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped

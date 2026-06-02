@@ -1,0 +1,79 @@
+# Observability stack — append/merge into project docker-compose.yml.
+# Per ADR-009 + Codex 2026-06-01 recommendation.
+#
+# Brings up: OTel Collector + Jaeger + Prometheus + Grafana + Phoenix.
+
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.110.0
+    container_name: insur_otel
+    command: ["--config=/etc/otel/config.yaml"]
+    volumes:
+      - ./infra/observability/otel/config.yaml:/etc/otel/config.yaml:ro
+    ports:
+      - "${OTLP_GRPC_PORT:-4317}:4317"   # OTLP gRPC
+      - "${OTLP_HTTP_PORT:-4318}:4318"   # OTLP HTTP
+      - "${OTEL_METRICS_PORT:-8889}:8889"  # Prometheus scrape
+    depends_on:
+      - jaeger
+      - prometheus
+    restart: unless-stopped
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62
+    container_name: insur_jaeger
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+      SPAN_STORAGE_TYPE: memory
+      MEMORY_MAX_TRACES: "100000"
+    ports:
+      - "${JAEGER_UI_PORT:-16686}:16686"   # UI
+      - "${JAEGER_OTLP_GRPC_PORT:-14317}:4317"
+      - "${JAEGER_OTLP_HTTP_PORT:-14318}:4318"
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.0
+    container_name: insur_prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=15d"
+    volumes:
+      - ./infra/observability/otel/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "${PROM_PORT:-9090}:9090"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss:11.2.0
+    container_name: insur_grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?required}
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+    volumes:
+      - ./infra/observability/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "${GRAFANA_PORT:-3001}:3000"
+    depends_on:
+      - prometheus
+      - jaeger
+    restart: unless-stopped
+
+  phoenix:
+    image: arizephoenix/phoenix:version-5.5.0
+    container_name: insur_phoenix
+    environment:
+      PHOENIX_PORT: "6006"
+      PHOENIX_GRPC_PORT: "4319"
+    ports:
+      - "${PHOENIX_UI_PORT:-6006}:6006"
+      - "${PHOENIX_GRPC_PORT:-4319}:4319"
+    restart: unless-stopped
+
+volumes:
+  prometheus_data:
+  grafana_data:

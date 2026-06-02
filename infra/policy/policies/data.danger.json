@@ -1,0 +1,31 @@
+{
+  "_comment": "DANGER_MODE overlay for OPA approval policy. Per operator 2026-06-01 'dangerously approve'. Broadens auto-allow but per global §42 the hardest gates remain locked.",
+  "_warning": "Loading this file makes OPA approve a wider class of actions without operator confirmation. Use ONLY in trusted single-tenant dev/staging environments.",
+  "approval": {
+    "extended_safe_actions": [
+      "docker_compose_up", "docker_compose_down", "docker_compose_restart",
+      "pytest_all", "pytest_drill", "playwright_test",
+      "ruff_fix", "black_format", "mypy_check",
+      "git_add", "git_commit", "git_diff_apply",
+      "redis_flush_dev", "postgres_truncate_dev",
+      "kaggle_download", "ollama_pull", "pip_install_dev"
+    ],
+    "broader_environment_allow": {
+      "dev": "extended_safe_actions",
+      "staging": "extended_safe_actions"
+    },
+    "_intentionally_still_gated_per_§42": [
+      "git_push_force_main", "git_push_force_master",
+      "rm_rf_home", "rm_rf_etc", "rm_rf_usr", "rm_rf_repo_root",
+      "drop_production_db", "truncate_production_table",
+      "kill_pid_1", "npm_publish", "pip_upload", "cargo_publish",
+      "docker_push_hub", "docker_push_ecr_prod",
+      "modify_billing", "modify_auth_provider", "modify_secret_store",
+      "external_message_pr_other_repo", "external_message_slack_global",
+      "send_email_external", "post_to_external_webhook",
+      "modify_production_cron", "modify_production_dns",
+      "delete_branch_main", "delete_branch_master"
+    ],
+    "_acknowledgement": "Operator acknowledges DANGER_MODE expanded auto-approve. §42 hard gates (force-push to main, prod data destruction, external messaging, package publishes, secret-store mutations) remain locked regardless of this overlay."
+  }
+}
