@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "tools": [
+    {
+      "name": "Superpowers",
+      "category": "operator workflow pack",
+      "status": "repo-local docs/specs present",
+      "stage": "use-now",
+      "layer": "planning and domain specs",
+      "use_for": "domain specs, plans, and reusable project knowledge under docs/superpowers",
+      "do_not_use_for": "runtime automation or approval bypass",
+      "next_step": "keep as project knowledge source for BMAD and KT workspaces"
+    },
+    {
+      "name": "Agentic OS",
+      "category": "operating model",
+      "status": "documented target",
+      "stage": "design-now",
+      "layer": "agent runtime, governance, memory, tools, observability",
+      "use_for": "single control map across OpenClaw, Ollama, BMAD, approval gates, memory, lineage, and evals",
+      "do_not_use_for": "claiming production autonomy without gates",
+      "next_step": "use this catalog plus GOVERNANCE_INDEX as the adoption source"
+    },
+    {
+      "name": "NeMo Guardrails",
+      "category": "LLM guardrails",
+      "status": "candidate; local guardrails endpoints already exist",
+      "stage": "candidate",
+      "layer": "trust and policy",
+      "use_for": "dialogue safety, jailbreak/prompt-injection flows, response policy checks",
+      "do_not_use_for": "replacing OPA, RBAC, HITL, or backend authorization",
+      "next_step": "pilot behind existing guardrails service and audit JSONL"
+    },
+    {
+      "name": "Letta + Mem0",
+      "category": "agent memory",
+      "status": "candidate",
+      "stage": "candidate",
+      "layer": "memory/RAG",
+      "use_for": "long-term agent memory, preferences, cross-session context",
+      "do_not_use_for": "secret storage, unbounded PII memory, production decisions without retention policy",
+      "next_step": "define memory retention, tenant isolation, erase/export, and audit before install"
+    },
+    {
+      "name": "Semantic Kernel",
+      "category": "agent orchestration SDK",
+      "status": "candidate",
+      "stage": "candidate",
+      "layer": "orchestration adapter",
+      "use_for": "skill/plugin orchestration experiments and enterprise workflow interop",
+      "do_not_use_for": "replacing the current OpenClaw/Redis default without parity tests",
+      "next_step": "compare against current OpenClaw/Pydantic AI council path on one workflow"
+    },
+    {
+      "name": "Pydantic AI",
+      "category": "typed agent framework",
+      "status": "opt-in typed council wired",
+      "stage": "pilot-wired",
+      "layer": "typed council adapter",
+      "use_for": "schema-constrained author/reviewer/chair results and typed tool outputs",
+      "do_not_use_for": "default async OpenClaw worker path until enabled and tested",
+      "next_step": "enable only with HOLY_TYPED_COUNCIL_ENABLED=true and focused tests"
+    },
+    {
+      "name": "GraphRAG + Neo4j",
+      "category": "graph RAG",
+      "status": "target; frontend/scaffold references exist, backend graph store not wired",
+      "stage": "design-now",
+      "layer": "knowledge graph and retrieval",
+      "use_for": "relationship-aware retrieval, dependency maps, entity resolution, explainability",
+      "do_not_use_for": "raw operational writes or bypassing repositories/services",
+      "next_step": "define graph schema, ingestion jobs, query API, tenancy, and eval set"
+    },
+    {
+      "name": "HITL",
+      "category": "human-in-the-loop approvals",
+      "status": "backend support exists",
+      "stage": "use-now",
+      "layer": "approval and escalation",
+      "use_for": "high-risk decisions, destructive operations, external writes, production changes",
+      "do_not_use_for": "low-risk repo-local work that autonomy policy allows",
+      "next_step": "connect HITL events to OpenLineage/evaluator evidence where relevant"
+    },
+    {
+      "name": "Reflection Agents",
+      "category": "agent pattern",
+      "status": "documented pattern; no separate runtime",
+      "stage": "design-now",
+      "layer": "review and quality gates",
+      "use_for": "self-review, critique, repair loops, adversarial checks, bmad-code-review",
+      "do_not_use_for": "unbounded recursive loops or bypassing tests",
+      "next_step": "implement as bounded OpenClaw council/reflection tasks with max iterations"
+    },
+    {
+      "name": "Future",
+      "category": "roadmap bucket",
+      "status": "placeholder",
+      "stage": "future",
+      "layer": "all layers",
+      "use_for": "items requiring operator decision, credentials, or production architecture",
+      "do_not_use_for": "present-tense production claims",
+      "next_step": "promote only after adoption questions and validation are complete"
+    },
+    {
+      "name": "OpenLineage",
+      "category": "data lineage",
+      "status": "candidate",
+      "stage": "candidate",
+      "layer": "observability and lineage",
+      "use_for": "pipeline/job dataset lineage, ML/data governance, eval provenance",
+      "do_not_use_for": "LLM prompt tracing alone; keep OTel/Langfuse/Phoenix for LLM traces",
+      "next_step": "pilot one pipeline event producer and store lineage evidence"
+    },
+    {
+      "name": "OWL + RDF",
+      "category": "semantic ontology",
+      "status": "target documented; not wired",
+      "stage": "design-now",
+      "layer": "semantic layer",
+      "use_for": "formal vocabulary, ontology, triples, constraints, reasoning, interoperability",
+      "do_not_use_for": "ad hoc JSON replacement before ontology ownership exists",
+      "next_step": "create domain ontology, SHACL constraints, and CI validation before graph ingestion"
+    },
+    {
+      "name": "Microsoft Purview",
+      "category": "data governance catalog",
+      "status": "external candidate; Azure/operator decision required",
+      "stage": "future",
+      "layer": "enterprise data governance",
+      "use_for": "enterprise catalog, classifications, data estate governance, compliance workflows",
+      "do_not_use_for": "local-only default or any flow without Azure tenant/credential review",
+      "next_step": "require Azure subscription, data boundary, auth, and retention review"
+    },
+    {
+      "name": "Evaluators",
+      "category": "quality/evaluation harness",
+      "status": "partially present via testing/eval docs and optional agent tooling",
+      "stage": "use-now",
+      "layer": "testing and assurance",
+      "use_for": "LLM output quality, RAG faithfulness, policy compliance, regression gates",
+      "do_not_use_for": "blocking every local edit with expensive evals by default",
+      "next_step": "define fast default evaluators and opt-in heavy eval suite"
+    },
+    {
+      "name": "Spec Kit",
+      "category": "specification kickoff",
+      "status": "repo-local Spec Kit command wired to KT/BMAD; external Spec Kit not installed",
+      "stage": "design-now",
+      "layer": "specification and acceptance criteria",
+      "use_for": "turn short requests into structured specs, tasks, acceptance criteria, and BMAD handoffs",
+      "do_not_use_for": "runtime execution or approval bypass",
+      "next_step": "use scripts/spec_kit.py for intake, then BMAD/OpenClaw routing"
+    },
+    {
+      "name": "BMAD",
+      "category": "planning methodology",
+      "status": "local methodology/scaffold installed",
+      "stage": "use-now",
+      "layer": "PRD, architecture, stories, review",
+      "use_for": "PRD, architecture handoff, implementation stories, review checklists",
+      "do_not_use_for": "runtime orchestration, direct deploys, or production authority",
+      "next_step": "use after Spec Kit/KT capture and before agent execution"
+    },
+    {
+      "name": "LangGraph",
+      "category": "stateful agent graph runtime",
+      "status": "target/candidate; not default runtime",
+      "stage": "candidate",
+      "layer": "stateful workflow graph",
+      "use_for": "bounded graph workflows, reflection loops, deterministic agent state transitions",
+      "do_not_use_for": "replacing OpenClaw/Redis without parity and observability checks",
+      "next_step": "pilot one bounded reflection or review graph"
+    },
+    {
+      "name": "OpenAI Agents SDK",
+      "category": "agent SDK",
+      "status": "candidate; no production wiring claimed",
+      "stage": "candidate",
+      "layer": "agent runtime adapter",
+      "use_for": "tool-calling agents, handoffs, tracing-compatible experiments",
+      "do_not_use_for": "default production execution before auth, audit, and provider policy are defined",
+      "next_step": "pilot behind OpenClaw adapter with local governance and no secret exposure"
+    },
+    {
+      "name": "AutoGen",
+      "category": "multi-agent conversation framework",
+      "status": "stage-2 candidate already tracked",
+      "stage": "candidate",
+      "layer": "multi-agent collaboration",
+      "use_for": "research-grade multi-agent conversation and debate experiments",
+      "do_not_use_for": "replacing current council path without tests",
+      "next_step": "compare with CrewAI and local council on one task"
+    },
+    {
+      "name": "CrewAI",
+      "category": "role-based multi-agent framework",
+      "status": "stage-2 candidate already tracked",
+      "stage": "candidate",
+      "layer": "role-based agent teams",
+      "use_for": "role/goal/task orchestration experiments",
+      "do_not_use_for": "duplicating local council workers without measurable gain",
+      "next_step": "run parity eval against local council pattern"
+    },
+    {
+      "name": "LangSmith + Phoenix",
+      "category": "LLM observability and evaluation tracing",
+      "status": "Phoenix preferred local/self-host path; LangSmith SaaS is opt-in only",
+      "stage": "candidate",
+      "layer": "LLM traces and eval observability",
+      "use_for": "trace inspection, RAG/eval debugging, prompt/version evidence",
+      "do_not_use_for": "sending sensitive traces to SaaS without explicit key and retention review",
+      "next_step": "default to Phoenix locally; use LangSmith only with explicit environment opt-in"
+    },
+    {
+      "name": "AgentOps",
+      "category": "agent observability",
+      "status": "stage-1 candidate; SaaS key required for dashboard",
+      "stage": "candidate",
+      "layer": "agent session observability",
+      "use_for": "per-agent/session traces, costs, tool usage, and run health",
+      "do_not_use_for": "unreviewed external telemetry export",
+      "next_step": "wire only behind AGENTOPS_API_KEY and telemetry policy"
+    },
+    {
+      "name": "AI Command Center",
+      "category": "operations console",
+      "status": "target operating layer; not a single installed product",
+      "stage": "design-now",
+      "layer": "ops UI and control plane",
+      "use_for": "agent status, queue health, approvals, evals, incidents, lineage, and governance dashboards",
+      "do_not_use_for": "direct unrestricted action execution",
+      "next_step": "compose from agent supervisor, approval dashboard, guardrails, lineage, and eval views"
+    },
+    {
+      "name": "Enterprise Decision OS",
+      "category": "decision governance platform",
+      "status": "target architecture",
+      "stage": "future",
+      "layer": "enterprise decisions and accountability",
+      "use_for": "policy-backed decisions, HITL escalation, auditability, lineage, and explainability",
+      "do_not_use_for": "autonomous final authority on regulated or high-risk decisions",
+      "next_step": "requires decision schema, approval model, audit retention, and compliance signoff"
+    },
+    {
+      "name": "Autonomous Enterprise OS",
+      "category": "enterprise autonomy target",
+      "status": "future target only",
+      "stage": "future",
+      "layer": "cross-enterprise autonomous operations",
+      "use_for": "long-term autonomous workflows after governance, evals, memory, lineage, and HITL are mature",
+      "do_not_use_for": "current repo-local coding or production claims",
+      "next_step": "promote only after Enterprise Decision OS gates and production controls are proven"
+    }
+  ],
+  "maturity_ladder": [
+    {
+      "order": 1,
+      "name": "Spec Kit",
+      "purpose": "Capture structured spec, acceptance criteria, constraints, and handoff inputs.",
+      "current_repo_status": "Repo-local scripts/spec_kit.py creates specs and can route into KT/BMAD."
+    },
+    {
+      "order": 2,
+      "name": "BMAD",
+      "purpose": "Convert spec into PRD, architecture, stories, and review plan.",
+      "current_repo_status": "Installed local methodology/scaffold."
+    },
+    {
+      "order": 3,
+      "name": "LangGraph",
+      "purpose": "Stateful graph workflow for bounded agent flows and reflection loops.",
+      "current_repo_status": "Candidate; not default runtime."
+    },
+    {
+      "order": 4,
+      "name": "OpenAI Agents SDK",
+      "purpose": "Agent/tool/handoff SDK adapter for governed experiments.",
+      "current_repo_status": "Candidate; not production wired."
+    },
+    {
+      "order": 5,
+      "name": "AutoGen",
+      "purpose": "Multi-agent conversation and debate framework.",
+      "current_repo_status": "Candidate; compare against local council."
+    },
+    {
+      "order": 6,
+      "name": "CrewAI",
+      "purpose": "Role-based agent teams and task orchestration.",
+      "current_repo_status": "Candidate; compare against local council."
+    },
+    {
+      "order": 7,
+      "name": "Agentic OS",
+      "purpose": "Unify runtime, governance, tools, memory, observability, approvals, and evals.",
+      "current_repo_status": "Documented control map."
+    },
+    {
+      "order": 8,
+      "name": "Mem0 + Letta",
+      "purpose": "Long-term and cross-session memory layer.",
+      "current_repo_status": "Candidate; retention and tenant policy required."
+    },
+    {
+      "order": 9,
+      "name": "GraphRAG + Neo4j",
+      "purpose": "Relationship-aware retrieval, lineage, dependency maps, and explainability.",
+      "current_repo_status": "Design target; backend graph store not wired."
+    },
+    {
+      "order": 10,
+      "name": "LangSmith + Phoenix",
+      "purpose": "LLM trace, RAG debug, prompt/eval observability.",
+      "current_repo_status": "Phoenix preferred local path; LangSmith opt-in SaaS."
+    },
+    {
+      "order": 11,
+      "name": "NeMo Guardrails",
+      "purpose": "Dialogue and policy guardrails layered behind existing authorization.",
+      "current_repo_status": "Candidate; local guardrails endpoints already exist."
+    },
+    {
+      "order": 12,
+      "name": "AgentOps",
+      "purpose": "Agent run/session telemetry, cost, and tool-use observability.",
+      "current_repo_status": "Candidate; SaaS key required."
+    },
+    {
+      "order": 13,
+      "name": "AI Command Center",
+      "purpose": "Operational console for queues, agents, approvals, evals, incidents, and lineage.",
+      "current_repo_status": "Target UI/control-plane layer."
+    },
+    {
+      "order": 14,
+      "name": "Enterprise Decision OS",
+      "purpose": "Policy-backed decision accountability, HITL, lineage, and compliance.",
+      "current_repo_status": "Future target architecture."
+    },
+    {
+      "order": 15,
+      "name": "Autonomous Enterprise OS",
+      "purpose": "Mature cross-enterprise autonomy after governance and evaluation gates are proven.",
+      "current_repo_status": "Future target only."
+    }
+  ]
+}

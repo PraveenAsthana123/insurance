@@ -70,6 +70,45 @@ scripts/setup_advanced_agentic_stack.sh smoke
 
 Run reports are written to `jobs/reports/advanced_agentic_stack_status.txt`. Policy and usage live in `docs/ADVANCED_AGENTIC_STACK_SETUP.md`.
 
+## Advanced Agentic OS Tool Catalog
+
+Inspect governed status for Superpowers, Agentic OS, NeMo Guardrails, Letta/Mem0, Semantic Kernel, Pydantic AI, GraphRAG/Neo4j, HITL, Reflection Agents, OpenLineage, OWL/RDF, Purview, and evaluators:
+
+```bash
+scripts/advanced_agentic_os_tools.py list
+scripts/advanced_agentic_os_tools.py list --stage candidate --verbose
+scripts/advanced_agentic_os_tools.py markdown
+scripts/advanced_agentic_os_tools.py ladder --verbose
+scripts/test_advanced_agentic_os_tools.py
+```
+
+Catalog source: `config/advanced_agentic_os_tools.json`. Policy and adoption order: `docs/ADVANCED_AGENTIC_OS_TOOLING_PLAN.md`.
+
+## Spec Kit
+
+Create a governed spec before BMAD/OpenClaw execution:
+
+```bash
+scripts/spec_kit.py create --title "catalog fix" --text "Fix catalog filters and update tests/docs"
+scripts/spec_kit.py create --bmad --text "Create a BMAD-ready story for the next governed task"
+scripts/spec_kit.py create --submit --department engineering --mode council --profile fast --text "Plan and route the next implementation task"
+scripts/spec_kit.py list
+```
+
+Spec workspaces are written under `jobs/spec-kit/`. Full usage: `docs/SPEC_KIT_RUNBOOK.md`.
+
+## KT + BMAD Space
+
+Create a lightweight BMAD-ready task workspace from a short request, transcript, or file:
+
+```bash
+scripts/kt_bmad_space.py create --title "catalog fix" --text "Create BMAD story and OpenClaw task for catalog filter fixes"
+scripts/kt_bmad_space.py create --submit --department engineering --mode council --profile fast --text "Create the next governed implementation task"
+scripts/kt_bmad_space.py list
+```
+
+Workspaces are written under `jobs/kt-bmad/`. Usage and policy live in `docs/KT_BMAD_SPACE_RUNBOOK.md`.
+
 ## Archon Developer Workflow Harness
 
 Archon is installed as an optional local developer workflow harness, not as production runtime infrastructure. Repo-local workflows live in `.archon/`.

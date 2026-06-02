@@ -31,7 +31,7 @@ RUN curl -sL https://github.com/grafana/k6/releases/download/v0.52.0/k6-v0.52.0-
 
 # Trivy binary (security-agent tier 11-12 — container/dep scanning)
 RUN curl -fsSL -o /tmp/trivy.tar.gz \
-        https://github.com/aquasecurity/trivy/releases/download/v0.55.0/trivy_0.55.0_Linux-64bit.tar.gz \
+        https://github.com/aquasecurity/trivy/releases/download/v0.71.0/trivy_0.71.0_Linux-64bit.tar.gz \
     && tar -xzf /tmp/trivy.tar.gz -C /usr/local/bin trivy \
     && chmod +x /usr/local/bin/trivy \
     && rm -f /tmp/trivy.tar.gz \

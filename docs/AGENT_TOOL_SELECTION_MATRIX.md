@@ -16,6 +16,12 @@ This matrix defines how to evaluate external agent, orchestration, coding, and m
 | DSPy | Prompt optimization for LMs | Auto-compile Signature-typed prompt chains; RAG eval-set optimization | New API surface vs hand-tuned prompts; debugging optimized chains is harder | Stage-1: installed; wire into `services/agent_platform_service.py` council prompts when operator picks the first DSPy signature to optimize. |
 | Haystack | Production RAG framework (deepset) | Document retrieval + LLM orchestration via Pipeline DAGs | Heavy dep tree (torch/transformers — already in venv); steeper learning curve than LlamaIndex | Stage-1: installed; wire as alternative `rag_lifecycle.py` impl; empirical eval vs LlamaIndex before default-flip. |
 | Pydantic AI | Pydantic-typed agent framework (Pydantic team) | Strongly-typed tool-calling + validation + retries | Newer ecosystem; provider-API-specific code paths | Stage-2 pilot wired for opt-in typed council runs at `POST /api/v1/agent-platform/typed-council/run`; default council path remains OpenClaw/Redis. |
+| NeMo Guardrails | LLM dialogue and policy guardrails | Prompt/response safety pilots layered behind existing auth and audit | Must not replace OPA/RBAC/HITL authorization | Candidate only; pilot behind `backend/services/guardrails_service.py` and audit JSONL. |
+| Letta + Mem0 | Agent memory and long-term context | Cross-session memory, preferences, agent recall | PII retention, tenant isolation, delete/export complexity | Candidate only; requires memory retention and tenant/PII policy before install. |
+| Semantic Kernel | Agent orchestration SDK | Enterprise plugin/skill orchestration experiments | Overlaps with OpenClaw/Redis and Pydantic AI council | Candidate only; requires parity test before replacing defaults. |
+| GraphRAG + Neo4j | Graph-aware retrieval and knowledge graph | Entity relationships, dependency maps, explainability | Schema/tenancy/ingestion complexity | Design target; define graph schema, ingestion, query API, and eval set first. |
+| OpenLineage | Data and pipeline lineage | Dataset/job lineage, ML provenance, eval evidence | Not an LLM trace replacement | Candidate pilot on one pipeline before broad instrumentation. |
+| Microsoft Purview | Enterprise data governance catalog | Azure data catalog, classification, compliance workflows | Requires Azure tenant, credentials, and data boundary review | Future/operator-gated only. |
 | OpenHands | Autonomous coding agent (formerly OpenDevin) | Multi-step file edit + shell exec + browse | HIGH blast radius; sandbox required; not production runtime | Stage-3: documented as developer dev harness; never wired into backend runtime. |
 | AgentOps | Agent observability + cost tracking SDK | Per-session traces; cost per (tenant, agent) | SaaS dashboard requires `AGENTOPS_API_KEY`; opt-in only | Stage-1: installed; wire into CUA execute path with feature flag; mutually exclusive with LangSmith per session. |
 | Arize Phoenix | Self-hosted LLM trace viewer | Local trace UI (no SaaS); RAG eval | Local web server on port 6006; not a SaaS observability platform | Stage-1: installed; ingest `cua_runs.jsonl` for trace + eval; runs as standalone tool, no backend coupling. |
@@ -237,6 +243,7 @@ Default decision for now:
 - GitHub Copilot CLI/SDK: CLI installed locally as developer tooling; SDK/extensions remain candidate only and are not production integrated
 - BMAD: local methodology/scaffold installed; planning and review layer only
 - Dark Factory Operating Model: documented control model only; not a runtime tool
+- Advanced Agentic OS catalog: `config/advanced_agentic_os_tools.json` + `docs/ADVANCED_AGENTIC_OS_TOOLING_PLAN.md`; separates use-now, design-now, candidate, and future/operator-gated tools
 
 Archon repo-local setup lives in `.archon/` and currently provides `insur-project-doctor-fix` and `insur-api-change-governance` workflows.
 

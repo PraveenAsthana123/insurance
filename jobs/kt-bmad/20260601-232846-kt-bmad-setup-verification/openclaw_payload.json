@@ -1,0 +1,12 @@
+{
+  "mode": "council",
+  "department": "engineering",
+  "prompt": "Verify the KT plus BMAD workspace path for short task kickoff, BMAD handoff, and optional OpenClaw routing.",
+  "source": "kt-bmad-space",
+  "metadata": {
+    "workspace": "/mnt/deepa/insur_project/jobs/kt-bmad/20260601-232846-kt-bmad-setup-verification",
+    "profile": "fast",
+    "bmad": true,
+    "created_at": "2026-06-02T05:28:46+00:00"
+  }
+}
