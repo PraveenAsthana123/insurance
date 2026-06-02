@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# voice-noise-cancel — enable PulseAudio echo-cancellation virtual source.
+#
+# Per operator 2026-06-01 ("noise cancellation").
+#
+# Creates a virtual mic source 'echo-cancel-source' that applies
+# WebRTC noise suppression + echo cancellation to the real mic.
+# The voice script auto-prefers this source if it exists.
+#
+# Usage:
+#   bash scripts/voice-noise-cancel enable    # load the module
+#   bash scripts/voice-noise-cancel disable   # unload it
+#   bash scripts/voice-noise-cancel status    # show current state
+#
+# Persistence: runs only in this PulseAudio session; survives until
+# logout. To persist across reboots, add the module to
+# ~/.config/pulse/default.pa.
+
+set -euo pipefail
+
+ACTION="${1:-status}"
+
+find_mic_source() {
+    pactl list sources short 2>/dev/null | \
+        awk '$2 ~ /^alsa_input\./ && $2 !~ /\.monitor$/ {print $2; exit}'
+}
+
+case "$ACTION" in
+    enable)
+        if pactl list short modules 2>/dev/null | grep -q module-echo-cancel; then
+            echo "echo-cancel already loaded"
+            pactl list short modules | grep module-echo-cancel
+            exit 0
+        fi
+
+        MIC="$(find_mic_source)"
+        if [[ -z "$MIC" ]]; then
+            echo "no alsa_input.* source found; can't enable"
+            exit 1
+        fi
+
+        echo "loading module-echo-cancel on $MIC..."
+        IDX=$(pactl load-module module-echo-cancel \
+            source_master="$MIC" \
+            aec_method=webrtc \
+            aec_args="\"analog_gain_control=0 digital_gain_control=1 noise_suppression=1 high_pass_filter=1\"" \
+            source_name=echo-cancel-source \
+            source_properties=device.description=NoiseCanceled-Mic \
+            2>&1) || { echo "load failed: $IDX"; exit 1; }
+        echo "loaded module index: $IDX"
+        echo
+        echo "now use: pactl set-default-source echo-cancel-source"
+        echo "or:      VOICE_MIC_SOURCE=echo-cancel-source bash scripts/voice"
+        ;;
+    disable)
+        IDX=$(pactl list short modules 2>/dev/null | \
+            grep module-echo-cancel | awk '{print $1}' | head -1)
+        if [[ -z "$IDX" ]]; then
+            echo "module-echo-cancel not currently loaded"
+            exit 0
+        fi
+        pactl unload-module "$IDX"
+        echo "unloaded module $IDX"
+        ;;
+    status)
+        echo "Loaded modules:"
+        pactl list short modules 2>/dev/null | grep echo-cancel || echo "  (none)"
+        echo
+        echo "Available sources (look for 'echo-cancel-source' if enabled):"
+        pactl list sources short 2>/dev/null
+        ;;
+    *)
+        echo "usage: $0 enable | disable | status"
+        exit 1
+        ;;
+esac
