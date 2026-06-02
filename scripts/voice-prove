@@ -1,0 +1,171 @@
+#!/usr/bin/env bash
+# voice-prove — definitive test that tells you EXACTLY where the pipeline fails.
+#
+# Records 5 sec, PLAYS THE AUDIO BACK to your speakers (so you can hear
+# if your mic captured anything), then transcribes.
+#
+# Three possible outcomes:
+#   A. Playback is silent → mic isn't capturing → fix: pavucontrol
+#   B. Playback has your voice, transcript empty → whisper needs bigger model
+#   C. Playback has voice + transcript correct → it works! Use voice-pro
+#
+# Run this YOURSELF in YOUR terminal:
+#   bash scripts/voice-prove
+
+set -uo pipefail
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python}"
+
+red()    { printf "\033[1;31m%s\033[0m\n" "$*"; }
+green()  { printf "\033[1;32m%s\033[0m\n" "$*"; }
+yellow() { printf "\033[1;33m%s\033[0m\n" "$*"; }
+blue()   { printf "\n\033[1;34m═══ %s ═══\033[0m\n" "$*"; }
+big()    { printf "\n\033[1;36m%s\033[0m\n" "$*"; }
+
+# Auto-discover the mic
+SRC=$(pactl list sources short 2>/dev/null | \
+      awk '$2 ~ /^alsa_input\./ && $2 !~ /\.monitor$/ {print $2; exit}')
+
+if [[ -z "$SRC" ]]; then
+    red "no PulseAudio mic source — bailing"
+    yellow "fix: pulseaudio --start  OR  systemctl --user restart pipewire"
+    exit 1
+fi
+
+WAV=/tmp/prove_$$.wav
+
+big "═══ voice-prove ═══"
+echo "  mic: $SRC"
+echo "  This will RECORD 5 SEC + PLAY IT BACK + TRANSCRIBE"
+echo
+
+blue "Step 1: Record 5 seconds — SPEAK!"
+yellow "  ▶ Say loud and clear: 'testing one two three four five'"
+yellow "  ▶ Speak NORMALLY (don't shout — clipping hurts whisper)"
+echo
+for i in 3 2 1; do
+    printf "  starting in %d...\r" "$i"
+    sleep 1
+done
+printf "\n"
+big "  ►RECORDING NOW◄ (5 sec)"
+
+parecord --device="$SRC" --record --rate=16000 --channels=1 \
+    --format=s16le --file-format=wav "$WAV" &
+PID=$!
+sleep 5
+kill $PID 2>/dev/null
+wait 2>/dev/null
+
+if [[ ! -s "$WAV" ]]; then
+    red "no audio file — parecord failed"
+    exit 1
+fi
+
+SIZE=$(du -h "$WAV" | cut -f1)
+MAX=$(ffmpeg -i "$WAV" -af volumedetect -vn -sn -dn -f null /dev/null 2>&1 | \
+      grep "max_volume" | awk '{print $5}')
+MEAN=$(ffmpeg -i "$WAV" -af volumedetect -vn -sn -dn -f null /dev/null 2>&1 | \
+       grep "mean_volume" | awk '{print $5}')
+
+echo
+echo "  file:   $WAV ($SIZE)"
+echo "  max:    $MAX"
+echo "  mean:   $MEAN"
+
+# Diagnose volume
+MAX_NUM=${MAX#-}
+MAX_NUM=${MAX_NUM%dB}
+MAX_NUM=${MAX_NUM%.*}
+if [[ -z "$MAX_NUM" ]] || (( MAX_NUM > 60 )); then
+    red "✗ SILENT capture (max ${MAX})"
+    big "  CONCLUSION A: your mic isn't capturing audio"
+    yellow ""
+    yellow "  FIX:"
+    yellow "    1. Open the volume mixer GUI:"
+    yellow "         pavucontrol"
+    yellow "    2. Go to 'Input Devices' tab"
+    yellow "    3. Find: $SRC"
+    yellow "    4. Make sure it's UNMUTED (speaker icon)"
+    yellow "    5. Raise the slider to ~75%"
+    yellow "    6. While voice-prove records, watch the level indicator on that"
+    yellow "       device — it should move when you speak"
+    yellow ""
+    yellow "  Or from CLI:"
+    yellow "    pactl set-source-mute $SRC 0"
+    yellow "    pactl set-source-volume $SRC 75%"
+    rm -f "$WAV"
+    exit 1
+fi
+
+green "✓ AUDIO CAPTURED (max $MAX)"
+
+blue "Step 2: Playing it back so you can hear yourself"
+yellow "  ► You should hear your voice now."
+yellow "  ► If you hear SILENCE: mic captured noise, not your voice"
+echo
+if command -v paplay >/dev/null 2>&1; then
+    paplay "$WAV"
+elif command -v aplay >/dev/null 2>&1; then
+    aplay "$WAV" 2>/dev/null
+else
+    yellow "  no audio playback tool (apt install pulseaudio-utils)"
+fi
+echo
+
+blue "Step 3: Transcribe (whisper-base)"
+TEXT=$("$PYTHON" - "$WAV" 2>&1 <<'PYEOF'
+import sys, warnings
+warnings.filterwarnings("ignore")
+try:
+    from faster_whisper import WhisperModel
+    m = WhisperModel("base", device="cpu", compute_type="int8")
+    segs, info = m.transcribe(sys.argv[1], language="en", beam_size=5)
+    text = " ".join(s.text for s in segs).strip()
+    print(f"language={info.language} prob={info.language_probability:.2f}")
+    print(f"duration={info.duration:.2f}s")
+    print(f"transcript: {text!r}")
+except Exception as e:
+    print(f"FAIL: {e}")
+PYEOF
+)
+echo "$TEXT"
+echo
+
+if echo "$TEXT" | grep -q "transcript: ''"; then
+    yellow "✗ empty transcript"
+    big "  CONCLUSION B: audio captured but whisper found no speech"
+    yellow ""
+    yellow "  POSSIBLE CAUSES:"
+    yellow "    1. Background noise only (no clear speech)"
+    yellow "    2. Whisper-base too small for your accent"
+    yellow "    3. Audio is mostly silence at low volume"
+    yellow ""
+    yellow "  TRY:"
+    yellow "    bash scripts/voice-prove  # speak LOUDER"
+    yellow "  Or use a bigger model:"
+    yellow "    /media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python -c \"
+    yellow "      from faster_whisper import WhisperModel"
+    yellow "      m = WhisperModel('small', device='cpu', compute_type='int8')"
+    yellow "      segs, info = m.transcribe('$WAV', language='en', beam_size=5)"
+    yellow "      print(' '.join(s.text for s in segs).strip())\""
+    yellow ""
+    yellow "  Or test with whisper-medium for accents:"
+    yellow "    VOICE_MODEL=medium bash scripts/voice-prove"
+elif echo "$TEXT" | grep -q "FAIL:"; then
+    red "✗ whisper crashed"
+    big "  CONCLUSION X: whisper itself failed"
+    yellow "  reinstall:  pip install --force-reinstall faster-whisper"
+else
+    green "★ TRANSCRIPT WORKS"
+    big "  CONCLUSION C: VOICE PIPELINE FULLY WORKS"
+    green ""
+    green "  Now run for real:"
+    green "    bash scripts/voice-pro"
+    green ""
+    green "  Then speak: 'go' to activate, words to type, 'send' to submit"
+fi
+
+echo
+echo "WAV preserved at: $WAV"
+echo "  (delete with: rm $WAV)"
