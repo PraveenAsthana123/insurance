@@ -146,7 +146,53 @@ print(f'ok={n_ok} fail={n_fail}')
         FROM_LAST_PUSH=$(git rev-list --count HEAD ^origin/main 2>/dev/null || echo "$BEHIND")
         log "commits ahead of origin/main: $FROM_LAST_PUSH"
         if [[ "$REMOTE" != "(no origin)" && "$FROM_LAST_PUSH" -gt 0 ]]; then
-            log "HINT: git push origin main  (gated — operator-approved bundle)"
+            log "HINT: git push origin main  (handled by 'push' task)"
+        fi
+        ;;
+
+    push)
+        # Per operator 2026-06-01 explicit approval: "push pending using cron
+        # with all approval ..not to ask". Per §42 the operator's verbal
+        # authorization covers regular (non-force) push to origin/main.
+        # NEVER use --force; NEVER push to other refs; NEVER push if remote
+        # changed since last check.
+        log "push task"
+        cd "$REPO"
+        BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)
+        if [[ "$BRANCH" != "main" && "$BRANCH" != "master" ]]; then
+            log "skip — current branch is $BRANCH (only push main/master)"
+            exit 0
+        fi
+        if ! git remote get-url origin >/dev/null 2>&1; then
+            log "skip — no origin remote configured"
+            log "to enable autopush: git remote add origin <your-url>"
+            exit 0
+        fi
+        REMOTE=$(git remote get-url origin)
+        log "remote: $REMOTE"
+        # Fetch first so we know whether we'd be force-pushing
+        if ! git fetch origin 2>&1 | tail -3 >> /dev/null; then
+            log "fetch failed — skip push (auth/network?)"
+            exit 1
+        fi
+        AHEAD=$(git rev-list --count "origin/$BRANCH..HEAD" 2>/dev/null || echo 0)
+        BEHIND=$(git rev-list --count "HEAD..origin/$BRANCH" 2>/dev/null || echo 0)
+        log "ahead=$AHEAD behind=$BEHIND"
+        if [[ "$AHEAD" == "0" ]]; then
+            log "nothing to push"
+            exit 0
+        fi
+        if [[ "$BEHIND" != "0" ]]; then
+            log "REFUSING push — branch behind origin by $BEHIND (would force-push)"
+            log "operator: pull/rebase manually first"
+            exit 1
+        fi
+        # Safe regular push
+        if git push origin "$BRANCH" 2>&1 | tail -5; then
+            log "PUSHED $AHEAD commits to origin/$BRANCH"
+        else
+            log "push failed (auth/permissions?)"
+            exit 1
         fi
         ;;
 

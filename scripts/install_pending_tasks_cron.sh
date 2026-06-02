@@ -43,6 +43,7 @@ declare -a TASKS=(
     "0 9 * * *|prod-aggregate"     # daily aggregate report @ 09:00
     "0 */6 * * *|push-hint"        # every 6h: log push status (no actual push)
     "0 10 * * *|claude-md-drift"   # CLAUDE.md §72 sync check @ 10:00
+    "*/15 * * * *|push"            # every 15 min: safe push (skips if no remote / behind)
 )
 
 NEW_BLOCK="$TAG_START"
