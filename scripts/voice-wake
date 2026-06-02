@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+# voice-wake — Tier-A #2: wake-word activated voice-pro using openwakeword.
+#
+# Idles quietly until you say a wake word (default: "hey jarvis").
+# Then runs VAD-driven recording for ONE phrase, transcribes, types,
+# and goes back to idle.
+#
+# CPU when idle: ~1-2% (openwakeword is fast)
+# Memory: ~500MB (whisper-base) + ~100MB (openwakeword)
+#
+# Usage:
+#   bash scripts/voice-wake                          # default wake word
+#   bash scripts/voice-wake --wake-word alexa        # 'alexa' instead
+#   bash scripts/voice-wake --wake-word hey_mycroft  # mycroft
+#
+# Built-in wake words (openwakeword): alexa, hey_jarvis, hey_mycroft,
+#   hey_rhasspy, ok_nabu
+
+set -uo pipefail
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python}"
+WAKE_WORD="${WAKE_WORD:-hey_jarvis}"
+MODEL="${MODEL:-base}"
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --wake-word) WAKE_WORD="$2"; shift 2;;
+        --model)     MODEL="$2"; shift 2;;
+        *) echo "unknown arg: $1"; exit 1;;
+    esac
+done
+
+printf "\n\033[1;34m═══ voice-wake (Tier A #2) ═══\033[0m\n"
+echo "  ► wake word: '$WAKE_WORD'"
+echo "  ► model:     whisper-${MODEL}"
+echo "  ► CPU idle until you say the wake word."
+echo "  ► After wake, one phrase → typed → back to idle."
+echo "  ► Ctrl+C to exit."
+echo
+
+"$PYTHON" - "$WAKE_WORD" "$MODEL" <<'PYEOF'
+import os, sys, time, warnings
+warnings.filterwarnings("ignore")
+
+WAKE_WORD = sys.argv[1]
+MODEL = sys.argv[2]
+
+try:
+    import numpy as np
+    import sounddevice as sd
+    import openwakeword
+    from openwakeword.model import Model as WakeModel
+    from faster_whisper import WhisperModel
+    from pynput.keyboard import Controller, Key
+    import torch
+    from silero_vad import load_silero_vad
+except ImportError as e:
+    print(f"missing dep: {e}")
+    sys.exit(1)
+
+print(f"[loading] wake-word model + whisper + silero-vad...")
+# First-time: openwakeword downloads ~25MB
+try:
+    openwakeword.utils.download_models()
+except Exception as e:
+    print(f"[warn] download models: {e}")
+
+wm = WakeModel(wakeword_models=[WAKE_WORD])
+asr = WhisperModel(MODEL, device="cpu", compute_type="int8")
+vad = load_silero_vad()
+kbd = Controller()
+print(f"[ready] say '{WAKE_WORD.replace('_',' ')}' to activate")
+
+SR = 16000
+WAKE_BLOCK = 1280   # openwakeword expects 80ms chunks at 16k
+VAD_BLOCK = 512
+
+def transcribe_phrase(stream):
+    """After wake word, record until 600ms silence + transcribe."""
+    SILENCE_FRAMES = int(0.6 * SR / VAD_BLOCK)
+    MIN_VOICED = int(0.3 * SR / VAD_BLOCK)
+    MAX_BUF = int(20 * SR / VAD_BLOCK)
+    buf = []; silence = 0; voiced = 0
+    state = "warming"
+
+    print("[recording] speak your phrase...")
+    while True:
+        block, _ = stream.read(VAD_BLOCK)
+        npb = np.frombuffer(block, dtype=np.int16).astype(np.float32) / 32768.0
+        prob = vad(torch.from_numpy(npb), SR).item()
+        speaking = prob > 0.5
+
+        if state == "warming":
+            if speaking:
+                buf = [npb]; voiced = 1; silence = 0
+                state = "recording"
+            elif len(buf) > 20:
+                # No speech within ~1.3s of wake → bail
+                return None
+            buf.append(npb)
+        else:
+            buf.append(npb)
+            if speaking: voiced += 1; silence = 0
+            else: silence += 1
+            if silence >= SILENCE_FRAMES and voiced >= MIN_VOICED:
+                break
+            if len(buf) >= MAX_BUF:
+                break
+
+    audio = np.concatenate(buf)
+    t0 = time.time()
+    segs, _ = asr.transcribe(audio, language="en", beam_size=5)
+    text = " ".join(s.text for s in segs).strip()
+    print(f"[heard] {text!r}  ({int((time.time()-t0)*1000)}ms)")
+    return text
+
+
+with sd.RawInputStream(samplerate=SR, blocksize=WAKE_BLOCK,
+                       channels=1, dtype="int16") as stream:
+    print(f"[idle] waiting for '{WAKE_WORD.replace('_',' ')}'... (Ctrl+C to exit)")
+    try:
+        while True:
+            block, _ = stream.read(WAKE_BLOCK)
+            audio = np.frombuffer(block, dtype=np.int16).astype(np.int16)
+            preds = wm.predict(audio)
+            score = preds.get(WAKE_WORD, 0)
+            if score > 0.5:
+                print(f"[WAKE] {WAKE_WORD!r} (score={score:.2f})")
+                text = transcribe_phrase(stream)
+                if text:
+                    if text.lower().strip(" .,!?") in {"stop","exit","quit"}:
+                        print("[exit] heard stop")
+                        break
+                    elif text.lower().strip(" .,!?") in {"send","submit"}:
+                        kbd.press(Key.enter); kbd.release(Key.enter)
+                        print("[send] Enter")
+                    else:
+                        try:
+                            kbd.type(text + " ")
+                            print(f"[type] OK")
+                        except Exception as e:
+                            print(f"[err] type: {e}")
+                print(f"[idle] waiting for '{WAKE_WORD.replace('_',' ')}'...")
+                # Brief cool-down to avoid re-triggering on the same audio
+                time.sleep(0.5)
+    except KeyboardInterrupt:
+        print("\n[done]")
+PYEOF

@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+# voice-vad — Tier-A #1: VAD-driven push-to-talk using silero-vad.
+#
+# Instead of fixed 4-sec chunks, records ONLY when you're speaking
+# (silence-trimmed). Uses silero-vad to detect speech start + end.
+#
+# Latency: ~250ms after you stop speaking → transcription begins.
+# Feels real-time vs the fixed-chunk version.
+#
+# Usage:
+#   bash scripts/voice-vad                        # listen until stopped
+#   bash scripts/voice-vad --model small          # better model for accents
+#   bash scripts/voice-vad --language en --prompt 'your vocab'
+
+set -uo pipefail
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python}"
+MODEL="${MODEL:-base}"
+LANGUAGE="${VOICE_LANGUAGE:-en}"
+PROMPT="${VOICE_INITIAL_PROMPT:-}"
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --model)    MODEL="$2"; shift 2;;
+        --language) LANGUAGE="$2"; shift 2;;
+        --prompt)   PROMPT="$2"; shift 2;;
+        *) echo "unknown arg: $1"; exit 1;;
+    esac
+done
+
+if [[ ! -f "$REPO/data/voice_history.db" ]]; then
+    "$PYTHON" "$REPO/scripts/voice_history_init.py" >/dev/null 2>&1 || true
+fi
+
+printf "\n\033[1;34m═══ voice-vad (Tier A #1) ═══\033[0m\n"
+echo "  ► VAD-driven: records only while you speak"
+echo "  ► model:      whisper-${MODEL}, language=${LANGUAGE}"
+echo "  ► Click into target window. Speak; the script types as you pause."
+echo "  ► Say 'stop' to exit; Ctrl+C to abort."
+echo
+
+"$PYTHON" - "$MODEL" "$LANGUAGE" "$PROMPT" "$REPO" <<'PYEOF'
+import os, sqlite3, subprocess, sys, tempfile, time, uuid, warnings
+from pathlib import Path
+warnings.filterwarnings("ignore")
+
+MODEL = sys.argv[1]; LANGUAGE = sys.argv[2]
+PROMPT = sys.argv[3]; REPO = Path(sys.argv[4])
+DB = REPO / "data" / "voice_history.db"
+SID = f"vad-{int(time.time())}-{uuid.uuid4().hex[:6]}"
+
+try:
+    from faster_whisper import WhisperModel
+    from pynput.keyboard import Controller, Key
+    import sounddevice as sd
+    import numpy as np
+    import torch
+    from silero_vad import load_silero_vad, get_speech_timestamps
+except ImportError as e:
+    print(f"missing dep: {e}")
+    print("install: pip install faster-whisper pynput sounddevice silero-vad")
+    sys.exit(1)
+
+print("[loading] silero-vad + whisper...")
+t0 = time.time()
+vad = load_silero_vad()
+asr = WhisperModel(MODEL, device="cpu", compute_type="int8")
+kbd = Controller()
+print(f"[ready] in {time.time()-t0:.1f}s")
+print(f"[session] {SID}")
+print()
+
+SR = 16000
+BLOCK = 512
+SILENCE_FRAMES = int(0.6 * SR / BLOCK)  # 600ms silence ends a phrase
+MIN_VOICED = int(0.3 * SR / BLOCK)      # 300ms min phrase
+MAX_BUF = int(30 * SR / BLOCK)          # 30s max
+
+def log(text, action, typed, lat):
+    try:
+        c = sqlite3.connect(DB)
+        c.execute("""INSERT INTO voice_history
+            (session_id, mic_source, model, raw_transcript, action,
+             typed_text, latency_ms, ok)
+            VALUES (?,?,?,?,?,?,?,?)""",
+            (SID, "sounddevice", MODEL, text, action, typed, lat, True))
+        c.commit(); c.close()
+    except Exception as e:
+        print(f"[err] sqlite: {e}")
+
+def speak(t):
+    try: subprocess.Popen(["espeak","-s","180",t],
+                          stdout=subprocess.DEVNULL,
+                          stderr=subprocess.DEVNULL).wait(timeout=2)
+    except Exception: pass
+
+def transcribe(audio_np: "np.ndarray") -> str:
+    kw = {"language": LANGUAGE, "beam_size": 5}
+    if PROMPT: kw["initial_prompt"] = PROMPT
+    segs, _ = asr.transcribe(audio_np, **kw)
+    return " ".join(s.text for s in segs).strip()
+
+speak("listening")
+print("[active] speak now (say 'stop' to exit)")
+
+buf = []          # list of np.float32 blocks during voiced state
+silence = 0
+voiced = 0
+state = "idle"    # idle | recording
+
+with sd.RawInputStream(samplerate=SR, blocksize=BLOCK,
+                       channels=1, dtype="int16") as stream:
+    while True:
+        block, _ = stream.read(BLOCK)
+        np_block = np.frombuffer(block, dtype=np.int16).astype(np.float32) / 32768.0
+        tensor = torch.from_numpy(np_block)
+
+        # silero-vad expects 16k chunks; quick speech-prob
+        speech_prob = vad(tensor, SR).item()
+        is_speech = speech_prob > 0.5
+
+        if state == "idle":
+            if is_speech:
+                state = "recording"
+                buf = [np_block]
+                voiced = 1
+                silence = 0
+        else:  # recording
+            buf.append(np_block)
+            if is_speech:
+                voiced += 1
+                silence = 0
+            else:
+                silence += 1
+
+            # End-of-phrase detection
+            if silence >= SILENCE_FRAMES and voiced >= MIN_VOICED:
+                t_start = time.time()
+                audio = np.concatenate(buf)
+                text = transcribe(audio)
+                lat = int((time.time() - t_start) * 1000)
+
+                if not text:
+                    print(f"[empty] ({lat}ms)")
+                    log("", "empty", None, lat)
+                elif text.lower().strip(" .,!?") in {"stop","exit","quit"}:
+                    print(f"[exit] {text!r}")
+                    speak("stopped")
+                    log(text, "exit", None, lat)
+                    break
+                elif text.lower().strip(" .,!?") in {"send","submit"}:
+                    print(f"[send] {text!r} ({lat}ms)")
+                    speak("sent")
+                    kbd.press(Key.enter); kbd.release(Key.enter)
+                    log(text, "submit", None, lat)
+                else:
+                    print(f"[type] {text!r} ({lat}ms)")
+                    try:
+                        kbd.type(text + " ")
+                        log(text, "type", text + " ", lat)
+                    except Exception as e:
+                        print(f"[err] type: {e}")
+
+                state = "idle"
+                buf = []
+                voiced = silence = 0
+            elif len(buf) >= MAX_BUF:
+                # Force-flush at 30s — don't lose audio
+                t_start = time.time()
+                audio = np.concatenate(buf)
+                text = transcribe(audio)
+                lat = int((time.time() - t_start) * 1000)
+                if text:
+                    print(f"[type] {text!r} ({lat}ms) [max-buf]")
+                    kbd.type(text + " ")
+                    log(text, "type", text + " ", lat)
+                state = "idle"; buf = []; voiced = silence = 0
+
+print("[done]")
+PYEOF
