@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-06-02T04:17:22Z",
+  "n_agents": 6,
+  "agents": [
+    {
+      "id": "fleet_supervisor",
+      "source": "scripts/insur_fleet.py",
+      "size_bytes": 15064,
+      "registered_at": "2026-06-02T04:17:22Z",
+      "kind": "fleet_supervisor",
+      "lifecycle": "active"
+    },
+    {
+      "id": "redis_supervisor",
+      "source": "scripts/agent_supervisor.py",
+      "size_bytes": 12552,
+      "registered_at": "2026-06-02T04:17:22Z",
+      "kind": "redis_supervisor",
+      "lifecycle": "active"
+    },
+    {
+      "id": "scheduler",
+      "source": "scripts/agent_scheduler.py",
+      "size_bytes": 5588,
+      "registered_at": "2026-06-02T04:17:22Z",
+      "kind": "scheduler",
+      "lifecycle": "active"
+    },
+    {
+      "id": "council_v77",
+      "source": "backend/core/council_v77.py",
+      "size_bytes": 4638,
+      "registered_at": "2026-06-02T04:17:22Z",
+      "kind": "council_v77",
+      "lifecycle": "active"
+    },
+    {
+      "id": "hitl_gate",
+      "source": "backend/core/hitl_approval.py",
+      "size_bytes": 8399,
+      "registered_at": "2026-06-02T04:17:22Z",
+      "kind": "hitl_gate",
+      "lifecycle": "active"
+    },
+    {
+      "id": "rag_bot",
+      "source": "scripts/insur_bot.py",
+      "size_bytes": 13802,
+      "registered_at": "2026-06-02T04:17:22Z",
+      "kind": "rag_bot",
+      "lifecycle": "active"
+    }
+  ]
+}
