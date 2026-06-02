@@ -59,7 +59,7 @@ sed \
     > ~/.claude/templates/production-readiness/nginx-lb/nginx.conf
 ```
 
-## The 8 modules at a glance
+## The 13 modules at a glance
 
 | # | Module | Target path | Files | When to install |
 |---|---|---|---|---|
