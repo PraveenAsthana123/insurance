@@ -103,6 +103,38 @@ TRIGGERS_CLEAR  = {"delete","clear","delete the text","delete text","clear input
 TRIGGERS_EDIT   = {"change","modify","update","change it","modify it","update text","update the text"}
 TRIGGERS_NEWL   = {"new line","newline","line break"}
 
+# Tier A #3 + #4 — punctuation + code-mode triggers
+PUNCT_MAP = {
+    " period":".", " full stop":".", " dot":".",
+    " comma":",", " semicolon":";", " colon":":",
+    " question mark":"?", " exclamation":"!", " exclamation mark":"!",
+    " open quote":' "', " close quote":'" ',
+    " open paren":" (", " close paren":") ",
+    " open bracket":" [", " close bracket":"] ",
+    " open brace":" {", " close brace":"} ",
+    " open curly":" {", " close curly":"} ",
+    " hash":"#", " hashtag":"#",
+    " at sign":"@", " at":"@",
+    " dollar sign":"$", " dollar":"$",
+    " percent":"%", " ampersand":"&",
+    " star":"*", " asterisk":"*",
+    " dash":"-", " hyphen":"-", " minus":"-",
+    " plus":"+", " plus sign":"+",
+    " equals":"=", " equal sign":"=",
+    " less than":"<", " greater than":">", " arrow":"->",
+    " slash":"/", " forward slash":"/", " back slash":"\\",
+    " pipe":"|", " bar":"|",
+    " tilde":"~", " caret":"^", " underscore":"_", " bang":"!",
+}
+
+def post_process(text):
+    s = " " + text.lower() + " "
+    for spoken, sym in PUNCT_MAP.items():
+        s = s.replace(spoken, sym)
+    for ch in ".,;:!?":
+        s = s.replace(" " + ch, ch)
+    return s.strip()
+
 
 def has_trigger(text, triggers):
     norm = text.lower().strip(" .,!?")
@@ -247,8 +279,10 @@ while True:
             print(f"[newline] {text!r}")
             kbd.press(Key.shift); kbd.press(Key.enter); kbd.release(Key.enter); kbd.release(Key.shift)
         elif listening:
-            action = "type"; typed = text + " "
-            print(f"[type] {text!r}")
+            action = "type"
+            processed = post_process(text)
+            typed = processed + " "
+            print(f"[type] {text!r} → {processed!r}")
             try: kbd.type(typed)
             except Exception as e:
                 print(f"[err] type: {e}"); speak("type failed")
