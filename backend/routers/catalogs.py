@@ -14,7 +14,7 @@ from fastapi import APIRouter, HTTPException, Query, Response
 from fastapi.responses import PlainTextResponse
 
 from core.config import get_settings
-from database import _connect
+from repositories import catalogs_repo
 
 router = APIRouter(prefix="/api/v1/catalogs", tags=["catalogs"])
 
@@ -34,21 +34,10 @@ def list_phases(
     family: str | None = Query(default=None, description="ai_assurance | ml_methodology | governance"),
 ) -> dict[str, Any]:
     """Read analysis_phase table from migration 015 + 016."""
-    sql = "SELECT id, code, name, answers_question, owner, family FROM analysis_phase"
-    params: list = []
-    if family:
-        sql += " WHERE family = ?"
-        params.append(family)
-    sql += " ORDER BY id"
-
-    with _connect() as conn:
-        try:
-            cur = conn.execute(sql, params)
-            rows = [dict(r) for r in cur.fetchall()]
-        except Exception as exc:  # noqa: BLE001
-            # Graceful degradation per §57.7
-            return {"items": [], "error": str(exc), "source": "fallback"}
-
+    try:
+        rows = catalogs_repo.list_phases(family=family)
+    except Exception as exc:  # noqa: BLE001
+        return {"items": [], "error": str(exc), "source": "fallback"}
     return {"items": rows, "total": len(rows), "source": "live"}
 
 
@@ -56,19 +45,10 @@ def list_phases(
 def list_modules(
     phase_id: int = Query(..., description="phase id (101-111 ai_assurance, 201-211 ml_methodology)"),
 ) -> dict[str, Any]:
-    sql = """
-        SELECT seq, slug, name, core_question, details, status, tags
-        FROM analysis_module
-        WHERE phase_id = ?
-        ORDER BY seq
-    """
-    with _connect() as conn:
-        try:
-            cur = conn.execute(sql, [phase_id])
-            rows = [dict(r) for r in cur.fetchall()]
-        except Exception as exc:  # noqa: BLE001
-            return {"items": [], "error": str(exc), "source": "fallback"}
-
+    try:
+        rows = catalogs_repo.list_modules(phase_id)
+    except Exception as exc:  # noqa: BLE001
+        return {"items": [], "error": str(exc), "source": "fallback"}
     return {"items": rows, "total": len(rows), "phase_id": phase_id, "source": "live"}
 
 

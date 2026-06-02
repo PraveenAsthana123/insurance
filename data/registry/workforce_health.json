@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-02T04:23:26Z",
+  "ts": "2026-06-02T05:15:01Z",
   "fleet": {
     "tasks": 237,
     "workers": 200,
@@ -14,6 +14,57 @@
   },
   "ollama": {
     "models": [
+      {
+        "name": "qwen2.5-coder:latest",
+        "model": "qwen2.5-coder:latest",
+        "modified_at": "2026-06-01T23:11:47.629124427-06:00",
+        "size": 4683087561,
+        "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M"
+        }
+      },
+      {
+        "name": "llama3-groq-tool-use:latest",
+        "model": "llama3-groq-tool-use:latest",
+        "modified_at": "2026-06-01T23:11:13.164655094-06:00",
+        "size": 4661257688,
+        "digest": "36211dad2b153f09fe2b0c5f3e4e82ee83d27db68e3a00006cd934dfdc5057a4",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q4_0"
+        }
+      },
+      {
+        "name": "nemotron-mini:latest",
+        "model": "nemotron-mini:latest",
+        "modified_at": "2026-06-01T23:01:39.721854418-06:00",
+        "size": 2697402546,
+        "digest": "ed76ab18784f5a01c9ec5b3c250e964d4f9c7a983e59ba041bb995f0fe2e8fb3",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "nemotron",
+          "families": [
+            "nemotron"
+          ],
+          "parameter_size": "4.2B",
+          "quantization_level": "Q4_K_M"
+        }
+      },
       {
         "name": "kivi:local",
         "model": "kivi:local",

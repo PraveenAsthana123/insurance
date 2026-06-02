@@ -1,9 +1,9 @@
 {
-  "ts": "2026-06-02T04:40:01Z",
+  "ts": "2026-06-02T05:15:01Z",
   "cron_logs": {
     "codex_approval_cron.log": {
-      "size": 499217,
-      "last_modified": "2026-06-02T04:40:01Z",
+      "size": 555392,
+      "last_modified": "2026-06-02T05:15:01Z",
       "tail": [
         "  File \"/home/praveen/miniconda3/lib/python3.13/subprocess.py\", line 1972, in _execute_child",
         "    raise child_exception_type(errno_num, err_msg, err_filename)",
@@ -11,12 +11,21 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 230019,
-      "last_modified": "2026-06-02T04:35:58Z",
+      "size": 254664,
+      "last_modified": "2026-06-02T05:09:49Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
         "No Archon workflow runs found."
+      ]
+    },
+    "fix_all_quick.log": {
+      "size": 174,
+      "last_modified": "2026-06-02T05:15:01Z",
+      "tail": [
+        "entity_res: 8 unique \u00b7 0 dupes",
+        "[2026-06-02T05:15:01Z] \u2713 entity-res",
+        "[2026-06-02T05:15:01Z] \u25b6 workforce \u2014 workforce"
       ]
     },
     "insurance_audit_20260601T221059Z.log": {
@@ -74,8 +83,8 @@
       ]
     },
     "pending_boot.log": {
-      "size": 2776,
-      "last_modified": "2026-06-02T04:30:04Z",
+      "size": 3302,
+      "last_modified": "2026-06-02T05:00:25Z",
       "tail": [
         "ImportError(\"cannot import name 'std_to_otel' from 'opentelemetry._logs' (/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/opentelemetry/_logs/__init__.py)\")",
         "  plugins = get_plugins()",
@@ -83,20 +92,20 @@
       ]
     },
     "pending_push.log": {
-      "size": 2366,
-      "last_modified": "2026-06-02T04:30:02Z",
+      "size": 2873,
+      "last_modified": "2026-06-02T05:15:01Z",
       "tail": [
-        "[2026-06-02T04:30:01Z] push task",
-        "[2026-06-02T04:30:01Z] skip \u2014 no origin remote configured",
-        "[2026-06-02T04:30:01Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-02T05:15:01Z] push task",
+        "[2026-06-02T05:15:01Z] skip \u2014 no origin remote configured",
+        "[2026-06-02T05:15:01Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "rag_chunking.log": {
-      "size": 504,
-      "last_modified": "2026-06-02T04:35:03Z",
+      "size": 588,
+      "last_modified": "2026-06-02T05:05:07Z",
       "tail": [
         "chunked 4644 docs, wrote 0 new chunks",
-        "[2026-06-02T04:35:01Z] running chunking sweep",
+        "[2026-06-02T05:05:01Z] running chunking sweep",
         "chunked 4644 docs, wrote 0 new chunks"
       ]
     },
@@ -109,21 +118,21 @@
       ]
     },
     "rag_embedding.log": {
-      "size": 540,
-      "last_modified": "2026-06-02T04:40:01Z",
+      "size": 703,
+      "last_modified": "2026-06-02T05:11:01Z",
       "tail": [
-        "chunks=30465 embedded=1000 todo=29465",
-        "embedded 200 new chunks",
-        "[2026-06-02T04:40:01Z] embedding sweep"
+        "[2026-06-02T05:10:01Z] embedding sweep",
+        "chunks=30465 embedded=1400 todo=29065",
+        "embedded 200 new chunks"
       ]
     },
     "rag_guardrail.log": {
-      "size": 1170,
-      "last_modified": "2026-06-02T04:40:01Z",
+      "size": 1306,
+      "last_modified": "2026-06-02T05:00:02Z",
       "tail": [
         "/mnt/deepa/insur_project/scripts/basic_rag_ops_runner.sh: line 155: OUT: unbound variable",
-        "[2026-06-02T04:40:01Z] guardrail probes",
-        "/mnt/deepa/insur_project/scripts/basic_rag_ops_runner.sh: line 155: OUT: unbound variable"
+        "[2026-06-02T05:00:01Z] guardrail probes",
+        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260602.jsonl"
       ]
     },
     "rag_ragas.log": {
@@ -136,17 +145,17 @@
       ]
     },
     "rag_token.log": {
-      "size": 258,
-      "last_modified": "2026-06-02T04:15:01Z",
+      "size": 344,
+      "last_modified": "2026-06-02T05:15:01Z",
       "tail": [
         "token usage: 1 models tallied for 2026-06-01",
-        "[2026-06-02T04:15:01Z] token usage tally",
+        "[2026-06-02T05:15:01Z] token usage tally",
         "token usage: 1 models tallied for 2026-06-01"
       ]
     },
     "work_tracker.log": {
-      "size": 3570,
-      "last_modified": "2026-06-02T04:35:01Z",
+      "size": 4305,
+      "last_modified": "2026-06-02T05:10:04Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=38, fleet=237)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=38, fleet=237)",
@@ -168,7 +177,7 @@
   },
   "rag": {
     "chunks": 30465,
-    "embeddings": 1200
+    "embeddings": 1600
   },
   "bot": {
     "audit_rows": 0,
@@ -180,6 +189,6 @@
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 26
+    "count": 28
   }
 }

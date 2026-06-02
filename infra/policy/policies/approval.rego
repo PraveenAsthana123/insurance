@@ -27,45 +27,69 @@ safe_actions := {
     "type_check", "format_check",
 }
 
-decision := "allow" if {
-    input.action in safe_actions
-}
+# Priority: hard_deny > require_human > allow > default deny.
+# Helper rules disambiguate so multiple decisions cannot fire with
+# conflicting outputs (eval_conflict_error).
 
-# Per-environment auto-allow for low-risk dev actions
-decision := "allow" if {
-    input.environment == "dev"
-    input.action in {"docker_compose_up", "docker_compose_down", "pytest", "ruff"}
-}
-
-# ──────────────────────────────────────────────────────────────────────
-# Hard-deny — never proceed without explicit operator confirmation
-# (these match global §42 gated-list)
-# ──────────────────────────────────────────────────────────────────────
 hard_deny_actions := {
     "git_push_force_main", "rm_rf_home", "drop_production_db",
     "npm_publish", "pip_upload", "cargo_publish", "docker_push_hub",
     "modify_billing", "modify_auth_provider", "modify_secret_store",
 }
 
-decision := "deny" if {
+dev_actions := {"docker_compose_up", "docker_compose_down", "pytest", "ruff"}
+
+# Helper: is this hard-denied?
+hard_denied_in_prod if {
     input.action in hard_deny_actions
     input.environment == "prod"
 }
 
-# ──────────────────────────────────────────────────────────────────────
-# Require human approval — risk above threshold OR PHI / secrets
-# ──────────────────────────────────────────────────────────────────────
+# Helper: is data class sensitive?
+sensitive_data if input.data_class in {"phi", "secret"}
+
+# Helper: is risk high?
+high_risk if input.risk_score > 0.6
+
+# 1) Hard-deny in production — highest priority
+decision := "deny" if hard_denied_in_prod
+
+# 2) Require human for sensitive data (PHI/secret) UNLESS already hard-denied
 decision := "require_human" if {
-    input.risk_score > 0.6
+    sensitive_data
+    not hard_denied_in_prod
 }
 
+# 3) Require human for high risk UNLESS already hard-denied / sensitive
 decision := "require_human" if {
-    input.data_class in {"phi", "secret"}
+    high_risk
+    not sensitive_data
+    not hard_denied_in_prod
 }
 
+# 4) Require human in prod for non-safe actions
 decision := "require_human" if {
     input.environment == "prod"
     not input.action in safe_actions
+    not input.action in hard_deny_actions
+    not sensitive_data
+    not high_risk
+}
+
+# 5) Allow safe actions UNLESS sensitive data class OR high risk OR hard-denied
+decision := "allow" if {
+    input.action in safe_actions
+    not sensitive_data
+    not high_risk
+    not hard_denied_in_prod
+}
+
+# 6) Allow specific dev actions UNLESS sensitive data class OR high risk
+decision := "allow" if {
+    input.environment == "dev"
+    input.action in dev_actions
+    not sensitive_data
+    not high_risk
 }
 
 # ──────────────────────────────────────────────────────────────────────

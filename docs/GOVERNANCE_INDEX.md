@@ -61,6 +61,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/AGENT_HARNESS_GUIDE.md` | Run/debug agent and council workers, including OpenClaw and Paperclip local adapter flows. |
 | `docs/AGENT_SUPERVISOR_RUNBOOK.md` | Monitor/supervise all local agents, queues, schedules, process tests, health gates, reports, and task status. |
 | `docs/AGENT_PLATFORM_SETUP.md` | Unified setup/status for Harness Agent, OpenClaw, Paperclip, PoliysAI, CUA, Stagehand, Playwright, policy gates, and commands. |
+| `docs/AGENT_MODEL_ROUTING_POLICY.md` | Default OpenClaw/Ollama model routing and profile policy for local agent automation. |
 | `docs/ADVANCED_AGENTIC_STACK_SETUP.md` | Advanced local setup for BMAD, Archon, approval watcher, OpenClaw, and agent fleet readiness. |
 | `docs/VOICE_TEXT_AUTOMATION_RUNBOOK.md` | Voice/transcribed-text automation, planning, scheduling, cron, Ollama, and OpenClaw execution. |
 | `docs/DARK_FACTORY_OPERATING_MODEL.md` | AI-assisted delivery operating model tying BMAD, Archon, coding agents, local agent-platform adapters, CI, security, monitoring, and human approvals together. |

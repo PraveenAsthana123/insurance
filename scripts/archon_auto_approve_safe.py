@@ -62,6 +62,10 @@ def _extract_json(stdout: str) -> dict[str, Any]:
 
 
 def _status() -> dict[str, Any]:
+    # Graceful skip if archon binary isn't installed — silent no-op for cron
+    import shutil
+    if not shutil.which("archon"):
+        return {"runs": [], "skipped": "archon binary not installed"}
     proc = subprocess.run(
         ["archon", "workflow", "status", "--json"],
         cwd=ROOT,
@@ -71,7 +75,9 @@ def _status() -> dict[str, Any]:
         check=False,
     )
     if proc.returncode != 0:
-        raise RuntimeError(proc.stdout.strip() or "archon workflow status failed")
+        # Don't raise — log + return empty so the cron stops spamming
+        print(f"archon workflow status returned {proc.returncode}: {proc.stdout.strip()[:200]}")
+        return {"runs": [], "error": proc.stdout.strip()[:500]}
     return _extract_json(proc.stdout)
 
 

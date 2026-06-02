@@ -23,6 +23,19 @@ scripts/setup_claude_autonomy.sh
 
 Policy: `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md`. This reduces repo-local approval loops, but cannot bypass Claude Code platform-level permission prompts.
 
+## Agent Model Profiles
+
+Use OpenClaw + Ollama model profiles for speed, coding, or review work:
+
+```bash
+scripts/agent_model_profiles.py list
+scripts/agent_model_profiles.py start fast
+scripts/agent_model_profiles.py start coding
+scripts/agent_model_profiles.py start review
+```
+
+Policy: `docs/AGENT_MODEL_ROUTING_POLICY.md`.
+
 ## Voice/Text Automation
 
 Plan and execute transcribed voice or typed text through Ollama and OpenClaw:

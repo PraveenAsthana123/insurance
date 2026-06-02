@@ -1,0 +1,38 @@
+{
+  "fast": {
+    "description": "Maximum throughput. Best for simple summarization, queue triage, health checks, and many parallel agents.",
+    "AGENT_MODEL": "kivi:local",
+    "COUNCIL_AUTHOR_MODEL": "kivi:local",
+    "COUNCIL_REVIEWER_MODEL": "kivi:local",
+    "COUNCIL_CHAIR_MODEL": "kivi:local",
+    "recommended_agents": 100,
+    "recommended_council_agents": 5
+  },
+  "balanced": {
+    "description": "Balanced local reasoning. Best default when tasks need more reasoning than kivi but still need speed.",
+    "AGENT_MODEL": "qwen2.5:latest",
+    "COUNCIL_AUTHOR_MODEL": "qwen2.5:latest",
+    "COUNCIL_REVIEWER_MODEL": "codegemma:7b-instruct",
+    "COUNCIL_CHAIR_MODEL": "kivi:local",
+    "recommended_agents": 20,
+    "recommended_council_agents": 3
+  },
+  "coding": {
+    "description": "Coding-oriented local models. Best for code review, code generation suggestions, and implementation planning.",
+    "AGENT_MODEL": "deepseek-coder:6.7b-instruct",
+    "COUNCIL_AUTHOR_MODEL": "codegemma:7b-instruct",
+    "COUNCIL_REVIEWER_MODEL": "deepseek-coder:6.7b-instruct",
+    "COUNCIL_CHAIR_MODEL": "qwen2.5:latest",
+    "recommended_agents": 10,
+    "recommended_council_agents": 2
+  },
+  "review": {
+    "description": "Review-heavy profile. Best for comparing code, finding issues, and generating risk notes.",
+    "AGENT_MODEL": "starcoder2:7b",
+    "COUNCIL_AUTHOR_MODEL": "codellama:7b-instruct",
+    "COUNCIL_REVIEWER_MODEL": "starcoder2:7b",
+    "COUNCIL_CHAIR_MODEL": "qwen2.5:latest",
+    "recommended_agents": 10,
+    "recommended_council_agents": 3
+  }
+}

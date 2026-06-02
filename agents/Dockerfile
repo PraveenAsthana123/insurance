@@ -30,8 +30,11 @@ RUN curl -sL https://github.com/grafana/k6/releases/download/v0.52.0/k6-v0.52.0-
     && k6 version
 
 # Trivy binary (security-agent tier 11-12 — container/dep scanning)
-RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | \
-        sh -s -- -b /usr/local/bin v0.55.0 \
+RUN curl -fsSL -o /tmp/trivy.tar.gz \
+        https://github.com/aquasecurity/trivy/releases/download/v0.55.0/trivy_0.55.0_Linux-64bit.tar.gz \
+    && tar -xzf /tmp/trivy.tar.gz -C /usr/local/bin trivy \
+    && chmod +x /usr/local/bin/trivy \
+    && rm -f /tmp/trivy.tar.gz \
     && trivy --version
 
 # NOTE: Playwright (smoke-agent tier 8) is NOT installed here because it
