@@ -1,4 +1,4 @@
-# HOLY Beverage — Enterprise Data Domains (Master / Org / Condition / Stakeholder)
+# INSUR Beverage — Enterprise Data Domains (Master / Org / Condition / Stakeholder)
 
 **Source:** operator brief 2026-05-21
 
@@ -60,7 +60,7 @@ Customer · Employee · Vendor · Investor · Retail partner · Logistics partne
 
 ## Knowledge Graph (Reference)
 
-See `knowledge-semantic-layer/knowledge-graph/HOLY_KNOWLEDGE_GRAPH.md` for the entity-relationship map.
+See `knowledge-semantic-layer/knowledge-graph/INSUR_KNOWLEDGE_GRAPH.md` for the entity-relationship map.
 
 ## Data Governance
 

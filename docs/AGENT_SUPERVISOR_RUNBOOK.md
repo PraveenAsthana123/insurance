@@ -1,6 +1,6 @@
 # Agent Supervisor Runbook
 
-This runbook defines the local supervisor layer for the HOLY agent fleet. It monitors all Redis-backed agents, task queues, schedules, process-test coverage, and recent task results.
+This runbook defines the local supervisor layer for the INSUR agent fleet. It monitors all Redis-backed agents, task queues, schedules, process-test coverage, and recent task results.
 
 ## What Is Set Up
 

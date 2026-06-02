@@ -1,6 +1,6 @@
 # Global Agent Service Policy
 
-This policy defines how other projects may access the HOLY local agent services: Harness Agent, OpenClaw, Paperclip, PoliysAI governance, CUA dry-run gateway, Stagehand/Playwright contracts, Redis queues, and Ollama/Kivi model service.
+This policy defines how other projects may access the INSUR local agent services: Harness Agent, OpenClaw, Paperclip, PoliysAI governance, CUA dry-run gateway, Stagehand/Playwright contracts, Redis queues, and Ollama/Kivi model service.
 
 ## Service Boundary
 
@@ -19,21 +19,21 @@ Other projects must integrate through stable service contracts, not by importing
 ## Required Environment For Client Projects
 
 ```bash
-export HOLY_AGENT_API_URL=http://localhost:8000
-export HOLY_OPENCLAW_URL=http://localhost:8000/api/v1/openclaw
-export HOLY_PAPERCLIP_URL=http://localhost:8000/api/v1/paperclip
-export HOLY_AGENT_PLATFORM_URL=http://localhost:8000/api/v1/agent-platform
-export HOLY_OLLAMA_URL=http://localhost:11434
-export HOLY_AGENT_MODEL=kivi:local
-export HOLY_AGENT_ROLE=tester
+export INSUR_AGENT_API_URL=http://localhost:8000
+export INSUR_OPENCLAW_URL=http://localhost:8000/api/v1/openclaw
+export INSUR_PAPERCLIP_URL=http://localhost:8000/api/v1/paperclip
+export INSUR_AGENT_PLATFORM_URL=http://localhost:8000/api/v1/agent-platform
+export INSUR_OLLAMA_URL=http://localhost:11434
+export INSUR_AGENT_MODEL=kivi:local
+export INSUR_AGENT_ROLE=tester
 ```
 
 Inside Docker Compose networks, use service names:
 
 ```bash
-export HOLY_AGENT_API_URL=http://backend:8000
-export HOLY_OLLAMA_URL=http://ollama:11434
-export HOLY_REDIS_URL=redis://redis:6379/0
+export INSUR_AGENT_API_URL=http://backend:8000
+export INSUR_OLLAMA_URL=http://ollama:11434
+export INSUR_REDIS_URL=redis://redis:6379/0
 ```
 
 ## 100-Agent Runtime Standard

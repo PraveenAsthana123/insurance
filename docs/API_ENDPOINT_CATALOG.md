@@ -1,7 +1,7 @@
 # API Endpoint Catalog
 Generated from FastAPI OpenAPI metadata. This document is the current API contract baseline. Each endpoint should be expanded with domain-specific business rules as the code matures.
 
-## §68 HOLY Observability Hub — iter 7: `/api/v1/holy/observability-hub/_overview` (aggregator)
+## §68 INSUR Observability Hub — iter 7: `/api/v1/insur/observability-hub/_overview` (aggregator)
 
 Single endpoint that surfaces the health of all 7 §68 read surfaces
 (dbviewer / pii / guardrails / security / evals_functional /
@@ -14,7 +14,7 @@ Per §57.7 — a broken per-surface probe NEVER breaks the aggregator;
 the bad row surfaces with `status='probe_error'` + `error_type`.
 
 ```bash
-curl -s http://localhost:8001/api/v1/holy/observability-hub/_overview \
+curl -s http://localhost:8001/api/v1/insur/observability-hub/_overview \
   -H "X-Tenant-ID: tenant-a" -H "X-Demo-Role: manager" | jq '.surfaces[] | {key, status: .source.status, n_rows: .source.n_rows}'
 ```
 
@@ -25,11 +25,11 @@ Drill: `tests/drills/drill_observability_hub.py` (10 steps, 4 negative
 plus this aggregator for one-glance discoverability. Pending: §68.11
 multi-model comparison, §68.12 Langfuse adapter, frontend hub page.
 
-## §68 HOLY Observability Hub — iter 6: `/api/v1/holy/evals/safety/*` (eval triplet complete)
+## §68 INSUR Observability Hub — iter 6: `/api/v1/insur/evals/safety/*` (eval triplet complete)
 
-§68.10 Safety eval — 3 endpoints federated via `core.holy_audit`
+§68.10 Safety eval — 3 endpoints federated via `core.insur_audit`
 (surface=`evals_safety`). Read-only aggregation over
-`data/agent-supervisor/safety_eval_runs.jsonl` (`HOLY_EVAL_SAFETY_LOG`
+`data/agent-supervisor/safety_eval_runs.jsonl` (`INSUR_EVAL_SAFETY_LOG`
 env). Classifies each row into a verdict using §48 + §64.21 thresholds:
 
 | Metric | Threshold | Source |
@@ -47,12 +47,12 @@ Verdicts:
 - `unknown` — no checks could be evaluated
 
 Endpoints:
-- `GET /api/v1/holy/evals/safety/_global` — cross-model scorecard,
+- `GET /api/v1/insur/evals/safety/_global` — cross-model scorecard,
   latest-per-model, sorted unsafe→review→unknown→safe (operator-
   attention order)
-- `GET /api/v1/holy/evals/safety/incidents?since=&limit=` — recent
+- `GET /api/v1/insur/evals/safety/incidents?since=&limit=` — recent
   safety violations (verdict=unsafe OR n_safety_incidents > 0)
-- `GET /api/v1/holy/evals/safety/{model_id}?since=&limit=` — per-model
+- `GET /api/v1/insur/evals/safety/{model_id}?since=&limit=` — per-model
   history newest-first with per-row `verdict_summary` carrying the 5
   metric-pass flags + fairness_gate
 
@@ -62,19 +62,19 @@ safety on the same JSONL-aggregation pattern.
 Drill: `tests/drills/drill_evals_safety.py` (12 steps, 5 negative +
 §38.3 schema invariant).
 
-## §68 HOLY Observability Hub — iter 5: `/api/v1/holy/evals/cost/*`
+## §68 INSUR Observability Hub — iter 5: `/api/v1/insur/evals/cost/*`
 
-§68.9 Cost eval — 4 endpoints federated via `core.holy_audit`
+§68.9 Cost eval — 4 endpoints federated via `core.insur_audit`
 (surface=`evals_cost`). Read-only aggregation over
-`data/agent-supervisor/cost_runs.jsonl` (`HOLY_EVAL_COST_LOG` env):
+`data/agent-supervisor/cost_runs.jsonl` (`INSUR_EVAL_COST_LOG` env):
 
-- `GET /api/v1/holy/evals/cost/_global` — total cost across all
+- `GET /api/v1/insur/evals/cost/_global` — total cost across all
   tenants/models: `last_24h` / `last_7d` / `last_30d` + `all_time`
-- `GET /api/v1/holy/evals/cost/by-model` — per-model cost ranking,
+- `GET /api/v1/insur/evals/cost/by-model` — per-model cost ranking,
   highest-cost first
-- `GET /api/v1/holy/evals/cost/by-request/{request_id}` — single-call
+- `GET /api/v1/insur/evals/cost/by-request/{request_id}` — single-call
   cost detail (full row preserved)
-- `GET /api/v1/holy/evals/cost/{tenant_id}` — per-tenant breakdown
+- `GET /api/v1/insur/evals/cost/{tenant_id}` — per-tenant breakdown
   with nested per-model totals within the tenant
 
 Schema (every row): `ts, request_id, tenant_id, model_id,
@@ -88,20 +88,20 @@ isolation — per-tenant is the primary slice).
 Drill: `tests/drills/drill_evals_cost.py` (12 steps, 5 negative +
 §38.3 schema invariant).
 
-## §68 HOLY Observability Hub — iter 4: `/api/v1/holy/evals/functional/*`
+## §68 INSUR Observability Hub — iter 4: `/api/v1/insur/evals/functional/*`
 
-§68.8 Functional eval — 3 endpoints federated via `core.holy_audit`
+§68.8 Functional eval — 3 endpoints federated via `core.insur_audit`
 (surface=`evals_functional`). Read-only aggregation over
 `data/agent-supervisor/functional_eval_runs.jsonl`
-(`HOLY_EVAL_FUNCTIONAL_LOG` env):
+(`INSUR_EVAL_FUNCTIONAL_LOG` env):
 
-- `GET /api/v1/holy/evals/functional/_global?since=` — cross-model
+- `GET /api/v1/insur/evals/functional/_global?since=` — cross-model
   leaderboard (latest-per-model, sorted by accuracy/f1/auc desc)
   + dataset coverage + dept coverage
-- `GET /api/v1/holy/evals/functional/{model_id}?dataset=&since=&limit=` —
+- `GET /api/v1/insur/evals/functional/{model_id}?dataset=&since=&limit=` —
   per-model history newest-first with `drift_summary` between two
   latest runs on accuracy / f1 / auc / drift_score
-- `GET /api/v1/holy/evals/functional/{model_id}/runs/{run_id}` —
+- `GET /api/v1/insur/evals/functional/{model_id}/runs/{run_id}` —
   single eval run detail
 
 The WRITE side (MLflow integration / scheduled eval job that appends
@@ -110,50 +110,50 @@ surface so operators can answer "which model wins on rag_qa_v1?" the
 moment any eval job starts writing rows.
 
 Sibling iters (§68.9 cost + §68.10 safety) follow the same pattern
-under `/api/v1/holy/evals/{cost,safety}/*`.
+under `/api/v1/insur/evals/{cost,safety}/*`.
 
 Drill: `tests/drills/drill_evals_functional.py` (12 steps, 5 negative
 + §38.3 schema invariant).
 
-## §68 HOLY Observability Hub — iter 3: `/api/v1/holy/security/*`
+## §68 INSUR Observability Hub — iter 3: `/api/v1/insur/security/*`
 
-§68.7 Security posture — 3 endpoints federated via `core.holy_audit`
+§68.7 Security posture — 3 endpoints federated via `core.insur_audit`
 (surface=`security`) aggregating three signals:
 
-- `GET /api/v1/holy/security/_global` — cross-dept summary:
+- `GET /api/v1/insur/security/_global` — cross-dept summary:
   compliance gates (live-probed: federated_audit / rbac_matrix /
   tenant_id_middleware / pii_inventory / guardrails / drill_discipline)
   + CVE snapshot counts + 24h attack-attempts by type
-- `GET /api/v1/holy/security/attacks?since=&limit=` — attack-attempt
-  scan over the holy_reads audit log (rbac_denial / scope_denial /
+- `GET /api/v1/insur/security/attacks?since=&limit=` — attack-attempt
+  scan over the insur_reads audit log (rbac_denial / scope_denial /
   malformed_path patterns)
-- `GET /api/v1/holy/security/{dept}` — per-dept slice with
-  `spec_doc` pointer to `HOLY_SECURITY.md` (§64.32 WRITE-side spec)
+- `GET /api/v1/insur/security/{dept}` — per-dept slice with
+  `spec_doc` pointer to `INSUR_SECURITY.md` (§64.32 WRITE-side spec)
 
 Compliance gates are live-probed from the running process — no out-of-
 band calls. Score = fraction of gates passing. A healthy build scores
 1.0 (all 6 gates).
 
 The CVE snapshot at `data/agent-supervisor/security_posture.json`
-(env-overridable via `HOLY_SECURITY_POSTURE_PATH`) is populated by an
+(env-overridable via `INSUR_SECURITY_POSTURE_PATH`) is populated by an
 external pip-audit/bandit/trivy job — out-of-scope for this commit;
 service degrades gracefully when missing per §57.7.
 
 Drill: `tests/drills/drill_security_posture.py` (12 steps, 5 negative
 + §38.3 schema invariant).
 
-## §68 HOLY Observability Hub — iter 2b: `/api/v1/holy/guardrails/*`
+## §68 INSUR Observability Hub — iter 2b: `/api/v1/insur/guardrails/*`
 
-§68.5 Guardrails — 3 endpoints federated via `core.holy_audit`
+§68.5 Guardrails — 3 endpoints federated via `core.insur_audit`
 (surface=`guardrails`). Read-only aggregation over
 `data/agent-supervisor/guardrail_decisions.jsonl` (env-overridable via
-`HOLY_GUARDRAIL_LOG`):
-- `GET /api/v1/holy/guardrails/_global?since=` — cross-dept rollup
+`INSUR_GUARDRAIL_LOG`):
+- `GET /api/v1/insur/guardrails/_global?since=` — cross-dept rollup
   (by_guardrail_type × by_decision matrix + per-dept + per-filter
   totals)
-- `GET /api/v1/holy/guardrails/decision/{decision_id}` — single
+- `GET /api/v1/insur/guardrails/decision/{decision_id}` — single
   decision lookup by `decision_id` or `request_id`
-- `GET /api/v1/holy/guardrails/{dept}?decision=&guardrail_type=&since=&limit=` —
+- `GET /api/v1/insur/guardrails/{dept}?decision=&guardrail_type=&since=&limit=` —
   per-dept decisions, newest-first, with allow|deny|transform +
   guardrail_type filters
 
@@ -166,13 +166,13 @@ operators can answer "did the guardrails fire?" today.
 Drill: `tests/drills/drill_guardrails.py` (12 steps, 5 negative +
 §38.3 schema invariant + PII-never-in-row invariant).
 
-## §68 HOLY Observability Hub — iter 2: `/api/v1/holy/pii/*`
+## §68 INSUR Observability Hub — iter 2: `/api/v1/insur/pii/*`
 
-§68.6 PII inventory — 3 endpoints federated via `core.holy_audit`
+§68.6 PII inventory — 3 endpoints federated via `core.insur_audit`
 (surface=`pii`):
-- `GET /api/v1/holy/pii/_global` — cross-dept PII inventory + entity-level fields
-- `GET /api/v1/holy/pii/leaks?since=&limit=` — leak scan over audit log (NEVER returns raw PII; only redacted match metadata)
-- `GET /api/v1/holy/pii/{dept}` — per-dept PII slice
+- `GET /api/v1/insur/pii/_global` — cross-dept PII inventory + entity-level fields
+- `GET /api/v1/insur/pii/leaks?since=&limit=` — leak scan over audit log (NEVER returns raw PII; only redacted match metadata)
+- `GET /api/v1/insur/pii/{dept}` — per-dept PII slice
 
 Drill: `tests/drills/drill_pii_inventory.py` (12 steps, 4 negative +
 §38.3 schema invariant + raw-PII-never-in-response invariant). Composes
@@ -1488,22 +1488,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/agentic/execute
-- id: `agentic_execute_api_v1_holy_agentic_execute_post`
-- tags: `holy`
+## POST /api/v1/insur/agentic/execute
+- id: `agentic_execute_api_v1_insur_agentic_execute_post`
+- tags: `insur`
 - input: path/query params `0`, request body `present`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Agentic Execute Api V1 Holy Agentic Execute Post"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Agentic Execute Api V1 Insur Agentic Execute Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "agentic_execute_api_v1_holy_agentic_execute_post",
+  "id": "agentic_execute_api_v1_insur_agentic_execute_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/agentic/execute",
+  "path": "/api/v1/insur/agentic/execute",
   "input": {
     "params": [],
     "body": {
@@ -1528,7 +1528,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Agentic Execute Api V1 Holy Agentic Execute Post"
+      "title": "Response Agentic Execute Api V1 Insur Agentic Execute Post"
     }
   },
   "security": {
@@ -1537,22 +1537,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/agentic/runs
-- id: `list_agentic_runs_api_v1_holy_agentic_runs_get`
-- tags: `holy`
+## GET /api/v1/insur/agentic/runs
+- id: `list_agentic_runs_api_v1_insur_agentic_runs_get`
+- tags: `insur`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Agentic Runs Api V1 Holy Agentic Runs Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Agentic Runs Api V1 Insur Agentic Runs Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_agentic_runs_api_v1_holy_agentic_runs_get",
+  "id": "list_agentic_runs_api_v1_insur_agentic_runs_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/agentic/runs",
+  "path": "/api/v1/insur/agentic/runs",
   "input": {
     "params": [
       {
@@ -1593,7 +1593,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response List Agentic Runs Api V1 Holy Agentic Runs Get"
+      "title": "Response List Agentic Runs Api V1 Insur Agentic Runs Get"
     }
   },
   "security": {
@@ -1602,22 +1602,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/agentic/runs/{request_id}
-- id: `get_agentic_run_api_v1_holy_agentic_runs__request_id__get`
-- tags: `holy`
+## GET /api/v1/insur/agentic/runs/{request_id}
+- id: `get_agentic_run_api_v1_insur_agentic_runs__request_id__get`
+- tags: `insur`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Agentic Run Api V1 Holy Agentic Runs  Request Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Agentic Run Api V1 Insur Agentic Runs  Request Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_agentic_run_api_v1_holy_agentic_runs__request_id__get",
+  "id": "get_agentic_run_api_v1_insur_agentic_runs__request_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/agentic/runs/{request_id}",
+  "path": "/api/v1/insur/agentic/runs/{request_id}",
   "input": {
     "params": [
       {
@@ -1641,7 +1641,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Agentic Run Api V1 Holy Agentic Runs  Request Id  Get"
+      "title": "Response Get Agentic Run Api V1 Insur Agentic Runs  Request Id  Get"
     }
   },
   "security": {
@@ -1650,22 +1650,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/council/ask
-- id: `council_ask_api_v1_holy_council_ask_post`
-- tags: `holy`
+## POST /api/v1/insur/council/ask
+- id: `council_ask_api_v1_insur_council_ask_post`
+- tags: `insur`
 - input: path/query params `0`, request body `present`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Council Ask Api V1 Holy Council Ask Post"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Council Ask Api V1 Insur Council Ask Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "council_ask_api_v1_holy_council_ask_post",
+  "id": "council_ask_api_v1_insur_council_ask_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/council/ask",
+  "path": "/api/v1/insur/council/ask",
   "input": {
     "params": [],
     "body": {
@@ -1690,7 +1690,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Council Ask Api V1 Holy Council Ask Post"
+      "title": "Response Council Ask Api V1 Insur Council Ask Post"
     }
   },
   "security": {
@@ -1699,22 +1699,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/council/result/{task_id}
-- id: `council_result_api_v1_holy_council_result__task_id__get`
-- tags: `holy`
+## GET /api/v1/insur/council/result/{task_id}
+- id: `council_result_api_v1_insur_council_result__task_id__get`
+- tags: `insur`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Council Result Api V1 Holy Council Result  Task Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Council Result Api V1 Insur Council Result  Task Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "council_result_api_v1_holy_council_result__task_id__get",
+  "id": "council_result_api_v1_insur_council_result__task_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/council/result/{task_id}",
+  "path": "/api/v1/insur/council/result/{task_id}",
   "input": {
     "params": [
       {
@@ -1738,7 +1738,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Council Result Api V1 Holy Council Result  Task Id  Get"
+      "title": "Response Council Result Api V1 Insur Council Result  Task Id  Get"
     }
   },
   "security": {
@@ -1747,22 +1747,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dashboards/{dept}/{role}
-- id: `get_role_dashboard_api_v1_holy_dashboards__dept___role__get`
-- tags: `holy`
+## GET /api/v1/insur/dashboards/{dept}/{role}
+- id: `get_role_dashboard_api_v1_insur_dashboards__dept___role__get`
+- tags: `insur`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Role Dashboard Api V1 Holy Dashboards  Dept   Role  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Role Dashboard Api V1 Insur Dashboards  Dept   Role  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_role_dashboard_api_v1_holy_dashboards__dept___role__get",
+  "id": "get_role_dashboard_api_v1_insur_dashboards__dept___role__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dashboards/{dept}/{role}",
+  "path": "/api/v1/insur/dashboards/{dept}/{role}",
   "input": {
     "params": [
       {
@@ -1795,7 +1795,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Role Dashboard Api V1 Holy Dashboards  Dept   Role  Get"
+      "title": "Response Get Role Dashboard Api V1 Insur Dashboards  Dept   Role  Get"
     }
   },
   "security": {
@@ -1804,22 +1804,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/_global
-- id: `global_overview_api_v1_holy_dbviewer__global_get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/_global
+- id: `global_overview_api_v1_insur_dbviewer__global_get`
+- tags: `insur, dbviewer`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Overview Api V1 Holy Dbviewer  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Overview Api V1 Insur Dbviewer  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_overview_api_v1_holy_dbviewer__global_get",
+  "id": "global_overview_api_v1_insur_dbviewer__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/_global",
+  "path": "/api/v1/insur/dbviewer/_global",
   "input": {
     "params": [],
     "body": null
@@ -1832,7 +1832,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Overview Api V1 Holy Dbviewer  Global Get"
+      "title": "Response Global Overview Api V1 Insur Dbviewer  Global Get"
     }
   },
   "security": {
@@ -1841,22 +1841,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/databases/{db_id}
-- id: `database_info_api_v1_holy_dbviewer_databases__db_id__get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/databases/{db_id}
+- id: `database_info_api_v1_insur_dbviewer_databases__db_id__get`
+- tags: `insur, dbviewer`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Database Info Api V1 Holy Dbviewer Databases  Db Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Database Info Api V1 Insur Dbviewer Databases  Db Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "database_info_api_v1_holy_dbviewer_databases__db_id__get",
+  "id": "database_info_api_v1_insur_dbviewer_databases__db_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/databases/{db_id}",
+  "path": "/api/v1/insur/dbviewer/databases/{db_id}",
   "input": {
     "params": [
       {
@@ -1880,7 +1880,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Database Info Api V1 Holy Dbviewer Databases  Db Id  Get"
+      "title": "Response Database Info Api V1 Insur Dbviewer Databases  Db Id  Get"
     }
   },
   "security": {
@@ -1889,22 +1889,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}
-- id: `schema_tables_api_v1_holy_dbviewer_databases__db_id__schemas__schema__get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}
+- id: `schema_tables_api_v1_insur_dbviewer_databases__db_id__schemas__schema__get`
+- tags: `insur, dbviewer`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Schema Tables Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Schema Tables Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "schema_tables_api_v1_holy_dbviewer_databases__db_id__schemas__schema__get",
+  "id": "schema_tables_api_v1_insur_dbviewer_databases__db_id__schemas__schema__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}",
+  "path": "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}",
   "input": {
     "params": [
       {
@@ -1937,7 +1937,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Schema Tables Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Get"
+      "title": "Response Schema Tables Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Get"
     }
   },
   "security": {
@@ -1946,22 +1946,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}
-- id: `table_detail_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}
+- id: `table_detail_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__get`
+- tags: `insur, dbviewer`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Table Detail Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Table Detail Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "table_detail_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__get",
+  "id": "table_detail_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}",
+  "path": "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}",
   "input": {
     "params": [
       {
@@ -2003,7 +2003,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Table Detail Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get"
+      "title": "Response Table Detail Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get"
     }
   },
   "security": {
@@ -2012,22 +2012,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample
-- id: `table_sample_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample
+- id: `table_sample_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get`
+- tags: `insur, dbviewer`
 - input: path/query params `5`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Table Sample Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Table Sample Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "table_sample_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
+  "id": "table_sample_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample",
+  "path": "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample",
   "input": {
     "params": [
       {
@@ -2093,7 +2093,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Table Sample Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get"
+      "title": "Response Table Sample Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get"
     }
   },
   "security": {
@@ -2102,22 +2102,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/process-tables/_global
-- id: `process_tables_global_api_v1_holy_dbviewer_process_tables__global_get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/process-tables/_global
+- id: `process_tables_global_api_v1_insur_dbviewer_process_tables__global_get`
+- tags: `insur, dbviewer`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Process Tables Global Api V1 Holy Dbviewer Process Tables  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Process Tables Global Api V1 Insur Dbviewer Process Tables  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "process_tables_global_api_v1_holy_dbviewer_process_tables__global_get",
+  "id": "process_tables_global_api_v1_insur_dbviewer_process_tables__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/process-tables/_global",
+  "path": "/api/v1/insur/dbviewer/process-tables/_global",
   "input": {
     "params": [],
     "body": null
@@ -2130,7 +2130,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Process Tables Global Api V1 Holy Dbviewer Process Tables  Global Get"
+      "title": "Response Process Tables Global Api V1 Insur Dbviewer Process Tables  Global Get"
     }
   },
   "security": {
@@ -2139,22 +2139,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/process-tables/{dept}
-- id: `process_tables_dept_api_v1_holy_dbviewer_process_tables__dept__get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/process-tables/{dept}
+- id: `process_tables_dept_api_v1_insur_dbviewer_process_tables__dept__get`
+- tags: `insur, dbviewer`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Process Tables Dept Api V1 Holy Dbviewer Process Tables  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Process Tables Dept Api V1 Insur Dbviewer Process Tables  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "process_tables_dept_api_v1_holy_dbviewer_process_tables__dept__get",
+  "id": "process_tables_dept_api_v1_insur_dbviewer_process_tables__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/process-tables/{dept}",
+  "path": "/api/v1/insur/dbviewer/process-tables/{dept}",
   "input": {
     "params": [
       {
@@ -2178,7 +2178,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Process Tables Dept Api V1 Holy Dbviewer Process Tables  Dept  Get"
+      "title": "Response Process Tables Dept Api V1 Insur Dbviewer Process Tables  Dept  Get"
     }
   },
   "security": {
@@ -2187,22 +2187,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/dbviewer/process-tables/{dept}/{process_id}
-- id: `process_tables_detail_api_v1_holy_dbviewer_process_tables__dept___process_id__get`
-- tags: `holy, dbviewer`
+## GET /api/v1/insur/dbviewer/process-tables/{dept}/{process_id}
+- id: `process_tables_detail_api_v1_insur_dbviewer_process_tables__dept___process_id__get`
+- tags: `insur, dbviewer`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Process Tables Detail Api V1 Holy Dbviewer Process Tables  Dept   Process Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Process Tables Detail Api V1 Insur Dbviewer Process Tables  Dept   Process Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "process_tables_detail_api_v1_holy_dbviewer_process_tables__dept___process_id__get",
+  "id": "process_tables_detail_api_v1_insur_dbviewer_process_tables__dept___process_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/dbviewer/process-tables/{dept}/{process_id}",
+  "path": "/api/v1/insur/dbviewer/process-tables/{dept}/{process_id}",
   "input": {
     "params": [
       {
@@ -2235,7 +2235,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Process Tables Detail Api V1 Holy Dbviewer Process Tables  Dept   Process Id  Get"
+      "title": "Response Process Tables Detail Api V1 Insur Dbviewer Process Tables  Dept   Process Id  Get"
     }
   },
   "security": {
@@ -2244,22 +2244,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/demo-stories/_global
-- id: `global_inventory_api_v1_holy_demo_stories__global_get`
-- tags: `holy, demo-stories`
+## GET /api/v1/insur/demo-stories/_global
+- id: `global_inventory_api_v1_insur_demo_stories__global_get`
+- tags: `insur, demo-stories`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Holy Demo Stories  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Insur Demo Stories  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_inventory_api_v1_holy_demo_stories__global_get",
+  "id": "global_inventory_api_v1_insur_demo_stories__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/demo-stories/_global",
+  "path": "/api/v1/insur/demo-stories/_global",
   "input": {
     "params": [],
     "body": null
@@ -2272,7 +2272,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Inventory Api V1 Holy Demo Stories  Global Get"
+      "title": "Response Global Inventory Api V1 Insur Demo Stories  Global Get"
     }
   },
   "security": {
@@ -2281,22 +2281,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/demo-stories/{dept}
-- id: `dept_catalog_api_v1_holy_demo_stories__dept__get`
-- tags: `holy, demo-stories`
+## GET /api/v1/insur/demo-stories/{dept}
+- id: `dept_catalog_api_v1_insur_demo_stories__dept__get`
+- tags: `insur, demo-stories`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Holy Demo Stories  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Insur Demo Stories  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_catalog_api_v1_holy_demo_stories__dept__get",
+  "id": "dept_catalog_api_v1_insur_demo_stories__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/demo-stories/{dept}",
+  "path": "/api/v1/insur/demo-stories/{dept}",
   "input": {
     "params": [
       {
@@ -2320,7 +2320,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Catalog Api V1 Holy Demo Stories  Dept  Get"
+      "title": "Response Dept Catalog Api V1 Insur Demo Stories  Dept  Get"
     }
   },
   "security": {
@@ -2329,22 +2329,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/demo-stories/{dept}/{role}
-- id: `role_demo_detail_api_v1_holy_demo_stories__dept___role__get`
-- tags: `holy, demo-stories`
+## GET /api/v1/insur/demo-stories/{dept}/{role}
+- id: `role_demo_detail_api_v1_insur_demo_stories__dept___role__get`
+- tags: `insur, demo-stories`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Role Demo Detail Api V1 Holy Demo Stories  Dept   Role  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Role Demo Detail Api V1 Insur Demo Stories  Dept   Role  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "role_demo_detail_api_v1_holy_demo_stories__dept___role__get",
+  "id": "role_demo_detail_api_v1_insur_demo_stories__dept___role__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/demo-stories/{dept}/{role}",
+  "path": "/api/v1/insur/demo-stories/{dept}/{role}",
   "input": {
     "params": [
       {
@@ -2377,7 +2377,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Role Demo Detail Api V1 Holy Demo Stories  Dept   Role  Get"
+      "title": "Response Role Demo Detail Api V1 Insur Demo Stories  Dept   Role  Get"
     }
   },
   "security": {
@@ -2386,22 +2386,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/depts
-- id: `list_depts_api_v1_holy_depts_get`
-- tags: `holy`
+## GET /api/v1/insur/depts
+- id: `list_depts_api_v1_insur_depts_get`
+- tags: `insur`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Depts Api V1 Holy Depts Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Depts Api V1 Insur Depts Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_depts_api_v1_holy_depts_get",
+  "id": "list_depts_api_v1_insur_depts_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/depts",
+  "path": "/api/v1/insur/depts",
   "input": {
     "params": [],
     "body": null
@@ -2414,7 +2414,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response List Depts Api V1 Holy Depts Get"
+      "title": "Response List Depts Api V1 Insur Depts Get"
     }
   },
   "security": {
@@ -2423,22 +2423,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/downloads/_global
-- id: `global_inventory_api_v1_holy_downloads__global_get`
-- tags: `holy, downloads`
+## GET /api/v1/insur/downloads/_global
+- id: `global_inventory_api_v1_insur_downloads__global_get`
+- tags: `insur, downloads`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Holy Downloads  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Insur Downloads  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_inventory_api_v1_holy_downloads__global_get",
+  "id": "global_inventory_api_v1_insur_downloads__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/downloads/_global",
+  "path": "/api/v1/insur/downloads/_global",
   "input": {
     "params": [],
     "body": null
@@ -2451,7 +2451,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Inventory Api V1 Holy Downloads  Global Get"
+      "title": "Response Global Inventory Api V1 Insur Downloads  Global Get"
     }
   },
   "security": {
@@ -2460,22 +2460,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/downloads/{dept}
-- id: `dept_catalog_api_v1_holy_downloads__dept__get`
-- tags: `holy, downloads`
+## GET /api/v1/insur/downloads/{dept}
+- id: `dept_catalog_api_v1_insur_downloads__dept__get`
+- tags: `insur, downloads`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Holy Downloads  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Insur Downloads  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_catalog_api_v1_holy_downloads__dept__get",
+  "id": "dept_catalog_api_v1_insur_downloads__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/downloads/{dept}",
+  "path": "/api/v1/insur/downloads/{dept}",
   "input": {
     "params": [
       {
@@ -2499,7 +2499,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Catalog Api V1 Holy Downloads  Dept  Get"
+      "title": "Response Dept Catalog Api V1 Insur Downloads  Dept  Get"
     }
   },
   "security": {
@@ -2508,9 +2508,9 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/downloads/{dept}/{filename}
-- id: `serve_file_api_v1_holy_downloads__dept___filename__get`
-- tags: `holy, downloads`
+## GET /api/v1/insur/downloads/{dept}/{filename}
+- id: `serve_file_api_v1_insur_downloads__dept___filename__get`
+- tags: `insur, downloads`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
 - output: response schema `{}`
@@ -2520,10 +2520,10 @@ JSON test case shape:
 JSON test case shape:
 ```json
 {
-  "id": "serve_file_api_v1_holy_downloads__dept___filename__get",
+  "id": "serve_file_api_v1_insur_downloads__dept___filename__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/downloads/{dept}/{filename}",
+  "path": "/api/v1/insur/downloads/{dept}/{filename}",
   "input": {
     "params": [
       {
@@ -2561,22 +2561,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/eval/{dept}/{pipeline}/runs
-- id: `list_runs_api_v1_holy_eval__dept___pipeline__runs_get`
-- tags: `holy`
+## GET /api/v1/insur/eval/{dept}/{pipeline}/runs
+- id: `list_runs_api_v1_insur_eval__dept___pipeline__runs_get`
+- tags: `insur`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Runs Api V1 Holy Eval  Dept   Pipeline  Runs Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Runs Api V1 Insur Eval  Dept   Pipeline  Runs Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_runs_api_v1_holy_eval__dept___pipeline__runs_get",
+  "id": "list_runs_api_v1_insur_eval__dept___pipeline__runs_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs",
+  "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs",
   "input": {
     "params": [
       {
@@ -2609,7 +2609,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response List Runs Api V1 Holy Eval  Dept   Pipeline  Runs Get"
+      "title": "Response List Runs Api V1 Insur Eval  Dept   Pipeline  Runs Get"
     }
   },
   "security": {
@@ -2618,22 +2618,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/latest
-- id: `get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get`
-- tags: `holy`
+## GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/latest
+- id: `get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get`
+- tags: `insur`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Latest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Latest Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Latest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Latest Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get",
+  "id": "get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/latest",
+  "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/latest",
   "input": {
     "params": [
       {
@@ -2675,7 +2675,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Latest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Latest Get"
+      "title": "Response Get Latest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Latest Get"
     }
   },
   "security": {
@@ -2684,22 +2684,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/manifest
-- id: `get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get`
-- tags: `holy`
+## GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/manifest
+- id: `get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get`
+- tags: `insur`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Manifest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Manifest Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Manifest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Manifest Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get",
+  "id": "get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/manifest",
+  "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/manifest",
   "input": {
     "params": [
       {
@@ -2741,7 +2741,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Manifest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Manifest Get"
+      "title": "Response Get Manifest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Manifest Get"
     }
   },
   "security": {
@@ -2750,9 +2750,9 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}
-- id: `get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get`
-- tags: `holy`
+## GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}
+- id: `get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get`
+- tags: `insur`
 - input: path/query params `4`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
 - output: response schema `{}`
@@ -2762,10 +2762,10 @@ JSON test case shape:
 JSON test case shape:
 ```json
 {
-  "id": "get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
+  "id": "get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}",
+  "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}",
   "input": {
     "params": [
       {
@@ -2821,22 +2821,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/fleet/fanout
-- id: `fanout_tasks_api_v1_holy_fleet_fanout_post`
-- tags: `holy`
+## POST /api/v1/insur/fleet/fanout
+- id: `fanout_tasks_api_v1_insur_fleet_fanout_post`
+- tags: `insur`
 - input: path/query params `0`, request body `present`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Fanout Tasks Api V1 Holy Fleet Fanout Post"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Fanout Tasks Api V1 Insur Fleet Fanout Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "fanout_tasks_api_v1_holy_fleet_fanout_post",
+  "id": "fanout_tasks_api_v1_insur_fleet_fanout_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/fleet/fanout",
+  "path": "/api/v1/insur/fleet/fanout",
   "input": {
     "params": [],
     "body": {
@@ -2867,7 +2867,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Fanout Tasks Api V1 Holy Fleet Fanout Post"
+      "title": "Response Fanout Tasks Api V1 Insur Fleet Fanout Post"
     }
   },
   "security": {
@@ -2876,22 +2876,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/fleet/recent-done
-- id: `get_recent_done_api_v1_holy_fleet_recent_done_get`
-- tags: `holy`
+## GET /api/v1/insur/fleet/recent-done
+- id: `get_recent_done_api_v1_insur_fleet_recent_done_get`
+- tags: `insur`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Recent Done Api V1 Holy Fleet Recent Done Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Recent Done Api V1 Insur Fleet Recent Done Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_recent_done_api_v1_holy_fleet_recent_done_get",
+  "id": "get_recent_done_api_v1_insur_fleet_recent_done_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/fleet/recent-done",
+  "path": "/api/v1/insur/fleet/recent-done",
   "input": {
     "params": [
       {
@@ -2926,7 +2926,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Recent Done Api V1 Holy Fleet Recent Done Get"
+      "title": "Response Get Recent Done Api V1 Insur Fleet Recent Done Get"
     }
   },
   "security": {
@@ -2935,22 +2935,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/fleet/stats
-- id: `get_fleet_stats_api_v1_holy_fleet_stats_get`
-- tags: `holy`
+## GET /api/v1/insur/fleet/stats
+- id: `get_fleet_stats_api_v1_insur_fleet_stats_get`
+- tags: `insur`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Get Fleet Stats Api V1 Holy Fleet Stats Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Get Fleet Stats Api V1 Insur Fleet Stats Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_fleet_stats_api_v1_holy_fleet_stats_get",
+  "id": "get_fleet_stats_api_v1_insur_fleet_stats_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/fleet/stats",
+  "path": "/api/v1/insur/fleet/stats",
   "input": {
     "params": [],
     "body": null
@@ -2963,7 +2963,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Get Fleet Stats Api V1 Holy Fleet Stats Get"
+      "title": "Response Get Fleet Stats Api V1 Insur Fleet Stats Get"
     }
   },
   "security": {
@@ -2972,22 +2972,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/graph/_global
-- id: `global_summary_api_v1_holy_graph__global_get`
-- tags: `holy, graph`
+## GET /api/v1/insur/graph/_global
+- id: `global_summary_api_v1_insur_graph__global_get`
+- tags: `insur, graph`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Summary Api V1 Holy Graph  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Summary Api V1 Insur Graph  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_summary_api_v1_holy_graph__global_get",
+  "id": "global_summary_api_v1_insur_graph__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/graph/_global",
+  "path": "/api/v1/insur/graph/_global",
   "input": {
     "params": [],
     "body": null
@@ -3000,7 +3000,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Summary Api V1 Holy Graph  Global Get"
+      "title": "Response Global Summary Api V1 Insur Graph  Global Get"
     }
   },
   "security": {
@@ -3009,22 +3009,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/graph/{dept}
-- id: `dept_graph_api_v1_holy_graph__dept__get`
-- tags: `holy, graph`
+## GET /api/v1/insur/graph/{dept}
+- id: `dept_graph_api_v1_insur_graph__dept__get`
+- tags: `insur, graph`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Graph Api V1 Holy Graph  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Graph Api V1 Insur Graph  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_graph_api_v1_holy_graph__dept__get",
+  "id": "dept_graph_api_v1_insur_graph__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/graph/{dept}",
+  "path": "/api/v1/insur/graph/{dept}",
   "input": {
     "params": [
       {
@@ -3048,7 +3048,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Graph Api V1 Holy Graph  Dept  Get"
+      "title": "Response Dept Graph Api V1 Insur Graph  Dept  Get"
     }
   },
   "security": {
@@ -3057,22 +3057,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/graph/{dept}/neighbors/{node_id}
-- id: `dept_neighbors_api_v1_holy_graph__dept__neighbors__node_id__get`
-- tags: `holy, graph`
+## GET /api/v1/insur/graph/{dept}/neighbors/{node_id}
+- id: `dept_neighbors_api_v1_insur_graph__dept__neighbors__node_id__get`
+- tags: `insur, graph`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Neighbors Api V1 Holy Graph  Dept  Neighbors  Node Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Neighbors Api V1 Insur Graph  Dept  Neighbors  Node Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_neighbors_api_v1_holy_graph__dept__neighbors__node_id__get",
+  "id": "dept_neighbors_api_v1_insur_graph__dept__neighbors__node_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/graph/{dept}/neighbors/{node_id}",
+  "path": "/api/v1/insur/graph/{dept}/neighbors/{node_id}",
   "input": {
     "params": [
       {
@@ -3105,7 +3105,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Neighbors Api V1 Holy Graph  Dept  Neighbors  Node Id  Get"
+      "title": "Response Dept Neighbors Api V1 Insur Graph  Dept  Neighbors  Node Id  Get"
     }
   },
   "security": {
@@ -3114,22 +3114,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/graph/{dept}/nodes
-- id: `dept_nodes_filtered_api_v1_holy_graph__dept__nodes_get`
-- tags: `holy, graph`
+## GET /api/v1/insur/graph/{dept}/nodes
+- id: `dept_nodes_filtered_api_v1_insur_graph__dept__nodes_get`
+- tags: `insur, graph`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Nodes Filtered Api V1 Holy Graph  Dept  Nodes Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Nodes Filtered Api V1 Insur Graph  Dept  Nodes Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_nodes_filtered_api_v1_holy_graph__dept__nodes_get",
+  "id": "dept_nodes_filtered_api_v1_insur_graph__dept__nodes_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/graph/{dept}/nodes",
+  "path": "/api/v1/insur/graph/{dept}/nodes",
   "input": {
     "params": [
       {
@@ -3165,7 +3165,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Nodes Filtered Api V1 Holy Graph  Dept  Nodes Get"
+      "title": "Response Dept Nodes Filtered Api V1 Insur Graph  Dept  Nodes Get"
     }
   },
   "security": {
@@ -3174,22 +3174,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/master-data/_global
-- id: `global_catalog_api_v1_holy_master_data__global_get`
-- tags: `holy, master-data`
+## GET /api/v1/insur/master-data/_global
+- id: `global_catalog_api_v1_insur_master_data__global_get`
+- tags: `insur, master-data`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Catalog Api V1 Holy Master Data  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Catalog Api V1 Insur Master Data  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_catalog_api_v1_holy_master_data__global_get",
+  "id": "global_catalog_api_v1_insur_master_data__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/master-data/_global",
+  "path": "/api/v1/insur/master-data/_global",
   "input": {
     "params": [],
     "body": null
@@ -3202,7 +3202,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Catalog Api V1 Holy Master Data  Global Get"
+      "title": "Response Global Catalog Api V1 Insur Master Data  Global Get"
     }
   },
   "security": {
@@ -3211,22 +3211,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/master-data/{dept}
-- id: `dept_catalog_api_v1_holy_master_data__dept__get`
-- tags: `holy, master-data`
+## GET /api/v1/insur/master-data/{dept}
+- id: `dept_catalog_api_v1_insur_master_data__dept__get`
+- tags: `insur, master-data`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Holy Master Data  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Insur Master Data  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_catalog_api_v1_holy_master_data__dept__get",
+  "id": "dept_catalog_api_v1_insur_master_data__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/master-data/{dept}",
+  "path": "/api/v1/insur/master-data/{dept}",
   "input": {
     "params": [
       {
@@ -3250,7 +3250,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Catalog Api V1 Holy Master Data  Dept  Get"
+      "title": "Response Dept Catalog Api V1 Insur Master Data  Dept  Get"
     }
   },
   "security": {
@@ -3259,22 +3259,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/master-data/{dept}/{entity}
-- id: `entity_sample_api_v1_holy_master_data__dept___entity__get`
-- tags: `holy, master-data`
+## GET /api/v1/insur/master-data/{dept}/{entity}
+- id: `entity_sample_api_v1_insur_master_data__dept___entity__get`
+- tags: `insur, master-data`
 - input: path/query params `4`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Entity Sample Api V1 Holy Master Data  Dept   Entity  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Entity Sample Api V1 Insur Master Data  Dept   Entity  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "entity_sample_api_v1_holy_master_data__dept___entity__get",
+  "id": "entity_sample_api_v1_insur_master_data__dept___entity__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/master-data/{dept}/{entity}",
+  "path": "/api/v1/insur/master-data/{dept}/{entity}",
   "input": {
     "params": [
       {
@@ -3331,7 +3331,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Entity Sample Api V1 Holy Master Data  Dept   Entity  Get"
+      "title": "Response Entity Sample Api V1 Insur Master Data  Dept   Entity  Get"
     }
   },
   "security": {
@@ -3340,22 +3340,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/monitoring/_global
-- id: `global_rollup_api_v1_holy_monitoring__global_get`
-- tags: `holy, monitoring`
+## GET /api/v1/insur/monitoring/_global
+- id: `global_rollup_api_v1_insur_monitoring__global_get`
+- tags: `insur, monitoring`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Rollup Api V1 Holy Monitoring  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Rollup Api V1 Insur Monitoring  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_rollup_api_v1_holy_monitoring__global_get",
+  "id": "global_rollup_api_v1_insur_monitoring__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/monitoring/_global",
+  "path": "/api/v1/insur/monitoring/_global",
   "input": {
     "params": [],
     "body": null
@@ -3368,7 +3368,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Rollup Api V1 Holy Monitoring  Global Get"
+      "title": "Response Global Rollup Api V1 Insur Monitoring  Global Get"
     }
   },
   "security": {
@@ -3377,22 +3377,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/monitoring/{dept}
-- id: `dept_monitoring_api_v1_holy_monitoring__dept__get`
-- tags: `holy, monitoring`
+## GET /api/v1/insur/monitoring/{dept}
+- id: `dept_monitoring_api_v1_insur_monitoring__dept__get`
+- tags: `insur, monitoring`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Monitoring Api V1 Holy Monitoring  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Monitoring Api V1 Insur Monitoring  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_monitoring_api_v1_holy_monitoring__dept__get",
+  "id": "dept_monitoring_api_v1_insur_monitoring__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/monitoring/{dept}",
+  "path": "/api/v1/insur/monitoring/{dept}",
   "input": {
     "params": [
       {
@@ -3416,7 +3416,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Monitoring Api V1 Holy Monitoring  Dept  Get"
+      "title": "Response Dept Monitoring Api V1 Insur Monitoring  Dept  Get"
     }
   },
   "security": {
@@ -3425,22 +3425,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/monitoring/{dept}/jobs/{job}/runs
-- id: `list_runs_api_v1_holy_monitoring__dept__jobs__job__runs_get`
-- tags: `holy, monitoring`
+## GET /api/v1/insur/monitoring/{dept}/jobs/{job}/runs
+- id: `list_runs_api_v1_insur_monitoring__dept__jobs__job__runs_get`
+- tags: `insur, monitoring`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Runs Api V1 Holy Monitoring  Dept  Jobs  Job  Runs Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Runs Api V1 Insur Monitoring  Dept  Jobs  Job  Runs Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_runs_api_v1_holy_monitoring__dept__jobs__job__runs_get",
+  "id": "list_runs_api_v1_insur_monitoring__dept__jobs__job__runs_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/monitoring/{dept}/jobs/{job}/runs",
+  "path": "/api/v1/insur/monitoring/{dept}/jobs/{job}/runs",
   "input": {
     "params": [
       {
@@ -3485,7 +3485,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response List Runs Api V1 Holy Monitoring  Dept  Jobs  Job  Runs Get"
+      "title": "Response List Runs Api V1 Insur Monitoring  Dept  Jobs  Job  Runs Get"
     }
   },
   "security": {
@@ -3494,22 +3494,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/monitoring/{dept}/jobs/{job}/runs/{run_id}
-- id: `get_run_api_v1_holy_monitoring__dept__jobs__job__runs__run_id__get`
-- tags: `holy, monitoring`
+## GET /api/v1/insur/monitoring/{dept}/jobs/{job}/runs/{run_id}
+- id: `get_run_api_v1_insur_monitoring__dept__jobs__job__runs__run_id__get`
+- tags: `insur, monitoring`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Run Api V1 Holy Monitoring  Dept  Jobs  Job  Runs  Run Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Run Api V1 Insur Monitoring  Dept  Jobs  Job  Runs  Run Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_run_api_v1_holy_monitoring__dept__jobs__job__runs__run_id__get",
+  "id": "get_run_api_v1_insur_monitoring__dept__jobs__job__runs__run_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/monitoring/{dept}/jobs/{job}/runs/{run_id}",
+  "path": "/api/v1/insur/monitoring/{dept}/jobs/{job}/runs/{run_id}",
   "input": {
     "params": [
       {
@@ -3551,7 +3551,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Run Api V1 Holy Monitoring  Dept  Jobs  Job  Runs  Run Id  Get"
+      "title": "Response Get Run Api V1 Insur Monitoring  Dept  Jobs  Job  Runs  Run Id  Get"
     }
   },
   "security": {
@@ -3560,22 +3560,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/nav/{dept}
-- id: `get_nav_api_v1_holy_nav__dept__get`
-- tags: `holy`
+## GET /api/v1/insur/nav/{dept}
+- id: `get_nav_api_v1_insur_nav__dept__get`
+- tags: `insur`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Nav Api V1 Holy Nav  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Nav Api V1 Insur Nav  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_nav_api_v1_holy_nav__dept__get",
+  "id": "get_nav_api_v1_insur_nav__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/nav/{dept}",
+  "path": "/api/v1/insur/nav/{dept}",
   "input": {
     "params": [
       {
@@ -3599,7 +3599,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Nav Api V1 Holy Nav  Dept  Get"
+      "title": "Response Get Nav Api V1 Insur Nav  Dept  Get"
     }
   },
   "security": {
@@ -3608,22 +3608,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/orchestration/demo
-- id: `orchestration_demo_api_v1_holy_orchestration_demo_post`
-- tags: `holy`
+## POST /api/v1/insur/orchestration/demo
+- id: `orchestration_demo_api_v1_insur_orchestration_demo_post`
+- tags: `insur`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Orchestration Demo Api V1 Holy Orchestration Demo Post"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Orchestration Demo Api V1 Insur Orchestration Demo Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "orchestration_demo_api_v1_holy_orchestration_demo_post",
+  "id": "orchestration_demo_api_v1_insur_orchestration_demo_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/orchestration/demo",
+  "path": "/api/v1/insur/orchestration/demo",
   "input": {
     "params": [],
     "body": null
@@ -3636,7 +3636,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Orchestration Demo Api V1 Holy Orchestration Demo Post"
+      "title": "Response Orchestration Demo Api V1 Insur Orchestration Demo Post"
     }
   },
   "security": {
@@ -3645,22 +3645,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/pipelines/_global
-- id: `global_inventory_api_v1_holy_pipelines__global_get`
-- tags: `holy, pipelines`
+## GET /api/v1/insur/pipelines/_global
+- id: `global_inventory_api_v1_insur_pipelines__global_get`
+- tags: `insur, pipelines`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Holy Pipelines  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Insur Pipelines  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_inventory_api_v1_holy_pipelines__global_get",
+  "id": "global_inventory_api_v1_insur_pipelines__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/pipelines/_global",
+  "path": "/api/v1/insur/pipelines/_global",
   "input": {
     "params": [],
     "body": null
@@ -3673,7 +3673,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Inventory Api V1 Holy Pipelines  Global Get"
+      "title": "Response Global Inventory Api V1 Insur Pipelines  Global Get"
     }
   },
   "security": {
@@ -3682,22 +3682,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/pipelines/{dept}
-- id: `dept_catalog_api_v1_holy_pipelines__dept__get`
-- tags: `holy, pipelines`
+## GET /api/v1/insur/pipelines/{dept}
+- id: `dept_catalog_api_v1_insur_pipelines__dept__get`
+- tags: `insur, pipelines`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Holy Pipelines  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Insur Pipelines  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_catalog_api_v1_holy_pipelines__dept__get",
+  "id": "dept_catalog_api_v1_insur_pipelines__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/pipelines/{dept}",
+  "path": "/api/v1/insur/pipelines/{dept}",
   "input": {
     "params": [
       {
@@ -3721,7 +3721,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Catalog Api V1 Holy Pipelines  Dept  Get"
+      "title": "Response Dept Catalog Api V1 Insur Pipelines  Dept  Get"
     }
   },
   "security": {
@@ -3730,22 +3730,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/pipelines/{dept}/{process_id}
-- id: `process_detail_api_v1_holy_pipelines__dept___process_id__get`
-- tags: `holy, pipelines`
+## GET /api/v1/insur/pipelines/{dept}/{process_id}
+- id: `process_detail_api_v1_insur_pipelines__dept___process_id__get`
+- tags: `insur, pipelines`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Process Detail Api V1 Holy Pipelines  Dept   Process Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Process Detail Api V1 Insur Pipelines  Dept   Process Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "process_detail_api_v1_holy_pipelines__dept___process_id__get",
+  "id": "process_detail_api_v1_insur_pipelines__dept___process_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/pipelines/{dept}/{process_id}",
+  "path": "/api/v1/insur/pipelines/{dept}/{process_id}",
   "input": {
     "params": [
       {
@@ -3778,7 +3778,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Process Detail Api V1 Holy Pipelines  Dept   Process Id  Get"
+      "title": "Response Process Detail Api V1 Insur Pipelines  Dept   Process Id  Get"
     }
   },
   "security": {
@@ -3787,22 +3787,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/reports/_global
-- id: `global_inventory_api_v1_holy_reports__global_get`
-- tags: `holy, reports`
+## GET /api/v1/insur/reports/_global
+- id: `global_inventory_api_v1_insur_reports__global_get`
+- tags: `insur, reports`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Holy Reports  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Inventory Api V1 Insur Reports  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_inventory_api_v1_holy_reports__global_get",
+  "id": "global_inventory_api_v1_insur_reports__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/reports/_global",
+  "path": "/api/v1/insur/reports/_global",
   "input": {
     "params": [],
     "body": null
@@ -3815,7 +3815,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Inventory Api V1 Holy Reports  Global Get"
+      "title": "Response Global Inventory Api V1 Insur Reports  Global Get"
     }
   },
   "security": {
@@ -3824,22 +3824,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/reports/{dept}
-- id: `dept_catalog_api_v1_holy_reports__dept__get`
-- tags: `holy, reports`
+## GET /api/v1/insur/reports/{dept}
+- id: `dept_catalog_api_v1_insur_reports__dept__get`
+- tags: `insur, reports`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Holy Reports  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Dept Catalog Api V1 Insur Reports  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dept_catalog_api_v1_holy_reports__dept__get",
+  "id": "dept_catalog_api_v1_insur_reports__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/reports/{dept}",
+  "path": "/api/v1/insur/reports/{dept}",
   "input": {
     "params": [
       {
@@ -3863,7 +3863,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Dept Catalog Api V1 Holy Reports  Dept  Get"
+      "title": "Response Dept Catalog Api V1 Insur Reports  Dept  Get"
     }
   },
   "security": {
@@ -3872,22 +3872,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/reports/{dept}/{report_id}
-- id: `report_detail_api_v1_holy_reports__dept___report_id__get`
-- tags: `holy, reports`
+## GET /api/v1/insur/reports/{dept}/{report_id}
+- id: `report_detail_api_v1_insur_reports__dept___report_id__get`
+- tags: `insur, reports`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Report Detail Api V1 Holy Reports  Dept   Report Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Report Detail Api V1 Insur Reports  Dept   Report Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "report_detail_api_v1_holy_reports__dept___report_id__get",
+  "id": "report_detail_api_v1_insur_reports__dept___report_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/reports/{dept}/{report_id}",
+  "path": "/api/v1/insur/reports/{dept}/{report_id}",
   "input": {
     "params": [
       {
@@ -3920,7 +3920,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Report Detail Api V1 Holy Reports  Dept   Report Id  Get"
+      "title": "Response Report Detail Api V1 Insur Reports  Dept   Report Id  Get"
     }
   },
   "security": {
@@ -3929,22 +3929,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/reports/{dept}/{role}
-- id: `get_role_reports_api_v1_holy_reports__dept___role__get`
-- tags: `holy`
+## GET /api/v1/insur/reports/{dept}/{role}
+- id: `get_role_reports_api_v1_insur_reports__dept___role__get`
+- tags: `insur`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Role Reports Api V1 Holy Reports  Dept   Role  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Role Reports Api V1 Insur Reports  Dept   Role  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_role_reports_api_v1_holy_reports__dept___role__get",
+  "id": "get_role_reports_api_v1_insur_reports__dept___role__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/reports/{dept}/{role}",
+  "path": "/api/v1/insur/reports/{dept}/{role}",
   "input": {
     "params": [
       {
@@ -3977,7 +3977,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Role Reports Api V1 Holy Reports  Dept   Role  Get"
+      "title": "Response Get Role Reports Api V1 Insur Reports  Dept   Role  Get"
     }
   },
   "security": {
@@ -3986,22 +3986,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/reports/{dept}/{role}/{report_id}/run
-- id: `run_role_report_api_v1_holy_reports__dept___role___report_id__run_post`
-- tags: `holy`
+## POST /api/v1/insur/reports/{dept}/{role}/{report_id}/run
+- id: `run_role_report_api_v1_insur_reports__dept___role___report_id__run_post`
+- tags: `insur`
 - input: path/query params `3`, request body `present`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Run Role Report Api V1 Holy Reports  Dept   Role   Report Id  Run Post"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Run Role Report Api V1 Insur Reports  Dept   Role   Report Id  Run Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "run_role_report_api_v1_holy_reports__dept___role___report_id__run_post",
+  "id": "run_role_report_api_v1_insur_reports__dept___role___report_id__run_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/reports/{dept}/{role}/{report_id}/run",
+  "path": "/api/v1/insur/reports/{dept}/{role}/{report_id}/run",
   "input": {
     "params": [
       {
@@ -4060,7 +4060,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Run Role Report Api V1 Holy Reports  Dept   Role   Report Id  Run Post"
+      "title": "Response Run Role Report Api V1 Insur Reports  Dept   Role   Report Id  Run Post"
     }
   },
   "security": {
@@ -4069,22 +4069,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/roles
-- id: `list_roles_api_v1_holy_roles_get`
-- tags: `holy`
+## GET /api/v1/insur/roles
+- id: `list_roles_api_v1_insur_roles_get`
+- tags: `insur`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Roles Api V1 Holy Roles Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Roles Api V1 Insur Roles Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_roles_api_v1_holy_roles_get",
+  "id": "list_roles_api_v1_insur_roles_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/roles",
+  "path": "/api/v1/insur/roles",
   "input": {
     "params": [],
     "body": null
@@ -4097,7 +4097,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response List Roles Api V1 Holy Roles Get"
+      "title": "Response List Roles Api V1 Insur Roles Get"
     }
   },
   "security": {
@@ -4106,22 +4106,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/security/attack-classes
-- id: `list_attack_classes_api_v1_holy_security_attack_classes_get`
-- tags: `holy`
+## GET /api/v1/insur/security/attack-classes
+- id: `list_attack_classes_api_v1_insur_security_attack_classes_get`
+- tags: `insur`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Attack Classes Api V1 Holy Security Attack Classes Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Attack Classes Api V1 Insur Security Attack Classes Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_attack_classes_api_v1_holy_security_attack_classes_get",
+  "id": "list_attack_classes_api_v1_insur_security_attack_classes_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/security/attack-classes",
+  "path": "/api/v1/insur/security/attack-classes",
   "input": {
     "params": [],
     "body": null
@@ -4134,7 +4134,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response List Attack Classes Api V1 Holy Security Attack Classes Get"
+      "title": "Response List Attack Classes Api V1 Insur Security Attack Classes Get"
     }
   },
   "security": {
@@ -4143,22 +4143,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/security/{dept}/corpora
-- id: `list_attack_corpora_api_v1_holy_security__dept__corpora_get`
-- tags: `holy`
+## GET /api/v1/insur/security/{dept}/corpora
+- id: `list_attack_corpora_api_v1_insur_security__dept__corpora_get`
+- tags: `insur`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Attack Corpora Api V1 Holy Security  Dept  Corpora Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Attack Corpora Api V1 Insur Security  Dept  Corpora Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_attack_corpora_api_v1_holy_security__dept__corpora_get",
+  "id": "list_attack_corpora_api_v1_insur_security__dept__corpora_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/security/{dept}/corpora",
+  "path": "/api/v1/insur/security/{dept}/corpora",
   "input": {
     "params": [
       {
@@ -4198,7 +4198,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response List Attack Corpora Api V1 Holy Security  Dept  Corpora Get"
+      "title": "Response List Attack Corpora Api V1 Insur Security  Dept  Corpora Get"
     }
   },
   "security": {
@@ -4207,22 +4207,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/security/{dept}/corpora/{attack_class}/{corpus_id}
-- id: `get_attack_corpus_api_v1_holy_security__dept__corpora__attack_class___corpus_id__get`
-- tags: `holy`
+## GET /api/v1/insur/security/{dept}/corpora/{attack_class}/{corpus_id}
+- id: `get_attack_corpus_api_v1_insur_security__dept__corpora__attack_class___corpus_id__get`
+- tags: `insur`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Attack Corpus Api V1 Holy Security  Dept  Corpora  Attack Class   Corpus Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Attack Corpus Api V1 Insur Security  Dept  Corpora  Attack Class   Corpus Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_attack_corpus_api_v1_holy_security__dept__corpora__attack_class___corpus_id__get",
+  "id": "get_attack_corpus_api_v1_insur_security__dept__corpora__attack_class___corpus_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/security/{dept}/corpora/{attack_class}/{corpus_id}",
+  "path": "/api/v1/insur/security/{dept}/corpora/{attack_class}/{corpus_id}",
   "input": {
     "params": [
       {
@@ -4264,7 +4264,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Attack Corpus Api V1 Holy Security  Dept  Corpora  Attack Class   Corpus Id  Get"
+      "title": "Response Get Attack Corpus Api V1 Insur Security  Dept  Corpora  Attack Class   Corpus Id  Get"
     }
   },
   "security": {
@@ -4273,22 +4273,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/security/{dept}/generate-corpus
-- id: `generate_attack_corpus_api_v1_holy_security__dept__generate_corpus_post`
-- tags: `holy`
+## POST /api/v1/insur/security/{dept}/generate-corpus
+- id: `generate_attack_corpus_api_v1_insur_security__dept__generate_corpus_post`
+- tags: `insur`
 - input: path/query params `1`, request body `present`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Generate Attack Corpus Api V1 Holy Security  Dept  Generate Corpus Post"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Generate Attack Corpus Api V1 Insur Security  Dept  Generate Corpus Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "generate_attack_corpus_api_v1_holy_security__dept__generate_corpus_post",
+  "id": "generate_attack_corpus_api_v1_insur_security__dept__generate_corpus_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/security/{dept}/generate-corpus",
+  "path": "/api/v1/insur/security/{dept}/generate-corpus",
   "input": {
     "params": [
       {
@@ -4329,7 +4329,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Generate Attack Corpus Api V1 Holy Security  Dept  Generate Corpus Post"
+      "title": "Response Generate Attack Corpus Api V1 Insur Security  Dept  Generate Corpus Post"
     }
   },
   "security": {
@@ -4338,22 +4338,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/sim/reference-processes
-- id: `list_reference_processes_api_v1_holy_sim_reference_processes_get`
-- tags: `holy`
+## GET /api/v1/insur/sim/reference-processes
+- id: `list_reference_processes_api_v1_insur_sim_reference_processes_get`
+- tags: `insur`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Reference Processes Api V1 Holy Sim Reference Processes Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Reference Processes Api V1 Insur Sim Reference Processes Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_reference_processes_api_v1_holy_sim_reference_processes_get",
+  "id": "list_reference_processes_api_v1_insur_sim_reference_processes_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/sim/reference-processes",
+  "path": "/api/v1/insur/sim/reference-processes",
   "input": {
     "params": [],
     "body": null
@@ -4366,7 +4366,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response List Reference Processes Api V1 Holy Sim Reference Processes Get"
+      "title": "Response List Reference Processes Api V1 Insur Sim Reference Processes Get"
     }
   },
   "security": {
@@ -4375,22 +4375,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/sim/{dept}/{process}/run
-- id: `run_simulation_api_v1_holy_sim__dept___process__run_post`
-- tags: `holy`
+## POST /api/v1/insur/sim/{dept}/{process}/run
+- id: `run_simulation_api_v1_insur_sim__dept___process__run_post`
+- tags: `insur`
 - input: path/query params `2`, request body `present`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Run Simulation Api V1 Holy Sim  Dept   Process  Run Post"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Run Simulation Api V1 Insur Sim  Dept   Process  Run Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "run_simulation_api_v1_holy_sim__dept___process__run_post",
+  "id": "run_simulation_api_v1_insur_sim__dept___process__run_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/sim/{dept}/{process}/run",
+  "path": "/api/v1/insur/sim/{dept}/{process}/run",
   "input": {
     "params": [
       {
@@ -4440,7 +4440,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Run Simulation Api V1 Holy Sim  Dept   Process  Run Post"
+      "title": "Response Run Simulation Api V1 Insur Sim  Dept   Process  Run Post"
     }
   },
   "security": {
@@ -4449,22 +4449,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/sim/{dept}/{process}/runs
-- id: `list_sim_runs_api_v1_holy_sim__dept___process__runs_get`
-- tags: `holy`
+## GET /api/v1/insur/sim/{dept}/{process}/runs
+- id: `list_sim_runs_api_v1_insur_sim__dept___process__runs_get`
+- tags: `insur`
 - input: path/query params `2`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Sim Runs Api V1 Holy Sim  Dept   Process  Runs Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Sim Runs Api V1 Insur Sim  Dept   Process  Runs Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_sim_runs_api_v1_holy_sim__dept___process__runs_get",
+  "id": "list_sim_runs_api_v1_insur_sim__dept___process__runs_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/sim/{dept}/{process}/runs",
+  "path": "/api/v1/insur/sim/{dept}/{process}/runs",
   "input": {
     "params": [
       {
@@ -4497,7 +4497,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response List Sim Runs Api V1 Holy Sim  Dept   Process  Runs Get"
+      "title": "Response List Sim Runs Api V1 Insur Sim  Dept   Process  Runs Get"
     }
   },
   "security": {
@@ -4506,22 +4506,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/events
-- id: `get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get`
-- tags: `holy`
+## GET /api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/events
+- id: `get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get`
+- tags: `insur`
 - input: path/query params `4`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Sim Events Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Events Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Sim Events Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Events Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get",
+  "id": "get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/events",
+  "path": "/api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/events",
   "input": {
     "params": [
       {
@@ -4579,7 +4579,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Sim Events Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Events Get"
+      "title": "Response Get Sim Events Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Events Get"
     }
   },
   "security": {
@@ -4588,22 +4588,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/manifest
-- id: `get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get`
-- tags: `holy`
+## GET /api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/manifest
+- id: `get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get`
+- tags: `insur`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Sim Manifest Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Manifest Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Sim Manifest Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Manifest Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get",
+  "id": "get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/manifest",
+  "path": "/api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/manifest",
   "input": {
     "params": [
       {
@@ -4645,7 +4645,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Sim Manifest Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Manifest Get"
+      "title": "Response Get Sim Manifest Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Manifest Get"
     }
   },
   "security": {
@@ -4654,22 +4654,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/spec/{dept}
-- id: `get_spec_api_v1_holy_spec__dept__get`
-- tags: `holy`
+## GET /api/v1/insur/spec/{dept}
+- id: `get_spec_api_v1_insur_spec__dept__get`
+- tags: `insur`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Spec Api V1 Holy Spec  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Spec Api V1 Insur Spec  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_spec_api_v1_holy_spec__dept__get",
+  "id": "get_spec_api_v1_insur_spec__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/spec/{dept}",
+  "path": "/api/v1/insur/spec/{dept}",
   "input": {
     "params": [
       {
@@ -4693,7 +4693,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Spec Api V1 Holy Spec  Dept  Get"
+      "title": "Response Get Spec Api V1 Insur Spec  Dept  Get"
     }
   },
   "security": {
@@ -4702,22 +4702,22 @@ JSON test case shape:
 }
 ```
 
-## POST /api/v1/holy/testing/dispatch
-- id: `dispatch_test_api_v1_holy_testing_dispatch_post`
-- tags: `holy`
+## POST /api/v1/insur/testing/dispatch
+- id: `dispatch_test_api_v1_insur_testing_dispatch_post`
+- tags: `insur`
 - input: path/query params `0`, request body `present`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Dispatch Test Api V1 Holy Testing Dispatch Post"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Dispatch Test Api V1 Insur Testing Dispatch Post"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "dispatch_test_api_v1_holy_testing_dispatch_post",
+  "id": "dispatch_test_api_v1_insur_testing_dispatch_post",
   "type": "api_contract",
   "method": "POST",
-  "path": "/api/v1/holy/testing/dispatch",
+  "path": "/api/v1/insur/testing/dispatch",
   "input": {
     "params": [],
     "body": {
@@ -4742,7 +4742,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Dispatch Test Api V1 Holy Testing Dispatch Post"
+      "title": "Response Dispatch Test Api V1 Insur Testing Dispatch Post"
     }
   },
   "security": {
@@ -4751,22 +4751,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/testing/result/{task_id}
-- id: `get_test_result_api_v1_holy_testing_result__task_id__get`
-- tags: `holy`
+## GET /api/v1/insur/testing/result/{task_id}
+- id: `get_test_result_api_v1_insur_testing_result__task_id__get`
+- tags: `insur`
 - input: path/query params `1`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Test Result Api V1 Holy Testing Result  Task Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Test Result Api V1 Insur Testing Result  Task Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_test_result_api_v1_holy_testing_result__task_id__get",
+  "id": "get_test_result_api_v1_insur_testing_result__task_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/testing/result/{task_id}",
+  "path": "/api/v1/insur/testing/result/{task_id}",
   "input": {
     "params": [
       {
@@ -4790,7 +4790,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Test Result Api V1 Holy Testing Result  Task Id  Get"
+      "title": "Response Get Test Result Api V1 Insur Testing Result  Task Id  Get"
     }
   },
   "security": {
@@ -4799,22 +4799,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/testing/results
-- id: `get_test_results_api_v1_holy_testing_results_get`
-- tags: `holy`
+## GET /api/v1/insur/testing/results
+- id: `get_test_results_api_v1_insur_testing_results_get`
+- tags: `insur`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Test Results Api V1 Holy Testing Results Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Test Results Api V1 Insur Testing Results Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_test_results_api_v1_holy_testing_results_get",
+  "id": "get_test_results_api_v1_insur_testing_results_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/testing/results",
+  "path": "/api/v1/insur/testing/results",
   "input": {
     "params": [
       {
@@ -4871,7 +4871,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Test Results Api V1 Holy Testing Results Get"
+      "title": "Response Get Test Results Api V1 Insur Testing Results Get"
     }
   },
   "security": {
@@ -4880,22 +4880,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/testing/tiers
-- id: `list_test_tiers_api_v1_holy_testing_tiers_get`
-- tags: `holy`
+## GET /api/v1/insur/testing/tiers
+- id: `list_test_tiers_api_v1_insur_testing_tiers_get`
+- tags: `insur`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Test Tiers Api V1 Holy Testing Tiers Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response List Test Tiers Api V1 Insur Testing Tiers Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_test_tiers_api_v1_holy_testing_tiers_get",
+  "id": "list_test_tiers_api_v1_insur_testing_tiers_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/testing/tiers",
+  "path": "/api/v1/insur/testing/tiers",
   "input": {
     "params": [],
     "body": null
@@ -4908,7 +4908,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response List Test Tiers Api V1 Holy Testing Tiers Get"
+      "title": "Response List Test Tiers Api V1 Insur Testing Tiers Get"
     }
   },
   "security": {
@@ -4917,22 +4917,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/transactions/_global
-- id: `global_summary_api_v1_holy_transactions__global_get`
-- tags: `holy, transactions`
+## GET /api/v1/insur/transactions/_global
+- id: `global_summary_api_v1_insur_transactions__global_get`
+- tags: `insur, transactions`
 - input: path/query params `0`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Summary Api V1 Holy Transactions  Global Get"}`
+- output: response schema `{"additionalProperties": true, "type": "object", "title": "Response Global Summary Api V1 Insur Transactions  Global Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "global_summary_api_v1_holy_transactions__global_get",
+  "id": "global_summary_api_v1_insur_transactions__global_get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/transactions/_global",
+  "path": "/api/v1/insur/transactions/_global",
   "input": {
     "params": [],
     "body": null
@@ -4945,7 +4945,7 @@ JSON test case shape:
     "schema": {
       "additionalProperties": true,
       "type": "object",
-      "title": "Response Global Summary Api V1 Holy Transactions  Global Get"
+      "title": "Response Global Summary Api V1 Insur Transactions  Global Get"
     }
   },
   "security": {
@@ -4954,22 +4954,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/transactions/{dept}
-- id: `list_transactions_api_v1_holy_transactions__dept__get`
-- tags: `holy, transactions`
+## GET /api/v1/insur/transactions/{dept}
+- id: `list_transactions_api_v1_insur_transactions__dept__get`
+- tags: `insur, transactions`
 - input: path/query params `6`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Transactions Api V1 Holy Transactions  Dept  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response List Transactions Api V1 Insur Transactions  Dept  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "list_transactions_api_v1_holy_transactions__dept__get",
+  "id": "list_transactions_api_v1_insur_transactions__dept__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/transactions/{dept}",
+  "path": "/api/v1/insur/transactions/{dept}",
   "input": {
     "params": [
       {
@@ -5051,7 +5051,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response List Transactions Api V1 Holy Transactions  Dept  Get"
+      "title": "Response List Transactions Api V1 Insur Transactions  Dept  Get"
     }
   },
   "security": {
@@ -5060,22 +5060,22 @@ JSON test case shape:
 }
 ```
 
-## GET /api/v1/holy/transactions/{dept}/{event_id}
-- id: `get_event_api_v1_holy_transactions__dept___event_id__get`
-- tags: `holy, transactions`
+## GET /api/v1/insur/transactions/{dept}/{event_id}
+- id: `get_event_api_v1_insur_transactions__dept___event_id__get`
+- tags: `insur, transactions`
 - input: path/query params `3`, request body `none`
 - process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
-- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Event Api V1 Holy Transactions  Dept   Event Id  Get"}`
+- output: response schema `{"type": "object", "additionalProperties": true, "title": "Response Get Event Api V1 Insur Transactions  Dept   Event Id  Get"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
 
 JSON test case shape:
 ```json
 {
-  "id": "get_event_api_v1_holy_transactions__dept___event_id__get",
+  "id": "get_event_api_v1_insur_transactions__dept___event_id__get",
   "type": "api_contract",
   "method": "GET",
-  "path": "/api/v1/holy/transactions/{dept}/{event_id}",
+  "path": "/api/v1/insur/transactions/{dept}/{event_id}",
   "input": {
     "params": [
       {
@@ -5120,7 +5120,7 @@ JSON test case shape:
     "schema": {
       "type": "object",
       "additionalProperties": true,
-      "title": "Response Get Event Api V1 Holy Transactions  Dept   Event Id  Get"
+      "title": "Response Get Event Api V1 Insur Transactions  Dept   Event Id  Get"
     }
   },
   "security": {

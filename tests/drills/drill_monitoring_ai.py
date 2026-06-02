@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drill: HOLY Monitoring AI per-dept (§64 + §65 + §47 + §38).
+"""Drill: INSUR Monitoring AI per-dept (§64 + §65 + §47 + §38).
 
 Steps (10 total; 3 negative):
     1. (+) monitoring router imports + endpoint catalog populated
@@ -12,7 +12,7 @@ Steps (10 total; 3 negative):
            are present in the router's CRON_JOBS catalog with correct cadences
     8. (-) NEGATIVE — get_run with bogus run_id → 404 (filesystem-not-found
            must not leak path traversal info)
-    9. (+) HOLY_MONITORING_AI.md exists for every dept under global-ai-org/
+    9. (+) INSUR_MONITORING_AI.md exists for every dept under global-ai-org/
    10. (+) cron audit dir layout matches what cron tasks write to
            (data/eval/cron/<job_subdir>/) so backend + workers are aligned
 
@@ -38,10 +38,10 @@ EXPECTED_DEPTS = {
 }
 
 EXPECTED_JOBS = {
-    "data_refresh":   ("holy.refresh_data_artifacts", 60 * 60),
-    "retrain":        ("holy.retrain_models",         24 * 60 * 60),
-    "accuracy_drift": ("holy.eval_accuracy_drift",    4 * 60 * 60),
-    "analysis":       ("holy.analysis_rollup",        24 * 60 * 60),
+    "data_refresh":   ("insur.refresh_data_artifacts", 60 * 60),
+    "retrain":        ("insur.retrain_models",         24 * 60 * 60),
+    "accuracy_drift": ("insur.eval_accuracy_drift",    4 * 60 * 60),
+    "analysis":       ("insur.analysis_rollup",        24 * 60 * 60),
 }
 
 
@@ -53,7 +53,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY Monitoring AI (§64 + §65 + §47 + §38)\n")
+    print("\nDRILL: INSUR Monitoring AI (§64 + §65 + §47 + §38)\n")
     t0 = time.time()
 
     # ----- Step 1: router imports + has expected attributes -----
@@ -64,11 +64,11 @@ def main():
         return
     has_catalog = (
         hasattr(mon, "CRON_JOBS") and isinstance(mon.CRON_JOBS, dict)
-        and hasattr(mon, "HOLY_DEPTS") and isinstance(mon.HOLY_DEPTS, list)
+        and hasattr(mon, "INSUR_DEPTS") and isinstance(mon.INSUR_DEPTS, list)
         and hasattr(mon, "router")
     )
     step(1, "monitoring router imports + endpoint catalog populated",
-         has_catalog, f"{len(mon.CRON_JOBS)} jobs, {len(mon.HOLY_DEPTS)} depts")
+         has_catalog, f"{len(mon.CRON_JOBS)} jobs, {len(mon.INSUR_DEPTS)} depts")
 
     # ----- Step 2: per-dept GET returns 200 + job catalog -----
     # Use FastAPI TestClient directly against the router rather than full app
@@ -79,7 +79,7 @@ def main():
     app.include_router(mon.router)
     client = TestClient(app)
 
-    r = client.get("/api/v1/holy/monitoring/sales")
+    r = client.get("/api/v1/insur/monitoring/sales")
     ok = r.status_code == 200 and "jobs" in r.json() and len(r.json()["jobs"]) == 4
     step(2, "GET /monitoring/sales → 200 + 4-job catalog",
          ok, f"status={r.status_code} jobs={len(r.json().get('jobs', {}))}")
@@ -95,7 +95,7 @@ def main():
          not bad, "; ".join(bad[:3]) if bad else "")
 
     # ----- Step 4: cross-dept rollup returns all 19 depts -----
-    r = client.get("/api/v1/holy/monitoring/_global")
+    r = client.get("/api/v1/insur/monitoring/_global")
     payload = r.json() if r.status_code == 200 else {}
     depts_in_rollup = set(payload.get("depts", []))
     missing_depts = EXPECTED_DEPTS - depts_in_rollup
@@ -104,12 +104,12 @@ def main():
          f"status={r.status_code} missing={sorted(missing_depts)[:3]}" if missing_depts else "")
 
     # ----- Step 5: NEGATIVE — unknown dept → 404 -----
-    r = client.get("/api/v1/holy/monitoring/not-a-real-dept")
+    r = client.get("/api/v1/insur/monitoring/not-a-real-dept")
     step(5, "NEGATIVE: unknown dept → 404 not 500 (no info leak)",
          r.status_code == 404, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 6: NEGATIVE — unknown job → 404 -----
-    r = client.get("/api/v1/holy/monitoring/sales/jobs/not-a-real-job/runs")
+    r = client.get("/api/v1/insur/monitoring/sales/jobs/not-a-real-job/runs")
     step(6, "NEGATIVE: unknown job → 404 with allowed-values hint",
          r.status_code == 404 and "data_refresh" in r.text,
          f"got {r.status_code}: {r.text[:80]}")
@@ -129,11 +129,11 @@ def main():
          not bad_catalog, "; ".join(bad_catalog[:3]) if bad_catalog else "")
 
     # ----- Step 8: NEGATIVE — bogus run_id → 404 -----
-    r = client.get("/api/v1/holy/monitoring/sales/jobs/data_refresh/runs/0000-deadbeef")
+    r = client.get("/api/v1/insur/monitoring/sales/jobs/data_refresh/runs/0000-deadbeef")
     step(8, "NEGATIVE: bogus run_id → 404 (no path-traversal leak)",
          r.status_code == 404, f"got {r.status_code}: {r.text[:80]}")
 
-    # ----- Step 9: HOLY_MONITORING_AI.md exists per dept -----
+    # ----- Step 9: INSUR_MONITORING_AI.md exists per dept -----
     # Locate global-ai-org/ — same candidate pattern the router uses.
     candidates = [
         Path("/global-ai-org"),
@@ -146,10 +146,10 @@ def main():
 
     missing_md = []
     for dept in EXPECTED_DEPTS:
-        target = gao_root / "departments" / dept / "business-layer" / "HOLY_MONITORING_AI.md"
+        target = gao_root / "departments" / dept / "business-layer" / "INSUR_MONITORING_AI.md"
         if not target.exists():
             missing_md.append(dept)
-    step(9, f"HOLY_MONITORING_AI.md exists for all {len(EXPECTED_DEPTS)} depts",
+    step(9, f"INSUR_MONITORING_AI.md exists for all {len(EXPECTED_DEPTS)} depts",
          not missing_md, f"missing: {sorted(missing_md)[:3]}" if missing_md else "")
 
     # ----- Step 10: cron audit subdir contract matches worker convention -----

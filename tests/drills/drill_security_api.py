@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY security API endpoints (§43, §64.32).
+Drill: INSUR security API endpoints (§43, §64.32).
 
 Steps (8 total; 3 negative):
     1. (+) GET /attack-classes returns 12 classes
@@ -27,7 +27,7 @@ import httpx
 
 
 BACKEND = "http://localhost:8000"
-API = f"{BACKEND}/api/v1/holy/security"
+API = f"{BACKEND}/api/v1/insur/security"
 DEPT = "drill_test_security"
 
 
@@ -39,7 +39,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY security API (section 64.32)\n")
+    print("\nDRILL: INSUR security API (section 64.32)\n")
     t0 = time.time()
 
     # Prereq: backend reachable

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Drill: §68.8 Functional eval surface — iteration 4 of HOLY Observability Hub.
+Drill: §68.8 Functional eval surface — iteration 4 of INSUR Observability Hub.
 
 Read-only aggregation over data/agent-supervisor/functional_eval_runs.jsonl
-(env-overridable via HOLY_EVAL_FUNCTIONAL_LOG). The WRITE side (MLflow
+(env-overridable via INSUR_EVAL_FUNCTIONAL_LOG). The WRITE side (MLflow
 job / scheduled eval that appends a row per run) is a separate iteration.
 
 Steps (12 total; 5 negative):
@@ -53,13 +53,13 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path, eval_log: Path):
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
-    os.environ["HOLY_EVAL_FUNCTIONAL_LOG"] = str(eval_log)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_EVAL_FUNCTIONAL_LOG"] = str(eval_log)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit",
+                            "core.insur_audit",
                             "routers.evals_functional",
                             "services.functional_eval_service")):
             del sys.modules[mod]
@@ -152,13 +152,13 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         eval_log = Path(tmp) / "functional_eval_runs.jsonl"
         client = TestClient(_build_app(audit_path, eval_log))
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: empty log → graceful envelope ----
-        r = client.get("/api/v1/holy/evals/functional/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/functional/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(1, "empty log → /_global returns 200, n_runs=0, leaderboard=[]",
              r.status_code == 200
@@ -173,7 +173,7 @@ def main() -> int:
             for row in _seed_runs():
                 fh.write(json.dumps(row) + "\n")
 
-        r = client.get("/api/v1/holy/evals/functional/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/functional/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         lb = body.get("leaderboard", [])
         # Latest-only per model: 3 entries. Sort by accuracy desc:
@@ -190,7 +190,7 @@ def main() -> int:
              f"n_models={body.get('n_models')} lb_order={[r['model_id'] for r in lb]}")
 
         # ---- Step 3: per-model history + drift_summary ----
-        r = client.get("/api/v1/holy/evals/functional/llama3.1:8b", headers=headers)
+        r = client.get("/api/v1/insur/evals/functional/llama3.1:8b", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         drift = body.get("drift_summary") or {}
         step(3, "/llama3.1:8b → 2 runs newest-first + drift_summary on accuracy",
@@ -204,7 +204,7 @@ def main() -> int:
 
         # ---- Step 4: dataset filter ----
         r = client.get(
-            "/api/v1/holy/evals/functional/kivi:local?dataset=intent_classify_v1",
+            "/api/v1/insur/evals/functional/kivi:local?dataset=intent_classify_v1",
             headers=headers,
         )
         body = r.json() if r.status_code == 200 else {}
@@ -216,7 +216,7 @@ def main() -> int:
 
         # ---- Step 5: /runs/{run_id} ----
         r = client.get(
-            "/api/v1/holy/evals/functional/kivi:local/runs/eval-kivi-1",
+            "/api/v1/insur/evals/functional/kivi:local/runs/eval-kivi-1",
             headers=headers,
         )
         body = r.json() if r.status_code == 200 else {}
@@ -229,7 +229,7 @@ def main() -> int:
 
         # ---- Step 6: NEG unknown model_id → 404 ----
         r = client.get(
-            "/api/v1/holy/evals/functional/nonexistent-model",
+            "/api/v1/insur/evals/functional/nonexistent-model",
             headers=headers,
         )
         step(6, "NEG: unknown model_id → 404 (no eval runs)",
@@ -238,7 +238,7 @@ def main() -> int:
 
         # ---- Step 7: NEG malformed model_id → 400 ----
         r = client.get(
-            "/api/v1/holy/evals/functional/bad model id with spaces",
+            "/api/v1/insur/evals/functional/bad model id with spaces",
             headers=headers,
         )
         step(7, "NEG: model_id with spaces → 400 from regex validator",
@@ -247,7 +247,7 @@ def main() -> int:
 
         # ---- Step 8: NEG unknown run_id under known model → 404 ----
         r = client.get(
-            "/api/v1/holy/evals/functional/kivi:local/runs/eval-nonexistent",
+            "/api/v1/insur/evals/functional/kivi:local/runs/eval-nonexistent",
             headers=headers,
         )
         step(8, "NEG: unknown run_id under known model → 404",
@@ -256,7 +256,7 @@ def main() -> int:
 
         # ---- Step 9: NEG malformed run_id → 400 ----
         r = client.get(
-            "/api/v1/holy/evals/functional/kivi:local/runs/bad$run&id",
+            "/api/v1/insur/evals/functional/kivi:local/runs/bad$run&id",
             headers=headers,
         )
         step(9, "NEG: run_id with $/& chars → 400 (regex reject)",
@@ -265,7 +265,7 @@ def main() -> int:
 
         # ---- Step 10: NEG bad role → 400 from RBAC ----
         r = client.get(
-            "/api/v1/holy/evals/functional/_global",
+            "/api/v1/insur/evals/functional/_global",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "intruder"},
         )
         step(10, "NEG: unknown role → 400 from RBAC",
@@ -275,14 +275,14 @@ def main() -> int:
         # ---- Step 11: corrupt JSONL line skipped, other rows surface ----
         with eval_log.open("a") as fh:
             fh.write("{not valid json\n")
-        r = client.get("/api/v1/holy/evals/functional/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/functional/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(11, "corrupt JSONL line skipped, other rows still surface (n_runs=5)",
              r.status_code == 200 and body.get("n_runs_total") == 5,
              f"n_runs={body.get('n_runs_total')}")
 
         # ---- Step 12: tenant attribution echoed ----
-        r = client.get("/api/v1/holy/evals/functional/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/functional/_global", headers=headers)
         step(12, "tenant_id from X-Tenant-ID echoed in response header",
              r.status_code == 200 and r.headers.get("X-Tenant-ID") == "tenant-a",
              f"echo={r.headers.get('X-Tenant-ID')!r}")
@@ -291,7 +291,7 @@ def main() -> int:
         required = {"ts", "tenant_id", "actor", "tool", "request_id",
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
-        router_rows = [r for r in rows if r.get("tool", "").startswith("holy.evals_functional")]
+        router_rows = [r for r in rows if r.get("tool", "").startswith("insur.evals_functional")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         if bad:
             step(99, "§38.3 schema invariant",

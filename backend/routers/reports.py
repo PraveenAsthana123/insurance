@@ -1,7 +1,7 @@
-"""HOLY reports-catalog router — dept-level rollup of standard reports.
+"""INSUR reports-catalog router — dept-level rollup of standard reports.
 
 Sibling to the per-role reports at
-    global-ai-org/departments/<dept>/reports-by-role/<role>/HOLY_REPORTS.md
+    global-ai-org/departments/<dept>/reports-by-role/<role>/INSUR_REPORTS.md
 This endpoint surfaces the DEPT-level unified catalog: every standard
 report the dept publishes (15 archetypes per §64.37.2) with cadence,
 format, owner role, and audience.
@@ -11,9 +11,9 @@ per audience) + §57.6 (canonical envelope) + §59 MDD + §64.37 (per-role
 reports sibling) + §66.
 
 Endpoints:
-  GET /api/v1/holy/reports/{dept}
-  GET /api/v1/holy/reports/{dept}/{report_id}
-  GET /api/v1/holy/reports/_global
+  GET /api/v1/insur/reports/{dept}
+  GET /api/v1/insur/reports/{dept}/{report_id}
+  GET /api/v1/insur/reports/_global
 """
 from __future__ import annotations
 
@@ -23,11 +23,11 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 
-router = APIRouter(prefix="/api/v1/holy/reports", tags=["holy", "reports"])
+router = APIRouter(prefix="/api/v1/insur/reports", tags=["insur", "reports"])
 
-HOLY_DEPTS = [
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -44,7 +44,7 @@ KNOWN_ROLES = {
 
 # The 15 standard report archetypes per global §64.37.2 — same shape
 # every dept, dept-specific titles. KEEP ALIGNED with the scaffolder's
-# standard_reports list in scaffold-holy-reports-catalog.py.
+# standard_reports list in scaffold-insur-reports-catalog.py.
 STANDARD_REPORTS: list[dict[str, str]] = [
     {"report_id": "daily_ops_digest",        "cadence": "daily 08:00",     "format": "PDF + Slack",  "owner_role": "admin",                  "audience": "admin / devops / manager"},
     {"report_id": "weekly_business_review",  "cadence": "weekly Monday",   "format": "PDF + email",  "owner_role": "manager",                "audience": "manager / dept staff"},
@@ -67,8 +67,8 @@ REQUIRED_FIELDS = {"report_id", "cadence", "format", "owner_role", "audience"}
 
 
 def _validate_dept(dept: str) -> None:
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 def _title_for(dept: str, report_id: str) -> str:
@@ -102,16 +102,16 @@ def _enrich(dept: str, base: dict[str, Any]) -> dict[str, Any]:
 @router.get("/_global")
 def global_inventory(http_request: Request) -> dict[str, Any]:
     """Cross-dept report inventory + counts."""
-    log_holy_access(http_request, "reports", "global_inventory")
+    log_insur_access(http_request, "reports", "global_inventory")
     inventory = {
         dept: [r["report_id"] for r in STANDARD_REPORTS]
-        for dept in HOLY_DEPTS
+        for dept in INSUR_DEPTS
     }
     return {
-        "n_depts": len(HOLY_DEPTS),
-        "depts": HOLY_DEPTS,
+        "n_depts": len(INSUR_DEPTS),
+        "depts": INSUR_DEPTS,
         "n_standard_reports_per_dept": len(STANDARD_REPORTS),
-        "n_reports_total": len(STANDARD_REPORTS) * len(HOLY_DEPTS),
+        "n_reports_total": len(STANDARD_REPORTS) * len(INSUR_DEPTS),
         "per_dept_report_ids": inventory,
         "scanned_at": time.time(),
     }
@@ -121,7 +121,7 @@ def global_inventory(http_request: Request) -> dict[str, Any]:
 def dept_catalog(http_request: Request, dept: str) -> dict[str, Any]:
     """Per-dept catalog — 15 standard reports with full envelope."""
     _validate_dept(dept)
-    log_holy_access(http_request, "reports", "dept_catalog", dept=dept)
+    log_insur_access(http_request, "reports", "dept_catalog", dept=dept)
     return {
         "dept": dept,
         "n_reports": len(STANDARD_REPORTS),
@@ -140,7 +140,7 @@ def report_detail(http_request: Request, dept: str, report_id: str) -> dict[str,
     if base is None:
         available = [r["report_id"] for r in STANDARD_REPORTS]
         raise HTTPException(404, f"Unknown report '{report_id}' — available: {available}")
-    log_holy_access(http_request, "reports", "report_detail",
+    log_insur_access(http_request, "reports", "report_detail",
                     dept=dept, extra={"report_id": report_id})
     return {
         "dept": dept,

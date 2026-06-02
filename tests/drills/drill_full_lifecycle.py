@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY full ML lifecycle — both directions locked (§43).
+Drill: INSUR full ML lifecycle — both directions locked (§43).
 
 Steps (8 total; 3 negative assertions):
     1. (+) Lifecycle runs end-to-end on Telco churn (classification)
@@ -47,7 +47,7 @@ def main() -> None:
         print(f"  \033[31m✗\033[0m prereq: {CSV} missing")
         sys.exit(1)
 
-    print(f"\nDRILL: HOLY full ML lifecycle  (dataset={CSV.name})\n")
+    print(f"\nDRILL: INSUR full ML lifecycle  (dataset={CSV.name})\n")
     t0 = time.time()
 
     # ----- Step 1: end-to-end run -----

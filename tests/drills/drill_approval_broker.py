@@ -63,7 +63,7 @@ def _build_app():
     """Boot a fresh app with the full middleware stack + agent_platform router."""
     for mod in list(sys.modules.keys()):
         if mod.startswith((
-            "core.middleware", "core.rbac_middleware", "core.holy_audit",
+            "core.middleware", "core.rbac_middleware", "core.insur_audit",
             "routers.agent_platform", "services.agent_platform_service",
             "services.openclaw_gateway_service", "schemas.agent_platform",
         )):

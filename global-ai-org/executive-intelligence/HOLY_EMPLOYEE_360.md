@@ -1,4 +1,4 @@
-# HOLY Beverage — Employee 360 Architecture
+# INSUR Beverage — Employee 360 Architecture
 
 **Source:** operator brief 2026-05-21
 

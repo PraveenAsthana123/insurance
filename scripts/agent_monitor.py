@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monitor the HOLY agent queues and live worker heartbeats.
+"""Monitor the INSUR agent queues and live worker heartbeats.
 
 Shows queue depths, completion counts, success/error summary, and recently seen
 agent heartbeat records. It works for simple agents and council agents.
@@ -19,7 +19,7 @@ DEFAULT_REDIS_URL = os.environ.get("REDIS_URL", os.environ.get("BEV_REDIS_URL", 
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Monitor HOLY Redis-backed agent fleets.")
+    parser = argparse.ArgumentParser(description="Monitor INSUR Redis-backed agent fleets.")
     parser.add_argument("--redis-url", default=DEFAULT_REDIS_URL, help="Redis URL")
     parser.add_argument("--watch", action="store_true", help="Refresh continuously")
     parser.add_argument("--interval", type=float, default=2.0, help="Watch refresh seconds")

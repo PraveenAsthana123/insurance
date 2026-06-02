@@ -18,7 +18,7 @@ const REFERENCE_PIPELINE = {
 };
 
 const ALL_AUDIENCES = ['b2b', 'b2c', 'b2e'];
-const API_BASE = '/api/v1/holy';
+const API_BASE = '/api/v1/insur';
 
 export default function HolyNavPage() {
   const { departmentId } = useParams();
@@ -161,18 +161,18 @@ export default function HolyNavPage() {
 
   if (!departmentId) {
     return (
-      <div className="holy-nav-container">
-        <h1>HOLY Beverage — Department Navigator</h1>
-        <p className="holy-subtitle">
+      <div className="insur-nav-container">
+        <h1>INSUR Beverage — Department Navigator</h1>
+        <p className="insur-subtitle">
           Pick a department to explore its processes, sub-processes, data inputs, AI models, outputs, and KPIs.
           Filter by audience (B2B / B2C / B2E) and ask the AI council about any process.
         </p>
-        <div className="holy-dept-grid">
+        <div className="insur-dept-grid">
           {depts.length === 0 && <p>Loading depts…</p>}
           {depts.map((d) => (
-            <Link key={d} to={`/holy/${d}`} className="holy-dept-card">
-              <span className="holy-dept-name">{d.replace(/-/g, ' ')}</span>
-              <span className="holy-dept-cta">Open →</span>
+            <Link key={d} to={`/insur/${d}`} className="insur-dept-card">
+              <span className="insur-dept-name">{d.replace(/-/g, ' ')}</span>
+              <span className="insur-dept-cta">Open →</span>
             </Link>
           ))}
         </div>
@@ -182,16 +182,16 @@ export default function HolyNavPage() {
 
   if (error) {
     return (
-      <div className="holy-nav-container">
-        <p className="holy-error">{error}</p>
-        <Link to="/holy" className="holy-back">← Back to department picker</Link>
+      <div className="insur-nav-container">
+        <p className="insur-error">{error}</p>
+        <Link to="/insur" className="insur-back">← Back to department picker</Link>
       </div>
     );
   }
 
   if (!nav || !filteredNav) {
     return (
-      <div className="holy-nav-container">
+      <div className="insur-nav-container">
         <p>Loading nav for {departmentId}…</p>
       </div>
     );
@@ -202,31 +202,31 @@ export default function HolyNavPage() {
     sub && filteredNav.left_nav.some((p) => p.sub_processes.some((s) => s.slug === sub.slug));
 
   return (
-    <div className="holy-nav-page">
-      <aside className="holy-sidebar">
-        <div className="holy-sidebar-header">
-          <Link to="/holy" className="holy-back-link">← All HOLY depts</Link>
+    <div className="insur-nav-page">
+      <aside className="insur-sidebar">
+        <div className="insur-sidebar-header">
+          <Link to="/insur" className="insur-back-link">← All INSUR depts</Link>
           <h2>{nav.display_name}</h2>
-          <p className="holy-sidebar-sub">
+          <p className="insur-sidebar-sub">
             {filteredNav.left_nav.length} processes · {totalVisibleSubs} sub-processes shown
           </p>
-          <div className="holy-spec-link-wrap">
-            <button type="button" onClick={openSpec} className="holy-spec-link">
-              📄 View full HOLY_SPEC.md
+          <div className="insur-spec-link-wrap">
+            <button type="button" onClick={openSpec} className="insur-spec-link">
+              📄 View full INSUR_SPEC.md
             </button>
           </div>
 
-          <div className="holy-audience-filter">
-            <span className="holy-audience-label">Filter by audience:</span>
-            <div className="holy-audience-chips">
+          <div className="insur-audience-filter">
+            <span className="insur-audience-label">Filter by audience:</span>
+            <div className="insur-audience-chips">
               {ALL_AUDIENCES.map((a) => (
                 <button
                   key={a}
                   type="button"
                   onClick={() => toggleAudience(a)}
                   className={
-                    'holy-audience-chip' +
-                    (audiences.includes(a) ? ' holy-audience-chip--active' : '')
+                    'insur-audience-chip' +
+                    (audiences.includes(a) ? ' insur-audience-chip--active' : '')
                   }
                   aria-pressed={audiences.includes(a)}
                 >
@@ -237,21 +237,21 @@ export default function HolyNavPage() {
           </div>
         </div>
 
-        <nav className="holy-sidebar-nav">
+        <nav className="insur-sidebar-nav">
           {filteredNav.left_nav.length === 0 ? (
-            <p className="holy-empty-nav">No sub-processes match the current audience filter.</p>
+            <p className="insur-empty-nav">No sub-processes match the current audience filter.</p>
           ) : (
             filteredNav.left_nav.map((proc) => (
-              <div key={proc.slug} className="holy-proc-group">
-                <div className="holy-proc-title">{proc.process}</div>
-                <ul className="holy-sub-list">
+              <div key={proc.slug} className="insur-proc-group">
+                <div className="insur-proc-title">{proc.process}</div>
+                <ul className="insur-sub-list">
                   {proc.sub_processes.map((s) => (
                     <li key={s.slug}>
                       <button
                         type="button"
                         className={
-                          'holy-sub-link' +
-                          (selected.sub?.slug === s.slug ? ' holy-sub-link--active' : '')
+                          'insur-sub-link' +
+                          (selected.sub?.slug === s.slug ? ' insur-sub-link--active' : '')
                         }
                         onClick={() => {
                           setSelected({ process: proc.process, sub: s });
@@ -261,7 +261,7 @@ export default function HolyNavPage() {
                       >
                         <span>{s.name}</span>
                         {s.audiences && s.audiences.length < 3 && (
-                          <span className="holy-sub-aud-badge">
+                          <span className="insur-sub-aud-badge">
                             {s.audiences.map((a) => a.toUpperCase()).join(' · ')}
                           </span>
                         )}
@@ -275,9 +275,9 @@ export default function HolyNavPage() {
         </nav>
       </aside>
 
-      <section className="holy-main">
+      <section className="insur-main">
         {!sub || !subStillVisible ? (
-          <div className="holy-empty">
+          <div className="insur-empty">
             <p>
               {!sub
                 ? 'Pick a sub-process from the left sidebar.'
@@ -286,30 +286,30 @@ export default function HolyNavPage() {
           </div>
         ) : (
           <>
-            <header className="holy-main-header">
-              <p className="holy-breadcrumb">
+            <header className="insur-main-header">
+              <p className="insur-breadcrumb">
                 <span>{nav.display_name}</span> ›{' '}
                 <span>{procName}</span> ›{' '}
-                <span className="holy-breadcrumb-current">{sub.name}</span>
+                <span className="insur-breadcrumb-current">{sub.name}</span>
               </p>
-              <div className="holy-main-title-row">
+              <div className="insur-main-title-row">
                 <h1>{sub.name}</h1>
                 {sub.audiences && (
-                  <div className="holy-sub-audiences">
+                  <div className="insur-sub-audiences">
                     {sub.audiences.map((a) => (
-                      <span key={a} className="holy-aud-badge">{a.toUpperCase()}</span>
+                      <span key={a} className="insur-aud-badge">{a.toUpperCase()}</span>
                     ))}
                   </div>
                 )}
               </div>
             </header>
 
-            <div className="holy-tabs">
+            <div className="insur-tabs">
               {sub.tabs.map((t) => (
                 <button
                   key={t}
                   type="button"
-                  className={'holy-tab' + (activeTab === t ? ' holy-tab--active' : '')}
+                  className={'insur-tab' + (activeTab === t ? ' insur-tab--active' : '')}
                   onClick={() => setActiveTab(t)}
                 >
                   {t}
@@ -317,7 +317,7 @@ export default function HolyNavPage() {
               ))}
             </div>
 
-            <div className="holy-tab-content">
+            <div className="insur-tab-content">
               <p>{sub.tab_content?.[activeTab] ?? '(no content for this tab)'}</p>
             </div>
 
@@ -348,14 +348,14 @@ export default function HolyNavPage() {
             <TestingDashboard dept={departmentId} />
 
             {/* Ask Council */}
-            <div className="holy-council-section">
-              <div className="holy-council-header">
+            <div className="insur-council-section">
+              <div className="insur-council-header">
                 <h3>🤖 Ask the AI Council</h3>
                 <button
                   type="button"
                   onClick={askCouncil}
                   disabled={council.status === 'submitting' || council.status === 'pending'}
-                  className="holy-council-btn"
+                  className="insur-council-btn"
                 >
                   {council.status === 'submitting'
                     ? 'Submitting…'
@@ -366,61 +366,61 @@ export default function HolyNavPage() {
               </div>
 
               {council.status === 'pending' && (
-                <p className="holy-council-status">
+                <p className="insur-council-status">
                   ⏳ Council working (3 stages × ~30s each on CPU). Task ID: <code>{council.taskId}</code>
                 </p>
               )}
 
               {council.status === 'error' && (
-                <p className="holy-council-error">⚠ {council.error}</p>
+                <p className="insur-council-error">⚠ {council.error}</p>
               )}
 
               {council.status === 'done' && council.result && (
-                <div className="holy-council-result">
-                  <div className="holy-council-meta">
+                <div className="insur-council-result">
+                  <div className="insur-council-meta">
                     <span>Total: {Math.round(council.result.elapsed_ms / 1000)}s</span>
                     <span>Task: <code>{council.result.task_id}</code></span>
                   </div>
-                  <div className="holy-council-stage">
-                    <div className="holy-council-stage-title">
+                  <div className="insur-council-stage">
+                    <div className="insur-council-stage-title">
                       ① AUTHOR · <code>{council.result.author?.model}</code> · {council.result.author?.ms}ms
                     </div>
-                    <div className="holy-council-stage-body">{council.result.author?.response}</div>
+                    <div className="insur-council-stage-body">{council.result.author?.response}</div>
                   </div>
-                  <div className="holy-council-stage">
-                    <div className="holy-council-stage-title">
+                  <div className="insur-council-stage">
+                    <div className="insur-council-stage-title">
                       ② REVIEWER · <code>{council.result.reviewer?.model}</code> · {council.result.reviewer?.ms}ms
                     </div>
-                    <div className="holy-council-stage-body">{council.result.reviewer?.response}</div>
+                    <div className="insur-council-stage-body">{council.result.reviewer?.response}</div>
                   </div>
-                  <div className="holy-council-stage holy-council-stage--final">
-                    <div className="holy-council-stage-title">
+                  <div className="insur-council-stage insur-council-stage--final">
+                    <div className="insur-council-stage-title">
                       ③ CHAIR (FINAL) · <code>{council.result.chair?.model}</code> · {council.result.chair?.ms}ms
                     </div>
-                    <div className="holy-council-stage-body">{council.result.chair?.response}</div>
+                    <div className="insur-council-stage-body">{council.result.chair?.response}</div>
                   </div>
                 </div>
               )}
             </div>
 
-            <details className="holy-debug">
+            <details className="insur-debug">
               <summary>Raw JSON for this sub-process</summary>
               <pre>{JSON.stringify(sub, null, 2)}</pre>
             </details>
           </>
         )}
 
-        {/* HOLY_SPEC.md inline modal */}
+        {/* INSUR_SPEC.md inline modal */}
         {specOpen && (
-          <div className="holy-spec-modal-backdrop" onClick={() => setSpecOpen(false)}>
-            <div className="holy-spec-modal" onClick={(e) => e.stopPropagation()}>
-              <div className="holy-spec-modal-header">
-                <h2>HOLY_SPEC.md — {nav.display_name}</h2>
-                <button type="button" onClick={() => setSpecOpen(false)} className="holy-spec-close">
+          <div className="insur-spec-modal-backdrop" onClick={() => setSpecOpen(false)}>
+            <div className="insur-spec-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="insur-spec-modal-header">
+                <h2>INSUR_SPEC.md — {nav.display_name}</h2>
+                <button type="button" onClick={() => setSpecOpen(false)} className="insur-spec-close">
                   ✕
                 </button>
               </div>
-              <div className="holy-spec-modal-body">
+              <div className="insur-spec-modal-body">
                 {specMd ? <ReactMarkdown>{specMd}</ReactMarkdown> : <p>Loading spec…</p>}
               </div>
             </div>

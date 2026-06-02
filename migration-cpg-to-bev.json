@@ -4,7 +4,7 @@
     "name": "cpg-to-insur",
     "date": "2026-05-21",
     "purpose": "Project rebrand from CPG (Consumer Packaged Goods) to BEV (Beverages) \u2014 covers brand mentions, identifiers, env vars, container names, DB identifiers, domain terms, file renames, directory rename",
-    "operator": "Claude via /mnt/deepa/Holy_insurarage session",
+    "operator": "Claude via /mnt/deepa/Insur_insurarage session",
     "policy_refs": [
       "\u00a742 operational autonomy (gated destructive operation completed under user direction)",
       "\u00a760 path verification (verified new path with lsblk/stat before/after rename)",

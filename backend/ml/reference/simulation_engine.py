@@ -1,4 +1,4 @@
-"""HOLY reference: per-process simulation engine (manual vs automatic).
+"""INSUR reference: per-process simulation engine (manual vs automatic).
 
 Per operator 2026-05-22 §64.34: every dept must have a simulation tab where
 each process runs in both Manual + Automatic modes side-by-side, with all

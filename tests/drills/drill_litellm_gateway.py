@@ -72,10 +72,10 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory() as tmp:
         audit_path = Path(tmp) / "llm_runs.jsonl"
-        os.environ["HOLY_LLM_GATEWAY_AUDIT_PATH"] = str(audit_path)
+        os.environ["INSUR_LLM_GATEWAY_AUDIT_PATH"] = str(audit_path)
 
         # ---- Step 1: default disabled ----
-        os.environ.pop("HOLY_LLM_GATEWAY_ENABLED", None)
+        os.environ.pop("INSUR_LLM_GATEWAY_ENABLED", None)
         _reset_modules()
         from services import llm_gateway
 
@@ -94,8 +94,8 @@ def main() -> int:
              f"text_len={len(r1.text)} leak={has_leak}")
 
         # ---- Step 3: enabled + mocked LiteLLM → executed ----
-        os.environ["HOLY_LLM_GATEWAY_ENABLED"] = "true"
-        os.environ["HOLY_LLM_MODEL"] = "ollama/kivi:local"
+        os.environ["INSUR_LLM_GATEWAY_ENABLED"] = "true"
+        os.environ["INSUR_LLM_MODEL"] = "ollama/kivi:local"
 
         # Mock the litellm module + its completion()
         mock_litellm = SimpleNamespace()

@@ -9,14 +9,14 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('digital-marketing smoke tests', () => {
-  test('HOLY nav page for digital-marketing loads', async ({ page }) => {
-    await page.goto('http://localhost:3000/holy/digital-marketing');
-    await expect(page).toHaveURL(/\/holy\/digital-marketing/);
+  test('INSUR nav page for digital-marketing loads', async ({ page }) => {
+    await page.goto('http://localhost:3000/insur/digital-marketing');
+    await expect(page).toHaveURL(/\/insur\/digital-marketing/);
     await expect(page.locator('body')).toBeVisible();
   });
 
   test('NEGATIVE — bogus dept returns 404 or empty', async ({ page }) => {
-    await page.goto('http://localhost:3000/holy/nonexistent-dept-xyz');
+    await page.goto('http://localhost:3000/insur/nonexistent-dept-xyz');
     // Either explicit 404 OR empty nav — both acceptable; absence of crash is the point
     await expect(page.locator('body')).toBeVisible();
   });

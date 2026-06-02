@@ -157,7 +157,7 @@ Per-invocation flow:
 
 ## Composes with
 
-- §38 (AI Production Governance) — every walker decision lands a §38.3 audit row in `data/agent-supervisor/holy_reads.jsonl`
+- §38 (AI Production Governance) — every walker decision lands a §38.3 audit row in `data/agent-supervisor/insur_reads.jsonl`
 - §42 (Operational Autonomy) — pre-approval token economy enforces the gated list verbatim
 - §43 (Drill Discipline) — Phases 102–104 + 114–116 are pure drill-execution phases; ≥ 3 negative assertions per drill
 - §44 (Autonomous Feature Loop) — 21-phase iteration mode within the 180h window

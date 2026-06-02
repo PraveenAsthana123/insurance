@@ -393,7 +393,7 @@ function ReportTab({ phase, catalog }) {
       </section>
 
       <footer style={{ borderTop: '1px solid #e2e8f0', paddingTop: 12, fontSize: 11, color: '#94a3b8' }}>
-        Composes with §38.3 audit envelope, §47.11 pre-release gates, §51 forensic substrate, §53 maturity stack, §66 per-dept HOLY_BRD/FRD.
+        Composes with §38.3 audit envelope, §47.11 pre-release gates, §51 forensic substrate, §53 maturity stack, §66 per-dept INSUR_BRD/FRD.
         Generated from <code>{phase.file}</code> on {new Date().toISOString()}.
       </footer>
     </div>

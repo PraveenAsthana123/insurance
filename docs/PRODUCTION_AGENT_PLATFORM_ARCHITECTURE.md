@@ -116,7 +116,7 @@ Idea / Ticket
 
 ## Workflow And Approval Tool Shortlist
 
-| Tool | Best For | Key features | HOLY status |
+| Tool | Best For | Key features | INSUR status |
 |---|---|---|---|
 | Temporal | Durable workflows | Retries, pause/resume, approval, long-running workflows | Target durable approval/workflow engine; not wired. |
 | LangGraph Studio | Agent graph workflows | Execution graph, state visualization, agent DAG debugging | Target graph UI; LangGraph itself is not wired. |
@@ -130,7 +130,7 @@ Idea / Ticket
 
 ## Agent And LLM Observability Shortlist
 
-| Tool | Best For | Key features | HOLY status |
+| Tool | Best For | Key features | INSUR status |
 |---|---|---|---|
 | AgentOps | Multi-agent observability | Agent sessions, tool tracking, failures | Installed candidate; SaaS key required for dashboard. |
 | LangSmith | LangGraph/LangChain monitoring | Traces, workflows, evaluation datasets | Installed candidate; SaaS and opt-in only. |

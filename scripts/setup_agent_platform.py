@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Operator CLI for the local HOLY agent platform setup.
+"""Operator CLI for the local INSUR agent platform setup.
 
 It verifies the same requested stack as the API: Harness Agent, OpenClaw,
 Paperclip, PoliysAI governance, CUA, Stagehand, and Playwright.

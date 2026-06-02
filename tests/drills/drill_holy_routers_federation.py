@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 """
-Drill: §64.43 #7 federation extended to the 7 remaining /api/v1/holy/* routers
-via the shared `core.holy_audit.log_holy_access` helper.
+Drill: §64.43 #7 federation extended to the 7 remaining /api/v1/insur/* routers
+via the shared `core.insur_audit.log_insur_access` helper.
 
 Closes the federation gap left after the monitoring router landed alone
-(drill_holy_monitoring_federation.py). One drill covers ALL 7 surfaces in
+(drill_insur_monitoring_federation.py). One drill covers ALL 7 surfaces in
 one place because the contract is identical:
 
   - Every read attributes the access to caller's tenant_id + actor
-  - Validators (e.g. _validate_dept) MUST run BEFORE log_holy_access so
+  - Validators (e.g. _validate_dept) MUST run BEFORE log_insur_access so
     failed-enumeration attempts do NOT pollute the audit trail
   - Best-effort disk persistence (read path NEVER broken by audit layer)
   - Audit row schema carries §38.3 required fields
 
 Steps (12 total; ≥4 negative):
-  1. (+) Shared helper writes to data/agent-supervisor/holy_reads.jsonl
-        (configurable via HOLY_AUDIT_PATH env var). Default location is
-        the unified holy-fleet audit trail.
+  1. (+) Shared helper writes to data/agent-supervisor/insur_reads.jsonl
+        (configurable via INSUR_AUDIT_PATH env var). Default location is
+        the unified insur-fleet audit trail.
   2. (+) master_data /_global with X-Tenant-ID echoed in row + tenant
         column = "tenant-a"
   3. (+) transactions /{dept} writes row tagged with dept + endpoint
@@ -26,7 +26,7 @@ Steps (12 total; ≥4 negative):
   7. (+) graph /{dept}/nodes writes row with extra={type}
   8. (+) downloads /_global writes row with surface=downloads
   9. (-) NEG: master_data invalid dept → 404, NO new audit row (validator
-        runs BEFORE log_holy_access per §47.6 anti-info-leak)
+        runs BEFORE log_insur_access per §47.6 anti-info-leak)
   10.(-) NEG: pipelines invalid process_id → 400, NO new audit row
         (validator-before-audit ordering preserved)
   11.(-) NEG: default tenant when no X-Tenant-ID header → row tagged
@@ -63,11 +63,11 @@ def step(n, label, ok, detail=""):
 
 def _build_app(audit_path: Path):
     """Boot a fresh FastAPI with all 7 federated routers + middleware stack."""
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in (
-        "core.middleware", "core.rbac_middleware", "core.holy_audit",
+        "core.middleware", "core.rbac_middleware", "core.insur_audit",
         "routers.master_data", "routers.transactions", "routers.pipelines",
         "routers.reports", "routers.demo_stories", "routers.graph",
         "routers.downloads",
@@ -107,19 +107,19 @@ def _audit_rows(path: Path):
 def main() -> int:
     from fastapi.testclient import TestClient
 
-    print("\nDRILL: §64.43 #7 federation — 7 remaining holy/* routers via shared helper\n")
+    print("\nDRILL: §64.43 #7 federation — 7 remaining insur/* routers via shared helper\n")
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         client = TestClient(_build_app(audit_path))
 
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: helper-target path created on first write ----
-        r = client.get("/api/v1/holy/master-data/_global", headers=headers)
+        r = client.get("/api/v1/insur/master-data/_global", headers=headers)
         rows = _audit_rows(audit_path)
-        step(1, "shared helper writes to HOLY_AUDIT_PATH (env-configurable)",
+        step(1, "shared helper writes to INSUR_AUDIT_PATH (env-configurable)",
              r.status_code == 200 and audit_path.exists() and len(rows) == 1,
              f"status={r.status_code} path_exists={audit_path.exists()} rows={len(rows)}")
 
@@ -133,7 +133,7 @@ def main() -> int:
              f"echo={r.headers.get('X-Tenant-ID')!r} surface={last['surface']!r}")
 
         # ---- Step 3: transactions /{dept} → dept-tagged row ----
-        r = client.get("/api/v1/holy/transactions/sales", headers=headers)
+        r = client.get("/api/v1/insur/transactions/sales", headers=headers)
         last = _audit_rows(audit_path)[-1]
         step(3, "transactions /{dept} → dept-tagged row",
              r.status_code == 200
@@ -143,7 +143,7 @@ def main() -> int:
              f"status={r.status_code} dept={last.get('dept')!r}")
 
         # ---- Step 4: pipelines /{dept}/{process_id} → process_id in extras ----
-        r = client.get("/api/v1/holy/pipelines/sales/lead_scoring", headers=headers)
+        r = client.get("/api/v1/insur/pipelines/sales/lead_scoring", headers=headers)
         last = _audit_rows(audit_path)[-1]
         step(4, "pipelines /{dept}/{process_id} → row carries process_id",
              r.status_code == 200
@@ -152,7 +152,7 @@ def main() -> int:
              f"status={r.status_code} process_id={last.get('process_id')!r}")
 
         # ---- Step 5: reports /{dept}/{report_id} → report_id in extras ----
-        r = client.get("/api/v1/holy/reports/sales/weekly_business_review", headers=headers)
+        r = client.get("/api/v1/insur/reports/sales/weekly_business_review", headers=headers)
         last = _audit_rows(audit_path)[-1]
         step(5, "reports /{dept}/{report_id} → row carries report_id",
              r.status_code == 200
@@ -161,7 +161,7 @@ def main() -> int:
              f"status={r.status_code} report_id={last.get('report_id')!r}")
 
         # ---- Step 6: demo_stories /{dept}/{role} → role in extras ----
-        r = client.get("/api/v1/holy/demo-stories/sales/manager", headers=headers)
+        r = client.get("/api/v1/insur/demo-stories/sales/manager", headers=headers)
         last = _audit_rows(audit_path)[-1]
         step(6, "demo_stories /{dept}/{role} → row carries role",
              r.status_code == 200
@@ -170,7 +170,7 @@ def main() -> int:
              f"status={r.status_code} role={last.get('role')!r}")
 
         # ---- Step 7: graph /{dept}/nodes?type=role → type in extras ----
-        r = client.get("/api/v1/holy/graph/sales/nodes?type=role", headers=headers)
+        r = client.get("/api/v1/insur/graph/sales/nodes?type=role", headers=headers)
         last = _audit_rows(audit_path)[-1]
         step(7, "graph /{dept}/nodes → row carries type filter",
              r.status_code == 200
@@ -180,7 +180,7 @@ def main() -> int:
              f"status={r.status_code} type={last.get('type')!r}")
 
         # ---- Step 8: downloads /_global → surface=downloads ----
-        r = client.get("/api/v1/holy/downloads/_global", headers=headers)
+        r = client.get("/api/v1/insur/downloads/_global", headers=headers)
         last = _audit_rows(audit_path)[-1]
         step(8, "downloads /_global → surface=downloads in audit row",
              r.status_code == 200
@@ -190,7 +190,7 @@ def main() -> int:
 
         # ---- Step 9: NEG invalid dept → 404, NO new audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/master-data/BOGUS-DEPT", headers=headers)
+        r = client.get("/api/v1/insur/master-data/BOGUS-DEPT", headers=headers)
         rows_after = len(_audit_rows(audit_path))
         step(9, "NEG: master_data invalid dept → 404, NO audit row (validator-first)",
              r.status_code == 404 and rows_after == rows_before,
@@ -198,14 +198,14 @@ def main() -> int:
 
         # ---- Step 10: NEG malformed process_id → 400, NO new audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/pipelines/sales/Bogus-ID", headers=headers)
+        r = client.get("/api/v1/insur/pipelines/sales/Bogus-ID", headers=headers)
         rows_after = len(_audit_rows(audit_path))
         step(10, "NEG: pipelines malformed process_id → 400, NO new audit row",
              r.status_code == 400 and rows_after == rows_before,
              f"status={r.status_code} rows_delta={rows_after - rows_before}")
 
         # ---- Step 11: NEG no X-Tenant-ID → row tagged tenant_id='default' ----
-        r = client.get("/api/v1/holy/master-data/_global", headers={"X-Demo-Role": "manager"})
+        r = client.get("/api/v1/insur/master-data/_global", headers={"X-Demo-Role": "manager"})
         last = _audit_rows(audit_path)[-1]
         step(11, "NEG: no X-Tenant-ID → row tagged with tenant_id='default'",
              r.status_code == 200 and last["tenant_id"] == "default",
@@ -221,15 +221,15 @@ def main() -> int:
                  False, f"{len(bad)} rows missing fields; first: {bad[0]}")
 
         # ---- Step 12: NEG disk write failure → read STILL succeeds ----
-        # Point HOLY_AUDIT_PATH at a path whose parent cannot be created
+        # Point INSUR_AUDIT_PATH at a path whose parent cannot be created
         # (a file blocks the would-be parent dir). The helper swallows OSError
         # so the read path survives the audit-layer disk failure.
         blocker = Path(tmp) / "blocker.file"
         blocker.write_text("")
         bad_path = blocker / "audit.jsonl"        # parent of bad_path is a FILE
-        os.environ["HOLY_AUDIT_PATH"] = str(bad_path)
+        os.environ["INSUR_AUDIT_PATH"] = str(bad_path)
         client2 = TestClient(_build_app(bad_path))
-        r = client2.get("/api/v1/holy/master-data/_global",
+        r = client2.get("/api/v1/insur/master-data/_global",
                         headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         step(12, "NEG: disk-write failure → read STILL succeeds (best-effort audit)",
              r.status_code == 200,

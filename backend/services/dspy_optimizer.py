@@ -7,7 +7,7 @@ the prompt — including few-shot demos selected from labelled examples
 — by running the program against a validation set and keeping what
 scores best.
 
-HOLY's existing prompt path is whatever the caller hand-writes in
+INSUR's existing prompt path is whatever the caller hand-writes in
 `prompts/`. This adapter is the COMPLEMENTARY in-process synchronous
 path for *RAG QA* prompts specifically:
 
@@ -17,8 +17,8 @@ path for *RAG QA* prompts specifically:
 
 Per global CLAUDE.md §56.2 Stage-1 contract:
   - Lazy import of dspy (SDK absence → unavailable, never crash)
-  - Feature-flag opt-in: HOLY_DSPY_OPTIMIZER_ENABLED=true
-  - Default model from HOLY_LLM_MODEL (reuses gateway env contract)
+  - Feature-flag opt-in: INSUR_DSPY_OPTIMIZER_ENABLED=true
+  - Default model from INSUR_LLM_MODEL (reuses gateway env contract)
   - Never default-on; existing hand-written prompts keep working
 
 Per §38.3:
@@ -49,9 +49,9 @@ from pathlib import Path
 from typing import Any
 
 _AUDIT_PATH = Path(
-    os.environ.get("HOLY_DSPY_AUDIT_PATH", "data/agent-supervisor/dspy_optimizer_runs.jsonl")
+    os.environ.get("INSUR_DSPY_AUDIT_PATH", "data/agent-supervisor/dspy_optimizer_runs.jsonl")
 )
-_DEFAULT_MODEL = os.environ.get("HOLY_LLM_MODEL", "ollama/kivi:local")
+_DEFAULT_MODEL = os.environ.get("INSUR_LLM_MODEL", "ollama/kivi:local")
 
 # Whitelist of optimizer names exposed via this adapter. Other DSPy
 # optimizers exist (MIPROv2, COPRO, BootstrapFinetune, ...) but they
@@ -94,7 +94,7 @@ class DSPyOptimizationResult:
 
 def is_enabled() -> bool:
     """True only when explicitly opted-in. Never default-on (§56.2)."""
-    return os.environ.get("HOLY_DSPY_OPTIMIZER_ENABLED", "").lower() == "true"
+    return os.environ.get("INSUR_DSPY_OPTIMIZER_ENABLED", "").lower() == "true"
 
 
 def is_importable() -> bool:
@@ -239,7 +239,7 @@ def run_optimization(
         })
         return DSPyOptimizationResult(
             outcome="disabled", model=model, tenant_id=tenant_id, request_id=request_id,
-            error_msg="HOLY_DSPY_OPTIMIZER_ENABLED is not 'true'",
+            error_msg="INSUR_DSPY_OPTIMIZER_ENABLED is not 'true'",
         )
 
     # ---- Gate 2: SDK installed ----
@@ -377,7 +377,7 @@ def status() -> dict[str, Any]:
             "max_demos": _MAX_DEMOS,
         },
         "detail": (
-            "Stage-1 adapter; opt-in via HOLY_DSPY_OPTIMIZER_ENABLED=true. "
+            "Stage-1 adapter; opt-in via INSUR_DSPY_OPTIMIZER_ENABLED=true. "
             "Compiles a signature(question, context -> answer) into a few-shot "
             "program with demos selected by metric. Audit row carries the "
             "optimizer used + before/after train accuracy so a reviewer can "

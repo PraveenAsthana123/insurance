@@ -309,12 +309,12 @@ def run_pipeline(
 
 
 # ============================================================
-# HOLY reference-lifecycle tasks (operator request 2026-05-22)
+# INSUR reference-lifecycle tasks (operator request 2026-05-22)
 # Run by Celery beat per the schedule in workers/celery_app.py
 # ============================================================
 
 
-@celery_app.task(bind=True, name="holy.run_structured_lifecycle")
+@celery_app.task(bind=True, name="insur.run_structured_lifecycle")
 def run_structured_lifecycle(self, *, dataset, target, task_type, dept, pipeline_name,
                               date_cols=None, drop_cols=None, n_trials=10, sample_rows=None):
     """Run the full structured-ML lifecycle (EDA → eval → SHAP) and persist
@@ -323,7 +323,7 @@ def run_structured_lifecycle(self, *, dataset, target, task_type, dept, pipeline
     from ml.reference.full_lifecycle import FullLifecycle
 
     logger.info(
-        "holy.run_structured_lifecycle | dept=%s pipeline=%s dataset=%s",
+        "insur.run_structured_lifecycle | dept=%s pipeline=%s dataset=%s",
         dept, pipeline_name, dataset,
     )
     self.update_state(state="PROGRESS", meta={"step": "starting"})
@@ -351,14 +351,14 @@ def run_structured_lifecycle(self, *, dataset, target, task_type, dept, pipeline
     }
 
 
-@celery_app.task(bind=True, name="holy.run_rag_lifecycle")
+@celery_app.task(bind=True, name="insur.run_rag_lifecycle")
 def run_rag_lifecycle(self, *, corpus, dept, pipeline_name, chunking="sentence_aware",
                        llm="gemma3:1b", top_k=4):
     """Run the full RAG lifecycle: chunk → embed → index → retrieve → answer → cite."""
     from ml.reference.rag_lifecycle import RagLifecycle
 
     logger.info(
-        "holy.run_rag_lifecycle | dept=%s pipeline=%s corpus=%s",
+        "insur.run_rag_lifecycle | dept=%s pipeline=%s corpus=%s",
         dept, pipeline_name, corpus,
     )
     self.update_state(state="PROGRESS", meta={"step": "starting"})
@@ -390,7 +390,7 @@ def run_rag_lifecycle(self, *, corpus, dept, pipeline_name, chunking="sentence_a
 # ============================================================
 
 
-@celery_app.task(bind=True, name="holy.dispatch_test_fanout")
+@celery_app.task(bind=True, name="insur.dispatch_test_fanout")
 def dispatch_test_fanout(self, *, tier: str, depts: list[str],
                           timeout_seconds: int = 600,
                           agent_role_required: str | None = None) -> dict:
@@ -440,7 +440,7 @@ def dispatch_test_fanout(self, *, tier: str, depts: list[str],
             skipped.append(dept)
 
     logger.info(
-        "holy.dispatch_test_fanout | tier=%s enqueued=%d skipped=%d",
+        "insur.dispatch_test_fanout | tier=%s enqueued=%d skipped=%d",
         tier, len(enqueued), len(skipped),
     )
     return {"tier": tier, "enqueued": len(enqueued), "skipped": len(skipped),
@@ -449,7 +449,7 @@ def dispatch_test_fanout(self, *, tier: str, depts: list[str],
 
 # ============================================================
 # Data + Model + Accuracy + Analysis cron tasks (operator 2026-05-23)
-# Per global §65.1 §64.20 — fan-out across all 19 HOLY depts.
+# Per global §65.1 §64.20 — fan-out across all 19 INSUR depts.
 # Writes audit rows to data/eval/cron/<job_name>/<run_id>/manifest.json
 # ============================================================
 
@@ -471,7 +471,7 @@ def _cron_disabled(env_name: str) -> bool:
     return os.environ.get(env_name) == "1"
 
 
-@celery_app.task(bind=True, name="holy.refresh_data_artifacts")
+@celery_app.task(bind=True, name="insur.refresh_data_artifacts")
 def refresh_data_artifacts(self, *, depts: list[str], max_minutes: int = 30) -> dict:
     """DATA cron — per dept: re-ingest, dedup, IQR-flag, impute, freshness check.
 
@@ -532,7 +532,7 @@ def refresh_data_artifacts(self, *, depts: list[str], max_minutes: int = 30) -> 
             skipped.append(f"{dept}:{type(exc).__name__}")
 
     manifest = {
-        "task": "holy.refresh_data_artifacts",
+        "task": "insur.refresh_data_artifacts",
         "depts_processed": len(rows_per_dept),
         "depts_skipped": len(skipped),
         "skipped_reasons": skipped[:10],
@@ -545,7 +545,7 @@ def refresh_data_artifacts(self, *, depts: list[str], max_minutes: int = 30) -> 
     return manifest
 
 
-@celery_app.task(bind=True, name="holy.retrain_models")
+@celery_app.task(bind=True, name="insur.retrain_models")
 def retrain_models(self, *, depts: list[str], pipelines: list[str]) -> dict:
     """MODEL cron — per dept × pipeline: invoke the appropriate lifecycle.train().
 
@@ -620,7 +620,7 @@ def retrain_models(self, *, depts: list[str], pipelines: list[str]) -> dict:
                                 "status": "failed", "error": str(exc)[:200]})
 
     manifest = {
-        "task": "holy.retrain_models",
+        "task": "insur.retrain_models",
         "n_ok": sum(1 for r in results if r["status"] == "ok"),
         "n_failed": sum(1 for r in results if r["status"] == "failed"),
         "n_skipped": sum(1 for r in results if r["status"] == "skipped"),
@@ -631,7 +631,7 @@ def retrain_models(self, *, depts: list[str], pipelines: list[str]) -> dict:
     return manifest
 
 
-@celery_app.task(bind=True, name="holy.eval_accuracy_drift")
+@celery_app.task(bind=True, name="insur.eval_accuracy_drift")
 def eval_accuracy_drift(self, *, depts: list[str]) -> dict:
     """ACCURACY cron — scan latest pipeline manifests for accuracy drift.
 
@@ -686,7 +686,7 @@ def eval_accuracy_drift(self, *, depts: list[str]) -> dict:
                 continue
 
     manifest = {
-        "task": "holy.eval_accuracy_drift",
+        "task": "insur.eval_accuracy_drift",
         "scans": scans,
         "drift_alerts": len(drift_alerts),
         "duration_seconds": round(_time.time() - t0, 2),
@@ -697,7 +697,7 @@ def eval_accuracy_drift(self, *, depts: list[str]) -> dict:
     return manifest
 
 
-@celery_app.task(bind=True, name="holy.analysis_rollup")
+@celery_app.task(bind=True, name="insur.analysis_rollup")
 def analysis_rollup(self, *, depts: list[str]) -> dict:
     """ANALYSIS cron — per dept: aggregate KPIs from existing dashboard catalog.
 
@@ -733,7 +733,7 @@ def analysis_rollup(self, *, depts: list[str]) -> dict:
         rollup.append({"error": str(exc)})
 
     manifest = {
-        "task": "holy.analysis_rollup",
+        "task": "insur.analysis_rollup",
         "n_rollup_rows": len(rollup),
         "n_depts": len(depts),
         "duration_seconds": round(_time.time() - t0, 2),

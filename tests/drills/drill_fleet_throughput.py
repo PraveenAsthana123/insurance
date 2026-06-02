@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY agent-fleet throughput (§43, §65.8).
+Drill: INSUR agent-fleet throughput (§43, §65.8).
 
 Steps (8 total; 3 negative):
     1. (+) GET /fleet/stats returns the 3 fleet sections (simple, council, test)
@@ -28,7 +28,7 @@ import httpx
 
 
 BACKEND = "http://localhost:8000"
-API = f"{BACKEND}/api/v1/holy/fleet"
+API = f"{BACKEND}/api/v1/insur/fleet"
 
 
 def step(n, label, ok, detail=""):
@@ -39,7 +39,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY agent-fleet throughput (section 65.8 + section 43)\n")
+    print("\nDRILL: INSUR agent-fleet throughput (section 65.8 + section 43)\n")
     t0 = time.time()
 
     # Prereq: backend reachable

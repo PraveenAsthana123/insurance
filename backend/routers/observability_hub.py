@@ -1,6 +1,6 @@
 """§68 Observability Hub aggregator router.
 
-One endpoint: GET /api/v1/holy/observability-hub/_overview that surfaces
+One endpoint: GET /api/v1/insur/observability-hub/_overview that surfaces
 the health of all 7 §68 read surfaces in one call. Mirrors the §56
 /api/v1/agent-platform/adapters aggregator shape.
 
@@ -12,12 +12,12 @@ from typing import Any
 
 from fastapi import APIRouter, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 from services import observability_hub_service as ohub
 
 router = APIRouter(
-    prefix="/api/v1/holy/observability-hub",
-    tags=["holy", "observability-hub"],
+    prefix="/api/v1/insur/observability-hub",
+    tags=["insur", "observability-hub"],
 )
 
 
@@ -33,5 +33,5 @@ def hub_overview(http_request: Request) -> dict[str, Any]:
     Use this to answer: "Are the §68 surfaces wired? Which ones have
     data flowing in? Which ones are missing their write side?"
     """
-    log_holy_access(http_request, "observability_hub", "hub_overview")
+    log_insur_access(http_request, "observability_hub", "hub_overview")
     return ohub.overview()

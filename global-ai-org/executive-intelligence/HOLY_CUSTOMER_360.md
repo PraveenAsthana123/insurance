@@ -1,4 +1,4 @@
-# HOLY Beverage — Customer 360 Architecture
+# INSUR Beverage — Customer 360 Architecture
 
 **Source:** operator brief 2026-05-21
 

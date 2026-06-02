@@ -1,4 +1,4 @@
-"""HOLY reference ML/RAG lifecycle implementations.
+"""INSUR reference ML/RAG lifecycle implementations.
 
 Each module here demonstrates the FULL lifecycle for a class of pipelines:
 - full_lifecycle: structured ML (regression + classification)

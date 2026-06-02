@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recurring task scheduler for HOLY Redis-backed agents.
+"""Recurring task scheduler for INSUR Redis-backed agents.
 
 This is a lightweight local scheduler for demos and development. It stores job
 metadata in Redis, supports multiple interval jobs, and enqueues due tasks into
@@ -24,7 +24,7 @@ SCHEDULE_PREFIX = "agent:schedule:"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Schedule recurring HOLY agent tasks.")
+    parser = argparse.ArgumentParser(description="Schedule recurring INSUR agent tasks.")
     parser.add_argument("--redis-url", default=DEFAULT_REDIS_URL, help="Redis URL")
     sub = parser.add_subparsers(dest="cmd", required=True)
 

@@ -152,7 +152,7 @@ class OpenClawGatewayService:
     def manifest(self) -> OpenClawManifestResponse:
         """Return the OpenClaw bridge contract for tools and operators."""
         return OpenClawManifestResponse(
-            name="holy-insurerage-openclaw-bridge",
+            name="insur-insurerage-openclaw-bridge",
             status="working-local-bridge",
             external_gateway_installed=False,
             modes=list(_QUEUE_MAP.keys()),

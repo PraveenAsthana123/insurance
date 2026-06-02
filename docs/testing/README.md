@@ -1,6 +1,6 @@
 # docs/testing/
 
-Canonical testing references for HOLY Beverage.
+Canonical testing references for INSUR Beverage.
 
 | File | Purpose |
 |---|---|

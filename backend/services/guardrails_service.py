@@ -2,7 +2,7 @@
 
 Read-only aggregation surface over a guardrail-decisions JSONL log
 (`data/agent-supervisor/guardrail_decisions.jsonl` by default; override
-via HOLY_GUARDRAIL_LOG env). The WRITE side (middleware that appends a
+via INSUR_GUARDRAIL_LOG env). The WRITE side (middleware that appends a
 row when a guardrail fires — prompt-injection filter, output toxicity
 classifier, scope-denial, rate-limit hit, etc.) is a separate iteration
 of §68.5; this commit ships only the READ surface so operators can
@@ -52,10 +52,10 @@ KNOWN_GUARDRAIL_TYPES = frozenset({
 
 
 def _log_path() -> Path | None:
-    """Resolve the active guardrail log. HOLY_GUARDRAIL_LOG env wins
+    """Resolve the active guardrail log. INSUR_GUARDRAIL_LOG env wins
     so tests + alternate deploys can override (same pattern as §68.6).
     """
-    env_override = os.environ.get("HOLY_GUARDRAIL_LOG")
+    env_override = os.environ.get("INSUR_GUARDRAIL_LOG")
     if env_override:
         p = Path(env_override)
         if p.exists():

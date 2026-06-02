@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drill: HOLY Graph AI per dept (§38 + §39 + §45 + §47 + §49 + §66).
+"""Drill: INSUR Graph AI per dept (§38 + §39 + §45 + §47 + §49 + §66).
 
 Steps (10 total; 3 negative):
     1. (+) graph router imports + ALLOWED_NODE_TYPES = 8 canonical types
@@ -49,7 +49,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY Graph AI per dept (§38 + §39 + §45 + §47 + §49 + §66)\n")
+    print("\nDRILL: INSUR Graph AI per dept (§38 + §39 + §45 + §47 + §49 + §66)\n")
     t0 = time.time()
 
     # ----- Step 1: router + ALLOWED_NODE_TYPES catalog -----
@@ -73,7 +73,7 @@ def main():
     client = TestClient(app)
 
     # ----- Step 2: per-dept graph 200 + size -----
-    r = client.get("/api/v1/holy/graph/sales")
+    r = client.get("/api/v1/insur/graph/sales")
     body = r.json() if r.status_code == 200 else {}
     nodes = body.get("nodes", [])
     edges = body.get("edges", [])
@@ -103,24 +103,24 @@ def main():
          f"all {len(edges)} edges resolve")
 
     # ----- Step 5: NEGATIVE — unknown dept -----
-    r = client.get("/api/v1/holy/graph/not-a-real-dept")
+    r = client.get("/api/v1/insur/graph/not-a-real-dept")
     step(5, "NEGATIVE: unknown dept → 404 (no info leak)",
          r.status_code == 404, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 6: NEGATIVE — malformed type AND unknown type -----
-    r1 = client.get("/api/v1/holy/graph/sales/nodes?type=Bogus!")
-    r2 = client.get("/api/v1/holy/graph/sales/nodes?type=unknown_type")
+    r1 = client.get("/api/v1/insur/graph/sales/nodes?type=Bogus!")
+    r2 = client.get("/api/v1/insur/graph/sales/nodes?type=unknown_type")
     step(6, "NEGATIVE: malformed type → 400 + unknown type → 404",
          r1.status_code == 400 and r2.status_code == 404,
          f"malformed={r1.status_code} unknown={r2.status_code}")
 
     # ----- Step 7: NEGATIVE — nonexistent node neighbors -----
-    r = client.get("/api/v1/holy/graph/sales/neighbors/entity:totally_bogus_xyz")
+    r = client.get("/api/v1/insur/graph/sales/neighbors/entity:totally_bogus_xyz")
     step(7, "NEGATIVE: neighbors of nonexistent node → 404",
          r.status_code == 404, f"got {r.status_code}")
 
     # ----- Step 8: /nodes?type=role → exactly 15 -----
-    r = client.get("/api/v1/holy/graph/sales/nodes?type=role")
+    r = client.get("/api/v1/insur/graph/sales/nodes?type=role")
     body = r.json() if r.status_code == 200 else {}
     role_count = len(body.get("nodes", []))
     step(8, "/nodes?type=role returns exactly 15 (per §63)",
@@ -128,7 +128,7 @@ def main():
          f"status={r.status_code} n_roles={role_count}")
 
     # ----- Step 9: role:manager 1-hop — demo + dashboard + ≥ 1 report -----
-    r = client.get("/api/v1/holy/graph/sales/neighbors/role:manager")
+    r = client.get("/api/v1/insur/graph/sales/neighbors/role:manager")
     body = r.json() if r.status_code == 200 else {}
     neighbor_types = {n["type"] for n in body.get("neighbors", [])}
     has_demo = "demo" in neighbor_types
@@ -139,7 +139,7 @@ def main():
          f"types={sorted(neighbor_types)}")
 
     # ----- Step 10: _global rollup -----
-    r = client.get("/api/v1/holy/graph/_global")
+    r = client.get("/api/v1/insur/graph/_global")
     body = r.json() if r.status_code == 200 else {}
     depts_in = set(body.get("depts", []))
     missing = EXPECTED_DEPTS - depts_in

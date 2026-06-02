@@ -116,12 +116,12 @@
     "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
   },
   {
-    "file": "backend/core/holy_audit.py",
+    "file": "backend/core/insur_audit.py",
     "layer": "trust/infra",
-    "business_logic_gist": "Shared \u00a738.3 audit-trail helper for HOLY/* routers under \u00a764.43 #7 federation.",
+    "business_logic_gist": "Shared \u00a738.3 audit-trail helper for INSUR/* routers under \u00a764.43 #7 federation.",
     "classes": [],
     "functions": [
-      "log_holy_access"
+      "log_insur_access"
     ],
     "imports_from_project_or_libs": [
       "__future__",
@@ -316,7 +316,7 @@
       "routers.downloads",
       "routers.graph",
       "routers.health",
-      "routers.holy",
+      "routers.insur",
       "routers.jobs",
       "routers.master_data",
       "routers.models",
@@ -544,7 +544,7 @@
   {
     "file": "backend/ml/reference/__init__.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference ML/RAG lifecycle implementations.",
+    "business_logic_gist": "INSUR reference ML/RAG lifecycle implementations.",
     "classes": [],
     "functions": [],
     "imports_from_project_or_libs": [],
@@ -553,7 +553,7 @@
   {
     "file": "backend/ml/reference/agent_orchestration.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: agentic orchestration patterns (\u00a764.43).",
+    "business_logic_gist": "INSUR reference: agentic orchestration patterns (\u00a764.43).",
     "classes": [
       "DagNode",
       "DagExecutionError",
@@ -594,7 +594,7 @@
   {
     "file": "backend/ml/reference/agentic_stack.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: 10-layer agentic execution stack per \u00a764.40.",
+    "business_logic_gist": "INSUR reference: 10-layer agentic execution stack per \u00a764.40.",
     "classes": [
       "Task",
       "AgenticRun",
@@ -630,7 +630,7 @@
   {
     "file": "backend/ml/reference/anomaly_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: anomaly-detection lifecycle with multi-detector comparison.",
+    "business_logic_gist": "INSUR reference: anomaly-detection lifecycle with multi-detector comparison.",
     "classes": [
       "AnomalyManifest",
       "AnomalyLifecycle"
@@ -665,7 +665,7 @@
   {
     "file": "backend/ml/reference/attack_simulators.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: attack-simulation payload generators (\u00a764.32.3 + \u00a764.42).",
+    "business_logic_gist": "INSUR reference: attack-simulation payload generators (\u00a764.32.3 + \u00a764.42).",
     "classes": [
       "AttackPayload",
       "AttackCorpus"
@@ -706,7 +706,7 @@
   {
     "file": "backend/ml/reference/cv_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: CV lifecycle with multi-model score comparison.",
+    "business_logic_gist": "INSUR reference: CV lifecycle with multi-model score comparison.",
     "classes": [
       "CvManifest",
       "SimpleCNN",
@@ -740,7 +740,7 @@
   {
     "file": "backend/ml/reference/dl_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: Deep Learning sequence-classification lifecycle (\u00a764.20).",
+    "business_logic_gist": "INSUR reference: Deep Learning sequence-classification lifecycle (\u00a764.20).",
     "classes": [
       "DlManifest",
       "LstmClassifier",
@@ -775,7 +775,7 @@
   {
     "file": "backend/ml/reference/ensemble_compare.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: ensemble model comparison (Voting + Stacking) per \u00a765.1 #5.",
+    "business_logic_gist": "INSUR reference: ensemble model comparison (Voting + Stacking) per \u00a765.1 #5.",
     "classes": [
       "EnsembleManifest"
     ],
@@ -807,7 +807,7 @@
   {
     "file": "backend/ml/reference/fraud_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: fraud-detection lifecycle (\u00a764.23 + \u00a740).",
+    "business_logic_gist": "INSUR reference: fraud-detection lifecycle (\u00a764.23 + \u00a740).",
     "classes": [
       "FraudDecision",
       "FraudManifest",
@@ -844,7 +844,7 @@
   {
     "file": "backend/ml/reference/full_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: full structured-ML lifecycle.",
+    "business_logic_gist": "INSUR reference: full structured-ML lifecycle.",
     "classes": [
       "LifecycleManifest",
       "FullLifecycle"
@@ -886,7 +886,7 @@
   {
     "file": "backend/ml/reference/nlp_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: NLP lifecycle with multiple-technique score comparison.",
+    "business_logic_gist": "INSUR reference: NLP lifecycle with multiple-technique score comparison.",
     "classes": [
       "NlpManifest",
       "NlpLifecycle"
@@ -920,7 +920,7 @@
   {
     "file": "backend/ml/reference/noise_handling.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: noise-handling utility per data type (\u00a764.19 + \u00a764.26 + \u00a765.1 #5).",
+    "business_logic_gist": "INSUR reference: noise-handling utility per data type (\u00a764.19 + \u00a764.26 + \u00a765.1 #5).",
     "classes": [
       "TabularNoiseReport",
       "ImageNoiseReport",
@@ -951,7 +951,7 @@
   {
     "file": "backend/ml/reference/rag_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: full RAG lifecycle (chunking \u2192 embed \u2192 vector DB \u2192 retrieve \u2192 rerank \u2192 LLM \u2192 cite \u2192 eval).",
+    "business_logic_gist": "INSUR reference: full RAG lifecycle (chunking \u2192 embed \u2192 vector DB \u2192 retrieve \u2192 rerank \u2192 LLM \u2192 cite \u2192 eval).",
     "classes": [
       "CircuitBreaker",
       "RagManifest",
@@ -985,7 +985,7 @@
   {
     "file": "backend/ml/reference/recommendation_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: recommendation lifecycle with content + CF + hybrid comparison.",
+    "business_logic_gist": "INSUR reference: recommendation lifecycle with content + CF + hybrid comparison.",
     "classes": [
       "RecoManifest",
       "PopularityReco",
@@ -1026,7 +1026,7 @@
   {
     "file": "backend/ml/reference/role_dashboard_catalog.py",
     "layer": "ml/model",
-    "business_logic_gist": "Shared catalog for HOLY role dashboards + reports (\u00a764.37).",
+    "business_logic_gist": "Shared catalog for INSUR role dashboards + reports (\u00a764.37).",
     "classes": [
       "Tile",
       "ChartSpec",
@@ -1052,7 +1052,7 @@
   {
     "file": "backend/ml/reference/simulation_engine.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: per-process simulation engine (manual vs automatic).",
+    "business_logic_gist": "INSUR reference: per-process simulation engine (manual vs automatic).",
     "classes": [
       "SimEvent",
       "StepDef",
@@ -1081,7 +1081,7 @@
   {
     "file": "backend/ml/reference/timeseries_lifecycle.py",
     "layer": "ml/model",
-    "business_logic_gist": "HOLY reference: time-series lifecycle with multi-technique score comparison.",
+    "business_logic_gist": "INSUR reference: time-series lifecycle with multi-technique score comparison.",
     "classes": [
       "TimeSeriesManifest",
       "TimeSeriesLifecycle"
@@ -1432,7 +1432,7 @@
   {
     "file": "backend/routers/dbviewer.py",
     "layer": "http/api",
-    "business_logic_gist": "\u00a768.1 + \u00a768.2 \u2014 HOLY DB Viewer + per-function table catalog.",
+    "business_logic_gist": "\u00a768.1 + \u00a768.2 \u2014 INSUR DB Viewer + per-function table catalog.",
     "classes": [],
     "functions": [
       "_validate_db_id",
@@ -1449,7 +1449,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "core.middleware",
       "fastapi",
       "re",
@@ -1462,7 +1462,7 @@
   {
     "file": "backend/routers/demo_stories.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY demo-stories router \u2014 per-dept \u00d7 per-role demo scripts.",
+    "business_logic_gist": "INSUR demo-stories router \u2014 per-dept \u00d7 per-role demo scripts.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -1474,7 +1474,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "re",
       "time",
@@ -1508,7 +1508,7 @@
   {
     "file": "backend/routers/downloads.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY data-downloads router \u2014 per-dept downloadable sample data.",
+    "business_logic_gist": "INSUR data-downloads router \u2014 per-dept downloadable sample data.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -1520,7 +1520,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "fastapi.responses",
       "pathlib",
@@ -1533,7 +1533,7 @@
   {
     "file": "backend/routers/graph.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY Graph AI router \u2014 per-dept relationship graph (Cytoscape-compatible).",
+    "business_logic_gist": "INSUR Graph AI router \u2014 per-dept relationship graph (Cytoscape-compatible).",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -1545,7 +1545,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "re",
       "time",
@@ -1570,9 +1570,9 @@
     "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
   },
   {
-    "file": "backend/routers/holy.py",
+    "file": "backend/routers/insur.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY endpoints \u2014 nav (live HOLY_NAV.json) + council (Redis queue/poll).",
+    "business_logic_gist": "INSUR endpoints \u2014 nav (live INSUR_NAV.json) + council (Redis queue/poll).",
     "classes": [],
     "functions": [
       "get_nav",
@@ -1664,7 +1664,7 @@
   {
     "file": "backend/routers/master_data.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY master-data router \u2014 per-dept SAP-style master + reference data.",
+    "business_logic_gist": "INSUR master-data router \u2014 per-dept SAP-style master + reference data.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -1675,7 +1675,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "time",
       "typing"
@@ -1708,7 +1708,7 @@
   {
     "file": "backend/routers/monitoring.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY monitoring AI router \u2014 per-dept job + pipeline health surface.",
+    "business_logic_gist": "INSUR monitoring AI router \u2014 per-dept job + pipeline health surface.",
     "classes": [],
     "functions": [
       "_log_monitoring_access",
@@ -1784,7 +1784,7 @@
   {
     "file": "backend/routers/pipelines.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY automated-pipelines router \u2014 5-phase per-process catalog per dept.",
+    "business_logic_gist": "INSUR automated-pipelines router \u2014 5-phase per-process catalog per dept.",
     "classes": [],
     "functions": [
       "_catalog_for",
@@ -1795,7 +1795,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "re",
       "time",
@@ -1830,7 +1830,7 @@
   {
     "file": "backend/routers/reports.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY reports-catalog router \u2014 dept-level rollup of standard reports.",
+    "business_logic_gist": "INSUR reports-catalog router \u2014 dept-level rollup of standard reports.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -1842,7 +1842,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "re",
       "time",
@@ -1917,7 +1917,7 @@
   {
     "file": "backend/routers/transactions.py",
     "layer": "http/api",
-    "business_logic_gist": "HOLY transactional history router \u2014 unified chronological audit feed per dept.",
+    "business_logic_gist": "INSUR transactional history router \u2014 unified chronological audit feed per dept.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -1933,7 +1933,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "json",
       "logging",
@@ -2352,7 +2352,7 @@
   {
     "file": "backend/services/dbviewer_service.py",
     "layer": "service/business",
-    "business_logic_gist": "\u00a768 HOLY Observability + Data Hub \u2014 DB Viewer service.",
+    "business_logic_gist": "\u00a768 INSUR Observability + Data Hub \u2014 DB Viewer service.",
     "classes": [],
     "functions": [
       "_process_tables_path",
@@ -3359,7 +3359,7 @@
   {
     "file": "backend/services/pii_inventory_service.py",
     "layer": "service",
-    "business_logic_gist": "\u00a768.6 PII inventory \u2014 aggregates PII column annotations from per_process_tables + master_data ENTITY_CATALOG into cross-dept + per-dept views. scan_leaks heuristic over federated holy_reads audit log returns redacted match metadata (never raw PII). Honors HOLY_AUDIT_PATH env.",
+    "business_logic_gist": "\u00a768.6 PII inventory \u2014 aggregates PII column annotations from per_process_tables + master_data ENTITY_CATALOG into cross-dept + per-dept views. scan_leaks heuristic over federated insur_reads audit log returns redacted match metadata (never raw PII). Honors INSUR_AUDIT_PATH env.",
     "classes": [],
     "functions": [
       "_audit_log_path",
@@ -3384,7 +3384,7 @@
   {
     "file": "backend/routers/pii.py",
     "layer": "router",
-    "business_logic_gist": "\u00a768.6 PII inventory router \u2014 3 endpoints federated via core.holy_audit (surface=pii). Validators 404 BEFORE audit per \u00a747.6.",
+    "business_logic_gist": "\u00a768.6 PII inventory router \u2014 3 endpoints federated via core.insur_audit (surface=pii). Validators 404 BEFORE audit per \u00a747.6.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -3394,18 +3394,18 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "services",
       "time",
       "typing"
     ],
-    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response with \u00a738.3 audit row."
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_insur_access -> service call -> response with \u00a738.3 audit row."
   },
   {
     "file": "backend/services/guardrails_service.py",
     "layer": "service",
-    "business_logic_gist": "\u00a768.5 Guardrails \u2014 read-only aggregation over data/agent-supervisor/guardrail_decisions.jsonl (HOLY_GUARDRAIL_LOG env). Returns cross-dept rollup, per-dept decisions with filters, single-decision lookup. PII never in row, only input_hash.",
+    "business_logic_gist": "\u00a768.5 Guardrails \u2014 read-only aggregation over data/agent-supervisor/guardrail_decisions.jsonl (INSUR_GUARDRAIL_LOG env). Returns cross-dept rollup, per-dept decisions with filters, single-decision lookup. PII never in row, only input_hash.",
     "classes": [],
     "functions": [
       "_log_path",
@@ -3430,7 +3430,7 @@
   {
     "file": "backend/routers/guardrails.py",
     "layer": "router",
-    "business_logic_gist": "\u00a768.5 Guardrails router \u2014 3 endpoints federated via core.holy_audit (surface=guardrails). Validators 404/400 BEFORE audit per \u00a747.6.",
+    "business_logic_gist": "\u00a768.5 Guardrails router \u2014 3 endpoints federated via core.insur_audit (surface=guardrails). Validators 404/400 BEFORE audit per \u00a747.6.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -3440,18 +3440,18 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "re",
       "services",
       "typing"
     ],
-    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response with \u00a738.3 audit row."
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_insur_access -> service call -> response with \u00a738.3 audit row."
   },
   {
     "file": "backend/services/security_posture_service.py",
     "layer": "service",
-    "business_logic_gist": "\u00a768.7 Security posture \u2014 aggregates compliance gates (live probe) + CVE snapshot (HOLY_SECURITY_POSTURE_PATH env) + attack-attempt scan (rbac_denial / scope_denial / malformed_path patterns over holy_reads audit log). Graceful when snapshot missing per \u00a757.7.",
+    "business_logic_gist": "\u00a768.7 Security posture \u2014 aggregates compliance gates (live probe) + CVE snapshot (INSUR_SECURITY_POSTURE_PATH env) + attack-attempt scan (rbac_denial / scope_denial / malformed_path patterns over insur_reads audit log). Graceful when snapshot missing per \u00a757.7.",
     "classes": [],
     "functions": [
       "_posture_path",
@@ -3479,7 +3479,7 @@
   {
     "file": "backend/routers/security.py",
     "layer": "router",
-    "business_logic_gist": "\u00a768.7 Security posture router \u2014 3 endpoints federated via core.holy_audit (surface=security). Validators 404 BEFORE audit per \u00a747.6.",
+    "business_logic_gist": "\u00a768.7 Security posture router \u2014 3 endpoints federated via core.insur_audit (surface=security). Validators 404 BEFORE audit per \u00a747.6.",
     "classes": [],
     "functions": [
       "_validate_dept",
@@ -3489,17 +3489,17 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "services",
       "typing"
     ],
-    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response."
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_insur_access -> service call -> response."
   },
   {
     "file": "backend/services/functional_eval_service.py",
     "layer": "service",
-    "business_logic_gist": "\u00a768.8 Functional eval \u2014 leaderboard + per-model history with drift_summary + single-run detail over HOLY_EVAL_FUNCTIONAL_LOG JSONL. Best-effort missing/corrupt.",
+    "business_logic_gist": "\u00a768.8 Functional eval \u2014 leaderboard + per-model history with drift_summary + single-run detail over INSUR_EVAL_FUNCTIONAL_LOG JSONL. Best-effort missing/corrupt.",
     "classes": [],
     "functions": [
       "_log_path",
@@ -3525,7 +3525,7 @@
   {
     "file": "backend/routers/evals_functional.py",
     "layer": "router",
-    "business_logic_gist": "\u00a768.8 Functional eval router \u2014 3 endpoints federated via core.holy_audit (surface=evals_functional). Validators 400/404 BEFORE audit per \u00a747.6.",
+    "business_logic_gist": "\u00a768.8 Functional eval router \u2014 3 endpoints federated via core.insur_audit (surface=evals_functional). Validators 400/404 BEFORE audit per \u00a747.6.",
     "classes": [],
     "functions": [
       "functional_global",
@@ -3534,17 +3534,17 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "services",
       "typing"
     ],
-    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_holy_access -> service call -> response."
+    "flow_note": "request -> RBAC -> TenantId -> CorrelationId -> validator -> log_insur_access -> service call -> response."
   },
   {
     "file": "backend/services/cost_eval_service.py",
     "layer": "service",
-    "business_logic_gist": "\u00a768.9 Cost eval \u2014 24h/7d/30d windows + all-time + per-tenant + per-model ranking + per-request lookup over HOLY_EVAL_COST_LOG JSONL.",
+    "business_logic_gist": "\u00a768.9 Cost eval \u2014 24h/7d/30d windows + all-time + per-tenant + per-model ranking + per-request lookup over INSUR_EVAL_COST_LOG JSONL.",
     "classes": [],
     "functions": [
       "_log_path",
@@ -3571,7 +3571,7 @@
   {
     "file": "backend/routers/evals_cost.py",
     "layer": "router",
-    "business_logic_gist": "\u00a768.9 Cost eval router \u2014 4 endpoints federated via core.holy_audit (surface=evals_cost). Validators 400/404 BEFORE audit per \u00a747.6.",
+    "business_logic_gist": "\u00a768.9 Cost eval router \u2014 4 endpoints federated via core.insur_audit (surface=evals_cost). Validators 400/404 BEFORE audit per \u00a747.6.",
     "classes": [],
     "functions": [
       "cost_global",
@@ -3581,7 +3581,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "services",
       "typing"
@@ -3617,7 +3617,7 @@
   {
     "file": "backend/routers/evals_safety.py",
     "layer": "router",
-    "business_logic_gist": "\u00a768.10 Safety eval router \u2014 3 endpoints federated via core.holy_audit (surface=evals_safety). RBAC catch-all /evals/* gates this.",
+    "business_logic_gist": "\u00a768.10 Safety eval router \u2014 3 endpoints federated via core.insur_audit (surface=evals_safety). RBAC catch-all /evals/* gates this.",
     "classes": [],
     "functions": [
       "safety_global",
@@ -3626,7 +3626,7 @@
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "services",
       "typing"
@@ -3659,18 +3659,18 @@
   {
     "file": "backend/routers/observability_hub.py",
     "layer": "router",
-    "business_logic_gist": "\u00a768 aggregator router \u2014 single endpoint /_overview federated via core.holy_audit (surface=observability_hub).",
+    "business_logic_gist": "\u00a768 aggregator router \u2014 single endpoint /_overview federated via core.insur_audit (surface=observability_hub).",
     "classes": [],
     "functions": [
       "hub_overview"
     ],
     "imports_from_project_or_libs": [
       "__future__",
-      "core.holy_audit",
+      "core.insur_audit",
       "fastapi",
       "services",
       "typing"
     ],
-    "flow_note": "GET /_overview \u2192 log_holy_access \u2192 ohub.overview() \u2192 aggregated snapshot."
+    "flow_note": "GET /_overview \u2192 log_insur_access \u2192 ohub.overview() \u2192 aggregated snapshot."
   }
 ]

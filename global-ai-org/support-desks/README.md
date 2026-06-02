@@ -1,6 +1,6 @@
 # Support Desks
 
-**Local scope:** 15 enterprise support desks per HOLY brief — each with L0-L4 tiers.
+**Local scope:** 15 enterprise support desks per INSUR brief — each with L0-L4 tiers.
 
 > Path: `support-desks`
 > See `GLOBAL_README.md` in this folder for how it fits into the global org structure.

@@ -1,4 +1,4 @@
-"""HOLY reference: CV lifecycle with multi-model score comparison.
+"""INSUR reference: CV lifecycle with multi-model score comparison.
 
 Per operator 2026-05-22: "CV: image classification + segmentation + detection
 for image data ...compare each model with hyperparam + loss + batch + score"

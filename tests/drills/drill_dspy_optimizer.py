@@ -13,7 +13,7 @@ This drill locks the same invariants for DSPy. Offline-friendly via
 dspy.utils.dummies.DummyLM — no Ollama / OpenAI / Anthropic needed.
 
 Steps (10 total; 4 negative + a schema invariant):
-  1. (+) Disabled fallback when HOLY_DSPY_OPTIMIZER_ENABLED unset →
+  1. (+) Disabled fallback when INSUR_DSPY_OPTIMIZER_ENABLED unset →
         outcome='disabled'; audit row written
   2. (+) Unavailable fallback when dspy import probe says no →
         outcome='unavailable'; audit row written
@@ -96,16 +96,16 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory() as tmp:
         audit_path = Path(tmp) / "dspy_optimizer_runs.jsonl"
-        os.environ["HOLY_DSPY_AUDIT_PATH"] = str(audit_path)
+        os.environ["INSUR_DSPY_AUDIT_PATH"] = str(audit_path)
         # Start in disabled-state for step 1
-        os.environ.pop("HOLY_DSPY_OPTIMIZER_ENABLED", None)
+        os.environ.pop("INSUR_DSPY_OPTIMIZER_ENABLED", None)
         _reset_modules()
         import services.dspy_optimizer as dopt
 
         # ---- Step 1: disabled fallback ----
         res = dopt.run_optimization(SAMPLE_EXAMPLES, tenant_id="tenant-a", request_id="req-1")
         rows = _audit_rows(audit_path)
-        step(1, "HOLY_DSPY_OPTIMIZER_ENABLED unset → outcome='disabled' + audit row",
+        step(1, "INSUR_DSPY_OPTIMIZER_ENABLED unset → outcome='disabled' + audit row",
              res.outcome == "disabled"
              and len(rows) == 1
              and rows[0]["outcome"] == "disabled"
@@ -114,7 +114,7 @@ def main() -> int:
              f"outcome={res.outcome!r} rows={len(rows)}")
 
         # ---- Step 2: unavailable fallback (monkeypatch import probe) ----
-        os.environ["HOLY_DSPY_OPTIMIZER_ENABLED"] = "true"
+        os.environ["INSUR_DSPY_OPTIMIZER_ENABLED"] = "true"
         orig_importable = dopt.is_importable
         dopt.is_importable = lambda: False
         try:
@@ -234,7 +234,7 @@ def main() -> int:
         blocker = Path(tmp) / "blocker.file"
         blocker.write_text("")
         bad_audit = blocker / "dspy.jsonl"
-        os.environ["HOLY_DSPY_AUDIT_PATH"] = str(bad_audit)
+        os.environ["INSUR_DSPY_AUDIT_PATH"] = str(bad_audit)
         _reset_modules()
         import services.dspy_optimizer as dopt2
 

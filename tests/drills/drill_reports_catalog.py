@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drill: HOLY reports-catalog router (§38 + §47.6 + §57.6 + §64.37 + §66).
+"""Drill: INSUR reports-catalog router (§38 + §47.6 + §57.6 + §64.37 + §66).
 
 Steps (10 total; 3 negative):
     1. (+) reports router imports + STANDARD_REPORTS has exactly 15 rows
@@ -11,7 +11,7 @@ Steps (10 total; 3 negative):
     7. (-) NEGATIVE — malformed report_id (caps/special) → 400
     8. (+) report_id values unique within STANDARD_REPORTS (no dup keys)
     9. (+) every owner_role is one of the 15 known §63 role archetypes
-   10. (+) HOLY_REPORTS_CATALOG.md exists per dept + _global rollup
+   10. (+) INSUR_REPORTS_CATALOG.md exists per dept + _global rollup
            returns all 19 depts with n_reports_total = 285 (15 × 19)
 
 # RESOURCES: reports_router disk_io
@@ -52,7 +52,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY reports-catalog per dept (§38 + §47.6 + §57.6 + §64.37 + §66)\n")
+    print("\nDRILL: INSUR reports-catalog per dept (§38 + §47.6 + §57.6 + §64.37 + §66)\n")
     t0 = time.time()
 
     # ----- Step 1: router imports + 15 standard reports -----
@@ -82,7 +82,7 @@ def main():
     client = TestClient(app)
 
     # ----- Step 3: per-dept GET 200 + 15 reports + dept-specific titles -----
-    r = client.get("/api/v1/holy/reports/sales")
+    r = client.get("/api/v1/insur/reports/sales")
     body = r.json() if r.status_code == 200 else {}
     reports = body.get("reports", [])
     has_dept_title = (
@@ -94,7 +94,7 @@ def main():
          f"status={r.status_code} n={len(reports)} sample_title={reports[0].get('title') if reports else None}")
 
     # ----- Step 4: per-report detail + audit_summary -----
-    r = client.get("/api/v1/holy/reports/sales/daily_ops_digest")
+    r = client.get("/api/v1/insur/reports/sales/daily_ops_digest")
     body = r.json() if r.status_code == 200 else {}
     has_audit = (
         "audit_summary" in body
@@ -106,18 +106,18 @@ def main():
          f"status={r.status_code} audit_keys={list(body.get('audit_summary', {}).keys())}")
 
     # ----- Step 5: NEGATIVE — unknown dept -----
-    r = client.get("/api/v1/holy/reports/not-a-real-dept")
+    r = client.get("/api/v1/insur/reports/not-a-real-dept")
     step(5, "NEGATIVE: unknown dept → 404 (no info leak)",
          r.status_code == 404, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 6: NEGATIVE — unknown report_id -----
-    r = client.get("/api/v1/holy/reports/sales/totally_bogus_report_xyz")
+    r = client.get("/api/v1/insur/reports/sales/totally_bogus_report_xyz")
     step(6, "NEGATIVE: unknown report_id → 404 + lists available",
          r.status_code == 404 and "daily_ops_digest" in r.text,
          f"got {r.status_code}: {r.text[:120]}")
 
     # ----- Step 7: NEGATIVE — malformed report_id -----
-    r = client.get("/api/v1/holy/reports/sales/Bogus-CapitalLetters!")
+    r = client.get("/api/v1/insur/reports/sales/Bogus-CapitalLetters!")
     step(7, "NEGATIVE: malformed report_id (caps/special) → 400",
          r.status_code == 400, f"got {r.status_code}: {r.text[:80]}")
 
@@ -143,9 +143,9 @@ def main():
         return
     missing_md = [
         dept for dept in EXPECTED_DEPTS
-        if not (gao / "departments" / dept / "business-layer" / "HOLY_REPORTS_CATALOG.md").exists()
+        if not (gao / "departments" / dept / "business-layer" / "INSUR_REPORTS_CATALOG.md").exists()
     ]
-    r = client.get("/api/v1/holy/reports/_global")
+    r = client.get("/api/v1/insur/reports/_global")
     rollup = r.json() if r.status_code == 200 else {}
     expected_total = len(EXPECTED_DEPTS) * 15
     ok = (
@@ -155,7 +155,7 @@ def main():
         and set(rollup.get("depts", [])) == EXPECTED_DEPTS
     )
     step(10,
-         f"HOLY_REPORTS_CATALOG.md present + _global rollup ({len(EXPECTED_DEPTS)} depts × 15 = {expected_total} reports)",
+         f"INSUR_REPORTS_CATALOG.md present + _global rollup ({len(EXPECTED_DEPTS)} depts × 15 = {expected_total} reports)",
          ok,
          f"missing_md={missing_md[:2]} n_total={rollup.get('n_reports_total')} depts={len(rollup.get('depts', []))}")
 

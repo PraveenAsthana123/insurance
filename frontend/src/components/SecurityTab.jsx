@@ -5,15 +5,15 @@
  * generation (generator-only — executor is §42 gated), browse + drill
  * into past corpora with audit info.
  *
- * Endpoints (per backend/routers/holy.py):
- *   GET  /api/v1/holy/security/attack-classes
- *   POST /api/v1/holy/security/{dept}/generate-corpus  {attack_class, n?, seed?}
- *   GET  /api/v1/holy/security/{dept}/corpora?attack_class=
- *   GET  /api/v1/holy/security/{dept}/corpora/{class}/{corpus_id}
+ * Endpoints (per backend/routers/insur.py):
+ *   GET  /api/v1/insur/security/attack-classes
+ *   POST /api/v1/insur/security/{dept}/generate-corpus  {attack_class, n?, seed?}
+ *   GET  /api/v1/insur/security/{dept}/corpora?attack_class=
+ *   GET  /api/v1/insur/security/{dept}/corpora/{class}/{corpus_id}
  */
 import { useEffect, useState } from 'react';
 
-const API = '/api/v1/holy/security';
+const API = '/api/v1/insur/security';
 
 const SEVERITY_COLOR = {
   low: '#10b981',

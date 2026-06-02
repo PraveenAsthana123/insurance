@@ -1,5 +1,5 @@
 """
-HOLY Beverage — council task seeder.
+INSUR Beverage — council task seeder.
 
 Pushes N tasks into Redis 'council_tasks' queue. Tasks are harder than
 the simple seeder — they require the 3-stage council to actually add

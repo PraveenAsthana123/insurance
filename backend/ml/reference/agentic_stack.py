@@ -1,4 +1,4 @@
-"""HOLY reference: 10-layer agentic execution stack per §64.40.
+"""INSUR reference: 10-layer agentic execution stack per §64.40.
 
 Operator architecture brief 2026-05-22:
 
@@ -125,7 +125,7 @@ class PlannerAgent:
         try:
             import httpx
             prompt = (
-                f"You are a planner agent for the {dept} dept of HOLY Beverage.\n"
+                f"You are a planner agent for the {dept} dept of INSUR Beverage.\n"
                 f"User goal: {goal}\n\n"
                 "Break this into 3-6 atomic tasks. Output ONLY a JSON array of objects with keys:\n"
                 "  action (one of: navigate, fill_form, click, api_call, extract)\n"
@@ -176,7 +176,7 @@ class PlannerAgent:
         if any(v in clean for v in ("list", "show", "find", "get", "what", "how many")):
             tasks.append(Task(
                 task_id="task-01", action="api_call",
-                description=f"Query {dept} read endpoint", target=f"/api/v1/holy/{dept}/list",
+                description=f"Query {dept} read endpoint", target=f"/api/v1/insur/{dept}/list",
                 scope_required=f"read:{dept}", est_cost_usd=0.0001,
             ))
             tasks.append(Task(
@@ -187,7 +187,7 @@ class PlannerAgent:
         elif any(v in clean for v in ("create", "add", "new", "send", "submit")):
             tasks.append(Task(
                 task_id="task-01", action="fill_form",
-                description=f"Fill {dept} create form", target=f"/holy/{dept}/new",
+                description=f"Fill {dept} create form", target=f"/insur/{dept}/new",
                 scope_required=f"write:{dept}", est_cost_usd=0.001,
                 reversible=True, rollback_action="delete created entity",
             ))
@@ -205,7 +205,7 @@ class PlannerAgent:
             tasks.append(Task(
                 task_id="task-01", action="api_call",
                 description=f"Delete {dept} resource (REVERSIBLE only if soft-delete supported)",
-                target=f"/api/v1/holy/{dept}/delete",
+                target=f"/api/v1/insur/{dept}/delete",
                 scope_required=f"admin:delete:{dept}",  # high-risk scope
                 est_cost_usd=0.001, reversible=False,
             ))
@@ -213,7 +213,7 @@ class PlannerAgent:
             tasks.append(Task(
                 task_id="task-01", action="extract",
                 description=f"Interpret goal: {goal[:80]}",
-                target=f"/holy/{dept}", scope_required=f"read:{dept}",
+                target=f"/insur/{dept}", scope_required=f"read:{dept}",
                 est_cost_usd=0.0,
             ))
         return tasks

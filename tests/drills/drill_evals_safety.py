@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Drill: §68.10 Safety eval surface — iteration 6 of HOLY Observability Hub,
+Drill: §68.10 Safety eval surface — iteration 6 of INSUR Observability Hub,
 completes the §68.8/9/10 eval triplet.
 
 Read-only aggregation over data/agent-supervisor/safety_eval_runs.jsonl
-(env-overridable via HOLY_EVAL_SAFETY_LOG). RBAC catch-all /evals/*
+(env-overridable via INSUR_EVAL_SAFETY_LOG). RBAC catch-all /evals/*
 gates this surface from iter 4.
 
 Steps (12 total; 5 negative):
@@ -53,13 +53,13 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path, safety_log: Path):
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
-    os.environ["HOLY_EVAL_SAFETY_LOG"] = str(safety_log)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_EVAL_SAFETY_LOG"] = str(safety_log)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit",
+                            "core.insur_audit",
                             "routers.evals_safety", "services.safety_eval_service")):
             del sys.modules[mod]
 
@@ -153,13 +153,13 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         safety_log = Path(tmp) / "safety_eval_runs.jsonl"
         client = TestClient(_build_app(audit_path, safety_log))
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: empty log ----
-        r = client.get("/api/v1/holy/evals/safety/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/safety/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(1, "empty log → /_global: policy + thresholds + zero counts",
              r.status_code == 200
@@ -173,7 +173,7 @@ def main() -> int:
         with safety_log.open("w") as fh:
             for row in _seed_runs():
                 fh.write(json.dumps(row) + "\n")
-        r = client.get("/api/v1/holy/evals/safety/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/safety/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         vc = body.get("verdict_counts", {})
         step(2, "scorecard: 4 models, verdicts 1 safe + 1 review + 2 unsafe",
@@ -201,7 +201,7 @@ def main() -> int:
              f"gemma_fairness={gemma_row.get('fairness_gate') if gemma_row else 'none'}")
 
         # ---- Step 5: /{model_id} per-row verdict_summary ----
-        r = client.get("/api/v1/holy/evals/safety/kivi:local", headers=headers)
+        r = client.get("/api/v1/insur/evals/safety/kivi:local", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         runs = body.get("runs", [])
         step(5, "/kivi:local: 1 run with verdict_summary carrying 5 flag booleans",
@@ -214,7 +214,7 @@ def main() -> int:
              f"verdict={runs[0]['verdict_summary']['verdict'] if runs else 'none'}")
 
         # ---- Step 6: /incidents ----
-        r = client.get("/api/v1/holy/evals/safety/incidents", headers=headers)
+        r = client.get("/api/v1/insur/evals/safety/incidents", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         incs = body.get("incidents", [])
         # mistral (unsafe + 3 incidents) AND gemma (unsafe + 1 incident) both qualify
@@ -227,7 +227,7 @@ def main() -> int:
              f"n_incidents={body.get('n_incidents')} models={sorted(unsafe_or_inc)}")
 
         # ---- Step 7: NEG unknown model → 404 ----
-        r = client.get("/api/v1/holy/evals/safety/nonexistent-model",
+        r = client.get("/api/v1/insur/evals/safety/nonexistent-model",
                        headers=headers)
         step(7, "NEG: unknown model_id → 404",
              r.status_code == 404,
@@ -235,7 +235,7 @@ def main() -> int:
 
         # ---- Step 8: NEG malformed model_id → 400 ----
         r = client.get(
-            "/api/v1/holy/evals/safety/bad model name",
+            "/api/v1/insur/evals/safety/bad model name",
             headers=headers,
         )
         step(8, "NEG: model_id with spaces → 400 (regex reject)",
@@ -244,7 +244,7 @@ def main() -> int:
 
         # ---- Step 9: NEG bad role → 400 ----
         r = client.get(
-            "/api/v1/holy/evals/safety/_global",
+            "/api/v1/insur/evals/safety/_global",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "intruder"},
         )
         step(9, "NEG: unknown role → 400 from RBAC catch-all /evals/*",
@@ -253,7 +253,7 @@ def main() -> int:
 
         # ---- Step 10: NEG negative since → 422 ----
         r = client.get(
-            "/api/v1/holy/evals/safety/incidents?since=-1",
+            "/api/v1/insur/evals/safety/incidents?since=-1",
             headers=headers,
         )
         step(10, "NEG: ?since=-1 → 422 from FastAPI Query ge=0 validator",
@@ -263,18 +263,18 @@ def main() -> int:
         # ---- Step 11: corrupt JSONL line skipped ----
         with safety_log.open("a") as fh:
             fh.write("{not valid json\n")
-        r = client.get("/api/v1/holy/evals/safety/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/safety/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(11, "corrupt JSONL line skipped, other rows still surface (n_models=4)",
              r.status_code == 200 and body.get("n_models") == 4,
              f"n_models={body.get('n_models')}")
 
         # ---- Step 12: tenant echo + §38.3 invariant ----
-        r = client.get("/api/v1/holy/evals/safety/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/safety/_global", headers=headers)
         required = {"ts", "tenant_id", "actor", "tool", "request_id",
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
-        router_rows = [r for r in rows if r.get("tool", "").startswith("holy.evals_safety")]
+        router_rows = [r for r in rows if r.get("tool", "").startswith("insur.evals_safety")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         step(12, "tenant echo + §38.3 schema invariant on all router rows",
              r.status_code == 200

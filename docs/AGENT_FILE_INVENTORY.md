@@ -18,8 +18,8 @@
 - input: Redis `council_tasks` list with department and prompt.
 - process: `run_council()` calls author model, reviewer model, then chair model; each stage uses `call_ollama()`.
 - output: Redis `council_done` list with full audit trail.
-- upstream: `backend/routers/holy.py` council ask endpoint or `agents/council_seeder.py`.
-- downstream: Ollama, Redis `council_done`, `GET /api/v1/holy/council/result/{task_id}`.
+- upstream: `backend/routers/insur.py` council ask endpoint or `agents/council_seeder.py`.
+- downstream: Ollama, Redis `council_done`, `GET /api/v1/insur/council/result/{task_id}`.
 - production gap: policy and adapters are in one file; should split into domain policy, model adapter, queue adapter, audit adapter.
 
 ## `agents/seeder.py`

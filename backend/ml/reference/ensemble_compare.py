@@ -1,4 +1,4 @@
-"""HOLY reference: ensemble model comparison (Voting + Stacking) per §65.1 #5.
+"""INSUR reference: ensemble model comparison (Voting + Stacking) per §65.1 #5.
 
 Generic wrapper that takes a list of base sklearn-compatible classifiers (or
 regressors) and produces a side-by-side comparison of:

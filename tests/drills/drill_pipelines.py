@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drill: HOLY automated-pipelines router (§38 + §40 + §47 + §57.5 + §57.6 + §66).
+"""Drill: INSUR automated-pipelines router (§38 + §40 + §47 + §57.5 + §57.6 + §66).
 
 Steps (10 total; 3 negative):
     1. (+) pipelines router imports + PHASES canonical 5-tuple intact
@@ -11,7 +11,7 @@ Steps (10 total; 3 negative):
     6. (-) NEGATIVE — unknown process_id → 404 + lists available process_ids
     7. (-) NEGATIVE — malformed process_id (uppercase / special chars) → 400
     8. (+) _global inventory returns all 19 depts + n_processes_total > 19
-    9. (+) HOLY_PIPELINES.md exists per dept (under business-layer/)
+    9. (+) INSUR_PIPELINES.md exists per dept (under business-layer/)
    10. (+) phase ordering deterministic across all pipelines (Input → Report)
 
 # RESOURCES: pipelines_router disk_io
@@ -50,7 +50,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY automated-pipelines per dept (§38 + §40 + §57.6 + §66)\n")
+    print("\nDRILL: INSUR automated-pipelines per dept (§38 + §40 + §57.6 + §66)\n")
     t0 = time.time()
 
     # ----- Step 1: router imports + PHASES intact -----
@@ -61,7 +61,7 @@ def main():
         return
     phases_ok = (
         hasattr(pl, "PHASES") and tuple(pl.PHASES) == EXPECTED_PHASES
-        and hasattr(pl, "PIPELINE_CATALOG") and hasattr(pl, "HOLY_DEPTS")
+        and hasattr(pl, "PIPELINE_CATALOG") and hasattr(pl, "INSUR_DEPTS")
     )
     step(1, "router imports + PHASES == (input/data_process/model/output/report)",
          phases_ok, f"phases={pl.PHASES}")
@@ -74,7 +74,7 @@ def main():
     client = TestClient(app)
 
     # ----- Step 2: per-dept GET 200 + catalog + phase_sequence -----
-    r = client.get("/api/v1/holy/pipelines/sales")
+    r = client.get("/api/v1/insur/pipelines/sales")
     body = r.json() if r.status_code == 200 else {}
     ok = (
         r.status_code == 200
@@ -94,7 +94,7 @@ def main():
          not bad_phases, "; ".join(bad_phases[:3]) if bad_phases else "")
 
     # ----- Step 4: per-process detail + audit envelope -----
-    r = client.get("/api/v1/holy/pipelines/sales/lead_scoring")
+    r = client.get("/api/v1/insur/pipelines/sales/lead_scoring")
     body = r.json() if r.status_code == 200 else {}
     envelope_keys = set(body.get("audit_row_template", {}).keys())
     has_envelope = CANONICAL_AUDIT_ENVELOPE.issubset(envelope_keys)
@@ -103,23 +103,23 @@ def main():
          f"status={r.status_code} envelope_present={has_envelope}")
 
     # ----- Step 5: NEGATIVE — unknown dept -----
-    r = client.get("/api/v1/holy/pipelines/not-a-real-dept")
+    r = client.get("/api/v1/insur/pipelines/not-a-real-dept")
     step(5, "NEGATIVE: unknown dept → 404 (no info leak)",
          r.status_code == 404, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 6: NEGATIVE — unknown process_id -----
-    r = client.get("/api/v1/holy/pipelines/sales/totally_bogus_process_xyz")
+    r = client.get("/api/v1/insur/pipelines/sales/totally_bogus_process_xyz")
     step(6, "NEGATIVE: unknown process_id → 404 + lists available",
          r.status_code == 404 and "lead_scoring" in r.text,
          f"got {r.status_code}: {r.text[:100]}")
 
     # ----- Step 7: NEGATIVE — malformed process_id -----
-    r = client.get("/api/v1/holy/pipelines/sales/Bogus-CapitalLetters!")
+    r = client.get("/api/v1/insur/pipelines/sales/Bogus-CapitalLetters!")
     step(7, "NEGATIVE: malformed process_id (caps/special) → 400",
          r.status_code == 400, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 8: _global rollup -----
-    r = client.get("/api/v1/holy/pipelines/_global")
+    r = client.get("/api/v1/insur/pipelines/_global")
     body = r.json() if r.status_code == 200 else {}
     depts_returned = set(body.get("per_dept_processes", {}).keys())
     missing = EXPECTED_DEPTS - depts_returned
@@ -132,7 +132,7 @@ def main():
          ok,
          f"depts={len(depts_returned)} total_processes={body.get('n_processes_total')} missing={sorted(missing)[:3]}")
 
-    # ----- Step 9: HOLY_PIPELINES.md per dept -----
+    # ----- Step 9: INSUR_PIPELINES.md per dept -----
     candidates = [Path("/global-ai-org"), REPO_ROOT / "global-ai-org"]
     gao = next((p for p in candidates if p.exists()), None)
     if gao is None:
@@ -140,9 +140,9 @@ def main():
         return
     missing_md = [
         dept for dept in EXPECTED_DEPTS
-        if not (gao / "departments" / dept / "business-layer" / "HOLY_PIPELINES.md").exists()
+        if not (gao / "departments" / dept / "business-layer" / "INSUR_PIPELINES.md").exists()
     ]
-    step(9, f"HOLY_PIPELINES.md exists for all {len(EXPECTED_DEPTS)} depts",
+    step(9, f"INSUR_PIPELINES.md exists for all {len(EXPECTED_DEPTS)} depts",
          not missing_md, f"missing: {sorted(missing_md)[:3]}" if missing_md else "")
 
     # ----- Step 10: phase ordering deterministic -----
@@ -151,7 +151,7 @@ def main():
     # dicts preserve insertion order; we assert phase[0] is "input" and
     # phase[4] is "report" in every pipeline definition.
     bad_order = []
-    for dept in pl.HOLY_DEPTS:
+    for dept in pl.INSUR_DEPTS:
         catalog = pl._catalog_for(dept)
         for pipeline in catalog:
             phase_keys = list(pipeline["phases"].keys())

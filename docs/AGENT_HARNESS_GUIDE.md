@@ -43,7 +43,7 @@ docker compose exec redis redis-cli LRANGE council_done 0 1
 ## Run Through API
 
 ```bash
-curl -X POST http://localhost:8000/api/v1/holy/council/ask \
+curl -X POST http://localhost:8000/api/v1/insur/council/ask \
   -H 'Content-Type: application/json' \
   -d '{"department":"sales","prompt":"Design a distributor pricing framework"}'
 ```
@@ -51,7 +51,7 @@ curl -X POST http://localhost:8000/api/v1/holy/council/ask \
 Then poll:
 
 ```bash
-curl http://localhost:8000/api/v1/holy/council/result/<task_id>
+curl http://localhost:8000/api/v1/insur/council/result/<task_id>
 ```
 
 
@@ -299,9 +299,9 @@ complementary to the async OpenClaw → Redis → worker path. Feature-flag
 opt-in:
 
 ```bash
-export HOLY_LLM_GATEWAY_ENABLED=true
-export HOLY_LLM_MODEL=ollama/kivi:local        # default; targets local Ollama
-export HOLY_LLM_TIMEOUT_SECONDS=30
+export INSUR_LLM_GATEWAY_ENABLED=true
+export INSUR_LLM_MODEL=ollama/kivi:local        # default; targets local Ollama
+export INSUR_LLM_TIMEOUT_SECONDS=30
 ```
 
 Then call from any service:
@@ -331,9 +331,9 @@ Drill: `tests/drills/drill_litellm_gateway.py` (11 steps, 5 negative)
 locks: default off + opt-in env required, lazy import, broken SDK
 swallowed, timeout wrapped, API key never leaks, audit row per call.
 
-## HOLY/monitoring Federation (§64.43 #7 — first of 9 holy routers)
+## INSUR/monitoring Federation (§64.43 #7 — first of 9 insur routers)
 
-`backend/routers/monitoring.py` is the first `/api/v1/holy/*` router
+`backend/routers/monitoring.py` is the first `/api/v1/insur/*` router
 federated under §64.43 #7. Monitoring data is fleet-wide infrastructure
 telemetry (NOT tenant-scoped data) — so federation here means:
 
@@ -351,23 +351,23 @@ stays fleet-wide, access is tenant-attributed. Operator can answer
 "which tenant looked at the pricing model accuracy curve last week?"
 without artificially partitioning per tenant.
 
-Drill: `tests/drills/drill_holy_monitoring_federation.py` (10 steps,
+Drill: `tests/drills/drill_insur_monitoring_federation.py` (10 steps,
 4 negative) locks: tenant echo, audit row per endpoint, validator-
 before-audit ordering, cross-tenant payload equality, disk-write
 failure tolerated.
 
-## HOLY/* Shared Audit Helper — 7 remaining routers federated
+## INSUR/* Shared Audit Helper — 7 remaining routers federated
 
-`backend/core/holy_audit.py` is the factored §38.3 audit-trail helper
-that lets every remaining `holy/*` router federate with three lines:
+`backend/core/insur_audit.py` is the factored §38.3 audit-trail helper
+that lets every remaining `insur/*` router federate with three lines:
 
 ```python
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 
 @router.get("/{dept}")
 def dept_X(http_request: Request, dept: str):
     _validate_dept(dept)                      # ALWAYS first (§47.6 anti-info-leak)
-    log_holy_access(http_request, "<surface>", "dept_X", dept=dept)
+    log_insur_access(http_request, "<surface>", "dept_X", dept=dept)
     # ... existing body unchanged ...
 ```
 
@@ -382,8 +382,8 @@ Federated this iteration:
   - `routers/downloads.py`    (surface=`downloads`,    3 endpoints)
 
 Total: 22 endpoints now writing tenant-attributed §38.3 rows to the
-unified holy-fleet audit trail at `data/agent-supervisor/holy_reads.jsonl`
-(env-overridable via `HOLY_AUDIT_PATH`).
+unified insur-fleet audit trail at `data/agent-supervisor/insur_reads.jsonl`
+(env-overridable via `INSUR_AUDIT_PATH`).
 
 Monitoring keeps its own helper writing to `monitoring_reads.jsonl` —
 intentional split so the high-volume infrastructure telemetry surface
@@ -394,7 +394,7 @@ RBAC: each prefix gets a catch-all `_READ_ROLES` entry in
 `backend/core/rbac_middleware.py::PERMS_MATRIX` — read-only in MVP;
 mutations stay gated per §42.
 
-Drill: `tests/drills/drill_holy_routers_federation.py` (12 steps, 4
+Drill: `tests/drills/drill_insur_routers_federation.py` (12 steps, 4
 negative + a schema invariant) covers representative endpoints from
 all 7 surfaces, the validator-before-audit ordering, default-tenant
 fallback when no `X-Tenant-ID` header, and best-effort persistence
@@ -410,8 +410,8 @@ via function calling, so off-schema LLM output is caught at parse time.
 Opt-in:
 
 ```bash
-export HOLY_TYPED_COUNCIL_ENABLED=true
-export HOLY_LLM_MODEL=openai/gpt-4o-mini    # or any pydantic_ai-supported provider
+export INSUR_TYPED_COUNCIL_ENABLED=true
+export INSUR_LLM_MODEL=openai/gpt-4o-mini    # or any pydantic_ai-supported provider
 ```
 
 Use from any service:
@@ -476,10 +476,10 @@ selected by metric. Caller can serialize the result + version it.
 Opt-in:
 
 ```bash
-export HOLY_DSPY_OPTIMIZER_ENABLED=true
-export HOLY_LLM_MODEL=ollama/kivi:local          # any DSPy-supported LM
+export INSUR_DSPY_OPTIMIZER_ENABLED=true
+export INSUR_LLM_MODEL=ollama/kivi:local          # any DSPy-supported LM
 # Optional:
-export HOLY_DSPY_AUDIT_PATH=data/agent-supervisor/dspy_optimizer_runs.jsonl
+export INSUR_DSPY_AUDIT_PATH=data/agent-supervisor/dspy_optimizer_runs.jsonl
 ```
 
 Use from any service:
@@ -574,21 +574,21 @@ Drill: `tests/drills/drill_adapters_endpoint.py` (10 steps, 4 negative)
 locks: 4 stable keys, per-row schema, default-off, enable-flag echo,
 broken-row tolerance, RBAC catch-entry, tenant echo, unknown-role 400.
 
-## §68 HOLY Observability + Data Hub — Iteration 1 (DB Viewer + per-function tables)
+## §68 INSUR Observability + Data Hub — Iteration 1 (DB Viewer + per-function tables)
 
 Reference impl of global §68. Two surfaces shipped:
 
-**§68.1 DB Viewer** — `/api/v1/holy/dbviewer/{_global, databases/{db_id}, databases/{db_id}/schemas/{schema}, databases/{db_id}/schemas/{schema}/tables/{table}, databases/{db_id}/schemas/{schema}/tables/{table}/sample}`. Read-only Postgres introspection with PII redaction + tenant-scoped SQL + best-effort graceful degradation (DB unreachable → status=`unreachable`, never crashes).
+**§68.1 DB Viewer** — `/api/v1/insur/dbviewer/{_global, databases/{db_id}, databases/{db_id}/schemas/{schema}, databases/{db_id}/schemas/{schema}/tables/{table}, databases/{db_id}/schemas/{schema}/tables/{table}/sample}`. Read-only Postgres introspection with PII redaction + tenant-scoped SQL + best-effort graceful degradation (DB unreachable → status=`unreachable`, never crashes).
 
-**§68.2 Per-function tables** — `/api/v1/holy/dbviewer/process-tables/{_global, {dept}, {dept}/{process_id}}`. Surfaces the primary + secondary table map per process from `data/dbviewer/per_process_tables.json`. Catalog is the foundation for §68.11 multi-model comparison (knowing the input/output table → know what to score).
+**§68.2 Per-function tables** — `/api/v1/insur/dbviewer/process-tables/{_global, {dept}, {dept}/{process_id}}`. Surfaces the primary + secondary table map per process from `data/dbviewer/per_process_tables.json`. Catalog is the foundation for §68.11 multi-model comparison (knowing the input/output table → know what to score).
 
 ```bash
 # What tables back lead_scoring?
-curl -s http://localhost:8000/api/v1/holy/dbviewer/process-tables/sales/lead_scoring \
+curl -s http://localhost:8000/api/v1/insur/dbviewer/process-tables/sales/lead_scoring \
   -H "X-Tenant-ID: tenant-a" -H "X-Demo-Role: manager" | jq .process
 
 # 10 rows from dim_customer, PII redacted
-curl -s 'http://localhost:8000/api/v1/holy/dbviewer/databases/holy/schemas/public/tables/dim_customer/sample?limit=10' \
+curl -s 'http://localhost:8000/api/v1/insur/dbviewer/databases/insur/schemas/public/tables/dim_customer/sample?limit=10' \
   -H "X-Tenant-ID: tenant-a" -H "X-Demo-Role: manager"
 ```
 

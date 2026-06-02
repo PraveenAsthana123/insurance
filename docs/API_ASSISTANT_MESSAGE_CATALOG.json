@@ -192,217 +192,217 @@
     ]
   },
   {
-    "id": "council_ask_api_v1_holy_council_ask_post",
+    "id": "council_ask_api_v1_insur_council_ask_post",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: POST /api/v1/holy/council/ask\nID: council_ask_api_v1_holy_council_ask_post\nPurpose: Council Ask\nInput: path/query parameters = []; request body schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Payload\"}.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = council_ask_api_v1_holy_council_ask_post.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response Council Ask Api V1 Holy Council Ask Post\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: POST /api/v1/insur/council/ask\nID: council_ask_api_v1_insur_council_ask_post\nPurpose: Council Ask\nInput: path/query parameters = []; request body schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Payload\"}.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = council_ask_api_v1_insur_council_ask_post.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response Council Ask Api V1 Insur Council Ask Post\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "council_result_api_v1_holy_council_result__task_id__get",
+    "id": "council_result_api_v1_insur_council_result__task_id__get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/council/result/{task_id}\nID: council_result_api_v1_holy_council_result__task_id__get\nPurpose: Council Result\nInput: path/query parameters = [{\"name\": \"task_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Task Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = council_result_api_v1_holy_council_result__task_id__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Council Result Api V1 Holy Council Result  Task Id  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/council/result/{task_id}\nID: council_result_api_v1_insur_council_result__task_id__get\nPurpose: Council Result\nInput: path/query parameters = [{\"name\": \"task_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Task Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = council_result_api_v1_insur_council_result__task_id__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Council Result Api V1 Insur Council Result  Task Id  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_role_dashboard_api_v1_holy_dashboards__dept___role__get",
+    "id": "get_role_dashboard_api_v1_insur_dashboards__dept___role__get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/dashboards/{dept}/{role}\nID: get_role_dashboard_api_v1_holy_dashboards__dept___role__get\nPurpose: Get Role Dashboard\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"role\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Role\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_role_dashboard_api_v1_holy_dashboards__dept___role__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Role Dashboard Api V1 Holy Dashboards  Dept   Role  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/dashboards/{dept}/{role}\nID: get_role_dashboard_api_v1_insur_dashboards__dept___role__get\nPurpose: Get Role Dashboard\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"role\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Role\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_role_dashboard_api_v1_insur_dashboards__dept___role__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Role Dashboard Api V1 Insur Dashboards  Dept   Role  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "list_depts_api_v1_holy_depts_get",
+    "id": "list_depts_api_v1_insur_depts_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/depts\nID: list_depts_api_v1_holy_depts_get\nPurpose: List Depts\nInput: path/query parameters = []; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_depts_api_v1_holy_depts_get.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response List Depts Api V1 Holy Depts Get\"}; possible statuses = 200.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/depts\nID: list_depts_api_v1_insur_depts_get\nPurpose: List Depts\nInput: path/query parameters = []; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_depts_api_v1_insur_depts_get.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response List Depts Api V1 Insur Depts Get\"}; possible statuses = 200.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "list_runs_api_v1_holy_eval__dept___pipeline__runs_get",
+    "id": "list_runs_api_v1_insur_eval__dept___pipeline__runs_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/eval/{dept}/{pipeline}/runs\nID: list_runs_api_v1_holy_eval__dept___pipeline__runs_get\nPurpose: List Runs\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_runs_api_v1_holy_eval__dept___pipeline__runs_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response List Runs Api V1 Holy Eval  Dept   Pipeline  Runs Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/eval/{dept}/{pipeline}/runs\nID: list_runs_api_v1_insur_eval__dept___pipeline__runs_get\nPurpose: List Runs\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_runs_api_v1_insur_eval__dept___pipeline__runs_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response List Runs Api V1 Insur Eval  Dept   Pipeline  Runs Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get",
+    "id": "get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/latest\nID: get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get\nPurpose: Get Latest\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}, {\"name\": \"run_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Run Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Latest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Latest Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/latest\nID: get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get\nPurpose: Get Latest\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}, {\"name\": \"run_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Run Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Latest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Latest Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get",
+    "id": "get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/manifest\nID: get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get\nPurpose: Get Manifest\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}, {\"name\": \"run_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Run Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Manifest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Manifest Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/manifest\nID: get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get\nPurpose: Get Manifest\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}, {\"name\": \"run_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Run Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Manifest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Manifest Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
+    "id": "get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}\nID: get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get\nPurpose: Get Plot\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}, {\"name\": \"run_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Run Id\"}}, {\"name\": \"plot_name\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Plot Name\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get.\nOutput: response schema = {}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}\nID: get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get\nPurpose: Get Plot\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"pipeline\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Pipeline\"}}, {\"name\": \"run_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Run Id\"}}, {\"name\": \"plot_name\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Plot Name\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get.\nOutput: response schema = {}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_nav_api_v1_holy_nav__dept__get",
+    "id": "get_nav_api_v1_insur_nav__dept__get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/nav/{dept}\nID: get_nav_api_v1_holy_nav__dept__get\nPurpose: Get Nav\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_nav_api_v1_holy_nav__dept__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Nav Api V1 Holy Nav  Dept  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/nav/{dept}\nID: get_nav_api_v1_insur_nav__dept__get\nPurpose: Get Nav\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_nav_api_v1_insur_nav__dept__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Nav Api V1 Insur Nav  Dept  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_role_reports_api_v1_holy_reports__dept___role__get",
+    "id": "get_role_reports_api_v1_insur_reports__dept___role__get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/reports/{dept}/{role}\nID: get_role_reports_api_v1_holy_reports__dept___role__get\nPurpose: Get Role Reports\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"role\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Role\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_role_reports_api_v1_holy_reports__dept___role__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Role Reports Api V1 Holy Reports  Dept   Role  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/reports/{dept}/{role}\nID: get_role_reports_api_v1_insur_reports__dept___role__get\nPurpose: Get Role Reports\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"role\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Role\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_role_reports_api_v1_insur_reports__dept___role__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Role Reports Api V1 Insur Reports  Dept   Role  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "run_role_report_api_v1_holy_reports__dept___role___report_id__run_post",
+    "id": "run_role_report_api_v1_insur_reports__dept___role___report_id__run_post",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: POST /api/v1/holy/reports/{dept}/{role}/{report_id}/run\nID: run_role_report_api_v1_holy_reports__dept___role___report_id__run_post\nPurpose: Run Role Report\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"role\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Role\"}}, {\"name\": \"report_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Report Id\"}}]; request body schema = {\"anyOf\": [{\"type\": \"object\", \"additionalProperties\": true}, {\"type\": \"null\"}], \"title\": \"Payload\"}.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = run_role_report_api_v1_holy_reports__dept___role___report_id__run_post.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Run Role Report Api V1 Holy Reports  Dept   Role   Report Id  Run Post\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: POST /api/v1/insur/reports/{dept}/{role}/{report_id}/run\nID: run_role_report_api_v1_insur_reports__dept___role___report_id__run_post\nPurpose: Run Role Report\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"role\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Role\"}}, {\"name\": \"report_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Report Id\"}}]; request body schema = {\"anyOf\": [{\"type\": \"object\", \"additionalProperties\": true}, {\"type\": \"null\"}], \"title\": \"Payload\"}.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = run_role_report_api_v1_insur_reports__dept___role___report_id__run_post.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Run Role Report Api V1 Insur Reports  Dept   Role   Report Id  Run Post\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "list_roles_api_v1_holy_roles_get",
+    "id": "list_roles_api_v1_insur_roles_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/roles\nID: list_roles_api_v1_holy_roles_get\nPurpose: List Roles\nInput: path/query parameters = []; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_roles_api_v1_holy_roles_get.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response List Roles Api V1 Holy Roles Get\"}; possible statuses = 200.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/roles\nID: list_roles_api_v1_insur_roles_get\nPurpose: List Roles\nInput: path/query parameters = []; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_roles_api_v1_insur_roles_get.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response List Roles Api V1 Insur Roles Get\"}; possible statuses = 200.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "list_reference_processes_api_v1_holy_sim_reference_processes_get",
+    "id": "list_reference_processes_api_v1_insur_sim_reference_processes_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/sim/reference-processes\nID: list_reference_processes_api_v1_holy_sim_reference_processes_get\nPurpose: List Reference Processes\nInput: path/query parameters = []; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_reference_processes_api_v1_holy_sim_reference_processes_get.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response List Reference Processes Api V1 Holy Sim Reference Processes Get\"}; possible statuses = 200.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/sim/reference-processes\nID: list_reference_processes_api_v1_insur_sim_reference_processes_get\nPurpose: List Reference Processes\nInput: path/query parameters = []; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_reference_processes_api_v1_insur_sim_reference_processes_get.\nOutput: response schema = {\"additionalProperties\": true, \"type\": \"object\", \"title\": \"Response List Reference Processes Api V1 Insur Sim Reference Processes Get\"}; possible statuses = 200.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "run_simulation_api_v1_holy_sim__dept___process__run_post",
+    "id": "run_simulation_api_v1_insur_sim__dept___process__run_post",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: POST /api/v1/holy/sim/{dept}/{process}/run\nID: run_simulation_api_v1_holy_sim__dept___process__run_post\nPurpose: Run Simulation\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}]; request body schema = {\"anyOf\": [{\"type\": \"object\", \"additionalProperties\": true}, {\"type\": \"null\"}], \"title\": \"Payload\"}.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = run_simulation_api_v1_holy_sim__dept___process__run_post.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Run Simulation Api V1 Holy Sim  Dept   Process  Run Post\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: POST /api/v1/insur/sim/{dept}/{process}/run\nID: run_simulation_api_v1_insur_sim__dept___process__run_post\nPurpose: Run Simulation\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}]; request body schema = {\"anyOf\": [{\"type\": \"object\", \"additionalProperties\": true}, {\"type\": \"null\"}], \"title\": \"Payload\"}.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = run_simulation_api_v1_insur_sim__dept___process__run_post.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Run Simulation Api V1 Insur Sim  Dept   Process  Run Post\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "list_sim_runs_api_v1_holy_sim__dept___process__runs_get",
+    "id": "list_sim_runs_api_v1_insur_sim__dept___process__runs_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/sim/{dept}/{process}/runs\nID: list_sim_runs_api_v1_holy_sim__dept___process__runs_get\nPurpose: List Sim Runs\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_sim_runs_api_v1_holy_sim__dept___process__runs_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response List Sim Runs Api V1 Holy Sim  Dept   Process  Runs Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/sim/{dept}/{process}/runs\nID: list_sim_runs_api_v1_insur_sim__dept___process__runs_get\nPurpose: List Sim Runs\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = list_sim_runs_api_v1_insur_sim__dept___process__runs_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response List Sim Runs Api V1 Insur Sim  Dept   Process  Runs Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get",
+    "id": "get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/events\nID: get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get\nPurpose: Get Sim Events\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}, {\"name\": \"sim_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Sim Id\"}}, {\"name\": \"layer\", \"in\": \"query\", \"required\": false, \"schema\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Layer\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Sim Events Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Events Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/events\nID: get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get\nPurpose: Get Sim Events\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}, {\"name\": \"sim_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Sim Id\"}}, {\"name\": \"layer\", \"in\": \"query\", \"required\": false, \"schema\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Layer\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Sim Events Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Events Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get",
+    "id": "get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/manifest\nID: get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get\nPurpose: Get Sim Manifest\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}, {\"name\": \"sim_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Sim Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Sim Manifest Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Manifest Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/manifest\nID: get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get\nPurpose: Get Sim Manifest\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}, {\"name\": \"process\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Process\"}}, {\"name\": \"sim_id\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Sim Id\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Sim Manifest Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Manifest Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]
   },
   {
-    "id": "get_spec_api_v1_holy_spec__dept__get",
+    "id": "get_spec_api_v1_insur_spec__dept__get",
     "type": "message",
     "role": "assistant",
     "content": [
       {
         "type": "output_text",
-        "text": "API: GET /api/v1/holy/spec/{dept}\nID: get_spec_api_v1_holy_spec__dept__get\nPurpose: Get Spec\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_spec_api_v1_holy_spec__dept__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Spec Api V1 Holy Spec  Dept  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
+        "text": "API: GET /api/v1/insur/spec/{dept}\nID: get_spec_api_v1_insur_spec__dept__get\nPurpose: Get Spec\nInput: path/query parameters = [{\"name\": \"dept\", \"in\": \"path\", \"required\": true, \"schema\": {\"type\": \"string\", \"title\": \"Dept\"}}]; request body schema = null.\nProcess: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening. Router/function = get_spec_api_v1_insur_spec__dept__get.\nOutput: response schema = {\"type\": \"object\", \"additionalProperties\": true, \"title\": \"Response Get Spec Api V1 Insur Spec  Dept  Get\"}; possible statuses = 200, 422.\nSecurity: Demo RBAC middleware uses X-Demo-Role for protected routes; production policy requires JWT + permission matrix.\nTracing: apiFetch attaches X-Client-Trace-Id and X-Request-ID. CorrelationIdMiddleware attaches request correlation context where backend handlers use structured logging.",
         "annotations": []
       }
     ]

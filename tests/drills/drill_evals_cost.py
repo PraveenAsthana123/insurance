@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Drill: §68.9 Cost eval surface — iteration 5 of HOLY Observability Hub.
+Drill: §68.9 Cost eval surface — iteration 5 of INSUR Observability Hub.
 
 Read-only aggregation over data/agent-supervisor/cost_runs.jsonl
-(env-overridable via HOLY_EVAL_COST_LOG). Sibling of §68.8 functional;
+(env-overridable via INSUR_EVAL_COST_LOG). Sibling of §68.8 functional;
 RBAC catch-all /evals/* already gates this surface.
 
 Steps (12 total; 5 negative):
@@ -50,13 +50,13 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path, cost_log: Path):
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
-    os.environ["HOLY_EVAL_COST_LOG"] = str(cost_log)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_EVAL_COST_LOG"] = str(cost_log)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit",
+                            "core.insur_audit",
                             "routers.evals_cost",
                             "services.cost_eval_service")):
             del sys.modules[mod]
@@ -148,13 +148,13 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         cost_log = Path(tmp) / "cost_runs.jsonl"
         client = TestClient(_build_app(audit_path, cost_log))
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: empty log → graceful zeros ----
-        r = client.get("/api/v1/holy/evals/cost/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/cost/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         windows = body.get("windows", {})
         step(1, "empty log → /_global all windows show n_calls=0 + cost=0.0",
@@ -169,7 +169,7 @@ def main() -> int:
         with cost_log.open("w") as fh:
             for row in _seed_rows():
                 fh.write(json.dumps(row) + "\n")
-        r = client.get("/api/v1/holy/evals/cost/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/cost/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         all_time = body.get("all_time", {})
         # Expected all-time: 8 calls, sum of cost_usd = 0.00335 + 0.0046 + 0.0005 = 0.00845
@@ -193,7 +193,7 @@ def main() -> int:
              f"24h={windows['last_24h']['n_calls']} 7d={windows['last_7d']['n_calls']} 30d={windows['last_30d']['n_calls']}")
 
         # ---- Step 4: per-tenant breakdown ----
-        r = client.get("/api/v1/holy/evals/cost/tenant-a", headers=headers)
+        r = client.get("/api/v1/insur/evals/cost/tenant-a", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         per_model = body.get("per_model", {})
         step(4, "/tenant-a → 4 calls, per_model nests {kivi:local, llama3.1:8b, mistral:7b}",
@@ -207,7 +207,7 @@ def main() -> int:
              f"n_calls={body.get('n_calls')} models={sorted(per_model.keys())}")
 
         # ---- Step 5: by-model ranking ----
-        r = client.get("/api/v1/holy/evals/cost/by-model", headers=headers)
+        r = client.get("/api/v1/insur/evals/cost/by-model", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         ranking = body.get("ranking", [])
         # kivi:local has the most spend (0.001+0.0008+0.002+0.0025=0.0063)
@@ -220,7 +220,7 @@ def main() -> int:
              f"order={[r['model_id'] for r in ranking]}")
 
         # ---- Step 6: by-request lookup ----
-        r = client.get("/api/v1/holy/evals/cost/by-request/req-a1", headers=headers)
+        r = client.get("/api/v1/insur/evals/cost/by-request/req-a1", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(6, "/by-request/req-a1 → 200 with status=found, full row preserved",
              r.status_code == 200
@@ -230,7 +230,7 @@ def main() -> int:
              f"status={r.status_code} request_id={body.get('row', {}).get('request_id')}")
 
         # ---- Step 7: NEG unknown tenant → 404 ----
-        r = client.get("/api/v1/holy/evals/cost/tenant-zzz", headers=headers)
+        r = client.get("/api/v1/insur/evals/cost/tenant-zzz", headers=headers)
         step(7, "NEG: unknown tenant → 404",
              r.status_code == 404,
              f"status={r.status_code}")
@@ -240,7 +240,7 @@ def main() -> int:
         # Use ?since=-1 trick OR a value the regex rejects. Try ; or %.
         # Actually a / in tenant_id would 404 via routing. Use a different non-allowed char.
         r = client.get(
-            "/api/v1/holy/evals/cost/tenant%24bad",  # %24 = $
+            "/api/v1/insur/evals/cost/tenant%24bad",  # %24 = $
             headers=headers,
         )
         step(8, "NEG: tenant_id with $ → 400 (regex reject)",
@@ -249,7 +249,7 @@ def main() -> int:
 
         # ---- Step 9: NEG unknown request_id → 404 ----
         r = client.get(
-            "/api/v1/holy/evals/cost/by-request/req-nonexistent",
+            "/api/v1/insur/evals/cost/by-request/req-nonexistent",
             headers=headers,
         )
         step(9, "NEG: unknown request_id → 404",
@@ -258,7 +258,7 @@ def main() -> int:
 
         # ---- Step 10: NEG malformed request_id ($) → 400 ----
         r = client.get(
-            "/api/v1/holy/evals/cost/by-request/req%24bad",
+            "/api/v1/insur/evals/cost/by-request/req%24bad",
             headers=headers,
         )
         step(10, "NEG: request_id with $ → 400 (regex reject)",
@@ -267,7 +267,7 @@ def main() -> int:
 
         # ---- Step 11: NEG bad role → 400 ----
         r = client.get(
-            "/api/v1/holy/evals/cost/_global",
+            "/api/v1/insur/evals/cost/_global",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "intruder"},
         )
         step(11, "NEG: unknown role → 400 from RBAC catch-all /evals/*",
@@ -275,11 +275,11 @@ def main() -> int:
              f"status={r.status_code}")
 
         # ---- Step 12: tenant echo + §38.3 schema invariant ----
-        r = client.get("/api/v1/holy/evals/cost/_global", headers=headers)
+        r = client.get("/api/v1/insur/evals/cost/_global", headers=headers)
         required = {"ts", "tenant_id", "actor", "tool", "request_id",
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
-        router_rows = [r for r in rows if r.get("tool", "").startswith("holy.evals_cost")]
+        router_rows = [r for r in rows if r.get("tool", "").startswith("insur.evals_cost")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         step(12, "tenant echo + §38.3 schema invariant on all router rows",
              r.status_code == 200

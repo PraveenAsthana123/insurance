@@ -1,5 +1,5 @@
 """
-HOLY Beverage — 100-agent background worker.
+INSUR Beverage — 100-agent background worker.
 
 Each agent process:
   1. Pulls a task from Redis queue (BRPOP)

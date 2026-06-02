@@ -88,4 +88,4 @@ After a request completes, the Approval Agent must decide whether the next reque
 
 ## Approval Broker Endpoint
 
-HOLY exposes `POST /api/v1/agent-platform/approval-broker/decide` for local approve/submit/next automation. It can auto-approve low-risk local work and submit safe next tasks to OpenClaw, but it must return `require_human_approval` or `deny` for production, secrets, deploy, destructive, real browser/CUA, GitHub admin/auth, database migration, or external SaaS write scopes.
+INSUR exposes `POST /api/v1/agent-platform/approval-broker/decide` for local approve/submit/next automation. It can auto-approve low-risk local work and submit safe next tasks to OpenClaw, but it must return `require_human_approval` or `deny` for production, secrets, deploy, destructive, real browser/CUA, GitHub admin/auth, database migration, or external SaaS write scopes.

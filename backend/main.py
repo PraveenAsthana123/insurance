@@ -85,7 +85,7 @@ def create_app() -> FastAPI:
     from routers.supply_chain import router as supply_chain_router
     from routers.customer import router as customer_router
     from routers.ai_explain import router as ai_explain_router
-    from routers.holy import router as holy_router
+    from routers.insur import router as insur_router
     from routers.openclaw import router as openclaw_router
     from routers.paperclip import router as paperclip_router
     from routers.agent_platform import router as agent_platform_router
@@ -123,28 +123,28 @@ def create_app() -> FastAPI:
     app.include_router(supply_chain_router)
     app.include_router(customer_router)
     app.include_router(ai_explain_router)
-    app.include_router(holy_router)
+    app.include_router(insur_router)
     app.include_router(openclaw_router)    # /api/v1/openclaw/* (parallel-agent integration)
     app.include_router(paperclip_router)   # /api/v1/paperclip/* (parallel-agent integration)
     app.include_router(agent_platform_router)  # /api/v1/agent-platform/* (unified agent tool setup/status)
     app.include_router(admin_router)            # /api/v1/admin/* (cross-tenant compliance/reporting reads — RBAC-gated)
-    app.include_router(monitoring_router)  # /api/v1/holy/monitoring/* (per-dept cron + pipeline health)
-    app.include_router(master_data_router) # /api/v1/holy/master-data/* (per-dept SAP-style master data)
-    app.include_router(transactions_router) # /api/v1/holy/transactions/* (unified chronological audit feed per dept)
-    app.include_router(pipelines_router)    # /api/v1/holy/pipelines/* (5-phase automated pipeline catalog per dept)
-    app.include_router(reports_router)      # /api/v1/holy/reports/* (dept-level reports catalog: 15 standard archetypes per §64.37.2)
-    app.include_router(demo_stories_router) # /api/v1/holy/demo-stories/* (per-dept × per-role demo scripts: 15 roles × 19 depts = 285 total)
-    app.include_router(graph_router)        # /api/v1/holy/graph/* (per-dept relationship graph: entities + processes + pipelines + roles + reports + demos + audit + dashboards)
-    app.include_router(downloads_router)    # /api/v1/holy/downloads/* (per-dept sample data: CSV + JSON + before/after SVG, path-traversal-hardened)
-    app.include_router(dbviewer_router)     # /api/v1/holy/dbviewer/* (§68 HOLY Observability Hub: DB browse + per-function primary/secondary tables, PII-redacted + tenant-scoped)
-    app.include_router(pii_router)          # /api/v1/holy/pii/* (§68.6 PII inventory: cross-dept PII columns + per-dept slice + leak scan over audit log)
-    app.include_router(guardrails_router)   # /api/v1/holy/guardrails/* (§68.5 Guardrails: cross-dept rollup + per-dept decisions + single decision lookup; reads from data/agent-supervisor/guardrail_decisions.jsonl)
-    app.include_router(security_router)     # /api/v1/holy/security/* (§68.7 Security posture: compliance gates + CVE snapshot + attack-attempt audit scan)
-    app.include_router(evals_functional_router) # /api/v1/holy/evals/functional/* (§68.8 Functional eval: leaderboard + per-model history + drift; reads from data/agent-supervisor/functional_eval_runs.jsonl)
-    app.include_router(evals_cost_router)       # /api/v1/holy/evals/cost/* (§68.9 Cost eval: 24h/7d/30d windows + per-tenant + per-model ranking + per-request lookup; reads from data/agent-supervisor/cost_runs.jsonl)
-    app.include_router(evals_safety_router)     # /api/v1/holy/evals/safety/* (§68.10 Safety eval: hallucination + toxicity + bias + fairness with verdict classification; reads from data/agent-supervisor/safety_eval_runs.jsonl)
-    app.include_router(observability_hub_router) # /api/v1/holy/observability-hub/* (§68 aggregator: one GET surfacing health of all 7 §68 read surfaces — dbviewer + pii + guardrails + security + evals_{functional,cost,safety})
-    app.include_router(evals_model_compare_router) # /api/v1/holy/evals/model-compare/* (§68.11 Multi-model comparison: POST joins §68.8/9/10 logs and persists scorecard; GET _history + GET {comparison_id})
+    app.include_router(monitoring_router)  # /api/v1/insur/monitoring/* (per-dept cron + pipeline health)
+    app.include_router(master_data_router) # /api/v1/insur/master-data/* (per-dept SAP-style master data)
+    app.include_router(transactions_router) # /api/v1/insur/transactions/* (unified chronological audit feed per dept)
+    app.include_router(pipelines_router)    # /api/v1/insur/pipelines/* (5-phase automated pipeline catalog per dept)
+    app.include_router(reports_router)      # /api/v1/insur/reports/* (dept-level reports catalog: 15 standard archetypes per §64.37.2)
+    app.include_router(demo_stories_router) # /api/v1/insur/demo-stories/* (per-dept × per-role demo scripts: 15 roles × 19 depts = 285 total)
+    app.include_router(graph_router)        # /api/v1/insur/graph/* (per-dept relationship graph: entities + processes + pipelines + roles + reports + demos + audit + dashboards)
+    app.include_router(downloads_router)    # /api/v1/insur/downloads/* (per-dept sample data: CSV + JSON + before/after SVG, path-traversal-hardened)
+    app.include_router(dbviewer_router)     # /api/v1/insur/dbviewer/* (§68 INSUR Observability Hub: DB browse + per-function primary/secondary tables, PII-redacted + tenant-scoped)
+    app.include_router(pii_router)          # /api/v1/insur/pii/* (§68.6 PII inventory: cross-dept PII columns + per-dept slice + leak scan over audit log)
+    app.include_router(guardrails_router)   # /api/v1/insur/guardrails/* (§68.5 Guardrails: cross-dept rollup + per-dept decisions + single decision lookup; reads from data/agent-supervisor/guardrail_decisions.jsonl)
+    app.include_router(security_router)     # /api/v1/insur/security/* (§68.7 Security posture: compliance gates + CVE snapshot + attack-attempt audit scan)
+    app.include_router(evals_functional_router) # /api/v1/insur/evals/functional/* (§68.8 Functional eval: leaderboard + per-model history + drift; reads from data/agent-supervisor/functional_eval_runs.jsonl)
+    app.include_router(evals_cost_router)       # /api/v1/insur/evals/cost/* (§68.9 Cost eval: 24h/7d/30d windows + per-tenant + per-model ranking + per-request lookup; reads from data/agent-supervisor/cost_runs.jsonl)
+    app.include_router(evals_safety_router)     # /api/v1/insur/evals/safety/* (§68.10 Safety eval: hallucination + toxicity + bias + fairness with verdict classification; reads from data/agent-supervisor/safety_eval_runs.jsonl)
+    app.include_router(observability_hub_router) # /api/v1/insur/observability-hub/* (§68 aggregator: one GET surfacing health of all 7 §68 read surfaces — dbviewer + pii + guardrails + security + evals_{functional,cost,safety})
+    app.include_router(evals_model_compare_router) # /api/v1/insur/evals/model-compare/* (§68.11 Multi-model comparison: POST joins §68.8/9/10 logs and persists scorecard; GET _history + GET {comparison_id})
     app.include_router(catalogs_router)             # /api/v1/catalogs/* (analysis_phase + analysis_module reads + raw markdown serve for AI assurance / ML methodology / DT)
     app.include_router(tenants_admin_router)        # /api/v1/admin/{tenants,departments,tenant-departments} — migration 017 surfaces
     app.include_router(insurance_router)            # /api/v1/insurance/* — 4 insurance depts: spec + role dashboards/reports + pipeline runner + sim/system-design/manual-vs-auto markdown

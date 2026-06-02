@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Drill: §68.7 Security posture surface — iteration 3 of HOLY Observability Hub.
+Drill: §68.7 Security posture surface — iteration 3 of INSUR Observability Hub.
 
 Read-only aggregation over three signals: live-probed compliance gates,
-external CVE snapshot (HOLY_SECURITY_POSTURE_PATH env), attack-attempt
-scan of the holy_reads audit log.
+external CVE snapshot (INSUR_SECURITY_POSTURE_PATH env), attack-attempt
+scan of the insur_reads audit log.
 
 Steps (12 total; 5 negative):
   1. (+) GET /_global → 200 with policy stamp, compliance gates with
@@ -21,7 +21,7 @@ Steps (12 total; 5 negative):
   6. (+) Seed an audit log row with 'rbac.denied' → /attacks finds it
         with attack_type='rbac_denial'
   7. (+) GET /{dept} → per-dept slice with spec_doc pointing at
-        HOLY_SECURITY.md path
+        INSUR_SECURITY.md path
   8. (-) NEG: invalid dept → 404 (validator-first per §47.6)
   9. (-) NEG: bad role → 400 from RBAC, NEVER reaches service
   10.(-) NEG: malformed posture JSON → graceful envelope, not crash
@@ -56,16 +56,16 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path, posture_path: Path | None = None):
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
     if posture_path:
-        os.environ["HOLY_SECURITY_POSTURE_PATH"] = str(posture_path)
+        os.environ["INSUR_SECURITY_POSTURE_PATH"] = str(posture_path)
     else:
-        os.environ.pop("HOLY_SECURITY_POSTURE_PATH", None)
+        os.environ.pop("INSUR_SECURITY_POSTURE_PATH", None)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit",
+                            "core.insur_audit",
                             "routers.security", "services.security_posture_service")):
             del sys.modules[mod]
 
@@ -104,12 +104,12 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         client = TestClient(_build_app(audit_path))
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: /_global envelope shape ----
-        r = client.get("/api/v1/holy/security/_global", headers=headers)
+        r = client.get("/api/v1/insur/security/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         comp = body.get("compliance", {})
         step(1, "/_global → 200 with policy stamp + compliance + vulnerabilities + attacks_24h",
@@ -159,7 +159,7 @@ def main() -> int:
             },
         }))
         client = TestClient(_build_app(audit_path, posture_path))
-        r = client.get("/api/v1/holy/security/_global", headers=headers)
+        r = client.get("/api/v1/insur/security/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         vuln = body.get("vulnerabilities", {})
         step(4, "posture snapshot → CVE counts surface in /_global",
@@ -169,7 +169,7 @@ def main() -> int:
              f"vuln={vuln}")
 
         # ---- Step 5: /attacks envelope ----
-        r = client.get("/api/v1/holy/security/attacks", headers=headers)
+        r = client.get("/api/v1/insur/security/attacks", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(5, "/attacks → 200 with hits + patterns_checked + since_epoch",
              r.status_code == 200
@@ -179,11 +179,11 @@ def main() -> int:
              f"status={r.status_code} n_hits={body.get('n_hits')}")
 
         # ---- Step 6: seeded audit row with 'rbac.denied' → found ----
-        # Seed via direct write to the audit log (HOLY_AUDIT_PATH = audit_path)
+        # Seed via direct write to the audit log (INSUR_AUDIT_PATH = audit_path)
         seed_row = {
             "ts": time.time(),
             "tenant_id": "tenant-a", "actor": "test",
-            "tool": "holy.test.seed",
+            "tool": "insur.test.seed",
             "request_id": "drill-attack-1",
             "surface": "test", "endpoint": "seed",
             "outcome": "denied",
@@ -193,7 +193,7 @@ def main() -> int:
         with audit_path.open("a") as fh:
             fh.write(json.dumps(seed_row) + "\n")
         # Use since=0 to scan all
-        r = client.get("/api/v1/holy/security/attacks?since=1", headers=headers)
+        r = client.get("/api/v1/insur/security/attacks?since=1", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         rbac_hits = [h for h in body.get("hits", []) if h.get("attack_type") == "rbac_denial"]
         step(6, "seeded 'rbac.denied' audit row → /attacks finds it as rbac_denial",
@@ -203,12 +203,12 @@ def main() -> int:
              f"n_rbac_hits={len(rbac_hits)}")
 
         # ---- Step 7: /{dept} per-dept slice ----
-        r = client.get("/api/v1/holy/security/sales", headers=headers)
+        r = client.get("/api/v1/insur/security/sales", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(7, "/sales → per-dept slice with spec_doc + compliance_state from seeded posture",
              r.status_code == 200
              and body.get("dept") == "sales"
-             and body.get("spec_doc", "").endswith("HOLY_SECURITY.md")
+             and body.get("spec_doc", "").endswith("INSUR_SECURITY.md")
              and body.get("compliance_gates_passing", 0) >= 5
              and body.get("vulnerabilities", {}).get("n_critical") == 1
              and body.get("pen_test_result") == "passed",
@@ -216,19 +216,19 @@ def main() -> int:
 
         # ---- Step 8: NEG invalid dept → 404 ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/security/nonexistent-dept", headers=headers)
+        r = client.get("/api/v1/insur/security/nonexistent-dept", headers=headers)
         rows_after = len(_audit_rows(audit_path))
         # rows_after may have 1 extra from the audit-log scan reading the seed row
-        # the assertion is on the validator running BEFORE log_holy_access
+        # the assertion is on the validator running BEFORE log_insur_access
         new_audit_writes = [r for r in _audit_rows(audit_path)[rows_before:]
-                            if r.get("tool", "").startswith("holy.security")]
-        step(8, "NEG: invalid dept → 404, NO holy.security audit row added",
+                            if r.get("tool", "").startswith("insur.security")]
+        step(8, "NEG: invalid dept → 404, NO insur.security audit row added",
              r.status_code == 404 and len(new_audit_writes) == 0,
              f"status={r.status_code} new_security_rows={len(new_audit_writes)}")
 
         # ---- Step 9: NEG bad role → 400 from RBAC ----
         r = client.get(
-            "/api/v1/holy/security/_global",
+            "/api/v1/insur/security/_global",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "intruder"},
         )
         step(9, "NEG: unknown role → 400 from RBAC (router never sees request)",
@@ -239,7 +239,7 @@ def main() -> int:
         bad_posture = Path(tmp) / "bad_posture.json"
         bad_posture.write_text("{not valid json")
         client3 = TestClient(_build_app(audit_path, bad_posture))
-        r = client3.get("/api/v1/holy/security/_global", headers=headers)
+        r = client3.get("/api/v1/insur/security/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(10, "NEG: malformed posture JSON → /_global still returns 200 with graceful envelope",
              r.status_code == 200
@@ -249,7 +249,7 @@ def main() -> int:
 
         # ---- Step 11: NEG missing audit log → /attacks gracefully empty ----
         client4 = TestClient(_build_app(Path(tmp) / "nonexistent.jsonl", None))
-        r = client4.get("/api/v1/holy/security/attacks", headers={
+        r = client4.get("/api/v1/insur/security/attacks", headers={
             "X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager",
         })
         body = r.json() if r.status_code == 200 else {}
@@ -262,7 +262,7 @@ def main() -> int:
         # ---- Step 12: NEG negative since → 422 ----
         client = TestClient(_build_app(audit_path))
         r = client.get(
-            "/api/v1/holy/security/attacks?since=-1",
+            "/api/v1/insur/security/attacks?since=-1",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"},
         )
         step(12, "NEG: ?since=-1 → 422 from FastAPI Query validator",
@@ -273,7 +273,7 @@ def main() -> int:
         required = {"ts", "tenant_id", "actor", "tool", "request_id",
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
-        router_rows = [r for r in rows if r.get("tool", "").startswith("holy.security")]
+        router_rows = [r for r in rows if r.get("tool", "").startswith("insur.security")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         if bad:
             step(99, "§38.3 schema invariant",

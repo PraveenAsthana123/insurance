@@ -1,4 +1,4 @@
-"""HOLY reference: recommendation lifecycle with content + CF + hybrid comparison.
+"""INSUR reference: recommendation lifecycle with content + CF + hybrid comparison.
 
 Per §64.22 — every dept needs a recommender; this is the reference template.
 

@@ -1,10 +1,10 @@
 # Agent Tool Selection Matrix
 
-This matrix defines how to evaluate external agent, orchestration, coding, and media tools before introducing them into the HOLY platform. It is a governance artifact, not an approval to install any tool by default.
+This matrix defines how to evaluate external agent, orchestration, coding, and media tools before introducing them into the INSUR platform. It is a governance artifact, not an approval to install any tool by default.
 
 ## Tool Comparison
 
-| Tool | Primary Focus | Best For | Weakness | HOLY Fit |
+| Tool | Primary Focus | Best For | Weakness | INSUR Fit |
 |---|---|---|---|---|
 | Hermes Agent | Self-learning autonomous AI agent | Persistent AI teammate | Younger ecosystem | Candidate for long-running assistant memory and autonomous backlog support, only behind governance and audit controls. |
 | OpenClaw | Multi-channel orchestration gateway | Automation + integrations | Complex setup/security overhead | Local OpenClaw-compatible bridge is working for Redis/council task routing. External gateway/SDK remains a future integration requiring strong auth, secrets, and tenant controls. |
@@ -31,7 +31,7 @@ This matrix defines how to evaluate external agent, orchestration, coding, and m
 | AutoGen (Microsoft) | Multi-agent conversation framework | Conversation patterns for research-grade agents | Two packages (`pyautogen` v0.2 vs `autogen-agentchat` v0.4); overlap with §64.43 #2 Council | Stage-2: `pyautogen` installed; document the v0.4 split SDK; pilot vs in-repo council. |
 | OpenAI Swarm | Educational multi-agent framework | Learning multi-agent patterns | Experimental upstream; OpenAI explicitly labels as educational | **Skip** per §56.3 rejection (experimental + redundant with CrewAI/AutoGen). |
 | Dagster | Data orchestrator (asset-graph) | Strong typing on ML artifacts + pipelines | Heavier than Celery beat for simple cron jobs; webserver port 3000 collides with frontend | Stage-2: installed; empirical parity eval vs Celery beat (§64.30) before adoption. |
-| Prefect | Workflow orchestrator (Python-native) | Dynamic DAGs + decorator API | Overlaps with Dagster on the same slot — pick one | Stage-2: installed; pilot vs Dagster on one HOLY pipeline before default-flip. |
+| Prefect | Workflow orchestrator (Python-native) | Dynamic DAGs + decorator API | Overlaps with Dagster on the same slot — pick one | Stage-2: installed; pilot vs Dagster on one INSUR pipeline before default-flip. |
 | Kestra (Python SDK) | Declarative workflow engine; server is Java/Kotlin | Visual UI for non-developer operators | Server is JVM-heavy; SDK alone doesn't execute | Stage-2: SDK installed; server adoption deferred until non-dev operator population justifies the JVM stack. |
 | Windmill (wmill SDK) | OSS dev platform — scripts + workflows + apps | Low-code admin tools for ops | AGPL implications for self-hosting with modifications | Stage-2: SDK installed; legal review required before AGPL server adoption. |
 | Portkey | LLM gateway (SaaS) | Load balancing, fallbacks, caching, observability | SaaS — all LLM traffic routed via Portkey when wired | Stage-1: installed; wire only with `PORTKEY_API_KEY`; mutually exclusive with LiteLLM per call. |

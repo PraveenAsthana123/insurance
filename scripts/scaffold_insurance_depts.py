@@ -823,7 +823,7 @@ Main KPI: {d['main_kpi']}.
 ## Demo Script
 
 {md_table(["Step", "Action", "Expected Screen", "Talking Point"], [
-    ["1", f"Open /holy/{slug}/dashboard?role=manager", "Manager dashboard with 6-flavor scorecard", "Every sub-process governed across 6 AI flavors per §64.36"],
+    ["1", f"Open /insur/{slug}/dashboard?role=manager", "Manager dashboard with 6-flavor scorecard", "Every sub-process governed across 6 AI flavors per §64.36"],
     ["2", "Click first L2 process card", "Process detail with IPO + sub-processes", "IPO + TODO + Task per §64.15"],
     ["3", "Open Simulation tab", "Side-by-side Manual vs Automatic", "Per §64.34 — 5-layer simulation"],
     ["4", "Open Agentic tab", "10-layer execution trace for a goal", "Per §64.40 — goal → council → plan → policy → CUA"],
@@ -1064,7 +1064,7 @@ sequenceDiagram
     participant LLM as LLM
     participant AU as Audit
 
-    U->>GW: POST /api/v1/holy/{slug}/execute
+    U->>GW: POST /api/v1/insur/{slug}/execute
     GW->>TM: Validate X-Tenant-ID
     TM->>CO: Forward + request_id
     CO->>PL: Interpret + clarify
@@ -1704,7 +1704,7 @@ Per global §47.6 SOC2 CC6.2 — role-scoped. PII redacted by default; `?include
 
 ## API
 ```
-GET /api/v1/holy/dashboards/{slug}/{role}
+GET /api/v1/insur/dashboards/{slug}/{role}
 ```
 
 ## Endpoint contract
@@ -1750,8 +1750,8 @@ Per global §38.3 — every report-generation event writes an audit row keyed by
 
 ## API
 ```
-GET  /api/v1/holy/reports/{slug}/{role}
-POST /api/v1/holy/reports/{slug}/{role}/{{report_id}}/run
+GET  /api/v1/insur/reports/{slug}/{role}
+POST /api/v1/insur/reports/{slug}/{role}/{{report_id}}/run
 ```
 """
 
@@ -1763,11 +1763,11 @@ def render_simulation_ui(slug: str, d: dict) -> str:
 
 Per global §64.34 + operator 2026-06-01.
 
-This dept's `/holy/{slug}/simulation` tab specification. Manual-mode + Automatic-mode
+This dept's `/insur/{slug}/simulation` tab specification. Manual-mode + Automatic-mode
 side-by-side with 5 layers visible per run.
 
 ## Tab path
-`/holy/{slug}/simulation?process=<L2-process-name>`
+`/insur/{slug}/simulation?process=<L2-process-name>`
 
 ## Available processes (L2)
 {chr(10).join(f"- {p}" for p in proc_names)}
@@ -1805,10 +1805,10 @@ side-by-side with 5 layers visible per run.
 
 | Endpoint | Purpose |
 |---|---|
-| `POST /api/v1/holy/sim/{slug}/{{process}}/run` | Trigger sim; body: `{{mode, inputs, seed}}` |
-| `GET /api/v1/holy/sim/{slug}/{{process}}/runs/{{sim_id}}/events` | SSE stream for live waterfall |
-| `GET /api/v1/holy/sim/{slug}/{{process}}/runs/{{sim_id}}/manifest` | Per-layer summary + comparison report |
-| `GET /api/v1/holy/sim/{slug}/{{process}}/runs/{{sim_id}}/replay` | Frame-by-frame replay of past run |
+| `POST /api/v1/insur/sim/{slug}/{{process}}/run` | Trigger sim; body: `{{mode, inputs, seed}}` |
+| `GET /api/v1/insur/sim/{slug}/{{process}}/runs/{{sim_id}}/events` | SSE stream for live waterfall |
+| `GET /api/v1/insur/sim/{slug}/{{process}}/runs/{{sim_id}}/manifest` | Per-layer summary + comparison report |
+| `GET /api/v1/insur/sim/{slug}/{{process}}/runs/{{sim_id}}/replay` | Frame-by-frame replay of past run |
 
 ## Engine requirements (§64.34.3)
 

@@ -1,4 +1,4 @@
-"""HOLY reference: Deep Learning sequence-classification lifecycle (§64.20).
+"""INSUR reference: Deep Learning sequence-classification lifecycle (§64.20).
 
 CV lifecycle already covers CNN + ResNet (image domain). This module covers
 the explicit sequence-domain DL stack the operator asked for:

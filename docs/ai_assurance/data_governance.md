@@ -96,7 +96,7 @@ the gateway and verify 100% block rate. Failure = release blocker.
 | Pattern | Surface |
 |---|---|
 | **Run card** (per-operation receipt) | Inline below each AI action |
-| **Timeline view** ("Activity") | `/holy/activity` per user |
+| **Timeline view** ("Activity") | `/insur/activity` per user |
 | **Real-time banner** | "Using model now… data minimized" during inference |
 | **Explicit consent step** | For sensitive operations (medical, financial, legal) |
 

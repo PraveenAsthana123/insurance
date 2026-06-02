@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Drill: §68.1 DB Viewer + §68.2 per-function tables — first iteration of
-the §68 HOLY Observability + Data Hub Standard.
+the §68 INSUR Observability + Data Hub Standard.
 
 This drill is intentionally OFFLINE-CAPABLE: it locks the SHAPE +
 INVARIANTS of the dbviewer surface without requiring docker-compose
@@ -56,12 +56,12 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path):
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit", "routers.dbviewer",
+                            "core.insur_audit", "routers.dbviewer",
                             "services.dbviewer_service")):
             del sys.modules[mod]
 
@@ -89,13 +89,13 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         client = TestClient(_build_app(audit_path))
 
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: /_global ----
-        r = client.get("/api/v1/holy/dbviewer/_global", headers=headers)
+        r = client.get("/api/v1/insur/dbviewer/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(1, "/_global → 200 + registered DBs + endpoint map + invariants",
              r.status_code == 200
@@ -106,7 +106,7 @@ def main() -> int:
              f"status={r.status_code} n_dbs={body.get('n_registered_databases')}")
 
         # ---- Step 2: /databases/{db_id} — no connection strings in response ----
-        r = client.get("/api/v1/holy/dbviewer/databases/holy", headers=headers)
+        r = client.get("/api/v1/insur/dbviewer/databases/insur", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         info_str = json.dumps(body)
         leak_terms = ("password", "passwd", "dsn", "://", "POSTGRES_PASSWORD")
@@ -116,7 +116,7 @@ def main() -> int:
              f"status={r.status_code} leaked_terms={leaked}")
 
         # ---- Step 3: /databases/{db_id}/schemas/{schema} → graceful degradation ----
-        r = client.get("/api/v1/holy/dbviewer/databases/holy/schemas/public", headers=headers)
+        r = client.get("/api/v1/insur/dbviewer/databases/insur/schemas/public", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(3, "schemas → 200, status is one of {live|unreachable|query_error}",
              r.status_code == 200
@@ -157,7 +157,7 @@ def main() -> int:
 
         # ---- Step 7: NEG malformed db_id → 400, NO audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/dbviewer/databases/Bad-DB", headers=headers)
+        r = client.get("/api/v1/insur/dbviewer/databases/Bad-DB", headers=headers)
         rows_after = len(_audit_rows(audit_path))
         step(7, "NEG: malformed db_id → 400, NO audit row (validator-first §47.6)",
              r.status_code == 400 and rows_after == rows_before,
@@ -165,7 +165,7 @@ def main() -> int:
 
         # ---- Step 8: NEG unknown db_id → 404, NO audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/dbviewer/databases/nonexistent", headers=headers)
+        r = client.get("/api/v1/insur/dbviewer/databases/nonexistent", headers=headers)
         rows_after = len(_audit_rows(audit_path))
         step(8, "NEG: unregistered db_id → 404, NO audit row",
              r.status_code == 404 and rows_after == rows_before,
@@ -174,7 +174,7 @@ def main() -> int:
         # ---- Step 9: NEG SQL-injection attempt in schema name → 400 ----
         rows_before = len(_audit_rows(audit_path))
         r = client.get(
-            "/api/v1/holy/dbviewer/databases/holy/schemas/public;DROP",
+            "/api/v1/insur/dbviewer/databases/insur/schemas/public;DROP",
             headers=headers,
         )
         rows_after = len(_audit_rows(audit_path))
@@ -186,7 +186,7 @@ def main() -> int:
              f"status={r.status_code} rows_delta={rows_after - rows_before}")
 
         # ---- Step 10: /process-tables/_global ----
-        r = client.get("/api/v1/holy/dbviewer/process-tables/_global", headers=headers)
+        r = client.get("/api/v1/insur/dbviewer/process-tables/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         annotated = [
             p for p in body.get("processes", [])
@@ -200,7 +200,7 @@ def main() -> int:
 
         # ---- Step 11: /process-tables/{dept}/{process_id} ----
         r = client.get(
-            "/api/v1/holy/dbviewer/process-tables/sales/lead_scoring",
+            "/api/v1/insur/dbviewer/process-tables/sales/lead_scoring",
             headers=headers,
         )
         body = r.json() if r.status_code == 200 else {}
@@ -216,7 +216,7 @@ def main() -> int:
         # ---- Step 12: NEG unknown process_id → 404 ----
         rows_before = len(_audit_rows(audit_path))
         r = client.get(
-            "/api/v1/holy/dbviewer/process-tables/sales/nonexistent_process",
+            "/api/v1/insur/dbviewer/process-tables/sales/nonexistent_process",
             headers=headers,
         )
         rows_after = len(_audit_rows(audit_path))

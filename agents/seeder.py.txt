@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # agents/seeder.py
-# auto-generated explainer · 2026-06-02T06:35:39Z
+# auto-generated explainer · 2026-06-02T10:00:03Z
 
 ## Purpose
 HOLY Beverage — task seeder for the 100-agent demo.

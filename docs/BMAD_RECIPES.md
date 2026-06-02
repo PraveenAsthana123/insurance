@@ -1,7 +1,7 @@
-# BMad Workflow Recipes — HOLY/insur
+# BMad Workflow Recipes — INSUR/insur
 
 How to use the 44 BMad skills (installed at `_bmad/` + `.claude/skills/bmad-*/`)
-inside HOLY's existing flows. Skill discovery: `scripts/bmad.sh status`.
+inside INSUR's existing flows. Skill discovery: `scripts/bmad.sh status`.
 
 ## Index of the 44 skills
 
@@ -59,7 +59,7 @@ python3 scripts/archon_auto_approve_safe.py --dry-run
 
 Do not mark OpenHands, DeepEval, Temporal, or full OpenTelemetry as wired unless the corresponding setup docs, tests, and runbooks have been updated and validated.
 
-## Recipe 1 — Adding a new HOLY API endpoint
+## Recipe 1 — Adding a new INSUR API endpoint
 
 Existing flow lives in `.archon/workflows/insur-api-change-governance.yaml` —
 plan → approve → implement → validate → approve. BMad augments each phase:
@@ -89,7 +89,7 @@ before approving the handoff.
 
 ## Recipe 2 — Per-dept feature (e.g. new pipeline for sales)
 
-HOLY has 19 departments under `global-ai-org/departments/*`. Each one
+INSUR has 19 departments under `global-ai-org/departments/*`. Each one
 has 25+ business-layer artifacts. BMad helps author per-dept content:
 
 ```text
@@ -143,9 +143,9 @@ has 25+ business-layer artifacts. BMad helps author per-dept content:
 6. drill_voice_pipeline.py if voice-related
 ```
 
-## Compose with existing HOLY tooling
+## Compose with existing INSUR tooling
 
-| HOLY Surface | BMad Replacement OR Complement | Note |
+| INSUR Surface | BMad Replacement OR Complement | Note |
 |---|---|---|
 | `.archon/workflows/insur-*.yaml` | **Complement** | BMad authors content for the workflow's command nodes |
 | `docs/AGENT_TOOL_SELECTION_MATRIX.md` | **Complement** | BMad's 44 skills mostly methodology, not the tools themselves |

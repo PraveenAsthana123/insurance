@@ -128,10 +128,10 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory() as tmp:
         audit_path = Path(tmp) / "typed_council.jsonl"
-        os.environ["HOLY_TYPED_COUNCIL_AUDIT_PATH"] = str(audit_path)
+        os.environ["INSUR_TYPED_COUNCIL_AUDIT_PATH"] = str(audit_path)
 
         # ---- Step 1: default disabled ----
-        os.environ.pop("HOLY_TYPED_COUNCIL_ENABLED", None)
+        os.environ.pop("INSUR_TYPED_COUNCIL_ENABLED", None)
         _reset_modules()
         from services import typed_council
 
@@ -153,8 +153,8 @@ def main() -> int:
              f"author={r1.author} leak={'sk-' in str(leak_text)}")
 
         # ---- Step 3: enabled + mocked happy path → executed ----
-        os.environ["HOLY_TYPED_COUNCIL_ENABLED"] = "true"
-        os.environ["HOLY_LLM_MODEL"] = "openai/gpt-4o-mini"
+        os.environ["INSUR_TYPED_COUNCIL_ENABLED"] = "true"
+        os.environ["INSUR_LLM_MODEL"] = "openai/gpt-4o-mini"
 
         _reset_modules()
         mock_happy = _make_mock_pydantic_ai("happy")

@@ -4284,7 +4284,7 @@
         "type": "object"
       },
       "TypedCouncilRunRequest": {
-        "description": "Input for the Pydantic AI typed 3-stage council.\n\nThe endpoint remains default-off unless `HOLY_TYPED_COUNCIL_ENABLED=true`.\nThe middleware-set tenant is injected by the router; body metadata cannot\nspoof tenant attribution.",
+        "description": "Input for the Pydantic AI typed 3-stage council.\n\nThe endpoint remains default-off unless `INSUR_TYPED_COUNCIL_ENABLED=true`.\nThe middleware-set tenant is injected by the router; body metadata cannot\nspoof tenant attribution.",
         "properties": {
           "metadata": {
             "additionalProperties": true,
@@ -6110,10 +6110,10 @@
         ]
       }
     },
-    "/api/v1/holy/agentic/execute": {
+    "/api/v1/insur/agentic/execute": {
       "post": {
         "description": "Run a goal through the 10-layer agentic stack. Returns full run manifest.\n\nBody: {goal, dept?, user_id?, granted_scopes?, budget_usd?}",
-        "operationId": "agentic_execute_api_v1_holy_agentic_execute_post",
+        "operationId": "agentic_execute_api_v1_insur_agentic_execute_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6132,7 +6132,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Agentic Execute Api V1 Holy Agentic Execute Post",
+                  "title": "Response Agentic Execute Api V1 Insur Agentic Execute Post",
                   "type": "object"
                 }
               }
@@ -6152,14 +6152,14 @@
         },
         "summary": "Agentic Execute",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/agentic/runs": {
+    "/api/v1/insur/agentic/runs": {
       "get": {
         "description": "List recent agentic runs, optionally filtered by dept.",
-        "operationId": "list_agentic_runs_api_v1_holy_agentic_runs_get",
+        "operationId": "list_agentic_runs_api_v1_insur_agentic_runs_get",
         "parameters": [
           {
             "in": "query",
@@ -6194,7 +6194,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Agentic Runs Api V1 Holy Agentic Runs Get",
+                  "title": "Response List Agentic Runs Api V1 Insur Agentic Runs Get",
                   "type": "object"
                 }
               }
@@ -6214,14 +6214,14 @@
         },
         "summary": "List Agentic Runs",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/agentic/runs/{request_id}": {
+    "/api/v1/insur/agentic/runs/{request_id}": {
       "get": {
         "description": "Get full manifest for a specific run.",
-        "operationId": "get_agentic_run_api_v1_holy_agentic_runs__request_id__get",
+        "operationId": "get_agentic_run_api_v1_insur_agentic_runs__request_id__get",
         "parameters": [
           {
             "in": "path",
@@ -6239,7 +6239,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Agentic Run Api V1 Holy Agentic Runs  Request Id  Get",
+                  "title": "Response Get Agentic Run Api V1 Insur Agentic Runs  Request Id  Get",
                   "type": "object"
                 }
               }
@@ -6259,14 +6259,14 @@
         },
         "summary": "Get Agentic Run",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/council/ask": {
+    "/api/v1/insur/council/ask": {
       "post": {
         "description": "Enqueue a council task. Body: {prompt, department?}. Returns task_id.",
-        "operationId": "council_ask_api_v1_holy_council_ask_post",
+        "operationId": "council_ask_api_v1_insur_council_ask_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6285,7 +6285,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Council Ask Api V1 Holy Council Ask Post",
+                  "title": "Response Council Ask Api V1 Insur Council Ask Post",
                   "type": "object"
                 }
               }
@@ -6305,14 +6305,14 @@
         },
         "summary": "Council Ask",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/council/result/{task_id}": {
+    "/api/v1/insur/council/result/{task_id}": {
       "get": {
         "description": "Poll for a council task's result. Returns 'pending' if not yet processed.",
-        "operationId": "council_result_api_v1_holy_council_result__task_id__get",
+        "operationId": "council_result_api_v1_insur_council_result__task_id__get",
         "parameters": [
           {
             "in": "path",
@@ -6330,7 +6330,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Council Result Api V1 Holy Council Result  Task Id  Get",
+                  "title": "Response Council Result Api V1 Insur Council Result  Task Id  Get",
                   "type": "object"
                 }
               }
@@ -6350,14 +6350,14 @@
         },
         "summary": "Council Result",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/dashboards/{dept}/{role}": {
+    "/api/v1/insur/dashboards/{dept}/{role}": {
       "get": {
         "description": "Return synthesized tile + chart payload for (dept, role).\nTiles/charts use deterministic synthetic data per global \u00a764.37.",
-        "operationId": "get_role_dashboard_api_v1_holy_dashboards__dept___role__get",
+        "operationId": "get_role_dashboard_api_v1_insur_dashboards__dept___role__get",
         "parameters": [
           {
             "in": "path",
@@ -6384,7 +6384,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Role Dashboard Api V1 Holy Dashboards  Dept   Role  Get",
+                  "title": "Response Get Role Dashboard Api V1 Insur Dashboards  Dept   Role  Get",
                   "type": "object"
                 }
               }
@@ -6404,21 +6404,21 @@
         },
         "summary": "Get Role Dashboard",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/_global": {
+    "/api/v1/insur/dbviewer/_global": {
       "get": {
         "description": "Cross-database overview \u2014 registered DBs + counts.",
-        "operationId": "global_overview_api_v1_holy_dbviewer__global_get",
+        "operationId": "global_overview_api_v1_insur_dbviewer__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Overview Api V1 Holy Dbviewer  Global Get",
+                  "title": "Response Global Overview Api V1 Insur Dbviewer  Global Get",
                   "type": "object"
                 }
               }
@@ -6428,15 +6428,15 @@
         },
         "summary": "Global Overview",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/databases/{db_id}": {
+    "/api/v1/insur/dbviewer/databases/{db_id}": {
       "get": {
         "description": "Return registered DB info + list of schemas.",
-        "operationId": "database_info_api_v1_holy_dbviewer_databases__db_id__get",
+        "operationId": "database_info_api_v1_insur_dbviewer_databases__db_id__get",
         "parameters": [
           {
             "in": "path",
@@ -6454,7 +6454,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Database Info Api V1 Holy Dbviewer Databases  Db Id  Get",
+                  "title": "Response Database Info Api V1 Insur Dbviewer Databases  Db Id  Get",
                   "type": "object"
                 }
               }
@@ -6474,15 +6474,15 @@
         },
         "summary": "Database Info",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}": {
+    "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}": {
       "get": {
         "description": "List tables in a schema with PII + tenant_id flags + row estimates.",
-        "operationId": "schema_tables_api_v1_holy_dbviewer_databases__db_id__schemas__schema__get",
+        "operationId": "schema_tables_api_v1_insur_dbviewer_databases__db_id__schemas__schema__get",
         "parameters": [
           {
             "in": "path",
@@ -6509,7 +6509,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Schema Tables Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Get",
+                  "title": "Response Schema Tables Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Get",
                   "type": "object"
                 }
               }
@@ -6529,15 +6529,15 @@
         },
         "summary": "Schema Tables",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}": {
+    "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}": {
       "get": {
         "description": "Column list + PK + FK + PII flags for a single table.",
-        "operationId": "table_detail_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__get",
+        "operationId": "table_detail_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__get",
         "parameters": [
           {
             "in": "path",
@@ -6573,7 +6573,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Table Detail Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get",
+                  "title": "Response Table Detail Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get",
                   "type": "object"
                 }
               }
@@ -6593,15 +6593,15 @@
         },
         "summary": "Table Detail",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample": {
+    "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample": {
       "get": {
         "description": "Sample rows (PII-redacted by default, tenant-scoped at SQL).",
-        "operationId": "table_sample_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
+        "operationId": "table_sample_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
         "parameters": [
           {
             "in": "path",
@@ -6661,7 +6661,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Table Sample Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get",
+                  "title": "Response Table Sample Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get",
                   "type": "object"
                 }
               }
@@ -6681,22 +6681,22 @@
         },
         "summary": "Table Sample",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/process-tables/_global": {
+    "/api/v1/insur/dbviewer/process-tables/_global": {
       "get": {
         "description": "Whole per-process table catalog (\u00a768.2).",
-        "operationId": "process_tables_global_api_v1_holy_dbviewer_process_tables__global_get",
+        "operationId": "process_tables_global_api_v1_insur_dbviewer_process_tables__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Process Tables Global Api V1 Holy Dbviewer Process Tables  Global Get",
+                  "title": "Response Process Tables Global Api V1 Insur Dbviewer Process Tables  Global Get",
                   "type": "object"
                 }
               }
@@ -6706,15 +6706,15 @@
         },
         "summary": "Process Tables Global",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/process-tables/{dept}": {
+    "/api/v1/insur/dbviewer/process-tables/{dept}": {
       "get": {
         "description": "Per-dept process table catalog.",
-        "operationId": "process_tables_dept_api_v1_holy_dbviewer_process_tables__dept__get",
+        "operationId": "process_tables_dept_api_v1_insur_dbviewer_process_tables__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -6732,7 +6732,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Process Tables Dept Api V1 Holy Dbviewer Process Tables  Dept  Get",
+                  "title": "Response Process Tables Dept Api V1 Insur Dbviewer Process Tables  Dept  Get",
                   "type": "object"
                 }
               }
@@ -6752,15 +6752,15 @@
         },
         "summary": "Process Tables Dept",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/dbviewer/process-tables/{dept}/{process_id}": {
+    "/api/v1/insur/dbviewer/process-tables/{dept}/{process_id}": {
       "get": {
         "description": "Single process \u2014 primary + secondary tables + join keys + PII columns.",
-        "operationId": "process_tables_detail_api_v1_holy_dbviewer_process_tables__dept___process_id__get",
+        "operationId": "process_tables_detail_api_v1_insur_dbviewer_process_tables__dept___process_id__get",
         "parameters": [
           {
             "in": "path",
@@ -6787,7 +6787,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Process Tables Detail Api V1 Holy Dbviewer Process Tables  Dept   Process Id  Get",
+                  "title": "Response Process Tables Detail Api V1 Insur Dbviewer Process Tables  Dept   Process Id  Get",
                   "type": "object"
                 }
               }
@@ -6807,22 +6807,22 @@
         },
         "summary": "Process Tables Detail",
         "tags": [
-          "holy",
+          "insur",
           "dbviewer"
         ]
       }
     },
-    "/api/v1/holy/demo-stories/_global": {
+    "/api/v1/insur/demo-stories/_global": {
       "get": {
         "description": "Cross-dept demo inventory \u2014 counts + per-dept demo_id lists.",
-        "operationId": "global_inventory_api_v1_holy_demo_stories__global_get",
+        "operationId": "global_inventory_api_v1_insur_demo_stories__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Inventory Api V1 Holy Demo Stories  Global Get",
+                  "title": "Response Global Inventory Api V1 Insur Demo Stories  Global Get",
                   "type": "object"
                 }
               }
@@ -6832,15 +6832,15 @@
         },
         "summary": "Global Inventory",
         "tags": [
-          "holy",
+          "insur",
           "demo-stories"
         ]
       }
     },
-    "/api/v1/holy/demo-stories/{dept}": {
+    "/api/v1/insur/demo-stories/{dept}": {
       "get": {
         "description": "Per-dept catalog \u2014 all 15 role demos for this dept.",
-        "operationId": "dept_catalog_api_v1_holy_demo_stories__dept__get",
+        "operationId": "dept_catalog_api_v1_insur_demo_stories__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -6858,7 +6858,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Catalog Api V1 Holy Demo Stories  Dept  Get",
+                  "title": "Response Dept Catalog Api V1 Insur Demo Stories  Dept  Get",
                   "type": "object"
                 }
               }
@@ -6878,15 +6878,15 @@
         },
         "summary": "Dept Catalog",
         "tags": [
-          "holy",
+          "insur",
           "demo-stories"
         ]
       }
     },
-    "/api/v1/holy/demo-stories/{dept}/{role}": {
+    "/api/v1/insur/demo-stories/{dept}/{role}": {
       "get": {
         "description": "Single role demo detail for this dept.",
-        "operationId": "role_demo_detail_api_v1_holy_demo_stories__dept___role__get",
+        "operationId": "role_demo_detail_api_v1_insur_demo_stories__dept___role__get",
         "parameters": [
           {
             "in": "path",
@@ -6913,7 +6913,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Role Demo Detail Api V1 Holy Demo Stories  Dept   Role  Get",
+                  "title": "Response Role Demo Detail Api V1 Insur Demo Stories  Dept   Role  Get",
                   "type": "object"
                 }
               }
@@ -6933,22 +6933,22 @@
         },
         "summary": "Role Demo Detail",
         "tags": [
-          "holy",
+          "insur",
           "demo-stories"
         ]
       }
     },
-    "/api/v1/holy/depts": {
+    "/api/v1/insur/depts": {
       "get": {
-        "description": "List HOLY-enabled departments that have a HOLY_NAV.json file.",
-        "operationId": "list_depts_api_v1_holy_depts_get",
+        "description": "List INSUR-enabled departments that have a INSUR_NAV.json file.",
+        "operationId": "list_depts_api_v1_insur_depts_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Depts Api V1 Holy Depts Get",
+                  "title": "Response List Depts Api V1 Insur Depts Get",
                   "type": "object"
                 }
               }
@@ -6958,21 +6958,21 @@
         },
         "summary": "List Depts",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/downloads/_global": {
+    "/api/v1/insur/downloads/_global": {
       "get": {
         "description": "Cross-dept inventory \u2014 datasets + file counts.",
-        "operationId": "global_inventory_api_v1_holy_downloads__global_get",
+        "operationId": "global_inventory_api_v1_insur_downloads__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Inventory Api V1 Holy Downloads  Global Get",
+                  "title": "Response Global Inventory Api V1 Insur Downloads  Global Get",
                   "type": "object"
                 }
               }
@@ -6982,15 +6982,15 @@
         },
         "summary": "Global Inventory",
         "tags": [
-          "holy",
+          "insur",
           "downloads"
         ]
       }
     },
-    "/api/v1/holy/downloads/{dept}": {
+    "/api/v1/insur/downloads/{dept}": {
       "get": {
         "description": "Per-dept catalog \u2014 datasets + per-dataset URL set.",
-        "operationId": "dept_catalog_api_v1_holy_downloads__dept__get",
+        "operationId": "dept_catalog_api_v1_insur_downloads__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -7008,7 +7008,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Catalog Api V1 Holy Downloads  Dept  Get",
+                  "title": "Response Dept Catalog Api V1 Insur Downloads  Dept  Get",
                   "type": "object"
                 }
               }
@@ -7028,15 +7028,15 @@
         },
         "summary": "Dept Catalog",
         "tags": [
-          "holy",
+          "insur",
           "downloads"
         ]
       }
     },
-    "/api/v1/holy/downloads/{dept}/{filename}": {
+    "/api/v1/insur/downloads/{dept}/{filename}": {
       "get": {
         "description": "Serve a specific dataset file. Hardened against path traversal.",
-        "operationId": "serve_file_api_v1_holy_downloads__dept___filename__get",
+        "operationId": "serve_file_api_v1_insur_downloads__dept___filename__get",
         "parameters": [
           {
             "in": "path",
@@ -7079,15 +7079,15 @@
         },
         "summary": "Serve File",
         "tags": [
-          "holy",
+          "insur",
           "downloads"
         ]
       }
     },
-    "/api/v1/holy/eval/{dept}/{pipeline}/runs": {
+    "/api/v1/insur/eval/{dept}/{pipeline}/runs": {
       "get": {
         "description": "List all completed runs for a pipeline (most recent first).",
-        "operationId": "list_runs_api_v1_holy_eval__dept___pipeline__runs_get",
+        "operationId": "list_runs_api_v1_insur_eval__dept___pipeline__runs_get",
         "parameters": [
           {
             "in": "path",
@@ -7114,7 +7114,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Runs Api V1 Holy Eval  Dept   Pipeline  Runs Get",
+                  "title": "Response List Runs Api V1 Insur Eval  Dept   Pipeline  Runs Get",
                   "type": "object"
                 }
               }
@@ -7134,14 +7134,14 @@
         },
         "summary": "List Runs",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/latest": {
+    "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/latest": {
       "get": {
         "description": "Convenience: return manifest of newest run (alias for /runs/<id>/manifest).",
-        "operationId": "get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get",
+        "operationId": "get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get",
         "parameters": [
           {
             "in": "path",
@@ -7177,7 +7177,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Latest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Latest Get",
+                  "title": "Response Get Latest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Latest Get",
                   "type": "object"
                 }
               }
@@ -7197,14 +7197,14 @@
         },
         "summary": "Get Latest",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/manifest": {
+    "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/manifest": {
       "get": {
         "description": "Return the full manifest for a specific run.",
-        "operationId": "get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get",
+        "operationId": "get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get",
         "parameters": [
           {
             "in": "path",
@@ -7240,7 +7240,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Manifest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Manifest Get",
+                  "title": "Response Get Manifest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Manifest Get",
                   "type": "object"
                 }
               }
@@ -7260,14 +7260,14 @@
         },
         "summary": "Get Manifest",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}": {
+    "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}": {
       "get": {
         "description": "Serve a PNG plot file. Path-traversal guarded.",
-        "operationId": "get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
+        "operationId": "get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
         "parameters": [
           {
             "in": "path",
@@ -7328,21 +7328,21 @@
         },
         "summary": "Get Plot",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/evals/cost/_global": {
+    "/api/v1/insur/evals/cost/_global": {
       "get": {
         "description": "Total cost across all tenants/models \u2014 24h / 7d / 30d + all-time.",
-        "operationId": "cost_global_api_v1_holy_evals_cost__global_get",
+        "operationId": "cost_global_api_v1_insur_evals_cost__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Cost Global Api V1 Holy Evals Cost  Global Get",
+                  "title": "Response Cost Global Api V1 Insur Evals Cost  Global Get",
                   "type": "object"
                 }
               }
@@ -7352,16 +7352,16 @@
         },
         "summary": "Cost Global",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "cost"
         ]
       }
     },
-    "/api/v1/holy/evals/cost/by-model": {
+    "/api/v1/insur/evals/cost/by-model": {
       "get": {
         "description": "Per-model cost ranking, highest-cost first.",
-        "operationId": "cost_by_model_api_v1_holy_evals_cost_by_model_get",
+        "operationId": "cost_by_model_api_v1_insur_evals_cost_by_model_get",
         "parameters": [
           {
             "in": "query",
@@ -7381,7 +7381,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Cost By Model Api V1 Holy Evals Cost By Model Get",
+                  "title": "Response Cost By Model Api V1 Insur Evals Cost By Model Get",
                   "type": "object"
                 }
               }
@@ -7401,16 +7401,16 @@
         },
         "summary": "Cost By Model",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "cost"
         ]
       }
     },
-    "/api/v1/holy/evals/cost/by-request/{request_id}": {
+    "/api/v1/insur/evals/cost/by-request/{request_id}": {
       "get": {
         "description": "Single-request cost detail.",
-        "operationId": "cost_by_request_api_v1_holy_evals_cost_by_request__request_id__get",
+        "operationId": "cost_by_request_api_v1_insur_evals_cost_by_request__request_id__get",
         "parameters": [
           {
             "in": "path",
@@ -7428,7 +7428,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Cost By Request Api V1 Holy Evals Cost By Request  Request Id  Get",
+                  "title": "Response Cost By Request Api V1 Insur Evals Cost By Request  Request Id  Get",
                   "type": "object"
                 }
               }
@@ -7448,16 +7448,16 @@
         },
         "summary": "Cost By Request",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "cost"
         ]
       }
     },
-    "/api/v1/holy/evals/cost/{tenant_id}": {
+    "/api/v1/insur/evals/cost/{tenant_id}": {
       "get": {
         "description": "Per-tenant cost breakdown with per-model totals within the tenant.",
-        "operationId": "cost_per_tenant_api_v1_holy_evals_cost__tenant_id__get",
+        "operationId": "cost_per_tenant_api_v1_insur_evals_cost__tenant_id__get",
         "parameters": [
           {
             "in": "path",
@@ -7486,7 +7486,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Cost Per Tenant Api V1 Holy Evals Cost  Tenant Id  Get",
+                  "title": "Response Cost Per Tenant Api V1 Insur Evals Cost  Tenant Id  Get",
                   "type": "object"
                 }
               }
@@ -7506,16 +7506,16 @@
         },
         "summary": "Cost Per Tenant",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "cost"
         ]
       }
     },
-    "/api/v1/holy/evals/functional/_global": {
+    "/api/v1/insur/evals/functional/_global": {
       "get": {
         "description": "Cross-model leaderboard + dataset coverage.",
-        "operationId": "functional_global_api_v1_holy_evals_functional__global_get",
+        "operationId": "functional_global_api_v1_insur_evals_functional__global_get",
         "parameters": [
           {
             "in": "query",
@@ -7535,7 +7535,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Functional Global Api V1 Holy Evals Functional  Global Get",
+                  "title": "Response Functional Global Api V1 Insur Evals Functional  Global Get",
                   "type": "object"
                 }
               }
@@ -7555,16 +7555,16 @@
         },
         "summary": "Functional Global",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "functional"
         ]
       }
     },
-    "/api/v1/holy/evals/functional/{model_id}": {
+    "/api/v1/insur/evals/functional/{model_id}": {
       "get": {
         "description": "Per-model eval history with optional dataset filter.",
-        "operationId": "functional_model_api_v1_holy_evals_functional__model_id__get",
+        "operationId": "functional_model_api_v1_insur_evals_functional__model_id__get",
         "parameters": [
           {
             "in": "path",
@@ -7623,7 +7623,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Functional Model Api V1 Holy Evals Functional  Model Id  Get",
+                  "title": "Response Functional Model Api V1 Insur Evals Functional  Model Id  Get",
                   "type": "object"
                 }
               }
@@ -7643,16 +7643,16 @@
         },
         "summary": "Functional Model",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "functional"
         ]
       }
     },
-    "/api/v1/holy/evals/functional/{model_id}/runs/{run_id}": {
+    "/api/v1/insur/evals/functional/{model_id}/runs/{run_id}": {
       "get": {
         "description": "Single eval run detail.",
-        "operationId": "functional_run_api_v1_holy_evals_functional__model_id__runs__run_id__get",
+        "operationId": "functional_run_api_v1_insur_evals_functional__model_id__runs__run_id__get",
         "parameters": [
           {
             "in": "path",
@@ -7679,7 +7679,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Functional Run Api V1 Holy Evals Functional  Model Id  Runs  Run Id  Get",
+                  "title": "Response Functional Run Api V1 Insur Evals Functional  Model Id  Runs  Run Id  Get",
                   "type": "object"
                 }
               }
@@ -7699,16 +7699,16 @@
         },
         "summary": "Functional Run",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "functional"
         ]
       }
     },
-    "/api/v1/holy/evals/model-compare": {
+    "/api/v1/insur/evals/model-compare": {
       "post": {
         "description": "Execute a multi-model comparison; persist manifest; return scorecard.",
-        "operationId": "run_compare_api_v1_holy_evals_model_compare_post",
+        "operationId": "run_compare_api_v1_insur_evals_model_compare_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -7743,16 +7743,16 @@
         },
         "summary": "Run Compare",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "model-compare"
         ]
       }
     },
-    "/api/v1/holy/evals/model-compare/_history": {
+    "/api/v1/insur/evals/model-compare/_history": {
       "get": {
         "description": "List recent comparison runs (newest-first by manifest mtime).",
-        "operationId": "history_api_v1_holy_evals_model_compare__history_get",
+        "operationId": "history_api_v1_insur_evals_model_compare__history_get",
         "parameters": [
           {
             "in": "query",
@@ -7773,7 +7773,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response History Api V1 Holy Evals Model Compare  History Get",
+                  "title": "Response History Api V1 Insur Evals Model Compare  History Get",
                   "type": "object"
                 }
               }
@@ -7793,16 +7793,16 @@
         },
         "summary": "History",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "model-compare"
         ]
       }
     },
-    "/api/v1/holy/evals/model-compare/{comparison_id}": {
+    "/api/v1/insur/evals/model-compare/{comparison_id}": {
       "get": {
         "description": "Read back a persisted comparison manifest.",
-        "operationId": "get_comparison_api_v1_holy_evals_model_compare__comparison_id__get",
+        "operationId": "get_comparison_api_v1_insur_evals_model_compare__comparison_id__get",
         "parameters": [
           {
             "in": "path",
@@ -7820,7 +7820,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Comparison Api V1 Holy Evals Model Compare  Comparison Id  Get",
+                  "title": "Response Get Comparison Api V1 Insur Evals Model Compare  Comparison Id  Get",
                   "type": "object"
                 }
               }
@@ -7840,23 +7840,23 @@
         },
         "summary": "Get Comparison",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "model-compare"
         ]
       }
     },
-    "/api/v1/holy/evals/safety/_global": {
+    "/api/v1/insur/evals/safety/_global": {
       "get": {
         "description": "Cross-model safety scorecard, latest-per-model with verdicts.",
-        "operationId": "safety_global_api_v1_holy_evals_safety__global_get",
+        "operationId": "safety_global_api_v1_insur_evals_safety__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Safety Global Api V1 Holy Evals Safety  Global Get",
+                  "title": "Response Safety Global Api V1 Insur Evals Safety  Global Get",
                   "type": "object"
                 }
               }
@@ -7866,16 +7866,16 @@
         },
         "summary": "Safety Global",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "safety"
         ]
       }
     },
-    "/api/v1/holy/evals/safety/incidents": {
+    "/api/v1/insur/evals/safety/incidents": {
       "get": {
         "description": "Recent safety incidents (verdict=unsafe OR n_safety_incidents > 0).",
-        "operationId": "safety_incidents_api_v1_holy_evals_safety_incidents_get",
+        "operationId": "safety_incidents_api_v1_insur_evals_safety_incidents_get",
         "parameters": [
           {
             "in": "query",
@@ -7907,7 +7907,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Safety Incidents Api V1 Holy Evals Safety Incidents Get",
+                  "title": "Response Safety Incidents Api V1 Insur Evals Safety Incidents Get",
                   "type": "object"
                 }
               }
@@ -7927,16 +7927,16 @@
         },
         "summary": "Safety Incidents",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "safety"
         ]
       }
     },
-    "/api/v1/holy/evals/safety/{model_id}": {
+    "/api/v1/insur/evals/safety/{model_id}": {
       "get": {
         "description": "Per-model safety history with per-row verdict_summary.",
-        "operationId": "safety_per_model_api_v1_holy_evals_safety__model_id__get",
+        "operationId": "safety_per_model_api_v1_insur_evals_safety__model_id__get",
         "parameters": [
           {
             "in": "path",
@@ -7977,7 +7977,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Safety Per Model Api V1 Holy Evals Safety  Model Id  Get",
+                  "title": "Response Safety Per Model Api V1 Insur Evals Safety  Model Id  Get",
                   "type": "object"
                 }
               }
@@ -7997,16 +7997,16 @@
         },
         "summary": "Safety Per Model",
         "tags": [
-          "holy",
+          "insur",
           "evals",
           "safety"
         ]
       }
     },
-    "/api/v1/holy/fleet/fanout": {
+    "/api/v1/insur/fleet/fanout": {
       "post": {
         "description": "Push N synthetic tasks into the `tasks` queue so the 100-agent fleet\nhas visible work.\n\nBody: {n?, prompt_template?, dept?}\nReturns: {enqueued, task_ids, queue_depth_after}",
-        "operationId": "fanout_tasks_api_v1_holy_fleet_fanout_post",
+        "operationId": "fanout_tasks_api_v1_insur_fleet_fanout_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -8031,7 +8031,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Fanout Tasks Api V1 Holy Fleet Fanout Post",
+                  "title": "Response Fanout Tasks Api V1 Insur Fleet Fanout Post",
                   "type": "object"
                 }
               }
@@ -8051,14 +8051,14 @@
         },
         "summary": "Fanout Tasks",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/fleet/recent-done": {
+    "/api/v1/insur/fleet/recent-done": {
       "get": {
         "description": "Return the N most-recent completed items from the chosen done queue.",
-        "operationId": "get_recent_done_api_v1_holy_fleet_recent_done_get",
+        "operationId": "get_recent_done_api_v1_insur_fleet_recent_done_get",
         "parameters": [
           {
             "in": "query",
@@ -8087,7 +8087,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Recent Done Api V1 Holy Fleet Recent Done Get",
+                  "title": "Response Get Recent Done Api V1 Insur Fleet Recent Done Get",
                   "type": "object"
                 }
               }
@@ -8107,21 +8107,21 @@
         },
         "summary": "Get Recent Done",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/fleet/stats": {
+    "/api/v1/insur/fleet/stats": {
       "get": {
         "description": "Live snapshot of all agent fleets \u2014 queue depths + recent completions.",
-        "operationId": "get_fleet_stats_api_v1_holy_fleet_stats_get",
+        "operationId": "get_fleet_stats_api_v1_insur_fleet_stats_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Fleet Stats Api V1 Holy Fleet Stats Get",
+                  "title": "Response Get Fleet Stats Api V1 Insur Fleet Stats Get",
                   "type": "object"
                 }
               }
@@ -8131,21 +8131,21 @@
         },
         "summary": "Get Fleet Stats",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/graph/_global": {
+    "/api/v1/insur/graph/_global": {
       "get": {
         "description": "Cross-dept summary: node + edge counts per dept.",
-        "operationId": "global_summary_api_v1_holy_graph__global_get",
+        "operationId": "global_summary_api_v1_insur_graph__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Summary Api V1 Holy Graph  Global Get",
+                  "title": "Response Global Summary Api V1 Insur Graph  Global Get",
                   "type": "object"
                 }
               }
@@ -8155,15 +8155,15 @@
         },
         "summary": "Global Summary",
         "tags": [
-          "holy",
+          "insur",
           "graph"
         ]
       }
     },
-    "/api/v1/holy/graph/{dept}": {
+    "/api/v1/insur/graph/{dept}": {
       "get": {
         "description": "Full per-dept relationship graph.",
-        "operationId": "dept_graph_api_v1_holy_graph__dept__get",
+        "operationId": "dept_graph_api_v1_insur_graph__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -8181,7 +8181,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Graph Api V1 Holy Graph  Dept  Get",
+                  "title": "Response Dept Graph Api V1 Insur Graph  Dept  Get",
                   "type": "object"
                 }
               }
@@ -8201,15 +8201,15 @@
         },
         "summary": "Dept Graph",
         "tags": [
-          "holy",
+          "insur",
           "graph"
         ]
       }
     },
-    "/api/v1/holy/graph/{dept}/neighbors/{node_id}": {
+    "/api/v1/insur/graph/{dept}/neighbors/{node_id}": {
       "get": {
         "description": "1-hop neighbors of a node (both incoming and outgoing edges).",
-        "operationId": "dept_neighbors_api_v1_holy_graph__dept__neighbors__node_id__get",
+        "operationId": "dept_neighbors_api_v1_insur_graph__dept__neighbors__node_id__get",
         "parameters": [
           {
             "in": "path",
@@ -8236,7 +8236,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Neighbors Api V1 Holy Graph  Dept  Neighbors  Node Id  Get",
+                  "title": "Response Dept Neighbors Api V1 Insur Graph  Dept  Neighbors  Node Id  Get",
                   "type": "object"
                 }
               }
@@ -8256,15 +8256,15 @@
         },
         "summary": "Dept Neighbors",
         "tags": [
-          "holy",
+          "insur",
           "graph"
         ]
       }
     },
-    "/api/v1/holy/graph/{dept}/nodes": {
+    "/api/v1/insur/graph/{dept}/nodes": {
       "get": {
         "description": "Per-dept node list, optionally filtered by type.",
-        "operationId": "dept_nodes_filtered_api_v1_holy_graph__dept__nodes_get",
+        "operationId": "dept_nodes_filtered_api_v1_insur_graph__dept__nodes_get",
         "parameters": [
           {
             "in": "path",
@@ -8294,7 +8294,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Nodes Filtered Api V1 Holy Graph  Dept  Nodes Get",
+                  "title": "Response Dept Nodes Filtered Api V1 Insur Graph  Dept  Nodes Get",
                   "type": "object"
                 }
               }
@@ -8314,15 +8314,15 @@
         },
         "summary": "Dept Nodes Filtered",
         "tags": [
-          "holy",
+          "insur",
           "graph"
         ]
       }
     },
-    "/api/v1/holy/guardrails/_global": {
+    "/api/v1/insur/guardrails/_global": {
       "get": {
         "description": "Cross-dept rollup: counts per guardrail_type \u00d7 decision + per-dept totals.",
-        "operationId": "guardrails_global_api_v1_holy_guardrails__global_get",
+        "operationId": "guardrails_global_api_v1_insur_guardrails__global_get",
         "parameters": [
           {
             "in": "query",
@@ -8342,7 +8342,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Guardrails Global Api V1 Holy Guardrails  Global Get",
+                  "title": "Response Guardrails Global Api V1 Insur Guardrails  Global Get",
                   "type": "object"
                 }
               }
@@ -8362,15 +8362,15 @@
         },
         "summary": "Guardrails Global",
         "tags": [
-          "holy",
+          "insur",
           "guardrails"
         ]
       }
     },
-    "/api/v1/holy/guardrails/decision/{decision_id}": {
+    "/api/v1/insur/guardrails/decision/{decision_id}": {
       "get": {
         "description": "Look up one guardrail decision by decision_id or request_id.",
-        "operationId": "guardrails_decision_api_v1_holy_guardrails_decision__decision_id__get",
+        "operationId": "guardrails_decision_api_v1_insur_guardrails_decision__decision_id__get",
         "parameters": [
           {
             "in": "path",
@@ -8388,7 +8388,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Guardrails Decision Api V1 Holy Guardrails Decision  Decision Id  Get",
+                  "title": "Response Guardrails Decision Api V1 Insur Guardrails Decision  Decision Id  Get",
                   "type": "object"
                 }
               }
@@ -8408,15 +8408,15 @@
         },
         "summary": "Guardrails Decision",
         "tags": [
-          "holy",
+          "insur",
           "guardrails"
         ]
       }
     },
-    "/api/v1/holy/guardrails/{dept}": {
+    "/api/v1/insur/guardrails/{dept}": {
       "get": {
         "description": "Per-dept guardrail decisions, newest-first, with optional filters.",
-        "operationId": "guardrails_dept_api_v1_holy_guardrails__dept__get",
+        "operationId": "guardrails_dept_api_v1_insur_guardrails__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -8493,7 +8493,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Guardrails Dept Api V1 Holy Guardrails  Dept  Get",
+                  "title": "Response Guardrails Dept Api V1 Insur Guardrails  Dept  Get",
                   "type": "object"
                 }
               }
@@ -8513,22 +8513,22 @@
         },
         "summary": "Guardrails Dept",
         "tags": [
-          "holy",
+          "insur",
           "guardrails"
         ]
       }
     },
-    "/api/v1/holy/master-data/_global": {
+    "/api/v1/insur/master-data/_global": {
       "get": {
         "description": "Cross-dept catalog summary \u2014 what every dept publishes.",
-        "operationId": "global_catalog_api_v1_holy_master_data__global_get",
+        "operationId": "global_catalog_api_v1_insur_master_data__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Catalog Api V1 Holy Master Data  Global Get",
+                  "title": "Response Global Catalog Api V1 Insur Master Data  Global Get",
                   "type": "object"
                 }
               }
@@ -8538,15 +8538,15 @@
         },
         "summary": "Global Catalog",
         "tags": [
-          "holy",
+          "insur",
           "master-data"
         ]
       }
     },
-    "/api/v1/holy/master-data/{dept}": {
+    "/api/v1/insur/master-data/{dept}": {
       "get": {
         "description": "Per-dept master-data catalog \u2014 entity list + ownership + field schema.",
-        "operationId": "dept_catalog_api_v1_holy_master_data__dept__get",
+        "operationId": "dept_catalog_api_v1_insur_master_data__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -8564,7 +8564,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Catalog Api V1 Holy Master Data  Dept  Get",
+                  "title": "Response Dept Catalog Api V1 Insur Master Data  Dept  Get",
                   "type": "object"
                 }
               }
@@ -8584,15 +8584,15 @@
         },
         "summary": "Dept Catalog",
         "tags": [
-          "holy",
+          "insur",
           "master-data"
         ]
       }
     },
-    "/api/v1/holy/master-data/{dept}/{entity}": {
+    "/api/v1/insur/master-data/{dept}/{entity}": {
       "get": {
         "description": "Entity schema + (stub) sample rows.\n\nPII fields are redacted unless include_pii=1 AND the caller passes the\n\u00a747.6 SOC2 CC6.2 access check (TODO when auth middleware lands).\nThe MVP returns the schema + empty rows list; downstream integrations\nfill the actual data per \u00a765.1 #7.",
-        "operationId": "entity_sample_api_v1_holy_master_data__dept___entity__get",
+        "operationId": "entity_sample_api_v1_insur_master_data__dept___entity__get",
         "parameters": [
           {
             "in": "path",
@@ -8643,7 +8643,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Entity Sample Api V1 Holy Master Data  Dept   Entity  Get",
+                  "title": "Response Entity Sample Api V1 Insur Master Data  Dept   Entity  Get",
                   "type": "object"
                 }
               }
@@ -8663,22 +8663,22 @@
         },
         "summary": "Entity Sample",
         "tags": [
-          "holy",
+          "insur",
           "master-data"
         ]
       }
     },
-    "/api/v1/holy/monitoring/_global": {
+    "/api/v1/insur/monitoring/_global": {
       "get": {
         "description": "Cross-dept rollup (executive view).  Same job health, projected per dept.\n\nPer \u00a738.3 \u2014 read attribution audit row written per call with caller's\ntenant_id + actor. Monitoring DATA is fleet-wide (not tenant-scoped),\nbut the access trail IS tenant-attributed.",
-        "operationId": "global_rollup_api_v1_holy_monitoring__global_get",
+        "operationId": "global_rollup_api_v1_insur_monitoring__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Rollup Api V1 Holy Monitoring  Global Get",
+                  "title": "Response Global Rollup Api V1 Insur Monitoring  Global Get",
                   "type": "object"
                 }
               }
@@ -8688,15 +8688,15 @@
         },
         "summary": "Global Rollup",
         "tags": [
-          "holy",
+          "insur",
           "monitoring"
         ]
       }
     },
-    "/api/v1/holy/monitoring/{dept}": {
+    "/api/v1/insur/monitoring/{dept}": {
       "get": {
         "description": "Per-dept monitoring summary across all 4 cron jobs.",
-        "operationId": "dept_monitoring_api_v1_holy_monitoring__dept__get",
+        "operationId": "dept_monitoring_api_v1_insur_monitoring__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -8714,7 +8714,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Monitoring Api V1 Holy Monitoring  Dept  Get",
+                  "title": "Response Dept Monitoring Api V1 Insur Monitoring  Dept  Get",
                   "type": "object"
                 }
               }
@@ -8734,15 +8734,15 @@
         },
         "summary": "Dept Monitoring",
         "tags": [
-          "holy",
+          "insur",
           "monitoring"
         ]
       }
     },
-    "/api/v1/holy/monitoring/{dept}/jobs/{job}/runs": {
+    "/api/v1/insur/monitoring/{dept}/jobs/{job}/runs": {
       "get": {
         "description": "Recent runs of a cron job (cron audits are global, not per-dept; dept\narg is validated so the URL space stays consistent with the per-dept view).",
-        "operationId": "list_runs_api_v1_holy_monitoring__dept__jobs__job__runs_get",
+        "operationId": "list_runs_api_v1_insur_monitoring__dept__jobs__job__runs_get",
         "parameters": [
           {
             "in": "path",
@@ -8781,7 +8781,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Runs Api V1 Holy Monitoring  Dept  Jobs  Job  Runs Get",
+                  "title": "Response List Runs Api V1 Insur Monitoring  Dept  Jobs  Job  Runs Get",
                   "type": "object"
                 }
               }
@@ -8801,15 +8801,15 @@
         },
         "summary": "List Runs",
         "tags": [
-          "holy",
+          "insur",
           "monitoring"
         ]
       }
     },
-    "/api/v1/holy/monitoring/{dept}/jobs/{job}/runs/{run_id}": {
+    "/api/v1/insur/monitoring/{dept}/jobs/{job}/runs/{run_id}": {
       "get": {
         "description": "Full manifest of one cron run.",
-        "operationId": "get_run_api_v1_holy_monitoring__dept__jobs__job__runs__run_id__get",
+        "operationId": "get_run_api_v1_insur_monitoring__dept__jobs__job__runs__run_id__get",
         "parameters": [
           {
             "in": "path",
@@ -8845,7 +8845,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Run Api V1 Holy Monitoring  Dept  Jobs  Job  Runs  Run Id  Get",
+                  "title": "Response Get Run Api V1 Insur Monitoring  Dept  Jobs  Job  Runs  Run Id  Get",
                   "type": "object"
                 }
               }
@@ -8865,15 +8865,15 @@
         },
         "summary": "Get Run",
         "tags": [
-          "holy",
+          "insur",
           "monitoring"
         ]
       }
     },
-    "/api/v1/holy/nav/{dept}": {
+    "/api/v1/insur/nav/{dept}": {
       "get": {
-        "description": "Serve a dept's HOLY_NAV.json live from disk.",
-        "operationId": "get_nav_api_v1_holy_nav__dept__get",
+        "description": "Serve a dept's INSUR_NAV.json live from disk.",
+        "operationId": "get_nav_api_v1_insur_nav__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -8891,7 +8891,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Nav Api V1 Holy Nav  Dept  Get",
+                  "title": "Response Get Nav Api V1 Insur Nav  Dept  Get",
                   "type": "object"
                 }
               }
@@ -8911,21 +8911,21 @@
         },
         "summary": "Get Nav",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/observability-hub/_overview": {
+    "/api/v1/insur/observability-hub/_overview": {
       "get": {
         "description": "Aggregated health view across all 7 \u00a768 read surfaces.\n\nEach surface contributes its source-of-truth probe (path / exists /\nn_rows / last_ts). A broken surface NEVER breaks the aggregator\n(per-surface try/except in service); the bad one surfaces with\nstatus='probe_error' + error_type.\n\nUse this to answer: \"Are the \u00a768 surfaces wired? Which ones have\ndata flowing in? Which ones are missing their write side?\"",
-        "operationId": "hub_overview_api_v1_holy_observability_hub__overview_get",
+        "operationId": "hub_overview_api_v1_insur_observability_hub__overview_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Hub Overview Api V1 Holy Observability Hub  Overview Get",
+                  "title": "Response Hub Overview Api V1 Insur Observability Hub  Overview Get",
                   "type": "object"
                 }
               }
@@ -8935,22 +8935,22 @@
         },
         "summary": "Hub Overview",
         "tags": [
-          "holy",
+          "insur",
           "observability-hub"
         ]
       }
     },
-    "/api/v1/holy/orchestration/demo": {
+    "/api/v1/insur/orchestration/demo": {
       "post": {
         "description": "Run the OrchestrationDemo (DAG + Reflection + MoA) end-to-end.\nReturns manifest with all three pattern results.",
-        "operationId": "orchestration_demo_api_v1_holy_orchestration_demo_post",
+        "operationId": "orchestration_demo_api_v1_insur_orchestration_demo_post",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Orchestration Demo Api V1 Holy Orchestration Demo Post",
+                  "title": "Response Orchestration Demo Api V1 Insur Orchestration Demo Post",
                   "type": "object"
                 }
               }
@@ -8960,21 +8960,21 @@
         },
         "summary": "Orchestration Demo",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/pii/_global": {
+    "/api/v1/insur/pii/_global": {
       "get": {
         "description": "Cross-dept PII inventory + entity-level PII fields.",
-        "operationId": "pii_global_api_v1_holy_pii__global_get",
+        "operationId": "pii_global_api_v1_insur_pii__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Pii Global Api V1 Holy Pii  Global Get",
+                  "title": "Response Pii Global Api V1 Insur Pii  Global Get",
                   "type": "object"
                 }
               }
@@ -8984,15 +8984,15 @@
         },
         "summary": "Pii Global",
         "tags": [
-          "holy",
+          "insur",
           "pii"
         ]
       }
     },
-    "/api/v1/holy/pii/leaks": {
+    "/api/v1/insur/pii/leaks": {
       "get": {
         "description": "Scan recent audit-log lines for plaintext PII patterns.\n\nHit = either a real leak (operator investigates) OR an over-redaction\nelsewhere (heuristic adjustment needed). Both are actionable. The\nmatched PII string is NEVER returned in plaintext \u2014 only a redacted\nfirst/last char + length + position metadata.",
-        "operationId": "pii_leaks_api_v1_holy_pii_leaks_get",
+        "operationId": "pii_leaks_api_v1_insur_pii_leaks_get",
         "parameters": [
           {
             "description": "Epoch seconds; 0 = scan all",
@@ -9026,7 +9026,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Pii Leaks Api V1 Holy Pii Leaks Get",
+                  "title": "Response Pii Leaks Api V1 Insur Pii Leaks Get",
                   "type": "object"
                 }
               }
@@ -9046,15 +9046,15 @@
         },
         "summary": "Pii Leaks",
         "tags": [
-          "holy",
+          "insur",
           "pii"
         ]
       }
     },
-    "/api/v1/holy/pii/{dept}": {
+    "/api/v1/insur/pii/{dept}": {
       "get": {
         "description": "Per-dept PII inventory.",
-        "operationId": "pii_dept_api_v1_holy_pii__dept__get",
+        "operationId": "pii_dept_api_v1_insur_pii__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -9072,7 +9072,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Pii Dept Api V1 Holy Pii  Dept  Get",
+                  "title": "Response Pii Dept Api V1 Insur Pii  Dept  Get",
                   "type": "object"
                 }
               }
@@ -9092,22 +9092,22 @@
         },
         "summary": "Pii Dept",
         "tags": [
-          "holy",
+          "insur",
           "pii"
         ]
       }
     },
-    "/api/v1/holy/pipelines/_global": {
+    "/api/v1/insur/pipelines/_global": {
       "get": {
         "description": "Cross-dept process inventory \u2014 names + counts per dept.",
-        "operationId": "global_inventory_api_v1_holy_pipelines__global_get",
+        "operationId": "global_inventory_api_v1_insur_pipelines__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Inventory Api V1 Holy Pipelines  Global Get",
+                  "title": "Response Global Inventory Api V1 Insur Pipelines  Global Get",
                   "type": "object"
                 }
               }
@@ -9117,15 +9117,15 @@
         },
         "summary": "Global Inventory",
         "tags": [
-          "holy",
+          "insur",
           "pipelines"
         ]
       }
     },
-    "/api/v1/holy/pipelines/{dept}": {
+    "/api/v1/insur/pipelines/{dept}": {
       "get": {
         "description": "Per-dept pipeline catalog with 5-phase spec for every process.",
-        "operationId": "dept_catalog_api_v1_holy_pipelines__dept__get",
+        "operationId": "dept_catalog_api_v1_insur_pipelines__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -9143,7 +9143,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Catalog Api V1 Holy Pipelines  Dept  Get",
+                  "title": "Response Dept Catalog Api V1 Insur Pipelines  Dept  Get",
                   "type": "object"
                 }
               }
@@ -9163,15 +9163,15 @@
         },
         "summary": "Dept Catalog",
         "tags": [
-          "holy",
+          "insur",
           "pipelines"
         ]
       }
     },
-    "/api/v1/holy/pipelines/{dept}/{process_id}": {
+    "/api/v1/insur/pipelines/{dept}/{process_id}": {
       "get": {
         "description": "Single-process 5-phase detail.",
-        "operationId": "process_detail_api_v1_holy_pipelines__dept___process_id__get",
+        "operationId": "process_detail_api_v1_insur_pipelines__dept___process_id__get",
         "parameters": [
           {
             "in": "path",
@@ -9198,7 +9198,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Process Detail Api V1 Holy Pipelines  Dept   Process Id  Get",
+                  "title": "Response Process Detail Api V1 Insur Pipelines  Dept   Process Id  Get",
                   "type": "object"
                 }
               }
@@ -9218,22 +9218,22 @@
         },
         "summary": "Process Detail",
         "tags": [
-          "holy",
+          "insur",
           "pipelines"
         ]
       }
     },
-    "/api/v1/holy/reports/_global": {
+    "/api/v1/insur/reports/_global": {
       "get": {
         "description": "Cross-dept report inventory + counts.",
-        "operationId": "global_inventory_api_v1_holy_reports__global_get",
+        "operationId": "global_inventory_api_v1_insur_reports__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Inventory Api V1 Holy Reports  Global Get",
+                  "title": "Response Global Inventory Api V1 Insur Reports  Global Get",
                   "type": "object"
                 }
               }
@@ -9243,15 +9243,15 @@
         },
         "summary": "Global Inventory",
         "tags": [
-          "holy",
+          "insur",
           "reports"
         ]
       }
     },
-    "/api/v1/holy/reports/{dept}": {
+    "/api/v1/insur/reports/{dept}": {
       "get": {
         "description": "Per-dept catalog \u2014 15 standard reports with full envelope.",
-        "operationId": "dept_catalog_api_v1_holy_reports__dept__get",
+        "operationId": "dept_catalog_api_v1_insur_reports__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -9269,7 +9269,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dept Catalog Api V1 Holy Reports  Dept  Get",
+                  "title": "Response Dept Catalog Api V1 Insur Reports  Dept  Get",
                   "type": "object"
                 }
               }
@@ -9289,15 +9289,15 @@
         },
         "summary": "Dept Catalog",
         "tags": [
-          "holy",
+          "insur",
           "reports"
         ]
       }
     },
-    "/api/v1/holy/reports/{dept}/{report_id}": {
+    "/api/v1/insur/reports/{dept}/{report_id}": {
       "get": {
         "description": "Single report detail.",
-        "operationId": "report_detail_api_v1_holy_reports__dept___report_id__get",
+        "operationId": "report_detail_api_v1_insur_reports__dept___report_id__get",
         "parameters": [
           {
             "in": "path",
@@ -9324,7 +9324,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Report Detail Api V1 Holy Reports  Dept   Report Id  Get",
+                  "title": "Response Report Detail Api V1 Insur Reports  Dept   Report Id  Get",
                   "type": "object"
                 }
               }
@@ -9344,15 +9344,15 @@
         },
         "summary": "Report Detail",
         "tags": [
-          "holy",
+          "insur",
           "reports"
         ]
       }
     },
-    "/api/v1/holy/reports/{dept}/{role}": {
+    "/api/v1/insur/reports/{dept}/{role}": {
       "get": {
         "description": "Return standard-report list for (dept, role) per \u00a764.37.",
-        "operationId": "get_role_reports_api_v1_holy_reports__dept___role__get",
+        "operationId": "get_role_reports_api_v1_insur_reports__dept___role__get",
         "parameters": [
           {
             "in": "path",
@@ -9379,7 +9379,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Role Reports Api V1 Holy Reports  Dept   Role  Get",
+                  "title": "Response Get Role Reports Api V1 Insur Reports  Dept   Role  Get",
                   "type": "object"
                 }
               }
@@ -9399,14 +9399,14 @@
         },
         "summary": "Get Role Reports",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/reports/{dept}/{role}/{report_id}/run": {
+    "/api/v1/insur/reports/{dept}/{role}/{report_id}/run": {
       "post": {
         "description": "Trigger a report run. Logs to Redis audit list (proxy for \u00a738.3 audit row).",
-        "operationId": "run_role_report_api_v1_holy_reports__dept___role___report_id__run_post",
+        "operationId": "run_role_report_api_v1_insur_reports__dept___role___report_id__run_post",
         "parameters": [
           {
             "in": "path",
@@ -9460,7 +9460,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Run Role Report Api V1 Holy Reports  Dept   Role   Report Id  Run Post",
+                  "title": "Response Run Role Report Api V1 Insur Reports  Dept   Role   Report Id  Run Post",
                   "type": "object"
                 }
               }
@@ -9480,21 +9480,21 @@
         },
         "summary": "Run Role Report",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/roles": {
+    "/api/v1/insur/roles": {
       "get": {
         "description": "All 15 standard roles per global \u00a764.37.",
-        "operationId": "list_roles_api_v1_holy_roles_get",
+        "operationId": "list_roles_api_v1_insur_roles_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Roles Api V1 Holy Roles Get",
+                  "title": "Response List Roles Api V1 Insur Roles Get",
                   "type": "object"
                 }
               }
@@ -9504,21 +9504,21 @@
         },
         "summary": "List Roles",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/security/_global": {
+    "/api/v1/insur/security/_global": {
       "get": {
         "description": "Cross-dept security posture summary.\n\nReturns:\n  - compliance: live-probed \u00a747.6 gates + score\n  - vulnerabilities: CVE counts from external posture snapshot\n  - attack_attempts_24h: count + by_type from audit-log scan",
-        "operationId": "security_global_api_v1_holy_security__global_get",
+        "operationId": "security_global_api_v1_insur_security__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Security Global Api V1 Holy Security  Global Get",
+                  "title": "Response Security Global Api V1 Insur Security  Global Get",
                   "type": "object"
                 }
               }
@@ -9528,22 +9528,22 @@
         },
         "summary": "Security Global",
         "tags": [
-          "holy",
+          "insur",
           "security"
         ]
       }
     },
-    "/api/v1/holy/security/attack-classes": {
+    "/api/v1/insur/security/attack-classes": {
       "get": {
         "description": "List the 12 mandatory attack-class generators per \u00a764.32.3.",
-        "operationId": "list_attack_classes_api_v1_holy_security_attack_classes_get",
+        "operationId": "list_attack_classes_api_v1_insur_security_attack_classes_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Attack Classes Api V1 Holy Security Attack Classes Get",
+                  "title": "Response List Attack Classes Api V1 Insur Security Attack Classes Get",
                   "type": "object"
                 }
               }
@@ -9553,14 +9553,14 @@
         },
         "summary": "List Attack Classes",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/security/attacks": {
+    "/api/v1/insur/security/attacks": {
       "get": {
         "description": "Recent attack attempts rejected by middleware (RBAC denial / scope\ndenial / malformed-path patterns in audit log).",
-        "operationId": "security_attacks_api_v1_holy_security_attacks_get",
+        "operationId": "security_attacks_api_v1_insur_security_attacks_get",
         "parameters": [
           {
             "description": "Epoch seconds; 0 = last 7 days",
@@ -9594,7 +9594,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Security Attacks Api V1 Holy Security Attacks Get",
+                  "title": "Response Security Attacks Api V1 Insur Security Attacks Get",
                   "type": "object"
                 }
               }
@@ -9614,15 +9614,15 @@
         },
         "summary": "Security Attacks",
         "tags": [
-          "holy",
+          "insur",
           "security"
         ]
       }
     },
-    "/api/v1/holy/security/{dept}": {
+    "/api/v1/insur/security/{dept}": {
       "get": {
         "description": "Per-dept security score.",
-        "operationId": "security_dept_api_v1_holy_security__dept__get",
+        "operationId": "security_dept_api_v1_insur_security__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -9640,7 +9640,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Security Dept Api V1 Holy Security  Dept  Get",
+                  "title": "Response Security Dept Api V1 Insur Security  Dept  Get",
                   "type": "object"
                 }
               }
@@ -9660,15 +9660,15 @@
         },
         "summary": "Security Dept",
         "tags": [
-          "holy",
+          "insur",
           "security"
         ]
       }
     },
-    "/api/v1/holy/security/{dept}/corpora": {
+    "/api/v1/insur/security/{dept}/corpora": {
       "get": {
         "description": "List existing corpora for a dept, optionally filtered by attack_class.",
-        "operationId": "list_attack_corpora_api_v1_holy_security__dept__corpora_get",
+        "operationId": "list_attack_corpora_api_v1_insur_security__dept__corpora_get",
         "parameters": [
           {
             "in": "path",
@@ -9702,7 +9702,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Attack Corpora Api V1 Holy Security  Dept  Corpora Get",
+                  "title": "Response List Attack Corpora Api V1 Insur Security  Dept  Corpora Get",
                   "type": "object"
                 }
               }
@@ -9722,14 +9722,14 @@
         },
         "summary": "List Attack Corpora",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/security/{dept}/corpora/{attack_class}/{corpus_id}": {
+    "/api/v1/insur/security/{dept}/corpora/{attack_class}/{corpus_id}": {
       "get": {
         "description": "Return a specific corpus by id (path-traversal guarded).",
-        "operationId": "get_attack_corpus_api_v1_holy_security__dept__corpora__attack_class___corpus_id__get",
+        "operationId": "get_attack_corpus_api_v1_insur_security__dept__corpora__attack_class___corpus_id__get",
         "parameters": [
           {
             "in": "path",
@@ -9765,7 +9765,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Attack Corpus Api V1 Holy Security  Dept  Corpora  Attack Class   Corpus Id  Get",
+                  "title": "Response Get Attack Corpus Api V1 Insur Security  Dept  Corpora  Attack Class   Corpus Id  Get",
                   "type": "object"
                 }
               }
@@ -9785,14 +9785,14 @@
         },
         "summary": "Get Attack Corpus",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/security/{dept}/generate-corpus": {
+    "/api/v1/insur/security/{dept}/generate-corpus": {
       "post": {
         "description": "Generate an attack-simulation corpus for a dept (\u00a764.32.3 generator-only).\n\nBody: {attack_class, n?, seed?}. Returns corpus manifest including\npayload count + audit path. NEVER executes payloads \u2014 generation only.",
-        "operationId": "generate_attack_corpus_api_v1_holy_security__dept__generate_corpus_post",
+        "operationId": "generate_attack_corpus_api_v1_insur_security__dept__generate_corpus_post",
         "parameters": [
           {
             "in": "path",
@@ -9828,7 +9828,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Generate Attack Corpus Api V1 Holy Security  Dept  Generate Corpus Post",
+                  "title": "Response Generate Attack Corpus Api V1 Insur Security  Dept  Generate Corpus Post",
                   "type": "object"
                 }
               }
@@ -9848,21 +9848,21 @@
         },
         "summary": "Generate Attack Corpus",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/sim/reference-processes": {
+    "/api/v1/insur/sim/reference-processes": {
       "get": {
         "description": "List the (dept, process) pairs that have a defined simulation.",
-        "operationId": "list_reference_processes_api_v1_holy_sim_reference_processes_get",
+        "operationId": "list_reference_processes_api_v1_insur_sim_reference_processes_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Reference Processes Api V1 Holy Sim Reference Processes Get",
+                  "title": "Response List Reference Processes Api V1 Insur Sim Reference Processes Get",
                   "type": "object"
                 }
               }
@@ -9872,14 +9872,14 @@
         },
         "summary": "List Reference Processes",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/sim/{dept}/{process}/run": {
+    "/api/v1/insur/sim/{dept}/{process}/run": {
       "post": {
         "description": "Trigger a simulation in BOTH modes. Body: {n_inputs, seed}. Returns manifest.",
-        "operationId": "run_simulation_api_v1_holy_sim__dept___process__run_post",
+        "operationId": "run_simulation_api_v1_insur_sim__dept___process__run_post",
         "parameters": [
           {
             "in": "path",
@@ -9924,7 +9924,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Run Simulation Api V1 Holy Sim  Dept   Process  Run Post",
+                  "title": "Response Run Simulation Api V1 Insur Sim  Dept   Process  Run Post",
                   "type": "object"
                 }
               }
@@ -9944,14 +9944,14 @@
         },
         "summary": "Run Simulation",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/sim/{dept}/{process}/runs": {
+    "/api/v1/insur/sim/{dept}/{process}/runs": {
       "get": {
         "description": "List past simulation runs for (dept, process), newest first.",
-        "operationId": "list_sim_runs_api_v1_holy_sim__dept___process__runs_get",
+        "operationId": "list_sim_runs_api_v1_insur_sim__dept___process__runs_get",
         "parameters": [
           {
             "in": "path",
@@ -9978,7 +9978,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Sim Runs Api V1 Holy Sim  Dept   Process  Runs Get",
+                  "title": "Response List Sim Runs Api V1 Insur Sim  Dept   Process  Runs Get",
                   "type": "object"
                 }
               }
@@ -9998,14 +9998,14 @@
         },
         "summary": "List Sim Runs",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/events": {
+    "/api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/events": {
       "get": {
         "description": "Return all events for a simulation. Optional ?layer=backend|process|data|accuracy|reporting.",
-        "operationId": "get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get",
+        "operationId": "get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get",
         "parameters": [
           {
             "in": "path",
@@ -10057,7 +10057,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Sim Events Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Events Get",
+                  "title": "Response Get Sim Events Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Events Get",
                   "type": "object"
                 }
               }
@@ -10077,13 +10077,13 @@
         },
         "summary": "Get Sim Events",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/manifest": {
+    "/api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/manifest": {
       "get": {
-        "operationId": "get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get",
+        "operationId": "get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get",
         "parameters": [
           {
             "in": "path",
@@ -10119,7 +10119,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Sim Manifest Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Manifest Get",
+                  "title": "Response Get Sim Manifest Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Manifest Get",
                   "type": "object"
                 }
               }
@@ -10139,14 +10139,14 @@
         },
         "summary": "Get Sim Manifest",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/spec/{dept}": {
+    "/api/v1/insur/spec/{dept}": {
       "get": {
-        "description": "Serve a dept's HOLY_SPEC.md content (raw text).",
-        "operationId": "get_spec_api_v1_holy_spec__dept__get",
+        "description": "Serve a dept's INSUR_SPEC.md content (raw text).",
+        "operationId": "get_spec_api_v1_insur_spec__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -10164,7 +10164,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Spec Api V1 Holy Spec  Dept  Get",
+                  "title": "Response Get Spec Api V1 Insur Spec  Dept  Get",
                   "type": "object"
                 }
               }
@@ -10184,14 +10184,14 @@
         },
         "summary": "Get Spec",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/testing/dispatch": {
+    "/api/v1/insur/testing/dispatch": {
       "post": {
         "description": "Enqueue a test-tier task for the test-agent fleet.\n\nBody: {dept, tier, timeout_seconds?, agent_role_required?}",
-        "operationId": "dispatch_test_api_v1_holy_testing_dispatch_post",
+        "operationId": "dispatch_test_api_v1_insur_testing_dispatch_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10210,7 +10210,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Dispatch Test Api V1 Holy Testing Dispatch Post",
+                  "title": "Response Dispatch Test Api V1 Insur Testing Dispatch Post",
                   "type": "object"
                 }
               }
@@ -10230,14 +10230,14 @@
         },
         "summary": "Dispatch Test",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/testing/result/{task_id}": {
+    "/api/v1/insur/testing/result/{task_id}": {
       "get": {
         "description": "Poll a single test task by task_id.",
-        "operationId": "get_test_result_api_v1_holy_testing_result__task_id__get",
+        "operationId": "get_test_result_api_v1_insur_testing_result__task_id__get",
         "parameters": [
           {
             "in": "path",
@@ -10255,7 +10255,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Test Result Api V1 Holy Testing Result  Task Id  Get",
+                  "title": "Response Get Test Result Api V1 Insur Testing Result  Task Id  Get",
                   "type": "object"
                 }
               }
@@ -10275,14 +10275,14 @@
         },
         "summary": "Get Test Result",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/testing/results": {
+    "/api/v1/insur/testing/results": {
       "get": {
         "description": "Return recent test_results (most recent first), optionally filtered.",
-        "operationId": "get_test_results_api_v1_holy_testing_results_get",
+        "operationId": "get_test_results_api_v1_insur_testing_results_get",
         "parameters": [
           {
             "in": "query",
@@ -10333,7 +10333,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Test Results Api V1 Holy Testing Results Get",
+                  "title": "Response Get Test Results Api V1 Insur Testing Results Get",
                   "type": "object"
                 }
               }
@@ -10353,21 +10353,21 @@
         },
         "summary": "Get Test Results",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/testing/tiers": {
+    "/api/v1/insur/testing/tiers": {
       "get": {
         "description": "List the 8 supported test tiers + the agent role responsible per global \u00a765.8.",
-        "operationId": "list_test_tiers_api_v1_holy_testing_tiers_get",
+        "operationId": "list_test_tiers_api_v1_insur_testing_tiers_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Test Tiers Api V1 Holy Testing Tiers Get",
+                  "title": "Response List Test Tiers Api V1 Insur Testing Tiers Get",
                   "type": "object"
                 }
               }
@@ -10377,21 +10377,21 @@
         },
         "summary": "List Test Tiers",
         "tags": [
-          "holy"
+          "insur"
         ]
       }
     },
-    "/api/v1/holy/transactions/_global": {
+    "/api/v1/insur/transactions/_global": {
       "get": {
         "description": "Cross-dept summary: per-dept event count for the last 24h.",
-        "operationId": "global_summary_api_v1_holy_transactions__global_get",
+        "operationId": "global_summary_api_v1_insur_transactions__global_get",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Global Summary Api V1 Holy Transactions  Global Get",
+                  "title": "Response Global Summary Api V1 Insur Transactions  Global Get",
                   "type": "object"
                 }
               }
@@ -10401,15 +10401,15 @@
         },
         "summary": "Global Summary",
         "tags": [
-          "holy",
+          "insur",
           "transactions"
         ]
       }
     },
-    "/api/v1/holy/transactions/{dept}": {
+    "/api/v1/insur/transactions/{dept}": {
       "get": {
         "description": "Per-dept chronological transaction feed (newest first).",
-        "operationId": "list_transactions_api_v1_holy_transactions__dept__get",
+        "operationId": "list_transactions_api_v1_insur_transactions__dept__get",
         "parameters": [
           {
             "in": "path",
@@ -10485,7 +10485,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response List Transactions Api V1 Holy Transactions  Dept  Get",
+                  "title": "Response List Transactions Api V1 Insur Transactions  Dept  Get",
                   "type": "object"
                 }
               }
@@ -10505,15 +10505,15 @@
         },
         "summary": "List Transactions",
         "tags": [
-          "holy",
+          "insur",
           "transactions"
         ]
       }
     },
-    "/api/v1/holy/transactions/{dept}/{event_id}": {
+    "/api/v1/insur/transactions/{dept}/{event_id}": {
       "get": {
         "description": "Single-event detail by event_id.",
-        "operationId": "get_event_api_v1_holy_transactions__dept___event_id__get",
+        "operationId": "get_event_api_v1_insur_transactions__dept___event_id__get",
         "parameters": [
           {
             "in": "path",
@@ -10552,7 +10552,7 @@
               "application/json": {
                 "schema": {
                   "additionalProperties": true,
-                  "title": "Response Get Event Api V1 Holy Transactions  Dept   Event Id  Get",
+                  "title": "Response Get Event Api V1 Insur Transactions  Dept   Event Id  Get",
                   "type": "object"
                 }
               }
@@ -10572,7 +10572,7 @@
         },
         "summary": "Get Event",
         "tags": [
-          "holy",
+          "insur",
           "transactions"
         ]
       }

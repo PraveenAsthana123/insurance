@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Drill: §68.5 Guardrails surface — iteration 2b of HOLY Observability Hub.
+Drill: §68.5 Guardrails surface — iteration 2b of INSUR Observability Hub.
 
 Read-only aggregation over data/agent-supervisor/guardrail_decisions.jsonl
-(env-overridable via HOLY_GUARDRAIL_LOG). The WRITE side (middleware
+(env-overridable via INSUR_GUARDRAIL_LOG). The WRITE side (middleware
 appending rows when a guardrail fires) is a separate iteration — this
 drill seeds the JSONL with sample rows + asserts the read contract.
 
@@ -56,13 +56,13 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path, guardrail_log: Path):
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
-    os.environ["HOLY_GUARDRAIL_LOG"] = str(guardrail_log)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_GUARDRAIL_LOG"] = str(guardrail_log)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit",
+                            "core.insur_audit",
                             "routers.guardrails", "services.guardrails_service")):
             del sys.modules[mod]
 
@@ -158,13 +158,13 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         guardrail_log = Path(tmp) / "guardrail_decisions.jsonl"
         client = TestClient(_build_app(audit_path, guardrail_log))
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: empty log → graceful envelope ----
-        r = client.get("/api/v1/holy/guardrails/_global", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(1, "empty log → /_global returns 200 with n_rows=0 + policy stamp",
              r.status_code == 200
@@ -180,7 +180,7 @@ def main() -> int:
             for row in seed_rows:
                 fh.write(json.dumps(row) + "\n")
 
-        r = client.get("/api/v1/holy/guardrails/_global", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(2, "after seed → n_rows=6, by_decision counts add up (3 deny + 1 transform + 2 allow)",
              r.status_code == 200
@@ -199,7 +199,7 @@ def main() -> int:
              f"matrix={matrix}")
 
         # ---- Step 4: /{dept} returns dept-filtered rows ----
-        r = client.get("/api/v1/holy/guardrails/sales", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/sales", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(4, "/guardrails/sales → 3 sales rows, newest-first",
              r.status_code == 200
@@ -211,7 +211,7 @@ def main() -> int:
              f"n_rows={body.get('n_rows')}")
 
         # ---- Step 5: decision filter ----
-        r = client.get("/api/v1/holy/guardrails/sales?decision=deny", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/sales?decision=deny", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(5, "/sales?decision=deny → only sales deny rows (2)",
              r.status_code == 200
@@ -221,7 +221,7 @@ def main() -> int:
 
         # ---- Step 6: guardrail_type filter ----
         r = client.get(
-            "/api/v1/holy/guardrails/sales?guardrail_type=prompt_injection",
+            "/api/v1/insur/guardrails/sales?guardrail_type=prompt_injection",
             headers=headers,
         )
         body = r.json() if r.status_code == 200 else {}
@@ -232,7 +232,7 @@ def main() -> int:
              f"n_rows={body.get('n_rows')}")
 
         # ---- Step 7: /decision/{id} found ----
-        r = client.get("/api/v1/holy/guardrails/decision/req-pi-001", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/decision/req-pi-001", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(7, "/decision/req-pi-001 → 200 with status=found + matching row",
              r.status_code == 200
@@ -243,14 +243,14 @@ def main() -> int:
 
         # ---- Step 8: NEG invalid dept → 404, NO audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/guardrails/nonexistent-dept", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/nonexistent-dept", headers=headers)
         rows_after = len(_audit_rows(audit_path))
         step(8, "NEG: invalid dept → 404, NO audit row (validator-first §47.6)",
              r.status_code == 404 and rows_after == rows_before,
              f"status={r.status_code} rows_delta={rows_after - rows_before}")
 
         # ---- Step 9: NEG invalid decision filter → 400 with hint ----
-        r = client.get("/api/v1/holy/guardrails/sales?decision=blocked", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/sales?decision=blocked", headers=headers)
         body = r.json() if r.status_code == 400 else {}
         step(9, "NEG: ?decision=blocked → 400 with valid_decisions hint",
              r.status_code == 400
@@ -260,7 +260,7 @@ def main() -> int:
 
         # ---- Step 10: NEG malformed guardrail_type → 400 ----
         r = client.get(
-            "/api/v1/holy/guardrails/sales?guardrail_type=BadType",
+            "/api/v1/insur/guardrails/sales?guardrail_type=BadType",
             headers=headers,
         )
         step(10, "NEG: ?guardrail_type=BadType → 400 (uppercase rejected)",
@@ -269,7 +269,7 @@ def main() -> int:
 
         # ---- Step 11: NEG unknown decision_id → 404 ----
         r = client.get(
-            "/api/v1/holy/guardrails/decision/req-nonexistent-xyz",
+            "/api/v1/insur/guardrails/decision/req-nonexistent-xyz",
             headers=headers,
         )
         step(11, "NEG: unknown decision_id → 404",
@@ -278,7 +278,7 @@ def main() -> int:
 
         # ---- Step 12: NEG unknown role → 400 from RBAC ----
         r = client.get(
-            "/api/v1/holy/guardrails/_global",
+            "/api/v1/insur/guardrails/_global",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "intruder"},
         )
         step(12, "NEG: unknown role → 400 from RBAC",
@@ -289,14 +289,14 @@ def main() -> int:
         required = {"ts", "tenant_id", "actor", "tool", "request_id",
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
-        router_rows = [r for r in rows if r.get("tool", "").startswith("holy.guardrails")]
+        router_rows = [r for r in rows if r.get("tool", "").startswith("insur.guardrails")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         if bad:
             step(98, "§38.3 schema invariant",
                  False, f"{len(bad)} bad rows; first={bad[0]}")
 
         # PII never in returned guardrail rows (only input_hash)
-        r = client.get("/api/v1/holy/guardrails/sales", headers=headers)
+        r = client.get("/api/v1/insur/guardrails/sales", headers=headers)
         body_text = r.text
         leak_terms = ("@example.com", "555-12", "@gmail.com",
                       "ignore all previous", "forget the system")

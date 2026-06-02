@@ -34,7 +34,7 @@ export default function Topbar() {
               )}
             </>
           ) : (
-            <span className="topbar-page-title">HOLY Analytics</span>
+            <span className="topbar-page-title">INSUR Analytics</span>
           )}
         </div>
       </div>
@@ -55,7 +55,7 @@ export default function Topbar() {
         <div className="topbar-divider" />
         <div className="topbar-user">
           <div className="topbar-avatar">AI</div>
-          <span className="topbar-user-name">HOLY Admin</span>
+          <span className="topbar-user-name">INSUR Admin</span>
         </div>
       </div>
     </header>

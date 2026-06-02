@@ -1,9 +1,9 @@
 """§68.8 Functional eval router.
 
-3 endpoints under /api/v1/holy/evals/functional/* federated via
-core.holy_audit (surface=evals_functional). Sibling routers for §68.9
+3 endpoints under /api/v1/insur/evals/functional/* federated via
+core.insur_audit (surface=evals_functional). Sibling routers for §68.9
 cost and §68.10 safety follow the same pattern under
-/api/v1/holy/evals/{cost,safety}/*.
+/api/v1/insur/evals/{cost,safety}/*.
 
 Composes with §38.3 + §47.6 + §57.7 + §64.20 + §68.
 """
@@ -13,12 +13,12 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 from services import functional_eval_service as feval
 
 router = APIRouter(
-    prefix="/api/v1/holy/evals/functional",
-    tags=["holy", "evals", "functional"],
+    prefix="/api/v1/insur/evals/functional",
+    tags=["insur", "evals", "functional"],
 )
 
 
@@ -29,7 +29,7 @@ def functional_global(
     since: float = Query(0.0, ge=0.0),
 ) -> dict[str, Any]:
     """Cross-model leaderboard + dataset coverage."""
-    log_holy_access(http_request, "evals_functional", "functional_global",
+    log_insur_access(http_request, "evals_functional", "functional_global",
                     extra={"since": since})
     return feval.global_summary(since_epoch=since)
 
@@ -45,7 +45,7 @@ def functional_model(
     """Per-model eval history with optional dataset filter."""
     if not feval._MODEL_ID_RE.match(model_id):
         raise HTTPException(400, f"Malformed model_id '{model_id}'")
-    log_holy_access(
+    log_insur_access(
         http_request, "evals_functional", "functional_model",
         extra={"model_id": model_id, "dataset": dataset,
                "since": since, "limit": limit},
@@ -71,7 +71,7 @@ def functional_run(
         raise HTTPException(400, f"Malformed model_id '{model_id}'")
     if not feval._RUN_ID_RE.match(run_id):
         raise HTTPException(400, f"Malformed run_id '{run_id}'")
-    log_holy_access(
+    log_insur_access(
         http_request, "evals_functional", "functional_run",
         extra={"model_id": model_id, "run_id": run_id},
     )

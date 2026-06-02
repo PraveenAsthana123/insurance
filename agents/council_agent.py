@@ -1,5 +1,5 @@
 """
-HOLY Beverage — Council-of-Agents worker.
+INSUR Beverage — Council-of-Agents worker.
 
 Each task is processed by a 3-stage council:
   1. AUTHOR    (gemma3:4b)  — generates initial response
@@ -10,7 +10,7 @@ Pulls from Redis 'council_tasks' queue; pushes results (full audit trail —
 all 3 stage outputs + final choice) to 'council_done' list.
 
 Pattern inspired by /mnt/deepa/rag/scripts/gemma_agent_council.py (Stage-1
-adapter, §56 compliance). Simplified to 3 stages for HOLY POC.
+adapter, §56 compliance). Simplified to 3 stages for INSUR POC.
 
 Environment:
   REDIS_URL          redis://redis:6379/0

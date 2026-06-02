@@ -144,7 +144,7 @@ def cmd_export_cron(args: argparse.Namespace) -> int:
     modes = ['smoke', 'full'] if args.mode == 'all' else [args.mode]
     python = args.python or '/usr/bin/env python3'
     script = ROOT / 'scripts' / 'process_test_plan.py'
-    print('# Generated HOLY process testing cron entries')
+    print('# Generated INSUR process testing cron entries')
     print(f'# Source: {CATALOG_PATH}')
     for row in rows:
         for mode in modes:

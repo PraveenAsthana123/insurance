@@ -4,7 +4,7 @@
     "schema_version": "1.0",
     "generated_at_note": "Hand-maintained catalog; keep aligned with backend/migrations/*.sql + routers/pipelines.py PIPELINE_CATALOG. Updated 2026-05-26 from migration files 001 / 003 / 010 / 011 / 012.",
     "engine": "postgres",
-    "default_database": "holy",
+    "default_database": "insur",
     "default_schema": "public",
     "tenant_column": "tenant_id",
     "primary_table_meaning": "The fact/transaction table the process WRITES to or DERIVES its primary output from.",
@@ -149,7 +149,7 @@
   ],
   "registered_databases": [
     {
-      "db_id": "holy",
+      "db_id": "insur",
       "engine": "postgres",
       "purpose": "primary application + ML pipeline data",
       "schemas": ["public"],

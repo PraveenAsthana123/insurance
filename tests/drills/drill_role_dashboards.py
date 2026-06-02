@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY per-role dashboards + reports (§43, §64.37).
+Drill: INSUR per-role dashboards + reports (§43, §64.37).
 
 Steps (8 total; 3 negative assertions):
     1. (+) Catalog defines all 15 roles
@@ -49,7 +49,7 @@ def main():
         build_reports_payload,
     )
 
-    print("\nDRILL: HOLY role dashboards + reports\n")
+    print("\nDRILL: INSUR role dashboards + reports\n")
     t0 = time.time()
 
     # ----- Step 1: catalog has all 15 roles -----

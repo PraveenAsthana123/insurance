@@ -1,7 +1,7 @@
 # Beverage Industry — Required Processes (Canadian CPG context)
 
 > **Industry:** Beverage (non-alcoholic + alcoholic + functional + dairy)
-> · **Jurisdiction:** Canada · **Project:** HOLY/insur
+> · **Jurisdiction:** Canada · **Project:** INSUR/insur
 >
 > The **process catalog** for the insurerage CPG industry. Companion to
 > [`canada_cpg_2026.md`](canada_cpg_2026.md) (the DT checklist).
@@ -15,7 +15,7 @@
 
 ## Why this catalog
 
-HOLY/insur is a Canadian insurerage analytics platform. Every dept feature,
+INSUR/insur is a Canadian insurerage analytics platform. Every dept feature,
 every AI use case, every dashboard ultimately serves one or more of the
 processes below. A team that builds a "demand forecast" without naming
 WHICH process it feeds + WHICH KPI it moves is shipping a model with
@@ -251,7 +251,7 @@ Plus 4 cross-cutting families covered separately:
 ## How to use this catalog
 
 1. **New AI use case proposed?** → Map it to ≥ 1 process family above. If it maps to 0, it's an orphan and should be challenged.
-2. **Planning a dept's HOLY_DT_STRATEGY.md (4P)?** → Walk the process families that dept owns; for each, identify People / Process / Profit / Technology gaps.
+2. **Planning a dept's INSUR_DT_STRATEGY.md (4P)?** → Walk the process families that dept owns; for each, identify People / Process / Profit / Technology gaps.
 3. **Quarterly DT audit?** → Walk every sub-process row; classify `✓ / ⚠ / ✗`; ladder gap closures.
 4. **Recall drill?** → Process family 14 IS the drill — run it quarterly with synthetic case data; target ≤ 24 h end-to-end.
 
@@ -268,8 +268,8 @@ Plus 4 cross-cutting families covered separately:
 - **§38 + §38.3** — every AI decision against a process row lands an audit row
 - **§47** — process digitisation is the JAD-to-BRD-to-LLD chain made operational
 - **§63** — each process family lives in a §63 dept (Procurement / Operations / Supply Chain / Sales / Marketing / etc.)
-- **§64** — per-dept artefacts reference these processes (HOLY_DEPT_SPEC + HOLY_DT_STRATEGY)
-- **§66** — HOLY_BRD + HOLY_FRD use these process rows as functional scope
+- **§64** — per-dept artefacts reference these processes (INSUR_DEPT_SPEC + INSUR_DT_STRATEGY)
+- **§66** — INSUR_BRD + INSUR_FRD use these process rows as functional scope
 - **§68** — Observability Hub surfaces per-process KPI dashboards
 - Sister docs:
   - [`canada_cpg_2026.md`](canada_cpg_2026.md) — 12-domain DT checklist (compliance overlay on these processes)

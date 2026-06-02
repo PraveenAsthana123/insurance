@@ -16,7 +16,7 @@ per-dept is already implicitly tenant-scoped via dept filter) + §47.6
 (SOC2 CC6.2 PII handling) + §57.7 (graceful degradation) + §68
 (Observability Hub iter 2).
 
-The "leak" surface is intentionally heuristic-only: scans the holy_reads
+The "leak" surface is intentionally heuristic-only: scans the insur_reads
 audit log for plaintext PII patterns that should have been redacted. A
 hit means either (a) a real leak (operator should investigate) OR (b)
 the PII heuristic over-redacted somewhere else. Both are actionable.
@@ -36,18 +36,18 @@ from services import dbviewer_service as dbv
 logger = logging.getLogger(__name__)
 
 # Audit log to scan for leaks. Same env var the federation helper writes
-# to (core.holy_audit) — HOLY_AUDIT_PATH wins, then well-known fallbacks.
+# to (core.insur_audit) — INSUR_AUDIT_PATH wins, then well-known fallbacks.
 _AUDIT_LOG_CANDIDATES = [
-    Path(__file__).resolve().parents[2] / "data" / "agent-supervisor" / "holy_reads.jsonl",
-    Path("/app/data/agent-supervisor/holy_reads.jsonl"),
-    Path("/data/agent-supervisor/holy_reads.jsonl"),
+    Path(__file__).resolve().parents[2] / "data" / "agent-supervisor" / "insur_reads.jsonl",
+    Path("/app/data/agent-supervisor/insur_reads.jsonl"),
+    Path("/data/agent-supervisor/insur_reads.jsonl"),
 ]
 
 
 def _audit_log_path() -> Path | None:
-    """Resolve the active audit log. HOLY_AUDIT_PATH env wins (matches
+    """Resolve the active audit log. INSUR_AUDIT_PATH env wins (matches
     the federation helper) so tests + alternate deploys can override."""
-    env_override = os.environ.get("HOLY_AUDIT_PATH")
+    env_override = os.environ.get("INSUR_AUDIT_PATH")
     if env_override:
         p = Path(env_override)
         if p.exists():

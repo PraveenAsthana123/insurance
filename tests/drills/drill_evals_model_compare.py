@@ -59,22 +59,22 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(tmp: Path):
-    audit_path = tmp / "holy_reads.jsonl"
+    audit_path = tmp / "insur_reads.jsonl"
     func_log = tmp / "functional_eval.jsonl"
     cost_log = tmp / "cost_runs.jsonl"
     safety_log = tmp / "safety_eval_runs.jsonl"
     manifest_dir = tmp / "model_compare"
 
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
-    os.environ["HOLY_EVAL_FUNCTIONAL_LOG"] = str(func_log)
-    os.environ["HOLY_EVAL_COST_LOG"] = str(cost_log)
-    os.environ["HOLY_EVAL_SAFETY_LOG"] = str(safety_log)
-    os.environ["HOLY_MODEL_COMPARE_DIR"] = str(manifest_dir)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_EVAL_FUNCTIONAL_LOG"] = str(func_log)
+    os.environ["INSUR_EVAL_COST_LOG"] = str(cost_log)
+    os.environ["INSUR_EVAL_SAFETY_LOG"] = str(safety_log)
+    os.environ["INSUR_MODEL_COMPARE_DIR"] = str(manifest_dir)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith((
-            "core.middleware", "core.rbac_middleware", "core.holy_audit",
+            "core.middleware", "core.rbac_middleware", "core.insur_audit",
             "routers.evals_model_compare", "services.model_compare_service",
             "services.functional_eval_service", "services.cost_eval_service",
             "services.safety_eval_service", "schemas.model_compare",
@@ -122,7 +122,7 @@ def main() -> int:
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: empty logs → 200, found_in=[] per model ----
-        r = client.post("/api/v1/holy/evals/model-compare", headers=headers,
+        r = client.post("/api/v1/insur/evals/model-compare", headers=headers,
                         json={"models": ["kivi:local", "llama3.1:8b"]})
         body = r.json() if r.status_code == 200 else {}
         step(1, "empty logs → 200, comparison_id='cmp-...', 2 entries with found_in=[]",
@@ -159,7 +159,7 @@ def main() -> int:
                 "equal_opportunity_gap": 0.02, "n_safety_incidents": 0,
             }) + "\n")
 
-        r = client.post("/api/v1/holy/evals/model-compare", headers=headers,
+        r = client.post("/api/v1/insur/evals/model-compare", headers=headers,
                         json={"models": ["kivi:local"], "eval_set": "rag_qa_v1"})
         body = r.json() if r.status_code == 200 else {}
         kivi_row = body["scorecard"][0]
@@ -179,7 +179,7 @@ def main() -> int:
                 "latency_p95_ms": 290, "n_examples": 100,
             }) + "\n")
 
-        r = client.post("/api/v1/holy/evals/model-compare", headers=headers,
+        r = client.post("/api/v1/insur/evals/model-compare", headers=headers,
                         json={"models": ["kivi:local", "llama3.1:8b"],
                               "eval_set": "rag_qa_v1"})
         body = r.json() if r.status_code == 200 else {}
@@ -202,14 +202,14 @@ def main() -> int:
         first_cmp_id = body["comparison_id"]
 
         # ---- Step 5: GET /_history ----
-        r = client.get("/api/v1/holy/evals/model-compare/_history", headers=headers)
+        r = client.get("/api/v1/insur/evals/model-compare/_history", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(5, "/_history → 200 with ≥2 comparisons listed",
              r.status_code == 200 and body.get("n_comparisons", 0) >= 2,
              f"status={r.status_code} n={body.get('n_comparisons')}")
 
         # ---- Step 6: GET /{comparison_id} ----
-        r = client.get(f"/api/v1/holy/evals/model-compare/{first_cmp_id}",
+        r = client.get(f"/api/v1/insur/evals/model-compare/{first_cmp_id}",
                        headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(6, f"/{first_cmp_id[:12]}... → 200 with status=found + manifest",
@@ -219,7 +219,7 @@ def main() -> int:
              f"status={r.status_code} svc_status={body.get('status')}")
 
         # ---- Step 7: NEG empty models list → 422 ----
-        r = client.post("/api/v1/holy/evals/model-compare", headers=headers,
+        r = client.post("/api/v1/insur/evals/model-compare", headers=headers,
                         json={"models": []})
         step(7, "NEG: empty models list → 422 (Pydantic min_length=1)",
              r.status_code == 422,
@@ -227,7 +227,7 @@ def main() -> int:
 
         # ---- Step 8: NEG too many models → 422 ----
         r = client.post(
-            "/api/v1/holy/evals/model-compare", headers=headers,
+            "/api/v1/insur/evals/model-compare", headers=headers,
             json={"models": [f"model-{i}" for i in range(9)]},
         )
         step(8, "NEG: 9 models → 422 (Pydantic max_length=8)",
@@ -236,7 +236,7 @@ def main() -> int:
 
         # ---- Step 9: NEG malformed model_id → 400 (service-side regex) ----
         r = client.post(
-            "/api/v1/holy/evals/model-compare", headers=headers,
+            "/api/v1/insur/evals/model-compare", headers=headers,
             json={"models": ["bad model id with spaces"]},
         )
         step(9, "NEG: model_id with spaces → 400 from service regex",
@@ -245,7 +245,7 @@ def main() -> int:
 
         # ---- Step 10: NEG unknown comparison_id → 404 ----
         r = client.get(
-            "/api/v1/holy/evals/model-compare/cmp-nonexistent-xyz",
+            "/api/v1/insur/evals/model-compare/cmp-nonexistent-xyz",
             headers=headers,
         )
         step(10, "NEG: unknown comparison_id → 404",
@@ -254,7 +254,7 @@ def main() -> int:
 
         # ---- Step 11: NEG malformed comparison_id (no cmp- prefix) → 400 ----
         r = client.get(
-            "/api/v1/holy/evals/model-compare/bad-id-no-prefix",
+            "/api/v1/insur/evals/model-compare/bad-id-no-prefix",
             headers=headers,
         )
         step(11, "NEG: malformed comparison_id (missing cmp- prefix) → 400",
@@ -263,7 +263,7 @@ def main() -> int:
 
         # ---- Step 12: NEG team-member role on POST → 403 ----
         r = client.post(
-            "/api/v1/holy/evals/model-compare",
+            "/api/v1/insur/evals/model-compare",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "team-member"},
             json={"models": ["kivi:local"]},
         )
@@ -276,7 +276,7 @@ def main() -> int:
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
         router_rows = [r for r in rows
-                       if r.get("tool", "").startswith("holy.evals_model_compare")]
+                       if r.get("tool", "").startswith("insur.evals_model_compare")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         if bad:
             step(99, "§38.3 schema invariant",

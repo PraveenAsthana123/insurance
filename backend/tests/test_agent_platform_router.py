@@ -47,7 +47,7 @@ def test_agent_platform_manifest_contract(client: TestClient) -> None:
     response = client.get("/api/v1/agent-platform/manifest", headers={"X-Demo-Role": "compliance"})
     assert response.status_code == 200
     payload = response.json()
-    assert payload["platform"] == "HOLY Beverage Agent Platform"
+    assert payload["platform"] == "INSUR Beverage Agent Platform"
     assert "governance_contract" in payload
     assert "observability_contract" in payload
 
@@ -100,7 +100,7 @@ def test_cua_real_write_requires_manager_or_tester_rbac(client: TestClient) -> N
 def test_typed_council_run_default_disabled_is_tenant_scoped(
     client: TestClient, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.delenv("HOLY_TYPED_COUNCIL_ENABLED", raising=False)
+    monkeypatch.delenv("INSUR_TYPED_COUNCIL_ENABLED", raising=False)
     response = client.post(
         "/api/v1/agent-platform/typed-council/run",
         headers={"X-Demo-Role": "manager", "X-Tenant-ID": "tenant-council"},

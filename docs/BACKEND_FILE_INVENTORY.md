@@ -56,12 +56,12 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 - imports: `__future__`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
-## `backend/core/holy_audit.py`
+## `backend/core/insur_audit.py`
 
 - layer: `trust/infra`
-- gist: Shared §38.3 audit-trail helper for HOLY/* routers under §64.43 #7 federation.
+- gist: Shared §38.3 audit-trail helper for INSUR/* routers under §64.43 #7 federation.
 - classes: `none`
-- functions: `log_holy_access`
+- functions: `log_insur_access`
 - imports: `__future__, core.middleware, fastapi, json, os, pathlib, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
@@ -134,7 +134,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 - gist: No module docstring yet. Add file-level input/process/output/flow documentation.
 - classes: `none`
 - functions: `lifespan, create_app`
-- imports: `__future__, contextlib, core.config, core.error_handlers, core.logging_config, core.middleware, core.rbac_middleware, database, fastapi, fastapi.middleware.cors, fastapi.middleware.gzip, logging, routers.admin, routers.agent_platform, routers.ai_explain, routers.customer, routers.datasets, routers.dbviewer, routers.demo_stories, routers.departments, routers.downloads, routers.graph, routers.health, routers.holy, routers.jobs, routers.master_data, routers.models, routers.monitoring, routers.openclaw, routers.paperclip, routers.pipelines, routers.processes, routers.reports, routers.sales, routers.supply_chain, routers.transactions, seeds.seed_runner, typing`
+- imports: `__future__, contextlib, core.config, core.error_handlers, core.logging_config, core.middleware, core.rbac_middleware, database, fastapi, fastapi.middleware.cors, fastapi.middleware.gzip, logging, routers.admin, routers.agent_platform, routers.ai_explain, routers.customer, routers.datasets, routers.dbviewer, routers.demo_stories, routers.departments, routers.downloads, routers.graph, routers.health, routers.insur, routers.jobs, routers.master_data, routers.models, routers.monitoring, routers.openclaw, routers.paperclip, routers.pipelines, routers.processes, routers.reports, routers.sales, routers.supply_chain, routers.transactions, seeds.seed_runner, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/ml/__init__.py`
@@ -239,7 +239,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/__init__.py`
 
 - layer: `ml/model`
-- gist: HOLY reference ML/RAG lifecycle implementations.
+- gist: INSUR reference ML/RAG lifecycle implementations.
 - classes: `none`
 - functions: `none`
 - imports: `none`
@@ -248,7 +248,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/agent_orchestration.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: agentic orchestration patterns (§64.43).
+- gist: INSUR reference: agentic orchestration patterns (§64.43).
 - classes: `DagNode, DagExecutionError, DagCycleError, DagExecutor, ReflectionStep, ReflectionResult, ReflectionLoop, AgentVote, MoAResult, MixtureOfAgents, DebateRound, DebateResult, DebateOrchestrator, BlackboardEntry, BlackboardConcurrencyError, Blackboard, OrchestrationManifest, OrchestrationDemo`
 - functions: `_main`
 - imports: `__future__, argparse, collections, dataclasses, json, logging, pathlib, time, typing, uuid`
@@ -257,7 +257,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/agentic_stack.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: 10-layer agentic execution stack per §64.40.
+- gist: INSUR reference: 10-layer agentic execution stack per §64.40.
 - classes: `Task, AgenticRun, PlannerAgent, Decomposer, PolicyEngine, StagehandAdapter, PlaywrightAdapter, OpenClawAdapter, PaperclipAdapter, CuaOrchestrator, CouncilAdapter, AgenticStackRunner`
 - functions: `_main`
 - imports: `__future__, argparse, dataclasses, httpx, json, logging, pathlib, re, time, typing, uuid`
@@ -266,7 +266,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/anomaly_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: anomaly-detection lifecycle with multi-detector comparison.
+- gist: INSUR reference: anomaly-detection lifecycle with multi-detector comparison.
 - classes: `AnomalyManifest, AnomalyLifecycle`
 - functions: `_main`
 - imports: `__future__, argparse, dataclasses, json, logging, matplotlib, numpy, pandas, pathlib, seaborn, sklearn.ensemble, sklearn.metrics, sklearn.neighbors, sklearn.preprocessing, sklearn.svm, time, torch, torch.utils.data, typing, uuid`
@@ -275,7 +275,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/attack_simulators.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: attack-simulation payload generators (§64.32.3 + §64.42).
+- gist: INSUR reference: attack-simulation payload generators (§64.32.3 + §64.42).
 - classes: `AttackPayload, AttackCorpus`
 - functions: `_check_executor_authorization, gen_sql_injection, gen_xss, gen_csrf, gen_auth_bypass, gen_prompt_injection, gen_model_theft, gen_data_poisoning, gen_ddos, gen_phishing, gen_deepfake, gen_synthetic_identity, gen_brute_force, generate_corpus, generate_all_classes, _main`
 - imports: `__future__, argparse, dataclasses, json, logging, os, pathlib, random, time, typing, uuid`
@@ -284,7 +284,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/cv_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: CV lifecycle with multi-model score comparison.
+- gist: INSUR reference: CV lifecycle with multi-model score comparison.
 - classes: `CvManifest, SimpleCNN, ResNetTransfer, CvLifecycle`
 - functions: `_main`
 - imports: `__future__, argparse, dataclasses, json, logging, matplotlib, numpy, pathlib, seaborn, sklearn.linear_model, sklearn.metrics, time, torch, torch.utils.data, torchvision, typing, uuid`
@@ -293,7 +293,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/dl_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: Deep Learning sequence-classification lifecycle (§64.20).
+- gist: INSUR reference: Deep Learning sequence-classification lifecycle (§64.20).
 - classes: `DlManifest, LstmClassifier, TransformerClassifier, DlLifecycle`
 - functions: `generate_synthetic_sequences, _main`
 - imports: `__future__, argparse, dataclasses, json, logging, matplotlib, numpy, pathlib, seaborn, sklearn.linear_model, sklearn.metrics, sklearn.model_selection, time, torch, torch.utils.data, typing, uuid`
@@ -302,7 +302,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/ensemble_compare.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: ensemble model comparison (Voting + Stacking) per §65.1 #5.
+- gist: INSUR reference: ensemble model comparison (Voting + Stacking) per §65.1 #5.
 - classes: `EnsembleManifest`
 - functions: `_score_classifier, _score_regressor, default_classifiers, default_regressors, compare_ensemble, _main`
 - imports: `__future__, dataclasses, json, logging, numpy, sklearn.base, sklearn.dummy, sklearn.ensemble, sklearn.linear_model, sklearn.metrics, sklearn.model_selection, time, typing`
@@ -311,7 +311,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/fraud_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: fraud-detection lifecycle (§64.23 + §40).
+- gist: INSUR reference: fraud-detection lifecycle (§64.23 + §40).
 - classes: `FraudDecision, FraudManifest, RuleLayer, MlLayer, LlmLayer, DecisionLayer, FraudLifecycle`
 - functions: `generate_synthetic_transactions, _main`
 - imports: `__future__, argparse, dataclasses, json, logging, matplotlib, numpy, pathlib, seaborn, sklearn.ensemble, sklearn.metrics, sklearn.model_selection, time, typing, uuid, xgboost`
@@ -320,7 +320,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/full_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: full structured-ML lifecycle.
+- gist: INSUR reference: full structured-ML lifecycle.
 - classes: `LifecycleManifest, FullLifecycle`
 - functions: `_main`
 - imports: `__future__, argparse, dataclasses, json, lightgbm, logging, matplotlib, mlflow, numpy, optuna, pandas, pathlib, seaborn, shap, sklearn.compose, sklearn.dummy, sklearn.ensemble, sklearn.feature_selection, sklearn.impute, sklearn.metrics, sklearn.model_selection, sklearn.pipeline, sklearn.preprocessing, time, typing, uuid, xgboost`
@@ -329,7 +329,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/nlp_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: NLP lifecycle with multiple-technique score comparison.
+- gist: INSUR reference: NLP lifecycle with multiple-technique score comparison.
 - classes: `NlpManifest, NlpLifecycle`
 - functions: `_main`
 - imports: `__future__, argparse, dataclasses, json, logging, matplotlib, numpy, pathlib, seaborn, sentence_transformers, sklearn.feature_extraction.text, sklearn.linear_model, sklearn.metrics, sklearn.model_selection, sklearn.svm, time, transformers, typing, uuid`
@@ -338,7 +338,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/noise_handling.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: noise-handling utility per data type (§64.19 + §64.26 + §65.1 #5).
+- gist: INSUR reference: noise-handling utility per data type (§64.19 + §64.26 + §65.1 #5).
 - classes: `TabularNoiseReport, ImageNoiseReport, TextNoiseReport, TimeseriesNoiseReport`
 - functions: `clean_tabular, clean_image_batch, clean_text_batch, clean_timeseries`
 - imports: `__future__, dataclasses, logging, numpy, pandas, re, scipy.ndimage, skimage.transform, sklearn.ensemble, typing, unicodedata`
@@ -347,7 +347,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/rag_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: full RAG lifecycle (chunking → embed → vector DB → retrieve → rerank → LLM → cite → eval).
+- gist: INSUR reference: full RAG lifecycle (chunking → embed → vector DB → retrieve → rerank → LLM → cite → eval).
 - classes: `CircuitBreaker, RagManifest, RagLifecycle`
 - functions: `chunk_fixed_size, chunk_sentence_aware, chunk_semantic_paragraph, _main`
 - imports: `__future__, argparse, chromadb, dataclasses, httpx, json, logging, matplotlib, numpy, pathlib, re, sentence_transformers, time, typing, uuid`
@@ -356,7 +356,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/recommendation_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: recommendation lifecycle with content + CF + hybrid comparison.
+- gist: INSUR reference: recommendation lifecycle with content + CF + hybrid comparison.
 - classes: `RecoManifest, PopularityReco, ContentReco, CollabReco, HybridReco, RecoLifecycle`
 - functions: `generate_synthetic_data, precision_at_k, recall_at_k, ndcg_at_k, average_precision_at_k, diversity, novelty, _main`
 - imports: `__future__, argparse, dataclasses, json, logging, matplotlib, numpy, pathlib, scipy.sparse, seaborn, sklearn.decomposition, sklearn.metrics.pairwise, time, typing, uuid`
@@ -365,7 +365,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/role_dashboard_catalog.py`
 
 - layer: `ml/model`
-- gist: Shared catalog for HOLY role dashboards + reports (§64.37).
+- gist: Shared catalog for INSUR role dashboards + reports (§64.37).
 - classes: `Tile, ChartSpec, ReportSpec`
 - functions: `synthesize_tile_value, synthesize_chart_data, build_dashboard_payload, build_reports_payload, _now_iso`
 - imports: `__future__, dataclasses, datetime, hashlib, random, typing`
@@ -374,7 +374,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/simulation_engine.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: per-process simulation engine (manual vs automatic).
+- gist: INSUR reference: per-process simulation engine (manual vs automatic).
 - classes: `SimEvent, StepDef, SimRunSummary, SimManifest, ProcessSimulator`
 - functions: `_three_step, _main`
 - imports: `__future__, argparse, dataclasses, json, logging, pathlib, random, time, typing, uuid`
@@ -383,7 +383,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/ml/reference/timeseries_lifecycle.py`
 
 - layer: `ml/model`
-- gist: HOLY reference: time-series lifecycle with multi-technique score comparison.
+- gist: INSUR reference: time-series lifecycle with multi-technique score comparison.
 - classes: `TimeSeriesManifest, TimeSeriesLifecycle`
 - functions: `_mape, _smape, _main`
 - imports: `__future__, argparse, dataclasses, json, logging, matplotlib, numpy, pandas, pathlib, sklearn.metrics, statsmodels.tsa.holtwinters, time, typing, uuid, xgboost`
@@ -545,19 +545,19 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/routers/dbviewer.py`
 
 - layer: `http/api`
-- gist: §68.1 + §68.2 — HOLY DB Viewer + per-function table catalog.
+- gist: §68.1 + §68.2 — INSUR DB Viewer + per-function table catalog.
 - classes: `none`
 - functions: `_validate_db_id, _validate_ident, _validate_dept, global_overview, database_info, schema_tables, table_detail, table_sample, process_tables_global, process_tables_dept, process_tables_detail`
-- imports: `__future__, core.holy_audit, core.middleware, fastapi, re, services, time, typing`
+- imports: `__future__, core.insur_audit, core.middleware, fastapi, re, services, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/routers/demo_stories.py`
 
 - layer: `http/api`
-- gist: HOLY demo-stories router — per-dept × per-role demo scripts.
+- gist: INSUR demo-stories router — per-dept × per-role demo scripts.
 - classes: `none`
 - functions: `_validate_dept, _validate_role, _demo_for, global_inventory, dept_catalog, role_demo_detail`
-- imports: `__future__, core.holy_audit, fastapi, re, time, typing`
+- imports: `__future__, core.insur_audit, fastapi, re, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/routers/departments.py`
@@ -572,19 +572,19 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/routers/downloads.py`
 
 - layer: `http/api`
-- gist: HOLY data-downloads router — per-dept downloadable sample data.
+- gist: INSUR data-downloads router — per-dept downloadable sample data.
 - classes: `none`
 - functions: `_validate_dept, _datasets_for, _file_urls, global_inventory, dept_catalog, serve_file`
-- imports: `__future__, core.holy_audit, fastapi, fastapi.responses, pathlib, re, time, typing`
+- imports: `__future__, core.insur_audit, fastapi, fastapi.responses, pathlib, re, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/routers/graph.py`
 
 - layer: `http/api`
-- gist: HOLY Graph AI router — per-dept relationship graph (Cytoscape-compatible).
+- gist: INSUR Graph AI router — per-dept relationship graph (Cytoscape-compatible).
 - classes: `none`
 - functions: `_validate_dept, _build_graph, global_summary, dept_graph, dept_nodes_filtered, dept_neighbors`
-- imports: `__future__, core.holy_audit, fastapi, re, time, typing`
+- imports: `__future__, core.insur_audit, fastapi, re, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/routers/health.py`
@@ -596,10 +596,10 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 - imports: `__future__, fastapi`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
-## `backend/routers/holy.py`
+## `backend/routers/insur.py`
 
 - layer: `http/api`
-- gist: HOLY endpoints — nav (live HOLY_NAV.json) + council (Redis queue/poll).
+- gist: INSUR endpoints — nav (live INSUR_NAV.json) + council (Redis queue/poll).
 - classes: `none`
 - functions: `get_nav, list_depts, get_spec, council_ask, council_result, _safe_run_dir, list_runs, get_manifest, get_plot, get_latest, _safe_sim_dir, list_reference_processes, run_simulation, list_sim_runs, get_sim_manifest, get_fleet_stats, get_recent_done, fanout_tasks, list_attack_classes, generate_attack_corpus, list_attack_corpora, get_attack_corpus, agentic_execute, list_agentic_runs, get_agentic_run, orchestration_demo, list_test_tiers, dispatch_test, get_test_results, get_test_result, list_roles, get_role_dashboard, get_role_reports, run_role_report, get_sim_events`
 - imports: `__future__, dataclasses, fastapi, fastapi.responses, json, logging, ml.reference.agent_orchestration, ml.reference.agentic_stack, ml.reference.attack_simulators, ml.reference.role_dashboard_catalog, ml.reference.simulation_engine, os, pathlib, random, redis, time, typing, uuid`
@@ -617,10 +617,10 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/routers/master_data.py`
 
 - layer: `http/api`
-- gist: HOLY master-data router — per-dept SAP-style master + reference data.
+- gist: INSUR master-data router — per-dept SAP-style master + reference data.
 - classes: `none`
 - functions: `_validate_dept, _validate_entity, global_catalog, dept_catalog, entity_sample`
-- imports: `__future__, core.holy_audit, fastapi, time, typing`
+- imports: `__future__, core.insur_audit, fastapi, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/routers/models.py`
@@ -635,7 +635,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/routers/monitoring.py`
 
 - layer: `http/api`
-- gist: HOLY monitoring AI router — per-dept job + pipeline health surface.
+- gist: INSUR monitoring AI router — per-dept job + pipeline health surface.
 - classes: `none`
 - functions: `_log_monitoring_access, _validate_dept, _validate_job, _scan_runs, _job_health, global_rollup, dept_monitoring, list_runs, get_run`
 - imports: `__future__, core.middleware, datetime, fastapi, json, logging, os, pathlib, time, typing`
@@ -662,10 +662,10 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/routers/pipelines.py`
 
 - layer: `http/api`
-- gist: HOLY automated-pipelines router — 5-phase per-process catalog per dept.
+- gist: INSUR automated-pipelines router — 5-phase per-process catalog per dept.
 - classes: `none`
 - functions: `_catalog_for, _validate_dept, global_inventory, dept_catalog, process_detail`
-- imports: `__future__, core.holy_audit, fastapi, re, time, typing`
+- imports: `__future__, core.insur_audit, fastapi, re, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/routers/processes.py`
@@ -680,10 +680,10 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/routers/reports.py`
 
 - layer: `http/api`
-- gist: HOLY reports-catalog router — dept-level rollup of standard reports.
+- gist: INSUR reports-catalog router — dept-level rollup of standard reports.
 - classes: `none`
 - functions: `_validate_dept, _title_for, _enrich, global_inventory, dept_catalog, report_detail`
-- imports: `__future__, core.holy_audit, fastapi, re, time, typing`
+- imports: `__future__, core.insur_audit, fastapi, re, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/routers/sales.py`
@@ -707,10 +707,10 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/routers/transactions.py`
 
 - layer: `http/api`
-- gist: HOLY transactional history router — unified chronological audit feed per dept.
+- gist: INSUR transactional history router — unified chronological audit feed per dept.
 - classes: `none`
 - functions: `_validate_dept, _ts_from_run_id, _redact_pii, _scan_cron_events, _scan_ml_events, _scan_sim_events, _wildcard_match, global_summary, list_transactions, get_event`
-- imports: `__future__, core.holy_audit, fastapi, json, logging, pathlib, re, time, typing`
+- imports: `__future__, core.insur_audit, fastapi, json, logging, pathlib, re, time, typing`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
 ## `backend/schemas/__init__.py`
@@ -914,7 +914,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/services/safety_eval_service.py`
 
 - layer: `service`
-- gist: §68.10 Safety eval — read-only aggregation over `data/agent-supervisor/safety_eval_runs.jsonl` (HOLY_EVAL_SAFETY_LOG env). Classifies each row's verdict (safe/review/unsafe/unknown) using §48 + §64.21 thresholds: hallucination ≤0.05, toxicity ≤0.02, bias ≤0.10, disparate_impact ≥0.80, equal_opportunity_gap ≤0.05. fairness_gate distinguishes 'review' (missing metric, no fail) from 'safe' (all known + no missing). Composes the §68.8/9/10 eval triplet.
+- gist: §68.10 Safety eval — read-only aggregation over `data/agent-supervisor/safety_eval_runs.jsonl` (INSUR_EVAL_SAFETY_LOG env). Classifies each row's verdict (safe/review/unsafe/unknown) using §48 + §64.21 thresholds: hallucination ≤0.05, toxicity ≤0.02, bias ≤0.10, disparate_impact ≥0.80, equal_opportunity_gap ≤0.05. fairness_gate distinguishes 'review' (missing metric, no fail) from 'safe' (all known + no missing). Composes the §68.8/9/10 eval triplet.
 - classes: `none`
 - functions: `_log_path, _read_rows, _classify, _latest_per_model, global_scorecard, per_model_history, list_incidents`
 - imports: `__future__, json, logging, os, pathlib, re, time, typing`
@@ -923,7 +923,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/services/cost_eval_service.py`
 
 - layer: `service`
-- gist: §68.9 Cost eval — read-only aggregation over `data/agent-supervisor/cost_runs.jsonl` (HOLY_EVAL_COST_LOG env). Returns 24h/7d/30d cost windows + all-time totals, per-tenant breakdown with nested per-model totals, per-model cost ranking, single-request lookup. WRITE side (LLM-gateway/LiteLLM adapter) is a separate iteration. Cost rounded to 6 decimal places.
+- gist: §68.9 Cost eval — read-only aggregation over `data/agent-supervisor/cost_runs.jsonl` (INSUR_EVAL_COST_LOG env). Returns 24h/7d/30d cost windows + all-time totals, per-tenant breakdown with nested per-model totals, per-model cost ranking, single-request lookup. WRITE side (LLM-gateway/LiteLLM adapter) is a separate iteration. Cost rounded to 6 decimal places.
 - classes: `none`
 - functions: `_log_path, _read_rows, _sum_cost, global_summary, per_tenant_breakdown, by_model_ranking, by_request`
 - imports: `__future__, collections, json, logging, os, pathlib, re, time, typing`
@@ -932,7 +932,7 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/services/functional_eval_service.py`
 
 - layer: `service`
-- gist: §68.8 Functional eval — read-only aggregation over `data/agent-supervisor/functional_eval_runs.jsonl` (HOLY_EVAL_FUNCTIONAL_LOG env). Returns cross-model leaderboard (latest-per-model, sorted by accuracy/f1/auc desc), per-model history with drift_summary between two latest runs, single-run detail. WRITE side (MLflow / scheduled eval job appending rows) is a separate iteration. PII never in row — only eval_set_hash + ground_truth_hash.
+- gist: §68.8 Functional eval — read-only aggregation over `data/agent-supervisor/functional_eval_runs.jsonl` (INSUR_EVAL_FUNCTIONAL_LOG env). Returns cross-model leaderboard (latest-per-model, sorted by accuracy/f1/auc desc), per-model history with drift_summary between two latest runs, single-run detail. WRITE side (MLflow / scheduled eval job appending rows) is a separate iteration. PII never in row — only eval_set_hash + ground_truth_hash.
 - classes: `none`
 - functions: `_log_path, _read_rows, _latest_per_model, global_summary, model_history, run_detail`
 - imports: `__future__, collections, json, logging, os, pathlib, re, time, typing`
@@ -941,16 +941,16 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/services/security_posture_service.py`
 
 - layer: `service`
-- gist: §68.7 Security posture — read-only aggregation of three signals: live-probed §47.6 compliance gates (federated_audit_helper / rbac_matrix_density / tenant_id_middleware / pii_inventory / guardrails / drill_discipline) + external CVE snapshot from `data/agent-supervisor/security_posture.json` (HOLY_SECURITY_POSTURE_PATH env) + attack-attempt scan over holy_reads audit log (rbac_denial / scope_denial / malformed_path patterns). Graceful when posture snapshot missing per §57.7. WRITE side (CVE scanner job) is external + out-of-scope.
+- gist: §68.7 Security posture — read-only aggregation of three signals: live-probed §47.6 compliance gates (federated_audit_helper / rbac_matrix_density / tenant_id_middleware / pii_inventory / guardrails / drill_discipline) + external CVE snapshot from `data/agent-supervisor/security_posture.json` (INSUR_SECURITY_POSTURE_PATH env) + attack-attempt scan over insur_reads audit log (rbac_denial / scope_denial / malformed_path patterns). Graceful when posture snapshot missing per §57.7. WRITE side (CVE scanner job) is external + out-of-scope.
 - classes: `none`
 - functions: `_posture_path, _audit_log_path, _load_posture, _compliance_gates, _scan_attacks, global_summary, per_dept_score, list_attacks`
-- imports: `__future__, collections, json, logging, os, pathlib, re, time, typing, lazy: core.holy_audit / core.rbac_middleware / core.middleware / services.pii_inventory_service / services.guardrails_service`
-- flow: /_global → load posture (env or fallback) + probe compliance gates + scan attacks-24h → aggregate. /{dept} → per-dept slice of posture + dept-filtered attack count + HOLY_SECURITY.md spec doc pointer. /attacks → audit-log scan with 3 attack-type regexes.
+- imports: `__future__, collections, json, logging, os, pathlib, re, time, typing, lazy: core.insur_audit / core.rbac_middleware / core.middleware / services.pii_inventory_service / services.guardrails_service`
+- flow: /_global → load posture (env or fallback) + probe compliance gates + scan attacks-24h → aggregate. /{dept} → per-dept slice of posture + dept-filtered attack count + INSUR_SECURITY.md spec doc pointer. /attacks → audit-log scan with 3 attack-type regexes.
 
 ## `backend/services/guardrails_service.py`
 
 - layer: `service`
-- gist: §68.5 Guardrails — read-only aggregation over `data/agent-supervisor/guardrail_decisions.jsonl` (env-overridable via HOLY_GUARDRAIL_LOG). Returns cross-dept rollup (counts per guardrail_type × decision), per-dept decisions with filters, and single-decision lookup. The WRITE side (middleware appending rows when a guardrail fires) is a separate §68.5 iteration. PII never in row — only input_hash (SHA-256 truncated).
+- gist: §68.5 Guardrails — read-only aggregation over `data/agent-supervisor/guardrail_decisions.jsonl` (env-overridable via INSUR_GUARDRAIL_LOG). Returns cross-dept rollup (counts per guardrail_type × decision), per-dept decisions with filters, and single-decision lookup. The WRITE side (middleware appending rows when a guardrail fires) is a separate §68.5 iteration. PII never in row — only input_hash (SHA-256 truncated).
 - classes: `none`
 - functions: `_log_path, _read_rows, global_summary, per_dept_decisions, get_decision`
 - imports: `__future__, collections, json, logging, os, pathlib, re, time, typing`
@@ -959,16 +959,16 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 ## `backend/services/pii_inventory_service.py`
 
 - layer: `service`
-- gist: §68.6 PII inventory — aggregates PII column annotations from per_process_tables + master_data ENTITY_CATALOG into one cross-dept view + per-dept slice. Adds a `scan_leaks` heuristic over the federated holy_reads audit log for plaintext PII patterns (email/phone/SSN/credit-card/IBAN) returning redacted match metadata (NEVER the raw PII). Honors HOLY_AUDIT_PATH env.
+- gist: §68.6 PII inventory — aggregates PII column annotations from per_process_tables + master_data ENTITY_CATALOG into one cross-dept view + per-dept slice. Adds a `scan_leaks` heuristic over the federated insur_reads audit log for plaintext PII patterns (email/phone/SSN/credit-card/IBAN) returning redacted match metadata (NEVER the raw PII). Honors INSUR_AUDIT_PATH env.
 - classes: `none`
 - functions: `_audit_log_path, cross_dept_inventory, per_dept_inventory, scan_leaks`
 - imports: `__future__, json, logging, os, pathlib, re, routers.master_data (lazy), services.dbviewer_service, time, typing`
-- flow: /pii/_global → load per_process_tables.json + ENTITY_CATALOG → aggregate distinct PII columns + entity inventory. /pii/leaks → read audit log (HOLY_AUDIT_PATH or fallback) → blank false-positive ID fields → run leak regex catalog → return hits with redacted match strings + position metadata.
+- flow: /pii/_global → load per_process_tables.json + ENTITY_CATALOG → aggregate distinct PII columns + entity inventory. /pii/leaks → read audit log (INSUR_AUDIT_PATH or fallback) → blank false-positive ID fields → run leak regex catalog → return hits with redacted match strings + position metadata.
 
 ## `backend/services/dbviewer_service.py`
 
 - layer: `service/business`
-- gist: §68 HOLY Observability + Data Hub — DB Viewer service.
+- gist: §68 INSUR Observability + Data Hub — DB Viewer service.
 - classes: `none`
 - functions: `_process_tables_path, load_process_tables, is_pii_column, redact_row, safe_ident, _connect_pg, list_registered_databases, get_database_info, list_schemas, list_tables, describe_table, sample_rows, process_tables_global, process_tables_for_dept, process_tables_for_process`
 - imports: `__future__, core.config, json, logging, pathlib, psycopg2, re, time, typing`

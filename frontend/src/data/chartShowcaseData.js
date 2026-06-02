@@ -3,21 +3,21 @@
 
 // 1) Pie / Donut — Market share by brand family
 export const marketShareData = [
-  { name: 'HOLY Original', value: 38, color: '#3b82f6' },
-  { name: 'HOLY Zero Sugar', value: 22, color: '#10b981' },
-  { name: 'HOLY Energy', value: 18, color: '#f59e0b' },
-  { name: 'HOLY Hydrate', value: 14, color: '#ef4444' },
-  { name: 'HOLY Sparkling', value: 8, color: '#8b5cf6' },
+  { name: 'INSUR Original', value: 38, color: '#3b82f6' },
+  { name: 'INSUR Zero Sugar', value: 22, color: '#10b981' },
+  { name: 'INSUR Energy', value: 18, color: '#f59e0b' },
+  { name: 'INSUR Hydrate', value: 14, color: '#ef4444' },
+  { name: 'INSUR Sparkling', value: 8, color: '#8b5cf6' },
 ];
 
 // 2) Bar — Weekly sales by SKU
 export const weeklySkuSales = [
-  { sku: 'HOLY-355ml', cases: 45200, target: 42000 },
-  { sku: 'HOLY-500ml', cases: 38900, target: 40000 },
-  { sku: 'HOLY-1L',    cases: 27400, target: 28000 },
-  { sku: 'HOLY-2L',    cases: 18700, target: 20000 },
-  { sku: 'HOLY-12pk',  cases: 31200, target: 30000 },
-  { sku: 'HOLY-24pk',  cases: 22800, target: 22000 },
+  { sku: 'INSUR-355ml', cases: 45200, target: 42000 },
+  { sku: 'INSUR-500ml', cases: 38900, target: 40000 },
+  { sku: 'INSUR-1L',    cases: 27400, target: 28000 },
+  { sku: 'INSUR-2L',    cases: 18700, target: 20000 },
+  { sku: 'INSUR-12pk',  cases: 31200, target: 30000 },
+  { sku: 'INSUR-24pk',  cases: 22800, target: 22000 },
 ];
 
 // 3) Stacked Bar — Sales by retailer × channel

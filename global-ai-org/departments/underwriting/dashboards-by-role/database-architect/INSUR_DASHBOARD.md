@@ -43,7 +43,7 @@ Per global §47.6 SOC2 CC6.2 — role-scoped. PII redacted by default; `?include
 
 ## API
 ```
-GET /api/v1/holy/dashboards/underwriting/database-architect
+GET /api/v1/insur/dashboards/underwriting/database-architect
 ```
 
 ## Endpoint contract

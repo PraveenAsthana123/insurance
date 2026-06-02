@@ -48,7 +48,7 @@ Adoption stages (per §56):
 - **Purpose**: Programming framework for LMs. Compiles prompt templates +
   few-shot examples into optimized chains. Stanford NLP origin.
 - **License**: MIT
-- **Useful for HOLY**: prompt optimization for the RAG eval-set (§59.4 ORF
+- **Useful for INSUR**: prompt optimization for the RAG eval-set (§59.4 ORF
   metrics). Compose `Signature`-typed Pydantic chains.
 - **Safety**: pure-Python; no external creds required for local use.
 - **Integration target**: `backend/services/agent_platform_service.py`
@@ -62,7 +62,7 @@ Adoption stages (per §56):
 - **Purpose**: Production RAG framework from deepset. Document retrieval,
   embedding, LLM orchestration. Pipeline-based API.
 - **License**: Apache 2.0
-- **Useful for HOLY**: alternative to LlamaIndex for `data/eval/<dept>/`
+- **Useful for INSUR**: alternative to LlamaIndex for `data/eval/<dept>/`
   RAG pipelines. Better production-grade pipeline DAGs.
 - **Safety**: pulls torch + transformers (already in venv); no creds
   for local use.
@@ -76,7 +76,7 @@ Adoption stages (per §56):
 - **Purpose**: Agent framework with Pydantic-typed inputs/outputs, from
   the Pydantic team. Tool-calling, validation, retries.
 - **License**: MIT
-- **Useful for HOLY**: typed agent for `/api/v1/agent-platform/governance/evaluate`
+- **Useful for INSUR**: typed agent for `/api/v1/agent-platform/governance/evaluate`
   + future tool-use paths. Composes cleanly with existing Pydantic
   schemas (we're on pydantic 2.13).
 - **Safety**: optional creds per provider (OpenAI/Anthropic/Gemini);
@@ -86,7 +86,7 @@ Adoption stages (per §56):
   council 3-stage author/reviewer/chair pilot. Each stage returns a
   Pydantic-shaped author, reviewer, or chair payload.
 - **Current wiring**: stage-2 pilot. Default-off via
-  `HOLY_TYPED_COUNCIL_ENABLED`; unavailable/disabled/error outcomes are
+  `INSUR_TYPED_COUNCIL_ENABLED`; unavailable/disabled/error outcomes are
   returned without crashing the request. The OpenClaw/Redis council path
   remains the default async council path.
 - **Verdict**: stage-2 pilot wired; no default-flip.
@@ -96,7 +96,7 @@ Adoption stages (per §56):
 - **Purpose**: Open-source autonomous coding agent (formerly OpenDevin).
   Browses, edits files, runs commands inside sandboxed environments.
 - **License**: MIT
-- **Useful for HOLY**: developer tooling only — runs the coding-agent
+- **Useful for INSUR**: developer tooling only — runs the coding-agent
   workflows (similar to Claude Code/Cursor/Copilot). NOT production
   runtime.
 - **Safety**: HIGH blast radius — autonomous file edits + shell exec.
@@ -110,7 +110,7 @@ Adoption stages (per §56):
 - **Purpose**: Observability SDK for AI agents. Traces sessions, captures
   costs, errors, tool calls. SaaS + self-host options.
 - **License**: MIT (SDK); SaaS for the dashboard.
-- **Useful for HOLY**: complement to OpenTelemetry on agent paths. Cost
+- **Useful for INSUR**: complement to OpenTelemetry on agent paths. Cost
   tracking per (tenant, agent_run) — composes cleanly with the §64.43 #7
   federation work.
 - **Safety**: requires `AGENTOPS_API_KEY` for the SaaS dashboard; sends
@@ -125,7 +125,7 @@ Adoption stages (per §56):
 - **Purpose**: Self-hosted LLM observability UI. Trace viewer, eval
   framework, dataset management. Open-source alternative to LangSmith.
 - **License**: ELv2 / Apache 2.0
-- **Useful for HOLY**: local trace viewer for the CUA + audit log. No
+- **Useful for INSUR**: local trace viewer for the CUA + audit log. No
   SaaS dependency, runs on localhost.
 - **Safety**: spawns a local web server on port 6006; safe for dev.
 - **Integration target**: `data/agent-supervisor/cua_runs.jsonl` ingest
@@ -137,7 +137,7 @@ Adoption stages (per §56):
 
 - **Purpose**: SaaS observability + eval platform for LangChain agents.
 - **License**: MIT (SDK); SaaS for dashboard.
-- **Useful for HOLY**: optional. Phoenix is the self-host alternative.
+- **Useful for INSUR**: optional. Phoenix is the self-host alternative.
   Adopt if operator wants the LangChain ecosystem polish.
 - **Safety**: sends trace events to langsmith.com when `LANGSMITH_API_KEY`
   is set. Opt-in only.
@@ -152,7 +152,7 @@ Adoption stages (per §56):
 - **License**: MIT
 - **PyPI**: not applicable — this is a Node.js/CLI methodology project,
   not a Python package.
-- **Useful for HOLY**: as documentation/methodology only. Reference
+- **Useful for INSUR**: as documentation/methodology only. Reference
   pattern for how the operator might structure recurring AI tasks.
 - **Safety**: N/A — no Python install side-effects.
 - **Verdict**: document only — name + URL recorded in
@@ -164,7 +164,7 @@ Adoption stages (per §56):
 - **Purpose**: Role-based multi-agent framework. Define agents with
   goals + roles, compose into crews.
 - **License**: MIT
-- **Useful for HOLY**: alternative to in-repo §64.43 #4 hierarchical
+- **Useful for INSUR**: alternative to in-repo §64.43 #4 hierarchical
   pattern. Operator already has a 10-layer agentic stack (§64.40); CrewAI
   duplicates ~70% of that surface.
 - **Safety**: provider-dependent (OpenAI/Anthropic creds).
@@ -178,7 +178,7 @@ Adoption stages (per §56):
   - `pyautogen` (v0.2.x) — original AutoGen
   - `autogen-agentchat` (v0.4.x) — new split SDK from Microsoft
 - **License**: MIT
-- **Useful for HOLY**: same overlap concern as CrewAI — duplicates
+- **Useful for INSUR**: same overlap concern as CrewAI — duplicates
   much of §64.43 #2 (Council). Operator may want for benchmarking.
 - **Safety**: provider-dependent creds.
 - **Integration target**: pilot vs in-repo council pattern.
@@ -192,7 +192,7 @@ Adoption stages (per §56):
 - **Purpose**: Data orchestrator with strong typing on assets + pipelines.
   Asset-graph centric (vs Airflow's DAG-centric).
 - **License**: Apache 2.0
-- **Useful for HOLY**: alternative to Celery beat for `data/eval/<dept>`
+- **Useful for INSUR**: alternative to Celery beat for `data/eval/<dept>`
   ML pipelines (§64.20) + cron jobs (§64.30). Strong type checking on
   ML artifacts.
 - **Safety**: spawns dagster-webserver on port 3000 (collides with frontend);
@@ -206,7 +206,7 @@ Adoption stages (per §56):
 - **Purpose**: Workflow orchestrator with hybrid execution model.
   Pythonic decorators, dynamic DAGs at runtime.
 - **License**: Apache 2.0
-- **Useful for HOLY**: alternative to Celery beat for parametric flows
+- **Useful for INSUR**: alternative to Celery beat for parametric flows
   (e.g., per-tenant retraining schedules).
 - **Safety**: Prefect Cloud SaaS is optional; self-host server works.
 - **Integration target**: same as Dagster; pick ONE to pilot, not both.
@@ -219,12 +219,12 @@ Adoption stages (per §56):
 - **Purpose**: Declarative workflow engine. Server is Java/Kotlin
   (Docker image); Python SDK calls the server's HTTP API.
 - **License**: Apache 2.0
-- **Useful for HOLY**: language-agnostic workflows + good UI for
+- **Useful for INSUR**: language-agnostic workflows + good UI for
   non-developer operators. Heavier to deploy than Dagster/Prefect
   (JVM-based).
 - **Safety**: requires running the Kestra server (Docker compose).
   Python SDK alone doesn't execute anything.
-- **Integration target**: only if HOLY's operator population includes
+- **Integration target**: only if INSUR's operator population includes
   non-developers who want a visual workflow editor.
 - **Verdict**: stage-2 (SDK installed; server adoption deferred).
 
@@ -233,9 +233,9 @@ Adoption stages (per §56):
 - **Purpose**: Open-source dev platform — script + workflow + app
   builder. Server in Rust; Python/TS scripts as workflow steps.
 - **License**: AGPL v3 (community) / commercial
-- **Useful for HOLY**: low-code admin tools for compliance operators
+- **Useful for INSUR**: low-code admin tools for compliance operators
   (build internal UIs without React work). Powerful for ops.
-- **Safety**: AGPL implications — running Windmill server in HOLY's
+- **Safety**: AGPL implications — running Windmill server in INSUR's
   hosted infra requires offering Windmill modifications under AGPL.
   Self-host with no modifications is fine.
 - **Integration target**: ops-only; never wire into customer-facing
@@ -248,7 +248,7 @@ Adoption stages (per §56):
 - **Purpose**: LLM gateway as a service. Load-balances across providers,
   fallbacks, caches, observability dashboard.
 - **License**: SDK MIT; service is SaaS.
-- **Useful for HOLY**: insurance against single-provider outages;
+- **Useful for INSUR**: insurance against single-provider outages;
   cost ceiling per (tenant, model). Composes with §64.43 #7 federation.
 - **Safety**: SaaS — sends all LLM traffic through Portkey when wired.
   Requires `PORTKEY_API_KEY` env var.
@@ -262,7 +262,7 @@ Adoption stages (per §56):
   (OpenAI, Anthropic, Bedrock, Vertex, Ollama, etc.) via one
   OpenAI-shaped API. Self-host proxy server available.
 - **License**: MIT
-- **Useful for HOLY**: provider-agnostic LLM calls + spend tracking.
+- **Useful for INSUR**: provider-agnostic LLM calls + spend tracking.
   Replaces ad-hoc `openai` SDK use across multiple services.
 - **Safety**: pure-SDK use is local; proxy server is opt-in.
 - **Integration target**: `services/agent_platform_service.py` LLM
@@ -274,7 +274,7 @@ Adoption stages (per §56):
 - **Purpose**: Open-source LLM observability. Auto-instruments OpenAI /
   Anthropic / Ollama / etc. calls via OpenTelemetry.
 - **License**: Apache 2.0
-- **Useful for HOLY**: complement to Arize Phoenix; OpenLit is
+- **Useful for INSUR**: complement to Arize Phoenix; OpenLit is
   instrumentation-side, Phoenix is the UI for the resulting traces.
 - **Safety**: requires OTel collector endpoint (local or hosted).
 - **Integration target**: `services/agent_platform_service.py`
@@ -287,7 +287,7 @@ Adoption stages (per §56):
 - **Purpose**: Open-source LLM observability platform — traces, evals,
   datasets, prompt management. Self-host or SaaS.
 - **License**: MIT (SDK + server)
-- **Useful for HOLY**: self-host alternative to LangSmith; better
+- **Useful for INSUR**: self-host alternative to LangSmith; better
   long-term posture (no SaaS dependency, full data control).
 - **Safety**: requires Langfuse server (Docker); SaaS option also
   exists with `LANGFUSE_PUBLIC_KEY` + `LANGFUSE_SECRET_KEY`.
@@ -304,7 +304,7 @@ Adoption stages (per §56):
 - **License**: Apache 2.0 (gateway) + SaaS dashboard.
 - **PyPI**: no Python package needed; integrate via existing OpenAI
   SDK with a base_url override.
-- **Useful for HOLY**: alternative observability gateway pattern;
+- **Useful for INSUR**: alternative observability gateway pattern;
   competes with Portkey for the gateway slot.
 - **§56.3 check**: not redundant (Helicone caches at the HTTP layer,
   Portkey at the SDK layer — different blast surfaces). Not skipped.
@@ -317,7 +317,7 @@ Adoption stages (per §56):
 - **Purpose**: Lightweight educational multi-agent framework from OpenAI.
 - **License**: MIT (per repo)
 - **PyPI**: not published; install via `pip install git+https://github.com/openai/swarm.git`
-- **Useful for HOLY**: limited. OpenAI explicitly labels Swarm as
+- **Useful for INSUR**: limited. OpenAI explicitly labels Swarm as
   experimental/educational; production users moved to Microsoft AutoGen
   or CrewAI for similar capability.
 - **Safety**: requires OpenAI API key for any real run.
@@ -353,7 +353,7 @@ sit at the operator-interaction boundary, not in any agent code path.
   (tiny/base/small/medium/large). Push-to-talk voice commands → text.
 - **License**: MIT
 - **PyPI**: `openai-whisper`
-- **Useful for HOLY**: voice-driven operator workflows; transcribe meeting
+- **Useful for INSUR**: voice-driven operator workflows; transcribe meeting
   recordings; offline STT for incident reports.
 - **Safety**: requires explicit mic-capture invocation (push-to-talk, not
   always-listening); models cached at `~/.cache/whisper/`; no SaaS.
@@ -365,7 +365,7 @@ sit at the operator-interaction boundary, not in any agent code path.
 - **Purpose**: Local text-to-speech with natural ONNX voices.
 - **License**: MIT
 - **PyPI**: `piper-tts`
-- **Useful for HOLY**: read-aloud Claude responses; voice status reports;
+- **Useful for INSUR**: read-aloud Claude responses; voice status reports;
   accessibility for operators.
 - **Safety**: model auto-downloads on first use (~63MB per voice); no SaaS.
   Voice cloning would require explicit consent + watermarking per global §46.4.
@@ -381,7 +381,7 @@ sit at the operator-interaction boundary, not in any agent code path.
   wired for Claude Code at `.claude/skills/bmad-*`.
 - **License**: MIT
 - **PyPI**: not applicable — Node.js CLI.
-- **Useful for HOLY**: structured AI workflow methodology; complements
+- **Useful for INSUR**: structured AI workflow methodology; complements
   the in-repo `.archon/workflows/` patterns.
 - **Safety**: Node ≥ 20 required; `scripts/bmad.sh` shim picks nvm Node 22.
   Per-user config (`_bmad/config.user.toml`) gitignored.

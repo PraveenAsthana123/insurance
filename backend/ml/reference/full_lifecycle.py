@@ -1,4 +1,4 @@
-"""HOLY reference: full structured-ML lifecycle.
+"""INSUR reference: full structured-ML lifecycle.
 
 Demonstrates ALL 16 steps the operator asked about for one pipeline.
 Copy this file for every other sub-process; only the dataset path,
@@ -277,7 +277,7 @@ class FullLifecycle:
         deduped = before - len(df)
 
         # IQR outlier flag on numeric (do NOT drop — flag only, drop is too
-        # aggressive for HOLY data with legitimate extremes like 11.11 sales)
+        # aggressive for INSUR data with legitimate extremes like 11.11 sales)
         num_cols = df.select_dtypes(include=np.number).columns.tolist()
         outlier_counts = {}
         for c in num_cols:
@@ -506,7 +506,7 @@ class FullLifecycle:
         ]
         # Step 9 — loss function chosen
         if self.task == "regression":
-            self.manifest.loss_function = "reg:squarederror (XGBoost default — robust for HOLY)"
+            self.manifest.loss_function = "reg:squarederror (XGBoost default — robust for INSUR)"
         else:
             self.manifest.loss_function = (
                 "binary:logistic"
@@ -769,7 +769,7 @@ class FullLifecycle:
         # MLflow
         if _MLFLOW:
             try:
-                mlflow.set_experiment(f"holy.{self.dept}.{self.pipeline_name}")
+                mlflow.set_experiment(f"insur.{self.dept}.{self.pipeline_name}")
                 with mlflow.start_run(run_name=self.run_id):
                     for k, v in (best_params or {}).items():
                         mlflow.log_param(k, v)
@@ -791,7 +791,7 @@ class FullLifecycle:
 def _main() -> None:
     import argparse
 
-    parser = argparse.ArgumentParser(description="Run HOLY full ML lifecycle on a CSV")
+    parser = argparse.ArgumentParser(description="Run INSUR full ML lifecycle on a CSV")
     parser.add_argument("--dataset", required=True, help="Path to CSV")
     parser.add_argument("--target", required=True, help="Target column name")
     parser.add_argument("--task", choices=["regression", "classification"], required=True)

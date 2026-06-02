@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY fraud-detection lifecycle (§43, §64.23 + §40).
+Drill: INSUR fraud-detection lifecycle (§43, §64.23 + §40).
 
 Steps (8 total; 3 negative):
     1. (+) Lifecycle runs end-to-end on synthetic 2000 txn dataset
@@ -42,7 +42,7 @@ def main():
     )
     import numpy as np
 
-    print("\nDRILL: HOLY fraud lifecycle\n")
+    print("\nDRILL: INSUR fraud lifecycle\n")
     t0 = time.time()
 
     # ----- Step 1: end-to-end -----

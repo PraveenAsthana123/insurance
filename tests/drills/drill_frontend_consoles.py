@@ -32,8 +32,8 @@ import httpx
 
 
 BACKEND = "http://localhost:8000"
-API_AGENTIC = f"{BACKEND}/api/v1/holy/agentic"
-API_TESTING = f"{BACKEND}/api/v1/holy/testing"
+API_AGENTIC = f"{BACKEND}/api/v1/insur/agentic"
+API_TESTING = f"{BACKEND}/api/v1/insur/testing"
 DEPT = "drill_consoles"
 
 

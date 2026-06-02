@@ -185,7 +185,7 @@ def probe_process(task: dict[str, Any]) -> dict[str, Any]:
         return {"verdict": "ok", "dept": dept, "artifact": artifact, "size": target.stat().st_size}
     return {"verdict": "issue_found", "dept": dept, "artifact": artifact,
             "note": "missing or stub (< 200 bytes)",
-            "fix_proposal": f"re-run scaffold-holy-* for {dept}"}
+            "fix_proposal": f"re-run scaffold-insur-* for {dept}"}
 
 
 PROBES: dict[str, Callable[[dict[str, Any]], dict[str, Any]]] = {

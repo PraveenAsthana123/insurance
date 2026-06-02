@@ -1,6 +1,6 @@
 """Pydantic AI typed council — §56 Stage-1 adapter.
 
-HOLY's existing council pattern runs via OpenClaw → Redis → worker
+INSUR's existing council pattern runs via OpenClaw → Redis → worker
 (see council_agents service in docker-compose). That path returns raw
 text strings from each of the 3 stages (author / reviewer / chair).
 
@@ -17,8 +17,8 @@ parse time rather than at downstream consumer time.
 
 Per global CLAUDE.md §56.2 Stage-1 contract:
   - Lazy import of pydantic_ai (SDK absence → unavailable, never crash)
-  - Feature-flag opt-in: HOLY_TYPED_COUNCIL_ENABLED=true
-  - Default model from HOLY_LLM_MODEL (reuses gateway env contract)
+  - Feature-flag opt-in: INSUR_TYPED_COUNCIL_ENABLED=true
+  - Default model from INSUR_LLM_MODEL (reuses gateway env contract)
   - Never default-on; OpenClaw/Redis path keeps working
 
 Per §38.3:
@@ -46,9 +46,9 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field
 
 _COUNCIL_AUDIT_PATH = Path(
-    os.environ.get("HOLY_TYPED_COUNCIL_AUDIT_PATH", "data/agent-supervisor/typed_council_runs.jsonl")
+    os.environ.get("INSUR_TYPED_COUNCIL_AUDIT_PATH", "data/agent-supervisor/typed_council_runs.jsonl")
 )
-_DEFAULT_MODEL = os.environ.get("HOLY_LLM_MODEL", "ollama/kivi:local")
+_DEFAULT_MODEL = os.environ.get("INSUR_LLM_MODEL", "ollama/kivi:local")
 
 
 class CouncilAuthorOutput(BaseModel):
@@ -93,7 +93,7 @@ class CouncilResult:
 
 def is_enabled() -> bool:
     """True only when explicitly opted-in."""
-    return os.environ.get("HOLY_TYPED_COUNCIL_ENABLED", "").lower() == "true"
+    return os.environ.get("INSUR_TYPED_COUNCIL_ENABLED", "").lower() == "true"
 
 
 def is_importable() -> bool:
@@ -154,7 +154,7 @@ def run_typed_council(
         _write_audit_row(row)
         return CouncilResult(
             outcome="disabled", model=model, tenant_id=tenant_id, request_id=request_id,
-            error_msg="HOLY_TYPED_COUNCIL_ENABLED is not 'true'",
+            error_msg="INSUR_TYPED_COUNCIL_ENABLED is not 'true'",
         )
 
     if not is_importable():
@@ -275,7 +275,7 @@ def status() -> dict[str, Any]:
             "CouncilChairDecision(decision,rationale,final_text)",
         ],
         "detail": (
-            "Stage-1 adapter; opt-in via HOLY_TYPED_COUNCIL_ENABLED=true. "
+            "Stage-1 adapter; opt-in via INSUR_TYPED_COUNCIL_ENABLED=true. "
             "Uses Pydantic AI Agent class to enforce typed output via function "
             "calling. Complementary to the async OpenClaw → Redis → worker "
             "council; same 3-stage shape, sync + typed outputs."

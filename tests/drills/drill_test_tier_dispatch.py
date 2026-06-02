@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY test-tier dispatch (§43, §65.8).
+Drill: INSUR test-tier dispatch (§43, §65.8).
 
 Steps (8 total; 3 negative):
     1. (+) 8 tiers defined in canonical list
@@ -50,7 +50,7 @@ def step(n, label, ok, detail=""):
 def main():
     from test_agent import RUNNERS, _qualifies, run_test_task
 
-    print("\nDRILL: HOLY test-tier dispatch (§65.8)\n")
+    print("\nDRILL: INSUR test-tier dispatch (§65.8)\n")
     t0 = time.time()
 
     # ----- Step 1: canonical 8 tiers -----

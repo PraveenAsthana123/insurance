@@ -1,4 +1,4 @@
-"""HOLY reference: agentic orchestration patterns (§64.43).
+"""INSUR reference: agentic orchestration patterns (§64.43).
 
 Three high-leverage patterns not previously implemented:
 

@@ -1,16 +1,16 @@
-"""HOLY demo-stories router — per-dept × per-role demo scripts.
+"""INSUR demo-stories router — per-dept × per-role demo scripts.
 
-Sibling to HOLY_DEMO_STORY (per dept, §64.1). This router surfaces the
+Sibling to INSUR_DEMO_STORY (per dept, §64.1). This router surfaces the
 15 role-scoped demo scripts catalogued at
-    global-ai-org/departments/<dept>/business-layer/HOLY_DEMO_STORIES_BY_ROLE.md
+    global-ai-org/departments/<dept>/business-layer/INSUR_DEMO_STORIES_BY_ROLE.md
 
 Composes with global §38 (demo runs audit-rowed) + §47.6 (RBAC) +
 §57.6 (canonical envelope) + §63 (15-role scaffold) + §64.1 + §66.
 
 Endpoints:
-  GET /api/v1/holy/demo-stories/{dept}            — all 15 role demos
-  GET /api/v1/holy/demo-stories/{dept}/{role}     — single role demo detail
-  GET /api/v1/holy/demo-stories/_global           — cross-dept inventory
+  GET /api/v1/insur/demo-stories/{dept}            — all 15 role demos
+  GET /api/v1/insur/demo-stories/{dept}/{role}     — single role demo detail
+  GET /api/v1/insur/demo-stories/_global           — cross-dept inventory
 """
 from __future__ import annotations
 
@@ -20,11 +20,11 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 
-router = APIRouter(prefix="/api/v1/holy/demo-stories", tags=["holy", "demo-stories"])
+router = APIRouter(prefix="/api/v1/insur/demo-stories", tags=["insur", "demo-stories"])
 
-HOLY_DEPTS = [
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -84,8 +84,8 @@ DEPT_KPI: dict[str, str] = {
 
 
 def _validate_dept(dept: str) -> None:
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 def _validate_role(role: str) -> None:
@@ -110,7 +110,7 @@ def _demo_for(dept: str, role: str) -> dict[str, Any]:
             f"Navigate to `{route}`",
             "Drill into the top tile",
             "Trigger a representative action (approve / page / refresh)",
-            f"Confirm audit row appears in /api/v1/holy/transactions/{dept} within 30s",
+            f"Confirm audit row appears in /api/v1/insur/transactions/{dept} within 30s",
         ],
         "talking_points": [
             f"This is {persona}'s view of {pretty}.",
@@ -128,9 +128,9 @@ def _demo_for(dept: str, role: str) -> dict[str, Any]:
         ],
         "audit_event_pattern": f"demo.{role.replace('-', '_')}.<action>",
         "related": {
-            "dept_demo_md": "HOLY_DEMO_STORY.md",
-            "role_reports_md": f"../reports-by-role/{role}/HOLY_REPORTS.md",
-            "role_dashboards_md": f"../dashboards-by-role/{role}/HOLY_DASHBOARD.md",
+            "dept_demo_md": "INSUR_DEMO_STORY.md",
+            "role_reports_md": f"../reports-by-role/{role}/INSUR_REPORTS.md",
+            "role_dashboards_md": f"../dashboards-by-role/{role}/INSUR_DASHBOARD.md",
         },
     }
 
@@ -139,16 +139,16 @@ def _demo_for(dept: str, role: str) -> dict[str, Any]:
 @router.get("/_global")
 def global_inventory(http_request: Request) -> dict[str, Any]:
     """Cross-dept demo inventory — counts + per-dept demo_id lists."""
-    log_holy_access(http_request, "demo_stories", "global_inventory")
+    log_insur_access(http_request, "demo_stories", "global_inventory")
     inventory = {
         dept: [f"{role.replace('-', '_')}_demo" for role in ROLES]
-        for dept in HOLY_DEPTS
+        for dept in INSUR_DEPTS
     }
     return {
-        "n_depts": len(HOLY_DEPTS),
-        "depts": HOLY_DEPTS,
+        "n_depts": len(INSUR_DEPTS),
+        "depts": INSUR_DEPTS,
         "n_roles_per_dept": len(ROLES),
-        "n_demos_total": len(HOLY_DEPTS) * len(ROLES),
+        "n_demos_total": len(INSUR_DEPTS) * len(ROLES),
         "per_dept_demo_ids": inventory,
         "scanned_at": time.time(),
     }
@@ -158,7 +158,7 @@ def global_inventory(http_request: Request) -> dict[str, Any]:
 def dept_catalog(http_request: Request, dept: str) -> dict[str, Any]:
     """Per-dept catalog — all 15 role demos for this dept."""
     _validate_dept(dept)
-    log_holy_access(http_request, "demo_stories", "dept_catalog", dept=dept)
+    log_insur_access(http_request, "demo_stories", "dept_catalog", dept=dept)
     demos = [_demo_for(dept, role) for role in ROLES]
     return {
         "dept": dept,
@@ -173,7 +173,7 @@ def role_demo_detail(http_request: Request, dept: str, role: str) -> dict[str, A
     """Single role demo detail for this dept."""
     _validate_dept(dept)
     _validate_role(role)
-    log_holy_access(http_request, "demo_stories", "role_demo_detail",
+    log_insur_access(http_request, "demo_stories", "role_demo_detail",
                     dept=dept, extra={"role": role})
     return {
         "dept": dept,

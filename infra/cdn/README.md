@@ -37,7 +37,7 @@ this commit — operator + cloud team apply when ready.
 | `/api/v1/insurance/depts/*/spec` | 1 hour | Spec doc; bust on commit |
 | `/api/v1/insurance/depts/*/dashboards/*` | 1 hour | Role dashboards static-ish |
 | `/api/v1/insurance/depts/*/pipelines/*/run` | **no-cache** | Side-effect endpoint |
-| `/api/v1/holy/*` | 30s | Most reads tenant-scoped — short TTL |
+| `/api/v1/insur/*` | 30s | Most reads tenant-scoped — short TTL |
 | `/static/*` | 1 year | Hashed asset paths |
 | `/index.html` | 5 min | SPA shell |
 

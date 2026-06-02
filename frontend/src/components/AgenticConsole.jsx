@@ -3,19 +3,19 @@
  * per §64.40.5.
  *
  * - Goal input box + dept context + scope-grant chips
- * - "Execute" triggers POST /api/v1/holy/agentic/execute (synchronous; returns full run)
+ * - "Execute" triggers POST /api/v1/insur/agentic/execute (synchronous; returns full run)
  * - Per-layer trace: layer 1-10 with status badges
  * - Task list with policy decisions + cost estimates + reversibility flags
  * - Run history (list past runs for this dept) — clickable to revisit
  *
  * Endpoints:
- *   POST /api/v1/holy/agentic/execute  {goal, dept, granted_scopes?, budget_usd?}
- *   GET  /api/v1/holy/agentic/runs?dept=
- *   GET  /api/v1/holy/agentic/runs/{request_id}
+ *   POST /api/v1/insur/agentic/execute  {goal, dept, granted_scopes?, budget_usd?}
+ *   GET  /api/v1/insur/agentic/runs?dept=
+ *   GET  /api/v1/insur/agentic/runs/{request_id}
  */
 import { useEffect, useState } from 'react';
 
-const API = '/api/v1/holy/agentic';
+const API = '/api/v1/insur/agentic';
 
 // Per §64.40.1 — the canonical 10 layers in order
 const LAYER_ORDER = [
@@ -277,7 +277,7 @@ export default function AgenticConsole({ dept }) {
       </div>
 
       <div style={s.footer}>
-        10 layers per §64.40.1 · backend: <code>/api/v1/holy/agentic/*</code> ·
+        10 layers per §64.40.1 · backend: <code>/api/v1/insur/agentic/*</code> ·
         adapters: Stagehand + Playwright + OpenClaw (live) + Paperclip (live)
       </div>
     </div>

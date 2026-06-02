@@ -1,6 +1,6 @@
-# Master Testing Framework Matrix — HOLY Beverage
+# Master Testing Framework Matrix — INSUR Beverage
 
-> **Status:** canonical testing tool catalog for the HOLY Beverage project.
+> **Status:** canonical testing tool catalog for the INSUR Beverage project.
 > **Compose with:** global §64.30 (12-tier per-dept testing policy), §43 (drill testing), §47.6 (security 4-lens), §47.10 (5-phase load testing).
 > **Last updated:** 2026-05-22.
 
@@ -142,7 +142,7 @@ These are the AI/LLM testing tools every dept that ships AI features MUST evalua
 
 ## 4. Open-source agentic AI testing stack
 
-For HOLY's §64.40 10-layer agentic execution stack:
+For INSUR's §64.40 10-layer agentic execution stack:
 
 | Layer | OSS recommendation |
 |---|---|
@@ -193,12 +193,12 @@ Each arrow = a CI gate. A red gate blocks the next step.
 
 ---
 
-## 6. The gaps most AI teams miss (HOLY release blockers)
+## 6. The gaps most AI teams miss (INSUR release blockers)
 
 Per §38.2 hard stops and §64 per-dept artifacts, the following MUST be tested
-in every HOLY release. Most enterprise teams ship without them — HOLY does not:
+in every INSUR release. Most enterprise teams ship without them — INSUR does not:
 
-| Missing capability | Risk if absent | HOLY tool/policy |
+| Missing capability | Risk if absent | INSUR tool/policy |
 |---|---|---|
 | AI Agent Memory Testing | Cross-session leakage | §64.40 layer-5 policy engine + tenant-isolation drill |
 | Semantic Cache Validation | Wrong cached responses | RAGAS regression + cache-invalidation drill |
@@ -242,7 +242,7 @@ Per-tier `README.md` MUST cite the tool chosen from §1's matrix.
 
 ## 8. Composes with
 
-| HOLY Policy / Section | Contribution |
+| INSUR Policy / Section | Contribution |
 |---|---|
 | §38 (AI governance) | Every test run emits a §38.3 audit row |
 | §43 (drill testing) | Every "added a tool" commit ships a paired drill |

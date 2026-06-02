@@ -8,9 +8,9 @@ import pytest
 
 @pytest.mark.skip(reason="placeholder — requires running backend on :8000")
 def test_customer_support_list_returns_200():
-    """REPLACE — GET /api/v1/holy/depts (smoke that backend reachable)."""
+    """REPLACE — GET /api/v1/insur/depts (smoke that backend reachable)."""
     import httpx
-    r = httpx.get("http://localhost:8000/api/v1/holy/depts", timeout=5)
+    r = httpx.get("http://localhost:8000/api/v1/insur/depts", timeout=5)
     assert r.status_code == 200
     body = r.json()
     assert "customer-support" in body.get("departments", []), f"customer-support not in /depts response"

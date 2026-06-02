@@ -59,7 +59,7 @@
       "layer": "typed council adapter",
       "use_for": "schema-constrained author/reviewer/chair results and typed tool outputs",
       "do_not_use_for": "default async OpenClaw worker path until enabled and tested",
-      "next_step": "enable only with HOLY_TYPED_COUNCIL_ENABLED=true and focused tests"
+      "next_step": "enable only with INSUR_TYPED_COUNCIL_ENABLED=true and focused tests"
     },
     {
       "name": "GraphRAG + Neo4j",

@@ -72,7 +72,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/data-flow" element={<DataFlowPage />} />
-          <Route path="/holy" element={<HolyNavPage />} />
+          <Route path="/insur" element={<HolyNavPage />} />
           <Route path="/agent-supervisor" element={<AgentSupervisorPage />} />
 
           {/* Heavy lazy-loaded pages get their own Suspense boundary so a
@@ -127,7 +127,7 @@ export default function App() {
             }
           />
 
-          <Route path="/holy/:departmentId" element={<HolyNavPage />} />
+          <Route path="/insur/:departmentId" element={<HolyNavPage />} />
           <Route path="/:departmentId" element={<DepartmentPage />} />
           <Route path="/:departmentId/admin" element={<AdminPage />} />
           <Route path="/:departmentId/manager" element={<ManagerPage />} />

@@ -1,5 +1,5 @@
 /**
- * PipelineOutput — renders the latest run of a HOLY reference pipeline:
+ * PipelineOutput — renders the latest run of a INSUR reference pipeline:
  *   - metrics row (accuracy / F1 / RMSE / etc.)
  *   - benchmark table (baseline vs candidates)
  *   - plot grid (EDA + eval + SHAP PNGs)
@@ -7,13 +7,13 @@
  *   - chunking / RAG eval when present
  *
  * Fetches:
- *   GET /api/v1/holy/eval/{dept}/{pipeline}/runs
- *   GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/manifest
- *   GET /api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/plots/{name}
+ *   GET /api/v1/insur/eval/{dept}/{pipeline}/runs
+ *   GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/manifest
+ *   GET /api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/plots/{name}
  */
 import { useEffect, useState } from 'react';
 
-const API_BASE = '/api/v1/holy/eval';
+const API_BASE = '/api/v1/insur/eval';
 
 export default function PipelineOutput({ dept, pipeline }) {
   const [runs, setRuns] = useState([]);
@@ -63,7 +63,7 @@ export default function PipelineOutput({ dept, pipeline }) {
       <div style={s.empty}>
         <strong>No runs yet for {dept}/{pipeline}.</strong>
         <div style={s.hint}>
-          Trigger one: <code>celery -A workers.celery_app call holy.run_structured_lifecycle</code>
+          Trigger one: <code>celery -A workers.celery_app call insur.run_structured_lifecycle</code>
           {' '}or wait for the daily beat schedule.
         </div>
       </div>

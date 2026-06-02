@@ -1,7 +1,7 @@
 """§68.8 Functional eval — "does the model still work?"
 
 Read-only aggregation over data/agent-supervisor/functional_eval_runs.jsonl
-(env-overridable via HOLY_EVAL_FUNCTIONAL_LOG). Each row is one eval run:
+(env-overridable via INSUR_EVAL_FUNCTIONAL_LOG). Each row is one eval run:
 
   ts, run_id, model_id, model_version, dataset, dept, tenant_id,
   accuracy, f1, auc, precision, recall, n_examples, latency_p95_ms,
@@ -54,7 +54,7 @@ _RUN_ID_RE = re.compile(r"^[A-Za-z0-9._:-]+$")
 
 
 def _log_path() -> Path | None:
-    env = os.environ.get("HOLY_EVAL_FUNCTIONAL_LOG")
+    env = os.environ.get("INSUR_EVAL_FUNCTIONAL_LOG")
     if env:
         p = Path(env)
         if p.exists():

@@ -6,13 +6,13 @@
  * immediately visible in the throughput strip.
  *
  * Endpoints:
- *   GET  /api/v1/holy/fleet/stats
- *   GET  /api/v1/holy/fleet/recent-done?fleet=simple|council|test&limit=
- *   POST /api/v1/holy/fleet/fanout  {n?, prompt_template?, dept?}
+ *   GET  /api/v1/insur/fleet/stats
+ *   GET  /api/v1/insur/fleet/recent-done?fleet=simple|council|test&limit=
+ *   POST /api/v1/insur/fleet/fanout  {n?, prompt_template?, dept?}
  */
 import { useEffect, useRef, useState } from 'react';
 
-const API = '/api/v1/holy/fleet';
+const API = '/api/v1/insur/fleet';
 
 export default function FleetMonitor({ dept = 'sales' }) {
   const [stats, setStats] = useState(null);
@@ -154,7 +154,7 @@ export default function FleetMonitor({ dept = 'sales' }) {
 
       <div style={s.footer}>
         Snapshot at <code>{new Date((stats.snapshot_time || 0) * 1000).toLocaleTimeString()}</code>
-        {' · '}backend: <code>backend/routers/holy.py</code> /fleet/*
+        {' · '}backend: <code>backend/routers/insur.py</code> /fleet/*
         {' · '}docker: <code>docker ps | grep insur-agents-</code> = 100 containers
       </div>
     </div>

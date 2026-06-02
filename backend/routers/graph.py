@@ -1,4 +1,4 @@
-"""HOLY Graph AI router — per-dept relationship graph (Cytoscape-compatible).
+"""INSUR Graph AI router — per-dept relationship graph (Cytoscape-compatible).
 
 Unifies per-dept artifacts (master entities, processes, pipelines, roles,
 reports, demos, audit event types, dashboards) into one queryable graph.
@@ -8,10 +8,10 @@ requirement) + §45 (KG non-negotiable) + §47 (C4 L5 dep view) + §49
 (compose-footer derivable from edges) + §59 MDD + §63 + §64 + §66.
 
 Endpoints:
-  GET /api/v1/holy/graph/{dept}                       — full graph
-  GET /api/v1/holy/graph/{dept}/nodes?type=<type>     — filtered nodes
-  GET /api/v1/holy/graph/{dept}/neighbors/{node_id}   — 1-hop neighbors
-  GET /api/v1/holy/graph/_global                      — cross-dept counts
+  GET /api/v1/insur/graph/{dept}                       — full graph
+  GET /api/v1/insur/graph/{dept}/nodes?type=<type>     — filtered nodes
+  GET /api/v1/insur/graph/{dept}/neighbors/{node_id}   — 1-hop neighbors
+  GET /api/v1/insur/graph/_global                      — cross-dept counts
 """
 from __future__ import annotations
 
@@ -21,11 +21,11 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 
-router = APIRouter(prefix="/api/v1/holy/graph", tags=["holy", "graph"])
+router = APIRouter(prefix="/api/v1/insur/graph", tags=["insur", "graph"])
 
-HOLY_DEPTS = [
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -58,7 +58,7 @@ REPORTS = [
     "monthly_data_steward", "quarterly_dt_strategy", "monthly_infosec",
 ]
 
-# Audit event prefixes per HOLY_TRANSACTIONS event taxonomy.
+# Audit event prefixes per INSUR_TRANSACTIONS event taxonomy.
 AUDIT_EVENT_PREFIXES = ["cron", "ml", "sim", "decision", "demo", "report"]
 
 # Per-dept process list — sparse map, falls back to single "default" process.
@@ -98,8 +98,8 @@ REPORT_OWNER: dict[str, str] = {
 
 
 def _validate_dept(dept: str) -> None:
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 def _build_graph(dept: str) -> dict[str, Any]:
@@ -207,18 +207,18 @@ def _build_graph(dept: str) -> dict[str, Any]:
 @router.get("/_global")
 def global_summary(http_request: Request) -> dict[str, Any]:
     """Cross-dept summary: node + edge counts per dept."""
-    log_holy_access(http_request, "graph", "global_summary")
+    log_insur_access(http_request, "graph", "global_summary")
     summary: dict[str, dict[str, int]] = {}
     total_nodes = total_edges = 0
-    for dept in HOLY_DEPTS:
+    for dept in INSUR_DEPTS:
         g = _build_graph(dept)
         n, e = len(g["nodes"]), len(g["edges"])
         summary[dept] = {"nodes": n, "edges": e}
         total_nodes += n
         total_edges += e
     return {
-        "n_depts": len(HOLY_DEPTS),
-        "depts": HOLY_DEPTS,
+        "n_depts": len(INSUR_DEPTS),
+        "depts": INSUR_DEPTS,
         "per_dept_counts": summary,
         "totals": {"nodes": total_nodes, "edges": total_edges},
         "allowed_node_types": sorted(ALLOWED_NODE_TYPES),
@@ -230,7 +230,7 @@ def global_summary(http_request: Request) -> dict[str, Any]:
 def dept_graph(http_request: Request, dept: str) -> dict[str, Any]:
     """Full per-dept relationship graph."""
     _validate_dept(dept)
-    log_holy_access(http_request, "graph", "dept_graph", dept=dept)
+    log_insur_access(http_request, "graph", "dept_graph", dept=dept)
     g = _build_graph(dept)
     return {
         "dept": dept,
@@ -257,7 +257,7 @@ def dept_nodes_filtered(
             raise HTTPException(
                 404, f"Unknown node type '{type}' — must be one of {sorted(ALLOWED_NODE_TYPES)}"
             )
-    log_holy_access(http_request, "graph", "dept_nodes_filtered",
+    log_insur_access(http_request, "graph", "dept_nodes_filtered",
                     dept=dept, extra={"type": type})
     g = _build_graph(dept)
     filtered = g["nodes"] if type == "all" else [n for n in g["nodes"] if n["type"] == type]
@@ -282,7 +282,7 @@ def dept_neighbors(http_request: Request, dept: str, node_id: str) -> dict[str, 
     if node_id not in node_ids:
         raise HTTPException(404, f"Node '{node_id}' not found in dept '{dept}' graph")
 
-    log_holy_access(http_request, "graph", "dept_neighbors",
+    log_insur_access(http_request, "graph", "dept_neighbors",
                     dept=dept, extra={"node_id": node_id})
 
     outgoing = [e for e in g["edges"] if e["source"] == node_id]

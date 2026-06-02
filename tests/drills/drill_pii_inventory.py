@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: §68.6 PII inventory surface — iteration 2 of HOLY Observability Hub.
+Drill: §68.6 PII inventory surface — iteration 2 of INSUR Observability Hub.
 
 The dbviewer iter 1 surface shipped the per-process PII annotations; this
 iter 2 surface aggregates them + adds the leak-scan layer that answers
@@ -56,12 +56,12 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path):
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit",
+                            "core.insur_audit",
                             "routers.pii", "services.pii_inventory_service")):
             del sys.modules[mod]
     # Also force pii_inventory_service to re-read _AUDIT_LOG_CANDIDATES
@@ -105,12 +105,12 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         client = TestClient(_build_app(audit_path))
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: /_global ----
-        r = client.get("/api/v1/holy/pii/_global", headers=headers)
+        r = client.get("/api/v1/insur/pii/_global", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(1, "/_global → 200, policy stamp + distinct PII columns + entity inventory",
              r.status_code == 200
@@ -122,7 +122,7 @@ def main() -> int:
              f"n_entities={len(body.get('entity_inventory', []))}")
 
         # ---- Step 2: /pii/{dept} ----
-        r = client.get("/api/v1/holy/pii/sales", headers=headers)
+        r = client.get("/api/v1/insur/pii/sales", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(2, "/pii/sales → per-process slice with PII columns",
              r.status_code == 200
@@ -133,17 +133,17 @@ def main() -> int:
 
         # ---- Step 3: NEG unknown dept → 404, NO audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/pii/nonexistent-dept", headers=headers)
+        r = client.get("/api/v1/insur/pii/nonexistent-dept", headers=headers)
         rows_after = len(_audit_rows(audit_path))
         step(3, "NEG: unknown dept → 404, NO audit row (validator-first §47.6)",
              r.status_code == 404 and rows_after == rows_before,
              f"status={r.status_code} rows_delta={rows_after - rows_before}")
 
         # ---- Step 4: /pii/leaks with NO audit log → graceful empty ----
-        # The HOLY_AUDIT_PATH points to a temp file that may or may not exist
+        # The INSUR_AUDIT_PATH points to a temp file that may or may not exist
         # depending on prior reads. Call with since=now+1 to guarantee 0 hits.
         future = time.time() + 3600
-        r = client.get(f"/api/v1/holy/pii/leaks?since={future}", headers=headers)
+        r = client.get(f"/api/v1/insur/pii/leaks?since={future}", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         step(4, "/pii/leaks → 200 with graceful envelope (no-log path or 0 hits)",
              r.status_code == 200
@@ -157,7 +157,7 @@ def main() -> int:
         seed_row = {
             "ts": time.time(),
             "tenant_id": "tenant-a", "actor": "test",
-            "tool": "holy.test.seed",
+            "tool": "insur.test.seed",
             "request_id": "drill-seed-1",
             "surface": "test", "endpoint": "seed", "outcome": "executed",
             # Plaintext email in the payload — simulates a real leak
@@ -167,7 +167,7 @@ def main() -> int:
         with audit_path.open("a") as fh:
             fh.write(json.dumps(seed_row) + "\n")
 
-        r = client.get("/api/v1/holy/pii/leaks?limit=10", headers=headers)
+        r = client.get("/api/v1/insur/pii/leaks?limit=10", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         hits = body.get("hits", [])
         email_hits = [h for h in hits if h.get("pii_type") == "email"]
@@ -193,12 +193,12 @@ def main() -> int:
         fp_row = {
             "ts": time.time(),
             "tenant_id": "tenant-a", "actor": "test",
-            "tool": "holy.test.fp", "request_id": "fake@test.local",
+            "tool": "insur.test.fp", "request_id": "fake@test.local",
             "surface": "test", "endpoint": "fp", "outcome": "executed",
         }
         with audit_path.open("a") as fh:
             fh.write(json.dumps(fp_row) + "\n")
-        r = client.get("/api/v1/holy/pii/leaks?limit=50", headers=headers)
+        r = client.get("/api/v1/insur/pii/leaks?limit=50", headers=headers)
         body = r.json() if r.status_code == 200 else {}
         # The FP row's only PII-looking content is its request_id ("fake@test.local").
         # After the false-positive blanking, the EMAIL regex MUST NOT find a hit
@@ -218,13 +218,13 @@ def main() -> int:
         # ---- Step 8: leak-scan handles corrupt JSON ----
         with audit_path.open("a") as fh:
             fh.write("{not valid json\n")
-        r = client.get("/api/v1/holy/pii/leaks?limit=10", headers=headers)
+        r = client.get("/api/v1/insur/pii/leaks?limit=10", headers=headers)
         step(8, "leak-scan handles corrupt JSON lines (skipped, no crash)",
              r.status_code == 200,
              f"status={r.status_code}")
 
         # ---- Step 9: /_global response carries NO raw PII values ----
-        r = client.get("/api/v1/holy/pii/_global", headers=headers)
+        r = client.get("/api/v1/insur/pii/_global", headers=headers)
         body_text = r.text
         # Catalog should only have column NAMES (e.g. "primary_email") not
         # values (e.g. "alice@example.com")
@@ -235,14 +235,14 @@ def main() -> int:
              f"leaked_terms={leaked}")
 
         # ---- Step 10: NEG malformed dept (uppercase) → 404, no info leak ----
-        r = client.get("/api/v1/holy/pii/SALES", headers=headers)
+        r = client.get("/api/v1/insur/pii/SALES", headers=headers)
         step(10, "NEG: uppercase dept → 404 (no info leak about validator order)",
              r.status_code == 404,
              f"status={r.status_code}")
 
         # ---- Step 11: NEG bad role → 400 from RBAC ----
         r = client.get(
-            "/api/v1/holy/pii/_global",
+            "/api/v1/insur/pii/_global",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "intruder"},
         )
         step(11, "NEG: unknown role → 400 from RBAC",
@@ -250,7 +250,7 @@ def main() -> int:
              f"status={r.status_code}")
 
         # ---- Step 12: tenant attribution echoed ----
-        r = client.get("/api/v1/holy/pii/_global", headers=headers)
+        r = client.get("/api/v1/insur/pii/_global", headers=headers)
         step(12, "tenant_id from X-Tenant-ID middleware echoed in response header",
              r.status_code == 200 and r.headers.get("X-Tenant-ID") == "tenant-a",
              f"echo={r.headers.get('X-Tenant-ID')!r}")
@@ -260,7 +260,7 @@ def main() -> int:
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
         # Filter to rows we wrote via the router (not the seeded ones)
-        router_rows = [r for r in rows if r.get("tool", "").startswith("holy.pii")]
+        router_rows = [r for r in rows if r.get("tool", "").startswith("insur.pii")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         if bad:
             step(99, "§38.3 schema invariant — all router rows have required fields",

@@ -1,25 +1,25 @@
-"""Shared §38.3 audit-trail helper for HOLY/* routers under §64.43 #7 federation.
+"""Shared §38.3 audit-trail helper for INSUR/* routers under §64.43 #7 federation.
 
-The pattern (first proven on /api/v1/holy/monitoring/* in commit ff0fc9f9):
+The pattern (first proven on /api/v1/insur/monitoring/* in commit ff0fc9f9):
   - Data layer stays fleet-wide / dept-scoped where appropriate
   - Access trail IS tenant-attributed: every read writes one §38.3 audit
     row with caller's tenant_id + actor + endpoint + path-param tags
 
-This module is the reusable contract so the 7 remaining holy/* routers
+This module is the reusable contract so the 7 remaining insur/* routers
 (master_data, transactions, pipelines, reports, demo_stories, graph,
 downloads) can opt in with three lines:
 
-    from core.holy_audit import log_holy_access
+    from core.insur_audit import log_insur_access
     @router.get("/...")
     def handler(http_request: Request, ...):
-        log_holy_access(http_request, "<surface>", "<endpoint>", dept=...)
+        log_insur_access(http_request, "<surface>", "<endpoint>", dept=...)
         ...
 
 Per §57.7: disk failures do NOT crash the request. The audit write is
 best-effort; the read path is the contract.
 
 Per §47.6 anti-info-leak: validators (e.g. _validate_dept) MUST run
-BEFORE log_holy_access so failed-enumeration attempts don't pollute
+BEFORE log_insur_access so failed-enumeration attempts don't pollute
 the audit trail (matches the existing 404-not-400 pattern).
 """
 from __future__ import annotations
@@ -35,11 +35,11 @@ from fastapi import Request
 from core.middleware import current_tenant_id
 
 _AUDIT_PATH = Path(
-    os.environ.get("HOLY_AUDIT_PATH", "data/agent-supervisor/holy_reads.jsonl")
+    os.environ.get("INSUR_AUDIT_PATH", "data/agent-supervisor/insur_reads.jsonl")
 )
 
 
-def log_holy_access(
+def log_insur_access(
     http_request: Request,
     surface: str,
     endpoint: str,
@@ -54,7 +54,7 @@ def log_holy_access(
         surface:      one of "monitoring", "master_data", "transactions", etc.
                       Used as the `tool` prefix in the audit row.
         endpoint:     the specific handler name (e.g. "global_rollup")
-        dept:         optional dept tag (most holy/* surfaces are dept-scoped)
+        dept:         optional dept tag (most insur/* surfaces are dept-scoped)
         extra:        optional extra fields to merge into the row
 
     Best-effort persistence — disk errors are swallowed so the read path
@@ -64,7 +64,7 @@ def log_holy_access(
         "ts": time.time(),
         "tenant_id": current_tenant_id(http_request),
         "actor": http_request.headers.get("X-Demo-Role", "unknown"),
-        "tool": f"holy.{surface}.{endpoint}",
+        "tool": f"insur.{surface}.{endpoint}",
         "request_id": getattr(http_request.state, "correlation_id", ""),
         "surface": surface,
         "endpoint": endpoint,

@@ -22,7 +22,7 @@ Main KPI: Underwriting cycle time; STP rate; loss ratio; combined ratio.
 
 | Step | Action | Expected Screen | Talking Point |
 | --- | --- | --- | --- |
-| 1 | Open /holy/underwriting/dashboard?role=manager | Manager dashboard with 6-flavor scorecard | Every sub-process governed across 6 AI flavors per §64.36 |
+| 1 | Open /insur/underwriting/dashboard?role=manager | Manager dashboard with 6-flavor scorecard | Every sub-process governed across 6 AI flavors per §64.36 |
 | 2 | Click first L2 process card | Process detail with IPO + sub-processes | IPO + TODO + Task per §64.15 |
 | 3 | Open Simulation tab | Side-by-side Manual vs Automatic | Per §64.34 — 5-layer simulation |
 | 4 | Open Agentic tab | 10-layer execution trace for a goal | Per §64.40 — goal → council → plan → policy → CUA |

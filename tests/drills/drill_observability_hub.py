@@ -2,7 +2,7 @@
 """
 Drill: §68 Observability Hub aggregator — completes the §68 read-surface story.
 
-One endpoint: GET /api/v1/holy/observability-hub/_overview that probes
+One endpoint: GET /api/v1/insur/observability-hub/_overview that probes
 all 7 §68 read surfaces' source-of-truth logs in one call. Mirrors
 the §56 /api/v1/agent-platform/adapters shape.
 
@@ -59,17 +59,17 @@ def step(n, label, ok, detail=""):
 def _build_app(audit_path: Path):
     # Point all §68 surface env vars at a per-test tmp dir so each
     # surface reports absent unless we seed it.
-    os.environ["HOLY_AUDIT_PATH"] = str(audit_path)
-    os.environ["HOLY_GUARDRAIL_LOG"] = str(audit_path.parent / "guardrails.jsonl")
-    os.environ["HOLY_SECURITY_POSTURE_PATH"] = str(audit_path.parent / "security_posture.json")
-    os.environ["HOLY_EVAL_FUNCTIONAL_LOG"] = str(audit_path.parent / "functional_eval.jsonl")
-    os.environ["HOLY_EVAL_COST_LOG"] = str(audit_path.parent / "cost.jsonl")
-    os.environ["HOLY_EVAL_SAFETY_LOG"] = str(audit_path.parent / "safety.jsonl")
+    os.environ["INSUR_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_GUARDRAIL_LOG"] = str(audit_path.parent / "guardrails.jsonl")
+    os.environ["INSUR_SECURITY_POSTURE_PATH"] = str(audit_path.parent / "security_posture.json")
+    os.environ["INSUR_EVAL_FUNCTIONAL_LOG"] = str(audit_path.parent / "functional_eval.jsonl")
+    os.environ["INSUR_EVAL_COST_LOG"] = str(audit_path.parent / "cost.jsonl")
+    os.environ["INSUR_EVAL_SAFETY_LOG"] = str(audit_path.parent / "safety.jsonl")
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in list(sys.modules.keys()):
         if mod.startswith(("core.middleware", "core.rbac_middleware",
-                            "core.holy_audit",
+                            "core.insur_audit",
                             "routers.observability_hub",
                             "services.observability_hub_service")):
             del sys.modules[mod]
@@ -109,13 +109,13 @@ def main() -> int:
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
-        audit_path = Path(tmp) / "holy_reads.jsonl"
+        audit_path = Path(tmp) / "insur_reads.jsonl"
         client = TestClient(_build_app(audit_path))
         headers = {"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"}
 
         # ---- Step 1: /_overview envelope ----
         r = client.get(
-            "/api/v1/holy/observability-hub/_overview", headers=headers,
+            "/api/v1/insur/observability-hub/_overview", headers=headers,
         )
         body = r.json() if r.status_code == 200 else {}
         step(1, "/_overview → 200, n_surfaces=7, policy stamp present",
@@ -157,7 +157,7 @@ def main() -> int:
              f"dbviewer={dbv_status} non_absent_jsonls={absent_jsonls}")
 
         # ---- Step 5: seed guardrail log + re-probe ----
-        guardrail_log = Path(os.environ["HOLY_GUARDRAIL_LOG"])
+        guardrail_log = Path(os.environ["INSUR_GUARDRAIL_LOG"])
         now = time.time()
         seed_rows = [
             {"ts": now - 100, "tenant_id": "tenant-a", "actor": "rag-svc",
@@ -172,7 +172,7 @@ def main() -> int:
             for row in seed_rows:
                 fh.write(json.dumps(row) + "\n")
         r = client.get(
-            "/api/v1/holy/observability-hub/_overview", headers=headers,
+            "/api/v1/insur/observability-hub/_overview", headers=headers,
         )
         body = r.json() if r.status_code == 200 else {}
         gr = next(s for s in body["surfaces"] if s["key"] == "guardrails")
@@ -186,7 +186,7 @@ def main() -> int:
         with guardrail_log.open("a") as fh:
             fh.write("{not valid json\n")
         r = client.get(
-            "/api/v1/holy/observability-hub/_overview", headers=headers,
+            "/api/v1/insur/observability-hub/_overview", headers=headers,
         )
         body = r.json() if r.status_code == 200 else {}
         gr = next(s for s in body["surfaces"] if s["key"] == "guardrails")
@@ -209,7 +209,7 @@ def main() -> int:
         ohub_svc._probe_one = broken_probe
         try:
             r = client.get(
-                "/api/v1/holy/observability-hub/_overview", headers=headers,
+                "/api/v1/insur/observability-hub/_overview", headers=headers,
             )
             body = r.json() if r.status_code == 200 else {}
             sec = next((s for s in body.get("surfaces", []) if s["key"] == "security"), None)
@@ -224,7 +224,7 @@ def main() -> int:
 
         # ---- Step 8: NEG bad role → 400 ----
         r = client.get(
-            "/api/v1/holy/observability-hub/_overview",
+            "/api/v1/insur/observability-hub/_overview",
             headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "intruder"},
         )
         step(8, "NEG: unknown role → 400 from RBAC catch-all",
@@ -233,7 +233,7 @@ def main() -> int:
 
         # ---- Step 9: no role header → defaults to manager (TENANT_ID_STRICT unset) ----
         r = client.get(
-            "/api/v1/holy/observability-hub/_overview",
+            "/api/v1/insur/observability-hub/_overview",
             headers={"X-Tenant-ID": "tenant-a"},  # no X-Demo-Role
         )
         step(9, "no X-Demo-Role + TENANT_ID_STRICT unset → defaults to manager → 200",
@@ -242,13 +242,13 @@ def main() -> int:
 
         # ---- Step 10: §38.3 schema invariant + tenant echo ----
         r = client.get(
-            "/api/v1/holy/observability-hub/_overview", headers=headers,
+            "/api/v1/insur/observability-hub/_overview", headers=headers,
         )
         required = {"ts", "tenant_id", "actor", "tool", "request_id",
                     "surface", "endpoint", "outcome"}
         rows = _audit_rows(audit_path)
         router_rows = [r for r in rows
-                       if r.get("tool", "").startswith("holy.observability_hub")]
+                       if r.get("tool", "").startswith("insur.observability_hub")]
         bad = [r for r in router_rows if not required.issubset(r.keys())]
         step(10, "tenant echo + §38.3 schema invariant on all router rows",
              r.status_code == 200

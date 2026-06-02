@@ -37,4 +37,4 @@ prompt-version migration, vendor model-update intake, rollback drill.
 - §47.5 (JAD chain) — problem-framing connects business to model
 - §47.7 (4-layer rollback) — model rollback path required at release
 - §53.39 (schema evolution) + §53.45 (continuous improvement)
-- §66 (per-dept artifacts) — each dept's HOLY_DEPT_SPEC names its models
+- §66 (per-dept artifacts) — each dept's INSUR_DEPT_SPEC names its models

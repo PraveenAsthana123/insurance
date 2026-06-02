@@ -1,4 +1,4 @@
-# HOLY Beverage — Enterprise Knowledge Graph
+# INSUR Beverage — Enterprise Knowledge Graph
 
 **Source:** operator brief 2026-05-21
 

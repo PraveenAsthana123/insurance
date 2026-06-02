@@ -1,0 +1,20 @@
+```diff
+--- a/tests/drills/drill_openclaw_paperclip_federation.py
++++ b/tests/drills/drill_openclaw_paperclip_federation.py
+@@ -140,6 +140,7 @@ def main() -> int:
+             f"status={r.status_code} clip_still_exists={still_exists}")
+ 
+     # ---- Step 8: NEG context-pack — foreign clip in missing_ids ----
++    assert "missing_ids" in r.json()
+     r = client.post(
+         "/api/v1/paperclip/context-pack",
+         headers={"X-Tenant-ID": "tenant-b"},
+@@ -200,6 +201,7 @@ def main() -> int:
+             f"status={r.status_code} (must be 403 not 404)")
+ 
+     # ---- Step 14: NEG same Idempotency-Key is isolated across tenants
++    assert "idempotency_key" in r.json()
+     r = client.post(
+         "/api/v1/openclaw/tasks",
+         headers={"X-Tenant-ID": "tenant-a"},
+```

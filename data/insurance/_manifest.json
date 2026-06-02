@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T22:29:35.507175+00:00",
+  "generated_at": "2026-06-02T10:15:01.513569+00:00",
   "dry_run": false,
   "refresh": true,
   "downloads": [
@@ -37,20 +37,6 @@
       "desc": "Auto UW + claims features",
       "status": "ok",
       "message": "already present (2 files)"
-    },
-    {
-      "slug": "customer-service/call_center_data",
-      "dataset": "satvicoder/call-center-data",
-      "desc": "Call Center metrics dataset",
-      "status": "ok",
-      "message": "downloaded (1 files): Call Center Data.csv"
-    },
-    {
-      "slug": "customer-service/customer_complaints",
-      "dataset": "adelanseur/insurance-company-complaints",
-      "desc": "Insurance Company Complaints",
-      "status": "ok",
-      "message": "downloaded (1 files): Insurance_Company_Complaints__Resolutions__Status__and_Recoveries.csv"
     },
     {
       "slug": "customer-service/customer_churn",
@@ -105,8 +91,22 @@
       "slug": "underwriting/medical_cost",
       "dataset": "mirichoi0218/insurance",
       "desc": "Medical cost personal dataset",
-      "status": "ok",
-      "message": "downloaded (1 files): insurance.csv"
+      "status": "fail",
+      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+    },
+    {
+      "slug": "customer-service/call_center_data",
+      "dataset": "satvicoder/call-center-data",
+      "desc": "Call Center metrics dataset",
+      "status": "fail",
+      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+    },
+    {
+      "slug": "customer-service/customer_complaints",
+      "dataset": "adelanseur/insurance-company-complaints",
+      "desc": "Insurance Company Complaints",
+      "status": "fail",
+      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
     }
   ]
 }

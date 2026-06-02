@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Drill: §64.43 #7 federation extended to /api/v1/holy/monitoring/* — first
-of 9 holy/* router federations.
+Drill: §64.43 #7 federation extended to /api/v1/insur/monitoring/* — first
+of 9 insur/* router federations.
 
 Monitoring DATA is fleet-wide infrastructure telemetry (ML pipeline +
 cron job health across all depts). It is NOT tenant-scoped data — the
@@ -60,7 +60,7 @@ def step(n, label, ok, detail=""):
 
 
 def _build_app(audit_path: Path):
-    os.environ["HOLY_MONITORING_AUDIT_PATH"] = str(audit_path)
+    os.environ["INSUR_MONITORING_AUDIT_PATH"] = str(audit_path)
     os.environ.pop("TENANT_ID_STRICT", None)
 
     for mod in (
@@ -90,7 +90,7 @@ def _audit_rows(path: Path):
 def main() -> int:
     from fastapi.testclient import TestClient
 
-    print("\nDRILL: §64.43 #7 federation — HOLY/monitoring (first of 9 holy routers)\n")
+    print("\nDRILL: §64.43 #7 federation — INSUR/monitoring (first of 9 insur routers)\n")
     t0 = time.time()
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -98,7 +98,7 @@ def main() -> int:
         client = TestClient(_build_app(audit_path))
 
         # ---- Step 1: /_global with X-Tenant-ID → echo + audit row ----
-        r = client.get("/api/v1/holy/monitoring/_global",
+        r = client.get("/api/v1/insur/monitoring/_global",
                        headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         rows = _audit_rows(audit_path)
         step(1, "/_global → X-Tenant-ID echoed + audit row with tenant_id='tenant-a'",
@@ -110,7 +110,7 @@ def main() -> int:
              f"status={r.status_code} echo={r.headers.get('X-Tenant-ID')!r} rows={len(rows)}")
 
         # ---- Step 2: /{dept} → audit row with dept ----
-        r = client.get("/api/v1/holy/monitoring/sales",
+        r = client.get("/api/v1/insur/monitoring/sales",
                        headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         rows = _audit_rows(audit_path)
         last = rows[-1]
@@ -121,7 +121,7 @@ def main() -> int:
              f"status={r.status_code} dept={last.get('dept')!r}")
 
         # ---- Step 3: /{dept}/jobs/{job}/runs → dept + job tags ----
-        r = client.get("/api/v1/holy/monitoring/sales/jobs/data_refresh/runs",
+        r = client.get("/api/v1/insur/monitoring/sales/jobs/data_refresh/runs",
                        headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         rows = _audit_rows(audit_path)
         last = rows[-1]
@@ -134,7 +134,7 @@ def main() -> int:
 
         # ---- Step 4: /{dept}/jobs/{job}/runs/{run_id} → dept+job+run_id tags ----
         # Hits 404 (no manifest on disk in tmpdir) but audit row written BEFORE the 404.
-        r = client.get("/api/v1/holy/monitoring/sales/jobs/data_refresh/runs/run-xyz",
+        r = client.get("/api/v1/insur/monitoring/sales/jobs/data_refresh/runs/run-xyz",
                        headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         rows = _audit_rows(audit_path)
         last = rows[-1]
@@ -147,7 +147,7 @@ def main() -> int:
 
         # ---- Step 5: NEG invalid dept → 404 (anti-info-leakage), NO new audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/monitoring/BOGUS-DEPT",
+        r = client.get("/api/v1/insur/monitoring/BOGUS-DEPT",
                        headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         rows_after = len(_audit_rows(audit_path))
         step(5, "NEG: invalid dept → 404 (anti-info-leakage), NO audit row (validator runs first)",
@@ -156,7 +156,7 @@ def main() -> int:
 
         # ---- Step 6: NEG invalid job → 404, NO new audit row ----
         rows_before = len(_audit_rows(audit_path))
-        r = client.get("/api/v1/holy/monitoring/sales/jobs/BOGUS_JOB/runs",
+        r = client.get("/api/v1/insur/monitoring/sales/jobs/BOGUS_JOB/runs",
                        headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         rows_after = len(_audit_rows(audit_path))
         step(6, "NEG: invalid job → 404, audit row count unchanged",
@@ -164,7 +164,7 @@ def main() -> int:
              f"status={r.status_code} rows_delta={rows_after - rows_before}")
 
         # ---- Step 7: NEG default tenant when no header ----
-        r = client.get("/api/v1/holy/monitoring/_global",
+        r = client.get("/api/v1/insur/monitoring/_global",
                        headers={"X-Demo-Role": "manager"})
         rows = _audit_rows(audit_path)
         last = rows[-1]
@@ -173,9 +173,9 @@ def main() -> int:
              f"tenant_id={last['tenant_id']!r}")
 
         # ---- Step 8: cross-tenant reads ARE allowed; payload identical ----
-        r_a = client.get("/api/v1/holy/monitoring/_global",
+        r_a = client.get("/api/v1/insur/monitoring/_global",
                          headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
-        r_b = client.get("/api/v1/holy/monitoring/_global",
+        r_b = client.get("/api/v1/insur/monitoring/_global",
                          headers={"X-Tenant-ID": "tenant-b", "X-Demo-Role": "manager"})
         # Strip scanned_at (timestamp differs across calls)
         body_a = {k: v for k, v in r_a.json().items() if k != "scanned_at"}
@@ -201,9 +201,9 @@ def main() -> int:
         bad_audit_path = Path(tmp) / "nonexistent_parent" / "file.jsonl"
         # Create a FILE at where the parent dir would be — so mkdir-with-parents fails
         (Path(tmp) / "blocker.file").write_text("")
-        os.environ["HOLY_MONITORING_AUDIT_PATH"] = str(Path(tmp) / "blocker.file" / "audit.jsonl")
+        os.environ["INSUR_MONITORING_AUDIT_PATH"] = str(Path(tmp) / "blocker.file" / "audit.jsonl")
         client2 = TestClient(_build_app(Path(tmp) / "blocker.file" / "audit.jsonl"))
-        r = client2.get("/api/v1/holy/monitoring/_global",
+        r = client2.get("/api/v1/insur/monitoring/_global",
                         headers={"X-Tenant-ID": "tenant-a", "X-Demo-Role": "manager"})
         step(10, "NEG: disk-write failure → read STILL succeeds (best-effort audit)",
              r.status_code == 200,

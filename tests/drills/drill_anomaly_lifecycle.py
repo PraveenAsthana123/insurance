@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY anomaly lifecycle (§43, §64.23 + §64.32).
+Drill: INSUR anomaly lifecycle (§43, §64.23 + §64.32).
 
 Steps (8 total; 3 negative assertions):
     1. (+) Lifecycle runs end-to-end on Rossmann subset with injected anomalies
@@ -36,7 +36,7 @@ def step(n, label, ok, detail=""):
 def main():
     from ml.reference.anomaly_lifecycle import AnomalyLifecycle
 
-    print("\nDRILL: HOLY anomaly lifecycle (Rossmann + synthetic outliers)\n")
+    print("\nDRILL: INSUR anomaly lifecycle (Rossmann + synthetic outliers)\n")
     t0 = time.time()
 
     DATA = REPO_ROOT / "data" / "kaggle" / "rossmann" / "train.csv"

@@ -3,7 +3,7 @@
 > **Status:** Phase 1 of 7 expanded — Phases 2-7 listed at table-of-contents level.
 > **Convention:** one phase per commit; "Top 1% additions" called out inline.
 > **Mapping:** every dashboard cross-references the backend surface it reads from
-> (§68 Observability Hub endpoints, §56 Stage-1 adapters, §66 holy/* federated reads, etc.).
+> (§68 Observability Hub endpoints, §56 Stage-1 adapters, §66 insur/* federated reads, etc.).
 
 ## Index — the 7 phases
 
@@ -87,7 +87,7 @@ Used in the `Audience` column below:
 |---|---|---|---|---|---|---|---|---|
 | 1 | **Executive AI Dashboard** | Overall AI health one-glance | EXEC | Total AI requests, adoption, cost, ROI, availability | KPI cards + sparklines + scorecard | Real-time (60s) | `/observability-hub/_overview` + `/agent-platform/adapters` | Spec'd |
 | 2 | **AI Cost Dashboard** | FinOps for AI | EXEC, BIZ | Cost by model, team, workflow, agent | Treemap + line + waterfall | Real-time | `/evals/cost/_global` + `/evals/cost/by-model` | Spec'd |
-| 3 | **AI Usage Dashboard** | Adoption tracking | EXEC, PROD | Daily users, active users, sessions, growth | Line + area + bar | Hourly | `/holy/transactions/_global` | Spec'd |
+| 3 | **AI Usage Dashboard** | Adoption tracking | EXEC, PROD | Daily users, active users, sessions, growth | Line + area + bar | Hourly | `/insur/transactions/_global` | Spec'd |
 | 4 | **Business KPI Dashboard** | Business value linkage | EXEC, BIZ | Productivity gain, revenue impact, ticket-deflection, time-saved | Treemap + waterfall + forecast | Daily | (per-dept ROI source) | Spec'd |
 | 5 | **AI Portfolio Dashboard** | Initiative tracking | EXEC, PROD | Projects active/pending, risks, benefits realized | Kanban + scorecard | Weekly | (project tracker) | Spec'd |
 | 6 | **AI Governance Dashboard** | Oversight + policy hits | EXEC, RISK | Approvals, policies fired, exceptions, RACI status | Funnel + matrix | Real-time | `/agent-platform/approval-broker/decide` + `/guardrails/_global` | Spec'd |
@@ -99,7 +99,7 @@ Used in the `Audience` column below:
 | 12 | **AI Investment Dashboard** ⭐ | Top-1% addition: investment trail | EXEC, BIZ | $ spent vs budget, run-rate, capex/opex | Stacked bar + forecast | Monthly | (FinOps source) | Spec'd |
 | 13 | **AI Risk Heatmap** ⭐ | Top-1% addition: board-level risk view | EXEC, RISK | Risk × probability matrix per AI surface | Risk heatmap | Real-time | `/security/_global` aggregation | Spec'd |
 | 14 | **Business Value Realization Dashboard** ⭐ | Top-1% addition: planned vs realized | EXEC, BIZ | Planned vs actual value, % realized, gap | Bullet chart + waterfall | Quarterly | (initiative tracker) | Spec'd |
-| 15 | **AI Adoption Curve Dashboard** ⭐ | Top-1% addition: rollout S-curve | EXEC, PROD | DAU/WAU/MAU, new vs returning, viral coefficient | S-curve + funnel | Daily | `/holy/transactions/_global` slicing | Spec'd |
+| 15 | **AI Adoption Curve Dashboard** ⭐ | Top-1% addition: rollout S-curve | EXEC, PROD | DAU/WAU/MAU, new vs returning, viral coefficient | S-curve + funnel | Daily | `/insur/transactions/_global` slicing | Spec'd |
 | 16 | **AI ROI by Department Dashboard** | Per-dept value attribution | EXEC, BIZ | ROI per dept × initiative | Treemap | Monthly | per-dept aggregation | Spec'd |
 | 17 | **AI ROI by Use Case Dashboard** | Per-use-case attribution | EXEC, BIZ | ROI per use-case (lead-scoring / churn / forecast / etc.) | Bar + waterfall | Monthly | per-process aggregation (§64.20) | Spec'd |
 | 18 | **AI Project Risk Register Dashboard** | Project-level risk tracking | EXEC, RISK | Open risks, severity, mitigation status | Risk register table | Weekly | (project risk source) | Spec'd |
@@ -107,7 +107,7 @@ Used in the `Audience` column below:
 | 20 | **AI Talent & Capability Dashboard** | Team readiness | EXEC, OPS | Headcount, skills, certifications, hiring pipeline | Stacked bar + sunburst | Monthly | (HR source) | Spec'd |
 | 21 | **AI Vendor Spend Dashboard** | Vendor concentration | EXEC, BIZ, RISK | $ per vendor, vendor-lock-in score | Treemap + Pareto | Monthly | (vendor source) | Spec'd |
 | 22 | **AI Audit-Readiness Dashboard** ⭐ | Top-1% addition: audit-prep | EXEC, RISK | Evidence coverage, control gaps, doc-freshness | Gap-analysis + scorecard | Weekly | `/security/_global.compliance` + audit_log | Spec'd |
-| 23 | **AI Incident Executive Dashboard** | Incident summary for execs | EXEC, RISK | MTTD, MTTR, severity, impact $, count by type | Timeline + Pareto + KPI | Real-time | `/holy/transactions/_global` filtering | Spec'd |
+| 23 | **AI Incident Executive Dashboard** | Incident summary for execs | EXEC, RISK | MTTD, MTTR, severity, impact $, count by type | Timeline + Pareto + KPI | Real-time | `/insur/transactions/_global` filtering | Spec'd |
 
 ⭐ = top-1% addition beyond the operator's original list
 
@@ -195,7 +195,7 @@ Categories: Model Usage (8) · Token (8) · Cost (8) · PromptOps (10) · Qualit
 Categories: Retrieval (15) · Search (10) · Hybrid Search (10) · Vector DB (15) · Embeddings (15) · Chunking (15) · Re-ranker (10) · Citation (10) · Knowledge Graph (10) · Freshness (10) · Index Health (10) · Data Sources (10) · Evaluation (10) · Document Processing (10). Owner: RAG Engineering. **Backend mapping:** ~30% covered today (need RAG-specific telemetry).
 
 ## Phase 4 — Agentic AI & Multi-Agent Ops (~80 dashboards)
-Categories: Agent Overview (8) · Reasoning & Decision (7) · Multi-Agent Coordination (8) · Tool Usage (8) · Memory (8) · HITL (7) · Safety & Governance (8) · LangGraph / Workflow (8) · Evaluation (8) · Top-1% Additions (10). Owner: AgentOps. **Backend mapping:** ~40% covered by Approval Broker + typed-council + holy_audit federation.
+Categories: Agent Overview (8) · Reasoning & Decision (7) · Multi-Agent Coordination (8) · Tool Usage (8) · Memory (8) · HITL (7) · Safety & Governance (8) · LangGraph / Workflow (8) · Evaluation (8) · Top-1% Additions (10). Owner: AgentOps. **Backend mapping:** ~40% covered by Approval Broker + typed-council + insur_audit federation.
 
 ## Phase 5 — MCP, Tooling, Workflow & Integration (~106 dashboards)
 Categories: MCP Overview (8) · MCP Servers (8) · Tool Registry (8) · Tool Execution (8) · Tool Selection (8) · APIs (8) · Enterprise Apps (8) · Workflows (8) · LangGraph (8) · Events & Queues (8) · Integrations (8) · MCP Security (8) · Top-1% Additions (10). Owner: Platform / Integration. **Backend mapping:** ~20% covered today.

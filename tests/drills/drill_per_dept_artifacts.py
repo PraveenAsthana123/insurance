@@ -4,10 +4,10 @@ Drill: §64 + §65 release blocker — every dept MUST have FULL artifact set.
 
 Updated 2026-05-23 to cover the artifacts the prior version undercounted:
 data-types/* (9 per dept), docs/{hld,lld,sad,c4-model,network-flow}/* (5 per
-dept), HOLY_TECH_STACK.md (1 per dept).
+dept), INSUR_TECH_STACK.md (1 per dept).
 
 Total mandatory artifacts per dept after this update:
-  - 25 business-layer MD files (last added: HOLY_AGENTIC_STACK §64.40.8, 2026-05-25;
+  - 25 business-layer MD files (last added: INSUR_AGENTIC_STACK §64.40.8, 2026-05-25;
         remote-parallel batch §66 2026-05-24: TRANSACTIONS, PIPELINES,
         REPORTS_CATALOG, DEMO_STORIES_BY_ROLE, GRAPH_AI, DATA_DOWNLOADS)
   - 30 role-scoped MD files (15 dashboards + 15 reports)
@@ -21,7 +21,7 @@ Steps (10 total; 3 negative):
     2. (+) 25 business-layer MD artifacts present per dept (= 475 files)
     3. (-) NEGATIVE — known-bad dept name produces a clear failure
     4. (+) Each artifact file is non-empty (≥ 200 bytes)
-    5. (+) Each artifact starts with the standard HOLY header
+    5. (+) Each artifact starts with the standard INSUR header
     6. (-) NEGATIVE — script does NOT silently mark missing files as OK
     7. (+) Role dashboards: 15 dashboards + 15 reports per dept (= 570 files)
     8. (+) Data-type stubs: 9 per dept (= 171 files; per §64.26)
@@ -50,31 +50,31 @@ DEPARTMENTS = [
 
 # 15 markdown artifacts per dept (per §64.18 + §64.31 + §64.33 + §64.35 + §64.38)
 REQUIRED_MD = [
-    "HOLY_DEMO_STORY.md",       # §64.1
-    "HOLY_ASIS_ASSESSMENT.md",  # §64.2
-    "HOLY_DT_STRATEGY.md",      # §64.4 (per §64.34 — DT-4P)
-    "HOLY_CONTACT_CENTER.md",   # §64.5
-    "HOLY_INCIDENT_MGMT.md",    # §64.6
-    "HOLY_MEETING_COMMS.md",    # §64.14
-    "HOLY_PROCESS_MGMT.md",     # §64.15
-    "HOLY_DATA_MGMT.md",        # §64.17
-    "HOLY_RECOMMENDATION.md",   # §64.22
-    "HOLY_ANOMALY.md",          # §64.23
-    "HOLY_FRAUD.md",            # §64.23 (stub if N/A)
-    "HOLY_CONTACTS.md",         # §64.25
-    "HOLY_FLOW.md",             # §64.27
-    "HOLY_SECURITY.md",         # §64.32
-    "HOLY_SIMULATION.md",       # §64.34
-    "HOLY_USE_CASES.md",        # §66 — added 2026-05-23
-    "HOLY_MONITORING_AI.md",    # §66 — added 2026-05-23 (per-dept cron + pipeline health)
-    "HOLY_MASTER_DATA.md",      # §66 — added 2026-05-24 (SAP-style master + ref data)
-    "HOLY_TRANSACTIONS.md",     # §66 — added 2026-05-24 (unified chronological audit feed)
-    "HOLY_PIPELINES.md",        # §66 — added 2026-05-24 (5-phase automated pipeline catalog)
-    "HOLY_REPORTS_CATALOG.md",  # §66 — added 2026-05-24 (dept-level rollup of 15 standard reports)
-    "HOLY_DEMO_STORIES_BY_ROLE.md",  # §66 — added 2026-05-24 (15 role-scoped demo scripts per dept)
-    "HOLY_GRAPH_AI.md",         # §66 — added 2026-05-24 (per-dept relationship graph spec)
-    "HOLY_DATA_DOWNLOADS.md",   # §66 — added 2026-05-24 (per-dept sample data + CSV/JSON/SVG)
-    "HOLY_AGENTIC_STACK.md",    # §64.40.8 — added 2026-05-25 (per-dept Layer-10 enterprise apps + scopes)
+    "INSUR_DEMO_STORY.md",       # §64.1
+    "INSUR_ASIS_ASSESSMENT.md",  # §64.2
+    "INSUR_DT_STRATEGY.md",      # §64.4 (per §64.34 — DT-4P)
+    "INSUR_CONTACT_CENTER.md",   # §64.5
+    "INSUR_INCIDENT_MGMT.md",    # §64.6
+    "INSUR_MEETING_COMMS.md",    # §64.14
+    "INSUR_PROCESS_MGMT.md",     # §64.15
+    "INSUR_DATA_MGMT.md",        # §64.17
+    "INSUR_RECOMMENDATION.md",   # §64.22
+    "INSUR_ANOMALY.md",          # §64.23
+    "INSUR_FRAUD.md",            # §64.23 (stub if N/A)
+    "INSUR_CONTACTS.md",         # §64.25
+    "INSUR_FLOW.md",             # §64.27
+    "INSUR_SECURITY.md",         # §64.32
+    "INSUR_SIMULATION.md",       # §64.34
+    "INSUR_USE_CASES.md",        # §66 — added 2026-05-23
+    "INSUR_MONITORING_AI.md",    # §66 — added 2026-05-23 (per-dept cron + pipeline health)
+    "INSUR_MASTER_DATA.md",      # §66 — added 2026-05-24 (SAP-style master + ref data)
+    "INSUR_TRANSACTIONS.md",     # §66 — added 2026-05-24 (unified chronological audit feed)
+    "INSUR_PIPELINES.md",        # §66 — added 2026-05-24 (5-phase automated pipeline catalog)
+    "INSUR_REPORTS_CATALOG.md",  # §66 — added 2026-05-24 (dept-level rollup of 15 standard reports)
+    "INSUR_DEMO_STORIES_BY_ROLE.md",  # §66 — added 2026-05-24 (15 role-scoped demo scripts per dept)
+    "INSUR_GRAPH_AI.md",         # §66 — added 2026-05-24 (per-dept relationship graph spec)
+    "INSUR_DATA_DOWNLOADS.md",   # §66 — added 2026-05-24 (per-dept sample data + CSV/JSON/SVG)
+    "INSUR_AGENTIC_STACK.md",    # §64.40.8 — added 2026-05-25 (per-dept Layer-10 enterprise apps + scopes)
 ]
 
 # 12 mandatory AI-flavor subdirs per dept (per operator 2026-05-23 brief)
@@ -85,7 +85,7 @@ REQUIRED_AI_FLAVORS = [
     "compliance-ai", "secure-ai",
 ]
 
-# 3 mandatory B2B/B2C/B2E use-case subdirs per dept (per HOLY brief)
+# 3 mandatory B2B/B2C/B2E use-case subdirs per dept (per INSUR brief)
 REQUIRED_AUDIENCE_USE_CASES = ["b2b", "b2c", "b2e"]
 
 ROLES = [
@@ -143,7 +143,7 @@ def main():
     step(4, "all artifacts non-empty (≥ 200B)", not tiny,
          f"{len(tiny)} tiny; first 3: {tiny[:3]}" if tiny else "")
 
-    # ----- Step 5: standard HOLY header -----
+    # ----- Step 5: standard INSUR header -----
     bad_header: list[str] = []
     for dept in DEPARTMENTS:
         biz = root / dept / "business-layer"
@@ -151,9 +151,9 @@ def main():
             f = biz / filename
             if f.exists():
                 first = f.read_text().splitlines()[0] if f.stat().st_size > 0 else ""
-                if not first.startswith("# HOLY Beverage"):
+                if not first.startswith("# INSUR Beverage"):
                     bad_header.append(f"{dept}/{filename}: '{first[:50]}'")
-    step(5, "all artifacts start with standard HOLY header", not bad_header,
+    step(5, "all artifacts start with standard INSUR header", not bad_header,
          f"{len(bad_header)} bad" if bad_header else "")
 
     # ----- Step 6: NEGATIVE — assert script does NOT pass on missing files -----
@@ -172,8 +172,8 @@ def main():
     missing_roles: list[str] = []
     for dept in DEPARTMENTS:
         for role in ROLES:
-            dash = root / dept / "dashboards-by-role" / role / "HOLY_DASHBOARD.md"
-            rpts = root / dept / "reports-by-role" / role / "HOLY_REPORTS.md"
+            dash = root / dept / "dashboards-by-role" / role / "INSUR_DASHBOARD.md"
+            rpts = root / dept / "reports-by-role" / role / "INSUR_REPORTS.md"
             if not dash.exists():
                 missing_roles.append(f"{dept}/{role}/dashboard")
             if not rpts.exists():
@@ -188,7 +188,7 @@ def main():
     missing_dt: list[str] = []
     for dept in DEPARTMENTS:
         for dt in DATA_TYPES:
-            f = root / dept / "business-layer" / "data-types" / f"HOLY_DATA_{dt.upper()}.md"
+            f = root / dept / "business-layer" / "data-types" / f"INSUR_DATA_{dt.upper()}.md"
             if not f.exists():
                 missing_dt.append(f"{dept}/{dt}")
     expected_dt = len(DEPARTMENTS) * len(DATA_TYPES)
@@ -198,15 +198,15 @@ def main():
 
     # ----- Step 9: doc artifacts (HLD/LLD/SAD/C4/NetworkFlow + TechStack) -----
     DOC_FILES = [
-        ("docs/hld/HOLY_HLD.md", "HLD"),
-        ("docs/lld/HOLY_LLD.md", "LLD"),
-        ("docs/sad/HOLY_SAD.md", "SAD"),
-        ("docs/c4-model/HOLY_C4.md", "C4"),
-        ("docs/network-flow/HOLY_NETWORK_FLOW.md", "NetworkFlow"),
-        ("docs/frd/HOLY_FRD.md", "FRD"),   # §66 — added 2026-05-24
-        ("docs/brd/HOLY_BRD.md", "BRD"),   # §66 — added 2026-05-24
-        ("docs/sequence/HOLY_SEQUENCE.md", "Sequence"),  # §66 — added 2026-05-24
-        ("HOLY_TECH_STACK.md", "TechStack"),
+        ("docs/hld/INSUR_HLD.md", "HLD"),
+        ("docs/lld/INSUR_LLD.md", "LLD"),
+        ("docs/sad/INSUR_SAD.md", "SAD"),
+        ("docs/c4-model/INSUR_C4.md", "C4"),
+        ("docs/network-flow/INSUR_NETWORK_FLOW.md", "NetworkFlow"),
+        ("docs/frd/INSUR_FRD.md", "FRD"),   # §66 — added 2026-05-24
+        ("docs/brd/INSUR_BRD.md", "BRD"),   # §66 — added 2026-05-24
+        ("docs/sequence/INSUR_SEQUENCE.md", "Sequence"),  # §66 — added 2026-05-24
+        ("INSUR_TECH_STACK.md", "TechStack"),
     ]
     missing_docs: list[str] = []
     for dept in DEPARTMENTS:

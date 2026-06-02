@@ -1,4 +1,4 @@
-# HOLY Beverage — E-Commerce, Digital Commerce & Subscription Operations
+# INSUR Beverage — E-Commerce, Digital Commerce & Subscription Operations
 
 **Department index:** 46 · **Source:** operator brief 2026-05-21
 
@@ -53,4 +53,4 @@ Observability + Governance + FinOps
 | Sentiment AI | Delivery experience |
 | Governance AI | Compliance, bias, explainability |
 
-Cross-ref: `../../../HOLY_PROJECT.md` for cross-dept flow.
+Cross-ref: `../../../INSUR_PROJECT.md` for cross-dept flow.

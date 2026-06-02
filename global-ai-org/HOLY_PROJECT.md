@@ -1,11 +1,11 @@
-# HOLY Beverage Company — Project Overview
+# INSUR Beverage Company — Project Overview
 
 **Source:** operator-provided business brief (2026-05-21).
 **Scaffold standard:** global CLAUDE.md §63 + `~/.claude/policies/global-ai-org-structure.md`.
 
-This file gives the enterprise-wide view of HOLY's AI architecture. For each
+This file gives the enterprise-wide view of INSUR's AI architecture. For each
 department's detailed spec (data types / process flow / AI impact / datasets),
-see `departments/<dept>/business-layer/HOLY_SPEC.md`.
+see `departments/<dept>/business-layer/INSUR_SPEC.md`.
 
 ## Departments in scope (12)
 
@@ -75,7 +75,7 @@ AI Request
 | **P3** | Finance | Medium-High | Medium |
 | **P3** | Governance | Medium-High | Medium |
 
-## Highest-ROI AI Opportunities for HOLY
+## Highest-ROI AI Opportunities for INSUR
 
 | AI Initiative | Estimated Enterprise Value |
 |---|---|
@@ -152,5 +152,5 @@ AI Request
 
 ## Per-Department Spec Files
 
-Each department's deep spec is at: `departments/<dept>/business-layer/HOLY_SPEC.md`.
-The 12 in-scope HOLY departments listed above each have such a file.
+Each department's deep spec is at: `departments/<dept>/business-layer/INSUR_SPEC.md`.
+The 12 in-scope INSUR departments listed above each have such a file.

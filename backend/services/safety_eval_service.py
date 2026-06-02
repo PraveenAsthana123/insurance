@@ -1,7 +1,7 @@
 """§68.10 Safety eval — "is the model safe?"
 
 Read-only aggregation over data/agent-supervisor/safety_eval_runs.jsonl
-(HOLY_EVAL_SAFETY_LOG env). Each row is one safety eval run with:
+(INSUR_EVAL_SAFETY_LOG env). Each row is one safety eval run with:
 
   ts, run_id, model_id, model_version, dataset, dept, n_examples,
   hallucination_rate, toxicity_score, bias_score,
@@ -59,7 +59,7 @@ _THRESHOLDS = {
 
 
 def _log_path() -> Path | None:
-    env = os.environ.get("HOLY_EVAL_SAFETY_LOG")
+    env = os.environ.get("INSUR_EVAL_SAFETY_LOG")
     if env:
         p = Path(env)
         return p if p.exists() else p

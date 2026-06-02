@@ -1,4 +1,4 @@
-"""HOLY automated-pipelines router — 5-phase per-process catalog per dept.
+"""INSUR automated-pipelines router — 5-phase per-process catalog per dept.
 
 Each pipeline runs through:
   Phase 1 INPUT        → data source + contract
@@ -13,9 +13,9 @@ in Phase 4) + §47 (C4 L3 dynamic flow) + §57.5 (5-question runbook) +
 types) + §66 (operational AI surface).
 
 Endpoints:
-  GET /api/v1/holy/pipelines/{dept}                — dept catalog
-  GET /api/v1/holy/pipelines/{dept}/{process_id}   — single 5-phase spec
-  GET /api/v1/holy/pipelines/_global               — cross-dept inventory
+  GET /api/v1/insur/pipelines/{dept}                — dept catalog
+  GET /api/v1/insur/pipelines/{dept}/{process_id}   — single 5-phase spec
+  GET /api/v1/insur/pipelines/_global               — cross-dept inventory
 """
 from __future__ import annotations
 
@@ -25,11 +25,11 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 
-router = APIRouter(prefix="/api/v1/holy/pipelines", tags=["holy", "pipelines"])
+router = APIRouter(prefix="/api/v1/insur/pipelines", tags=["insur", "pipelines"])
 
-HOLY_DEPTS = [
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -39,7 +39,7 @@ HOLY_DEPTS = [
 PHASES = ("input", "data_process", "model", "output", "report")
 
 # Per-dept pipeline catalog — keep aligned with
-# ~/.claude/scripts/scaffold-holy-pipelines.py DEPT_PIPELINES dict.
+# ~/.claude/scripts/scaffold-insur-pipelines.py DEPT_PIPELINES dict.
 # Schema per pipeline:
 #   {"process_id": str, "process_name": str, "lifecycle_type": str,
 #    "phases": {phase_name: text}}
@@ -209,21 +209,21 @@ def _catalog_for(dept: str) -> list[dict[str, Any]]:
 
 
 def _validate_dept(dept: str) -> None:
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 # IMPORTANT — _global BEFORE /{dept} per §66.3 FastAPI greedy-match trap.
 @router.get("/_global")
 def global_inventory(http_request: Request) -> dict[str, Any]:
     """Cross-dept process inventory — names + counts per dept."""
-    log_holy_access(http_request, "pipelines", "global_inventory")
+    log_insur_access(http_request, "pipelines", "global_inventory")
     inventory: dict[str, list[str]] = {}
-    for dept in HOLY_DEPTS:
+    for dept in INSUR_DEPTS:
         inventory[dept] = [p["process_id"] for p in _catalog_for(dept)]
     return {
-        "n_depts": len(HOLY_DEPTS),
-        "depts": HOLY_DEPTS,
+        "n_depts": len(INSUR_DEPTS),
+        "depts": INSUR_DEPTS,
         "n_processes_total": sum(len(v) for v in inventory.values()),
         "per_dept_processes": inventory,
         "phase_sequence": list(PHASES),
@@ -235,7 +235,7 @@ def global_inventory(http_request: Request) -> dict[str, Any]:
 def dept_catalog(http_request: Request, dept: str) -> dict[str, Any]:
     """Per-dept pipeline catalog with 5-phase spec for every process."""
     _validate_dept(dept)
-    log_holy_access(http_request, "pipelines", "dept_catalog", dept=dept)
+    log_insur_access(http_request, "pipelines", "dept_catalog", dept=dept)
     catalog = _catalog_for(dept)
     return {
         "dept": dept,
@@ -253,7 +253,7 @@ def process_detail(http_request: Request, dept: str, process_id: str) -> dict[st
     # Validate process_id format to avoid injection vibes
     if not re.match(r"^[a-z0-9_]+$", process_id):
         raise HTTPException(400, f"Malformed process_id '{process_id}' (must be lowercase + underscores)")
-    log_holy_access(http_request, "pipelines", "process_detail",
+    log_insur_access(http_request, "pipelines", "process_detail",
                     dept=dept, extra={"process_id": process_id})
     catalog = _catalog_for(dept)
     match = next((p for p in catalog if p["process_id"] == process_id), None)

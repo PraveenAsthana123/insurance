@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY DL sequence-classification lifecycle (§43, §64.20 DL row).
+Drill: INSUR DL sequence-classification lifecycle (§43, §64.20 DL row).
 
 Steps (8 total; 3 negative):
     1. (+) Lifecycle runs end-to-end on synthetic 1000-seq dataset
@@ -36,7 +36,7 @@ def step(n, label, ok, detail=""):
 def main():
     from ml.reference.dl_lifecycle import DlLifecycle
 
-    print("\nDRILL: HOLY DL lifecycle (sequence classification)\n")
+    print("\nDRILL: INSUR DL lifecycle (sequence classification)\n")
     t0 = time.time()
 
     # ----- Step 1: end-to-end -----

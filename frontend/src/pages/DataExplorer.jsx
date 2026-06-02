@@ -6,7 +6,7 @@
 //   - the §66 per-dept artefacts story
 //
 // Backend-independent: fetches CSV via Vite dev passthrough OR via
-// /api/v1/holy/downloads/<...> if backend is up.
+// /api/v1/insur/downloads/<...> if backend is up.
 
 import { useEffect, useMemo, useState } from 'react';
 import {
@@ -215,7 +215,7 @@ function ChartRender({ spec }) {
 
 // ── Data fetch (backend-first, dev-passthrough fallback, graceful failure) ──
 async function fetchSampleCSV(deptFolder, filename) {
-  const apiUrl = `/api/v1/holy/downloads/${deptFolder}/${filename}`;
+  const apiUrl = `/api/v1/insur/downloads/${deptFolder}/${filename}`;
   try {
     const r = await fetch(apiUrl);
     if (r.ok) return await r.text();
@@ -388,7 +388,7 @@ export default function DataExplorer() {
 
       <footer style={{ marginTop: 16, padding: 12, fontSize: 11, color: '#64748b', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6 }}>
         <strong>Data source:</strong> <code style={{ background: '#f1f5f9', padding: '2px 6px' }}>data/samples/&lt;dept&gt;/&lt;file&gt;.csv</code> ·
-        <strong> Fetch path:</strong> <code style={{ background: '#f1f5f9', padding: '2px 6px' }}>/api/v1/holy/downloads/*</code> (live) → <code style={{ background: '#f1f5f9', padding: '2px 6px' }}>/data/samples/*</code> (Vite dev) → graceful fallback.
+        <strong> Fetch path:</strong> <code style={{ background: '#f1f5f9', padding: '2px 6px' }}>/api/v1/insur/downloads/*</code> (live) → <code style={{ background: '#f1f5f9', padding: '2px 6px' }}>/data/samples/*</code> (Vite dev) → graceful fallback.
         Composes with §63 (dept scaffold), §66 (per-dept artefacts), §64.39 (chart vocab), §57.7 (graceful degradation).
       </footer>
     </div>

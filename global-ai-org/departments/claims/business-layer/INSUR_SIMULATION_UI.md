@@ -2,11 +2,11 @@
 
 Per global §64.34 + operator 2026-06-01.
 
-This dept's `/holy/claims/simulation` tab specification. Manual-mode + Automatic-mode
+This dept's `/insur/claims/simulation` tab specification. Manual-mode + Automatic-mode
 side-by-side with 5 layers visible per run.
 
 ## Tab path
-`/holy/claims/simulation?process=<L2-process-name>`
+`/insur/claims/simulation?process=<L2-process-name>`
 
 ## Available processes (L2)
 - Claim Intake
@@ -49,10 +49,10 @@ side-by-side with 5 layers visible per run.
 
 | Endpoint | Purpose |
 |---|---|
-| `POST /api/v1/holy/sim/claims/{process}/run` | Trigger sim; body: `{mode, inputs, seed}` |
-| `GET /api/v1/holy/sim/claims/{process}/runs/{sim_id}/events` | SSE stream for live waterfall |
-| `GET /api/v1/holy/sim/claims/{process}/runs/{sim_id}/manifest` | Per-layer summary + comparison report |
-| `GET /api/v1/holy/sim/claims/{process}/runs/{sim_id}/replay` | Frame-by-frame replay of past run |
+| `POST /api/v1/insur/sim/claims/{process}/run` | Trigger sim; body: `{mode, inputs, seed}` |
+| `GET /api/v1/insur/sim/claims/{process}/runs/{sim_id}/events` | SSE stream for live waterfall |
+| `GET /api/v1/insur/sim/claims/{process}/runs/{sim_id}/manifest` | Per-layer summary + comparison report |
+| `GET /api/v1/insur/sim/claims/{process}/runs/{sim_id}/replay` | Frame-by-frame replay of past run |
 
 ## Engine requirements (§64.34.3)
 

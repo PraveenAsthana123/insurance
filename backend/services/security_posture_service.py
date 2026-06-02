@@ -7,18 +7,18 @@ Aggregates three signals into one operator view:
      place? are the drill files present?). This is the "did we hold the
      line on the §42 / §47.6 / §38.3 baseline" check.
   2. CVE / dep-vuln backlog — read from data/agent-supervisor/
-     security_posture.json (HOLY_SECURITY_POSTURE_PATH env override).
+     security_posture.json (INSUR_SECURITY_POSTURE_PATH env override).
      This file is populated by an external pip-audit/bandit/trivy job
      (out-of-scope for this commit; service handles missing file
      gracefully per §57.7).
-  3. Attack attempts — derived from the federated holy_reads audit log
+  3. Attack attempts — derived from the federated insur_reads audit log
      by filtering for 403/401-shaped denial events (RBAC denied / role
      unknown / scope-denied). The leak-scan from §68.6 sits adjacent.
 
 Composes with §38.3 (audit on read) + §47.6 (compliance gate check —
 the audit-helper + RBAC matrix presence ARE part of the posture) +
 §57.7 (graceful degradation — missing posture file → empty signal,
-never crash) + §64.32 (per-dept HOLY_SECURITY.md spec is the WRITE
+never crash) + §64.32 (per-dept INSUR_SECURITY.md spec is the WRITE
 side; this is the READ surface) + §68 (Observability Hub iter 3).
 """
 from __future__ import annotations
@@ -44,14 +44,14 @@ _POSTURE_CANDIDATES = [
 
 # Audit log for attack-attempt scan (same as §68.6 leak scan).
 _AUDIT_LOG_CANDIDATES = [
-    Path(__file__).resolve().parents[2] / "data" / "agent-supervisor" / "holy_reads.jsonl",
-    Path("/app/data/agent-supervisor/holy_reads.jsonl"),
-    Path("/data/agent-supervisor/holy_reads.jsonl"),
+    Path(__file__).resolve().parents[2] / "data" / "agent-supervisor" / "insur_reads.jsonl",
+    Path("/app/data/agent-supervisor/insur_reads.jsonl"),
+    Path("/data/agent-supervisor/insur_reads.jsonl"),
 ]
 
 
 def _posture_path() -> Path | None:
-    env = os.environ.get("HOLY_SECURITY_POSTURE_PATH")
+    env = os.environ.get("INSUR_SECURITY_POSTURE_PATH")
     if env:
         p = Path(env)
         if p.exists():
@@ -63,7 +63,7 @@ def _posture_path() -> Path | None:
 
 
 def _audit_log_path() -> Path | None:
-    env = os.environ.get("HOLY_AUDIT_PATH")
+    env = os.environ.get("INSUR_AUDIT_PATH")
     if env:
         p = Path(env)
         if p.exists():
@@ -107,9 +107,9 @@ def _compliance_gates() -> dict[str, Any]:
 
     # Gate 1: federated audit helper present?
     try:
-        from core.holy_audit import log_holy_access  # noqa: F401
+        from core.insur_audit import log_insur_access  # noqa: F401
         gates.append({"gate": "federated_audit_helper", "pass": True,
-                      "evidence": "core.holy_audit.log_holy_access importable"})
+                      "evidence": "core.insur_audit.log_insur_access importable"})
     except Exception as exc:  # noqa: BLE001
         gates.append({"gate": "federated_audit_helper", "pass": False,
                       "evidence": f"import failed: {type(exc).__name__}"})
@@ -277,7 +277,7 @@ def per_dept_score(dept: str) -> dict[str, Any]:
         "pen_test_result": per_dept_data.get("pen_test_result"),
         "compliance_state": per_dept_data.get("compliance_state", {}),
         "attack_attempts_24h": len(dept_attacks),
-        "spec_doc": f"global-ai-org/departments/{dept}/business-layer/HOLY_SECURITY.md",
+        "spec_doc": f"global-ai-org/departments/{dept}/business-layer/INSUR_SECURITY.md",
         "scanned_at": time.time(),
     }
 

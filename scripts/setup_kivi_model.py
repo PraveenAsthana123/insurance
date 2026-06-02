@@ -16,7 +16,7 @@ DEFAULT_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 DEFAULT_BASE = os.environ.get("BASE_MODEL", "gemma3:1b")
 DEFAULT_KIVI = os.environ.get("KIVI_MODEL", "kivi:local")
 SYSTEM_PROMPT = (
-    "You are Kivi, a concise enterprise operations agent for HOLY Beverage. "
+    "You are Kivi, a concise enterprise operations agent for INSUR Beverage. "
     "Answer with practical, auditable, production-safe guidance. If a task "
     "requires external system changes, describe the action and required approval "
     "instead of claiming it was performed."

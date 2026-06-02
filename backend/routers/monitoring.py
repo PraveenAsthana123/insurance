@@ -1,4 +1,4 @@
-"""HOLY monitoring AI router — per-dept job + pipeline health surface.
+"""INSUR monitoring AI router — per-dept job + pipeline health surface.
 
 Surfaces the 4 cron jobs (refresh_data / retrain / accuracy_drift /
 analysis_rollup) plus on-demand ML pipeline runs plus dispatched agent
@@ -10,10 +10,10 @@ Reads run manifests from:
     data/eval/<dept>/<pipeline>/<run_id>/manifest.json
 
 Endpoints:
-    GET /api/v1/holy/monitoring/{dept}
-    GET /api/v1/holy/monitoring/{dept}/jobs/{job}/runs?limit=20
-    GET /api/v1/holy/monitoring/{dept}/jobs/{job}/runs/{run_id}
-    GET /api/v1/holy/monitoring/_global
+    GET /api/v1/insur/monitoring/{dept}
+    GET /api/v1/insur/monitoring/{dept}/jobs/{job}/runs?limit=20
+    GET /api/v1/insur/monitoring/{dept}/jobs/{job}/runs/{run_id}
+    GET /api/v1/insur/monitoring/_global
 """
 from __future__ import annotations
 
@@ -29,14 +29,14 @@ from fastapi import APIRouter, HTTPException, Query, Request
 from core.middleware import current_tenant_id
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/api/v1/holy/monitoring", tags=["holy", "monitoring"])
+router = APIRouter(prefix="/api/v1/insur/monitoring", tags=["insur", "monitoring"])
 
 # Per §38.3 + §47.6 + §64.43 #7 — monitoring data is INFRASTRUCTURE telemetry
 # (fleet-wide ML pipeline health), NOT tenant-scoped data. But every monitoring
 # READ is attributed to the caller's tenant for forensic + SOC2 CC4 auditing.
 # The data layout stays dept-scoped; the access trail is tenant-attributed.
 _MONITORING_READS_PATH = Path(
-    os.environ.get("HOLY_MONITORING_AUDIT_PATH", "data/agent-supervisor/monitoring_reads.jsonl")
+    os.environ.get("INSUR_MONITORING_AUDIT_PATH", "data/agent-supervisor/monitoring_reads.jsonl")
 )
 
 
@@ -50,7 +50,7 @@ def _log_monitoring_access(
         "ts": time.time(),
         "tenant_id": current_tenant_id(http_request),
         "actor": http_request.headers.get("X-Demo-Role", "unknown"),
-        "tool": f"holy.monitoring.{endpoint}",
+        "tool": f"insur.monitoring.{endpoint}",
         "request_id": getattr(http_request.state, "correlation_id", ""),
         "endpoint": endpoint,
         "outcome": "executed",
@@ -71,14 +71,14 @@ def _log_monitoring_access(
 # Cron job catalog — keep aligned with backend/workers/celery_app.py beat_schedule.
 # Tuple = (celery task name, cadence seconds, audit dir name under data/eval/cron/)
 CRON_JOBS: dict[str, tuple[str, int, str]] = {
-    "data_refresh":   ("holy.refresh_data_artifacts", 60 * 60,           "data_refresh"),
-    "retrain":        ("holy.retrain_models",         24 * 60 * 60,      "retrain"),
-    "accuracy_drift": ("holy.eval_accuracy_drift",    4 * 60 * 60,       "accuracy"),
-    "analysis":       ("holy.analysis_rollup",        24 * 60 * 60,      "analysis"),
+    "data_refresh":   ("insur.refresh_data_artifacts", 60 * 60,           "data_refresh"),
+    "retrain":        ("insur.retrain_models",         24 * 60 * 60,      "retrain"),
+    "accuracy_drift": ("insur.eval_accuracy_drift",    4 * 60 * 60,       "accuracy"),
+    "analysis":       ("insur.analysis_rollup",        24 * 60 * 60,      "analysis"),
 }
 
-# 19 HOLY departments — single source of truth for cross-dept rollup.
-HOLY_DEPTS = [
+# 19 INSUR departments — single source of truth for cross-dept rollup.
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -99,9 +99,9 @@ CRON_DIR = DATA_ROOT / "eval" / "cron"
 
 
 def _validate_dept(dept: str) -> None:
-    """Raise 404 if dept not in the HOLY 19 — no info leakage."""
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    """Raise 404 if dept not in the INSUR 19 — no info leakage."""
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 def _validate_job(job: str) -> None:
@@ -219,8 +219,8 @@ def global_rollup(http_request: Request) -> dict[str, Any]:
     _log_monitoring_access(http_request, "global_rollup")
     jobs = {key: _job_health(key) for key in CRON_JOBS}
     return {
-        "n_depts": len(HOLY_DEPTS),
-        "depts": HOLY_DEPTS,
+        "n_depts": len(INSUR_DEPTS),
+        "depts": INSUR_DEPTS,
         "jobs": jobs,
         "scanned_at": time.time(),
     }

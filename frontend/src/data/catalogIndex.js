@@ -87,9 +87,9 @@ export const fallbackDepartments = [
 export const fallbackTenants = [
   {
     id: 1,
-    slug: 'holy_insur',
-    display_name: 'HOLY Beverage',
-    legal_name: 'HOLY Beverage Ltd.',
+    slug: 'insur_insur',
+    display_name: 'INSUR Beverage',
+    legal_name: 'INSUR Beverage Ltd.',
     industry: 'cpg_insurerage',
     jurisdiction: 'CA',
     region: 'CA-ON',

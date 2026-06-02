@@ -1,7 +1,7 @@
-"""HOLY master-data router — per-dept SAP-style master + reference data.
+"""INSUR master-data router — per-dept SAP-style master + reference data.
 
 Surfaces the entity catalog documented in
-    global-ai-org/departments/<dept>/business-layer/HOLY_MASTER_DATA.md
+    global-ai-org/departments/<dept>/business-layer/INSUR_MASTER_DATA.md
 as a queryable schema endpoint. Persistence of the actual rows belongs to
 the ERP/CRM/PIM source-of-truth systems; this endpoint is the *contract*
 (what entities exist, what fields they carry, who owns them) plus a
@@ -12,9 +12,9 @@ header) + §47.6 (SOC2 CC6.2 access control) + §57.6 (canonical envelope)
 + §59 DDD (entities ARE the aggregates) + §64 per-dept artifact.
 
 Endpoints (read-only in MVP — write paths gated per §40 decision system):
-    GET /api/v1/holy/master-data/{dept}              — catalog
-    GET /api/v1/holy/master-data/{dept}/{entity}     — sample rows
-    GET /api/v1/holy/master-data/{dept}/org-structure — org tree slice
+    GET /api/v1/insur/master-data/{dept}              — catalog
+    GET /api/v1/insur/master-data/{dept}/{entity}     — sample rows
+    GET /api/v1/insur/master-data/{dept}/org-structure — org tree slice
 """
 from __future__ import annotations
 
@@ -23,12 +23,12 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 
-router = APIRouter(prefix="/api/v1/holy/master-data", tags=["holy", "master-data"])
+router = APIRouter(prefix="/api/v1/insur/master-data", tags=["insur", "master-data"])
 
-# 19 HOLY departments — single source of truth for cross-dept validation.
-HOLY_DEPTS = [
+# 19 INSUR departments — single source of truth for cross-dept validation.
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -122,8 +122,8 @@ ENTITY_CATALOG: dict[str, dict[str, Any]] = {
 
 
 def _validate_dept(dept: str) -> None:
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 def _validate_entity(entity: str) -> None:
@@ -138,10 +138,10 @@ def _validate_entity(entity: str) -> None:
 @router.get("/_global")
 def global_catalog(http_request: Request) -> dict[str, Any]:
     """Cross-dept catalog summary — what every dept publishes."""
-    log_holy_access(http_request, "master_data", "global_catalog")
+    log_insur_access(http_request, "master_data", "global_catalog")
     return {
-        "n_depts": len(HOLY_DEPTS),
-        "depts": HOLY_DEPTS,
+        "n_depts": len(INSUR_DEPTS),
+        "depts": INSUR_DEPTS,
         "n_entities": len(ENTITY_CATALOG),
         "entities": sorted(ENTITY_CATALOG.keys()),
         "canonical_envelope": CANONICAL_ENVELOPE,
@@ -153,7 +153,7 @@ def global_catalog(http_request: Request) -> dict[str, Any]:
 def dept_catalog(http_request: Request, dept: str) -> dict[str, Any]:
     """Per-dept master-data catalog — entity list + ownership + field schema."""
     _validate_dept(dept)
-    log_holy_access(http_request, "master_data", "dept_catalog", dept=dept)
+    log_insur_access(http_request, "master_data", "dept_catalog", dept=dept)
     return {
         "dept": dept,
         "n_entities": len(ENTITY_CATALOG),
@@ -186,7 +186,7 @@ def entity_sample(
     """
     _validate_dept(dept)
     _validate_entity(entity)
-    log_holy_access(http_request, "master_data", "entity_sample",
+    log_insur_access(http_request, "master_data", "entity_sample",
                     dept=dept, extra={"entity": entity, "include_pii": int(include_pii)})
     meta = ENTITY_CATALOG[entity]
     response_fields = list(meta["fields_public"])

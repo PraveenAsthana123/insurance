@@ -14,7 +14,7 @@
     "kivi_model": "kivi:local",
     "simple_agents": 100
   },
-  "name": "holy-agent-services",
+  "name": "insur-agent-services",
   "services": {
     "agent_platform": {
       "cua": "POST /api/v1/agent-platform/cua/execute",

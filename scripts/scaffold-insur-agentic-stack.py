@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Scaffold HOLY_AGENTIC_STACK.md per dept (§64.40.8 + §67).
+Scaffold INSUR_AGENTIC_STACK.md per dept (§64.40.8 + §67).
 
 Each dept gets a stub describing:
   - Which Layer-10 enterprise apps the dept may touch
@@ -154,7 +154,7 @@ DEPT_TITLE = {
     "executive-leadership": "Executive Leadership",
 }
 
-TEMPLATE = """# HOLY Beverage — {title} — Agentic Stack
+TEMPLATE = """# INSUR Beverage — {title} — Agentic Stack
 
 > Per global CLAUDE.md §64.40 + §64.40.8 + §67 — every department MUST have
 > this artifact. It names the Layer-10 enterprise apps this dept may take
@@ -234,7 +234,7 @@ Required fields specific to this dept:
 
 Approval surface: `/api/v1/agent-platform/cua/execute` body sets
 `require_human_approval=true`; frontend renders the queue at
-`/holy/{dept}/agentic` (per §64.40.5).
+`/insur/{dept}/agentic` (per §64.40.5).
 
 ## Rollback plan
 
@@ -291,14 +291,14 @@ def main() -> int:
         if not dept_dir.is_dir():
             continue
         dept = dept_dir.name
-        target = dept_dir / "business-layer" / "HOLY_AGENTIC_STACK.md"
+        target = dept_dir / "business-layer" / "INSUR_AGENTIC_STACK.md"
         target.parent.mkdir(parents=True, exist_ok=True)
         if target.exists() and not args.force:
             skipped += 1
             continue
         target.write_text(render(dept))
         written += 1
-    print(f"scaffold-holy-agentic-stack: written={written} skipped={skipped}")
+    print(f"scaffold-insur-agentic-stack: written={written} skipped={skipped}")
     return 0
 
 

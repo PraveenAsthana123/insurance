@@ -1255,12 +1255,12 @@
     }
   },
   {
-    "id": "agentic_execute_api_v1_holy_agentic_execute_post",
+    "id": "agentic_execute_api_v1_insur_agentic_execute_post",
     "method": "POST",
-    "path": "/api/v1/holy/agentic/execute",
+    "path": "/api/v1/insur/agentic/execute",
     "summary": "Agentic Execute",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
@@ -1278,14 +1278,14 @@
       }
     },
     "process": {
-      "router_function": "agentic_execute_api_v1_holy_agentic_execute_post",
+      "router_function": "agentic_execute_api_v1_insur_agentic_execute_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Agentic Execute Api V1 Holy Agentic Execute Post"
+        "title": "Response Agentic Execute Api V1 Insur Agentic Execute Post"
       },
       "responses": [
         "200",
@@ -1302,12 +1302,12 @@
     }
   },
   {
-    "id": "list_agentic_runs_api_v1_holy_agentic_runs_get",
+    "id": "list_agentic_runs_api_v1_insur_agentic_runs_get",
     "method": "GET",
-    "path": "/api/v1/holy/agentic/runs",
+    "path": "/api/v1/insur/agentic/runs",
     "summary": "List Agentic Runs",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -1341,14 +1341,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_agentic_runs_api_v1_holy_agentic_runs_get",
+      "router_function": "list_agentic_runs_api_v1_insur_agentic_runs_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response List Agentic Runs Api V1 Holy Agentic Runs Get"
+        "title": "Response List Agentic Runs Api V1 Insur Agentic Runs Get"
       },
       "responses": [
         "200",
@@ -1365,12 +1365,12 @@
     }
   },
   {
-    "id": "get_agentic_run_api_v1_holy_agentic_runs__request_id__get",
+    "id": "get_agentic_run_api_v1_insur_agentic_runs__request_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/agentic/runs/{request_id}",
+    "path": "/api/v1/insur/agentic/runs/{request_id}",
     "summary": "Get Agentic Run",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -1387,14 +1387,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_agentic_run_api_v1_holy_agentic_runs__request_id__get",
+      "router_function": "get_agentic_run_api_v1_insur_agentic_runs__request_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Agentic Run Api V1 Holy Agentic Runs  Request Id  Get"
+        "title": "Response Get Agentic Run Api V1 Insur Agentic Runs  Request Id  Get"
       },
       "responses": [
         "200",
@@ -1411,12 +1411,12 @@
     }
   },
   {
-    "id": "council_ask_api_v1_holy_council_ask_post",
+    "id": "council_ask_api_v1_insur_council_ask_post",
     "method": "POST",
-    "path": "/api/v1/holy/council/ask",
+    "path": "/api/v1/insur/council/ask",
     "summary": "Council Ask",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
@@ -1434,14 +1434,14 @@
       }
     },
     "process": {
-      "router_function": "council_ask_api_v1_holy_council_ask_post",
+      "router_function": "council_ask_api_v1_insur_council_ask_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Council Ask Api V1 Holy Council Ask Post"
+        "title": "Response Council Ask Api V1 Insur Council Ask Post"
       },
       "responses": [
         "200",
@@ -1458,12 +1458,12 @@
     }
   },
   {
-    "id": "council_result_api_v1_holy_council_result__task_id__get",
+    "id": "council_result_api_v1_insur_council_result__task_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/council/result/{task_id}",
+    "path": "/api/v1/insur/council/result/{task_id}",
     "summary": "Council Result",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -1480,14 +1480,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "council_result_api_v1_holy_council_result__task_id__get",
+      "router_function": "council_result_api_v1_insur_council_result__task_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Council Result Api V1 Holy Council Result  Task Id  Get"
+        "title": "Response Council Result Api V1 Insur Council Result  Task Id  Get"
       },
       "responses": [
         "200",
@@ -1504,12 +1504,12 @@
     }
   },
   {
-    "id": "get_role_dashboard_api_v1_holy_dashboards__dept___role__get",
+    "id": "get_role_dashboard_api_v1_insur_dashboards__dept___role__get",
     "method": "GET",
-    "path": "/api/v1/holy/dashboards/{dept}/{role}",
+    "path": "/api/v1/insur/dashboards/{dept}/{role}",
     "summary": "Get Role Dashboard",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -1535,14 +1535,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_role_dashboard_api_v1_holy_dashboards__dept___role__get",
+      "router_function": "get_role_dashboard_api_v1_insur_dashboards__dept___role__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Role Dashboard Api V1 Holy Dashboards  Dept   Role  Get"
+        "title": "Response Get Role Dashboard Api V1 Insur Dashboards  Dept   Role  Get"
       },
       "responses": [
         "200",
@@ -1559,12 +1559,12 @@
     }
   },
   {
-    "id": "global_overview_api_v1_holy_dbviewer__global_get",
+    "id": "global_overview_api_v1_insur_dbviewer__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/_global",
+    "path": "/api/v1/insur/dbviewer/_global",
     "summary": "Global Overview",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1572,14 +1572,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_overview_api_v1_holy_dbviewer__global_get",
+      "router_function": "global_overview_api_v1_insur_dbviewer__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Overview Api V1 Holy Dbviewer  Global Get"
+        "title": "Response Global Overview Api V1 Insur Dbviewer  Global Get"
       },
       "responses": [
         "200"
@@ -1595,12 +1595,12 @@
     }
   },
   {
-    "id": "database_info_api_v1_holy_dbviewer_databases__db_id__get",
+    "id": "database_info_api_v1_insur_dbviewer_databases__db_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/databases/{db_id}",
+    "path": "/api/v1/insur/dbviewer/databases/{db_id}",
     "summary": "Database Info",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1618,14 +1618,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "database_info_api_v1_holy_dbviewer_databases__db_id__get",
+      "router_function": "database_info_api_v1_insur_dbviewer_databases__db_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Database Info Api V1 Holy Dbviewer Databases  Db Id  Get"
+        "title": "Response Database Info Api V1 Insur Dbviewer Databases  Db Id  Get"
       },
       "responses": [
         "200",
@@ -1642,12 +1642,12 @@
     }
   },
   {
-    "id": "schema_tables_api_v1_holy_dbviewer_databases__db_id__schemas__schema__get",
+    "id": "schema_tables_api_v1_insur_dbviewer_databases__db_id__schemas__schema__get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}",
+    "path": "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}",
     "summary": "Schema Tables",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1674,14 +1674,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "schema_tables_api_v1_holy_dbviewer_databases__db_id__schemas__schema__get",
+      "router_function": "schema_tables_api_v1_insur_dbviewer_databases__db_id__schemas__schema__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Schema Tables Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Get"
+        "title": "Response Schema Tables Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Get"
       },
       "responses": [
         "200",
@@ -1698,12 +1698,12 @@
     }
   },
   {
-    "id": "table_detail_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__get",
+    "id": "table_detail_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}",
+    "path": "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}",
     "summary": "Table Detail",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1739,14 +1739,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "table_detail_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__get",
+      "router_function": "table_detail_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Table Detail Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get"
+        "title": "Response Table Detail Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Get"
       },
       "responses": [
         "200",
@@ -1763,12 +1763,12 @@
     }
   },
   {
-    "id": "table_sample_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
+    "id": "table_sample_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample",
+    "path": "/api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample",
     "summary": "Table Sample",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1828,14 +1828,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "table_sample_api_v1_holy_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
+      "router_function": "table_sample_api_v1_insur_dbviewer_databases__db_id__schemas__schema__tables__table__sample_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Table Sample Api V1 Holy Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get"
+        "title": "Response Table Sample Api V1 Insur Dbviewer Databases  Db Id  Schemas  Schema  Tables  Table  Sample Get"
       },
       "responses": [
         "200",
@@ -1852,12 +1852,12 @@
     }
   },
   {
-    "id": "process_tables_global_api_v1_holy_dbviewer_process_tables__global_get",
+    "id": "process_tables_global_api_v1_insur_dbviewer_process_tables__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/process-tables/_global",
+    "path": "/api/v1/insur/dbviewer/process-tables/_global",
     "summary": "Process Tables Global",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1865,14 +1865,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "process_tables_global_api_v1_holy_dbviewer_process_tables__global_get",
+      "router_function": "process_tables_global_api_v1_insur_dbviewer_process_tables__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Process Tables Global Api V1 Holy Dbviewer Process Tables  Global Get"
+        "title": "Response Process Tables Global Api V1 Insur Dbviewer Process Tables  Global Get"
       },
       "responses": [
         "200"
@@ -1888,12 +1888,12 @@
     }
   },
   {
-    "id": "process_tables_dept_api_v1_holy_dbviewer_process_tables__dept__get",
+    "id": "process_tables_dept_api_v1_insur_dbviewer_process_tables__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/process-tables/{dept}",
+    "path": "/api/v1/insur/dbviewer/process-tables/{dept}",
     "summary": "Process Tables Dept",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1911,14 +1911,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "process_tables_dept_api_v1_holy_dbviewer_process_tables__dept__get",
+      "router_function": "process_tables_dept_api_v1_insur_dbviewer_process_tables__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Process Tables Dept Api V1 Holy Dbviewer Process Tables  Dept  Get"
+        "title": "Response Process Tables Dept Api V1 Insur Dbviewer Process Tables  Dept  Get"
       },
       "responses": [
         "200",
@@ -1935,12 +1935,12 @@
     }
   },
   {
-    "id": "process_tables_detail_api_v1_holy_dbviewer_process_tables__dept___process_id__get",
+    "id": "process_tables_detail_api_v1_insur_dbviewer_process_tables__dept___process_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/dbviewer/process-tables/{dept}/{process_id}",
+    "path": "/api/v1/insur/dbviewer/process-tables/{dept}/{process_id}",
     "summary": "Process Tables Detail",
     "tags": [
-      "holy",
+      "insur",
       "dbviewer"
     ],
     "input": {
@@ -1967,14 +1967,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "process_tables_detail_api_v1_holy_dbviewer_process_tables__dept___process_id__get",
+      "router_function": "process_tables_detail_api_v1_insur_dbviewer_process_tables__dept___process_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Process Tables Detail Api V1 Holy Dbviewer Process Tables  Dept   Process Id  Get"
+        "title": "Response Process Tables Detail Api V1 Insur Dbviewer Process Tables  Dept   Process Id  Get"
       },
       "responses": [
         "200",
@@ -1991,12 +1991,12 @@
     }
   },
   {
-    "id": "global_inventory_api_v1_holy_demo_stories__global_get",
+    "id": "global_inventory_api_v1_insur_demo_stories__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/demo-stories/_global",
+    "path": "/api/v1/insur/demo-stories/_global",
     "summary": "Global Inventory",
     "tags": [
-      "holy",
+      "insur",
       "demo-stories"
     ],
     "input": {
@@ -2004,14 +2004,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_inventory_api_v1_holy_demo_stories__global_get",
+      "router_function": "global_inventory_api_v1_insur_demo_stories__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Inventory Api V1 Holy Demo Stories  Global Get"
+        "title": "Response Global Inventory Api V1 Insur Demo Stories  Global Get"
       },
       "responses": [
         "200"
@@ -2027,12 +2027,12 @@
     }
   },
   {
-    "id": "dept_catalog_api_v1_holy_demo_stories__dept__get",
+    "id": "dept_catalog_api_v1_insur_demo_stories__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/demo-stories/{dept}",
+    "path": "/api/v1/insur/demo-stories/{dept}",
     "summary": "Dept Catalog",
     "tags": [
-      "holy",
+      "insur",
       "demo-stories"
     ],
     "input": {
@@ -2050,14 +2050,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_catalog_api_v1_holy_demo_stories__dept__get",
+      "router_function": "dept_catalog_api_v1_insur_demo_stories__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Catalog Api V1 Holy Demo Stories  Dept  Get"
+        "title": "Response Dept Catalog Api V1 Insur Demo Stories  Dept  Get"
       },
       "responses": [
         "200",
@@ -2074,12 +2074,12 @@
     }
   },
   {
-    "id": "role_demo_detail_api_v1_holy_demo_stories__dept___role__get",
+    "id": "role_demo_detail_api_v1_insur_demo_stories__dept___role__get",
     "method": "GET",
-    "path": "/api/v1/holy/demo-stories/{dept}/{role}",
+    "path": "/api/v1/insur/demo-stories/{dept}/{role}",
     "summary": "Role Demo Detail",
     "tags": [
-      "holy",
+      "insur",
       "demo-stories"
     ],
     "input": {
@@ -2106,14 +2106,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "role_demo_detail_api_v1_holy_demo_stories__dept___role__get",
+      "router_function": "role_demo_detail_api_v1_insur_demo_stories__dept___role__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Role Demo Detail Api V1 Holy Demo Stories  Dept   Role  Get"
+        "title": "Response Role Demo Detail Api V1 Insur Demo Stories  Dept   Role  Get"
       },
       "responses": [
         "200",
@@ -2130,26 +2130,26 @@
     }
   },
   {
-    "id": "list_depts_api_v1_holy_depts_get",
+    "id": "list_depts_api_v1_insur_depts_get",
     "method": "GET",
-    "path": "/api/v1/holy/depts",
+    "path": "/api/v1/insur/depts",
     "summary": "List Depts",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_depts_api_v1_holy_depts_get",
+      "router_function": "list_depts_api_v1_insur_depts_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response List Depts Api V1 Holy Depts Get"
+        "title": "Response List Depts Api V1 Insur Depts Get"
       },
       "responses": [
         "200"
@@ -2165,12 +2165,12 @@
     }
   },
   {
-    "id": "global_inventory_api_v1_holy_downloads__global_get",
+    "id": "global_inventory_api_v1_insur_downloads__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/downloads/_global",
+    "path": "/api/v1/insur/downloads/_global",
     "summary": "Global Inventory",
     "tags": [
-      "holy",
+      "insur",
       "downloads"
     ],
     "input": {
@@ -2178,14 +2178,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_inventory_api_v1_holy_downloads__global_get",
+      "router_function": "global_inventory_api_v1_insur_downloads__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Inventory Api V1 Holy Downloads  Global Get"
+        "title": "Response Global Inventory Api V1 Insur Downloads  Global Get"
       },
       "responses": [
         "200"
@@ -2201,12 +2201,12 @@
     }
   },
   {
-    "id": "dept_catalog_api_v1_holy_downloads__dept__get",
+    "id": "dept_catalog_api_v1_insur_downloads__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/downloads/{dept}",
+    "path": "/api/v1/insur/downloads/{dept}",
     "summary": "Dept Catalog",
     "tags": [
-      "holy",
+      "insur",
       "downloads"
     ],
     "input": {
@@ -2224,14 +2224,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_catalog_api_v1_holy_downloads__dept__get",
+      "router_function": "dept_catalog_api_v1_insur_downloads__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Catalog Api V1 Holy Downloads  Dept  Get"
+        "title": "Response Dept Catalog Api V1 Insur Downloads  Dept  Get"
       },
       "responses": [
         "200",
@@ -2248,12 +2248,12 @@
     }
   },
   {
-    "id": "serve_file_api_v1_holy_downloads__dept___filename__get",
+    "id": "serve_file_api_v1_insur_downloads__dept___filename__get",
     "method": "GET",
-    "path": "/api/v1/holy/downloads/{dept}/{filename}",
+    "path": "/api/v1/insur/downloads/{dept}/{filename}",
     "summary": "Serve File",
     "tags": [
-      "holy",
+      "insur",
       "downloads"
     ],
     "input": {
@@ -2280,7 +2280,7 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "serve_file_api_v1_holy_downloads__dept___filename__get",
+      "router_function": "serve_file_api_v1_insur_downloads__dept___filename__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
@@ -2300,12 +2300,12 @@
     }
   },
   {
-    "id": "list_runs_api_v1_holy_eval__dept___pipeline__runs_get",
+    "id": "list_runs_api_v1_insur_eval__dept___pipeline__runs_get",
     "method": "GET",
-    "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs",
+    "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs",
     "summary": "List Runs",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -2331,14 +2331,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_runs_api_v1_holy_eval__dept___pipeline__runs_get",
+      "router_function": "list_runs_api_v1_insur_eval__dept___pipeline__runs_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response List Runs Api V1 Holy Eval  Dept   Pipeline  Runs Get"
+        "title": "Response List Runs Api V1 Insur Eval  Dept   Pipeline  Runs Get"
       },
       "responses": [
         "200",
@@ -2355,12 +2355,12 @@
     }
   },
   {
-    "id": "get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get",
+    "id": "get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get",
     "method": "GET",
-    "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/latest",
+    "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/latest",
     "summary": "Get Latest",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -2395,14 +2395,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_latest_api_v1_holy_eval__dept___pipeline__runs__run_id__latest_get",
+      "router_function": "get_latest_api_v1_insur_eval__dept___pipeline__runs__run_id__latest_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Latest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Latest Get"
+        "title": "Response Get Latest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Latest Get"
       },
       "responses": [
         "200",
@@ -2419,12 +2419,12 @@
     }
   },
   {
-    "id": "get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get",
+    "id": "get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get",
     "method": "GET",
-    "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/manifest",
+    "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/manifest",
     "summary": "Get Manifest",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -2459,14 +2459,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_manifest_api_v1_holy_eval__dept___pipeline__runs__run_id__manifest_get",
+      "router_function": "get_manifest_api_v1_insur_eval__dept___pipeline__runs__run_id__manifest_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Manifest Api V1 Holy Eval  Dept   Pipeline  Runs  Run Id  Manifest Get"
+        "title": "Response Get Manifest Api V1 Insur Eval  Dept   Pipeline  Runs  Run Id  Manifest Get"
       },
       "responses": [
         "200",
@@ -2483,12 +2483,12 @@
     }
   },
   {
-    "id": "get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
+    "id": "get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
     "method": "GET",
-    "path": "/api/v1/holy/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}",
+    "path": "/api/v1/insur/eval/{dept}/{pipeline}/runs/{run_id}/plots/{plot_name}",
     "summary": "Get Plot",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -2532,7 +2532,7 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_plot_api_v1_holy_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
+      "router_function": "get_plot_api_v1_insur_eval__dept___pipeline__runs__run_id__plots__plot_name__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
@@ -2552,12 +2552,12 @@
     }
   },
   {
-    "id": "fanout_tasks_api_v1_holy_fleet_fanout_post",
+    "id": "fanout_tasks_api_v1_insur_fleet_fanout_post",
     "method": "POST",
-    "path": "/api/v1/holy/fleet/fanout",
+    "path": "/api/v1/insur/fleet/fanout",
     "summary": "Fanout Tasks",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
@@ -2581,14 +2581,14 @@
       }
     },
     "process": {
-      "router_function": "fanout_tasks_api_v1_holy_fleet_fanout_post",
+      "router_function": "fanout_tasks_api_v1_insur_fleet_fanout_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Fanout Tasks Api V1 Holy Fleet Fanout Post"
+        "title": "Response Fanout Tasks Api V1 Insur Fleet Fanout Post"
       },
       "responses": [
         "200",
@@ -2605,12 +2605,12 @@
     }
   },
   {
-    "id": "get_recent_done_api_v1_holy_fleet_recent_done_get",
+    "id": "get_recent_done_api_v1_insur_fleet_recent_done_get",
     "method": "GET",
-    "path": "/api/v1/holy/fleet/recent-done",
+    "path": "/api/v1/insur/fleet/recent-done",
     "summary": "Get Recent Done",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -2638,14 +2638,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_recent_done_api_v1_holy_fleet_recent_done_get",
+      "router_function": "get_recent_done_api_v1_insur_fleet_recent_done_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Recent Done Api V1 Holy Fleet Recent Done Get"
+        "title": "Response Get Recent Done Api V1 Insur Fleet Recent Done Get"
       },
       "responses": [
         "200",
@@ -2662,26 +2662,26 @@
     }
   },
   {
-    "id": "get_fleet_stats_api_v1_holy_fleet_stats_get",
+    "id": "get_fleet_stats_api_v1_insur_fleet_stats_get",
     "method": "GET",
-    "path": "/api/v1/holy/fleet/stats",
+    "path": "/api/v1/insur/fleet/stats",
     "summary": "Get Fleet Stats",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_fleet_stats_api_v1_holy_fleet_stats_get",
+      "router_function": "get_fleet_stats_api_v1_insur_fleet_stats_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Get Fleet Stats Api V1 Holy Fleet Stats Get"
+        "title": "Response Get Fleet Stats Api V1 Insur Fleet Stats Get"
       },
       "responses": [
         "200"
@@ -2697,12 +2697,12 @@
     }
   },
   {
-    "id": "global_summary_api_v1_holy_graph__global_get",
+    "id": "global_summary_api_v1_insur_graph__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/graph/_global",
+    "path": "/api/v1/insur/graph/_global",
     "summary": "Global Summary",
     "tags": [
-      "holy",
+      "insur",
       "graph"
     ],
     "input": {
@@ -2710,14 +2710,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_summary_api_v1_holy_graph__global_get",
+      "router_function": "global_summary_api_v1_insur_graph__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Summary Api V1 Holy Graph  Global Get"
+        "title": "Response Global Summary Api V1 Insur Graph  Global Get"
       },
       "responses": [
         "200"
@@ -2733,12 +2733,12 @@
     }
   },
   {
-    "id": "dept_graph_api_v1_holy_graph__dept__get",
+    "id": "dept_graph_api_v1_insur_graph__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/graph/{dept}",
+    "path": "/api/v1/insur/graph/{dept}",
     "summary": "Dept Graph",
     "tags": [
-      "holy",
+      "insur",
       "graph"
     ],
     "input": {
@@ -2756,14 +2756,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_graph_api_v1_holy_graph__dept__get",
+      "router_function": "dept_graph_api_v1_insur_graph__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Graph Api V1 Holy Graph  Dept  Get"
+        "title": "Response Dept Graph Api V1 Insur Graph  Dept  Get"
       },
       "responses": [
         "200",
@@ -2780,12 +2780,12 @@
     }
   },
   {
-    "id": "dept_neighbors_api_v1_holy_graph__dept__neighbors__node_id__get",
+    "id": "dept_neighbors_api_v1_insur_graph__dept__neighbors__node_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/graph/{dept}/neighbors/{node_id}",
+    "path": "/api/v1/insur/graph/{dept}/neighbors/{node_id}",
     "summary": "Dept Neighbors",
     "tags": [
-      "holy",
+      "insur",
       "graph"
     ],
     "input": {
@@ -2812,14 +2812,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_neighbors_api_v1_holy_graph__dept__neighbors__node_id__get",
+      "router_function": "dept_neighbors_api_v1_insur_graph__dept__neighbors__node_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Neighbors Api V1 Holy Graph  Dept  Neighbors  Node Id  Get"
+        "title": "Response Dept Neighbors Api V1 Insur Graph  Dept  Neighbors  Node Id  Get"
       },
       "responses": [
         "200",
@@ -2836,12 +2836,12 @@
     }
   },
   {
-    "id": "dept_nodes_filtered_api_v1_holy_graph__dept__nodes_get",
+    "id": "dept_nodes_filtered_api_v1_insur_graph__dept__nodes_get",
     "method": "GET",
-    "path": "/api/v1/holy/graph/{dept}/nodes",
+    "path": "/api/v1/insur/graph/{dept}/nodes",
     "summary": "Dept Nodes Filtered",
     "tags": [
-      "holy",
+      "insur",
       "graph"
     ],
     "input": {
@@ -2871,14 +2871,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_nodes_filtered_api_v1_holy_graph__dept__nodes_get",
+      "router_function": "dept_nodes_filtered_api_v1_insur_graph__dept__nodes_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Nodes Filtered Api V1 Holy Graph  Dept  Nodes Get"
+        "title": "Response Dept Nodes Filtered Api V1 Insur Graph  Dept  Nodes Get"
       },
       "responses": [
         "200",
@@ -2895,12 +2895,12 @@
     }
   },
   {
-    "id": "global_catalog_api_v1_holy_master_data__global_get",
+    "id": "global_catalog_api_v1_insur_master_data__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/master-data/_global",
+    "path": "/api/v1/insur/master-data/_global",
     "summary": "Global Catalog",
     "tags": [
-      "holy",
+      "insur",
       "master-data"
     ],
     "input": {
@@ -2908,14 +2908,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_catalog_api_v1_holy_master_data__global_get",
+      "router_function": "global_catalog_api_v1_insur_master_data__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Catalog Api V1 Holy Master Data  Global Get"
+        "title": "Response Global Catalog Api V1 Insur Master Data  Global Get"
       },
       "responses": [
         "200"
@@ -2931,12 +2931,12 @@
     }
   },
   {
-    "id": "dept_catalog_api_v1_holy_master_data__dept__get",
+    "id": "dept_catalog_api_v1_insur_master_data__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/master-data/{dept}",
+    "path": "/api/v1/insur/master-data/{dept}",
     "summary": "Dept Catalog",
     "tags": [
-      "holy",
+      "insur",
       "master-data"
     ],
     "input": {
@@ -2954,14 +2954,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_catalog_api_v1_holy_master_data__dept__get",
+      "router_function": "dept_catalog_api_v1_insur_master_data__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Catalog Api V1 Holy Master Data  Dept  Get"
+        "title": "Response Dept Catalog Api V1 Insur Master Data  Dept  Get"
       },
       "responses": [
         "200",
@@ -2978,12 +2978,12 @@
     }
   },
   {
-    "id": "entity_sample_api_v1_holy_master_data__dept___entity__get",
+    "id": "entity_sample_api_v1_insur_master_data__dept___entity__get",
     "method": "GET",
-    "path": "/api/v1/holy/master-data/{dept}/{entity}",
+    "path": "/api/v1/insur/master-data/{dept}/{entity}",
     "summary": "Entity Sample",
     "tags": [
-      "holy",
+      "insur",
       "master-data"
     ],
     "input": {
@@ -3034,14 +3034,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "entity_sample_api_v1_holy_master_data__dept___entity__get",
+      "router_function": "entity_sample_api_v1_insur_master_data__dept___entity__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Entity Sample Api V1 Holy Master Data  Dept   Entity  Get"
+        "title": "Response Entity Sample Api V1 Insur Master Data  Dept   Entity  Get"
       },
       "responses": [
         "200",
@@ -3058,12 +3058,12 @@
     }
   },
   {
-    "id": "global_rollup_api_v1_holy_monitoring__global_get",
+    "id": "global_rollup_api_v1_insur_monitoring__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/monitoring/_global",
+    "path": "/api/v1/insur/monitoring/_global",
     "summary": "Global Rollup",
     "tags": [
-      "holy",
+      "insur",
       "monitoring"
     ],
     "input": {
@@ -3071,14 +3071,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_rollup_api_v1_holy_monitoring__global_get",
+      "router_function": "global_rollup_api_v1_insur_monitoring__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Rollup Api V1 Holy Monitoring  Global Get"
+        "title": "Response Global Rollup Api V1 Insur Monitoring  Global Get"
       },
       "responses": [
         "200"
@@ -3094,12 +3094,12 @@
     }
   },
   {
-    "id": "dept_monitoring_api_v1_holy_monitoring__dept__get",
+    "id": "dept_monitoring_api_v1_insur_monitoring__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/monitoring/{dept}",
+    "path": "/api/v1/insur/monitoring/{dept}",
     "summary": "Dept Monitoring",
     "tags": [
-      "holy",
+      "insur",
       "monitoring"
     ],
     "input": {
@@ -3117,14 +3117,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_monitoring_api_v1_holy_monitoring__dept__get",
+      "router_function": "dept_monitoring_api_v1_insur_monitoring__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Monitoring Api V1 Holy Monitoring  Dept  Get"
+        "title": "Response Dept Monitoring Api V1 Insur Monitoring  Dept  Get"
       },
       "responses": [
         "200",
@@ -3141,12 +3141,12 @@
     }
   },
   {
-    "id": "list_runs_api_v1_holy_monitoring__dept__jobs__job__runs_get",
+    "id": "list_runs_api_v1_insur_monitoring__dept__jobs__job__runs_get",
     "method": "GET",
-    "path": "/api/v1/holy/monitoring/{dept}/jobs/{job}/runs",
+    "path": "/api/v1/insur/monitoring/{dept}/jobs/{job}/runs",
     "summary": "List Runs",
     "tags": [
-      "holy",
+      "insur",
       "monitoring"
     ],
     "input": {
@@ -3185,14 +3185,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_runs_api_v1_holy_monitoring__dept__jobs__job__runs_get",
+      "router_function": "list_runs_api_v1_insur_monitoring__dept__jobs__job__runs_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response List Runs Api V1 Holy Monitoring  Dept  Jobs  Job  Runs Get"
+        "title": "Response List Runs Api V1 Insur Monitoring  Dept  Jobs  Job  Runs Get"
       },
       "responses": [
         "200",
@@ -3209,12 +3209,12 @@
     }
   },
   {
-    "id": "get_run_api_v1_holy_monitoring__dept__jobs__job__runs__run_id__get",
+    "id": "get_run_api_v1_insur_monitoring__dept__jobs__job__runs__run_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/monitoring/{dept}/jobs/{job}/runs/{run_id}",
+    "path": "/api/v1/insur/monitoring/{dept}/jobs/{job}/runs/{run_id}",
     "summary": "Get Run",
     "tags": [
-      "holy",
+      "insur",
       "monitoring"
     ],
     "input": {
@@ -3250,14 +3250,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_run_api_v1_holy_monitoring__dept__jobs__job__runs__run_id__get",
+      "router_function": "get_run_api_v1_insur_monitoring__dept__jobs__job__runs__run_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Run Api V1 Holy Monitoring  Dept  Jobs  Job  Runs  Run Id  Get"
+        "title": "Response Get Run Api V1 Insur Monitoring  Dept  Jobs  Job  Runs  Run Id  Get"
       },
       "responses": [
         "200",
@@ -3274,12 +3274,12 @@
     }
   },
   {
-    "id": "get_nav_api_v1_holy_nav__dept__get",
+    "id": "get_nav_api_v1_insur_nav__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/nav/{dept}",
+    "path": "/api/v1/insur/nav/{dept}",
     "summary": "Get Nav",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -3296,14 +3296,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_nav_api_v1_holy_nav__dept__get",
+      "router_function": "get_nav_api_v1_insur_nav__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Nav Api V1 Holy Nav  Dept  Get"
+        "title": "Response Get Nav Api V1 Insur Nav  Dept  Get"
       },
       "responses": [
         "200",
@@ -3320,26 +3320,26 @@
     }
   },
   {
-    "id": "orchestration_demo_api_v1_holy_orchestration_demo_post",
+    "id": "orchestration_demo_api_v1_insur_orchestration_demo_post",
     "method": "POST",
-    "path": "/api/v1/holy/orchestration/demo",
+    "path": "/api/v1/insur/orchestration/demo",
     "summary": "Orchestration Demo",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
       "request_body_schema": null
     },
     "process": {
-      "router_function": "orchestration_demo_api_v1_holy_orchestration_demo_post",
+      "router_function": "orchestration_demo_api_v1_insur_orchestration_demo_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Orchestration Demo Api V1 Holy Orchestration Demo Post"
+        "title": "Response Orchestration Demo Api V1 Insur Orchestration Demo Post"
       },
       "responses": [
         "200"
@@ -3355,12 +3355,12 @@
     }
   },
   {
-    "id": "global_inventory_api_v1_holy_pipelines__global_get",
+    "id": "global_inventory_api_v1_insur_pipelines__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/pipelines/_global",
+    "path": "/api/v1/insur/pipelines/_global",
     "summary": "Global Inventory",
     "tags": [
-      "holy",
+      "insur",
       "pipelines"
     ],
     "input": {
@@ -3368,14 +3368,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_inventory_api_v1_holy_pipelines__global_get",
+      "router_function": "global_inventory_api_v1_insur_pipelines__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Inventory Api V1 Holy Pipelines  Global Get"
+        "title": "Response Global Inventory Api V1 Insur Pipelines  Global Get"
       },
       "responses": [
         "200"
@@ -3391,12 +3391,12 @@
     }
   },
   {
-    "id": "dept_catalog_api_v1_holy_pipelines__dept__get",
+    "id": "dept_catalog_api_v1_insur_pipelines__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/pipelines/{dept}",
+    "path": "/api/v1/insur/pipelines/{dept}",
     "summary": "Dept Catalog",
     "tags": [
-      "holy",
+      "insur",
       "pipelines"
     ],
     "input": {
@@ -3414,14 +3414,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_catalog_api_v1_holy_pipelines__dept__get",
+      "router_function": "dept_catalog_api_v1_insur_pipelines__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Catalog Api V1 Holy Pipelines  Dept  Get"
+        "title": "Response Dept Catalog Api V1 Insur Pipelines  Dept  Get"
       },
       "responses": [
         "200",
@@ -3438,12 +3438,12 @@
     }
   },
   {
-    "id": "process_detail_api_v1_holy_pipelines__dept___process_id__get",
+    "id": "process_detail_api_v1_insur_pipelines__dept___process_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/pipelines/{dept}/{process_id}",
+    "path": "/api/v1/insur/pipelines/{dept}/{process_id}",
     "summary": "Process Detail",
     "tags": [
-      "holy",
+      "insur",
       "pipelines"
     ],
     "input": {
@@ -3470,14 +3470,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "process_detail_api_v1_holy_pipelines__dept___process_id__get",
+      "router_function": "process_detail_api_v1_insur_pipelines__dept___process_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Process Detail Api V1 Holy Pipelines  Dept   Process Id  Get"
+        "title": "Response Process Detail Api V1 Insur Pipelines  Dept   Process Id  Get"
       },
       "responses": [
         "200",
@@ -3494,12 +3494,12 @@
     }
   },
   {
-    "id": "global_inventory_api_v1_holy_reports__global_get",
+    "id": "global_inventory_api_v1_insur_reports__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/reports/_global",
+    "path": "/api/v1/insur/reports/_global",
     "summary": "Global Inventory",
     "tags": [
-      "holy",
+      "insur",
       "reports"
     ],
     "input": {
@@ -3507,14 +3507,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_inventory_api_v1_holy_reports__global_get",
+      "router_function": "global_inventory_api_v1_insur_reports__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Inventory Api V1 Holy Reports  Global Get"
+        "title": "Response Global Inventory Api V1 Insur Reports  Global Get"
       },
       "responses": [
         "200"
@@ -3530,12 +3530,12 @@
     }
   },
   {
-    "id": "dept_catalog_api_v1_holy_reports__dept__get",
+    "id": "dept_catalog_api_v1_insur_reports__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/reports/{dept}",
+    "path": "/api/v1/insur/reports/{dept}",
     "summary": "Dept Catalog",
     "tags": [
-      "holy",
+      "insur",
       "reports"
     ],
     "input": {
@@ -3553,14 +3553,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "dept_catalog_api_v1_holy_reports__dept__get",
+      "router_function": "dept_catalog_api_v1_insur_reports__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Dept Catalog Api V1 Holy Reports  Dept  Get"
+        "title": "Response Dept Catalog Api V1 Insur Reports  Dept  Get"
       },
       "responses": [
         "200",
@@ -3577,12 +3577,12 @@
     }
   },
   {
-    "id": "report_detail_api_v1_holy_reports__dept___report_id__get",
+    "id": "report_detail_api_v1_insur_reports__dept___report_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/reports/{dept}/{report_id}",
+    "path": "/api/v1/insur/reports/{dept}/{report_id}",
     "summary": "Report Detail",
     "tags": [
-      "holy",
+      "insur",
       "reports"
     ],
     "input": {
@@ -3609,14 +3609,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "report_detail_api_v1_holy_reports__dept___report_id__get",
+      "router_function": "report_detail_api_v1_insur_reports__dept___report_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Report Detail Api V1 Holy Reports  Dept   Report Id  Get"
+        "title": "Response Report Detail Api V1 Insur Reports  Dept   Report Id  Get"
       },
       "responses": [
         "200",
@@ -3633,12 +3633,12 @@
     }
   },
   {
-    "id": "get_role_reports_api_v1_holy_reports__dept___role__get",
+    "id": "get_role_reports_api_v1_insur_reports__dept___role__get",
     "method": "GET",
-    "path": "/api/v1/holy/reports/{dept}/{role}",
+    "path": "/api/v1/insur/reports/{dept}/{role}",
     "summary": "Get Role Reports",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -3664,14 +3664,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_role_reports_api_v1_holy_reports__dept___role__get",
+      "router_function": "get_role_reports_api_v1_insur_reports__dept___role__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Role Reports Api V1 Holy Reports  Dept   Role  Get"
+        "title": "Response Get Role Reports Api V1 Insur Reports  Dept   Role  Get"
       },
       "responses": [
         "200",
@@ -3688,12 +3688,12 @@
     }
   },
   {
-    "id": "run_role_report_api_v1_holy_reports__dept___role___report_id__run_post",
+    "id": "run_role_report_api_v1_insur_reports__dept___role___report_id__run_post",
     "method": "POST",
-    "path": "/api/v1/holy/reports/{dept}/{role}/{report_id}/run",
+    "path": "/api/v1/insur/reports/{dept}/{role}/{report_id}/run",
     "summary": "Run Role Report",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -3745,14 +3745,14 @@
       }
     },
     "process": {
-      "router_function": "run_role_report_api_v1_holy_reports__dept___role___report_id__run_post",
+      "router_function": "run_role_report_api_v1_insur_reports__dept___role___report_id__run_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Run Role Report Api V1 Holy Reports  Dept   Role   Report Id  Run Post"
+        "title": "Response Run Role Report Api V1 Insur Reports  Dept   Role   Report Id  Run Post"
       },
       "responses": [
         "200",
@@ -3769,26 +3769,26 @@
     }
   },
   {
-    "id": "list_roles_api_v1_holy_roles_get",
+    "id": "list_roles_api_v1_insur_roles_get",
     "method": "GET",
-    "path": "/api/v1/holy/roles",
+    "path": "/api/v1/insur/roles",
     "summary": "List Roles",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_roles_api_v1_holy_roles_get",
+      "router_function": "list_roles_api_v1_insur_roles_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response List Roles Api V1 Holy Roles Get"
+        "title": "Response List Roles Api V1 Insur Roles Get"
       },
       "responses": [
         "200"
@@ -3804,26 +3804,26 @@
     }
   },
   {
-    "id": "list_attack_classes_api_v1_holy_security_attack_classes_get",
+    "id": "list_attack_classes_api_v1_insur_security_attack_classes_get",
     "method": "GET",
-    "path": "/api/v1/holy/security/attack-classes",
+    "path": "/api/v1/insur/security/attack-classes",
     "summary": "List Attack Classes",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_attack_classes_api_v1_holy_security_attack_classes_get",
+      "router_function": "list_attack_classes_api_v1_insur_security_attack_classes_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response List Attack Classes Api V1 Holy Security Attack Classes Get"
+        "title": "Response List Attack Classes Api V1 Insur Security Attack Classes Get"
       },
       "responses": [
         "200"
@@ -3839,12 +3839,12 @@
     }
   },
   {
-    "id": "list_attack_corpora_api_v1_holy_security__dept__corpora_get",
+    "id": "list_attack_corpora_api_v1_insur_security__dept__corpora_get",
     "method": "GET",
-    "path": "/api/v1/holy/security/{dept}/corpora",
+    "path": "/api/v1/insur/security/{dept}/corpora",
     "summary": "List Attack Corpora",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -3877,14 +3877,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_attack_corpora_api_v1_holy_security__dept__corpora_get",
+      "router_function": "list_attack_corpora_api_v1_insur_security__dept__corpora_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response List Attack Corpora Api V1 Holy Security  Dept  Corpora Get"
+        "title": "Response List Attack Corpora Api V1 Insur Security  Dept  Corpora Get"
       },
       "responses": [
         "200",
@@ -3901,12 +3901,12 @@
     }
   },
   {
-    "id": "get_attack_corpus_api_v1_holy_security__dept__corpora__attack_class___corpus_id__get",
+    "id": "get_attack_corpus_api_v1_insur_security__dept__corpora__attack_class___corpus_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/security/{dept}/corpora/{attack_class}/{corpus_id}",
+    "path": "/api/v1/insur/security/{dept}/corpora/{attack_class}/{corpus_id}",
     "summary": "Get Attack Corpus",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -3941,14 +3941,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_attack_corpus_api_v1_holy_security__dept__corpora__attack_class___corpus_id__get",
+      "router_function": "get_attack_corpus_api_v1_insur_security__dept__corpora__attack_class___corpus_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Attack Corpus Api V1 Holy Security  Dept  Corpora  Attack Class   Corpus Id  Get"
+        "title": "Response Get Attack Corpus Api V1 Insur Security  Dept  Corpora  Attack Class   Corpus Id  Get"
       },
       "responses": [
         "200",
@@ -3965,12 +3965,12 @@
     }
   },
   {
-    "id": "generate_attack_corpus_api_v1_holy_security__dept__generate_corpus_post",
+    "id": "generate_attack_corpus_api_v1_insur_security__dept__generate_corpus_post",
     "method": "POST",
-    "path": "/api/v1/holy/security/{dept}/generate-corpus",
+    "path": "/api/v1/insur/security/{dept}/generate-corpus",
     "summary": "Generate Attack Corpus",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4004,14 +4004,14 @@
       }
     },
     "process": {
-      "router_function": "generate_attack_corpus_api_v1_holy_security__dept__generate_corpus_post",
+      "router_function": "generate_attack_corpus_api_v1_insur_security__dept__generate_corpus_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Generate Attack Corpus Api V1 Holy Security  Dept  Generate Corpus Post"
+        "title": "Response Generate Attack Corpus Api V1 Insur Security  Dept  Generate Corpus Post"
       },
       "responses": [
         "200",
@@ -4028,26 +4028,26 @@
     }
   },
   {
-    "id": "list_reference_processes_api_v1_holy_sim_reference_processes_get",
+    "id": "list_reference_processes_api_v1_insur_sim_reference_processes_get",
     "method": "GET",
-    "path": "/api/v1/holy/sim/reference-processes",
+    "path": "/api/v1/insur/sim/reference-processes",
     "summary": "List Reference Processes",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_reference_processes_api_v1_holy_sim_reference_processes_get",
+      "router_function": "list_reference_processes_api_v1_insur_sim_reference_processes_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response List Reference Processes Api V1 Holy Sim Reference Processes Get"
+        "title": "Response List Reference Processes Api V1 Insur Sim Reference Processes Get"
       },
       "responses": [
         "200"
@@ -4063,12 +4063,12 @@
     }
   },
   {
-    "id": "run_simulation_api_v1_holy_sim__dept___process__run_post",
+    "id": "run_simulation_api_v1_insur_sim__dept___process__run_post",
     "method": "POST",
-    "path": "/api/v1/holy/sim/{dept}/{process}/run",
+    "path": "/api/v1/insur/sim/{dept}/{process}/run",
     "summary": "Run Simulation",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4111,14 +4111,14 @@
       }
     },
     "process": {
-      "router_function": "run_simulation_api_v1_holy_sim__dept___process__run_post",
+      "router_function": "run_simulation_api_v1_insur_sim__dept___process__run_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Run Simulation Api V1 Holy Sim  Dept   Process  Run Post"
+        "title": "Response Run Simulation Api V1 Insur Sim  Dept   Process  Run Post"
       },
       "responses": [
         "200",
@@ -4135,12 +4135,12 @@
     }
   },
   {
-    "id": "list_sim_runs_api_v1_holy_sim__dept___process__runs_get",
+    "id": "list_sim_runs_api_v1_insur_sim__dept___process__runs_get",
     "method": "GET",
-    "path": "/api/v1/holy/sim/{dept}/{process}/runs",
+    "path": "/api/v1/insur/sim/{dept}/{process}/runs",
     "summary": "List Sim Runs",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4166,14 +4166,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_sim_runs_api_v1_holy_sim__dept___process__runs_get",
+      "router_function": "list_sim_runs_api_v1_insur_sim__dept___process__runs_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response List Sim Runs Api V1 Holy Sim  Dept   Process  Runs Get"
+        "title": "Response List Sim Runs Api V1 Insur Sim  Dept   Process  Runs Get"
       },
       "responses": [
         "200",
@@ -4190,12 +4190,12 @@
     }
   },
   {
-    "id": "get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get",
+    "id": "get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get",
     "method": "GET",
-    "path": "/api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/events",
+    "path": "/api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/events",
     "summary": "Get Sim Events",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4246,14 +4246,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_sim_events_api_v1_holy_sim__dept___process__runs__sim_id__events_get",
+      "router_function": "get_sim_events_api_v1_insur_sim__dept___process__runs__sim_id__events_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Sim Events Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Events Get"
+        "title": "Response Get Sim Events Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Events Get"
       },
       "responses": [
         "200",
@@ -4270,12 +4270,12 @@
     }
   },
   {
-    "id": "get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get",
+    "id": "get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get",
     "method": "GET",
-    "path": "/api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/manifest",
+    "path": "/api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/manifest",
     "summary": "Get Sim Manifest",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4310,14 +4310,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_sim_manifest_api_v1_holy_sim__dept___process__runs__sim_id__manifest_get",
+      "router_function": "get_sim_manifest_api_v1_insur_sim__dept___process__runs__sim_id__manifest_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Sim Manifest Api V1 Holy Sim  Dept   Process  Runs  Sim Id  Manifest Get"
+        "title": "Response Get Sim Manifest Api V1 Insur Sim  Dept   Process  Runs  Sim Id  Manifest Get"
       },
       "responses": [
         "200",
@@ -4334,12 +4334,12 @@
     }
   },
   {
-    "id": "get_spec_api_v1_holy_spec__dept__get",
+    "id": "get_spec_api_v1_insur_spec__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/spec/{dept}",
+    "path": "/api/v1/insur/spec/{dept}",
     "summary": "Get Spec",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4356,14 +4356,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_spec_api_v1_holy_spec__dept__get",
+      "router_function": "get_spec_api_v1_insur_spec__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Spec Api V1 Holy Spec  Dept  Get"
+        "title": "Response Get Spec Api V1 Insur Spec  Dept  Get"
       },
       "responses": [
         "200",
@@ -4380,12 +4380,12 @@
     }
   },
   {
-    "id": "dispatch_test_api_v1_holy_testing_dispatch_post",
+    "id": "dispatch_test_api_v1_insur_testing_dispatch_post",
     "method": "POST",
-    "path": "/api/v1/holy/testing/dispatch",
+    "path": "/api/v1/insur/testing/dispatch",
     "summary": "Dispatch Test",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
@@ -4403,14 +4403,14 @@
       }
     },
     "process": {
-      "router_function": "dispatch_test_api_v1_holy_testing_dispatch_post",
+      "router_function": "dispatch_test_api_v1_insur_testing_dispatch_post",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Dispatch Test Api V1 Holy Testing Dispatch Post"
+        "title": "Response Dispatch Test Api V1 Insur Testing Dispatch Post"
       },
       "responses": [
         "200",
@@ -4427,12 +4427,12 @@
     }
   },
   {
-    "id": "get_test_result_api_v1_holy_testing_result__task_id__get",
+    "id": "get_test_result_api_v1_insur_testing_result__task_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/testing/result/{task_id}",
+    "path": "/api/v1/insur/testing/result/{task_id}",
     "summary": "Get Test Result",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4449,14 +4449,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_test_result_api_v1_holy_testing_result__task_id__get",
+      "router_function": "get_test_result_api_v1_insur_testing_result__task_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Test Result Api V1 Holy Testing Result  Task Id  Get"
+        "title": "Response Get Test Result Api V1 Insur Testing Result  Task Id  Get"
       },
       "responses": [
         "200",
@@ -4473,12 +4473,12 @@
     }
   },
   {
-    "id": "get_test_results_api_v1_holy_testing_results_get",
+    "id": "get_test_results_api_v1_insur_testing_results_get",
     "method": "GET",
-    "path": "/api/v1/holy/testing/results",
+    "path": "/api/v1/insur/testing/results",
     "summary": "Get Test Results",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [
@@ -4528,14 +4528,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_test_results_api_v1_holy_testing_results_get",
+      "router_function": "get_test_results_api_v1_insur_testing_results_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Test Results Api V1 Holy Testing Results Get"
+        "title": "Response Get Test Results Api V1 Insur Testing Results Get"
       },
       "responses": [
         "200",
@@ -4552,26 +4552,26 @@
     }
   },
   {
-    "id": "list_test_tiers_api_v1_holy_testing_tiers_get",
+    "id": "list_test_tiers_api_v1_insur_testing_tiers_get",
     "method": "GET",
-    "path": "/api/v1/holy/testing/tiers",
+    "path": "/api/v1/insur/testing/tiers",
     "summary": "List Test Tiers",
     "tags": [
-      "holy"
+      "insur"
     ],
     "input": {
       "path_query_parameters": [],
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_test_tiers_api_v1_holy_testing_tiers_get",
+      "router_function": "list_test_tiers_api_v1_insur_testing_tiers_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response List Test Tiers Api V1 Holy Testing Tiers Get"
+        "title": "Response List Test Tiers Api V1 Insur Testing Tiers Get"
       },
       "responses": [
         "200"
@@ -4587,12 +4587,12 @@
     }
   },
   {
-    "id": "global_summary_api_v1_holy_transactions__global_get",
+    "id": "global_summary_api_v1_insur_transactions__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/transactions/_global",
+    "path": "/api/v1/insur/transactions/_global",
     "summary": "Global Summary",
     "tags": [
-      "holy",
+      "insur",
       "transactions"
     ],
     "input": {
@@ -4600,14 +4600,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "global_summary_api_v1_holy_transactions__global_get",
+      "router_function": "global_summary_api_v1_insur_transactions__global_get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "additionalProperties": true,
         "type": "object",
-        "title": "Response Global Summary Api V1 Holy Transactions  Global Get"
+        "title": "Response Global Summary Api V1 Insur Transactions  Global Get"
       },
       "responses": [
         "200"
@@ -4623,12 +4623,12 @@
     }
   },
   {
-    "id": "list_transactions_api_v1_holy_transactions__dept__get",
+    "id": "list_transactions_api_v1_insur_transactions__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/transactions/{dept}",
+    "path": "/api/v1/insur/transactions/{dept}",
     "summary": "List Transactions",
     "tags": [
-      "holy",
+      "insur",
       "transactions"
     ],
     "input": {
@@ -4704,14 +4704,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "list_transactions_api_v1_holy_transactions__dept__get",
+      "router_function": "list_transactions_api_v1_insur_transactions__dept__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response List Transactions Api V1 Holy Transactions  Dept  Get"
+        "title": "Response List Transactions Api V1 Insur Transactions  Dept  Get"
       },
       "responses": [
         "200",
@@ -4728,12 +4728,12 @@
     }
   },
   {
-    "id": "get_event_api_v1_holy_transactions__dept___event_id__get",
+    "id": "get_event_api_v1_insur_transactions__dept___event_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/transactions/{dept}/{event_id}",
+    "path": "/api/v1/insur/transactions/{dept}/{event_id}",
     "summary": "Get Event",
     "tags": [
-      "holy",
+      "insur",
       "transactions"
     ],
     "input": {
@@ -4772,14 +4772,14 @@
       "request_body_schema": null
     },
     "process": {
-      "router_function": "get_event_api_v1_holy_transactions__dept___event_id__get",
+      "router_function": "get_event_api_v1_insur_transactions__dept___event_id__get",
       "business_logic": "Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening."
     },
     "output": {
       "response_schema": {
         "type": "object",
         "additionalProperties": true,
-        "title": "Response Get Event Api V1 Holy Transactions  Dept   Event Id  Get"
+        "title": "Response Get Event Api V1 Insur Transactions  Dept   Event Id  Get"
       },
       "responses": [
         "200",
@@ -6536,12 +6536,12 @@
     }
   },
   {
-    "id": "pii_global_api_v1_holy_pii__global_get",
+    "id": "pii_global_api_v1_insur_pii__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/pii/_global",
+    "path": "/api/v1/insur/pii/_global",
     "summary": "PII Global",
     "tags": [
-      "holy",
+      "insur",
       "pii"
     ],
     "input": {
@@ -6572,18 +6572,18 @@
     "federation": {
       "policy": "\u00a768.6 + \u00a764.43 #7 + \u00a738.3",
       "surface": "pii",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
-      "note": "\u00a768.6 PII inventory federated via core.holy_audit (surface=pii). NEVER returns raw PII \u2014 only redacted match metadata. Drill: tests/drills/drill_pii_inventory.py."
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
+      "note": "\u00a768.6 PII inventory federated via core.insur_audit (surface=pii). NEVER returns raw PII \u2014 only redacted match metadata. Drill: tests/drills/drill_pii_inventory.py."
     }
   },
   {
-    "id": "pii_leaks_api_v1_holy_pii_leaks_get",
+    "id": "pii_leaks_api_v1_insur_pii_leaks_get",
     "method": "GET",
-    "path": "/api/v1/holy/pii/leaks",
+    "path": "/api/v1/insur/pii/leaks",
     "summary": "PII Leaks Scan",
     "tags": [
-      "holy",
+      "insur",
       "pii"
     ],
     "input": {
@@ -6614,18 +6614,18 @@
     "federation": {
       "policy": "\u00a768.6 + \u00a764.43 #7 + \u00a738.3",
       "surface": "pii",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
-      "note": "\u00a768.6 PII inventory federated via core.holy_audit (surface=pii). NEVER returns raw PII \u2014 only redacted match metadata. Drill: tests/drills/drill_pii_inventory.py."
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
+      "note": "\u00a768.6 PII inventory federated via core.insur_audit (surface=pii). NEVER returns raw PII \u2014 only redacted match metadata. Drill: tests/drills/drill_pii_inventory.py."
     }
   },
   {
-    "id": "pii_dept_api_v1_holy_pii__dept__get",
+    "id": "pii_dept_api_v1_insur_pii__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/pii/{dept}",
+    "path": "/api/v1/insur/pii/{dept}",
     "summary": "PII Dept Slice",
     "tags": [
-      "holy",
+      "insur",
       "pii"
     ],
     "input": {
@@ -6656,18 +6656,18 @@
     "federation": {
       "policy": "\u00a768.6 + \u00a764.43 #7 + \u00a738.3",
       "surface": "pii",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
-      "note": "\u00a768.6 PII inventory federated via core.holy_audit (surface=pii). NEVER returns raw PII \u2014 only redacted match metadata. Drill: tests/drills/drill_pii_inventory.py."
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
+      "note": "\u00a768.6 PII inventory federated via core.insur_audit (surface=pii). NEVER returns raw PII \u2014 only redacted match metadata. Drill: tests/drills/drill_pii_inventory.py."
     }
   },
   {
-    "id": "guardrails_global_api_v1_holy_guardrails__global_get",
+    "id": "guardrails_global_api_v1_insur_guardrails__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/guardrails/_global",
+    "path": "/api/v1/insur/guardrails/_global",
     "summary": "Guardrails Global Rollup",
     "tags": [
-      "holy",
+      "insur",
       "guardrails"
     ],
     "input": {
@@ -6698,19 +6698,19 @@
     "federation": {
       "policy": "\u00a768.5 + \u00a764.43 #7 + \u00a738.3",
       "surface": "guardrails",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/guardrail_decisions.jsonl",
-      "note": "\u00a768.5 Guardrails federated via core.holy_audit (surface=guardrails). Reads JSONL (HOLY_GUARDRAIL_LOG env). PII never in row, only input_hash. Drill: tests/drills/drill_guardrails.py."
+      "note": "\u00a768.5 Guardrails federated via core.insur_audit (surface=guardrails). Reads JSONL (INSUR_GUARDRAIL_LOG env). PII never in row, only input_hash. Drill: tests/drills/drill_guardrails.py."
     }
   },
   {
-    "id": "guardrails_decision_api_v1_holy_guardrails_decision__decision_id__get",
+    "id": "guardrails_decision_api_v1_insur_guardrails_decision__decision_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/guardrails/decision/{decision_id}",
+    "path": "/api/v1/insur/guardrails/decision/{decision_id}",
     "summary": "Guardrails Decision Lookup",
     "tags": [
-      "holy",
+      "insur",
       "guardrails"
     ],
     "input": {
@@ -6741,19 +6741,19 @@
     "federation": {
       "policy": "\u00a768.5 + \u00a764.43 #7 + \u00a738.3",
       "surface": "guardrails",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/guardrail_decisions.jsonl",
-      "note": "\u00a768.5 Guardrails federated via core.holy_audit (surface=guardrails). Reads JSONL (HOLY_GUARDRAIL_LOG env). PII never in row, only input_hash. Drill: tests/drills/drill_guardrails.py."
+      "note": "\u00a768.5 Guardrails federated via core.insur_audit (surface=guardrails). Reads JSONL (INSUR_GUARDRAIL_LOG env). PII never in row, only input_hash. Drill: tests/drills/drill_guardrails.py."
     }
   },
   {
-    "id": "guardrails_dept_api_v1_holy_guardrails__dept__get",
+    "id": "guardrails_dept_api_v1_insur_guardrails__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/guardrails/{dept}",
+    "path": "/api/v1/insur/guardrails/{dept}",
     "summary": "Guardrails Per-Dept Decisions",
     "tags": [
-      "holy",
+      "insur",
       "guardrails"
     ],
     "input": {
@@ -6784,19 +6784,19 @@
     "federation": {
       "policy": "\u00a768.5 + \u00a764.43 #7 + \u00a738.3",
       "surface": "guardrails",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/guardrail_decisions.jsonl",
-      "note": "\u00a768.5 Guardrails federated via core.holy_audit (surface=guardrails). Reads JSONL (HOLY_GUARDRAIL_LOG env). PII never in row, only input_hash. Drill: tests/drills/drill_guardrails.py."
+      "note": "\u00a768.5 Guardrails federated via core.insur_audit (surface=guardrails). Reads JSONL (INSUR_GUARDRAIL_LOG env). PII never in row, only input_hash. Drill: tests/drills/drill_guardrails.py."
     }
   },
   {
-    "id": "security_global_api_v1_holy_security__global_get",
+    "id": "security_global_api_v1_insur_security__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/security/_global",
+    "path": "/api/v1/insur/security/_global",
     "summary": "Security Posture Global",
     "tags": [
-      "holy",
+      "insur",
       "security"
     ],
     "input": {
@@ -6827,19 +6827,19 @@
     "federation": {
       "policy": "\u00a768.7 + \u00a764.43 #7 + \u00a738.3",
       "surface": "security",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "posture_source": "data/agent-supervisor/security_posture.json",
-      "note": "\u00a768.7 Security posture federated via core.holy_audit (surface=security). Aggregates compliance gates + CVE snapshot + attack-attempt scan. Drill: tests/drills/drill_security_posture.py."
+      "note": "\u00a768.7 Security posture federated via core.insur_audit (surface=security). Aggregates compliance gates + CVE snapshot + attack-attempt scan. Drill: tests/drills/drill_security_posture.py."
     }
   },
   {
-    "id": "security_attacks_api_v1_holy_security_attacks_get",
+    "id": "security_attacks_api_v1_insur_security_attacks_get",
     "method": "GET",
-    "path": "/api/v1/holy/security/attacks",
+    "path": "/api/v1/insur/security/attacks",
     "summary": "Security Attack Attempts",
     "tags": [
-      "holy",
+      "insur",
       "security"
     ],
     "input": {
@@ -6870,19 +6870,19 @@
     "federation": {
       "policy": "\u00a768.7 + \u00a764.43 #7 + \u00a738.3",
       "surface": "security",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "posture_source": "data/agent-supervisor/security_posture.json",
-      "note": "\u00a768.7 Security posture federated via core.holy_audit (surface=security). Aggregates compliance gates + CVE snapshot + attack-attempt scan. Drill: tests/drills/drill_security_posture.py."
+      "note": "\u00a768.7 Security posture federated via core.insur_audit (surface=security). Aggregates compliance gates + CVE snapshot + attack-attempt scan. Drill: tests/drills/drill_security_posture.py."
     }
   },
   {
-    "id": "security_dept_api_v1_holy_security__dept__get",
+    "id": "security_dept_api_v1_insur_security__dept__get",
     "method": "GET",
-    "path": "/api/v1/holy/security/{dept}",
+    "path": "/api/v1/insur/security/{dept}",
     "summary": "Security Per-Dept Score",
     "tags": [
-      "holy",
+      "insur",
       "security"
     ],
     "input": {
@@ -6913,19 +6913,19 @@
     "federation": {
       "policy": "\u00a768.7 + \u00a764.43 #7 + \u00a738.3",
       "surface": "security",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "posture_source": "data/agent-supervisor/security_posture.json",
-      "note": "\u00a768.7 Security posture federated via core.holy_audit (surface=security). Aggregates compliance gates + CVE snapshot + attack-attempt scan. Drill: tests/drills/drill_security_posture.py."
+      "note": "\u00a768.7 Security posture federated via core.insur_audit (surface=security). Aggregates compliance gates + CVE snapshot + attack-attempt scan. Drill: tests/drills/drill_security_posture.py."
     }
   },
   {
-    "id": "functional_global_api_v1_holy_evals_functional__global_get",
+    "id": "functional_global_api_v1_insur_evals_functional__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/functional/_global",
+    "path": "/api/v1/insur/evals/functional/_global",
     "summary": "Functional Eval Global Leaderboard",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "functional"
     ],
@@ -6957,19 +6957,19 @@
     "federation": {
       "policy": "\u00a768.8 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_functional",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/functional_eval_runs.jsonl",
-      "note": "\u00a768.8 Functional eval federated via core.holy_audit (surface=evals_functional). Reads HOLY_EVAL_FUNCTIONAL_LOG JSONL. Drill: tests/drills/drill_evals_functional.py."
+      "note": "\u00a768.8 Functional eval federated via core.insur_audit (surface=evals_functional). Reads INSUR_EVAL_FUNCTIONAL_LOG JSONL. Drill: tests/drills/drill_evals_functional.py."
     }
   },
   {
-    "id": "functional_model_api_v1_holy_evals_functional__model_id__get",
+    "id": "functional_model_api_v1_insur_evals_functional__model_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/functional/{model_id}",
+    "path": "/api/v1/insur/evals/functional/{model_id}",
     "summary": "Functional Eval Per Model History",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "functional"
     ],
@@ -7001,19 +7001,19 @@
     "federation": {
       "policy": "\u00a768.8 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_functional",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/functional_eval_runs.jsonl",
-      "note": "\u00a768.8 Functional eval federated via core.holy_audit (surface=evals_functional). Reads HOLY_EVAL_FUNCTIONAL_LOG JSONL. Drill: tests/drills/drill_evals_functional.py."
+      "note": "\u00a768.8 Functional eval federated via core.insur_audit (surface=evals_functional). Reads INSUR_EVAL_FUNCTIONAL_LOG JSONL. Drill: tests/drills/drill_evals_functional.py."
     }
   },
   {
-    "id": "functional_run_api_v1_holy_evals_functional__model_id__runs__run_id__get",
+    "id": "functional_run_api_v1_insur_evals_functional__model_id__runs__run_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/functional/{model_id}/runs/{run_id}",
+    "path": "/api/v1/insur/evals/functional/{model_id}/runs/{run_id}",
     "summary": "Functional Eval Run Detail",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "functional"
     ],
@@ -7045,19 +7045,19 @@
     "federation": {
       "policy": "\u00a768.8 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_functional",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/functional_eval_runs.jsonl",
-      "note": "\u00a768.8 Functional eval federated via core.holy_audit (surface=evals_functional). Reads HOLY_EVAL_FUNCTIONAL_LOG JSONL. Drill: tests/drills/drill_evals_functional.py."
+      "note": "\u00a768.8 Functional eval federated via core.insur_audit (surface=evals_functional). Reads INSUR_EVAL_FUNCTIONAL_LOG JSONL. Drill: tests/drills/drill_evals_functional.py."
     }
   },
   {
-    "id": "cost_global_api_v1_holy_evals_cost__global_get",
+    "id": "cost_global_api_v1_insur_evals_cost__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/cost/_global",
+    "path": "/api/v1/insur/evals/cost/_global",
     "summary": "Cost Eval Global Windows",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "cost"
     ],
@@ -7089,19 +7089,19 @@
     "federation": {
       "policy": "\u00a768.9 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_cost",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/cost_runs.jsonl",
-      "note": "\u00a768.9 Cost eval federated via core.holy_audit (surface=evals_cost). Reads HOLY_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
+      "note": "\u00a768.9 Cost eval federated via core.insur_audit (surface=evals_cost). Reads INSUR_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
     }
   },
   {
-    "id": "cost_by_model_api_v1_holy_evals_cost_by_model_get",
+    "id": "cost_by_model_api_v1_insur_evals_cost_by_model_get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/cost/by-model",
+    "path": "/api/v1/insur/evals/cost/by-model",
     "summary": "Cost Eval By Model Ranking",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "cost"
     ],
@@ -7133,19 +7133,19 @@
     "federation": {
       "policy": "\u00a768.9 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_cost",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/cost_runs.jsonl",
-      "note": "\u00a768.9 Cost eval federated via core.holy_audit (surface=evals_cost). Reads HOLY_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
+      "note": "\u00a768.9 Cost eval federated via core.insur_audit (surface=evals_cost). Reads INSUR_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
     }
   },
   {
-    "id": "cost_by_request_api_v1_holy_evals_cost_by_request__request_id__get",
+    "id": "cost_by_request_api_v1_insur_evals_cost_by_request__request_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/cost/by-request/{request_id}",
+    "path": "/api/v1/insur/evals/cost/by-request/{request_id}",
     "summary": "Cost Eval By Request",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "cost"
     ],
@@ -7177,19 +7177,19 @@
     "federation": {
       "policy": "\u00a768.9 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_cost",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/cost_runs.jsonl",
-      "note": "\u00a768.9 Cost eval federated via core.holy_audit (surface=evals_cost). Reads HOLY_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
+      "note": "\u00a768.9 Cost eval federated via core.insur_audit (surface=evals_cost). Reads INSUR_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
     }
   },
   {
-    "id": "cost_per_tenant_api_v1_holy_evals_cost__tenant_id__get",
+    "id": "cost_per_tenant_api_v1_insur_evals_cost__tenant_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/cost/{tenant_id}",
+    "path": "/api/v1/insur/evals/cost/{tenant_id}",
     "summary": "Cost Eval Per Tenant",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "cost"
     ],
@@ -7221,19 +7221,19 @@
     "federation": {
       "policy": "\u00a768.9 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_cost",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/cost_runs.jsonl",
-      "note": "\u00a768.9 Cost eval federated via core.holy_audit (surface=evals_cost). Reads HOLY_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
+      "note": "\u00a768.9 Cost eval federated via core.insur_audit (surface=evals_cost). Reads INSUR_EVAL_COST_LOG JSONL. Drill: tests/drills/drill_evals_cost.py."
     }
   },
   {
-    "id": "safety_global_api_v1_holy_evals_safety__global_get",
+    "id": "safety_global_api_v1_insur_evals_safety__global_get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/safety/_global",
+    "path": "/api/v1/insur/evals/safety/_global",
     "summary": "Safety Eval Scorecard",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "safety"
     ],
@@ -7265,19 +7265,19 @@
     "federation": {
       "policy": "\u00a768.10 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_safety",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/safety_eval_runs.jsonl",
-      "note": "\u00a768.10 Safety eval federated via core.holy_audit (surface=evals_safety). Classifies verdicts safe/review/unsafe/unknown by \u00a748+\u00a764.21 thresholds. Drill: tests/drills/drill_evals_safety.py."
+      "note": "\u00a768.10 Safety eval federated via core.insur_audit (surface=evals_safety). Classifies verdicts safe/review/unsafe/unknown by \u00a748+\u00a764.21 thresholds. Drill: tests/drills/drill_evals_safety.py."
     }
   },
   {
-    "id": "safety_incidents_api_v1_holy_evals_safety_incidents_get",
+    "id": "safety_incidents_api_v1_insur_evals_safety_incidents_get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/safety/incidents",
+    "path": "/api/v1/insur/evals/safety/incidents",
     "summary": "Safety Incidents",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "safety"
     ],
@@ -7309,19 +7309,19 @@
     "federation": {
       "policy": "\u00a768.10 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_safety",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/safety_eval_runs.jsonl",
-      "note": "\u00a768.10 Safety eval federated via core.holy_audit (surface=evals_safety). Classifies verdicts safe/review/unsafe/unknown by \u00a748+\u00a764.21 thresholds. Drill: tests/drills/drill_evals_safety.py."
+      "note": "\u00a768.10 Safety eval federated via core.insur_audit (surface=evals_safety). Classifies verdicts safe/review/unsafe/unknown by \u00a748+\u00a764.21 thresholds. Drill: tests/drills/drill_evals_safety.py."
     }
   },
   {
-    "id": "safety_per_model_api_v1_holy_evals_safety__model_id__get",
+    "id": "safety_per_model_api_v1_insur_evals_safety__model_id__get",
     "method": "GET",
-    "path": "/api/v1/holy/evals/safety/{model_id}",
+    "path": "/api/v1/insur/evals/safety/{model_id}",
     "summary": "Safety Per Model History",
     "tags": [
-      "holy",
+      "insur",
       "evals",
       "safety"
     ],
@@ -7353,19 +7353,19 @@
     "federation": {
       "policy": "\u00a768.10 + \u00a764.43 #7 + \u00a738.3",
       "surface": "evals_safety",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "source_of_truth": "data/agent-supervisor/safety_eval_runs.jsonl",
-      "note": "\u00a768.10 Safety eval federated via core.holy_audit (surface=evals_safety). Classifies verdicts safe/review/unsafe/unknown by \u00a748+\u00a764.21 thresholds. Drill: tests/drills/drill_evals_safety.py."
+      "note": "\u00a768.10 Safety eval federated via core.insur_audit (surface=evals_safety). Classifies verdicts safe/review/unsafe/unknown by \u00a748+\u00a764.21 thresholds. Drill: tests/drills/drill_evals_safety.py."
     }
   },
   {
-    "id": "hub_overview_api_v1_holy_observability_hub__overview_get",
+    "id": "hub_overview_api_v1_insur_observability_hub__overview_get",
     "method": "GET",
-    "path": "/api/v1/holy/observability-hub/_overview",
+    "path": "/api/v1/insur/observability-hub/_overview",
     "summary": "\u00a768 Observability Hub Aggregator",
     "tags": [
-      "holy",
+      "insur",
       "observability-hub"
     ],
     "input": {
@@ -7396,8 +7396,8 @@
     "federation": {
       "policy": "\u00a768 + \u00a764.43 #7 + \u00a738.3",
       "surface": "observability_hub",
-      "helper": "core.holy_audit.log_holy_access",
-      "audit_file": "data/agent-supervisor/holy_reads.jsonl",
+      "helper": "core.insur_audit.log_insur_access",
+      "audit_file": "data/agent-supervisor/insur_reads.jsonl",
       "aggregates": [
         "dbviewer",
         "pii",

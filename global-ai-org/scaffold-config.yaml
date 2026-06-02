@@ -1,18 +1,18 @@
-# scaffold-config.yaml — HOLY Beverage Company project values.
+# scaffold-config.yaml — INSUR Beverage Company project values.
 # Per global CLAUDE.md §63. Re-running scaffold-global-ai-org.py substitutes
 # these values into every README via {{KEY}} placeholders.
 
-# Target root: /mnt/deepa/Holy_insurarage/global-ai-org
+# Target root: /mnt/deepa/Insur_insurarage/global-ai-org
 
 project:
-  name: holy
-  display_name: "HOLY Beverage Company"
+  name: insur
+  display_name: "INSUR Beverage Company"
   description: "Beverage company enterprise AI platform — 12 departments, full operating system."
   organization: "PraveenAsthana123"
   contact_email: "temp.genai18@gmail.com"
 
 departments:
-  # HOLY 12-department roster (from operator brief 2026-05-21)
+  # INSUR 12-department roster (from operator brief 2026-05-21)
   enabled:
     - digital-marketing
     - customer-experience
@@ -26,14 +26,14 @@ departments:
     - procurement
     - executive-leadership
     # governance-compliance handled at top-level governance-trust-compliance-layer/
-    # plus per-dept HOLY_SPEC.md content under each dept's business-layer/
-  # custom: add HOLY-specific departments here (e.g., influencer-marketing)
+    # plus per-dept INSUR_SPEC.md content under each dept's business-layer/
+  # custom: add INSUR-specific departments here (e.g., influencer-marketing)
   # custom:
   #   - name: influencer-marketing
   #     description: Influencer-specific marketing sub-dept.
 
 substitutions:
-  PROJECT_NAME: holy
-  PROJECT_DISPLAY_NAME: "HOLY Beverage Company"
+  PROJECT_NAME: insur
+  PROJECT_DISPLAY_NAME: "INSUR Beverage Company"
   PROJECT_ORG: "PraveenAsthana123"
   PROJECT_DESCRIPTION: "Beverage company enterprise AI platform"

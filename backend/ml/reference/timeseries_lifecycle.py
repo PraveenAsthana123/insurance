@@ -1,4 +1,4 @@
-"""HOLY reference: time-series lifecycle with multi-technique score comparison.
+"""INSUR reference: time-series lifecycle with multi-technique score comparison.
 
 Per operator 2026-05-22: "time series data ...each technique must apply and show in score"
 

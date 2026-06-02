@@ -16,7 +16,7 @@ This document is the study and selection guide for agent architecture in this re
 | DAG Agent Workflow | Structured execution | LangGraph-style flows | Good for repeatable workflows with explicit dependencies | Not implemented as DAG; current scheduler is interval-based |
 | Debate Architecture | Agents challenge each other | Risk validation | Useful for security, compliance, financial, and AI governance reviews | Partially implemented through author/reviewer/chair council flow |
 | Reflection Architecture | Self-evaluation loops | Autonomous improvement | Useful for output quality checks and retry loops | Not implemented as persistent loop |
-| Society of Mind | Specialized micro-agents | Cognitive AI | Useful for specialized business departments and role agents | Conceptual fit with HOLY departments; not fully wired as role-specialized runtime |
+| Society of Mind | Specialized micro-agents | Cognitive AI | Useful for specialized business departments and role agents | Conceptual fit with INSUR departments; not fully wired as role-specialized runtime |
 | Mixture-of-Agents | Ensemble intelligence | Reliability and accuracy | Useful for model/provider redundancy and answer scoring | Not implemented; council approximates one ensemble pattern |
 | Supervisor-Worker | Central planner/executor | Task automation | Same practical family as hub-and-spoke; best current operating model | Working through OpenClaw/FastAPI -> Redis -> worker containers |
 | Recursive Delegation | Agents spawn agents | Deep research | High risk; only allow behind budgets, depth limits, and approvals | Not implemented |
@@ -100,7 +100,7 @@ Authors:
 Year:
 Architecture pattern:
 Main idea:
-What applies to HOLY:
+What applies to INSUR:
 What does not apply:
 Implementation risk:
 Repo decision:

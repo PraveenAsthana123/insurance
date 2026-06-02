@@ -299,7 +299,7 @@ class AgentPlatformIntegrationService:
         unavailable = [tool for tool in tools if tool.key in required and not tool.available]
         status = "ready-local" if not unavailable else "degraded"
         return AgentPlatformStatusResponse(
-            name="holy-agent-platform-local-setup",
+            name="insur-agent-platform-local-setup",
             status=status,
             tools=tools,
             command_surface={
@@ -328,7 +328,7 @@ class AgentPlatformIntegrationService:
 
     def manifest(self) -> AgentPlatformManifestResponse:
         return AgentPlatformManifestResponse(
-            platform="HOLY Beverage Agent Platform",
+            platform="INSUR Beverage Agent Platform",
             architecture="Hub-and-spoke local harness with OpenClaw bridge, Paperclip memory/context, PoliysAI governance, and dry-run CUA/browser adapters.",
             ingress=["REST API", "Codex/Claude CLI via scripts/agent_fleet.sh", "scheduler", "Redis queues"],
             orchestration=["Harness Agent fleet", "OpenClaw-compatible bridge", "Council agents", "agent supervisor", "agent scheduler"],
@@ -555,7 +555,7 @@ class AgentPlatformIntegrationService:
 
         The endpoint is policy-gated and tenant-attributed, but it does not
         become default runtime behavior: `services.typed_council` still enforces
-        HOLY_TYPED_COUNCIL_ENABLED and lazy SDK import.
+        INSUR_TYPED_COUNCIL_ENABLED and lazy SDK import.
         """
         tenant_id = str(request.metadata.get("tenant_id", "default"))
         request_id = str(request.metadata.get("request_id", ""))
@@ -576,7 +576,7 @@ class AgentPlatformIntegrationService:
                 policy=policy,
                 request_id=request_id,
                 tenant_id=tenant_id,
-                model=request.model or os.environ.get("HOLY_LLM_MODEL", "ollama/kivi:local"),
+                model=request.model or os.environ.get("INSUR_LLM_MODEL", "ollama/kivi:local"),
                 error_msg=policy.reason,
             )
 

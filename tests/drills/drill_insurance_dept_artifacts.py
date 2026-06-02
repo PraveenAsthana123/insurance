@@ -11,7 +11,7 @@ Steps (10 total; 4 negative):
     7. (+) BUSINESS_MODELS covers B2C + B2B + B2E sections per dept
     8. (-) NEGATIVE — no insurance dept artifacts under _legacy/ (preserved generic depts unchanged)
     9. (-) NEGATIVE — no INSUR_*.md file is empty (< 200 bytes)
-   10. (-) NEGATIVE — FRD does NOT contain HOLY_ prefix references in active depts
+   10. (-) NEGATIVE — FRD does NOT contain INSUR_ prefix references in active depts
    11. (-) NEGATIVE — data manifest exists and has no 100% failure rate
 
 # RESOURCES: disk_io
@@ -145,16 +145,16 @@ def main() -> int:
         fail(f"empty/tiny INSUR_*.md files: {small_files}")
     ok("all INSUR_*.md ≥ 200 bytes")
 
-    step(10, "NEGATIVE — active depts contain no HOLY_ prefix file references")
-    holy_refs = []
+    step(10, "NEGATIVE — active depts contain no INSUR_ prefix file references")
+    insur_refs = []
     for d in INSURANCE_DEPTS:
         for p in (DEPT_ROOT / d).rglob("*.md"):
             txt = p.read_text()
-            if re.search(r"HOLY_[A-Z]+\.md", txt):
-                holy_refs.append(str(p))
-    if holy_refs:
-        fail(f"insurance dept files still contain HOLY_ references: {holy_refs[:3]}")
-    ok("no HOLY_*.md references in active insurance depts")
+            if re.search(r"INSUR_[A-Z]+\.md", txt):
+                insur_refs.append(str(p))
+    if insur_refs:
+        fail(f"insurance dept files still contain INSUR_ references: {insur_refs[:3]}")
+    ok("no INSUR_*.md references in active insurance depts")
 
     step(11, "each dept has 15 role dashboards + 15 role reports (§64.37)")
     for d in INSURANCE_DEPTS:

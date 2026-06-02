@@ -10,7 +10,7 @@ project_knowledge: "{project-root}/docs"
 
 # Core Configuration Values
 user_name: Praveen
-project_name: Holy_insurarage
+project_name: Insur_insurarage
 communication_language: English
 document_output_language: English
 output_folder: _bmad-output

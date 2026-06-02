@@ -7,13 +7,13 @@
  * - Tier-to-agent-role legend
  *
  * Endpoints:
- *   GET  /api/v1/holy/testing/tiers
- *   POST /api/v1/holy/testing/dispatch  {dept, tier, timeout_seconds?}
- *   GET  /api/v1/holy/testing/results?tier=&dept=&limit=
+ *   GET  /api/v1/insur/testing/tiers
+ *   POST /api/v1/insur/testing/dispatch  {dept, tier, timeout_seconds?}
+ *   GET  /api/v1/insur/testing/results?tier=&dept=&limit=
  */
 import { useEffect, useRef, useState } from 'react';
 
-const API = '/api/v1/holy/testing';
+const API = '/api/v1/insur/testing';
 
 const TIER_BG = {
   unit: '#dbeafe',

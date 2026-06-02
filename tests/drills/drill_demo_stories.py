@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drill: HOLY demo-stories per dept × per role (§38 + §47.6 + §57.6 + §63 + §66).
+"""Drill: INSUR demo-stories per dept × per role (§38 + §47.6 + §57.6 + §63 + §66).
 
 Steps (10 total; 3 negative):
     1. (+) demo-stories router imports + ROLES has exactly 15 entries (§63)
@@ -11,7 +11,7 @@ Steps (10 total; 3 negative):
     7. (-) NEGATIVE — malformed role (caps/special) → 400
     8. (+) demo_id values unique within a dept catalog (no dup primary keys)
     9. (+) every role in ROLE_DEMO ∈ canonical ROLES list (no drift)
-   10. (+) HOLY_DEMO_STORIES_BY_ROLE.md per dept + _global rollup
+   10. (+) INSUR_DEMO_STORIES_BY_ROLE.md per dept + _global rollup
            returns all 19 depts with n_demos_total = 285 (15 × 19)
 
 # RESOURCES: demo_stories_router disk_io
@@ -57,7 +57,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY demo-stories per dept × per role (§38 + §47.6 + §63 + §66)\n")
+    print("\nDRILL: INSUR demo-stories per dept × per role (§38 + §47.6 + §63 + §66)\n")
     t0 = time.time()
 
     # ----- Step 1: router imports + ROLES count -----
@@ -85,7 +85,7 @@ def main():
     client = TestClient(app)
 
     # ----- Step 3: per-dept GET 200 + 15 demos + persona contains dept -----
-    r = client.get("/api/v1/holy/demo-stories/sales")
+    r = client.get("/api/v1/insur/demo-stories/sales")
     body = r.json() if r.status_code == 200 else {}
     demos = body.get("demos", [])
     persona_ok = all("Sales" in d.get("persona", "") for d in demos)
@@ -95,7 +95,7 @@ def main():
          f"status={r.status_code} n={len(demos)} persona_ok={persona_ok}")
 
     # ----- Step 4: per-role detail + 9-section envelope -----
-    r = client.get("/api/v1/holy/demo-stories/sales/manager")
+    r = client.get("/api/v1/insur/demo-stories/sales/manager")
     body = r.json() if r.status_code == 200 else {}
     demo = body.get("demo", {})
     missing_keys = REQUIRED_DEMO_KEYS - set(demo.keys())
@@ -105,23 +105,23 @@ def main():
          f"all {len(REQUIRED_DEMO_KEYS)} keys present")
 
     # ----- Step 5: NEGATIVE — unknown dept -----
-    r = client.get("/api/v1/holy/demo-stories/not-a-real-dept")
+    r = client.get("/api/v1/insur/demo-stories/not-a-real-dept")
     step(5, "NEGATIVE: unknown dept → 404 (no info leak)",
          r.status_code == 404, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 6: NEGATIVE — unknown role -----
-    r = client.get("/api/v1/holy/demo-stories/sales/totally-bogus-role")
+    r = client.get("/api/v1/insur/demo-stories/sales/totally-bogus-role")
     step(6, "NEGATIVE: unknown role → 404 + lists available",
          r.status_code == 404 and "manager" in r.text,
          f"got {r.status_code}: {r.text[:120]}")
 
     # ----- Step 7: NEGATIVE — malformed role -----
-    r = client.get("/api/v1/holy/demo-stories/sales/Bogus_Caps!")
+    r = client.get("/api/v1/insur/demo-stories/sales/Bogus_Caps!")
     step(7, "NEGATIVE: malformed role (caps/special) → 400",
          r.status_code == 400, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 8: demo_id uniqueness within a dept -----
-    catalog = client.get("/api/v1/holy/demo-stories/sales").json()
+    catalog = client.get("/api/v1/insur/demo-stories/sales").json()
     ids = [d["demo_id"] for d in catalog.get("demos", [])]
     dups = [rid for rid in set(ids) if ids.count(rid) > 1]
     step(8, "demo_id values unique within a dept catalog (no dup keys)",
@@ -141,9 +141,9 @@ def main():
         return
     missing_md = [
         dept for dept in EXPECTED_DEPTS
-        if not (gao / "departments" / dept / "business-layer" / "HOLY_DEMO_STORIES_BY_ROLE.md").exists()
+        if not (gao / "departments" / dept / "business-layer" / "INSUR_DEMO_STORIES_BY_ROLE.md").exists()
     ]
-    r = client.get("/api/v1/holy/demo-stories/_global")
+    r = client.get("/api/v1/insur/demo-stories/_global")
     rollup = r.json() if r.status_code == 200 else {}
     expected_total = len(EXPECTED_DEPTS) * len(ds.ROLES)
     ok = (
@@ -153,7 +153,7 @@ def main():
         and set(rollup.get("depts", [])) == EXPECTED_DEPTS
     )
     step(10,
-         f"HOLY_DEMO_STORIES_BY_ROLE.md present + _global ({len(EXPECTED_DEPTS)} depts × {len(ds.ROLES)} = {expected_total} demos)",
+         f"INSUR_DEMO_STORIES_BY_ROLE.md present + _global ({len(EXPECTED_DEPTS)} depts × {len(ds.ROLES)} = {expected_total} demos)",
          ok,
          f"missing_md={missing_md[:2]} n_total={rollup.get('n_demos_total')} depts={len(rollup.get('depts', []))}")
 

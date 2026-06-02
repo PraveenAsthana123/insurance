@@ -1,4 +1,4 @@
-"""HOLY reference: attack-simulation payload generators (§64.32.3 + §64.42).
+"""INSUR reference: attack-simulation payload generators (§64.32.3 + §64.42).
 
 Per global CLAUDE.md §64.32.3 — every dept's security tab MUST have an
 "attack simulation" panel that generates realistic adversarial test data
@@ -154,14 +154,14 @@ def gen_xss(seed: int = 42, n: int = 10) -> list[AttackPayload]:
 def gen_csrf(seed: int = 42, n: int = 8) -> list[AttackPayload]:
     rng = random.Random(seed)
     actions = [
-        ("POST /api/v1/holy/admin/users", "create-user-no-token", "CWE-352"),
-        ("DELETE /api/v1/holy/admin/users/42", "delete-user-no-token", "CWE-352"),
-        ("POST /api/v1/holy/agentic/execute", "agentic-action-no-token", "CWE-352"),
-        ("PUT /api/v1/holy/admin/roles", "role-mod-no-token", "CWE-352"),
-        ("POST /api/v1/holy/reports/finance/manager/payout/run", "payout-no-token", "CWE-352"),
+        ("POST /api/v1/insur/admin/users", "create-user-no-token", "CWE-352"),
+        ("DELETE /api/v1/insur/admin/users/42", "delete-user-no-token", "CWE-352"),
+        ("POST /api/v1/insur/agentic/execute", "agentic-action-no-token", "CWE-352"),
+        ("PUT /api/v1/insur/admin/roles", "role-mod-no-token", "CWE-352"),
+        ("POST /api/v1/insur/reports/finance/manager/payout/run", "payout-no-token", "CWE-352"),
         ("DELETE /api/v1/paperclip/clips/secret-clip", "delete-clip-no-token", "CWE-352"),
         ("POST /api/v1/openclaw/tasks", "task-no-token", "CWE-352"),
-        ("PUT /api/v1/holy/testing/dispatch", "test-dispatch-no-token", "CWE-352"),
+        ("PUT /api/v1/insur/testing/dispatch", "test-dispatch-no-token", "CWE-352"),
     ]
     out = []
     for i in range(n):
@@ -186,7 +186,7 @@ def gen_auth_bypass(seed: int = 42, n: int = 10) -> list[AttackPayload]:
         ("Authorization: Basic YWRtaW46YWRtaW4=", "default-creds", "CWE-798"),
         ("X-Forwarded-For: 127.0.0.1", "trust-proxy-spoof", "CWE-290"),
         ("X-User-Role: admin", "header-injection-role", "CWE-290"),
-        ("/api/v1/holy/admin/../public/health", "path-traversal-route", "CWE-22"),
+        ("/api/v1/insur/admin/../public/health", "path-traversal-route", "CWE-22"),
         ("%2e%2e%2f%2e%2e%2fetc%2fpasswd", "url-encoded-traversal", "CWE-22"),
     ]
     out = []

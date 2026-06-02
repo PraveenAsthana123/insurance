@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY process simulation engine (§43, §64.34).
+Drill: INSUR process simulation engine (§43, §64.34).
 
 Steps (8 total; 3 negative assertions):
     1. (+) Simulator runs sales/lead_scoring × 10 leads in both modes
@@ -41,7 +41,7 @@ def main():
         StepDef,
     )
 
-    print("\nDRILL: HOLY process simulation engine\n")
+    print("\nDRILL: INSUR process simulation engine\n")
     t0 = time.time()
 
     # ----- Step 1: run sales/lead_scoring × 10 -----

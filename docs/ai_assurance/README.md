@@ -113,7 +113,7 @@ this migration. The follow-up will look like:
 ```sql
 -- migration 016 (planned)
 CREATE TABLE dept_framework_applies (
-  dept_code         VARCHAR(40) NOT NULL,    -- references HOLY_NAV dept slug
+  dept_code         VARCHAR(40) NOT NULL,    -- references INSUR_NAV dept slug
   phase_id          SMALLINT NOT NULL REFERENCES analysis_phase(id),
   applicability     VARCHAR(20) NOT NULL,    -- 'required' | 'recommended' | 'optional' | 'n/a'
   rationale         TEXT,
@@ -125,7 +125,7 @@ CREATE TABLE dept_framework_applies (
 
 This is intentionally postponed because:
 
-- The dept inventory may shift (HOLY/insur is at 19 depts; insur_project
+- The dept inventory may shift (INSUR/insur is at 19 depts; insur_project
   fork is at 19 today but may grow).
 - The owner per cell is a governance decision, not a code decision —
   filing it without the operator is invention, not engineering.

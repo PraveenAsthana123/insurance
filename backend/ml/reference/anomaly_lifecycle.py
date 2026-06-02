@@ -1,4 +1,4 @@
-"""HOLY reference: anomaly-detection lifecycle with multi-detector comparison.
+"""INSUR reference: anomaly-detection lifecycle with multi-detector comparison.
 
 Per operator 2026-05-22 + §64.23 + §64.32: every dept needs anomaly detection.
 

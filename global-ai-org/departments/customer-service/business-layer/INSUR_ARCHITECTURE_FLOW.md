@@ -100,7 +100,7 @@ sequenceDiagram
     participant LLM as LLM
     participant AU as Audit
 
-    U->>GW: POST /api/v1/holy/customer-service/execute
+    U->>GW: POST /api/v1/insur/customer-service/execute
     GW->>TM: Validate X-Tenant-ID
     TM->>CO: Forward + request_id
     CO->>PL: Interpret + clarify

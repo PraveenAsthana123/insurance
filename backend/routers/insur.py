@@ -1,4 +1,4 @@
-"""HOLY endpoints — nav (live HOLY_NAV.json) + council (Redis queue/poll)."""
+"""INSUR endpoints — nav (live INSUR_NAV.json) + council (Redis queue/poll)."""
 from __future__ import annotations
 
 import json
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 
-router = APIRouter(prefix="/api/v1/holy", tags=["holy"])
+router = APIRouter(prefix="/api/v1/insur", tags=["insur"])
 
 # Locate global-ai-org/ — assume backend runs from /app inside the insur/ project,
 # global-ai-org is a sibling at /app/../global-ai-org/ in the container.
@@ -39,31 +39,31 @@ except Exception:
 
 @router.get("/nav/{dept}")
 def get_nav(dept: str) -> dict:
-    """Serve a dept's HOLY_NAV.json live from disk."""
-    p = GLOBAL_AI_ORG / "departments" / dept / "HOLY_NAV.json"
+    """Serve a dept's INSUR_NAV.json live from disk."""
+    p = GLOBAL_AI_ORG / "departments" / dept / "INSUR_NAV.json"
     if not p.exists():
-        raise HTTPException(404, f"HOLY_NAV.json not found for dept '{dept}' (looked at {p})")
+        raise HTTPException(404, f"INSUR_NAV.json not found for dept '{dept}' (looked at {p})")
     return json.loads(p.read_text())
 
 
 @router.get("/depts")
 def list_depts() -> dict:
-    """List HOLY-enabled departments that have a HOLY_NAV.json file."""
+    """List INSUR-enabled departments that have a INSUR_NAV.json file."""
     depts = []
     dept_root = GLOBAL_AI_ORG / "departments"
     if dept_root.exists():
         for d in sorted(dept_root.iterdir()):
-            if (d / "HOLY_NAV.json").exists():
+            if (d / "INSUR_NAV.json").exists():
                 depts.append(d.name)
     return {"departments": depts, "count": len(depts), "global_ai_org": str(GLOBAL_AI_ORG)}
 
 
 @router.get("/spec/{dept}")
 def get_spec(dept: str) -> dict:
-    """Serve a dept's HOLY_SPEC.md content (raw text)."""
-    p = GLOBAL_AI_ORG / "departments" / dept / "business-layer" / "HOLY_SPEC.md"
+    """Serve a dept's INSUR_SPEC.md content (raw text)."""
+    p = GLOBAL_AI_ORG / "departments" / dept / "business-layer" / "INSUR_SPEC.md"
     if not p.exists():
-        raise HTTPException(404, f"HOLY_SPEC.md not found for dept '{dept}'")
+        raise HTTPException(404, f"INSUR_SPEC.md not found for dept '{dept}'")
     return {"dept": dept, "markdown": p.read_text()}
 
 
@@ -86,7 +86,7 @@ def council_ask(payload: dict) -> dict:
         "department": dept,
         "prompt": prompt,
         "seeded_at": time.time(),
-        "source": "holy-nav-ui",
+        "source": "insur-nav-ui",
     }
     _r.lpush("council_tasks", json.dumps(task))
     return {"task_id": task_id, "queue_len": _r.llen("council_tasks")}
@@ -343,8 +343,8 @@ def get_fleet_stats() -> dict:
                 "completed_total": _r.llen("test_results"),
             },
             "report_audit": {
-                "queue": "holy_report_audit",
-                "size": _r.llen("holy_report_audit"),
+                "queue": "insur_report_audit",
+                "size": _r.llen("insur_report_audit"),
             },
             "snapshot_time": time.time(),
         }
@@ -737,7 +737,7 @@ def get_role_dashboard(dept: str, role: str) -> dict:
     """Return synthesized tile + chart payload for (dept, role).
     Tiles/charts use deterministic synthetic data per global §64.37."""
     if role not in ROLE_LIST:
-        raise HTTPException(404, f"unknown role '{role}'; see /api/v1/holy/roles")
+        raise HTTPException(404, f"unknown role '{role}'; see /api/v1/insur/roles")
     try:
         from ml.reference.role_dashboard_catalog import build_dashboard_payload
     except Exception as exc:
@@ -781,8 +781,8 @@ def run_role_report(dept: str, role: str, report_id: str, payload: dict | None =
     }
     if _r is not None:
         try:
-            _r.lpush("holy_report_audit", json.dumps(audit))
-            _r.ltrim("holy_report_audit", 0, 999)  # keep last 1000
+            _r.lpush("insur_report_audit", json.dumps(audit))
+            _r.ltrim("insur_report_audit", 0, 999)  # keep last 1000
         except Exception:
             pass
     return {

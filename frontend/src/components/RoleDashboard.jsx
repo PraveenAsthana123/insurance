@@ -5,10 +5,10 @@
  * Chart dispatch: recharts (default), plotly placeholder (renders JSON spec).
  *
  * Endpoints:
- *   GET  /api/v1/holy/roles
- *   GET  /api/v1/holy/dashboards/{dept}/{role}
- *   GET  /api/v1/holy/reports/{dept}/{role}
- *   POST /api/v1/holy/reports/{dept}/{role}/{report_id}/run
+ *   GET  /api/v1/insur/roles
+ *   GET  /api/v1/insur/dashboards/{dept}/{role}
+ *   GET  /api/v1/insur/reports/{dept}/{role}
+ *   POST /api/v1/insur/reports/{dept}/{role}/{report_id}/run
  */
 import { useEffect, useMemo, useState } from 'react';
 import {
@@ -16,7 +16,7 @@ import {
   ResponsiveContainer, Tooltip, XAxis, YAxis, Area, AreaChart,
 } from 'recharts';
 
-const API = '/api/v1/holy';
+const API = '/api/v1/insur';
 
 const STATUS_COLOR = { green: '#10b981', amber: '#f59e0b', red: '#ef4444' };
 const CHART_PALETTE = ['#1f77b4', '#2ca02c', '#ff7f0e', '#d62728', '#9467bd', '#8c564b'];

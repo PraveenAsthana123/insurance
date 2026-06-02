@@ -1,6 +1,6 @@
 """LiteLLM provider-agnostic LLM gateway (§56 Stage-1 adapter).
 
-Today, HOLY's agent flows reach Ollama via the OpenClaw → Redis → worker pool
+Today, INSUR's agent flows reach Ollama via the OpenClaw → Redis → worker pool
 path (`docker-compose ... agents`). That path is async-fanout and works well
 for batched council/simple work.
 
@@ -13,15 +13,15 @@ needs a single LLM call without the queue overhead:
 Per global CLAUDE.md §56.2 Stage-1 adapter contract:
   - Lazy import (litellm SDK absence is fine — adapter degrades to honest
     "unavailable" instead of crashing)
-  - Feature-flag opt-in via env: HOLY_LLM_GATEWAY_ENABLED=true
-  - Default model from env HOLY_LLM_MODEL (e.g. "ollama/kivi:local") so
+  - Feature-flag opt-in via env: INSUR_LLM_GATEWAY_ENABLED=true
+  - Default model from env INSUR_LLM_MODEL (e.g. "ollama/kivi:local") so
     no provider creds are required to drive the local Ollama path
   - NEVER default-on; the original OpenClaw/Redis path keeps working
     without this module being imported
 
 Per global §57.7:
   - All LiteLLM exceptions wrapped → structured error response
-  - Hard timeout cap via HOLY_LLM_TIMEOUT_SECONDS (default 30s)
+  - Hard timeout cap via INSUR_LLM_TIMEOUT_SECONDS (default 30s)
   - API key values NEVER appear in responses (only model + provider names)
 
 Per global §38.3:
@@ -42,10 +42,10 @@ from pathlib import Path
 from typing import Any
 
 _LLM_AUDIT_PATH = Path(
-    os.environ.get("HOLY_LLM_GATEWAY_AUDIT_PATH", "data/agent-supervisor/llm_gateway_runs.jsonl")
+    os.environ.get("INSUR_LLM_GATEWAY_AUDIT_PATH", "data/agent-supervisor/llm_gateway_runs.jsonl")
 )
-_DEFAULT_MODEL = os.environ.get("HOLY_LLM_MODEL", "ollama/kivi:local")
-_DEFAULT_TIMEOUT_SECONDS = float(os.environ.get("HOLY_LLM_TIMEOUT_SECONDS", "30"))
+_DEFAULT_MODEL = os.environ.get("INSUR_LLM_MODEL", "ollama/kivi:local")
+_DEFAULT_TIMEOUT_SECONDS = float(os.environ.get("INSUR_LLM_TIMEOUT_SECONDS", "30"))
 
 
 @dataclass
@@ -66,7 +66,7 @@ class LlmCompletion:
 
 def is_enabled() -> bool:
     """Return True only when explicitly opted-in. Default off; never default-on."""
-    return os.environ.get("HOLY_LLM_GATEWAY_ENABLED", "").lower() == "true"
+    return os.environ.get("INSUR_LLM_GATEWAY_ENABLED", "").lower() == "true"
 
 
 def is_importable() -> bool:
@@ -120,7 +120,7 @@ def complete(
     """Sync single LLM call via LiteLLM. Returns LlmCompletion regardless of outcome.
 
     Contract:
-      - Returns outcome="disabled" when HOLY_LLM_GATEWAY_ENABLED != "true"
+      - Returns outcome="disabled" when INSUR_LLM_GATEWAY_ENABLED != "true"
       - Returns outcome="unavailable" when litellm is not importable
       - Returns outcome="error" when litellm raises (wrapped in error_type/msg)
       - Returns outcome="executed" with `text` populated on success
@@ -149,7 +149,7 @@ def complete(
         return LlmCompletion(
             text="", model=model, outcome="disabled", latency_ms=0,
             provider=provider, request_id=row["request_id"],
-            error_msg="HOLY_LLM_GATEWAY_ENABLED is not 'true'",
+            error_msg="INSUR_LLM_GATEWAY_ENABLED is not 'true'",
         )
 
     if not is_importable():
@@ -222,8 +222,8 @@ def status() -> dict[str, Any]:
         "timeout_seconds": _DEFAULT_TIMEOUT_SECONDS,
         "audit_path": str(_LLM_AUDIT_PATH),
         "detail": (
-            "Stage-1 adapter; opt-in via HOLY_LLM_GATEWAY_ENABLED=true. "
-            "Default model targets local Ollama; override via HOLY_LLM_MODEL "
+            "Stage-1 adapter; opt-in via INSUR_LLM_GATEWAY_ENABLED=true. "
+            "Default model targets local Ollama; override via INSUR_LLM_MODEL "
             "(e.g. 'openai/gpt-4o-mini', 'anthropic/claude-3-5-sonnet-latest'). "
             "Every call writes an audit row regardless of outcome."
         ),

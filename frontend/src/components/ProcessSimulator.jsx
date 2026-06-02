@@ -5,15 +5,15 @@
  * defined reference simulation in backend/ml/reference/simulation_engine.py.
  *
  * Endpoints:
- *   GET  /api/v1/holy/sim/reference-processes
- *   POST /api/v1/holy/sim/{dept}/{process}/run    { n_inputs, seed }
- *   GET  /api/v1/holy/sim/{dept}/{process}/runs
- *   GET  /api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/manifest
- *   GET  /api/v1/holy/sim/{dept}/{process}/runs/{sim_id}/events?layer=...
+ *   GET  /api/v1/insur/sim/reference-processes
+ *   POST /api/v1/insur/sim/{dept}/{process}/run    { n_inputs, seed }
+ *   GET  /api/v1/insur/sim/{dept}/{process}/runs
+ *   GET  /api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/manifest
+ *   GET  /api/v1/insur/sim/{dept}/{process}/runs/{sim_id}/events?layer=...
  */
 import { useEffect, useState } from 'react';
 
-const API_BASE = '/api/v1/holy/sim';
+const API_BASE = '/api/v1/insur/sim';
 const LAYERS = ['all', 'backend', 'process', 'data', 'accuracy', 'reporting'];
 
 export default function ProcessSimulator({ dept }) {

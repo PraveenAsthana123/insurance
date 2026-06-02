@@ -1,4 +1,4 @@
-"""HOLY reference: fraud-detection lifecycle (§64.23 + §40).
+"""INSUR reference: fraud-detection lifecycle (§64.23 + §40).
 
 4-layer detection per §64.23 (mandatory for finance / sales / e-commerce /
 security-operations / retail-operations / procurement):

@@ -13,7 +13,7 @@ This document is the local setup contract for Harness Agent, OpenClaw, Paperclip
 | CUA | Dry-run contract | `/api/v1/agent-platform/cua/execute` validates and audits CUA/browser intent | Real computer-use execution disabled until allowlist, approval, session audit, and executor exist. |
 | Stagehand | Dry-run contract | Tool status and CUA adapter selection | Requires Stagehand package and `BROWSERBASE_API_KEY`; real sessions disabled. |
 | Playwright agentic adapter | Working local (real navigation) | Real headless-Chromium navigation behind `PLAYWRIGHT_ALLOWLIST` (default: `http://localhost,http://127.0.0.1`). Audit row per session at `data/agent-supervisor/cua_runs.jsonl`. Drill at `tests/drills/drill_agent_platform_cua.py`. | `pip install playwright && python -m playwright install chromium`. Off-allowlist targets blocked at gateway. |
-| Pydantic AI typed council | Stage-2 opt-in pilot | `POST /api/v1/agent-platform/typed-council/run` returns typed author/reviewer/chair results when enabled. Defaults to disabled/unavailable without provider calls. | Requires `pydantic_ai` and `HOLY_TYPED_COUNCIL_ENABLED=true`; provider credentials depend on selected `HOLY_LLM_MODEL`. |
+| Pydantic AI typed council | Stage-2 opt-in pilot | `POST /api/v1/agent-platform/typed-council/run` returns typed author/reviewer/chair results when enabled. Defaults to disabled/unavailable without provider calls. | Requires `pydantic_ai` and `INSUR_TYPED_COUNCIL_ENABLED=true`; provider credentials depend on selected `INSUR_LLM_MODEL`. |
 | Approval Broker | Working local policy facade | `POST /api/v1/agent-platform/approval-broker/decide` classifies approve/submit/next requests, auto-approves low-risk local work, and can submit safe next tasks to OpenClaw. | Local rules only; does not bypass human approval for production, credentials, deploys, destructive commands, real browser/CUA, or GitHub admin actions. |
 
 ## Ollama And Kivi Model
@@ -92,7 +92,7 @@ The broker returns `require_human_approval` or `deny` for production, secrets, d
 ## Example Governance Check
 
 ```bash
-curl -X POST http://localhost:8000/api/v1/agent-platform/governance/evaluate   -H 'Content-Type: application/json'   -H 'X-Demo-Role: tester'   -d '{"agent_id":"security-agent","tool":"poliysai","action":"read dashboard","target":"/holy/sales","user_role":"tester"}'
+curl -X POST http://localhost:8000/api/v1/agent-platform/governance/evaluate   -H 'Content-Type: application/json'   -H 'X-Demo-Role: tester'   -d '{"agent_id":"security-agent","tool":"poliysai","action":"read dashboard","target":"/insur/sales","user_role":"tester"}'
 ```
 
 Dangerous targets such as secrets, tokens, private keys, production deletion, and force-push patterns are denied.
@@ -112,8 +112,8 @@ curl -X POST http://localhost:8000/api/v1/agent-platform/typed-council/run \
 Enable only for an explicit pilot:
 
 ```bash
-export HOLY_TYPED_COUNCIL_ENABLED=true
-export HOLY_LLM_MODEL=openai/gpt-4o-mini
+export INSUR_TYPED_COUNCIL_ENABLED=true
+export INSUR_LLM_MODEL=openai/gpt-4o-mini
 ```
 
 The endpoint remains RBAC-gated to manager/tester roles and tenant-attributed from `X-Tenant-ID`.

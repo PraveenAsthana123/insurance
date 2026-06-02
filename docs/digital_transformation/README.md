@@ -44,7 +44,7 @@ rows**, each with a named compliance source and an outcome metric.
 | Doc | Industry | Jurisdiction | Year | Status |
 |---|---|---|---|---|
 | [Canada Healthcare 2026](canada_healthcare_2026.md) | Healthcare | Canada | 2026 | ✅ Worked example |
-| [Canada CPG / Beverage 2026](canada_cpg_2026.md) | CPG / Beverage | Canada | 2026 | ✅ Project-relevant (HOLY/insur) |
+| [Canada CPG / Beverage 2026](canada_cpg_2026.md) | CPG / Beverage | Canada | 2026 | ✅ Project-relevant (INSUR/insur) |
 | _(future)_ Canada Finance 2026 | Banking / FinTech | Canada | 2026 | ⏳ Planned |
 | _(future)_ EU Pharma 2026 | Pharma / MedDevice | EU | 2026 | ⏳ Planned |
 
@@ -54,7 +54,7 @@ Different from the DT checklist — these enumerate the **industry processes** t
 
 | Doc | Industry | Scope |
 |---|---|---|
-| [Beverage Industry Processes](insurerage_industry_processes.md) | Beverage / CPG | 14 process families with full sub-process detail (HOLY/insur primary focus) |
+| [Beverage Industry Processes](insurerage_industry_processes.md) | Beverage / CPG | 14 process families with full sub-process detail (INSUR/insur primary focus) |
 | [Healthcare Industry Processes](healthcare_industry_processes.md) | Healthcare | 12 process family summary (parallel reference; expand on actual deployment) |
 
 Each new jurisdiction × industry combination = a new MD file.

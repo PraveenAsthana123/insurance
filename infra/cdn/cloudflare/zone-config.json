@@ -29,7 +29,7 @@
   },
   "page_rules": [
     {
-      "targets": [{"target": "url", "constraint": {"operator": "matches", "value": "*insur.example.com/api/v1/holy/*"}}],
+      "targets": [{"target": "url", "constraint": {"operator": "matches", "value": "*insur.example.com/api/v1/insur/*"}}],
       "actions": [
         {"id": "cache_level", "value": "bypass"}
       ],

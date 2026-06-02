@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supervise HOLY agent queues, schedules, heartbeats, and task results.
+"""Supervise INSUR agent queues, schedules, heartbeats, and task results.
 
 This script is the local operational control plane for the Redis-backed agent
 fleet. It does not execute tasks itself; it observes worker liveness, queue
@@ -35,7 +35,7 @@ SCHEDULE_PREFIX = "agent:schedule:"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Supervisor for HOLY local agent fleets.")
+    parser = argparse.ArgumentParser(description="Supervisor for INSUR local agent fleets.")
     parser.add_argument("--redis-url", default=DEFAULT_REDIS_URL, help="Redis URL")
     parser.add_argument("--sample", type=int, default=8, help="Recent result sample size")
     sub = parser.add_subparsers(dest="cmd", required=True)

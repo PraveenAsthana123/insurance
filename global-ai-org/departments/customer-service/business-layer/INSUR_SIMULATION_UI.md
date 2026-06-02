@@ -2,11 +2,11 @@
 
 Per global §64.34 + operator 2026-06-01.
 
-This dept's `/holy/customer-service/simulation` tab specification. Manual-mode + Automatic-mode
+This dept's `/insur/customer-service/simulation` tab specification. Manual-mode + Automatic-mode
 side-by-side with 5 layers visible per run.
 
 ## Tab path
-`/holy/customer-service/simulation?process=<L2-process-name>`
+`/insur/customer-service/simulation?process=<L2-process-name>`
 
 ## Available processes (L2)
 - Inbound Channels
@@ -49,10 +49,10 @@ side-by-side with 5 layers visible per run.
 
 | Endpoint | Purpose |
 |---|---|
-| `POST /api/v1/holy/sim/customer-service/{process}/run` | Trigger sim; body: `{mode, inputs, seed}` |
-| `GET /api/v1/holy/sim/customer-service/{process}/runs/{sim_id}/events` | SSE stream for live waterfall |
-| `GET /api/v1/holy/sim/customer-service/{process}/runs/{sim_id}/manifest` | Per-layer summary + comparison report |
-| `GET /api/v1/holy/sim/customer-service/{process}/runs/{sim_id}/replay` | Frame-by-frame replay of past run |
+| `POST /api/v1/insur/sim/customer-service/{process}/run` | Trigger sim; body: `{mode, inputs, seed}` |
+| `GET /api/v1/insur/sim/customer-service/{process}/runs/{sim_id}/events` | SSE stream for live waterfall |
+| `GET /api/v1/insur/sim/customer-service/{process}/runs/{sim_id}/manifest` | Per-layer summary + comparison report |
+| `GET /api/v1/insur/sim/customer-service/{process}/runs/{sim_id}/replay` | Frame-by-frame replay of past run |
 
 ## Engine requirements (§64.34.3)
 

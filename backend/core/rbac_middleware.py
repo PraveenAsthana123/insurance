@@ -63,35 +63,35 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
     ("GET",  re.compile(r"^/api/v1/agent-platform/activity$"),            _READ_ROLES),
     ("GET",  re.compile(r"^/api/v1/agent-platform/adapters$"),            _READ_ROLES),
 
-    # -------- HOLY monitoring (fleet ML pipeline health) --------
+    # -------- INSUR monitoring (fleet ML pipeline health) --------
     # Data is fleet-wide infrastructure telemetry, not tenant-scoped — but
     # every READ is attributed to caller's tenant for §38.3 / SOC2 CC4 trail.
-    ("GET",  re.compile(r"^/api/v1/holy/monitoring/_global$"),            _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/monitoring/[^/]+$"),              _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/monitoring/[^/]+/jobs/[^/]+/runs$"), _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/monitoring/[^/]+/jobs/[^/]+/runs/[^/]+$"), _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/monitoring/_global$"),            _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/monitoring/[^/]+$"),              _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/monitoring/[^/]+/jobs/[^/]+/runs$"), _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/monitoring/[^/]+/jobs/[^/]+/runs/[^/]+$"), _READ_ROLES),
 
-    # -------- HOLY federated read surfaces (§64.43 #7) --------
+    # -------- INSUR federated read surfaces (§64.43 #7) --------
     # Pattern: catch-all prefix per surface — fleet data, tenant-attributed
-    # access trail via core.holy_audit.log_holy_access. Read-only in MVP;
+    # access trail via core.insur_audit.log_insur_access. Read-only in MVP;
     # mutations land elsewhere or stay gated per §42.
-    ("GET",  re.compile(r"^/api/v1/holy/master-data(/.*)?$"),  _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/transactions(/.*)?$"), _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/pipelines(/.*)?$"),    _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/reports(/.*)?$"),      _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/demo-stories(/.*)?$"), _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/graph(/.*)?$"),        _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/downloads(/.*)?$"),    _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/dbviewer(/.*)?$"),     _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/pii(/.*)?$"),          _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/guardrails(/.*)?$"),   _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/security(/.*)?$"),     _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/evals(/.*)?$"),        _READ_ROLES),
-    ("GET",  re.compile(r"^/api/v1/holy/observability-hub(/.*)?$"), _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/master-data(/.*)?$"),  _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/transactions(/.*)?$"), _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/pipelines(/.*)?$"),    _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/reports(/.*)?$"),      _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/demo-stories(/.*)?$"), _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/graph(/.*)?$"),        _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/downloads(/.*)?$"),    _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/dbviewer(/.*)?$"),     _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/pii(/.*)?$"),          _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/guardrails(/.*)?$"),   _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/security(/.*)?$"),     _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/evals(/.*)?$"),        _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/insur/observability-hub(/.*)?$"), _READ_ROLES),
     # §68.11 multi-model compare — POST creates a persisted manifest, so
     # restricted to manager/tester (matches the typed-council/run +
     # cua/execute pattern). GET endpoints are covered by the /evals/* catch-all above.
-    ("POST", re.compile(r"^/api/v1/holy/evals/model-compare$"),  {"manager", "tester"}),
+    ("POST", re.compile(r"^/api/v1/insur/evals/model-compare$"),  {"manager", "tester"}),
 
     # -------- Admin: cross-tenant compliance/reporting reads --------
     # Intentionally NOT in _READ_ROLES — compliance + reporting-monitoring

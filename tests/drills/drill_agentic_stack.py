@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY 10-layer agentic execution stack (§43, §64.40).
+Drill: INSUR 10-layer agentic execution stack (§43, §64.40).
 
 Steps (10 total; 4 negative assertions):
     1. (+) Stack runs end-to-end on read goal (idempotent dry-run)
@@ -39,7 +39,7 @@ def step(n, label, ok, detail=""):
 def main():
     from ml.reference.agentic_stack import AgenticStackRunner
 
-    print("\nDRILL: HOLY 10-layer agentic stack (§64.40)\n")
+    print("\nDRILL: INSUR 10-layer agentic stack (§64.40)\n")
     t0 = time.time()
 
     # ----- Step 1: end-to-end on read goal -----

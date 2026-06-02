@@ -1,12 +1,12 @@
-# HOLY DB Viewer + Per-Function Tables — Reference Impl of Global §68
+# INSUR DB Viewer + Per-Function Tables — Reference Impl of Global §68
 
-> Global policy: [`~/.claude/policies/holy-observability-hub.md`](../../home/praveen/.claude/policies/holy-observability-hub.md)
+> Global policy: [`~/.claude/policies/insur-observability-hub.md`](../../home/praveen/.claude/policies/insur-observability-hub.md)
 > Tool comparison: [TOOL_COMPARISON.md](TOOL_COMPARISON.md)
 > Per-process tables catalog: [`data/dbviewer/per_process_tables.json`](../../data/dbviewer/per_process_tables.json)
 
 ## What this is
 
-The HOLY/insur reference implementation of the 13-sub-surface
+The INSUR/insur reference implementation of the 13-sub-surface
 **Observability + Data Hub** mandated by global §68. This iteration
 ships **2 of the 13 surfaces**:
 
@@ -23,19 +23,19 @@ ship in subsequent iterations per the §68 iteration plan.
 
 | Endpoint | Returns |
 |---|---|
-| `GET /api/v1/holy/dbviewer/_global` | Registered DBs + endpoint map + invariants |
-| `GET /api/v1/holy/dbviewer/databases/{db_id}` | DB info (no creds) + schemas |
-| `GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}` | Tables + PII flags + tenant_id flag + row estimates |
-| `GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}` | Columns + PK + FK + PII flags |
-| `GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample` | Sample rows (PII-redacted, tenant-scoped, capped at 100) |
+| `GET /api/v1/insur/dbviewer/_global` | Registered DBs + endpoint map + invariants |
+| `GET /api/v1/insur/dbviewer/databases/{db_id}` | DB info (no creds) + schemas |
+| `GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}` | Tables + PII flags + tenant_id flag + row estimates |
+| `GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}` | Columns + PK + FK + PII flags |
+| `GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample` | Sample rows (PII-redacted, tenant-scoped, capped at 100) |
 
 ### §68.2 Per-function tables
 
 | Endpoint | Returns |
 |---|---|
-| `GET /api/v1/holy/dbviewer/process-tables/_global` | Full catalog: every process with primary + secondary tables |
-| `GET /api/v1/holy/dbviewer/process-tables/{dept}` | Per-dept slice |
-| `GET /api/v1/holy/dbviewer/process-tables/{dept}/{process_id}` | Single process: primary_table + secondary_tables + join_keys + pii_columns |
+| `GET /api/v1/insur/dbviewer/process-tables/_global` | Full catalog: every process with primary + secondary tables |
+| `GET /api/v1/insur/dbviewer/process-tables/{dept}` | Per-dept slice |
+| `GET /api/v1/insur/dbviewer/process-tables/{dept}/{process_id}` | Single process: primary_table + secondary_tables + join_keys + pii_columns |
 
 ## Invariants (drill-locked)
 
@@ -45,7 +45,7 @@ Per `tests/drills/drill_dbviewer.py` (12 steps, 4 negative):
 2. **PII redacted by default** — `?include_pii=1` opt-in (audited)
 3. **Tenant-scoped at SQL boundary** — `WHERE tenant_id = $1` applied when column exists
 4. **Sample-size capped at 100 rows**
-5. **Audit row per call** via `core.holy_audit.log_holy_access`
+5. **Audit row per call** via `core.insur_audit.log_insur_access`
 6. **NO connection strings in responses** (defense in depth at router)
 7. **Validators 404 BEFORE audit** per §47.6 anti-info-leak
 8. **Best-effort persistence** — DB unreachable does NOT crash the request
@@ -55,19 +55,19 @@ Per `tests/drills/drill_dbviewer.py` (12 steps, 4 negative):
 
 ```bash
 # List registered databases
-curl -s http://localhost:8000/api/v1/holy/dbviewer/_global \
+curl -s http://localhost:8000/api/v1/insur/dbviewer/_global \
   -H "X-Tenant-ID: tenant-a" -H "X-Demo-Role: manager" | jq
 
 # What tables back the lead_scoring process?
-curl -s http://localhost:8000/api/v1/holy/dbviewer/process-tables/sales/lead_scoring \
+curl -s http://localhost:8000/api/v1/insur/dbviewer/process-tables/sales/lead_scoring \
   -H "X-Tenant-ID: tenant-a" -H "X-Demo-Role: manager" | jq .process
 
 # Sample 10 PII-redacted rows from dim_customer
-curl -s 'http://localhost:8000/api/v1/holy/dbviewer/databases/holy/schemas/public/tables/dim_customer/sample?limit=10' \
+curl -s 'http://localhost:8000/api/v1/insur/dbviewer/databases/insur/schemas/public/tables/dim_customer/sample?limit=10' \
   -H "X-Tenant-ID: tenant-a" -H "X-Demo-Role: manager" | jq
 
 # Same, with PII visible (audited)
-curl -s 'http://localhost:8000/api/v1/holy/dbviewer/databases/holy/schemas/public/tables/dim_customer/sample?limit=10&include_pii=1' \
+curl -s 'http://localhost:8000/api/v1/insur/dbviewer/databases/insur/schemas/public/tables/dim_customer/sample?limit=10&include_pii=1' \
   -H "X-Tenant-ID: tenant-a" -H "X-Demo-Role: manager" | jq
 ```
 
@@ -93,7 +93,7 @@ Then re-run the drill: `python tests/drills/drill_dbviewer.py`. Status
 options: `annotated` (everything wired) / `stub` (primary table not yet
 migrated — placeholder).
 
-## Roadmap (HOLY/insur specific)
+## Roadmap (INSUR/insur specific)
 
 | Iter | Surface | Status |
 |---|---|---|
@@ -109,4 +109,4 @@ migrated — placeholder).
 
 - Tool comparison: [TOOL_COMPARISON.md](TOOL_COMPARISON.md)
 - Global policy: §68 in [`~/.claude/CLAUDE.md`](../../home/praveen/.claude/CLAUDE.md)
-- Federation pattern: [`docs/AGENT_HARNESS_GUIDE.md`](../AGENT_HARNESS_GUIDE.md) → "HOLY/* Shared Audit Helper"
+- Federation pattern: [`docs/AGENT_HARNESS_GUIDE.md`](../AGENT_HARNESS_GUIDE.md) → "INSUR/* Shared Audit Helper"

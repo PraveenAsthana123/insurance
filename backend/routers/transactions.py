@@ -1,4 +1,4 @@
-"""HOLY transactional history router — unified chronological audit feed per dept.
+"""INSUR transactional history router — unified chronological audit feed per dept.
 
 Surfaces 3 event sources in MVP:
   - cron audit rows  data/eval/cron/<job>/<run_id>/manifest.json
@@ -13,9 +13,9 @@ Composes with global §38 audit + §41.3 tenant isolation + §47.6 SOC2
 CC6.2 access (PII redacted by default) + §57.6 canonical envelope.
 
 Endpoints (read-only — append-only event stream, no mutation API):
-  GET /api/v1/holy/transactions/{dept}
-  GET /api/v1/holy/transactions/{dept}/{event_id}
-  GET /api/v1/holy/transactions/_global
+  GET /api/v1/insur/transactions/{dept}
+  GET /api/v1/insur/transactions/{dept}/{event_id}
+  GET /api/v1/insur/transactions/_global
 """
 from __future__ import annotations
 
@@ -28,12 +28,12 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/api/v1/holy/transactions", tags=["holy", "transactions"])
+router = APIRouter(prefix="/api/v1/insur/transactions", tags=["insur", "transactions"])
 
-HOLY_DEPTS = [
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -67,8 +67,8 @@ SIM_DIR = DATA_ROOT / "eval" / "sim"
 
 
 def _validate_dept(dept: str) -> None:
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 def _ts_from_run_id(run_id: str) -> float | None:
@@ -222,10 +222,10 @@ def _wildcard_match(pattern: str, event_type: str) -> bool:
 @router.get("/_global")
 def global_summary(http_request: Request) -> dict[str, Any]:
     """Cross-dept summary: per-dept event count for the last 24h."""
-    log_holy_access(http_request, "transactions", "global_summary")
+    log_insur_access(http_request, "transactions", "global_summary")
     since = time.time() - 24 * 3600
     summary: dict[str, dict[str, int]] = {}
-    for dept in HOLY_DEPTS:
+    for dept in INSUR_DEPTS:
         events = (
             _scan_cron_events(dept, since, limit=100)
             + _scan_ml_events(dept, since, limit=100)
@@ -236,8 +236,8 @@ def global_summary(http_request: Request) -> dict[str, Any]:
             by_source[ev["source"]] = by_source.get(ev["source"], 0) + 1
         summary[dept] = by_source
     return {
-        "n_depts": len(HOLY_DEPTS),
-        "depts": HOLY_DEPTS,
+        "n_depts": len(INSUR_DEPTS),
+        "depts": INSUR_DEPTS,
         "window_hours": 24,
         "since_epoch": since,
         "per_dept_counts": summary,
@@ -257,7 +257,7 @@ def list_transactions(
 ) -> dict[str, Any]:
     """Per-dept chronological transaction feed (newest first)."""
     _validate_dept(dept)
-    log_holy_access(http_request, "transactions", "list_transactions",
+    log_insur_access(http_request, "transactions", "list_transactions",
                     dept=dept, extra={"source": source, "include_pii": int(include_pii)})
 
     events: list[dict[str, Any]] = []
@@ -300,7 +300,7 @@ def list_transactions(
 def get_event(http_request: Request, dept: str, event_id: str, include_pii: int = Query(0, ge=0, le=1)) -> dict[str, Any]:
     """Single-event detail by event_id."""
     _validate_dept(dept)
-    log_holy_access(http_request, "transactions", "get_event",
+    log_insur_access(http_request, "transactions", "get_event",
                     dept=dept, extra={"event_id": event_id, "include_pii": int(include_pii)})
 
     # Parse event_id: evt-<source>-<run_id>

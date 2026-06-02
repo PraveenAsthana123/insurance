@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY agent orchestration patterns (§43, §64.43 #5/#8/#9/#10/#12).
+Drill: INSUR agent orchestration patterns (§43, §64.43 #5/#8/#9/#10/#12).
 
 Steps (14 total; 6 negative assertions):
     1.  (+) DAG executes 4-node linear chain in correct order
@@ -54,7 +54,7 @@ def main():
         ReflectionLoop,
     )
 
-    print("\nDRILL: HOLY agent orchestration (DAG + Reflection + MoA)\n")
+    print("\nDRILL: INSUR agent orchestration (DAG + Reflection + MoA)\n")
     t0 = time.time()
 
     # ----- Step 1: DAG linear chain -----

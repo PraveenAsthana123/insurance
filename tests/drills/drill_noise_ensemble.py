@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY noise handling + ensemble compare (§43, §64.19 + §65.1 #5).
+Drill: INSUR noise handling + ensemble compare (§43, §64.19 + §65.1 #5).
 
 Steps (10 total; 4 negative):
     1. (+) Tabular cleaner: NaNs all filled, duplicates dropped
@@ -47,7 +47,7 @@ def main():
     )
     from ml.reference.ensemble_compare import compare_ensemble
 
-    print("\nDRILL: HOLY noise handling + ensemble compare\n")
+    print("\nDRILL: INSUR noise handling + ensemble compare\n")
     t0 = time.time()
 
     # ----- Step 1: tabular NaN + dedup -----

@@ -10,7 +10,7 @@
 
 ## Why this catalog
 
-HOLY/insur is a insurerage project; healthcare is **not** its primary
+INSUR/insur is a insurerage project; healthcare is **not** its primary
 deployment domain. This catalog exists to:
 
 1. Keep the methodology portable — same process-catalog shape, swap
@@ -43,7 +43,7 @@ deployment domain. This catalog exists to:
 Each family follows the same sub-process pattern as the insurerage
 catalog: **sub-process → AI / automation opportunity → compliance
 touchpoint → KPI**. Full row-level detail is intentionally NOT
-expanded here (HOLY/insur project is non-healthcare); to expand, fork
+expanded here (INSUR/insur project is non-healthcare); to expand, fork
 the [`insurerage_industry_processes.md`](insurerage_industry_processes.md)
 structure and populate rows from your specific deployment.
 

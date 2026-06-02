@@ -1,7 +1,7 @@
-# HOLY Beverage Company — Hr Specification
+# INSUR Beverage Company — Hr Specification
 
 **Source:** operator brief (2026-05-21).
-**Project:** HOLY Beverage Company.
+**Project:** INSUR Beverage Company.
 **Scope:** this department's data types, process flow, AI impact, and recommended datasets.
 
 ## Data Types
@@ -45,5 +45,5 @@
 
 ---
 
-Cross-reference: `../../../HOLY_PROJECT.md` for cross-department flow + dataset map.
+Cross-reference: `../../../INSUR_PROJECT.md` for cross-department flow + dataset map.
 Scaffold standard: global CLAUDE.md §63.

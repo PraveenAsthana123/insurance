@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY CV lifecycle (§43, §64.20 + §64.32).
+Drill: INSUR CV lifecycle (§43, §64.20 + §64.32).
 
 Steps (8 total; 3 negative assertions):
     1. (+) CV lifecycle runs end-to-end on MNIST subset (3 models)
@@ -36,7 +36,7 @@ def step(n, label, ok, detail=""):
 def main():
     from ml.reference.cv_lifecycle import CvLifecycle
 
-    print("\nDRILL: HOLY CV lifecycle (MNIST)\n")
+    print("\nDRILL: INSUR CV lifecycle (MNIST)\n")
     t0 = time.time()
 
     # ----- Step 1: end-to-end run -----

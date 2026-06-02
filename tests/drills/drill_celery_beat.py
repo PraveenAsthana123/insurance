@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY Celery beat schedule for test-tier auto-dispatch (§43, §65.8.5).
+Drill: INSUR Celery beat schedule for test-tier auto-dispatch (§43, §65.8.5).
 
 Steps (8 total; 3 negative):
     1. (+) celery_app imports cleanly + beat_schedule populated
     2. (+) All 8 expected test-tier schedules present
     3. (+) Every test-tier schedule has the canonical kwargs (tier, depts, timeout)
-    4. (+) holy.dispatch_test_fanout task registered in celery_app
+    4. (+) insur.dispatch_test_fanout task registered in celery_app
     5. (+) Every schedule references a valid task name
     6. (-) NEGATIVE — bogus tier in dispatch envelope rejected by agent (covered by test_agent drill, asserted indirectly here)
-    7. (+) All 19 HOLY depts present in beat-fan-out depts list
+    7. (+) All 19 INSUR depts present in beat-fan-out depts list
     8. (-) NEGATIVE — schedule period MUST be > 0 (catches off-by-one in cadence defs)
 
 # RESOURCES: celery_config disk_io
@@ -28,28 +28,28 @@ sys.path.insert(0, str(REPO_ROOT / "agents"))
 
 
 EXPECTED_TIER_SCHEDULES = {
-    "holy-tests-unit-30min",
-    "holy-tests-process-30min",
-    "holy-tests-api-hourly",
-    "holy-tests-integration-hourly",
-    "holy-tests-boundary-4h",
-    "holy-tests-perf-nightly",
-    "holy-tests-smoke-daily",
-    "holy-tests-security-weekly",
+    "insur-tests-unit-30min",
+    "insur-tests-process-30min",
+    "insur-tests-api-hourly",
+    "insur-tests-integration-hourly",
+    "insur-tests-boundary-4h",
+    "insur-tests-perf-nightly",
+    "insur-tests-smoke-daily",
+    "insur-tests-security-weekly",
 }
 
 EXPECTED_CRON_SCHEDULES = {
-    "holy-data-refresh-hourly",
-    "holy-model-retrain-daily",
-    "holy-accuracy-eval-4h",
-    "holy-analysis-rollup-daily",
+    "insur-data-refresh-hourly",
+    "insur-model-retrain-daily",
+    "insur-accuracy-eval-4h",
+    "insur-analysis-rollup-daily",
 }
 
 EXPECTED_CRON_TASKS = {
-    "holy.refresh_data_artifacts",
-    "holy.retrain_models",
-    "holy.eval_accuracy_drift",
-    "holy.analysis_rollup",
+    "insur.refresh_data_artifacts",
+    "insur.retrain_models",
+    "insur.eval_accuracy_drift",
+    "insur.analysis_rollup",
 }
 
 EXPECTED_DEPTS = {
@@ -100,7 +100,7 @@ def main():
     step(3, "every tier schedule has tier+depts+timeout_seconds kwargs",
          not bad, "; ".join(bad[:3]) if bad else "")
 
-    # ----- Step 4: holy.dispatch_test_fanout task registered -----
+    # ----- Step 4: insur.dispatch_test_fanout task registered -----
     # Force task discovery
     try:
         from workers import tasks  # noqa: F401
@@ -108,8 +108,8 @@ def main():
         step(4, "workers.tasks imports", False, str(exc))
         return
     registered = set(celery_app.tasks.keys())
-    step(4, "holy.dispatch_test_fanout registered in celery_app.tasks",
-         "holy.dispatch_test_fanout" in registered,
+    step(4, "insur.dispatch_test_fanout registered in celery_app.tasks",
+         "insur.dispatch_test_fanout" in registered,
          f"have {len(registered)} tasks total")
 
     # ----- Step 5: every schedule's task name is a registered task -----
@@ -137,7 +137,7 @@ def main():
         missing_depts = EXPECTED_DEPTS - depts
         if missing_depts:
             bad_dept_lists.append(f"{name}: missing {len(missing_depts)} depts")
-    step(7, f"all {len(EXPECTED_DEPTS)} HOLY depts present in every tier fan-out",
+    step(7, f"all {len(EXPECTED_DEPTS)} INSUR depts present in every tier fan-out",
          not bad_dept_lists, "; ".join(bad_dept_lists[:3]) if bad_dept_lists else "")
 
     # ----- Step 8: NEGATIVE — all schedule periods > 0 -----

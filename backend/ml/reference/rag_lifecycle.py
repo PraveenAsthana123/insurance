@@ -1,4 +1,4 @@
-"""HOLY reference: full RAG lifecycle (chunking → embed → vector DB → retrieve → rerank → LLM → cite → eval).
+"""INSUR reference: full RAG lifecycle (chunking → embed → vector DB → retrieve → rerank → LLM → cite → eval).
 
 Demonstrates the operator's ask: chunking, RAG, vector DB, Ollama integration,
 all in one runnable reference. Copy this file for every dept's RAG pipeline.
@@ -520,7 +520,7 @@ class RagLifecycle:
 def _main() -> None:
     import argparse
 
-    parser = argparse.ArgumentParser(description="Run HOLY RAG lifecycle on a corpus")
+    parser = argparse.ArgumentParser(description="Run INSUR RAG lifecycle on a corpus")
     parser.add_argument("--corpus", nargs="+", required=True, help="Paths to corpus dirs/files")
     parser.add_argument("--dept", default="customer-experience")
     parser.add_argument("--pipeline", default="rag_reference")

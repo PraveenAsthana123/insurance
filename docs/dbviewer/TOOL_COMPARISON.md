@@ -6,7 +6,7 @@
 
 ## §1 — DB Viewer alternatives
 
-| # | Tool | License | Maintained | Multi-DB | OSS | TenantId-aware | RBAC-aware | PII-aware | Audit hook | Fits HOLY stack | Verdict |
+| # | Tool | License | Maintained | Multi-DB | OSS | TenantId-aware | RBAC-aware | PII-aware | Audit hook | Fits INSUR stack | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | **CloudBeaver** | GPLv2 | ✅ active | ✅ yes | ✅ | ❌ | bring-your-own SSO | ❌ | ❌ | partial | **skip** — GPLv2 license, no native PII layer, would bypass our middleware stack |
 | 2 | **sqlite-web** | MIT | ✅ active | ❌ SQLite-only | ✅ | ❌ | ❌ | ❌ | ❌ | weak | **skip** — Postgres-first project; would only cover per-tenant SQLite files |
@@ -16,12 +16,12 @@
 | 6 | **sqladmin (aminalinz)** | BSD-3 | ✅ active | ✅ via SQLAlchemy | ✅ | ❌ | bring-your-own | ❌ | ❌ | strong | **defer** — FastAPI-native; reconsider in iter 4 if scope grows to need rich CRUD |
 | 7 | **Metabase** | AGPLv3 | ✅ active | ✅ yes | partial | bring-your-own | ✅ | ❌ | partial | weak | **skip** — heavy JVM runtime + AGPLv3 forces source disclosure |
 | 8 | **DBeaver Desktop** | Apache-2 | ✅ active | ✅ yes | ✅ | ❌ | ❌ | ❌ | ❌ | N/A | **skip** — desktop only; not embeddable |
-| 9 | **Custom thin viewer** (this project, §68.1) | project license | ✅ | ✅ via psycopg2 | ✅ | ✅ enforced at SQL | ✅ via PERMS_MATRIX | ✅ default-on | ✅ holy_audit | ✅ | **ADOPT** — composes with TenantId + RBAC + audit + PII out of the box |
+| 9 | **Custom thin viewer** (this project, §68.1) | project license | ✅ | ✅ via psycopg2 | ✅ | ✅ enforced at SQL | ✅ via PERMS_MATRIX | ✅ default-on | ✅ insur_audit | ✅ | **ADOPT** — composes with TenantId + RBAC + audit + PII out of the box |
 
 ### Rationale for "build thin"
 
 Every off-the-shelf option either (a) bypasses our existing middleware
-stack (`TenantIdMiddleware` + `RBACMiddleware` + `core.holy_audit`) or
+stack (`TenantIdMiddleware` + `RBACMiddleware` + `core.insur_audit`) or
 (b) drags in a heavy runtime (PHP / JVM / GPL). A thin custom viewer
 costs ~300 LOC backend + ~200 LOC frontend, ships under the existing
 license + audit posture, and lights up incrementally (4 endpoints
@@ -47,7 +47,7 @@ adapter (after AgentOps + LiteLLM + typed-council + DSPy optimizer).
 
 | Surface | Why |
 |---|---|
-| `POST /api/v1/holy/evals/model-compare` (custom) | Composes with existing LiteLLM gateway (§56.2) — invoke N models with the same eval set, score each via the same metric whitelist as `dspy_optimizer.run_optimization` (`exact_match` / `contains` / latency_p95 / cost). Persist comparison_id + per-model scorecard in `data/eval/model-compare/<comparison_id>/manifest.json`. |
+| `POST /api/v1/insur/evals/model-compare` (custom) | Composes with existing LiteLLM gateway (§56.2) — invoke N models with the same eval set, score each via the same metric whitelist as `dspy_optimizer.run_optimization` (`exact_match` / `contains` / latency_p95 / cost). Persist comparison_id + per-model scorecard in `data/eval/model-compare/<comparison_id>/manifest.json`. |
 
 Not adopting: per-vendor consoles (OpenAI Playground / Anthropic Console)
 — they don't compose with our cost-tracker or audit envelope.

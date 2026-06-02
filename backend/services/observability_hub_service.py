@@ -47,7 +47,7 @@ _SURFACES: list[dict[str, Any]] = [
     {
         "key": "dbviewer",
         "policy": "§68.1 + §68.2",
-        "endpoint_prefix": "/api/v1/holy/dbviewer",
+        "endpoint_prefix": "/api/v1/insur/dbviewer",
         "source_kind": "json_catalog",
         "source_relpath": "data/dbviewer/per_process_tables.json",
         "write_status": "shipped",  # catalog file ships from iter 1
@@ -55,54 +55,54 @@ _SURFACES: list[dict[str, Any]] = [
     {
         "key": "pii",
         "policy": "§68.6",
-        "endpoint_prefix": "/api/v1/holy/pii",
-        "source_kind": "audit_log",   # PII inventory READS the holy_reads audit log
-        "source_env_var": "HOLY_AUDIT_PATH",
-        "source_default": "data/agent-supervisor/holy_reads.jsonl",
+        "endpoint_prefix": "/api/v1/insur/pii",
+        "source_kind": "audit_log",   # PII inventory READS the insur_reads audit log
+        "source_env_var": "INSUR_AUDIT_PATH",
+        "source_default": "data/agent-supervisor/insur_reads.jsonl",
         "write_status": "shipped",
     },
     {
         "key": "guardrails",
         "policy": "§68.5",
-        "endpoint_prefix": "/api/v1/holy/guardrails",
+        "endpoint_prefix": "/api/v1/insur/guardrails",
         "source_kind": "jsonl",
-        "source_env_var": "HOLY_GUARDRAIL_LOG",
+        "source_env_var": "INSUR_GUARDRAIL_LOG",
         "source_default": "data/agent-supervisor/guardrail_decisions.jsonl",
         "write_status": "operator-action-required",  # write side pending
     },
     {
         "key": "security",
         "policy": "§68.7",
-        "endpoint_prefix": "/api/v1/holy/security",
+        "endpoint_prefix": "/api/v1/insur/security",
         "source_kind": "json_snapshot",
-        "source_env_var": "HOLY_SECURITY_POSTURE_PATH",
+        "source_env_var": "INSUR_SECURITY_POSTURE_PATH",
         "source_default": "data/agent-supervisor/security_posture.json",
         "write_status": "operator-action-required",  # pip-audit/bandit job
     },
     {
         "key": "evals_functional",
         "policy": "§68.8",
-        "endpoint_prefix": "/api/v1/holy/evals/functional",
+        "endpoint_prefix": "/api/v1/insur/evals/functional",
         "source_kind": "jsonl",
-        "source_env_var": "HOLY_EVAL_FUNCTIONAL_LOG",
+        "source_env_var": "INSUR_EVAL_FUNCTIONAL_LOG",
         "source_default": "data/agent-supervisor/functional_eval_runs.jsonl",
         "write_status": "operator-action-required",  # MLflow / scheduled eval
     },
     {
         "key": "evals_cost",
         "policy": "§68.9",
-        "endpoint_prefix": "/api/v1/holy/evals/cost",
+        "endpoint_prefix": "/api/v1/insur/evals/cost",
         "source_kind": "jsonl",
-        "source_env_var": "HOLY_EVAL_COST_LOG",
+        "source_env_var": "INSUR_EVAL_COST_LOG",
         "source_default": "data/agent-supervisor/cost_runs.jsonl",
         "write_status": "operator-action-required",  # LLM-gateway hook
     },
     {
         "key": "evals_safety",
         "policy": "§68.10",
-        "endpoint_prefix": "/api/v1/holy/evals/safety",
+        "endpoint_prefix": "/api/v1/insur/evals/safety",
         "source_kind": "jsonl",
-        "source_env_var": "HOLY_EVAL_SAFETY_LOG",
+        "source_env_var": "INSUR_EVAL_SAFETY_LOG",
         "source_default": "data/agent-supervisor/safety_eval_runs.jsonl",
         "write_status": "operator-action-required",  # DeepEval/Ragas/Garak
     },
@@ -250,7 +250,7 @@ def overview() -> dict[str, Any]:
     n_shipped_writes = sum(1 for s in surfaces if s["write_status"] == "shipped")
 
     return {
-        "policy": "§68 HOLY Observability Hub — aggregator",
+        "policy": "§68 INSUR Observability Hub — aggregator",
         "stage": "iter 7 of 7 read surfaces shipped",
         "n_surfaces": len(surfaces),
         "n_source_present": n_present,

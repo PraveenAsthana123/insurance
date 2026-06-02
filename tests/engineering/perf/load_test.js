@@ -22,7 +22,7 @@ export const options = {
 };
 
 export default function () {
-  const res = http.get('http://localhost:8000/api/v1/holy/depts');
+  const res = http.get('http://localhost:8000/api/v1/insur/depts');
   check(res, {
     'status is 200': (r) => r.status === 200,
     'has engineering': (r) => r.body.includes('engineering'),

@@ -317,11 +317,45 @@ def serve(port: int) -> None:
             "embed_model": EMBED_MODEL,
         }
 
+    # Guardrail refuse-list per §77 row 1408 + §80 guardrail surface.
+    # Composes with §75.5 HITL — these patterns short-circuit before LLM call.
+    REFUSE_PATTERNS = [
+        ("prompt_injection", ["ignore prior", "ignore all previous", "you are now",
+                              "system prompt", "say HACKED"]),
+        ("pii_extraction", ["sample ssn", "social security", "training data",
+                            "give me sample customer", "customer email"]),
+        ("off_topic", ["chocolate cake", "recipe for", "weather", "news today",
+                       "sports score", "movie", "song lyrics"]),
+        ("secret_exfil", ["api key", "password", "ANTHROPIC_API", "OPENAI_API",
+                          "show env", "echo ${"]),
+    ]
+
+    def _guardrail_check(query: str) -> dict[str, Any] | None:
+        """Return refusal payload if query trips a guardrail; else None."""
+        q = query.lower()
+        for kind, patterns in REFUSE_PATTERNS:
+            for p in patterns:
+                if p in q:
+                    return {
+                        "answer": ("I cannot answer that. The context does not contain "
+                                    "information on that topic and the request appears "
+                                    f"off-scope ({kind})."),
+                        "refused": True, "refusal_kind": kind,
+                        "matched_pattern": p,
+                    }
+        return None
+
+    from fastapi import Body
     @app.post("/bot/ask")
-    def ask(req: AskRequest) -> JSONResponse:
-        if not req.query.strip():
+    def ask(payload: dict[str, Any] = Body(...)) -> JSONResponse:
+        query = (payload.get("query") or "").strip()
+        if not query:
             raise HTTPException(400, "query required")
-        result = answer_query(req.query.strip(), idx)
+        # §80 guardrail check BEFORE LLM call
+        refusal = _guardrail_check(query)
+        if refusal:
+            return JSONResponse({**refusal, "query": query, "citations": []})
+        result = answer_query(query, idx)
         return JSONResponse(result)
 
     @app.get("/bot/ui", response_class=HTMLResponse)

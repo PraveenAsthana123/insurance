@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY attack-simulation generators (§43, §64.32.3 + §42).
+Drill: INSUR attack-simulation generators (§43, §64.32.3 + §42).
 
 Steps (10 total; 4 negative assertions):
     1.  (+) All 12 mandatory attack classes have generators registered
@@ -51,7 +51,7 @@ def main():
         generate_corpus,
     )
 
-    print("\nDRILL: HOLY attack-simulation generators (section 64.32.3)\n")
+    print("\nDRILL: INSUR attack-simulation generators (section 64.32.3)\n")
     t0 = time.time()
 
     # ----- Step 1: 12 mandatory classes -----

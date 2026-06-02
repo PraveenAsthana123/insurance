@@ -46,7 +46,7 @@ _MAX_MODELS_PER_COMPARISON = 8
 
 
 def _manifest_dir() -> Path:
-    env = os.environ.get("HOLY_MODEL_COMPARE_DIR")
+    env = os.environ.get("INSUR_MODEL_COMPARE_DIR")
     if env:
         return Path(env)
     return _REPO_ROOT / "data" / "agent-supervisor" / "model_compare"

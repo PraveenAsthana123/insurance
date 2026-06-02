@@ -1,6 +1,6 @@
 """§68.5 Guardrails router.
 
-3 endpoints under /api/v1/holy/guardrails/* federated via core.holy_audit
+3 endpoints under /api/v1/insur/guardrails/* federated via core.insur_audit
 (surface=guardrails). Answers operator's question: "Did the guardrails
 fire? What did they catch? Show me the decision detail."
 
@@ -15,12 +15,12 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query, Request
 
-from core.holy_audit import log_holy_access
+from core.insur_audit import log_insur_access
 from services import guardrails_service as gr
 
-router = APIRouter(prefix="/api/v1/holy/guardrails", tags=["holy", "guardrails"])
+router = APIRouter(prefix="/api/v1/insur/guardrails", tags=["insur", "guardrails"])
 
-HOLY_DEPTS = [
+INSUR_DEPTS = [
     "digital-marketing", "customer-experience", "supply-chain", "manufacturing",
     "product-rd", "retail-operations", "sales", "finance", "hr", "procurement",
     "executive-leadership", "e-commerce", "customer-support", "engineering",
@@ -33,8 +33,8 @@ _DECISION_ID_RE = re.compile(r"^[A-Za-z0-9_.:-]+$")
 
 
 def _validate_dept(dept: str) -> None:
-    if dept not in HOLY_DEPTS:
-        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(HOLY_DEPTS)} HOLY depts")
+    if dept not in INSUR_DEPTS:
+        raise HTTPException(404, f"Unknown dept '{dept}' — must be one of {len(INSUR_DEPTS)} INSUR depts")
 
 
 # _global BEFORE /{dept} per §66.3 FastAPI greedy-match trap.
@@ -44,7 +44,7 @@ def guardrails_global(
     since: float = Query(0.0, ge=0.0),
 ) -> dict[str, Any]:
     """Cross-dept rollup: counts per guardrail_type × decision + per-dept totals."""
-    log_holy_access(http_request, "guardrails", "guardrails_global",
+    log_insur_access(http_request, "guardrails", "guardrails_global",
                     extra={"since": since})
     return gr.global_summary(since_epoch=since)
 
@@ -55,7 +55,7 @@ def guardrails_decision(http_request: Request, decision_id: str) -> dict[str, An
     """Look up one guardrail decision by decision_id or request_id."""
     if not _DECISION_ID_RE.match(decision_id):
         raise HTTPException(400, f"Malformed decision_id '{decision_id}'")
-    log_holy_access(http_request, "guardrails", "guardrails_decision",
+    log_insur_access(http_request, "guardrails", "guardrails_decision",
                     extra={"decision_id": decision_id})
     result = gr.get_decision(decision_id)
     if result is None:
@@ -86,7 +86,7 @@ def guardrails_dept(
             400,
             f"Malformed guardrail_type '{guardrail_type}' (lowercase letters/digits/underscores)",
         )
-    log_holy_access(
+    log_insur_access(
         http_request, "guardrails", "guardrails_dept",
         dept=dept,
         extra={"decision": decision, "guardrail_type": guardrail_type,

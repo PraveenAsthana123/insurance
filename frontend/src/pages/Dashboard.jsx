@@ -10,7 +10,7 @@ export default function Dashboard() {
     <div>
       <div className="page-header">
         <div className="page-header-left">
-          <div className="page-title">🥤 HOLY Analytics Platform</div>
+          <div className="page-title">🥤 INSUR Analytics Platform</div>
           <div className="page-subtitle">AI-powered analytics across 11 departments — from demand forecasting to governance</div>
         </div>
         <div className="page-header-right">

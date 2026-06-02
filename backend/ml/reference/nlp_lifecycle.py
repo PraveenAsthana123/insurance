@@ -1,4 +1,4 @@
-"""HOLY reference: NLP lifecycle with multiple-technique score comparison.
+"""INSUR reference: NLP lifecycle with multiple-technique score comparison.
 
 Per operator 2026-05-22: "for nlp all the technique with score"
 

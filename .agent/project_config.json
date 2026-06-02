@@ -1,0 +1,68 @@
+{
+  "_description": "Single source of truth for this project's identity. Change ONCE, run `agent rebrand` to propagate.",
+  "_used_by": [
+    "~/.claude/scripts/agent-rebrand.sh",
+    "scaffolders + generators",
+    "bootstrap copy when moving to a new project"
+  ],
+
+  "project_name": "insur_project",
+  "project_display_name": "Insurance Project",
+  "project_slug": "insur",
+  "project_prefix_uc": "INSUR",
+  "project_prefix_lc": "insur",
+  "project_prefix_cap": "Insur",
+
+  "domain": "insurance",
+  "domain_cap": "Insurance",
+  "domain_uc": "INSURANCE",
+
+  "departments": [
+    "claims",
+    "underwriting",
+    "customer-service",
+    "fraud-siu"
+  ],
+
+  "rename_map": {
+    "_comment": "Used by agent-rebrand.sh — left side is the historical/original token, right side is what to replace it with. Order matters: longer keys go first.",
+    "HOLY_": "INSUR_",
+    "Holy_": "Insur_",
+    "holy_": "insur_",
+    "HOLY":  "INSUR",
+    "Holy":  "Insur",
+    "holy":  "insur"
+  },
+
+  "preserve_paths": [
+    "_legacy/",
+    "__pycache__/",
+    ".git/",
+    "data/rag/chunks/",
+    "data/rag/embeddings/",
+    "data/eval/end_to_end/",
+    "node_modules/",
+    ".venv/",
+    "venv/",
+    "jobs/reports/",
+    ".agent/auto_fix_audit.jsonl",
+    ".agent/token_usage.jsonl"
+  ],
+
+  "preserve_globs": [
+    "*.py.txt",
+    "*.pyc",
+    "*.lock",
+    "*.png",
+    "*.jpg",
+    "*.pdf",
+    "*.db"
+  ],
+
+  "_when_copying_to_new_project": [
+    "1. cp -r insur_project /path/to/new_project",
+    "2. Edit .agent/project_config.json — set project_name, slug, prefix, domain, departments",
+    "3. Run: bash ~/.claude/scripts/agent-rebrand.sh",
+    "4. Verify: agent test all"
+  ]
+}

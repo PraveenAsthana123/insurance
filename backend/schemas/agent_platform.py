@@ -133,7 +133,7 @@ class ApprovalBrokerResponse(BaseModel):
 class TypedCouncilRunRequest(BaseModel):
     """Input for the Pydantic AI typed 3-stage council.
 
-    The endpoint remains default-off unless `HOLY_TYPED_COUNCIL_ENABLED=true`.
+    The endpoint remains default-off unless `INSUR_TYPED_COUNCIL_ENABLED=true`.
     The middleware-set tenant is injected by the router; body metadata cannot
     spoof tenant attribution.
     """

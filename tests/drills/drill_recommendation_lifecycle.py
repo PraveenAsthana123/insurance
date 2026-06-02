@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Drill: HOLY recommendation lifecycle (§43, §64.22).
+Drill: INSUR recommendation lifecycle (§43, §64.22).
 
 Steps (8 total; 3 negative):
     1. (+) Lifecycle runs end-to-end on synthetic 200×60 matrix
@@ -37,7 +37,7 @@ def step(n, label, ok, detail=""):
 def main():
     from ml.reference.recommendation_lifecycle import RecoLifecycle
 
-    print("\nDRILL: HOLY recommendation lifecycle\n")
+    print("\nDRILL: INSUR recommendation lifecycle\n")
     t0 = time.time()
 
     # ----- Step 1: end-to-end -----

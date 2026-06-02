@@ -33,6 +33,6 @@ Per global §38.3 — every report-generation event writes an audit row keyed by
 
 ## API
 ```
-GET  /api/v1/holy/reports/claims/manager
-POST /api/v1/holy/reports/claims/manager/{report_id}/run
+GET  /api/v1/insur/reports/claims/manager
+POST /api/v1/insur/reports/claims/manager/{report_id}/run
 ```

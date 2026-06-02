@@ -1,6 +1,6 @@
 # Agent Council And Hybrid Architecture
 
-This document defines the production direction for the HOLY agent system: simple worker agents, council-of-agents, hybrid human/API/worker orchestration, and future framework adapters such as OpenClaw, Piperclip, or Harness-style execution runners.
+This document defines the production direction for the INSUR agent system: simple worker agents, council-of-agents, hybrid human/API/worker orchestration, and future framework adapters such as OpenClaw, Piperclip, or Harness-style execution runners.
 
 ## 1. Current Implementation
 
@@ -10,7 +10,7 @@ Current files:
 - `agents/seeder.py`: seeds simple one-shot tasks into Redis.
 - `agents/council_agent.py`: three-stage council worker. Pulls from `council_tasks`, runs author/reviewer/chair, pushes full audit trail to `council_done`.
 - `agents/council_seeder.py`: seeds harder tasks for the council flow.
-- `backend/routers/holy.py`: exposes UI/API endpoints for council ask/result and related HOLY artifacts.
+- `backend/routers/insur.py`: exposes UI/API endpoints for council ask/result and related INSUR artifacts.
 - `backend/services/typed_council.py`: opt-in Pydantic AI typed council adapter for synchronous author/reviewer/chair runs.
 - `backend/routers/agent_platform.py`: exposes `POST /api/v1/agent-platform/typed-council/run` for the typed council pilot.
 - `docker-compose.yml`: defines `agents` and `council_agents` scalable worker services.
@@ -64,15 +64,15 @@ User/API/seeder
 Council flow:
 
 ```text
-User/UI POST /api/v1/holy/council/ask
-  -> backend/routers/holy.py
+User/UI POST /api/v1/insur/council/ask
+  -> backend/routers/insur.py
   -> Redis list: council_tasks
   -> agents/council_agent.py BRPOP
   -> Stage 1 AUTHOR model
   -> Stage 2 REVIEWER model
   -> Stage 3 CHAIR model
   -> Redis list: council_done
-  -> UI GET /api/v1/holy/council/result/{task_id}
+  -> UI GET /api/v1/insur/council/result/{task_id}
 ```
 
 Typed council pilot flow:
@@ -89,7 +89,7 @@ User/API POST /api/v1/agent-platform/typed-council/run
   -> synchronous typed response
 ```
 
-This pilot is default-off via `HOLY_TYPED_COUNCIL_ENABLED`; the Redis/OpenClaw council flow remains the default async council path.
+This pilot is default-off via `INSUR_TYPED_COUNCIL_ENABLED`; the Redis/OpenClaw council flow remains the default async council path.
 
 ## 4. Council Contract
 
@@ -101,7 +101,7 @@ Input task shape:
   "department": "sales",
   "prompt": "Design a tiered pricing model...",
   "seeded_at": 1760000000.0,
-  "source": "holy-nav-ui"
+  "source": "insur-nav-ui"
 }
 ```
 
@@ -131,7 +131,7 @@ Responsible for starting work through UI, API, CLI, or seeders.
 
 Examples:
 
-- Holy Nav UI council button
+- Insur Nav UI council button
 - `council_seeder.py`
 - future workflow runner
 - future load balancer / gateway
@@ -142,8 +142,8 @@ Responsible for request validation and exposing task state.
 
 Current implementation:
 
-- `POST /api/v1/holy/council/ask`
-- `GET /api/v1/holy/council/result/{task_id}`
+- `POST /api/v1/insur/council/ask`
+- `GET /api/v1/insur/council/result/{task_id}`
 
 Production target:
 
@@ -233,7 +233,7 @@ External orchestrator
 
 Responsibilities:
 
-- translate OpenClaw-style task payload to HOLY worker task format
+- translate OpenClaw-style task payload to INSUR worker task format
 - enforce demo RBAC so task creation is manager-only
 - preserve source, metadata, timestamps, and task id for traceability
 - map worker results back to a stable polling response
@@ -324,11 +324,11 @@ docker compose exec redis redis-cli LRANGE council_done 0 2
 API harness:
 
 ```bash
-curl -X POST http://localhost:8000/api/v1/holy/council/ask \
+curl -X POST http://localhost:8000/api/v1/insur/council/ask \
   -H 'Content-Type: application/json' \
   -d '{"department":"sales","prompt":"Create a distributor pricing plan"}'
 
-curl http://localhost:8000/api/v1/holy/council/result/<task_id>
+curl http://localhost:8000/api/v1/insur/council/result/<task_id>
 ```
 
 ## 8. Observability Requirements

@@ -98,8 +98,8 @@ Commands:
 Install generated cron entries manually after review:
 
 ```bash
-./scripts/process_test_plan.py export-cron --mode all > /tmp/holy-process-tests.cron
-crontab /tmp/holy-process-tests.cron
+./scripts/process_test_plan.py export-cron --mode all > /tmp/insur-process-tests.cron
+crontab /tmp/insur-process-tests.cron
 ```
 
 Before installing cron, ensure:

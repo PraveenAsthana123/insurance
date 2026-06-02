@@ -1,7 +1,7 @@
 """§68.9 Cost eval — "what does the model cost?"
 
 Read-only aggregation over data/agent-supervisor/cost_runs.jsonl
-(HOLY_EVAL_COST_LOG env). Each row is one LLM/inference call:
+(INSUR_EVAL_COST_LOG env). Each row is one LLM/inference call:
 
   ts, request_id, tenant_id, model_id, prompt_tokens,
   completion_tokens, total_tokens, cost_usd, dept, surface, endpoint
@@ -46,7 +46,7 @@ _BUCKET_30D = 30 * 24 * 3600
 
 
 def _log_path() -> Path | None:
-    env = os.environ.get("HOLY_EVAL_COST_LOG")
+    env = os.environ.get("INSUR_EVAL_COST_LOG")
     if env:
         p = Path(env)
         if p.exists():

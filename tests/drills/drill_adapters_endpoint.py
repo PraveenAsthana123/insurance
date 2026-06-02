@@ -25,7 +25,7 @@ Steps (10; 4 negative):
         audit_path, detail) — schema invariant.
   4. (-) NEG with all opt-in flags unset → n_enabled == 0 (default-off
         §56.2 contract holds at the aggregator surface too).
-  5. (+) Enabling HOLY_DSPY_OPTIMIZER_ENABLED bumps n_enabled by 1
+  5. (+) Enabling INSUR_DSPY_OPTIMIZER_ENABLED bumps n_enabled by 1
         AND the dspy-optimizer row shows enabled=true.
   6. (-) NEG with importable false (mocked) → enabled flag set, but
         importable=false; aggregate n_importable < n_adapters.
@@ -96,9 +96,9 @@ def main() -> int:
     # Clean slate — no opt-in flags set
     for flag in (
         "AGENTOPS_ENABLED", "AGENTOPS_API_KEY",
-        "HOLY_LLM_GATEWAY_ENABLED",
-        "HOLY_TYPED_COUNCIL_ENABLED",
-        "HOLY_DSPY_OPTIMIZER_ENABLED",
+        "INSUR_LLM_GATEWAY_ENABLED",
+        "INSUR_TYPED_COUNCIL_ENABLED",
+        "INSUR_DSPY_OPTIMIZER_ENABLED",
     ):
         os.environ.pop(flag, None)
 
@@ -134,12 +134,12 @@ def main() -> int:
          f"n_enabled={body['n_enabled']}")
 
     # ---- Step 5: enable dspy → n_enabled bumps to 1, dspy row enabled=true ----
-    os.environ["HOLY_DSPY_OPTIMIZER_ENABLED"] = "true"
+    os.environ["INSUR_DSPY_OPTIMIZER_ENABLED"] = "true"
     client = TestClient(_build_app())
     r = client.get("/api/v1/agent-platform/adapters", headers=headers)
     body = r.json()
     dspy_row = next(a for a in body["adapters"] if a["key"] == "dspy-optimizer")
-    step(5, "enabling HOLY_DSPY_OPTIMIZER_ENABLED bumps n_enabled to 1",
+    step(5, "enabling INSUR_DSPY_OPTIMIZER_ENABLED bumps n_enabled to 1",
          body["n_enabled"] == 1 and dspy_row["enabled"] is True,
          f"n_enabled={body['n_enabled']} dspy_enabled={dspy_row['enabled']}")
 

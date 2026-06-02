@@ -187,7 +187,7 @@ def test_nemo_guardrails() -> ToolResult:
         import_check("nemoguardrails", "nemoguardrails"),
         path_exists("backend/services/guardrails_service.py"),
         path_exists("backend/routers/guardrails.py"),
-        http_check("guardrails:global", f"{DEFAULT_API_URL.rstrip('/')}/api/v1/holy/guardrails/_global"),
+        http_check("guardrails:global", f"{DEFAULT_API_URL.rstrip('/')}/api/v1/insur/guardrails/_global"),
     ]
     return result(11, "NeMo Guardrails", checks, summary="Local guardrails service exists; NeMo package is a separate candidate check.")
 

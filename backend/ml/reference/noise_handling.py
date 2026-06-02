@@ -1,4 +1,4 @@
-"""HOLY reference: noise-handling utility per data type (§64.19 + §64.26 + §65.1 #5).
+"""INSUR reference: noise-handling utility per data type (§64.19 + §64.26 + §65.1 #5).
 
 Per-type cleaners with deterministic invariants (drill-able):
 

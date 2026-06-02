@@ -1,8 +1,8 @@
-"""Shared catalog for HOLY role dashboards + reports (§64.37).
+"""Shared catalog for INSUR role dashboards + reports (§64.37).
 
 Single source of truth used by:
-  - backend/routers/holy.py        (serves /dashboards/{dept}/{role})
-  - ~/.claude/scripts/scaffold-holy-role-dashboards.py (renders MD)
+  - backend/routers/insur.py        (serves /dashboards/{dept}/{role})
+  - ~/.claude/scripts/scaffold-insur-role-dashboards.py (renders MD)
   - tests/drills/drill_role_dashboards.py (asserts coverage)
 
 Keeps backend + scaffolder in lockstep — change once, both follow.

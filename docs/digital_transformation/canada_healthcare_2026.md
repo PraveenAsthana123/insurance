@@ -57,7 +57,7 @@ classifiable as `✓ done / ⚠ partial / ✗ gap` during the DT audit.
 | **Standardization** | Clinical + admin standards | Are sites working differently? | Provincial care pathways | Consistency |
 | **Automation** | RPA / workflow engines | Which tasks are repetitive? | Billing + scheduling rules | Staff time saved |
 
-**Composes with:** §66 per-dept HOLY_DEPT_SPEC + flowchart artefacts ·
+**Composes with:** §66 per-dept INSUR_DEPT_SPEC + flowchart artefacts ·
 §64.40 10-layer agentic stack (Layer 6 CUA orchestrates automation) ·
 ml_methodology Phase 1 framing.
 
@@ -307,8 +307,8 @@ columns change.
 - **§47.6 (security 4 lenses)** — SOC2 + STRIDE + OWASP + DevSecOps gates every Privacy & Security row
 - **§53 Enterprise AI Maturity Stack** — items 35–48 align with this DT checklist's domains
 - **§63 Global AI Org Structure** — the 19-dept scaffold IS the organisational substrate this checklist transforms
-- **§64 Per-Dept Business Artifacts** — every dept's HOLY_DT_STRATEGY.md (4P) maps directly to this checklist
-- **§66 per-dept** — HOLY_DEPT_SPEC + HOLY_DT_STRATEGY + HOLY_BRD + HOLY_FRD reference this checklist's compliance citations
+- **§64 Per-Dept Business Artifacts** — every dept's INSUR_DT_STRATEGY.md (4P) maps directly to this checklist
+- **§66 per-dept** — INSUR_DEPT_SPEC + INSUR_DT_STRATEGY + INSUR_BRD + INSUR_FRD reference this checklist's compliance citations
 - **§68 Observability Hub** — DT progress dashboard tile per domain
 - Sister catalogs:
   - [`../ai_assurance/`](../ai_assurance/) — verification frameworks (101–111 + 10 horizontals)

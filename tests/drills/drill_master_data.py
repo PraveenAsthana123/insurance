@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drill: HOLY master-data router + per-dept catalog (§38 + §41.3 + §47.6 + §57.6 + §64).
+"""Drill: INSUR master-data router + per-dept catalog (§38 + §41.3 + §47.6 + §57.6 + §64).
 
 Steps (10 total; 3 negative):
     1. (+) master-data router imports + ENTITY_CATALOG has all 15 core entities
@@ -12,7 +12,7 @@ Steps (10 total; 3 negative):
                      redacted unless include_pii=1)
     7. (+) include_pii=1 surfaces PII fields (audit path noted)
     8. (+) _global endpoint returns all 19 depts + entity index
-    9. (+) HOLY_MASTER_DATA.md exists per dept (under business-layer/)
+    9. (+) INSUR_MASTER_DATA.md exists per dept (under business-layer/)
    10. (+) §57.6 canonical envelope present on every entity (id / tenant_id /
            created_at / updated_at / created_by / version / is_active)
 
@@ -59,7 +59,7 @@ def step(n, label, ok, detail=""):
 
 
 def main():
-    print("\nDRILL: HOLY master-data per dept (§38 + §41.3 + §47.6 + §57.6 + §64)\n")
+    print("\nDRILL: INSUR master-data per dept (§38 + §41.3 + §47.6 + §57.6 + §64)\n")
     t0 = time.time()
 
     # ----- Step 1: router imports + catalog populated -----
@@ -80,7 +80,7 @@ def main():
     app.include_router(md.router)
     client = TestClient(app)
 
-    r = client.get("/api/v1/holy/master-data/sales")
+    r = client.get("/api/v1/insur/master-data/sales")
     body = r.json() if r.status_code == 200 else {}
     ok = (r.status_code == 200
           and "entities" in body
@@ -89,7 +89,7 @@ def main():
          ok, f"status={r.status_code} entities={len(body.get('entities', {}))}")
 
     # ----- Step 3: per-entity GET 200 + envelope fields -----
-    r = client.get("/api/v1/holy/master-data/sales/customer")
+    r = client.get("/api/v1/insur/master-data/sales/customer")
     body = r.json() if r.status_code == 200 else {}
     fields_returned = set(body.get("fields", []))
     has_envelope = CANONICAL_ENVELOPE.issubset(fields_returned)
@@ -98,25 +98,25 @@ def main():
          f"status={r.status_code} envelope_present={has_envelope}")
 
     # ----- Step 4: NEGATIVE — unknown dept -----
-    r = client.get("/api/v1/holy/master-data/not-a-real-dept")
+    r = client.get("/api/v1/insur/master-data/not-a-real-dept")
     step(4, "NEGATIVE: unknown dept → 404 (no info leak)",
          r.status_code == 404, f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 5: NEGATIVE — unknown entity -----
-    r = client.get("/api/v1/holy/master-data/sales/not-a-real-entity")
+    r = client.get("/api/v1/insur/master-data/sales/not-a-real-entity")
     step(5, "NEGATIVE: unknown entity → 404 + allowed-values hint",
          r.status_code == 404 and "customer" in r.text,
          f"got {r.status_code}: {r.text[:80]}")
 
     # ----- Step 6: NEGATIVE — no PII fields in default response -----
-    r = client.get("/api/v1/holy/master-data/sales/customer")
+    r = client.get("/api/v1/insur/master-data/sales/customer")
     body_text = r.text
     pii_leaked = [tok for tok in PII_TOKENS if tok in body_text]
     step(6, "NEGATIVE: PII fields redacted from default schema response",
          not pii_leaked, f"leaked: {pii_leaked}" if pii_leaked else "")
 
     # ----- Step 7: include_pii=1 surfaces PII fields -----
-    r = client.get("/api/v1/holy/master-data/sales/customer?include_pii=1")
+    r = client.get("/api/v1/insur/master-data/sales/customer?include_pii=1")
     body = r.json() if r.status_code == 200 else {}
     fields_returned = set(body.get("fields", []))
     pii_present = "customer_name" in fields_returned
@@ -125,7 +125,7 @@ def main():
          f"customer_name in fields={pii_present}")
 
     # ----- Step 8: _global rollup -----
-    r = client.get("/api/v1/holy/master-data/_global")
+    r = client.get("/api/v1/insur/master-data/_global")
     body = r.json() if r.status_code == 200 else {}
     depts_in_rollup = set(body.get("depts", []))
     missing = EXPECTED_DEPTS - depts_in_rollup
@@ -133,7 +133,7 @@ def main():
          r.status_code == 200 and not missing,
          f"missing depts: {sorted(missing)[:3]}" if missing else "")
 
-    # ----- Step 9: HOLY_MASTER_DATA.md exists per dept -----
+    # ----- Step 9: INSUR_MASTER_DATA.md exists per dept -----
     candidates = [Path("/global-ai-org"), REPO_ROOT / "global-ai-org"]
     gao = next((p for p in candidates if p.exists()), None)
     if gao is None:
@@ -141,9 +141,9 @@ def main():
         return
     missing_md = []
     for dept in EXPECTED_DEPTS:
-        if not (gao / "departments" / dept / "business-layer" / "HOLY_MASTER_DATA.md").exists():
+        if not (gao / "departments" / dept / "business-layer" / "INSUR_MASTER_DATA.md").exists():
             missing_md.append(dept)
-    step(9, f"HOLY_MASTER_DATA.md exists for all {len(EXPECTED_DEPTS)} depts",
+    step(9, f"INSUR_MASTER_DATA.md exists for all {len(EXPECTED_DEPTS)} depts",
          not missing_md, f"missing: {sorted(missing_md)[:3]}" if missing_md else "")
 
     # ----- Step 10: canonical envelope on every entity -----

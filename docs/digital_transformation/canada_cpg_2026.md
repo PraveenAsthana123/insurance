@@ -2,7 +2,7 @@
 
 > **Industry:** Consumer-Packaged Goods (Beverage emphasis) · **Jurisdiction:** Canada · **Year:** 2026
 >
-> Direct DT checklist for the HOLY/insur project's actual deployment
+> Direct DT checklist for the INSUR/insur project's actual deployment
 > domain. 12-domain × ~48-area checklist following the same 6-column
 > rubric as [`canada_healthcare_2026.md`](canada_healthcare_2026.md):
 > Domain / Area / What to Check / Key Questions / Canadian Context +
@@ -60,7 +60,7 @@
 | **Automation** | RPA / OT automation / RGV-AGV / packaging-line robotics | Which tasks are repetitive? | OHSA + provincial OH&S codes for robotics safety | Staff time saved + safety |
 | **Cold Chain & Traceability** | End-to-end traceability for cold/temperature-sensitive SKUs | Can we trace 1 case to source lot in ≤ 30 min? | **CFIA Safe Food for Canadians Regulations (SFCR)** + recall traceability one-up one-down | Recall cost reduction |
 
-**Composes with:** §66 HOLY_DEPT_SPEC (supply-chain dept) · §64.40
+**Composes with:** §66 INSUR_DEPT_SPEC (supply-chain dept) · §64.40
 agentic stack Layer 10 (Enterprise Apps = ERP / MES / WMS) · framework
 106 Lifecycle Management.
 
@@ -279,8 +279,8 @@ Same as [`canada_healthcare_2026.md`](canada_healthcare_2026.md) §"Per-row clas
 - **§47.6 (security 4 lenses)** — SOC2 + STRIDE + OWASP + DevSecOps gates Privacy & Security rows
 - **§53 Enterprise AI Maturity Stack** — items 35–48 align with this DT checklist's domains
 - **§63 Global AI Org Structure** — 19-dept scaffold IS the organisational substrate (Sales / Supply Chain / Operations / Marketing / Finance / HR / Legal / Procurement / Customer Support / Engineering / Security Ops + project-specific bottling/plant depts)
-- **§64 Per-Dept Business Artifacts** — every dept's HOLY_DT_STRATEGY.md (4P) maps directly to this checklist
-- **§66 per-dept HOLY_BRD + HOLY_FRD** reference compliance citations from here
+- **§64 Per-Dept Business Artifacts** — every dept's INSUR_DT_STRATEGY.md (4P) maps directly to this checklist
+- **§66 per-dept INSUR_BRD + INSUR_FRD** reference compliance citations from here
 - **§68 Observability Hub** — DT progress dashboard tile per domain
 - Sister catalogs:
   - [`canada_healthcare_2026.md`](canada_healthcare_2026.md) — the healthcare worked example (same structure, different rows)
