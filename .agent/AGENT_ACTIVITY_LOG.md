@@ -26,3 +26,23 @@ Format: `<TS> | <agent> | <verb> | <object> | <result>`
 2026-06-02T05:39:49Z | workflow-pir/REVIEW | T-20260602T053949Z | model=qwen2.5-coder:14b · final review
 2026-06-02T05:39:49Z | workflow-pir/REVIEW | T-20260602T053949Z | review saved to .agent/review_T-20260602T053949Z.md
 2026-06-02T05:39:49Z | workflow-pir/DONE | T-20260602T053949Z | all 4 stages complete
+2026-06-02T06:53:20Z | auto-fix-loop | === iteration start: apply=0 max_fixes=3 workers=2 ===
+2026-06-02T06:53:20Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-02T06:53:20Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-02T06:53:36Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-02T06:53:36Z | auto-fix-loop | dispatch #1: T-loop-1780383216-1
+2026-06-02T06:53:36Z | auto-fix-worker | start        | T-loop-1780383216-1 | role=backend target=backend/routers/openclaw.py
+2026-06-02T06:53:36Z | auto-fix-worker | classify     | T-loop-1780383216-1 | tier=large risk=medium council=council
+2026-06-02T06:55:04Z | auto-fix-worker | skip         | T-loop-1780383216-1 | model returned empty or NEEDS_HUMAN
+2026-06-02T06:55:05Z | auto-fix-loop |   → verdict=skip
+2026-06-02T06:55:05Z | auto-fix-loop | dispatch #2: T-loop-1780383305-2
+2026-06-02T06:55:05Z | auto-fix-worker | start        | T-loop-1780383305-2 | role=backend target=backend/routers/paperclip.py
+2026-06-02T06:55:05Z | auto-fix-worker | classify     | T-loop-1780383305-2 | tier=large risk=medium council=council
+2026-06-02T06:55:08Z | auto-fix-worker | skip         | T-loop-1780383305-2 | model returned empty or NEEDS_HUMAN
+2026-06-02T06:55:08Z | auto-fix-loop |   → verdict=skip
+2026-06-02T06:55:08Z | auto-fix-loop | dispatch #3: T-loop-1780383308-3
+2026-06-02T06:55:08Z | auto-fix-worker | start        | T-loop-1780383308-3 | role=backend target=backend/routers/agent_platform.py
+2026-06-02T06:55:08Z | auto-fix-worker | classify     | T-loop-1780383308-3 | tier=large risk=medium council=council
+2026-06-02T06:55:14Z | auto-fix-worker | skip         | T-loop-1780383308-3 | model returned empty or NEEDS_HUMAN
+2026-06-02T06:55:14Z | auto-fix-loop |   → verdict=skip
+2026-06-02T06:55:14Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
