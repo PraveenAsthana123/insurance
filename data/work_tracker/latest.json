@@ -1,9 +1,9 @@
 {
-  "ts": "2026-06-02T06:05:02Z",
+  "ts": "2026-06-02T06:20:01Z",
   "cron_logs": {
     "codex_approval_cron.log": {
-      "size": 558516,
-      "last_modified": "2026-06-02T06:05:02Z",
+      "size": 558981,
+      "last_modified": "2026-06-02T06:20:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -11,8 +11,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 287524,
-      "last_modified": "2026-06-02T05:58:25Z",
+      "size": 295739,
+      "last_modified": "2026-06-02T06:09:32Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -20,12 +20,12 @@
       ]
     },
     "fix_all_quick.log": {
-      "size": 400,
-      "last_modified": "2026-06-02T05:15:02Z",
+      "size": 800,
+      "last_modified": "2026-06-02T06:15:17Z",
       "tail": [
         "workforce: fleet+ollama \u2192 /mnt/deepa/insur_project/data/registry/workforce_health.json",
-        "[2026-06-02T05:15:01Z] \u2713 workforce",
-        "[2026-06-02T05:15:01Z] report \u2192 /mnt/deepa/insur_project/jobs/reports/fix_all_20260602T051501Z.md"
+        "[2026-06-02T06:15:04Z] \u2713 workforce",
+        "[2026-06-02T06:15:04Z] report \u2192 /mnt/deepa/insur_project/jobs/reports/fix_all_20260602T061504Z.md"
       ]
     },
     "insur_bot.log": {
@@ -106,21 +106,21 @@
       ]
     },
     "pending_push.log": {
-      "size": 3380,
-      "last_modified": "2026-06-02T06:00:02Z",
+      "size": 3549,
+      "last_modified": "2026-06-02T06:15:08Z",
       "tail": [
-        "[2026-06-02T06:00:01Z] push task",
-        "[2026-06-02T06:00:01Z] skip \u2014 no origin remote configured",
-        "[2026-06-02T06:00:01Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-02T06:15:02Z] push task",
+        "[2026-06-02T06:15:02Z] skip \u2014 no origin remote configured",
+        "[2026-06-02T06:15:02Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "rag_chunking.log": {
-      "size": 718,
-      "last_modified": "2026-06-02T06:05:02Z",
+      "size": 756,
+      "last_modified": "2026-06-02T06:05:10Z",
       "tail": [
-        "[2026-06-02T05:35:02Z] running chunking sweep",
         "chunked 4644 docs, wrote 0 new chunks",
-        "[2026-06-02T06:05:02Z] running chunking sweep"
+        "[2026-06-02T06:05:02Z] running chunking sweep",
+        "chunked 4644 docs, wrote 0 new chunks"
       ]
     },
     "rag_deepeval.log": {
@@ -133,21 +133,21 @@
       ]
     },
     "rag_embedding.log": {
-      "size": 804,
-      "last_modified": "2026-06-02T05:40:13Z",
+      "size": 1025,
+      "last_modified": "2026-06-02T06:10:22Z",
       "tail": [
-        "[2026-06-02T05:40:01Z] embedding sweep",
-        "chunks=30465 embedded=1600 todo=28865",
-        "embedded 200 new chunks"
+        "chunks=30465 embedded=1800 todo=28665",
+        "embed fail 181c8bc5d60f: ReadTimeout: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=20)",
+        "embedded 0 new chunks"
       ]
     },
     "rag_guardrail.log": {
-      "size": 1714,
-      "last_modified": "2026-06-02T06:00:03Z",
+      "size": 1754,
+      "last_modified": "2026-06-02T06:20:01Z",
       "tail": [
-        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260602.jsonl",
         "[2026-06-02T06:00:01Z] guardrail probes",
-        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260602.jsonl"
+        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260602.jsonl",
+        "[2026-06-02T06:20:01Z] guardrail probes"
       ]
     },
     "rag_ragas.log": {
@@ -160,21 +160,21 @@
       ]
     },
     "rag_token.log": {
-      "size": 344,
-      "last_modified": "2026-06-02T05:15:01Z",
+      "size": 430,
+      "last_modified": "2026-06-02T06:15:12Z",
       "tail": [
         "token usage: 1 models tallied for 2026-06-01",
-        "[2026-06-02T05:15:01Z] token usage tally",
-        "token usage: 1 models tallied for 2026-06-01"
+        "[2026-06-02T06:15:02Z] token usage tally",
+        "token usage: 1 models tallied for 2026-06-02"
       ]
     },
     "work_tracker.log": {
-      "size": 5355,
-      "last_modified": "2026-06-02T06:00:02Z",
+      "size": 5670,
+      "last_modified": "2026-06-02T06:15:31Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=38, fleet=237)",
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=38, fleet=237)",
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=38, fleet=237)"
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=39, fleet=237)",
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=39, fleet=237)"
       ]
     }
   },
@@ -198,12 +198,12 @@
     "audit_rows": 0,
     "last_modified": null
   },
-  "cron_entries": 38,
+  "cron_entries": 39,
   "e2e_runs": {
     "count": 1,
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 32
+    "count": 34
   }
 }
