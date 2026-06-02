@@ -311,7 +311,21 @@ def main() -> int:
         fail(f"f-string SQL violations: {bad}")
     ok("no f-string SQL on table names in repositories")
 
-    step(23, "NEGATIVE — data manifest exists and not 100% failure")
+    step(23, "voice + coordination scripts present (operator-facing tools)")
+    voice_scripts = [
+        REPO_ROOT / "scripts" / "voice_command.sh",
+        REPO_ROOT / "scripts" / "setup_advanced_models.sh",
+        REPO_ROOT / "scripts" / "setup_advanced_dev_environment.sh",
+        REPO_ROOT / "scripts" / "audit_codex_work.sh",
+        REPO_ROOT / "docs" / "EDITOR_AGNOSTIC_SETUP.md",
+        REPO_ROOT / "docs" / "CLAUDE_CODEX_COORDINATION.md",
+    ]
+    missing = [p for p in voice_scripts if not p.is_file()]
+    if missing:
+        fail(f"missing voice/coord files: {[str(p.relative_to(REPO_ROOT)) for p in missing]}")
+    ok(f"all {len(voice_scripts)} voice + coordination files present")
+
+    step(24, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
     if not manifest.is_file():
         fail(f"missing data manifest: {manifest}")
@@ -322,7 +336,7 @@ def main() -> int:
         fail(f"zero successful downloads in manifest: {statuses}")
     ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
 
-    print(f"\nALL 23 STEPS PASSED")
+    print(f"\nALL 24 STEPS PASSED")
     return 0
 
 
