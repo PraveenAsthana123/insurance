@@ -1,0 +1,110 @@
+{
+  "elapsed_s": 102.7,
+  "results": {
+    "rag/chunking": {
+      "exit": 0,
+      "duration_s": 15.17,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] running chunking sweep",
+        "chunked 4644 docs, wrote 30465 new chunks"
+      ],
+      "stderr_tail": []
+    },
+    "rag/embedding": {
+      "exit": 0,
+      "duration_s": 15.45,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] embedding sweep",
+        "chunks=1905 embedded=0 todo=1905",
+        "embedded 200 new chunks"
+      ],
+      "stderr_tail": []
+    },
+    "rag/token": {
+      "exit": 0,
+      "duration_s": 0.31,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] token usage tally",
+        "token usage: 1 models tallied for 2026-06-01"
+      ],
+      "stderr_tail": []
+    },
+    "rag/guardrail": {
+      "exit": 1,
+      "duration_s": 0.04,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] guardrail probes"
+      ],
+      "stderr_tail": [
+        "/mnt/deepa/insur_project/scripts/basic_rag_ops_runner.sh: line 155: OUT: unbound variable"
+      ]
+    },
+    "rag/deepeval": {
+      "exit": 0,
+      "duration_s": 93.01,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] deepeval suite",
+        "deepeval: no audit rows yet \u2014 skipped"
+      ],
+      "stderr_tail": []
+    },
+    "rag/ragas": {
+      "exit": 0,
+      "duration_s": 102.69,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] ragas suite",
+        "ragas: skipped (no audit)"
+      ],
+      "stderr_tail": [
+        "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/transformers/utils/hub.py:105: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.",
+        "  warnings.warn("
+      ]
+    },
+    "pending/boot": {
+      "exit": 0,
+      "duration_s": 74.93,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] verifying backend create_app()",
+        "BOOT_OK routes=177"
+      ],
+      "stderr_tail": []
+    },
+    "pending/data-manifest": {
+      "exit": 0,
+      "duration_s": 0.06,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] verifying data manifest",
+        "[2026-06-02T01:48:39Z] data manifest: ok=13 fail=0"
+      ],
+      "stderr_tail": []
+    },
+    "pending/module-sync": {
+      "exit": 0,
+      "duration_s": 0.02,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] module-sync drift check",
+        "[2026-06-02T01:48:39Z] scaffolder lists 26 \u00b7 template dir has 26",
+        "[2026-06-02T01:48:39Z] in sync"
+      ],
+      "stderr_tail": []
+    },
+    "pending/claude-md-drift": {
+      "exit": 0,
+      "duration_s": 0.01,
+      "stdout_tail": [
+        "[2026-06-02T01:48:39Z] CLAUDE.md \u00a772 module-count drift check",
+        "[2026-06-02T01:48:39Z] stated=26  actual=26",
+        "[2026-06-02T01:48:39Z] in sync"
+      ],
+      "stderr_tail": []
+    },
+    "fleet/seed": {
+      "exit": 0,
+      "duration_s": 0.3,
+      "stdout_tail": [
+        "Seeded 237 tasks \u2192 /mnt/deepa/insur_project/jobs/fleet/tasks.jsonl"
+      ],
+      "stderr_tail": []
+    }
+  }
+}
