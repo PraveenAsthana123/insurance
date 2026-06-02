@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_bmad_installed.py
-# auto-generated explainer · 2026-06-02T06:30:12Z
+# auto-generated explainer · 2026-06-02T06:35:40Z
 
 ## Purpose
 Drill: BMad methodology installed in the project (§56 gate-2 follow-through).

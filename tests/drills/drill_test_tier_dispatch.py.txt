@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_test_tier_dispatch.py
-# auto-generated explainer · 2026-06-02T06:30:12Z
+# auto-generated explainer · 2026-06-02T06:35:40Z
 
 ## Purpose
 Drill: HOLY test-tier dispatch (§43, §65.8).

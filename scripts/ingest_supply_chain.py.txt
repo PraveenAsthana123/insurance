@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/ingest_supply_chain.py
-# auto-generated explainer · 2026-06-02T06:30:12Z
+# auto-generated explainer · 2026-06-02T06:35:39Z
 
 ## Purpose
 ingest_supply_chain.py — load Supply Chain Analysis CSV into canonical star schema.

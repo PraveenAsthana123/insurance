@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/ml/insurance/__init__.py
-# auto-generated explainer · 2026-06-02T06:30:14Z
+# auto-generated explainer · 2026-06-02T06:35:40Z
 
 ## Purpose
 Insurance-specific ML pipeline runner — wires INSUR_PIPELINES.md manifests

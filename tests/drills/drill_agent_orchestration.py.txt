@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_agent_orchestration.py
-# auto-generated explainer · 2026-06-02T06:30:13Z
+# auto-generated explainer · 2026-06-02T06:35:40Z
 
 ## Purpose
 Drill: HOLY agent orchestration patterns (§43, §64.43 #5/#8/#9/#10/#12).

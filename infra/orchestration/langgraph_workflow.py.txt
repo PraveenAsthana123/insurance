@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # infra/orchestration/langgraph_workflow.py
-# auto-generated explainer · 2026-06-02T06:30:12Z
+# auto-generated explainer · 2026-06-02T06:35:41Z
 
 ## Purpose
 LangGraph workflow template — parallel planner → coder → reviewer → tester DAG.

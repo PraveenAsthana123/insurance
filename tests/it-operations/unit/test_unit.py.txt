@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/it-operations/unit/test_unit.py
-# auto-generated explainer · 2026-06-02T06:30:13Z
+# auto-generated explainer · 2026-06-02T06:35:40Z
 
 ## Purpose
 Tier 1 — Unit tests for it-operations.

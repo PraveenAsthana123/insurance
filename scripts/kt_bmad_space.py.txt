@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/kt_bmad_space.py
-# auto-generated explainer · 2026-06-02T06:30:11Z
+# auto-generated explainer · 2026-06-02T06:35:39Z
 
 ## Purpose
 Create a lightweight KT + BMAD workspace and optionally submit it to OpenClaw.
