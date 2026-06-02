@@ -30,12 +30,16 @@ PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/pytho
 CHUNK="${CHUNK:-4}"
 MODEL="${MODEL:-base}"
 TTS="${VOICE_TTS:-true}"
+LANGUAGE="${VOICE_LANGUAGE:-en}"
+PROMPT="${VOICE_INITIAL_PROMPT:-Insurance claims underwriting policy. Go send stop wait change delete add modify update.}"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --chunk)  CHUNK="$2"; shift 2;;
-        --model)  MODEL="$2"; shift 2;;
-        --no-tts) TTS="false"; shift;;
+        --chunk)    CHUNK="$2"; shift 2;;
+        --model)    MODEL="$2"; shift 2;;
+        --language) LANGUAGE="$2"; shift 2;;
+        --prompt)   PROMPT="$2"; shift 2;;
+        --no-tts)   TTS="false"; shift;;
         *) echo "unknown arg: $1"; exit 1;;
     esac
 done
@@ -68,7 +72,7 @@ echo "  TRIGGERS: stop · send · go · wait · change · add · delete · new l
 echo "  ► focus your target window, say 'go' to start, 'stop' to exit"
 echo
 
-"$PYTHON" - "$CHUNK" "$MODEL" "$MIC_SRC" "$TTS" "$REPO" <<'PYEOF'
+"$PYTHON" - "$CHUNK" "$MODEL" "$MIC_SRC" "$TTS" "$REPO" "$LANGUAGE" "$PROMPT" <<'PYEOF'
 import os, re, subprocess, sqlite3, sys, tempfile, time, uuid, warnings
 from pathlib import Path
 warnings.filterwarnings("ignore")
@@ -77,6 +81,8 @@ CHUNK = int(sys.argv[1]); MODEL = sys.argv[2]
 MIC_SRC = sys.argv[3] if len(sys.argv) > 3 else ""
 TTS_ENABLED = sys.argv[4].lower() == "true" if len(sys.argv) > 4 else False
 REPO = Path(sys.argv[5])
+LANGUAGE = sys.argv[6] if len(sys.argv) > 6 else "en"
+INITIAL_PROMPT = sys.argv[7] if len(sys.argv) > 7 else ""
 DB_PATH = REPO / "data" / "voice_history.db"
 
 import whisper
@@ -166,7 +172,13 @@ def get_db(wav):
 
 
 def transcribe(wav):
-    try: return model.transcribe(str(wav), fp16=False)["text"].strip()
+    try:
+        # language="en" forces English decoder (handles Indian English better)
+        # initial_prompt biases whisper toward expected vocabulary
+        kw = {"fp16": False, "language": LANGUAGE}
+        if INITIAL_PROMPT:
+            kw["initial_prompt"] = INITIAL_PROMPT
+        return model.transcribe(str(wav), **kw)["text"].strip()
     except Exception as e: return f"[ERR:{e}]"
 
 
