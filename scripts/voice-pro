@@ -1,0 +1,245 @@
+#!/usr/bin/env bash
+# voice-pro — continuous voice-to-input with trigger-word commands.
+#
+# Listens in chunks, transcribes each chunk, types into the focused window
+# via pynput (no sudo / no xdotool needed). Recognizes trigger words to
+# control submit / edit / pause / stop.
+#
+# Trigger vocabulary:
+#   stop                        exit
+#   send / submit               press Enter (submit form)
+#   go / start                  start new dictation
+#   wait / pause                pause listening (resume with "go")
+#   change / modify / update    select & overwrite last sentence
+#   add                         append-only mode (default)
+#   delete / clear / delete the text   clear current input (Ctrl+A then Delete)
+#   new line                    press Enter without submitting (Shift+Enter)
+#
+# Usage:
+#   bash scripts/voice-pro
+#   bash scripts/voice-pro --chunk 4 --model small
+#
+# Pre-reqs:
+#   - parecord OR arecord -D hw:1,0
+#   - whisper (already installed)
+#   - pynput (already installed)
+#
+# The script types into whatever window has KEYBOARD FOCUS — click into
+# Claude Code's chat input before saying "go".
+
+set -uo pipefail
+
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON="${PYTHON:-/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python}"
+CHUNK="${CHUNK:-4}"
+MODEL="${MODEL:-base}"
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --chunk)  CHUNK="$2"; shift 2;;
+        --model)  MODEL="$2"; shift 2;;
+        *) echo "unknown arg: $1"; exit 1;;
+    esac
+done
+
+find_mic_source() {
+    pactl list sources short 2>/dev/null | \
+        awk '$2 ~ /^alsa_input\./ {print $2; exit}'
+}
+MIC_SRC="$(find_mic_source)"
+
+red()   { printf "\033[1;31m%s\033[0m\n" "$*"; }
+green() { printf "\033[1;32m%s\033[0m\n" "$*"; }
+blue()  { printf "\033[1;34m%s\033[0m\n" "$*"; }
+
+blue "═══ voice-pro listener ═══"
+echo "  trigger words: stop, send, go, wait, change, add, delete, new line"
+echo "  chunk:         ${CHUNK}s"
+echo "  model:         whisper-${MODEL}"
+echo "  mic source:    ${MIC_SRC:-arecord hw:1,0}"
+echo "  ► click into your target input window NOW (Claude Code, etc.)"
+echo "  ► then say 'go' to start dictating, 'stop' to exit"
+echo
+
+# ─── start the Python listener loop ─────────────────────────────────────
+"$PYTHON" - "$CHUNK" "$MODEL" "$MIC_SRC" <<'PYEOF'
+import os
+import re
+import subprocess
+import sys
+import tempfile
+import time
+import warnings
+from pathlib import Path
+
+warnings.filterwarnings("ignore")
+
+CHUNK = int(sys.argv[1])
+MODEL = sys.argv[2]
+MIC_SRC = sys.argv[3] if len(sys.argv) > 3 else ""
+
+import whisper
+from pynput.keyboard import Controller, Key
+
+kbd = Controller()
+model = whisper.load_model(MODEL)
+print(f"[ready] whisper-{MODEL} loaded")
+
+# ── trigger vocabulary ─────────────────────────────────────────────────
+TRIGGERS_STOP   = {"stop", "stop listening", "exit", "quit"}
+TRIGGERS_SUBMIT = {"send", "submit", "send it", "send message"}
+TRIGGERS_START  = {"go", "start", "begin", "listening"}
+TRIGGERS_PAUSE  = {"wait", "pause", "hold"}
+TRIGGERS_CLEAR  = {"delete", "clear", "delete the text", "delete text",
+                   "clear input", "clear it", "clear the input"}
+TRIGGERS_EDIT   = {"change", "modify", "update", "change it", "modify it",
+                   "update text", "update the text"}
+TRIGGERS_NEWL   = {"new line", "newline", "line break", "break"}
+
+WORD = re.compile(r"\w+")
+
+
+def record_chunk(out_path: Path) -> bool:
+    if MIC_SRC and any(cmd in os.environ.get("PATH", "") + ":/usr/bin"
+                       for cmd in ["parecord"]):
+        proc = subprocess.Popen(
+            ["parecord", f"--device={MIC_SRC}", "--record",
+             "--rate=16000", "--channels=1", "--format=s16le",
+             "--file-format=wav", str(out_path)],
+            stderr=subprocess.DEVNULL,
+        )
+        time.sleep(CHUNK)
+        proc.terminate()
+        proc.wait(timeout=2)
+    else:
+        subprocess.run(
+            ["arecord", "-q", "-D", "hw:1,0", "-f", "S16_LE", "-r", "16000",
+             "-c", "2", "-d", str(CHUNK), str(out_path)],
+            check=True,
+        )
+    return out_path.exists() and out_path.stat().st_size > 0
+
+
+def transcribe(wav: Path) -> str:
+    try:
+        return model.transcribe(str(wav), fp16=False)["text"].strip()
+    except Exception as e:
+        print(f"[err] transcribe: {e}")
+        return ""
+
+
+def type_text(text: str) -> None:
+    """Inject text into focused window."""
+    if not text:
+        return
+    try:
+        kbd.type(text)
+    except Exception as e:
+        print(f"[err] type: {e}")
+
+
+def press(*keys) -> None:
+    try:
+        for k in keys[:-1]:
+            kbd.press(k)
+        kbd.press(keys[-1])
+        kbd.release(keys[-1])
+        for k in reversed(keys[:-1]):
+            kbd.release(k)
+    except Exception as e:
+        print(f"[err] press: {e}")
+
+
+def submit_message() -> None:
+    print("  → SEND (Enter)")
+    press(Key.enter)
+
+
+def clear_input() -> None:
+    print("  → CLEAR (Ctrl+A, Delete)")
+    press(Key.ctrl, "a")
+    time.sleep(0.05)
+    press(Key.delete)
+
+
+def newline() -> None:
+    print("  → NEWLINE (Shift+Enter)")
+    press(Key.shift, Key.enter)
+
+
+def has_trigger(text: str, triggers: set) -> str | None:
+    """Return matched trigger if present, else None."""
+    norm = text.lower().strip(" .,!?")
+    if norm in triggers:
+        return norm
+    for trig in triggers:
+        if norm.endswith(trig) or norm.startswith(trig):
+            return trig
+    return None
+
+
+# ── main loop ──────────────────────────────────────────────────────────
+listening = False
+print("\n[idle] say 'go' to start, 'stop' to exit\n")
+
+while True:
+    wav_path = Path(tempfile.mkstemp(suffix=".wav")[1])
+    try:
+        if not record_chunk(wav_path):
+            time.sleep(0.5)
+            continue
+
+        text = transcribe(wav_path)
+        if not text:
+            continue
+
+        norm = text.lower().strip(" .,!?")
+        print(f"[heard] {text!r}")
+
+        # ── trigger dispatch ──
+        if has_trigger(text, TRIGGERS_STOP):
+            print("[exit] stopping")
+            break
+
+        if has_trigger(text, TRIGGERS_START):
+            listening = True
+            print("[active] listening — speak now")
+            continue
+
+        if has_trigger(text, TRIGGERS_PAUSE):
+            listening = False
+            print("[paused] say 'go' to resume")
+            continue
+
+        if not listening:
+            print("  (paused — say 'go' to activate)")
+            continue
+
+        if has_trigger(text, TRIGGERS_SUBMIT):
+            submit_message()
+            continue
+
+        if has_trigger(text, TRIGGERS_CLEAR):
+            clear_input()
+            continue
+
+        if has_trigger(text, TRIGGERS_NEWL):
+            newline()
+            continue
+
+        if has_trigger(text, TRIGGERS_EDIT):
+            # edit mode: clear last sentence, then await replacement
+            print("  → EDIT MODE (clearing last sentence; next chunk replaces)")
+            press(Key.ctrl, "a")
+            time.sleep(0.05)
+            press(Key.delete)
+            continue
+
+        # default: type the text + trailing space
+        type_text(text + " ")
+
+    finally:
+        wav_path.unlink(missing_ok=True)
+
+print("[done]")
+PYEOF
