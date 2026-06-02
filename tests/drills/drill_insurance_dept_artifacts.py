@@ -325,7 +325,25 @@ def main() -> int:
         fail(f"missing voice/coord files: {[str(p.relative_to(REPO_ROOT)) for p in missing]}")
     ok(f"all {len(voice_scripts)} voice + coordination files present")
 
-    step(24, "NEGATIVE — data manifest exists and not 100% failure")
+    step(24, "global production-readiness templates — 18 modules available")
+    g_templates = Path("/home/praveen/.claude/templates/production-readiness")
+    if not g_templates.is_dir():
+        ok("global templates dir absent (not in this env) — skipping")
+    else:
+        expected = {
+            "nginx-lb", "cdn", "external-feeds", "compliance", "load-testing",
+            "adr-template", "cron-plan", "cron-installer", "identity-provider",
+            "backup-strategy", "agent-orchestration", "policy-engine",
+            "observability", "voice-command", "advanced-models",
+            "multi-session-coord", "feature-flags", "secrets-management",
+        }
+        actual = {p.name for p in g_templates.iterdir() if p.is_dir()}
+        missing = expected - actual
+        if missing:
+            fail(f"global modules missing: {missing}")
+        ok(f"all 18 global modules present at {g_templates}")
+
+    step(25, "NEGATIVE — data manifest exists and not 100% failure")
     manifest = REPO_ROOT / "data" / "insurance" / "_manifest.json"
     if not manifest.is_file():
         fail(f"missing data manifest: {manifest}")
@@ -336,7 +354,7 @@ def main() -> int:
         fail(f"zero successful downloads in manifest: {statuses}")
     ok(f"data manifest: {n_ok}/{len(statuses)} ok (rest skipped/fail expected)")
 
-    print(f"\nALL 24 STEPS PASSED")
+    print(f"\nALL 25 STEPS PASSED")
     return 0
 
 
