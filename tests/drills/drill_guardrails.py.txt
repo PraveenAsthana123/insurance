@@ -1,12 +1,12 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_guardrails.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
-Drill: §68.5 Guardrails surface — iteration 2b of HOLY Observability Hub.
+Drill: §68.5 Guardrails surface — iteration 2b of INSUR Observability Hub.
 
 Read-only aggregation over data/agent-supervisor/guardrail_decisions.jsonl
-(env-overridable via HOLY_GUARDRAIL_LOG). The WRITE side (middleware
+(env-overridable via INSUR_GUARDRAIL_LOG). The WRITE side (middleware
 appending rows when a guardrail fires) is a separate iteration — this
 drill seeds the JSONL with sample rows + asserts the read contract.
 
@@ -48,7 +48,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH, HOLY_GUARDRAIL_LOG
+- Env vars: INSUR_AUDIT_PATH, INSUR_GUARDRAIL_LOG
 
 ## Process
 ### Functions

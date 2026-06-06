@@ -1,16 +1,16 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_per_dept_artifacts.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
 Drill: §64 + §65 release blocker — every dept MUST have FULL artifact set.
 
 Updated 2026-05-23 to cover the artifacts the prior version undercounted:
 data-types/* (9 per dept), docs/{hld,lld,sad,c4-model,network-flow}/* (5 per
-dept), HOLY_TECH_STACK.md (1 per dept).
+dept), INSUR_TECH_STACK.md (1 per dept).
 
 Total mandatory artifacts per dept after this update:
-  - 25 business-layer MD files (last added: HOLY_AGENTIC_STACK §64.40.8, 2026-05-25;
+  - 25 business-layer MD files (last added: INSUR_AGENTIC_STACK §64.40.8, 2026-05-25;
         remote-parallel batch §66 2026-05-24: TRANSACTIONS, PIPELINES,
         REPORTS_CATALOG, DEMO_STORIES_BY_ROLE, GRAPH_AI, DATA_DOWNLOADS)
   - 30 role-scoped MD files (15 dashboards + 15 reports)
@@ -24,7 +24,7 @@ Steps (10 total; 3 negative):
     2. (+) 25 business-layer MD artifacts present per dept (= 475 files)
     3. (-) NEGATIVE — known-bad dept name produces a clear failure
     4. (+) Each artifact file is non-empty (≥ 200 bytes)
-    5. (+) Each artifact starts with the standard HOLY header
+    5. (+) Each artifact starts with the standard INSUR header
     6. (-) NEGATIVE — script does NOT silently mark missing files as OK
     7. (+) Role dashboards: 15 dashboards + 15 reports per dept (= 570 files)
     8. (+) Data-type stubs: 9 per dept (= 171 files; per §64.26)
@@ -56,5 +56,5 @@ Exit 0 on PASS, 1 on any missing artifact.
 - RESOURCES: disk_io
 - 15 markdown artifacts per dept (per §64.18 + §64.31 + §64.33 + §64.35 + §64.38)
 - 12 mandatory AI-flavor subdirs per dept (per operator 2026-05-23 brief)
-- 3 mandatory B2B/B2C/B2E use-case subdirs per dept (per HOLY brief)
+- 3 mandatory B2B/B2C/B2E use-case subdirs per dept (per INSUR brief)
 - ----- Step 1: all 19 depts exist -----

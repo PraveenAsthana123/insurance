@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_insurance_dept_artifacts.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
 Drill: insurance dept artifacts (§64 + §66 + §43).
@@ -15,7 +15,7 @@ Steps (10 total; 4 negative):
     7. (+) BUSINESS_MODELS covers B2C + B2B + B2E sections per dept
     8. (-) NEGATIVE — no insurance dept artifacts under _legacy/ (preserved generic depts unchanged)
     9. (-) NEGATIVE — no INSUR_*.md file is empty (< 200 bytes)
-   10. (-) NEGATIVE — FRD does NOT contain HOLY_ prefix references in active depts
+   10. (-) NEGATIVE — FRD does NOT contain INSUR_ prefix references in active depts
    11. (-) NEGATIVE — data manifest exists and has no 100% failure rate
 
 # RESOURCES: disk_io

@@ -24,6 +24,8 @@ from typing import Any
 import httpx
 import redis
 
+from agent_observability import append_trace, attach_trace, build_trace
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -36,6 +38,20 @@ MODEL = os.environ.get("MODEL", "gemma3:1b")
 AGENT_ID = os.environ.get("AGENT_ID") or socket.gethostname()
 POLL_TIMEOUT = int(os.environ.get("POLL_TIMEOUT", "5"))
 OLLAMA_TIMEOUT = float(os.environ.get("OLLAMA_TIMEOUT", "60"))
+STARTUP_SMOKE = os.environ.get("AGENT_STARTUP_SMOKE", "0") == "1"
+
+
+def write_heartbeat(r: redis.Redis, state: str, processed: int, task_id: str = "") -> None:
+    """Publish lightweight liveness/task state for supervisor dashboards."""
+    payload = {
+        "kind": "simple",
+        "agent_id": AGENT_ID,
+        "state": state,
+        "processed": processed,
+        "updated_at": time.time(),
+        "last_task_id": task_id,
+    }
+    r.set(f"agent:heartbeat:{AGENT_ID}", json.dumps(payload), ex=90)
 
 
 def call_ollama(prompt: str) -> dict[str, Any]:
@@ -76,18 +92,23 @@ def main() -> int:
         log.error(f"redis unreachable: {e}")
         return 1
 
-    smoke = call_ollama("Reply with 'OK' only.")
-    if smoke["ok"]:
-        log.info(f"ollama OK ({smoke['duration_ms']}ms)")
+    if STARTUP_SMOKE:
+        smoke = call_ollama("Reply with 'OK' only.")
+        if smoke["ok"]:
+            log.info(f"ollama OK ({smoke['duration_ms']}ms)")
+        else:
+            log.warning(f"ollama smoke failed: {smoke.get('error')} — will retry on each task")
     else:
-        log.warning(f"ollama smoke failed: {smoke.get('error')} — will retry on each task")
+        log.info("ollama startup smoke skipped; task execution remains the proof signal")
 
     processed = 0
+    write_heartbeat(r, "idle", processed)
     while True:
         try:
             popped = r.brpop("tasks", timeout=POLL_TIMEOUT)
             if popped is None:
                 # Idle — keep polling
+                write_heartbeat(r, "idle", processed)
                 continue
             _key, task_json = popped
             task = json.loads(task_json)
@@ -95,6 +116,7 @@ def main() -> int:
             prompt = task.get("prompt", "")
 
             log.info(f"task {task_id} picked")
+            write_heartbeat(r, "running", processed, task_id)
             result = call_ollama(prompt)
 
             output = {
@@ -105,8 +127,12 @@ def main() -> int:
                 **result,
                 "completed_at": time.time(),
             }
+            trace = build_trace("simple", task, output, MODEL, AGENT_ID)
+            output = attach_trace(output, trace)
+            append_trace(trace)
             r.lpush("done", json.dumps(output))
             processed += 1
+            write_heartbeat(r, "idle", processed, task_id)
             log.info(f"task {task_id} done ({result.get('duration_ms')}ms, processed={processed})")
         except KeyboardInterrupt:
             log.info(f"shutdown after {processed} tasks")

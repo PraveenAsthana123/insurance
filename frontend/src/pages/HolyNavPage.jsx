@@ -162,9 +162,9 @@ export default function HolyNavPage() {
   if (!departmentId) {
     return (
       <div className="insur-nav-container">
-        <h1>INSUR Beverage — Department Navigator</h1>
+        <h1>Insurance AI — Department Navigator</h1>
         <p className="insur-subtitle">
-          Pick a department to explore its processes, sub-processes, data inputs, AI models, outputs, and KPIs.
+          Pick an insurance department to explore its workflows, sub-processes, data inputs, AI models, outputs, KPIs, and governance controls.
           Filter by audience (B2B / B2C / B2E) and ask the AI council about any process.
         </p>
         <div className="insur-dept-grid">
@@ -205,14 +205,14 @@ export default function HolyNavPage() {
     <div className="insur-nav-page">
       <aside className="insur-sidebar">
         <div className="insur-sidebar-header">
-          <Link to="/insur" className="insur-back-link">← All INSUR depts</Link>
+          <Link to="/insur" className="insur-back-link">← All insurance depts</Link>
           <h2>{nav.display_name}</h2>
           <p className="insur-sidebar-sub">
             {filteredNav.left_nav.length} processes · {totalVisibleSubs} sub-processes shown
           </p>
           <div className="insur-spec-link-wrap">
             <button type="button" onClick={openSpec} className="insur-spec-link">
-              📄 View full INSUR_SPEC.md
+              📄 View full insurance spec
             </button>
           </div>
 
@@ -415,7 +415,7 @@ export default function HolyNavPage() {
           <div className="insur-spec-modal-backdrop" onClick={() => setSpecOpen(false)}>
             <div className="insur-spec-modal" onClick={(e) => e.stopPropagation()}>
               <div className="insur-spec-modal-header">
-                <h2>INSUR_SPEC.md — {nav.display_name}</h2>
+                <h2>Insurance spec — {nav.display_name}</h2>
                 <button type="button" onClick={() => setSpecOpen(false)} className="insur-spec-close">
                   ✕
                 </button>

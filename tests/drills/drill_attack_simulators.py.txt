@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_attack_simulators.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:40Z
 
 ## Purpose
-Drill: HOLY attack-simulation generators (§43, §64.32.3 + §42).
+Drill: INSUR attack-simulation generators (§43, §64.32.3 + §42).
 
 Steps (10 total; 4 negative assertions):
     1.  (+) All 12 mandatory attack classes have generators registered

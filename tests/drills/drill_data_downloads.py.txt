@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_data_downloads.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
-Drill: HOLY data-downloads router (§38 + §47.6 + §57.6 + §64.6 + §66).
+Drill: INSUR data-downloads router (§38 + §47.6 + §57.6 + §64.6 + §66).
 
 Steps (10 total; 3 negative):
     1. (+) router imports + ALLOWED_EXTENSIONS = {csv, json, svg}
@@ -15,7 +15,7 @@ Steps (10 total; 3 negative):
     7. (-) NEGATIVE — path traversal attempt (../etc/passwd) → 400
     8. (-) NEGATIVE — malformed filename (CapitalLetters.csv, bad ext) → 400
     9. (+) _global rollup returns all 19 depts + n_datasets_total ≥ 21
-   10. (+) HOLY_DATA_DOWNLOADS.md exists per dept (under business-layer/)
+   10. (+) INSUR_DATA_DOWNLOADS.md exists per dept (under business-layer/)
 
 # RESOURCES: downloads_router disk_io
 

@@ -1,12 +1,12 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/reports.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
-HOLY reports-catalog router — dept-level rollup of standard reports.
+INSUR reports-catalog router — dept-level rollup of standard reports.
 
 Sibling to the per-role reports at
-    global-ai-org/departments/<dept>/reports-by-role/<role>/HOLY_REPORTS.md
+    global-ai-org/departments/<dept>/reports-by-role/<role>/INSUR_REPORTS.md
 This endpoint surfaces the DEPT-level unified catalog: every standard
 report the dept publishes (15 archetypes per §64.37.2) with cadence,
 format, owner role, and audience.
@@ -16,9 +16,9 @@ per audience) + §57.6 (canonical envelope) + §59 MDD + §64.37 (per-role
 reports sibling) + §66.
 
 Endpoints:
-  GET /api/v1/holy/reports/{dept}
-  GET /api/v1/holy/reports/{dept}/{report_id}
-  GET /api/v1/holy/reports/_global
+  GET /api/v1/insur/reports/{dept}
+  GET /api/v1/insur/reports/{dept}/{report_id}
+  GET /api/v1/insur/reports/_global
 
 ## Imports
 - from `__future__` import annotations
@@ -26,7 +26,7 @@ Endpoints:
 - from `_` import time
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 
 ## Inputs
 (no CLI / env inputs — library module or implicit)
@@ -47,5 +47,5 @@ Endpoints:
 - Canonical 15 owner roles per global §63 scaffold (15 roles per dept).
 - The 15 standard report archetypes per global §64.37.2 — same shape
 - every dept, dept-specific titles. KEEP ALIGNED with the scaffolder's
-- standard_reports list in scaffold-holy-reports-catalog.py.
+- standard_reports list in scaffold-insur-reports-catalog.py.
 - IMPORTANT — _global BEFORE /{dept} per §66.3 FastAPI greedy-match trap.

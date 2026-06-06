@@ -89,8 +89,10 @@ def create_app() -> FastAPI:
     from routers.openclaw import router as openclaw_router
     from routers.paperclip import router as paperclip_router
     from routers.agent_platform import router as agent_platform_router
+    from routers.agent_supervisor import router as agent_supervisor_router
     from routers.admin import router as admin_router
     from routers.monitoring import router as monitoring_router
+    from routers.holy_components import router as holy_components_router
     from routers.master_data import router as master_data_router
     from routers.transactions import router as transactions_router
     from routers.pipelines import router as pipelines_router
@@ -127,8 +129,10 @@ def create_app() -> FastAPI:
     app.include_router(openclaw_router)    # /api/v1/openclaw/* (parallel-agent integration)
     app.include_router(paperclip_router)   # /api/v1/paperclip/* (parallel-agent integration)
     app.include_router(agent_platform_router)  # /api/v1/agent-platform/* (unified agent tool setup/status)
+    app.include_router(agent_supervisor_router)  # /api/v1/agent-supervisor/* (live agent fleet queues, heartbeats, schedules, results)
     app.include_router(admin_router)            # /api/v1/admin/* (cross-tenant compliance/reporting reads — RBAC-gated)
     app.include_router(monitoring_router)  # /api/v1/insur/monitoring/* (per-dept cron + pipeline health)
+    app.include_router(holy_components_router)  # /api/v1/holy/components/<op> — workspace SpecComponentCard ops (run/view/edit/validate)
     app.include_router(master_data_router) # /api/v1/insur/master-data/* (per-dept SAP-style master data)
     app.include_router(transactions_router) # /api/v1/insur/transactions/* (unified chronological audit feed per dept)
     app.include_router(pipelines_router)    # /api/v1/insur/pipelines/* (5-phase automated pipeline catalog per dept)

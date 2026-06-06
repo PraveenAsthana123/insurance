@@ -44,7 +44,7 @@ RUN curl -fsSL -o /tmp/trivy.tar.gz \
 # in this container later, add: pip install playwright + playwright install chromium
 
 # Copy agent code (all variants share the image; CMD picks one)
-COPY agent.py seeder.py council_agent.py council_seeder.py test_agent.py ./
+COPY agent.py seeder.py council_agent.py council_seeder.py test_agent.py agent_observability.py ./
 
 # Run as non-root for security
 RUN useradd -m -u 1000 agent && chown -R agent:agent /app

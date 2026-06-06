@@ -1,21 +1,21 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/demo_stories.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
-HOLY demo-stories router — per-dept × per-role demo scripts.
+INSUR demo-stories router — per-dept × per-role demo scripts.
 
-Sibling to HOLY_DEMO_STORY (per dept, §64.1). This router surfaces the
+Sibling to INSUR_DEMO_STORY (per dept, §64.1). This router surfaces the
 15 role-scoped demo scripts catalogued at
-    global-ai-org/departments/<dept>/business-layer/HOLY_DEMO_STORIES_BY_ROLE.md
+    global-ai-org/departments/<dept>/business-layer/INSUR_DEMO_STORIES_BY_ROLE.md
 
 Composes with global §38 (demo runs audit-rowed) + §47.6 (RBAC) +
 §57.6 (canonical envelope) + §63 (15-role scaffold) + §64.1 + §66.
 
 Endpoints:
-  GET /api/v1/holy/demo-stories/{dept}            — all 15 role demos
-  GET /api/v1/holy/demo-stories/{dept}/{role}     — single role demo detail
-  GET /api/v1/holy/demo-stories/_global           — cross-dept inventory
+  GET /api/v1/insur/demo-stories/{dept}            — all 15 role demos
+  GET /api/v1/insur/demo-stories/{dept}/{role}     — single role demo detail
+  GET /api/v1/insur/demo-stories/_global           — cross-dept inventory
 
 ## Imports
 - from `__future__` import annotations
@@ -23,7 +23,7 @@ Endpoints:
 - from `_` import time
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 
 ## Inputs
 (no CLI / env inputs — library module or implicit)

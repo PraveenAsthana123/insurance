@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/pii_inventory_service.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 §68.6 PII inventory — answers "where does PII live? what's redacted?"
@@ -21,7 +21,7 @@ per-dept is already implicitly tenant-scoped via dept filter) + §47.6
 (SOC2 CC6.2 PII handling) + §57.7 (graceful degradation) + §68
 (Observability Hub iter 2).
 
-The "leak" surface is intentionally heuristic-only: scans the holy_reads
+The "leak" surface is intentionally heuristic-only: scans the insur_reads
 audit log for plaintext PII patterns that should have been redacted. A
 hit means either (a) a real leak (operator should investigate) OR (b)
 the PII heuristic over-redacted somewhere else. Both are actionable.
@@ -38,11 +38,11 @@ the PII heuristic over-redacted somewhere else. Both are actionable.
 - from `services` import dbviewer_service
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH
+- Env vars: INSUR_AUDIT_PATH
 
 ## Process
 ### Functions
-- `_audit_log_path()`: Resolve the active audit log. HOLY_AUDIT_PATH env wins (matches
+- `_audit_log_path()`: Resolve the active audit log. INSUR_AUDIT_PATH env wins (matches
 - `cross_dept_inventory()`: Aggregate PII inventory across every annotated process + entity.
 - `per_dept_inventory(dept)`: PII inventory slice for one dept.
 - `scan_leaks(since_epoch, limit)`: Scan recent audit-log lines for plaintext PII patterns.
@@ -52,7 +52,7 @@ the PII heuristic over-redacted somewhere else. Both are actionable.
 
 ## Notable inline comments
 - Audit log to scan for leaks. Same env var the federation helper writes
-- to (core.holy_audit) — HOLY_AUDIT_PATH wins, then well-known fallbacks.
+- to (core.insur_audit) — INSUR_AUDIT_PATH wins, then well-known fallbacks.
 - Plaintext PII pattern catalog. Conservative — false positives are OK
 - (operator investigates), false negatives are NOT OK (leak undetected).
 - These patterns match RAW PII as it would appear in a log line, NOT just

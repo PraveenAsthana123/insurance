@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { departments } from '../data/departments';
-import { departmentProcesses } from '../data/processes';
+import { brand } from '../config/brand';
 import {
   aiAssuranceFrameworks,
   aiAssuranceHorizontals,
@@ -56,14 +56,82 @@ export default function Sidebar() {
   return (
     <aside className="sidebar" aria-label="Main navigation">
       <div className="sidebar-header">
-        <div className="sidebar-logo">INSUR</div>
+        <div className="sidebar-logo" aria-hidden="true">{brand.icon}</div>
         <div>
-          <div className="sidebar-title">INSUR Analytics</div>
-          <div style={{ fontSize: '10px', color: 'rgba(226,232,240,0.45)', marginTop: '1px' }}>AI Platform</div>
+          <div className="sidebar-title">{brand.shortName || brand.name}</div>
+          <div style={{ fontSize: '10px', color: 'rgba(226,232,240,0.65)', marginTop: '1px' }}>AI Platform</div>
         </div>
       </div>
 
       <nav className="sidebar-nav">
+        <NavLink
+          to="/insurance-catalog"
+          className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
+          style={{ background: 'linear-gradient(90deg, rgba(30,64,175,0.35), transparent)' }}
+        >
+          <span className="nav-item-icon">{brand.icon}</span>
+          <span className="nav-item-label">Insurance Catalog</span>
+        </NavLink>
+
+        <div className="nav-group">
+          <div
+            className={'nav-item nav-item-parent' + (location.pathname === '/insurance' ? ' active' : '')}
+            onClick={(e) => toggleExpand('_insurance_alignment', e)}
+            style={{ cursor: 'pointer' }}
+          >
+            <span className="nav-item-icon">I</span>
+            <NavLink
+              to="/insurance"
+              className="nav-item-label"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Insurance Alignment
+            </NavLink>
+            <span className={'nav-expand-arrow' + (expanded['_insurance_alignment'] ? ' expanded' : '')}>&#9662;</span>
+          </div>
+          {expanded['_insurance_alignment'] && (
+            <div className="nav-subitems">
+              {[
+                { hash: 'departments', label: 'Departments', tag: 'D' },
+                { hash: 'data', label: 'Data taxonomy', tag: 'M' },
+                { hash: 'ai', label: 'AI catalog', tag: 'A' },
+                { hash: 'bot', label: 'Bot UI', tag: 'B' },
+                { hash: 'business-models', label: 'Business models', tag: 'BM' },
+                { hash: 'ai-matrix', label: 'AI × model', tag: 'AM' },
+                { hash: 'maturity', label: 'Maturity ladder', tag: 'ML' },
+                { hash: 'phases', label: 'Phases', tag: 'P' },
+                { hash: 'implementation-sequence', label: 'Implementation sequence', tag: 'IS' },
+                { hash: 'missing', label: '20 missing layers', tag: '20' },
+                { hash: 'autonomous-org', label: 'Autonomous org', tag: 'AO' },
+                { hash: 'closed-loop', label: 'Closed loop', tag: 'CL' },
+                { hash: 'top20', label: 'Top 20 ROI', tag: '★' },
+                { hash: 'opportunities', label: 'Opportunities (147)', tag: '147' },
+                { hash: 'enterprise-arch', label: 'Enterprise arch (13)', tag: '13' },
+                { hash: 'enterprise-missing', label: 'Enterprise missing', tag: 'EM' },
+                { hash: 'top50', label: 'Top 50', tag: '50' },
+                { hash: 'dept-catalog', label: 'Department catalog', tag: 'DC' },
+              ].map((it) => (
+                <NavLink
+                  key={it.hash}
+                  to={`/insurance#${it.hash}`}
+                  className="nav-subitem"
+                  title={it.label}
+                >
+                  <span
+                    className="nav-subitem-dot"
+                    style={{ background: 'var(--accent-primary)', borderRadius: 2, width: 24, textAlign: 'center', fontSize: 9, color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600 }}
+                  >
+                    {it.tag}
+                  </span>
+                  <span className="nav-subitem-label" style={{ fontSize: 12 }}>
+                    {it.label}
+                  </span>
+                </NavLink>
+              ))}
+            </div>
+          )}
+        </div>
+
         <NavLink
           to="/agent-supervisor"
           className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
@@ -150,8 +218,6 @@ export default function Sidebar() {
         })}
 
         {departments.map((dept) => {
-          const processes = dept.id !== 'dashboard' ? (departmentProcesses[dept.id] || []) : [];
-          const hasProcesses = processes.length > 0;
           const isExpanded = expanded[dept.id] || currentDeptId === dept.id;
           const isDeptActive = location.pathname === dept.route || location.pathname.startsWith(`/${dept.id}/`);
 
@@ -220,17 +286,6 @@ export default function Sidebar() {
                       <span className="nav-subitem-label">Dossier</span>
                     </NavLink>
                   )}
-                  {hasProcesses && <div className="nav-subitem-divider" />}
-                  {processes.map((proc) => (
-                    <NavLink
-                      key={proc.id}
-                      to={`/${dept.id}/${proc.id}`}
-                      className={({ isActive }) => 'nav-subitem' + (isActive ? ' active' : '')}
-                    >
-                      <span className="nav-subitem-dot"></span>
-                      <span className="nav-subitem-label">{proc.name}</span>
-                    </NavLink>
-                  ))}
                 </div>
               )}
             </div>

@@ -1,47 +1,45 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+const DOMAINS = ['B2C', 'B2B', 'B2E'];
+
 function processIdOf(p) {
   return (p?.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+function domainsForProcess(process, dept) {
+  const explicit = process.channels || process.domains || process.business_domains || process.audiences;
+  if (Array.isArray(explicit) && explicit.length > 0) {
+    return explicit.map((domain) => String(domain).toUpperCase());
+  }
+  const deptDomains = DOMAINS.filter((domain) => dept.channel_scenarios?.[domain]);
+  return deptDomains.length > 0 ? deptDomains : DOMAINS;
 }
 
 export function InsuranceSubMenu({ bp }) {
   const navigate = useNavigate();
   const params = useParams();
   const [filter, setFilter] = useState('');
-  const [expanded, setExpanded] = useState(() =>
-    params.processId ? { [params.processId]: true } : {}
-  );
-  const toggle = (key) => setExpanded((p) => ({ ...p, [key]: !p[key] }));
+  const [expanded, setExpanded] = useState(() => {
+    const initial = {};
+    if (params.deptId) initial[`dept:${params.deptId}`] = true;
+    if (params.deptId && params.domain) initial[`domain:${params.deptId}:${params.domain}`] = true;
+    return initial;
+  });
+  const toggle = (key) => setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
 
-  const dept = (bp.department_catalog || []).find((d) => String(d.id) === params.deptId);
-  if (!dept) {
-    return (
-      <nav className="insurance-sub-menu" aria-label="Sub menu: Process + Sub-process + AI">
-        <div className="insurance-main-menu-header">Sub menu · Process + AI</div>
-        <div style={{ padding: 'var(--spacing-sm)', color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)' }}>
-          Select a dept on the left to see its processes.
-        </div>
-      </nav>
-    );
-  }
-
-  const domain = params.domain || 'B2C';
+  const departments = (bp.department_catalog || []).slice().sort((a, b) => a.id - b.id);
   const q = filter.trim().toLowerCase();
-  const processes = (dept.processes || []).filter((p) =>
-    !q || p.name.toLowerCase().includes(q) || (p.ai || []).some((a) => (a.ai_type || '').toLowerCase().includes(q))
-  );
+  const totalProcesses = departments.reduce((sum, dept) => sum + (dept.processes || []).length, 0);
 
   return (
-    <nav className="insurance-sub-menu" aria-label="Sub menu: Process + Sub-process + AI">
-      <div className="insurance-main-menu-header">
-        Sub menu · dept {dept.id} {domain ? `· ${domain}` : ''}
-      </div>
+    <nav className="insurance-sub-menu" aria-label="Sub menu: Department domain process list">
+      <div className="insurance-main-menu-header">Department processes</div>
       <input
         type="search"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        placeholder="Filter processes / AI…"
+        placeholder="Filter departments / processes..."
         style={{
           width: '100%', marginBottom: 'var(--spacing-xs)',
           padding: '4px 8px',
@@ -52,73 +50,82 @@ export function InsuranceSubMenu({ bp }) {
           fontSize: 'var(--font-size-xs)',
           font: 'inherit',
         }}
-        aria-label="Filter processes or AI"
+        aria-label="Filter departments or processes"
       />
+      <div style={{ padding: '0 var(--spacing-sm) var(--spacing-xs)', color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)' }}>
+        {departments.length} departments · {totalProcesses} processes
+      </div>
 
-      {processes.length === 0 && (
-        <div style={{ padding: 'var(--spacing-sm)', color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)' }}>
-          No processes match.
-        </div>
-      )}
+      {departments.map((dept) => {
+        const deptKey = `dept:${dept.id}`;
+        const deptNameMatches = !q || (dept.name || '').toLowerCase().includes(q) || `dept ${dept.id}`.includes(q);
+        const processes = (dept.processes || []).filter((process) =>
+          !q || deptNameMatches || (process.name || '').toLowerCase().includes(q) ||
+          (process.ai || []).some((ai) => (ai.ai_type || '').toLowerCase().includes(q))
+        );
+        const showDept = deptNameMatches || processes.length > 0;
+        const deptOpen = expanded[deptKey] || params.deptId === String(dept.id) || q;
+        const activeDept = params.deptId === String(dept.id);
 
-      {processes.map((p, i) => {
-        const pid = processIdOf(p) || `p${i}`;
-        const procOpen = expanded[pid] || params.processId === pid || q;
-        const isActiveProc = params.processId === pid && !params.subProcessId && !params.aiType;
-        const subProcs = p.sub_processes || [];
-        const ais = p.ai || [];
-        const hasChildren = ais.length > 0 || subProcs.length > 0;
+        if (!showDept) return null;
+
         return (
-          <div key={pid}>
+          <div key={dept.id}>
             <span
-              className={`insurance-process-row ${isActiveProc ? 'active' : ''}`}
-              onClick={() => {
-                if (hasChildren) toggle(pid);
-                navigate(`/insurance/${dept.id}/${domain}/${pid}`);
-              }}
-              style={{ paddingLeft: 8 }}
-              title={p.name}
+              className={`insurance-process-row ${activeDept ? 'active' : ''}`}
+              onClick={() => toggle(deptKey)}
+              role="button"
+              aria-expanded={deptOpen}
+              style={{ paddingLeft: 8, fontWeight: 700 }}
+              title={dept.name}
             >
-              {hasChildren && <span style={{ marginRight: 4 }}>{procOpen ? '▾' : '▸'}</span>}
-              {p.name}
-              {ais.length > 0 && (
-                <span style={{ marginLeft: 4, fontSize: '10px', color: isActiveProc ? '#fff' : 'var(--text-muted)' }}>
-                  ({ais.length} AI)
-                </span>
-              )}
+              <span style={{ marginRight: 4 }}>{deptOpen ? '▾' : '▸'}</span>
+              <strong>#{dept.id}</strong> {dept.name}
             </span>
 
-            {procOpen && ais.map((ai, k) => {
-              const aiType = ai.ai_type;
-              const aiActive = params.aiType && decodeURIComponent(params.aiType) === aiType && params.processId === pid;
-              const matches = !q || aiType.toLowerCase().includes(q);
-              if (!matches && q) return null;
-              return (
-                <span
-                  key={`${aiType}-${k}`}
-                  className={`insurance-ai-row ${aiActive ? 'active' : ''}`}
-                  onClick={() => navigate(`/insurance/${dept.id}/${domain}/${pid}/ai/${encodeURIComponent(aiType)}?sub=data`)}
-                  title={`${aiType} — ${ai.scenario || ''}`}
-                  style={{ paddingLeft: 24 }}
-                >
-                  ⤷ {aiType}
-                </span>
-              );
-            })}
+            {deptOpen && DOMAINS.map((domain) => {
+              const domainKey = `domain:${dept.id}:${domain}`;
+              const domainOpen = expanded[domainKey] || (params.deptId === String(dept.id) && params.domain === domain) || q;
+              const activeDomain = params.deptId === String(dept.id) && params.domain === domain;
+              const hasDomain = dept.channel_scenarios && dept.channel_scenarios[domain];
+              const domainProcesses = processes.filter((process) => domainsForProcess(process, dept).includes(domain));
 
-            {procOpen && subProcs.map((sp, j) => {
-              const spid = (sp.name || `sub${j}`).toLowerCase().replace(/[^a-z0-9]+/g, '-');
-              const spActive = params.subProcessId === spid;
               return (
-                <span
-                  key={spid}
-                  className={`insurance-subprocess-row ${spActive ? 'active' : ''}`}
-                  onClick={() => navigate(`/insurance/${dept.id}/${domain}/${pid}/${spid}`)}
-                  style={{ paddingLeft: 24 }}
-                  title={sp.name}
-                >
-                  ↳ {sp.name}
-                </span>
+                <div key={domain}>
+                  <span
+                    className={`insurance-subprocess-row ${activeDomain ? 'active' : ''}`}
+                    onClick={() => toggle(domainKey)}
+                    role="button"
+                    aria-expanded={domainOpen}
+                    style={{ paddingLeft: 24, opacity: hasDomain ? 1 : 0.55 }}
+                    title={hasDomain ? dept.channel_scenarios[domain].label : `${domain} (no operator content yet)`}
+                  >
+                    <span style={{ marginRight: 4 }}>{domainOpen ? '▾' : '▸'}</span>
+                    {domain} <span style={{ fontSize: 10 }}>({domainProcesses.length})</span>
+                  </span>
+
+                  {domainOpen && domainProcesses.map((process, index) => {
+                    const pid = processIdOf(process) || `p${index}`;
+                    const activeProcess = params.deptId === String(dept.id) && params.domain === domain && params.processId === pid;
+                    const aiCount = (process.ai || []).length;
+                    return (
+                      <span
+                        key={`${domain}-${pid}`}
+                        className={`insurance-process-row ${activeProcess ? 'active' : ''}`}
+                        onClick={() => navigate(`/insurance/${dept.id}/${domain}/${pid}`)}
+                        style={{ paddingLeft: 42 }}
+                        title={process.name}
+                      >
+                        {process.name}
+                        {aiCount > 0 && (
+                          <span style={{ marginLeft: 4, fontSize: '10px', color: activeProcess ? '#fff' : 'var(--text-muted)' }}>
+                            ({aiCount} AI)
+                          </span>
+                        )}
+                      </span>
+                    );
+                  })}
+                </div>
               );
             })}
           </div>

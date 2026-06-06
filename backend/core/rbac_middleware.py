@@ -62,6 +62,7 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
     ("GET",  re.compile(r"^/api/v1/agent-platform/cua/audit$"),           _READ_ROLES),
     ("GET",  re.compile(r"^/api/v1/agent-platform/activity$"),            _READ_ROLES),
     ("GET",  re.compile(r"^/api/v1/agent-platform/adapters$"),            _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/agent-supervisor(/.*)?$"),        _READ_ROLES),
 
     # -------- INSUR monitoring (fleet ML pipeline health) --------
     # Data is fleet-wide infrastructure telemetry, not tenant-scoped — but

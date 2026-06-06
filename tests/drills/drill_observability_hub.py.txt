@@ -1,11 +1,11 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_observability_hub.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:40Z
 
 ## Purpose
 Drill: §68 Observability Hub aggregator — completes the §68 read-surface story.
 
-One endpoint: GET /api/v1/holy/observability-hub/_overview that probes
+One endpoint: GET /api/v1/insur/observability-hub/_overview that probes
 all 7 §68 read surfaces' source-of-truth logs in one call. Mirrors
 the §56 /api/v1/agent-platform/adapters shape.
 
@@ -44,7 +44,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH, HOLY_EVAL_COST_LOG, HOLY_EVAL_FUNCTIONAL_LOG, HOLY_EVAL_SAFETY_LOG, HOLY_GUARDRAIL_LOG, HOLY_SECURITY_POSTURE_PATH
+- Env vars: INSUR_AUDIT_PATH, INSUR_EVAL_COST_LOG, INSUR_EVAL_FUNCTIONAL_LOG, INSUR_EVAL_SAFETY_LOG, INSUR_GUARDRAIL_LOG, INSUR_SECURITY_POSTURE_PATH
 
 ## Process
 ### Functions

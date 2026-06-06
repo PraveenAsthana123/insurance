@@ -1208,6 +1208,15 @@ Generated file inventory. Files without module docstrings are explicitly marked 
 - imports: `__future__, backend.services.forecast_service, datetime, pytest, unittest.mock`
 - flow: See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments.
 
+## `backend/tests/test_insurance_router.py`
+
+- layer: `test`
+- gist: HTTP coverage for insurance department artifact endpoints and generated INSUR navigator shape. Verifies priority department listing, markdown artifact reads, anti-enumeration 404s, missing artifact 404s, pipeline registry listing, and `/api/v1/insur/nav/{dept}` JSON shape.
+- classes: `none`
+- functions: `test_insurance_depts_lists_four_priority_domains, test_insurance_markdown_artifacts_are_served, test_insurance_invalid_dept_and_role_are_not_enumerable, test_insurance_missing_artifact_returns_404, test_insurance_pipeline_list_uses_registry, test_insur_nav_lists_generated_insurance_departments, test_insur_nav_serves_generated_nav_shape`
+- imports: `__future__, fastapi.testclient, main, pathlib, routers.insurance, routers.insur`
+- flow: TestClient exercises mounted FastAPI routers against filesystem-backed insurance artifacts and generated INSUR_NAV.json files.
+
 ## `backend/tests/test_openclaw_router.py`
 
 - layer: `unknown`

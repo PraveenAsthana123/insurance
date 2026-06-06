@@ -19,6 +19,7 @@ re-run → all 50+ files regenerate. Idempotent.
 Usage: python3 scripts/scaffold_insurance_depts.py
 """
 from __future__ import annotations
+import json
 import sys
 import textwrap
 from pathlib import Path
@@ -2263,6 +2264,64 @@ Drill `tests/drills/drill_insurance_dept_artifacts.py` enforces presence of pipe
 """
 
 
+
+def nav_slug(value: str) -> str:
+    """Return a lowercase dash slug suitable for INSUR_NAV.json."""
+    chars = []
+    prev_dash = False
+    for ch in value.lower():
+        if ch.isalnum():
+            chars.append(ch)
+            prev_dash = False
+        elif not prev_dash:
+            chars.append("-")
+            prev_dash = True
+    return "".join(chars).strip("-") or "item"
+
+
+def render_nav(slug: str, d: dict) -> str:
+    """Render the live navigator JSON consumed by frontend /insur/:departmentId."""
+    tabs = ["Overview", "Inputs", "AI", "Outputs", "KPIs", "Governance"]
+    left_nav = []
+    for l1, l2, subs in d["process_hierarchy"]:
+        process_slug = nav_slug(l1)
+        sub_processes = []
+        for sub in subs:
+            sub_slug = nav_slug(sub)
+            sub_processes.append({
+                "slug": f"{process_slug}-{sub_slug}",
+                "name": sub,
+                "audiences": [a.lower() for a in d.get("business_models", ["B2C", "B2B", "B2E"]) if a in {"B2C", "B2B", "B2E"}],
+                "tabs": tabs,
+                "tab_content": {
+                    "Overview": f"{sub} supports {l2} in {d['display']}.",
+                    "Inputs": f"Primary inputs come from {d['display']} systems, customer/broker channels, documents, and external insurance data feeds.",
+                    "AI": f"Relevant AI agents: {', '.join(d['ai_agents'][:4])}.",
+                    "Outputs": f"Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for {d['display']}.",
+                    "KPIs": d.get("main_kpi", "Cycle time, accuracy, cost, and service quality."),
+                    "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision.",
+                },
+            })
+        left_nav.append({
+            "slug": process_slug,
+            "process": f"{l1} - {l2}",
+            "sub_processes": sub_processes,
+        })
+
+    payload = {
+        "department_id": slug,
+        "display_name": d["display"],
+        "owner": d["owner"],
+        "objective": d["objective"],
+        "business_models": d.get("business_models", []),
+        "ai_priority": d.get("ai_priority"),
+        "roi_tier": d.get("roi_tier"),
+        "main_kpi": d.get("main_kpi"),
+        "left_nav": left_nav,
+    }
+    return json.dumps(payload, indent=2) + "\n"
+
+
 def scaffold_dept(slug: str, d: dict) -> int:
     dept_root = ROOT / slug
     bl = dept_root / "business-layer"
@@ -2274,6 +2333,8 @@ def scaffold_dept(slug: str, d: dict) -> int:
     w(dept_root / "README.md", render_dept_readme(slug, d))
     files_written += 1
     w(dept_root / "GLOBAL_README.md", render_global_readme(slug, d))
+    files_written += 1
+    w(dept_root / "INSUR_NAV.json", render_nav(slug, d))
     files_written += 1
 
     # business-layer/

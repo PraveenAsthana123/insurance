@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/pipelines.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
-HOLY automated-pipelines router — 5-phase per-process catalog per dept.
+INSUR automated-pipelines router — 5-phase per-process catalog per dept.
 
 Each pipeline runs through:
   Phase 1 INPUT        → data source + contract
@@ -18,9 +18,9 @@ in Phase 4) + §47 (C4 L3 dynamic flow) + §57.5 (5-question runbook) +
 types) + §66 (operational AI surface).
 
 Endpoints:
-  GET /api/v1/holy/pipelines/{dept}                — dept catalog
-  GET /api/v1/holy/pipelines/{dept}/{process_id}   — single 5-phase spec
-  GET /api/v1/holy/pipelines/_global               — cross-dept inventory
+  GET /api/v1/insur/pipelines/{dept}                — dept catalog
+  GET /api/v1/insur/pipelines/{dept}/{process_id}   — single 5-phase spec
+  GET /api/v1/insur/pipelines/_global               — cross-dept inventory
 
 ## Imports
 - from `__future__` import annotations
@@ -28,7 +28,7 @@ Endpoints:
 - from `_` import time
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 
 ## Inputs
 (no CLI / env inputs — library module or implicit)
@@ -46,7 +46,7 @@ Endpoints:
 
 ## Notable inline comments
 - Per-dept pipeline catalog — keep aligned with
-- ~/.claude/scripts/scaffold-holy-pipelines.py DEPT_PIPELINES dict.
+- ~/.claude/scripts/scaffold-insur-pipelines.py DEPT_PIPELINES dict.
 - Schema per pipeline:
 - {"process_id": str, "process_name": str, "lifecycle_type": str,
 - "phases": {phase_name: text}}

@@ -33,6 +33,8 @@ from typing import Any
 import httpx
 import redis
 
+from agent_observability import append_trace, attach_trace, build_trace
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger("council")
 
@@ -44,6 +46,20 @@ CHAIR_MODEL = os.environ.get("CHAIR_MODEL", "gemma3:1b")
 POLL_TIMEOUT = int(os.environ.get("POLL_TIMEOUT", "5"))
 STAGE_TIMEOUT = float(os.environ.get("STAGE_TIMEOUT", "60"))
 AGENT_ID = os.environ.get("AGENT_ID") or socket.gethostname()
+STARTUP_SMOKE = os.environ.get("AGENT_STARTUP_SMOKE", "0") == "1"
+
+
+def write_heartbeat(r: redis.Redis, state: str, processed: int, task_id: str = "") -> None:
+    """Publish lightweight liveness/task state for supervisor dashboards."""
+    payload = {
+        "kind": "council",
+        "agent_id": AGENT_ID,
+        "state": state,
+        "processed": processed,
+        "updated_at": time.time(),
+        "last_task_id": task_id,
+    }
+    r.set(f"agent:heartbeat:{AGENT_ID}", json.dumps(payload), ex=90)
 
 
 def call_ollama(model: str, prompt: str, num_predict: int = 200) -> dict[str, Any]:
@@ -128,17 +144,22 @@ def main() -> int:
     r.ping()
     log.info("redis OK")
 
-    smoke = call_ollama(CHAIR_MODEL, "Reply OK.", num_predict=3)
-    if smoke["ok"]:
-        log.info(f"ollama OK ({smoke['ms']}ms)")
+    if STARTUP_SMOKE:
+        smoke = call_ollama(CHAIR_MODEL, "Reply OK.", num_predict=3)
+        if smoke["ok"]:
+            log.info(f"ollama OK ({smoke['ms']}ms)")
+        else:
+            log.warning(f"ollama smoke failed: {smoke.get('error')}")
     else:
-        log.warning(f"ollama smoke failed: {smoke.get('error')}")
+        log.info("ollama startup smoke skipped; task execution remains the proof signal")
 
     processed = 0
+    write_heartbeat(r, "idle", processed)
     while True:
         try:
             popped = r.brpop("council_tasks", timeout=POLL_TIMEOUT)
             if popped is None:
+                write_heartbeat(r, "idle", processed)
                 continue
             _key, task_json = popped
             task = json.loads(task_json)
@@ -147,6 +168,7 @@ def main() -> int:
             dept = task.get("department", "")
 
             log.info(f"task {tid} picked (dept={dept})")
+            write_heartbeat(r, "running", processed, tid)
             result = run_council(prompt, dept)
             output = {
                 "task_id": tid,
@@ -156,8 +178,12 @@ def main() -> int:
                 **result,
                 "completed_at": time.time(),
             }
+            trace = build_trace("council", task, output, "/".join([AUTHOR_MODEL, REVIEWER_MODEL, CHAIR_MODEL]), AGENT_ID)
+            output = attach_trace(output, trace)
+            append_trace(trace)
             r.lpush("council_done", json.dumps(output))
             processed += 1
+            write_heartbeat(r, "idle", processed, tid)
             log.info(f"task {tid} done in {result.get('elapsed_ms')}ms (processed={processed})")
         except KeyboardInterrupt:
             log.info(f"shutdown after {processed} tasks")

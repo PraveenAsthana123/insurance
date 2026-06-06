@@ -1,18 +1,18 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_celery_beat.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
-Drill: HOLY Celery beat schedule for test-tier auto-dispatch (§43, §65.8.5).
+Drill: INSUR Celery beat schedule for test-tier auto-dispatch (§43, §65.8.5).
 
 Steps (8 total; 3 negative):
     1. (+) celery_app imports cleanly + beat_schedule populated
     2. (+) All 8 expected test-tier schedules present
     3. (+) Every test-tier schedule has the canonical kwargs (tier, depts, timeout)
-    4. (+) holy.dispatch_test_fanout task registered in celery_app
+    4. (+) insur.dispatch_test_fanout task registered in celery_app
     5. (+) Every schedule references a valid task name
     6. (-) NEGATIVE — bogus tier in dispatch envelope rejected by agent (covered by test_agent drill, asserted indirectly here)
-    7. (+) All 19 HOLY depts present in beat-fan-out depts list
+    7. (+) All 19 INSUR depts present in beat-fan-out depts list
     8. (-) NEGATIVE — schedule period MUST be > 0 (catches off-by-one in cadence defs)
 
 # RESOURCES: celery_config disk_io
@@ -41,4 +41,4 @@ Exit 0 on PASS, 1 on FAIL.
 - ----- Step 1: celery_app + beat_schedule -----
 - ----- Step 2: all 8 tier schedules present -----
 - ----- Step 3: each tier schedule has canonical kwargs -----
-- ----- Step 4: holy.dispatch_test_fanout task registered -----
+- ----- Step 4: insur.dispatch_test_fanout task registered -----

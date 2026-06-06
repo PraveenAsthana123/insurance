@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/model_compare_service.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 §68.11 Multi-model comparison — "which model wins?"
@@ -35,7 +35,7 @@ Composes with §38.3 audit + §47.6 (PII never in row — only hashes)
 - from `typing` import Any
 
 ## Inputs
-- Env vars: HOLY_MODEL_COMPARE_DIR
+- Env vars: INSUR_MODEL_COMPARE_DIR
 
 ## Process
 ### Functions

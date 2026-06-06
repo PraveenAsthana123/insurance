@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_fraud_lifecycle.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:40Z
 
 ## Purpose
-Drill: HOLY fraud-detection lifecycle (§43, §64.23 + §40).
+Drill: INSUR fraud-detection lifecycle (§43, §64.23 + §40).
 
 Steps (8 total; 3 negative):
     1. (+) Lifecycle runs end-to-end on synthetic 2000 txn dataset

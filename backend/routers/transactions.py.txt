@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/transactions.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
-HOLY transactional history router — unified chronological audit feed per dept.
+INSUR transactional history router — unified chronological audit feed per dept.
 
 Surfaces 3 event sources in MVP:
   - cron audit rows  data/eval/cron/<job>/<run_id>/manifest.json
@@ -18,9 +18,9 @@ Composes with global §38 audit + §41.3 tenant isolation + §47.6 SOC2
 CC6.2 access (PII redacted by default) + §57.6 canonical envelope.
 
 Endpoints (read-only — append-only event stream, no mutation API):
-  GET /api/v1/holy/transactions/{dept}
-  GET /api/v1/holy/transactions/{dept}/{event_id}
-  GET /api/v1/holy/transactions/_global
+  GET /api/v1/insur/transactions/{dept}
+  GET /api/v1/insur/transactions/{dept}/{event_id}
+  GET /api/v1/insur/transactions/_global
 
 ## Imports
 - from `__future__` import annotations
@@ -31,7 +31,7 @@ Endpoints (read-only — append-only event stream, no mutation API):
 - from `pathlib` import Path
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Query, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 
 ## Inputs
 (no CLI / env inputs — library module or implicit)

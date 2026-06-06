@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/dspy_optimizer.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 DSPy RAG prompt optimizer — §56 Stage-1 adapter (4th in the series).
@@ -12,7 +12,7 @@ the prompt — including few-shot demos selected from labelled examples
 — by running the program against a validation set and keeping what
 scores best.
 
-HOLY's existing prompt path is whatever the caller hand-writes in
+INSUR's existing prompt path is whatever the caller hand-writes in
 `prompts/`. This adapter is the COMPLEMENTARY in-process synchronous
 path for *RAG QA* prompts specifically:
 
@@ -22,8 +22,8 @@ path for *RAG QA* prompts specifically:
 
 Per global CLAUDE.md §56.2 Stage-1 contract:
   - Lazy import of dspy (SDK absence → unavailable, never crash)
-  - Feature-flag opt-in: HOLY_DSPY_OPTIMIZER_ENABLED=true
-  - Default model from HOLY_LLM_MODEL (reuses gateway env contract)
+  - Feature-flag opt-in: INSUR_DSPY_OPTIMIZER_ENABLED=true
+  - Default model from INSUR_LLM_MODEL (reuses gateway env contract)
   - Never default-on; existing hand-written prompts keep working
 
 Per §38.3:
@@ -54,7 +54,7 @@ Drill: tests/drills/drill_dspy_optimizer.py
 - from `typing` import Any
 
 ## Inputs
-- Env vars: HOLY_DSPY_AUDIT_PATH, HOLY_DSPY_OPTIMIZER_ENABLED, HOLY_LLM_MODEL
+- Env vars: INSUR_DSPY_AUDIT_PATH, INSUR_DSPY_OPTIMIZER_ENABLED, INSUR_LLM_MODEL
 
 ## Process
 ### Classes

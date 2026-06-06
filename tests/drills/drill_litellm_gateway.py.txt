@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_litellm_gateway.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
 Drill: LiteLLM gateway Stage-1 adapter (backend/services/llm_gateway.py).
@@ -47,7 +47,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `unittest.mock` import patch
 
 ## Inputs
-- Env vars: HOLY_LLM_GATEWAY_AUDIT_PATH, HOLY_LLM_GATEWAY_ENABLED, HOLY_LLM_MODEL, OPENAI_API_KEY
+- Env vars: INSUR_LLM_GATEWAY_AUDIT_PATH, INSUR_LLM_GATEWAY_ENABLED, INSUR_LLM_MODEL, OPENAI_API_KEY
 
 ## Process
 ### Functions

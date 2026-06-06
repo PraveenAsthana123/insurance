@@ -1,12 +1,12 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/master_data.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
-HOLY master-data router — per-dept SAP-style master + reference data.
+INSUR master-data router — per-dept SAP-style master + reference data.
 
 Surfaces the entity catalog documented in
-    global-ai-org/departments/<dept>/business-layer/HOLY_MASTER_DATA.md
+    global-ai-org/departments/<dept>/business-layer/INSUR_MASTER_DATA.md
 as a queryable schema endpoint. Persistence of the actual rows belongs to
 the ERP/CRM/PIM source-of-truth systems; this endpoint is the *contract*
 (what entities exist, what fields they carry, who owns them) plus a
@@ -17,16 +17,16 @@ header) + §47.6 (SOC2 CC6.2 access control) + §57.6 (canonical envelope)
 + §59 DDD (entities ARE the aggregates) + §64 per-dept artifact.
 
 Endpoints (read-only in MVP — write paths gated per §40 decision system):
-    GET /api/v1/holy/master-data/{dept}              — catalog
-    GET /api/v1/holy/master-data/{dept}/{entity}     — sample rows
-    GET /api/v1/holy/master-data/{dept}/org-structure — org tree slice
+    GET /api/v1/insur/master-data/{dept}              — catalog
+    GET /api/v1/insur/master-data/{dept}/{entity}     — sample rows
+    GET /api/v1/insur/master-data/{dept}/org-structure — org tree slice
 
 ## Imports
 - from `__future__` import annotations
 - from `_` import time
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Query, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 
 ## Inputs
 (no CLI / env inputs — library module or implicit)
@@ -43,7 +43,7 @@ Endpoints (read-only in MVP — write paths gated per §40 decision system):
 - Return values from functions above
 
 ## Notable inline comments
-- 19 HOLY departments — single source of truth for cross-dept validation.
+- 19 INSUR departments — single source of truth for cross-dept validation.
 - Per global §57.6 — every entity row carries this envelope.
 - Master entity catalog — what fields are exposed by default (no PII).
 - PII (customer name/email/phone, employee SSN, vendor bank account) is

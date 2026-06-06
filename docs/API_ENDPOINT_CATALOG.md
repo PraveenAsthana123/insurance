@@ -1,6 +1,59 @@
 # API Endpoint Catalog
 Generated from FastAPI OpenAPI metadata. This document is the current API contract baseline. Each endpoint should be expanded with domain-specific business rules as the code matures.
 
+## Agent Supervisor Command Center: `/api/v1/agent-supervisor/*`
+
+Read-only Redis-backed command-center surface for live agent execution, queue
+health, worker heartbeats, task output samples, schedules, process-test catalog
+coverage, and advanced operations visibility. Used by the frontend
+`/agent-supervisor` cockpit and by the lightweight local monitor server on port
+`8010` when the full backend is not the active dev target.
+
+Endpoints:
+
+- `GET /api/v1/agent-supervisor/report?sample=10` — returns queues, pending
+  totals, live heartbeats, delegation by agent kind, schedules, process-test
+  catalog summary, durable `trace_log` summary from
+  `data/agent-supervisor/task_traces.jsonl`, recent results, recommendations,
+  and `operations_visibility` with scores for health, execution, quality,
+  completion, and observability plus tracking, durable tracing, failure
+  taxonomy, owner routing, reporting catalog, intelligent insights, and blunt
+  operational feedback.
+- `GET /api/v1/agent-supervisor/tasks/{task_id}?limit=500` — finds a completed
+  task across known result queues and returns the queue, result index, and raw
+  result payload when present.
+
+Security: read-only route allowed through demo RBAC read roles. The endpoint
+gracefully returns `status=unavailable` when Redis is unavailable.
+
+## Insurance Department Artifacts: `/api/v1/insurance/*`
+
+Filesystem-backed insurance department surface for the four priority domains:
+claims, underwriting, customer-service, and fraud/SIU. Source of truth is
+`global-ai-org/departments/{dept}` and the pipeline registry in
+`backend/ml/insurance/run_dept_pipelines.py`. This section follows
+`docs/NO_APPROVAL_AUTONOMY_POLICY.md`: safe repo-local artifact reads and local
+validation proceed without interruption; dependency downloads, sandbox
+escalation, destructive commands, credentials, production changes, and external
+writes remain hard approval gates.
+
+Endpoints:
+
+- `GET /api/v1/insurance/depts` — list priority insurance departments.
+- `GET /api/v1/insurance/depts/{dept}/spec` — serve `INSUR_DEPT_SPEC.md` as markdown.
+- `GET /api/v1/insurance/depts/{dept}/dashboards/{role}` — serve role dashboard markdown.
+- `GET /api/v1/insurance/depts/{dept}/reports/{role}` — serve role reports markdown.
+- `GET /api/v1/insurance/depts/{dept}/pipelines` — list registered ML/RAG pipelines.
+- `POST /api/v1/insurance/depts/{dept}/pipelines/{pipeline_id}/run` — invoke a smoke/full pipeline run through the runner.
+- `GET /api/v1/insurance/depts/{dept}/manual_vs_auto` — serve manual-vs-auto flow markdown.
+- `GET /api/v1/insurance/depts/{dept}/simulation_ui` — serve simulation UI spec markdown.
+- `GET /api/v1/insurance/depts/{dept}/system_design` — serve system design markdown.
+- `GET /api/v1/insurance/health` — return department/role surface health.
+
+Validation added: `backend/tests/test_insurance_router.py` covers department
+listing, markdown reads, invalid dept/role 404s, missing artifact 404s, pipeline
+registry listing, and generated `/api/v1/insur/nav/{dept}` shape.
+
 ## §68 INSUR Observability Hub — iter 7: `/api/v1/insur/observability-hub/_overview` (aggregator)
 
 Single endpoint that surfaces the health of all 7 §68 read surfaces

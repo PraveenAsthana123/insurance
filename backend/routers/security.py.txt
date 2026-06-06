@@ -1,25 +1,25 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/security.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
 §68.7 Security posture router.
 
-3 endpoints under /api/v1/holy/security/* federated via core.holy_audit
+3 endpoints under /api/v1/insur/security/* federated via core.insur_audit
 (surface=security). Answers "is the system secure?" with three signals:
 compliance gates (live probe), vulnerabilities (external snapshot),
 attack attempts (audit-log scan).
 
 Composes with §47.6 (the compliance-gate check IS a §47.6 invariant
 audit) + §57.7 (graceful when posture snapshot absent) + §64.32
-(per-dept HOLY_SECURITY.md spec is the WRITE side) + §68
+(per-dept INSUR_SECURITY.md spec is the WRITE side) + §68
 (Observability Hub iter 3).
 
 ## Imports
 - from `__future__` import annotations
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Query, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 - from `services` import security_posture_service
 
 ## Inputs

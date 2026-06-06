@@ -24,6 +24,7 @@ DEFAULT_REDIS_URL = os.environ.get("REDIS_URL", os.environ.get("BEV_REDIS_URL", 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 PROCESS_CATALOG = ROOT_DIR / "docs" / "testing" / "PROCESS_AGENT_CRON_CATALOG.json"
 DEFAULT_REPORT = ROOT_DIR / "data" / "agent-supervisor" / "latest.json"
+TRACE_LOG = ROOT_DIR / "data" / "agent-supervisor" / "task_traces.jsonl"
 
 QUEUE_PAIRS = {
     "simple": ("tasks", "done"),
@@ -151,6 +152,169 @@ def process_catalog_summary() -> dict[str, Any]:
     }
 
 
+
+def trace_log_summary(limit: int = 50) -> dict[str, Any]:
+    if not TRACE_LOG.exists():
+        return {
+            "path": str(TRACE_LOG),
+            "available": False,
+            "total": 0,
+            "recent": [],
+            "by_status": {},
+            "by_failure_category": {},
+            "by_owner": {},
+            "retryable": 0,
+        }
+    rows: list[dict[str, Any]] = []
+    total = 0
+    with TRACE_LOG.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            total += 1
+            try:
+                rows.append(json.loads(line))
+            except Exception:
+                rows.append({"status": "failed", "failure_category": "corrupt_trace_row", "owner": "AgentOps"})
+            if len(rows) > max(limit * 4, 200):
+                rows = rows[-max(limit * 2, 100):]
+    recent = rows[-limit:][::-1]
+    return {
+        "path": str(TRACE_LOG),
+        "available": True,
+        "total": total,
+        "recent": recent,
+        "by_status": dict(sorted(Counter(str(row.get("status", "unknown")) for row in rows).items())),
+        "by_failure_category": dict(sorted(Counter(str(row.get("failure_category", "unknown")) for row in rows).items())),
+        "by_owner": dict(sorted(Counter(str(row.get("owner", "unknown")) for row in rows).items())),
+        "retryable": sum(1 for row in rows if row.get("retryable") is True),
+    }
+
+
+
+def derive_operations(report: dict[str, Any]) -> dict[str, Any]:
+    queues = report["queues"]
+    heartbeats = report["heartbeats"]["rows"]
+    recent_results = report["recent_results"]
+    pending_total = report["pending_total"]
+    completed_total = sum(row["completed"] for row in queues.values())
+    recent_flat = [item for rows in recent_results.values() for item in rows]
+    recent_count = len(recent_flat)
+    recent_failures = report["recent_failure_count"]
+    recent_success = max(0, recent_count - recent_failures)
+    live_agents = report["heartbeats"]["live"]
+    running_agents = sum(1 for row in heartbeats if row.get("state") == "running")
+    stale_agents = sum(1 for row in heartbeats if (row.get("age_sec") or 0) > 30)
+    processed_total = sum(int(row.get("processed", 0) or 0) for row in heartbeats)
+    schedules = report["schedules"]
+    catalog = report["process_test_catalog"]
+    trace_log = report.get("trace_log", {})
+
+    completion_rate = round((completed_total / max(completed_total + pending_total, 1)) * 100)
+    recent_success_rate = round((recent_success / max(recent_count, 1)) * 100) if recent_count else 100
+    worker_freshness = round(((live_agents - stale_agents) / max(live_agents, 1)) * 100) if live_agents else 0
+    schedule_coverage = 100 if schedules else 0
+    catalog_coverage = 100 if catalog.get("available") and catalog.get("processes", 0) else 0
+
+    health_score = max(0, min(100, round(
+        worker_freshness * 0.30
+        + recent_success_rate * 0.25
+        + completion_rate * 0.20
+        + schedule_coverage * 0.10
+        + catalog_coverage * 0.10
+        + (100 if pending_total <= max(live_agents, 1) * 2 else 45) * 0.05
+    )))
+    execution_score = max(0, min(100, round(
+        recent_success_rate * 0.55 + completion_rate * 0.30 + (100 if running_agents or completed_total else 60) * 0.15
+    )))
+    quality_score = max(0, min(100, round(
+        recent_success_rate * 0.60 + (100 if recent_failures == 0 else 55) * 0.25 + catalog_coverage * 0.15
+    )))
+    observability_score = max(0, min(100, round(
+        (100 if live_agents else 0) * 0.35 + (100 if recent_count else 35) * 0.25 + catalog_coverage * 0.20 + (100 if schedules else 35) * 0.20
+    )))
+
+    trace_rows: list[dict[str, Any]] = []
+    for queue_name, rows in recent_results.items():
+        for item in rows:
+            trace_rows.append({
+                "trace_id": item.get("trace_id") or item.get("task_id") or item.get("id") or "unknown",
+                "queue": queue_name,
+                "task_id": item.get("task_id") or item.get("id") or "unknown",
+                "agent_id": item.get("agent_id") or item.get("agent") or "unknown",
+                "department": item.get("department") or item.get("dept") or "unknown",
+                "status": "success" if item.get("ok") is True else "failed" if result_is_failure(item) else str(item.get("status", "unknown")),
+                "duration_ms": item.get("duration_ms"),
+                "tokens": item.get("tokens"),
+            })
+
+    operation_rows = [
+        {"name": "Agent fleet liveness", "status": "healthy" if live_agents else "critical", "metric": f"{live_agents} live"},
+        {"name": "Queue drain", "status": "healthy" if pending_total == 0 else "watch", "metric": f"{pending_total} pending"},
+        {"name": "Recent execution quality", "status": "healthy" if recent_failures == 0 else "degraded", "metric": f"{recent_failures} failures"},
+        {"name": "Schedule coverage", "status": "healthy" if schedules else "gap", "metric": f"{len(schedules)} schedules"},
+        {"name": "Process catalog coverage", "status": "healthy" if catalog.get("available") else "gap", "metric": f"{catalog.get('processes', 0)} processes"},
+        {"name": "Worker throughput", "status": "healthy" if processed_total else "watch", "metric": f"{processed_total} processed"},
+        {"name": "Durable trace log", "status": "healthy" if trace_log.get("available") and trace_log.get("total", 0) else "gap", "metric": f"{trace_log.get('total', 0)} traces"},
+        {"name": "Retryable failures", "status": "watch" if trace_log.get("retryable", 0) else "healthy", "metric": f"{trace_log.get('retryable', 0)} retryable"},
+    ]
+
+    reporting = [
+        {"name": "Executive health report", "cadence": "daily", "owner": "AI Command Center", "status": "ready" if health_score >= 70 else "needs attention"},
+        {"name": "Failure RCA report", "cadence": "on failure", "owner": "AgentOps", "status": "ready" if recent_failures else "quiet"},
+        {"name": "Queue and SLA report", "cadence": "hourly", "owner": "Operations", "status": "ready"},
+        {"name": "Process test coverage report", "cadence": "weekly", "owner": "QA", "status": "ready" if catalog.get("available") else "blocked"},
+        {"name": "Delegation and throughput report", "cadence": "daily", "owner": "Platform", "status": "ready" if live_agents else "blocked"},
+    ]
+
+    insights: list[str] = []
+    brutal_feedback: list[str] = []
+    if health_score >= 85:
+        insights.append("The agent fleet is visible, responsive, and draining work within the sampled window.")
+    if recent_failures:
+        insights.append("Recent results include failures, so the next priority is failure classification and retry policy.")
+        brutal_feedback.append("Do not call this autonomous until recurring failures are routed to RCA, retry, and owner escalation.")
+    if not schedules:
+        brutal_feedback.append("Scheduling is still immature: no recurring monitor jobs are registered.")
+    if not live_agents:
+        brutal_feedback.append("There is no execution visibility without live heartbeats. Start the workers before trusting any dashboard.")
+    if live_agents and processed_total == 0:
+        brutal_feedback.append("Agents are alive but not proving throughput yet. Keep smoke tasks running until processed counts move.")
+    if catalog.get("processes", 0) < 50:
+        insights.append("Process-test catalog exists, but coverage should grow with every new department workflow.")
+    if not brutal_feedback:
+        brutal_feedback.append("The stack is usable now; the remaining hardening work is SLA alerts, retry lanes, and persisted trace history.")
+
+    return {
+        "scores": {
+            "health": health_score,
+            "execution": execution_score,
+            "quality": quality_score,
+            "completion": completion_rate,
+            "observability": observability_score,
+        },
+        "tracking": {
+            "live_agents": live_agents,
+            "running_agents": running_agents,
+            "stale_agents": stale_agents,
+            "processed_total": processed_total,
+            "completed_total": completed_total,
+            "pending_total": pending_total,
+            "recent_success_rate": recent_success_rate,
+            "recent_sample_size": recent_count,
+        },
+        "operations": operation_rows,
+        "tracing": (trace_log.get("recent") or trace_rows)[:50],
+        "failure_taxonomy": trace_log.get("by_failure_category", {}),
+        "failure_owners": trace_log.get("by_owner", {}),
+        "durable_trace_total": trace_log.get("total", 0),
+        "retryable_failures": trace_log.get("retryable", 0),
+        "reporting": reporting,
+        "insights": insights,
+        "brutal_feedback": brutal_feedback,
+    }
+
+
 def build_report(client: redis.Redis, sample: int) -> dict[str, Any]:
     queues = queue_snapshot(client)
     heartbeats = heartbeat_rows(client)
@@ -167,7 +331,7 @@ def build_report(client: redis.Redis, sample: int) -> dict[str, Any]:
     if not schedules:
         recommendations.append("No recurring schedules are registered. Add schedule-add jobs for recurring monitoring.")
 
-    return {
+    report = {
         "generated_at": utc_now(),
         "redis_url": client.connection_pool.connection_kwargs.get("host", "redis"),
         "queues": queues,
@@ -179,10 +343,13 @@ def build_report(client: redis.Redis, sample: int) -> dict[str, Any]:
         },
         "schedules": schedules,
         "process_test_catalog": process_catalog_summary(),
+        "trace_log": trace_log_summary(max(sample, 20)),
         "recent_results": results,
         "recent_failure_count": failures,
         "recommendations": recommendations,
     }
+    report["operations_visibility"] = derive_operations(report)
+    return report
 
 
 def print_status(report: dict[str, Any], sample: int) -> None:

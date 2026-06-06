@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-02T10:15:01.513569+00:00",
+  "generated_at": "2026-06-04T08:15:01.696542+00:00",
   "dry_run": false,
   "refresh": true,
   "downloads": [
@@ -39,39 +39,11 @@
       "message": "already present (2 files)"
     },
     {
-      "slug": "customer-service/customer_churn",
-      "dataset": "blastchar/telco-customer-churn",
-      "desc": "Telco Customer Churn (Kaggle classic, 550K downloads)",
-      "status": "ok",
-      "message": "downloaded (1 files): WA_Fn-UseC_-Telco-Customer-Churn.csv"
-    },
-    {
       "slug": "customer-service/nlp_intent_classification",
       "dataset": "bittlingmayer/amazonreviews",
       "desc": "Sentiment / intent corpus",
       "status": "skipped",
       "reason": "skipped: ~3GB too large for scaffold"
-    },
-    {
-      "slug": "fraud-siu/vehicle_claim_fraud",
-      "dataset": "shivamb/vehicle-claim-fraud-detection",
-      "desc": "Vehicle fraud (also in claims)",
-      "status": "ok",
-      "message": "already present (1 files)"
-    },
-    {
-      "slug": "fraud-siu/creditcard_fraud",
-      "dataset": "mlg-ulb/creditcardfraud",
-      "desc": "Credit-card fraud benchmark",
-      "status": "ok",
-      "message": "already present (1 files)"
-    },
-    {
-      "slug": "fraud-siu/auto_insurance_fraud",
-      "dataset": "buntyshah/auto-insurance-claims-data",
-      "desc": "Auto fraud (also in claims)",
-      "status": "ok",
-      "message": "already present (1 files)"
     },
     {
       "slug": "fraud-siu/ieee_fraud",
@@ -105,6 +77,34 @@
       "slug": "customer-service/customer_complaints",
       "dataset": "adelanseur/insurance-company-complaints",
       "desc": "Insurance Company Complaints",
+      "status": "fail",
+      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+    },
+    {
+      "slug": "customer-service/customer_churn",
+      "dataset": "blastchar/telco-customer-churn",
+      "desc": "Telco Customer Churn (Kaggle classic, 550K downloads)",
+      "status": "fail",
+      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+    },
+    {
+      "slug": "fraud-siu/vehicle_claim_fraud",
+      "dataset": "shivamb/vehicle-claim-fraud-detection",
+      "desc": "Vehicle fraud (also in claims)",
+      "status": "fail",
+      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+    },
+    {
+      "slug": "fraud-siu/creditcard_fraud",
+      "dataset": "mlg-ulb/creditcardfraud",
+      "desc": "Credit-card fraud benchmark",
+      "status": "fail",
+      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+    },
+    {
+      "slug": "fraud-siu/auto_insurance_fraud",
+      "dataset": "buntyshah/auto-insurance-claims-data",
+      "desc": "Auto fraud (also in claims)",
       "status": "fail",
       "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
     }

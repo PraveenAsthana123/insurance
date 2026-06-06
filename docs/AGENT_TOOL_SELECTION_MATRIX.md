@@ -110,6 +110,12 @@ Score every candidate from 1 to 5:
 | Testability | Can it run in CI/harness with deterministic checks |
 | Exit strategy | Can it be removed without large rewrite |
 
+## Top 1 Percent Setup Reference
+
+For the integrated setup blueprint across Spec Kit, BMAD, GSD/Ralph Loop, pneumatic workflows, orchestration patterns, Harness Agent, CUA, Stagehand, Playwright, approval policy, observability, value, and use cases, see:
+
+- `docs/TOP_1_PERCENT_AI_DELIVERY_SETUP.md`
+
 ## Recommended Use In This Repo
 
 ### Hermes Agent

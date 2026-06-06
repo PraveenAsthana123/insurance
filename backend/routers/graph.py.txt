@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/graph.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
-HOLY Graph AI router — per-dept relationship graph (Cytoscape-compatible).
+INSUR Graph AI router — per-dept relationship graph (Cytoscape-compatible).
 
 Unifies per-dept artifacts (master entities, processes, pipelines, roles,
 reports, demos, audit event types, dashboards) into one queryable graph.
@@ -13,10 +13,10 @@ requirement) + §45 (KG non-negotiable) + §47 (C4 L5 dep view) + §49
 (compose-footer derivable from edges) + §59 MDD + §63 + §64 + §66.
 
 Endpoints:
-  GET /api/v1/holy/graph/{dept}                       — full graph
-  GET /api/v1/holy/graph/{dept}/nodes?type=<type>     — filtered nodes
-  GET /api/v1/holy/graph/{dept}/neighbors/{node_id}   — 1-hop neighbors
-  GET /api/v1/holy/graph/_global                      — cross-dept counts
+  GET /api/v1/insur/graph/{dept}                       — full graph
+  GET /api/v1/insur/graph/{dept}/nodes?type=<type>     — filtered nodes
+  GET /api/v1/insur/graph/{dept}/neighbors/{node_id}   — 1-hop neighbors
+  GET /api/v1/insur/graph/_global                      — cross-dept counts
 
 ## Imports
 - from `__future__` import annotations
@@ -24,7 +24,7 @@ Endpoints:
 - from `_` import time
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Query, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 
 ## Inputs
 (no CLI / env inputs — library module or implicit)
@@ -46,4 +46,4 @@ Endpoints:
 - Master entities — keep aligned with master_data.ENTITY_CATALOG keys.
 - 15 standard report archetypes per §64.37.2 — keep aligned with
 - reports.STANDARD_REPORTS report_id values.
-- Audit event prefixes per HOLY_TRANSACTIONS event taxonomy.
+- Audit event prefixes per INSUR_TRANSACTIONS event taxonomy.

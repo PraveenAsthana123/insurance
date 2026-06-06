@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/security_posture_service.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 §68.7 Security posture — read surface for "is the system secure?"
@@ -12,18 +12,18 @@ Aggregates three signals into one operator view:
      place? are the drill files present?). This is the "did we hold the
      line on the §42 / §47.6 / §38.3 baseline" check.
   2. CVE / dep-vuln backlog — read from data/agent-supervisor/
-     security_posture.json (HOLY_SECURITY_POSTURE_PATH env override).
+     security_posture.json (INSUR_SECURITY_POSTURE_PATH env override).
      This file is populated by an external pip-audit/bandit/trivy job
      (out-of-scope for this commit; service handles missing file
      gracefully per §57.7).
-  3. Attack attempts — derived from the federated holy_reads audit log
+  3. Attack attempts — derived from the federated insur_reads audit log
      by filtering for 403/401-shaped denial events (RBAC denied / role
      unknown / scope-denied). The leak-scan from §68.6 sits adjacent.
 
 Composes with §38.3 (audit on read) + §47.6 (compliance gate check —
 the audit-helper + RBAC matrix presence ARE part of the posture) +
 §57.7 (graceful degradation — missing posture file → empty signal,
-never crash) + §64.32 (per-dept HOLY_SECURITY.md spec is the WRITE
+never crash) + §64.32 (per-dept INSUR_SECURITY.md spec is the WRITE
 side; this is the READ surface) + §68 (Observability Hub iter 3).
 
 ## Imports
@@ -38,7 +38,7 @@ side; this is the READ surface) + §68 (Observability Hub iter 3).
 - from `typing` import Any
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH, HOLY_SECURITY_POSTURE_PATH
+- Env vars: INSUR_AUDIT_PATH, INSUR_SECURITY_POSTURE_PATH
 
 ## Process
 ### Functions

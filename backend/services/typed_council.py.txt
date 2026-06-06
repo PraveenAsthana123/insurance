@@ -1,11 +1,11 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/typed_council.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 Pydantic AI typed council — §56 Stage-1 adapter.
 
-HOLY's existing council pattern runs via OpenClaw → Redis → worker
+INSUR's existing council pattern runs via OpenClaw → Redis → worker
 (see council_agents service in docker-compose). That path returns raw
 text strings from each of the 3 stages (author / reviewer / chair).
 
@@ -22,8 +22,8 @@ parse time rather than at downstream consumer time.
 
 Per global CLAUDE.md §56.2 Stage-1 contract:
   - Lazy import of pydantic_ai (SDK absence → unavailable, never crash)
-  - Feature-flag opt-in: HOLY_TYPED_COUNCIL_ENABLED=true
-  - Default model from HOLY_LLM_MODEL (reuses gateway env contract)
+  - Feature-flag opt-in: INSUR_TYPED_COUNCIL_ENABLED=true
+  - Default model from INSUR_LLM_MODEL (reuses gateway env contract)
   - Never default-on; OpenClaw/Redis path keeps working
 
 Per §38.3:
@@ -50,7 +50,7 @@ Drill: tests/drills/drill_typed_council.py
 - from `pydantic` import BaseModel, Field
 
 ## Inputs
-- Env vars: HOLY_LLM_MODEL, HOLY_TYPED_COUNCIL_AUDIT_PATH, HOLY_TYPED_COUNCIL_ENABLED
+- Env vars: INSUR_LLM_MODEL, INSUR_TYPED_COUNCIL_AUDIT_PATH, INSUR_TYPED_COUNCIL_ENABLED
 
 ## Process
 ### Classes

@@ -1,13 +1,13 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_security_posture.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
-Drill: §68.7 Security posture surface — iteration 3 of HOLY Observability Hub.
+Drill: §68.7 Security posture surface — iteration 3 of INSUR Observability Hub.
 
 Read-only aggregation over three signals: live-probed compliance gates,
-external CVE snapshot (HOLY_SECURITY_POSTURE_PATH env), attack-attempt
-scan of the holy_reads audit log.
+external CVE snapshot (INSUR_SECURITY_POSTURE_PATH env), attack-attempt
+scan of the insur_reads audit log.
 
 Steps (12 total; 5 negative):
   1. (+) GET /_global → 200 with policy stamp, compliance gates with
@@ -24,7 +24,7 @@ Steps (12 total; 5 negative):
   6. (+) Seed an audit log row with 'rbac.denied' → /attacks finds it
         with attack_type='rbac_denial'
   7. (+) GET /{dept} → per-dept slice with spec_doc pointing at
-        HOLY_SECURITY.md path
+        INSUR_SECURITY.md path
   8. (-) NEG: invalid dept → 404 (validator-first per §47.6)
   9. (-) NEG: bad role → 400 from RBAC, NEVER reaches service
   10.(-) NEG: malformed posture JSON → graceful envelope, not crash
@@ -48,7 +48,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH, HOLY_SECURITY_POSTURE_PATH
+- Env vars: INSUR_AUDIT_PATH, INSUR_SECURITY_POSTURE_PATH
 
 ## Process
 ### Functions

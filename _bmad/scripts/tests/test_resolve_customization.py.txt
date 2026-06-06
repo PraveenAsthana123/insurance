@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # _bmad/scripts/tests/test_resolve_customization.py
-# auto-generated explainer · 2026-06-02T10:00:07Z
+# auto-generated explainer · 2026-06-05T10:00:10Z
 
 ## Purpose
 (no module docstring — add one to improve this)

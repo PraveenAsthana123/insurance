@@ -1,29 +1,29 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/dbviewer.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
-§68.1 + §68.2 — HOLY DB Viewer + per-function table catalog.
+§68.1 + §68.2 — INSUR DB Viewer + per-function table catalog.
 
-Read-only API over registered databases. Composes with global §68 (HOLY
+Read-only API over registered databases. Composes with global §68 (INSUR
 Observability + Data Hub Standard) + the existing TenantId + RBAC +
-holy_audit federation (§64.43 #7) + PII redaction (§47.6).
+insur_audit federation (§64.43 #7) + PII redaction (§47.6).
 
 Endpoints (8 total):
   §68.1 DB Viewer:
-    GET /api/v1/holy/dbviewer/_global
-    GET /api/v1/holy/dbviewer/databases/{db_id}
-    GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}
-    GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}
-    GET /api/v1/holy/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample
+    GET /api/v1/insur/dbviewer/_global
+    GET /api/v1/insur/dbviewer/databases/{db_id}
+    GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}
+    GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}
+    GET /api/v1/insur/dbviewer/databases/{db_id}/schemas/{schema}/tables/{table}/sample
 
   §68.2 Per-function tables:
-    GET /api/v1/holy/dbviewer/process-tables/_global
-    GET /api/v1/holy/dbviewer/process-tables/{dept}
-    GET /api/v1/holy/dbviewer/process-tables/{dept}/{process_id}
+    GET /api/v1/insur/dbviewer/process-tables/_global
+    GET /api/v1/insur/dbviewer/process-tables/{dept}
+    GET /api/v1/insur/dbviewer/process-tables/{dept}/{process_id}
 
 All validators (db_id / schema / table / process_id format checks) run
-BEFORE log_holy_access per §47.6 anti-info-leak.
+BEFORE log_insur_access per §47.6 anti-info-leak.
 
 ## Imports
 - from `__future__` import annotations
@@ -31,7 +31,7 @@ BEFORE log_holy_access per §47.6 anti-info-leak.
 - from `_` import time
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Query, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 - from `core.middleware` import current_tenant_id
 - from `services` import dbviewer_service
 
@@ -56,7 +56,7 @@ BEFORE log_holy_access per §47.6 anti-info-leak.
 - Return values from functions above
 
 ## Notable inline comments
-- 19 HOLY departments — single source of truth for cross-dept validation.
+- 19 INSUR departments — single source of truth for cross-dept validation.
 - Identifier regex shared with the service module.
 - --- §68.1 DB Viewer surface --------------------------------------------
 - IMPORTANT — _global BEFORE the parameterized paths per §66.3 FastAPI

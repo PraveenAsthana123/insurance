@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import Layout from './components/Layout';
 
 // Eagerly load the small/critical pages (dashboard, dept tree) — these run on
@@ -15,6 +15,23 @@ import DepartmentDossierPage from './pages/DepartmentDossierPage';
 import DataFlowPage from './pages/DataFlowPage';
 import HolyNavPage from './pages/HolyNavPage';
 import AgentSupervisorPage from './pages/AgentSupervisorPage';
+import InsuranceCatalogPage from './pages/InsuranceCatalogPage';
+import InsurancePage from './pages/InsurancePage';
+import { InsuranceLayout } from './pages/insurance/InsuranceLayout';
+import { InsuranceOverview, InsuranceDeptViewImpl, InsuranceDomainView } from './pages/insurance/InsuranceOverview';
+import { ProcessDetailView } from './pages/insurance/ProcessDetailView';
+import { AIDetailView } from './pages/insurance/AIDetailView';
+import { AgenticReferenceView } from './pages/insurance/AgenticReferenceView';
+import { BankLayout } from './pages/bank/BankLayout';
+import { BankUseCasePage } from './pages/bank/BankUseCasePage';
+import { BankDeptView } from './pages/bank/BankDeptView';
+import { BankBotPage } from './pages/bank/BankBotPage';
+import { BankChatPage } from './pages/bank/BankChatPage';
+import { BankBcmPage } from './pages/bank/BankBcmPage';
+import { BankScorecardPage } from './pages/bank/BankScorecardPage';
+import { BankAgenticPage } from './pages/bank/BankAgenticPage';
+import { BankPromptsPage } from './pages/bank/BankPromptsPage';
+import { BankFrameworkPage } from './pages/bank/BankFrameworkPage';
 
 // Lazy-load the heavy pages. ChartShowcase pulls Plotly+ECharts+Leaflet
 // (~6MB of vendor JS); PhaseDetailPage pulls jspdf+html2canvas on PDF
@@ -35,6 +52,7 @@ import './styles/tabs.css';
 import './styles/charts.css';
 import './styles/process.css';
 import './styles/forms.css';
+import './styles/insurance.css';
 
 function PageLoader({ label }) {
   return (
@@ -74,6 +92,19 @@ export default function App() {
           <Route path="/data-flow" element={<DataFlowPage />} />
           <Route path="/insur" element={<HolyNavPage />} />
           <Route path="/agent-supervisor" element={<AgentSupervisorPage />} />
+          <Route path="/insurance-catalog" element={<InsuranceCatalogPage />} />
+          <Route path="/insurance-catalog/:departmentId" element={<InsuranceCatalogPage />} />
+          <Route path="/insurance-legacy" element={<InsurancePage />} />
+          <Route path="/insurance" element={<InsuranceLayout />}>
+            <Route index element={<InsuranceOverview />} />
+            <Route path="reference/agentic" element={<AgenticReferenceView />} />
+            <Route path=":deptId" element={<InsuranceDeptViewImpl />} />
+            <Route path=":deptId/:domain" element={<InsuranceDomainView />} />
+            <Route path=":deptId/:domain/:processId" element={<ProcessDetailView />} />
+            <Route path=":deptId/:domain/:processId/ai/:aiType" element={<AIDetailView />} />
+            <Route path=":deptId/:domain/:processId/:subProcessId" element={<ProcessDetailView />} />
+            <Route path=":deptId/:domain/:processId/:subProcessId/ai/:aiType" element={<AIDetailView />} />
+          </Route>
 
           {/* Heavy lazy-loaded pages get their own Suspense boundary so a
               navigation between them shows a per-page spinner rather than
@@ -135,6 +166,21 @@ export default function App() {
           <Route path="/:departmentId/tester" element={<TesterPage />} />
           <Route path="/:departmentId/dossier" element={<DepartmentDossierPage />} />
           <Route path="/:departmentId/:processId" element={<ProcessPage />} />
+        </Route>
+
+        {/* /bank takes the whole screen — only 2 menus (dark blue + maroon) — no global Layout wrapper */}
+        <Route path="/bank" element={<BankLayout />}>
+          <Route index element={<div style={{ padding: 24, color: '#64748b' }}>Pick a department · domain · process from the dark blue menu.</div>} />
+          <Route path="dept/:deptId/:domain" element={<BankDeptView />} />
+          <Route path="dept/:deptId/:domain/:processId" element={<BankUseCasePage />} />
+          <Route path="uc/:deptId/:processId" element={<BankUseCasePage />} />
+          <Route path="bot" element={<BankBotPage />} />
+          <Route path="chat" element={<BankChatPage />} />
+          <Route path="bcm" element={<BankBcmPage />} />
+          <Route path="scorecard" element={<BankScorecardPage />} />
+          <Route path="agentic" element={<BankAgenticPage />} />
+          <Route path="prompts" element={<BankPromptsPage />} />
+          <Route path="framework" element={<BankFrameworkPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

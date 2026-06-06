@@ -1,13 +1,13 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/evals_cost.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
 §68.9 Cost eval router.
 
-4 endpoints under /api/v1/holy/evals/cost/* federated via core.holy_audit
+4 endpoints under /api/v1/insur/evals/cost/* federated via core.insur_audit
 (surface=evals_cost). Sibling of §68.8 functional + §68.10 safety; RBAC
-catch-all `/api/v1/holy/evals/*` already gates this surface.
+catch-all `/api/v1/insur/evals/*` already gates this surface.
 
 Composes with §38.3 + §41.1 (FinOps) + §41.3 (tenant) + §57.7 + §68.
 
@@ -15,7 +15,7 @@ Composes with §38.3 + §41.1 (FinOps) + §41.3 (tenant) + §57.7 + §68.
 - from `__future__` import annotations
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Query, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 - from `services` import cost_eval_service
 
 ## Inputs

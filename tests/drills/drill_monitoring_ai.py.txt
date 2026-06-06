@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_monitoring_ai.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
-Drill: HOLY Monitoring AI per-dept (§64 + §65 + §47 + §38).
+Drill: INSUR Monitoring AI per-dept (§64 + §65 + §47 + §38).
 
 Steps (10 total; 3 negative):
     1. (+) monitoring router imports + endpoint catalog populated
@@ -16,7 +16,7 @@ Steps (10 total; 3 negative):
            are present in the router's CRON_JOBS catalog with correct cadences
     8. (-) NEGATIVE — get_run with bogus run_id → 404 (filesystem-not-found
            must not leak path traversal info)
-    9. (+) HOLY_MONITORING_AI.md exists for every dept under global-ai-org/
+    9. (+) INSUR_MONITORING_AI.md exists for every dept under global-ai-org/
    10. (+) cron audit dir layout matches what cron tasks write to
            (data/eval/cron/<job_subdir>/) so backend + workers are aligned
 

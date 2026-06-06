@@ -1,25 +1,25 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_holy_routers_federation.py
-# auto-generated explainer · 2026-06-02T10:00:35Z
+# auto-generated explainer · 2026-06-05T10:00:43Z
 
 ## Purpose
-Drill: §64.43 #7 federation extended to the 7 remaining /api/v1/holy/* routers
-via the shared `core.holy_audit.log_holy_access` helper.
+Drill: §64.43 #7 federation extended to the 7 remaining /api/v1/insur/* routers
+via the shared `core.insur_audit.log_insur_access` helper.
 
 Closes the federation gap left after the monitoring router landed alone
-(drill_holy_monitoring_federation.py). One drill covers ALL 7 surfaces in
+(drill_insur_monitoring_federation.py). One drill covers ALL 7 surfaces in
 one place because the contract is identical:
 
   - Every read attributes the access to caller's tenant_id + actor
-  - Validators (e.g. _validate_dept) MUST run BEFORE log_holy_access so
+  - Validators (e.g. _validate_dept) MUST run BEFORE log_insur_access so
     failed-enumeration attempts do NOT pollute the audit trail
   - Best-effort disk persistence (read path NEVER broken by audit layer)
   - Audit row schema carries §38.3 required fields
 
 Steps (12 total; ≥4 negative):
-  1. (+) Shared helper writes to data/agent-supervisor/holy_reads.jsonl
-        (configurable via HOLY_AUDIT_PATH env var). Default location is
-        the unified holy-fleet audit trail.
+  1. (+) Shared helper writes to data/agent-supervisor/insur_reads.jsonl
+        (configurable via INSUR_AUDIT_PATH env var). Default location is
+        the unified insur-fleet audit trail.
   2. (+) master_data /_global with X-Tenant-ID echoed in row + tenant
         column = "tenant-a"
   3. (+) transactions /{dept} writes row tagged with dept + endpoint
@@ -29,7 +29,7 @@ Steps (12 total; ≥4 negative):
   7. (+) graph /{dept}/nodes writes row with extra={type}
   8. (+) downloads /_global writes row with surface=downloads
   9. (-) NEG: master_data invalid dept → 404, NO new audit row (validator
-        runs BEFORE log_holy_access per §47.6 anti-info-leak)
+        runs BEFORE log_insur_access per §47.6 anti-info-leak)
   10.(-) NEG: pipelines invalid process_id → 400, NO new audit row
         (validator-before-audit ordering preserved)
   11.(-) NEG: default tenant when no X-Tenant-ID header → row tagged
@@ -54,7 +54,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH
+- Env vars: INSUR_AUDIT_PATH
 
 ## Process
 ### Functions

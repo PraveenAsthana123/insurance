@@ -1,11 +1,11 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/observability_hub.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
 §68 Observability Hub aggregator router.
 
-One endpoint: GET /api/v1/holy/observability-hub/_overview that surfaces
+One endpoint: GET /api/v1/insur/observability-hub/_overview that surfaces
 the health of all 7 §68 read surfaces in one call. Mirrors the §56
 /api/v1/agent-platform/adapters aggregator shape.
 
@@ -15,7 +15,7 @@ Composes with §38.3 + §47.6 + §57.7 + §64.43 #7 + §68.
 - from `__future__` import annotations
 - from `typing` import Any
 - from `fastapi` import APIRouter, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 - from `services` import observability_hub_service
 
 ## Inputs

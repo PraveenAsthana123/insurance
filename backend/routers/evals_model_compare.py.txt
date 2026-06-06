@@ -1,12 +1,12 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/evals_model_compare.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:46Z
 
 ## Purpose
 §68.11 Multi-model comparison router.
 
-3 endpoints under /api/v1/holy/evals/model-compare/* federated via
-core.holy_audit (surface=evals_model_compare). The POST mutates
+3 endpoints under /api/v1/insur/evals/model-compare/* federated via
+core.insur_audit (surface=evals_model_compare). The POST mutates
 disk (manifest persistence) so RBAC restricts it to manager/tester;
 GETs are open to _READ_ROLES via the existing /evals/* catch-all.
 
@@ -17,7 +17,7 @@ Composes with §68.8/9/10 (this surface JOINS their data) + §38.3 +
 - from `__future__` import annotations
 - from `typing` import Any
 - from `fastapi` import APIRouter, HTTPException, Query, Request
-- from `core.holy_audit` import log_holy_access
+- from `core.insur_audit` import log_insur_access
 - from `core.middleware` import current_tenant_id
 - from `schemas.model_compare` import ModelCompareRequest, ModelCompareResponse
 - from `services` import model_compare_service

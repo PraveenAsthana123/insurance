@@ -1,12 +1,12 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/functional_eval_service.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 §68.8 Functional eval — "does the model still work?"
 
 Read-only aggregation over data/agent-supervisor/functional_eval_runs.jsonl
-(env-overridable via HOLY_EVAL_FUNCTIONAL_LOG). Each row is one eval run:
+(env-overridable via INSUR_EVAL_FUNCTIONAL_LOG). Each row is one eval run:
 
   ts, run_id, model_id, model_version, dataset, dept, tenant_id,
   accuracy, f1, auc, precision, recall, n_examples, latency_p95_ms,
@@ -41,7 +41,7 @@ functional eval surface IS the per-pipeline scorecard) + §68
 - from `typing` import Any
 
 ## Inputs
-- Env vars: HOLY_EVAL_FUNCTIONAL_LOG
+- Env vars: INSUR_EVAL_FUNCTIONAL_LOG
 
 ## Process
 ### Functions

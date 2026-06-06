@@ -1,12 +1,12 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_evals_functional.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
-Drill: §68.8 Functional eval surface — iteration 4 of HOLY Observability Hub.
+Drill: §68.8 Functional eval surface — iteration 4 of INSUR Observability Hub.
 
 Read-only aggregation over data/agent-supervisor/functional_eval_runs.jsonl
-(env-overridable via HOLY_EVAL_FUNCTIONAL_LOG). The WRITE side (MLflow
+(env-overridable via INSUR_EVAL_FUNCTIONAL_LOG). The WRITE side (MLflow
 job / scheduled eval that appends a row per run) is a separate iteration.
 
 Steps (12 total; 5 negative):
@@ -45,7 +45,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH, HOLY_EVAL_FUNCTIONAL_LOG
+- Env vars: INSUR_AUDIT_PATH, INSUR_EVAL_FUNCTIONAL_LOG
 
 ## Process
 ### Functions

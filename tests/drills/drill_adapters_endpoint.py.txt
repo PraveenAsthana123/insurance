@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_adapters_endpoint.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:40Z
 
 ## Purpose
 Drill: /api/v1/agent-platform/adapters aggregator (§56.2 discovery surface).
@@ -28,7 +28,7 @@ Steps (10; 4 negative):
         audit_path, detail) — schema invariant.
   4. (-) NEG with all opt-in flags unset → n_enabled == 0 (default-off
         §56.2 contract holds at the aggregator surface too).
-  5. (+) Enabling HOLY_DSPY_OPTIMIZER_ENABLED bumps n_enabled by 1
+  5. (+) Enabling INSUR_DSPY_OPTIMIZER_ENABLED bumps n_enabled by 1
         AND the dspy-optimizer row shows enabled=true.
   6. (-) NEG with importable false (mocked) → enabled flag set, but
         importable=false; aggregate n_importable < n_adapters.
@@ -52,7 +52,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_DSPY_OPTIMIZER_ENABLED
+- Env vars: INSUR_DSPY_OPTIMIZER_ENABLED
 
 ## Process
 ### Functions

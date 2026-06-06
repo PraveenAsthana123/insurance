@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/insur_bot.py
-# auto-generated explainer · 2026-06-02T10:00:05Z
+# auto-generated explainer · 2026-06-05T10:00:08Z
 
 ## Purpose
 insur_bot — chat over the end-to-end demo index.
@@ -53,3 +53,6 @@ Per CLAUDE.md security: NO innerHTML — chat UI uses textContent + DOM.
 
 ## Notable inline comments
 - ── HTTP / UI mode (no innerHTML; safe DOM only) ─────────────────────────
+- Guardrail refuse-list per §77 row 1408 + §80 guardrail surface.
+- Composes with §75.5 HITL — these patterns short-circuit before LLM call.
+- §80 guardrail check BEFORE LLM call

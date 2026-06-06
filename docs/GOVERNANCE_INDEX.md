@@ -11,7 +11,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | Run/debug locally | `docs/RUN_DEBUG_RUNBOOK.md`, `docs/ADVANCED_AGENTIC_STACK_SETUP.md` |
 | Default health check | `scripts/project_doctor.sh` |
 | Claude/Codex operating rules | `AGENTS.md`, `CLAUDE.md`, `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md` |
-| Approval workflow and gates | `docs/NO_APPROVAL_AUTONOMY_POLICY.md`, `docs/CODEX_APPROVAL_CRON_POLICY.md`, `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md`, `docs/CODEX_APPROVAL_ADVANCED_POLICY.md`, `docs/APPROVAL_GOVERNANCE.md`, `.archon/approval-policy.yaml` |
+| Approval workflow and gates | `docs/USER_APPROVAL_POLICY.md`, `docs/NO_APPROVAL_AUTONOMY_POLICY.md`, `docs/CODEX_APPROVAL_CRON_POLICY.md`, `docs/CODEX_APPROVAL_CRON_RUN_PLAN.md`, `docs/CODEX_APPROVAL_ADVANCED_POLICY.md`, `docs/APPROVAL_GOVERNANCE.md`, `.archon/approval-policy.yaml` |
 | Tenant + idempotency header contracts | `docs/TENANT_ID_IDEMPOTENCY_CONTRACT.md` |
 
 ## Universal Policies
@@ -22,6 +22,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/DESIGN_METHODOLOGY_POLICY.md` | Domain-driven, model-driven, output-evaluation-first, governance-AI-driven, and test-driven design. |
 | `docs/BACKEND_GLOBAL_POLICY.md` | Repo-specific backend layering, API, database, service, observability, testing, and AI governance rules. |
 | `docs/UI_GLOBAL_POLICY.md` | React/Next.js frontend policy: lazy loading, freshness, status, SEO, accessibility, debugability. |
+| `docs/USER_APPROVAL_POLICY.md` | User standing approval policy for safe repo-local work and narrow hard-gate requests. |
 | `docs/NO_APPROVAL_AUTONOMY_POLICY.md` | Agent autonomy policy: do safe repo-local work without asking, while preserving hard approval gates. |
 | `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md` | Claude-specific safe local autonomy and approval policy. |
 | `docs/CODEX_APPROVAL_CRON_POLICY.md` | Scheduled safe local approval policy for Codex/Archon workflow gates. |
@@ -33,10 +34,12 @@ This is the single entry point for project governance, architecture, testing, AP
 | Document | Purpose |
 |---|---|
 | `docs/LAYERED_ARCHITECTURE_MAP.md` | User, application, model, service, infra, orchestration, trust/governance layers. |
+| `docs/INSURANCE_IMPLEMENTATION_PLAN.md` | Insurance verticalization plan for claims, underwriting, customer-service, and fraud/SIU across frontend, API, data, ML/RAG, observability, and governance. |
 | `docs/architecture/ENTERPRISE_AI_REFERENCE_ARCHITECTURE.md` | Enterprise AI reference architecture. |
 | `docs/architecture/DEPARTMENT_OPERATING_SYSTEM.md` | Department operating system model. |
 | `docs/architecture/DEPARTMENT_OS_BLUEPRINT.md` | Department OS blueprint. |
 | `docs/PRODUCTION_AGENT_PLATFORM_ARCHITECTURE.md` | Production agent tooling blueprint and enterprise Dark Factory architecture: workflow engines, agent/control/execution/runtime planes, observability, trust/governance, AutoGen, CrewAI, LangGraph, Temporal, OpenClaw, OpenTelemetry, OPA, Kafka, Istio/Kiali, RDF/OWL, graph DB, ontology, simulation. |
+| `docs/ENTERPRISE_INTEGRATION_OPERATIONS_MATRIX.md` | Integration matrix for circuit breakers, service discovery, gateways, load balancing, DB viewer, gRPC, Redis, Memcached, Ollama/Kivi, operations, and thresholds. |
 | `docs/GLOBAL_AGENT_ARCHITECTURE_POLICY.md` | Reusable global agent architecture policy: layers, runtime, tools, memory, security, governance, observability, MCP, policy engine. |
 | `docs/AGENT_PLATFORM_INTERVIEW_GUIDE.md` | Interview-ready explanation of the multi-agent platform, business problem, architecture, security, observability, and challenges. |
 | `docs/diagrams/agent-platform-architecture.md` | Mermaid diagrams for layered agent platform, runtime, tool governance, memory/RAG, and observability flows. |
@@ -48,6 +51,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/API_ENDPOINT_CATALOG.md` | Human-readable API input/process/output/security/tracing catalog. |
 | `docs/API_CATALOG.json` | Machine-readable API contract catalog generated from FastAPI. |
 | `docs/API_ASSISTANT_MESSAGE_CATALOG.json` | API catalog in assistant message/output_text JSON format. |
+| `docs/BANKING_TAB_ALIGNMENT.md` | Banking-style process detail tab, sub-tab, component, and blueprint data-source alignment map. |
 | `docs/BACKEND_FILE_INVENTORY.md` | Backend Python file inventory with layer, gist, classes, functions, flow notes. |
 | `docs/BACKEND_FILE_INVENTORY.json` | Machine-readable backend file inventory. |
 | `docs/MODEL_CATALOG_FLOW.md` | Model catalog/`ml_models` rationale and flow chain. |
@@ -66,6 +70,8 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/SPEC_KIT_RUNBOOK.md` | Spec Kit intake layer for structured specs, acceptance criteria, BMAD handoff, and optional OpenClaw routing. |
 | `docs/KT_BMAD_SPACE_RUNBOOK.md` | KT + BMAD kickoff workspace for short tasks, voice transcripts, BMAD handoff, and optional OpenClaw submission. |
 | `docs/ADVANCED_AGENTIC_STACK_SETUP.md` | Advanced local setup for BMAD, Archon, approval watcher, OpenClaw, and agent fleet readiness. |
+| `docs/TOP_1_PERCENT_AI_DELIVERY_SETUP.md` | Top-tier AI delivery setup blueprint: features, value, use cases, readiness, install priorities, and commands. |
+| `docs/AI_COMMAND_CENTER_MONITORING_DELEGATION_RUNBOOK.md` | Command-center runbook for monitoring portals, delegation, operations, task queues, quality gates, and escalation. |
 | `docs/VOICE_TEXT_AUTOMATION_RUNBOOK.md` | Voice/transcribed-text automation, planning, scheduling, cron, Ollama, and OpenClaw execution. |
 | `docs/DARK_FACTORY_OPERATING_MODEL.md` | AI-assisted delivery operating model tying BMAD, Archon, coding agents, local agent-platform adapters, CI, security, monitoring, and human approvals together. |
 | `docs/BMAD_RECIPES.md` | Project-specific BMAD recipes, including the full AI Dark Factory flow from idea to monitoring. |

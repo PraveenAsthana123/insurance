@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_reports_catalog.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:41Z
 
 ## Purpose
-Drill: HOLY reports-catalog router (§38 + §47.6 + §57.6 + §64.37 + §66).
+Drill: INSUR reports-catalog router (§38 + §47.6 + §57.6 + §64.37 + §66).
 
 Steps (10 total; 3 negative):
     1. (+) reports router imports + STANDARD_REPORTS has exactly 15 rows
@@ -15,7 +15,7 @@ Steps (10 total; 3 negative):
     7. (-) NEGATIVE — malformed report_id (caps/special) → 400
     8. (+) report_id values unique within STANDARD_REPORTS (no dup keys)
     9. (+) every owner_role is one of the 15 known §63 role archetypes
-   10. (+) HOLY_REPORTS_CATALOG.md exists per dept + _global rollup
+   10. (+) INSUR_REPORTS_CATALOG.md exists per dept + _global rollup
            returns all 19 depts with n_reports_total = 285 (15 × 19)
 
 # RESOURCES: reports_router disk_io

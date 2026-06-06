@@ -159,7 +159,11 @@ services:
       OLLAMA_URL: http://ollama:11434
       MODEL: ${AGENT_MODEL:-kivi:local}
       POLL_TIMEOUT: "5"
-      OLLAMA_TIMEOUT: "60"
+      OLLAMA_TIMEOUT: "180"
+      AGENT_STARTUP_SMOKE: ${AGENT_STARTUP_SMOKE:-0}
+      AGENT_TRACE_PATH: /data/agent-supervisor/task_traces.jsonl
+    volumes:
+      - ./data:/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -204,6 +208,10 @@ services:
       CHAIR_MODEL: ${COUNCIL_CHAIR_MODEL:-kivi:local}
       POLL_TIMEOUT: "5"
       STAGE_TIMEOUT: "120"
+      AGENT_STARTUP_SMOKE: ${AGENT_STARTUP_SMOKE:-0}
+      AGENT_TRACE_PATH: /data/agent-supervisor/task_traces.jsonl
+    volumes:
+      - ./data:/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:

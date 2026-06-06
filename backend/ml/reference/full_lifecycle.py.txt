@@ -1,9 +1,9 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/ml/reference/full_lifecycle.py
-# auto-generated explainer · 2026-06-02T10:00:39Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
-HOLY reference: full structured-ML lifecycle.
+INSUR reference: full structured-ML lifecycle.
 
 Demonstrates ALL 16 steps the operator asked about for one pipeline.
 Copy this file for every other sub-process; only the dataset path,

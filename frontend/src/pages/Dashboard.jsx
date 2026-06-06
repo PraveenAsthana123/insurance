@@ -1,48 +1,94 @@
 import { Link } from 'react-router-dom';
 import { departments } from '../data/departments';
+import { brand, labels, totals, priorityDepartment } from '../config/brand';
 
 export default function Dashboard() {
   const depts = departments.filter((d) => d.id !== 'dashboard');
-  const totalProcesses = depts.reduce((s, d) => s + d.processCount, 0);
-  const allAITypes = [...new Set(depts.flatMap((d) => d.aiTypes))];
 
   return (
     <div>
       <div className="page-header">
         <div className="page-header-left">
-          <div className="page-title">🥤 INSUR Analytics Platform</div>
-          <div className="page-subtitle">AI-powered analytics across 11 departments — from demand forecasting to governance</div>
+          <h1
+            className="page-title"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              margin: 0,
+              fontSize: 'clamp(1.5rem, 2.4vw, 2rem)',
+              fontWeight: 800,
+              color: brand.primaryColor || 'var(--text-primary)',
+            }}
+          >
+            <span aria-hidden="true" style={{ fontSize: '1.3em' }}>{brand.icon}</span>
+            <span>{brand.name}</span>
+          </h1>
+          <p className="page-subtitle" style={{ marginTop: 6, color: 'var(--text-secondary)' }}>
+            {brand.tagline}
+          </p>
         </div>
         <div className="page-header-right">
           <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)', background: 'var(--bg-hover)', padding: '4px 12px', borderRadius: 10 }}>
-            Last updated: {new Date().toLocaleDateString()}
+            {labels.lastUpdatedPrefix} {new Date().toLocaleDateString()}
           </span>
         </div>
       </div>
 
+      {priorityDepartment && (
+        <Link
+          to={priorityDepartment.route}
+          style={{
+            display: 'block',
+            textDecoration: 'none',
+            background: `linear-gradient(135deg, ${priorityDepartment.color}10, ${priorityDepartment.color}25)`,
+            border: `1px solid ${priorityDepartment.color}55`,
+            borderLeft: `4px solid ${priorityDepartment.color}`,
+            borderRadius: 'var(--border-radius-lg)',
+            padding: '14px 18px',
+            marginBottom: 'var(--spacing-lg)',
+            color: 'var(--text-primary)',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontSize: 28 }} aria-hidden="true">{priorityDepartment.icon}</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.04em', color: priorityDepartment.color, fontWeight: 700 }}>
+                Priority department
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 'var(--font-size-md)' }}>{priorityDepartment.name}</div>
+              <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)', marginTop: 2 }}>
+                {priorityDepartment.description}
+              </div>
+            </div>
+            <span style={{ fontSize: 20, color: priorityDepartment.color }}>›</span>
+          </div>
+        </Link>
+      )}
+
       <div className="kpi-grid">
         <div className="kpi-card">
           <div className="kpi-card-accent blue" />
-          <div className="kpi-label">Departments</div>
-          <div className="kpi-value">11</div>
-          <div className="kpi-change positive"><span className="kpi-change-arrow">↑</span> Full CPG coverage</div>
+          <div className="kpi-label">{labels.departmentCount}</div>
+          <div className="kpi-value">{totals.departments}</div>
+          <div className="kpi-change positive"><span className="kpi-change-arrow">↑</span> Full coverage</div>
         </div>
         <div className="kpi-card">
           <div className="kpi-card-accent green" />
-          <div className="kpi-label">Total Processes</div>
-          <div className="kpi-value">{totalProcesses}+</div>
+          <div className="kpi-label">{labels.processCount}</div>
+          <div className="kpi-value">{totals.processes}+</div>
           <div className="kpi-change positive"><span className="kpi-change-arrow">↑</span> AI-powered workflows</div>
         </div>
         <div className="kpi-card">
           <div className="kpi-card-accent purple" />
-          <div className="kpi-label">AI Types</div>
-          <div className="kpi-value">{allAITypes.length}</div>
-          <div className="kpi-change neutral"><span className="kpi-change-label">ML, DL, CV, NLP, RAG, RPA, n8n, Physical</span></div>
+          <div className="kpi-label">{labels.aiTypes}</div>
+          <div className="kpi-value">{totals.aiTypes.length}</div>
+          <div className="kpi-change neutral"><span className="kpi-change-label">{labels.aiTypesSubtitle}</span></div>
         </div>
         <div className="kpi-card">
           <div className="kpi-card-accent amber" />
-          <div className="kpi-label">Kaggle Datasets</div>
-          <div className="kpi-value">11+</div>
+          <div className="kpi-label">{labels.datasets}</div>
+          <div className="kpi-value">{totals.datasets}+</div>
           <div className="kpi-change positive"><span className="kpi-change-arrow">↑</span> Real-world data</div>
         </div>
       </div>
@@ -71,7 +117,7 @@ export default function Dashboard() {
                   {dept.description}
                 </p>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                  {dept.aiTypes.map((t) => (
+                  {(dept.aiTypes || []).map((t) => (
                     <span key={t} className={`ai-badge ai-badge-${t.toLowerCase().replace(' ', '')}`}>{t}</span>
                   ))}
                 </div>
@@ -90,22 +136,15 @@ export default function Dashboard() {
 
       <div className="content-section">
         <div className="content-section-header">
-          <span className="content-section-title">🤖 AI Types Deployed</span>
+          <span className="content-section-title">🤖 AI Capabilities Deployed</span>
         </div>
         <div style={{ display: 'flex', gap: 'var(--spacing-md)', flexWrap: 'wrap' }}>
-          {[
-            { type: 'ML', desc: 'Machine Learning — Forecasting, classification, optimization' },
-            { type: 'DL', desc: 'Deep Learning — Complex pattern recognition, sequences' },
-            { type: 'CV', desc: 'Computer Vision — Defect detection, shelf analytics' },
-            { type: 'NLP', desc: 'Natural Language Processing — Text analysis, chatbots' },
-            { type: 'RAG', desc: 'Retrieval Augmented Generation — Document Q&A, insights' },
-            { type: 'RPA', desc: 'Robotic Process Automation — Data entry, PO processing' },
-            { type: 'n8n', desc: 'n8n Workflows — Alert routing, ERP integration, notifications' },
-            { type: 'Physical AI', desc: 'Physical AI — Robotics, IoT, edge computing' },
-          ].map((ai) => (
-            <div key={ai.type} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 'var(--border-radius-lg)', boxShadow: 'var(--shadow-card)' }}>
-              <span className={`ai-badge ai-badge-${ai.type.toLowerCase().replace(' ', '')}`}>{ai.type}</span>
-              <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)' }}>{ai.desc}</span>
+          {totals.aiTypes.map((type) => (
+            <div key={type} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 'var(--border-radius-lg)', boxShadow: 'var(--shadow-card)' }}>
+              <span className={`ai-badge ai-badge-${type.toLowerCase().replace(' ', '')}`}>{type}</span>
+              <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)' }}>
+                Used across {depts.filter((d) => (d.aiTypes || []).includes(type)).length} department(s)
+              </span>
             </div>
           ))}
         </div>

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_evals_model_compare.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:42Z
 
 ## Purpose
 Drill: §68.11 Multi-model comparison — operator-asked-for surface.
@@ -51,7 +51,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH, HOLY_EVAL_COST_LOG, HOLY_EVAL_FUNCTIONAL_LOG, HOLY_EVAL_SAFETY_LOG, HOLY_MODEL_COMPARE_DIR
+- Env vars: INSUR_AUDIT_PATH, INSUR_EVAL_COST_LOG, INSUR_EVAL_FUNCTIONAL_LOG, INSUR_EVAL_SAFETY_LOG, INSUR_MODEL_COMPARE_DIR
 
 ## Process
 ### Functions

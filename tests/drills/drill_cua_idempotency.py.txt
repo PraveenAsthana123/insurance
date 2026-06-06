@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_cua_idempotency.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:41Z
 
 ## Purpose
 Drill: §10.3 idempotency keys on /api/v1/agent-platform/cua/execute.

@@ -2954,6 +2954,30 @@
     "flow_note": "See docs/BACKEND_GLOBAL_POLICY.md for required cross-file input/process/output flow comments."
   },
   {
+    "file": "backend/tests/test_insurance_router.py",
+    "layer": "test",
+    "business_logic_gist": "HTTP coverage for insurance department artifact endpoints and generated INSUR navigator shape. Verifies priority department listing, markdown artifact reads, anti-enumeration 404s, missing artifact 404s, pipeline registry listing, and /api/v1/insur/nav/{dept} JSON shape.",
+    "classes": [],
+    "functions": [
+      "test_insurance_depts_lists_four_priority_domains",
+      "test_insurance_markdown_artifacts_are_served",
+      "test_insurance_invalid_dept_and_role_are_not_enumerable",
+      "test_insurance_missing_artifact_returns_404",
+      "test_insurance_pipeline_list_uses_registry",
+      "test_insur_nav_lists_generated_insurance_departments",
+      "test_insur_nav_serves_generated_nav_shape"
+    ],
+    "imports_from_project_or_libs": [
+      "__future__",
+      "fastapi.testclient",
+      "main",
+      "pathlib",
+      "routers.insurance",
+      "routers.insur"
+    ],
+    "flow_note": "TestClient exercises mounted FastAPI routers against filesystem-backed insurance artifacts and generated INSUR_NAV.json files."
+  },
+  {
     "file": "backend/tests/test_openclaw_router.py",
     "layer": "unknown",
     "business_logic_gist": "OpenClaw bridge router tests.",

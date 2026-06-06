@@ -1,10 +1,10 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_holy_monitoring_federation.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:41Z
 
 ## Purpose
-Drill: §64.43 #7 federation extended to /api/v1/holy/monitoring/* — first
-of 9 holy/* router federations.
+Drill: §64.43 #7 federation extended to /api/v1/insur/monitoring/* — first
+of 9 insur/* router federations.
 
 Monitoring DATA is fleet-wide infrastructure telemetry (ML pipeline +
 cron job health across all depts). It is NOT tenant-scoped data — the
@@ -52,7 +52,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_MONITORING_AUDIT_PATH
+- Env vars: INSUR_MONITORING_AUDIT_PATH
 
 ## Process
 ### Functions

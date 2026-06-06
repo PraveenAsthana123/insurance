@@ -49,6 +49,14 @@ Rolls up KPIs across all depts, AI weekly narrative, strategy simulator. Spec no
 - LLM hallucination / bias detection beyond citation-required
 - Real JWT-based auth (demo-mode RBAC replaces real sessions)
 
+### Insurance verticalization
+See `docs/INSURANCE_IMPLEMENTATION_PLAN.md`. Current code already has
+filesystem-backed `/api/v1/insurance/*` department artifact endpoints and an
+insurance pipeline registry for claims, underwriting, customer-service, and
+fraud/SIU. Remaining work is namespace governance, frontend catalog alignment,
+insurance router tests, data/pipeline smoke validation, and API/backend catalog
+regeneration.
+
 ### Long-tail
 - Other 13 depts' deep dives (pattern established; each is ~20-30 h reuse-assisted)
 - GRC / Governance flagship (reviewer-proposed 15th dept)

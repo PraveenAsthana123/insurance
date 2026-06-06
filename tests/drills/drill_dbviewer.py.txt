@@ -1,10 +1,10 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_dbviewer.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:41Z
 
 ## Purpose
 Drill: §68.1 DB Viewer + §68.2 per-function tables — first iteration of
-the §68 HOLY Observability + Data Hub Standard.
+the §68 INSUR Observability + Data Hub Standard.
 
 This drill is intentionally OFFLINE-CAPABLE: it locks the SHAPE +
 INVARIANTS of the dbviewer surface without requiring docker-compose
@@ -48,7 +48,7 @@ Exit 0 on PASS, 1 on any failure.
 - from `pathlib` import Path
 
 ## Inputs
-- Env vars: HOLY_AUDIT_PATH
+- Env vars: INSUR_AUDIT_PATH
 
 ## Process
 ### Functions

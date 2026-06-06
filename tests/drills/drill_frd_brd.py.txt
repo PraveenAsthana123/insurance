@@ -1,13 +1,13 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_frd_brd.py
-# auto-generated explainer · 2026-06-02T10:00:34Z
+# auto-generated explainer · 2026-06-05T10:00:40Z
 
 ## Purpose
-Drill: HOLY FRD + BRD content invariants per dept (§47 + §52 + §64).
+Drill: INSUR FRD + BRD content invariants per dept (§47 + §52 + §64).
 
 Steps (10 total; 3 negative):
-    1. (+) all 19 docs/brd/HOLY_BRD.md exist + ≥ 1500B
-    2. (+) all 19 docs/frd/HOLY_FRD.md exist + ≥ 2000B
+    1. (+) all 19 docs/brd/INSUR_BRD.md exist + ≥ 1500B
+    2. (+) all 19 docs/frd/INSUR_FRD.md exist + ≥ 2000B
     3. (+) every BRD has §-numbered sections: Executive summary, Stakeholders,
            Scope, Success metrics, Constraints, Risks, Dependencies, Approvals,
            Compose-footer (per §49)
@@ -15,8 +15,8 @@ Steps (10 total; 3 negative):
            ≥ 1 row per category (Decision / Observability / Per-process / Compliance)
     5. (-) NEGATIVE — a fake dept missing both docs is detected by the
            per-dept audit (cross-check with drill_per_dept_artifacts)
-    6. (+) every FRD references its parent BRD (HOLY_BRD.md link present)
-    7. (+) every BRD references its child FRD (HOLY_FRD.md link present)
+    6. (+) every FRD references its parent BRD (INSUR_BRD.md link present)
+    7. (+) every BRD references its child FRD (INSUR_FRD.md link present)
     8. (-) NEGATIVE — no FRD contains TBD/TODO/XXX placeholder anti-patterns
     9. (-) NEGATIVE — no BRD/FRD has duplicate FR-IDs across depts (would
            confuse audit traceability under §38.3)

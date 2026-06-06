@@ -1,6 +1,7 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { departments } from '../data/departments';
 import { departmentProcesses } from '../data/processes';
+import { brand, totals } from '../config/brand';
 import RoleSelector from './RoleSelector';
 import '../styles/topbar.css';
 
@@ -18,7 +19,7 @@ export default function Topbar() {
     <header className="topbar">
       <div className="topbar-left">
         <div className="topbar-breadcrumb">
-          <span>🏭</span>
+          <span aria-hidden="true">{brand.icon}</span>
           <span className="topbar-breadcrumb-sep">/</span>
           {isHome ? (
             <span className="topbar-dept-name">Dashboard</span>
@@ -34,16 +35,16 @@ export default function Topbar() {
               )}
             </>
           ) : (
-            <span className="topbar-page-title">INSUR Analytics</span>
+            <span className="topbar-page-title">{brand.name}</span>
           )}
         </div>
       </div>
 
       <div className="topbar-right">
         <div className="dept-chips">
-          <span className="dept-chip">11 Depts</span>
-          <span className="dept-chip">120+ Processes</span>
-          <span className="dept-chip">8 AI Types</span>
+          <span className="dept-chip">{totals.departments} Depts</span>
+          <span className="dept-chip">{totals.processes}+ Processes</span>
+          <span className="dept-chip">{totals.aiTypes.length} AI Types</span>
         </div>
         <div className="topbar-divider" />
         <RoleSelector />

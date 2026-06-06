@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/customer-support/api/__init__.py
-# auto-generated explainer · 2026-06-02T10:00:37Z
+# auto-generated explainer · 2026-06-05T10:00:44Z
 
 ## Purpose
 (no module docstring — add one to improve this)

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/integrations/db/__init__.py
-# auto-generated explainer · 2026-06-02T10:00:39Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 backend/integrations/db — unified ORM-style accessors for ALL storage layers.
@@ -10,7 +10,7 @@ Composes with §3 (no SQL in routers) + §47.2 (data layer) + §77 (memory stack
 
 Exposes 5 clients, each lazy-imported:
   sqlite_local   - 5 SQLite dbs (voice, token, blackboard, hitl, vibecheck)
-  postgres       - via psycopg (10 migrations, holy.* + holy_audit + tenants)
+  postgres       - via psycopg (10 migrations, insur.* + insur_audit + tenants)
   chromadb       - vector store (data/eval/end_to_end/<run>/chroma)
   neo4j          - graph (if docker compose neo4j service is up)
   elasticsearch  - vector-less keyword + dense (running on :9200)

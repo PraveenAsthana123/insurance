@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/agent_platform_service.py
-# auto-generated explainer · 2026-06-02T10:00:38Z
+# auto-generated explainer · 2026-06-05T10:00:47Z
 
 ## Purpose
 Unified agent platform integration service.
@@ -23,7 +23,7 @@ working bridges and blocks real side effects behind policy checks.
 - from `_` import urllib.request
 
 ## Inputs
-- Env vars: AGENTOPS_API_KEY, AGENTOPS_ENABLED, AGENT_MODEL, BEV_OLLAMA_HOST, BEV_PAPERCLIP_ROOT, BROWSERBASE_API_KEY, CUA_AUDIT_PATH, CUA_IDEMPOTENCY_MAX_ENTRIES, CUA_IDEMPOTENCY_PATH, CUA_IDEMPOTENCY_TTL_SECONDS, ENABLE_REAL_CUA, HOLY_LLM_MODEL, KIVI_MODEL, OLLAMA_HOST, PLAYWRIGHT_ALLOWLIST, POLIYSAI_API_KEY
+- Env vars: AGENTOPS_API_KEY, AGENTOPS_ENABLED, AGENT_MODEL, BEV_OLLAMA_HOST, BEV_PAPERCLIP_ROOT, BROWSERBASE_API_KEY, CUA_AUDIT_PATH, CUA_IDEMPOTENCY_MAX_ENTRIES, CUA_IDEMPOTENCY_PATH, CUA_IDEMPOTENCY_TTL_SECONDS, ENABLE_REAL_CUA, INSUR_LLM_MODEL, KIVI_MODEL, OLLAMA_HOST, PLAYWRIGHT_ALLOWLIST, POLIYSAI_API_KEY
 
 ## Process
 ### Classes

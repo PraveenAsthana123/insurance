@@ -7409,5 +7409,633 @@
       ],
       "note": "\u00a768 aggregator mirroring \u00a756 /adapters. Drill: tests/drills/drill_observability_hub.py."
     }
+  },
+  {
+    "id": "list_depts_api_v1_insurance_depts_get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts",
+    "summary": "List Depts",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "list_depts_api_v1_insurance_depts_get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": {
+        "additionalProperties": true,
+        "title": "Response List Depts Api V1 Insurance Depts Get",
+        "type": "object"
+      },
+      "responses": [
+        "200"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "get_role_dashboard_api_v1_insurance_depts__dept__dashboards__role__get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts/{dept}/dashboards/{role}",
+    "summary": "Get Role Dashboard",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "role",
+          "required": true,
+          "schema": {
+            "title": "Role",
+            "type": "string"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_role_dashboard_api_v1_insurance_depts__dept__dashboards__role__get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": null,
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "get_manual_vs_auto_api_v1_insurance_depts__dept__manual_vs_auto_get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts/{dept}/manual_vs_auto",
+    "summary": "Get Manual Vs Auto",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_manual_vs_auto_api_v1_insurance_depts__dept__manual_vs_auto_get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": null,
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "list_pipelines_api_v1_insurance_depts__dept__pipelines_get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts/{dept}/pipelines",
+    "summary": "List Pipelines",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "list_pipelines_api_v1_insurance_depts__dept__pipelines_get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": {
+        "additionalProperties": true,
+        "title": "Response List Pipelines Api V1 Insurance Depts  Dept  Pipelines Get",
+        "type": "object"
+      },
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "run_pipeline_api_v1_insurance_depts__dept__pipelines__pipeline_id__run_post",
+    "method": "POST",
+    "path": "/api/v1/insurance/depts/{dept}/pipelines/{pipeline_id}/run",
+    "summary": "Run Pipeline",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "pipeline_id",
+          "required": true,
+          "schema": {
+            "title": "Pipeline Id",
+            "type": "integer"
+          }
+        },
+        {
+          "in": "query",
+          "name": "smoke",
+          "required": false,
+          "schema": {
+            "default": true,
+            "title": "Smoke",
+            "type": "boolean"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "run_pipeline_api_v1_insurance_depts__dept__pipelines__pipeline_id__run_post",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": {
+        "additionalProperties": true,
+        "title": "Response Run Pipeline Api V1 Insurance Depts  Dept  Pipelines  Pipeline Id  Run Post",
+        "type": "object"
+      },
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "get_role_reports_api_v1_insurance_depts__dept__reports__role__get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts/{dept}/reports/{role}",
+    "summary": "Get Role Reports",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "role",
+          "required": true,
+          "schema": {
+            "title": "Role",
+            "type": "string"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_role_reports_api_v1_insurance_depts__dept__reports__role__get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": null,
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "get_simulation_ui_api_v1_insurance_depts__dept__simulation_ui_get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts/{dept}/simulation_ui",
+    "summary": "Get Simulation Ui",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_simulation_ui_api_v1_insurance_depts__dept__simulation_ui_get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": null,
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "get_dept_spec_api_v1_insurance_depts__dept__spec_get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts/{dept}/spec",
+    "summary": "Get Dept Spec",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_dept_spec_api_v1_insurance_depts__dept__spec_get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": null,
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "get_system_design_api_v1_insurance_depts__dept__system_design_get",
+    "method": "GET",
+    "path": "/api/v1/insurance/depts/{dept}/system_design",
+    "summary": "Get System Design",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "in": "path",
+          "name": "dept",
+          "required": true,
+          "schema": {
+            "title": "Dept",
+            "type": "string"
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_system_design_api_v1_insurance_depts__dept__system_design_get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": null,
+      "responses": [
+        "200",
+        "422"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "health_api_v1_insurance_health_get",
+    "method": "GET",
+    "path": "/api/v1/insurance/health",
+    "summary": "Health",
+    "tags": [
+      "insurance"
+    ],
+    "input": {
+      "path_query_parameters": [],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "health_api_v1_insurance_health_get",
+      "business_logic": "Insurance router serves filesystem-backed department artifacts and invokes the insurance pipeline registry. Routers remain HTTP-only; artifact content is read from global-ai-org/departments and pipeline runs delegate to backend/ml/insurance/run_dept_pipelines.py."
+    },
+    "output": {
+      "response_schema": {
+        "additionalProperties": true,
+        "title": "Response Health Api V1 Insurance Health Get",
+        "type": "object"
+      },
+      "responses": [
+        "200"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "RBACMiddleware allows unlisted read-only insurance artifact routes; production policy requires JWT + tenant/role scoping before sensitive data is exposed."
+    },
+    "observability": {
+      "correlation_id": "CorrelationIdMiddleware attaches request correlation context.",
+      "frontend_trace": "apiFetch should attach X-Client-Trace-Id and X-Request-ID when frontend bindings are added."
+    },
+    "federation": {
+      "policy": "Insurance verticalization plan + docs/NO_APPROVAL_AUTONOMY_POLICY.md + docs/APPROVAL_GOVERNANCE.md",
+      "surface": "insurance_department_artifacts",
+      "source_of_truth": "global-ai-org/departments/{dept}/...",
+      "note": "Covers claims, underwriting, customer-service, and fraud-siu department artifacts, role markdown, pipeline registry, and health."
+    }
+  },
+  {
+    "id": "agent_supervisor_report_api_v1_agent_supervisor_report_get",
+    "method": "GET",
+    "path": "/api/v1/agent-supervisor/report",
+    "summary": "Agent Supervisor Report",
+    "tags": [
+      "agent-supervisor"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "name": "sample",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 8
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_agent_supervisor_report",
+      "business_logic": "Read-only Redis aggregation of agent queues, completed results, heartbeats, schedules, process-test catalog coverage, and durable JSONL task traces. Computes operations_visibility scores, tracking, durable tracing, failure taxonomy, owner routing, retryable counts, reporting catalog, insights, and blunt feedback for the /agent-supervisor cockpit."
+    },
+    "output": {
+      "response_schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "required_sections": [
+          "queues",
+          "heartbeats",
+          "recent_results",
+          "trace_log",
+          "operations_visibility"
+        ]
+      },
+      "responses": [
+        "200"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "Demo RBAC read roles can access GET /api/v1/agent-supervisor/*; production target is JWT + read permission."
+    },
+    "observability": {
+      "source_of_truth": "Redis lists/keys: tasks, done, council_tasks, council_done, test_tasks, test_results, agent:heartbeat:*, agent:schedules.",
+      "frontend_trace": "apiFetch attaches X-Client-Trace-Id and X-Request-ID.",
+      "durable_trace_log": "data/agent-supervisor/task_traces.jsonl",
+      "failure_taxonomy": [
+        "none",
+        "model_timeout",
+        "model_not_found",
+        "model_connection",
+        "schema_error",
+        "redis_error",
+        "rate_limit",
+        "unknown"
+      ]
+    }
+  },
+  {
+    "id": "agent_supervisor_task_result_api_v1_agent_supervisor_tasks_task_id_get",
+    "method": "GET",
+    "path": "/api/v1/agent-supervisor/tasks/{task_id}",
+    "summary": "Agent Supervisor Task Result",
+    "tags": [
+      "agent-supervisor"
+    ],
+    "input": {
+      "path_query_parameters": [
+        {
+          "name": "task_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5000,
+            "default": 500
+          }
+        }
+      ],
+      "request_body_schema": null
+    },
+    "process": {
+      "router_function": "get_agent_task_result",
+      "business_logic": "Scans known Redis completed-result queues for a task id and returns the queue, result index, and raw result payload when found."
+    },
+    "output": {
+      "response_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "responses": [
+        "200"
+      ]
+    },
+    "security": {
+      "declared_openapi_security": [],
+      "runtime_authorization": "Demo RBAC read roles can access GET /api/v1/agent-supervisor/*; production target is JWT + read permission."
+    },
+    "observability": {
+      "frontend_trace": "apiFetch attaches X-Client-Trace-Id and X-Request-ID."
+    }
   }
 ]
