@@ -162,6 +162,256 @@
       "next_step": "use after Spec Kit/KT capture and before agent execution"
     },
     {
+      "name": "Paperclip",
+      "category": "artifact and context adapter",
+      "status": "working local adapter",
+      "stage": "use-now",
+      "layer": "context, artifacts, and agent handoff",
+      "use_for": "store redacted text artifacts, retrieve clips, and build context packs for agents",
+      "do_not_use_for": "secret storage, long-term unbounded PII retention, or bypassing repository/service boundaries",
+      "next_step": "add retention/TTL policy and object-storage backing if it becomes production-critical"
+    },
+    {
+      "name": "Harness Agent",
+      "category": "agent harness and supervisor",
+      "status": "working local supervisor/fleet surfaces; external Harness platform not wired",
+      "stage": "use-now",
+      "layer": "agent runtime monitoring and task supervision",
+      "use_for": "local agent fleet status, queue inspection, task traces, and run supervision",
+      "do_not_use_for": "claiming Harness SaaS/CD production deployment integration",
+      "next_step": "keep local harness as the default proof surface; add external Harness only after CI/CD security review"
+    },
+    {
+      "name": "OpenClaw",
+      "category": "orchestration bridge",
+      "status": "working local OpenClaw-compatible bridge; external OpenClaw gateway not bundled",
+      "stage": "use-now",
+      "layer": "task routing and council/simple queue bridge",
+      "use_for": "submit governed local tasks into Redis-backed simple or council queues",
+      "do_not_use_for": "external SaaS writes, production actions, or replacing service-layer APIs",
+      "next_step": "harden result TTL/indexing, circuit breaker, and external gateway adapter only if an official runtime is selected"
+    },
+    {
+      "name": "Hierarchical Orchestration",
+      "category": "agent architecture pattern",
+      "status": "documented architecture pattern",
+      "stage": "design-now",
+      "layer": "planner, manager, worker, reviewer hierarchy",
+      "use_for": "manager-agent delegation, bounded worker fanout, reviewer escalation",
+      "do_not_use_for": "unbounded recursive delegation or unclear task ownership",
+      "next_step": "map hierarchy roles to OpenClaw queues and supervisor reports"
+    },
+    {
+      "name": "Mesh / Peer-to-Peer Agents",
+      "category": "agent architecture pattern",
+      "status": "documented architecture pattern",
+      "stage": "design-now",
+      "layer": "agent collaboration topology",
+      "use_for": "peer review, debate, distributed specialist checks, redundancy",
+      "do_not_use_for": "production actions without a chair/arbiter and audit trail",
+      "next_step": "run parity eval against council-of-agents before implementation"
+    },
+    {
+      "name": "Hub and Spoke Architecture",
+      "category": "agent architecture pattern",
+      "status": "documented and used by local fleet docs",
+      "stage": "use-now",
+      "layer": "central coordinator with specialist spokes",
+      "use_for": "100-agent fleet supervision, task routing, and centralized governance",
+      "do_not_use_for": "single point of failure without queue health and fallback",
+      "next_step": "keep supervisor/queue metrics as the hub health signal"
+    },
+    {
+      "name": "Council of Agents Architecture",
+      "category": "agent architecture pattern",
+      "status": "working local council queue plus typed-council pilot",
+      "stage": "use-now",
+      "layer": "multi-agent review and decision arbitration",
+      "use_for": "author/reviewer/chair review, high-risk analysis, policy checks",
+      "do_not_use_for": "automatic final authority on regulated decisions",
+      "next_step": "compare Redis council and Pydantic AI typed council on one eval set"
+    },
+    {
+      "name": "Spec-driven Development",
+      "category": "delivery methodology",
+      "status": "repo-local Spec Kit + BMAD flow wired",
+      "stage": "use-now",
+      "layer": "requirements, acceptance criteria, and implementation planning",
+      "use_for": "turn requests into specs, stories, tests, and governed handoffs",
+      "do_not_use_for": "runtime automation or approval bypass",
+      "next_step": "make Spec Kit the entry point for ambiguous multi-step requests"
+    },
+    {
+      "name": "AI Dark Factory Architecture",
+      "category": "delivery operating model",
+      "status": "documented operating model",
+      "stage": "design-now",
+      "layer": "idea-to-deployment AI delivery pipeline",
+      "use_for": "coordinate BMAD, Archon, coding agents, tests, approvals, and monitoring",
+      "do_not_use_for": "claiming fully autonomous production delivery",
+      "next_step": "promote each target-only tool only after validation and governance gates"
+    },
+    {
+      "name": "GSD (Get Shit Done)",
+      "category": "delivery philosophy",
+      "status": "documented as philosophy, not a tool",
+      "stage": "design-now",
+      "layer": "execution discipline",
+      "use_for": "small scoped tasks with clear proof and quick validation",
+      "do_not_use_for": "skipping tests, docs, architecture boundaries, or governance",
+      "next_step": "express GSD as checklists in Spec Kit/BMAD handoffs"
+    },
+    {
+      "name": "Ralph / Ralph Loop",
+      "category": "autonomous coding loop pattern",
+      "status": "documented candidate pattern",
+      "stage": "future",
+      "layer": "developer automation loop",
+      "use_for": "bounded autonomous coding experiments with stop criteria",
+      "do_not_use_for": "unbounded self-repair loops, production writes, or bypassing project doctor",
+      "next_step": "define max iterations, budget, rollback, and reviewer gates before any pilot"
+    },
+    {
+      "name": "OpenSpec",
+      "category": "specification standard candidate",
+      "status": "not wired; tracked as Spec Kit-adjacent candidate",
+      "stage": "candidate",
+      "layer": "structured specification",
+      "use_for": "portable specs if the team standardizes on OpenSpec",
+      "do_not_use_for": "duplicating the current Spec Kit/BMAD handoff without migration plan",
+      "next_step": "compare schema fields against scripts/spec_kit.py output"
+    },
+    {
+      "name": "AWS Kiro",
+      "category": "spec/coding agent candidate",
+      "status": "not wired; external candidate",
+      "stage": "future",
+      "layer": "developer workflow and spec-to-code",
+      "use_for": "future evaluation if AWS Kiro is selected by operator",
+      "do_not_use_for": "current repo claims, production runtime, or external AWS writes without approval",
+      "next_step": "requires tool availability, auth, data boundary, and parity test"
+    },
+    {
+      "name": "GitHub Spec",
+      "category": "GitHub-native specification candidate",
+      "status": "not wired; GitHub workflow candidate",
+      "stage": "candidate",
+      "layer": "issues, specs, pull requests, and CI gates",
+      "use_for": "future GitHub-native spec/issue/PR workflow alignment",
+      "do_not_use_for": "bypassing local governance, CODEOWNERS, or project doctor",
+      "next_step": "define issue template, spec template, PR checklist, and CI validation"
+    },
+    {
+      "name": "Circuit Breaker",
+      "category": "resilience pattern",
+      "status": "working in RAG lifecycle only; not shared platform-wide",
+      "stage": "pilot-wired",
+      "layer": "resilience and fallback",
+      "use_for": "protect flaky LLM/API calls and prevent retry storms",
+      "do_not_use_for": "claiming all services have circuit breakers",
+      "next_step": "extract shared resilience utility and reuse in agentic, council, and API clients"
+    },
+    {
+      "name": "Istio",
+      "category": "service mesh",
+      "status": "target only; not wired in Docker Compose runtime",
+      "stage": "future",
+      "layer": "service mesh, traffic policy, mTLS, canary, circuit breaking",
+      "use_for": "Kubernetes production service mesh after cluster adoption",
+      "do_not_use_for": "current local Docker Compose runtime claims",
+      "next_step": "requires Kubernetes manifests, mesh policy, and Kiali/OTel integration"
+    },
+    {
+      "name": "Kiali",
+      "category": "service mesh observability",
+      "status": "target only; depends on Istio/Kubernetes",
+      "stage": "future",
+      "layer": "mesh topology and traffic observability",
+      "use_for": "visualize Istio service graph and traffic health",
+      "do_not_use_for": "current local runtime claims without Istio",
+      "next_step": "wire only after Istio and Prometheus are deployed"
+    },
+    {
+      "name": "Service Discovery",
+      "category": "platform infrastructure",
+      "status": "Docker Compose service-name discovery only; no Consul/Eureka/Kubernetes service discovery",
+      "stage": "use-now",
+      "layer": "runtime connectivity",
+      "use_for": "local service names such as postgres, redis, backend, frontend",
+      "do_not_use_for": "claiming dynamic production discovery",
+      "next_step": "choose Kubernetes DNS or service registry when production deployment target is selected"
+    },
+    {
+      "name": "Computer-Using Agent (CUA)",
+      "category": "browser/desktop automation",
+      "status": "policy-gated dry-run gateway; real CUA disabled",
+      "stage": "pilot-wired",
+      "layer": "computer/browser action adapter",
+      "use_for": "dry-run action envelopes, audit rows, idempotency, and approval policy tests",
+      "do_not_use_for": "real browser/desktop side effects without allowlist, sandbox, session audit, and approval",
+      "next_step": "add real adapter only after browser/CUA safety policy and target allowlist"
+    },
+    {
+      "name": "Stagehand",
+      "category": "browser automation adapter",
+      "status": "stub only",
+      "stage": "candidate",
+      "layer": "browser agent adapter",
+      "use_for": "future Browserbase/Stagehand browser automation behind policy gates",
+      "do_not_use_for": "current production or local side-effect claims",
+      "next_step": "requires BROWSERBASE_API_KEY, package install, session lifecycle, allowlist, and tests"
+    },
+    {
+      "name": "Playwright",
+      "category": "browser testing and possible browser adapter",
+      "status": "frontend E2E dependency present; backend agentic adapter is stub/dry-run",
+      "stage": "use-now",
+      "layer": "frontend tests and future local browser automation",
+      "use_for": "frontend E2E tests and deterministic local browser checks",
+      "do_not_use_for": "real authenticated browser actions without approval and audit",
+      "next_step": "add Python Playwright adapter only after target allowlist and browser install"
+    },
+    {
+      "name": "Archon",
+      "category": "developer workflow harness",
+      "status": "repo-local workflow harness documented/configured",
+      "stage": "use-now",
+      "layer": "developer workflow and approval gates",
+      "use_for": "repeatable issue, implementation, validation, and handoff workflows",
+      "do_not_use_for": "production runtime, CI bypass, or direct deploy authority",
+      "next_step": "keep workflows aligned with project doctor and approval policy"
+    },
+    {
+      "name": "OpenHands",
+      "category": "autonomous coding agent candidate",
+      "status": "candidate dependency tracked; not wired into runtime",
+      "stage": "future",
+      "layer": "developer coding harness",
+      "use_for": "sandboxed coding experiments after risk review",
+      "do_not_use_for": "backend production runtime, unrestricted shell, or autonomous merge/deploy",
+      "next_step": "requires sandbox policy, test harness, and blast-radius controls"
+    },
+    {
+      "name": "Augment Code Intent",
+      "category": "coding assistant candidate",
+      "status": "not wired; candidate only",
+      "stage": "future",
+      "layer": "developer intent and code assistance",
+      "use_for": "future code-intent capture/evaluation if selected",
+      "do_not_use_for": "current architecture claims or runtime automation",
+      "next_step": "define evaluation criteria and compare against existing Codex/BMAD/Spec Kit flow"
+    },
+    {
+      "name": "Bernstein",
+      "category": "multi-agent coding orchestrator candidate",
+      "status": "documented candidate; not installed/wired",
+      "stage": "candidate",
+      "layer": "developer multi-agent orchestration",
+      "use_for": "future isolated-worktree multi-agent coding orchestration experiments",
+      "do_not_use_for": "current production runtime or direct repository mutation without review",
+      "next_step": "requires install decision, isolated worktree policy, audit retention, and parity test"
+    },
+    {
       "name": "LangGraph",
       "category": "stateful agent graph runtime",
       "status": "target/candidate; not default runtime",
@@ -297,7 +547,7 @@
     },
     {
       "order": 8,
-      "name": "Mem0 + Letta",
+      "name": "Letta + Mem0",
       "purpose": "Long-term and cross-session memory layer.",
       "current_repo_status": "Candidate; retention and tenant policy required."
     },
