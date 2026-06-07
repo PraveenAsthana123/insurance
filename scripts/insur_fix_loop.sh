@@ -30,6 +30,24 @@ mkdir -p "$REPORT_DIR" "$LOG_DIR"
 
 cd "$ROOT"
 
+# Per §60 path verification — preflight check the venv interpreter.
+# If unreachable (typically: cuda disk unmounted), exit cleanly with a
+# clear message instead of running stages that all fail with "No such file".
+if [[ ! -x "$VENV_PY" ]]; then
+  TS_NOW="$(date +%H:%M:%S)"
+  PREFLIGHT_MSG="[$TS_NOW] PREFLIGHT FAIL — VENV unreachable: $VENV_PY"
+  HINT="  Likely: cuda venv disk is unmounted. Per §60 ladder:"
+  HINT2="    lsblk -o NAME,LABEL,MOUNTPOINT  # confirm sdb1 (praveenlinux2) unmounted"
+  HINT3="    udisksctl mount -b /dev/sdb1    # mount it"
+  echo "$PREFLIGHT_MSG"   >> "$LOG_DIR/cron.log"
+  echo "$HINT"            >> "$LOG_DIR/cron.log"
+  echo "$HINT2"           >> "$LOG_DIR/cron.log"
+  echo "$HINT3"           >> "$LOG_DIR/cron.log"
+  # Skip cleanly with exit 0 so cron doesn't email a failure every 30 min
+  # while the disk is genuinely unmounted (e.g. overnight reboot).
+  exit 0
+fi
+
 # Acquire exclusive lock so 09:00 + 21:00 comprehensive don't collide with
 # the */30 light run that fires at the same minute. flock auto-releases on
 # script exit. -n = non-blocking; exits 0 if can't acquire (skip this run).
