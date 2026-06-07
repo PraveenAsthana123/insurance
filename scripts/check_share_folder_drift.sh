@@ -60,11 +60,35 @@ for SRC_NAME in "${!MAP[@]}"; do
   fi
 done
 
-if [[ $drift_total -eq 0 ]]; then
-  echo "[$TS] OK — 0/18 files diverged" >>"$LOG"
+# Bidirectional check — detect files in share that aren't tracked by MAP
+# (catches the case where share folder grows but adopter scripts didn't keep up).
+share_only=()
+while IFS= read -r f; do
+  rel="${f#$SHARE/}"
+  # Skip share-folder-only artifacts that aren't meant to ship
+  [[ "$rel" == "README.md" || "$rel" == "adopt-agentic-tool-readiness.sh" ]] && continue
+  if [[ -z "${MAP[$rel]+_}" ]]; then
+    share_only+=("$rel")
+  fi
+done < <(find "$SHARE" -type f)
+
+# Count + log results
+share_only_count=${#share_only[@]}
+total_tracked=${#MAP[@]}
+
+if [[ $drift_total -eq 0 && $share_only_count -eq 0 ]]; then
+  echo "[$TS] OK — 0/$total_tracked files diverged · 0 untracked share files" >>"$LOG"
   exit 0
-else
-  echo "[$TS] DRIFT — $drift_total/18 files diverged" >>"$LOG"
+elif [[ $drift_total -gt 0 ]]; then
+  echo "[$TS] DRIFT — $drift_total/$total_tracked files diverged" >>"$LOG"
   printf "$drift_files\n" >>"$LOG"
+  [[ $share_only_count -gt 0 ]] && {
+    echo "  + $share_only_count file(s) in share NOT yet tracked in adopt MAP:" >>"$LOG"
+    printf '    %s\n' "${share_only[@]}" >>"$LOG"
+  }
+  exit 1
+else
+  echo "[$TS] WARN — 0/$total_tracked diverged but $share_only_count untracked share file(s):" >>"$LOG"
+  printf '    %s\n' "${share_only[@]}" >>"$LOG"
   exit 1
 fi
