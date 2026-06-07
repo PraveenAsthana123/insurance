@@ -137,6 +137,31 @@ if [ -n "${PYTHON:-}" ]; then
   PYTHON_BIN="$PYTHON"
 elif [ -x "$ROOT_DIR/.venv/bin/python" ]; then
   PYTHON_BIN="$ROOT_DIR/.venv/bin/python"
+elif [ -f "$HOME/.claude/python-venv-map.json" ] && command_exists python3; then
+  # Per global §61: resolve project venv from operator's per-project map (longest-prefix match on CWD).
+  # Map values are venv ROOTS; append /bin/python to get the interpreter.
+  MAPPED_PY=$(python3 -c "
+import json, os
+try:
+    m = json.load(open(os.path.expanduser('~/.claude/python-venv-map.json')))
+    overrides = m.get('project_overrides', {})
+    best_path, best_venv = '', ''
+    for path, venv in overrides.items():
+        if os.path.abspath('$ROOT_DIR').startswith(path) and len(path) > len(best_path):
+            best_path, best_venv = path, venv
+    candidate = os.path.join(best_venv, 'bin', 'python') if best_venv else ''
+    if candidate and os.access(candidate, os.X_OK):
+        print(candidate)
+except Exception:
+    pass
+" 2>/dev/null)
+  if [ -n "$MAPPED_PY" ] && [ -x "$MAPPED_PY" ]; then
+    PYTHON_BIN="$MAPPED_PY"
+  elif command_exists python3.11; then
+    PYTHON_BIN="python3.11"
+  else
+    PYTHON_BIN="python3"
+  fi
 elif command_exists python3.11; then
   PYTHON_BIN="python3.11"
 else

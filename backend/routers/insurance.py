@@ -28,13 +28,11 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 DEPT_ROOT = REPO_ROOT / "global-ai-org" / "departments"
 RUNNER = REPO_ROOT / "backend" / "ml" / "insurance" / "run_dept_pipelines.py"
 
-INSURANCE_DEPTS = ["claims", "underwriting", "customer-service", "fraud-siu"]
-ROLES = [
-    "admin", "manager", "team-member", "tester", "security",
-    "devops", "ai-reviewer", "digital-transformation", "system-architect",
-    "test-architect", "database-architect", "api-architect",
-    "data-owner", "ai-strategy", "information-security",
-]
+# Per Phase 2.2 of docs/AUDIT_FIX_PLAN.md — single source of truth lives in
+# backend/core/insurance_config.py and is env-driven (INSUR_DEPT_SCOPE).
+from backend.core.insurance_config import get_insurance_depts, get_roles
+INSURANCE_DEPTS = list(get_insurance_depts())
+ROLES = list(get_roles())
 
 # Anti-info-leak per §47.6 — validate path components before file access
 _SAFE = re.compile(r"^[a-z][a-z0-9-]{0,40}$")

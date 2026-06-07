@@ -39,7 +39,8 @@ async def app_error_handler(request: Request, exc: AppError) -> JSONResponse:
         "Application error",
         extra={
             "error_code": exc.error_code,
-            "message": exc.message,
+            # 'message' is reserved by LogRecord — rename to avoid KeyError.
+            "error_message": exc.message,
             "status_code": status_code,
             "correlation_id": correlation_id,
             "path": request.url.path,

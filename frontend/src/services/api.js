@@ -1,4 +1,6 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+// Per Phase 2.4 of docs/AUDIT_FIX_PLAN.md — env-derived API timeout.
+const API_TIMEOUT_MS = Number(import.meta.env.VITE_API_TIMEOUT_MS) || 10000;
 
 class ApiClient {
   constructor(baseUrl) {
@@ -8,7 +10,7 @@ class ApiClient {
   async request(path, options = {}) {
     const url = `${this.baseUrl}${path}`;
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
     try {
       const response = await fetch(url, {

@@ -33,7 +33,14 @@ def _pg_dsn_from_env() -> str:
     port = os.getenv("BEV_POSTGRES_PORT", "5432")
     db = os.getenv("BEV_POSTGRES_DB", "insur_analytics")
     user = os.getenv("BEV_POSTGRES_USER", "insur_user")
-    pwd = os.getenv("BEV_POSTGRES_PASSWORD", "insur_secret_password")
+    # Per Phase 2.3 of docs/AUDIT_FIX_PLAN.md — no hardcoded password fallback.
+    # Fail loudly rather than ship a known default.
+    pwd = os.environ.get("BEV_POSTGRES_PASSWORD")
+    if not pwd:
+        raise RuntimeError(
+            "BEV_POSTGRES_PASSWORD env var is required. "
+            "Set it in .env or shell before running this script."
+        )
     return f"host={host} port={port} dbname={db} user={user} password={pwd}"
 
 

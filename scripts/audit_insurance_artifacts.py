@@ -21,7 +21,14 @@ DEPT_ROOT = REPO / "global-ai-org" / "departments"
 REPORTS_DIR = REPO / "jobs" / "reports"
 LOGS_DIR = REPO / "jobs" / "logs"
 
-INSURANCE_DEPTS = ["claims", "underwriting", "customer-service", "fraud-siu"]
+# Per Phase 2.2 of docs/AUDIT_FIX_PLAN.md — read from single source of truth.
+sys.path.insert(0, str(REPO))
+try:
+    from backend.core.insurance_config import get_insurance_depts
+    INSURANCE_DEPTS = list(get_insurance_depts())
+except ImportError:
+    # Fallback if backend isn't on sys.path (e.g. running from packaged install)
+    INSURANCE_DEPTS = ["claims", "underwriting", "customer-service", "fraud-siu"]
 REQUIRED_BL_FILES = [
     "INSUR_DEPT_SPEC.md", "INSUR_DEMO_STORY.md", "INSUR_ASIS_ASSESSMENT.md",
     "INSUR_DT_STRATEGY.md", "INSUR_PROCESS_FLOW.md", "INSUR_ARCHITECTURE_FLOW.md",

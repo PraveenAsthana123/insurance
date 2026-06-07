@@ -47,12 +47,19 @@ ADD_ON_SERVICES = [
 
 
 def _pg_dsn() -> str:
+    # Per Phase 2.3 of docs/AUDIT_FIX_PLAN.md — no hardcoded password fallback.
+    pwd = os.environ.get("BEV_POSTGRES_PASSWORD")
+    if not pwd:
+        raise RuntimeError(
+            "BEV_POSTGRES_PASSWORD env var is required. "
+            "Set it in .env or shell before running this script."
+        )
     return (
         f"host={os.getenv('BEV_POSTGRES_HOST', 'localhost')} "
         f"port={os.getenv('BEV_POSTGRES_PORT', '5432')} "
         f"dbname={os.getenv('BEV_POSTGRES_DB', 'insur_analytics')} "
         f"user={os.getenv('BEV_POSTGRES_USER', 'insur_user')} "
-        f"password={os.getenv('BEV_POSTGRES_PASSWORD', 'insur_secret_password')}"
+        f"password={pwd}"
     )
 
 
