@@ -9,6 +9,9 @@
 
 set -uo pipefail  # NOT -e — we want to scan all files even if one diff fails
 
+# Cron sometimes inherits a stripped env. Fail loudly if HOME is missing.
+: "${HOME:?HOME env var is required (cron should set it; otherwise pass HOME=/home/<user> when invoking).}"
+
 SHARE="$HOME/.claude/templates/agentic-tool-readiness"
 INSUR="/mnt/deepa/insur_project"
 LOG="$INSUR/jobs/logs/share_folder_drift.log"
