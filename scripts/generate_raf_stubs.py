@@ -317,13 +317,52 @@ def main() -> int:
     p.add_argument("--force", action="store_true")
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--limit", type=int, default=0)
+    p.add_argument("--only", action="append", default=[],
+                   help="filter by problem (R/A/F) · modality (N/T/I) · combined (RN/RT/RI etc.) "
+                        "or slug. Repeatable. Combine with --force to refresh.")
+    p.add_argument("--list", action="store_true",
+                   help="list all scenarios grouped by problem×modality and exit")
     args = p.parse_args()
+
+    if args.list:
+        from collections import Counter
+        groups: dict[tuple[str, str], list] = {}
+        for problem, modality, idx, slug, summary, dept_id in SCENARIOS:
+            groups.setdefault((problem, modality), []).append((idx, slug, dept_id))
+        counts = Counter()
+        for (problem, modality), items in sorted(groups.items()):
+            label = f"{PROBLEM_NAME[problem]} × {MODALITY_NAME[modality]}"
+            print(f"  {label} ({len(items)}):")
+            for idx, slug, dept_id in items:
+                print(f"    {problem.lower()}-{modality.lower()}-{idx:02d}-{slug:<35} dept={dept_id}")
+            counts[problem] += len(items)
+        print(f"\n  total: {len(SCENARIOS)} scenarios · {dict(counts)}")
+        return 0
+
+    only_match: list[str] = []
+    if args.only:
+        only_match = [t.lower() for t in args.only]
+        print(f"  --only filter: {only_match}")
 
     ROOT.mkdir(parents=True, exist_ok=True)
     written = skipped = 0
     count = 0
 
     for problem, modality, idx, slug, summary, dept_id in SCENARIOS:
+        # Apply --only filter
+        if only_match:
+            p_lower = problem.lower()
+            m_lower = modality.lower()
+            pm = f"{p_lower}{m_lower}"  # e.g., "rn" "an" "fi"
+            pmd = f"{p_lower}-{m_lower}"  # e.g., "r-n" "a-i"
+            slug_lower = slug.lower()
+            dir_lower = f"{p_lower}-{m_lower}-{idx:02d}-{slug_lower}"
+            if not any(t == p_lower or t == m_lower or t == pm or t == pmd or
+                       t == slug_lower or t == dir_lower or
+                       slug_lower.startswith(t)
+                       for t in only_match):
+                continue
+
         count += 1
         if args.limit and count > args.limit:
             break

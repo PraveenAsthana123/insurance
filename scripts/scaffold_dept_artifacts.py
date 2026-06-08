@@ -668,6 +668,8 @@ def main() -> int:
                         "Combine with --force to refresh schema-shifted files.")
     p.add_argument("--list-types", action="store_true",
                    help="show available file types and exit")
+    p.add_argument("--diff", action="store_true",
+                   help="show unified diff of what would change vs disk (no write)")
     args = p.parse_args()
 
     if args.list_types:
@@ -702,6 +704,8 @@ def main() -> int:
     depts_root = repo / "global-ai-org" / "departments"
 
     written = skipped = 0
+    diff_changed = 0
+    diff_same = 0
     for did, slug, name in CANONICAL_DEPTS:
         dept_dir = find_dept_dir(did, slug, depts_root)
         bl = dept_dir / "business-layer"
@@ -711,18 +715,51 @@ def main() -> int:
             if selected is not None and fname not in selected:
                 continue
             target = bl / fname
+            new_content = gen(did, slug, name)
+
+            # --diff: compare regenerated content vs disk · NO write
+            if args.diff:
+                if not target.exists():
+                    diff_changed += 1
+                    print(f"  [NEW]    {target.relative_to(repo)}")
+                    continue
+                current = target.read_text(errors="replace")
+                if current == new_content:
+                    diff_same += 1
+                else:
+                    diff_changed += 1
+                    import difflib
+                    diff = difflib.unified_diff(
+                        current.splitlines(keepends=True),
+                        new_content.splitlines(keepends=True),
+                        fromfile=str(target.relative_to(repo)) + " (disk)",
+                        tofile=str(target.relative_to(repo)) + " (regenerated)",
+                        n=1,
+                    )
+                    diff_str = "".join(diff)
+                    if diff_str:
+                        # Show only first 8 lines of diff per file to keep output sane
+                        print(f"  [DIFF]   {target.relative_to(repo)}")
+                        for line in diff_str.splitlines()[:8]:
+                            print(f"    {line}")
+                continue
+
             if target.exists() and not args.force:
                 skipped += 1
                 continue
             if args.dry_run:
                 print(f"  WOULD WRITE: {target.relative_to(repo)}")
                 continue
-            target.write_text(gen(did, slug, name))
+            target.write_text(new_content)
             written += 1
 
     sel_msg = f" · scope: {sorted(selected)}" if selected is not None else ""
-    print(f"\n  Summary: wrote {written} · skipped {skipped}{sel_msg}")
-    print(f"  Per §57.7 honest: these are starter scaffolds · operator refines content")
+    if args.diff:
+        print(f"\n  Diff summary: {diff_changed} changed/new · {diff_same} identical{sel_msg}")
+        print(f"  (use --force --only <name> to apply)")
+    else:
+        print(f"\n  Summary: wrote {written} · skipped {skipped}{sel_msg}")
+        print(f"  Per §57.7 honest: these are starter scaffolds · operator refines content")
     return 0
 
 

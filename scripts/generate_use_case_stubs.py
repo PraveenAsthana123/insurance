@@ -511,12 +511,45 @@ def main() -> int:
     p.add_argument("--force", action="store_true")
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--limit", type=int, default=0)
+    p.add_argument("--only", action="append", default=[],
+                   help="regenerate only specific block(s)/slug(s). "
+                        "Accepts block prefix (A · F · L) or full slug. Repeatable. "
+                        "Combine with --force to refresh.")
+    p.add_argument("--list", action="store_true",
+                   help="list all use-case slugs and exit")
     args = p.parse_args()
+
+    if args.list:
+        by_block = {}
+        for block_id, slug, summary, dept_id in USE_CASES:
+            by_block.setdefault(block_id, []).append((slug, dept_id, summary[:60]))
+        for block_id in sorted(by_block):
+            print(f"  Block {block_id}:")
+            for slug, dept_id, snippet in by_block[block_id]:
+                print(f"    {block_id.lower()}-{slug:<48} dept={dept_id}")
+        print(f"\n  total: {len(USE_CASES)} use cases across {len(by_block)} blocks")
+        return 0
+
+    # Resolve --only filters
+    only_match: list[str] = []
+    if args.only:
+        only_match = [t.lower() for t in args.only]
+        print(f"  --only filter: {only_match}")
 
     ROOT.mkdir(parents=True, exist_ok=True)
     written = 0; skipped = 0; count = 0
 
     for block_id, slug, summary, dept_id in USE_CASES:
+        # Apply --only filter
+        if only_match:
+            slug_lower = slug.lower()
+            block_lower = block_id.lower()
+            dir_lower = f"{block_lower}-{slug_lower}"
+            if not any(t == block_lower or t == slug_lower or t == dir_lower or
+                       slug_lower.startswith(t) or block_lower.startswith(t)
+                       for t in only_match):
+                continue
+
         count += 1
         if args.limit and count > args.limit:
             break
