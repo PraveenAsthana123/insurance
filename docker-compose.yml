@@ -5,7 +5,7 @@ services:
     image: postgres:16-alpine
     container_name: insur_postgres
     ports:
-      - "5432:5432"
+      - "5434:5432"  # host 5432/5433 occupied · use 5434
     environment:
       POSTGRES_DB: insur_analytics
       POSTGRES_USER: insur_user

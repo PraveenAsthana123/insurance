@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import os
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
@@ -28,12 +29,19 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     setup_logging()
     logger.info("Starting Insur Analytics Dashboard")
 
-    run_migrations()
-    logger.info("Migrations complete")
+    # Optional skip for local dev when schema state is known-good.
+    # Default behavior unchanged (migrations run on every startup).
+    skip = os.environ.get("INSUR_SKIP_MIGRATIONS", "").lower() in ("1", "true", "yes")
+    if skip:
+        logger.info("INSUR_SKIP_MIGRATIONS set — skipping run_migrations()")
+    else:
+        run_migrations()
+        logger.info("Migrations complete")
 
-    from seeds.seed_runner import run_seeds
-    run_seeds()
-    logger.info("Seed data check complete")
+    if not skip:
+        from seeds.seed_runner import run_seeds
+        run_seeds()
+        logger.info("Seed data check complete")
 
     yield
 
