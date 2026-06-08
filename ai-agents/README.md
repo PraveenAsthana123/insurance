@@ -153,6 +153,24 @@ ai-agents/
 ./_shared/scripts/setup_ai_agent_stack.sh --tool gsd --tool spec-kit --tool openspec
 ```
 
+
+## Marketing AI composites · L13 + L14 (operator-added 2026-06-08)
+
+2 composite tools that combine existing ai-agents/ pieces:
+
+| Tool | Type | Composite of |
+|---|---|---|
+| **banner-ai** | Marketing visual gen | Fooocus/ComfyUI image gen + WebLLM copy + template engine + C2PA watermark + a11y |
+| **contact-ai** | CRM entity res | sentence-transformers entity res + GNN relationship + bandit routing + per-tenant DB |
+
+Per §90 L13 + L14. §82.21 watermark/provenance MANDATORY for banner-ai. §41.3 multi-tenant MANDATORY for contact-ai.
+
+### Quick install
+
+```bash
+./_shared/scripts/setup_ai_agent_stack.sh --tool banner-ai --tool contact-ai
+```
+
 ## Per-tool deep/ structure (uniform)
 
 Every tool has the same skeleton:
