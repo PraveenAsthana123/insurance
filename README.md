@@ -1,10 +1,54 @@
-# Insur Analytics Dashboard
+# insur_project — Insurance Analytics & AI Platform
 
-A full-stack enterprise analytics platform for Beverages (BEV) companies.
-Covers 11 functional departments with real-time KPIs, ML-powered forecasting, and
-AI-driven explanations via Ollama/RAG.
+A full-stack enterprise platform for Insurance.
+Covers **21 functional departments · 322 processes · 1278 AI items** with real-time KPIs, ML-powered scoring, and AI-driven explanations via Ollama/RAG/agentic council.
+
+## Snapshot (per §51.2)
+
+| Field | Value |
+|---|---|
+| Last updated | **2026-06-08** (MDT) |
+| Location | Linux x86_64 dev host (192.168.1.88) |
+| Code metrics | Frontend LOC **58,486** · Backend LOC **30,973** · Test files **114** · ADRs **10** · Commits last 30d **57** |
+| Architecture docs | [`docs/architecture/ARCHITECTURE.md`](docs/architecture/ARCHITECTURE.md) · [`FLOW_DIAGRAM.md`](docs/architecture/FLOW_DIAGRAM.md) · [`NETWORK_FLOW.md`](docs/architecture/NETWORK_FLOW.md) · [`SEQUENCE_DIAGRAMS.md`](docs/architecture/SEQUENCE_DIAGRAMS.md) |
+| Trust signals | `./scripts/project_doctor.sh` · `npm run validate` · `bash scripts/architecture_docs_check.sh` |
+| Recent audit | [`docs/DEEP_ERROR_ANALYSIS_REPORT_2026-06-08.md`](docs/DEEP_ERROR_ANALYSIS_REPORT_2026-06-08.md) · [`docs/UI_MENU_SUBMENU_PROCESS_AUDIT_2026-06-08.md`](docs/UI_MENU_SUBMENU_PROCESS_AUDIT_2026-06-08.md) |
+| Standards | §47 ✓ · §51 ✓ · §58 ✓ · §74-§86 ✓ |
+| Live URL (LAN) | `http://192.168.1.88:3210/insurance` |
+
+## Quick start
+
+```bash
+# Frontend (Vite dev server)
+cd frontend && npm install && npm run dev -- --host 0.0.0.0 --port 3210
+
+# Open
+open http://192.168.1.88:3210/insurance
+
+# Backend stack (compose · backend host port is 8001 not 8000)
+docker compose up -d postgres redis ollama mlflow backend worker
+
+# Run smoke ML pipeline (verified working per commit 57463ce)
+/path/to/venv/bin/python backend/ml/insurance/run_dept_pipelines.py --dept fraud-siu --pipeline 1 --smoke
+
+# Health gate
+./scripts/project_doctor.sh
+```
+
+## Architecture (full diagrams in docs/architecture/)
+
+- [**ARCHITECTURE.md**](docs/architecture/ARCHITECTURE.md) — C4 L1 + L2 (mermaid)
+- [**FLOW_DIAGRAM.md**](docs/architecture/FLOW_DIAGRAM.md) — 3 manual-vs-automatic process flows (claims · underwriting · customer service · per §64.27)
+- [**NETWORK_FLOW.md**](docs/architecture/NETWORK_FLOW.md) — Docker topology + port map + service-to-service connections
+- [**SEQUENCE_DIAGRAMS.md**](docs/architecture/SEQUENCE_DIAGRAMS.md) — 3 user-flow sequence diagrams (catalog load · ML smoke · fix-loop incident recovery)
+
+Cron-installed freshness check: `bash scripts/architecture_docs_check.sh` (weekly Monday 09:00 per §86).
 
 ---
+
+## Legacy section (BEV — pre-pivot to insurance)
+
+> The sections below describe the original BEV (Beverages) prototype this codebase started from. The actual production project is insurance — 21 departments, 322 processes. Diagrams in `docs/architecture/` reflect the current state.
 
 ## Architecture Overview
 
