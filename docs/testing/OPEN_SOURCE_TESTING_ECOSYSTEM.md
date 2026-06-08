@@ -42,10 +42,10 @@ Status legend:
 | Cross-Browser Testing | Selenium Grid | Browser | target | No Selenium Grid setup. |
 | Mobile Testing | Appium, Maestro | Mobile | not-applicable-now | No mobile app. |
 | Desktop Testing | WinAppDriver, FlaUI | Desktop | not-applicable-now | No desktop app. |
-| AI/LLM Evaluation | RAGAS, DeepEval, Promptfoo | AI Testing | partial | RAG eval tests exist but are opt-in/skipped unless local model/data are available. |
+| AI/LLM Evaluation | RAGAS, DeepEval, G-Eval, Promptfoo, BLEU, ROUGE, Fairlearn, Detoxify | AI Testing | partial | RAG eval tests exist but are opt-in/skipped unless local model/data are available. |
 | AI Safety Testing | Garak, Lakera OSS tools | AI Security | target | Not wired. |
 | Prompt Injection Testing | Garak, Promptfoo | AI Security | target | Not wired. |
-| Hallucination Testing | RAGAS, DeepEval | AI Quality | partial | RAG eval coverage exists; not default gate. |
+| Hallucination Testing | RAGAS, DeepEval, G-Eval, BLEU, ROUGE | AI Quality | partial | RAG eval coverage exists; not default gate. |
 | Multi-Agent Testing | LangSmith OSS alternatives, AgentOps OSS | Agentic AI | target | Local agent harness tests exist; AgentOps-style tool not wired. |
 | AI Tracing | OpenLIT, Langfuse, Helicone OSS | AI Observability | target | Structured logs/request IDs exist; AI tracing tools not wired. |
 | Observability | OpenTelemetry | Observability | target | OpenTelemetry is documented target; not fully wired. |
@@ -65,10 +65,10 @@ Status legend:
 | CI/CD Testing | Jenkins, Tekton, Argo Workflows | DevOps | target | GitHub Actions exists; Jenkins/Tekton/Argo not wired. |
 | GitOps Validation | ArgoCD, FluxCD | DevOps | target | No GitOps deployment yet. |
 | AI Workflow Testing | LangGraph test harnesses | Agentic AI | target | LangGraph not wired; local hub-and-spoke harness exists. |
-| Semantic Testing | RAGAS | RAG | partial | RAG eval tests exist, opt-in. |
+| Semantic Testing | RAGAS, G-Eval, BLEU, ROUGE | RAG | partial | RAG eval tests exist, opt-in. |
 | Vector DB Testing | Custom embedding benchmark tools | AI | target | No vector DB currently. |
 | Explainability Testing | SHAP, LIME | Responsible AI | partial | SHAP is in ML stack references; no standard explainability gate across all models. |
-| Bias/Fairness Testing | IBM AI Fairness 360, Fairlearn | Responsible AI | target | Not wired. |
+| Bias/Fairness Testing | IBM AI Fairness 360, Fairlearn, Detoxify | Responsible AI | target | Not wired. |
 | Synthetic Data Testing | SDV | AI/Data | target | Not wired. |
 | Network Testing | Toxiproxy | Resilience | target | Not wired. |
 | Resilience Testing | Gremlin alternatives, Chaos Mesh | Reliability | target | Circuit breaker partial; resilience testing tools not wired. |
@@ -95,7 +95,7 @@ It currently validates:
 | 1 | Semgrep, Gitleaks, Trivy | Fast security value with low runtime complexity. |
 | 2 | Playwright e2e in CI, Axe-core | Frontend regression and accessibility coverage. |
 | 3 | k6 or Locust | API performance baseline before scaling. |
-| 4 | RAGAS, DeepEval, Promptfoo | AI quality and prompt regression. |
+| 4 | RAGAS, DeepEval, G-Eval, Promptfoo, BLEU, ROUGE, Fairlearn, Detoxify | AI quality and prompt regression. |
 | 5 | OpenTelemetry, Prometheus, Grafana, Jaeger | Observability across API -> service -> worker -> model. |
 | 6 | OPA + Conftest | Policy-as-code and governance testing. |
 | 7 | Kafka Test Containers, Toxiproxy | Distributed/event and network resilience once Kafka is wired. |

@@ -34,6 +34,8 @@ No process can be called production-ready unless it has automated or scheduled c
 
 | Artifact | Purpose |
 |---|---|
+| `docs/testing/GLOBAL_DEFAULT_TESTING_POLICY.md` | Default repo-wide testing gate, default tool stack, report, notification, and update policy. |
+| `docs/testing/DEFAULT_TESTING_AGENT_ASSIGNMENTS.json` | Machine-readable default test agent, cadence, reporting, and notification assignments. |
 | `backend/seeds/departments.json` | Department list. |
 | `backend/seeds/processes.json` | Business process list. |
 | `docs/testing/PROCESS_AGENT_CRON_CATALOG.json` | Machine-readable agent and cron assignment for every process. |
@@ -175,6 +177,8 @@ Every process test run must produce or reference:
 - AI quality/evaluation scores where applicable
 - governance decision and audit fields
 - artifacts or Paperclip context ids when used
+
+Process test reports must follow the reporting and notification rules in `docs/testing/GLOBAL_DEFAULT_TESTING_POLICY.md`. Persistent reports should be written under `jobs/reports/testing/` or a more specific subdirectory such as `jobs/reports/testing/processes/`.
 
 ## 8. Failure Severity
 

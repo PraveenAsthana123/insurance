@@ -50,10 +50,10 @@ per-dept `tests/<dept>/README.md`.
 | Cross-Browser Testing | Multi-browser | Selenium Grid | 8 |
 | Mobile Testing | Android/iOS | Appium, Maestro | 8 |
 | Desktop App Testing | Native apps | WinAppDriver, FlaUI | 8 |
-| AI/LLM Evaluation | Hallucination, grounding | RAGAS, DeepEval, Promptfoo | 7 (process) |
+| AI/LLM Evaluation | Hallucination, grounding | RAGAS, DeepEval, G-Eval, Promptfoo, BLEU, ROUGE, Fairlearn, Detoxify | 7 (process) |
 | AI Safety Testing | Jailbreak detection | Garak, Lakera OSS | 11 |
 | Prompt Injection Testing | Prompt attacks | Garak, Promptfoo, Rebuff, LLM Guard | 11 |
-| Hallucination Testing | LLM grounding | RAGAS, DeepEval | 7 (process) |
+| Hallucination Testing | LLM grounding | RAGAS, DeepEval, G-Eval, BLEU, ROUGE | 7 (process) |
 | Multi-Agent Testing | Agent workflow validation | LangSmith OSS alts, AgentOps OSS | 7 (process) |
 | AI Tracing | LLM observability | OpenLIT, Langfuse, Helicone OSS | (cross-cutting) |
 | Observability Testing | Logs/traces/metrics | OpenTelemetry | (cross-cutting) |
@@ -78,7 +78,7 @@ per-dept `tests/<dept>/README.md`.
 | Semantic Testing | RAG relevance | RAGAS | 7 (process) |
 | Vector DB Testing | Embedding retrieval | Custom semantic benchmarks | 2 |
 | Explainability Testing | XAI validation | SHAP, LIME | 7 (process) |
-| Bias/Fairness Testing | Responsible AI | Fairlearn, IBM AI Fairness 360 | 7 (process) |
+| Bias/Fairness Testing | Responsible AI | Fairlearn, Detoxify, IBM AI Fairness 360 | 7 (process) |
 | Synthetic Data Testing | Test-data generation | SDV | 6 (boundary) |
 | Cost Testing | FinOps validation | Kubecost | (cross-cutting) |
 
@@ -97,7 +97,7 @@ When a dept's tier needs a single choice, pick from this column unless a dept-sp
 | Security | **OWASP ZAP** |
 | Accessibility | **Axe-core** |
 | Data Quality | **Great Expectations** |
-| AI Evaluation | **RAGAS + DeepEval** |
+| AI Evaluation | **RAGAS + DeepEval + G-Eval + BLEU/ROUGE + Fairlearn/Detoxify** |
 | Prompt Testing | **Promptfoo** |
 | AI Observability | **Langfuse** |
 | Distributed Tracing | **Jaeger** |
@@ -115,7 +115,7 @@ When a dept's tier needs a single choice, pick from this column unless a dept-sp
 | Multi-Agent Framework | **LangGraph + CrewAI + AutoGen** |
 | Event Streaming | **Apache Kafka** |
 | Explainability | **SHAP + LIME** |
-| Responsible AI | **Fairlearn + IBM AI Fairness 360** |
+| Responsible AI | **Fairlearn, Detoxify + IBM AI Fairness 360** |
 
 ---
 
@@ -135,7 +135,7 @@ These are the AI/LLM testing tools every dept that ships AI features MUST evalua
 | **Garak** | AI vulnerability scanning (jailbreak, injection) | §64.30 tier 11 (penetration) + §64.32 attack-sim |
 | **SHAP** | Tree/linear-model explainability | §48.2 local explanation |
 | **LIME** | Black-box explainability | §48.2 local explanation |
-| **Fairlearn** | Bias testing + mitigation | §48.8 fairness gate |
+| **Fairlearn, Detoxify** | Bias testing + mitigation | §48.8 fairness gate |
 | **IBM AI Fairness 360** | Fairness metric library | §48.8 fairness gate |
 
 ---
@@ -149,7 +149,7 @@ For INSUR's §64.40 10-layer agentic execution stack:
 | Browser Automation (layer 8) | Playwright |
 | AI Browser Agent (layers 6-7) | Browser Use + Stagehand |
 | Agent Framework (layers 2-4) | LangGraph + CrewAI + AutoGen |
-| AI Evaluation | RAGAS + DeepEval |
+| AI Evaluation | RAGAS + DeepEval + G-Eval + BLEU/ROUGE + Fairlearn/Detoxify |
 | Prompt Testing | Promptfoo |
 | AI Tracing | Langfuse |
 | Observability | OpenTelemetry |
@@ -181,7 +181,7 @@ Developer Commit
    ↓ Kubernetes Security (Kubescape)
    ↓ Performance Testing (k6)
    ↓ Chaos Engineering (LitmusChaos)
-   ↓ AI Evaluation (RAGAS + DeepEval)
+   ↓ AI Evaluation (RAGAS + DeepEval + G-Eval + BLEU/ROUGE + Fairlearn/Detoxify)
    ↓ Prompt Injection Testing (Garak)
    ↓ Governance Validation (OPA)
    ↓ Observability Validation (Jaeger + Prometheus)
@@ -230,7 +230,7 @@ tests/<dept>/
 ├── integration/  # tier 2  — PyTest + real DB + real cache + WireMock
 ├── api/          # tier 3  — Karate + httpx + schemathesis
 ├── boundary/     # tier 6  — Hypothesis / Faker / SDV
-├── process/      # tier 7  — §43 drills + RAGAS + DeepEval + Promptfoo
+├── process/      # tier 7  — §43 drills + RAGAS + DeepEval + G-Eval + BLEU/ROUGE + Fairlearn/Detoxify + Promptfoo
 ├── perf/         # tiers 9-10 — k6 + Locust + Gatling
 ├── smoke/        # tier 8  — Playwright + curl + Axe
 └── security/     # tiers 11-12 — OWASP ZAP + Trivy + Kubescape + Garak + LitmusChaos

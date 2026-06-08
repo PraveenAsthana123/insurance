@@ -4,6 +4,8 @@ Canonical testing references for INSUR Beverage.
 
 | File | Purpose |
 |---|---|
+| [GLOBAL_DEFAULT_TESTING_POLICY.md](GLOBAL_DEFAULT_TESTING_POLICY.md) | Default repo-wide testing gate, tool stack, agent assignment, reporting, notification, and update policy. |
+| [DEFAULT_TESTING_AGENT_ASSIGNMENTS.json](DEFAULT_TESTING_AGENT_ASSIGNMENTS.json) | Machine-readable default testing agent, cadence, report, and notification catalog. |
 | [MASTER_TESTING_MATRIX.md](MASTER_TESTING_MATRIX.md) | 50+ testing areas × open-source tool catalog; backs the §64.30 12-tier per-dept policy with concrete tool choices. |
 | [OPEN_SOURCE_TESTING_ECOSYSTEM.md](OPEN_SOURCE_TESTING_ECOSYSTEM.md) | Complete open-source testing ecosystem with repo status and adoption order. |
 | [ENTERPRISE_AI_TESTING_LANDSCAPE.md](ENTERPRISE_AI_TESTING_LANDSCAPE.md) | Modern enterprise AI-native testing pyramid, architecture, missed gaps, and top 1% stack. |
@@ -15,6 +17,7 @@ Canonical testing references for INSUR Beverage.
 ## How to use
 
 - **Setting up a new dept's `tests/<dept>/<tier>/`** → consult §1 of the matrix, pick a tool from §2, cite it in the tier's local README.
+- **Choosing the default test gate for any change** → start with `GLOBAL_DEFAULT_TESTING_POLICY.md`, then add focused tests for the changed area.
 - **Adding a new tool** → file a 40-row review per global §52 under `docs/architecture/tool-reviews/`, then add a row to §1 of the matrix.
 - **Audit gap discovery** → cross-check §6 (the "AI teams miss this" gap list) against the dept's current coverage.
 

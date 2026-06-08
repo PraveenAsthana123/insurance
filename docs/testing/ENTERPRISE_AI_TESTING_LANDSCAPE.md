@@ -60,7 +60,7 @@ This pyramid is additive. Lower layers catch fast deterministic failures. Upper 
 | Cross-Browser Testing | Multi-browser support | BrowserStack, Sauce Labs | Target; external SaaS optional |
 | Mobile Testing | Android/iOS | Appium | Not applicable until mobile exists |
 | Desktop App Testing | Native app testing | WinAppDriver | Not applicable until desktop exists |
-| AI/LLM Testing | Hallucination/grounding | DeepEval, RAGAS | Partial opt-in RAG tests |
+| AI/LLM Testing | Hallucination/grounding | DeepEval, RAGAS, G-Eval, BLEU, ROUGE | Partial opt-in RAG tests |
 | Prompt Testing | Prompt regression | Promptfoo | Target |
 | AI Safety Testing | Jailbreak/prompt injection | Lakera Guard, Garak | Target |
 | AI Evaluation | Quality scoring | LangSmith, Arize Phoenix | Target |
@@ -124,7 +124,7 @@ This pyramid is additive. Lower layers catch fast deterministic failures. Upper 
 | Security | OWASP ZAP + Snyk |
 | Visual | Applitools |
 | Accessibility | Axe |
-| AI Evaluation | RAGAS + DeepEval |
+| AI Evaluation | RAGAS + DeepEval + G-Eval + BLEU/ROUGE + Fairlearn/Detoxify |
 | Observability | OpenTelemetry |
 | AI Tracing | LangSmith |
 | Chaos Engineering | LitmusChaos |
@@ -212,7 +212,7 @@ Still missing before enterprise production:
 | Visual | Applitools |
 | Accessibility | Axe |
 | Data Testing | Great Expectations |
-| AI Evaluation | RAGAS + DeepEval |
+| AI Evaluation | RAGAS + DeepEval + G-Eval + BLEU/ROUGE + Fairlearn/Detoxify |
 | Prompt Testing | Promptfoo |
 | AI Observability | LangSmith |
 | Distributed Tracing | OpenTelemetry |

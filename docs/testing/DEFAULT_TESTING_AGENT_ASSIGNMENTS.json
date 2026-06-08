@@ -1,0 +1,220 @@
+{
+  "version": "2026-06-08",
+  "policy": "docs/testing/GLOBAL_DEFAULT_TESTING_POLICY.md",
+  "default_report_directory": "jobs/reports/testing",
+  "default_notification_mode": "local-first",
+  "assignments": [
+    {
+      "area": "default_health_gate",
+      "primary_agent": "quality-gate-agent",
+      "council_agent": "council-governance-review-agent",
+      "default_tools": [
+        "scripts/project_doctor.sh",
+        "pytest",
+        "npm run lint",
+        "npm run build"
+      ],
+      "cadence": "every production-facing change",
+      "report_artifacts": [
+        "jobs/reports/testing/default_health_latest.md",
+        "jobs/reports/testing/default_health_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "doctor_failure"
+      ]
+    },
+    {
+      "area": "code_quality_sast",
+      "primary_agent": "sast-code-quality-agent",
+      "council_agent": "security-governance-test-agent",
+      "default_tools": [
+        "SonarQube Community Edition",
+        "Semgrep",
+        "Ruff",
+        "ESLint",
+        "Gitleaks",
+        "Trivy"
+      ],
+      "cadence": "pull request and weekly full gate",
+      "report_artifacts": [
+        "jobs/reports/testing/code_quality_latest.md",
+        "jobs/reports/testing/code_quality_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "secret_detected",
+        "critical_vulnerability"
+      ]
+    },
+    {
+      "area": "api_contract_testing",
+      "primary_agent": "api-contract-test-agent",
+      "council_agent": "council-governance-review-agent",
+      "default_tools": [
+        "pytest",
+        "FastAPI TestClient",
+        "httpx",
+        "Schemathesis",
+        "Karate"
+      ],
+      "cadence": "every backend/API change",
+      "report_artifacts": [
+        "jobs/reports/testing/api_contract_latest.md",
+        "jobs/reports/testing/api_contract_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "contract_break"
+      ]
+    },
+    {
+      "area": "frontend_browser_f12_testing",
+      "primary_agent": "frontend-browser-test-agent",
+      "council_agent": "quality-gate-agent",
+      "default_tools": [
+        "Playwright",
+        "Axe",
+        "Lighthouse",
+        "Chrome/Firefox DevTools console and network capture"
+      ],
+      "cadence": "every user-facing UI change",
+      "report_artifacts": [
+        "jobs/reports/testing/frontend_browser_latest.md",
+        "jobs/reports/testing/frontend_browser_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "console_error",
+        "failed_core_flow"
+      ]
+    },
+    {
+      "area": "load_performance_1000_request_testing",
+      "primary_agent": "load-performance-test-agent",
+      "council_agent": "resilience-observability-test-agent",
+      "default_tools": [
+        "k6",
+        "Locust",
+        "wrk",
+        "hey",
+        "pytest-benchmark"
+      ],
+      "cadence": "weekly full gate and before performance-sensitive releases",
+      "report_artifacts": [
+        "jobs/reports/testing/load_performance_latest.md",
+        "jobs/reports/testing/load_performance_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "latency_slo_breach",
+        "error_rate_breach"
+      ]
+    },
+    {
+      "area": "data_quality_testing",
+      "primary_agent": "data-quality-test-agent",
+      "council_agent": "governance-test-agent",
+      "default_tools": [
+        "Great Expectations",
+        "Soda Core",
+        "dbt tests",
+        "Pandas validation"
+      ],
+      "cadence": "every ETL/data model change and daily smoke",
+      "report_artifacts": [
+        "jobs/reports/testing/data_quality_latest.md",
+        "jobs/reports/testing/data_quality_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "freshness_failure",
+        "lineage_break"
+      ]
+    },
+    {
+      "area": "database_testing",
+      "primary_agent": "database-test-agent",
+      "council_agent": "data-quality-test-agent",
+      "default_tools": [
+        "pytest with psycopg",
+        "pgTAP",
+        "pgbench",
+        "migration dry-run"
+      ],
+      "cadence": "every migration or repository change",
+      "report_artifacts": [
+        "jobs/reports/testing/database_latest.md",
+        "jobs/reports/testing/database_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "migration_failure",
+        "integrity_failure"
+      ]
+    },
+    {
+      "area": "model_training_accuracy_benchmarking",
+      "primary_agent": "model-evaluation-test-agent",
+      "council_agent": "ai-governance-review-agent",
+      "default_tools": [
+        "MLflow",
+        "scikit-learn metrics",
+        "Evidently",
+        "RAGAS",
+        "DeepEval",
+        "G-Eval",
+        "BLEU",
+        "ROUGE",
+        "Promptfoo",
+        "SHAP",
+        "Fairlearn",
+        "Detoxify"
+      ],
+      "cadence": "every model, prompt, dataset, or training change",
+      "report_artifacts": [
+        "jobs/reports/testing/model_evaluation_latest.md",
+        "jobs/reports/testing/model_evaluation_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "accuracy_regression",
+        "drift_breach",
+        "unsafe_ai_output",
+        "generated_text_regression",
+        "rag_quality_regression",
+        "fairness_regression",
+        "toxicity_regression"
+      ]
+    },
+    {
+      "area": "reporting_notification",
+      "primary_agent": "reporting-notification-agent",
+      "council_agent": "council-governance-review-agent",
+      "default_tools": [
+        "Markdown report",
+        "JSON report",
+        "agent_fleet supervisor-report",
+        "optional webhook notifier"
+      ],
+      "cadence": "after every test run",
+      "report_artifacts": [
+        "jobs/reports/testing/testing_summary_latest.md",
+        "jobs/reports/testing/testing_summary_latest.json"
+      ],
+      "notify_on": [
+        "P0",
+        "P1",
+        "missing_evidence"
+      ]
+    }
+  ]
+}

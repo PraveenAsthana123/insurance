@@ -27,6 +27,7 @@ The project is now expected to support production-grade foundations:
 - UI global policy for React/Next.js migration readiness
 - backend global policy for DDD, service boundaries, testing, security, observability, and documentation
 - default project doctor command
+- default global testing policy with agent assignment, reports, notifications, and update rules
 - CI baseline for frontend and backend checks
 - database viewer for local debugging
 
@@ -40,6 +41,7 @@ The project is now expected to support production-grade foundations:
 - Added generated backend file inventory in `docs/BACKEND_FILE_INVENTORY.md` and `docs/BACKEND_FILE_INVENTORY.json`.
 - Added docstrings to model route/schema/service/repository files.
 - Added Adminer database viewer to Docker Compose.
+- Added default global testing policy and agent assignment catalog for health, code quality, API, frontend/F12, 1000-request/load, data, DB, model, report, and notification coverage.
 
 ## Requirement Change Rule
 
