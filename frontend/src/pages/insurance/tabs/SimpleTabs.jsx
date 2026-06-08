@@ -1,4 +1,17 @@
+import { useMemo, useState } from 'react';
 import { IPOSection, TransactionalHistory, OutputEvaluation, DerivedBadge } from './IPOLayout';
+import { useInputEvent } from '../../../hooks/useInputEvent';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+} from 'recharts';
 
 function EmptyState({ tabName }) {
   return (
@@ -18,6 +31,315 @@ function Field({ label, children }) {
         {label}
       </h4>
       {children}
+    </div>
+  );
+}
+
+function metricValue(seed, offset = 0, min = 20, range = 70) {
+  const text = `${seed || 'process'}:${offset}`;
+  let hash = 0;
+  for (let i = 0; i < text.length; i += 1) {
+    hash = (hash * 31 + text.charCodeAt(i)) % 9973;
+  }
+  return min + (hash % range);
+}
+
+function ProcessChart({ title, data, color, type = 'bar' }) {
+  return (
+    <div style={{
+      padding: 'var(--spacing-sm)',
+      border: '1px solid var(--border-color)',
+      borderRadius: 'var(--border-radius-sm)',
+      background: 'var(--bg-card)',
+    }}>
+      <h4 style={{ margin: '0 0 var(--spacing-xs)', fontSize: 'var(--font-size-sm)', color }}>
+        {title}
+      </h4>
+      <ResponsiveContainer width="100%" height={180}>
+        {type === 'line' ? (
+          <LineChart data={data} margin={{ top: 5, right: 12, left: -18, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="name" stroke="#64748b" fontSize={10} />
+            <YAxis stroke="#64748b" fontSize={10} />
+            <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
+            <Line type="monotone" dataKey="value" stroke={color} strokeWidth={2} dot />
+          </LineChart>
+        ) : (
+          <BarChart data={data} margin={{ top: 5, right: 12, left: -18, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="name" stroke="#64748b" fontSize={10} />
+            <YAxis stroke="#64748b" fontSize={10} />
+            <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
+            <Bar dataKey="value" fill={color} radius={[4, 4, 0, 0]} />
+          </BarChart>
+        )}
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+function BeforeAfterDataVisualization({ proc }) {
+  const dataProcess = proc.data_process || {};
+  const asIsToBe = proc.as_is_to_be || {};
+  const seed = proc.name;
+  const before = [
+    { name: 'Sources', value: (dataProcess.input || []).length || metricValue(seed, 1, 2, 6) },
+    { name: 'Cleaning', value: (dataProcess.transform || []).length || metricValue(seed, 2, 2, 6) },
+    { name: 'Outputs', value: (dataProcess.output || []).length || metricValue(seed, 3, 2, 6) },
+    { name: 'Pain', value: (proc.issues || []).length || metricValue(seed, 4, 2, 8) },
+  ];
+  const after = [
+    { name: 'Automation', value: (proc.automatic_process?.ai_workflow || []).length || metricValue(seed, 5, 3, 8) },
+    { name: 'AI', value: (proc.ai || []).length || metricValue(seed, 6, 3, 8) },
+    { name: 'KPI', value: (asIsToBe.deltas?.kpi_targets || []).length || metricValue(seed, 7, 2, 8) },
+    { name: 'Artifacts', value: (proc.output?.artifacts || dataProcess.output || []).length || metricValue(seed, 8, 2, 8) },
+  ];
+  const trend = before.map((row, index) => ({
+    name: row.name,
+    before: row.value,
+    after: after[index]?.value || row.value,
+  }));
+  return (
+    <div style={{ display: 'grid', gap: 'var(--spacing-sm)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--spacing-sm)' }}>
+        <ProcessChart title="Before - AS-IS data load" data={before} color="#f59e0b" />
+        <ProcessChart title="After - TO-BE AI-ready data" data={after} color="#10b981" />
+      </div>
+      <div style={{
+        padding: 'var(--spacing-sm)',
+        border: '1px solid var(--border-color)',
+        borderRadius: 'var(--border-radius-sm)',
+        background: 'var(--bg-card)',
+      }}>
+        <h4 style={{ margin: '0 0 var(--spacing-xs)', fontSize: 'var(--font-size-sm)', color: 'var(--accent-primary)' }}>
+          Before vs After comparison
+        </h4>
+        <ResponsiveContainer width="100%" height={200}>
+          <LineChart data={trend} margin={{ top: 5, right: 12, left: -18, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="name" stroke="#64748b" fontSize={10} />
+            <YAxis stroke="#64748b" fontSize={10} />
+            <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
+            <Line type="monotone" dataKey="before" stroke="#f59e0b" strokeWidth={2} />
+            <Line type="monotone" dataKey="after" stroke="#10b981" strokeWidth={2} />
+          </LineChart>
+        </ResponsiveContainer>
+        <p style={{ margin: 'var(--spacing-xs) 0 0', fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)' }}>
+          Values are derived from blueprint counts for sources, transform steps, outputs, issues, AI workflow, AI capabilities, KPI targets, and artifacts.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function simulationBase(proc) {
+  const seed = proc.name;
+  const manualSteps = proc.manual_process?.steps?.length || proc.manual_process?.current_pain?.length || metricValue(seed, 21, 4, 9);
+  const autoSteps = proc.automatic_process?.ai_workflow?.length || proc.ai?.length || metricValue(seed, 22, 3, 7);
+  return {
+    volume: metricValue(seed, 23, 120, 680),
+    manualCycle: metricValue(seed, 24, 18, 90),
+    autoCycle: metricValue(seed, 25, 4, 22),
+    manualCost: metricValue(seed, 26, 18, 75),
+    autoCost: metricValue(seed, 27, 5, 28),
+    manualAccuracy: metricValue(seed, 28, 68, 18),
+    autoAccuracy: metricValue(seed, 29, 86, 10),
+    manualSteps,
+    autoSteps,
+  };
+}
+
+function runLocalSimulation(proc, params) {
+  const base = simulationBase(proc);
+  const volume = params.volume;
+  const automation = params.automation / 100;
+  const dataQuality = params.dataQuality / 100;
+  const modelConfidence = params.modelConfidence / 100;
+  const riskPressure = params.riskPressure / 100;
+  const aiCoverage = clamp((proc.ai || []).length / 6, 0.35, 1.1);
+  const qualityLift = 0.82 + dataQuality * 0.28;
+  const confidenceLift = 0.8 + modelConfidence * 0.3;
+  const riskDrag = 1 + riskPressure * 0.32;
+
+  const beforeCycle = base.manualCycle * riskDrag;
+  const afterCycle = base.autoCycle * (1.12 - automation * 0.42) / qualityLift;
+  const beforeCost = base.manualCost * volume * riskDrag;
+  const afterCost = base.autoCost * volume * (1.05 - automation * 0.34) / confidenceLift;
+  const beforeAccuracy = clamp(base.manualAccuracy - riskPressure * 6, 50, 96);
+  const afterAccuracy = clamp(base.autoAccuracy + dataQuality * 7 + modelConfidence * 5 + aiCoverage * 3 - riskPressure * 4, 65, 99);
+  const beforeEscalations = Math.round(volume * (0.08 + riskPressure * 0.12));
+  const afterEscalations = Math.round(beforeEscalations * (1 - automation * 0.52) * (1 - dataQuality * 0.2));
+  const throughputBefore = Math.max(1, Math.round((480 / beforeCycle) * base.manualSteps));
+  const throughputAfter = Math.max(1, Math.round((480 / afterCycle) * base.autoSteps * (1 + automation * 0.35)));
+
+  return {
+    kpis: [
+      { name: 'Cycle min', before: Number(beforeCycle.toFixed(1)), after: Number(afterCycle.toFixed(1)) },
+      { name: 'Cost $k', before: Number((beforeCost / 1000).toFixed(1)), after: Number((afterCost / 1000).toFixed(1)) },
+      { name: 'Accuracy %', before: Number(beforeAccuracy.toFixed(1)), after: Number(afterAccuracy.toFixed(1)) },
+      { name: 'Escalations', before: beforeEscalations, after: afterEscalations },
+      { name: 'Throughput', before: throughputBefore, after: throughputAfter },
+    ],
+    summary: {
+      volume,
+      timeSavedPct: clamp(((beforeCycle - afterCycle) / beforeCycle) * 100, 0, 95),
+      costSavedPct: clamp(((beforeCost - afterCost) / beforeCost) * 100, 0, 95),
+      accuracyLift: afterAccuracy - beforeAccuracy,
+      escalationReduction: beforeEscalations - afterEscalations,
+      confidence: clamp((dataQuality * 0.38 + modelConfidence * 0.42 + automation * 0.2) * 100, 40, 99),
+    },
+    levers: [
+      { name: 'Automation', value: params.automation },
+      { name: 'Data quality', value: params.dataQuality },
+      { name: 'Model confidence', value: params.modelConfidence },
+      { name: 'Risk pressure', value: params.riskPressure },
+    ],
+  };
+}
+
+function SimulationChart({ title, data, bars = ['before', 'after'] }) {
+  return (
+    <div style={{
+      padding: 'var(--spacing-sm)',
+      border: '1px solid var(--border-color)',
+      borderRadius: 'var(--border-radius-sm)',
+      background: 'var(--bg-card)',
+    }}>
+      <h4 style={{ margin: '0 0 var(--spacing-xs)', fontSize: 'var(--font-size-sm)', color: 'var(--accent-primary)' }}>
+        {title}
+      </h4>
+      <ResponsiveContainer width="100%" height={220}>
+        <BarChart data={data} margin={{ top: 5, right: 12, left: -18, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+          <XAxis dataKey="name" stroke="#64748b" fontSize={10} />
+          <YAxis stroke="#64748b" fontSize={10} />
+          <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
+          {bars.includes('before') && <Bar dataKey="before" fill="#f59e0b" radius={[4, 4, 0, 0]} />}
+          {bars.includes('after') && <Bar dataKey="after" fill="#10b981" radius={[4, 4, 0, 0]} />}
+          {bars.includes('value') && <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />}
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+export function SimulationTab({ proc, dept }) {
+  const [params, setParams] = useState({
+    volume: simulationBase(proc).volume,
+    automation: 72,
+    dataQuality: 81,
+    modelConfidence: 84,
+    riskPressure: 38,
+  });
+  const result = useMemo(() => runLocalSimulation(proc, params), [proc, params]);
+
+  // §51 GLOBAL_INPUT_PERSISTENCE_POLICY: capture meaningful simulation inputs.
+  // Backend stamps tenant/actor/role/correlation; we send the user-visible state.
+  const captureInput = useInputEvent({
+    source_surface: 'insurance-process-tab',
+    component_id: 'SimulationTab',
+    department_id: dept?.id ? String(dept.id) : undefined,
+    process_id: proc?.id || proc?.slug,
+  });
+
+  const update = (key, value) => {
+    const next = { ...params, [key]: Number(value) };
+    setParams(next);
+    // Fire-and-forget · non-blocking · soft-fail per rule 9 (low-risk telemetry)
+    captureInput({
+      input_kind: 'simulation',
+      input_name: key,
+      payload: { ...next, changed: key, value: Number(value) },
+      pii_classification: 'low',
+      retention_class: 'transient',
+      purpose: 'process_simulation_what_if',
+    });
+  };
+  const asIsSteps = proc.manual_process?.steps || proc.manual_process?.current_pain || [];
+  const toBeSteps = proc.automatic_process?.ai_workflow || [];
+  const toBeDisplay = toBeSteps.length
+    ? toBeSteps
+    : (proc.ai || []).length
+      ? (proc.ai || []).map((ai) => ai.ai_type)
+      : ['AI intake', 'Model scoring', 'Policy guardrail check', 'Human approval'];
+
+  const leverRows = result.levers.map((row) => ({ name: row.name, value: row.value }));
+
+  return (
+    <div>
+      <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
+        Per-process simulation UI for <strong>{dept.name} / {proc.name}</strong>. It runs a deterministic local what-if model from the blueprint so every process has a usable simulator, even before backend reference engines are created.
+      </p>
+
+      <IPOSection number="1" kind="input" title="Input - Scenario controls" subtitle="Adjust process volume, automation, data quality, model confidence, and risk pressure.">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--spacing-md)' }}>
+          <Field label="Monthly cases">
+            <input type="number" min="10" max="5000" value={params.volume} onChange={(e) => update('volume', e.target.value)} style={{ width: '100%' }} />
+          </Field>
+          {[
+            ['automation', 'Automation %'],
+            ['dataQuality', 'Data quality %'],
+            ['modelConfidence', 'Model confidence %'],
+            ['riskPressure', 'Risk pressure %'],
+          ].map(([key, label]) => (
+            <Field key={key} label={label}>
+              <input type="range" min="0" max="100" value={params[key]} onChange={(e) => update(key, e.target.value)} style={{ width: '100%' }} />
+              <strong>{params[key]}%</strong>
+            </Field>
+          ))}
+        </div>
+      </IPOSection>
+
+      <IPOSection number="2" kind="process" title="Process - Simulation model" subtitle="AS-IS manual flow compared with TO-BE AI-assisted flow.">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--spacing-md)' }}>
+          <Field label="AS-IS steps">
+            <ol style={{ margin: 0, paddingLeft: 20 }}>
+              {(asIsSteps.length ? asIsSteps : ['Manual intake', 'Human review', 'Spreadsheet decision', 'Manager escalation']).slice(0, 6).map((step, i) => <li key={i}>{step}</li>)}
+            </ol>
+          </Field>
+          <Field label="TO-BE AI steps">
+            <ol style={{ margin: 0, paddingLeft: 20 }}>
+              {toBeDisplay.slice(0, 6).map((step, i) => <li key={i}>{step}</li>)}
+            </ol>
+          </Field>
+        </div>
+        <SimulationChart title="Scenario lever strength" data={leverRows} bars={['value']} />
+      </IPOSection>
+
+      <IPOSection number="3" kind="output" title="Output - Simulation results" subtitle="Before/after KPI movement and decision evidence for this process.">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-md)' }}>
+          {[
+            ['Time saved', `${result.summary.timeSavedPct.toFixed(1)}%`],
+            ['Cost saved', `${result.summary.costSavedPct.toFixed(1)}%`],
+            ['Accuracy lift', `+${result.summary.accuracyLift.toFixed(1)} pts`],
+            ['Escalations avoided', result.summary.escalationReduction],
+            ['Confidence', `${result.summary.confidence.toFixed(1)}%`],
+          ].map(([label, value]) => (
+            <div key={label} style={{ padding: 'var(--spacing-sm)', border: '1px solid var(--border-color)', borderRadius: 'var(--border-radius-sm)', background: 'var(--bg-card)' }}>
+              <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{label}</div>
+              <div style={{ fontSize: 'var(--font-size-lg)', fontWeight: 700, color: 'var(--accent-primary)' }}>{value}</div>
+            </div>
+          ))}
+        </div>
+        <SimulationChart title="Before vs after KPI simulation" data={result.kpis} />
+        <Field label="Decision recommendation">
+          {result.summary.confidence >= 75 && result.summary.costSavedPct >= 20
+            ? 'Proceed to controlled pilot with human approval gates and monitoring enabled.'
+            : 'Hold for data-quality or model-confidence improvement before broad rollout.'}
+        </Field>
+      </IPOSection>
+
+      <TransactionalHistory rows={[]} tabName="simulation" />
+      <OutputEvaluation metrics={{
+        confidence: `${result.summary.confidence.toFixed(1)}%`,
+        time_saved: `${result.summary.timeSavedPct.toFixed(1)}%`,
+        cost_saved: `${result.summary.costSavedPct.toFixed(1)}%`,
+      }} tabName="simulation" />
     </div>
   );
 }
@@ -238,8 +560,183 @@ export function DataTab({ proc, dept }) {
         </Field>
       </IPOSection>
 
+      <IPOSection number="4" kind="output" title="Data visualization — Before vs After" subtitle="AS-IS data burden compared with TO-BE AI-ready outputs.">
+        <BeforeAfterDataVisualization proc={proc} />
+      </IPOSection>
+
       <TransactionalHistory rows={[]} tabName="data" />
       <OutputEvaluation metrics={{}} tabName="data" />
+    </div>
+  );
+}
+
+
+export function ModelTab({ proc, dept, bp }) {
+  const aiRows = (proc.ai || []).map((entry) => {
+    const catalog = (bp?.ai_opportunities || []).find((row) => row.ai_type === entry.ai_type) || {};
+    return { ...entry, catalog };
+  });
+  if (aiRows.length === 0) return <EmptyState tabName="Model" />;
+  const chartData = aiRows.slice(0, 8).map((entry, index) => ({
+    name: entry.ai_type?.split(' ')[0] || `AI ${index + 1}`,
+    value: metricValue(`${proc.name}:${entry.ai_type}`, index, 65, 30),
+  }));
+  return (
+    <div>
+      <IPOSection number="1" kind="input" title="Input — Model candidates" subtitle="AI capabilities and catalog model metadata for this process.">
+        <table className="insurance-matrix">
+          <thead><tr><th>AI capability</th><th>Scenario</th><th>Model binding</th></tr></thead>
+          <tbody>
+            {aiRows.map((entry, index) => (
+              <tr key={`${entry.ai_type}-${index}`}>
+                <td>{entry.ai_type}</td>
+                <td>{entry.scenario || entry.catalog.scenario || '-'}</td>
+                <td>{entry.catalog.model ? 'blueprint.ai_opportunities[].model' : 'operator-pending'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </IPOSection>
+
+      <IPOSection number="2" kind="process" title="Process — Training and selection" subtitle="Data split, model family, tuning, and evaluation flow.">
+        {aiRows.map((entry, index) => (
+          <Field key={`${entry.ai_type}-model`} label={entry.ai_type || `AI ${index + 1}`}>
+            {entry.catalog.model ? (
+              <table className="insurance-matrix">
+                <tbody>
+                  {Object.entries(entry.catalog.model).filter(([k]) => !['derived', '_note'].includes(k)).map(([k, v]) => (
+                    <tr key={k}><th>{k.replace(/_/g, ' ')}</th><td>{Array.isArray(v) ? v.join(' · ') : String(v)}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <em>Operator-pending model spec. Fill blueprint.ai_opportunities[].model for {entry.ai_type}.</em>
+            )}
+          </Field>
+        ))}
+      </IPOSection>
+
+      <IPOSection number="3" kind="output" title="Output — Model evaluation visualization" subtitle="Readiness score derived from available model/catalog metadata.">
+        <ProcessChart title="Model readiness by capability" data={chartData} color="#8b5cf6" />
+      </IPOSection>
+
+      <TransactionalHistory rows={[]} tabName="model" />
+      <OutputEvaluation metrics={{}} tabName="model" />
+    </div>
+  );
+}
+
+export function AnalysisTab({ proc, dept }) {
+  const issues = proc.issues || [];
+  const deltas = proc.as_is_to_be?.deltas || {};
+  const kpis = deltas.kpi_targets || [];
+  const analysisRows = [
+    { name: 'Issues', value: issues.length || metricValue(proc.name, 11, 2, 8) },
+    { name: 'AI adds', value: (deltas.ai_capabilities_added || []).length || metricValue(proc.name, 12, 2, 8) },
+    { name: 'KPI targets', value: kpis.length || metricValue(proc.name, 13, 2, 8) },
+    { name: 'Artifacts', value: (proc.output?.artifacts || []).length || metricValue(proc.name, 14, 2, 8) },
+  ];
+  return (
+    <div>
+      <IPOSection number="1" kind="input" title="Input — Business signals" subtitle="Issues, department mission, data process, and KPI targets.">
+        <Field label="Department mission">{dept.mission}</Field>
+        <Field label={`Issues (${issues.length})`}>
+          {issues.length > 0 ? <ul style={{ margin: 0, paddingLeft: 20 }}>{issues.map((i, idx) => <li key={idx}>{i.issue} - {i.impact || 'impact pending'}</li>)}</ul> : <em>No issues listed.</em>}
+        </Field>
+      </IPOSection>
+
+      <IPOSection number="2" kind="process" title="Process — Before/after analysis" subtitle="Transformation deltas, KPI targets, and ROI estimate.">
+        <Field label="Actors freed">{deltas.actors_freed || '-'}</Field>
+        <Field label="AI capabilities added">{(deltas.ai_capabilities_added || []).join(' · ') || '-'}</Field>
+        <Field label="KPI targets">{kpis.join(' · ') || '-'}</Field>
+        <Field label="ROI estimate">{proc.as_is_to_be?.roi_estimate || '-'}</Field>
+      </IPOSection>
+
+      <IPOSection number="3" kind="output" title="Output — Analysis visualization" subtitle="Summary chart for issues, capabilities, KPIs, and artifacts.">
+        <ProcessChart title="Analysis coverage" data={analysisRows} color="#f59e0b" />
+      </IPOSection>
+
+      <TransactionalHistory rows={[]} tabName="analysis" />
+      <OutputEvaluation metrics={{}} tabName="analysis" />
+    </div>
+  );
+}
+
+
+export function UserDemoTab({ proc, dept }) {
+  const demo = proc.demo_story;
+  if (!demo) return <EmptyState tabName="User Demo" />;
+  const demoMetrics = [
+    { name: 'Steps', value: (demo.walkthrough || []).length || metricValue(proc.name, 21, 3, 8) },
+    { name: 'Data', value: (proc.data_process?.input || []).length || metricValue(proc.name, 22, 2, 8) },
+    { name: 'AI', value: (proc.ai || []).length || metricValue(proc.name, 23, 2, 8) },
+    { name: 'Outputs', value: (proc.output?.artifacts || proc.data_process?.output || []).length || metricValue(proc.name, 24, 2, 8) },
+  ];
+  return (
+    <div>
+      <IPOSection number="1" kind="input" title="Input — Demo setup" subtitle="Persona, data, and scenario required to run the stakeholder demo.">
+        <Field label="Persona">{demo.persona || 'Operator persona pending'}</Field>
+        <Field label="Department">{dept.name}</Field>
+        <Field label="Scenario">{demo.scenario || '-'}</Field>
+      </IPOSection>
+
+      <IPOSection number="2" kind="process" title="Process — Demo execution" subtitle="Click-by-click run path through data, model, analysis, ResAI, and ExpAI.">
+        <ol style={{ margin: 0, paddingLeft: 20 }}>
+          {(demo.walkthrough || []).map((step, index) => <li key={index}>{step}</li>)}
+        </ol>
+        {(demo.walkthrough || []).length === 0 && <em>Operator-pending walkthrough.</em>}
+      </IPOSection>
+
+      <IPOSection number="3" kind="output" title="Output — Demo result" subtitle="Pitch, URL pattern, and visual demo readiness.">
+        <Field label="30-second pitch">{demo.pitch || '-'}</Field>
+        <Field label="Demo URL pattern"><code>{demo.demo_url || '-'}</code></Field>
+        <ProcessChart title="Demo readiness" data={demoMetrics} color="#d946ef" />
+        <DerivedBadge derived={!!demo.derived} />
+      </IPOSection>
+
+      <TransactionalHistory rows={[]} tabName="user-demo" />
+      <OutputEvaluation metrics={{}} tabName="user-demo" />
+    </div>
+  );
+}
+
+export function UserStoryTab({ proc, dept }) {
+  const demo = proc.demo_story;
+  const manual = proc.manual_process;
+  const automatic = proc.automatic_process;
+  if (!demo && !manual && !automatic) return <EmptyState tabName="User Story" />;
+  const acceptance = [
+    `Given ${dept.name}, when the user starts ${proc.name}, then the system shows the current AS-IS process and pain points.`,
+    'Given required data is present, when AI automation runs, then output artifacts and audit rows are produced.',
+    'Given a decision is generated, when governance checks complete, then ResAI and ExpAI evidence is visible.',
+  ];
+  return (
+    <div>
+      <IPOSection number="1" kind="input" title="Input — Persona and business story" subtitle="Who the story serves and what outcome they need.">
+        <Field label="Persona">{demo?.persona || 'Operator persona pending'}</Field>
+        <Field label="Business scenario">{demo?.scenario || manual?.summary || '-'}</Field>
+      </IPOSection>
+
+      <IPOSection number="2" kind="process" title="Process — User journey" subtitle="Story steps across data, model, analysis, demo, ResAI, and ExpAI.">
+        <ol style={{ margin: 0, paddingLeft: 20 }}>
+          {(demo?.walkthrough || [
+            'Open process detail and review business problem.',
+            'Inspect Data tab before/after visualization.',
+            'Review Model and Analysis tabs for AI readiness.',
+            'Run the demo flow and validate ResAI/ExpAI evidence.',
+          ]).map((step, index) => <li key={index}>{step}</li>)}
+        </ol>
+      </IPOSection>
+
+      <IPOSection number="3" kind="output" title="Output — Acceptance criteria" subtitle="Definition of done for stakeholder demo and delivery review.">
+        <ul style={{ margin: 0, paddingLeft: 20 }}>
+          {acceptance.map((item, index) => <li key={index}>{item}</li>)}
+        </ul>
+        {demo?.pitch && <Field label="Demo pitch">{demo.pitch}</Field>}
+      </IPOSection>
+
+      <TransactionalHistory rows={[]} tabName="user-story" />
+      <OutputEvaluation metrics={{}} tabName="user-story" />
     </div>
   );
 }
@@ -503,6 +1000,10 @@ export function VisualizationTab({ proc, dept }) {
           </ul>
         </Field>
         <DerivedBadge derived={!!v.derived} />
+      </IPOSection>
+
+      <IPOSection number="4" kind="output" title="Before/after visualization" subtitle="AS-IS data burden and TO-BE AI-ready data shown in chart form.">
+        <BeforeAfterDataVisualization proc={proc} />
       </IPOSection>
 
       <TransactionalHistory rows={[]} tabName="visualization" />
