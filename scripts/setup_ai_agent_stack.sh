@@ -96,6 +96,10 @@ ALL_TOOLS=(
   "sendportal|SendPortal|~200 MB|OSS Laravel email newsletter"
   "mautic|Mautic|~500 MB|OSS marketing automation"
   "dittofeed|Dittofeed|~200 MB|OSS customer engagement"
+  "matomo|Matomo|~500 MB|OSS web analytics · GA-alt · GDPR-friendly"
+  "metabase|Metabase|~500 MB|OSS BI · SQL + GUI dashboards"
+  "activepieces|Activepieces|~300 MB|OSS workflow automation · Zapier-alt"
+  "mixpost|Mixpost|~300 MB|OSS social media management · Buffer-alt"
 )
 
 usage() {
@@ -142,7 +146,7 @@ while [[ $# -gt 0 ]]; do
     -h|--help) usage; exit 0 ;;
     --dry-run) DRY_RUN=1; shift ;;
     --core)   SELECTED_TOOLS=("core" "chrome"); INTERACTIVE=0; shift ;;
-    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands" "pipecat" "livekit" "coqui-tts" "piper-tts" "deepgram" "speechbrain" "retell-ai" "vapi" "cartesia" "elevenlabs" "assemblyai" "gimp" "fooocus" "invokeai" "stable-diffusion-webui" "comfyui" "limesurvey" "formbricks" "surveyjs" "ohmyform" "yakforms" "listmonk" "postal" "mailtrain" "keila" "sendportal" "mautic" "dittofeed"); INTERACTIVE=0; shift ;;
+    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands" "pipecat" "livekit" "coqui-tts" "piper-tts" "deepgram" "speechbrain" "retell-ai" "vapi" "cartesia" "elevenlabs" "assemblyai" "gimp" "fooocus" "invokeai" "stable-diffusion-webui" "comfyui" "limesurvey" "formbricks" "surveyjs" "ohmyform" "yakforms" "listmonk" "postal" "mailtrain" "keila" "sendportal" "mautic" "dittofeed" "matomo" "metabase" "activepieces" "mixpost"); INTERACTIVE=0; shift ;;
     --tool)   SELECTED_TOOLS+=("$2"); INTERACTIVE=0; shift 2 ;;
     *) echo "Unknown arg: $1" >&2; usage; exit 1 ;;
   esac
@@ -602,6 +606,42 @@ for tool in "${SELECTED_TOOLS[@]}"; do
         log "  ✗ install.sh missing at ai-agents/dittofeed/deep/scripts/"
       fi
       ;;
+    matomo)
+      log_step "matomo · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/matomo/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/matomo/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/matomo/deep/scripts/"
+      fi
+      ;;
+
+    metabase)
+      log_step "metabase · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/metabase/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/metabase/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/metabase/deep/scripts/"
+      fi
+      ;;
+
+    activepieces)
+      log_step "activepieces · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/activepieces/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/activepieces/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/activepieces/deep/scripts/"
+      fi
+      ;;
+
+    mixpost)
+      log_step "mixpost · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/mixpost/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/mixpost/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/mixpost/deep/scripts/"
+      fi
+      ;;
+
 
 
 

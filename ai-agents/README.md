@@ -114,6 +114,24 @@ ai-agents/
 | Multi-channel marketing | InvokeAI | Formbricks | Mautic OR Dittofeed |
 | Highest scale newsletter | (n/a) | (n/a) | Listmonk |
 
+
+## Analytics · BI · Workflow automation · Social media (operator-added 2026-06-08)
+
+4 additional tools across 4 categories:
+
+| Tool | Category | Use |
+|---|---|---|
+| **matomo** | Web Analytics | OSS GA-alt · GDPR-friendly · self-hosted (port 8080) |
+| **metabase** | BI Dashboards | OSS SQL + GUI dashboards · 30+ data sources · embedded (port 3000) |
+| **activepieces** | Workflow Automation | OSS Zapier-alt · 200+ connectors · self-hosted (port 8080) |
+| **mixpost** | Social Media | OSS Buffer-alt · multi-platform scheduling (port 8080) |
+
+### Quick install
+
+```bash
+./_shared/scripts/setup_ai_agent_stack.sh --tool matomo --tool metabase --tool activepieces --tool mixpost
+```
+
 ## Per-tool deep/ structure (uniform)
 
 Every tool has the same skeleton:
