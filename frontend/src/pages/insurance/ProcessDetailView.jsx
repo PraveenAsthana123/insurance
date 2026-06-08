@@ -3,12 +3,15 @@ import { useParams, useOutletContext, useSearchParams } from 'react-router-dom';
 import { ReadmeTabPanel } from './tabs/ReadmeTabPanel';
 import {
   TechStackTab, DemoStoryTab, AsIsToBeTab,
-  ProblemTab, DataTab, ManualProcessTab, AutomaticProcessTab,
-  FlowDiagramTab, OutputTab, VisualizationTab, DashboardTab,
+  ProblemTab, DataTab, ModelTab, AnalysisTab, UserStoryTab, UserDemoTab,
+  ManualProcessTab, AutomaticProcessTab,
+  FlowDiagramTab, OutputTab, VisualizationTab, DashboardTab, SimulationTab,
   ResAITab, ExpAITab, GovernanceAITab, TestsTab, SecurityTab,
 } from './tabs/SimpleTabs';
+import { canonicalDomainId, domainMeta, processAppliesToDomain } from '../../utils/insuranceNavigation';
+import { FeedbackWidget } from '../../components/insurance/FeedbackWidget';
 
-// 17 tabs in fixed order per global §73
+// 22 tabs in fixed order: process, data, model, analysis, user story, user demo, simulation, ResAI, ExpAI, governance, tests, security
 const TABS = [
   { slug: 'readme',           label: 'Architecture',       phase: 'Orient' },
   { slug: 'tech-stack',       label: 'Tech stack',         phase: 'Orient' },
@@ -16,12 +19,17 @@ const TABS = [
   { slug: 'as-is-to-be',      label: 'AS-IS → TO-BE',      phase: 'Orient' },
   { slug: 'problem',          label: 'Problem',            phase: 'Understand' },
   { slug: 'data',             label: 'Data',               phase: 'Understand' },
+  { slug: 'model',            label: 'Model',              phase: 'Understand' },
+  { slug: 'analysis',         label: 'Analysis',           phase: 'Understand' },
+  { slug: 'user-story',       label: 'User story',         phase: 'Orient' },
+  { slug: 'user-demo',        label: 'User demo',          phase: 'Orient' },
   { slug: 'manual',           label: 'Manual process',     phase: 'Describe' },
   { slug: 'automatic',        label: 'Automatic process',  phase: 'Describe' },
   { slug: 'flow-diagram',     label: 'Flow diagram',       phase: 'Ship' },
   { slug: 'output',           label: 'Output',             phase: 'Ship' },
   { slug: 'visualization',    label: 'Visualization',      phase: 'Measure' },
   { slug: 'dashboard',        label: 'Dashboard',          phase: 'Measure' },
+  { slug: 'simulation',      label: 'Simulation',       phase: 'Measure' },
   { slug: 'resai',            label: 'ResAI',              phase: 'Govern' },
   { slug: 'expai',            label: 'ExpAI',              phase: 'Govern' },
   { slug: 'governance',       label: 'Governance AI',      phase: 'Govern' },
@@ -44,12 +52,18 @@ const PHASE_GRADIENT = {
 // §49 compose-footer per-tab: which tabs each tab cross-references.
 // Wired into the renderer so every tab can reach its neighbours in one click.
 const TAB_CROSSREFS = {
-  data:         ['problem', 'manual', 'automatic', 'flow-diagram', 'output'],
+  data:         ['problem', 'model', 'analysis', 'manual', 'automatic', 'flow-diagram', 'output'],
+  model:        ['data', 'analysis', 'resai', 'expai', 'tests'],
+  analysis:     ['problem', 'data', 'model', 'as-is-to-be', 'dashboard'],
+  'user-story': ['user-demo', 'demo-story', 'data', 'model', 'analysis', 'resai', 'expai'],
+  'user-demo':  ['user-story', 'data', 'model', 'analysis', 'visualization', 'resai', 'expai'],
+  visualization: ['data', 'analysis', 'dashboard', 'simulation', 'output'],
   manual:       ['problem', 'data', 'automatic', 'flow-diagram'],
-  automatic:    ['manual', 'data', 'flow-diagram', 'governance', 'output'],
+  automatic:    ['manual', 'data', 'model', 'flow-diagram', 'governance', 'output'],
   'flow-diagram': ['manual', 'automatic', 'data', 'output', 'visualization'],
   problem:      ['data', 'manual', 'as-is-to-be'],
-  output:       ['automatic', 'flow-diagram', 'visualization', 'dashboard'],
+  output:       ['automatic', 'flow-diagram', 'visualization', 'dashboard', 'simulation'],
+  simulation:   ['data', 'model', 'analysis', 'visualization', 'dashboard', 'governance'],
 };
 
 function findProcess(dept, processId) {
@@ -111,6 +125,9 @@ export function ProcessDetailView() {
 
   const dept = bp.department_catalog?.find((d) => String(d.id) === params.deptId);
   const proc = findProcess(dept, params.processId);
+  const selectedDomain = canonicalDomainId(params.domain);
+  const selectedDomainMeta = domainMeta(selectedDomain);
+  const processMatchesDomain = !selectedDomain || processAppliesToDomain(proc, dept, selectedDomain);
 
   // Banking-parity: last-refreshed timestamp updated whenever activeTab changes
   const [lastRefreshed, setLastRefreshed] = useState(new Date());
@@ -143,12 +160,17 @@ export function ProcessDetailView() {
       case 'as-is-to-be':    return <AsIsToBeTab proc={proc} dept={dept} />;
       case 'problem':        return <ProblemTab proc={proc} dept={dept} />;
       case 'data':           return <DataTab proc={proc} dept={dept} />;
+      case 'model':          return <ModelTab proc={proc} dept={dept} bp={bp} />;
+      case 'analysis':       return <AnalysisTab proc={proc} dept={dept} />;
+      case 'user-story':     return <UserStoryTab proc={proc} dept={dept} />;
+      case 'user-demo':      return <UserDemoTab proc={proc} dept={dept} />;
       case 'manual':         return <ManualProcessTab proc={proc} dept={dept} bp={bp} />;
       case 'automatic':      return <AutomaticProcessTab proc={proc} dept={dept} bp={bp} />;
       case 'flow-diagram':   return <FlowDiagramTab proc={proc} dept={dept} />;
       case 'output':         return <OutputTab proc={proc} dept={dept} />;
       case 'visualization':  return <VisualizationTab proc={proc} dept={dept} />;
       case 'dashboard':      return <DashboardTab proc={proc} dept={dept} />;
+      case 'simulation':     return <SimulationTab proc={proc} dept={dept} />;
       case 'resai':          return <ResAITab proc={proc} dept={dept} />;
       case 'expai':          return <ExpAITab proc={proc} dept={dept} />;
       case 'governance':     return <GovernanceAITab proc={proc} dept={dept} />;
@@ -162,8 +184,20 @@ export function ProcessDetailView() {
     <div>
       <h2 style={{ margin: '0 0 var(--spacing-xs)', fontSize: 'var(--font-size-xl)' }}>{proc.name}</h2>
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
-        Dept {dept.id} · {dept.name} · {params.domain || 'all domains'}
+        Dept {dept.id} · {dept.name} · {selectedDomainMeta?.label || 'all domains'}
       </p>
+      {!processMatchesDomain && (
+        <div style={{
+          margin: '0 0 var(--spacing-md)',
+          padding: 'var(--spacing-xs) var(--spacing-sm)',
+          border: '1px solid var(--accent-warning)',
+          borderRadius: 'var(--border-radius-sm)',
+          color: 'var(--accent-warning)',
+          fontSize: 'var(--font-size-xs)',
+        }}>
+          This process is not mapped to {selectedDomainMeta?.label}; use the left sub-menu to choose a mapped domain.
+        </div>
+      )}
 
       {/* Banking-style: Prev/Next + tab row */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
@@ -240,6 +274,7 @@ export function ProcessDetailView() {
       <div className="insurance-tab-content" role="tabpanel">
         {renderTab()}
         <TabCrossRefs activeTab={activeTab} setTab={setTab} />
+        <FeedbackWidget proc={proc} dept={dept} activeTab={activeTab} />
       </div>
     </div>
   );
