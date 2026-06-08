@@ -173,6 +173,8 @@ export default function App() {
           <Route index element={<div style={{ padding: 24, color: '#64748b' }}>Pick a department · domain · process from the dark blue menu.</div>} />
           <Route path="dept/:deptId/:domain" element={<BankDeptView />} />
           <Route path="dept/:deptId/:domain/:processId" element={<BankUseCasePage />} />
+          {/* 4-level: sub-process (AI capability) within a process. Per §73 menu spec. */}
+          <Route path="dept/:deptId/:domain/:processId/:subProcessId" element={<BankUseCasePage />} />
           <Route path="uc/:deptId/:processId" element={<BankUseCasePage />} />
           <Route path="bot" element={<BankBotPage />} />
           <Route path="chat" element={<BankChatPage />} />

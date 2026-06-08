@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const DOMAINS = ['B2C', 'B2B', 'B2E'];
+// Per §73: domain ids are lowercase in URLs (b2c/b2b/b2e); display labels are uppercase.
+// Aligned with InsuranceMainMenu.jsx so navigation from either menu activates both.
+const DOMAINS = [
+  { id: 'b2c', label: 'B2C' },
+  { id: 'b2b', label: 'B2B' },
+  { id: 'b2e', label: 'B2E' },
+];
 
 function processIdOf(p) {
   return (p?.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
@@ -10,10 +16,12 @@ function processIdOf(p) {
 function domainsForProcess(process, dept) {
   const explicit = process.channels || process.domains || process.business_domains || process.audiences;
   if (Array.isArray(explicit) && explicit.length > 0) {
-    return explicit.map((domain) => String(domain).toUpperCase());
+    return explicit.map((domain) => String(domain).toLowerCase());
   }
-  const deptDomains = DOMAINS.filter((domain) => dept.channel_scenarios?.[domain]);
-  return deptDomains.length > 0 ? deptDomains : DOMAINS;
+  const deptDomains = DOMAINS
+    .map((d) => d.id)
+    .filter((id) => dept.channel_scenarios?.[id] || dept.channel_scenarios?.[id.toUpperCase()]);
+  return deptDomains.length > 0 ? deptDomains : DOMAINS.map((d) => d.id);
 }
 
 export function InsuranceSubMenu({ bp }) {
@@ -83,11 +91,12 @@ export function InsuranceSubMenu({ bp }) {
               <strong>#{dept.id}</strong> {dept.name}
             </span>
 
-            {deptOpen && DOMAINS.map((domain) => {
+            {deptOpen && DOMAINS.map((dom) => {
+              const domain = dom.id;
               const domainKey = `domain:${dept.id}:${domain}`;
               const domainOpen = expanded[domainKey] || (params.deptId === String(dept.id) && params.domain === domain) || q;
               const activeDomain = params.deptId === String(dept.id) && params.domain === domain;
-              const hasDomain = dept.channel_scenarios && dept.channel_scenarios[domain];
+              const hasDomain = dept.channel_scenarios && (dept.channel_scenarios[domain] || dept.channel_scenarios[dom.label]);
               const domainProcesses = processes.filter((process) => domainsForProcess(process, dept).includes(domain));
 
               return (
@@ -98,10 +107,10 @@ export function InsuranceSubMenu({ bp }) {
                     role="button"
                     aria-expanded={domainOpen}
                     style={{ paddingLeft: 24, opacity: hasDomain ? 1 : 0.55 }}
-                    title={hasDomain ? dept.channel_scenarios[domain].label : `${domain} (no operator content yet)`}
+                    title={hasDomain ? (hasDomain.label || dom.label) : `${dom.label} (no operator content yet)`}
                   >
                     <span style={{ marginRight: 4 }}>{domainOpen ? '▾' : '▸'}</span>
-                    {domain} <span style={{ fontSize: 10 }}>({domainProcesses.length})</span>
+                    {dom.label} <span style={{ fontSize: 10 }}>({domainProcesses.length})</span>
                   </span>
 
                   {domainOpen && domainProcesses.map((process, index) => {

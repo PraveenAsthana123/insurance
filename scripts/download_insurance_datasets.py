@@ -57,9 +57,25 @@ def download(slug: str, dataset: str, dry_run: bool, refresh: bool = False) -> t
     if dry_run:
         return (True, "DRY-RUN")
 
+    # Resolve kaggle CLI. Cron's PATH may not include ~/.local/bin where
+    # `pip install --user kaggle` lands the binary. Per §60 path verification:
+    # check the user-local path first, then PATH, fail loudly if absent.
+    import shutil, os
+    kaggle_bin = None
+    for candidate in [
+        os.path.expanduser("~/.local/bin/kaggle"),
+        "/usr/local/bin/kaggle",
+        shutil.which("kaggle"),
+    ]:
+        if candidate and os.access(candidate, os.X_OK):
+            kaggle_bin = candidate
+            break
+    if not kaggle_bin:
+        return (False, "kaggle CLI not found (tried ~/.local/bin, /usr/local/bin, PATH)")
+
     try:
         result = subprocess.run(
-            ["kaggle", "datasets", "download", "-d", dataset, "-p", str(out_dir), "--unzip"],
+            [kaggle_bin, "datasets", "download", "-d", dataset, "-p", str(out_dir), "--unzip"],
             capture_output=True, text=True, timeout=300,
         )
         if result.returncode == 0:
