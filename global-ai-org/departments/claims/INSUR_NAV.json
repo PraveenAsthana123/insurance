@@ -1,0 +1,1314 @@
+{
+  "department_id": "claims",
+  "display_name": "Claims",
+  "owner": "Chief Claims Officer",
+  "objective": "Faster, accurate claim settlement across B2C, B2B, B2E channels.",
+  "business_models": [
+    "B2C",
+    "B2B",
+    "B2E",
+    "B2G"
+  ],
+  "ai_priority": "Very High",
+  "roi_tier": "Very High",
+  "main_kpi": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+  "left_nav": [
+    {
+      "slug": "fnol",
+      "process": "FNOL - Claim Intake",
+      "sub_processes": [
+        {
+          "slug": "fnol-web-claim-submission",
+          "name": "Web Claim Submission",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Web Claim Submission supports Claim Intake in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fnol-mobile-claim-submission",
+          "name": "Mobile Claim Submission",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Mobile Claim Submission supports Claim Intake in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fnol-call-center-intake",
+          "name": "Call Center Intake",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Call Center Intake supports Claim Intake in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fnol-broker-agent-submission",
+          "name": "Broker / Agent Submission",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Broker / Agent Submission supports Claim Intake in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fnol-email-document-upload",
+          "name": "Email / Document Upload",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Email / Document Upload supports Claim Intake in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "claim-setup",
+      "process": "Claim Setup - Registration",
+      "sub_processes": [
+        {
+          "slug": "claim-setup-claim-number-generation",
+          "name": "Claim Number Generation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Claim Number Generation supports Registration in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "claim-setup-policy-linking",
+          "name": "Policy Linking",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Policy Linking supports Registration in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "claim-setup-customer-verification",
+          "name": "Customer Verification",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Customer Verification supports Registration in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "claim-setup-loss-date-location-capture",
+          "name": "Loss Date / Location Capture",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Loss Date / Location Capture supports Registration in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "document-management",
+      "process": "Document Management - Collection & Extraction",
+      "sub_processes": [
+        {
+          "slug": "document-management-document-upload",
+          "name": "Document Upload",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Document Upload supports Collection & Extraction in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "document-management-ocr-extraction",
+          "name": "OCR Extraction",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "OCR Extraction supports Collection & Extraction in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "document-management-document-classification",
+          "name": "Document Classification",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Document Classification supports Collection & Extraction in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "document-management-metadata-tagging",
+          "name": "Metadata Tagging",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Metadata Tagging supports Collection & Extraction in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "validation",
+      "process": "Validation - Completeness & Coverage",
+      "sub_processes": [
+        {
+          "slug": "validation-missing-data-check",
+          "name": "Missing Data Check",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Missing Data Check supports Completeness & Coverage in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "validation-duplicate-claim-check",
+          "name": "Duplicate Claim Check",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Duplicate Claim Check supports Completeness & Coverage in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "validation-coverage-validation",
+          "name": "Coverage Validation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Coverage Validation supports Completeness & Coverage in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "validation-policy-in-force-verification",
+          "name": "Policy-in-force Verification",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Policy-in-force Verification supports Completeness & Coverage in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "fraud-management",
+      "process": "Fraud Management - Screening",
+      "sub_processes": [
+        {
+          "slug": "fraud-management-fraud-score-calculation",
+          "name": "Fraud Score Calculation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Fraud Score Calculation supports Screening in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fraud-management-pattern-analysis",
+          "name": "Pattern Analysis",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Pattern Analysis supports Screening in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fraud-management-network-graph-analysis",
+          "name": "Network / Graph Analysis",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Network / Graph Analysis supports Screening in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fraud-management-external-watchlist-match",
+          "name": "External Watchlist Match",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "External Watchlist Match supports Screening in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "coverage",
+      "process": "Coverage - Verification",
+      "sub_processes": [
+        {
+          "slug": "coverage-coverage-check",
+          "name": "Coverage Check",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Coverage Check supports Verification in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "coverage-policy-limits-check",
+          "name": "Policy Limits Check",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Policy Limits Check supports Verification in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "coverage-deductible-application",
+          "name": "Deductible Application",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Deductible Application supports Verification in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "coverage-exclusion-review",
+          "name": "Exclusion Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Exclusion Review supports Verification in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "assessment",
+      "process": "Assessment - Damage / Loss Assessment",
+      "sub_processes": [
+        {
+          "slug": "assessment-image-video-analysis-cv",
+          "name": "Image / Video Analysis (CV)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Image / Video Analysis (CV) supports Damage / Loss Assessment in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "assessment-adjuster-field-review",
+          "name": "Adjuster Field Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Adjuster Field Review supports Damage / Loss Assessment in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "assessment-repair-estimate",
+          "name": "Repair Estimate",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Repair Estimate supports Damage / Loss Assessment in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "assessment-medical-bill-review",
+          "name": "Medical Bill Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Medical Bill Review supports Damage / Loss Assessment in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "investigation",
+      "process": "Investigation - Case Analysis",
+      "sub_processes": [
+        {
+          "slug": "investigation-field-investigation",
+          "name": "Field Investigation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Field Investigation supports Case Analysis in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-external-verification-police-medical",
+          "name": "External Verification (Police / Medical)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "External Verification (Police / Medical) supports Case Analysis in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-witness-interview",
+          "name": "Witness Interview",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Witness Interview supports Case Analysis in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-subrogation-review",
+          "name": "Subrogation Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Subrogation Review supports Case Analysis in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "settlement",
+      "process": "Settlement - Reserve & Decision",
+      "sub_processes": [
+        {
+          "slug": "settlement-reserve-calculation",
+          "name": "Reserve Calculation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Reserve Calculation supports Reserve & Decision in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "settlement-settlement-recommendation",
+          "name": "Settlement Recommendation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Settlement Recommendation supports Reserve & Decision in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "settlement-negotiation",
+          "name": "Negotiation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Negotiation supports Reserve & Decision in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "settlement-approval-routing",
+          "name": "Approval Routing",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Approval Routing supports Reserve & Decision in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "approval",
+      "process": "Approval - Approval Workflow",
+      "sub_processes": [
+        {
+          "slug": "approval-auto-approval-stp",
+          "name": "Auto Approval (STP)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Auto Approval (STP) supports Approval Workflow in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "approval-manual-approval",
+          "name": "Manual Approval",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Manual Approval supports Approval Workflow in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "approval-manager-escalation",
+          "name": "Manager Escalation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Manager Escalation supports Approval Workflow in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "approval-committee-review",
+          "name": "Committee Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Committee Review supports Approval Workflow in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "payment",
+      "process": "Payment - Disbursement",
+      "sub_processes": [
+        {
+          "slug": "payment-eft-payment",
+          "name": "EFT Payment",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "EFT Payment supports Disbursement in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "payment-check-issuance",
+          "name": "Check Issuance",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Check Issuance supports Disbursement in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "payment-vendor-direct-pay",
+          "name": "Vendor Direct Pay",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Vendor Direct Pay supports Disbursement in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "payment-recovery-salvage",
+          "name": "Recovery / Salvage",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Recovery / Salvage supports Disbursement in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "closure",
+      "process": "Closure - Closeout & Audit",
+      "sub_processes": [
+        {
+          "slug": "closure-file-archive",
+          "name": "File Archive",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "File Archive supports Closeout & Audit in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "closure-audit-logging",
+          "name": "Audit Logging",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Audit Logging supports Closeout & Audit in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "closure-customer-notification",
+          "name": "Customer Notification",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Customer Notification supports Closeout & Audit in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "closure-subrogation-recovery",
+          "name": "Subrogation Recovery",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Subrogation Recovery supports Closeout & Audit in Claims.",
+            "Inputs": "Primary inputs come from Claims systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Claim Intake Agent, Claim Assessment Agent, Claim Validation Agent, Claim Triage Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Claims.",
+            "KPIs": "Claims cycle time (FNOL \u2192 settlement); STP rate; loss-adjustment expense",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,915 @@
+{
+  "department_id": "customer-service",
+  "display_name": "Customer Service / Contact Center",
+  "owner": "Director of Customer Experience",
+  "objective": "Highest customer-touch dept \u2014 drive automation + omnichannel + 24\u00d77 + CSAT.",
+  "business_models": [
+    "B2C",
+    "B2B",
+    "B2E",
+    "B2G"
+  ],
+  "ai_priority": "Very High",
+  "roi_tier": "High",
+  "main_kpi": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+  "left_nav": [
+    {
+      "slug": "customer-contact",
+      "process": "Customer Contact - Inbound Channels",
+      "sub_processes": [
+        {
+          "slug": "customer-contact-phone-ivr-agent",
+          "name": "Phone (IVR + agent)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Phone (IVR + agent) supports Inbound Channels in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "customer-contact-email",
+          "name": "Email",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Email supports Inbound Channels in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "customer-contact-chat-web-mobile",
+          "name": "Chat (web + mobile)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Chat (web + mobile) supports Inbound Channels in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "customer-contact-mobile-app",
+          "name": "Mobile app",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Mobile app supports Inbound Channels in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "customer-contact-social-media",
+          "name": "Social media",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Social media supports Inbound Channels in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "customer-contact-whatsapp",
+          "name": "WhatsApp",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "WhatsApp supports Inbound Channels in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "authentication",
+      "process": "Authentication - Identity & Security",
+      "sub_processes": [
+        {
+          "slug": "authentication-voice-biometrics",
+          "name": "Voice biometrics",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Voice biometrics supports Identity & Security in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "authentication-knowledge-based-authentication",
+          "name": "Knowledge-based authentication",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Knowledge-based authentication supports Identity & Security in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "authentication-otp-2fa",
+          "name": "OTP / 2FA",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "OTP / 2FA supports Identity & Security in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "authentication-account-number-dob",
+          "name": "Account number + DOB",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Account number + DOB supports Identity & Security in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "inquiry-management",
+      "process": "Inquiry Management - Intent Routing",
+      "sub_processes": [
+        {
+          "slug": "inquiry-management-policy-inquiry",
+          "name": "Policy Inquiry",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Policy Inquiry supports Intent Routing in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "inquiry-management-claims-inquiry",
+          "name": "Claims Inquiry",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Claims Inquiry supports Intent Routing in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "inquiry-management-billing-inquiry",
+          "name": "Billing Inquiry",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Billing Inquiry supports Intent Routing in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "inquiry-management-coverage-inquiry",
+          "name": "Coverage Inquiry",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Coverage Inquiry supports Intent Routing in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "inquiry-management-endorsement-change-request",
+          "name": "Endorsement / Change Request",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Endorsement / Change Request supports Intent Routing in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "case-management",
+      "process": "Case Management - Ticket Lifecycle",
+      "sub_processes": [
+        {
+          "slug": "case-management-ticket-creation",
+          "name": "Ticket Creation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Ticket Creation supports Ticket Lifecycle in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "case-management-ticket-assignment",
+          "name": "Ticket Assignment",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Ticket Assignment supports Ticket Lifecycle in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "case-management-routing-to-specialist",
+          "name": "Routing to Specialist",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Routing to Specialist supports Ticket Lifecycle in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "case-management-sla-tracking",
+          "name": "SLA Tracking",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "SLA Tracking supports Ticket Lifecycle in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "resolution",
+      "process": "Resolution - Resolution Path",
+      "sub_processes": [
+        {
+          "slug": "resolution-self-service-kb-chatbot",
+          "name": "Self-Service (KB / chatbot)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Self-Service (KB / chatbot) supports Resolution Path in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "resolution-agent-resolution",
+          "name": "Agent Resolution",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Agent Resolution supports Resolution Path in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "resolution-escalation",
+          "name": "Escalation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Escalation supports Resolution Path in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "escalation",
+      "process": "Escalation - Tiered Escalation",
+      "sub_processes": [
+        {
+          "slug": "escalation-supervisor-escalation",
+          "name": "Supervisor Escalation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Supervisor Escalation supports Tiered Escalation in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "escalation-claims-uw-escalation",
+          "name": "Claims / UW Escalation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Claims / UW Escalation supports Tiered Escalation in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "escalation-executive-escalation",
+          "name": "Executive Escalation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Executive Escalation supports Tiered Escalation in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "escalation-legal-compliance-escalation",
+          "name": "Legal / Compliance Escalation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Legal / Compliance Escalation supports Tiered Escalation in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "feedback",
+      "process": "Feedback - Voice of Customer",
+      "sub_processes": [
+        {
+          "slug": "feedback-survey-csat",
+          "name": "Survey (CSAT)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Survey (CSAT) supports Voice of Customer in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "feedback-net-promoter-score",
+          "name": "Net Promoter Score",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Net Promoter Score supports Voice of Customer in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "feedback-complaint-capture",
+          "name": "Complaint Capture",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Complaint Capture supports Voice of Customer in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "feedback-compliment-capture",
+          "name": "Compliment Capture",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Compliment Capture supports Voice of Customer in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "retention",
+      "process": "Retention - Save Path",
+      "sub_processes": [
+        {
+          "slug": "retention-renewal-reminder",
+          "name": "Renewal Reminder",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Renewal Reminder supports Save Path in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "retention-save-offer",
+          "name": "Save Offer",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Save Offer supports Save Path in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "retention-loyalty-program-surface",
+          "name": "Loyalty Program Surface",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Loyalty Program Surface supports Save Path in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "retention-cross-sell-suggestion",
+          "name": "Cross-sell Suggestion",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Cross-sell Suggestion supports Save Path in Customer Service / Contact Center.",
+            "Inputs": "Primary inputs come from Customer Service / Contact Center systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Insurance Chatbot Agent, Voice Virtual Agent, Authentication Agent, Intent Classification Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Customer Service / Contact Center.",
+            "KPIs": "First-call resolution; AHT; chatbot deflection rate; CSAT; NPS",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    }
+  ]
+}

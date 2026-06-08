@@ -1,0 +1,1070 @@
+{
+  "department_id": "underwriting",
+  "display_name": "Underwriting",
+  "owner": "Chief Underwriting Officer",
+  "objective": "Faster, more accurate risk selection + dynamic pricing across B2C, B2B, B2E.",
+  "business_models": [
+    "B2C",
+    "B2B",
+    "B2E"
+  ],
+  "ai_priority": "Very High",
+  "roi_tier": "Very High",
+  "main_kpi": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+  "left_nav": [
+    {
+      "slug": "lead-intake",
+      "process": "Lead Intake - Application Submission",
+      "sub_processes": [
+        {
+          "slug": "lead-intake-web-application",
+          "name": "Web Application",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Web Application supports Application Submission in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "lead-intake-broker-portal",
+          "name": "Broker Portal",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Broker Portal supports Application Submission in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "lead-intake-direct-sales-channel",
+          "name": "Direct Sales Channel",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Direct Sales Channel supports Application Submission in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "lead-intake-reverse-auction-aggregator",
+          "name": "Reverse Auction Aggregator",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Reverse Auction Aggregator supports Application Submission in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "pre-screening",
+      "process": "Pre-Screening - Eligibility & Appetite",
+      "sub_processes": [
+        {
+          "slug": "pre-screening-eligibility-check",
+          "name": "Eligibility Check",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Eligibility Check supports Eligibility & Appetite in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "pre-screening-appetite-match",
+          "name": "Appetite Match",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Appetite Match supports Eligibility & Appetite in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "pre-screening-decline-and-redirect",
+          "name": "Decline-and-redirect",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Decline-and-redirect supports Eligibility & Appetite in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "pre-screening-quick-quote-path",
+          "name": "Quick-quote Path",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Quick-quote Path supports Eligibility & Appetite in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "data-collection",
+      "process": "Data Collection - External Data Pulls",
+      "sub_processes": [
+        {
+          "slug": "data-collection-kyc-identity-verification",
+          "name": "KYC / Identity Verification",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "KYC / Identity Verification supports External Data Pulls in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "data-collection-credit-bureau-pull",
+          "name": "Credit Bureau Pull",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Credit Bureau Pull supports External Data Pulls in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "data-collection-medical-records-hipaa-compliant",
+          "name": "Medical Records (HIPAA-compliant)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Medical Records (HIPAA-compliant) supports External Data Pulls in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "data-collection-motor-vehicle-records-mvr",
+          "name": "Motor Vehicle Records (MVR)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Motor Vehicle Records (MVR) supports External Data Pulls in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "data-collection-clue-loss-history",
+          "name": "CLUE Loss History",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "CLUE Loss History supports External Data Pulls in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "data-collection-telematics-onboarding",
+          "name": "Telematics Onboarding",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Telematics Onboarding supports External Data Pulls in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "risk-assessment",
+      "process": "Risk Assessment - Multi-Source Risk Scoring",
+      "sub_processes": [
+        {
+          "slug": "risk-assessment-demographic-risk-scoring",
+          "name": "Demographic Risk Scoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Demographic Risk Scoring supports Multi-Source Risk Scoring in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "risk-assessment-behavioral-risk-scoring",
+          "name": "Behavioral Risk Scoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Behavioral Risk Scoring supports Multi-Source Risk Scoring in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "risk-assessment-catastrophe-exposure-geo",
+          "name": "Catastrophe Exposure (Geo)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Catastrophe Exposure (Geo) supports Multi-Source Risk Scoring in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "risk-assessment-credit-based-insurance-score",
+          "name": "Credit-based Insurance Score",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Credit-based Insurance Score supports Multi-Source Risk Scoring in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "risk-assessment-predictive-lapse-risk",
+          "name": "Predictive Lapse Risk",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Predictive Lapse Risk supports Multi-Source Risk Scoring in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "underwriting-review",
+      "process": "Underwriting Review - Decision Engine",
+      "sub_processes": [
+        {
+          "slug": "underwriting-review-auto-underwriting-stp",
+          "name": "Auto Underwriting (STP)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Auto Underwriting (STP) supports Decision Engine in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "underwriting-review-manual-underwriting-review",
+          "name": "Manual Underwriting Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Manual Underwriting Review supports Decision Engine in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "underwriting-review-senior-uw-referral",
+          "name": "Senior UW Referral",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Senior UW Referral supports Decision Engine in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "underwriting-review-reinsurance-referral-treaty-facultative",
+          "name": "Reinsurance Referral (treaty / facultative)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Reinsurance Referral (treaty / facultative) supports Decision Engine in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "pricing",
+      "process": "Pricing - Premium Calculation",
+      "sub_processes": [
+        {
+          "slug": "pricing-base-premium-calculation",
+          "name": "Base Premium Calculation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Base Premium Calculation supports Premium Calculation in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "pricing-dynamic-adjustment-telematics-behavior",
+          "name": "Dynamic Adjustment (telematics, behavior)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Dynamic Adjustment (telematics, behavior) supports Premium Calculation in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "pricing-discount-application",
+          "name": "Discount Application",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Discount Application supports Premium Calculation in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "pricing-surcharge-application",
+          "name": "Surcharge Application",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Surcharge Application supports Premium Calculation in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "pricing-rate-filing-compliance-check",
+          "name": "Rate-filing Compliance Check",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Rate-filing Compliance Check supports Premium Calculation in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "decision",
+      "process": "Decision - Decision Issuance",
+      "sub_processes": [
+        {
+          "slug": "decision-approve",
+          "name": "Approve",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Approve supports Decision Issuance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "decision-reject-with-reason-codes",
+          "name": "Reject (with reason codes)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Reject (with reason codes) supports Decision Issuance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "decision-refer-with-conditions",
+          "name": "Refer (with conditions)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Refer (with conditions) supports Decision Issuance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "decision-counter-offer",
+          "name": "Counter-offer",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Counter-offer supports Decision Issuance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "policy-issuance",
+      "process": "Policy Issuance - Binding & Delivery",
+      "sub_processes": [
+        {
+          "slug": "policy-issuance-policy-document-generation",
+          "name": "Policy Document Generation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Policy Document Generation supports Binding & Delivery in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "policy-issuance-id-card-issuance",
+          "name": "ID Card Issuance",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "ID Card Issuance supports Binding & Delivery in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "policy-issuance-welcome-kit-generation",
+          "name": "Welcome Kit Generation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Welcome Kit Generation supports Binding & Delivery in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "policy-issuance-policy-delivery-e-delivery-mail",
+          "name": "Policy Delivery (e-delivery / mail)",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Policy Delivery (e-delivery / mail) supports Binding & Delivery in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "portfolio-monitoring",
+      "process": "Portfolio Monitoring - In-force Surveillance",
+      "sub_processes": [
+        {
+          "slug": "portfolio-monitoring-risk-re-scoring",
+          "name": "Risk Re-scoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Risk Re-scoring supports In-force Surveillance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "portfolio-monitoring-loss-experience-monitoring",
+          "name": "Loss-experience Monitoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Loss-experience Monitoring supports In-force Surveillance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "portfolio-monitoring-renewal-risk-review",
+          "name": "Renewal Risk Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Renewal Risk Review supports In-force Surveillance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "portfolio-monitoring-mid-term-endorsement-review",
+          "name": "Mid-term Endorsement Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Mid-term Endorsement Review supports In-force Surveillance in Underwriting.",
+            "Inputs": "Primary inputs come from Underwriting systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Application Intake Agent, Document Verification Agent, Risk Scoring Agent, Pricing Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Underwriting.",
+            "KPIs": "Underwriting cycle time; STP rate; loss ratio; combined ratio",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    }
+  ]
+}

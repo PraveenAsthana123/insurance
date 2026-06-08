@@ -1,0 +1,758 @@
+{
+  "department_id": "fraud-siu",
+  "display_name": "Fraud / Special Investigations Unit (SIU)",
+  "owner": "Chief Fraud Officer",
+  "objective": "Detect + prevent insurance fraud across claims, application, and provider networks.",
+  "business_models": [
+    "B2C",
+    "B2B",
+    "B2E"
+  ],
+  "ai_priority": "Very High",
+  "roi_tier": "Very High",
+  "main_kpi": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+  "left_nav": [
+    {
+      "slug": "fraud-detection",
+      "process": "Fraud Detection - Multi-Layer Screening",
+      "sub_processes": [
+        {
+          "slug": "fraud-detection-rule-based-screening",
+          "name": "Rule-based Screening",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Rule-based Screening supports Multi-Layer Screening in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fraud-detection-ml-fraud-scoring",
+          "name": "ML Fraud Scoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "ML Fraud Scoring supports Multi-Layer Screening in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fraud-detection-network-graph-analysis",
+          "name": "Network / Graph Analysis",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Network / Graph Analysis supports Multi-Layer Screening in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fraud-detection-behavioral-anomaly",
+          "name": "Behavioral Anomaly",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Behavioral Anomaly supports Multi-Layer Screening in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "fraud-detection-external-watchlist-match",
+          "name": "External Watchlist Match",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "External Watchlist Match supports Multi-Layer Screening in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "triage",
+      "process": "Triage - Case Prioritization",
+      "sub_processes": [
+        {
+          "slug": "triage-priority-scoring",
+          "name": "Priority Scoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Priority Scoring supports Case Prioritization in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "triage-case-routing",
+          "name": "Case Routing",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Case Routing supports Case Prioritization in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "triage-investigator-assignment",
+          "name": "Investigator Assignment",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Investigator Assignment supports Case Prioritization in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "investigation",
+      "process": "Investigation - Active Case Work",
+      "sub_processes": [
+        {
+          "slug": "investigation-document-examination",
+          "name": "Document Examination",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Document Examination supports Active Case Work in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-interview",
+          "name": "Interview",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Interview supports Active Case Work in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-surveillance",
+          "name": "Surveillance",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Surveillance supports Active Case Work in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-medical-record-review",
+          "name": "Medical Record Review",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Medical Record Review supports Active Case Work in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-vendor-provider-audit",
+          "name": "Vendor / Provider Audit",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Vendor / Provider Audit supports Active Case Work in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "investigation-social-media-osint",
+          "name": "Social Media OSINT",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Social Media OSINT supports Active Case Work in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "decision",
+      "process": "Decision - Case Disposition",
+      "sub_processes": [
+        {
+          "slug": "decision-confirm-fraud",
+          "name": "Confirm Fraud",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Confirm Fraud supports Case Disposition in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "decision-confirm-legitimate",
+          "name": "Confirm Legitimate",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Confirm Legitimate supports Case Disposition in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "decision-inconclusive-refer-out",
+          "name": "Inconclusive / Refer Out",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Inconclusive / Refer Out supports Case Disposition in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "action",
+      "process": "Action - Outcome",
+      "sub_processes": [
+        {
+          "slug": "action-claim-denial",
+          "name": "Claim Denial",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Claim Denial supports Outcome in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "action-recovery-subrogation",
+          "name": "Recovery / Subrogation",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Recovery / Subrogation supports Outcome in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "action-law-enforcement-referral",
+          "name": "Law Enforcement Referral",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Law Enforcement Referral supports Outcome in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "action-provider-de-network",
+          "name": "Provider De-network",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Provider De-network supports Outcome in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "reporting",
+      "process": "Reporting - Regulatory & Industry",
+      "sub_processes": [
+        {
+          "slug": "reporting-nicb-reporting",
+          "name": "NICB Reporting",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "NICB Reporting supports Regulatory & Industry in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "reporting-state-doi-reporting",
+          "name": "State DOI Reporting",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "State DOI Reporting supports Regulatory & Industry in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "reporting-internal-reporting",
+          "name": "Internal Reporting",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Internal Reporting supports Regulatory & Industry in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "reporting-industry-anti-fraud-consortium",
+          "name": "Industry Anti-Fraud Consortium",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Industry Anti-Fraud Consortium supports Regulatory & Industry in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "prevention",
+      "process": "Prevention - Forward-looking Controls",
+      "sub_processes": [
+        {
+          "slug": "prevention-application-risk-scoring",
+          "name": "Application Risk Scoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Application Risk Scoring supports Forward-looking Controls in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "prevention-provider-audit",
+          "name": "Provider Audit",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Provider Audit supports Forward-looking Controls in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        },
+        {
+          "slug": "prevention-customer-behavioral-monitoring",
+          "name": "Customer Behavioral Monitoring",
+          "audiences": [
+            "b2c",
+            "b2b",
+            "b2e"
+          ],
+          "tabs": [
+            "Overview",
+            "Inputs",
+            "AI",
+            "Outputs",
+            "KPIs",
+            "Governance"
+          ],
+          "tab_content": {
+            "Overview": "Customer Behavioral Monitoring supports Forward-looking Controls in Fraud / Special Investigations Unit (SIU).",
+            "Inputs": "Primary inputs come from Fraud / Special Investigations Unit (SIU) systems, customer/broker channels, documents, and external insurance data feeds.",
+            "AI": "Relevant AI agents: Fraud Detection Agent, Anomaly Detection Agent, Graph / Network Analysis Agent, Behavioral Analysis Agent.",
+            "Outputs": "Outputs include workflow decisions, recommendations, explanations, audit rows, and role dashboard signals for Fraud / Special Investigations Unit (SIU).",
+            "KPIs": "Fraud detection rate; fraud savings; SIU referral conversion; investigation cycle time",
+            "Governance": "Tenant-scoped, role-scoped, PII-redacted by default, and audited per decision."
+          }
+        }
+      ]
+    }
+  ]
+}
