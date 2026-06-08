@@ -60,8 +60,9 @@ test.describe('Insurance process detail tabs', () => {
     await expect(page.getByRole('heading', { name: /Explanation methods/i })).toBeVisible();
 
     // FeedbackWidget present on every tab · per GLOBAL_INPUT_PERSISTENCE_POLICY
+    // aria-label='Thumbs up'/'Thumbs down' is the accessible name; visible text is "👍 Helpful"
     await expect(page.getByTestId('feedback-widget')).toBeVisible();
-    await expect(page.getByRole('button', { name: /Helpful/i })).toBeVisible();
-    await expect(page.getByRole('button', { name: /Needs work/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Thumbs up' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Thumbs down' })).toBeVisible();
   });
 });
