@@ -79,6 +79,23 @@ ALL_TOOLS=(
   "deepgram|Deepgram SDK|~10 MB|Streaming STT SaaS"
   "assemblyai|AssemblyAI SDK|~10 MB|Feature-rich STT SaaS"
   "speechbrain|SpeechBrain|~1 GB|OSS PyTorch speech toolkit"
+  "gimp|GIMP|~250 MB|OSS raster image editor"
+  "fooocus|Fooocus|~6 GB|Simplified SDXL UI"
+  "invokeai|InvokeAI|~5 GB|Production SDXL/Flux UI"
+  "stable-diffusion-webui|A1111 SD WebUI|~6 GB|Stable Diffusion UI · most extensions"
+  "comfyui|ComfyUI|~5 GB|Node-based SD workflow"
+  "limesurvey|LimeSurvey|~500 MB|OSS advanced survey tool"
+  "formbricks|Formbricks|~200 MB|In-product survey + NPS"
+  "surveyjs|SurveyJS|~10 MB|JS library form builder"
+  "ohmyform|OhMyForm|~200 MB|OSS Typeform alternative"
+  "yakforms|YakForms|~200 MB|Framasoft form builder"
+  "listmonk|Listmonk|~50 MB|High-perf newsletter manager"
+  "postal|Postal|~500 MB|OSS mail server"
+  "mailtrain|Mailtrain|~200 MB|OSS Node.js newsletter"
+  "keila|Keila|~200 MB|OSS Elixir Mailchimp-alt"
+  "sendportal|SendPortal|~200 MB|OSS Laravel email newsletter"
+  "mautic|Mautic|~500 MB|OSS marketing automation"
+  "dittofeed|Dittofeed|~200 MB|OSS customer engagement"
 )
 
 usage() {
@@ -125,7 +142,7 @@ while [[ $# -gt 0 ]]; do
     -h|--help) usage; exit 0 ;;
     --dry-run) DRY_RUN=1; shift ;;
     --core)   SELECTED_TOOLS=("core" "chrome"); INTERACTIVE=0; shift ;;
-    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands" "pipecat" "livekit" "coqui-tts" "piper-tts" "deepgram" "speechbrain" "retell-ai" "vapi" "cartesia" "elevenlabs" "assemblyai"); INTERACTIVE=0; shift ;;
+    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands" "pipecat" "livekit" "coqui-tts" "piper-tts" "deepgram" "speechbrain" "retell-ai" "vapi" "cartesia" "elevenlabs" "assemblyai" "gimp" "fooocus" "invokeai" "stable-diffusion-webui" "comfyui" "limesurvey" "formbricks" "surveyjs" "ohmyform" "yakforms" "listmonk" "postal" "mailtrain" "keila" "sendportal" "mautic" "dittofeed"); INTERACTIVE=0; shift ;;
     --tool)   SELECTED_TOOLS+=("$2"); INTERACTIVE=0; shift 2 ;;
     *) echo "Unknown arg: $1" >&2; usage; exit 1 ;;
   esac
@@ -433,6 +450,159 @@ for tool in "${SELECTED_TOOLS[@]}"; do
       pip_install_if_missing speechbrain
       log "  Verify: python -c 'import speechbrain; print(speechbrain.__version__)'"
       ;;
+    gimp)
+      log_step "gimp · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/gimp/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/gimp/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/gimp/deep/scripts/"
+      fi
+      ;;
+
+    fooocus)
+      log_step "fooocus · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/fooocus/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/fooocus/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/fooocus/deep/scripts/"
+      fi
+      ;;
+
+    invokeai)
+      log_step "invokeai · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/invokeai/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/invokeai/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/invokeai/deep/scripts/"
+      fi
+      ;;
+
+    stable-diffusion-webui)
+      log_step "stable-diffusion-webui · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/stable-diffusion-webui/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/stable-diffusion-webui/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/stable-diffusion-webui/deep/scripts/"
+      fi
+      ;;
+
+    comfyui)
+      log_step "comfyui · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/comfyui/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/comfyui/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/comfyui/deep/scripts/"
+      fi
+      ;;
+
+    limesurvey)
+      log_step "limesurvey · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/limesurvey/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/limesurvey/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/limesurvey/deep/scripts/"
+      fi
+      ;;
+
+    formbricks)
+      log_step "formbricks · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/formbricks/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/formbricks/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/formbricks/deep/scripts/"
+      fi
+      ;;
+
+    surveyjs)
+      log_step "surveyjs · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/surveyjs/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/surveyjs/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/surveyjs/deep/scripts/"
+      fi
+      ;;
+
+    ohmyform)
+      log_step "ohmyform · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/ohmyform/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/ohmyform/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/ohmyform/deep/scripts/"
+      fi
+      ;;
+
+    yakforms)
+      log_step "yakforms · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/yakforms/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/yakforms/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/yakforms/deep/scripts/"
+      fi
+      ;;
+
+    listmonk)
+      log_step "listmonk · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/listmonk/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/listmonk/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/listmonk/deep/scripts/"
+      fi
+      ;;
+
+    postal)
+      log_step "postal · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/postal/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/postal/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/postal/deep/scripts/"
+      fi
+      ;;
+
+    mailtrain)
+      log_step "mailtrain · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/mailtrain/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/mailtrain/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/mailtrain/deep/scripts/"
+      fi
+      ;;
+
+    keila)
+      log_step "keila · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/keila/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/keila/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/keila/deep/scripts/"
+      fi
+      ;;
+
+    sendportal)
+      log_step "sendportal · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/sendportal/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/sendportal/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/sendportal/deep/scripts/"
+      fi
+      ;;
+
+    mautic)
+      log_step "mautic · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/mautic/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/mautic/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/mautic/deep/scripts/"
+      fi
+      ;;
+
+    dittofeed)
+      log_step "dittofeed · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/dittofeed/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/dittofeed/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing at ai-agents/dittofeed/deep/scripts/"
+      fi
+      ;;
+
 
 
     *)

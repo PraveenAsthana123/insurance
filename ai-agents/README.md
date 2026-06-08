@@ -68,6 +68,52 @@ Per §46 (TTS consent + watermark) · §88.4 G18 (Voice channel) · §90 Block J
 | Multilingual feature-rich | AssemblyAI | (any) | Coqui XTTS-v2 | Pipecat |
 | Lowest latency (sub-200ms) | Deepgram | (any) | Cartesia Sonic | LiveKit |
 
+
+## Image generation · Survey/Forms · Email/Newsletter (operator-added 2026-06-08)
+
+17 additional tools across 3 categories:
+
+### Image Generation / Editing (5)
+```
+ai-agents/
+├── gimp/                  deep/ · OSS raster image editor          (GIMP)
+├── fooocus/               deep/ · Simplified SDXL UI               (image gen)
+├── invokeai/              deep/ · Production SDXL/Flux node graph  (image gen)
+├── stable-diffusion-webui/ deep/ · A1111 WebUI · most extensions   (image gen)
+└── comfyui/               deep/ · Node-based SD workflow           (image gen)
+```
+
+### Survey / Forms (5)
+```
+├── limesurvey/            deep/ · OSS advanced survey · 80+ Q types
+├── formbricks/            deep/ · In-product surveys + NPS · React
+├── surveyjs/              deep/ · JS library · React/Vue/Angular
+├── ohmyform/              deep/ · OSS Typeform alternative
+└── yakforms/              deep/ · Framasoft form builder
+```
+
+### Email / Newsletter / Marketing Automation (7)
+```
+├── listmonk/              deep/ · High-perf newsletter manager (Go)
+├── postal/                deep/ · OSS mail server (SendGrid alt)
+├── mailtrain/             deep/ · OSS Node.js newsletter
+├── keila/                 deep/ · OSS Elixir Mailchimp-alt · GDPR-friendly
+├── sendportal/            deep/ · OSS Laravel email newsletter
+├── mautic/                deep/ · OSS marketing automation
+└── dittofeed/             deep/ · OSS customer engagement (Customer.io alt)
+```
+
+### Stack decision matrix
+
+| Use case | Image gen | Forms/Survey | Email/Marketing |
+|---|---|---|---|
+| In-house · best quality | ComfyUI (custom workflows) | LimeSurvey | Mautic (marketing) + Postal (server) |
+| Simple · low-friction | Fooocus | Formbricks | Listmonk |
+| Embed in product | InvokeAI API | SurveyJS | Dittofeed |
+| GDPR-priority | (any OSS) | Yakforms (FR origin) | Keila (Elixir) |
+| Multi-channel marketing | InvokeAI | Formbricks | Mautic OR Dittofeed |
+| Highest scale newsletter | (n/a) | (n/a) | Listmonk |
+
 ## Per-tool deep/ structure (uniform)
 
 Every tool has the same skeleton:
