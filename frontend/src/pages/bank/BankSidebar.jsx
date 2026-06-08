@@ -1,41 +1,35 @@
-// Dark blue (navy) main menu — Business Hierarchy: Department → Business Domain → Main Process.
-// Per operator spec: all 3 levels visible in the main menu.
-// Font scale matched to BankSubMenu for visual parity.
+// Dark blue main menu: Department -> Business Domain -> Main Process -> AI Capability.
+// Domain IDs are lowercase in URLs and uppercase only in labels.
 
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import {
+  CANONICAL_DOMAINS,
+  aiCapabilitiesOf,
+  canonicalDomainId,
+  processesForDomain,
+  scenarioForDomain,
+  slugOf,
+} from '../../utils/insuranceNavigation';
 
-const DOMAINS = ['B2C', 'B2B', 'B2E'];
-
-// Shared font scale (must match BankSubMenu) — every level a UNIQUE size for clarity.
-const FS_SECTION_HEADER = 14;   // top-level header
-const FS_TOP_ROW        = 13;   // dept name
-const FS_MID_ROW        = 12;   // domain row, category title, cross-dept tools
-const FS_LEAF_ROW       = 11;   // process (main process)
-const FS_SUBPROC_ROW    = 10;   // sub-process (AI capability inside a process)
-const FS_SMALL_LABEL    =  9;   // hints, #ID badge, breadcrumb caption
-const FS_TINY_LABEL     =  8;   // UC-X.Y code, P badge
-
-// Process keys to use as "sub-process" items (blueprint has no sub_processes
-// field; use AI capabilities as the natural per-process drill-down).
-function subProcessesOf(p) {
-  const ai = Array.isArray(p?.ai) ? p.ai : [];
-  return ai.map((entry, i) => {
-    const label = entry?.ai_type || entry?.name || entry?.label || `AI #${i + 1}`;
-    const idSlug = (label || `ai${i}`).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    return { id: idSlug, label, kind: 'ai' };
-  });
-}
+const FS_SECTION_HEADER = 14;
+const FS_TOP_ROW = 13;
+const FS_MID_ROW = 12;
+const FS_LEAF_ROW = 11;
+const FS_AI_CAPABILITY_ROW = 10;
+const FS_SMALL_LABEL = 9;
+const FS_TINY_LABEL = 8;
 
 export function BankSidebar({ bp, collapsed, onToggle }) {
   const navigate = useNavigate();
   const params = useParams();
+  const activeDomain = canonicalDomainId(params.domain);
   const [filter, setFilter] = useState('');
   const [openDepts, setOpenDepts] = useState(() =>
     params.deptId ? { [params.deptId]: true } : {}
   );
   const [openDomains, setOpenDomains] = useState(() =>
-    params.deptId && params.domain ? { [`${params.deptId}:${params.domain}`]: true } : {}
+    params.deptId && activeDomain ? { [`${params.deptId}:${activeDomain}`]: true } : {}
   );
   const [openProcs, setOpenProcs] = useState({});
 
@@ -60,12 +54,13 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
     ? allDepts.filter((d) =>
         d.name.toLowerCase().includes(q) ||
         `dept ${d.id}`.includes(q) ||
-        (d.processes || []).some((p) => (p.name || '').toLowerCase().includes(q)))
+        (d.processes || []).some((p) =>
+          (p.name || '').toLowerCase().includes(q) ||
+          (p.ai || []).some((ai) => (ai.ai_type || '').toLowerCase().includes(q))))
     : allDepts;
 
   const toggleDept = (id) => setOpenDepts((p) => ({ ...p, [id]: !p[id] }));
   const toggleDomain = (key) => setOpenDomains((p) => ({ ...p, [key]: !p[key] }));
-  const slug = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
   return (
     <aside style={{
@@ -73,7 +68,6 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
       borderRight: '1px solid #1e40af',
       overflow: 'auto', padding: '12px 0',
     }}>
-      {/* Header */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 16px 12px', borderBottom: '1px solid #1e40af',
@@ -88,7 +82,6 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         }}>≡</button>
       </div>
 
-      {/* Cross-dept tools */}
       <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
         {[
           { to: '/bank/prompts',   icon: '💬', label: 'My input prompts',        color: '#60a5fa' },
@@ -111,13 +104,12 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ))}
       </div>
 
-      {/* Filter */}
       <div style={{ padding: '12px 16px' }}>
         <input
           type="search"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          placeholder="Filter dept / process…"
+          placeholder="Filter dept / process..."
           style={{
             width: '100%', padding: '6px 10px', fontSize: FS_MID_ROW,
             background: '#1e40af', color: '#fff',
@@ -130,13 +122,12 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         padding: '8px 16px 4px', fontSize: FS_SMALL_LABEL,
         color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.06em',
       }}>
-        Dept › Domain › Main Process · {depts.length} dept{depts.length === 1 ? '' : 's'}
+        Dept &gt; Domain &gt; Main Process &gt; AI · {depts.length} dept{depts.length === 1 ? '' : 's'}
       </div>
 
-      {/* 3-level tree */}
       {depts.map((d) => {
         const deptOpen = openDepts[d.id] || !!q || params.deptId === String(d.id);
-        const isActiveDept = params.deptId === String(d.id) && !params.domain;
+        const isActiveDept = params.deptId === String(d.id) && !activeDomain;
         return (
           <div key={d.id}>
             <button
@@ -165,23 +156,23 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
               )}
             </button>
 
-            {deptOpen && DOMAINS.map((dom) => {
-              const domKey = `${d.id}:${dom}`;
-              const domOpen = openDomains[domKey] ||
-                !!q ||
-                (params.deptId === String(d.id) && params.domain === dom);
+            {deptOpen && CANONICAL_DOMAINS.map((dom) => {
+              const domKey = `${d.id}:${dom.id}`;
+              const hasDomain = scenarioForDomain(d, dom.id);
+              const domainProcesses = processesForDomain(d.processes, d, dom.id);
+              const domOpen = openDomains[domKey] || !!q ||
+                (params.deptId === String(d.id) && activeDomain === dom.id);
               const isActiveDom = params.deptId === String(d.id) &&
-                                   params.domain === dom && !params.processId;
-              const hasDomain = d.channel_scenarios && d.channel_scenarios[dom];
+                activeDomain === dom.id && !params.processId;
               return (
-                <div key={dom} style={{ paddingLeft: 14 }}>
+                <div key={dom.id} style={{ paddingLeft: 14 }}>
                   <button
                     type="button"
                     onClick={() => {
                       toggleDomain(domKey);
-                      navigate(`/bank/dept/${d.id}/${dom}`);
+                      navigate(`/bank/dept/${d.id}/${dom.id}`);
                     }}
-                    title={hasDomain ? (hasDomain.label || dom) : `${dom} (no operator content)`}
+                    title={hasDomain ? (hasDomain.label || dom.label) : `${dom.label} (operator-pending)`}
                     style={{
                       width: '100%', textAlign: 'left',
                       padding: '8px 14px',
@@ -194,31 +185,36 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                     }}
                   >
                     <span style={{ width: 10, color: '#93c5fd' }}>{domOpen ? '▾' : '▸'}</span>
-                    <span>{dom}</span>
+                    <span>{dom.label}</span>
+                    <span style={{ marginLeft: 'auto', fontSize: FS_TINY_LABEL, opacity: 0.8 }}>
+                      {domainProcesses.length}
+                    </span>
                   </button>
 
-                  {domOpen && (d.processes || []).map((p, i) => {
-                    const procSlug = slug(p.name);
-                    const procKey = `${d.id}:${dom}:${procSlug}`;
+                  {domOpen && domainProcesses.map((p, i) => {
+                    const procSlug = slugOf(p.name);
+                    const procKey = `${d.id}:${dom.id}:${procSlug}`;
                     const isActive = params.deptId === String(d.id)
-                                  && params.domain === dom
-                                  && params.processId === procSlug;
+                      && activeDomain === dom.id
+                      && params.processId === procSlug;
                     const procOpen = openProcs[procKey] || !!q || isActive;
-                    const subs = subProcessesOf(p);
+                    const aiCaps = aiCapabilitiesOf(p);
                     return (
                       <div key={procSlug}>
                         <button
                           type="button"
                           onClick={() => {
                             setOpenProcs((s) => ({ ...s, [procKey]: !s[procKey] }));
-                            navigate(`/bank/dept/${d.id}/${dom}/${procSlug}`);
+                            navigate(`/bank/dept/${d.id}/${dom.id}/${procSlug}`);
                           }}
                           style={{
                             width: '100%', textAlign: 'left',
                             padding: '6px 14px 6px 32px',
                             background: isActive ? '#2563eb' : 'transparent',
+                            // Avoid border shorthand + borderLeft conflict (React TDZ warning).
+                            // Set per-side borders explicitly: only left has color.
+                            borderTop: 'none', borderRight: 'none', borderBottom: 'none',
                             borderLeft: isActive ? '3px solid #fff' : '3px solid transparent',
-                            border: 'none',
                             color: isActive ? '#fff' : '#dbeafe',
                             fontSize: FS_LEAF_ROW, fontWeight: isActive ? 600 : 400,
                             cursor: 'pointer',
@@ -231,46 +227,47 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                             UC-{d.id}.{i + 1}
                           </span>
                           <span style={{ flex: 1 }}>{p.name}</span>
-                          <span style={{ fontSize: FS_TINY_LABEL, opacity: 0.7 }}>({subs.length})</span>
+                          <span style={{ fontSize: FS_TINY_LABEL, opacity: 0.7 }}>({aiCaps.length})</span>
                         </button>
 
-                        {procOpen && subs.length === 0 && (
+                        {procOpen && aiCaps.length === 0 && (
                           <div style={{
                             padding: '4px 14px 6px 56px',
-                            color: '#94a3b8', fontSize: FS_SUBPROC_ROW, fontStyle: 'italic',
+                            color: '#94a3b8', fontSize: FS_AI_CAPABILITY_ROW, fontStyle: 'italic',
                           }}>
-                            (no sub-processes — backfill via blueprint)
+                            (no AI capabilities on this process)
                           </div>
                         )}
 
-                        {procOpen && subs.map((s) => {
-                          const subActive = params.subProcessId === s.id;
+                        {procOpen && aiCaps.map((capability) => {
+                          const capabilityActive = params.subProcessId === capability.id;
                           return (
                             <button
-                              key={s.id}
+                              key={capability.id}
                               type="button"
-                              onClick={() => navigate(`/bank/dept/${d.id}/${dom}/${procSlug}/${s.id}`)}
+                              onClick={() => navigate(`/bank/dept/${d.id}/${dom.id}/${procSlug}/${capability.id}`)}
                               style={{
                                 width: '100%', textAlign: 'left',
                                 padding: '5px 14px 5px 56px',
-                                background: subActive ? '#1d4ed8' : 'transparent',
-                                borderLeft: subActive ? '3px solid #fff' : '3px solid transparent',
-                                border: 'none',
-                                color: subActive ? '#fff' : '#bfdbfe',
-                                fontSize: FS_SUBPROC_ROW, fontWeight: subActive ? 600 : 400,
+                                background: capabilityActive ? '#1d4ed8' : 'transparent',
+                                // Avoid border shorthand + borderLeft conflict.
+                                borderTop: 'none', borderRight: 'none', borderBottom: 'none',
+                                borderLeft: capabilityActive ? '3px solid #fff' : '3px solid transparent',
+                                color: capabilityActive ? '#fff' : '#bfdbfe',
+                                fontSize: FS_AI_CAPABILITY_ROW, fontWeight: capabilityActive ? 600 : 400,
                                 cursor: 'pointer',
                                 display: 'flex', alignItems: 'center', gap: 6,
                               }}
                             >
                               <span style={{
                                 width: 4, height: 4, borderRadius: 4,
-                                background: subActive ? '#fff' : '#3b82f6',
+                                background: capabilityActive ? '#fff' : '#3b82f6',
                               }} />
-                              <span style={{ flex: 1 }}>{s.label}</span>
+                              <span style={{ flex: 1 }}>{capability.label}</span>
                               <span style={{
                                 fontSize: FS_TINY_LABEL, padding: '0 4px', borderRadius: 2,
                                 background: '#1e3a8a', color: '#dbeafe', fontWeight: 600,
-                              }}>{s.kind}</span>
+                              }}>{capability.kind}</span>
                             </button>
                           );
                         })}

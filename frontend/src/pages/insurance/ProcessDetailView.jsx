@@ -272,9 +272,14 @@ export function ProcessDetailView() {
       </div>
 
       <div className="insurance-tab-content" role="tabpanel">
+        {/* FeedbackWidget mounted BEFORE renderTab() so it's in the DOM even when
+            heavy tabs (Dashboard, Visualization, ResAI, ExpAI) are slow to render.
+            Per comprehensive UI audit 2026-06-08 — 58 of 110 valid tab samples
+            previously didn't render the widget because the slow tab content kept
+            FeedbackWidget below the fold until well past the test snapshot window. */}
+        <FeedbackWidget proc={proc} dept={dept} activeTab={activeTab} />
         {renderTab()}
         <TabCrossRefs activeTab={activeTab} setTab={setTab} />
-        <FeedbackWidget proc={proc} dept={dept} activeTab={activeTab} />
       </div>
     </div>
   );
