@@ -1332,3 +1332,607 @@ Every use case in Blocks A-F (33 scenarios) now has 12 mandatory subsections (G1
 
 **This is the operator's bar.** Any use case shipped without ALL 22 subsections is incomplete per §90 (codified below).
 
+
+---
+
+# Block J · Voice / Email / Campaign / Survey AI (operator-added 2026-06-08)
+
+> "voice ai, campaign, email, template AI email, campaign ai, survey AI"
+
+## J1. Voice AI · end-to-end
+
+**Use case** · Dept 9 CS · `voice-ai-end-to-end`: STT (Whisper) → intent classification → LLM agent → TTS (Coqui/Bark) · bidirectional voice with auto-detect language.
+
+**Arch**: Whisper-large-v3 (multi-lang STT) → DistilBERT intent → LLM (Llama-3.1-70B) → Coqui-TTS or Bark with consent flag · streaming WebSocket.
+
+**Data**: Common Voice (multi-lang) + LibriSpeech + simulated insurance call recordings.
+
+**HP**: VAD threshold · Whisper temperature 0.0 · beam search · TTS voice cloning gate.
+
+**Noise**: accents · background · code-switching · channel codec.
+
+**Edge cases**: silent caller · hot-mic · adversarial speech · profanity injection · age verification (consent for minors).
+
+**Pipelines**: streaming (real-time call) · batch (post-call transcript analysis) · async (voicemail triage).
+
+**Workflow tools**: Temporal for call-state · n8n for non-realtime · LangGraph for agent DAG.
+
+**Sched**: realtime · per-call audit cron `daily 09:00` · weekly accent-fairness audit.
+
+**Top 1%**: per-language WER ≤ baseline · TTS consent + watermark (per §46) · §76 5-pillar · §48 attention map on call flow.
+
+## J2. Email AI
+
+**Use case** · Dept 9 CS · `email-classification-routing`: BERT classifies inbound email → 50 intent classes → routes to specialist or auto-reply.
+
+**Arch**: DistilBERT classifier + LLM reply generator with style guardrail.
+
+**Data**: simulated email corpus + Enron public dataset for training NLU.
+
+**HP**: classification threshold · reply temperature · max_tokens.
+
+**Noise**: spam · multi-language · attachments · quoted threads.
+
+**Edge cases**: empty body · forwarded chains · multiple intents in one email.
+
+**Pipelines**: stream (IMAP push) · batch (nightly classifier retrain) · async (auto-reply queue).
+
+**Workflow**: n8n IMAP node → classifier → router · Temporal for stateful conversation tracking.
+
+**Sched**: realtime per email · `EMAIL-AI-RETRAIN` weekly.
+
+## J3. Template-AI Email Generation
+
+**Use case** · Dept 3 Sales · `personalized-email-template-ai`: LLM fills template variables (customer name · last interaction · product) → personalized cold email at scale.
+
+**Arch**: Jinja2 template + LLM (small SLM like Phi-3 for cost) · variable extraction from CRM · A/B variant generation.
+
+**Data**: CRM customer attributes + product catalog.
+
+**HP**: temperature 0.7 · template diversity · per-segment variant count.
+
+**Noise**: missing CRM fields · stale interactions · regulatory restrictions (CAN-SPAM · GDPR).
+
+**Edge cases**: deceased customer · do-not-contact flag · regulator opt-out.
+
+**Pipelines**: batch (mass campaign) · trigger-based (on-event personalization) · A/B (variant routing).
+
+**Workflow**: n8n or Mailchimp + LLM hook · campaign approval via §80 council.
+
+**Sched**: `CAMPAIGN-EMAIL-AI-DAILY` · A/B winner detection daily · weekly content QA.
+
+**Top 1%**: §76 fairness across cohorts · §82.7 unsubscribe rate monitoring · per-region compliance.
+
+## J4. Campaign AI
+
+**Use case** · Dept 3 Sales + Dept 22 Product · `cross-channel-campaign-ai`: orchestrates customer journey across email · SMS · push · ads · A/B tests · budget optimization across channels.
+
+**Arch**: bandit algorithm (contextual Thompson Sampling) for channel mix + LLM for content + RL for budget allocation.
+
+**Data**: CRM + ad spend data + conversion outcomes.
+
+**HP**: bandit exploration ε · RL discount factor · channel cost weights.
+
+**Noise**: attribution gap · cross-device user · channel-specific noise.
+
+**Edge cases**: ad fatigue · seasonality · regulatory holiday.
+
+**Pipelines**: realtime bid (RTB) · batch (daily reallocation) · stream (engagement signals).
+
+**Workflow**: n8n + Temporal · §64.40 10-layer agentic for autonomous budget shifts.
+
+**Sched**: hourly reallocation · `CAMPAIGN-AI-ROAS-DAILY` · weekly creative refresh.
+
+**Top 1%**: ROAS ≥ target · channel fairness · creative diversity · §76 audit per ad impression.
+
+## J5. Survey AI
+
+**Use case** · Dept 9 CS + Dept 18 Analytics · `adaptive-survey-ai`: LLM generates next question based on prior answers · BERTopic clusters open-text · sentiment per response.
+
+**Arch**: LLM adaptive next-question + topic-modeling on free-text + sentiment classifier.
+
+**Data**: prior survey responses + customer attributes.
+
+**HP**: question depth · LLM temperature · sentiment threshold.
+
+**Noise**: survey fatigue · sandbagging · multilingual.
+
+**Edge cases**: abusive responses · sensitive topics requiring HITL.
+
+**Pipelines**: realtime (in-survey) · batch (post-survey analysis) · stream (live dashboard).
+
+**Workflow**: Typeform + n8n + LangGraph for adaptive flow.
+
+**Sched**: realtime · `SURVEY-AI-WEEKLY-DIGEST` · monthly model recalibration.
+
+**Top 1%**: response rate ≥ baseline · NPS correlation · §76 fairness on question selection.
+
+---
+
+# G13-G18 · Additional mandatory subsections (operator-added 2026-06-08)
+
+In addition to G1-G12, EVERY use case in Blocks A-F-J MUST also include:
+
+## G13. Architecture diagram (mandatory)
+
+- Mermaid block diagram of full data + model + decision flow
+- Per-component versioning · scaling annotations · failure modes
+- Composes with §47 (C4 model L1-L7) · §86 (architecture docs standard)
+
+## G14. Edge case enumeration
+
+| Edge case | Detection | Response |
+|---|---|---|
+| Empty input | input validation | reject 400 |
+| Out-of-distribution | OOD detector | route to HITL |
+| Adversarial perturbation | detector | reject + alert SOC |
+| Missing dependency | health probe (per §47.8 3-probe) | circuit breaker · fallback |
+| Slow response | timeout | partial result + flag |
+| Concurrent updates | optimistic locking | retry · escalate |
+| Regulatory restriction (state-specific) | rule engine | gate decision |
+| PII in unexpected field | DLP scan | redact + audit |
+| Demographic edge group | fairness pre-check | gate + HITL |
+| Resource exhaustion | quota | back-pressure |
+
+## G15. Pipeline catalog (per use case)
+
+| Pipeline | Trigger | SLA | Components |
+|---|---|---|---|
+| **Ingestion** | webhook / cron / stream | < 1 min | source → raw table |
+| **Cleaning** | post-ingestion | < 5 min | raw → clean table (G5) |
+| **Feature** | post-cleaning | < 5 min | clean → features (G4) |
+| **Training** | weekly OR drift-triggered | < 4 hr | features → MLflow model |
+| **Evaluation** | post-training | < 30 min | model → metrics.json (§75) |
+| **Deployment** | post-eval | < 15 min | MLflow → serving |
+| **Inference (sync)** | per request | < 500 ms | features → prediction |
+| **Inference (batch)** | scheduled | < 30 min | bulk → predictions |
+| **Inference (stream)** | event | < 1 sec | streaming features → prediction |
+| **Audit ingest** | post-inference | < 5 sec | prediction → audit row (§87) |
+| **Vector ingest** | post-audit | < 15 min | audit → vector DB (per §90.5 cron) |
+| **Drift check** | hourly cron | < 5 min | live vs baseline → drift_metrics |
+| **Retrain trigger** | drift OR scheduled | < 15 min | trigger → retrain job |
+
+## G16. Inference modes (mandatory · 3 modes)
+
+Every use case MUST document how it serves predictions in ALL THREE modes:
+
+| Mode | When to use | Latency | Architecture |
+|---|---|---|---|
+| **Sync (request-response)** | UI-driven · per request | < 500 ms p95 | FastAPI + Triton/vLLM/MLflow serve |
+| **Batch (scheduled)** | nightly bulk · backfill | < 30 min for 1M | Celery + worker pool |
+| **Stream (event-driven)** | Kafka / Pub-Sub · real-time decisioning | < 1 sec | Faust / Flink / Spark streaming |
+
+**Sync gate**: any use case shipped to UI without sync mode = blocked.
+**Batch gate**: any use case w/ historical-data feature = needs batch backfill capability.
+**Stream gate**: any use case w/ time-sensitive decisioning = needs stream mode.
+
+## G17. Workflow tool (mandatory · choose 1+ per use case)
+
+| Tool | Best for | License |
+|---|---|---|
+| **Temporal** | durable execution · long-running goals · agent workflows | OSS Apache 2.0 |
+| **LangGraph** | LLM agent DAGs · short-running per-conversation | OSS MIT |
+| **n8n** | no-code automation · cross-SaaS integrations · email/CRM hooks | OSS / fair-source |
+| **Airflow** | ETL · scheduled batch · data pipelines | OSS Apache 2.0 |
+| **Argo Workflows** | k8s-native DAG · ML training pipelines | OSS Apache 2.0 |
+| **Celery + Beat** | simple Python tasks · cron · already in §65 default | OSS BSD |
+| **Step Functions** | AWS-native serverless workflows | AWS managed |
+| **Prefect** | data orchestration · modern Python-first | OSS Apache 2.0 |
+
+**Pattern**: orchestrators · queuing · workflow engines compose · don't replace. Use Celery for sub-second tasks · Temporal for durable steps · LangGraph for agent reasoning · n8n for cross-SaaS connectors.
+
+## G18. Communication channels (mandatory · for any user-facing use case)
+
+| Channel | Use case fit | Tools |
+|---|---|---|
+| **Email** | async · long-form · regulated comms | SES · SendGrid · Mailgun · n8n IMAP |
+| **SMS** | urgent · short · 2FA | Twilio · MessageBird · Plivo |
+| **Push** | mobile-first engagement | Firebase · OneSignal |
+| **Voice** | accessibility · age-stratified | Twilio Voice + Whisper + TTS (per J1) |
+| **Chat (in-app)** | interactive support | LangChain agent + WebSocket |
+| **Slack/Teams** | internal alerts · ops | webhook bots |
+| **Webhook** | system-to-system | Temporal signal · n8n trigger |
+| **Template AI Email** | personalized at scale | per J3 |
+| **Campaign multichannel** | coordinated journey | per J4 |
+| **Survey** | feedback · NPS · CSAT | per J5 |
+
+Every use case MUST declare which channels apply + ResAI consent + opt-out + accessibility (per §46 TTS + §76 ResAI).
+
+---
+
+# Roll-up · 53 mandatory use cases (was 48 · J-block added 5)
+
+| Block | Count | Theme |
+|---|---|---|
+| A · Zero-coverage | 5 | DL · CV-Cls · GAN · VAE · Content-Rec |
+| B · Low-coverage | 5 | CV-Seg · Collab-Rec · Anomaly · Claims · UW |
+| C · Architecture explicit | 5 | CNN · Transformer · LSTM · TFT · Autoencoder |
+| D · Missing scenarios | 18 | RL · GNN · Causal · Federated · Survival · ... |
+| E · Stacked additions | 10 | RLHF · Stat-AI · Probability-AI · ... |
+| F · Hybrid combinations | 5 | ML+RAG · DL+RAG · CV+RAG · ML+CV+NLP+RAG · Agentic+RAG+MCP+Workflow |
+| **J · Voice/Email/Campaign/Survey (NEW)** | **5** | **Voice AI · Email AI · Template-AI Email · Campaign AI · Survey AI** |
+| **TOTAL** | **53** | |
+
+Plus operator F-block expansion in [`HYBRID_USE_CASES_PER_DEPARTMENT.md`](HYBRID_USE_CASES_PER_DEPARTMENT.md): 94 per-dept × hybrid-type cells (5 types × 21 depts minus n/a).
+
+# Sub-section count update
+
+Every use case now has **22 + 6 = 28 mandatory subsections**:
+- 10 top-level (use-case · architecture · data · planning · HP · noise · sched · gates · §refs · domain)
+- G1-G12 (preprocessing · EDA · SMOTE · feature-eng · cleaning · quality · stat · subjective · sensitivity · ResAI · ExpAI · DB+VectorDB)
+- **G13 architecture diagram (Mermaid)**
+- **G14 edge-case enumeration**
+- **G15 pipeline catalog (13 pipelines per use case)**
+- **G16 inference modes (sync · batch · stream)**
+- **G17 workflow tool (Temporal · LangGraph · n8n · Airflow · etc.)**
+- **G18 communication channels (Email · SMS · Voice · Push · Chat · etc.)**
+
+Total mandatory cells per project: **53 use cases × 28 subsections = 1484 cells** (was 1056).
+
+
+---
+
+# Block K · Incident / Knowledge / Meeting / Email-deep / Screen-capture / CUA (operator-added 2026-06-08)
+
+## K1. Incident AI
+
+**Use case** · Dept 19 IT + Dept 15 ERM · `incident-ai-full-lifecycle`: detect · triage · diagnose · communicate · remediate · post-mortem · auto-generated runbook updates.
+
+**Arch**: ML severity score + RAG runbook retrieval + agentic incident commander (per §64.40) + Temporal durable workflow + post-mortem LLM.
+
+**Data**: PagerDuty/ServiceNow incident history + runbook corpus + post-mortem archive.
+
+**Pipelines**: stream (alert ingestion) · sync (operator queries) · batch (weekly trend) · async (post-mortem generation).
+
+**Channels**: Slack/Teams (war room) · SMS (on-call escalation) · Email (stakeholder update) · Dashboard (incident timeline).
+
+**Edge cases**: cascading failures · partial restoration · regulatory disclosure deadlines · multi-tenant blast-radius.
+
+**Top 1%**: MTTD < 5 min · MTTR < 30 min · post-mortem within 48h · §57.5 5-question runbook drives every incident.
+
+## K2. Knowledge AI
+
+**Use case** · all depts · `knowledge-ai-self-service`: org-wide RAG over all internal docs · Confluence · Sharepoint · Slack archives · meeting transcripts · code wikis.
+
+**Arch**: §79 7-pillar RAG (vector · graph · cache · reranker · monitor · gold-set · A1 eval) + multi-source ingestion + per-tenant access control.
+
+**Data**: every internal document repository with permission-aware indexing.
+
+**Pipelines**: stream (real-time ingestion as docs change) · batch (full re-index weekly) · sync (per query).
+
+**Channels**: Chat (Slack-bot) · in-app search · API for downstream apps.
+
+**Edge cases**: confidential docs · ABAC permissions · stale content · multi-language · regulator-only docs.
+
+**Top 1%**: §48.5 citation 100% · per-tenant isolation · ABAC enforced at retrieval (not just response) · §47.6 SOC2 CC6.1.
+
+## K3. Meeting AI
+
+**Use case** · all depts · `meeting-ai-end-to-end`: transcribe (Whisper) · diarize (pyannote) · summarize (LLM) · action-item extraction · assign owners · dashboard.
+
+**Arch**: Zoom/Teams recording → Whisper STT → pyannote speaker diarization → LLM summarizer → action-item NER → Jira/Asana writer (MCP) → audit row per §38.3.
+
+**Data**: meeting recordings · calendar · attendee org chart.
+
+**Pipelines**: stream (live transcription) · async (post-meeting summary) · batch (weekly digest).
+
+**Channels**: Email (post-meeting digest) · Slack (action items) · Calendar (auto-scheduled follow-ups) · Jira/Asana (tasks).
+
+**Edge cases**: bad audio · multilingual · whisper failures · multi-speaker overlap · privileged content (legal · HR) requiring HITL.
+
+**Top 1%**: §46 TTS consent equivalent for STT (recording consent banner) · §76 5-pillar (privacy especially) · §82.20 transparency.
+
+## K4. Email AI (deep · separate from J2 routing)
+
+**Use case** · all depts · `email-ai-full-stack`: priority scoring · auto-draft reply (with brand voice guardrail) · attachment understanding (OCR + classification) · thread summarization for context.
+
+**Arch**: priority classifier · thread embedder · LLM reply generator (per J3 template-AI) · attachment processor (TrOCR + classifier) · CRM/case writer (MCP).
+
+**Data**: Email corpus · brand voice exemplars · attachment exemplars.
+
+**Pipelines**: stream (IMAP push) · sync (operator queries) · batch (nightly priority recalibration) · async (auto-reply queue with HITL).
+
+**Channels**: Email · Slack escalation · CRM auto-update · dashboard.
+
+**Edge cases**: legal hold · regulatory email (no AI reply allowed) · personal vs business email · adversarial phishing.
+
+**Top 1%**: per-tenant brand voice · §76 5-pillar · auto-reply HITL gate for any regulated · sender impersonation detection.
+
+## K5. CUA · Screen Capture · Web-level operations (per §64.40 + §64.44)
+
+**Use case** · all depts · `cua-screen-task-automation`: Computer-Using Agent automates UI tasks where no API exists. Examples: extract data from legacy CRM · fill out underwriter portal · submit regulatory form · monitor dashboard.
+
+**Arch**: Stagehand (or Browser-Use) + Claude Computer Use (Anthropic) + Temporal workflow + screenshot capture + step-replay audit.
+
+**Data**: legacy app screenshots · DOM snapshots · task recordings (for HITL teaching).
+
+**Pipelines**: sync (per request · operator-triggered) · batch (overnight scheduled) · async (background monitoring).
+
+**Channels**: web (Browserbase) · desktop (RPA fallback) · mobile (via emulator) · all w/ per-action screenshot.
+
+**Edge cases**: CAPTCHAs · MFA challenges · UI redesign breaks agent · adversarial DOM · accessibility issues · data-loss prevention (no copy out of legacy).
+
+**Top 1%**: per §64.40 10-layer · per §64.43 #1 hub-spoke + #5 blackboard · per §64.44 status matrix (Stagehand 🟡 stub · Browser-Use ❌ install · Claude CUA paid). Mandatory: step-replay for every action · scope check pre-execution (§42 gated for prod) · per-action screenshot saved for audit.
+
+---
+
+# Per-department Automation List
+
+> Per operator "list of Automation in each department". Each dept gets a top-10 automation roster. Format: name · type (ML/DL/RPA/RAG/agentic) · ROI tier.
+
+## Dept 1 · Product Management
+1. Competitor pricing scrape (CUA · K5) · M
+2. Market research summary (Knowledge AI · K2) · H
+3. Roadmap risk score (ML) · M
+4. Feature voting analyzer (NLP) · L
+5. Launch readiness checker (RAG) · M
+6. Stakeholder comms drafter (Email AI · K4) · M
+7. Demand forecast (TS-DL) · H
+8. Product analytics dashboard (Analytics) · H
+9. A/B variant generator (Template AI · J3) · M
+10. Product backlog auto-grooming (Knowledge AI · agentic) · L
+
+## Dept 3 · Sales & Distribution
+1. Lead scoring (ML · F1 ML+RAG) · H
+2. Email sequencing (Template AI · J3) · H
+3. CRM auto-update (Email AI · K4) · H
+4. Pipeline forecast (TS-DL) · H
+5. Cross-sell next-best-action (Rec-hybrid) · H
+6. Sales call analytics (Meeting AI · K3) · M
+7. Quote generation (RAG + LLM) · H
+8. Renewal risk score (ML) · H
+9. Territory optimizer (Optimization) · M
+10. Broker performance dashboard (Analytics) · M
+
+## Dept 4 · Underwriting
+1. Auto-UW decision (ML · F1 hybrid) · H
+2. Property photo class (DL · A2 · F2) · H
+3. Risk score with reg-citations (Hybrid · F1) · H
+4. Counterfactual denial (CF · D15) · H
+5. Pricing causal (Causal · D3) · H
+6. Form OCR (Deep OCR · D16) · H
+7. Reg compliance check (RAG) · H
+8. Field-inspector report agent (Agentic) · M
+9. Renewal pricing (Bayesian · E3) · M
+10. Adverse-action letter generator (Template AI · J3) · M
+
+## Dept 5 · Policy Administration
+1. Policy issuance LLM (ML+RAG · F1 variant) · H
+2. Signature verification (DL · F2 variant) · H
+3. Endorsement processing (NLP + OCR) · H
+4. Policy doc segmentation (CV · F3 variant) · M
+5. Renewal automation (agentic) · H
+6. Cancellation processing (workflow) · M
+7. Reinstatement decisioning (ML) · M
+8. Compliance gate (RAG) · H
+9. Email confirmation (Email AI) · M
+10. Customer self-service portal (knowledge AI + chatbot) · H
+
+## Dept 6 · Billing & Collections
+1. Payment failure prediction (LSTM · C3) · H
+2. Dunning sequence orchestration (agentic · K1-style) · H
+3. Check tamper detection (CV) · M
+4. Auto-credit-memo drafter (LLM + RAG) · M
+5. Lockbox OCR (Deep OCR) · H
+6. Anomaly detection on journal (B3) · H
+7. Collections call analytics (Voice AI · J1) · M
+8. Customer self-pay portal (chatbot) · M
+9. Invoice line-item extraction (CV · H3 variant) · M
+10. Forecasting collection rate (TS-DL) · M
+
+## Dept 7 · Claims
+1. Photo damage triage (DL · A1 · F2) · H
+2. FNOL chatbot (NLP) · H
+3. Adjudication letter generator (LLM + RAG · F1) · H
+4. Total-loss determination (B4) · H
+5. Fraud red-flag scoring (ML) · H
+6. Call analytics (Voice AI · J1) · M
+7. Repair-shop recommendation (Rec) · M
+8. Settlement amount calculator (Hybrid · F4) · H
+9. Subrogation opportunity detector (RAG) · M
+10. Reserve estimation (Bayesian · E3) · H
+
+## Dept 8 · SIU
+1. Fraud ring detection (GNN · D2) · H
+2. Document tamper detection (DL) · H
+3. Synthetic fraud augmentation (GAN · A3) · M
+4. Network analytics dashboard (Analytics) · M
+5. Investigator workflow agent (Agentic · K1-style) · M
+6. Interview transcript NLU (NLP) · M
+7. SIU policy retrieval (RAG) · M
+8. Risk-tier escalation (ML) · M
+9. Adverse-action notifier (Template AI · J3) · M
+10. Case-prioritization (ML) · M
+
+## Dept 9 · Customer Service / Contact Center
+1. Voice AI end-to-end (J1) · H
+2. Intent classification (NLU · D17) · H
+3. Skill routing (Collab · B2) · H
+4. Chatbot (NLP-chatbot) · H
+5. RLHF chatbot tuning (RLHF · E1) · M
+6. Email AI routing (J2) · H
+7. Meeting AI for QA (K3) · M
+8. Knowledge AI self-service (K2) · H
+9. Survey AI (J5) · M
+10. Customer churn predict (LSTM) · M
+
+## Dept 10 · Actuarial
+1. Statistical AI hypothesis engine (E2) · H
+2. Bayesian loss-cost (E3) · H
+3. Mortality table OCR (TrOCR) · M
+4. Loss ratio forecast (TS-DL · D14) · H
+5. Reserve calc with citations (RAG) · M
+6. Model comparison dashboard (Analytics) · M
+7. Filing prep automation (RAG + agentic) · H
+8. Rate-change impact simulator (MPC · E10) · M
+9. Stochastic modeling (Probability AI · E3) · M
+10. Regulatory comment auto-drafter (Template AI · J3) · M
+
+## Dept 11 · Reinsurance
+1. TFT catastrophe forecast (C4) · H
+2. Treaty optimization (RL · D1) · H
+3. Survival re-activation (Survival · D5) · M
+4. MDN multi-modal loss (E5) · M
+5. Satellite cat detection (DL · F2 variant) · M
+6. Exposure dashboards (Analytics) · M
+7. Treaty allocation agent (Agentic · K1-style) · H
+8. Cat-bond pricing (Bayesian · E3) · M
+9. Retrocession optimization (Optimization) · M
+10. Treaty renewal workflow (agentic) · M
+
+## Dept 12 · Compliance
+1. Regulation reranking (D12) · H
+2. Compliance score with reg-RAG (F1 variant) · H
+3. Filing prep (RAG + agentic) · H
+4. Reg-change monitoring (Knowledge AI · K2 variant) · H
+5. Audit trail review (LLM + RAG) · M
+6. Conduct risk score (ML) · M
+7. Sanctions screening (RPA + KG) · H
+8. Whistleblower triage (NLP) · M
+9. Training-content generation (Template AI · J3) · L
+10. Regulatory comms drafter (Template AI) · M
+
+## Dept 13 · Legal
+1. Contract clause classification (Transformer · C2) · H
+2. Precedent retrieval (Reranker · D12) · H
+3. Risk score with caselaw (F1 variant) · H
+4. Knowledge graph reasoner (D8) · H
+5. Contract redline (NER + RAG) · H
+6. Document review agent (Agentic) · H
+7. Legal research summary (Knowledge AI · K2) · H
+8. NDA auto-drafter (Template AI · J3) · M
+9. Counsel-meeting AI (K3) · M
+10. Settlement-letter generator (LLM) · M
+
+## Dept 14 · Finance
+1. Expense classification (F1 variant) · H
+2. Receipt OCR (TrOCR) · H
+3. Anomaly on GL (B3) · H
+4. Revenue forecast (TS-DL · D14) · H
+5. Month-end close agent (Agentic · K-style) · H
+6. Variance commentary drafter (Template AI) · M
+7. MPC portfolio (E10) · M
+8. Audit doc retrieval (RAG) · M
+9. Treasury optimization (RL) · M
+10. Investor-relations summary (Meeting AI · K3) · M
+
+## Dept 15 · ERM
+1. Risk register scoring (ML) · H
+2. Emerging-risk monitoring (Knowledge AI) · H
+3. Capital allocation (Optimization + RL) · H
+4. Stress-test sim (Bayesian) · H
+5. Risk register agent (Agentic) · M
+6. KRI dashboards (Analytics) · M
+7. ORSA report drafter (Template AI) · M
+8. Strategic-decision causal (D3) · M
+9. Risk-app questionnaire AI (Survey AI · J5) · L
+10. Board pack auto-generator (Knowledge AI + Template AI) · M
+
+## Dept 16 · HR
+1. Attrition prediction (LSTM) · H
+2. Resume screening (NLP + DL) · H
+3. Interview-scheduling agent (Agentic) · M
+4. JD auto-drafter (Template AI · J3) · M
+5. Pay equity audit (Fairlearn · §76) · H
+6. Survey AI (J5) · M
+7. Performance review summarizer (LLM) · M
+8. Learning recommendations (Rec-hybrid) · M
+9. Voice-of-employee analytics (NLP + topic) · M
+10. HR-bot for self-service (K2 variant) · M
+
+## Dept 17 · Procurement
+1. Vendor risk score (F1 variant) · H
+2. Invoice OCR match (F2 variant) · H
+3. RFP analysis (Knowledge AI) · H
+4. Contract review (D8) · H
+5. Spend analytics (Analytics + ML) · H
+6. Vendor onboarding agent (Agentic) · M
+7. PO auto-generation (Template AI) · M
+8. Sanctions screening (RPA + KG) · H
+9. Inventory forecast (TS-DL) · M
+10. Sourcing AI (multimodal · F4 variant) · M
+
+## Dept 18 · Analytics
+1. Self-supervised customer embedding (D6) · H
+2. Vector search across data (D11) · H
+3. Topic modeling (D13) · H
+4. Reranker (D12) · M
+5. Adversarial robustness (E8) · M
+6. Conformal prediction (E4) · M
+7. Bayesian optimization HP (E6) · M
+8. Insight auto-generation (Template AI + Analytics) · M
+9. Anomaly on KPIs (B3 variant) · M
+10. Data-quality scoring (G6 service) · H
+
+## Dept 19 · IT / Cloud / Infrastructure
+1. Incident AI full-lifecycle (K1) · H
+2. Knowledge AI for runbooks (K2) · H
+3. Anomaly on infra metrics (B3 variant) · H
+4. Auto-remediation agent (Agentic · K1) · H
+5. Capacity planning (TS-DL + optimization) · H
+6. Change-risk predict (ML) · M
+7. ITSM ticket-routing (NLU · D17 variant) · M
+8. Cloud-cost optimization (RL · D1 variant) · H
+9. Network anomaly (VAE · A4) · H
+10. CUA for legacy systems (K5) · H
+
+## Dept 20 · Cybersecurity
+1. Network anomaly VAE (A4) · H
+2. Adversarial robustness eval (E8) · H
+3. Fraud ring GNN (D2) · H
+4. Phishing detection (NLP + CV) · H
+5. Threat intel RAG (K2 variant) · H
+6. Identity & biometric AI (multimodal) · H
+7. SOAR agent (Agentic) · H
+8. Incident response workflow (K1) · H
+9. Compliance scoring (ML) · M
+10. Synthetic attack augmentation (GAN · A3 variant) · M
+
+## Dept 21 · Sales / Distribution / Broker / Agency Partner
+1. Broker quota predict (F1 variant) · H
+2. Partner onboarding agent (Agentic) · H
+3. Agent productivity dashboards (Analytics) · M
+4. KYC photo verification (F2 variant) · H
+5. Pipeline forecast (TS-DL) · H
+6. Partner survey AI (J5) · M
+7. Broker comms drafter (Template AI · J3) · M
+8. Recommendation hybrid (next-best-action) · H
+9. Partner-call analytics (Voice AI · J1) · M
+10. CUA for broker portals (K5) · M
+
+## Dept 22 · Product Innovation
+1. Feature prioritization (ML) · H
+2. Customer feedback topic modeling (D13) · H
+3. Prototype screenshot AI (CV) · M
+4. Discovery agent (Agentic) · M
+5. PRD auto-drafter (Template AI · J3) · M
+6. Customer-research summary (Knowledge AI) · H
+7. Innovation pipeline (Knowledge AI) · M
+8. A/B variant gen (J3 variant) · M
+9. Roadmap risk (ML) · M
+10. Innovation-meeting AI (K3) · M
+
+---
+
+## Total · 53 + 5 (K-block) = 58 use-case scenarios + 21 × 10 = 210 per-dept automations
+
+| Block | # |
+|---|---|
+| A · Zero-coverage | 5 |
+| B · Low-coverage | 5 |
+| C · Architecture | 5 |
+| D · Missing scenarios | 18 |
+| E · Stacked additions | 10 |
+| F · Hybrid (canonical) | 5 |
+| J · Voice/Email/Campaign/Survey | 5 |
+| K · Incident/Knowledge/Meeting/Email-deep/CUA | 5 |
+| **Total** | **58 canonical scenarios** |
+
+Plus:
+- **94 hybrid × dept cells** in HYBRID_USE_CASES_PER_DEPARTMENT.md
+- **210 per-dept automation entries** (21 depts × 10 each)
+- **28 mandatory subsections** per use case (G1-G18)
+- **53 × 28 = 1624 cells per project**
+
+This is the §90 bar.
+
