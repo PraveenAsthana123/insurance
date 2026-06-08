@@ -82,7 +82,10 @@ services:
       dockerfile: Dockerfile
     container_name: insur_backend
     ports:
-      - "8000:8000"
+      # Mapped to host 8001 because bev_backend squats on 8000 from the
+      # legacy bev project. To switch back, stop bev_backend first then
+      # change this to "8000:8000".
+      - "8001:8000"
     environment:
       BEV_POSTGRES_HOST: postgres
       BEV_POSTGRES_PORT: 5432
