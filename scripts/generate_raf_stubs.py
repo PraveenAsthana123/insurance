@@ -322,6 +322,8 @@ def main() -> int:
                         "or slug. Repeatable. Combine with --force to refresh.")
     p.add_argument("--list", action="store_true",
                    help="list all scenarios grouped by problem×modality and exit")
+    p.add_argument("--summary", action="store_true",
+                   help="brief problem×modality count")
     args = p.parse_args()
 
     if args.list:
@@ -337,6 +339,17 @@ def main() -> int:
                 print(f"    {problem.lower()}-{modality.lower()}-{idx:02d}-{slug:<35} dept={dept_id}")
             counts[problem] += len(items)
         print(f"\n  total: {len(SCENARIOS)} scenarios · {dict(counts)}")
+        return 0
+
+    if args.summary:
+        from collections import Counter
+        counts: dict[tuple[str, str], int] = Counter()
+        for problem, modality, idx, slug, summary, dept_id in SCENARIOS:
+            counts[(problem, modality)] += 1
+        print(f"  RAF summary · 3 problems × 3 modalities:")
+        for (problem, modality), count in sorted(counts.items()):
+            print(f"    {PROBLEM_NAME[problem]} × {MODALITY_NAME[modality]:<10} · {count}")
+        print(f"  total: {len(SCENARIOS)} scenarios")
         return 0
 
     only_match: list[str] = []

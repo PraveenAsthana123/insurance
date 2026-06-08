@@ -517,6 +517,8 @@ def main() -> int:
                         "Combine with --force to refresh.")
     p.add_argument("--list", action="store_true",
                    help="list all use-case slugs and exit")
+    p.add_argument("--summary", action="store_true",
+                   help="brief block-count summary")
     args = p.parse_args()
 
     if args.list:
@@ -528,6 +530,15 @@ def main() -> int:
             for slug, dept_id, snippet in by_block[block_id]:
                 print(f"    {block_id.lower()}-{slug:<48} dept={dept_id}")
         print(f"\n  total: {len(USE_CASES)} use cases across {len(by_block)} blocks")
+        return 0
+
+    if args.summary:
+        by_block = {}
+        for block_id, slug, summary, dept_id in USE_CASES:
+            by_block[block_id] = by_block.get(block_id, 0) + 1
+        for block_id in sorted(by_block):
+            print(f"  Block {block_id}: {by_block[block_id]} use cases")
+        print(f"  total: {len(USE_CASES)}")
         return 0
 
     # Resolve --only filters

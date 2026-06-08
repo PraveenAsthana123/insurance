@@ -670,6 +670,8 @@ def main() -> int:
                    help="show available file types and exit")
     p.add_argument("--diff", action="store_true",
                    help="show unified diff of what would change vs disk (no write)")
+    p.add_argument("--summary", action="store_true",
+                   help="brief block-count summary (smaller than --list-types)")
     args = p.parse_args()
 
     if args.list_types:
@@ -677,6 +679,10 @@ def main() -> int:
         for fname in FILE_GENERATORS.keys():
             short = fname.replace("HOLY_", "").replace(".md", "").lower().replace("_", "-")
             print(f"    {fname:<28} short: {short}")
+        return 0
+
+    if args.summary:
+        print(f"  scaffold_dept_artifacts.py · {len(CANONICAL_DEPTS)} depts × {len(FILE_GENERATORS)} files = {len(CANONICAL_DEPTS) * len(FILE_GENERATORS)} cells")
         return 0
 
     # Resolve --only to FILE_GENERATORS keys
