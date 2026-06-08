@@ -2171,3 +2171,61 @@ This is the §90 final bar after operator's 2026-06-08 stacked additions.
 
 Total blocks now: A · B · C · D · E · F · J · K · L · M · **N (NEW)** = **80 scenarios** (was 75 · +5 N variations).
 
+
+---
+
+## L13 · Banner AI (operator-added)
+
+**Use case** · Dept 3 Sales + Dept 22 Product Innovation · `banner-ai-generator`: dynamic visual banner generation · per-cohort variants · A/B winner detection · multi-channel (Email · Web · Ads · Social · Push).
+
+**Arch**: SDXL / Flux for image gen + LLM for copy + template engine + brand-voice guardrail + C2PA watermarking + accessibility checker.
+
+**Pipelines**:
+- **batch** · nightly mass production for campaigns
+- **sync** · operator triggers per-cohort variant
+- **stream** · event-driven per-customer-milestone
+
+**Channels** · Email · Web · Ads · Social · Push · In-app.
+
+**Edge cases** · brand-tone drift · accessibility WCAG AA · regulatory advertising rules · trademark · per-region compliance.
+
+**Top 1%** · §76 5-pillar · §82.21 Secure AI (C2PA + image watermark MANDATORY · per §76 voice-extends-to-all-AI-gen) · §48 explainability (why this banner for this cohort) · §76 fairness across cohorts · A11Y validator inline.
+
+## L14 · Contact AI (operator-added)
+
+**Use case** · all depts · `contact-ai-management`: enrichment · deduplication · routing · scoring · segmentation. Distinct from contact CENTER (which is conversational) — this is contact MANAGEMENT (CRM).
+
+**Arch**: ML-based entity resolution + LLM for narrative enrichment + GNN for relationship graph + bandit for routing + per-tenant scoping.
+
+**Pipelines**:
+- **batch** · nightly dedup + enrichment sweep
+- **sync** · per-record CRUD with realtime score
+- **stream** · webhook on new inbound contact
+
+**Channels** · CRM UI · API · Slack notifications · in-app.
+
+**Edge cases** · cross-tenant data leakage (per §41.3) · duplicate-but-different (e.g., John Smith) · stale records · GDPR right-to-be-forgotten · privacy-restricted data fields.
+
+**Top 1%** · §41.3 multi-tenant isolation MANDATORY · §76 RAI 5-pillar (PII as biometric · consent record per contact) · §82.7 drift on enrichment quality · §38.3 audit row per CRUD · GDPR delete propagation.
+
+---
+
+## Updated block summary
+
+| Block | Count | Scope |
+|---|---|---|
+| A · Zero-coverage | 5 |
+| B · Low-coverage | 5 |
+| C · Architecture explicit | 5 |
+| D · Missing scenarios | 18 |
+| E · Stacked additions | 10 |
+| F · Hybrid combinations | 5 |
+| J · Voice/Email/Campaign/Survey | 5 |
+| K · Incident/Knowledge/Meeting/Email-deep/CUA | 5 |
+| L · Digital Marketing (12 → 14) | **14 (+2)** |
+| M · Foundational ML | 5 |
+| N · WebLLM+CDP+RAG+LangGraph | 5 |
+| **TOTAL CANONICAL** | **82 scenarios** (was 80) |
+
+L13 (Banner AI) + L14 (Contact AI) are MANDATORY per project per §64.13 (digital marketing block) + §64.22 (contact management block).
+

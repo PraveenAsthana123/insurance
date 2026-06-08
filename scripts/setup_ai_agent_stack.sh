@@ -105,6 +105,8 @@ ALL_TOOLS=(
   "spec-kit|Spec-Kit|~20 MB|GitHub spec-driven framework"
   "superpowers|Anthropic Superpowers|~10 MB|Claude Code skill plugin marketplace"
   "openspec|OpenSpec|~20 MB|Open spec tooling for agent contracts"
+  "banner-ai|Banner AI (composite)|composite|Image gen + LLM + template + C2PA · §90 L13"
+  "contact-ai|Contact AI (composite)|composite|CRM · entity resolution + routing · §90 L14"
 )
 
 usage() {
@@ -151,7 +153,7 @@ while [[ $# -gt 0 ]]; do
     -h|--help) usage; exit 0 ;;
     --dry-run) DRY_RUN=1; shift ;;
     --core)   SELECTED_TOOLS=("core" "chrome"); INTERACTIVE=0; shift ;;
-    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands" "pipecat" "livekit" "coqui-tts" "piper-tts" "deepgram" "speechbrain" "retell-ai" "vapi" "cartesia" "elevenlabs" "assemblyai" "gimp" "fooocus" "invokeai" "stable-diffusion-webui" "comfyui" "limesurvey" "formbricks" "surveyjs" "ohmyform" "yakforms" "listmonk" "postal" "mailtrain" "keila" "sendportal" "mautic" "dittofeed" "matomo" "metabase" "activepieces" "mixpost" "gsd" "bmad" "spec-kit" "superpowers" "openspec"); INTERACTIVE=0; shift ;;
+    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands" "pipecat" "livekit" "coqui-tts" "piper-tts" "deepgram" "speechbrain" "retell-ai" "vapi" "cartesia" "elevenlabs" "assemblyai" "gimp" "fooocus" "invokeai" "stable-diffusion-webui" "comfyui" "limesurvey" "formbricks" "surveyjs" "ohmyform" "yakforms" "listmonk" "postal" "mailtrain" "keila" "sendportal" "mautic" "dittofeed" "matomo" "metabase" "activepieces" "mixpost" "gsd" "bmad" "spec-kit" "superpowers" "openspec" "banner-ai" "contact-ai"); INTERACTIVE=0; shift ;;
     --tool)   SELECTED_TOOLS+=("$2"); INTERACTIVE=0; shift 2 ;;
     *) echo "Unknown arg: $1" >&2; usage; exit 1 ;;
   esac
@@ -690,6 +692,24 @@ for tool in "${SELECTED_TOOLS[@]}"; do
         log "  ✗ install.sh missing at ai-agents/openspec/deep/scripts/"
       fi
       ;;
+    banner-ai)
+      log_step "banner-ai · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/banner-ai/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/banner-ai/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing"
+      fi
+      ;;
+
+    contact-ai)
+      log_step "contact-ai · per-tool install"
+      if [ -x "$REPO_ROOT/ai-agents/contact-ai/deep/scripts/install.sh" ]; then
+        DRY_RUN=${DRY_RUN} run_cmd bash "$REPO_ROOT/ai-agents/contact-ai/deep/scripts/install.sh"
+      else
+        log "  ✗ install.sh missing"
+      fi
+      ;;
+
 
 
 
