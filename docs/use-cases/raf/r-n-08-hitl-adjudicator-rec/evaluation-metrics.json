@@ -70,5 +70,7 @@
     "formula": "per \u00a777",
     "current": null,
     "target": null
-  }
+  },
+  "classical_flavor": "item-based",
+  "flavor_reference": "../../../RECOMMENDER_FLAVORS_PER_DEPT.md"
 }
