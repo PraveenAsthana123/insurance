@@ -659,9 +659,44 @@ FILE_GENERATORS = {
 
 def main() -> int:
     p = argparse.ArgumentParser()
-    p.add_argument("--force", action="store_true")
+    p.add_argument("--force", action="store_true",
+                   help="overwrite existing files")
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--only", action="append", default=[],
+                   help="only regenerate specific file types (repeatable). "
+                        "Names can be full (HOLY_FRAUD.md) or short (fraud · anomaly · flow). "
+                        "Combine with --force to refresh schema-shifted files.")
+    p.add_argument("--list-types", action="store_true",
+                   help="show available file types and exit")
     args = p.parse_args()
+
+    if args.list_types:
+        print("  Available file types (short form OK):")
+        for fname in FILE_GENERATORS.keys():
+            short = fname.replace("HOLY_", "").replace(".md", "").lower().replace("_", "-")
+            print(f"    {fname:<28} short: {short}")
+        return 0
+
+    # Resolve --only to FILE_GENERATORS keys
+    selected: set[str] | None = None
+    if args.only:
+        selected = set()
+        for raw in args.only:
+            key = raw.strip()
+            # Full name match
+            if key in FILE_GENERATORS:
+                selected.add(key)
+                continue
+            # Short form match (case-insensitive)
+            key_lower = key.lower().replace("-", "_")
+            for fname in FILE_GENERATORS:
+                short = fname.replace("HOLY_", "").replace(".md", "").lower()
+                if short == key_lower or short.startswith(key_lower):
+                    selected.add(fname)
+                    break
+            else:
+                print(f"  WARNING: unknown file type '{raw}' (use --list-types to see options)",
+                      file=sys.stderr)
 
     repo = Path(__file__).resolve().parent.parent
     depts_root = repo / "global-ai-org" / "departments"
@@ -673,6 +708,8 @@ def main() -> int:
         bl.mkdir(parents=True, exist_ok=True)
 
         for fname, gen in FILE_GENERATORS.items():
+            if selected is not None and fname not in selected:
+                continue
             target = bl / fname
             if target.exists() and not args.force:
                 skipped += 1
@@ -683,7 +720,8 @@ def main() -> int:
             target.write_text(gen(did, slug, name))
             written += 1
 
-    print(f"\n  Summary: wrote {written} · skipped {skipped}")
+    sel_msg = f" · scope: {sorted(selected)}" if selected is not None else ""
+    print(f"\n  Summary: wrote {written} · skipped {skipped}{sel_msg}")
     print(f"  Per §57.7 honest: these are starter scaffolds · operator refines content")
     return 0
 
