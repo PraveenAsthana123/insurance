@@ -68,6 +68,17 @@ ALL_TOOLS=(
   "openadapt|OpenAdapt|~50 MB|Desktop+browser process recorder"
   "ui-tars|UI-TARS-7B (ByteDance)|~7 GB|Vision-language model · needs 16GB GPU"
   "openhands|OpenHands|~3 GB|Autonomous coding agent · docker"
+  "pipecat|Pipecat OSS voice framework (Python)|~100 MB|Real-time voice/multimodal AI bots"
+  "livekit|LiveKit + agents SDK|~80 MB|WebRTC infra + agent orchestration"
+  "retell-ai|Retell AI SDK|~5 MB|Managed real-time voice agent SaaS"
+  "vapi|Vapi voice SDK|~5 MB|Managed voice AI SaaS"
+  "coqui-tts|Coqui TTS|~500 MB|OSS multilingual TTS · XTTS-v2"
+  "cartesia|Cartesia SDK|~5 MB|Low-latency Sonic TTS SaaS"
+  "piper-tts|Piper TTS|~100 MB|Fast OSS neural TTS · offline"
+  "elevenlabs|ElevenLabs SDK|~5 MB|Best-in-class TTS SaaS"
+  "deepgram|Deepgram SDK|~10 MB|Streaming STT SaaS"
+  "assemblyai|AssemblyAI SDK|~10 MB|Feature-rich STT SaaS"
+  "speechbrain|SpeechBrain|~1 GB|OSS PyTorch speech toolkit"
 )
 
 usage() {
@@ -114,7 +125,7 @@ while [[ $# -gt 0 ]]; do
     -h|--help) usage; exit 0 ;;
     --dry-run) DRY_RUN=1; shift ;;
     --core)   SELECTED_TOOLS=("core" "chrome"); INTERACTIVE=0; shift ;;
-    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands"); INTERACTIVE=0; shift ;;
+    --all)    SELECTED_TOOLS=("core" "chrome" "agentops" "browser-use" "omniparser" "skyvern" "openadapt" "ui-tars" "openhands" "pipecat" "livekit" "coqui-tts" "piper-tts" "deepgram" "speechbrain" "retell-ai" "vapi" "cartesia" "elevenlabs" "assemblyai"); INTERACTIVE=0; shift ;;
     --tool)   SELECTED_TOOLS+=("$2"); INTERACTIVE=0; shift 2 ;;
     *) echo "Unknown arg: $1" >&2; usage; exit 1 ;;
   esac
@@ -355,6 +366,74 @@ for tool in "${SELECTED_TOOLS[@]}"; do
       log "  Start: docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock $IMAGE"
       log "  UI:    http://localhost:3000"
       ;;
+    pipecat)
+      log_step "pipecat · OSS voice framework"
+      pip_install_if_missing "pipecat-ai"
+      log "  Quickstart: see https://github.com/pipecat-ai/pipecat"
+      ;;
+
+    livekit)
+      log_step "livekit · WebRTC + agents SDK"
+      pip_install_if_missing livekit
+      pip_install_if_missing "livekit-agents"
+      pip_install_if_missing "livekit-plugins-openai"
+      log "  Env: LIVEKIT_API_KEY · LIVEKIT_API_SECRET · LIVEKIT_URL"
+      ;;
+
+    retell-ai)
+      log_step "retell-ai · managed real-time voice agent"
+      pip_install_if_missing "retell-sdk"
+      log "  Env: RETELL_API_KEY"
+      ;;
+
+    vapi)
+      log_step "vapi · managed voice AI SaaS"
+      pip_install_if_missing "vapi_python"
+      log "  Env: VAPI_API_KEY"
+      ;;
+
+    coqui-tts)
+      log_step "coqui-tts · OSS multilingual TTS"
+      pip_install_if_missing TTS
+      log "  Quickstart: tts --text \"hello\" --model_name tts_models/en/ljspeech/tacotron2-DDC"
+      ;;
+
+    cartesia)
+      log_step "cartesia · low-latency Sonic TTS"
+      pip_install_if_missing cartesia
+      log "  Env: CARTESIA_API_KEY"
+      ;;
+
+    piper-tts)
+      log_step "piper-tts · fast OSS neural TTS · offline"
+      pip_install_if_missing "piper-tts"
+      log "  Download voice models from https://github.com/rhasspy/piper/releases"
+      ;;
+
+    elevenlabs)
+      log_step "elevenlabs · best-in-class TTS SaaS"
+      pip_install_if_missing elevenlabs
+      log "  Env: ELEVENLABS_API_KEY"
+      ;;
+
+    deepgram)
+      log_step "deepgram · streaming STT SaaS"
+      pip_install_if_missing "deepgram-sdk"
+      log "  Env: DEEPGRAM_API_KEY"
+      ;;
+
+    assemblyai)
+      log_step "assemblyai · feature-rich STT SaaS"
+      pip_install_if_missing assemblyai
+      log "  Env: ASSEMBLYAI_API_KEY"
+      ;;
+
+    speechbrain)
+      log_step "speechbrain · OSS PyTorch speech toolkit (~1 GB)"
+      pip_install_if_missing speechbrain
+      log "  Verify: python -c 'import speechbrain; print(speechbrain.__version__)'"
+      ;;
+
 
     *)
       log "  ⚠ Unknown tool: $tool · skipping"

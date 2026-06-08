@@ -30,6 +30,44 @@ ai-agents/
 └── agentops/    deep/ · observability/trace/cost SDK                 (cross-cut)
 ```
 
+
+## Voice / Audio tools (operator-added 2026-06-08)
+
+11 additional tools for STT · TTS · real-time voice agents · speech toolkits:
+
+```
+ai-agents/
+├── pipecat/     deep/ · Pipecat OSS voice framework            (Voice agent)
+├── livekit/     deep/ · LiveKit WebRTC + agents SDK            (Voice agent)
+├── retell-ai/   deep/ · Retell AI SaaS                         (Voice agent)
+├── vapi/        deep/ · Vapi SaaS                              (Voice agent)
+├── coqui-tts/   deep/ · Coqui OSS multilingual TTS · XTTS-v2  (TTS)
+├── cartesia/    deep/ · Cartesia Sonic low-latency TTS SaaS    (TTS)
+├── piper-tts/   deep/ · Piper OSS fast offline TTS            (TTS)
+├── elevenlabs/  deep/ · ElevenLabs best-in-class TTS SaaS      (TTS)
+├── deepgram/    deep/ · Deepgram streaming STT SaaS            (STT)
+├── assemblyai/  deep/ · AssemblyAI feature-rich STT SaaS       (STT)
+└── speechbrain/ deep/ · SpeechBrain OSS PyTorch toolkit       (Speech toolkit)
+```
+
+Per §46 (TTS consent + watermark) · §88.4 G18 (Voice channel) · §90 Block J1 (Voice AI canonical use case).
+
+### Quick install
+
+```bash
+./_shared/scripts/setup_ai_agent_stack.sh --tool pipecat --tool deepgram --tool elevenlabs
+```
+
+### Voice-stack recommended
+
+| Use case | STT | LLM | TTS | Orchestration |
+|---|---|---|---|---|
+| Real-time agent (best quality) | Deepgram | Llama-3.1-70B (server) | ElevenLabs | LiveKit + LangGraph |
+| Real-time agent (low cost) | Whisper local | Llama-3.1-8B (WebLLM) | Piper TTS | Pipecat |
+| SaaS managed (fastest setup) | Retell AI bundles all | — | — | Retell AI |
+| Multilingual feature-rich | AssemblyAI | (any) | Coqui XTTS-v2 | Pipecat |
+| Lowest latency (sub-200ms) | Deepgram | (any) | Cartesia Sonic | LiveKit |
+
 ## Per-tool deep/ structure (uniform)
 
 Every tool has the same skeleton:
