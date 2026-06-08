@@ -176,3 +176,8 @@ jobs/logs/
 data/rag/chunks/
 data/rag/embeddings/
 data/rag/*.db
+
+# §21 prompt-tracker · DB excluded (markdown backup tracked)
+data/prompts.db
+data/prompts.db-shm
+data/prompts.db-wal
