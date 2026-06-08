@@ -165,3 +165,31 @@ Reference impl: `~/.claude/templates/webllm-cdp-rag-langgraph/mcp-wrapper-templa
 ## Caveat
 
 MCP ecosystem is fast-moving (mid-2026). Re-audit quarterly. Reference: [modelcontextprotocol.io/servers](https://modelcontextprotocol.io/servers) catalog is the authoritative list.
+
+## 8. Spec-Driven Development Frameworks (5 tools · added 2026-06-08)
+
+| Tool | MCP? | Source | Notes |
+|---|---|---|---|
+| **gsd** | ❌ None | — | CLI tool · methodology · wrap via subprocess if agent needs to drive spec gen |
+| **bmad** | ❌ None | — | In-repo `_bmad/` config-based; resolve_config.py provides JSON output usable by any agent |
+| **spec-kit** | ❌ None | — | GitHub framework · YAML contracts · CLI-driven · wrap if needed |
+| **superpowers** | 🔶 Indirect | Anthropic Claude Code plugin (not MCP server) | Skills load into Claude itself, NOT exposed as MCP · accessible only inside Claude Code |
+| **openspec** | ❌ None | — | CLI tool · operates on spec files · subprocess wrap |
+
+### Why none of these have MCP servers
+
+These are **methodology frameworks** that operate on files (specs / YAML / config) — not RPC services. They make more sense AS clients OF MCP servers (e.g., spec-kit calls postgres-mcp to validate spec → DB schema match) than AS MCP servers themselves.
+
+### Updated coverage summary
+
+| Category | Total | ✓ Official | 🟡 Community | 🔶 Indirect | ❌ None | % covered |
+|---|---|---|---|---|---|---|
+| §91 core | 4 | 1 | 1 | 0 | 2 | 50% |
+| Agent/RPA | 7 | 0 | 1 | 1 | 5 | 29% |
+| Voice/Audio | 11 | 1 | 2 | 0 | 8 | 27% |
+| Image gen | 5 | 0 | 3 | 0 | 2 | 60% |
+| Survey/Forms | 5 | 0 | 0 | 0 | 5 | 0% |
+| Email/Marketing | 7 | 0 | 1 | 0 | 6 | 14% |
+| Analytics/BI/Workflow | 4 | 0 | 0 | 2 | 2 | 50% |
+| **Spec-Driven Dev** | **5** | **0** | **0** | **1** | **4** | **20%** |
+| **TOTAL** | **48** | **2** | **8** | **4** | **34** | **29% MCP-reachable** |

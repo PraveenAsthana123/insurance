@@ -11,7 +11,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 [core]
-project_name = "Holy_bevarage"
+project_name = "insur_project"
 document_output_language = "English"
 output_folder = "_bmad-output"
 
