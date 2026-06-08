@@ -4,7 +4,7 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { Rate } from 'k6/metrics';
 
-const BASE = __ENV.BASE_URL || 'http://localhost:8000';
+const BASE = __ENV.BASE_URL || 'http://localhost:8001';
 const TENANT = __ENV.TENANT_ID || 'loadtest-tenant';
 
 const errorRate = new Rate('app_errors');

@@ -3,7 +3,7 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
-const BASE = __ENV.BASE_URL || 'http://localhost:8000';
+const BASE = __ENV.BASE_URL || 'http://localhost:8001';
 const TENANT = __ENV.TENANT_ID || 'loadtest-tenant';
 const TARGET_VU = parseInt(__ENV.SOAK_VU || '100', 10);
 

@@ -21,12 +21,12 @@ brew install k6   # macOS
 sudo apt install k6   # Ubuntu
 
 # Local target (insur_project on docker-compose)
-BASE_URL=http://localhost:8000 k6 run load-testing/smoke.js
+BASE_URL=http://localhost:8001 k6 run load-testing/smoke.js
 
 # Run all phases
 for f in smoke load stress soak spike; do
   echo "=== $f ==="
-  BASE_URL=http://localhost:8000 k6 run load-testing/$f.js
+  BASE_URL=http://localhost:8001 k6 run load-testing/$f.js
 done
 
 # Production target (use staging first; never load-test prod without authorization)

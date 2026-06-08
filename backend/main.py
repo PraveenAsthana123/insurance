@@ -112,6 +112,7 @@ def create_app() -> FastAPI:
     from routers.catalogs import router as catalogs_router
     from routers.tenants_admin import router as tenants_admin_router
     from routers.insurance import router as insurance_router
+    from routers.input_events import router as input_events_router  # GLOBAL_INPUT_PERSISTENCE_POLICY
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -152,6 +153,7 @@ def create_app() -> FastAPI:
     app.include_router(catalogs_router)             # /api/v1/catalogs/* (analysis_phase + analysis_module reads + raw markdown serve for AI assurance / ML methodology / DT)
     app.include_router(tenants_admin_router)        # /api/v1/admin/{tenants,departments,tenant-departments} — migration 017 surfaces
     app.include_router(insurance_router)            # /api/v1/insurance/* — 4 insurance depts: spec + role dashboards/reports + pipeline runner + sim/system-design/manual-vs-auto markdown
+    app.include_router(input_events_router)         # /api/v1/input-events/* — GLOBAL_INPUT_PERSISTENCE_POLICY · append-only user input capture (POST/GET/list)
 
     return app
 
