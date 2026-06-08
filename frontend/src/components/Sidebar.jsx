@@ -165,6 +165,14 @@ export default function Sidebar() {
         </NavLink>
 
         <NavLink
+          to="/admin/feedback"
+          className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
+        >
+          <span className="nav-item-icon">📣</span>
+          <span className="nav-item-label">Feedback</span>
+        </NavLink>
+
+        <NavLink
           to="/data-explorer"
           className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
         >

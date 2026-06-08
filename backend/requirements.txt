@@ -52,12 +52,12 @@ agentops>=0.4.0,<1.0.0
 pydantic-ai>=1.0.0,<2.0.0
 dspy-ai>=3.0.0,<4.0.0
 haystack-ai>=2.20.0,<3.0.0
-arize-phoenix>=15.0.0,<17.0.0
+# arize-phoenix: REMOVED — no runtime import · transitive aiosqlite>=0.22 conflict with crewai aiosqlite~=0.21
 langsmith>=0.3.0,<1.0.0
-crewai>=1.0.0,<2.0.0
+# crewai: REMOVED — no runtime import · transitive aiosqlite~=0.21 conflict with arize-phoenix aiosqlite>=0.22
 pyautogen>=0.10.0,<1.0.0
 # OpenHands is stage-3 (autonomous coding agent, local dev only, NOT runtime)
-openhands-ai>=1.7.0,<2.0.0
+# openhands-ai: REMOVED — stage-3 dev-only · no runtime import · transitive e2b<0.18 conflict
 
 # AI / Agent ecosystem — batch 2 (2026-05-26): orchestrators + LLM gateways +
 # observability. Same §56 gate-1-only adoption — wiring deferred to operator.
