@@ -18,6 +18,7 @@ import AgentSupervisorPage from './pages/AgentSupervisorPage';
 import InsuranceCatalogPage from './pages/InsuranceCatalogPage';
 import InsurancePage from './pages/InsurancePage';
 import { InsuranceLayout } from './pages/insurance/InsuranceLayout';
+import AdminFeedbackPage from './pages/AdminFeedbackPage';
 import { InsuranceOverview, InsuranceDeptViewImpl, InsuranceDomainView } from './pages/insurance/InsuranceOverview';
 import { ProcessDetailView } from './pages/insurance/ProcessDetailView';
 import { AIDetailView } from './pages/insurance/AIDetailView';
@@ -149,6 +150,7 @@ export default function App() {
               </Suspense>
             }
           />
+          <Route path="/admin/feedback" element={<AdminFeedbackPage />} />
           <Route
             path="/data-explorer"
             element={
@@ -173,7 +175,7 @@ export default function App() {
           <Route index element={<div style={{ padding: 24, color: '#64748b' }}>Pick a department · domain · process from the dark blue menu.</div>} />
           <Route path="dept/:deptId/:domain" element={<BankDeptView />} />
           <Route path="dept/:deptId/:domain/:processId" element={<BankUseCasePage />} />
-          {/* 4-level: sub-process (AI capability) within a process. Per §73 menu spec. */}
+          {/* 4-level: AI capability drill-down within a process. */}
           <Route path="dept/:deptId/:domain/:processId/:subProcessId" element={<BankUseCasePage />} />
           <Route path="uc/:deptId/:processId" element={<BankUseCasePage />} />
           <Route path="bot" element={<BankBotPage />} />
