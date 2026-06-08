@@ -1936,3 +1936,198 @@ Plus:
 
 This is the §90 bar.
 
+
+---
+
+# Block L · Digital Marketing AI (operator-added · MANDATORY in each project)
+
+> "digital marketing process · CampaignAI · Email AI · Template AI · Survey AI · Content AI · Target Group AI ...must in each project"
+
+## L1. Digital Marketing Process AI (umbrella)
+
+**Use case** · Dept 3 Sales + Dept 22 Product · `digital-marketing-orchestrator`: end-to-end campaign lifecycle · plan → produce → publish → measure → optimize · with §64.40 agentic orchestration.
+
+**Arch**: planner agent + content AI (L5) + template AI (J3) + campaign AI (J4) + survey AI (J5) + target-group AI (L7) + measurement AI · Temporal workflow.
+
+**Channels**: Email · SMS · Push · Social · Ads · Web · In-app · Voice.
+
+**Edge cases**: regulatory windows · brand-voice drift · attribution gap · cross-device user.
+
+## L2. Email AI (deep)
+
+Already covered in K4 + J2 · per-process this means: routing · auto-reply · attachment understanding · thread summarization · brand-voice guardrail · drip-sequence orchestration · A/B variant generation · compliance gating per §76.
+
+## L3. Template AI
+
+Already covered in J3 · plus: dynamic variable injection · multi-language · per-segment variants · A/B winner detection · per-region compliance (CAN-SPAM · GDPR).
+
+## L4. Campaign AI
+
+Already covered in J4 · plus: multi-touch attribution · cross-channel budget bandit · creative diversity gate · §76 fairness across cohorts.
+
+## L5. Content AI (NEW)
+
+**Use case** · `content-generation-platform`: blog · email · ad copy · social post · video script generation with brand-voice + LLM + RAG over content guidelines.
+
+**Arch**: LLM (Llama-3.1-70B) + brand RAG + style classifier guardrail + plagiarism check + image gen (SDXL · DALL-E) + video script + voice gen.
+
+**Pipelines**: batch (mass production) · trigger (event-driven · on customer milestone) · A/B (variant routing).
+
+**Workflow**: n8n + Mailchimp + Temporal for stateful approval flow + LangGraph for content refinement loop.
+
+**Channels**: Email · Social · Web · Ads · Push.
+
+**Edge cases**: trademark violation · regulatory · plagiarism · brand-tone drift · sensitive subjects.
+
+**Top 1%**: §76 5-pillar (transparency · accountability) · §48 explainability (why this content choice) · §82.20 plagiarism gate · §82.21 brand-safety classifier.
+
+## L6. Survey AI (deep)
+
+Already covered in J5 · plus: adaptive question generation · sentiment per response · topic drift alert · NPS correlation · response-rate fairness audit.
+
+## L7. Target Group AI (NEW)
+
+**Use case** · `audience-targeting-segmentation`: identify high-value cohorts · LTV prediction · churn risk · propensity-to-convert · per-segment optimal channel.
+
+**Arch**: K-means / GMM / HDBSCAN segmentation + XGBoost LTV/churn + contextual bandit for channel assignment + fairness audit.
+
+**Pipelines**: batch (nightly segmentation) · sync (per-customer scoring) · stream (event-triggered re-scoring).
+
+**Workflow**: Temporal for segmentation jobs + n8n for downstream channel routing.
+
+**Channels**: all of §G18.
+
+**Edge cases**: cohort over-segmentation · privacy (PII at cohort level) · regulatory restricted attributes (race · religion · age outside legal) · cold-start customers.
+
+**Top 1%**: §76 fairness across cohorts (NO protected attributes in segmentation) · §82.19 ResAI accountability (named cohort owner) · §82.20 ExpAI (why this customer in this cohort) · §85 strategic alignment (segments tied to business OKRs).
+
+## L8-L12 (additional Digital Marketing AI per operator request)
+
+| # | Use case | Dept × Process | Algorithm |
+|---|---|---|---|
+| L8 | SEO/SEM AI · keyword optimization · ad-bid bandit | Dept 3 Sales · `seo-sem-optimization` | bandit + LLM keyword gen |
+| L9 | Social-listening AI · brand sentiment + topic | Dept 3 + Dept 12 Compliance | NLP + topic modeling |
+| L10 | Influencer-matching AI · brand × influencer fit | Dept 3 Sales | embedding-similarity + fairness |
+| L11 | Landing-page AI · auto-personalization | Dept 22 Product | RL contextual bandit |
+| L12 | Chatbot for marketing · pre-sales qualification | Dept 3 Sales | RAG + LLM + lead-score |
+
+---
+
+# Mandatory per-project (operator instruction)
+
+Every project · the Digital Marketing block (L1-L12) MUST be scaffolded · NOT optional. Use cases must follow the §90 28-subsection contract (per G1-G18).
+
+## Total per project (after all blocks)
+
+| Block | Scenarios |
+|---|---|
+| A · Zero-coverage | 5 |
+| B · Low-coverage | 5 |
+| C · Architecture | 5 |
+| D · Missing scenarios | 18 |
+| E · Stacked additions | 10 |
+| F · Hybrid combinations | 5 |
+| J · Voice/Email/Campaign/Survey | 5 |
+| K · Incident/Knowledge/Meeting/Email-deep/CUA | 5 |
+| **L · Digital Marketing (NEW)** | **12** |
+| **TOTAL CANONICAL** | **70 scenarios** |
+
+Plus:
+- **94 hybrid × dept cells** (HYBRID_USE_CASES_PER_DEPARTMENT.md)
+- **210 per-dept automation entries**
+- **75 R/A/F scenarios** (RECOMMENDER_ANOMALY_FRAUD_SCENARIOS.md)
+
+Grand total: **70 + 94 + 75 = 239 distinct AI use cases** per project · **28 subsections each** = **6692 cells** per project.
+
+
+---
+
+# Block M · Foundational ML scenarios (operator-mandated · MUST be in global policy)
+
+> Per operator: "all these scenario must be added in global policy · sentiment analysis, predictive analysis, classification, regression, time series"
+
+## M1. Sentiment Analysis
+
+**Use case** · Dept 9 CS + Dept 18 Analytics · `sentiment-analysis-engine`: positive/negative/neutral on customer reviews · CSAT survey · social media · call transcripts. Per-segment + temporal drift.
+
+**Arch**: DistilBERT fine-tuned · OR VADER (lexicon-based for fast lane) · ensemble. Aspect-based (e.g. policy vs claim vs agent) via target-attention.
+
+**Data**: customer reviews · CSAT survey responses · social media mentions · call transcripts. Per §G3 SMOTE for class imbalance.
+
+**Pipelines**: stream (real-time on each interaction) · batch (daily aggregate) · sync (per-API query).
+
+**Channels**: dashboard · Slack alerts · email digest.
+
+**Edge cases**: sarcasm · multilingual · code-switching · emoji-only · regulatory protected feedback.
+
+**Top 1%**: per §76 fairness across cohorts · per-region calibration · §82.7 drift on sentiment baseline.
+
+## M2. Predictive Analysis (umbrella)
+
+**Use case** · all depts · `predictive-modeling-platform`: generic prediction-as-service · time-to-event · propensity · LTV · churn · risk · with §75 12-axis metrics.
+
+**Arch**: model registry router (XGBoost · LightGBM · TabNet · FT-Transformer · prophetic LSTM) + auto-feature engineering + drift-triggered retrain.
+
+**Pipelines**: all 13 mandatory (G15) · all 3 inference modes (G16).
+
+**Channels**: dashboard · API · embedded UI.
+
+**Edge cases**: drift · cold-start · regulatory restricted features · adversarial input.
+
+**Top 1%**: §75 12-axis full · §76 5-pillar · §83 subject-wise CV · §87 audit per prediction · §88 area #8 testing.
+
+## M3. Classification (umbrella)
+
+**Use case** · all depts · `classification-as-service`: binary · multi-class · ordinal · multi-label classification with calibrated confidence.
+
+**Arch**: model router (logistic regression baseline → XGBoost → BERT-based for text → ResNet/EfficientNet for image) + isotonic / Platt calibration.
+
+**Pipelines**: same as M2.
+
+**Top 1%**: per §75 precision/recall/F1/AUC + ECE/Brier calibration + per-class fairness · per §75.5 NPV+sensitivity priorities for clinical-style.
+
+## M4. Regression (umbrella)
+
+**Use case** · all depts · `regression-as-service`: continuous-output prediction · with quantile bands and uncertainty quantification.
+
+**Arch**: XGBoost regressor baseline → LightGBM → CatBoost → quantile regression for uncertainty. Conformal prediction wrapper (E4) for distribution-free CI.
+
+**Pipelines**: same as M2.
+
+**Top 1%**: MAE · RMSE · MAPE · SMAPE · R² per §75 · conformal CI · §83 subject-level bootstrap.
+
+## M5. Time Series (umbrella · separate from D14 TFT)
+
+**Use case** · all depts · `time-series-forecasting-platform`: univariate · multivariate · short-horizon (intraday) · long-horizon (annual) · probabilistic.
+
+**Arch**: hierarchy of models: ARIMA / SARIMAX (statistical baseline) → Prophet (interpretable) → DeepAR (probabilistic) → N-BEATS (deep) → TFT (per D14) → ensemble.
+
+**Pipelines**: stream (intraday) · batch (daily/weekly) · sync (ad-hoc query).
+
+**Edge cases**: structural breaks (M&A · COVID) · holidays · external regressors · time-zone · DST transitions.
+
+**Top 1%**: quantile coverage validation · per §77 KS-test on residuals · per §82.7 drift on backtests · per §83 walk-forward validation.
+
+---
+
+## Total block count
+
+| Block | Count | Scope |
+|---|---|---|
+| A | 5 | Zero-coverage |
+| B | 5 | Low-coverage |
+| C | 5 | Architecture explicit |
+| D | 18 | Missing scenarios |
+| E | 10 | Stacked additions |
+| F | 5 | Hybrid combos |
+| J | 5 | Voice/Email/Campaign/Survey |
+| K | 5 | Incident/Knowledge/Meeting/Email/CUA |
+| L | 12 | Digital Marketing (MANDATORY per project) |
+| **M (NEW)** | **5** | **Foundational ML · MANDATORY** |
+| **TOTAL CANONICAL** | **75 scenarios** |
+
+Plus 94 hybrid × dept · 210 per-dept automations · 75 RAF scenarios = **454 distinct cells per project**.
+With 28 mandatory subsections each = **454 × 28 = 12,712 cells per project**.
+
+This is the §90 final bar after operator's 2026-06-08 stacked additions.
+
