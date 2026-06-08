@@ -132,6 +132,27 @@ ai-agents/
 ./_shared/scripts/setup_ai_agent_stack.sh --tool matomo --tool metabase --tool activepieces --tool mixpost
 ```
 
+
+## Spec-Driven Development Frameworks (operator-added 2026-06-08)
+
+5 methodology/framework tools that drive the dev process · not runtime tools:
+
+| Tool | Type | Notes |
+|---|---|---|
+| **gsd** | Goal-Spec-Driven | Goal → Spec → Code methodology · LLM-assisted spec gen |
+| **bmad** | Build-Measure-Analyze-Deploy | Already at [`_bmad/`](../_bmad/) in this repo |
+| **spec-kit** | GitHub framework | YAML agent contracts · spec→test→impl loop |
+| **superpowers** | Claude Code skills | Referenced extensively in `~/.claude/CLAUDE.md` |
+| **openspec** | Open spec tooling | YAML/JSON schemas for agent behaviors |
+
+### Composes with §43 (drill) · §47.3 (ADR) · §51 (forensic substrate) · §57 (production grade) · §59 (TDDD/DDD/ORF/MDD) · §64.43 #2 Council · §90 (each use-case stub IS a spec).
+
+### Quick start
+
+```bash
+./_shared/scripts/setup_ai_agent_stack.sh --tool gsd --tool spec-kit --tool openspec
+```
+
 ## Per-tool deep/ structure (uniform)
 
 Every tool has the same skeleton:
