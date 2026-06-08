@@ -211,7 +211,44 @@ class FullLifecycle:
     def load(self) -> pd.DataFrame:
         df = pd.read_csv(self.dataset_path)
         if self.sample_rows and len(df) > self.sample_rows:
-            df = df.sample(n=self.sample_rows, random_state=42).reset_index(drop=True)
+            # Smarter smoke sampling for classification — guarantees every
+            # class is represented with at least MIN_PER_CLASS samples so the
+            # pipeline doesn't crash with "num_class: 0" on severely-imbalanced
+            # data (e.g. credit-card fraud at 0.17% positive). Strategy:
+            #   1. For each class, take min(actual_count, MIN_PER_CLASS) rows
+            #      OR proportional share — whichever is larger.
+            #   2. Top up the remaining budget from the majority class.
+            MIN_PER_CLASS = 30
+            if self.task == "classification" and self.target_col in df.columns:
+                pieces = []
+                budget = self.sample_rows
+                classes = df[self.target_col].value_counts()
+                # Reserve MIN_PER_CLASS per class (capped at actual count)
+                reserved = 0
+                for cls, count in classes.items():
+                    take = min(count, MIN_PER_CLASS)
+                    reserved += take
+                if reserved >= self.sample_rows:
+                    # Sample size too small for the number of classes — just
+                    # take MIN_PER_CLASS per class regardless of budget.
+                    for cls, count in classes.items():
+                        pieces.append(df[df[self.target_col] == cls].sample(
+                            n=min(count, MIN_PER_CLASS), random_state=42,
+                        ))
+                else:
+                    # Allocate proportionally over the remaining budget after reserve
+                    extra_budget = self.sample_rows - reserved
+                    total = len(df)
+                    for cls, count in classes.items():
+                        reserve = min(count, MIN_PER_CLASS)
+                        extra = int(round(extra_budget * (count / total)))
+                        take = min(count, reserve + extra)
+                        pieces.append(df[df[self.target_col] == cls].sample(
+                            n=take, random_state=42,
+                        ))
+                df = pd.concat(pieces).sample(frac=1.0, random_state=42).reset_index(drop=True)
+            else:
+                df = df.sample(n=self.sample_rows, random_state=42).reset_index(drop=True)
         for c in self.drop_cols:
             if c in df.columns:
                 df = df.drop(columns=c)
@@ -744,9 +781,22 @@ class FullLifecycle:
         # Preprocess + select
         Xs, selected = self.preprocess_and_select(X, y)
 
-        # Split train/val/test
-        X_train, X_temp, y_train, y_temp = train_test_split(Xs, y, test_size=0.3, random_state=42)
-        X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
+        # Split train/val/test — stratify on y for classification so the test
+        # set retains the original class distribution (per the fraud-SIU bug
+        # where a non-stratified split produced single-class test sets).
+        stratify_y = y if self.task == "classification" else None
+        try:
+            X_train, X_temp, y_train, y_temp = train_test_split(
+                Xs, y, test_size=0.3, random_state=42, stratify=stratify_y,
+            )
+            stratify_temp = y_temp if self.task == "classification" else None
+            X_val, X_test, y_val, y_test = train_test_split(
+                X_temp, y_temp, test_size=0.5, random_state=42, stratify=stratify_temp,
+            )
+        except ValueError:
+            # Rare class with <2 samples — fall back to non-stratified split.
+            X_train, X_temp, y_train, y_temp = train_test_split(Xs, y, test_size=0.3, random_state=42)
+            X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
 
         # Tune
         best_params = self.tune(X_train, y_train, X_val, y_val)
