@@ -2131,3 +2131,43 @@ With 28 mandatory subsections each = **454 × 28 = 12,712 cells per project**.
 
 This is the §90 final bar after operator's 2026-06-08 stacked additions.
 
+
+---
+
+# Block N · WebLLM + CDP + RAG + LangGraph Integration (operator-added)
+
+## N1. WebLLM + CDP + RAG + LangGraph Agent (canonical integration)
+
+**Use case** · Dept 7 Claims + all depts · `webllm-cdp-rag-langgraph-agent`: browser-native agentic AI · zero-server-LLM cost · privacy-preserving (LLM runs in user's browser via WebGPU) · full-DOM control (CDP) · grounded answers (RAG) · stateful orchestration (LangGraph cycles + checkpointing).
+
+**Why this stack**: WebLLM removes server LLM cost + data egress · CDP enables UI interaction beyond API · RAG grounds answers · LangGraph orchestrates multi-step reasoning with reflection.
+
+**Arch**: see `WEBLLM_CDP_RAG_LANGGRAPH_INTEGRATION.md` for full Mermaid + 6 code files.
+
+**Pipelines**: sync (operator-trigger) · batch (overnight CDP pool) · stream (webhook → CDP worker).
+
+**Workflow tool**: LangGraph (primary · supports cycles + reflection) + Temporal (durability for long CDP jobs).
+
+**Channels**: browser UI · Slack on HITL · email summary · in-app chat (powered by WebLLM in user's browser).
+
+**Edge cases**: WebGPU unavailable (fallback to server LLM via config) · CDP timeout (retry + pool) · model size 5 GB first load · cross-origin restriction · sensitive PII (stays in browser).
+
+**Top 1%**: per §76 5-pillar (privacy especially) · per §48 citation accuracy mandatory · per §47.4 baggage propagation (request_id browser→server→RAG→audit) · per §64.43 #5 Blackboard (LangGraph state) + #10 Reflection (verify node).
+
+**Reference impl**: `backend/webllm_cdp_rag_langgraph/` (6 Python modules · skeleton ready) + `frontend/src/hooks/useWebLLM.js` + `frontend/src/components/insurance/WebLLMAgentPanel.jsx` (per integration doc).
+
+---
+
+## N2-N5 · Variations (operator can pick)
+
+| # | Variation | Use case |
+|---|---|---|
+| N2 | WebLLM + CDP + RAG (no LangGraph) | simple single-turn agent · less state |
+| N3 | WebLLM + RAG + LangGraph (no CDP) | pure conversational agent · no browser action |
+| N4 | CDP + RAG + LangGraph (server-LLM) | when WebGPU not available · fallback |
+| N5 | WebLLM + CDP + LangGraph (no RAG) | scratch agent · no domain knowledge needed |
+
+---
+
+Total blocks now: A · B · C · D · E · F · J · K · L · M · **N (NEW)** = **80 scenarios** (was 75 · +5 N variations).
+

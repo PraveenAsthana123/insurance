@@ -121,6 +121,7 @@ def create_app() -> FastAPI:
     from routers.tenants_admin import router as tenants_admin_router
     from routers.insurance import router as insurance_router
     from routers.input_events import router as input_events_router  # GLOBAL_INPUT_PERSISTENCE_POLICY
+    from webllm_cdp_rag_langgraph.router import router as webllm_agent_router  # §91 WebLLM+CDP+RAG+LangGraph
     from routers.admin_feedback import router as admin_feedback_router  # /api/v1/admin/feedback rollup
 
     app.include_router(health_router)
@@ -163,6 +164,7 @@ def create_app() -> FastAPI:
     app.include_router(tenants_admin_router)        # /api/v1/admin/{tenants,departments,tenant-departments} — migration 017 surfaces
     app.include_router(insurance_router)            # /api/v1/insurance/* — 4 insurance depts: spec + role dashboards/reports + pipeline runner + sim/system-design/manual-vs-auto markdown
     app.include_router(input_events_router)         # /api/v1/input-events/* — GLOBAL_INPUT_PERSISTENCE_POLICY · append-only user input capture (POST/GET/list)
+    app.include_router(webllm_agent_router)         # /api/v1/webllm-agent/* — §91 browser-native agentic AI (WebLLM + CDP + RAG + LangGraph)
     app.include_router(admin_feedback_router)       # /api/v1/admin/feedback/* — rollup view over user_input_events (summary + comments)
 
     return app
