@@ -36,6 +36,32 @@ os.environ.setdefault("INSUR_SKIP_MIGRATIONS", "1")
 logging.disable(logging.CRITICAL)
 
 
+TEST_CAMPAIGN_PREFIX = "E2E test ·"
+
+
+def _cleanup_test_campaigns():
+    """Defensive · delete any leaked E2E test campaigns from prior runs.
+
+    Both at start (in case crash left orphans) and end (normal teardown).
+    CASCADE drops marketing_campaign_runs rows too.
+    """
+    try:
+        from core.config import get_settings
+        import psycopg2
+        settings = get_settings()
+        with psycopg2.connect(settings.database_url) as c, c.cursor() as cur:
+            cur.execute(
+                "DELETE FROM marketing_campaigns WHERE name LIKE %s",
+                (f"{TEST_CAMPAIGN_PREFIX}%",),
+            )
+            deleted = cur.rowcount
+            c.commit()
+        return deleted
+    except Exception as e:
+        print(f"  (cleanup warn: {type(e).__name__}: {e})")
+        return 0
+
+
 def main() -> int:
     print("Marketing campaigns · end-to-end consumer flow\n")
     print(f"  {'Step':<55} | Result")
@@ -54,6 +80,11 @@ def main() -> int:
     except Exception as e:
         print(f"  ✗ FATAL: create_app failed: {e}")
         return 1
+
+    # Pre-cleanup · sweep any orphans from prior runs (defensive)
+    pre = _cleanup_test_campaigns()
+    if pre > 0:
+        print(f"  0. pre-cleanup · swept {pre} orphan(s) from prior run     | ✓ INFO")
 
     fails = 0
     test_run_id = uuid.uuid4().hex[:6]
@@ -198,7 +229,10 @@ def main() -> int:
 
 
 def _summary(fails: int) -> int:
-    print(f"\n  Summary: {12 - fails}/12 pass · {fails} fail")
+    # Post-cleanup · delete test campaigns we created (prevents weekly cron leak)
+    post = _cleanup_test_campaigns()
+    print(f"\n  post-cleanup · removed {post} test campaign(s)")
+    print(f"  Summary: {12 - fails}/12 pass · {fails} fail")
     print(f"  Reference: §47.6 + §57.7 + §64.13 + §82.21 (DLP gate)")
     return 0 if fails == 0 else 1
 
