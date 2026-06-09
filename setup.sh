@@ -364,6 +364,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_dept_submenu_deeplinks.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Decision feedback audit (Tier 7 gate #4) ──"
+  [ -f scripts/audit_feedback.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_feedback.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

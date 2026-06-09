@@ -130,3 +130,6 @@ jobs:
 
       - name: DEPT SUB-MENU deep-link integrity · 22 depts (11 assertions)
         run: python3 scripts/audit_dept_submenu_deeplinks.py
+
+      - name: DECISION FEEDBACK · Tier 7 gate #4 (11 assertions)
+        run: python3 scripts/audit_feedback.py

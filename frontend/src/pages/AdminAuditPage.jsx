@@ -97,6 +97,11 @@ const AUDIT_LABELS = {
     spec: '§73 + PATH_E P1',
     description: '22 dept × 67 process × 30 sub-process deep-link integrity · 11 assertions (catalog parse · URL-safe IDs · unique IDs · all traversable)',
   },
+  'decision-feedback': {
+    name: 'Decision feedback (Tier 7 gate #4)',
+    spec: '§38.3 + Tier 7 gate #4',
+    description: 'Explicit + implicit feedback · 11 assertions (schema · 3 explicit + 1 implicit POST · invalid kind/value rejected · filter · stats)',
+  },
 };
 
 export default function AdminAuditPage() {

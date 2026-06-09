@@ -6,6 +6,7 @@ import {
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 import CorrectionsPanel from '../CorrectionsPanel';
+import FeedbackPanel from '../FeedbackPanel';
 
 /* ─────────────────────────────────────────────
    STATIC DATA
@@ -141,6 +142,7 @@ export default function ProcessFeedbackTab() {
   function requestLabel(id) { setRequestedLabels(r => ({ ...r, [id]: true })); }
 
   <CorrectionsPanel accent="#dc2626" />
+      <FeedbackPanel accent="#8b5cf6" />
       return (
     <TabShell
       tabName="feedback"
