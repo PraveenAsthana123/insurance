@@ -5,6 +5,7 @@ import {
 } from './IPOLayout';
 import CorrectionsPanel from '../../../components/CorrectionsPanel';
 import AuditPanel from '../../../components/AuditPanel';
+import ModelRegistryPanel from '../../../components/ModelRegistryPanel';
 import { useInputEvent } from '../../../hooks/useInputEvent';
 import {
   ResponsiveContainer,
@@ -649,6 +650,7 @@ export function ModelTab({ proc, dept, bp }) {
       accent="#0ea5e9"
       todos={[]}
     >
+      <ModelRegistryPanel accent="#0ea5e9" />
       <IPOSection number="1" kind="input" title="Input — Model candidates" subtitle="AI capabilities and catalog model metadata for this process.">
         <table className="insurance-matrix">
           <thead><tr><th>AI capability</th><th>Scenario</th><th>Model binding</th></tr></thead>

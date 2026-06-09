@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import ModelRegistryPanel from '../ModelRegistryPanel';
 
 /* ---- Model Categories ---- */
 const MODEL_CATEGORIES = {
@@ -385,6 +386,7 @@ export default function ProcessModelsTab({ process }) {
       accent="#0ea5e9"
       todos={[]}
     >
+      <ModelRegistryPanel accent="#0ea5e9" />
     <div>
       {/* Section Nav */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>
