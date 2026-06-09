@@ -141,9 +141,7 @@ export default function ProcessFeedbackTab() {
   function handleSubmitFb() { setFormSubmitted(true); setTimeout(() => setFormSubmitted(false), 3000); }
   function requestLabel(id) { setRequestedLabels(r => ({ ...r, [id]: true })); }
 
-  <CorrectionsPanel accent="#dc2626" />
-      <FeedbackPanel accent="#8b5cf6" />
-      return (
+  return (
     <TabShell
       tabName="feedback"
       title="Feedback & RLHF · capture + correction list"
@@ -155,6 +153,8 @@ export default function ProcessFeedbackTab() {
       accent="#dc2626"
       todos={[]}
     >
+      <CorrectionsPanel accent="#dc2626" />
+      <FeedbackPanel accent="#8b5cf6" />
     <div style={{ fontFamily: 'var(--font-family, system-ui)', color: 'var(--text-primary, #1e293b)' }}>
 
       {/* Section Nav */}
