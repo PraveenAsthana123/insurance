@@ -2229,3 +2229,42 @@ Total blocks now: A · B · C · D · E · F · J · K · L · M · **N (NEW)** 
 
 L13 (Banner AI) + L14 (Contact AI) are MANDATORY per project per §64.13 (digital marketing block) + §64.22 (contact management block).
 
+
+---
+
+## L15 · Voice AI End-to-End (operator-validated · 2026-06-08)
+
+**Use case** · all depts · `voice-ai-end-to-end-demo`: complete sales/presales/service voice agent with 8-stage state machine.
+
+**Stages** (per `backend/voice_ai/services.py`):
+
+1. **welcome** · segment-aware template (gold/silver/standard) · pulled from `voice_ai_welcome_templates`
+2. **identify** · phone/email/customer_ref lookup against `voice_ai_customers`
+3. **presales** · 5-category detection (auto/home/life/health/umbrella)
+4. **requirement** · structured feature capture (roadside · liability · cash value · ...)
+5. **recommend** · product matcher (segment + feature scoring) over `voice_ai_products`
+6. **order** · order row creation in `voice_ai_orders` · audit row per §38.3
+7. **notify** · email/SMS/voice confirmation
+8. **complete** · session close · transcript → §87.4 vector ingest
+
+**Arch**: rule-based state machine (per §57.7 honest fallback) · LLM-pluggable per stage via §91 WebLLM bridge.
+
+**Reference impl** (committed `851a2e5`):
+- `backend/voice_ai/` (4 files) · 14 endpoints under `/api/v1/voice-ai/*`
+- `backend/migrations/052_voice_ai_end_to_end.sql` · 5 tables · 10 products + 3 customers + 3 templates seeded
+- `frontend/src/pages/VoiceAIDemoPage.jsx` · 3-column UI (catalog · conversation · monitoring)
+- `docs/use-cases/voice-ai-end-to-end/HOLY_DEMO_STORY.md` · 14-section §64.2/.3/.4 demo story
+
+**Edge cases**: no customer match (continue as lead) · LLM/STT key missing (rule-based fallback) · stale session (24h auto-close) · welcome template segment NULL (matches all).
+
+**Top 1%**: §76 5-pillar (privacy MANDATORY for voice = biometric) · §46 TTS consent + recording disclosure · §47.7 rollback (state machine per stage) · §48.5 explainable product match (feature scoring shown) · §82.7 monitoring tiles with drift signals · §82.21 PII DLP on transcript before vector ingest.
+
+**Stakeholders + outcomes** (per HOLY_DEMO_STORY.md):
+- VP Sales: +83% conversion · cross-sell attach +89%
+- VP CS: NPS 32 → 48 · -75% handle time
+- CFO: $7.2M annual savings · 14× ROI
+- VP Compliance: real-time audit trail vs 7-30d lag
+- VP Engineering: single LangGraph DAG replaces siloed verification systems
+
+**MANDATORY per §64.13 (Digital Marketing block) + §92 (ai-agents/ catalog)** in every project. Reference impl is operator-ready; can be backported via the share folder pattern.
+
