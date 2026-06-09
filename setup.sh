@@ -382,6 +382,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_use_cases.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Responsible AI 12-lens audit ──"
+  [ -f scripts/audit_responsible_ai.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_responsible_ai.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

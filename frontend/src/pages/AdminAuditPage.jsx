@@ -112,6 +112,11 @@ const AUDIT_LABELS = {
     spec: '§94 process-use-case-mandatory-structure',
     description: 'Use Case · 11 assertions (5 parts · 4 impact axes · scored AI options · SWOT · first principles · 4P · Six Sigma + BPM · stakeholders RACI · KPI/ROI/value realization · completeness 0-17)',
   },
+  'responsible-ai': {
+    name: 'Responsible AI 12-lens per-process',
+    spec: '12-lens (Input/Process/Output/Rec/Score/ExpAI/Port/Perf/Ethical/Gov/Interpret/Fair)',
+    description: '11 assertions · 12 lens cards · per-lens library probe · per-process score + outcome · summary report aggregation',
+  },
 };
 
 export default function AdminAuditPage() {

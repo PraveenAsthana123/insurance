@@ -139,3 +139,6 @@ jobs:
 
       - name: USE CASES · §94 17-section structure (11 assertions)
         run: python3 scripts/audit_use_cases.py
+
+      - name: RESPONSIBLE AI · 12-lens per-process (11 assertions)
+        run: python3 scripts/audit_responsible_ai.py

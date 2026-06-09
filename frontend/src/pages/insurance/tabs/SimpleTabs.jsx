@@ -7,6 +7,7 @@ import CorrectionsPanel from '../../../components/CorrectionsPanel';
 import AuditPanel from '../../../components/AuditPanel';
 import HITLPanel from '../../../components/HITLPanel';
 import FeedbackPanel from '../../../components/FeedbackPanel';
+import ResponsibleAIPanel from '../../../components/ResponsibleAIPanel';
 import ModelRegistryPanel from '../../../components/ModelRegistryPanel';
 import ShapPanel from '../../../components/ShapPanel';
 import { useInputEvent } from '../../../hooks/useInputEvent';
@@ -1417,7 +1418,8 @@ export function GovernanceAITab({ proc, dept }) {
       
       <AuditPanel accent="#dc2626" />
       <HITLPanel accent="#d97706" />
-      <FeedbackPanel accent="#8b5cf6" />{!g ? (
+      <FeedbackPanel accent="#8b5cf6" />
+      <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />{!g ? (
         <InfoCard icon="🏛️" title="What this tab will contain (when populated)" accent="#dc2626">
           <ul style={{ margin: 0, paddingLeft: 16 }}>
             <li><strong>Decision layer</strong>: per §40 (rule + confidence + HITL)</li>
@@ -1494,7 +1496,9 @@ export function TestsTab({ proc, dept }) {
       accent="#f59e0b"
       todos={[]}
     >
+      <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
       <ShapPanel accent="#dc2626" modelName="expai-model" />
+      <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
       <IPOSection number="1" kind="input" title="Input — Test plan" subtitle="Per global §64.30 12-tier testing + §65.8 8-tier agent assignment.">
         <Field label="Test surfaces">API · Frontend · Backend · Drills (§43)</Field>
       </IPOSection>
