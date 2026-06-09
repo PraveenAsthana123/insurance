@@ -370,6 +370,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_feedback.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Pipeline modes audit (§93 manual + automatic) ──"
+  [ -f scripts/audit_pipeline_modes.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_pipeline_modes.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

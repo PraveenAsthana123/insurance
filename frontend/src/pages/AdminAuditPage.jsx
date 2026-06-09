@@ -102,6 +102,11 @@ const AUDIT_LABELS = {
     spec: '§38.3 + Tier 7 gate #4',
     description: 'Explicit + implicit feedback · 11 assertions (schema · 3 explicit + 1 implicit POST · invalid kind/value rejected · filter · stats)',
   },
+  'pipeline-modes': {
+    name: 'Pipeline manual + automatic modes (§93)',
+    spec: '§93 process-component-ipo-pattern',
+    description: 'Process modes · 11 assertions (4 components × 4 sub-sections (IPO+V) · manual session state · automatic 10-phase pipeline · overall quality = mean)',
+  },
 };
 
 export default function AdminAuditPage() {

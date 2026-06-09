@@ -161,9 +161,16 @@ AUDITS = {
         "spec": "§38.3 + Tier 7 gate #4",
         "description": "Decision feedback · 11 assertions (schema · explicit good/bad/correct · implicit accepted · invalid kind/value rejected · filter · stats)",
     },
+    "pipeline-modes": {
+        "script": "scripts/audit_pipeline_modes.py",
+        "report_dir": "jobs/reports/pipeline-modes-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§93 (process-component-ipo-pattern)",
+        "description": "Pipeline manual + automatic modes · 11 assertions (4 components · 4 IPO+V sub-sections · load/split/select/train state · 10 automatic phases · overall_quality_score = mean)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing", "dept-submenu-deeplinks", "decision-feedback"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing", "dept-submenu-deeplinks", "decision-feedback", "pipeline-modes"]
 
 
 @router.get("/list")

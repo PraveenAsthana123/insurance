@@ -133,3 +133,6 @@ jobs:
 
       - name: DECISION FEEDBACK · Tier 7 gate #4 (11 assertions)
         run: python3 scripts/audit_feedback.py
+
+      - name: PIPELINE MODES · §93 manual + automatic (11 assertions)
+        run: python3 scripts/audit_pipeline_modes.py

@@ -48,6 +48,7 @@ AUDITS = [
     ("SELF-HEALING AI", "scripts/audit_self_healing.py", "self-healing-audit", 10),
     ("DEPT DEEP-LINKS", "scripts/audit_dept_submenu_deeplinks.py", "dept-submenu-deeplinks-audit", 11),
     ("DECISION FEEDBACK", "scripts/audit_feedback.py", "decision-feedback-audit", 11),
+    ("PIPELINE MODES", "scripts/audit_pipeline_modes.py", "pipeline-modes-audit", 11),
 ]
 
 
