@@ -13,6 +13,7 @@
 //   - flowchart + IPO + status one-liner
 
 import { useEffect, useState } from 'react';
+import MermaidDiagram from './MermaidDiagram';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
@@ -30,6 +31,21 @@ const PHASE_COLOR = {
   Image:      '#10b981',
   Conversion: '#dc2626',
 };
+
+
+// Convert a list of step strings into a mermaid flowchart definition.
+// Per §57.7: deterministic + escapes labels.
+function buildFlowchartMermaid(steps, taskId) {
+  if (!Array.isArray(steps) || steps.length === 0) return '';
+  const prefix = `n_${taskId.replace(/[^a-z0-9]/gi, '_')}`;
+  const lines = ['flowchart LR'];
+  steps.forEach((step, i) => {
+    const safe = String(step).replace(/[\[\]"]/g, '').slice(0, 40);
+    lines.push(`  ${prefix}_${i}["${safe}"]`);
+    if (i > 0) lines.push(`  ${prefix}_${i - 1} --> ${prefix}_${i}`);
+  });
+  return lines.join('\n');
+}
 
 export default function DataPipelinePanel({ accent = '#0ea5e9', processId = 'fraud-ring-detection' }) {
   const [data, setData] = useState(null);
@@ -240,20 +256,14 @@ function TaskRow({ task, isOpen, onToggle }) {
             </span>
           </div>
 
-          {/* Flowchart · ordered horizontal */}
-          {task.flowchart && (
-            <div style={{ fontSize: 10, marginBottom: 6 }}>
-              <strong>🔁 Flow:</strong>{' '}
-              {task.flowchart.map((step, i) => (
-                <span key={i}>
-                  <span style={{
-                    padding: '1px 6px', borderRadius: 2,
-                    background: '#fff', border: '1px solid #cbd5e1',
-                    fontSize: 9,
-                  }}>{step}</span>
-                  {i < task.flowchart.length - 1 && <span style={{ margin: '0 3px', color: '#94a3b8' }}>→</span>}
-                </span>
-              ))}
+          {/* Flowchart · rendered Mermaid (Iteration 1 P0 #1) */}
+          {task.flowchart && task.flowchart.length > 0 && (
+            <div style={{ marginBottom: 6 }}>
+              <div style={{ fontSize: 10, fontWeight: 600, color: '#475569', marginBottom: 2 }}>🔁 Flow</div>
+              <MermaidDiagram
+                definition={buildFlowchartMermaid(task.flowchart, task.id)}
+                accent={PHASE_COLOR[task.phase] || '#0ea5e9'}
+              />
             </div>
           )}
 

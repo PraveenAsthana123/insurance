@@ -5,6 +5,7 @@
 // D Data · E Transformation) with all 17 sections rendered.
 
 import { useEffect, useState } from 'react';
+import MermaidDiagram from './MermaidDiagram';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
@@ -133,14 +134,18 @@ function Section({ name, value, accent }) {
         {isNull && <span style={{ fontSize: 9, color: '#94a3b8', fontStyle: 'italic' }}>· operator-pending per §57.7</span>}
       </div>
       {!isNull && (
-        <pre style={{
-          margin: 0, padding: 4, background: '#f8fafc',
-          fontSize: 10, color: '#475569',
-          overflow: 'auto', maxHeight: 220,
-          whiteSpace: 'pre-wrap',
-        }}>
-          {typeof value === 'string' ? value : JSON.stringify(value, null, 2)}
-        </pre>
+        name === 'flowchart_mermaid' && typeof value === 'string' ? (
+          <MermaidDiagram definition={value} accent={accent} title="Solution flowchart" />
+        ) : (
+          <pre style={{
+            margin: 0, padding: 4, background: '#f8fafc',
+            fontSize: 10, color: '#475569',
+            overflow: 'auto', maxHeight: 220,
+            whiteSpace: 'pre-wrap',
+          }}>
+            {typeof value === 'string' ? value : JSON.stringify(value, null, 2)}
+          </pre>
+        )
       )}
     </div>
   );
