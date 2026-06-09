@@ -5,6 +5,7 @@ import MarketingCampaignsPage from './pages/MarketingCampaignsPage';
 import PublicCampaignPage from './pages/PublicCampaignPage';
 import ContentOpsPage from './pages/ContentOpsPage';
 import MarketingKPIsPage from './pages/MarketingKPIsPage';
+import AIToolLandscapePage from './pages/AIToolLandscapePage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
@@ -105,6 +106,7 @@ export default function App() {
           <Route path="/public/form/:campaignRef/:customerId" element={<PublicCampaignPage kind="form" />} />
           <Route path="/content-ops" element={<ContentOpsPage />} />
           <Route path="/marketing-kpis" element={<MarketingKPIsPage />} />
+          <Route path="/ai-tools" element={<AIToolLandscapePage />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/data-flow" element={<DataFlowPage />} />

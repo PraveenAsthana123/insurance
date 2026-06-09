@@ -55,6 +55,25 @@ These are operator-aligned polish items · no external blockers.
 | T3.4 | Per-step latency histograms on E2E flow (trend per assertion) | medium | Operator hasn't asked · defer |
 | T3.5 | §82.21 DLP scan multilingual (non-US SSN/CC) | medium | Jurisdictional scope decision needed |
 
+### Tier 6 · ENTERPRISE AI TOOL LANDSCAPE (NEW · operator brief 2026-06-08)
+
+| # | Item | Effort | Status |
+|---|---|---|---|
+| T6.1 | Tool registry · 140 tools · 26 categories | done | `backend/ai_tool_registry/registry.py` |
+| T6.2 | Read-only tool API · 7 endpoints | done | `/api/v1/ai-tools/*` |
+| T6.3 | Tool Landscape Explorer UI · 4 tabs | done | `/ai-tools` route |
+| T6.4 | This project tool usage · 5 'used' tools | done | matches actual codebase |
+| T6.5 | Scaffolded tools · 4 (WebLLM · CDP · LangGraph · OTel) | scaffolded | webllm_cdp_rag_langgraph/ |
+| T6.6 | Planned tools · 6 (Presidio · Garak · RAGAS · DeepEval · Langfuse · Phoenix) | planned | T6.x roadmap |
+| T6.7 | Reference-only · 125 tools | reference | interview/architecture awareness |
+| T6.8 | Adopt RAGAS for §75 metric measurement | medium | T6.x |
+| T6.9 | Adopt Langfuse for §38.3 audit row enhancement | medium | T6.x |
+| T6.10 | Adopt Presidio for §82.21 DLP extension | medium | T6.x · extends current 5-shape regex |
+| T6.11 | Adopt Qdrant when scale > pgvector | medium | T6.x |
+| T6.12 | Adopt Temporal when cron > 20 jobs | medium | T6.x · currently 11 audits + 2 executors |
+
+Full reference: [docs/ENTERPRISE_AI_TOOL_LANDSCAPE.md](ENTERPRISE_AI_TOOL_LANDSCAPE.md)
+
 ### Tier 5 · ENTERPRISE MARKETING COMMAND CENTER (NEW · operator brief 2026-06-08)
 
 | # | Item | Effort | Status |
