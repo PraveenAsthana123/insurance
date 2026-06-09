@@ -50,7 +50,7 @@ These are operator-aligned polish items · no external blockers.
 | # | Item | Effort | Value |
 |---|---|---|---|
 | ~~T3.1~~ | **(DONE 2026-06-08)** ~~Frontend AutonomousAgentPage.jsx~~ | done | T3.1 done · `/autonomous-agent` route · live decision chain visualizer |
-| T3.2 | Multi-cohort fairness eval (real DI < 1.0 cross-cohort test) | medium | Real §76 RAI testing |
+| ~~T3.2~~ | **(DONE 2026-06-08)** ~~Multi-cohort fairness eval~~ | done | T3.2 done · DI=0.136 verified · RAI gate triggers correctly |
 | T3.3 | Operation_log rotation (>90d archive) | medium | §38.3 retention compliance |
 | T3.4 | Per-step latency histograms on E2E flow (trend per assertion) | medium | Operator hasn't asked · defer |
 | T3.5 | §82.21 DLP scan multilingual (non-US SSN/CC) | medium | Jurisdictional scope decision needed |

@@ -62,6 +62,11 @@ const AUDIT_LABELS = {
     spec: '§38.3 + §41.3 + §70 + T2.4',
     description: 'Content posting scheduler · 7 assertions (tenant discovery · 0/1-due cases · draft→published · TTP + quality_score · operation_log + per-platform runs)',
   },
+  'multi-cohort-fairness': {
+    name: '§76 multi-cohort RAI fairness (T3.2)',
+    spec: '§76 + T3.2',
+    description: 'Verifies RAI gate actually triggers · 9 assertions (DI math · cross-cohort halt · single-cohort baseline · rai_halt in decisions chain)',
+  },
 };
 
 export default function AdminAuditPage() {

@@ -322,6 +322,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_postings_executor.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── §76 multi-cohort fairness audit (RAI gate · T3.2) ──"
+  [ -f scripts/audit_multi_cohort_fairness.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_multi_cohort_fairness.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

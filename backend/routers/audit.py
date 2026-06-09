@@ -105,9 +105,16 @@ AUDITS = {
         "spec": "§38.3 + §41.3 + §47.6 + §70 + T2.4",
         "description": "Content posting cron */30 · 7 assertions (tenant discovery · 0-due no-op · 1-due publish · draft→published · TTP · quality_score · operation_log · per-platform runs)",
     },
+    "multi-cohort-fairness": {
+        "script": "scripts/audit_multi_cohort_fairness.py",
+        "report_dir": "jobs/reports/multi-cohort-fairness-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§76 + T3.2",
+        "description": "§76 RAI fairness gate · 9 assertions (DI math sanity · cross-cohort halt · single-cohort baseline · rai_halt action present in decisions chain · cleanup)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness"]
 
 
 @router.get("/list")

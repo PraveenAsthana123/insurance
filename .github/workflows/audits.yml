@@ -109,3 +109,6 @@ jobs:
 
       - name: POSTINGS EXECUTOR audit · cron publish + lifecycle (7 assertions)
         run: python3 scripts/audit_postings_executor.py
+
+      - name: §76 MULTI-COHORT FAIRNESS audit · RAI gate triggers on DI < 0.8 (9 assertions)
+        run: python3 scripts/audit_multi_cohort_fairness.py
