@@ -71,7 +71,7 @@ These are operator-aligned polish items · no external blockers.
 - T2.3 drag-and-drop file zone
 - T2.4 content posting scheduler
 
-Estimated effort: 1 hour cumulative · zero external blockers · ~150 LOC.
+Estimated effort: ~30 min remaining (T2.4 closed). Other Tier 2 items already done in commit f810ebc.
 
 ## Cron Stack (after this commit)
 

@@ -55,7 +55,12 @@ const AUDIT_LABELS = {
   'schedule-executor': {
     name: 'Schedule executor (cadence + tenant + monthly math)',
     spec: '§41.3 + §47.6 + §70',
-    description: 'Cron executor invariants · 9 assertions (monthly Dec→Jan · cadence · 0/1-due cases · per-tenant · last_run/next_run state update)',
+    description: 'Cron executor invariants · 12 assertions (monthly Dec→Jan · cadence · EOM sentinel · 0/1-due cases · per-tenant · last_run/next_run state update)',
+  },
+  'postings-executor': {
+    name: 'Postings executor (cron */30 publish loop)',
+    spec: '§38.3 + §41.3 + §70 + T2.4',
+    description: 'Content posting scheduler · 7 assertions (tenant discovery · 0/1-due cases · draft→published · TTP + quality_score · operation_log + per-platform runs)',
   },
 };
 

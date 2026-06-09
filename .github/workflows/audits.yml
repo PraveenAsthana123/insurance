@@ -106,3 +106,6 @@ jobs:
 
       - name: SCHEDULE EXECUTOR audit · cadence + per-tenant + monthly math
         run: python3 scripts/audit_schedule_executor.py
+
+      - name: POSTINGS EXECUTOR audit · cron publish + lifecycle (7 assertions)
+        run: python3 scripts/audit_postings_executor.py

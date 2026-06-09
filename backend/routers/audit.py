@@ -96,11 +96,18 @@ AUDITS = {
         "report_dir": "jobs/reports/schedule-executor-audit",
         "report_pattern": "audit-*.log",
         "spec": "§41.3 + §47.6 + §70",
-        "description": "Schedule cron executor · 9 assertions (monthly math · cadence semantics · 0-due no-op · 1-due execute · multi-tenant · state update)",
+        "description": "Schedule cron executor · 12 assertions (monthly math · cadence semantics · EOM sentinel · 0-due no-op · 1-due execute · multi-tenant · state update)",
+    },
+    "postings-executor": {
+        "script": "scripts/audit_postings_executor.py",
+        "report_dir": "jobs/reports/postings-executor-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§38.3 + §41.3 + §47.6 + §70 + T2.4",
+        "description": "Content posting cron */30 · 7 assertions (tenant discovery · 0-due no-op · 1-due publish · draft→published · TTP · quality_score · operation_log · per-platform runs)",
     },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor"]
 
 
 @router.get("/list")

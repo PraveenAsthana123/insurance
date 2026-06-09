@@ -39,6 +39,7 @@ AUDITS = [
     ("ADVANCED TESTS", "scripts/audit_marketing_advanced.py", "marketing-advanced-audit", 8),
     ("100-CUSTOMER SCALE", "scripts/audit_marketing_100_customers.py", "marketing-100-customers-audit", 9),
     ("SCHEDULE EXECUTOR", "scripts/audit_schedule_executor.py", "schedule-executor-audit", 12),
+    ("POSTINGS EXECUTOR", "scripts/audit_postings_executor.py", "postings-executor-audit", 7),
 ]
 
 
