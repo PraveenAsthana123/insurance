@@ -47,6 +47,11 @@ const AUDIT_LABELS = {
     spec: '§47.6 + §76 + §82.21',
     description: '4-channel · 5-shape DLP · concurrency · autonomous decision loop · RAI fairness gate · anti-replay · invalid channel · channel help',
   },
+  'marketing-100-customers': {
+    name: '100-customer scale E2E (9 assertions)',
+    spec: '§47.6 + §75 + §76 + §82.7',
+    description: '100+ pool · segment execute · timing · correlation_id · metrics aggregate · cohort_distribution · fairness DI · cleanup',
+  },
 };
 
 export default function AdminAuditPage() {

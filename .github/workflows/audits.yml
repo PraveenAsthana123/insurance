@@ -54,6 +54,13 @@ jobs:
           export BEV_POSTGRES_DB=test
           python3 scripts/audit_marketing_advanced.py || true
 
+      - name: 100-CUSTOMER SCALE TEST · 100+ customers · 9 assertions
+        run: |
+          export BEV_POSTGRES_HOST=localhost BEV_POSTGRES_PORT=5432
+          export BEV_POSTGRES_USER=postgres BEV_POSTGRES_PASSWORD=postgres
+          export BEV_POSTGRES_DB=test
+          python3 scripts/audit_marketing_100_customers.py || true
+
       - name: ROUTE SMOKE · in-process TestClient (8 critical routes)
         run: |
           export BEV_POSTGRES_HOST=localhost

@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "policy": "§68.2 — Per-function DB design (primary + secondary tables per process)",
+    "policy": "\u00a768.2 \u2014 Per-function DB design (primary + secondary tables per process)",
     "schema_version": "1.0",
-    "generated_at_note": "Hand-maintained catalog; keep aligned with backend/migrations/*.sql + routers/pipelines.py PIPELINE_CATALOG. Updated 2026-05-26 from migration files 001 / 003 / 010 / 011 / 012.",
+    "generated_at_note": "Hand-maintained catalog; keep aligned with backend/migrations/*.sql + routers/pipelines.py PIPELINE_CATALOG. Updated 2026-06-08 (4 digital-marketing processes added \u00b7 migrations 053/054/055/057) from migration files 001 / 003 / 010 / 011 / 012.",
     "engine": "postgres",
     "default_database": "insur",
     "default_schema": "public",
@@ -16,12 +16,21 @@
       "process_id": "lead_scoring",
       "process_name": "Lead Scoring",
       "primary_table": "dim_customer",
-      "secondary_tables": ["roi_metrics", "model_metrics"],
-      "join_keys": [
-        {"left": "dim_customer.customer_id", "right": "roi_metrics.customer_id"}
+      "secondary_tables": [
+        "roi_metrics",
+        "model_metrics"
       ],
-      "pii_columns": ["dim_customer.email", "dim_customer.phone"],
-      "tenant_column": "(none — fleet table)",
+      "join_keys": [
+        {
+          "left": "dim_customer.customer_id",
+          "right": "roi_metrics.customer_id"
+        }
+      ],
+      "pii_columns": [
+        "dim_customer.email",
+        "dim_customer.phone"
+      ],
+      "tenant_column": "(none \u2014 fleet table)",
       "status": "annotated"
     },
     {
@@ -29,13 +38,25 @@
       "process_id": "churn_prediction",
       "process_name": "Churn Prediction",
       "primary_table": "fact_churn_label",
-      "secondary_tables": ["dim_customer_pilot", "fact_customer_interaction"],
-      "join_keys": [
-        {"left": "fact_churn_label.customer_id", "right": "dim_customer_pilot.customer_id"},
-        {"left": "fact_customer_interaction.customer_id", "right": "dim_customer_pilot.customer_id"}
+      "secondary_tables": [
+        "dim_customer_pilot",
+        "fact_customer_interaction"
       ],
-      "pii_columns": ["dim_customer_pilot.full_name", "dim_customer_pilot.email"],
-      "tenant_column": "(none — pilot table)",
+      "join_keys": [
+        {
+          "left": "fact_churn_label.customer_id",
+          "right": "dim_customer_pilot.customer_id"
+        },
+        {
+          "left": "fact_customer_interaction.customer_id",
+          "right": "dim_customer_pilot.customer_id"
+        }
+      ],
+      "pii_columns": [
+        "dim_customer_pilot.full_name",
+        "dim_customer_pilot.email"
+      ],
+      "tenant_column": "(none \u2014 pilot table)",
       "status": "annotated"
     },
     {
@@ -43,13 +64,27 @@
       "process_id": "demand_forecast",
       "process_name": "Demand Forecast",
       "primary_table": "fact_sales",
-      "secondary_tables": ["dim_store", "dim_date", "product_dim", "store_dim", "forecast_output", "forecast_versions", "forecast_overrides"],
+      "secondary_tables": [
+        "dim_store",
+        "dim_date",
+        "product_dim",
+        "store_dim",
+        "forecast_output",
+        "forecast_versions",
+        "forecast_overrides"
+      ],
       "join_keys": [
-        {"left": "fact_sales.store_id", "right": "dim_store.store_id"},
-        {"left": "fact_sales.date_id", "right": "dim_date.date_id"}
+        {
+          "left": "fact_sales.store_id",
+          "right": "dim_store.store_id"
+        },
+        {
+          "left": "fact_sales.date_id",
+          "right": "dim_date.date_id"
+        }
       ],
       "pii_columns": [],
-      "tenant_column": "(none — public test data)",
+      "tenant_column": "(none \u2014 public test data)",
       "status": "annotated"
     },
     {
@@ -57,11 +92,20 @@
       "process_id": "fraud_detection",
       "process_name": "Fraud Detection",
       "primary_table": "process_transactions",
-      "secondary_tables": ["pipeline_logs", "model_metrics", "model_drift"],
-      "join_keys": [
-        {"left": "process_transactions.process_id", "right": "processes.id"}
+      "secondary_tables": [
+        "pipeline_logs",
+        "model_metrics",
+        "model_drift"
       ],
-      "pii_columns": ["process_transactions.payload_json (PII may appear here)"],
+      "join_keys": [
+        {
+          "left": "process_transactions.process_id",
+          "right": "processes.id"
+        }
+      ],
+      "pii_columns": [
+        "process_transactions.payload_json (PII may appear here)"
+      ],
       "tenant_column": "process_transactions.tenant_id",
       "status": "annotated"
     },
@@ -70,81 +114,193 @@
       "process_id": "cash_flow_forecast",
       "process_name": "Cash Flow Forecast",
       "primary_table": "(to-be-created: fact_cash_flow)",
-      "secondary_tables": ["forecast_output", "forecast_versions"],
+      "secondary_tables": [
+        "forecast_output",
+        "forecast_versions"
+      ],
       "join_keys": [],
       "pii_columns": [],
       "tenant_column": "(pending)",
-      "status": "stub — primary table not yet migrated"
+      "status": "stub \u2014 primary table not yet migrated"
     },
     {
       "dept": "finance",
       "process_id": "month_end_close",
       "process_name": "Month-End Close",
       "primary_table": "(to-be-created: fact_gl_entries)",
-      "secondary_tables": ["pipeline_logs"],
+      "secondary_tables": [
+        "pipeline_logs"
+      ],
       "join_keys": [],
       "pii_columns": [],
       "tenant_column": "(pending)",
-      "status": "stub — primary table not yet migrated"
+      "status": "stub \u2014 primary table not yet migrated"
     },
     {
       "dept": "manufacturing",
       "process_id": "defect_detection_cv",
       "process_name": "Defect Detection (CV)",
       "primary_table": "(to-be-created: fact_defect_inspection)",
-      "secondary_tables": ["pipeline_logs", "model_metrics", "ml_models"],
+      "secondary_tables": [
+        "pipeline_logs",
+        "model_metrics",
+        "ml_models"
+      ],
       "join_keys": [],
       "pii_columns": [],
       "tenant_column": "(pending)",
-      "status": "stub — primary table not yet migrated"
+      "status": "stub \u2014 primary table not yet migrated"
     },
     {
       "dept": "manufacturing",
       "process_id": "predictive_maintenance",
       "process_name": "Predictive Maintenance",
       "primary_table": "(to-be-created: fact_machine_telemetry)",
-      "secondary_tables": ["pipeline_logs", "model_metrics"],
+      "secondary_tables": [
+        "pipeline_logs",
+        "model_metrics"
+      ],
       "join_keys": [],
       "pii_columns": [],
       "tenant_column": "(pending)",
-      "status": "stub — primary table not yet migrated"
+      "status": "stub \u2014 primary table not yet migrated"
     },
     {
       "dept": "manufacturing",
       "process_id": "oee_optimization",
       "process_name": "OEE Optimization",
       "primary_table": "(to-be-created: fact_production_log)",
-      "secondary_tables": ["model_metrics"],
+      "secondary_tables": [
+        "model_metrics"
+      ],
       "join_keys": [],
       "pii_columns": [],
       "tenant_column": "(pending)",
-      "status": "stub — primary table not yet migrated"
+      "status": "stub \u2014 primary table not yet migrated"
     },
     {
       "dept": "customer-experience",
       "process_id": "ticket_auto_reply",
       "process_name": "Ticket Auto-Reply",
       "primary_table": "(to-be-created: fact_support_ticket)",
-      "secondary_tables": ["pipeline_logs", "model_metrics"],
+      "secondary_tables": [
+        "pipeline_logs",
+        "model_metrics"
+      ],
       "join_keys": [],
-      "pii_columns": ["fact_support_ticket.body (PII may appear)"],
+      "pii_columns": [
+        "fact_support_ticket.body (PII may appear)"
+      ],
       "tenant_column": "(pending)",
-      "status": "stub — primary table not yet migrated"
+      "status": "stub \u2014 primary table not yet migrated"
     },
     {
       "dept": "supply-chain",
       "process_id": "demand_sensing",
       "process_name": "Demand Sensing",
       "primary_table": "fact_shipment",
-      "secondary_tables": ["dim_sku", "dim_supplier", "dim_customer", "external_features"],
-      "join_keys": [
-        {"left": "fact_shipment.sku_id", "right": "dim_sku.sku_id"},
-        {"left": "fact_shipment.supplier_id", "right": "dim_supplier.supplier_id"},
-        {"left": "fact_shipment.customer_id", "right": "dim_customer.customer_id"}
+      "secondary_tables": [
+        "dim_sku",
+        "dim_supplier",
+        "dim_customer",
+        "external_features"
       ],
-      "pii_columns": ["dim_customer.email"],
-      "tenant_column": "(none — pilot table)",
+      "join_keys": [
+        {
+          "left": "fact_shipment.sku_id",
+          "right": "dim_sku.sku_id"
+        },
+        {
+          "left": "fact_shipment.supplier_id",
+          "right": "dim_supplier.supplier_id"
+        },
+        {
+          "left": "fact_shipment.customer_id",
+          "right": "dim_customer.customer_id"
+        }
+      ],
+      "pii_columns": [
+        "dim_customer.email"
+      ],
+      "tenant_column": "(none \u2014 pilot table)",
       "status": "annotated"
+    },
+    {
+      "dept": "digital-marketing",
+      "process_id": "content_publishing",
+      "process_name": "Job + Blog Content Publishing",
+      "primary_table": "content_postings",
+      "secondary_tables": [
+        "content_posting_runs"
+      ],
+      "join_keys": [
+        {
+          "left": "content_posting_runs.posting_id",
+          "right": "content_postings.id"
+        }
+      ],
+      "pii_columns": [],
+      "tenant_column": "tenant_id",
+      "status": "annotated",
+      "policy_refs": "\u00a764.13 + \u00a738.3 + \u00a776 + \u00a782.7 (operation_log tracking)"
+    },
+    {
+      "dept": "digital-marketing",
+      "process_id": "campaign_scheduling",
+      "process_name": "Daily/Weekly/Monthly Campaign Schedules",
+      "primary_table": "campaign_schedules",
+      "secondary_tables": [
+        "marketing_campaigns",
+        "marketing_campaign_runs"
+      ],
+      "join_keys": [
+        {
+          "left": "campaign_schedules.campaign_id",
+          "right": "marketing_campaigns.id"
+        }
+      ],
+      "pii_columns": [],
+      "tenant_column": "tenant_id",
+      "status": "annotated",
+      "policy_refs": "\u00a770 (cron audit pattern \u00b7 \u00a764.13)"
+    },
+    {
+      "dept": "digital-marketing",
+      "process_id": "master_data_management",
+      "process_name": "Master Contacts (CSV upload + manual add + dedup)",
+      "primary_table": "master_contacts",
+      "secondary_tables": [
+        "voice_ai_customers"
+      ],
+      "join_keys": [
+        {
+          "left": "master_contacts.contact_ref",
+          "right": "voice_ai_customers.customer_ref"
+        }
+      ],
+      "pii_columns": [
+        "master_contacts.email",
+        "master_contacts.phone",
+        "master_contacts.full_name"
+      ],
+      "tenant_column": "tenant_id",
+      "status": "annotated",
+      "policy_refs": "\u00a776 (consent gates) + \u00a782.7 (quality_score) + \u00a782.21 (PII redaction)"
+    },
+    {
+      "dept": "digital-marketing",
+      "process_id": "autonomous_campaigning",
+      "process_name": "Autonomous AI Campaign Agent (decision loop)",
+      "primary_table": "autonomous_agent_runs",
+      "secondary_tables": [
+        "marketing_campaigns",
+        "marketing_campaign_runs"
+      ],
+      "join_keys": [],
+      "pii_columns": [],
+      "tenant_column": "tenant_id",
+      "status": "annotated",
+      "policy_refs": "\u00a738.3 (per-decision audit) + \u00a776 (RAI fairness gate \u00b7 MANDATORY DI\u22650.8) + \u00a780 (decision system)"
     }
   ],
   "registered_databases": [
@@ -152,7 +308,9 @@
       "db_id": "insur",
       "engine": "postgres",
       "purpose": "primary application + ML pipeline data",
-      "schemas": ["public"],
+      "schemas": [
+        "public"
+      ],
       "readonly_in_viewer": true
     }
   ]

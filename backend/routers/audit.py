@@ -84,9 +84,16 @@ AUDITS = {
         "spec": "§47.6 + §57.7 + §64.13 + §76 + §82.21",
         "description": "Advanced suite · 8 tests (multi-channel + 5-shape adversarial DLP + concurrency + autonomous AI + RAI fairness + anti-replay + invalid + channel help)",
     },
+    "marketing-100-customers": {
+        "script": "scripts/audit_marketing_100_customers.py",
+        "report_dir": "jobs/reports/marketing-100-customers-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§47.6 + §75 + §76 + §82.7",
+        "description": "100+ customer scale E2E · 9 assertions (pool · execute · timing · corr_id · metrics · cohort_dist · fairness · cleanup)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers"]
 
 
 @router.get("/list")

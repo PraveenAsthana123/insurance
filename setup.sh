@@ -304,6 +304,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_marketing_advanced.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── 100-customer scale E2E test ──"
+  [ -f scripts/audit_marketing_100_customers.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_marketing_100_customers.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {
