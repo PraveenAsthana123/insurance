@@ -6,6 +6,7 @@ import {
 import CorrectionsPanel from '../../../components/CorrectionsPanel';
 import AuditPanel from '../../../components/AuditPanel';
 import ModelRegistryPanel from '../../../components/ModelRegistryPanel';
+import ShapPanel from '../../../components/ShapPanel';
 import { useInputEvent } from '../../../hooks/useInputEvent';
 import {
   ResponsiveContainer,
@@ -712,6 +713,7 @@ export function AnalysisTab({ proc, dept }) {
       accent="#dc2626"
       todos={[]}
     >
+      <ShapPanel accent="#dc2626" modelName="analysis-model" />
       <IPOSection number="1" kind="input" title="Input — Business signals" subtitle="Issues, department mission, data process, and KPI targets.">
         <Field label="Department mission">{dept.mission}</Field>
         <Field label={`Issues (${issues.length})`}>
@@ -1488,6 +1490,7 @@ export function TestsTab({ proc, dept }) {
       accent="#f59e0b"
       todos={[]}
     >
+      <ShapPanel accent="#dc2626" modelName="expai-model" />
       <IPOSection number="1" kind="input" title="Input — Test plan" subtitle="Per global §64.30 12-tier testing + §65.8 8-tier agent assignment.">
         <Field label="Test surfaces">API · Frontend · Backend · Drills (§43)</Field>
       </IPOSection>

@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import ShapPanel from '../ShapPanel';
 
 /* ── Statistical Data ── */
 const DESCRIPTIVE_STATS = [
@@ -110,6 +111,7 @@ export default function ProcessAnalysisTab() {
       accent="#dc2626"
       todos={[]}
     >
+      <ShapPanel accent="#dc2626" modelName="process-model" />
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
 
       {/* Sub-tab navigation */}
