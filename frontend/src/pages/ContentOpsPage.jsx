@@ -347,10 +347,42 @@ export default function ContentOpsPage() {
               <code style={{...small, display:'block', background:'#f8fafc', padding:4, marginBottom:6}}>
                 full_name,email,phone,segment
               </code>
+              <div style={{ display: 'flex', gap: 6, marginBottom: 6, alignItems: 'center' }}>
+                <input type="file" accept=".csv,text/csv,text/plain"
+                       onChange={async (e) => {
+                         const f = e.target.files?.[0];
+                         if (!f) return;
+                         if (f.size > 5 * 1024 * 1024) {
+                           setError('File too large (>5MB). Paste instead.');
+                           e.target.value = '';
+                           return;
+                         }
+                         try {
+                           const text = await f.text();
+                           setBulkText(text);
+                           setError(null);
+                         } catch (err) {
+                           setError(`File read failed: ${err.message}`);
+                         }
+                         e.target.value = '';  // re-pickable
+                       }}
+                       style={{ flex: 1, fontSize: 11 }} />
+                <button type="button"
+                        onClick={() => setBulkText('')}
+                        disabled={!bulkText}
+                        style={{...btn('#94a3b8'), padding: '4px 8px'}}>
+                  Clear
+                </button>
+              </div>
               <textarea value={bulkText} onChange={(e) => setBulkText(e.target.value)}
                         placeholder="full_name,email,phone,segment&#10;Sarah Chen,sarah@ex.com,+15551234567,gold"
                         style={{...input, minHeight: 140, fontFamily: 'ui-monospace'}} />
-              <button onClick={bulkUpload} disabled={busy} style={btn('#16a34a')}>
+              <div style={{...small, marginBottom: 6}}>
+                {bulkText.trim()
+                  ? `${Math.max(0, bulkText.split('\n').filter((l) => l.trim()).length - 1)} data rows · ${bulkText.length} chars`
+                  : 'No data loaded'}
+              </div>
+              <button onClick={bulkUpload} disabled={busy || !bulkText.trim()} style={btn('#16a34a')}>
                 📤 Bulk Upload
               </button>
             </div>

@@ -28,7 +28,11 @@ logging.disable(logging.CRITICAL)
 
 
 def _next_run_after(schedule, now):
-    """Compute the next next_run_at after the just-fired one."""
+    """Compute the next next_run_at after the just-fired one.
+
+    Calendar-correct monthly math: rolls year on December → January.
+    Preserves day_of_month from the original schedule when present.
+    """
     cadence = schedule["cadence"]
     if cadence == "once":
         return None  # one-shot · disable after first run
@@ -37,9 +41,39 @@ def _next_run_after(schedule, now):
     if cadence == "weekly":
         return now + timedelta(days=7)
     if cadence == "monthly":
-        # rough: 30 days · operator can refine with proper month math
-        return now + timedelta(days=30)
+        # Move to first day of next month, then set day-of-month + time-of-day.
+        dom = schedule.get("day_of_month") or 1
+        tod = schedule.get("time_of_day_utc") or "09:00"
+        hh, mm = (int(x) for x in tod.split(":"))
+        year = now.year + (1 if now.month == 12 else 0)
+        month = 1 if now.month == 12 else now.month + 1
+        # Clamp to 28 to avoid Feb edge (schemas enforce 1-28 already)
+        day = min(int(dom), 28)
+        return datetime(year, month, day, hh, mm,
+                          tzinfo=timezone.utc)
     return None
+
+
+def _list_tenant_ids() -> list[str]:
+    """Discover all tenants with at least one schedule.
+
+    Empty list → fall back to 'default' so single-tenant deployments
+    still work without explicit tenant rows.
+    """
+    try:
+        from core.config import get_settings
+        import psycopg2
+        with psycopg2.connect(get_settings().database_url) as c, c.cursor() as cur:
+            cur.execute(
+                "SELECT DISTINCT tenant_id FROM campaign_schedules "
+                "WHERE enabled = TRUE "
+                "AND next_run_at IS NOT NULL AND next_run_at <= NOW()",
+            )
+            tenants = [row[0] for row in cur.fetchall() if row[0]]
+        return tenants or ["default"]
+    except Exception as e:
+        print(f"  (tenant discovery warn: {type(e).__name__}: {e})")
+        return ["default"]
 
 
 def main() -> int:
@@ -59,28 +93,44 @@ def main() -> int:
     app = create_app()
     client = TestClient(app)
 
-    # 1. Fetch due
-    r = client.get("/api/v1/content-ops/schedules/due")
-    if r.status_code != 200:
-        print(f"  ✗ FATAL · /schedules/due returned {r.status_code}")
-        return 1
-    due = r.json()
-    print(f"  1. fetched due schedules · n={len(due)}")
-    if not due:
+    # 1. Discover all tenants with due schedules · iterate per-tenant
+    tenants = _list_tenant_ids()
+    print(f"  1. tenants with due schedules · {len(tenants)} ({', '.join(tenants[:5])}{'…' if len(tenants) > 5 else ''})")
+
+    all_due = []
+    for t in tenants:
+        r = client.get(
+            "/api/v1/content-ops/schedules/due",
+            headers={"X-Tenant-ID": t},
+        )
+        if r.status_code != 200:
+            print(f"  ✗ /schedules/due failed for tenant '{t}': {r.status_code}")
+            continue
+        for sched in r.json():
+            sched["_tenant_id"] = t
+            all_due.append(sched)
+
+    print(f"  2. total due schedules across tenants · n={len(all_due)}")
+    if not all_due:
         print("  → nothing to do")
         return 0
 
-    # 2. For each due · execute the associated campaign + update schedule
+    # 3. For each due · execute the associated campaign + update schedule
     success = 0
     failed = 0
     now = datetime.now(timezone.utc)
     settings = get_settings()
 
-    for sched in due:
+    for sched in all_due:
         sid = sched["id"]
         cid = sched["campaign_id"]
-        # Execute
-        r = client.post(f"/api/v1/marketing-campaigns/{cid}/execute", json={})
+        tenant = sched.get("_tenant_id", "default")
+        # Execute with tenant header propagated · per §41.3 multi-tenant scoping
+        r = client.post(
+            f"/api/v1/marketing-campaigns/{cid}/execute",
+            json={},
+            headers={"X-Tenant-ID": tenant},
+        )
         ok = r.status_code == 200
         runs_created = r.json().get("runs_created", 0) if ok else 0
 
@@ -109,13 +159,13 @@ def main() -> int:
 
         if ok:
             success += 1
-            print(f"  ▶ sched {sid:>4} · campaign {cid:>4} · cadence={sched['cadence']:<7}"
+            print(f"  ▶ tenant={tenant:<15} sched {sid:>4} · campaign {cid:>4} · cadence={sched['cadence']:<7}"
                   f" runs={runs_created} · next={next_run.isoformat() if next_run else 'DISABLED'}")
         else:
             failed += 1
-            print(f"  ✗ sched {sid:>4} · campaign {cid:>4} · execute failed")
+            print(f"  ✗ tenant={tenant:<15} sched {sid:>4} · campaign {cid:>4} · execute failed (http={r.status_code})")
 
-    print(f"\n  Summary: {success} executed · {failed} failed of {len(due)} due")
+    print(f"\n  Summary: {success} executed · {failed} failed of {len(all_due)} due across {len(tenants)} tenants")
     return 0 if failed == 0 else 1
 
 
