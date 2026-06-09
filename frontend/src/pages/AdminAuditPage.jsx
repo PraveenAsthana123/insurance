@@ -66,6 +66,7 @@ export default function AdminAuditPage() {
   const [history, setHistory] = useState([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+  const [historyWindow, setHistoryWindow] = useState(10);  // T2.1 · last X runs filter
 
   const fetchJSON = async (path, opts = {}) => {
     const r = await fetch(`${API_BASE}${path}`, {
@@ -95,7 +96,7 @@ export default function AdminAuditPage() {
     try {
       const [latest, hist] = await Promise.all([
         fetchJSON(`/api/v1/insur/audit/${kind}/latest`),
-        fetchJSON(`/api/v1/insur/audit/${kind}/history?n=10`),
+        fetchJSON(`/api/v1/insur/audit/${kind}/history?n=${historyWindow}`),
       ]);
       setReport(latest);
       setHistory(hist.history || []);
@@ -132,6 +133,8 @@ export default function AdminAuditPage() {
   };
 
   useEffect(() => { loadList(); }, []);
+  // T2.1 · re-fetch history when window changes (operator slider)
+  useEffect(() => { if (selected) loadReport(selected); }, [historyWindow]);
 
   const formatTime = (ts) => {
     if (!ts) return 'never';
@@ -274,14 +277,62 @@ export default function AdminAuditPage() {
                 ? '#64748b' : passRate >= 90
                 ? '#16a34a' : passRate >= 70
                 ? '#d97706' : '#dc2626';
+              // T2.2 · sparkline (cumulative PASS over time)
+              // Oldest → newest left-to-right. Each step: +1 if exit_code===0
+              const oldestFirst = [...history].reverse();
+              let cum = 0;
+              const sparkPoints = oldestFirst.map((h, i) => {
+                if (h.exit_code === 0) cum++;
+                return { i, cum };
+              });
+              const sparkMax = sparkPoints.length ? sparkPoints[sparkPoints.length - 1].cum : 1;
+              const sparkPath = sparkPoints.length > 1
+                ? sparkPoints.map((p, i) => {
+                    const x = (i / (sparkPoints.length - 1)) * 60;
+                    const y = 20 - (p.cum / Math.max(sparkMax, 1)) * 18;
+                    return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+                  }).join(' ')
+                : null;
               return (
+                <>
+                {/* T2.1 · window picker */}
+                <div style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  marginBottom: 6,
+                }}>
+                  <span style={{ fontSize: 11, color: '#64748b' }}>
+                    Showing last {history.length} runs · pick a different window:
+                  </span>
+                  <select value={historyWindow}
+                          onChange={(e) => setHistoryWindow(parseInt(e.target.value, 10))}
+                          style={{
+                            padding: '2px 6px', fontSize: 11, borderRadius: 4,
+                            border: '1px solid #e2e8f0',
+                          }}>
+                    <option value="10">last 10 runs</option>
+                    <option value="30">last 30 runs</option>
+                    <option value="90">last 90 runs</option>
+                    <option value="365">last year</option>
+                  </select>
+                </div>
                 <div style={{
                   display: 'flex', gap: 8, marginBottom: 8, fontSize: 11,
                 }}>
                   <div style={{
                     flex: 1, padding: 6, background: '#f0fdf4',
                     border: '1px solid #16a34a', borderRadius: 4,
+                    position: 'relative', overflow: 'hidden',
                   }}>
+                    {sparkPath && (
+                      <svg width="60" height="20"
+                           style={{
+                             position: 'absolute', top: 4, right: 4,
+                             opacity: 0.5,
+                           }}>
+                        <path d={sparkPath} stroke="#15803d" strokeWidth="1.5"
+                              fill="none" />
+                      </svg>
+                    )}
                     <div style={{ fontSize: 16, fontWeight: 700, color: '#15803d' }}>
                       {passed}
                     </div>
@@ -315,6 +366,7 @@ export default function AdminAuditPage() {
                     <div style={{ color: '#475569' }}>RUNS</div>
                   </div>
                 </div>
+                </>
               );
             })()}
             <h3 style={{ margin: '0 0 8px', fontSize: 14 }}>

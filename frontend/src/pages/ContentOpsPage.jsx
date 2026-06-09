@@ -369,7 +369,37 @@ export default function ContentOpsPage() {
               <code style={{...small, display:'block', background:'#f8fafc', padding:4, marginBottom:6}}>
                 full_name,email,phone,segment
               </code>
-              <div style={{ display: 'flex', gap: 6, marginBottom: 6, alignItems: 'center' }}>
+              {/* T2.3 · drag-and-drop file zone + file-picker fallback */}
+              <div
+                onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                onDrop={async (e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  const f = e.dataTransfer.files?.[0];
+                  if (!f) return;
+                  if (f.size > 5 * 1024 * 1024) {
+                    setError('File too large (>5MB). Paste instead.');
+                    return;
+                  }
+                  if (!/\.(csv|txt)$/i.test(f.name)) {
+                    setError(`Unsupported file type: ${f.name}. Expected .csv or .txt`);
+                    return;
+                  }
+                  try {
+                    const text = await f.text();
+                    setBulkText(text);
+                    setError(null);
+                  } catch (err) {
+                    setError(`File read failed: ${err.message}`);
+                  }
+                }}
+                style={{
+                  padding: 10, marginBottom: 6,
+                  border: '2px dashed #cbd5e1', borderRadius: 6,
+                  background: '#f8fafc', textAlign: 'center', fontSize: 12,
+                  color: '#475569',
+                }}>
+                Drop CSV here · or
                 <input type="file" accept=".csv,text/csv,text/plain"
                        onChange={async (e) => {
                          const f = e.target.files?.[0];
@@ -386,13 +416,13 @@ export default function ContentOpsPage() {
                          } catch (err) {
                            setError(`File read failed: ${err.message}`);
                          }
-                         e.target.value = '';  // re-pickable
+                         e.target.value = '';
                        }}
-                       style={{ flex: 1, fontSize: 11 }} />
+                       style={{ fontSize: 11, marginLeft: 8 }} />
                 <button type="button"
                         onClick={() => setBulkText('')}
                         disabled={!bulkText}
-                        style={{...btn('#94a3b8'), padding: '4px 8px'}}>
+                        style={{...btn('#94a3b8'), padding: '2px 8px', marginLeft: 8}}>
                   Clear
                 </button>
               </div>
