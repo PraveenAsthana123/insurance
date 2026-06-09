@@ -1,5 +1,6 @@
 import VoiceAIDemoPage from './pages/VoiceAIDemoPage';
 import VoiceAICampaignPage from './pages/VoiceAICampaignPage';
+import VoiceAIE2EPage from './pages/VoiceAIE2EPage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
@@ -94,6 +95,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/voice-ai-demo" element={<VoiceAIDemoPage />} />
           <Route path="/voice-ai-campaigns" element={<VoiceAICampaignPage />} />
+          <Route path="/voice-ai-e2e" element={<VoiceAIE2EPage />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/data-flow" element={<DataFlowPage />} />

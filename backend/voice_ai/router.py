@@ -179,3 +179,43 @@ def patch_run(run_id: int, body: CampaignRunUpdate, request: Request):
 @router.get("/campaigns/{campaign_id}/metrics", response_model=CampaignMetrics)
 def campaign_metrics(campaign_id: int, request: Request):
     return cs.campaign_metrics(campaign_id, _tenant(request))
+
+
+# ─── End-to-end observability + explainability + voice catalog ────
+from . import e2e_services as e2e
+
+
+@router.get("/e2e/phases")
+def e2e_phase_breakdown(request: Request):
+    """8-phase × component breakdown with live metrics. Per §64.34."""
+    return e2e.phase_breakdown(_tenant(request))
+
+
+@router.get("/e2e/sessions/{session_id}/tracking")
+def e2e_session_tracking(session_id: str, request: Request):
+    """Per-session timeline · date/timestamp/user/correlation_id."""
+    return e2e.session_tracking(session_id, _tenant(request))
+
+
+@router.get("/e2e/benchmark")
+def e2e_benchmark(request: Request):
+    """Manual vs Automatic per-phase comparison. Per §64.3 + §64.4."""
+    return e2e.benchmark(_tenant(request))
+
+
+@router.get("/e2e/quality")
+def e2e_quality(request: Request):
+    """Per-phase quality scoring · 0..1. Per §75."""
+    return e2e.quality_scoring(_tenant(request))
+
+
+@router.get("/e2e/sessions/{session_id}/explainability")
+def e2e_explainability(session_id: str, request: Request):
+    """Per-turn attribution + product match scoring. Per §48 XAI MANDATORY."""
+    return e2e.explainability_trace(session_id, _tenant(request))
+
+
+@router.get("/e2e/voices")
+def e2e_voice_catalog():
+    """Language + voice quality catalog · 23 langs · 12 Indian. Per §46 + §76."""
+    return e2e.voice_catalog()
