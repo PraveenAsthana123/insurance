@@ -182,9 +182,16 @@ AUDITS = {
         "spec": "12-lens Responsible AI per-process",
         "description": "Responsible AI 12-lens · 11 assertions (Input/Process/Output/Recommendation/Score/ExpAI/Portability/Performance/Ethical/Governance/Interpretable/Fairness · per-lens library probe · per-process score + outcome)",
     },
+    "data-pipeline": {
+        "script": "scripts/audit_data_pipeline.py",
+        "report_dir": "jobs/reports/data-pipeline-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "5-phase Data tab structure per operator brief",
+        "description": "Data Pipeline 5-phase · 11 assertions (Inventory · EDA · Quality · Image · Conversion · one-row-per-task · info vs action card · IPO + status one-liner · 19 tasks)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing", "dept-submenu-deeplinks", "decision-feedback", "pipeline-modes", "use-cases", "responsible-ai"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing", "dept-submenu-deeplinks", "decision-feedback", "pipeline-modes", "use-cases", "responsible-ai", "data-pipeline"]
 
 
 @router.get("/list")

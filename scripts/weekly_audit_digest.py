@@ -51,6 +51,7 @@ AUDITS = [
     ("PIPELINE MODES", "scripts/audit_pipeline_modes.py", "pipeline-modes-audit", 11),
     ("USE CASES (§94)", "scripts/audit_use_cases.py", "use-cases-audit", 11),
     ("RESPONSIBLE AI", "scripts/audit_responsible_ai.py", "responsible-ai-audit", 11),
+    ("DATA PIPELINE", "scripts/audit_data_pipeline.py", "data-pipeline-audit", 11),
 ]
 
 

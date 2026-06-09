@@ -142,3 +142,6 @@ jobs:
 
       - name: RESPONSIBLE AI · 12-lens per-process (11 assertions)
         run: python3 scripts/audit_responsible_ai.py
+
+      - name: DATA PIPELINE · 5-phase per-process (11 assertions)
+        run: python3 scripts/audit_data_pipeline.py

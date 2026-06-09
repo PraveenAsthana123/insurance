@@ -8,6 +8,7 @@ import AuditPanel from '../../../components/AuditPanel';
 import HITLPanel from '../../../components/HITLPanel';
 import FeedbackPanel from '../../../components/FeedbackPanel';
 import ResponsibleAIPanel from '../../../components/ResponsibleAIPanel';
+import DataPipelinePanel from '../../../components/DataPipelinePanel';
 import ModelRegistryPanel from '../../../components/ModelRegistryPanel';
 import ShapPanel from '../../../components/ShapPanel';
 import { useInputEvent } from '../../../hooks/useInputEvent';
@@ -591,6 +592,7 @@ export function DataTab({ proc, dept }) {
       accent="#0ea5e9"
       todos={[]}
     >
+      <DataPipelinePanel accent="#0ea5e9" processId="fraud-ring-detection" />
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         {d.summary} <DerivedBadge derived={!!d.derived} />
       </p>

@@ -117,6 +117,11 @@ const AUDIT_LABELS = {
     spec: '12-lens (Input/Process/Output/Rec/Score/ExpAI/Port/Perf/Ethical/Gov/Interpret/Fair)',
     description: '11 assertions · 12 lens cards · per-lens library probe · per-process score + outcome · summary report aggregation',
   },
+  'data-pipeline': {
+    name: 'Data Pipeline 5-phase per-process',
+    spec: '5-phase (Inventory · EDA · Quality · Image · Conversion)',
+    description: '11 assertions · one-row-per-task · info vs action card · journey flow · IPO + status one-liner · 19 tasks across 5 phases',
+  },
 };
 
 export default function AdminAuditPage() {

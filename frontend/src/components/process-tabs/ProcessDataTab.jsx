@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import DataPipelinePanel from '../DataPipelinePanel';
 
 /* ---- DATA INFO MAP (from original) ---- */
 const DATA_INFO = {
@@ -259,6 +260,7 @@ export default function ProcessDataTab({ process, dept }) {
       accent="#0ea5e9"
       todos={[]}
     >
+      <DataPipelinePanel accent="#0ea5e9" processId="fraud-ring-detection" />
     <div>
       {/* Section Nav */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>
