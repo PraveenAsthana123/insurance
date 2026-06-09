@@ -125,7 +125,8 @@ def create_app() -> FastAPI:
     from routers.admin_feedback import router as admin_feedback_router  # /api/v1/admin/feedback rollup
     from routers.audit import router as audit_router  # /api/v1/insur/audit/* — audit triad (§64.22 + §64.29 + §58/§63 + §90 L15)
     from voice_ai.router import router as voice_ai_router  # /api/v1/voice-ai/* — §90 L15 E2E demo + campaigns + observability
-    from marketing_campaigns.router import router as marketing_campaigns_router  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from marketing_campaigns.router import router as marketing_campaigns_router
+    from content_ops.router import router as content_ops_router  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -172,6 +173,7 @@ def create_app() -> FastAPI:
     app.include_router(audit_router)                # /api/v1/insur/audit/* — audit triad + L15
     app.include_router(voice_ai_router)             # /api/v1/voice-ai/* — E2E + campaigns + observability (28 endpoints)
     app.include_router(marketing_campaigns_router)  # /api/v1/marketing-campaigns/* — multi-channel (email/banner/survey/form)
+    app.include_router(content_ops_router)          # /api/v1/content-ops/* — postings + contacts + schedules
 
     return app
 
