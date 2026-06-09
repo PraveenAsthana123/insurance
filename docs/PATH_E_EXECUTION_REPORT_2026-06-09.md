@@ -39,7 +39,25 @@ Plus earlier in same session:
 - `9cf843e4` README rewrite
 - `6e490afc` T7.10 RLHF correction DB
 
-**Total session: 10 commits · ~2,000+ lines added/changed**
+**Total session: 13 commits · ~2,500+ lines added/changed**
+
+## Backend-wire commits (3 added after operator "fix all · I will be away")
+
+| # | Hash | Component | Tabs wired | Backend |
+|---|---|---|---|---|
+| 11 | `4a416e14` | `<CorrectionsPanel>` | ProcessFeedbackTab · ProcessGovernanceTab · GovernanceAITab | `/api/v1/corrections/*` (T7.10) |
+| 12 | `9f1915cc` | `<AuditPanel>` | ProcessGovernanceTab · GovernanceAITab | `/api/v1/insur/audit/list` (§38.3) |
+| 13 | `88eacc60` | `<E2ELatencyPanel>` | ProcessTestingTab · ProcessAccuracyTab | `/api/v1/marketing-kpis/e2e-latencies` (T3.4) |
+
+Each panel pattern:
+- 4-tile summary header
+- Per-row data table
+- LIVE BACKEND green pill
+- Honest empty-state (no fake data)
+- Explicit error state if backend unreachable
+- Source attribution at bottom
+
+**8 total backend-wire injections** across 8 tabs (3 + 2 + 3). Backend pipeline now visible end-to-end: cron → DB → UI.
 
 ## Test results
 
