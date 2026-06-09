@@ -122,6 +122,29 @@ def main() -> int:
     assert_("5. once · None (disable after fire)",
             nxt is None)
 
+    # ── 5a. EOM sentinel · Feb 1 → next Feb 28 (non-leap year) ─
+    sched = {"cadence": "monthly", "day_of_month": 0, "time_of_day_utc": "23:00"}
+    feb_now = datetime(2026, 1, 31, 12, 0, tzinfo=timezone.utc)
+    nxt = rds._next_run_after(sched, feb_now)
+    # From Jan 31 the executor computes "next month" = Feb · EOM = 28
+    assert_("5a. EOM sentinel · Jan→Feb · day=28",
+            nxt and nxt.month == 2 and nxt.day == 28 and nxt.hour == 23,
+            f"got {nxt}")
+
+    # ── 5b. EOM sentinel · Mar → Apr · day=30 ─────────
+    mar_now = datetime(2026, 3, 31, 12, 0, tzinfo=timezone.utc)
+    nxt = rds._next_run_after(sched, mar_now)
+    assert_("5b. EOM sentinel · Mar→Apr · day=30",
+            nxt and nxt.month == 4 and nxt.day == 30,
+            f"got {nxt}")
+
+    # ── 5c. EOM sentinel · May → Jun · day=30 ─────────
+    may_now = datetime(2026, 5, 31, 12, 0, tzinfo=timezone.utc)
+    nxt = rds._next_run_after(sched, may_now)
+    assert_("5c. EOM sentinel · May→Jun · day=30",
+            nxt and nxt.month == 6 and nxt.day == 30,
+            f"got {nxt}")
+
     # ── 6. Tenant discovery returns ['default'] for empty ─
     tenants = rds._list_tenant_ids()
     assert_("6. tenant discovery returns ≥1 tenant",
@@ -215,8 +238,8 @@ def main() -> int:
 
     cleaned = _cleanup()
     print(f"\n  post-cleanup · removed {cleaned} test row(s)")
-    print(f"  Summary: {9 - fails}/9 pass · {fails} fail")
-    print(f"  Reference: §41.3 + §47.6 + §57.7 + §70")
+    print(f"  Summary: {12 - fails}/12 pass · {fails} fail")
+    print(f"  Reference: §41.3 + §47.6 + §57.7 + §70 + EOM cadence (mig 058)")
     return 0 if fails == 0 else 1
 
 

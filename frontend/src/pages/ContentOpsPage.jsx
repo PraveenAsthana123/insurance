@@ -455,10 +455,18 @@ export default function ContentOpsPage() {
               </select>
             )}
             {scheduleForm.cadence === 'monthly' && (
-              <input type="number" min="1" max="28" value={scheduleForm.day_of_month}
-                     onChange={(e) => setScheduleForm({...scheduleForm, day_of_month: e.target.value})}
-                     placeholder="Day of month (1-28)"
-                     style={input} />
+              <div style={{ marginBottom: 6 }}>
+                <select value={scheduleForm.day_of_month}
+                        onChange={(e) => setScheduleForm({...scheduleForm,
+                            day_of_month: e.target.value})}
+                        style={{...input, marginBottom: 4}}>
+                  <option value="0">Last day of month (Feb→28 · Apr→30 · etc.)</option>
+                  {Array.from({length: 28}, (_, i) => i + 1).map((d) => (
+                    <option key={d} value={d}>Day {d}</option>
+                  ))}
+                </select>
+                <div style={small}>0 = end-of-month (resolves per-month dynamically · §82.7)</div>
+              </div>
             )}
             <button onClick={createSchedule} disabled={busy} style={btn('#d97706')}>
               Create Schedule

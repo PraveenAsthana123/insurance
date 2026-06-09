@@ -139,8 +139,10 @@ class ScheduleCreate(BaseModel):
                                               description="HH:MM · for daily/weekly/monthly")
     day_of_week: Optional[int] = Field(None, ge=0, le=6,
                                           description="0=Sun · for weekly")
-    day_of_month: Optional[int] = Field(None, ge=1, le=28,
-                                            description="1-28 · for monthly")
+    day_of_month: Optional[int] = Field(
+        None, ge=0, le=28,
+        description="for monthly · 1-28 = explicit day · 0 = last day of month (Feb→28 · Apr→30)"
+    )
     scheduled_at: Optional[datetime] = Field(None, description="for cadence=once")
 
 

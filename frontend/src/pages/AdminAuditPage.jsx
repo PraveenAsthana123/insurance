@@ -276,14 +276,21 @@ export default function AdminAuditPage() {
               {[...history].reverse().map((h, i) => {
                 const max = Math.max(...history.map((x) => x.size_bytes || 1), 1);
                 const heightPct = Math.max(5, (h.size_bytes / max) * 100);
+                // Heuristic: filename contains pass indicator OR exit_code===0
+                const failed = h.exit_code != null
+                  ? h.exit_code !== 0
+                  : (h.path || '').toLowerCase().includes('fail');
+                const passed = h.exit_code === 0;
+                const color = passed ? '#16a34a' : failed ? '#dc2626' : '#1e40af';
                 return (
                   <div key={i}
-                       title={`${formatTime(h.run_at)} · ${h.size_bytes} B`}
+                       title={`${formatTime(h.run_at)} · ${h.size_bytes} B`
+                              + (h.exit_code != null ? ` · exit ${h.exit_code}` : '')}
                        style={{
                          flex: 1,
                          minWidth: 8,
                          height: `${heightPct}%`,
-                         background: '#1e40af',
+                         background: color,
                          borderRadius: '2px 2px 0 0',
                          transition: 'height 0.3s',
                        }} />

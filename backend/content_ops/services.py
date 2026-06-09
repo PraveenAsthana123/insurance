@@ -481,16 +481,33 @@ def _compute_next_run(s: ScheduleCreate, now: datetime) -> Optional[datetime]:
             candidate += timedelta(days=7)
         return candidate
     if s.cadence == "monthly":
+        # Sentinel 0 = "last day of month" · resolved per current month
+        # (Feb → 28 · Apr/Jun/Sep/Nov → 30 · others → 31).
+        if s.day_of_month == 0:
+            target_dom = _last_day_of_month(now.year, now.month)
+            candidate = base.replace(day=target_dom)
+            if candidate <= now:
+                year = now.year + (1 if now.month == 12 else 0)
+                month = 1 if now.month == 12 else now.month + 1
+                candidate = base.replace(year=year, month=month,
+                                          day=_last_day_of_month(year, month))
+            return candidate
         target_dom = s.day_of_month or 1
-        # next occurrence of target_dom · this month or next
         candidate = base.replace(day=min(target_dom, 28))
         if candidate <= now:
-            # next month
             year = candidate.year + (1 if candidate.month == 12 else 0)
             month = 1 if candidate.month == 12 else candidate.month + 1
             candidate = candidate.replace(year=year, month=month)
         return candidate
     return None
+
+
+def _last_day_of_month(year: int, month: int) -> int:
+    """Calendar-correct last day · handles Feb leap-year too."""
+    if month == 12:
+        return 31
+    next_month_start = datetime(year, month + 1, 1, tzinfo=timezone.utc)
+    return (next_month_start - timedelta(days=1)).day
 
 
 def list_schedules(tenant_id: str = "default") -> list[Schedule]:

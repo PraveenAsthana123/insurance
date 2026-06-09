@@ -41,16 +41,25 @@ def _next_run_after(schedule, now):
     if cadence == "weekly":
         return now + timedelta(days=7)
     if cadence == "monthly":
-        # Move to first day of next month, then set day-of-month + time-of-day.
-        dom = schedule.get("day_of_month") or 1
+        dom = schedule.get("day_of_month")
         tod = schedule.get("time_of_day_utc") or "09:00"
         hh, mm = (int(x) for x in tod.split(":"))
         year = now.year + (1 if now.month == 12 else 0)
         month = 1 if now.month == 12 else now.month + 1
-        # Clamp to 28 to avoid Feb edge (schemas enforce 1-28 already)
-        day = min(int(dom), 28)
-        return datetime(year, month, day, hh, mm,
-                          tzinfo=timezone.utc)
+        if dom == 0:
+            # Last day of next month · resolves per-month (Feb→28, Apr→30, etc.)
+            if month == 12:
+                day = 31
+            else:
+                next_month_start = datetime(
+                    year + (1 if month == 12 else 0),
+                    1 if month == 12 else month + 1, 1, tzinfo=timezone.utc,
+                )
+                day = (next_month_start - timedelta(days=1)).day
+        else:
+            # Clamp 1-28 (schema enforces) · None → day 1
+            day = min(int(dom or 1), 28)
+        return datetime(year, month, day, hh, mm, tzinfo=timezone.utc)
     return None
 
 
