@@ -4,6 +4,7 @@ import {
   BarChart, Bar, ScatterChart, Scatter, Legend, Cell, ReferenceLine,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ---- Static Data ---- */
 const MODELS_METRICS = [
@@ -169,7 +170,18 @@ export default function ProcessAccuracyTab() {
     return MODELS_METRICS.find((m) => m.model === model)?.[key] === bests[key];
   }
 
-  return (
+  <TabShell
+      tabName="accuracy"
+      title="Accuracy · confusion matrix + ROC + fairness"
+      phase="Verify"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="per-class precision · recall · F1 · ROC/AUC · confusion matrix"
+      operation="read-only · wire eval harness output (P0)"
+      accent="#f59e0b"
+      todos={[]}
+    >
+      return (
     <div>
 
       {/* ===== A. KPI CARDS ===== */}
@@ -504,5 +516,6 @@ export default function ProcessAccuracyTab() {
       </div>
 
     </div>
+    </TabShell>
   );
 }

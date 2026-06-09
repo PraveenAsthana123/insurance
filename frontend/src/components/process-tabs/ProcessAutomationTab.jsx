@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 const MANUAL_STEPS = [
   { step: 'Data Collection', manual: 'Export from ERP manually to Excel', automated: 'Automated ETL pipeline runs daily at 6am', status: 'automated' },
@@ -73,7 +74,18 @@ export default function ProcessAutomationTab({ process }) {
     { id: 'todos', label: 'To-Do Tasks' },
   ];
 
-  return (
+  <TabShell
+      tabName="automation"
+      title="Automation · rule list + triggers + status"
+      phase="Operate"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P2"
+      information="automation rule list · triggers · success rate · failure log"
+      operation="read-only · per-proc rules pending"
+      accent="#10b981"
+      todos={[]}
+    >
+      return (
     <div>
       {/* KPI row */}
       <div className="kpi-grid" style={{ marginBottom: 'var(--spacing-lg)' }}>
@@ -332,5 +344,6 @@ export default function ProcessAutomationTab({ process }) {
         </div>
       )}
     </div>
+    </TabShell>
   );
 }

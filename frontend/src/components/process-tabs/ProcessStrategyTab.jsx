@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, Legend, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   ReferenceLine,
@@ -1484,7 +1485,18 @@ export default function ProcessStrategyTab({ process, dept }) {
     }
   };
 
-  return (
+  <TabShell
+      tabName="strategy"
+      title="Strategy · 4P framework + 12-month roadmap"
+      phase="Orient"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P2"
+      information="4P (people · process · profit · tech) · dependencies · risks"
+      operation="read-only · per-proc 4P pending"
+      accent="#8b5cf6"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Header */}
       <div className="content-section" style={{ marginBottom: 16 }}>
@@ -1525,5 +1537,6 @@ export default function ProcessStrategyTab({ process, dept }) {
       {/* Content */}
       {renderContent()}
     </div>
+    </TabShell>
   );
 }

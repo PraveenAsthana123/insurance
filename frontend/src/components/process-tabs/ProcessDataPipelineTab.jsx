@@ -4,6 +4,7 @@ import {
   PieChart, Pie, Cell, Legend,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ---- Medallion Layer Data ---- */
 const MEDALLION_LAYERS = [
@@ -147,7 +148,18 @@ const QUALITY_CHART_DATA = QUALITY_DATA.map((d) => ({ name: d.layer, score: d.qu
 export default function ProcessDataPipelineTab() {
   const [expandedType, setExpandedType] = useState(null);
 
-  return (
+  <TabShell
+      tabName="datapipeline"
+      title="Data Pipeline · DAG + stages + run history"
+      phase="Understand"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="pipeline DAG · stage list · run history · retry rules"
+      operation="read-only · wire pipeline state"
+      accent="#0ea5e9"
+      todos={[]}
+    >
+      return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xl)' }}>
 
       {/* ── A. Medallion Architecture ── */}
@@ -422,5 +434,6 @@ export default function ProcessDataPipelineTab() {
       </section>
 
     </div>
+    </TabShell>
   );
 }

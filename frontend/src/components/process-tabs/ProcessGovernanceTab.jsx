@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   PieChart, Pie, Cell,
@@ -72,7 +73,18 @@ export default function ProcessGovernanceTab({ process, dept }) {
   const driftData = generateDriftData();
   const maturityData = generateMaturityRadar();
 
-  return (
+  <TabShell
+      tabName="governance"
+      title="AI Governance · RACI + audit + HITL + compliance"
+      phase="Govern"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="RACI table · audit row count · HITL queue · compliance status"
+      operation="read-only · wire audit DB (P0 · SOC2 CC6.6)"
+      accent="#dc2626"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Governance Maturity Summary */}
       <div className="content-section">
@@ -703,5 +715,6 @@ export default function ProcessGovernanceTab({ process, dept }) {
         </div>
       </div>
     </div>
+    </TabShell>
   );
 }

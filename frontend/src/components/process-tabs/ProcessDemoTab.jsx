@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* =========================================================
    DEMO SCENARIOS TAB — Interactive walkthroughs by process
@@ -1077,7 +1078,18 @@ export default function ProcessDemoTab({ process }) {
     .filter(([k]) => k !== '__default__')
     .reduce((s, [, v]) => s + v.demos.length, 0);
 
-  return (
+  <TabShell
+      tabName="demo"
+      title="Demo Scenarios · walkthrough + scenario library"
+      phase="Orient"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="demo walkthrough · scenario library · replay history"
+      operation="interactive · per-proc demo pending"
+      accent="#d946ef"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Catalog toggle banner */}
       <div style={{ marginBottom: 'var(--spacing-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', borderRadius: 'var(--border-radius-lg)', background: 'linear-gradient(90deg, rgba(59,130,246,0.08), rgba(99,102,241,0.06))', border: '1px solid rgba(59,130,246,0.2)' }}>
@@ -1129,5 +1141,6 @@ export default function ProcessDemoTab({ process }) {
         <ScenarioSimulator scenarios={data.scenarios} />
       </div>
     </div>
+    </TabShell>
   );
 }

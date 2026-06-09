@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import '../../styles/workbench.css';
 import SequenceDiagram from '../charts/SequenceDiagram';
 import { processSequenceDiagrams } from '../../data/sequenceDiagrams';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 const PIPELINE_STEPS = [
   {
@@ -517,7 +518,18 @@ export default function ProcessOverviewTab({ process, dept }) {
   const primaryDiagram = seqDiagrams[0];
   const [seqExpanded, setSeqExpanded] = useState(false);
 
-  return (
+  <TabShell
+      tabName="overview"
+      title="Overview · process description + KPI strip + AI badges"
+      phase="Orient"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="description · KPIs · AI badges · related links"
+      operation="read-only · primary landing for the process"
+      accent="#1e40af"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Process description */}
       <div className="content-section">
@@ -875,5 +887,6 @@ export default function ProcessOverviewTab({ process, dept }) {
         )}
       </div>
     </div>
+    </TabShell>
   );
 }

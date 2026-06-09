@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ============================================================
    TESTING TAB — Comprehensive testing for each process
@@ -153,7 +154,18 @@ export default function ProcessTestingTab({ process }) {
     addLog('SUITE', `${filtered.length} tests completed`, 'info');
   }
 
-  return (
+  <TabShell
+      tabName="testing"
+      title="Testing · test list + coverage + flaky"
+      phase="Verify"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="test list · coverage % · flaky tests · trend over time"
+      operation="read-only · wire §65.8 test dispatcher"
+      accent="#f59e0b"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Summary KPIs */}
       <div className="kpi-row" style={{ marginBottom: 'var(--spacing-md)' }}>
@@ -381,5 +393,6 @@ export default function ProcessTestingTab({ process }) {
         </div>
       </div>
     </div>
+    </TabShell>
   );
 }

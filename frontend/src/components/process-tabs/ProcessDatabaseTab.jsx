@@ -4,6 +4,7 @@ import {
   PieChart, Pie, Cell, Legend, LineChart, Line,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ── A. Architecture data ── */
 const ARCH_NODES = [
@@ -332,7 +333,18 @@ export default function ProcessDatabaseTab() {
   const [activeSection, setActiveSection] = useState('architecture');
   const [expandedQuery, setExpandedQuery] = useState(null);
 
-  return (
+  <TabShell
+      tabName="database"
+      title="Databases · table list + ERD + indexes"
+      phase="Understand"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P2"
+      information="table inventory · ERD diagram · indexes · partition rules"
+      operation="read-only · per-proc table refs pending"
+      accent="#0ea5e9"
+      todos={[]}
+    >
+      return (
     <div style={{ display: 'flex', gap: 'var(--spacing-lg)' }}>
       {/* Sidebar nav */}
       <div style={{ width: 160, flexShrink: 0 }}>
@@ -844,5 +856,6 @@ export default function ProcessDatabaseTab() {
         )}
       </div>
     </div>
+    </TabShell>
   );
 }

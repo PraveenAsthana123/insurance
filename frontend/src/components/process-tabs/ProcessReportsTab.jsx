@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Legend, PieChart, Pie, Cell, AreaChart, Area,
 } from 'recharts';
@@ -836,7 +837,18 @@ function TechStackTab() {
 export default function ProcessReportsTab({ process, dept }) {
   const [activeTab, setActiveTab] = useState('executive');
 
-  return (
+  <TabShell
+      tabName="reports"
+      title="Reports · list + cadence + last-run + download"
+      phase="Operate"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P2"
+      information="report list · cadence · recipients · format · history"
+      operation="read-only · populate report list"
+      accent="#10b981"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Sub-tab bar */}
       <div style={{
@@ -870,5 +882,6 @@ export default function ProcessReportsTab({ process, dept }) {
       {activeTab === 'data' && <DataSourceReport />}
       {activeTab === 'techstack' && <TechStackTab />}
     </div>
+    </TabShell>
   );
 }

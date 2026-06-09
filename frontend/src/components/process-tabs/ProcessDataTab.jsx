@@ -4,6 +4,7 @@ import {
   LineChart, Line, PieChart, Pie, Cell, ScatterChart, Scatter, Legend,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ---- DATA INFO MAP (from original) ---- */
 const DATA_INFO = {
@@ -246,7 +247,18 @@ export default function ProcessDataTab({ process, dept }) {
 
   const corrCols = corrMatrix.map((r) => r.name);
 
-  return (
+  <TabShell
+      tabName="data"
+      title="Data · sources + schemas + samples + stats"
+      phase="Understand"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="data sources · schema · sample 10 rows · row counts · privacy class"
+      operation="read-only · per-proc data refs pending"
+      accent="#0ea5e9"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Section Nav */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>
@@ -776,5 +788,6 @@ export default function ProcessDataTab({ process, dept }) {
         </div>
       )}
     </div>
+    </TabShell>
   );
 }

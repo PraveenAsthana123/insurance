@@ -4,6 +4,7 @@ import {
   BarChart, Bar, PieChart, Pie, Cell, Legend, ReferenceLine,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ─────────────────────────────────────────────
    STATIC DATA
@@ -138,7 +139,18 @@ export default function ProcessFeedbackTab() {
   function handleSubmitFb() { setFormSubmitted(true); setTimeout(() => setFormSubmitted(false), 3000); }
   function requestLabel(id) { setRequestedLabels(r => ({ ...r, [id]: true })); }
 
-  return (
+  <TabShell
+      tabName="feedback"
+      title="Feedback & RLHF · capture + correction list"
+      phase="Govern"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="RLHF capture form · correction list · override frequency · severity"
+      operation="wire UI to T7.10 corrections endpoint (backend ready)"
+      accent="#dc2626"
+      todos={[]}
+    >
+      return (
     <div style={{ fontFamily: 'var(--font-family, system-ui)', color: 'var(--text-primary, #1e293b)' }}>
 
       {/* Section Nav */}
@@ -654,5 +666,6 @@ export default function ProcessFeedbackTab() {
         </div>
       )}
     </div>
+    </TabShell>
   );
 }

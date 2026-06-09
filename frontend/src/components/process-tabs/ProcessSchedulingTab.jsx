@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, RadialBarChart, RadialBar, Legend,
 } from 'recharts';
@@ -635,7 +636,18 @@ export default function ProcessSchedulingTab({ process: proc }) {
   const pausedCount = schedules.filter((s) => s.status === 'Paused').length;
   const failedCount = schedules.filter((s) => s.status === 'Failed').length;
 
-  return (
+  <TabShell
+      tabName="scheduling"
+      title="Scheduling · cron + last-run + next-run"
+      phase="Operate"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P2"
+      information="cron list · schedule editor · timezone · holiday calendar"
+      operation="read-only · per-proc schedule pending"
+      accent="#10b981"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Summary KPIs */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--spacing-md)', marginBottom: 'var(--spacing-lg)' }}>
@@ -676,5 +688,6 @@ export default function ProcessSchedulingTab({ process: proc }) {
       {subTab === 'alerts' && <AlertingPanel />}
       {subTab === 'celery' && <CeleryPanel />}
     </div>
+    </TabShell>
   );
 }

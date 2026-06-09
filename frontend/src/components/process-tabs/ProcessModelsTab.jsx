@@ -4,6 +4,7 @@ import {
   BarChart, Bar, RadarChart, Radar, PolarGrid, PolarAngleAxis, Legend, Cell,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ---- Model Categories ---- */
 const MODEL_CATEGORIES = {
@@ -372,7 +373,18 @@ export default function ProcessModelsTab({ process }) {
     { id: 'ensemble', label: 'Ensemble' },
   ];
 
-  return (
+  <TabShell
+      tabName="models"
+      title="Models · cards + accuracy + latency + cost"
+      phase="Build"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="model name · version · accuracy · latency · cost · rollback path"
+      operation="read-only · wire MLflow registry (P0.3)"
+      accent="#0ea5e9"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Section Nav */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>
@@ -904,5 +916,6 @@ export default function ProcessModelsTab({ process }) {
         </div>
       )}
     </div>
+    </TabShell>
   );
 }

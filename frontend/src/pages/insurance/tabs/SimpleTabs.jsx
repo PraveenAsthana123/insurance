@@ -274,7 +274,17 @@ export function SimulationTab({ proc, dept }) {
   const leverRows = result.levers.map((row) => ({ name: row.name, value: row.value }));
 
   return (
-    <div>
+    <TabShell
+      tabName="simulation"
+      title="Simulation · interactive what-if + AS-IS vs TO-BE comparison"
+      phase="Measure"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="scenario sliders · AS-IS steps · TO-BE AI steps · KPI lever strength · before/after metrics"
+      operation="interactive · 5 sliders (volume · automation · data quality · model confidence · risk) · sends §51 input event per change"
+      accent="#06b6d4"
+      todos={[]}
+    >
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         Per-process simulation UI for <strong>{dept.name} / {proc.name}</strong>. It runs a deterministic local what-if model from the blueprint so every process has a usable simulator, even before backend reference engines are created.
       </p>
@@ -337,13 +347,7 @@ export function SimulationTab({ proc, dept }) {
         </Field>
       </IPOSection>
 
-      <TransactionalHistory rows={[]} tabName="simulation" />
-      <OutputEvaluation metrics={{
-        confidence: `${result.summary.confidence.toFixed(1)}%`,
-        time_saved: `${result.summary.timeSavedPct.toFixed(1)}%`,
-        cost_saved: `${result.summary.costSavedPct.toFixed(1)}%`,
-      }} tabName="simulation" />
-    </div>
+    </TabShell>
   );
 }
 

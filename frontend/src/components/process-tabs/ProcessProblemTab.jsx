@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* =========================================================
    PROBLEM & USE CASE TAB — Data keyed by process ID
@@ -826,7 +827,18 @@ function MultiDataSection({ data }) {
 export default function ProcessProblemTab({ process }) {
   const data = PROBLEM_DATA[process.id] || PROBLEM_DATA['__default__'];
 
-  return (
+  <TabShell
+      tabName="problem"
+      title="Problem & Use Case · 5W + AS-IS + use cases"
+      phase="Understand"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="5W grid · AS-IS/TO-BE · use case list · stakeholders"
+      operation="read-only · 21 of 22 procs need data wiring"
+      accent="#ef4444"
+      todos={[]}
+    >
+      return (
     <div>
       {/* A. Problem Statement */}
       <div className="content-section">
@@ -894,5 +906,6 @@ export default function ProcessProblemTab({ process }) {
         <MultiDataSection data={MULTI_DATA} />
       </div>
     </div>
+    </TabShell>
   );
 }

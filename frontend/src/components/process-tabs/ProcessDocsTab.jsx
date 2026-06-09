@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SequenceDiagram from '../charts/SequenceDiagram';
 import { processSequenceDiagrams } from '../../data/sequenceDiagrams';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* =========================================================
    DOC SUB-TAB CONTENT
@@ -925,7 +926,18 @@ function AnalysisFlowDiagram() {
 export default function ProcessDocsTab({ process, dept }) {
   const [activeDocTab, setActiveDocTab] = useState('hld');
 
-  return (
+  <TabShell
+      tabName="docs"
+      title="Documentation · doc index + last-updated + owner"
+      phase="Operate"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P2"
+      information="doc list · breadcrumbs · search · inline editor"
+      operation="read-only · per-proc docs pending"
+      accent="#94a3b8"
+      todos={[]}
+    >
+      return (
     <div>
       {/* ---- PROCESS FLOW CHART ---- */}
       <div className="content-section">
@@ -1042,5 +1054,6 @@ export default function ProcessDocsTab({ process, dept }) {
         </div>
       </div>
     </div>
+    </TabShell>
   );
 }

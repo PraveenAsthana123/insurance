@@ -4,6 +4,7 @@ import {
   BarChart, Bar, Legend, ReferenceLine,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ─────────────────────────────────────────────
    PIPELINE STEPS DEFINITION
@@ -338,7 +339,18 @@ export default function ProcessSimulationTab() {
 
   const statusColor = { 'Not Started': '#64748b', Running: '#f59e0b', Paused: '#3b82f6', Complete: '#10b981' };
 
-  return (
+  <TabShell
+      tabName="simulation"
+      title="Simulation · what-if sliders + before/after"
+      phase="Measure"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="scenario library · what-if knobs · before/after metrics · save scenario"
+      operation="interactive · per-proc sim pending"
+      accent="#06b6d4"
+      todos={[]}
+    >
+      return (
     <div style={{ fontFamily: 'var(--font-family, system-ui)', color: 'var(--text-primary, #1e293b)' }}>
 
       {/* Section Nav */}
@@ -760,5 +772,6 @@ export default function ProcessSimulationTab() {
         </div>
       )}
     </div>
+    </TabShell>
   );
 }

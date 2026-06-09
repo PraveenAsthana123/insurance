@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import {
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
   LineChart, Line, BarChart, Bar, AreaChart, Area,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   ResponsiveContainer, Cell, ReferenceLine,
@@ -1147,7 +1148,18 @@ export default function ProcessWorkbenchTab() {
     8: <Step8 status={statuses[8] || 'pending'} onRun={runStep} />,
   };
 
-  return (
+  <TabShell
+      tabName="workbench"
+      title="ML Workbench · model picker + run + result"
+      phase="Build"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="model picker · param sliders · run button · result table"
+      operation="interactive · wire MLflow registry (P0.3)"
+      accent="#0ea5e9"
+      todos={[]}
+    >
+      return (
     <div style={{ fontFamily: 'var(--font-family)', color: 'var(--text-primary)' }}>
 
       {/* ── GLOBAL CONTROLS ── */}
@@ -1217,5 +1229,6 @@ export default function ProcessWorkbenchTab() {
         </div>
       </div>
     </div>
+    </TabShell>
   );
 }

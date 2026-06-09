@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ---- Sample Q&A for simulated responses ---- */
 const SAMPLE_QA = {
@@ -212,7 +213,18 @@ export default function ProcessChatbotTab({ process }) {
     }]);
   }
 
-  return (
+  <TabShell
+      tabName="chatbot"
+      title="Chatbot · chat UI + per-proc system prompt + history"
+      phase="Operate"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="chat UI · system prompt · message history · citations"
+      operation="interactive · per-proc system prompt pending"
+      accent="#8b5cf6"
+      todos={[]}
+    >
+      return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 600 }}>
 
       {/* Header */}
@@ -378,5 +390,6 @@ export default function ProcessChatbotTab({ process }) {
         </button>
       </div>
     </div>
+    </TabShell>
   );
 }

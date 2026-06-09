@@ -4,6 +4,7 @@ import {
   BarChart, Bar, Legend, ScatterChart, Scatter, ReferenceLine,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ── A. Mathematics sub-tab data ── */
 
@@ -268,7 +269,18 @@ export default function ProcessMathTab() {
   const filteredAnalysis = ANALYSIS_TYPES.filter((a) => a.category === activeAnalysisCat);
   const filteredModels = MODEL_CATALOG.filter((m) => m.category === activeModelCat);
 
-  return (
+  <TabShell
+      tabName="math"
+      title="Mathematics · formulas + derivations + references"
+      phase="Build"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P2"
+      information="core formulas · variable defs · derivations · references"
+      operation="read-only · per-proc math pending"
+      accent="#8b5cf6"
+      todos={[]}
+    >
+      return (
     <div>
       {/* Main tab bar */}
       <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>
@@ -696,5 +708,6 @@ export default function ProcessMathTab() {
         </div>
       )}
     </div>
+    </TabShell>
   );
 }

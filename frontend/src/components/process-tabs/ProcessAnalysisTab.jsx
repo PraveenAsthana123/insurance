@@ -4,6 +4,7 @@ import {
   LineChart, Line, Legend, ReferenceLine,
 } from 'recharts';
 import '../../styles/workbench.css';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ── Statistical Data ── */
 const DESCRIPTIVE_STATS = [
@@ -97,7 +98,18 @@ export default function ProcessAnalysisTab() {
   const [activeSubTab, setActiveSubTab] = useState('Statistical');
   const [driftChecked, setDriftChecked] = useState(false);
 
-  return (
+  <TabShell
+      tabName="analysis"
+      title="Analysis · SHAP + feature importance + counterfactual"
+      phase="Govern"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="feature importance · SHAP top-10 · counterfactual · per-segment drill"
+      operation="read-only · wire SHAP backend (P0.4 · EU AI Act blocker)"
+      accent="#dc2626"
+      todos={[]}
+    >
+      return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
 
       {/* Sub-tab navigation */}
@@ -530,5 +542,6 @@ export default function ProcessAnalysisTab() {
       )}
 
     </div>
+    </TabShell>
   );
 }
