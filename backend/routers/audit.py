@@ -91,9 +91,16 @@ AUDITS = {
         "spec": "§47.6 + §75 + §76 + §82.7",
         "description": "100+ customer scale E2E · 9 assertions (pool · execute · timing · corr_id · metrics · cohort_dist · fairness · cleanup)",
     },
+    "schedule-executor": {
+        "script": "scripts/audit_schedule_executor.py",
+        "report_dir": "jobs/reports/schedule-executor-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§41.3 + §47.6 + §70",
+        "description": "Schedule cron executor · 9 assertions (monthly math · cadence semantics · 0-due no-op · 1-due execute · multi-tenant · state update)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor"]
 
 
 @router.get("/list")

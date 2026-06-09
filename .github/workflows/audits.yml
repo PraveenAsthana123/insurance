@@ -1,7 +1,9 @@
 # .github/workflows/audits.yml — block PRs that regress audit invariants.
 # Per global §47.6 (DevSecOps shift-left) + §70 (cron audit pattern).
 #
-# Runs 3 audits on every push + PR. Any non-zero exit fails the build.
+# 10 audits + 1 route smoke. All hard-fail (no warn-only). DB-dependent
+# audits run against a postgres SERVICE container so silent regressions
+# can no longer slip past CI.
 
 name: Audits
 
@@ -18,6 +20,29 @@ permissions:
 jobs:
   audits:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      BEV_POSTGRES_HOST: localhost
+      BEV_POSTGRES_PORT: '5432'
+      BEV_POSTGRES_USER: postgres
+      BEV_POSTGRES_PASSWORD: postgres
+      BEV_POSTGRES_DB: test
+      PGPASSWORD: postgres
+
     steps:
       - uses: actions/checkout@v4
 
@@ -26,6 +51,28 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install backend deps (for DB-dependent audits)
+        run: |
+          pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Wait for postgres + apply migrations
+        run: |
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if psql -h localhost -U postgres -d test -c 'SELECT 1' >/dev/null 2>&1; then
+              echo "postgres ready"; break
+            fi
+            echo "waiting for postgres ($i)..."; sleep 2
+          done
+          if [ -d backend/migrations ]; then
+            for f in backend/migrations/*.sql; do
+              echo "applying $f"
+              psql -h localhost -U postgres -d test -f "$f" || \
+                echo "  (warn: migration $f had issues · proceeding)"
+            done
+          fi
+
+      # ── PURE-FILE AUDITS (always hard-fail · no DB needed) ─────────
       - name: §64.22 RECOMMENDATION audit (21 cells)
         run: python3 scripts/audit_recommender_flavors.py
 
@@ -34,40 +81,28 @@ jobs:
 
       - name: §58 + §63 FOLDER-README audit (50 tools × 4 invariants)
         run: python3 scripts/audit_folder_readmes.py
-      - name: §90 L15 VOICE AI E2E audit (7 checks)
+
+      - name: §90 L15 VOICE AI E2E audit (12 cells)
         run: python3 scripts/audit_voice_ai_artifacts.py
+
       - name: §92 COMPLIANCE meta-audit (19 mandatory paths)
         run: python3 scripts/audit_section_92_compliance.py
-      - name: E2E CONSUMER FLOW · create → execute → submit (12 assertions)
-        run: |
-          export BEV_POSTGRES_HOST=localhost
-          export BEV_POSTGRES_PORT=5432
-          export BEV_POSTGRES_USER=postgres
-          export BEV_POSTGRES_PASSWORD=postgres
-          export BEV_POSTGRES_DB=test
-          python3 scripts/audit_marketing_e2e_flow.py || true  # warn-only · DB may not be available in CI
 
-      - name: ADVANCED TEST SUITE · multi-channel + adversarial + autonomous (8 tests)
-        run: |
-          export BEV_POSTGRES_HOST=localhost BEV_POSTGRES_PORT=5432
-          export BEV_POSTGRES_USER=postgres BEV_POSTGRES_PASSWORD=postgres
-          export BEV_POSTGRES_DB=test
-          python3 scripts/audit_marketing_advanced.py || true
-
-      - name: 100-CUSTOMER SCALE TEST · 100+ customers · 9 assertions
-        run: |
-          export BEV_POSTGRES_HOST=localhost BEV_POSTGRES_PORT=5432
-          export BEV_POSTGRES_USER=postgres BEV_POSTGRES_PASSWORD=postgres
-          export BEV_POSTGRES_DB=test
-          python3 scripts/audit_marketing_100_customers.py || true
-
-      - name: ROUTE SMOKE · in-process TestClient (8 critical routes)
-        run: |
-          export BEV_POSTGRES_HOST=localhost
-          export BEV_POSTGRES_PORT=5432
-          export BEV_POSTGRES_USER=postgres
-          export BEV_POSTGRES_PASSWORD=postgres
-          export BEV_POSTGRES_DB=test
-          python3 scripts/audit_routes_smoke.py || true  # warn-only · DB may not be available in CI
       - name: §64.13 MARKETING CAMPAIGNS audit (16 checks · 4 channels)
         run: python3 scripts/audit_marketing_campaigns_artifacts.py
+
+      # ── DB-DEPENDENT AUDITS (hard-fail · postgres service available) ──
+      - name: ROUTE SMOKE · in-process TestClient (11 critical routes)
+        run: python3 scripts/audit_routes_smoke.py
+
+      - name: E2E CONSUMER FLOW · create → execute → submit (12 assertions)
+        run: python3 scripts/audit_marketing_e2e_flow.py
+
+      - name: ADVANCED TEST SUITE · multi-channel + adversarial + autonomous (8 tests)
+        run: python3 scripts/audit_marketing_advanced.py
+
+      - name: 100-CUSTOMER SCALE TEST · 100+ customers · 9 assertions
+        run: python3 scripts/audit_marketing_100_customers.py
+
+      - name: SCHEDULE EXECUTOR audit · cadence + per-tenant + monthly math
+        run: python3 scripts/audit_schedule_executor.py

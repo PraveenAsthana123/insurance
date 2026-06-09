@@ -310,6 +310,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_marketing_100_customers.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Schedule executor audit (cadence + per-tenant + monthly) ──"
+  [ -f scripts/audit_schedule_executor.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_schedule_executor.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

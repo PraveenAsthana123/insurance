@@ -52,6 +52,11 @@ const AUDIT_LABELS = {
     spec: '§47.6 + §75 + §76 + §82.7',
     description: '100+ pool · segment execute · timing · correlation_id · metrics aggregate · cohort_distribution · fairness DI · cleanup',
   },
+  'schedule-executor': {
+    name: 'Schedule executor (cadence + tenant + monthly math)',
+    spec: '§41.3 + §47.6 + §70',
+    description: 'Cron executor invariants · 9 assertions (monthly Dec→Jan · cadence · 0/1-due cases · per-tenant · last_run/next_run state update)',
+  },
 };
 
 export default function AdminAuditPage() {
