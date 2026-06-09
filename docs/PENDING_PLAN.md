@@ -97,7 +97,7 @@ Full reference: [docs/MARKETING_KPI_FRAMEWORK.md](MARKETING_KPI_FRAMEWORK.md)
 |---|---|---|---|
 | T4.1 | LLM-driven `_decide_next()` using §91 WebLLM | large | Smarter autonomous agent · current is rule-based per §57.7 |
 | T4.2 | Bulk-upload streaming for >10k rows | medium | Server cap already 10k/batch · client already chunks 100/batch |
-| T4.3 | E2E latency dashboard with histograms over weeks | large | Long-term trend infrastructure |
+| ~~T4.3~~ | **(DONE 2026-06-08)** ~~E2E latency dashboard~~ | done | T4.3 done · 7th tab in MarketingKPIsPage · histogram bars · window selector · color tiers per §82.7 |
 
 ## Recommended Next Move
 

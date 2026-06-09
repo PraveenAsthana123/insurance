@@ -9,12 +9,13 @@ import { useEffect, useState } from 'react';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
 const TABS = [
-  { id: 'dashboards', name: '📊 Dashboards',  color: '#1e40af' },
-  { id: 'kpis',       name: '🎯 KPIs (85+)',  color: '#9333ea' },
-  { id: 'alerts',     name: '🚨 Alerts',      color: '#dc2626' },
-  { id: 'agents',     name: '🤖 AI Agents',   color: '#16a34a' },
-  { id: 'maturity',   name: '🪜 Maturity',    color: '#d97706' },
-  { id: 'scorecard',  name: '🏆 Scorecard',   color: '#7c3aed' },
+  { id: 'dashboards', name: '📊 Dashboards',     color: '#1e40af' },
+  { id: 'kpis',       name: '🎯 KPIs (85+)',     color: '#9333ea' },
+  { id: 'alerts',     name: '🚨 Alerts',         color: '#dc2626' },
+  { id: 'latencies',  name: '⏱ E2E Latencies',  color: '#0ea5e9' },
+  { id: 'agents',     name: '🤖 AI Agents',      color: '#16a34a' },
+  { id: 'maturity',   name: '🪜 Maturity',       color: '#d97706' },
+  { id: 'scorecard',  name: '🏆 Scorecard',      color: '#7c3aed' },
 ];
 
 const STATUS_COLOR = {
@@ -32,6 +33,8 @@ export default function MarketingKPIsPage() {
   const [maturity, setMaturity] = useState(null);
   const [scorecard, setScorecard] = useState(null);
   const [alerts, setAlerts] = useState(null);
+  const [latencies, setLatencies] = useState(null);
+  const [windowRuns, setWindowRuns] = useState(20);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [error, setError] = useState(null);
 
@@ -75,9 +78,14 @@ export default function MarketingKPIsPage() {
         if (tab === 'alerts') {
           setAlerts(await fetchJSON('/api/v1/marketing-kpis/alerts'));
         }
+        if (tab === 'latencies') {
+          setLatencies(await fetchJSON(
+            `/api/v1/marketing-kpis/e2e-latencies?window_runs=${windowRuns}`,
+          ));
+        }
       } catch (e) { setError(`${tab}: ${e.message}`); }
     })();
-  }, [tab, selectedCategory]);
+  }, [tab, selectedCategory, windowRuns]);
 
   const card = {
     background: '#fff', border: '1px solid #e2e8f0', borderRadius: 8,
@@ -256,6 +264,152 @@ export default function MarketingKPIsPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {tab === 'latencies' && latencies && (
+        <div>
+          {/* Window selector + summary tiles */}
+          <div style={{...card, padding: 10}}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+              <strong style={{ fontSize: 13 }}>Window:</strong>
+              {[5, 10, 20, 50].map((n) => (
+                <button key={n} onClick={() => setWindowRuns(n)}
+                        style={{
+                          padding: '4px 10px', fontSize: 12,
+                          background: windowRuns === n ? '#0ea5e9' : '#fff',
+                          color: windowRuns === n ? '#fff' : '#475569',
+                          border: `1px solid ${windowRuns === n ? '#0ea5e9' : '#cbd5e1'}`,
+                          borderRadius: 4, cursor: 'pointer',
+                        }}>
+                  last {n} runs
+                </button>
+              ))}
+              <span style={{ marginLeft: 'auto', ...small }}>
+                audit_kind=<code>{latencies.audit_kind}</code>
+              </span>
+            </div>
+          </div>
+
+          {/* Summary tiles */}
+          <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+            <Tile label="RUNS AVAIL"  value={latencies.n_runs_available} accent="#1e40af" />
+            <Tile label="STEPS"       value={latencies.n_steps}          accent="#9333ea" />
+            {(() => {
+              const slowest = (latencies.steps || []).reduce(
+                (acc, s) => (s.p95 > (acc?.p95 || 0) ? s : acc),
+                null,
+              );
+              return slowest ? (
+                <>
+                  <Tile label="SLOWEST STEP"
+                        value={`${slowest.step_id}`}
+                        accent="#dc2626" />
+                  <Tile label="MAX P95 (ms)"
+                        value={Math.round(slowest.p95)}
+                        accent="#dc2626" />
+                </>
+              ) : null;
+            })()}
+            {(() => {
+              const totalFails = (latencies.steps || []).reduce(
+                (n, s) => n + (s.fail_count || 0), 0);
+              return (
+                <Tile label="FAIL COUNT"
+                      value={totalFails}
+                      accent={totalFails > 0 ? '#dc2626' : '#16a34a'} />
+              );
+            })()}
+          </div>
+
+          {/* Per-step histogram table */}
+          <div style={card}>
+            <h3 style={{ margin: '0 0 8px', fontSize: 14 }}>
+              Per-step latency histograms · p50/p95/p99 over last {windowRuns} runs
+            </h3>
+            {(!latencies.steps || latencies.steps.length === 0) ? (
+              <div style={{ ...small, padding: 12 }}>
+                No latency data yet. Trigger the E2E flow audit
+                (<code>./scripts/audit_marketing_e2e_flow.py</code>) to populate.
+              </div>
+            ) : (
+              <table style={{ width: '100%', fontSize: 12 }}>
+                <thead>
+                  <tr style={{ textAlign: 'left', color: '#64748b' }}>
+                    <th style={{ padding: 6 }}>Step</th>
+                    <th style={{ padding: 6 }}>n</th>
+                    <th style={{ padding: 6 }}>avg ms</th>
+                    <th style={{ padding: 6 }}>p50</th>
+                    <th style={{ padding: 6 }}>p95</th>
+                    <th style={{ padding: 6 }}>p99</th>
+                    <th style={{ padding: 6 }}>Histogram (p50 · p95 · p99)</th>
+                    <th style={{ padding: 6 }}>Fail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(() => {
+                    const maxP99 = Math.max(
+                      ...latencies.steps.map((s) => s.p99 || 0), 1,
+                    );
+                    return latencies.steps.map((s) => {
+                      const p50w = (s.p50 / maxP99) * 100;
+                      const p95w = (s.p95 / maxP99) * 100;
+                      const p99w = (s.p99 / maxP99) * 100;
+                      // Color tier by p95
+                      const color = s.p95 < 50 ? '#16a34a'
+                                  : s.p95 < 200 ? '#d97706'
+                                  : '#dc2626';
+                      return (
+                        <tr key={s.step_id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                          <td style={{ padding: 6, fontWeight: 700 }}>{s.step_id}</td>
+                          <td style={{ padding: 6 }}>{s.n}</td>
+                          <td style={{ padding: 6 }}>{s.avg_ms?.toFixed(1)}</td>
+                          <td style={{ padding: 6 }}>{s.p50?.toFixed(1)}</td>
+                          <td style={{ padding: 6, color, fontWeight: 600 }}>{s.p95?.toFixed(1)}</td>
+                          <td style={{ padding: 6 }}>{s.p99?.toFixed(1)}</td>
+                          <td style={{ padding: 6, position: 'relative', width: '40%' }}>
+                            <div style={{
+                              position: 'relative', height: 14,
+                              background: '#f8fafc', borderRadius: 2,
+                            }}>
+                              {/* p99 (lightest) */}
+                              <div style={{
+                                position: 'absolute', left: 0, top: 0, bottom: 0,
+                                width: `${p99w}%`, background: `${color}30`,
+                              }} />
+                              {/* p95 (medium) */}
+                              <div style={{
+                                position: 'absolute', left: 0, top: 0, bottom: 0,
+                                width: `${p95w}%`, background: `${color}80`,
+                              }} />
+                              {/* p50 (dark) */}
+                              <div style={{
+                                position: 'absolute', left: 0, top: 0, bottom: 0,
+                                width: `${p50w}%`, background: color,
+                              }} />
+                            </div>
+                          </td>
+                          <td style={{ padding: 6 }}>
+                            {s.fail_count > 0 ? (
+                              <span style={{
+                                background: '#dc2626', color: '#fff',
+                                padding: '2px 8px', borderRadius: 4,
+                                fontSize: 10, fontWeight: 700,
+                              }}>{s.fail_count}</span>
+                            ) : '✓'}
+                          </td>
+                        </tr>
+                      );
+                    });
+                  })()}
+                </tbody>
+              </table>
+            )}
+            <div style={{ ...small, marginTop: 8 }}>
+              Color tiers · GREEN p95 &lt; 50ms · AMBER 50-200ms · RED &gt; 200ms ·
+              §82.7 drift detection threshold
+            </div>
           </div>
         </div>
       )}
