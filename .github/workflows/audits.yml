@@ -36,3 +36,13 @@ jobs:
         run: python3 scripts/audit_folder_readmes.py
       - name: §90 L15 VOICE AI E2E audit (7 checks)
         run: python3 scripts/audit_voice_ai_artifacts.py
+      - name: §92 COMPLIANCE meta-audit (19 mandatory paths)
+        run: python3 scripts/audit_section_92_compliance.py
+      - name: ROUTE SMOKE · in-process TestClient (8 critical routes)
+        run: |
+          export BEV_POSTGRES_HOST=localhost
+          export BEV_POSTGRES_PORT=5432
+          export BEV_POSTGRES_USER=postgres
+          export BEV_POSTGRES_PASSWORD=postgres
+          export BEV_POSTGRES_DB=test
+          python3 scripts/audit_routes_smoke.py || true  # warn-only · DB may not be available in CI

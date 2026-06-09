@@ -54,11 +54,18 @@ AUDITS = {
         "report_dir": "jobs/reports/voice-ai-audit",
         "report_pattern": "audit-*.log",
         "spec": "§90 L15 + §92",
-        "description": "Voice AI E2E demo: 4 backend modules + migration + frontend + DEMO_STORY w/ 14 sections",
+        "description": "Voice AI E2E: 7 backend modules + migration + 3 frontends + DEMO_STORY w/ 14 sections (12 cells)",
+    },
+    "section-92-compliance": {
+        "script": "scripts/audit_section_92_compliance.py",
+        "report_dir": "jobs/reports/section-92-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§92",
+        "description": "ai-agents/ mandatory · 19 paths checked (tree + scripts + CI + API surface)",
     },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance"]
 
 
 @router.get("/list")

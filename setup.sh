@@ -280,6 +280,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_voice_ai_artifacts.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── §92 compliance audit (meta · ai-agents/ mandate) ──"
+  [ -f scripts/audit_section_92_compliance.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_section_92_compliance.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

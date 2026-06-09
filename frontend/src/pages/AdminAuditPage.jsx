@@ -25,7 +25,12 @@ const AUDIT_LABELS = {
   'voice-ai-artifacts': {
     name: 'Voice AI E2E demo completeness',
     spec: '§90 L15 + §92',
-    description: 'Backend modules + migration + frontend + DEMO_STORY w/ 14 sections',
+    description: '7 backend modules + migration + 3 frontends + DEMO_STORY w/ 14 sections',
+  },
+  'section-92-compliance': {
+    name: '§92 compliance · ai-agents/ mandate',
+    spec: '§92',
+    description: '19 mandatory paths: tree · scripts · CI · API surface',
   },
 };
 

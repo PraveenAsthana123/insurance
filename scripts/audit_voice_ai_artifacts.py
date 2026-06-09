@@ -20,10 +20,20 @@ BACKEND_FILES = [
     "backend/voice_ai/schemas.py",
     "backend/voice_ai/services.py",
     "backend/voice_ai/router.py",
+    "backend/voice_ai/campaign_schemas.py",
+    "backend/voice_ai/campaign_services.py",
+    "backend/voice_ai/e2e_services.py",
+]
+
+# Optional frontend files (operator may not always ship FE)
+FRONTEND_PAGES = [
+    "frontend/src/pages/VoiceAIDemoPage.jsx",
+    "frontend/src/pages/VoiceAICampaignPage.jsx",
+    "frontend/src/pages/VoiceAIE2EPage.jsx",
 ]
 
 MIGRATION = "backend/migrations/052_voice_ai_end_to_end.sql"
-FRONTEND = "frontend/src/pages/VoiceAIDemoPage.jsx"
+FRONTEND = "frontend/src/pages/VoiceAIDemoPage.jsx"  # legacy single check kept for shape
 DEMO_STORY = "docs/use-cases/voice-ai-end-to-end/HOLY_DEMO_STORY.md"
 
 DEMO_STORY_SECTIONS = [
@@ -66,12 +76,13 @@ def main() -> int:
     if not ok:
         fails += 1
 
-    # Frontend
-    target = REPO / FRONTEND
-    ok = target.exists() and target.stat().st_size > 5000
-    print(f"  {FRONTEND:<50} | {'✓ PASS' if ok else '✗ FAIL'}")
-    if not ok:
-        fails += 1
+    # Frontend (3 pages: demo · campaign · e2e)
+    for fp in FRONTEND_PAGES:
+        target = REPO / fp
+        ok = target.exists() and target.stat().st_size > 5000
+        print(f"  {fp:<50} | {'✓ PASS' if ok else '✗ FAIL'}")
+        if not ok:
+            fails += 1
 
     # Demo story
     target = REPO / DEMO_STORY
@@ -94,7 +105,7 @@ def main() -> int:
         print(f"  {DEMO_STORY:<50} | ✗ FAIL (missing)")
         fails += 1
 
-    total_checks = len(BACKEND_FILES) + 3
+    total_checks = len(BACKEND_FILES) + 1 + len(FRONTEND_PAGES) + 1  # backend + migration + frontends + demo_story
     passes = total_checks - fails if fails <= total_checks else 0
     print(f"\n  Summary: {passes} / {total_checks} pass · {fails} fail")
     print(f"  Reference: §90 L15 voice AI E2E · §92 ai-agents/ mandatory")
