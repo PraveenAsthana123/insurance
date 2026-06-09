@@ -52,7 +52,7 @@ def get_queue(
             cur.execute(
                 """
                 SELECT run_ref, status, decisions, fairness_di, rai_pass,
-                       created_at, halt_reason
+                       started_at, halt_reason
                 FROM autonomous_agent_runs
                 WHERE tenant_id = %s
                 ORDER BY id DESC LIMIT %s
