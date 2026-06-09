@@ -133,9 +133,16 @@ AUDITS = {
         "spec": "§57.7 + §80 + T7.9",
         "description": "Confidence-score routing · 10 assertions (4 threshold tiers · sparse=low · single-cohort=high · live agent run produces confidence+routing fields)",
     },
+    "decision-corrections": {
+        "script": "scripts/audit_corrections.py",
+        "report_dir": "jobs/reports/decision-corrections-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§38.3 + T7.10 + Tier 7 gate #5",
+        "description": "RLHF correction DB · 11 assertions (schema · 3 severity tiers · invalid severity rejected · round-trip · filter · stats)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections"]
 
 
 @router.get("/list")

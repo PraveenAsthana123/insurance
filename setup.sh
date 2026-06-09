@@ -346,6 +346,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_confidence_routing.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Decision corrections RLHF DB audit (T7.10) ──"
+  [ -f scripts/audit_corrections.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_corrections.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

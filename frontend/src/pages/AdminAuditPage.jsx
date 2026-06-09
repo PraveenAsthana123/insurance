@@ -82,6 +82,11 @@ const AUDIT_LABELS = {
     spec: '§57.7 + §80 + T7.9',
     description: '4-tier autonomous-agent routing · 10 assertions (threshold tiers · sparse vs single-cohort · live agent run produces confidence+routing)',
   },
+  'decision-corrections': {
+    name: 'RLHF correction DB (T7.10 · governance gate #5)',
+    spec: '§38.3 + T7.10 + gate #5',
+    description: 'Captures human-override of agent decisions · 11 assertions (schema · severity tiers · invalid rejected · round-trip · filter · stats)',
+  },
 };
 
 export default function AdminAuditPage() {

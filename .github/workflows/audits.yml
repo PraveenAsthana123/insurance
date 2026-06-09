@@ -121,3 +121,6 @@ jobs:
 
       - name: CONFIDENCE-ROUTING audit · 4-tier governance gate #1 (10 assertions)
         run: python3 scripts/audit_confidence_routing.py
+
+      - name: CORRECTIONS RLHF DB audit · governance gate #5 (11 assertions)
+        run: python3 scripts/audit_corrections.py
