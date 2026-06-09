@@ -42,6 +42,11 @@ const AUDIT_LABELS = {
     spec: '§47.6 + §57.7 + §64.13',
     description: 'Full path: create → execute → preview → submit → status verify · DLP gate · anti-replay · metrics aggregate',
   },
+  'marketing-advanced': {
+    name: 'Advanced suite · multi-channel + autonomous AI (8 tests)',
+    spec: '§47.6 + §76 + §82.21',
+    description: '4-channel · 5-shape DLP · concurrency · autonomous decision loop · RAI fairness gate · anti-replay · invalid channel · channel help',
+  },
 };
 
 export default function AdminAuditPage() {

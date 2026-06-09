@@ -77,9 +77,16 @@ AUDITS = {
         "spec": "§47.6 + §57.7 + §64.13",
         "description": "Full consumer flow · 12 assertions (create + execute + preview + submit + status + DLP gate + anti-replay + metrics)",
     },
+    "marketing-advanced": {
+        "script": "scripts/audit_marketing_advanced.py",
+        "report_dir": "jobs/reports/marketing-advanced-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§47.6 + §57.7 + §64.13 + §76 + §82.21",
+        "description": "Advanced suite · 8 tests (multi-channel + 5-shape adversarial DLP + concurrency + autonomous AI + RAI fairness + anti-replay + invalid + channel help)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced"]
 
 
 @router.get("/list")

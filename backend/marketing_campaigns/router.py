@@ -61,6 +61,34 @@ def create_campaign(body: CampaignCreate, request: Request):
         raise HTTPException(400, {"detail": str(e), "error_code": "INVALID_CHANNEL"})
 
 
+# ─── Autonomous AI agent endpoints (declared BEFORE /{campaign_id} so they
+#     don't get shadowed by FastAPI route-precedence)
+from . import autonomous_agent as aa
+from .autonomous_agent import AgentObjective, AgentRunResult
+
+
+@router.post("/autonomous/run", response_model=AgentRunResult)
+def autonomous_run(body: AgentObjective, request: Request):
+    """Run the autonomous decision loop · returns full audit trail."""
+    return aa.run_agent(body, _tenant(request), _correlation_id(request))
+
+
+@router.get("/autonomous/runs")
+def autonomous_runs(request: Request, limit: int = 50):
+    """List recent agent runs · for the decision-loop dashboard."""
+    return {"items": aa.list_runs(_tenant(request), limit)}
+
+
+@router.get("/autonomous/runs/{run_ref}")
+def autonomous_run_one(run_ref: str, request: Request):
+    """Single agent run · full decisions trail."""
+    r = aa.get_run(run_ref, _tenant(request))
+    if not r:
+        raise HTTPException(404, {"detail": "agent run not found",
+                                    "error_code": "AGENT_404"})
+    return r
+
+
 @router.get("/{campaign_id}", response_model=Campaign)
 def get_campaign(campaign_id: int, request: Request):
     c = services.get_campaign(campaign_id, _tenant(request))
