@@ -73,6 +73,9 @@ export function IPOSection({ number, kind = 'input', title, subtitle, children }
 // =========================================
 
 export function SubTabGrid({ subtabs, onSelect, columns = 4 }) {
+  // CLICKABLE cards · LIGHT-TINTED background per operator 2026-06-09
+  // ("clickable card must have background light color · information card must be white")
+  // 'Click to open →' affordance + cursor pointer + hover lift make clickability obvious.
   return (
     <div style={{
       display: 'grid',
@@ -83,24 +86,132 @@ export function SubTabGrid({ subtabs, onSelect, columns = 4 }) {
       {subtabs.map((s) => (
         <button
           key={s.slug}
-          onClick={() => onSelect(s.slug)}
+          onClick={() => { onSelect(s.slug); window.scrollTo({top: 0, behavior: 'instant'}); }}
+          title={`Click to open ${s.label}`}
           style={{
             padding: 'var(--spacing-md)',
-            background: 'var(--bg-card)',
-            border: `2px solid ${s.color || 'var(--border-color)'}`,
+            background: s.color ? `${s.color}10` : '#eff6ff',  // light-tint = clickable affordance
+            border: `2px solid ${s.color || '#3b82f6'}`,
             borderRadius: 'var(--border-radius)',
             cursor: 'pointer',
             textAlign: 'left',
             transition: 'transform 0.15s, box-shadow 0.15s',
+            display: 'flex', flexDirection: 'column', minHeight: 110,
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)'; e.currentTarget.style.background = s.color ? `${s.color}20` : '#dbeafe'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.background = s.color ? `${s.color}10` : '#eff6ff'; }}
         >
           <div style={{ fontSize: 24, marginBottom: 8 }}>{s.icon || '▸'}</div>
           <h4 style={{ margin: '0 0 4px', fontSize: 'var(--font-size-sm)', color: s.color || 'var(--text-primary)', fontWeight: 700 }}>{s.label}</h4>
-          {s.desc && <p style={{ margin: 0, fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)' }}>{s.desc}</p>}
+          {s.desc && <p style={{ margin: 0, fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)', flex: 1 }}>{s.desc}</p>}
+          <div style={{ marginTop: 6, fontSize: 'var(--font-size-xs)', color: s.color || '#3b82f6', fontWeight: 600 }}>
+            Click to open →
+          </div>
         </button>
       ))}
+    </div>
+  );
+}
+
+// =========================================
+// 2b. InfoCard — non-clickable information surface (WHITE background)
+// =========================================
+// Per operator 2026-06-09: "information card must be background white"
+// Use when you want to show structured info without inviting a click.
+
+export function InfoCard({ icon, title, children, accent = '#6b7280' }) {
+  return (
+    <div style={{
+      background: '#ffffff',                                    // pure white = info-only
+      border: `1px solid ${accent}40`,
+      borderLeft: `4px solid ${accent}`,
+      borderRadius: 'var(--border-radius)',
+      padding: 'var(--spacing-md)',
+      marginBottom: 'var(--spacing-sm)',
+    }}>
+      {(icon || title) && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+          {icon && <span style={{ fontSize: 18 }}>{icon}</span>}
+          {title && <strong style={{ fontSize: 'var(--font-size-sm)', color: accent }}>{title}</strong>}
+          <span style={{ fontSize: 10, color: '#9ca3af', marginLeft: 'auto', fontStyle: 'italic' }}>info-only</span>
+        </div>
+      )}
+      <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--text-secondary)' }}>{children}</div>
+    </div>
+  );
+}
+
+// =========================================
+// 2c. JourneyFlow — horizontal step-flow on top (operator 2026-06-09)
+// =========================================
+// "there must be one journy flow on top to undestand .. list of operation
+// going to havppend in horizental"
+
+export function JourneyFlow({ steps, currentSlug }) {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 4,
+      padding: 'var(--spacing-sm)',
+      background: '#f9fafb',
+      border: '1px solid #e5e7eb',
+      borderRadius: 'var(--border-radius)',
+      marginBottom: 'var(--spacing-md)',
+      overflowX: 'auto',
+    }}>
+      {steps.map((s, i) => (
+        <div key={s.slug} style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+          <div style={{
+            padding: '4px 10px',
+            background: s.slug === currentSlug ? s.color || '#3b82f6' : '#fff',
+            color: s.slug === currentSlug ? '#fff' : '#475569',
+            border: `1px solid ${s.color || '#cbd5e1'}`,
+            borderRadius: 4, fontSize: 11, fontWeight: 600,
+            whiteSpace: 'nowrap',
+          }}>
+            {i + 1}. {s.label}
+          </div>
+          {i < steps.length - 1 && (
+            <span style={{ margin: '0 4px', color: '#94a3b8' }}>→</span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// =========================================
+// 2d. TodoList — pending-tasks panel at TOP of every sub-tab (operator 2026-06-09)
+// =========================================
+// "todo must be top"
+// Renders BEFORE IPO sections so operator sees what's pending immediately.
+
+export function TodoList({ items, title = "TODO · pending for this artifact" }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div style={{
+      background: '#fff7ed',                                  // light orange = pending
+      border: '1px solid #fed7aa',
+      borderLeft: '4px solid #f59e0b',
+      borderRadius: 'var(--border-radius)',
+      padding: 'var(--spacing-md)',
+      marginBottom: 'var(--spacing-md)',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+        <span style={{ fontSize: 16 }}>📝</span>
+        <strong style={{ fontSize: 'var(--font-size-sm)', color: '#b45309' }}>{title}</strong>
+        <span style={{
+          marginLeft: 'auto',
+          background: '#f59e0b', color: '#fff',
+          padding: '2px 8px', borderRadius: 10, fontSize: 10, fontWeight: 700,
+        }}>
+          {items.length} pending
+        </span>
+      </div>
+      <ul style={{ margin: 0, paddingLeft: 20, fontSize: 'var(--font-size-xs)', color: '#78350f' }}>
+        {items.map((item, i) => (
+          <li key={i} style={{ marginBottom: 2 }}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
