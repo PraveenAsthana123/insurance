@@ -86,7 +86,7 @@ Per §73 · 17 fixed tabs in 8 phases.
 |---|---|---|---|---|---|---|---|---|
 | 1 | Orient | architecture (readme) | ReadmeTabPanel · 22 sub-tabs | **5** (FIXED 82d16642) | ✓ | ✓ | High | architecture.completeness |
 | 2 | Orient | tech-stack | TechStackTab · stack list | 3 | ✓ | ⚠ | Med | tech.layer_count |
-| 3 | Orient | demo-story | UserDemoTab (alias) | **1** | ❌ | ❌ | Med | demo.completion_rate |
+| 3 | Orient | demo-story | UserDemoTab (FIXED 5bf · TODO · JourneyFlow · InfoCard · skeleton) | **4** | ✓ | ✓ | Med | demo.completion_rate |
 | 4 | Orient | as-is-to-be | (in ReadmeTabPanel now) | 4 | ✓ | ⚠ | High | as_is.process_count |
 | 5 | Understand | problem | ProcessProblemTab | 2 | ⚠ | ❌ | High | problem.statement_count |
 | 6 | Understand | data | data renderer | 2 | ✓ | ❌ | Med | data.source_count |
@@ -418,8 +418,8 @@ Customer = the operator's customer (insurance policyholder for /insurance · mar
 
 | Surface | What's missing | Why it matters | Priority |
 |---|---|---|---|
-| /insurance ProcessDetailView | "User Story" tab has wrong content | Operator's loudest complaint · label-content mismatch | P0 |
-| /insurance ProcessDetailView | "User Demo" tab identical to User Story | Same problem | P0 |
+| /insurance ProcessDetailView | ~~"User Story" tab has wrong content~~ **FIXED** | reads proc.user_story (NEW field) · differentiated skeleton | ~~P0~~ ✓ done |
+| /insurance ProcessDetailView | ~~"User Demo" tab identical to User Story~~ **FIXED** | reads proc.demo_story · differentiated content vs UserStory | ~~P0~~ ✓ done |
 | ProcessPage 22 tabs | Per-process "Problem statement" for 21 of 22 procs | Sponsor cannot understand "why" without it | P0 |
 | ProcessPage Models tab | Wire to MLflow model registry · per-proc model card | Cannot ship model without card | P0 |
 | ProcessPage Accuracy tab | Wire to eval harness · per-proc confusion matrix | Cannot validate model accuracy | P0 |

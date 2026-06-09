@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
-import { IPOSection, TransactionalHistory, OutputEvaluation, DerivedBadge } from './IPOLayout';
+import {
+  IPOSection, TransactionalHistory, OutputEvaluation, DerivedBadge,
+  InfoCard, JourneyFlow, TodoList,
+} from './IPOLayout';
 import { useInputEvent } from '../../../hooks/useInputEvent';
 import {
   ResponsiveContainer,
@@ -663,36 +666,104 @@ export function AnalysisTab({ proc, dept }) {
 }
 
 
+// =========================================
+// UserDemoTab — DEMO walkthrough (persona · scenario · click-by-click)
+// Per operator 2026-06-09 fix · UserDemo is the EXPERIENCE preview · separate from UserStory.
+// Reads proc.demo_story (canonical) · falls back to differentiated skeleton if missing.
+// =========================================
 export function UserDemoTab({ proc, dept }) {
   const demo = proc.demo_story;
-  if (!demo) return <EmptyState tabName="User Demo" />;
+
+  // Per-tab TODO list (always visible at top per operator 'todo must be top')
+  const todos = [
+    !demo?.persona && 'Define demo persona (named operator · their role · who they report to)',
+    !demo?.scenario && 'Write 1-paragraph business scenario',
+    (!demo?.walkthrough || demo.walkthrough.length === 0) && 'Add ≥ 5 walkthrough steps (click-by-click)',
+    !demo?.pitch && 'Write 30-second elevator pitch',
+    !demo?.demo_url && 'Set demo URL pattern (e.g. /:dept/:proc?demo=1)',
+  ].filter(Boolean);
+
   const demoMetrics = [
-    { name: 'Steps', value: (demo.walkthrough || []).length || metricValue(proc.name, 21, 3, 8) },
+    { name: 'Steps', value: (demo?.walkthrough || []).length || metricValue(proc.name, 21, 3, 8) },
     { name: 'Data', value: (proc.data_process?.input || []).length || metricValue(proc.name, 22, 2, 8) },
     { name: 'AI', value: (proc.ai || []).length || metricValue(proc.name, 23, 2, 8) },
     { name: 'Outputs', value: (proc.output?.artifacts || proc.data_process?.output || []).length || metricValue(proc.name, 24, 2, 8) },
   ];
+
   return (
     <div>
-      <IPOSection number="1" kind="input" title="Input — Demo setup" subtitle="Persona, data, and scenario required to run the stakeholder demo.">
-        <Field label="Persona">{demo.persona || 'Operator persona pending'}</Field>
-        <Field label="Department">{dept.name}</Field>
-        <Field label="Scenario">{demo.scenario || '-'}</Field>
-      </IPOSection>
+      {/* JourneyFlow horizontal · DEMO is in 'Orient' phase per §73 */}
+      <JourneyFlow
+        steps={[
+          { slug: 'orient', label: 'Orient (Demo HERE)', color: '#d946ef' },
+          { slug: 'understand', label: 'Understand', color: '#3b82f6' },
+          { slug: 'describe', label: 'Describe', color: '#8b5cf6' },
+          { slug: 'ship', label: 'Ship', color: '#10b981' },
+        ]}
+        currentSlug="orient"
+      />
 
-      <IPOSection number="2" kind="process" title="Process — Demo execution" subtitle="Click-by-click run path through data, model, analysis, ResAI, and ExpAI.">
-        <ol style={{ margin: 0, paddingLeft: 20 }}>
-          {(demo.walkthrough || []).map((step, index) => <li key={index}>{step}</li>)}
-        </ol>
-        {(demo.walkthrough || []).length === 0 && <em>Operator-pending walkthrough.</em>}
-      </IPOSection>
+      {/* TODO at top */}
+      <TodoList items={todos} title={`TODO · pending for ${proc.name} demo`} />
 
-      <IPOSection number="3" kind="output" title="Output — Demo result" subtitle="Pitch, URL pattern, and visual demo readiness.">
-        <Field label="30-second pitch">{demo.pitch || '-'}</Field>
-        <Field label="Demo URL pattern"><code>{demo.demo_url || '-'}</code></Field>
-        <ProcessChart title="Demo readiness" data={demoMetrics} color="#d946ef" />
-        <DerivedBadge derived={!!demo.derived} />
-      </IPOSection>
+      {/* INFO card: what this tab IS for · clarity on info vs action */}
+      <InfoCard icon="🎬" title="What this tab shows" accent="#d946ef">
+        <strong>Customer experience preview.</strong> A click-by-click walkthrough of how a stakeholder
+        would EXPERIENCE this process via the AI-augmented flow. Different from User Story (which is
+        the As-a/I-want/So-that statement) and AS-IS/TO-BE (which are operational diagrams).
+        <br /><br />
+        <strong>Sequence</strong>: Orient → Understand → Describe → Ship · this tab is in Orient.
+        <br />
+        <strong>Priority</strong>: HIGH · customers cannot SEE the value without the demo.
+        <br />
+        <strong>Information</strong>: persona · scenario · walkthrough · pitch (all read-only here).
+        <br />
+        <strong>Operation</strong>: click any step number in walkthrough to jump to that screen (when wired).
+      </InfoCard>
+
+      {demo ? (
+        <>
+          <IPOSection number="1" kind="input" title={`1. Persona & Scenario for ${proc.name}`}
+                      subtitle="Who is this demo for · what business situation does it cover">
+            <Field label="Persona">{demo.persona || 'Operator persona pending'}</Field>
+            <Field label="Department">{dept.name}</Field>
+            <Field label="Scenario">{demo.scenario || '-'}</Field>
+          </IPOSection>
+
+          <IPOSection number="2" kind="process" title="2. Walkthrough — click-by-click"
+                      subtitle="Each step is a screen / action the demo audience sees">
+            <ol style={{ margin: 0, paddingLeft: 20 }}>
+              {(demo.walkthrough || []).map((step, index) => <li key={index}>{step}</li>)}
+            </ol>
+            {(demo.walkthrough || []).length === 0 && <em>Operator-pending walkthrough.</em>}
+          </IPOSection>
+
+          <IPOSection number="3" kind="output" title="3. Result — Pitch & demo URL"
+                      subtitle="30-second elevator pitch + demo URL pattern + readiness chart">
+            <Field label="30-second pitch">{demo.pitch || '-'}</Field>
+            <Field label="Demo URL pattern"><code>{demo.demo_url || '-'}</code></Field>
+            <ProcessChart title="Demo readiness" data={demoMetrics} color="#d946ef" />
+            <DerivedBadge derived={!!demo.derived} />
+          </IPOSection>
+        </>
+      ) : (
+        <>
+          <InfoCard icon="📋" title="What this artifact will contain (when populated)" accent="#d946ef">
+            <ul style={{ margin: 0, paddingLeft: 16 }}>
+              <li><strong>Persona</strong>: named operator + their role (e.g. "Sarah · Claims Adjuster")</li>
+              <li><strong>Scenario</strong>: business situation (e.g. "Auto claim · BI severity")</li>
+              <li><strong>Walkthrough</strong>: 5-10 click steps (e.g. "1. Open claim. 2. AI surfaces fraud score. 3. ...")</li>
+              <li><strong>30-second pitch</strong>: elevator narrative for board</li>
+              <li><strong>Demo URL pattern</strong>: how to start the demo · /:dept/:proc?demo=1</li>
+            </ul>
+          </InfoCard>
+          <InfoCard icon="✏️" title="How to populate" accent="#94a3b8">
+            Edit <code>process.demo_story</code> in <code>data/insurance/blueprint.json</code>.
+            Each process has its OWN demo. When the field is missing, this tab shows you
+            the skeleton above so the operator knows what's expected.
+          </InfoCard>
+        </>
+      )}
 
       <TransactionalHistory rows={[]} tabName="user-demo" />
       <OutputEvaluation metrics={{}} tabName="user-demo" />
@@ -700,39 +771,94 @@ export function UserDemoTab({ proc, dept }) {
   );
 }
 
+// =========================================
+// UserStoryTab — As-a / I-want / So-that statement + acceptance criteria
+// Per operator 2026-06-09 fix · UserStory is the AGREEMENT (what + why) ·
+// DIFFERENT from UserDemo (the experience preview).
+// Reads proc.user_story (DEDICATED field · prevents content correlation bug).
+// Falls back to demo_story persona if user_story missing (legacy).
+// =========================================
 export function UserStoryTab({ proc, dept }) {
-  const demo = proc.demo_story;
-  const manual = proc.manual_process;
-  const automatic = proc.automatic_process;
-  if (!demo && !manual && !automatic) return <EmptyState tabName="User Story" />;
-  const acceptance = [
+  const story = proc.user_story || {};
+  const legacyDemo = proc.demo_story || {};
+  const manual = proc.manual_process || {};
+
+  // Synthesize role/want/so_that from new field or legacy fallback
+  const role = story.role || legacyDemo.persona || 'Operator';
+  const wants = story.i_want || story.want || (manual.summary ? `to ${manual.summary.toLowerCase()}` : null);
+  const so_that = story.so_that || story.so_that_we_can || null;
+
+  // Per-tab TODO list at top
+  const todos = [
+    !story.role && 'Define "As a [role]" · who is the primary user',
+    !story.i_want && 'Define "I want [outcome]" · what they need to accomplish',
+    !story.so_that && 'Define "So that [value]" · WHY · business impact',
+    (!story.acceptance_criteria || story.acceptance_criteria.length === 0) && 'Add Given/When/Then acceptance criteria (≥ 3)',
+    !story.priority && 'Set priority (P0 / P1 / P2 / P3)',
+    !story.estimate_points && 'Add story point estimate (1 · 2 · 3 · 5 · 8 · 13)',
+  ].filter(Boolean);
+
+  // Default acceptance criteria (derived if blueprint missing)
+  const acceptance = story.acceptance_criteria || [
     `Given ${dept.name}, when the user starts ${proc.name}, then the system shows the current AS-IS process and pain points.`,
     'Given required data is present, when AI automation runs, then output artifacts and audit rows are produced.',
     'Given a decision is generated, when governance checks complete, then ResAI and ExpAI evidence is visible.',
   ];
+
   return (
     <div>
-      <IPOSection number="1" kind="input" title="Input — Persona and business story" subtitle="Who the story serves and what outcome they need.">
-        <Field label="Persona">{demo?.persona || 'Operator persona pending'}</Field>
-        <Field label="Business scenario">{demo?.scenario || manual?.summary || '-'}</Field>
+      <JourneyFlow
+        steps={[
+          { slug: 'orient', label: 'Orient', color: '#3b82f6' },
+          { slug: 'understand', label: 'Understand (Story HERE)', color: '#8b5cf6' },
+          { slug: 'describe', label: 'Describe', color: '#a855f7' },
+          { slug: 'ship', label: 'Ship', color: '#10b981' },
+        ]}
+        currentSlug="understand"
+      />
+
+      <TodoList items={todos} title={`TODO · pending for ${proc.name} user story`} />
+
+      <InfoCard icon="📝" title="What this tab shows" accent="#8b5cf6">
+        <strong>The user-story AGREEMENT</strong> · the As-a/I-want/So-that statement +
+        acceptance criteria the engineering team will deliver against. Different from
+        User Demo (which is the click-by-click experience preview).
+        <br /><br />
+        <strong>Sequence</strong>: Discovery → Story → Build · this tab is in Discovery/Understand.
+        <br />
+        <strong>Priority</strong>: MUST · cannot ship without acceptance criteria.
+        <br />
+        <strong>Information</strong>: role · want · so-that · acceptance criteria · priority · estimate.
+        <br />
+        <strong>Operation</strong>: read-only here · edit in <code>data/insurance/blueprint.json</code>.
+      </InfoCard>
+
+      <IPOSection number="1" kind="input" title="1. As a [role]"
+                  subtitle="WHO is the primary user of this process">
+        <Field label="Role">{role}</Field>
+        <Field label="Department">{dept.name}</Field>
+        {story.persona && <Field label="Persona note">{story.persona}</Field>}
       </IPOSection>
 
-      <IPOSection number="2" kind="process" title="Process — User journey" subtitle="Story steps across data, model, analysis, demo, ResAI, and ExpAI.">
-        <ol style={{ margin: 0, paddingLeft: 20 }}>
-          {(demo?.walkthrough || [
-            'Open process detail and review business problem.',
-            'Inspect Data tab before/after visualization.',
-            'Review Model and Analysis tabs for AI readiness.',
-            'Run the demo flow and validate ResAI/ExpAI evidence.',
-          ]).map((step, index) => <li key={index}>{step}</li>)}
-        </ol>
+      <IPOSection number="2" kind="process" title={`2. I want ${wants ? '...' : '[outcome]'}`}
+                  subtitle="WHAT outcome the user needs to accomplish">
+        <Field label="I want">
+          {wants || <em>Operator-pending · add proc.user_story.i_want in blueprint.</em>}
+        </Field>
+        <Field label={`Acceptance criteria (${acceptance.length})`}>
+          <ul style={{ margin: 0, paddingLeft: 20 }}>
+            {acceptance.map((item, index) => <li key={index}>{item}</li>)}
+          </ul>
+        </Field>
       </IPOSection>
 
-      <IPOSection number="3" kind="output" title="Output — Acceptance criteria" subtitle="Definition of done for stakeholder demo and delivery review.">
-        <ul style={{ margin: 0, paddingLeft: 20 }}>
-          {acceptance.map((item, index) => <li key={index}>{item}</li>)}
-        </ul>
-        {demo?.pitch && <Field label="Demo pitch">{demo.pitch}</Field>}
+      <IPOSection number="3" kind="output" title={`3. So that ${so_that ? '...' : '[business value]'}`}
+                  subtitle="WHY · the business value · the WHY behind the WHAT">
+        <Field label="So that">
+          {so_that || <em>Operator-pending · add proc.user_story.so_that in blueprint.</em>}
+        </Field>
+        {story.priority && <Field label="Priority"><strong>{story.priority}</strong></Field>}
+        {story.estimate_points && <Field label="Story points">{story.estimate_points}</Field>}
       </IPOSection>
 
       <TransactionalHistory rows={[]} tabName="user-story" />
