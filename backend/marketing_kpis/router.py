@@ -12,7 +12,7 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
 
-from . import computer, registry
+from . import alerter, computer, registry
 
 router = APIRouter(prefix="/api/v1/marketing-kpis", tags=["marketing-kpis"])
 
@@ -95,6 +95,20 @@ def values():
     return {"values": computer.compute_all(),
             "computed_count": len(computer.COMPUTERS),
             "registry_count": len(registry.KPIS)}
+
+
+@router.get("/alerts")
+def alerts(severity: str | None = None):
+    """T5.10 · per-KPI target-breach alerter.
+
+    Returns alerts sorted by deviation desc. Filter by severity:
+      ?severity=critical  · only ≥50%-off-target
+      ?severity=warning   · only <50%-off-target
+    """
+    d = alerter.compute_all_breaches()
+    if severity in ("critical", "warning"):
+        d["alerts"] = [a for a in d["alerts"] if a["severity"] == severity]
+    return d
 
 
 @router.get("/values/{kpi_id}")

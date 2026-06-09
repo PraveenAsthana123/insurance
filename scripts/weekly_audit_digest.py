@@ -163,6 +163,43 @@ def main() -> int:
                 lines.append(f"- `{ln}`")
             lines.append("")
 
+    # T5.10 · per-KPI target-breach alerts
+    try:
+        sys.path.insert(0, str(REPO / "backend"))
+        from marketing_kpis import alerter as _alerter
+        breach = _alerter.compute_all_breaches()
+        s = breach.get("summary", {})
+        lines.extend([
+            "",
+            "## KPI Target-Breach Alerts (T5.10)",
+            "",
+            f"- Critical: **{s.get('critical', 0)}** · "
+              f"Warning: **{s.get('warning', 0)}** · "
+              f"In compliance: **{s.get('in_compliance', 0)}** · "
+              f"Skipped (no value): {s.get('skipped_no_value', 0)} · "
+              f"Skipped (no target): {s.get('skipped_no_target', 0)}",
+            "",
+        ])
+        if breach.get("alerts"):
+            lines.append("| KPI | Value | Target | Deviation | Severity |")
+            lines.append("|---|---|---|---|---|")
+            for a in breach["alerts"]:
+                emoji = "🔴" if a["severity"] == "critical" else "🟠"
+                lines.append(
+                    f"| {a['kpi_name']} | {a['value']} | "
+                    f"{a['target_op']} {a['target']} | "
+                    f"{a['deviation_pct']}% | {emoji} {a['severity']} |"
+                )
+        else:
+            lines.append("- ✓ No KPIs currently breaching their targets.")
+        lines.append("")
+    except Exception as e:
+        lines.extend([
+            "",
+            f"## KPI alerts unavailable ({type(e).__name__}: {e})",
+            "",
+        ])
+
     lines.extend([
         "",
         "## Composes With",

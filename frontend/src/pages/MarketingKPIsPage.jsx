@@ -11,9 +11,10 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 const TABS = [
   { id: 'dashboards', name: '📊 Dashboards',  color: '#1e40af' },
   { id: 'kpis',       name: '🎯 KPIs (85+)',  color: '#9333ea' },
+  { id: 'alerts',     name: '🚨 Alerts',      color: '#dc2626' },
   { id: 'agents',     name: '🤖 AI Agents',   color: '#16a34a' },
   { id: 'maturity',   name: '🪜 Maturity',    color: '#d97706' },
-  { id: 'scorecard',  name: '🏆 Scorecard',   color: '#dc2626' },
+  { id: 'scorecard',  name: '🏆 Scorecard',   color: '#7c3aed' },
 ];
 
 const STATUS_COLOR = {
@@ -30,6 +31,7 @@ export default function MarketingKPIsPage() {
   const [agents, setAgents] = useState([]);
   const [maturity, setMaturity] = useState(null);
   const [scorecard, setScorecard] = useState(null);
+  const [alerts, setAlerts] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [error, setError] = useState(null);
 
@@ -69,6 +71,9 @@ export default function MarketingKPIsPage() {
         }
         if (tab === 'scorecard' && !scorecard) {
           setScorecard(await fetchJSON('/api/v1/marketing-kpis/scorecard'));
+        }
+        if (tab === 'alerts') {
+          setAlerts(await fetchJSON('/api/v1/marketing-kpis/alerts'));
         }
       } catch (e) { setError(`${tab}: ${e.message}`); }
     })();
@@ -251,6 +256,71 @@ export default function MarketingKPIsPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {tab === 'alerts' && alerts && (
+        <div>
+          <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+            <Tile label="CRITICAL"      value={alerts.summary.critical}      accent="#dc2626" />
+            <Tile label="WARNING"       value={alerts.summary.warning}       accent="#d97706" />
+            <Tile label="IN COMPLIANCE" value={alerts.summary.in_compliance} accent="#16a34a" />
+            <Tile label="NO VALUE"      value={alerts.summary.skipped_no_value}  accent="#94a3b8" />
+            <Tile label="NO TARGET"     value={alerts.summary.skipped_no_target} accent="#94a3b8" />
+          </div>
+          <div style={card}>
+            <h3 style={{ margin: '0 0 8px', fontSize: 14 }}>
+              KPI Target-Breach Alerts · T5.10 · sorted by deviation
+            </h3>
+            {alerts.alerts.length === 0 ? (
+              <div style={{ ...small, padding: 12 }}>
+                ✓ No KPIs currently breaching their targets.
+              </div>
+            ) : (
+              <table style={{ width: '100%', fontSize: 12 }}>
+                <thead>
+                  <tr style={{ textAlign: 'left', color: '#64748b' }}>
+                    <th style={{ padding: 6 }}>Severity</th>
+                    <th style={{ padding: 6 }}>KPI</th>
+                    <th style={{ padding: 6 }}>Value</th>
+                    <th style={{ padding: 6 }}>Target</th>
+                    <th style={{ padding: 6 }}>Deviation</th>
+                    <th style={{ padding: 6 }}>Category</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {alerts.alerts.map((a) => (
+                    <tr key={a.kpi_id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                      <td style={{ padding: 6 }}>
+                        <span style={{
+                          background: a.severity === 'critical' ? '#dc2626' : '#d97706',
+                          color: '#fff', padding: '2px 8px', borderRadius: 4,
+                          fontSize: 10, fontWeight: 700, textTransform: 'uppercase',
+                        }}>
+                          {a.severity === 'critical' ? '🔴' : '🟠'} {a.severity}
+                        </span>
+                      </td>
+                      <td style={{ padding: 6 }}>
+                        <strong>{a.kpi_name}</strong>
+                        <div style={small}><code>{a.kpi_id}</code></div>
+                      </td>
+                      <td style={{ padding: 6 }}><strong>{a.value}</strong></td>
+                      <td style={{ padding: 6 }}>{a.target_op} {a.target}</td>
+                      <td style={{ padding: 6, fontWeight: 700,
+                                    color: a.severity === 'critical' ? '#dc2626' : '#d97706' }}>
+                        {a.deviation_pct}%
+                      </td>
+                      <td style={{ padding: 6 }}><code>{a.category}</code></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+            <div style={{ ...small, marginTop: 8 }}>
+              Critical · value ≥50% off target · Warning · &lt; 50% off ·
+              Skipped · KPI lacks value or numeric target (§57.7 honest)
+            </div>
           </div>
         </div>
       )}
