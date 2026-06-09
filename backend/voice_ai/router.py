@@ -116,3 +116,66 @@ def monitoring(request: Request):
 def health():
     return {"status": "ok", "module": "voice-ai-e2e",
             "spec": "§90 L15 + §91 + §64.2/.3/.4"}
+
+
+# ─── Outbound Campaign endpoints (migration 053) ─────────────────
+from .campaign_schemas import (
+    Campaign, CampaignCreate, CampaignUpdate,
+    CampaignExecuteRequest, CampaignExecuteResponse,
+    CampaignRun, CampaignRunUpdate, CampaignMetrics,
+)
+from . import campaign_services as cs
+
+
+@router.get("/campaigns", response_model=list[Campaign])
+def list_campaigns(request: Request):
+    return cs.list_campaigns(_tenant(request))
+
+
+@router.post("/campaigns", response_model=Campaign, status_code=201)
+def create_campaign(body: CampaignCreate, request: Request):
+    return cs.create_campaign(body, _tenant(request))
+
+
+@router.get("/campaigns/{campaign_id}", response_model=Campaign)
+def get_one_campaign(campaign_id: int, request: Request):
+    c = cs.get_campaign(campaign_id, _tenant(request))
+    if not c:
+        raise HTTPException(404, {"detail": "campaign not found", "error_code": "CAMP_404"})
+    return c
+
+
+@router.patch("/campaigns/{campaign_id}", response_model=Campaign)
+def patch_campaign(campaign_id: int, body: CampaignUpdate, request: Request):
+    c = cs.update_campaign(campaign_id, body, _tenant(request))
+    if not c:
+        raise HTTPException(404, {"detail": "campaign not found", "error_code": "CAMP_404"})
+    return c
+
+
+@router.post("/campaigns/{campaign_id}/execute", response_model=CampaignExecuteResponse)
+def execute_campaign(campaign_id: int, body: CampaignExecuteRequest, request: Request):
+    try:
+        return cs.execute_campaign(
+            campaign_id, body, _tenant(request), _correlation_id(request),
+        )
+    except ValueError as e:
+        raise HTTPException(404, {"detail": str(e), "error_code": "CAMP_404"})
+
+
+@router.get("/campaigns/{campaign_id}/runs", response_model=list[CampaignRun])
+def list_runs(campaign_id: int, request: Request):
+    return cs.list_runs(campaign_id, _tenant(request))
+
+
+@router.patch("/campaign-runs/{run_id}", response_model=CampaignRun)
+def patch_run(run_id: int, body: CampaignRunUpdate, request: Request):
+    r = cs.update_run(run_id, body, _tenant(request))
+    if not r:
+        raise HTTPException(404, {"detail": "run not found", "error_code": "RUN_404"})
+    return r
+
+
+@router.get("/campaigns/{campaign_id}/metrics", response_model=CampaignMetrics)
+def campaign_metrics(campaign_id: int, request: Request):
+    return cs.campaign_metrics(campaign_id, _tenant(request))
