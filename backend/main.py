@@ -123,6 +123,8 @@ def create_app() -> FastAPI:
     from routers.input_events import router as input_events_router  # GLOBAL_INPUT_PERSISTENCE_POLICY
     from webllm_cdp_rag_langgraph.router import router as webllm_agent_router  # §91 WebLLM+CDP+RAG+LangGraph
     from routers.admin_feedback import router as admin_feedback_router  # /api/v1/admin/feedback rollup
+    from routers.audit import router as audit_router  # /api/v1/insur/audit/* — audit triad (§64.22 + §64.29 + §58/§63 + §90 L15)
+    from voice_ai.router import router as voice_ai_router  # /api/v1/voice-ai/* — §90 L15 E2E demo + campaigns + observability
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -166,6 +168,8 @@ def create_app() -> FastAPI:
     app.include_router(input_events_router)         # /api/v1/input-events/* — GLOBAL_INPUT_PERSISTENCE_POLICY · append-only user input capture (POST/GET/list)
     app.include_router(webllm_agent_router)         # /api/v1/webllm-agent/* — §91 browser-native agentic AI (WebLLM + CDP + RAG + LangGraph)
     app.include_router(admin_feedback_router)       # /api/v1/admin/feedback/* — rollup view over user_input_events (summary + comments)
+    app.include_router(audit_router)                # /api/v1/insur/audit/* — audit triad + L15
+    app.include_router(voice_ai_router)             # /api/v1/voice-ai/* — E2E + campaigns + observability (28 endpoints)
 
     return app
 

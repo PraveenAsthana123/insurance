@@ -94,7 +94,7 @@ def get_orders(request: Request):
     from core.config import get_settings
     s = get_settings()
     import psycopg2
-    with psycopg2.connect(s.postgres_dsn) as c, \
+    with psycopg2.connect(s.database_url) as c, \
          c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute(
             "SELECT * FROM voice_ai_orders WHERE tenant_id = %s "

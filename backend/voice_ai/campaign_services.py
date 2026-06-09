@@ -33,7 +33,7 @@ logger = logging.getLogger(__name__)
 
 def _conn():
     s = get_settings()
-    return psycopg2.connect(s.postgres_dsn)
+    return psycopg2.connect(s.database_url)
 
 
 def _row(r):
