@@ -70,9 +70,16 @@ AUDITS = {
         "spec": "§64.13 + §90 L13/L14",
         "description": "4 channels (email/banner/survey/form) · 16 checks (modules + migration + frontend + seeds + public endpoints)",
     },
+    "marketing-e2e-flow": {
+        "script": "scripts/audit_marketing_e2e_flow.py",
+        "report_dir": "jobs/reports/marketing-e2e-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§47.6 + §57.7 + §64.13",
+        "description": "Full consumer flow · 12 assertions (create + execute + preview + submit + status + DLP gate + anti-replay + metrics)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow"]
 
 
 @router.get("/list")

@@ -292,6 +292,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_marketing_campaigns_artifacts.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── E2E consumer flow audit (full create → execute → submit) ──"
+  [ -f scripts/audit_marketing_e2e_flow.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_marketing_e2e_flow.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

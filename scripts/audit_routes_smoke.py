@@ -17,8 +17,9 @@ import os
 import logging
 from pathlib import Path
 
-# Set up paths
+# Set up paths · BOTH needed (REPO for `from backend.x`, REPO/backend for `from main`)
 REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "backend"))
 os.environ["INSUR_SKIP_MIGRATIONS"] = "1"
 logging.disable(logging.CRITICAL)

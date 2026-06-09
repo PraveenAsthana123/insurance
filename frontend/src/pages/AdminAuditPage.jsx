@@ -37,6 +37,11 @@ const AUDIT_LABELS = {
     spec: '§64.13 + §90 L13/L14',
     description: 'Email · Banner · Survey · Form · modules + seeds + public endpoints (16 cells)',
   },
+  'marketing-e2e-flow': {
+    name: 'E2E consumer flow (12 assertions)',
+    spec: '§47.6 + §57.7 + §64.13',
+    description: 'Full path: create → execute → preview → submit → status verify · DLP gate · anti-replay · metrics aggregate',
+  },
 };
 
 export default function AdminAuditPage() {

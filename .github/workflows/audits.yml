@@ -38,6 +38,15 @@ jobs:
         run: python3 scripts/audit_voice_ai_artifacts.py
       - name: §92 COMPLIANCE meta-audit (19 mandatory paths)
         run: python3 scripts/audit_section_92_compliance.py
+      - name: E2E CONSUMER FLOW · create → execute → submit (12 assertions)
+        run: |
+          export BEV_POSTGRES_HOST=localhost
+          export BEV_POSTGRES_PORT=5432
+          export BEV_POSTGRES_USER=postgres
+          export BEV_POSTGRES_PASSWORD=postgres
+          export BEV_POSTGRES_DB=test
+          python3 scripts/audit_marketing_e2e_flow.py || true  # warn-only · DB may not be available in CI
+
       - name: ROUTE SMOKE · in-process TestClient (8 critical routes)
         run: |
           export BEV_POSTGRES_HOST=localhost
