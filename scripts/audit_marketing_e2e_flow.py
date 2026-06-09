@@ -25,6 +25,7 @@ import json
 import logging
 import os
 import sys
+import time
 import uuid
 from pathlib import Path
 
@@ -88,6 +89,9 @@ def main() -> int:
 
     fails = 0
     test_run_id = uuid.uuid4().hex[:6]
+    # T3.4 · per-step latency capture · [{step_id, label, latency_ms, passed}]
+    latencies = []
+    _step_start = [time.perf_counter()]  # mutable holder so we can reset between steps
 
     def step(label: str, ok: bool, detail: str = ""):
         nonlocal fails
@@ -96,6 +100,17 @@ def main() -> int:
         print(f"  {label[:55]:<55} | {mark} {('PASS' if ok else 'FAIL')}{suffix}")
         if not ok:
             fails += 1
+        # T3.4 · capture latency since last step start
+        lat_ms = (time.perf_counter() - _step_start[0]) * 1000
+        # Extract step_id (first token before space, e.g. "1.S")
+        step_id = label.split(" ", 1)[0] if " " in label else label[:5]
+        latencies.append({
+            "step_id": step_id,
+            "label": label,
+            "latency_ms": round(lat_ms, 2),
+            "passed": ok,
+        })
+        _step_start[0] = time.perf_counter()
 
     # ── SURVEY FLOW ────────────────────────────────────────────────
     # 1. Create test survey campaign
@@ -115,7 +130,7 @@ def main() -> int:
     r = client.post("/api/v1/marketing-campaigns", json=body)
     step("1.S create survey campaign", r.status_code == 201, f"http={r.status_code}")
     if r.status_code != 201:
-        return _summary(fails)
+        return _summary(fails, test_run_id, latencies)
     campaign_survey = r.json()
     cid_s = campaign_survey["id"]
     ref_s = campaign_survey["campaign_ref"]
@@ -126,7 +141,7 @@ def main() -> int:
     runs_created_s = r.json().get("runs_created", 0) if r.status_code == 200 else 0
     step(f"2.S execute · runs_created={runs_created_s}", ok)
     if runs_created_s == 0:
-        return _summary(fails)
+        return _summary(fails, test_run_id, latencies)
 
     # Pick the first run's customer_id
     runs = client.get(f"/api/v1/marketing-campaigns/{cid_s}/runs").json()
@@ -181,7 +196,7 @@ def main() -> int:
     r = client.post("/api/v1/marketing-campaigns", json=body)
     step("1.F create form campaign", r.status_code == 201, f"http={r.status_code}")
     if r.status_code != 201:
-        return _summary(fails)
+        return _summary(fails, test_run_id, latencies)
     campaign_form = r.json()
     cid_f = campaign_form["id"]
     ref_f = campaign_form["campaign_ref"]
@@ -190,7 +205,7 @@ def main() -> int:
     runs_created_f = r.json().get("runs_created", 0) if r.status_code == 200 else 0
     step(f"2.F execute · runs_created={runs_created_f}", runs_created_f > 0)
     if runs_created_f == 0:
-        return _summary(fails)
+        return _summary(fails, test_run_id, latencies)
 
     runs = client.get(f"/api/v1/marketing-campaigns/{cid_f}/runs").json()
     cust_id_f = runs[0]["customer_id"]
@@ -225,15 +240,44 @@ def main() -> int:
     step("6.F metrics aggregate shows converted",
           has_converted, f"by_status={metrics.get('by_status', {})}")
 
-    return _summary(fails)
+    return _summary(fails, test_run_id, latencies)
 
 
-def _summary(fails: int) -> int:
+def _persist_latencies(run_ref: str, latencies: list[dict]) -> None:
+    """T3.4 · persist per-step latency to e2e_step_latencies (migration 060)."""
+    if not latencies:
+        return
+    try:
+        from core.config import get_settings
+        import psycopg2
+        with psycopg2.connect(get_settings().database_url) as c, c.cursor() as cur:
+            for entry in latencies:
+                cur.execute(
+                    "INSERT INTO e2e_step_latencies "
+                    "(audit_kind, run_ref, step_id, step_label, latency_ms, passed) "
+                    "VALUES (%s, %s, %s, %s, %s, %s)",
+                    ("marketing-e2e-flow", run_ref,
+                     entry["step_id"], entry["label"],
+                     entry["latency_ms"], entry["passed"]),
+                )
+            c.commit()
+        total_ms = sum(e["latency_ms"] for e in latencies)
+        print(f"  ↳ T3.4 persisted {len(latencies)} step latencies · total {total_ms:.1f}ms")
+    except Exception as e:
+        # Honest per §57.7: latency persistence is best-effort · don't fail audit
+        print(f"  (T3.4 latency persist warn: {type(e).__name__}: {e})")
+
+
+def _summary(fails: int, run_ref: str = "unknown",
+              latencies: list[dict] | None = None) -> int:
+    # T3.4 · persist per-step latencies (including on early-exit)
+    if latencies:
+        _persist_latencies(run_ref, latencies)
     # Post-cleanup · delete test campaigns we created (prevents weekly cron leak)
     post = _cleanup_test_campaigns()
     print(f"\n  post-cleanup · removed {post} test campaign(s)")
     print(f"  Summary: {12 - fails}/12 pass · {fails} fail")
-    print(f"  Reference: §47.6 + §57.7 + §64.13 + §82.21 (DLP gate)")
+    print(f"  Reference: §47.6 + §57.7 + §64.13 + §82.21 (DLP gate) + T3.4 latency capture")
     return 0 if fails == 0 else 1
 
 

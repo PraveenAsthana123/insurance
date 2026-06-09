@@ -97,6 +97,69 @@ def values():
             "registry_count": len(registry.KPIS)}
 
 
+@router.get("/e2e-latencies")
+def e2e_latencies(audit_kind: str = "marketing-e2e-flow",
+                    window_runs: int = 20):
+    """T3.4 · per-step latency histogram with percentiles.
+
+    Aggregates the last `window_runs` runs of an audit's per-step
+    latencies (persisted by `audit_marketing_e2e_flow.py` into
+    `e2e_step_latencies`). Returns per-step p50/p95/p99 + count.
+    """
+    import psycopg2
+    import psycopg2.extras
+    from core.config import get_settings
+    try:
+        with psycopg2.connect(get_settings().database_url) as c, \
+             c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+            # Per-step percentile aggregation
+            cur.execute(
+                """
+                WITH recent AS (
+                    SELECT DISTINCT run_ref FROM e2e_step_latencies
+                    WHERE audit_kind = %s
+                    ORDER BY run_ref DESC LIMIT %s
+                )
+                SELECT
+                    step_id,
+                    MIN(step_label) AS step_label,
+                    COUNT(*) AS n,
+                    ROUND(AVG(latency_ms)::numeric, 2) AS avg_ms,
+                    ROUND(percentile_cont(0.5) WITHIN GROUP (ORDER BY latency_ms)::numeric, 2) AS p50,
+                    ROUND(percentile_cont(0.95) WITHIN GROUP (ORDER BY latency_ms)::numeric, 2) AS p95,
+                    ROUND(percentile_cont(0.99) WITHIN GROUP (ORDER BY latency_ms)::numeric, 2) AS p99,
+                    SUM(CASE WHEN NOT passed THEN 1 ELSE 0 END) AS fail_count
+                FROM e2e_step_latencies
+                WHERE audit_kind = %s AND run_ref IN (SELECT run_ref FROM recent)
+                GROUP BY step_id
+                ORDER BY step_id
+                """,
+                (audit_kind, window_runs, audit_kind),
+            )
+            steps = [dict(r) for r in cur.fetchall()]
+            for s in steps:
+                # Convert Decimal to float
+                for k in ("avg_ms", "p50", "p95", "p99"):
+                    if s[k] is not None:
+                        s[k] = float(s[k])
+            cur.execute(
+                "SELECT COUNT(DISTINCT run_ref) AS n FROM e2e_step_latencies "
+                "WHERE audit_kind = %s",
+                (audit_kind,),
+            )
+            n_runs = cur.fetchone()["n"]
+    except Exception as e:
+        return {"audit_kind": audit_kind, "error": f"{type(e).__name__}: {e}",
+                "steps": [], "n_runs": 0}
+    return {
+        "audit_kind": audit_kind,
+        "window_runs": window_runs,
+        "n_runs_available": n_runs,
+        "n_steps": len(steps),
+        "steps": steps,
+    }
+
+
 @router.get("/alerts")
 def alerts(severity: str | None = None):
     """T5.10 · per-KPI target-breach alerter.
