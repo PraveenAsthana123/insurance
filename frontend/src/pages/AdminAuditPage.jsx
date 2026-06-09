@@ -235,8 +235,34 @@ export default function AdminAuditPage() {
         {selected && history.length > 0 && (
           <div style={card}>
             <h3 style={{ margin: '0 0 8px', fontSize: 14 }}>
-              History (last {history.length})
+              History (last {history.length}) · size trend
             </h3>
+            {/* Bar trend graph · oldest → newest left-to-right.
+                Bar height proportional to size_bytes (larger report often = more findings) */}
+            <div style={{
+              display: 'flex', alignItems: 'flex-end', gap: 4, height: 80,
+              padding: '8px 4px', background: '#f8fafc', borderRadius: 4, marginBottom: 8,
+            }}>
+              {[...history].reverse().map((h, i) => {
+                const max = Math.max(...history.map((x) => x.size_bytes || 1), 1);
+                const heightPct = Math.max(5, (h.size_bytes / max) * 100);
+                return (
+                  <div key={i}
+                       title={`${formatTime(h.run_at)} · ${h.size_bytes} B`}
+                       style={{
+                         flex: 1,
+                         minWidth: 8,
+                         height: `${heightPct}%`,
+                         background: '#1e40af',
+                         borderRadius: '2px 2px 0 0',
+                         transition: 'height 0.3s',
+                       }} />
+                );
+              })}
+            </div>
+            <div style={{ fontSize: 10, color: '#64748b', textAlign: 'center', marginBottom: 8 }}>
+              ← older · newer →
+            </div>
             <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ textAlign: 'left', color: '#64748b' }}>

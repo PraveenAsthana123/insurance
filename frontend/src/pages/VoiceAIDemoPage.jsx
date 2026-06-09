@@ -43,6 +43,7 @@ export default function VoiceAIDemoPage() {
   const [lastOrder, setLastOrder] = useState(null);
   const [busy, setBusy] = useState(false);
   const [listening, setListening] = useState(false);
+  const [ttsEnabled, setTtsEnabled] = useState(true);
   const recRef = { current: null };  // box held by closure
 
   // New-product form
@@ -128,6 +129,7 @@ export default function VoiceAIDemoPage() {
       });
       setTranscript((t) => [...t, { role: 'assistant', text: r.assistant_text }]);
       setStage(r.stage);
+      speakReply(r.assistant_text);
       if (r.recommended_product) setRecommended(r.recommended_product);
       if (r.order) {
         setLastOrder(r.order);
@@ -169,6 +171,23 @@ export default function VoiceAIDemoPage() {
     }
   };
 
+
+  const speakReply = (text) => {
+    // Browser SpeechSynthesis · per §57.7 honest fallback when no ElevenLabs key.
+    // No npm dep · no API key · works offline in Chrome/Edge/Safari/Firefox.
+    if (!ttsEnabled || !text || !window.speechSynthesis) return;
+    try {
+      window.speechSynthesis.cancel();  // stop any in-flight utterance
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 1.0;
+      u.pitch = 1.0;
+      u.volume = 0.9;
+      window.speechSynthesis.speak(u);
+    } catch {
+      // graceful no-op · don't break the conversation
+    }
+  };
 
   const toggleMic = () => {
     // Browser SpeechRecognition · per §57.7 honest fallback when no Deepgram key.
@@ -354,6 +373,14 @@ export default function VoiceAIDemoPage() {
                                 color: '#fff', border: 'none', borderRadius: 4,
                                 cursor: busy ? 'not-allowed' : 'pointer', fontSize: 12 }}>
                   {listening ? '⏹' : '🎤'}
+                </button>
+                <button onClick={() => setTtsEnabled((v) => !v)}
+                        title={ttsEnabled ? 'TTS playback ON (browser SpeechSynthesis · per §57.7 honest fallback)' : 'TTS playback OFF'}
+                        style={{ padding: '6px 10px',
+                                background: ttsEnabled ? '#14b8a6' : '#94a3b8',
+                                color: '#fff', border: 'none', borderRadius: 4,
+                                cursor: 'pointer', fontSize: 12 }}>
+                  {ttsEnabled ? '🔊' : '🔇'}
                 </button>
                 <button onClick={sendTurn} disabled={busy || !userText.trim()}
                         style={{ padding: '6px 12px', background: '#1e40af',
