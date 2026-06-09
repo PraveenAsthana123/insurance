@@ -264,6 +264,59 @@ export default function AdminAuditPage() {
 
         {selected && history.length > 0 && (
           <div style={card}>
+            {/* Pass/fail summary tiles · operator-friendly aggregate over the window */}
+            {(() => {
+              const withExit = history.filter((h) => h.exit_code != null);
+              const passed = withExit.filter((h) => h.exit_code === 0).length;
+              const failed = withExit.length - passed;
+              const passRate = withExit.length ? (passed / withExit.length) * 100 : null;
+              const rateColor = passRate == null
+                ? '#64748b' : passRate >= 90
+                ? '#16a34a' : passRate >= 70
+                ? '#d97706' : '#dc2626';
+              return (
+                <div style={{
+                  display: 'flex', gap: 8, marginBottom: 8, fontSize: 11,
+                }}>
+                  <div style={{
+                    flex: 1, padding: 6, background: '#f0fdf4',
+                    border: '1px solid #16a34a', borderRadius: 4,
+                  }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#15803d' }}>
+                      {passed}
+                    </div>
+                    <div style={{ color: '#15803d' }}>PASS</div>
+                  </div>
+                  <div style={{
+                    flex: 1, padding: 6, background: '#fef2f2',
+                    border: '1px solid #dc2626', borderRadius: 4,
+                  }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#b91c1c' }}>
+                      {failed}
+                    </div>
+                    <div style={{ color: '#b91c1c' }}>FAIL</div>
+                  </div>
+                  <div style={{
+                    flex: 1, padding: 6, background: '#f8fafc',
+                    border: `1px solid ${rateColor}`, borderRadius: 4,
+                  }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: rateColor }}>
+                      {passRate == null ? '—' : `${passRate.toFixed(0)}%`}
+                    </div>
+                    <div style={{ color: rateColor }}>RATE</div>
+                  </div>
+                  <div style={{
+                    flex: 1, padding: 6, background: '#f8fafc',
+                    border: '1px solid #94a3b8', borderRadius: 4,
+                  }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#475569' }}>
+                      {history.length}
+                    </div>
+                    <div style={{ color: '#475569' }}>RUNS</div>
+                  </div>
+                </div>
+              );
+            })()}
             <h3 style={{ margin: '0 0 8px', fontSize: 14 }}>
               History (last {history.length}) · size trend
             </h3>

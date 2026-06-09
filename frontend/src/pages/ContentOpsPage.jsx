@@ -38,6 +38,7 @@ export default function ContentOpsPage() {
     consent_marketing: false, consent_email: false, consent_calls: false,
   });
   const [bulkText, setBulkText] = useState('');
+  const [uploadProgress, setUploadProgress] = useState(null);
   const [scheduleForm, setScheduleForm] = useState({
     campaign_id: 1, cadence: 'daily', time_of_day_utc: '09:00',
     day_of_week: 1, day_of_month: 1,
@@ -142,15 +143,36 @@ export default function ContentOpsPage() {
       };
     });
     setBusy(true);
+    setUploadProgress({ done: 0, total: rows.length, inserted: 0, skipped: 0, invalid: 0 });
     try {
-      const r = await fetchJSON('/api/v1/content-ops/contacts/bulk-upload', {
-        method: 'POST', body: JSON.stringify({ rows, skip_duplicates: true }),
-      });
-      alert(`Inserted ${r.inserted} · skipped ${r.skipped_duplicates} duplicates · ${r.invalid_rows} invalid`);
+      const CHUNK = 100;
+      let aggInserted = 0, aggSkipped = 0, aggInvalid = 0;
+      for (let i = 0; i < rows.length; i += CHUNK) {
+        const batch = rows.slice(i, i + CHUNK);
+        const r = await fetchJSON('/api/v1/content-ops/contacts/bulk-upload', {
+          method: 'POST',
+          body: JSON.stringify({ rows: batch, skip_duplicates: true }),
+        });
+        aggInserted += r.inserted;
+        aggSkipped += r.skipped_duplicates;
+        aggInvalid += r.invalid_rows;
+        setUploadProgress({
+          done: Math.min(i + CHUNK, rows.length),
+          total: rows.length,
+          inserted: aggInserted,
+          skipped: aggSkipped,
+          invalid: aggInvalid,
+        });
+      }
+      alert(`Inserted ${aggInserted} · skipped ${aggSkipped} duplicates · ${aggInvalid} invalid`);
       setBulkText('');
       load();
     } catch (e) { setError(`upload: ${e.message}`); }
-    finally { setBusy(false); }
+    finally {
+      setBusy(false);
+      // Keep progress visible 3 seconds then clear
+      setTimeout(() => setUploadProgress(null), 3000);
+    }
   };
 
   const createSchedule = async () => {
@@ -382,8 +404,37 @@ export default function ContentOpsPage() {
                   ? `${Math.max(0, bulkText.split('\n').filter((l) => l.trim()).length - 1)} data rows · ${bulkText.length} chars`
                   : 'No data loaded'}
               </div>
+              {uploadProgress && (
+                <div style={{ marginBottom: 6 }}>
+                  <div style={{
+                    height: 16, background: '#e2e8f0', borderRadius: 4, overflow: 'hidden',
+                    position: 'relative',
+                  }}>
+                    <div style={{
+                      height: '100%',
+                      width: `${(uploadProgress.done / uploadProgress.total) * 100}%`,
+                      background: '#16a34a',
+                      transition: 'width 0.3s',
+                    }} />
+                    <div style={{
+                      position: 'absolute', inset: 0, display: 'flex',
+                      alignItems: 'center', justifyContent: 'center',
+                      fontSize: 10, fontWeight: 700, color: '#fff',
+                      textShadow: '0 0 2px rgba(0,0,0,0.4)',
+                    }}>
+                      {uploadProgress.done} / {uploadProgress.total}
+                      {' '}({((uploadProgress.done / uploadProgress.total) * 100).toFixed(0)}%)
+                    </div>
+                  </div>
+                  <div style={{...small, marginTop: 2}}>
+                    Inserted: <strong>{uploadProgress.inserted}</strong> ·{' '}
+                    Skipped dup: <strong>{uploadProgress.skipped}</strong> ·{' '}
+                    Invalid: <strong>{uploadProgress.invalid}</strong>
+                  </div>
+                </div>
+              )}
               <button onClick={bulkUpload} disabled={busy || !bulkText.trim()} style={btn('#16a34a')}>
-                📤 Bulk Upload
+                {busy && uploadProgress ? '📤 Uploading...' : '📤 Bulk Upload'}
               </button>
             </div>
           </div>
