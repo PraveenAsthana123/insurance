@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import CorrectionsPanel from '../CorrectionsPanel';
 
 /* ─────────────────────────────────────────────
    STATIC DATA
@@ -139,7 +140,8 @@ export default function ProcessFeedbackTab() {
   function handleSubmitFb() { setFormSubmitted(true); setTimeout(() => setFormSubmitted(false), 3000); }
   function requestLabel(id) { setRequestedLabels(r => ({ ...r, [id]: true })); }
 
-  <TabShell
+  <CorrectionsPanel accent="#dc2626" />
+      <TabShell
       tabName="feedback"
       title="Feedback & RLHF · capture + correction list"
       phase="Govern"
