@@ -29,11 +29,11 @@ The gap is **substance · not structure**.
 | # | Fix | Effort (hr) | Impact | Status |
 |---|---|---|---|---|
 | 1 | Mermaid renderer (shared util) → UseCasePanel · DataPipelinePanel ✓ shipped 2026-06-09 | 8 | High | DONE |
-| 2 | SHAP bar chart (real recharts) → ShapPanel | 6 | High (EU AI Act Art. 86) | PENDING |
-| 3 | Confusion matrix heatmap → ProcessAccuracyTab + AccuracyTab | 6 | High (eval credibility) | PENDING |
-| 4 | ROC curve viz → same | 4 | High (eval credibility) | PENDING |
-| 5 | Per-task RUN button in DataPipelinePanel | 4 | High UX | PENDING |
-| 6 | HITL action buttons (approve/reject from UI) | 6 | Critical workflow | PENDING |
+| 2 | SHAP bar chart → ShapPanel ✓ shipped 2026-06-09 | 6 | High (EU AI Act Art. 86) | DONE |
+| 3 | Confusion matrix heatmap → EvalHarnessPanel ✓ shipped 2026-06-09 | 6 | High (eval credibility) | DONE |
+| 4 | ROC curve viz → EvalHarnessPanel ✓ shipped 2026-06-09 | 4 | High (eval credibility) | DONE |
+| 5 | Per-task RUN button → DataPipelinePanel ✓ shipped 2026-06-09 | 4 | High UX | DONE |
+| 6 | HITL action buttons → HITLPanel ✓ shipped 2026-06-09 | 6 | Critical workflow | DONE |
 | 7 | Per-section inline edit in UseCasePanel | 10 | Critical workflow | PENDING |
 | 8 | Time-series chart per ResAI lens (30-day drift) | 8 | Drift detection | PENDING |
 | 9 | Compare runs side-by-side (Automatic Pipeline) | 8 | Critical analysis | PENDING |

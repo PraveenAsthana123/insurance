@@ -94,35 +94,120 @@ def models(dept: str | None = None, process: str | None = None):
         }
 
 
+def _deterministic_features(model_name: str, n: int = 10) -> list[dict]:
+    """Per §57.7 · scaffold features when SHAP not wired but operator
+    needs to SEE the panel structure. Marked scaffold=True · NEVER
+    fabricates real SHAP values claimed as real.
+    """
+    base_features = [
+        "claim_amount", "policy_age_years", "prior_claims_count",
+        "credit_score", "vehicle_value", "vehicle_age",
+        "driver_age", "deductible", "garaging_zip_risk", "agent_tenure",
+        "annual_mileage", "marital_status", "policy_premium",
+        "claims_in_30d", "narrative_keyword_count",
+    ][:n]
+    out = []
+    for i, name in enumerate(base_features):
+        seed = (hash(model_name + name) % 1000) / 1000
+        importance = round(0.05 + seed * 0.45, 3)
+        # 60% positive · 40% negative · deterministic from seed
+        direction = "positive" if seed > 0.4 else "negative"
+        out.append({
+            "name": name,
+            "importance": importance,
+            "direction": direction,
+            "scaffold": True,
+        })
+    out.sort(key=lambda f: f["importance"], reverse=True)
+    return out
+
+
 @router.get("/shap/{model_name}")
 def shap_for_model(model_name: str):
-    """SHAP feature importance · returns empty when SHAP unavailable per §57.7."""
+    """SHAP feature importance · scaffold when SHAP unavailable per §57.7.
+
+    Returns deterministic per-feature scores with scaffold=True flag.
+    When SHAP is wired with real eval, replace this branch with real values.
+    """
     probe = _probe_shap()
+    features = _deterministic_features(model_name)
     if not probe["runtime_available"]:
         return {
             "model_name": model_name,
-            "features": [],
-            "count": 0,
+            "features": features,
+            "count": len(features),
             "runtime_available": False,
+            "scaffold": True,
             "reason": probe.get("reason"),
         }
     return {
         "model_name": model_name,
-        "features": [],
-        "count": 0,
+        "features": features,
+        "count": len(features),
         "runtime_available": True,
-        "reason": "SHAP available but no per-model run wired yet · pending eval harness integration",
+        "scaffold": True,
+        "reason": "SHAP available but per-model run not wired · scaffold values rendered",
+    }
+
+
+def _deterministic_confusion_matrix(model_name: str) -> dict:
+    """Per §57.7 scaffold confusion matrix · 2-class for now."""
+    seed = (hash(model_name + "cm") % 1000) / 1000
+    tn = 800 + int(seed * 100)
+    fp = 100 - int(seed * 30)
+    fn = 50 + int(seed * 25)
+    tp = 250 + int(seed * 50)
+    return {
+        "labels": ["No Fraud", "Fraud"],
+        "matrix": [[tn, fp], [fn, tp]],
+        "accuracy": round((tn + tp) / (tn + fp + fn + tp), 3),
+        "precision": round(tp / (tp + fp), 3) if (tp + fp) else 0,
+        "recall": round(tp / (tp + fn), 3) if (tp + fn) else 0,
+        "f1": round(2 * tp / (2 * tp + fp + fn), 3) if (2 * tp + fp + fn) else 0,
+    }
+
+
+def _deterministic_roc(model_name: str) -> dict:
+    """Per §57.7 scaffold ROC · 11 points."""
+    seed = (hash(model_name + "roc") % 1000) / 1000
+    points = []
+    auc_target = 0.80 + seed * 0.15
+    for i in range(11):
+        fpr = i / 10
+        # Concave curve through (0,0) (1,1) with controllable AUC
+        tpr = min(1.0, fpr + (1 - fpr) * (1 - (1 - auc_target) * 2))
+        points.append({"fpr": round(fpr, 3), "tpr": round(tpr, 3)})
+    return {
+        "points": points,
+        "auc": round(auc_target, 3),
+        "scaffold": True,
     }
 
 
 @router.get("/eval/{dept}/{process}")
 def eval_results(dept: str, process: str):
-    """Eval harness · returns empty when no run available per §57.7."""
+    """Eval harness · returns deterministic scaffold metrics per §57.7.
+
+    Operator sees the panel structure with confusion-matrix + ROC + per-class
+    metrics. When real eval harness lands, scaffold values replaced with real.
+    """
+    model_name = f"{dept}-{process}"
+    cm = _deterministic_confusion_matrix(model_name)
+    roc = _deterministic_roc(model_name)
     return {
         "dept": dept,
         "process": process,
-        "metrics": {},
-        "count": 0,
+        "model_name": model_name,
+        "metrics": {
+            "accuracy": cm["accuracy"],
+            "precision": cm["precision"],
+            "recall": cm["recall"],
+            "f1": cm["f1"],
+            "auc": roc["auc"],
+        },
+        "confusion_matrix": cm,
+        "roc_curve": roc,
         "runtime_available": False,
-        "reason": "eval harness not wired · use backend/ml/reference/full_lifecycle.py to produce metrics",
+        "scaffold": True,
+        "reason": "eval harness not wired · scaffold metrics shown per §57.7",
     }

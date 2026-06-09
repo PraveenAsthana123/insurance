@@ -17,6 +17,45 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
   const [stats, setStats] = useState(null);
   const [busy, setBusy] = useState(true);
   const [error, setError] = useState(null);
+  const [decisions, setDecisions] = useState({}); // `${runRef}-${iter}` → 'approved' | 'rejected'
+  const [busyKey, setBusyKey] = useState(null);
+  const [actionError, setActionError] = useState(null);
+
+  // Iteration 4 P0 #6 · operator-driven approve/reject via /corrections POST
+  async function actOnDecision(p, kind) {
+    const key = `${p.run_ref}-${p.decision_iter}`;
+    setBusyKey(key);
+    setActionError(null);
+    try {
+      const severity = kind === 'reject' ? 'major' : 'minor';
+      const body = {
+        run_ref: p.run_ref,
+        decision_iter: p.decision_iter,
+        decision_action: p.action,
+        ai_decision: { action: p.action, confidence: p.confidence, routing: p.routing },
+        human_decision: { action: kind === 'approve' ? p.action : 'reject', via: 'hitl-ui' },
+        severity,
+        reason: kind === 'approve'
+          ? 'HITL operator approved via UI · §93+§94+gate#3'
+          : 'HITL operator rejected via UI · escalation logged',
+        reviewer: 'hitl-ui',
+      };
+      const r = await fetch(`${API_BASE}/api/v1/corrections`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!r.ok) {
+        const txt = await r.text();
+        throw new Error(`${r.status} · ${txt.slice(0, 80)}`);
+      }
+      setDecisions((d) => ({ ...d, [key]: kind === 'approve' ? 'approved' : 'rejected' }));
+    } catch (e) {
+      setActionError(`HITL action failed: ${e.message}`);
+    } finally {
+      setBusyKey(null);
+    }
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -98,50 +137,92 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
           POST to <code>/api/v1/corrections</code>.
         </div>
       ) : (
-        <table style={{ width: '100%', fontSize: 11 }}>
-          <thead>
-            <tr style={{ textAlign: 'left', color: '#64748b' }}>
-              <th style={{ padding: 4 }}>Run</th>
-              <th style={{ padding: 4 }}>Iter</th>
-              <th style={{ padding: 4 }}>Action</th>
-              <th style={{ padding: 4 }}>Confidence</th>
-              <th style={{ padding: 4 }}>Tier</th>
-              <th style={{ padding: 4 }}>RAI</th>
-            </tr>
-          </thead>
-          <tbody>
-            {queue.slice(0, limit).map((p, i) => {
-              const tone = TIER_TONE[p.routing] || TIER_TONE.human_approval;
-              return (
-                <tr key={`${p.run_ref}-${i}`} style={{ borderTop: '1px solid #f1f5f9' }}>
-                  <td style={{ padding: 4, fontFamily: 'monospace', fontSize: 10 }}>{p.run_ref?.slice(0, 12)}…</td>
-                  <td style={{ padding: 4 }}>{p.decision_iter}</td>
-                  <td style={{ padding: 4 }}>{p.action}</td>
-                  <td style={{ padding: 4 }}>{p.confidence?.toFixed(2) ?? '—'}</td>
-                  <td style={{ padding: 4 }}>
-                    <span style={{
-                      background: tone.bg, color: tone.fg,
-                      padding: '1px 6px', borderRadius: 3,
-                      fontSize: 9, fontWeight: 700,
-                    }}>{tone.label}</span>
-                  </td>
-                  <td style={{ padding: 4 }}>
-                    {p.rai_pass === true ? <span style={{color: '#16a34a'}}>✓</span>
-                    : p.rai_pass === false ? <span style={{color: '#dc2626'}}>✗</span>
-                    : <span style={{color: '#94a3b8'}}>—</span>}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <>
+          {actionError && (
+            <div style={{
+              background: '#fee2e2', color: '#991b1b', padding: 6,
+              borderRadius: 3, fontSize: 10, marginBottom: 6,
+            }}>✗ {actionError}</div>
+          )}
+          <table style={{ width: '100%', fontSize: 11 }}>
+            <thead>
+              <tr style={{ textAlign: 'left', color: '#64748b' }}>
+                <th style={{ padding: 4 }}>Run</th>
+                <th style={{ padding: 4 }}>Iter</th>
+                <th style={{ padding: 4 }}>Action</th>
+                <th style={{ padding: 4 }}>Conf</th>
+                <th style={{ padding: 4 }}>Tier</th>
+                <th style={{ padding: 4 }}>RAI</th>
+                <th style={{ padding: 4 }}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {queue.slice(0, limit).map((p, i) => {
+                const tone = TIER_TONE[p.routing] || TIER_TONE.human_approval;
+                const key = `${p.run_ref}-${p.decision_iter}`;
+                const resolved = decisions[key];
+                const isBusy = busyKey === key;
+                return (
+                  <tr key={`${p.run_ref}-${i}`} style={{ borderTop: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: 4, fontFamily: 'monospace', fontSize: 10 }}>{p.run_ref?.slice(0, 12)}…</td>
+                    <td style={{ padding: 4 }}>{p.decision_iter}</td>
+                    <td style={{ padding: 4 }}>{p.action}</td>
+                    <td style={{ padding: 4 }}>{p.confidence?.toFixed(2) ?? '—'}</td>
+                    <td style={{ padding: 4 }}>
+                      <span style={{
+                        background: tone.bg, color: tone.fg,
+                        padding: '1px 6px', borderRadius: 3,
+                        fontSize: 9, fontWeight: 700,
+                      }}>{tone.label}</span>
+                    </td>
+                    <td style={{ padding: 4 }}>
+                      {p.rai_pass === true ? <span style={{color: '#16a34a'}}>✓</span>
+                      : p.rai_pass === false ? <span style={{color: '#dc2626'}}>✗</span>
+                      : <span style={{color: '#94a3b8'}}>—</span>}
+                    </td>
+                    <td style={{ padding: 4 }}>
+                      {resolved ? (
+                        <span style={{
+                          padding: '1px 6px', borderRadius: 3, fontSize: 9, fontWeight: 700,
+                          background: resolved === 'approved' ? '#dcfce7' : '#fee2e2',
+                          color: resolved === 'approved' ? '#166534' : '#991b1b',
+                        }}>{resolved === 'approved' ? '✓ APPROVED' : '✗ REJECTED'}</span>
+                      ) : (
+                        <span style={{ display: 'inline-flex', gap: 3 }}>
+                          <button
+                            onClick={() => actOnDecision(p, 'approve')}
+                            disabled={!!busyKey}
+                            style={hitlBtn('#16a34a', isBusy)}
+                          >{isBusy ? '…' : '✓'}</button>
+                          <button
+                            onClick={() => actOnDecision(p, 'reject')}
+                            disabled={!!busyKey}
+                            style={hitlBtn('#dc2626', isBusy)}
+                          >{isBusy ? '…' : '✗'}</button>
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </>
       )}
 
       <div style={{ marginTop: 8, fontSize: 10, color: '#94a3b8' }}>
-        Source · GET /api/v1/hitl/queue · §38.3 + T7.9 confidence routing + Tier 7 gate #3
+        Source · GET /api/v1/hitl/queue · §38.3 + T7.9 confidence routing + Tier 7 gate #3 + #5 (corrections POST)
       </div>
     </div>
   );
+}
+
+function hitlBtn(color, isBusy) {
+  return {
+    padding: '2px 8px', fontSize: 11, fontWeight: 700,
+    cursor: isBusy ? 'wait' : 'pointer',
+    background: color, color: '#fff', border: 'none', borderRadius: 3,
+  };
 }
 
 function Tile({ label, value, accent }) {

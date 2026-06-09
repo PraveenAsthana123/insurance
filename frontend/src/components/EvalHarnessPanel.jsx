@@ -1,9 +1,13 @@
 // EvalHarnessPanel — shared live-data panel for ML eval results (P0.5).
 // Wired to /api/v1/ml/eval/{dept}/{process}.
 //
+// Iteration 2-3 (P0 #3 + #4): renders confusion matrix heatmap + ROC curve.
+//
 // Injects into ProcessAccuracyTab + AccuracyTab (insurance §73).
 
 import { useEffect, useState } from 'react';
+import ConfusionMatrixHeatmap from './charts/ConfusionMatrixHeatmap';
+import ROCCurve from './charts/ROCCurve';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
@@ -52,7 +56,9 @@ export default function EvalHarnessPanel({ accent = '#f59e0b', dept = 'default',
 
   const runtime = data?.runtime_available;
   const metrics = data?.metrics || {};
-  const metricKeys = Object.keys(metrics);
+  const cm = data?.confusion_matrix;
+  const roc = data?.roc_curve;
+  const isScaffold = data?.scaffold === true;
 
   return (
     <div style={card}>
@@ -61,63 +67,55 @@ export default function EvalHarnessPanel({ accent = '#f59e0b', dept = 'default',
         <strong style={{ fontSize: 13, color: accent }}>P0.5 · Eval harness · {dept}/{process}</strong>
         <span style={{
           marginLeft: 'auto',
-          background: runtime ? '#10b981' : '#94a3b8',
+          background: runtime ? '#10b981' : isScaffold ? '#d97706' : '#94a3b8',
           color: '#fff', padding: '2px 6px', borderRadius: 3,
           fontSize: 9, fontWeight: 700,
-        }}>{runtime ? 'LIVE' : 'STUB'}</span>
+        }}>{runtime ? 'LIVE' : isScaffold ? 'SCAFFOLD' : 'STUB'}</span>
       </div>
 
-      {!runtime ? (
-        <div style={{ fontSize: 11, color: '#64748b' }}>
-          <strong>Eval harness not wired yet.</strong> Reason: <em>{data?.reason}</em>
-          <br />
-          When wired, this panel will surface per-run metrics:
-          <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
-            <li><strong>Classification</strong>: accuracy · precision · recall · F1 · ROC AUC</li>
-            <li><strong>Regression</strong>: MAE · RMSE · MAPE · R²</li>
-            <li><strong>RAG</strong>: faithfulness · context precision · answer relevance · citation accuracy (per §59.4)</li>
-            <li><strong>Subject-wise CV</strong>: LOSO · per-subject performance · bottom 10%</li>
-          </ul>
-          Run <code>backend/ml/reference/full_lifecycle.py --dept {dept} --process {process}</code> to produce eval data.
-          Status: <strong>honest empty</strong> per §57.7.
+      {isScaffold && (
+        <div style={{
+          padding: 4, marginBottom: 6, fontSize: 10,
+          background: '#fef3c7', color: '#92400e',
+          border: '1px solid #d97706', borderRadius: 3,
+        }}>
+          ⚠ SCAFFOLD per §57.7 · deterministic-seeded metrics · install MLflow + wire full_lifecycle.py for real eval
         </div>
-      ) : metricKeys.length === 0 ? (
-        <div style={{ fontSize: 11, color: '#64748b', fontStyle: 'italic' }}>
-          No eval runs for {dept}/{process} yet.
-        </div>
-      ) : (
-        <table style={{ width: '100%', fontSize: 11 }}>
-          <thead>
-            <tr style={{ textAlign: 'left', color: '#64748b' }}>
-              <th style={{ padding: 4 }}>Metric</th>
-              <th style={{ padding: 4 }}>Value</th>
-              <th style={{ padding: 4 }}>Target</th>
-              <th style={{ padding: 4 }}>Pass</th>
-            </tr>
-          </thead>
-          <tbody>
-            {metricKeys.map((k) => {
-              const m = metrics[k];
-              const pass = m.pass !== undefined ? m.pass : null;
-              return (
-                <tr key={k} style={{ borderTop: '1px solid #f1f5f9' }}>
-                  <td style={{ padding: 4, fontFamily: 'monospace' }}>{k}</td>
-                  <td style={{ padding: 4 }}>{m.value?.toFixed(3) ?? '—'}</td>
-                  <td style={{ padding: 4 }}>{m.target?.toFixed(3) ?? '—'}</td>
-                  <td style={{ padding: 4 }}>
-                    {pass === true ? <span style={{ color: '#16a34a', fontWeight: 700 }}>✓ pass</span>
-                    : pass === false ? <span style={{ color: '#dc2626', fontWeight: 700 }}>✗ fail</span>
-                    : <span style={{ color: '#94a3b8' }}>—</span>}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
       )}
 
+      {Object.keys(metrics).length > 0 && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 6, marginBottom: 10 }}>
+          {['accuracy', 'precision', 'recall', 'f1', 'auc'].map((k) => metrics[k] != null && (
+            <div key={k} style={{
+              padding: 6, background: '#fff',
+              border: '1px solid #3b82f6', borderRadius: 4, textAlign: 'center',
+            }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#3b82f6' }}>
+                {(metrics[k] * 100).toFixed(1)}%
+              </div>
+              <div style={{ fontSize: 9, color: '#64748b', textTransform: 'uppercase' }}>{k}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+        {cm && (
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 4 }}>Confusion matrix</div>
+            <ConfusionMatrixHeatmap labels={cm.labels} matrix={cm.matrix} cellSize={70} />
+          </div>
+        )}
+        {roc && (
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 4 }}>ROC curve</div>
+            <ROCCurve points={roc.points} auc={roc.auc} height={200} />
+          </div>
+        )}
+      </div>
+
       <div style={{ marginTop: 8, fontSize: 10, color: '#94a3b8' }}>
-        Source · GET /api/v1/ml/eval/{dept}/{process} · §74 lifecycle · §75 metrics · §57.7 honest empty
+        Source · GET /api/v1/ml/eval/{dept}/{process} · §74 lifecycle · §75 metrics · §57.7 scaffold badge when not wired
       </div>
     </div>
   );

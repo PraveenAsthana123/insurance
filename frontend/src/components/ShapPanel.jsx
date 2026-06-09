@@ -1,10 +1,13 @@
 // ShapPanel — shared live-data panel for SHAP feature importance (P0.4).
-// Wired to /api/v1/ml/shap/{model_name} (honest stub).
+// Wired to /api/v1/ml/shap/{model_name}.
 // Closes EU AI Act Art. 86 visibility blocker.
+//
+// Iteration 2 (P0 #2): now renders recharts horizontal bar chart.
 //
 // Injects into ProcessAnalysisTab + AnalysisTab + ExpAITab.
 
 import { useEffect, useState } from 'react';
+import RechartsBarHorizontal from './charts/RechartsBarHorizontal';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
@@ -71,57 +74,36 @@ export default function ShapPanel({ accent = '#dc2626', modelName = 'default' })
         Model: <code>{modelName}</code>
       </div>
 
-      {!runtime ? (
+      {features.length === 0 ? (
         <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
-          <strong>SHAP runtime not available.</strong> Reason: <em>{data?.reason || 'unknown'}</em>
-          <br />
-          When SHAP installed (<code>pip install shap</code>) + per-model run wired, this panel
-          will show: top-10 features · importance score · positive/negative direction · per-prediction explanation drilldown.
-          <br />
-          Status: <strong>honest empty</strong> per §57.7. EU AI Act Art. 86 (right to explanation) blocker.
-        </div>
-      ) : features.length === 0 ? (
-        <div style={{ fontSize: 11, color: '#64748b', fontStyle: 'italic', marginTop: 6 }}>
-          SHAP runtime available · <em>{data?.reason}</em>
-          <br />
-          Wire backend/ml/reference/full_lifecycle.py SHAP capture · then per-model results
-          appear here.
+          <strong>SHAP wire empty.</strong> Reason: <em>{data?.reason || 'unknown'}</em>
         </div>
       ) : (
-        <table style={{ width: '100%', fontSize: 11, marginTop: 6 }}>
-          <thead>
-            <tr style={{ textAlign: 'left', color: '#64748b' }}>
-              <th style={{ padding: 4 }}>Feature</th>
-              <th style={{ padding: 4 }}>Importance</th>
-              <th style={{ padding: 4 }}>Direction</th>
-              <th style={{ padding: 4 }}>Bar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {features.slice(0, 10).map((f, i) => (
-              <tr key={i} style={{ borderTop: '1px solid #f1f5f9' }}>
-                <td style={{ padding: 4, fontFamily: 'monospace' }}>{f.name}</td>
-                <td style={{ padding: 4 }}>{f.importance?.toFixed(3)}</td>
-                <td style={{ padding: 4, color: f.direction === 'positive' ? '#16a34a' : '#dc2626' }}>
-                  {f.direction === 'positive' ? '▲ positive' : '▼ negative'}
-                </td>
-                <td style={{ padding: 4, width: '30%' }}>
-                  <div style={{
-                    height: 8,
-                    background: f.direction === 'positive' ? '#dcfce7' : '#fee2e2',
-                    border: `1px solid ${f.direction === 'positive' ? '#16a34a' : '#dc2626'}`,
-                    width: `${(f.importance || 0) * 200}%`, maxWidth: '100%',
-                    borderRadius: 2,
-                  }} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <>
+          {data?.scaffold && (
+            <div style={{
+              padding: 4, marginBottom: 6, fontSize: 10,
+              background: '#fef3c7', color: '#92400e',
+              border: '1px solid #d97706', borderRadius: 3,
+            }}>
+              ⚠ SCAFFOLD per §57.7 · deterministic seed values · install shap + wire eval harness for real SHAP attributions
+            </div>
+          )}
+          <div style={{ marginTop: 8 }}>
+            <RechartsBarHorizontal
+              data={features.slice(0, 10).map((f) => ({
+                name: f.name,
+                value: f.importance,
+                direction: f.direction,
+              }))}
+              height={300}
+            />
+          </div>
+        </>
       )}
 
       <div style={{ marginTop: 8, fontSize: 10, color: '#94a3b8' }}>
-        Source · GET /api/v1/ml/shap/{modelName} · §48 explainability · §57.7 honest empty per EU AI Act Art. 86
+        Source · GET /api/v1/ml/shap/{modelName} · §48 explainability · EU AI Act Art. 86 · §57.7 scaffold badge when not wired
       </div>
     </div>
   );

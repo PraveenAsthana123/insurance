@@ -180,6 +180,24 @@ function TaskRow({ task, isOpen, onToggle }) {
     ? '1px solid #e5e7eb'
     : `1px solid ${PHASE_COLOR[task.phase] || '#0ea5e9'}40`;
 
+  // Iteration 5 P0 #5 · per-task RUN
+  const [runResult, setRunResult] = useState(null);
+  const [runBusy, setRunBusy] = useState(false);
+  const [runError, setRunError] = useState(null);
+  async function runTask() {
+    setRunBusy(true);
+    setRunError(null);
+    try {
+      const r = await fetch(
+        `${API_BASE}/api/v1/data-pipeline/${task.process_id}/${task.id}/run`,
+        { method: 'POST' },
+      );
+      if (!r.ok) throw new Error(`${r.status}`);
+      setRunResult(await r.json());
+    } catch (e) { setRunError(`run failed: ${e.message}`); }
+    finally { setRunBusy(false); }
+  }
+
   return (
     <div style={{
       background: cardBg,
@@ -221,6 +239,21 @@ function TaskRow({ task, isOpen, onToggle }) {
           {task.status}
         </span>
 
+        {/* Iteration 5 · P0 #5 · RUN button on action cards */}
+        {task.card_kind === 'action' && (
+          <button
+            onClick={runTask}
+            disabled={runBusy}
+            style={{
+              padding: '2px 8px', fontSize: 10, fontWeight: 700,
+              cursor: runBusy ? 'wait' : 'pointer',
+              background: runBusy ? '#94a3b8' : (PHASE_COLOR[task.phase] || '#0ea5e9'),
+              color: '#fff', border: 'none', borderRadius: 3,
+            }}>
+            {runBusy ? '⏳' : '▶ Run'}
+          </button>
+        )}
+
         <button onClick={onToggle} style={{
           padding: '2px 8px', fontSize: 10, fontWeight: 600, cursor: 'pointer',
           background: '#fff', color: '#475569',
@@ -234,6 +267,28 @@ function TaskRow({ task, isOpen, onToggle }) {
       <div style={{ marginTop: 4, fontSize: 11, color: '#475569', fontStyle: 'italic' }}>
         💬 {task.one_liner}
       </div>
+
+      {/* Run result · shown when operator triggers Run button */}
+      {runError && (
+        <div style={{
+          marginTop: 4, padding: 4, background: '#fee2e2',
+          color: '#991b1b', fontSize: 10, borderRadius: 3,
+        }}>✗ {runError}</div>
+      )}
+      {runResult && (
+        <div style={{
+          marginTop: 4, padding: 6, background: '#f0fdf4',
+          border: '1px solid #16a34a', borderRadius: 3, fontSize: 10,
+        }}>
+          <strong style={{ color: '#166534' }}>▶ Run {runResult.run_id}</strong>
+          {' · '}status: <strong>{runResult.status}</strong>
+          {' · '}duration: {runResult.outcome?.duration_ms}ms
+          {' · '}records: {runResult.outcome?.input_records}→{runResult.outcome?.output_records}
+          {runResult.outcome?.scaffold && (
+            <div style={{ color: '#92400e', marginTop: 2 }}>⚠ scaffold: {runResult.outcome?.note}</div>
+          )}
+        </div>
+      )}
 
       {isOpen && (
         <div style={{ marginTop: 6, padding: 6, background: '#f9fafb', borderRadius: 3 }}>

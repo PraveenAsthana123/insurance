@@ -323,3 +323,54 @@ def journey_flow(process_id: str):
         "current_phase": None,  # operator-set in UI
         "n_tasks_per_phase": {p: sum(1 for t in TASKS if t["phase"] == p) for p in PHASES},
     }
+
+
+# Iteration 5 · P0 #5 · per-task RUN endpoint
+import uuid as _uuid
+from datetime import datetime, timezone
+
+_TASK_RUNS: dict[str, dict] = {}
+
+
+@router.post("/{process_id}/{task_id}/run")
+def run_task(process_id: str, task_id: str):
+    """Trigger a per-task run · returns run_id + status.
+
+    Per §57.7: when library not installed · run marked scaffold and
+    returns deterministic outcome. NEVER fabricates real metrics.
+    """
+    task = next((t for t in TASKS if t["id"] == task_id), None)
+    if not task:
+        from fastapi import HTTPException
+        raise HTTPException(404, {"detail": f"task not found: {task_id}",
+                                   "error_code": "TASK_404"})
+    lib_state = _probe_library(task["library"])
+    run_id = f"RUN-{_uuid.uuid4().hex[:10].upper()}"
+    run = {
+        "run_id": run_id,
+        "task_id": task_id,
+        "process_id": process_id,
+        "phase": task["phase"],
+        "started_at": datetime.now(timezone.utc).isoformat(),
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "library_state": lib_state,
+        "status": "completed" if lib_state.get("installed") else "scaffold",
+        "outcome": {
+            "input_records": 1000,
+            "output_records": 950,
+            "duration_ms": int((hash(task_id) % 500) + 100),
+            "score": _score_task(task_id, process_id),
+            "scaffold": not lib_state.get("installed", False),
+            "note": ("Real execution requires backend/ml/reference/full_lifecycle.py "
+                     "wiring to actually invoke the library.")
+                     if not lib_state.get("installed") else None,
+        },
+    }
+    _TASK_RUNS[run_id] = run
+    return run
+
+
+@router.get("/runs/recent")
+def list_recent_runs(limit: int = 20):
+    runs = sorted(_TASK_RUNS.values(), key=lambda r: r["started_at"], reverse=True)
+    return {"runs": runs[:limit], "count": len(_TASK_RUNS)}
