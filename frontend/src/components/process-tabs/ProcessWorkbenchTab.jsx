@@ -5,6 +5,8 @@ import {
   ResponsiveContainer, Cell, ReferenceLine,
 } from 'recharts';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import ManualPipelinePanel from '../ManualPipelinePanel';
+import AutomaticPipelinePanel from '../AutomaticPipelinePanel';
 
 /* ─── SAMPLE DATA GENERATORS ─── */
 const SAMPLE_ROWS = [
@@ -1160,6 +1162,8 @@ export default function ProcessWorkbenchTab() {
       accent="#0ea5e9"
       todos={[]}
     >
+      <ManualPipelinePanel accent="#0ea5e9" />
+      <AutomaticPipelinePanel accent="#10b981" />
     <div style={{ fontFamily: 'var(--font-family)', color: 'var(--text-primary)' }}>
 
       {/* ── GLOBAL CONTROLS ── */}

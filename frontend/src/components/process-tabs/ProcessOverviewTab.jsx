@@ -3,6 +3,7 @@ import '../../styles/workbench.css';
 import SequenceDiagram from '../charts/SequenceDiagram';
 import { processSequenceDiagrams } from '../../data/sequenceDiagrams';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import AutomaticPipelinePanel from '../AutomaticPipelinePanel';
 
 const PIPELINE_STEPS = [
   {
@@ -530,6 +531,7 @@ export default function ProcessOverviewTab({ process, dept }) {
       accent="#1e40af"
       todos={[]}
     >
+      <AutomaticPipelinePanel accent="#10b981" />
     <div>
       {/* Process description */}
       <div className="content-section">
