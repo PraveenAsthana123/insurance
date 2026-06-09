@@ -51,9 +51,9 @@ These are operator-aligned polish items · no external blockers.
 |---|---|---|---|
 | ~~T3.1~~ | **(DONE 2026-06-08)** ~~Frontend AutonomousAgentPage.jsx~~ | done | T3.1 done · `/autonomous-agent` route · live decision chain visualizer |
 | ~~T3.2~~ | **(DONE 2026-06-08)** ~~Multi-cohort fairness eval~~ | done | T3.2 done · DI=0.136 verified · RAI gate triggers correctly |
-| T3.3 | Operation_log rotation (>90d archive) | medium | §38.3 retention compliance |
+| ~~T3.3~~ | **(DONE 2026-06-08)** ~~Operation_log rotation~~ | done | T3.3 done · 90d cutoff · daily 03:00 cron · operation_log_archive table |
 | T3.4 | Per-step latency histograms on E2E flow (trend per assertion) | medium | Operator hasn't asked · defer |
-| T3.5 | §82.21 DLP scan multilingual (non-US SSN/CC) | medium | Jurisdictional scope decision needed |
+| ~~T3.5~~ | **(DONE 2026-06-08)** ~~§82.21 DLP multilingual~~ | done | T3.5 done · 7 jurisdictions (US · UK · EU · CA · IN · BR · DE) · 9/9 verified |
 
 ### Tier 6 · ENTERPRISE AI TOOL LANDSCAPE (NEW · operator brief 2026-06-08)
 
@@ -85,7 +85,7 @@ Full reference: [docs/ENTERPRISE_AI_TOOL_LANDSCAPE.md](ENTERPRISE_AI_TOOL_LANDSC
 | T5.5 | Scaffolded wiring · 38 KPIs | scaffolded | formula present · needs data hook |
 | T5.6 | Planned KPIs · 34 deferred | planned | mostly require attribution/external data |
 | T5.7 | Predictive models (churn · NBA · attribution) | medium | needs feature store + training |
-| T5.8 | Real-time KPI calculation cron | medium | extends current weekly digest |
+| ~~T5.8~~ | **(DONE 2026-06-08)** ~~Real-time KPI calculation cron~~ | done | T5.8 done · hourly snapshot to kpi_snapshots table |
 | T5.9 | Multi-touch attribution model | large | requires touchpoint tracking |
 | T5.10 | Per-KPI alerting on target breach | medium | extends drift detection §82.7 |
 

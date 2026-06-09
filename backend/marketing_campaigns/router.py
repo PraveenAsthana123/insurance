@@ -155,11 +155,22 @@ class PublicResponse(BaseModel):
 
 
 def _public_dlp_ok(data: dict) -> bool:
-    """Same DLP shape as services._dlp_scan but for arbitrary dict."""
+    """Same DLP shape as services._dlp_scan · 7 jurisdictions per T3.5."""
     s = json.dumps(data) if not isinstance(data, str) else data
-    if re.search(r"\b\d{3}-\d{2}-\d{4}\b", s):
+    if re.search(r"\b\d{3}-\d{2}-\d{4}\b", s):              # US SSN
         return False
-    if re.search(r"\b\d{13,19}\b", s):
+    if re.search(r"\b\d{13,19}\b", s):                      # CC
+        return False
+    if re.search(r"\b[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z]"
+                  r"\s*\d{2}\s*\d{2}\s*\d{2}\s*[A-D]\b", s):  # UK NINO
+        return False
+    if re.search(r"\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b", s):   # EU IBAN
+        return False
+    if re.search(r"\b\d{3}[-\s]\d{3}[-\s]\d{3}\b", s):      # CA SIN
+        return False
+    if re.search(r"\b\d{4}\s\d{4}\s\d{4}\b", s):            # IN Aadhaar
+        return False
+    if re.search(r"\b\d{3}\.\d{3}\.\d{3}-\d{2}\b", s):      # BR CPF
         return False
     return True
 

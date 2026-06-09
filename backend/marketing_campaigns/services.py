@@ -113,13 +113,40 @@ def channel_help_all() -> dict[str, ChannelHelp]:
 # Top 1% gate helpers (mirror voice campaign · §76 + §82.21)
 # ─────────────────────────────────────────────────────────────────────
 def _dlp_scan(text: Any) -> bool:
-    """Refuse SSN-shape / CC-shape patterns in any string field."""
+    """Refuse PII-shape patterns across jurisdictions (T3.5 multilingual).
+
+    Patterns enforced per §82.21:
+      US:    SSN XXX-XX-XXXX · CC 13-19 digits
+      UK:    NINO AB123456C
+      EU:    IBAN (loose · 2L+2D+11-30 alnum)
+      CA:    SIN 123-456-789
+      IN:    Aadhaar 4-4-4 grouped digits
+      BR:    CPF XXX.XXX.XXX-XX
+
+    Per §57.7 conservative: false positives are safer than false negatives.
+    """
     if not text:
         return True
     s = json.dumps(text) if not isinstance(text, str) else text
-    if re.search(r"\b\d{3}-\d{2}-\d{4}\b", s):  # SSN
+    if re.search(r"\b\d{3}-\d{2}-\d{4}\b", s):                  # US SSN
         return False
-    if re.search(r"\b\d{13,19}\b", s):  # CC
+    if re.search(r"\b\d{13,19}\b", s):                          # CC
+        return False
+    # UK NINO · AB123456C
+    if re.search(r"\b[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z]"
+                  r"\s*\d{2}\s*\d{2}\s*\d{2}\s*[A-D]\b", s):
+        return False
+    # EU IBAN
+    if re.search(r"\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b", s):
+        return False
+    # Canadian SIN
+    if re.search(r"\b\d{3}[-\s]\d{3}[-\s]\d{3}\b", s):
+        return False
+    # India Aadhaar
+    if re.search(r"\b\d{4}\s\d{4}\s\d{4}\b", s):
+        return False
+    # Brazil CPF
+    if re.search(r"\b\d{3}\.\d{3}\.\d{3}-\d{2}\b", s):
         return False
     return True
 
