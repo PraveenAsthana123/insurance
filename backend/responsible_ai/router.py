@@ -270,6 +270,53 @@ def lens_for_process(process_id: str, lens_id: str):
     return _build_lens_for_process(lens, process_id)
 
 
+@router.get("/{process_id}/{lens_id}/timeseries")
+def lens_timeseries(process_id: str, lens_id: str, days: int = 30):
+    """P0 #8 · 30-day time-series of lens scores for drift detection.
+
+    Per §57.7: deterministic walk per (lens, process, day). When real
+    eval lands · backend pulls from audit row history.
+    """
+    lens = next((l for l in LENSES if l["id"] == lens_id), None)
+    if not lens:
+        raise HTTPException(404, {"detail": f"lens not found: {lens_id}",
+                                    "error_code": "LENS_404"})
+
+    base = _score_lens(lens_id, process_id)
+    series = []
+    for day in range(days):
+        # ±0.1 per-day noise + slight downward drift per day
+        noise = ((hash(lens_id + process_id + str(day)) % 200) - 100) / 1000
+        drift = -0.01 * (day / days)
+        score = max(0.0, min(1.0, base + noise + drift))
+        series.append({
+            "day": -days + day + 1,
+            "date_offset": f"-{days - day - 1}d" if day < days - 1 else "today",
+            "score": round(score, 3),
+            "scaffold": True,
+        })
+
+    first_week_avg = sum(p["score"] for p in series[:7]) / 7
+    last_week_avg = sum(p["score"] for p in series[-7:]) / 7
+    drift_delta = round(last_week_avg - first_week_avg, 3)
+
+    return {
+        "process_id": process_id,
+        "lens_id": lens_id,
+        "lens_name": lens["name"],
+        "section_color": lens["section_color"],
+        "days": days,
+        "series": series,
+        "current_score": series[-1]["score"] if series else None,
+        "baseline_score": series[0]["score"] if series else None,
+        "first_week_avg": round(first_week_avg, 3),
+        "last_week_avg": round(last_week_avg, 3),
+        "drift_delta": drift_delta,
+        "drift_alert": drift_delta < -0.05,
+        "scaffold": True,
+    }
+
+
 @router.get("/{process_id}/summary/report")
 def summary_report(process_id: str):
     """Aggregate report · used by ResponsibleAIPanel summary section."""

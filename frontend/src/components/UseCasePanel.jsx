@@ -104,7 +104,15 @@ export default function UseCasePanel({ accent = '#3b82f6', processId = 'fraud-ri
             {isOpen && (
               <div style={{ padding: 10 }}>
                 {Object.entries(partData).map(([key, val]) => (
-                  <Section key={key} name={key} value={val} accent={part.color} />
+                  <Section
+                    key={key}
+                    name={key}
+                    value={val}
+                    accent={part.color}
+                    partId={part.id}
+                    processId={processId}
+                    onSaved={(updated) => setUc(updated)}
+                  />
                 ))}
               </div>
             )}
@@ -119,21 +127,90 @@ export default function UseCasePanel({ accent = '#3b82f6', processId = 'fraud-ri
   );
 }
 
-function Section({ name, value, accent }) {
+function Section({ name, value, accent, partId, processId, onSaved }) {
   const isNull = value == null || value === '';
+  // P0 #7 · inline edit
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+
   const card = {
     padding: 6, marginBottom: 6,
     background: isNull ? '#f9fafb' : '#fff',
     border: `1px solid ${isNull ? '#e5e7eb' : `${accent}40`}`,
     borderRadius: 3,
   };
+
+  function startEdit() {
+    setDraft(typeof value === 'string' ? value : JSON.stringify(value, null, 2));
+    setEditing(true);
+    setError(null);
+  }
+
+  async function save() {
+    setBusy(true);
+    setError(null);
+    try {
+      // Parse draft · accept string for narrative fields, JSON for object/list fields
+      let parsedValue = draft;
+      if (draft.trim().startsWith('{') || draft.trim().startsWith('[')) {
+        try { parsedValue = JSON.parse(draft); }
+        catch (e) { throw new Error(`JSON parse failed: ${e.message}`); }
+      }
+      const body = { sections: { [partId]: { [name]: parsedValue } } };
+      const r = await fetch(`${API_BASE}/api/v1/use-cases/${processId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!r.ok) throw new Error(`${r.status}`);
+      const updated = await r.json();
+      onSaved?.(updated);
+      setEditing(false);
+    } catch (e) { setError(`save failed: ${e.message}`); }
+    finally { setBusy(false); }
+  }
+
   return (
     <div style={card}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
         <strong style={{ fontSize: 11, fontFamily: 'monospace', color: accent }}>{name}</strong>
-        {isNull && <span style={{ fontSize: 9, color: '#94a3b8', fontStyle: 'italic' }}>· operator-pending per §57.7</span>}
+        {isNull && !editing && <span style={{ fontSize: 9, color: '#94a3b8', fontStyle: 'italic' }}>· operator-pending per §57.7</span>}
+        <span style={{ flex: 1 }} />
+        {editing ? (
+          <>
+            <button onClick={save} disabled={busy} style={editBtn('#16a34a', busy)}>
+              {busy ? '⏳' : '💾 Save'}
+            </button>
+            <button onClick={() => setEditing(false)} disabled={busy} style={editBtn('#94a3b8', busy)}>
+              ✗ Cancel
+            </button>
+          </>
+        ) : (
+          <button onClick={startEdit} style={editBtn(accent, false)}>
+            ✎ Edit
+          </button>
+        )}
       </div>
-      {!isNull && (
+      {error && (
+        <div style={{
+          background: '#fee2e2', color: '#991b1b', fontSize: 9,
+          padding: 3, borderRadius: 3, marginBottom: 4,
+        }}>✗ {error}</div>
+      )}
+      {editing ? (
+        <textarea
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          rows={8}
+          style={{
+            width: '100%', padding: 6, fontSize: 10,
+            fontFamily: 'monospace', border: '1px solid #cbd5e1',
+            borderRadius: 3, resize: 'vertical',
+          }}
+        />
+      ) : !isNull ? (
         name === 'flowchart_mermaid' && typeof value === 'string' ? (
           <MermaidDiagram definition={value} accent={accent} title="Solution flowchart" />
         ) : (
@@ -146,7 +223,15 @@ function Section({ name, value, accent }) {
             {typeof value === 'string' ? value : JSON.stringify(value, null, 2)}
           </pre>
         )
-      )}
+      ) : null}
     </div>
   );
+}
+
+function editBtn(color, busy) {
+  return {
+    padding: '2px 6px', fontSize: 9, fontWeight: 700,
+    cursor: busy ? 'wait' : 'pointer',
+    background: color, color: '#fff', border: 'none', borderRadius: 3,
+  };
 }

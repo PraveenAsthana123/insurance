@@ -34,10 +34,10 @@ The gap is **substance · not structure**.
 | 4 | ROC curve viz → EvalHarnessPanel ✓ shipped 2026-06-09 | 4 | High (eval credibility) | DONE |
 | 5 | Per-task RUN button → DataPipelinePanel ✓ shipped 2026-06-09 | 4 | High UX | DONE |
 | 6 | HITL action buttons → HITLPanel ✓ shipped 2026-06-09 | 6 | Critical workflow | DONE |
-| 7 | Per-section inline edit in UseCasePanel | 10 | Critical workflow | PENDING |
-| 8 | Time-series chart per ResAI lens (30-day drift) | 8 | Drift detection | PENDING |
-| 9 | Compare runs side-by-side (Automatic Pipeline) | 8 | Critical analysis | PENDING |
-| 10 | Sample data preview in DataPipelinePanel (first 10 rows) | 6 | Critical UX | PENDING |
+| 7 | Per-section inline edit → UseCasePanel ✓ shipped 2026-06-09 | 10 | Critical workflow | DONE |
+| 8 | Time-series chart per ResAI lens ✓ shipped 2026-06-09 | 8 | Drift detection | DONE |
+| 9 | Compare runs side-by-side → AutomaticPipelinePanel ✓ shipped 2026-06-09 | 8 | Critical analysis | DONE |
+| 10 | Sample data preview → DataPipelinePanel ✓ shipped 2026-06-09 | 6 | Critical UX | DONE |
 
 **Total P0 effort: ~66 hours.** With one-fix-per-iteration cron loop and 1 iteration per day, **10 days to complete the P0**.
 

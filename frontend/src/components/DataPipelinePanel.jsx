@@ -287,6 +287,32 @@ function TaskRow({ task, isOpen, onToggle }) {
           {runResult.outcome?.scaffold && (
             <div style={{ color: '#92400e', marginTop: 2 }}>⚠ scaffold: {runResult.outcome?.note}</div>
           )}
+          {/* P0 #10 · sample data preview */}
+          {runResult.sample_rows?.length > 0 && (
+            <div style={{ marginTop: 6 }}>
+              <div style={{ fontSize: 9, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
+                Sample preview · first {runResult.sample_size} rows
+              </div>
+              <table style={{ width: '100%', fontSize: 9, background: '#fff' }}>
+                <thead>
+                  <tr style={{ background: '#f0fdf4' }}>
+                    {runResult.sample_columns.map((c) => (
+                      <th key={c} style={{ padding: 3, textAlign: 'left', color: '#475569' }}>{c}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {runResult.sample_rows.map((row, ri) => (
+                    <tr key={ri} style={{ borderTop: '1px solid #f1f5f9' }}>
+                      {runResult.sample_columns.map((c) => (
+                        <td key={c} style={{ padding: 3, fontFamily: 'monospace' }}>{String(row[c])}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       )}
 

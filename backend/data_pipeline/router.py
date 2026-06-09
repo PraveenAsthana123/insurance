@@ -332,12 +332,29 @@ from datetime import datetime, timezone
 _TASK_RUNS: dict[str, dict] = {}
 
 
+def _deterministic_sample_rows(task_id: str, n: int = 10) -> list[dict]:
+    """Per §57.7 scaffold · 10 deterministic insurance-themed sample rows.
+    P0 #10 sample data preview on RUN.
+    """
+    base_cols = {
+        "claim_id":      lambda i: f"CL-{(hash(task_id) % 10000) + i:05d}",
+        "amount_usd":    lambda i: round(500 + ((hash(task_id + str(i)) % 9500)), 2),
+        "policy_age_y":  lambda i: round(0.5 + ((hash(task_id + "p" + str(i)) % 200) / 10), 1),
+        "fraud_score":   lambda i: round(((hash(task_id + "f" + str(i)) % 1000) / 1000), 3),
+        "decision":      lambda i: ["approve", "review", "deny"][(hash(task_id + "d" + str(i))) % 3],
+    }
+    return [
+        {col: fn(i) for col, fn in base_cols.items()}
+        for i in range(n)
+    ]
+
+
 @router.post("/{process_id}/{task_id}/run")
 def run_task(process_id: str, task_id: str):
-    """Trigger a per-task run · returns run_id + status.
+    """Trigger a per-task run · returns run_id + status + sample rows.
 
     Per §57.7: when library not installed · run marked scaffold and
-    returns deterministic outcome. NEVER fabricates real metrics.
+    returns deterministic outcome + sample. NEVER fabricates real metrics.
     """
     task = next((t for t in TASKS if t["id"] == task_id), None)
     if not task:
@@ -346,6 +363,7 @@ def run_task(process_id: str, task_id: str):
                                    "error_code": "TASK_404"})
     lib_state = _probe_library(task["library"])
     run_id = f"RUN-{_uuid.uuid4().hex[:10].upper()}"
+    sample_rows = _deterministic_sample_rows(task_id, n=10)
     run = {
         "run_id": run_id,
         "task_id": task_id,
@@ -365,6 +383,10 @@ def run_task(process_id: str, task_id: str):
                      "wiring to actually invoke the library.")
                      if not lib_state.get("installed") else None,
         },
+        # P0 #10 · sample data preview
+        "sample_rows": sample_rows,
+        "sample_columns": list(sample_rows[0].keys()) if sample_rows else [],
+        "sample_size": len(sample_rows),
     }
     _TASK_RUNS[run_id] = run
     return run

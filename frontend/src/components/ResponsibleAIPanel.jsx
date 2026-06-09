@@ -8,6 +8,7 @@
 // Final outcome · Summary report.
 
 import { useEffect, useState } from 'react';
+import TimeSeriesLine from './charts/TimeSeriesLine';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
@@ -167,6 +168,12 @@ export default function ResponsibleAIPanel({ accent = '#dc2626', processId = 'fr
                   <div style={{ marginBottom: 4 }}>
                     <strong style={{ color: '#10b981' }}>📤 Output:</strong> {lens.output}
                   </div>
+                  {/* P0 #8 · 30-day drift time-series */}
+                  <LensTimeseries
+                    processId={processId}
+                    lensId={lens.id}
+                    color={lens.section_color}
+                  />
                   <div style={{
                     marginTop: 6, padding: 4, background: '#f9fafb', borderRadius: 3,
                     fontSize: 9, fontStyle: 'italic', color: '#64748b',
@@ -195,6 +202,51 @@ function Tile({ label, value, accent }) {
     }}>
       <div style={{ fontSize: 14, fontWeight: 700, color: accent }}>{value}</div>
       <div style={{ fontSize: 9, color: '#64748b' }}>{label}</div>
+    </div>
+  );
+}
+
+// P0 #8 · Per-lens 30-day drift time-series
+function LensTimeseries({ processId, lensId, color }) {
+  const [data, setData] = useState(null);
+  const [busy, setBusy] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        setBusy(true);
+        const r = await fetch(`${API_BASE}/api/v1/responsible-ai/${processId}/${lensId}/timeseries?days=30`);
+        if (!r.ok) throw new Error(`${r.status}`);
+        if (!cancelled) setData(await r.json());
+      } catch (e) { if (!cancelled) setError(e.message); }
+      finally { if (!cancelled) setBusy(false); }
+    })();
+    return () => { cancelled = true; };
+  }, [processId, lensId]);
+
+  if (busy) return <em style={{ fontSize: 9, color: '#94a3b8' }}>loading timeseries…</em>;
+  if (error || !data) return null;
+
+  return (
+    <div style={{ marginTop: 6, padding: 4, background: '#f9fafb', borderRadius: 3 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 9, marginBottom: 2 }}>
+        <strong style={{ color }}>📉 30-day drift</strong>
+        <span style={{
+          color: data.drift_delta < -0.05 ? '#dc2626' : data.drift_delta > 0.02 ? '#16a34a' : '#475569',
+          fontWeight: 700,
+        }}>
+          Δ {(data.drift_delta * 100).toFixed(1)}%
+          {data.drift_alert && ' ⚠ ALERT'}
+        </span>
+      </div>
+      <TimeSeriesLine
+        data={data.series}
+        color={color}
+        baseline={data.baseline_score}
+        height={100}
+      />
     </div>
   );
 }
