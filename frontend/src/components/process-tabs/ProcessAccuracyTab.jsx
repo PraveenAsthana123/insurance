@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import E2ELatencyPanel from '../E2ELatencyPanel';
 
 /* ---- Static Data ---- */
 const MODELS_METRICS = [
@@ -181,7 +182,8 @@ export default function ProcessAccuracyTab() {
       accent="#f59e0b"
       todos={[]}
     >
-      return (
+      
+      <E2ELatencyPanel accent="#f59e0b" />return (
     <div>
 
       {/* ===== A. KPI CARDS ===== */}

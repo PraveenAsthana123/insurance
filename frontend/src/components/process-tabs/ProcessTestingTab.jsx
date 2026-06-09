@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import E2ELatencyPanel from '../E2ELatencyPanel';
 
 /* ============================================================
    TESTING TAB — Comprehensive testing for each process
@@ -165,7 +166,8 @@ export default function ProcessTestingTab({ process }) {
       accent="#f59e0b"
       todos={[]}
     >
-      return (
+      
+      <E2ELatencyPanel accent="#f59e0b" />return (
     <div>
       {/* Summary KPIs */}
       <div className="kpi-row" style={{ marginBottom: 'var(--spacing-md)' }}>
