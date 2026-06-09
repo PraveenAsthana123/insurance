@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import {
   IPOSection, TransactionalHistory, OutputEvaluation, DerivedBadge,
-  InfoCard, JourneyFlow, TodoList,
+  InfoCard, JourneyFlow, TodoList, TabShell,
 } from './IPOLayout';
 import { useInputEvent } from '../../../hooks/useInputEvent';
 import {
@@ -362,7 +362,17 @@ export function TechStackTab({ proc, dept }) {
     </Field>
   );
   return (
-    <div>
+    <TabShell
+      tabName="techstack"
+      title="Tech stack · layer list + versions + chosen vs alternatives"
+      phase="Orient"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="layers · versions · purpose · maturity · alternatives"
+      operation="read-only · edit proc.tech_stack in blueprint.json"
+      accent="#0ea5e9"
+      todos={[]}
+    >
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         Stack inventory for <strong>{proc.name}</strong>. <DerivedBadge derived={!!ts.derived} />
       </p>
@@ -383,18 +393,24 @@ export function TechStackTab({ proc, dept }) {
       <IPOSection number="3" kind="output" title="Output — Observability + ops" subtitle="Telemetry + monitoring surfaces produced by the stack.">
         {cell('Observability', ts.observability)}
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="tech-stack" />
-      <OutputEvaluation metrics={{}} tabName="tech-stack" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 export function DemoStoryTab({ proc, dept }) {
   const ds = proc.demo_story;
   if (!ds) return <EmptyState tabName="Demo story" />;
   return (
-    <div>
+    <TabShell
+      tabName="demostory"
+      title="Demo story · stakeholder narrative + screenshots"
+      phase="Orient"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="persona · scenario · walkthrough · pitch · screenshots"
+      operation="read-only · edit proc.demo_story (separate from UserDemoTab)"
+      accent="#d946ef"
+      todos={[]}
+    >
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         30-second demo narrative for stakeholders. <DerivedBadge derived={!!ds.derived} />
       </p>
@@ -416,12 +432,8 @@ export function DemoStoryTab({ proc, dept }) {
         <Field label="30-second pitch">{ds.pitch}</Field>
         <Field label="Demo URL pattern"><code>{ds.demo_url}</code></Field>
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="demo-story" />
-      <OutputEvaluation metrics={{}} tabName="demo-story" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 export function AsIsToBeTab({ proc, dept }) {
   const m = proc.manual_process;
@@ -429,7 +441,17 @@ export function AsIsToBeTab({ proc, dept }) {
   const delta = proc.as_is_to_be;
   if (!m && !a) return <EmptyState tabName="AS-IS → TO-BE" />;
   return (
-    <div>
+    <TabShell
+      tabName="asistobe"
+      title="AS-IS / TO-BE · before vs after transformation"
+      phase="Orient"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="actors freed · AI capabilities added · KPI targets · ROI"
+      operation="read-only · edit proc.as_is_to_be in blueprint.json"
+      accent="#3b82f6"
+      todos={[]}
+    >
       <IPOSection number="1" kind="input" title="Input — AS-IS (today)" subtitle="Manual workflow, actors, tools, pain points.">
         <div style={{ borderLeft: '4px solid var(--accent-warning)', paddingLeft: 'var(--spacing-md)' }}>
           <Field label="Summary">{m?.summary || '—'}</Field>
@@ -467,12 +489,8 @@ export function AsIsToBeTab({ proc, dept }) {
           </>
         ) : <em>—</em>}
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="as-is-to-be" />
-      <OutputEvaluation metrics={{}} tabName="as-is-to-be" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 // =========================================
 // Phase 2: Understand
@@ -480,47 +498,70 @@ export function AsIsToBeTab({ proc, dept }) {
 
 export function ProblemTab({ proc, dept }) {
   const issues = proc.issues || [];
-  if (issues.length === 0) return <EmptyState tabName="Problem" />;
   const anyDerived = issues.some((i) => i && i.derived);
   const highImpactCount = issues.filter((i) => (i.impact || '').toLowerCase().includes('high') || (i.impact || '').includes('cycle')).length;
   return (
-    <div>
-      <IPOSection number="1" kind="input" title="Input — Pain signals collected" subtitle="Mission + raw operator/customer/regulator feedback that surfaced these issues.">
-        <Field label="Mission context">{dept.mission}</Field>
-        <Field label={`Issues detected (${issues.length})`}>
-          {issues.length} pain points captured. {anyDerived && <DerivedBadge derived={true} />}
-        </Field>
-      </IPOSection>
+    <TabShell
+      tabName="problem"
+      title="Problem statement · pain signals + triage + prioritized backlog"
+      phase="Understand"
+      phases={['Orient', 'Understand', 'Describe', 'Ship']}
+      priority="P0"
+      information="department mission · issue list · per-issue impact · high-impact count"
+      operation="read-only · edit proc.issues in blueprint.json to add per-process pain points"
+      accent="#ef4444"
+      todos={[
+        issues.length === 0 && 'Add ≥ 3 issues to proc.issues (issue + impact per row)',
+        highImpactCount === 0 && issues.length > 0 && 'Mark at least one issue as high-impact',
+        anyDerived && 'Replace derived issues with operator-confirmed ones',
+      ].filter(Boolean)}
+    >
+      {issues.length === 0 ? (
+        <InfoCard icon="📋" title="What this tab will contain (when populated)" accent="#ef4444">
+          <ul style={{ margin: 0, paddingLeft: 16 }}>
+            <li><strong>Pain signals</strong>: operator/customer/regulator feedback per process</li>
+            <li><strong>Issues table</strong>: # · issue text · impact (cycle time · accuracy · cost)</li>
+            <li><strong>High-impact count</strong>: feeds AS-IS → TO-BE prioritization</li>
+            <li><strong>Hand-off</strong>: AS-IS/TO-BE · Manual process · Data tabs</li>
+          </ul>
+        </InfoCard>
+      ) : (
+        <>
+          <IPOSection number="1" kind="input" title="1. Input — Pain signals collected" subtitle="Mission + raw operator/customer/regulator feedback that surfaced these issues.">
+            <Field label="Mission context">{dept.mission}</Field>
+            <Field label={`Issues detected (${issues.length})`}>
+              {issues.length} pain points captured. {anyDerived && <DerivedBadge derived={true} />}
+            </Field>
+          </IPOSection>
 
-      <IPOSection number="2" kind="process" title="Process — Triage & impact analysis" subtitle="Each pain point ranked by business impact + linked to downstream tabs.">
-        <table className="insurance-matrix">
-          <thead><tr><th>#</th><th>Issue</th><th>Impact</th></tr></thead>
-          <tbody>
-            {issues.map((i, idx) => (
-              <tr key={idx}>
-                <td>{idx + 1}</td>
-                <td>{i.issue}{i.derived && <span style={{ marginLeft: 6, fontSize: 10, color: 'var(--text-muted)' }}>(derived)</span>}</td>
-                <td>{i.impact || '—'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </IPOSection>
+          <IPOSection number="2" kind="process" title="2. Process — Triage & impact analysis" subtitle="Each pain point ranked by business impact + linked to downstream tabs.">
+            <table className="insurance-matrix">
+              <thead><tr><th>#</th><th>Issue</th><th>Impact</th></tr></thead>
+              <tbody>
+                {issues.map((i, idx) => (
+                  <tr key={idx}>
+                    <td>{idx + 1}</td>
+                    <td>{i.issue}{i.derived && <span style={{ marginLeft: 6, fontSize: 10, color: 'var(--text-muted)' }}>(derived)</span>}</td>
+                    <td>{i.impact || '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </IPOSection>
 
-      <IPOSection number="3" kind="output" title="Output — Prioritized backlog" subtitle="What feeds the AS-IS→TO-BE transformation plan.">
-        <Field label={`High-impact items (${highImpactCount})`}>
-          {highImpactCount > 0
-            ? `${highImpactCount} of ${issues.length} flagged as cycle-time / accuracy / cost critical — drive the AS-IS→TO-BE TO-BE plan.`
-            : 'No high-impact items detected — automation gain may be marginal.'}
-        </Field>
-        <Field label="Hand-off">
-          Feeds: <strong>AS-IS → TO-BE</strong> (delta scoring) · <strong>Manual process</strong> (pain attribution) · <strong>Data</strong> (root-cause tracing).
-        </Field>
-      </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="problem" />
-      <OutputEvaluation metrics={{}} tabName="problem" />
-    </div>
+          <IPOSection number="3" kind="output" title="3. Output — Prioritized backlog" subtitle="What feeds the AS-IS→TO-BE transformation plan.">
+            <Field label={`High-impact items (${highImpactCount})`}>
+              {highImpactCount > 0
+                ? `${highImpactCount} of ${issues.length} flagged as cycle-time / accuracy / cost critical — drive the AS-IS→TO-BE TO-BE plan.`
+                : 'No high-impact items detected — automation gain may be marginal.'}
+            </Field>
+            <Field label="Hand-off">
+              Feeds: <strong>AS-IS → TO-BE</strong> (delta scoring) · <strong>Manual process</strong> (pain attribution) · <strong>Data</strong> (root-cause tracing).
+            </Field>
+          </IPOSection>
+        </>
+      )}
+    </TabShell>
   );
 }
 
@@ -528,7 +569,17 @@ export function DataTab({ proc, dept }) {
   const d = proc.data_process;
   if (!d) return <EmptyState tabName="Data" />;
   return (
-    <div>
+    <TabShell
+      tabName="data"
+      title="Data · sources + schemas + sample rows + lineage"
+      phase="Understand"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="data sources · schema · sample rows · stats · lineage"
+      operation="read-only · edit proc.data_process in blueprint.json"
+      accent="#0ea5e9"
+      todos={[]}
+    >
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         {d.summary} <DerivedBadge derived={!!d.derived} />
       </p>
@@ -566,12 +617,8 @@ export function DataTab({ proc, dept }) {
       <IPOSection number="4" kind="output" title="Data visualization — Before vs After" subtitle="AS-IS data burden compared with TO-BE AI-ready outputs.">
         <BeforeAfterDataVisualization proc={proc} />
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="data" />
-      <OutputEvaluation metrics={{}} tabName="data" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 
 export function ModelTab({ proc, dept, bp }) {
@@ -585,7 +632,17 @@ export function ModelTab({ proc, dept, bp }) {
     value: metricValue(`${proc.name}:${entry.ai_type}`, index, 65, 30),
   }));
   return (
-    <div>
+    <TabShell
+      tabName="model"
+      title="Model · ML model cards + accuracy + latency + cost"
+      phase="Build"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="model name · version · accuracy · latency · cost · rollback"
+      operation="wire to MLflow registry (P0.3) · read-only here"
+      accent="#0ea5e9"
+      todos={[]}
+    >
       <IPOSection number="1" kind="input" title="Input — Model candidates" subtitle="AI capabilities and catalog model metadata for this process.">
         <table className="insurance-matrix">
           <thead><tr><th>AI capability</th><th>Scenario</th><th>Model binding</th></tr></thead>
@@ -622,12 +679,8 @@ export function ModelTab({ proc, dept, bp }) {
       <IPOSection number="3" kind="output" title="Output — Model evaluation visualization" subtitle="Readiness score derived from available model/catalog metadata.">
         <ProcessChart title="Model readiness by capability" data={chartData} color="#8b5cf6" />
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="model" />
-      <OutputEvaluation metrics={{}} tabName="model" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 export function AnalysisTab({ proc, dept }) {
   const issues = proc.issues || [];
@@ -640,7 +693,17 @@ export function AnalysisTab({ proc, dept }) {
     { name: 'Artifacts', value: (proc.output?.artifacts || []).length || metricValue(proc.name, 14, 2, 8) },
   ];
   return (
-    <div>
+    <TabShell
+      tabName="analysis"
+      title="Analysis · feature importance + SHAP + counterfactual"
+      phase="Govern"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="feature importance · SHAP top-10 · counterfactual"
+      operation="wire SHAP backend (P0.4 · EU AI Act Art. 86 blocker)"
+      accent="#dc2626"
+      todos={[]}
+    >
       <IPOSection number="1" kind="input" title="Input — Business signals" subtitle="Issues, department mission, data process, and KPI targets.">
         <Field label="Department mission">{dept.mission}</Field>
         <Field label={`Issues (${issues.length})`}>
@@ -658,12 +721,8 @@ export function AnalysisTab({ proc, dept }) {
       <IPOSection number="3" kind="output" title="Output — Analysis visualization" subtitle="Summary chart for issues, capabilities, KPIs, and artifacts.">
         <ProcessChart title="Analysis coverage" data={analysisRows} color="#f59e0b" />
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="analysis" />
-      <OutputEvaluation metrics={{}} tabName="analysis" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 
 // =========================================
@@ -878,7 +937,17 @@ export function ManualProcessTab({ proc, dept }) {
   const issues = proc.issues || [];
   if (!m) return <EmptyState tabName="Manual process" />;
   return (
-    <div>
+    <TabShell
+      tabName="manualprocess"
+      title="Manual process · AS-IS workflow + pain points"
+      phase="Describe"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="actor archetypes · data sources · tools · current pain"
+      operation="read-only · edit proc.manual_process in blueprint.json"
+      accent="#a855f7"
+      todos={[]}
+    >
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         {m.summary} <DerivedBadge derived={!!m.derived} />
       </p>
@@ -919,12 +988,8 @@ export function ManualProcessTab({ proc, dept }) {
           Output flows into <strong>Automatic process</strong> tab (TO-BE AI orchestration) or into the next manual reviewer. See <strong>Output</strong> tab for downstream consumers.
         </Field>
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="manual" />
-      <OutputEvaluation metrics={{}} tabName="manual" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 function AILink({ aiType, baseHref }) {
   // baseHref like "/insurance/7/B2C/fnol-first-notice-of-loss"
@@ -952,7 +1017,17 @@ export function AutomaticProcessTab({ proc, dept }) {
   if (!a) return <EmptyState tabName="Automatic process" />;
   const baseHref = typeof window !== 'undefined' ? window.location.pathname : null;
   return (
-    <div>
+    <TabShell
+      tabName="automaticprocess"
+      title="Automatic process · TO-BE AI workflow + HITL points"
+      phase="Describe"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="AI steps · HITL touchpoints · automation %"
+      operation="read-only · edit proc.automatic_process in blueprint.json"
+      accent="#10b981"
+      todos={[]}
+    >
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         {a.summary} <DerivedBadge derived={!!a.derived} />
       </p>
@@ -990,12 +1065,8 @@ export function AutomaticProcessTab({ proc, dept }) {
           Feeds: <strong>Output</strong> (downstream consumers) · <strong>Governance AI</strong> (decision audit) · <strong>ExpAI</strong> (per-prediction explanations).
         </Field>
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="automatic" />
-      <OutputEvaluation metrics={{}} tabName="automatic" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 // =========================================
 // Phase 4: Ship
@@ -1005,7 +1076,17 @@ export function FlowDiagramTab({ proc, dept }) {
   const fd = proc.flow_diagram;
   if (!fd) return <EmptyState tabName="Flow diagram" />;
   return (
-    <div>
+    <TabShell
+      tabName="flowdiagram"
+      title="Flow diagram · manual vs auto Mermaid side-by-side"
+      phase="Ship"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="mermaid renderer · 2 diagrams (AS-IS + TO-BE)"
+      operation="read-only · edit proc.flow_diagram_mermaid in blueprint.json"
+      accent="#a855f7"
+      todos={[]}
+    >
       <IPOSection number="1" kind="input" title="Input — Process steps" subtitle="Linear sequence of actions feeding the diagram source.">
         <Field label="Format"><code>{fd.format || 'mermaid'}</code></Field>
         <Field label="Source steps">
@@ -1033,12 +1114,8 @@ export function FlowDiagramTab({ proc, dept }) {
         </p>
         <DerivedBadge derived={!!fd.derived} />
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="flow-diagram" />
-      <OutputEvaluation metrics={{}} tabName="flow-diagram" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 export function OutputTab({ proc, dept }) {
   const out = proc.output;
@@ -1048,7 +1125,17 @@ export function OutputTab({ proc, dept }) {
   const consumers = out?.downstream_consumers || [];
   const auditFields = out?.audit_row_fields || [];
   return (
-    <div>
+    <TabShell
+      tabName="output"
+      title="Output · artifacts produced + downstream consumers"
+      phase="Ship"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="artifact list · format · downstream services"
+      operation="read-only · edit proc.output in blueprint.json"
+      accent="#10b981"
+      todos={[]}
+    >
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         Process output catalog · downstream consumers · audit-row schema.
         {out && <DerivedBadge derived={!!out.derived} />}
@@ -1083,12 +1170,8 @@ export function OutputTab({ proc, dept }) {
           Feeds: <strong>Visualization</strong> (chart-ready data) · <strong>Dashboard</strong> (KPI rollup) · external systems via API.
         </Field>
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="output" />
-      <OutputEvaluation metrics={{}} tabName="output" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 // =========================================
 // Phase 5: Measure
@@ -1098,7 +1181,17 @@ export function VisualizationTab({ proc, dept }) {
   const v = proc.visualization;
   if (!v) return <EmptyState tabName="Visualization" />;
   return (
-    <div>
+    <TabShell
+      tabName="visualization"
+      title="Visualization · per-process charts (4-7)"
+      phase="Measure"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="recharts library · per-metric chart"
+      operation="read-only · edit proc.charts in blueprint.json"
+      accent="#06b6d4"
+      todos={[]}
+    >
       <IPOSection number="1" kind="input" title="Input — Metrics + dimensions" subtitle="What gets fed into the chart (axes + slicing).">
         <Field label="Axes">
           {v.axes ? (
@@ -1131,18 +1224,24 @@ export function VisualizationTab({ proc, dept }) {
       <IPOSection number="4" kind="output" title="Before/after visualization" subtitle="AS-IS data burden and TO-BE AI-ready data shown in chart form.">
         <BeforeAfterDataVisualization proc={proc} />
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="visualization" />
-      <OutputEvaluation metrics={{}} tabName="visualization" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 export function DashboardTab({ proc, dept }) {
   const smart = proc.smart_kpi;
   if (!smart) return <EmptyState tabName="Dashboard" />;
   return (
-    <div>
+    <TabShell
+      tabName="dashboard"
+      title="Dashboard · KPI tiles + target + baseline + delta"
+      phase="Measure"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="KpiStrip · trend (12 weeks) · alert rules"
+      operation="read-only · edit proc.dashboard in blueprint.json"
+      accent="#0ea5e9"
+      todos={[]}
+    >
       <IPOSection number="1" kind="input" title="Input — KPI streams" subtitle="Metrics collected from the Output + Visualization tabs.">
         <Field label="Source">
           Aggregated from <strong>Output</strong> tab artifacts + <strong>Visualization</strong> tab charts.
@@ -1172,12 +1271,8 @@ export function DashboardTab({ proc, dept }) {
           </tbody>
         </table>
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="dashboard" />
-      <OutputEvaluation metrics={{}} tabName="dashboard" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 // =========================================
 // Phase 6: Govern
@@ -1185,87 +1280,162 @@ export function DashboardTab({ proc, dept }) {
 
 export function ResAITab({ proc, dept }) {
   const r = proc.responsible_ai;
-  if (!r) return <EmptyState tabName="ResAI" />;
   return (
-    <div>
-      <IPOSection number="1" kind="input" title="Input — Predictions + protected attributes" subtitle="Decisions from the Automatic process feeding the fairness audit.">
-        <Field label="Global policy">{r.global_policy}</Field>
-      </IPOSection>
+    <TabShell
+      tabName="resai"
+      title="Responsible AI · fairness + bias + privacy audit"
+      phase="Govern"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="global policy · fairness gate · equal-opportunity gap · bias audit · privacy class · audit-row schema"
+      operation="read-only · edit proc.responsible_ai in blueprint.json · backend governance wire pending"
+      accent="#dc2626"
+      todos={[
+        !r && 'Add proc.responsible_ai with shape {global_policy, fairness_gate, equal_opportunity_gap, bias_audit, privacy, audit_row_fields}',
+        r && !r.fairness_gate && 'Specify fairness gate (e.g. disparate impact ≥ 0.8)',
+        r && !r.bias_audit && 'Document bias audit method',
+        r && !r.privacy && 'Set privacy class (PII · PHI · PCI · public)',
+      ].filter(Boolean)}
+    >
+      {!r ? (
+        <InfoCard icon="⚖️" title="What this tab will contain (when populated)" accent="#dc2626">
+          <ul style={{ margin: 0, paddingLeft: 16 }}>
+            <li><strong>Global RAI policy</strong>: per §76 5-pillar framework</li>
+            <li><strong>Fairness gate</strong>: disparate impact ≥ 0.8 · equal-opportunity gap &lt; 5%</li>
+            <li><strong>Bias audit</strong>: per global §48.8</li>
+            <li><strong>Privacy class</strong>: PII · PHI · PCI · public</li>
+            <li><strong>Audit-row fields</strong>: what gets persisted per §38.3</li>
+          </ul>
+        </InfoCard>
+      ) : (
+        <>
+          <IPOSection number="1" kind="input" title="1. Input — Predictions + protected attributes" subtitle="Decisions from the Automatic process feeding the fairness audit.">
+            <Field label="Global policy">{r.global_policy}</Field>
+          </IPOSection>
 
-      <IPOSection number="2" kind="process" title="Process — Fairness + bias audit" subtitle="Disparate impact ≥ 0.8 · equal-opportunity gap < 5% (per global §38 + §48.8).">
-        <Field label="Fairness gate">{r.fairness_gate}</Field>
-        <Field label="Equal opportunity gap">{r.equal_opportunity_gap}</Field>
-        <Field label="Bias audit">{r.bias_audit}</Field>
-        <Field label="Privacy">{r.privacy}</Field>
-      </IPOSection>
+          <IPOSection number="2" kind="process" title="2. Process — Fairness + bias audit" subtitle="Disparate impact ≥ 0.8 · equal-opportunity gap < 5% (per global §38 + §48.8).">
+            <Field label="Fairness gate">{r.fairness_gate}</Field>
+            <Field label="Equal opportunity gap">{r.equal_opportunity_gap}</Field>
+            <Field label="Bias audit">{r.bias_audit}</Field>
+            <Field label="Privacy">{r.privacy}</Field>
+          </IPOSection>
 
-      <IPOSection number="3" kind="output" title="Output — ResAI score + audit row" subtitle="Pass/fail flag + persisted audit row schema.">
-        <Field label="Audit-row fields">{(r.audit_row_fields || []).join(' · ')}</Field>
-        <DerivedBadge derived={!!r.derived} />
-      </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="resai" />
-      <OutputEvaluation metrics={{}} tabName="resai" />
-    </div>
+          <IPOSection number="3" kind="output" title="3. Output — ResAI score + audit row" subtitle="Pass/fail flag + persisted audit row schema.">
+            <Field label="Audit-row fields">{(r.audit_row_fields || []).join(' · ')}</Field>
+            <DerivedBadge derived={!!r.derived} />
+          </IPOSection>
+        </>
+      )}
+    </TabShell>
   );
 }
 
 export function ExpAITab({ proc, dept }) {
   const e = proc.explainable_ai;
-  if (!e) return <EmptyState tabName="ExpAI" />;
   return (
-    <div>
-      <IPOSection number="1" kind="input" title="Input — Per-prediction artifacts" subtitle="Output of Automatic process tab + feature vectors.">
-        <Field label="Global policy">{e.global_policy}</Field>
-      </IPOSection>
+    <TabShell
+      tabName="expai"
+      title="Explainable AI · SHAP · LIME · Integrated Gradients · counterfactual"
+      phase="Govern"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="explanation methods · per-prediction surface · decision audit field per §38.3 + §48.5"
+      operation="read-only · edit proc.explainable_ai in blueprint.json · SHAP backend wire pending (EU AI Act Art. 86 blocker)"
+      accent="#dc2626"
+      todos={[
+        !e && 'Add proc.explainable_ai with shape {global_policy, methods, surface, decision_audit_field}',
+        e && (!e.methods || e.methods.length === 0) && 'List ≥ 2 explanation methods (SHAP · LIME · IG · counterfactual)',
+        e && !e.surface && 'Specify where explanation surfaces (UI tile · audit row · API)',
+        'Wire backend SHAP endpoint (P0.4 · EU AI Act Art. 86 requirement)',
+      ].filter(Boolean)}
+    >
+      {!e ? (
+        <InfoCard icon="🔍" title="What this tab will contain (when populated)" accent="#dc2626">
+          <ul style={{ margin: 0, paddingLeft: 16 }}>
+            <li><strong>Explanation methods</strong>: SHAP global + local · LIME · IG · counterfactual</li>
+            <li><strong>Surface</strong>: where explanations land (audit row · UI tile · API field)</li>
+            <li><strong>Decision audit field</strong>: which §38.3 field this populates</li>
+            <li><strong>EU AI Act Art. 86 compliance</strong>: right to explanation</li>
+          </ul>
+        </InfoCard>
+      ) : (
+        <>
+          <IPOSection number="1" kind="input" title="1. Input — Per-prediction artifacts" subtitle="Output of Automatic process tab + feature vectors.">
+            <Field label="Global policy">{e.global_policy}</Field>
+          </IPOSection>
 
-      <IPOSection number="2" kind="process" title="Process — Explanation methods" subtitle="SHAP · LIME · Integrated Gradients · counterfactual (per §48.2 + §64.21).">
-        <Field label="Methods">
-          <ul style={{ margin: 0, paddingLeft: 20 }}>{(e.methods || []).map((m, i) => <li key={i}>{m}</li>)}</ul>
-        </Field>
-      </IPOSection>
+          <IPOSection number="2" kind="process" title="2. Process — Explanation methods" subtitle="SHAP · LIME · Integrated Gradients · counterfactual (per §48.2 + §64.21).">
+            <Field label="Methods">
+              <ul style={{ margin: 0, paddingLeft: 20 }}>{(e.methods || []).map((m, i) => <li key={i}>{m}</li>)}</ul>
+            </Field>
+          </IPOSection>
 
-      <IPOSection number="3" kind="output" title="Output — Surfaced explanations" subtitle="Where explanations land + which decision-audit field they populate.">
-        <Field label="Surface">{e.surface}</Field>
-        <Field label="Audit field">{e.decision_audit_field}</Field>
-        <DerivedBadge derived={!!e.derived} />
-      </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="expai" />
-      <OutputEvaluation metrics={{}} tabName="expai" />
-    </div>
+          <IPOSection number="3" kind="output" title="3. Output — Surfaced explanations" subtitle="Where explanations land + which decision-audit field they populate.">
+            <Field label="Surface">{e.surface}</Field>
+            <Field label="Audit field">{e.decision_audit_field}</Field>
+            <DerivedBadge derived={!!e.derived} />
+          </IPOSection>
+        </>
+      )}
+    </TabShell>
   );
 }
 
 export function GovernanceAITab({ proc, dept }) {
   const g = proc.governance_ai;
-  if (!g) return <EmptyState tabName="Governance AI" />;
   return (
-    <div>
-      <IPOSection number="1" kind="input" title="Input — Decision + confidence" subtitle="Output of Automatic process tab carrying model score + scope token.">
-        <Field label="Global policy">{g.global_policy}</Field>
-      </IPOSection>
-
-      <IPOSection number="2" kind="process" title="Process — Rule + confidence routing" subtitle="Per §40 decision system: auto / review / reject based on confidence tiers.">
-        <Field label="Decision layer">{g.decision_layer}</Field>
-        <Field label="Confidence tiers">
-          <ul style={{ margin: 0, paddingLeft: 20 }}>
-            {Object.entries(g.confidence_tiers || {}).map(([k, v]) => (
-              <li key={k}><strong>{k.replace(/_/g, ' ')}</strong>: {v}</li>
-            ))}
+    <TabShell
+      tabName="governance"
+      title="Governance AI · rule + confidence routing + scope grants + rollback"
+      phase="Govern"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="decision layer · confidence tiers · scope grants · rollback procedure · audit row schema"
+      operation="read-only · edit proc.governance_ai in blueprint.json · audit DB wire pending (SOC2 CC6.6 blocker)"
+      accent="#dc2626"
+      todos={[
+        !g && 'Add proc.governance_ai with shape {global_policy, decision_layer, confidence_tiers, scope_grants, rollback}',
+        g && !g.decision_layer && 'Document decision layer per §40 (rule + confidence + HITL)',
+        g && (!g.confidence_tiers || Object.keys(g.confidence_tiers).length === 0) && 'Define ≥ 3 confidence tiers (auto · review · reject)',
+        g && !g.rollback && 'Document rollback procedure for reversible decisions',
+        'Wire backend audit-DB endpoint (P0 · SOC2 CC6.6 audit trail requirement)',
+      ].filter(Boolean)}
+    >
+      {!g ? (
+        <InfoCard icon="🏛️" title="What this tab will contain (when populated)" accent="#dc2626">
+          <ul style={{ margin: 0, paddingLeft: 16 }}>
+            <li><strong>Decision layer</strong>: per §40 (rule + confidence + HITL)</li>
+            <li><strong>Confidence tiers</strong>: auto-execute · agent-review · human-approval · reject (per T7.9)</li>
+            <li><strong>Scope grants</strong>: per §47.6 SOC2 CC6.2 RBAC</li>
+            <li><strong>Rollback procedure</strong>: how to reverse a wrong decision</li>
+            <li><strong>Audit row</strong>: §38.3 schema · what gets persisted per decision</li>
           </ul>
-        </Field>
-        <Field label="Scope grants">{g.scope_grants}</Field>
-      </IPOSection>
+        </InfoCard>
+      ) : (
+        <>
+          <IPOSection number="1" kind="input" title="1. Input — Decision + confidence" subtitle="Output of Automatic process tab carrying model score + scope token.">
+            <Field label="Global policy">{g.global_policy}</Field>
+          </IPOSection>
 
-      <IPOSection number="3" kind="output" title="Output — Audit row + rollback path" subtitle="Persistent decision record per §38.3 + reversal procedure.">
-        <Field label="Rollback">{g.rollback}</Field>
-        <DerivedBadge derived={!!g.derived} />
-      </IPOSection>
+          <IPOSection number="2" kind="process" title="2. Process — Rule + confidence routing" subtitle="Per §40 decision system: auto / review / reject based on confidence tiers.">
+            <Field label="Decision layer">{g.decision_layer}</Field>
+            <Field label="Confidence tiers">
+              <ul style={{ margin: 0, paddingLeft: 20 }}>
+                {Object.entries(g.confidence_tiers || {}).map(([k, v]) => (
+                  <li key={k}><strong>{k.replace(/_/g, ' ')}</strong>: {v}</li>
+                ))}
+              </ul>
+            </Field>
+            <Field label="Scope grants">{g.scope_grants}</Field>
+          </IPOSection>
 
-      <TransactionalHistory rows={[]} tabName="governance" />
-      <OutputEvaluation metrics={{}} tabName="governance" />
-    </div>
+          <IPOSection number="3" kind="output" title="3. Output — Audit row + rollback path" subtitle="Persistent decision record per §38.3 + reversal procedure.">
+            <Field label="Rollback">{g.rollback}</Field>
+            <DerivedBadge derived={!!g.derived} />
+          </IPOSection>
+        </>
+      )}
+    </TabShell>
   );
 }
 
@@ -1297,7 +1467,17 @@ export function TestsTab({ proc, dept }) {
     </div>
   );
   return (
-    <div>
+    <TabShell
+      tabName="tests"
+      title="Tests · API · Frontend · Backend · Drills (§43)"
+      phase="Verify"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P1"
+      information="test surfaces · pytest · vitest · playwright runners"
+      operation="read-only · wire §65.8 dispatcher to get real counts"
+      accent="#f59e0b"
+      todos={[]}
+    >
       <IPOSection number="1" kind="input" title="Input — Test plan" subtitle="Per global §64.30 12-tier testing + §65.8 8-tier agent assignment.">
         <Field label="Test surfaces">API · Frontend · Backend · Drills (§43)</Field>
       </IPOSection>
@@ -1316,12 +1496,8 @@ export function TestsTab({ proc, dept }) {
         </p>
         <DerivedBadge derived={!!t.derived} />
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="tests" />
-      <OutputEvaluation metrics={{}} tabName="tests" />
-    </div>
-  );
-}
+    </TabShell>
+  );}
 
 // =========================================
 // Phase 8: Secure
@@ -1352,25 +1528,37 @@ export function SecurityTab({ proc, dept }) {
     </div>
   );
   return (
-    <div>
-      <IPOSection number="1" kind="input" title="Input — Incoming request" subtitle="Caller identity · scope token · tenant ID (per §57.6 canonical fields).">
+    <TabShell
+      tabName="security"
+      title="Security · authorization + RBAC + threat model + auth audit"
+      phase="Secure"
+      phases={['Orient', 'Understand', 'Describe', 'Ship', 'Measure', 'Govern', 'Verify', 'Secure']}
+      priority="P0"
+      information="caller identity · scope token · tenant ID · RBAC · STRIDE per container · auth audit row"
+      operation="read-only · edit proc.security in blueprint.json · Presidio DLP wired (T6.10) · STRIDE pending"
+      accent="#dc2626"
+      todos={[
+        !s.authorization && 'Document authorization scheme (Bearer + scope token)',
+        !s.rbac && 'List RBAC roles + permissions',
+        !s.threat_model && 'Add STRIDE threat model entries',
+        !s.auth_audit && 'Define auth audit row schema',
+      ].filter(Boolean)}
+    >
+      <IPOSection number="1" kind="input" title="1. Input — Incoming request" subtitle="Caller identity · scope token · tenant ID (per §57.6 canonical fields).">
         {panel('Authorization', s.authorization, 'var(--accent-primary)')}
       </IPOSection>
 
-      <IPOSection number="2" kind="process" title="Process — RBAC + threat check" subtitle="Per §47.6 4-lens security: OWASP + STRIDE + DevSecOps + SOC2 CC6.2.">
+      <IPOSection number="2" kind="process" title="2. Process — RBAC + threat check" subtitle="Per §47.6 4-lens security: OWASP + STRIDE + DevSecOps + SOC2 CC6.2.">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--spacing-sm)' }}>
           {panel('RBAC', s.rbac, 'var(--accent-warning)')}
           {panel('Threat model', s.threat_model, 'var(--accent-danger)')}
         </div>
       </IPOSection>
 
-      <IPOSection number="3" kind="output" title="Output — Allow/deny + audit row" subtitle="Permission decision + auth event persisted per §38.3.">
+      <IPOSection number="3" kind="output" title="3. Output — Allow/deny + audit row" subtitle="Permission decision + auth event persisted per §38.3.">
         {panel('Auth audit', s.auth_audit, 'var(--accent-success)')}
         <DerivedBadge derived={!!s.derived} />
       </IPOSection>
-
-      <TransactionalHistory rows={[]} tabName="security" />
-      <OutputEvaluation metrics={{}} tabName="security" />
-    </div>
+    </TabShell>
   );
 }

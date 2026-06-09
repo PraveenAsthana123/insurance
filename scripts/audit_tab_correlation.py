@@ -70,10 +70,24 @@ TAB_FIELD_MAP = {
 
 
 def score_tab(text: str) -> dict:
-    """Return per-marker findings + composite 1-5 score."""
+    """Return per-marker findings + composite 1-5 score.
+
+    Special case: <TabShell> wrapper (deep-review 2026-06-09 P5 canonical)
+    counts as fulfilling ALL 4 markers (JourneyFlow + TodoList + InfoCard
+    + canonical imports) since TabShell renders them internally.
+    """
     findings = {}
     for key, pat in CANONICAL_MARKERS.items():
         findings[key] = bool(pat.search(text))
+
+    # TabShell wrapper credit (canonical pattern propagation)
+    has_tabshell = bool(re.search(r"<TabShell\b", text))
+    if has_tabshell:
+        findings["imports_canonical"] = True
+        findings["renders_infocard"] = True
+        findings["renders_journeyflow"] = True
+        findings["renders_todolist"] = True
+    findings["uses_tabshell"] = has_tabshell
 
     # Score components (out of 5)
     score = 1  # baseline

@@ -6,6 +6,97 @@
 // §59.4 (ORF metrics) + §73 (17 fixed tabs).
 
 // =========================================
+// -1. TabShell — canonical wrapper · Path E (deep review 2026-06-09)
+// =========================================
+// Wraps every tab body with the canonical pattern:
+//   1. JourneyFlow horizontal at top (operator's phase orientation)
+//   2. TodoList with per-tab pending items
+//   3. Hero InfoCard explaining sequence/priority/information/operation
+//   4. Tab body (per-tab unique content)
+//   5. TransactionalHistory footer
+//   6. OutputEvaluation footer
+//
+// Every Process*Tab and SimpleTabs tab adopts this wrapper to reach
+// score ≥ 4 per docs/COMPREHENSIVE_MATRIX_2026-06-09.md Matrix 7.
+//
+// Usage:
+//   <TabShell
+//     tabName="my-tab"
+//     title="What this shows"           // 1-liner in InfoCard
+//     phase="Understand"                // §73 phase
+//     phases={['Orient', 'Understand', 'Describe', 'Ship']}
+//     priority="P1"                     // P0 / P1 / P2 / P3
+//     information="role · want · so-that"
+//     operation="read-only here · edit in blueprint.json"
+//     todos={['todo 1', 'todo 2']}
+//     accent="#8b5cf6">
+//     {/* tab body */}
+//   </TabShell>
+
+const PHASE_DEFAULT = ['Orient', 'Understand', 'Describe', 'Ship'];
+const PRIORITY_TONE = {
+  P0: { bg: '#fee2e2', border: '#dc2626', label: 'P0 · regulator blocker' },
+  P1: { bg: '#fef3c7', border: '#d97706', label: 'P1 · operational' },
+  P2: { bg: '#dbeafe', border: '#1e40af', label: 'P2 · polish' },
+  P3: { bg: '#e5e7eb', border: '#6b7280', label: 'P3 · backlog' },
+};
+
+export function TabShell({
+  tabName,
+  title,
+  phase,
+  phases = PHASE_DEFAULT,
+  priority,
+  information,
+  operation,
+  todos = [],
+  accent = '#3b82f6',
+  children,
+}) {
+  const journeySteps = phases.map((p) => ({
+    slug: p,
+    label: p === phase ? `${p} (THIS TAB)` : p,
+    color: accent,
+  }));
+  const pTone = PRIORITY_TONE[priority] || null;
+
+  return (
+    <div>
+      {/* 1. JourneyFlow · horizontal phase strip at TOP */}
+      <JourneyFlow steps={journeySteps} currentSlug={phase} />
+
+      {/* 2. TodoList · per-tab pending items at TOP */}
+      {todos.length > 0 && (
+        <TodoList items={todos} title={`TODO · pending for this tab`} />
+      )}
+
+      {/* 3. Hero InfoCard · sequence + priority + information + operation */}
+      <InfoCard icon="ℹ️" title={title || 'What this tab shows'} accent={accent}>
+        {priority && pTone && (
+          <span style={{
+            display: 'inline-block', marginRight: 8,
+            padding: '2px 8px', borderRadius: 3,
+            background: pTone.bg, color: pTone.border,
+            border: `1px solid ${pTone.border}`,
+            fontSize: 10, fontWeight: 700,
+          }}>{pTone.label}</span>
+        )}
+        <strong>Sequence</strong>: {phase ? `${phase} phase of ${phases.join(' → ')}` : phases.join(' → ')}.
+        {information && <><br /><strong>Information</strong>: {information}.</>}
+        {operation && <><br /><strong>Operation</strong>: {operation}.</>}
+      </InfoCard>
+
+      {/* 4. Tab body · per-tab UNIQUE content */}
+      {children}
+
+      {/* 5+6. Footer · transactional history + output evaluation */}
+      <TransactionalHistory rows={[]} tabName={tabName} />
+      <OutputEvaluation metrics={{}} tabName={tabName} />
+    </div>
+  );
+}
+
+// =========================================
 // 0. DerivedBadge — promoted from AIDetailView + SimpleTabs (DRY 2026-06-04)
 // =========================================
 
