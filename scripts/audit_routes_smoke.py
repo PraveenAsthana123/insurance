@@ -34,6 +34,10 @@ CRITICAL_ROUTES = [
     "/api/v1/voice-ai/e2e/quality",
     "/api/v1/voice-ai/campaigns",
     "/api/v1/insur/audit/list",
+    # marketing campaigns (added 2026-06-08 · §64.13)
+    "/api/v1/marketing-campaigns/health",
+    "/api/v1/marketing-campaigns/channels",
+    "/api/v1/marketing-campaigns",
 ]
 
 

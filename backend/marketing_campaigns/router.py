@@ -153,6 +153,45 @@ def _find_pending_run(campaign_ref: str, customer_id: int):
         return cur.fetchone()
 
 
+@router.get("/public/{kind}/{campaign_ref}/{customer_id}/preview")
+def public_preview(kind: str, campaign_ref: str, customer_id: int):
+    """Public GET · returns campaign metadata + rendered_payload for the consumer page.
+
+    No auth · just lookup by (campaign_ref, customer_id, pending status).
+    """
+    if kind not in ("survey", "form"):
+        raise HTTPException(404, {"detail": "unknown kind", "error_code": "KIND_404"})
+    settings = get_settings()
+    with psycopg2.connect(settings.database_url) as c, \
+         c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute(
+            """
+            SELECT r.id AS run_id, r.rendered_payload, r.status,
+                   c.name AS campaign_name, c.channel,
+                   c.product_pitch, c.call_to_action
+            FROM marketing_campaign_runs r
+            JOIN marketing_campaigns c ON c.id = r.campaign_id
+            WHERE c.campaign_ref = %s AND r.customer_id = %s
+              AND c.channel = %s
+            ORDER BY r.id DESC LIMIT 1
+            """,
+            (campaign_ref, customer_id, kind),
+        )
+        row = cur.fetchone()
+    if not row:
+        raise HTTPException(404, {"detail": "no run for this token",
+                                    "error_code": "RUN_404"})
+    return {
+        "kind": kind,
+        "campaign_ref": campaign_ref,
+        "campaign_name": row["campaign_name"],
+        "product_pitch": row["product_pitch"],
+        "call_to_action": row["call_to_action"],
+        "status": row["status"],
+        "payload": row["rendered_payload"],
+    }
+
+
 @router.post("/public/survey/{campaign_ref}/{customer_id}/respond")
 def public_survey_respond(campaign_ref: str, customer_id: int, body: PublicResponse):
     """Public survey response submission · DLP-gated."""

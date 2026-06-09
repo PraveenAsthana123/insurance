@@ -2,6 +2,7 @@ import VoiceAIDemoPage from './pages/VoiceAIDemoPage';
 import VoiceAICampaignPage from './pages/VoiceAICampaignPage';
 import VoiceAIE2EPage from './pages/VoiceAIE2EPage';
 import MarketingCampaignsPage from './pages/MarketingCampaignsPage';
+import PublicCampaignPage from './pages/PublicCampaignPage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
@@ -98,6 +99,8 @@ export default function App() {
           <Route path="/voice-ai-campaigns" element={<VoiceAICampaignPage />} />
           <Route path="/voice-ai-e2e" element={<VoiceAIE2EPage />} />
           <Route path="/marketing-campaigns" element={<MarketingCampaignsPage />} />
+          <Route path="/public/survey/:campaignRef/:customerId" element={<PublicCampaignPage kind="survey" />} />
+          <Route path="/public/form/:campaignRef/:customerId" element={<PublicCampaignPage kind="form" />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/data-flow" element={<DataFlowPage />} />
