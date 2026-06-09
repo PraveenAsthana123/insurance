@@ -112,9 +112,16 @@ AUDITS = {
         "spec": "§76 + T3.2",
         "description": "§76 RAI fairness gate · 9 assertions (DI math sanity · cross-cohort halt · single-cohort baseline · rai_halt action present in decisions chain · cleanup)",
     },
+    "attribution-math": {
+        "script": "scripts/audit_attribution_math.py",
+        "report_dir": "jobs/reports/attribution-math-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§75 + T5.9",
+        "description": "Multi-touch attribution math · 15 assertions (5 model invariants · revenue conservation · compare returns 5 · cohort sum)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math"]
 
 
 @router.get("/list")

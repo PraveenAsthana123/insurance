@@ -328,6 +328,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_multi_cohort_fairness.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Attribution math audit (T5.9 · 5 models) ──"
+  [ -f scripts/audit_attribution_math.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_attribution_math.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

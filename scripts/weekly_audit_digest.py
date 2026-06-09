@@ -41,6 +41,7 @@ AUDITS = [
     ("SCHEDULE EXECUTOR", "scripts/audit_schedule_executor.py", "schedule-executor-audit", 12),
     ("POSTINGS EXECUTOR", "scripts/audit_postings_executor.py", "postings-executor-audit", 7),
     ("§76 MULTI-COHORT FAIRNESS", "scripts/audit_multi_cohort_fairness.py", "multi-cohort-fairness-audit", 9),
+    ("ATTRIBUTION MATH", "scripts/audit_attribution_math.py", "attribution-math-audit", 15),
 ]
 
 

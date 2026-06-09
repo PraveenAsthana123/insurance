@@ -112,3 +112,6 @@ jobs:
 
       - name: §76 MULTI-COHORT FAIRNESS audit · RAI gate triggers on DI < 0.8 (9 assertions)
         run: python3 scripts/audit_multi_cohort_fairness.py
+
+      - name: ATTRIBUTION MATH audit · 5 models conserve total revenue (15 assertions)
+        run: python3 scripts/audit_attribution_math.py

@@ -69,7 +69,7 @@ KPIS: list[dict[str, Any]] = [
      "unit": "USD", "source": "voice_ai_customers + transactions", "status": "scaffolded"},
     {"id": "exec.marketing_contribution", "category": "executive", "name": "Marketing Contribution",
      "formula": "Marketing Revenue / Total Revenue", "target_op": ">", "target": 0.35,
-     "unit": "ratio", "source": "attribution model", "status": "planned"},
+     "unit": "ratio", "source": "attribution model", "status": "live"},
     {"id": "exec.cost_per_lead", "category": "executive", "name": "Cost Per Lead",
      "formula": "Spend / Leads", "target_op": "<", "target": 50.0,
      "unit": "USD", "source": "spend / leads count", "status": "scaffolded"},
@@ -81,10 +81,10 @@ KPIS: list[dict[str, Any]] = [
      "unit": "ratio", "source": "ad spend ledger", "status": "planned"},
     {"id": "exec.pipeline_contribution", "category": "executive", "name": "Pipeline Contribution",
      "formula": "Marketing-Sourced Pipeline / Total Pipeline", "target_op": ">", "target": 0.40,
-     "unit": "ratio", "source": "pipeline ledger", "status": "planned"},
+     "unit": "ratio", "source": "pipeline ledger", "status": "live"},
     {"id": "exec.revenue_attribution", "category": "executive", "name": "Revenue Attribution",
      "formula": "SUM(attributed_revenue)", "target_op": "growth", "target": None,
-     "unit": "USD", "source": "multi-touch attribution", "status": "planned"},
+     "unit": "USD", "source": "multi-touch attribution", "status": "live"},
 
     # 2. Customer
     {"id": "cust.total", "category": "customer", "name": "Total Customers",

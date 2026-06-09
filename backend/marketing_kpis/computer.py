@@ -220,6 +220,45 @@ def compute_gov_explainability_score() -> Optional[float]:
     return _safe(_q, 0.0)
 
 
+def compute_exec_revenue_attribution() -> Optional[float]:
+    """T5.9 · total revenue attributed across all touchpoints (linear model)."""
+    def _q():
+        from attribution import services as attr_svc
+        d = attr_svc.compute_attribution(model="linear")
+        return float(d.get("total_attributed") or 0)
+    return _safe(_q)
+
+
+def compute_exec_marketing_contribution() -> Optional[float]:
+    """T5.9 · attributed-revenue / total marketing-touched value · linear model."""
+    def _q():
+        from attribution import services as attr_svc
+        d = attr_svc.compute_attribution(model="linear")
+        total = d.get("total_attributed") or 0
+        n_journeys = d.get("n_journeys") or 0
+        if n_journeys == 0:
+            return 0.0
+        # Marketing contribution proxy: avg-attributed-per-journey / max-possible
+        avg = total / n_journeys
+        return round(min(1.0, avg / 100.0), 3)  # 100 = default value_per_outcome
+    return _safe(_q, 0.0)
+
+
+def compute_exec_pipeline_contribution() -> Optional[float]:
+    """T5.9 · attributed pipeline / total pipeline (proxy: converted/total runs)."""
+    def _q():
+        with _conn() as c, c.cursor() as cur:
+            cur.execute(
+                "SELECT "
+                "  COUNT(*) FILTER (WHERE status = 'converted') AS converted, "
+                "  GREATEST(COUNT(*), 1) AS total "
+                "FROM marketing_campaign_runs WHERE tenant_id = 'default'",
+            )
+            r = cur.fetchone()
+            return round(r[0] / r[1], 3) if r[1] else 0.0
+    return _safe(_q, 0.0)
+
+
 # ─── Map KPI ID → compute function ─────────────────────────
 COMPUTERS = {
     "cust.total":               compute_cust_total,
@@ -237,6 +276,10 @@ COMPUTERS = {
     "gov.data_quality_score":   compute_gov_data_quality_score,
     "gov.ai_bias_score":        compute_gov_ai_bias_score,
     "gov.explainability_score": compute_gov_explainability_score,
+    # T5.9 · attribution-derived KPIs
+    "exec.revenue_attribution":    compute_exec_revenue_attribution,
+    "exec.marketing_contribution": compute_exec_marketing_contribution,
+    "exec.pipeline_contribution":  compute_exec_pipeline_contribution,
 }
 
 

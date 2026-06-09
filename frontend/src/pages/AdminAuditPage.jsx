@@ -67,6 +67,11 @@ const AUDIT_LABELS = {
     spec: '§76 + T3.2',
     description: 'Verifies RAI gate actually triggers · 9 assertions (DI math · cross-cohort halt · single-cohort baseline · rai_halt in decisions chain)',
   },
+  'attribution-math': {
+    name: 'Attribution math · 5 models (T5.9)',
+    spec: '§75 + T5.9',
+    description: 'Multi-touch attribution math invariants · 15 assertions (per-model splits + revenue conservation + compare endpoint + cohort sum)',
+  },
 };
 
 export default function AdminAuditPage() {

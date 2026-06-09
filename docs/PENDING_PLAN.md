@@ -86,7 +86,7 @@ Full reference: [docs/ENTERPRISE_AI_TOOL_LANDSCAPE.md](ENTERPRISE_AI_TOOL_LANDSC
 | T5.6 | Planned KPIs · 34 deferred | planned | mostly require attribution/external data |
 | T5.7 | Predictive models (churn · NBA · attribution) | medium | needs feature store + training |
 | ~~T5.8~~ | **(DONE 2026-06-08)** ~~Real-time KPI calculation cron~~ | done | T5.8 done · hourly snapshot to kpi_snapshots table |
-| T5.9 | Multi-touch attribution model | large | requires touchpoint tracking |
+| ~~T5.9~~ | **(DONE 2026-06-08)** ~~Multi-touch attribution~~ | done | T5.9 done · 5 models (last/first/linear/time_decay/position) · backend module + 4 endpoints + 3 KPIs wired |
 | ~~T5.10~~ | **(DONE 2026-06-08)** ~~Per-KPI alerting on target breach~~ | done | T5.10 done · /alerts endpoint · severity tiers · digest section · UI tab |
 
 Full reference: [docs/MARKETING_KPI_FRAMEWORK.md](MARKETING_KPI_FRAMEWORK.md)
