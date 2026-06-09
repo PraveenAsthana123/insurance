@@ -49,7 +49,7 @@ These are operator-aligned polish items · no external blockers.
 
 | # | Item | Effort | Value |
 |---|---|---|---|
-| T3.1 | Frontend `AutonomousAgentPage.jsx` (visualize decision loop) | medium | Operator-facing demo for §80 |
+| ~~T3.1~~ | **(DONE 2026-06-08)** ~~Frontend AutonomousAgentPage.jsx~~ | done | T3.1 done · `/autonomous-agent` route · live decision chain visualizer |
 | T3.2 | Multi-cohort fairness eval (real DI < 1.0 cross-cohort test) | medium | Real §76 RAI testing |
 | T3.3 | Operation_log rotation (>90d archive) | medium | §38.3 retention compliance |
 | T3.4 | Per-step latency histograms on E2E flow (trend per assertion) | medium | Operator hasn't asked · defer |
@@ -81,7 +81,7 @@ Full reference: [docs/ENTERPRISE_AI_TOOL_LANDSCAPE.md](ENTERPRISE_AI_TOOL_LANDSC
 | T5.1 | KPI registry · 85 KPIs · 15 categories | done | `backend/marketing_kpis/registry.py` |
 | T5.2 | KPI read-only API · 8 endpoints | done | `/api/v1/marketing-kpis/*` |
 | T5.3 | Marketing Command Center UI · 5 tabs | done | `/marketing-kpis` route |
-| T5.4 | Live wiring · 13 KPIs marked 'live' | live | reads from existing tables |
+| T5.4 | Live wiring · 22 KPIs now 'live' (was 13 · +9 via computer.py) | done | `backend/marketing_kpis/computer.py` |
 | T5.5 | Scaffolded wiring · 38 KPIs | scaffolded | formula present · needs data hook |
 | T5.6 | Planned KPIs · 34 deferred | planned | mostly require attribution/external data |
 | T5.7 | Predictive models (churn · NBA · attribution) | medium | needs feature store + training |

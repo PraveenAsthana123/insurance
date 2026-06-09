@@ -3,6 +3,8 @@
 Per docs/MARKETING_KPI_FRAMEWORK.md. All endpoints return scaffolded
 registry data · live data wiring happens incrementally per KPI's
 `status` field.
+
+T5.4 · 15 KPIs now wired to DB queries via computer.COMPUTERS.
 """
 from __future__ import annotations
 
@@ -10,7 +12,7 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
 
-from . import registry
+from . import computer, registry
 
 router = APIRouter(prefix="/api/v1/marketing-kpis", tags=["marketing-kpis"])
 
@@ -82,3 +84,30 @@ def scorecard():
 @router.get("/stats")
 def stats():
     return registry.stats()
+
+
+@router.get("/values")
+def values():
+    """T5.4 · compute all wired KPIs against live DB.
+
+    Returns dict of {kpi_id: value} for the 15 KPIs that have a computer.
+    """
+    return {"values": computer.compute_all(),
+            "computed_count": len(computer.COMPUTERS),
+            "registry_count": len(registry.KPIS)}
+
+
+@router.get("/values/{kpi_id}")
+def value(kpi_id: str):
+    """Compute a single KPI's live value."""
+    if kpi_id not in computer.COMPUTERS:
+        # Check if it's even a known KPI
+        kpi = next((k for k in registry.KPIS if k["id"] == kpi_id), None)
+        if not kpi:
+            raise HTTPException(404, {"detail": "KPI not in registry",
+                                        "error_code": "KPI_404"})
+        return {"kpi_id": kpi_id, "value": None,
+                "status": kpi["status"],
+                "note": f"No computer for this KPI · status='{kpi['status']}' · "
+                          "value computation not yet wired"}
+    return {"kpi_id": kpi_id, "value": computer.compute_value(kpi_id)}

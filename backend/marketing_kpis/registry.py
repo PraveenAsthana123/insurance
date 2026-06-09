@@ -152,7 +152,7 @@ KPIS: list[dict[str, Any]] = [
     # 5. Email
     {"id": "email.delivery_rate", "category": "email", "name": "Email Delivery Rate",
      "formula": "Delivered / Sent", "target_op": ">", "target": 0.97,
-     "unit": "ratio", "source": "marketing_campaign_runs (email channel)", "status": "scaffolded"},
+     "unit": "ratio", "source": "marketing_campaign_runs (email channel)", "status": "live"},
     {"id": "email.open_rate", "category": "email", "name": "Email Open Rate",
      "formula": "Opened / Delivered", "target_op": ">", "target": 0.25,
      "unit": "ratio", "source": "status='opened'", "status": "scaffolded"},
@@ -245,7 +245,7 @@ KPIS: list[dict[str, Any]] = [
      "unit": "ratio", "source": "master_contacts.segment", "status": "live"},
     {"id": "loyalty.retention", "category": "loyalty", "name": "Loyalty Retention",
      "formula": "Active Members / Total Members", "target_op": ">", "target": 0.85,
-     "unit": "ratio", "source": "derived", "status": "scaffolded"},
+     "unit": "ratio", "source": "derived", "status": "live"},
 
     # 13. Financial
     {"id": "fin.marketing_spend", "category": "financial", "name": "Marketing Spend",
@@ -308,7 +308,7 @@ KPIS: list[dict[str, Any]] = [
     {"id": "gov.policy_violation_rate", "category": "governance", "name": "Policy Violation Rate",
      "formula": "Violations / Total decisions",
      "target_op": "<", "target": 0.01,
-     "unit": "ratio", "source": "autonomous_agent_runs halts", "status": "scaffolded"},
+     "unit": "ratio", "source": "autonomous_agent_runs halts", "status": "live"},
     {"id": "gov.data_quality_score", "category": "governance", "name": "Data Quality Score",
      "formula": "AVG(master_contacts.quality_score)",
      "target_op": ">", "target": 0.70,
