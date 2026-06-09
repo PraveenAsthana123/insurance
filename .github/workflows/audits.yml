@@ -46,3 +46,5 @@ jobs:
           export BEV_POSTGRES_PASSWORD=postgres
           export BEV_POSTGRES_DB=test
           python3 scripts/audit_routes_smoke.py || true  # warn-only · DB may not be available in CI
+      - name: §64.13 MARKETING CAMPAIGNS audit (16 checks · 4 channels)
+        run: python3 scripts/audit_marketing_campaigns_artifacts.py

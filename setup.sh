@@ -286,6 +286,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_section_92_compliance.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── §64.13 marketing campaigns audit (4 channels) ──"
+  [ -f scripts/audit_marketing_campaigns_artifacts.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_marketing_campaigns_artifacts.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

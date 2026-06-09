@@ -63,9 +63,16 @@ AUDITS = {
         "spec": "§92",
         "description": "ai-agents/ mandatory · 19 paths checked (tree + scripts + CI + API surface)",
     },
+    "marketing-campaigns-artifacts": {
+        "script": "scripts/audit_marketing_campaigns_artifacts.py",
+        "report_dir": "jobs/reports/marketing-campaigns-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§64.13 + §90 L13/L14",
+        "description": "4 channels (email/banner/survey/form) · 16 checks (modules + migration + frontend + seeds + public endpoints)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts"]
 
 
 @router.get("/list")

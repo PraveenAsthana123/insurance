@@ -103,3 +103,98 @@ def patch_run(run_id: int, body: CampaignRunUpdate, request: Request):
 @router.get("/{campaign_id}/metrics", response_model=CampaignMetrics)
 def metrics(campaign_id: int, request: Request):
     return services.campaign_metrics(campaign_id, _tenant(request))
+
+
+# ─── Public submission endpoints · survey + form ─────────────────
+# These are reachable by the END CUSTOMER from the survey_url / form_url
+# in the rendered_payload. NO authentication required (public links) but:
+#   - DLP-gated (responses with SSN/CC patterns rejected)
+#   - Token-based lookup by campaign_ref + customer_id
+#   - Marks the matching campaign_run as 'responded' with the response_data
+#
+# Per §82.21 (Secure AI DLP) + §47.6 (CORS · public surface)
+
+from pydantic import BaseModel
+import re
+import psycopg2
+import psycopg2.extras
+import json
+from core.config import get_settings
+
+
+class PublicResponse(BaseModel):
+    responses: dict  # {field_id: value} or {question_id: value}
+
+
+def _public_dlp_ok(data: dict) -> bool:
+    """Same DLP shape as services._dlp_scan but for arbitrary dict."""
+    s = json.dumps(data) if not isinstance(data, str) else data
+    if re.search(r"\b\d{3}-\d{2}-\d{4}\b", s):
+        return False
+    if re.search(r"\b\d{13,19}\b", s):
+        return False
+    return True
+
+
+def _find_pending_run(campaign_ref: str, customer_id: int):
+    settings = get_settings()
+    with psycopg2.connect(settings.database_url) as c, \
+         c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute(
+            """
+            SELECT r.* FROM marketing_campaign_runs r
+            JOIN marketing_campaigns c ON c.id = r.campaign_id
+            WHERE c.campaign_ref = %s AND r.customer_id = %s
+              AND r.status = 'pending'
+            ORDER BY r.id DESC LIMIT 1
+            """,
+            (campaign_ref, customer_id),
+        )
+        return cur.fetchone()
+
+
+@router.post("/public/survey/{campaign_ref}/{customer_id}/respond")
+def public_survey_respond(campaign_ref: str, customer_id: int, body: PublicResponse):
+    """Public survey response submission · DLP-gated."""
+    if not _public_dlp_ok(body.responses):
+        raise HTTPException(400, {"detail": "Response contains restricted patterns",
+                                    "error_code": "DLP_REJECTED"})
+    run = _find_pending_run(campaign_ref, customer_id)
+    if not run:
+        raise HTTPException(404, {"detail": "no pending survey run for that token",
+                                    "error_code": "RUN_404"})
+
+    settings = get_settings()
+    with psycopg2.connect(settings.database_url) as c, c.cursor() as cur:
+        cur.execute(
+            "UPDATE marketing_campaign_runs SET status = 'responded', "
+            "response_data = %s::jsonb, outcome_score = 0.85, "
+            "completed_at = NOW() WHERE id = %s",
+            (json.dumps(body.responses), run["id"]),
+        )
+        c.commit()
+    return {"status": "ok", "run_id": run["id"], "outcome_score": 0.85}
+
+
+@router.post("/public/form/{campaign_ref}/{customer_id}/submit")
+def public_form_submit(campaign_ref: str, customer_id: int, body: PublicResponse):
+    """Public form submission · DLP-gated · creates lead handoff."""
+    if not _public_dlp_ok(body.responses):
+        raise HTTPException(400, {"detail": "Submission contains restricted patterns",
+                                    "error_code": "DLP_REJECTED"})
+    run = _find_pending_run(campaign_ref, customer_id)
+    if not run:
+        raise HTTPException(404, {"detail": "no pending form run for that token",
+                                    "error_code": "RUN_404"})
+
+    settings = get_settings()
+    with psycopg2.connect(settings.database_url) as c, c.cursor() as cur:
+        cur.execute(
+            "UPDATE marketing_campaign_runs SET status = 'converted', "
+            "response_data = %s::jsonb, outcome_score = 1.0, "
+            "completed_at = NOW() WHERE id = %s",
+            (json.dumps(body.responses), run["id"]),
+        )
+        c.commit()
+    return {"status": "ok", "run_id": run["id"], "outcome_score": 1.0,
+            "next_step": "agent_callback"}

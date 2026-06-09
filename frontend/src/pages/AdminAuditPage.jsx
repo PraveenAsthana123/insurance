@@ -32,6 +32,11 @@ const AUDIT_LABELS = {
     spec: '§92',
     description: '19 mandatory paths: tree · scripts · CI · API surface',
   },
+  'marketing-campaigns-artifacts': {
+    name: 'Marketing campaigns module (4 channels)',
+    spec: '§64.13 + §90 L13/L14',
+    description: 'Email · Banner · Survey · Form · modules + seeds + public endpoints (16 cells)',
+  },
 };
 
 export default function AdminAuditPage() {
