@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import UseCasePanel from '../UseCasePanel';
 
 /* =========================================================
    PROBLEM & USE CASE TAB — Data keyed by process ID
@@ -839,6 +840,7 @@ export default function ProcessProblemTab({ process }) {
       accent="#ef4444"
       todos={[]}
     >
+      <UseCasePanel accent="#3b82f6" processId="fraud-ring-detection" />
     <div>
       {/* A. Problem Statement */}
       <div className="content-section">

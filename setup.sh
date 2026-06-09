@@ -376,6 +376,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_pipeline_modes.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Use Case 17-section audit (§94) ──"
+  [ -f scripts/audit_use_cases.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_use_cases.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

@@ -107,6 +107,11 @@ const AUDIT_LABELS = {
     spec: '§93 process-component-ipo-pattern',
     description: 'Process modes · 11 assertions (4 components × 4 sub-sections (IPO+V) · manual session state · automatic 10-phase pipeline · overall quality = mean)',
   },
+  'use-cases': {
+    name: 'Process Use Case 17-section (§94)',
+    spec: '§94 process-use-case-mandatory-structure',
+    description: 'Use Case · 11 assertions (5 parts · 4 impact axes · scored AI options · SWOT · first principles · 4P · Six Sigma + BPM · stakeholders RACI · KPI/ROI/value realization · completeness 0-17)',
+  },
 };
 
 export default function AdminAuditPage() {

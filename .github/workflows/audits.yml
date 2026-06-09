@@ -136,3 +136,6 @@ jobs:
 
       - name: PIPELINE MODES · §93 manual + automatic (11 assertions)
         run: python3 scripts/audit_pipeline_modes.py
+
+      - name: USE CASES · §94 17-section structure (11 assertions)
+        run: python3 scripts/audit_use_cases.py

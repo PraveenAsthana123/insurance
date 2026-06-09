@@ -49,6 +49,7 @@ AUDITS = [
     ("DEPT DEEP-LINKS", "scripts/audit_dept_submenu_deeplinks.py", "dept-submenu-deeplinks-audit", 11),
     ("DECISION FEEDBACK", "scripts/audit_feedback.py", "decision-feedback-audit", 11),
     ("PIPELINE MODES", "scripts/audit_pipeline_modes.py", "pipeline-modes-audit", 11),
+    ("USE CASES (§94)", "scripts/audit_use_cases.py", "use-cases-audit", 11),
 ]
 
 

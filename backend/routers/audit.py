@@ -168,9 +168,16 @@ AUDITS = {
         "spec": "§93 (process-component-ipo-pattern)",
         "description": "Pipeline manual + automatic modes · 11 assertions (4 components · 4 IPO+V sub-sections · load/split/select/train state · 10 automatic phases · overall_quality_score = mean)",
     },
+    "use-cases": {
+        "script": "scripts/audit_use_cases.py",
+        "report_dir": "jobs/reports/use-cases-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§94 (process-use-case-mandatory-structure)",
+        "description": "Use Case 17-section structure · 11 assertions (5 parts · 4 impact axes · scored AI options · SWOT · first principles · 4P · Six Sigma · KPI/ROI/value realization · completeness score 0-17)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing", "dept-submenu-deeplinks", "decision-feedback", "pipeline-modes"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing", "dept-submenu-deeplinks", "decision-feedback", "pipeline-modes", "use-cases"]
 
 
 @router.get("/list")
