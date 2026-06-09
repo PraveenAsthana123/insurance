@@ -7,6 +7,7 @@ import {
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 import CorrectionsPanel from '../CorrectionsPanel';
 import AuditPanel from '../AuditPanel';
+import HITLPanel from '../HITLPanel';
 
 /* ============================================================
    AI GOVERNANCE TAB — Deep detail for each governance area
@@ -89,6 +90,7 @@ export default function ProcessGovernanceTab({ process, dept }) {
     >
       <CorrectionsPanel accent="#dc2626" />
       <AuditPanel accent="#dc2626" />
+      <HITLPanel accent="#d97706" />
 
       <div>
       {/* Governance Maturity Summary */}

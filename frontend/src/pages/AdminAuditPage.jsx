@@ -92,6 +92,11 @@ const AUDIT_LABELS = {
     spec: '§57.7 + §40 + T7.13',
     description: 'LLM fallback chain · 10 assertions (empty rejected · single/multi-provider · all-fail honest · latency · default chain)',
   },
+  'dept-submenu-deeplinks': {
+    name: 'Dept sub-menu deep-link integrity (PATH_E P1)',
+    spec: '§73 + PATH_E P1',
+    description: '22 dept × 67 process × 30 sub-process deep-link integrity · 11 assertions (catalog parse · URL-safe IDs · unique IDs · all traversable)',
+  },
 };
 
 export default function AdminAuditPage() {

@@ -5,6 +5,7 @@ import {
 } from './IPOLayout';
 import CorrectionsPanel from '../../../components/CorrectionsPanel';
 import AuditPanel from '../../../components/AuditPanel';
+import HITLPanel from '../../../components/HITLPanel';
 import ModelRegistryPanel from '../../../components/ModelRegistryPanel';
 import ShapPanel from '../../../components/ShapPanel';
 import { useInputEvent } from '../../../hooks/useInputEvent';
@@ -1413,7 +1414,8 @@ export function GovernanceAITab({ proc, dept }) {
     >
             <CorrectionsPanel accent="#dc2626" />
       
-      <AuditPanel accent="#dc2626" />{!g ? (
+      <AuditPanel accent="#dc2626" />
+      <HITLPanel accent="#d97706" />{!g ? (
         <InfoCard icon="🏛️" title="What this tab will contain (when populated)" accent="#dc2626">
           <ul style={{ margin: 0, paddingLeft: 16 }}>
             <li><strong>Decision layer</strong>: per §40 (rule + confidence + HITL)</li>

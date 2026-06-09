@@ -127,3 +127,6 @@ jobs:
 
       - name: SELF-HEALING AI fallback chain · gate #13 (10 assertions)
         run: python3 scripts/audit_self_healing.py
+
+      - name: DEPT SUB-MENU deep-link integrity · 22 depts (11 assertions)
+        run: python3 scripts/audit_dept_submenu_deeplinks.py

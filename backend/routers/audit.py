@@ -147,9 +147,16 @@ AUDITS = {
         "spec": "§57.7 + §40 + T7.13",
         "description": "Self-Healing AI fallback chain · 10 assertions (chain construction · single + multi-provider · all-fail honest · latency tracking · default 3-provider chain)",
     },
+    "dept-submenu-deeplinks": {
+        "script": "scripts/audit_dept_submenu_deeplinks.py",
+        "report_dir": "jobs/reports/dept-submenu-deeplinks-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§73 + PATH_E P1",
+        "description": "Dept sub-menu deep-link integrity · 11 assertions (catalog parse · 22 depts traversable · URL-safe IDs · unique IDs · all processes resolvable)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing", "dept-submenu-deeplinks"]
 
 
 @router.get("/list")

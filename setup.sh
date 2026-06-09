@@ -358,6 +358,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_self_healing.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Dept sub-menu deep-link integrity audit ──"
+  [ -f scripts/audit_dept_submenu_deeplinks.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_dept_submenu_deeplinks.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {
