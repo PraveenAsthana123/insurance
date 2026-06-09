@@ -34,3 +34,5 @@ jobs:
 
       - name: §58 + §63 FOLDER-README audit (50 tools × 4 invariants)
         run: python3 scripts/audit_folder_readmes.py
+      - name: §90 L15 VOICE AI E2E audit (7 checks)
+        run: python3 scripts/audit_voice_ai_artifacts.py

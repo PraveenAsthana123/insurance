@@ -42,6 +42,8 @@ export default function VoiceAIDemoPage() {
   const [recommended, setRecommended] = useState(null);
   const [lastOrder, setLastOrder] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [listening, setListening] = useState(false);
+  const recRef = { current: null };  // box held by closure
 
   // New-product form
   const [newProduct, setNewProduct] = useState({
@@ -165,6 +167,35 @@ export default function VoiceAIDemoPage() {
     } catch (e) {
       alert(`Update failed: ${e.message}`);
     }
+  };
+
+
+  const toggleMic = () => {
+    // Browser SpeechRecognition · per §57.7 honest fallback when no Deepgram key.
+    // Supported in Chrome/Edge/Safari · Firefox needs about:config flag.
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) {
+      alert('SpeechRecognition not supported. Use Chrome/Edge/Safari or wire Deepgram.');
+      return;
+    }
+    if (listening) {
+      recRef.current?.stop();
+      setListening(false);
+      return;
+    }
+    const rec = new SR();
+    rec.lang = 'en-US';
+    rec.interimResults = false;
+    rec.continuous = false;
+    rec.onresult = (e) => {
+      const text = Array.from(e.results).map((r) => r[0].transcript).join(' ').trim();
+      if (text) setUserText(text);
+    };
+    rec.onerror = () => setListening(false);
+    rec.onend = () => setListening(false);
+    rec.start();
+    recRef.current = rec;
+    setListening(true);
   };
 
   // ── Styles ──
@@ -312,9 +343,18 @@ export default function VoiceAIDemoPage() {
                   value={userText}
                   onChange={(e) => setUserText(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && sendTurn()}
-                  placeholder='Type a turn · e.g. "I need auto coverage"'
+                  placeholder='Type or press Mic · e.g. "I need auto coverage"'
                   style={{ flex: 1, padding: 6, fontSize: 12 }}
                 />
+                <button onClick={toggleMic}
+                        disabled={busy}
+                        title={listening ? 'Stop listening' : 'Speak (browser SpeechRecognition · per §57.7 honest fallback when no Deepgram key)'}
+                        style={{ padding: '6px 10px',
+                                background: listening ? '#dc2626' : '#0ea5e9',
+                                color: '#fff', border: 'none', borderRadius: 4,
+                                cursor: busy ? 'not-allowed' : 'pointer', fontSize: 12 }}>
+                  {listening ? '⏹' : '🎤'}
+                </button>
                 <button onClick={sendTurn} disabled={busy || !userText.trim()}
                         style={{ padding: '6px 12px', background: '#1e40af',
                                 color: '#fff', border: 'none', borderRadius: 4,

@@ -49,9 +49,16 @@ AUDITS = {
         "spec": "§58 + §63",
         "description": "50 ai-agents/ tools × 4 invariants (README · DEEP_DIVE · install.sh · §-refs)",
     },
+    "voice-ai-artifacts": {
+        "script": "scripts/audit_voice_ai_artifacts.py",
+        "report_dir": "jobs/reports/voice-ai-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§90 L15 + §92",
+        "description": "Voice AI E2E demo: 4 backend modules + migration + frontend + DEMO_STORY w/ 14 sections",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts"]
 
 
 @router.get("/list")

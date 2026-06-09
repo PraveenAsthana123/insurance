@@ -22,6 +22,11 @@ const AUDIT_LABELS = {
     spec: '§58 + §63',
     description: '50 tools × 4 invariants (README · DEEP_DIVE · install.sh · §-refs)',
   },
+  'voice-ai-artifacts': {
+    name: 'Voice AI E2E demo completeness',
+    spec: '§90 L15 + §92',
+    description: 'Backend modules + migration + frontend + DEMO_STORY w/ 14 sections',
+  },
 };
 
 export default function AdminAuditPage() {

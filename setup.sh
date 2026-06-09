@@ -254,6 +254,32 @@ do_audit() {
   else
     log "  scripts/audit_use_case_stubs.py missing"
   fi
+
+  # ─── audit triad: §64.22 · §64.29 · §58/§63 · §90 L15 (4 total) ─
+  log ""
+  log "── §64.22 recommendation audit ──"
+  [ -f scripts/audit_recommender_flavors.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_recommender_flavors.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
+  log ""
+  log "── §64.29 dept artifacts audit ──"
+  [ -f scripts/audit_dept_artifacts.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_dept_artifacts.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
+  log ""
+  log "── §58/§63 folder README audit ──"
+  [ -f scripts/audit_folder_readmes.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_folder_readmes.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
+  log ""
+  log "── §90 L15 voice AI E2E audit ──"
+  [ -f scripts/audit_voice_ai_artifacts.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_voice_ai_artifacts.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {
