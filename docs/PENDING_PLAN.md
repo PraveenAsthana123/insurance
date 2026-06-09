@@ -55,6 +55,26 @@ These are operator-aligned polish items · no external blockers.
 | ~~T3.4~~ | **(DONE 2026-06-08)** ~~Per-step latency histograms on E2E flow~~ | done | T3.4 done · `e2e_step_latencies` table + p50/p95/p99 endpoint + auto-capture |
 | ~~T3.5~~ | **(DONE 2026-06-08)** ~~§82.21 DLP multilingual~~ | done | T3.5 done · 7 jurisdictions (US · UK · EU · CA · IN · BR · DE) · 9/9 verified |
 
+### Tier 7 · AUTONOMOUS ENTERPRISE AI DEPARTMENT (NEW · operator brief 2026-06-08)
+
+| # | Item | Effort | Status |
+|---|---|---|---|
+| T7.1 | 10-level maturity model registry | done | `backend/autonomous_dept_registry/registry.py` |
+| T7.2 | 14 continuous-learning governance gates registry | done | same · enables future scoring |
+| T7.3 | 13 MCP marketing categories catalog | done | priority-ordered |
+| T7.4 | 10 multi-AI hybrid use cases (Fraud · Claims · etc.) | done | value tier + maturity-level mapping |
+| T7.5 | OSS Marketing/Contact-Center/Browser stacks (66 tools) | done | scored where applicable |
+| T7.6 | HITL 3-tier risk matrix | done | low/medium/high · action per tier |
+| T7.7 | 10 read-only API endpoints | done | /api/v1/autonomous-dept/* |
+| T7.8 | 5-tab Framework Explorer UI | done | /autonomous-dept-framework |
+| T7.9 | Confidence-score router (T7.governance.1) | medium | wire to autonomous_agent |
+| T7.10 | RLHF correction DB · learning capture | large | extends weekly_audit_digest |
+| T7.11 | Adopt RAGAS for Evaluation Layer (T7.governance.7) | medium | T6.8 overlap |
+| T7.12 | Adopt Langfuse for tracing (T7.governance.10) | medium | T6.9 overlap |
+| T7.13 | Self-Healing AI fallback chain (T7.governance.13) | medium | model registry needed |
+
+Full reference: [docs/AUTONOMOUS_DEPARTMENT_FRAMEWORK.md](AUTONOMOUS_DEPARTMENT_FRAMEWORK.md)
+
 ### Tier 6 · ENTERPRISE AI TOOL LANDSCAPE (NEW · operator brief 2026-06-08)
 
 | # | Item | Effort | Status |

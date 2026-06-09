@@ -7,6 +7,7 @@ import ContentOpsPage from './pages/ContentOpsPage';
 import MarketingKPIsPage from './pages/MarketingKPIsPage';
 import AIToolLandscapePage from './pages/AIToolLandscapePage';
 import AutonomousAgentPage from './pages/AutonomousAgentPage';
+import AutonomousDeptFrameworkPage from './pages/AutonomousDeptFrameworkPage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
@@ -109,6 +110,7 @@ export default function App() {
           <Route path="/marketing-kpis" element={<MarketingKPIsPage />} />
           <Route path="/ai-tools" element={<AIToolLandscapePage />} />
           <Route path="/autonomous-agent" element={<AutonomousAgentPage />} />
+          <Route path="/autonomous-dept-framework" element={<AutonomousDeptFrameworkPage />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/data-flow" element={<DataFlowPage />} />
