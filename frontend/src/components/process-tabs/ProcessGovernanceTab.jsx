@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 import CorrectionsPanel from '../CorrectionsPanel';
+import AuditPanel from '../AuditPanel';
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   PieChart, Pie, Cell,
@@ -86,6 +87,7 @@ export default function ProcessGovernanceTab({ process, dept }) {
       todos={[]}
     >
       <CorrectionsPanel accent="#dc2626" />
+      <AuditPanel accent="#dc2626" />
       return (
     <div>
       {/* Governance Maturity Summary */}
