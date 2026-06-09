@@ -118,3 +118,6 @@ jobs:
 
       - name: PRESIDIO Stage-1 adapter audit · 12-entity DLP coverage (8 assertions)
         run: python3 scripts/audit_presidio_adoption.py
+
+      - name: CONFIDENCE-ROUTING audit · 4-tier governance gate #1 (10 assertions)
+        run: python3 scripts/audit_confidence_routing.py

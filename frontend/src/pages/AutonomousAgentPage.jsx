@@ -26,6 +26,14 @@ const ACTION_COLOR = {
   switch_channel: '#f59e0b',
 };
 
+// T7.9 · routing tier colors per Tier 7 governance gate #1
+const ROUTING_COLOR = {
+  auto_execute:        '#16a34a',  // green · 95%+
+  agent_review:        '#0ea5e9',  // blue · 85-95%
+  human_approval:      '#d97706',  // amber · 70-85%
+  manual_processing:   '#dc2626',  // red · < 70%
+};
+
 export default function AutonomousAgentPage() {
   const [objective, setObjective] = useState({
     description: 'Improve gold-tier engagement uplift',
@@ -253,11 +261,22 @@ export default function AutonomousAgentPage() {
                             color: '#fff', padding: '2px 6px', borderRadius: 4,
                             fontSize: 10, fontWeight: 600,
                           }}>{d.action}</span>
-                          {d.metric_observed !== null && d.metric_observed !== undefined && (
-                            <span style={{ fontSize: 11, color: '#475569' }}>
-                              metric={d.metric_observed.toFixed(2)}
-                            </span>
-                          )}
+                          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                            {d.metric_observed !== null && d.metric_observed !== undefined && (
+                              <span style={{ fontSize: 11, color: '#475569' }}>
+                                metric={d.metric_observed.toFixed(2)}
+                              </span>
+                            )}
+                            {d.confidence !== null && d.confidence !== undefined && (
+                              <span style={{
+                                fontSize: 10, fontWeight: 700, padding: '2px 6px',
+                                borderRadius: 3, color: '#fff',
+                                background: ROUTING_COLOR[d.routing] || '#94a3b8',
+                              }} title={`Routing tier per T7.9 governance gate #1`}>
+                                {(d.confidence * 100).toFixed(0)}% · {d.routing}
+                              </span>
+                            )}
+                          </div>
                         </div>
                         <div style={{ fontSize: 11, color: '#475569', marginTop: 4 }}>
                           {d.reasoning}

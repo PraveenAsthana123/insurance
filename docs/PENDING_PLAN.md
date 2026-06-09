@@ -67,7 +67,7 @@ These are operator-aligned polish items · no external blockers.
 | T7.6 | HITL 3-tier risk matrix | done | low/medium/high · action per tier |
 | T7.7 | 10 read-only API endpoints | done | /api/v1/autonomous-dept/* |
 | T7.8 | 5-tab Framework Explorer UI | done | /autonomous-dept-framework |
-| T7.9 | Confidence-score router (T7.governance.1) | medium | wire to autonomous_agent |
+| ~~T7.9~~ | **(DONE 2026-06-09)** ~~Confidence-score router~~ | done | T7.9 done · 4-tier routing · color-coded in UI · 15th audit · 10/10 PASS |
 | T7.10 | RLHF correction DB · learning capture | large | extends weekly_audit_digest |
 | T7.11 | Adopt RAGAS for Evaluation Layer (T7.governance.7) | medium | T6.8 overlap |
 | T7.12 | Adopt Langfuse for tracing (T7.governance.10) | medium | T6.9 overlap |

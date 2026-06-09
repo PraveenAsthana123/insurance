@@ -77,6 +77,11 @@ const AUDIT_LABELS = {
     spec: '§56 + §82.21 + T6.10',
     description: '12-entity PII coverage · 8 assertions (status · entity detection · multi-entity · clean negative)',
   },
+  'confidence-routing': {
+    name: 'Confidence-score routing (T7.9 · governance gate #1)',
+    spec: '§57.7 + §80 + T7.9',
+    description: '4-tier autonomous-agent routing · 10 assertions (threshold tiers · sparse vs single-cohort · live agent run produces confidence+routing)',
+  },
 };
 
 export default function AdminAuditPage() {

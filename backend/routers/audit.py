@@ -126,9 +126,16 @@ AUDITS = {
         "spec": "§56 + §82.21 + T6.10",
         "description": "Presidio Stage-1 adapter · 8 assertions (status ready · 12-entity coverage · SSN/CC/email detection · multi-entity · clean text negative)",
     },
+    "confidence-routing": {
+        "script": "scripts/audit_confidence_routing.py",
+        "report_dir": "jobs/reports/confidence-routing-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§57.7 + §80 + T7.9",
+        "description": "Confidence-score routing · 10 assertions (4 threshold tiers · sparse=low · single-cohort=high · live agent run produces confidence+routing fields)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing"]
 
 
 @router.get("/list")

@@ -65,6 +65,65 @@ class AgentDecision(BaseModel):
     metric_observed: Optional[float] = None
     reasoning: str
     timestamp: str
+    # T7.9 · Confidence-score routing per Tier 7 governance gate #1
+    confidence: Optional[float] = None  # 0..1 · None when not applicable
+    routing: Optional[str] = None       # auto_execute · agent_review · human_approval · manual_processing
+
+
+# ─── T7.9 · Confidence-score routing thresholds (per governance gate #1) ─
+ROUTING_THRESHOLDS = [
+    (0.95, "auto_execute"),         # 95-100% · auto
+    (0.85, "agent_review"),         # 85-95%  · agent review
+    (0.70, "human_approval"),       # 70-85%  · human approval
+    (0.00, "manual_processing"),    # < 70%   · manual
+]
+
+
+def _route_by_confidence(confidence: Optional[float]) -> Optional[str]:
+    """T7.9 · maps confidence (0..1) → routing tier per Tier 7 gate #1."""
+    if confidence is None:
+        return None
+    for threshold, label in ROUTING_THRESHOLDS:
+        if confidence >= threshold:
+            return label
+    return "manual_processing"
+
+
+def _compute_confidence(metrics: Any, last_metrics: dict) -> float:
+    """T7.9 · synthesizes a confidence score (0..1) for an agent decision.
+
+    Combines:
+      - n_journeys signal (more samples = higher confidence · capped at 50)
+      - cohort balance (single cohort = high · imbalanced = lower)
+      - outcome consistency (high avg_outcome with low variance = higher)
+
+    Per §57.7 honest: when data is sparse, confidence is LOW (correct
+    pessimism · not fake high score).
+    """
+    n_runs = metrics.total_runs or 0
+    cohort = metrics.cohort_distribution or {}
+
+    # Sample-size component (caps at 50 runs for max signal)
+    sample_score = min(1.0, n_runs / 50.0)
+
+    # Cohort balance component (single cohort = full · imbalanced = ratio)
+    if not cohort or max(cohort.values()) == 0:
+        balance_score = 0.0
+    elif len(cohort) == 1:
+        balance_score = 1.0  # single segment · clean signal
+    else:
+        balance_score = min(cohort.values()) / max(cohort.values())
+
+    # Outcome component (avg_outcome reflects engagement strength)
+    outcome_score = min(1.0, max(0.0, metrics.avg_outcome_score or 0))
+
+    # Weighted blend (sample 40% · balance 30% · outcome 30%)
+    confidence = (
+        sample_score * 0.40
+        + balance_score * 0.30
+        + outcome_score * 0.30
+    )
+    return round(min(1.0, max(0.0, confidence)), 3)
 
 
 class AgentRunResult(BaseModel):
@@ -245,14 +304,20 @@ def run_agent(obj: AgentObjective, tenant_id: str = "default",
             "cohort_dist": metrics.cohort_distribution,
         }
         last_metric = metrics.avg_outcome_score
+        # T7.9 · per Tier 7 governance gate #1
+        confidence = _compute_confidence(metrics, last_metrics)
+        routing = _route_by_confidence(confidence)
         decisions.append(AgentDecision(
             iteration=iteration,
             action="measure",
             campaign_id=camp.id,
             metric_observed=last_metric,
+            confidence=confidence,
+            routing=routing,
             reasoning=f"avg_outcome={last_metric:.2f} · "
                        f"consent_rate={metrics.consent_gate_rate:.2f} · "
-                       f"cohorts={dict(metrics.cohort_distribution)}",
+                       f"cohorts={dict(metrics.cohort_distribution)} · "
+                       f"confidence={confidence:.2f} · routing={routing}",
             timestamp=datetime.now(timezone.utc).isoformat(),
         ))
 

@@ -340,6 +340,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_presidio_adoption.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Confidence-score routing audit (T7.9) ──"
+  [ -f scripts/audit_confidence_routing.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_confidence_routing.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

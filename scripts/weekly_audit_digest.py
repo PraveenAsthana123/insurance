@@ -43,6 +43,7 @@ AUDITS = [
     ("§76 MULTI-COHORT FAIRNESS", "scripts/audit_multi_cohort_fairness.py", "multi-cohort-fairness-audit", 9),
     ("ATTRIBUTION MATH", "scripts/audit_attribution_math.py", "attribution-math-audit", 15),
     ("PRESIDIO ADOPTION", "scripts/audit_presidio_adoption.py", "presidio-adoption-audit", 8),
+    ("CONFIDENCE ROUTING", "scripts/audit_confidence_routing.py", "confidence-routing-audit", 10),
 ]
 
 
