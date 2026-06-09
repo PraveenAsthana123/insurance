@@ -334,6 +334,12 @@ do_audit() {
     if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_attribution_math.py 2>&1 | tail -3
     else log "  (DRY-RUN)"; fi
   }
+  log ""
+  log "── Presidio Stage-1 adapter audit (T6.10) ──"
+  [ -f scripts/audit_presidio_adoption.py ] && {
+    if [ "$DRY_RUN" = "0" ]; then "$PY" scripts/audit_presidio_adoption.py 2>&1 | tail -3
+    else log "  (DRY-RUN)"; fi
+  }
 }
 
 do_spec_pipeline() {

@@ -42,6 +42,22 @@ def health():
             "spec": "§64.13 + §90 L13/L14 · 4 channels (email/banner/survey/form)"}
 
 
+@router.get("/dlp/status")
+def dlp_status():
+    """T6.10 · Presidio Stage-1 adapter status."""
+    from services import dlp_presidio
+    return dlp_presidio.status()
+
+
+@router.get("/dlp/test")
+def dlp_test(text: str):
+    """T6.10 · operator-facing DLP scan (use this to test what entities
+    Presidio/fallback detects in arbitrary text).
+    """
+    from services import dlp_presidio
+    return dlp_presidio.scan(text)
+
+
 @router.get("/channels", response_model=dict[str, ChannelHelp])
 def channels():
     """Per-channel config docs for the operator UI."""

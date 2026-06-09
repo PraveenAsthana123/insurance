@@ -72,6 +72,11 @@ const AUDIT_LABELS = {
     spec: '§75 + T5.9',
     description: 'Multi-touch attribution math invariants · 15 assertions (per-model splits + revenue conservation + compare endpoint + cohort sum)',
   },
+  'presidio-adoption': {
+    name: 'Presidio Stage-1 DLP adapter (T6.10)',
+    spec: '§56 + §82.21 + T6.10',
+    description: '12-entity PII coverage · 8 assertions (status · entity detection · multi-entity · clean negative)',
+  },
 };
 
 export default function AdminAuditPage() {

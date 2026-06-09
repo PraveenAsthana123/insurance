@@ -119,9 +119,16 @@ AUDITS = {
         "spec": "§75 + T5.9",
         "description": "Multi-touch attribution math · 15 assertions (5 model invariants · revenue conservation · compare returns 5 · cohort sum)",
     },
+    "presidio-adoption": {
+        "script": "scripts/audit_presidio_adoption.py",
+        "report_dir": "jobs/reports/presidio-adoption-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§56 + §82.21 + T6.10",
+        "description": "Presidio Stage-1 adapter · 8 assertions (status ready · 12-entity coverage · SSN/CC/email detection · multi-entity · clean text negative)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption"]
 
 
 @router.get("/list")

@@ -115,3 +115,6 @@ jobs:
 
       - name: ATTRIBUTION MATH audit · 5 models conserve total revenue (15 assertions)
         run: python3 scripts/audit_attribution_math.py
+
+      - name: PRESIDIO Stage-1 adapter audit · 12-entity DLP coverage (8 assertions)
+        run: python3 scripts/audit_presidio_adoption.py
