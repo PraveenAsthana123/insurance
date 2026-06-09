@@ -926,7 +926,8 @@ function AnalysisFlowDiagram() {
 export default function ProcessDocsTab({ process, dept }) {
   const [activeDocTab, setActiveDocTab] = useState('hld');
 
-  <TabShell
+  return (
+    <TabShell
       tabName="docs"
       title="Documentation · doc index + last-updated + owner"
       phase="Operate"
@@ -937,7 +938,6 @@ export default function ProcessDocsTab({ process, dept }) {
       accent="#94a3b8"
       todos={[]}
     >
-      return (
     <div>
       {/* ---- PROCESS FLOW CHART ---- */}
       <div className="content-section">

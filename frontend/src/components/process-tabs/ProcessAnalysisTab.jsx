@@ -98,7 +98,8 @@ export default function ProcessAnalysisTab() {
   const [activeSubTab, setActiveSubTab] = useState('Statistical');
   const [driftChecked, setDriftChecked] = useState(false);
 
-  <TabShell
+  return (
+    <TabShell
       tabName="analysis"
       title="Analysis · SHAP + feature importance + counterfactual"
       phase="Govern"
@@ -109,7 +110,6 @@ export default function ProcessAnalysisTab() {
       accent="#dc2626"
       todos={[]}
     >
-      return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
 
       {/* Sub-tab navigation */}

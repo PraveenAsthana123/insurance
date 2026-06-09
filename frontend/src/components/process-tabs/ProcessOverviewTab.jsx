@@ -518,7 +518,8 @@ export default function ProcessOverviewTab({ process, dept }) {
   const primaryDiagram = seqDiagrams[0];
   const [seqExpanded, setSeqExpanded] = useState(false);
 
-  <TabShell
+  return (
+    <TabShell
       tabName="overview"
       title="Overview · process description + KPI strip + AI badges"
       phase="Orient"
@@ -529,7 +530,6 @@ export default function ProcessOverviewTab({ process, dept }) {
       accent="#1e40af"
       todos={[]}
     >
-      return (
     <div>
       {/* Process description */}
       <div className="content-section">

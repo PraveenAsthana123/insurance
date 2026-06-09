@@ -148,7 +148,8 @@ const QUALITY_CHART_DATA = QUALITY_DATA.map((d) => ({ name: d.layer, score: d.qu
 export default function ProcessDataPipelineTab() {
   const [expandedType, setExpandedType] = useState(null);
 
-  <TabShell
+  return (
+    <TabShell
       tabName="datapipeline"
       title="Data Pipeline · DAG + stages + run history"
       phase="Understand"
@@ -159,7 +160,6 @@ export default function ProcessDataPipelineTab() {
       accent="#0ea5e9"
       todos={[]}
     >
-      return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xl)' }}>
 
       {/* ── A. Medallion Architecture ── */}

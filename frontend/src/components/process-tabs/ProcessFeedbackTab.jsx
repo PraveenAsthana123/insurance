@@ -141,7 +141,8 @@ export default function ProcessFeedbackTab() {
   function requestLabel(id) { setRequestedLabels(r => ({ ...r, [id]: true })); }
 
   <CorrectionsPanel accent="#dc2626" />
-      <TabShell
+      return (
+    <TabShell
       tabName="feedback"
       title="Feedback & RLHF · capture + correction list"
       phase="Govern"
@@ -152,7 +153,6 @@ export default function ProcessFeedbackTab() {
       accent="#dc2626"
       todos={[]}
     >
-      return (
     <div style={{ fontFamily: 'var(--font-family, system-ui)', color: 'var(--text-primary, #1e293b)' }}>
 
       {/* Section Nav */}

@@ -333,7 +333,8 @@ export default function ProcessDatabaseTab() {
   const [activeSection, setActiveSection] = useState('architecture');
   const [expandedQuery, setExpandedQuery] = useState(null);
 
-  <TabShell
+  return (
+    <TabShell
       tabName="database"
       title="Databases · table list + ERD + indexes"
       phase="Understand"
@@ -344,7 +345,6 @@ export default function ProcessDatabaseTab() {
       accent="#0ea5e9"
       todos={[]}
     >
-      return (
     <div style={{ display: 'flex', gap: 'var(--spacing-lg)' }}>
       {/* Sidebar nav */}
       <div style={{ width: 160, flexShrink: 0 }}>

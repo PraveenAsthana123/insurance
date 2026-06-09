@@ -171,7 +171,8 @@ export default function ProcessAccuracyTab() {
     return MODELS_METRICS.find((m) => m.model === model)?.[key] === bests[key];
   }
 
-  <TabShell
+  return (
+    <TabShell
       tabName="accuracy"
       title="Accuracy · confusion matrix + ROC + fairness"
       phase="Verify"
@@ -182,8 +183,7 @@ export default function ProcessAccuracyTab() {
       accent="#f59e0b"
       todos={[]}
     >
-      
-      <E2ELatencyPanel accent="#f59e0b" />return (
+      <E2ELatencyPanel accent="#f59e0b" />
     <div>
 
       {/* ===== A. KPI CARDS ===== */}

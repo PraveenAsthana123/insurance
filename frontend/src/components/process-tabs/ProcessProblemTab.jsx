@@ -827,7 +827,8 @@ function MultiDataSection({ data }) {
 export default function ProcessProblemTab({ process }) {
   const data = PROBLEM_DATA[process.id] || PROBLEM_DATA['__default__'];
 
-  <TabShell
+  return (
+    <TabShell
       tabName="problem"
       title="Problem & Use Case · 5W + AS-IS + use cases"
       phase="Understand"
@@ -838,7 +839,6 @@ export default function ProcessProblemTab({ process }) {
       accent="#ef4444"
       todos={[]}
     >
-      return (
     <div>
       {/* A. Problem Statement */}
       <div className="content-section">

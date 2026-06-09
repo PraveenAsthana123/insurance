@@ -155,7 +155,8 @@ export default function ProcessTestingTab({ process }) {
     addLog('SUITE', `${filtered.length} tests completed`, 'info');
   }
 
-  <TabShell
+  return (
+    <TabShell
       tabName="testing"
       title="Testing · test list + coverage + flaky"
       phase="Verify"
@@ -166,8 +167,7 @@ export default function ProcessTestingTab({ process }) {
       accent="#f59e0b"
       todos={[]}
     >
-      
-      <E2ELatencyPanel accent="#f59e0b" />return (
+      <E2ELatencyPanel accent="#f59e0b" />
     <div>
       {/* Summary KPIs */}
       <div className="kpi-row" style={{ marginBottom: 'var(--spacing-md)' }}>

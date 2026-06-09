@@ -74,7 +74,8 @@ export default function ProcessAutomationTab({ process }) {
     { id: 'todos', label: 'To-Do Tasks' },
   ];
 
-  <TabShell
+  return (
+    <TabShell
       tabName="automation"
       title="Automation · rule list + triggers + status"
       phase="Operate"
@@ -85,7 +86,6 @@ export default function ProcessAutomationTab({ process }) {
       accent="#10b981"
       todos={[]}
     >
-      return (
     <div>
       {/* KPI row */}
       <div className="kpi-grid" style={{ marginBottom: 'var(--spacing-lg)' }}>

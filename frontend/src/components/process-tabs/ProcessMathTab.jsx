@@ -269,7 +269,8 @@ export default function ProcessMathTab() {
   const filteredAnalysis = ANALYSIS_TYPES.filter((a) => a.category === activeAnalysisCat);
   const filteredModels = MODEL_CATALOG.filter((m) => m.category === activeModelCat);
 
-  <TabShell
+  return (
+    <TabShell
       tabName="math"
       title="Mathematics · formulas + derivations + references"
       phase="Build"
@@ -280,7 +281,6 @@ export default function ProcessMathTab() {
       accent="#8b5cf6"
       todos={[]}
     >
-      return (
     <div>
       {/* Main tab bar */}
       <div style={{ display: 'flex', gap: 4, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>

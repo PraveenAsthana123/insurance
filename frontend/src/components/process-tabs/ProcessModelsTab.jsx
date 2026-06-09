@@ -373,7 +373,8 @@ export default function ProcessModelsTab({ process }) {
     { id: 'ensemble', label: 'Ensemble' },
   ];
 
-  <TabShell
+  return (
+    <TabShell
       tabName="models"
       title="Models · cards + accuracy + latency + cost"
       phase="Build"
@@ -384,7 +385,6 @@ export default function ProcessModelsTab({ process }) {
       accent="#0ea5e9"
       todos={[]}
     >
-      return (
     <div>
       {/* Section Nav */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>

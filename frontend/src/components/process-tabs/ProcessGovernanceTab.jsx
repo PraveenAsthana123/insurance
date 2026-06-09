@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import {
-import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
-import CorrectionsPanel from '../CorrectionsPanel';
-import AuditPanel from '../AuditPanel';
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   PieChart, Pie, Cell,
 } from 'recharts';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import CorrectionsPanel from '../CorrectionsPanel';
+import AuditPanel from '../AuditPanel';
 
 /* ============================================================
    AI GOVERNANCE TAB — Deep detail for each governance area
@@ -75,7 +75,8 @@ export default function ProcessGovernanceTab({ process, dept }) {
   const driftData = generateDriftData();
   const maturityData = generateMaturityRadar();
 
-  <TabShell
+  return (
+    <TabShell
       tabName="governance"
       title="AI Governance · RACI + audit + HITL + compliance"
       phase="Govern"
@@ -88,8 +89,8 @@ export default function ProcessGovernanceTab({ process, dept }) {
     >
       <CorrectionsPanel accent="#dc2626" />
       <AuditPanel accent="#dc2626" />
-      return (
-    <div>
+
+      <div>
       {/* Governance Maturity Summary */}
       <div className="content-section">
         <div className="content-section-header">

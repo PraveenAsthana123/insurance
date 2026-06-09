@@ -165,7 +165,8 @@ export default function ProcessAIInfraTab() {
   const SECTIONS = ['overview', 'rag', 'pii', 'guardrails', 'embedding', 'observability'];
   const SECTION_LABELS = { overview: 'Infrastructure', rag: 'RAG Pipeline', pii: 'PII Detection', guardrails: 'Guardrails', embedding: 'Embedding Config', observability: 'Observability' };
 
-  <TabShell
+  return (
+    <TabShell
       tabName="aiinfra"
       title="AI Infrastructure · topology + scaling + cost"
       phase="Operate"
@@ -176,7 +177,6 @@ export default function ProcessAIInfraTab() {
       accent="#06b6d4"
       todos={[]}
     >
-      return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
 
       {/* Section Nav */}

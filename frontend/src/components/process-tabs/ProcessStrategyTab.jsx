@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import {
-import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, Legend, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   ReferenceLine,
 } from 'recharts';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ================================================================
    STRATEGY TAB — 8 sub-tabs
@@ -1485,7 +1485,8 @@ export default function ProcessStrategyTab({ process, dept }) {
     }
   };
 
-  <TabShell
+  return (
+    <TabShell
       tabName="strategy"
       title="Strategy · 4P framework + 12-month roadmap"
       phase="Orient"
@@ -1496,7 +1497,6 @@ export default function ProcessStrategyTab({ process, dept }) {
       accent="#8b5cf6"
       todos={[]}
     >
-      return (
     <div>
       {/* Header */}
       <div className="content-section" style={{ marginBottom: 16 }}>

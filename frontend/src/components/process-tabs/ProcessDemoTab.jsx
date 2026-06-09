@@ -1078,7 +1078,8 @@ export default function ProcessDemoTab({ process }) {
     .filter(([k]) => k !== '__default__')
     .reduce((s, [, v]) => s + v.demos.length, 0);
 
-  <TabShell
+  return (
+    <TabShell
       tabName="demo"
       title="Demo Scenarios · walkthrough + scenario library"
       phase="Orient"
@@ -1089,7 +1090,6 @@ export default function ProcessDemoTab({ process }) {
       accent="#d946ef"
       todos={[]}
     >
-      return (
     <div>
       {/* Catalog toggle banner */}
       <div style={{ marginBottom: 'var(--spacing-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', borderRadius: 'var(--border-radius-lg)', background: 'linear-gradient(90deg, rgba(59,130,246,0.08), rgba(99,102,241,0.06))', border: '1px solid rgba(59,130,246,0.2)' }}>

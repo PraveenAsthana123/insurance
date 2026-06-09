@@ -213,7 +213,8 @@ export default function ProcessChatbotTab({ process }) {
     }]);
   }
 
-  <TabShell
+  return (
+    <TabShell
       tabName="chatbot"
       title="Chatbot · chat UI + per-proc system prompt + history"
       phase="Operate"
@@ -224,7 +225,6 @@ export default function ProcessChatbotTab({ process }) {
       accent="#8b5cf6"
       todos={[]}
     >
-      return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 600 }}>
 
       {/* Header */}

@@ -247,7 +247,8 @@ export default function ProcessDataTab({ process, dept }) {
 
   const corrCols = corrMatrix.map((r) => r.name);
 
-  <TabShell
+  return (
+    <TabShell
       tabName="data"
       title="Data · sources + schemas + samples + stats"
       phase="Understand"
@@ -258,7 +259,6 @@ export default function ProcessDataTab({ process, dept }) {
       accent="#0ea5e9"
       todos={[]}
     >
-      return (
     <div>
       {/* Section Nav */}
       <div style={{ display: 'flex', gap: 6, marginBottom: 'var(--spacing-lg)', flexWrap: 'wrap' }}>

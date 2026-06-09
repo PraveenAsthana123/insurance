@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {
-import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Legend, PieChart, Pie, Cell, AreaChart, Area,
 } from 'recharts';
+import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 
 /* ================================================================
    REPORTS & DASHBOARD TAB — 4 sub-tabs
@@ -837,7 +837,8 @@ function TechStackTab() {
 export default function ProcessReportsTab({ process, dept }) {
   const [activeTab, setActiveTab] = useState('executive');
 
-  <TabShell
+  return (
+    <TabShell
       tabName="reports"
       title="Reports · list + cadence + last-run + download"
       phase="Operate"
@@ -848,7 +849,6 @@ export default function ProcessReportsTab({ process, dept }) {
       accent="#10b981"
       todos={[]}
     >
-      return (
     <div>
       {/* Sub-tab bar */}
       <div style={{

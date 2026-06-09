@@ -339,7 +339,8 @@ export default function ProcessSimulationTab() {
 
   const statusColor = { 'Not Started': '#64748b', Running: '#f59e0b', Paused: '#3b82f6', Complete: '#10b981' };
 
-  <TabShell
+  return (
+    <TabShell
       tabName="simulation"
       title="Simulation · what-if sliders + before/after"
       phase="Measure"
@@ -350,7 +351,6 @@ export default function ProcessSimulationTab() {
       accent="#06b6d4"
       todos={[]}
     >
-      return (
     <div style={{ fontFamily: 'var(--font-family, system-ui)', color: 'var(--text-primary, #1e293b)' }}>
 
       {/* Section Nav */}
