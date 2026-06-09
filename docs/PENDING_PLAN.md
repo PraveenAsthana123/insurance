@@ -40,10 +40,10 @@ These are operator-aligned polish items · no external blockers.
 
 | # | Item | Effort | Where it lands |
 |---|---|---|---|
-| T2.1 | "Last X days" filter on AdminAuditPage trend chart | small | Frontend dropdown (10 · 30 · 90 days) |
-| T2.2 | Sparkline overlay on PASS tile | small | Inline SVG · ~30 lines |
-| T2.3 | Drag-and-drop file zone in ContentOpsPage | small | Replace file-pick with dropzone (+ paste fallback) |
-| T2.4 | Schedule executor for `content_postings.scheduled_for` | small | New cron `*/30 * * * *` reads draft postings due to publish |
+| ~~T2.1~~ | **(DONE)** ~~"Last X days" filter~~ | done | windowPicker + history filter live in AdminAuditPage.jsx:99 |
+| ~~T2.2~~ | **(DONE)** ~~Sparkline overlay~~ | done | SVG sparkPath live in AdminAuditPage.jsx:310 |
+| ~~T2.3~~ | **(DONE)** ~~Drag-and-drop file zone~~ | done | onDrop handler live in ContentOpsPage.jsx:372 |
+| ~~T2.4~~ | **(DONE)** ~~Schedule executor for content_postings~~ | done | scripts/run_due_postings.py reads content_postings WHERE scheduled_for ≤ NOW() |
 
 ### Tier 3 · MEDIUM EFFORT (1-2h each)
 
@@ -71,7 +71,7 @@ These are operator-aligned polish items · no external blockers.
 | ~~T7.10~~ | **(DONE 2026-06-09)** ~~RLHF correction DB~~ | done | T7.10 done · `decision_corrections` table + 5 endpoints + 16th audit + gate #5 used |
 | T7.11 | Adopt RAGAS for Evaluation Layer (T7.governance.7) | medium | T6.8 overlap |
 | T7.12 | Adopt Langfuse for tracing (T7.governance.10) | medium | T6.9 overlap |
-| T7.13 | Self-Healing AI fallback chain (T7.governance.13) | medium | model registry needed |
+| ~~T7.13~~ | **(DONE 2026-06-09)** ~~Self-Healing AI fallback chain~~ | done | T7.13 done · LLMFallbackChain · 10/10 audit PASS · gate #13 used |
 
 Full reference: [docs/AUTONOMOUS_DEPARTMENT_FRAMEWORK.md](AUTONOMOUS_DEPARTMENT_FRAMEWORK.md)
 

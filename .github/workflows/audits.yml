@@ -124,3 +124,6 @@ jobs:
 
       - name: CORRECTIONS RLHF DB audit · governance gate #5 (11 assertions)
         run: python3 scripts/audit_corrections.py
+
+      - name: SELF-HEALING AI fallback chain · gate #13 (10 assertions)
+        run: python3 scripts/audit_self_healing.py

@@ -87,6 +87,11 @@ const AUDIT_LABELS = {
     spec: '§38.3 + T7.10 + gate #5',
     description: 'Captures human-override of agent decisions · 11 assertions (schema · severity tiers · invalid rejected · round-trip · filter · stats)',
   },
+  'self-healing': {
+    name: 'Self-Healing AI (T7.13 · governance gate #13)',
+    spec: '§57.7 + §40 + T7.13',
+    description: 'LLM fallback chain · 10 assertions (empty rejected · single/multi-provider · all-fail honest · latency · default chain)',
+  },
 };
 
 export default function AdminAuditPage() {

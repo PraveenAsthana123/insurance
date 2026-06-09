@@ -140,9 +140,16 @@ AUDITS = {
         "spec": "§38.3 + T7.10 + Tier 7 gate #5",
         "description": "RLHF correction DB · 11 assertions (schema · 3 severity tiers · invalid severity rejected · round-trip · filter · stats)",
     },
+    "self-healing": {
+        "script": "scripts/audit_self_healing.py",
+        "report_dir": "jobs/reports/self-healing-audit",
+        "report_pattern": "audit-*.log",
+        "spec": "§57.7 + §40 + T7.13",
+        "description": "Self-Healing AI fallback chain · 10 assertions (chain construction · single + multi-provider · all-fail honest · latency tracking · default 3-provider chain)",
+    },
 }
 
-AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections"]
+AuditKind = Literal["recommender-flavors", "dept-artifacts", "folder-readmes", "voice-ai-artifacts", "section-92-compliance", "marketing-campaigns-artifacts", "marketing-e2e-flow", "marketing-advanced", "marketing-100-customers", "schedule-executor", "postings-executor", "multi-cohort-fairness", "attribution-math", "presidio-adoption", "confidence-routing", "decision-corrections", "self-healing"]
 
 
 @router.get("/list")
