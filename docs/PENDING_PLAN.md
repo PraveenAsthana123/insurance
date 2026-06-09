@@ -55,6 +55,23 @@ These are operator-aligned polish items · no external blockers.
 | T3.4 | Per-step latency histograms on E2E flow (trend per assertion) | medium | Operator hasn't asked · defer |
 | T3.5 | §82.21 DLP scan multilingual (non-US SSN/CC) | medium | Jurisdictional scope decision needed |
 
+### Tier 5 · ENTERPRISE MARKETING COMMAND CENTER (NEW · operator brief 2026-06-08)
+
+| # | Item | Effort | Status |
+|---|---|---|---|
+| T5.1 | KPI registry · 85 KPIs · 15 categories | done | `backend/marketing_kpis/registry.py` |
+| T5.2 | KPI read-only API · 8 endpoints | done | `/api/v1/marketing-kpis/*` |
+| T5.3 | Marketing Command Center UI · 5 tabs | done | `/marketing-kpis` route |
+| T5.4 | Live wiring · 13 KPIs marked 'live' | live | reads from existing tables |
+| T5.5 | Scaffolded wiring · 38 KPIs | scaffolded | formula present · needs data hook |
+| T5.6 | Planned KPIs · 34 deferred | planned | mostly require attribution/external data |
+| T5.7 | Predictive models (churn · NBA · attribution) | medium | needs feature store + training |
+| T5.8 | Real-time KPI calculation cron | medium | extends current weekly digest |
+| T5.9 | Multi-touch attribution model | large | requires touchpoint tracking |
+| T5.10 | Per-KPI alerting on target breach | medium | extends drift detection §82.7 |
+
+Full reference: [docs/MARKETING_KPI_FRAMEWORK.md](MARKETING_KPI_FRAMEWORK.md)
+
 ### Tier 4 · LARGER SCOPE (>2h)
 
 | # | Item | Effort | Why |
