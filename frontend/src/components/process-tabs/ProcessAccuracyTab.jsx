@@ -6,6 +6,7 @@ import {
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
 import E2ELatencyPanel from '../E2ELatencyPanel';
+import EvalHarnessPanel from '../EvalHarnessPanel';
 
 /* ---- Static Data ---- */
 const MODELS_METRICS = [
@@ -184,6 +185,7 @@ export default function ProcessAccuracyTab() {
       todos={[]}
     >
       <E2ELatencyPanel accent="#f59e0b" />
+      <EvalHarnessPanel accent="#f59e0b" />
     <div>
 
       {/* ===== A. KPI CARDS ===== */}
