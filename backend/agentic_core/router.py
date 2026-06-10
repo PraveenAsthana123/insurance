@@ -353,78 +353,34 @@ def create_mapping(body: MappingCreate):
 
 @router.post("/invoke")
 def invoke_agent(body: InvokeRequest):
-    """Per §57.7 scaffold runtime · validates agent + plans skills + writes audit row.
-    Real LLM execution is operator-attached follow-up (LangGraph integration).
+    """Real end-to-end execution · Iter 41.
+
+    Calls runtime.invoke() which:
+      1. Plans via LLM (OpenAI/Anthropic if API key) or honest stub
+      2. Executes each planned skill via tool_executor
+      3. Tracks per-step timing + tokens + cost
+      4. Writes COMPLETE audit row to agent_invocation
+
+    Set OPENAI_API_KEY or ANTHROPIC_API_KEY to use real LLM.
+    Without key · returns honest deterministic stub with scaffold=true.
     """
-    invocation_id = f"INV-{uuid.uuid4().hex[:14]}"
-    correlation_id = body.correlation_id or f"CORR-{uuid.uuid4().hex[:14]}"
-
-    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        # 1. Load agent · validate
-        cur.execute("""
-            SELECT * FROM agent_registry
-            WHERE agent_id = %s AND tenant_id = %s
-        """, (body.agent_id, body.tenant_id))
-        agent = cur.fetchone()
-        if not agent:
-            raise HTTPException(404, {"detail": f"agent not found: {body.agent_id}",
-                                       "error_code": "AGENT_404"})
-        if agent["status"] != "Active":
-            raise HTTPException(409, {"detail": f"agent status is {agent['status']}",
-                                       "error_code": "AGENT_NOT_ACTIVE"})
-
-        # 2. Load allowed skills
-        cur.execute("""
-            SELECT s.skill_id, s.skill_name, s.risk_level, s.requires_human_approval,
-                   m.execution_mode, m.priority
-            FROM agent_skill_mapping m
-            JOIN skill_registry s ON s.skill_id = m.skill_id
-            WHERE m.agent_id = %s AND m.status = 'Active' AND s.status IN ('Active', 'Approved')
-            ORDER BY m.priority
-        """, (body.agent_id,))
-        skills = [dict(r) for r in cur.fetchall()]
-
-        # 3. Per §57.7 scaffold plan · pick first 3 skills · operator wires LLM planner
-        planned_skills = [s["skill_id"] for s in skills[:3]]
-        plan_text = (
-            f"SCAFFOLD plan: agent={body.agent_id} would execute "
-            f"{len(planned_skills)} skill(s): {planned_skills}. "
-            "Operator wires LangGraph planner for real LLM execution."
+    from agentic_core.runtime import invoke as runtime_invoke
+    try:
+        return runtime_invoke(
+            agent_id=body.agent_id,
+            input_text=body.input_text,
+            trigger_kind=body.trigger_kind,
+            incident_id=body.incident_id,
+            correlation_id=body.correlation_id,
+            tenant_id=body.tenant_id,
         )
-        scaffold_output = (
-            f"[SCAFFOLD · §57.7] Invocation {invocation_id} planned but NOT executed. "
-            f"Real run requires LangGraph + LLM API. "
-            f"Audit row recorded with agent={body.agent_id}, input={body.input_text[:80]!r}."
-        )
-
-        # 4. Write audit row · the Port _ai_invocation pattern
-        cur.execute("""
-            INSERT INTO agent_invocation
-            (invocation_id, agent_id, correlation_id, incident_id, trigger_kind,
-             input_text, plan_text, skills_used, tools_used, actions_taken,
-             output_text, status, duration_ms, tokens_in, tokens_out, tenant_id,
-             completed_at)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s::jsonb, %s::jsonb, %s::jsonb,
-                    %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
-            RETURNING invocation_id
-        """, (
-            invocation_id, body.agent_id, correlation_id, body.incident_id,
-            body.trigger_kind, body.input_text, plan_text,
-            json.dumps(planned_skills), json.dumps([]), json.dumps([]),
-            scaffold_output, "Success", 0, 0, 0, body.tenant_id,
-        ))
-
-        return {
-            "invocation_id": invocation_id,
-            "correlation_id": correlation_id,
-            "agent_id": body.agent_id,
-            "status": "Success",
-            "plan": plan_text,
-            "output": scaffold_output,
-            "skills_considered": [s["skill_id"] for s in skills],
-            "planned_skills": planned_skills,
-            "scaffold": True,
-        }
+    except ValueError as e:
+        msg = str(e)
+        if "not found" in msg:
+            raise HTTPException(404, {"detail": msg, "error_code": "AGENT_404"})
+        if "not Active" in msg:
+            raise HTTPException(409, {"detail": msg, "error_code": "AGENT_NOT_ACTIVE"})
+        raise HTTPException(400, {"detail": msg, "error_code": "INVOKE_FAILED"})
 
 
 @router.get("/invocations")
