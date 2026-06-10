@@ -11,6 +11,7 @@ const API = import.meta?.env?.VITE_API_BASE_URL || 'http://localhost:8001';
 const HUB_TABS = [
   { key: 'task-tracer',   label: '▶ Run Task (live trace)' },
   { key: 'production-pipeline', label: '🏭 22-Stage Production Pipeline (Iter 56)' },
+  { key: 'challenges', label: '⚠️ Challenges & Plans (Iter 58)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
@@ -1001,6 +1002,95 @@ function ProductionPipelineView() {
   );
 }
 
+
+function ChallengesView() {
+  const [data, setData] = useState(null);
+  const [cat, setCat] = useState('all');
+  useEffect(() => {
+    fetch(`${API}/api/v1/challenges-catalog/by-category`).then(r => r.json()).then(setData);
+  }, []);
+  if (!data) return <em>Loading…</em>;
+  const categories = Object.keys(data.categories);
+  const SEVERITY_COLOR = { Critical: '#991b1b', High: '#ef4444', Medium: '#f59e0b', Low: '#10b981' };
+  let rows = [];
+  for (const c of categories) {
+    if (cat !== 'all' && cat !== c) continue;
+    for (const item of data.categories[c]) rows.push({ ...item, category: c });
+  }
+  return (
+    <>
+      <Section title={`Challenges catalog · 7 categories × 5 = ${data.n_total} rows`} accent="#ef4444">
+        <div style={{ marginBottom: 8 }}>
+          <select value={cat} onChange={e => setCat(e.target.value)}
+            style={{ padding: '4px 8px', fontSize: 11, border: '1px solid #cbd5e1', borderRadius: 3 }}>
+            <option value="all">All categories</option>
+            {categories.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#fee2e2', color: '#991b1b' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 5 }}>CAT</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>ID</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>ISSUE</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>SEV</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>MITIGATION</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>OWNER</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>CRON</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>TOOL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(r => (
+              <tr key={r.id} style={{ borderTop: '1px solid #fecaca' }}>
+                <td style={{ padding: 5 }}><Pill color="#ef4444">{r.category}</Pill></td>
+                <td style={{ padding: 5 }}><code>{r.id}</code></td>
+                <td style={{ padding: 5 }}>{r.issue}</td>
+                <td style={{ padding: 5 }}><Pill color={SEVERITY_COLOR[r.severity]}>{r.severity}</Pill></td>
+                <td style={{ padding: 5, color: '#15803d', fontSize: 9 }}>{r.mitigation}</td>
+                <td style={{ padding: 5, fontSize: 9 }}><code>{r.owner_agent}</code></td>
+                <td style={{ padding: 5, fontSize: 9, color: '#64748b' }}>{r.cron}</td>
+                <td style={{ padding: 5, fontSize: 9 }}>{r.tool}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      <Section title="Plans · per operator" accent="#3b82f6">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#dbeafe', color: '#1d4ed8' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 5 }}>PLAN</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>WHERE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(data.plans).map(([k, v]) => (
+              <tr key={k} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: 5 }}><strong>{k.replace(/_/g, ' ')}</strong></td>
+                <td style={{ padding: 5, fontSize: 9 }}>{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      <Section title={`Tool catalog · ${data.tools.length} tools`} accent="#8b5cf6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+          {data.tools.map(t => (
+            <div key={t.tool} style={{ padding: 8, background: '#faf5ff', borderRadius: 4 }}>
+              <strong style={{ fontSize: 11, color: '#7e22ce' }}>{t.tool}</strong>
+              <div style={{ fontSize: 9, color: '#64748b' }}>{t.category}</div>
+              <div style={{ fontSize: 10, marginTop: 2 }}>{t.purpose}</div>
+            </div>
+          ))}
+        </div>
+      </Section>
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1357,6 +1447,7 @@ export default function AgenticHubPage() {
       <div style={{ padding: 12 }}>
         {activeTab === 'task-tracer'  && <TaskTracerView />}
         {activeTab === 'production-pipeline' && <ProductionPipelineView />}
+        {activeTab === 'challenges'         && <ChallengesView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}
