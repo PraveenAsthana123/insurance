@@ -28,13 +28,11 @@ function Breadcrumb({ bp }) {
   return (
     <div className="insurance-breadcrumb">
       <GlobalCmdK />
-      <div style={{ position: "fixed", top: 12, right: 16, zIndex: 100 }}>
+      <div style={{ position: "fixed", top: 12, right: 16, zIndex: 100, display: 'flex', gap: 6 }}>
         <ThemeToggle />
         <AlertsBadge />
       </div>
       <ToastHost />
-      
-      </div>
       <Link to="/insurance">Insurance</Link>
       {dept && (
         <>
