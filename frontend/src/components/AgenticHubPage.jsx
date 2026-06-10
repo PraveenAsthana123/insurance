@@ -10,6 +10,7 @@ const API = import.meta?.env?.VITE_API_BASE_URL || 'http://localhost:8001';
 
 const HUB_TABS = [
   { key: 'task-tracer',   label: '▶ Run Task (live trace)' },
+  { key: 'production-pipeline', label: '🏭 22-Stage Production Pipeline (Iter 56)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
@@ -903,6 +904,103 @@ function QualityScorecardView() {
   );
 }
 
+
+function ProductionPipelineView() {
+  const [input, setInput] = useState('How do I escalate a payment incident? Need runbook.');
+  const [severity, setSeverity] = useState('critical');
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState(null);
+  async function run() {
+    setBusy(true); setResult(null);
+    try {
+      const r = await fetch(`${API}/api/v1/production-pipeline/run`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_input: input, severity }),
+      });
+      setResult(await r.json());
+    } finally { setBusy(false); }
+  }
+  return (
+    <>
+      <Section title="22-Stage Production Pipeline · Ollama-only · agentic flow" accent="#3b82f6">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 120px 120px', gap: 8 }}>
+          <input value={input} onChange={e => setInput(e.target.value)}
+            placeholder="user input"
+            style={{ padding: '6px 8px', fontSize: 11, border: '1px solid #cbd5e1', borderRadius: 3 }} />
+          <select value={severity} onChange={e => setSeverity(e.target.value)}
+            style={{ padding: '6px 8px', fontSize: 11, border: '1px solid #cbd5e1', borderRadius: 3 }}>
+            <option value="info">info</option>
+            <option value="warning">warning</option>
+            <option value="critical">critical (HITL)</option>
+          </select>
+          <button onClick={run} disabled={busy}
+            style={{ padding: '6px 12px', fontSize: 11, cursor: 'pointer',
+              background: '#10b981', color: '#fff', border: 'none', borderRadius: 3 }}>
+            {busy ? 'Running…' : '▶ Run pipeline'}
+          </button>
+        </div>
+      </Section>
+      {result && (
+        <Section title={`Run ${result.run_id} · ${result.overall_status} · confidence ${result.overall_confidence}`} accent="#10b981">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 10 }}>
+            <div style={{ padding: 8, background: '#f0fdf4', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>DURATION</div>
+              <div style={{ fontWeight: 800 }}>{result.total_duration_ms}ms</div>
+            </div>
+            <div style={{ padding: 8, background: '#dbeafe', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>TOKENS</div>
+              <div style={{ fontWeight: 800 }}>{result.tokens_in}/{result.tokens_out}</div>
+            </div>
+            <div style={{ padding: 8, background: '#fef3c7', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>COST</div>
+              <div style={{ fontWeight: 800 }}>${result.cost_usd?.toFixed(4)}</div>
+            </div>
+            <div style={{ padding: 8, background: '#faf5ff', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>OVERALL CONF</div>
+              <div style={{ fontWeight: 800 }}>{(result.overall_confidence * 100).toFixed(1)}%</div>
+            </div>
+          </div>
+          <table style={{ fontSize: 10, width: '100%' }}>
+            <thead style={{ background: '#f1f5f9', color: '#475569' }}>
+              <tr>
+                <th style={{ textAlign: 'left', padding: 4 }}>#</th>
+                <th style={{ textAlign: 'left', padding: 4 }}>STAGE</th>
+                <th style={{ textAlign: 'left', padding: 4 }}>STATUS</th>
+                <th style={{ textAlign: 'right', padding: 4 }}>MS</th>
+                <th style={{ textAlign: 'left', padding: 4 }}>CONF</th>
+                <th style={{ textAlign: 'left', padding: 4 }}>SCAFFOLD</th>
+              </tr>
+            </thead>
+            <tbody>
+              {result.stages.map(s => {
+                const c = s.status === 'ok' ? '#10b981' :
+                          s.status === 'failed' ? '#ef4444' :
+                          s.status === 'skipped' ? '#94a3b8' : '#f59e0b';
+                return (
+                  <tr key={s.stage_no} style={{ borderTop: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: 4 }}><code>{s.stage_no}</code></td>
+                    <td style={{ padding: 4 }}>{s.name}</td>
+                    <td style={{ padding: 4 }}><Pill color={c}>{s.status}</Pill></td>
+                    <td style={{ padding: 4, textAlign: 'right' }}><code>{s.duration_ms}</code></td>
+                    <td style={{ padding: 4 }}>{s.confidence != null ? `${Math.round(s.confidence * 100)}%` : '—'}</td>
+                    <td style={{ padding: 4 }}>{s.scaffold && <Pill color="#94a3b8">scaffold</Pill>}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          {result.final_response && (
+            <div style={{ marginTop: 10, padding: 10, background: '#eff6ff', borderRadius: 4 }}>
+              <strong style={{ fontSize: 10 }}>FINAL RESPONSE</strong>
+              <div style={{ fontSize: 11, marginTop: 4 }}>{result.final_response}</div>
+            </div>
+          )}
+        </Section>
+      )}
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1258,6 +1356,7 @@ export default function AgenticHubPage() {
 
       <div style={{ padding: 12 }}>
         {activeTab === 'task-tracer'  && <TaskTracerView />}
+        {activeTab === 'production-pipeline' && <ProductionPipelineView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}
