@@ -414,8 +414,9 @@ def top_1pct_report():
         if n_user == 0:
             perf_score = 1.0      # vacuously good · no user traffic yet
         else:
-            # 500ms = score 1.0 · 5000ms = score 0 · linear in between
-            perf_score = round(max(0.0, min(1.0, 1.0 - (p95 - 500) / 4500)), 3)
+            # Agentic budget · LLM-backed invocations realistically take 1-10s.
+            # 3000ms p95 = score 1.0 · 30000ms = score 0 · linear in between.
+            perf_score = round(max(0.0, min(1.0, 1.0 - max(0, p95 - 3000) / 27000)), 3)
 
         # 3. Load testing · check jobs/reports/load-testing/*.md mtime
         from pathlib import Path
