@@ -10,6 +10,7 @@ import AutonomousAgentPage from './pages/AutonomousAgentPage';
 import AutonomousDeptFrameworkPage from './pages/AutonomousDeptFrameworkPage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { lazy, Suspense } from 'react';
+const AgenticHubPage = lazy(() => import('./components/AgenticHubPage'));
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import Layout from './components/Layout';
 
@@ -100,6 +101,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
+          <Route path="/agentic" element={<Suspense fallback={<div>Loading…</div>}><AgenticHubPage /></Suspense>} />
           <Route path="/voice-ai-demo" element={<VoiceAIDemoPage />} />
           <Route path="/voice-ai-campaigns" element={<VoiceAICampaignPage />} />
           <Route path="/voice-ai-e2e" element={<VoiceAIE2EPage />} />
