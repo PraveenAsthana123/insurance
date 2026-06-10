@@ -398,16 +398,24 @@ def top_1pct_report():
         scalability_score = round(max(0.0, 1.0 - max_util / 100.0), 3)
 
         # 2. Performance · p95 duration vs 500ms target
+        # Exclude internal cron jobs (watchdogs, top1pct testing) · only measure
+        # user-facing invocations · what a real consumer would experience.
         cur.execute("""
-            SELECT COALESCE(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY duration_ms), 0) AS p95
-            FROM agent_invocation WHERE created_at > NOW() - INTERVAL '24 hours'
+            SELECT COALESCE(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY duration_ms), 0) AS p95,
+                   COUNT(*) AS n
+            FROM agent_invocation
+            WHERE created_at > NOW() - INTERVAL '24 hours'
               AND duration_ms IS NOT NULL
+              AND trigger_kind NOT IN ('cron-watchdog', 'cron-top1pct')
         """)
-        p95 = float(cur.fetchone()["p95"] or 0)
-        # 500ms = score 1.0 · 5000ms = score 0
-        perf_score = round(max(0.0, min(1.0, 1.0 - (p95 - 500) / 4500)), 3)
-        if n_inv == 0:
-            perf_score = 1.0   # vacuously good · no data yet
+        r = cur.fetchone()
+        p95 = float(r["p95"] or 0)
+        n_user = r["n"]
+        if n_user == 0:
+            perf_score = 1.0      # vacuously good · no user traffic yet
+        else:
+            # 500ms = score 1.0 · 5000ms = score 0 · linear in between
+            perf_score = round(max(0.0, min(1.0, 1.0 - (p95 - 500) / 4500)), 3)
 
         # 3. Load testing · check jobs/reports/load-testing/*.md mtime
         from pathlib import Path
