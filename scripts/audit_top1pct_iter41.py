@@ -37,7 +37,7 @@ def main():
       r.status_code == 200 and d.get("invocation_id"))
 
     a(f"2. plan_provider declared ({d.get('plan_provider')})",
-      d.get("plan_provider") in ("stub", "openai", "anthropic"))
+      d.get("plan_provider") in ("stub", "openai", "anthropic", "ollama"))
 
     a(f"3. plan has steps + rationale ({d.get('n_skills_planned')} steps)",
       d.get("plan", {}).get("steps") and d.get("plan", {}).get("rationale"))
