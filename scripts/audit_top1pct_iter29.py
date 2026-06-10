@@ -45,12 +45,12 @@ def main():
       r.status_code in (401, 403))
 
     # 4-5. Jobs
-    r = c.post("/api/v1/jobs/enqueue", json={"name": "test-job", "kind": "pipeline"})
+    r = c.post("/api/v1/job-queue/enqueue", json={"name": "test-job", "kind": "pipeline"})
     d = r.json()
     a("4. /jobs/enqueue returns job_id + backing",
       r.status_code == 200 and "job_id" in d and "backing" in d)
 
-    r = c.get("/api/v1/jobs/stats")
+    r = c.get("/api/v1/job-queue/stats")
     d = r.json()
     a(f"5. /jobs/stats has by_status + by_kind (total={d.get('total')})",
       r.status_code == 200 and "by_status" in d and "by_kind" in d)

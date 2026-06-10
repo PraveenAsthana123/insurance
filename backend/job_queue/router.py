@@ -15,7 +15,7 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-router = APIRouter(prefix="/api/v1/jobs", tags=["jobs"])
+router = APIRouter(prefix="/api/v1/job-queue", tags=["job-queue"])  # Iter 29 · avoid /jobs collision
 
 _REDIS = None
 try:
