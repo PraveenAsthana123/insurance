@@ -209,6 +209,228 @@ def top_1pct_plan():
     return TOP_1_PCT_PLAN
 
 
+# ──────────────────────────────────────────────────────────────────────
+# 11 Quality dimensions · pipelines · benchmarks · scoring
+
+QUALITY_DIMENSIONS = [
+    {
+        "id": "scalability",
+        "label": "Scalability",
+        "owner_agent": "test_backend_load_k6",
+        "pipeline": "k6 · 5-phase: smoke → load → stress → soak → spike",
+        "monitoring_query": "/api/v1/heatmap?top=10 + /api/v1/metrics-latency",
+        "benchmark": {"target_rps": 200, "current_rps": 50, "scale_factor": 4},
+        "score_formula": "min(1.0, current_rps / target_rps)",
+        "pass_gate": "p95 < 500ms at target_rps · error_rate < 1%",
+    },
+    {
+        "id": "performance",
+        "label": "Performance (latency)",
+        "owner_agent": "test_inference_runner",
+        "pipeline": "Iter 33 latency histogram middleware · per-route p50/p95/p99",
+        "monitoring_query": "/api/v1/metrics-latency?sort=p95_ms",
+        "benchmark": {"p50_ms": 100, "p95_ms": 500, "p99_ms": 1000},
+        "score_formula": "weighted avg of (target/actual) per p50/p95/p99",
+        "pass_gate": "all three percentiles below target",
+    },
+    {
+        "id": "load_testing",
+        "label": "Load testing",
+        "owner_agent": "test_backend_load_k6",
+        "pipeline": "load-testing/insur-smoke.js · k6 + Locust · scheduled CI",
+        "monitoring_query": "jobs/reports/load-testing/*.md",
+        "benchmark": {"sustained_rps": 100, "spike_rps": 500, "soak_duration_h": 4},
+        "score_formula": "1.0 if all phases pass · 0.5 partial · 0 fail",
+        "pass_gate": "all 5 phases green · no error spike during soak",
+    },
+    {
+        "id": "error_handling",
+        "label": "Error handling + recovery",
+        "owner_agent": "test_fallback_chain",
+        "pipeline": "Circuit breaker · retry + exponential backoff · graceful degradation",
+        "monitoring_query": "/api/v1/agentic/invocations?status=Failed",
+        "benchmark": {"error_recovery_pct": 95, "circuit_open_max_s": 30},
+        "score_formula": "recovery_rate * (1 - circuit_open_seconds/60)",
+        "pass_gate": "95% of transient errors recover via retry",
+    },
+    {
+        "id": "resource_memory",
+        "label": "Resource + memory",
+        "owner_agent": "test_backend_load_k6",
+        "pipeline": "agent_capacity (Iter 38) · max_memory_mb · max_cpu_cores · max_gpu",
+        "monitoring_query": "/api/v1/agentic-ops/capacities",
+        "benchmark": {"memory_growth_pct_per_hour": 5, "rss_mb_max": 2048},
+        "score_formula": "1.0 if memory_growth < threshold · 0 if OOM",
+        "pass_gate": "no memory leak · no OOM during soak",
+    },
+    {
+        "id": "agent_quality",
+        "label": "Agent quality (accuracy/groundedness)",
+        "owner_agent": "test_model_accuracy",
+        "pipeline": "RAGAS faithfulness · context precision · answer relevance",
+        "monitoring_query": "/api/v1/agentic-ops/feedback/stats",
+        "benchmark": {"faithfulness": 0.85, "answer_relevance": 0.80, "context_precision": 0.75},
+        "score_formula": "min(faithfulness, answer_relevance, context_precision)",
+        "pass_gate": "all three above thresholds · no regression vs baseline",
+    },
+    {
+        "id": "logging",
+        "label": "Logging completeness",
+        "owner_agent": "sys_audit_chain",
+        "pipeline": "Iter 29 HMAC-chained audit · §38.3 audit row · §57.6 canonical fields",
+        "monitoring_query": "/api/v1/audit-chain/verify · /api/v1/agentic/invocations/stats",
+        "benchmark": {"audit_coverage_pct": 100, "missing_correlation_id_pct": 0},
+        "score_formula": "audit_coverage_pct/100 · penalize missing correlation_id",
+        "pass_gate": "every invoke writes audit row · 0 rows missing request_id",
+    },
+    {
+        "id": "observability",
+        "label": "Observability (OTel)",
+        "owner_agent": "sys_metrics",
+        "pipeline": "Iter 43 trace events · Iter 31 Prometheus /metrics · Iter 25 Grafana",
+        "monitoring_query": "/metrics + /api/v1/agentic/invocations/{id}/trace",
+        "benchmark": {"trace_coverage_pct": 100, "metric_freshness_s": 30},
+        "score_formula": "trace_coverage_pct/100",
+        "pass_gate": "every invocation has trace_id · metrics scraped every 30s",
+    },
+    {
+        "id": "tracking",
+        "label": "Tracking · completion · status",
+        "owner_agent": "sys_audit_search",
+        "pipeline": "agent_trace_event spans · agent_queue status · agent_invocation status",
+        "monitoring_query": "/api/v1/agentic/invocations/stats + /api/v1/agentic-ops/queue/stats",
+        "benchmark": {"orphan_jobs_pct": 0, "stuck_threshold_s": 300},
+        "score_formula": "1.0 - (orphans + stuck) / total",
+        "pass_gate": "0 orphan jobs · 0 jobs stuck > 5min",
+    },
+    {
+        "id": "benchmarking",
+        "label": "Benchmark catalog",
+        "owner_agent": "test_model_accuracy",
+        "pipeline": "Eval-set per agent · regression suite · baseline comparison",
+        "monitoring_query": "/api/v1/test-catalog/benchmarks",
+        "benchmark": {"regression_tolerance_pct": 2, "eval_set_size_min": 100},
+        "score_formula": "1.0 if no regression > tolerance · else proportional",
+        "pass_gate": "no eval metric drops > 2% vs baseline",
+    },
+    {
+        "id": "scoring_quality",
+        "label": "Scoring + quality gates",
+        "owner_agent": "test_model_fairness",
+        "pipeline": "agent_scorecard · 6-flavor (§64.36) · 9 verification gates (Iter 41)",
+        "monitoring_query": "/api/v1/agentic/invocations/{id}/trace · verification spans",
+        "benchmark": {"gate_pass_rate_pct": 95, "human_override_pct_max": 10},
+        "score_formula": "gate_pass_rate * (1 - human_override_excess)",
+        "pass_gate": "95% gate pass · human override rate < 10%",
+    },
+]
+
+
+@router.get("/quality-dimensions")
+def quality_dimensions():
+    return {"dimensions": QUALITY_DIMENSIONS, "count": len(QUALITY_DIMENSIONS)}
+
+
+@router.get("/benchmarks")
+def benchmarks():
+    """Per-dimension benchmark targets · for the scorecard."""
+    return {
+        "dimensions": [
+            {"id": d["id"], "label": d["label"], "benchmark": d["benchmark"], "pass_gate": d["pass_gate"]}
+            for d in QUALITY_DIMENSIONS
+        ],
+        "count": len(QUALITY_DIMENSIONS),
+    }
+
+
+@router.get("/scoring")
+def scoring():
+    """Scoring rubric per dimension."""
+    return {
+        "rubric": [
+            {"id": d["id"], "label": d["label"], "formula": d["score_formula"],
+             "owner_agent": d["owner_agent"]}
+            for d in QUALITY_DIMENSIONS
+        ],
+        "count": len(QUALITY_DIMENSIONS),
+    }
+
+
+@router.get("/top-1pct-report")
+def top_1pct_report():
+    """Compute a LIVE top-1% scorecard across all 11 dimensions.
+
+    Pulls from existing endpoints + DB + falls back to scaffold per §57.7.
+    """
+    import psycopg2.extras
+    scores: list[dict] = []
+
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        # logging completeness · agent_invocation coverage
+        cur.execute("SELECT COUNT(*) AS total, COUNT(correlation_id) AS with_corr FROM agent_invocation")
+        row = cur.fetchone() or {}
+        if row.get("total", 0) > 0:
+            audit_pct = 100 * row.get("with_corr", 0) / row["total"]
+        else:
+            audit_pct = 100.0   # no invocations yet · vacuously good
+
+        # tracking · orphan jobs
+        cur.execute("""
+            SELECT COUNT(*) FILTER (WHERE queue_status IN ('Stuck','Failed')) AS bad,
+                   COUNT(*) AS total
+            FROM agent_queue
+        """)
+        q = cur.fetchone() or {"total": 0, "bad": 0}
+        tracking_score = 1.0 if q["total"] == 0 else 1.0 - (q["bad"] / q["total"])
+
+        # observability · trace coverage
+        cur.execute("SELECT COUNT(*) FROM agent_trace_event")
+        n_events = cur.fetchone()["count"]
+        cur.execute("SELECT COUNT(*) FROM agent_invocation")
+        n_inv = cur.fetchone()["count"]
+        obs_score = 1.0 if n_inv == 0 else min(1.0, n_events / max(n_inv, 1))
+
+    # Build the scorecard
+    scaffold_score = 0.5   # honest placeholder for non-measurable yet
+    measurements = {
+        "scalability":     scaffold_score,
+        "performance":     scaffold_score,
+        "load_testing":    scaffold_score,
+        "error_handling":  scaffold_score,
+        "resource_memory": scaffold_score,
+        "agent_quality":   scaffold_score,
+        "logging":         round(audit_pct / 100, 3),
+        "observability":   round(obs_score, 3),
+        "tracking":        round(tracking_score, 3),
+        "benchmarking":    scaffold_score,
+        "scoring_quality": scaffold_score,
+    }
+    for d in QUALITY_DIMENSIONS:
+        scores.append({
+            "id": d["id"], "label": d["label"],
+            "score": measurements[d["id"]],
+            "owner_agent": d["owner_agent"],
+            "pipeline": d["pipeline"],
+            "scaffold": measurements[d["id"]] == scaffold_score,
+            "pass_gate": d["pass_gate"],
+        })
+
+    avg = round(sum(s["score"] for s in scores) / len(scores), 3)
+    n_pass = sum(1 for s in scores if s["score"] >= 0.8)
+
+    return {
+        "scorecard": scores,
+        "summary": {
+            "average_score": avg,
+            "n_dimensions": len(scores),
+            "n_passing_80pct": n_pass,
+            "overall_grade": "A" if avg >= 0.9 else "B" if avg >= 0.8 else "C" if avg >= 0.6 else "D" if avg >= 0.4 else "F",
+            "is_top_1_pct": avg >= 0.95,
+        },
+        "as_of": __import__("datetime").datetime.now().isoformat(),
+    }
+
+
 @router.get("/stats")
 def stats():
     """One-shot rollup · test agents + pipeline counts + invocation history."""

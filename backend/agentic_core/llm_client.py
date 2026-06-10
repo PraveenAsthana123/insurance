@@ -26,6 +26,9 @@ PRICING = {
     "gpt-4o-mini":    {"input": 0.15,  "output": 0.60},
     "claude-3-5-sonnet": {"input": 3.00,  "output": 15.00},
     "claude-3-5-haiku":  {"input": 0.80,  "output": 4.00},
+    "llama3.2:3b":    {"input": 0.00,  "output": 0.00},     # local Ollama
+    "llama3.1:8b":    {"input": 0.00,  "output": 0.00},
+    "qwen2.5:3b":     {"input": 0.00,  "output": 0.00},
     "stub":           {"input": 0.00,  "output": 0.00},
 }
 
@@ -37,6 +40,46 @@ def _compute_cost(model: str, tokens_in: int, tokens_out: int) -> float:
         + (tokens_out / 1_000_000.0) * p["output"],
         6,
     )
+
+
+def _ollama_reachable(url: str) -> bool:
+    try:
+        import httpx
+        r = httpx.get(f"{url}/api/tags", timeout=1.5)
+        return r.status_code == 200
+    except Exception:
+        return False
+
+
+def _ollama_plan(url: str, model: str, agent_id: str, input_text: str, skills: list[str]) -> tuple[dict, int, int]:
+    """Real Ollama call · per global §96 + §50."""
+    import httpx
+    prompt = (
+        f"You are the planner for agent '{agent_id}'. "
+        f"Available skills: {', '.join(skills[:20])}. "
+        f"User input: {input_text}\n\n"
+        "Reply ONLY with JSON: "
+        '{"rationale": "...", "steps": [{"step": 1, "skill_id": "...", "args": {}, "depends_on": []}], "n_steps": N}'
+    )
+    r = httpx.post(
+        f"{url}/api/generate",
+        json={
+            "model": model, "prompt": prompt, "stream": False,
+            "format": "json", "options": {"num_predict": 400},
+        },
+        timeout=30,
+    )
+    r.raise_for_status()
+    data = r.json()
+    text = data.get("response", "")
+    try:
+        plan = json.loads(text)
+    except Exception:
+        # Recover · extract first {…}
+        start = text.find("{")
+        end = text.rfind("}")
+        plan = json.loads(text[start:end+1]) if start >= 0 else _stub_plan(agent_id, input_text, skills)
+    return plan, data.get("prompt_eval_count", 0), data.get("eval_count", 0)
 
 
 def _stub_plan(agent_id: str, input_text: str, skills: list[str]) -> dict:
@@ -141,9 +184,11 @@ def plan(agent_id: str, agent_model: str, input_text: str, skills: list[str]) ->
     error = None
     plan_dict: dict[str, Any] = {}
 
-    # Resolve backend
+    # Resolve backend per global §96 + §50 · OpenAI → Anthropic → Ollama → stub
     has_openai = bool(os.environ.get("OPENAI_API_KEY"))
     has_anthropic = bool(os.environ.get("ANTHROPIC_API_KEY"))
+    ollama_url = os.environ.get("OLLAMA_URL", "http://localhost:11434")
+    ollama_model = os.environ.get("OLLAMA_MODEL", "llama3.2:3b")
 
     try:
         if agent_model and agent_model.startswith("gpt-") and has_openai:
@@ -162,9 +207,12 @@ def plan(agent_id: str, agent_model: str, input_text: str, skills: list[str]) ->
             provider = "anthropic"
             model_used = "claude-3-5-haiku"
             plan_dict, tokens_in, tokens_out = _anthropic_plan(model_used, agent_id, input_text, skills)
+        elif _ollama_reachable(ollama_url):
+            provider = "ollama"
+            model_used = ollama_model
+            plan_dict, tokens_in, tokens_out = _ollama_plan(ollama_url, ollama_model, agent_id, input_text, skills)
         else:
             plan_dict = _stub_plan(agent_id, input_text, skills)
-            # Honest stub token count (sentence-count × ~6)
             tokens_in = len(input_text.split())
             tokens_out = sum(len(str(s).split()) for s in plan_dict.get("steps", []))
     except Exception as e:

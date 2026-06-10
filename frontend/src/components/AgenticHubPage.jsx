@@ -20,6 +20,7 @@ const HUB_TABS = [
   { key: 'verification',  label: 'Verification Gates' },
   { key: 'issues',        label: 'Issues & Solutions' },
   { key: 'testing',       label: 'Testing & Pipelines (Iter 47)' },
+  { key: 'quality',       label: 'Quality Scorecard (Iter 48)' },
   { key: 'coverage',      label: 'Coverage (Iter 45)' },
 ];
 
@@ -778,6 +779,129 @@ function TestingView() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Quality Scorecard (Iter 48) · 11 dimensions · benchmarks · top-1% report
+
+function QualityScorecardView() {
+  const [data, setData] = useState(null);
+  const [dims, setDims] = useState([]);
+
+  const load = useCallback(async () => {
+    const [report, dimensions] = await Promise.all([
+      fetch(`${API}/api/v1/test-catalog/top-1pct-report`).then(r => r.json()),
+      fetch(`${API}/api/v1/test-catalog/quality-dimensions`).then(r => r.json()),
+    ]);
+    setData(report);
+    setDims(dimensions.dimensions || []);
+  }, []);
+  useEffect(() => { load(); }, [load]);
+
+  if (!data) return <em>Loading…</em>;
+
+  const summary = data.summary || {};
+  const gradeColor = summary.overall_grade === 'A' ? '#10b981' :
+                     summary.overall_grade === 'B' ? '#3b82f6' :
+                     summary.overall_grade === 'C' ? '#f59e0b' : '#ef4444';
+
+  return (
+    <>
+      <Section title="Top-1% Scorecard" accent={gradeColor}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+          <div style={{ padding: 12, background: `${gradeColor}15`, borderRadius: 4, border: `1px solid ${gradeColor}40` }}>
+            <div style={{ fontSize: 9, color: gradeColor }}>OVERALL GRADE</div>
+            <div style={{ fontSize: 38, fontWeight: 800, color: gradeColor }}>{summary.overall_grade}</div>
+            <div style={{ fontSize: 10, color: '#64748b' }}>avg {(summary.average_score * 100).toFixed(0)}%</div>
+          </div>
+          <div style={{ padding: 12, background: '#dbeafe', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#1d4ed8' }}>DIMENSIONS</div>
+            <div style={{ fontSize: 38, fontWeight: 800, color: '#1d4ed8' }}>{summary.n_dimensions}</div>
+          </div>
+          <div style={{ padding: 12, background: '#dcfce7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#15803d' }}>PASSING (≥80%)</div>
+            <div style={{ fontSize: 38, fontWeight: 800, color: '#15803d' }}>{summary.n_passing_80pct}</div>
+          </div>
+          <div style={{ padding: 12, background: summary.is_top_1_pct ? '#dcfce7' : '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: summary.is_top_1_pct ? '#15803d' : '#a16207' }}>TOP-1% (≥95%)</div>
+            <div style={{ fontSize: 38, fontWeight: 800, color: summary.is_top_1_pct ? '#15803d' : '#a16207' }}>
+              {summary.is_top_1_pct ? 'YES' : 'NO'}
+            </div>
+          </div>
+        </div>
+        <div style={{ marginTop: 8, fontSize: 10, color: '#64748b' }}>
+          As of: {data.as_of}
+        </div>
+      </Section>
+
+      <Section title="11 Quality Dimensions · live scores" accent="#3b82f6">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#f1f5f9', color: '#475569' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 5 }}>DIMENSION</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>SCORE</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>OWNER AGENT</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>PIPELINE</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>PASS GATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(data.scorecard || []).map(s => {
+              const pct = Math.round(s.score * 100);
+              const color = s.score >= 0.9 ? '#10b981' : s.score >= 0.8 ? '#3b82f6' :
+                            s.score >= 0.5 ? '#f59e0b' : '#ef4444';
+              return (
+                <tr key={s.id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  <td style={{ padding: 5 }}>
+                    <strong>{s.label}</strong>
+                    {s.scaffold && <Pill color="#94a3b8">SCAFFOLD</Pill>}
+                  </td>
+                  <td style={{ padding: 5 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <div style={{ width: 80, height: 8, background: '#e2e8f0', borderRadius: 2 }}>
+                        <div style={{ width: `${pct}%`, height: 8, background: color, borderRadius: 2 }} />
+                      </div>
+                      <code style={{ fontSize: 10, color }}>{pct}%</code>
+                    </div>
+                  </td>
+                  <td style={{ padding: 5, fontSize: 9 }}><code>{s.owner_agent}</code></td>
+                  <td style={{ padding: 5, fontSize: 9 }}>{s.pipeline}</td>
+                  <td style={{ padding: 5, fontSize: 9, color: '#15803d' }}>{s.pass_gate}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </Section>
+
+      <Section title="Benchmarks per dimension" accent="#8b5cf6">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#f3e8ff', color: '#7e22ce' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 5 }}>DIMENSION</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>BENCHMARK TARGETS</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>SCORE FORMULA</th>
+              <th style={{ textAlign: 'left', padding: 5 }}>MONITORING</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dims.map(d => (
+              <tr key={d.id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: 5 }}><strong>{d.label}</strong></td>
+                <td style={{ padding: 5, fontSize: 9 }}>
+                  {Object.entries(d.benchmark || {}).map(([k, v]) =>
+                    <div key={k}><code>{k}: {v}</code></div>
+                  )}
+                </td>
+                <td style={{ padding: 5, fontSize: 9, fontStyle: 'italic' }}>{d.score_formula}</td>
+                <td style={{ padding: 5, fontSize: 9, fontFamily: 'monospace', color: '#64748b' }}>{d.monitoring_query}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+    </>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // The hub
 
 export default function AgenticHubPage() {
@@ -816,6 +940,7 @@ export default function AgenticHubPage() {
         {activeTab === 'verification' && <VerificationView />}
         {activeTab === 'issues'       && <IssuesView />}
         {activeTab === 'testing'      && <TestingView />}
+        {activeTab === 'quality'      && <QualityScorecardView />}
         {activeTab === 'coverage'     && <CoverageView />}
       </div>
     </div>
