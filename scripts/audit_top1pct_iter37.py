@@ -60,11 +60,13 @@ def main():
         n_tables = cur.fetchone()[0]
     a(f"5. 5 agentic tables exist ({n_tables})", n_tables == 5)
 
-    # 6. Frontend panel exists
+    # 6. Frontend panel exists · Iter 41 extended TABS → TAB_GROUPS
     panel = REPO / "frontend/src/components/AgenticAdminPanel.jsx"
-    a("6. AgenticAdminPanel.jsx · 13 tabs + dept filter",
-      panel.exists() and "TABS = [" in panel.read_text()
-      and "DEPARTMENTS = [" in panel.read_text())
+    txt = panel.read_text() if panel.exists() else ""
+    a("6. AgenticAdminPanel.jsx · tabs + dept filter exist",
+      panel.exists()
+      and ("TAB_GROUPS" in txt or "TABS = [" in txt)
+      and "DEPARTMENTS = [" in txt)
 
     # 7. Page mount exists
     page = REPO / "frontend/src/pages/agentic/AgenticAdminPage.jsx"

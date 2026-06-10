@@ -26,6 +26,16 @@ def main():
     from fastapi.testclient import TestClient
     c = TestClient(create_app())
 
+    # Idempotency · clean up any stale rows from previous runs so unique
+    # constraints (e.g., agent_team UNIQUE(agent_id)) don't fail.
+    import psycopg2
+    from core.config import get_settings
+    with psycopg2.connect(get_settings().database_url) as cx, cx.cursor() as cur:
+        cur.execute("DELETE FROM agent_team WHERE agent_id = %s", ("incident_triage",))
+        cur.execute("DELETE FROM agent_capacity WHERE agent_id = %s", ("incident_triage",))
+        cur.execute("DELETE FROM agent_sla WHERE agent_id = %s AND sla_name LIKE %s",
+                    ("incident_triage", "Incident Triage Tier1%"))
+
     # 1. Health
     r = c.get("/api/v1/agentic-ops/health")
     d = r.json()
