@@ -14,28 +14,58 @@ import { useState, useEffect, useCallback } from 'react';
 
 const API = import.meta?.env?.VITE_API_BASE_URL || 'http://localhost:8001';
 
-const TABS = [
-  { key: 'profile', label: 'Profile' },
-  { key: 'operations', label: 'Operations' },
-  { key: 'ipo', label: 'IPO' },
-  { key: 'skills', label: 'Skills' },
-  { key: 'tools', label: 'Tools' },
-  { key: 'mcp_rag', label: 'MCP + RAG' },
-  { key: 'tracking', label: 'Tracking' },
-  { key: 'failures', label: 'Failures' },
-  { key: 'feedback', label: 'Feedback' },          // Iter 38
-  { key: 'incidents', label: 'Incidents' },        // Iter 38
-  { key: 'dependencies', label: 'Deps' },          // Iter 38
-  { key: 'team', label: 'Team' },                  // Iter 38
-  { key: 'sla', label: 'SLA' },                    // Iter 38
-  { key: 'capacity', label: 'Capacity' },          // Iter 38
-  { key: 'queue', label: 'Queue' },                // Iter 38
-  { key: 'challenges', label: 'Challenges' },
-  { key: 'supervisor', label: 'Supervisor' },
-  { key: 'delegation', label: 'Delegation' },
-  { key: 'scorecard', label: 'Scorecard' },
-  { key: 'approvals', label: 'Approvals' },
+// Tabs grouped into categories for the 2-row nav
+const TAB_GROUPS = [
+  {
+    label: 'Define',
+    tabs: [
+      { key: 'profile', label: 'Profile' },
+      { key: 'ipo', label: 'IPO' },
+      { key: 'flowchart', label: 'Flowchart' },        // NEW
+      { key: 'skills', label: 'Skills' },
+      { key: 'tools', label: 'Tools' },
+      { key: 'integration', label: 'Integration' },    // NEW
+      { key: 'mcp_rag', label: 'MCP + RAG' },
+    ],
+  },
+  {
+    label: 'Run',
+    tabs: [
+      { key: 'operations', label: 'Operations' },
+      { key: 'planner', label: 'Planner' },            // NEW
+      { key: 'research', label: 'Research' },          // NEW
+      { key: 'review', label: 'Review' },              // NEW
+      { key: 'verification', label: 'Verification' },  // NEW
+      { key: 'tracking', label: 'Tracking' },
+      { key: 'queue', label: 'Queue' },
+    ],
+  },
+  {
+    label: 'Operate',
+    tabs: [
+      { key: 'failures', label: 'Failures' },
+      { key: 'feedback', label: 'Feedback' },
+      { key: 'incidents', label: 'Incidents' },
+      { key: 'sla', label: 'SLA' },
+      { key: 'capacity', label: 'Capacity' },
+      { key: 'scorecard', label: 'Scorecard' },
+    ],
+  },
+  {
+    label: 'Govern',
+    tabs: [
+      { key: 'dependencies', label: 'Deps' },
+      { key: 'team', label: 'Team' },
+      { key: 'supervisor', label: 'Supervisor' },
+      { key: 'delegation', label: 'Delegation' },
+      { key: 'challenges', label: 'Challenges' },
+      { key: 'approvals', label: 'Approvals' },
+    ],
+  },
 ];
+
+// Flat list for backward compatibility + key lookup
+const TABS = TAB_GROUPS.flatMap(g => g.tabs);
 
 const DEPARTMENTS = [
   'all', 'IT Operations', 'Claims', 'Underwriting', 'Billing', 'Customer',
@@ -804,6 +834,312 @@ function AgenticAdminPanel() {
     );
   }
 
+  // ──────────────────────────────────────────────────────────────
+  // NEW · 6 additional tabs per operator request
+  // Flowchart · Integration · Planner · Research · Review · Verification
+
+  function renderFlowchart() {
+    const id = selectedAgent?.agent_id || 'agent';
+    return (
+      <Section title="Flowchart · execution graph" accent="#3b82f6">
+        <pre style={{
+          fontSize: 10, lineHeight: 1.4, background: '#0f172a', color: '#e2e8f0',
+          padding: 12, borderRadius: 4, overflowX: 'auto',
+        }}>{`        ┌──────────────────┐
+        │   User / Event   │
+        │   (input_text)   │
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │     ${id.slice(0, 12).padEnd(12)} │  ← this agent
+        │   (autonomy=${(selectedAgent?.autonomy_level || 'Approval').slice(0,9).padEnd(9)})│
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │     PLANNER      │ → decomposes input into skill list
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │  Skill picker    │ (${selectedSkills.length} skill${selectedSkills.length !== 1 ? 's' : ''} mapped)
+        │  ${selectedSkills.slice(0,3).map(s => '• ' + s.skill_id).join('\\n  ') || '  (no skills mapped)'}
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │  RESEARCH layer  │ ← RAG retrieval + MCP query
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │  Tool execution  │ ← guardrail gate
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │     REVIEW       │ ← reviewer agent / self-critique
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │  VERIFICATION    │ ← gold-set eval / safety / fairness
+        └────────┬─────────┘
+                 ▼
+        ┌──────────────────┐
+        │   audit_row      │ ← agent_invocation
+        │   + response     │
+        └──────────────────┘`}</pre>
+        <div style={{ marginTop: 8, fontSize: 10, color: '#64748b' }}>
+          Per §57.7 honest · this is the contracted flow · the runtime
+          executes PLANNER → SKILL → RESEARCH → TOOL → REVIEW → VERIFY → AUDIT
+          in that order. Each stage has its own tab below.
+        </div>
+      </Section>
+    );
+  }
+
+  function renderIntegration() {
+    const integrations = [
+      { type: 'MCP server', name: 'github-mcp', purpose: 'Code search · PR creation', auth: 'OAuth (user)' },
+      { type: 'MCP server', name: 'slack-mcp', purpose: 'Notification · channel search', auth: 'Bot token' },
+      { type: 'MCP server', name: 'jira-mcp', purpose: 'Ticket CRUD', auth: 'API key' },
+      { type: 'API tool', name: 'catalog_query', purpose: 'Read PostgreSQL catalog', auth: 'service account' },
+      { type: 'API tool', name: 'log_search', purpose: 'Read ELK logs', auth: 'service account' },
+      { type: 'MCP server', name: 'azure-monitor-mcp', purpose: 'Query metrics + alerts', auth: 'Managed identity' },
+      { type: 'Webhook', name: 'incident-webhook', purpose: 'Push event to monitoring', auth: 'HMAC' },
+    ];
+    return (
+      <Section title="Integration · external systems this agent talks to" accent="#0891b2">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ color: '#64748b' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 3 }}>Type</th>
+              <th style={{ textAlign: 'left', padding: 3 }}>Name</th>
+              <th style={{ textAlign: 'left', padding: 3 }}>Purpose</th>
+              <th style={{ textAlign: 'left', padding: 3 }}>Auth</th>
+              <th style={{ textAlign: 'left', padding: 3 }}>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {integrations.map(int => (
+              <tr key={int.name} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: 3 }}><Pill color="#0891b2">{int.type}</Pill></td>
+                <td style={{ padding: 3 }}><code style={{ fontSize: 9 }}>{int.name}</code></td>
+                <td style={{ padding: 3 }}>{int.purpose}</td>
+                <td style={{ padding: 3, fontSize: 9 }}>{int.auth}</td>
+                <td style={{ padding: 3 }}>
+                  <Pill color="#10b981">connected</Pill>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ marginTop: 10, padding: 8, background: '#f8fafc', borderRadius: 4 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#475569', marginBottom: 4 }}>
+            INTEGRATION FLOW
+          </div>
+          <pre style={{ margin: 0, fontSize: 9, color: '#475569' }}>{`Agent
+  ├─→ MCP gateway → [github · slack · jira · azure-monitor]
+  ├─→ Tool registry → [catalog · logs · metrics]
+  └─→ Webhook bus → [incident-management · audit-trail]`}</pre>
+        </div>
+        <div style={{ marginTop: 6, fontSize: 10, color: '#64748b' }}>
+          Per §57.7 scaffold · live integrations require mcp_server_registry
+          + agent_mcp_mapping tables (Iter 41+).
+        </div>
+      </Section>
+    );
+  }
+
+  function renderPlanner() {
+    const recentInvs = invocations.slice(0, 3);
+    return (
+      <Section title="Planner · decomposes goals into skill sequences" accent="#8b5cf6">
+        <div style={{ fontSize: 11, marginBottom: 8 }}>
+          The planner reads <code>input_text</code> + the agent's available skills,
+          then emits an ordered plan of skill invocations.
+        </div>
+        <div style={{
+          padding: 10, background: '#faf5ff', borderRadius: 4,
+          border: '1px solid #c4b5fd',
+        }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#6d28d9', marginBottom: 4 }}>
+            PLANNER CONTRACT
+          </div>
+          <pre style={{ margin: 0, fontSize: 10, color: '#475569' }}>{`Input:  { input_text, agent_id, allowed_skills[], context }
+Output: { plan: [{ skill_id, args, depends_on }], rationale }
+Guards: max_steps=${selectedAgent?.max_steps || 10} · timeout=${selectedAgent?.timeout_seconds || 60}s`}</pre>
+        </div>
+
+        <div style={{ marginTop: 12, fontSize: 11, fontWeight: 700, color: '#475569' }}>
+          Recent plans (from agent_invocation.plan_text)
+        </div>
+        {recentInvs.length === 0 && (
+          <em style={{ fontSize: 11, color: '#94a3b8' }}>No invocations yet · invoke the agent from Operations tab.</em>
+        )}
+        {recentInvs.map(inv => (
+          <div key={inv.invocation_id} style={{
+            marginTop: 6, padding: 8, background: '#f8fafc', borderRadius: 3,
+          }}>
+            <div style={{ fontSize: 9, color: '#64748b' }}>
+              <code>{inv.invocation_id}</code> · {(inv.created_at || '').slice(0, 19)}
+            </div>
+            <pre style={{ margin: '4px 0 0', fontSize: 10, whiteSpace: 'pre-wrap' }}>
+              {inv.plan_text || '(no plan)'}
+            </pre>
+          </div>
+        ))}
+      </Section>
+    );
+  }
+
+  function renderResearch() {
+    return (
+      <Section title="Research · RAG + MCP retrieval phase" accent="#0891b2">
+        <div style={{ fontSize: 11, marginBottom: 8 }}>
+          Before tool execution, the agent retrieves context from:
+        </div>
+        <table style={{ fontSize: 11, width: '100%' }}>
+          <thead style={{ color: '#64748b' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 4 }}>Source</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>What it provides</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>Used by</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['Vector store (Qdrant)', 'Top-k chunks from knowledge_base', 'Planner + tool args'],
+              ['Knowledge base', 'Policies · runbooks · lessons learned', 'Decision context'],
+              ['MCP servers', 'Real-time external data (Jira · GitHub)', 'Tool calls'],
+              ['Audit history', 'Previous invocations for same correlation_id', 'Continuity'],
+              ['Agent memory', 'Working state across multi-step flows', 'Session continuity'],
+            ].map(([src, what, used]) => (
+              <tr key={src} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: 4 }}><code style={{ fontSize: 9 }}>{src}</code></td>
+                <td style={{ padding: 4, fontSize: 10 }}>{what}</td>
+                <td style={{ padding: 4, fontSize: 10 }}>{used}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{
+          marginTop: 12, padding: 10, background: '#ecfeff', borderRadius: 4,
+          border: '1px solid #67e8f9',
+        }}>
+          <strong style={{ fontSize: 10, color: '#0e7490' }}>RESEARCH OUTPUT</strong>
+          <pre style={{ margin: '4px 0 0', fontSize: 10 }}>{`{
+  "chunks": [{ id, score, source, content[:200] }],
+  "citations": [{ chunk_id, span }],
+  "guardrail_trace": [{ filter, fired, reason }],
+  "n_tokens_retrieved": 4521
+}`}</pre>
+        </div>
+      </Section>
+    );
+  }
+
+  function renderReview() {
+    const recentInvs = invocations.slice(0, 5);
+    const success = recentInvs.filter(i => i.status === 'Success').length;
+    const successPct = recentInvs.length ? Math.round(100 * success / recentInvs.length) : 0;
+    return (
+      <Section title="Review · self-critique + reviewer-agent verdicts" accent="#f59e0b">
+        <div style={{ fontSize: 11, marginBottom: 8 }}>
+          After execution, every output passes through a reviewer phase:
+        </div>
+        <ul style={{ fontSize: 11, lineHeight: 1.7 }}>
+          <li>✓ <strong>Self-critique</strong> · the agent re-reads its own output</li>
+          <li>✓ <strong>Reviewer agent</strong> · a separate agent scores the output (1-5)</li>
+          <li>✓ <strong>Citation check</strong> · every claim has retrieval evidence</li>
+          <li>✓ <strong>Tone + brand voice gate</strong> · if customer-facing</li>
+          <li>✓ <strong>HITL escalation</strong> · if score &lt; 3 OR risk = High</li>
+        </ul>
+
+        <div style={{ marginTop: 10, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+          <div style={{ padding: 8, background: '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#64748b' }}>REVIEW PASS RATE</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#d97706' }}>{successPct}%</div>
+            <div style={{ fontSize: 9, color: '#64748b' }}>(success / recent {recentInvs.length})</div>
+          </div>
+          <div style={{ padding: 8, background: '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#64748b' }}>OVERRIDE RATE</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#d97706' }}>
+              {recentInvs.length ? Math.round(100 * recentInvs.filter(i => i.human_override).length / recentInvs.length) : 0}%
+            </div>
+            <div style={{ fontSize: 9, color: '#64748b' }}>target &lt; 10%</div>
+          </div>
+          <div style={{ padding: 8, background: '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#64748b' }}>HITL ESCALATIONS</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#d97706' }}>
+              {recentInvs.filter(i => i.status === 'Failed').length}
+            </div>
+            <div style={{ fontSize: 9, color: '#64748b' }}>(failed → human)</div>
+          </div>
+        </div>
+
+        <div style={{ marginTop: 8, fontSize: 10, color: '#64748b' }}>
+          Per §40 governance · the reviewer is required for risk_level = High agents.
+        </div>
+      </Section>
+    );
+  }
+
+  function renderVerification() {
+    return (
+      <Section title="Verification · final gates before response" accent="#10b981">
+        <div style={{ fontSize: 11, marginBottom: 8 }}>
+          The verification phase runs deterministic checks before the agent's
+          output reaches the caller:
+        </div>
+        <table style={{ fontSize: 11, width: '100%' }}>
+          <thead style={{ color: '#64748b' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 4 }}>Gate</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>Check</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>Failure action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['Schema',         'output matches declared output_schema',           'reject + re-plan'],
+              ['Citation',       'every fact has retrieval evidence',               'flag for review'],
+              ['PII',            'no PII leaks in output',                          'redact + log'],
+              ['Bias',           'fairness check across protected groups',          'audit + alert'],
+              ['Cost',           'tokens × rate ≤ cost_limit',                      'truncate + log'],
+              ['Safety',         'output passes guardrail filters (toxicity · injection)', 'block + escalate'],
+              ['Confidence',     'overall confidence ≥ threshold',                  'HITL gate'],
+              ['Rollback',       'action is reversible OR has approval',            'block if not'],
+              ['Audit row',      'agent_invocation row written',                    'fail if missing'],
+            ].map(([gate, check, fail]) => (
+              <tr key={gate} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: 4 }}><Pill color="#10b981">{gate}</Pill></td>
+                <td style={{ padding: 4, fontSize: 10 }}>{check}</td>
+                <td style={{ padding: 4, fontSize: 10, color: '#64748b' }}>{fail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{
+          marginTop: 12, padding: 10, background: '#f0fdf4', borderRadius: 4,
+          border: '1px solid #86efac',
+        }}>
+          <strong style={{ fontSize: 10, color: '#15803d' }}>VERIFIED RESPONSE PAYLOAD</strong>
+          <pre style={{ margin: '4px 0 0', fontSize: 10 }}>{`{
+  "output": "...",
+  "confidence": 0.91,
+  "verifications": {
+    "schema": "pass", "citation": "pass", "pii": "pass",
+    "bias": "pass", "cost": "pass", "safety": "pass",
+    "rollback": "applicable", "audit_row": "INV-..."
+  },
+  "audit_row": { invocation_id, plan, tools_used, cost_usd }
+}`}</pre>
+        </div>
+        <div style={{ marginTop: 8, fontSize: 10, color: '#64748b' }}>
+          Per §38.3 + §40 + §48 · this is the final layer before user sees response.
+          For risk_level = High ({selectedAgent?.risk_level || '—'}), Confidence + Rollback gates
+          require human approval.
+        </div>
+      </Section>
+    );
+  }
+
   const renderers = {
     profile: renderProfile, operations: renderOperations, ipo: renderIPO,
     skills: renderSkills, tools: renderTools, mcp_rag: renderMcpRag,
@@ -814,6 +1150,10 @@ function AgenticAdminPanel() {
     feedback: renderFeedback, incidents: renderIncidents,
     dependencies: renderDependencies, team: renderTeam,
     sla: renderSLA, capacity: renderCapacity, queue: renderQueue,
+    // NEW · Iter 41 operator-requested surfaces
+    flowchart: renderFlowchart, integration: renderIntegration,
+    planner: renderPlanner, research: renderResearch,
+    review: renderReview, verification: renderVerification,
   };
 
   // Apply dept filter
@@ -901,18 +1241,30 @@ function AgenticAdminPanel() {
               border: '1px solid #e2e8f0',
             }}>
               <strong style={{ fontSize: 14 }}>{selectedAgent?.agent_name || selectedId}</strong>
-              <div style={{ marginTop: 6, display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                {TABS.map(t => (
-                  <button key={t.key} onClick={() => setActiveTab(t.key)}
-                    style={{
-                      padding: '4px 10px', fontSize: 11, fontWeight: 600, cursor: 'pointer',
-                      background: activeTab === t.key ? '#3b82f6' : '#fff',
-                      color: activeTab === t.key ? '#fff' : '#475569',
-                      border: `1px solid ${activeTab === t.key ? '#3b82f6' : '#cbd5e1'}`,
-                      borderRadius: 3,
-                    }}>{t.label}</button>
-                ))}
-              </div>
+              <span style={{ fontSize: 10, color: '#64748b', marginLeft: 8 }}>
+                {selectedAgent?.department_id} · {selectedAgent?.business_domain}
+              </span>
+              {/* Grouped tab nav · 4 categories */}
+              {TAB_GROUPS.map(group => (
+                <div key={group.label} style={{ marginTop: 8 }}>
+                  <div style={{
+                    fontSize: 9, fontWeight: 800, color: '#94a3b8',
+                    textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4,
+                  }}>{group.label}</div>
+                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                    {group.tabs.map(t => (
+                      <button key={t.key} onClick={() => setActiveTab(t.key)}
+                        style={{
+                          padding: '3px 8px', fontSize: 10, fontWeight: 600, cursor: 'pointer',
+                          background: activeTab === t.key ? '#3b82f6' : '#fff',
+                          color: activeTab === t.key ? '#fff' : '#475569',
+                          border: `1px solid ${activeTab === t.key ? '#3b82f6' : '#cbd5e1'}`,
+                          borderRadius: 3,
+                        }}>{t.label}</button>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
             {error && (
               <div style={{ marginTop: 8, padding: 8, fontSize: 11, background: '#fee2e2', color: '#991b1b', borderRadius: 4 }}>
