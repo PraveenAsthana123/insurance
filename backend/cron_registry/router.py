@@ -69,8 +69,8 @@ def list_crons():
         if parsed:
             rows.append(parsed)
     # Filter to insur-tagged jobs first · others below
-    insur_jobs = [r for r in rows if r.get("tag", "").startswith("INSUR-")]
-    other_jobs = [r for r in rows if not r.get("tag", "").startswith("INSUR-")]
+    insur_jobs = [r for r in rows if (r.get("tag") or "").startswith("INSUR-")]
+    other_jobs = [r for r in rows if not (r.get("tag") or "").startswith("INSUR-")]
     return {
         "insur_jobs": insur_jobs,
         "other_jobs": other_jobs,
