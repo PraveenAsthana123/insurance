@@ -1922,3 +1922,2311 @@ error: jobs/logs/rag_cache.log: patch does not apply
 2026-06-06T02:04:06Z | auto-fix-worker | start        | T-loop-1780711430-3 | role=error target=jobs/logs/insur_bot.log
 2026-06-06T02:04:06Z | auto-fix-worker | classify     | T-loop-1780711430-3 | tier=small risk=low council=single
 2026-06-06T02:04:59Z | auto-fix-worker | validate     | T-loop-1780711430-3 | ok: no validator for jobs/logs/insur_bot.log
+2026-06-06T02:05:06Z | auto-fix-worker | commit       | T-loop-1780711430-3 | ok sha=f41f9752224a3f05447947cf294e51d9cddc3926
+2026-06-06T02:05:06Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-06T02:05:06Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2
+2026-06-06T03:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T03:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T03:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T03:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T03:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780714817-1
+2026-06-06T03:00:17Z | auto-fix-worker | start        | T-loop-1780714817-1 | role=error target=jobs/logs/backend.log
+2026-06-06T03:00:17Z | auto-fix-worker | classify     | T-loop-1780714817-1 | tier=small risk=low council=single
+2026-06-06T03:03:17Z | auto-fix-worker | skip         | T-loop-1780714817-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T03:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T03:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780714997-2
+2026-06-06T03:03:18Z | auto-fix-worker | start        | T-loop-1780714997-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T03:03:18Z | auto-fix-worker | classify     | T-loop-1780714997-2 | tier=small risk=low council=single
+2026-06-06T03:06:18Z | auto-fix-worker | skip         | T-loop-1780714997-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T03:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-06T03:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780715178-3
+2026-06-06T03:06:18Z | auto-fix-worker | start        | T-loop-1780715178-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T03:06:18Z | auto-fix-worker | classify     | T-loop-1780715178-3 | tier=small risk=low council=single
+2026-06-06T03:06:21Z | auto-fix-worker | apply_check  | T-loop-1780715178-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T03:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-06T03:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T04:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T04:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T04:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T04:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T04:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780718418-1
+2026-06-06T04:00:18Z | auto-fix-worker | start        | T-loop-1780718418-1 | role=error target=jobs/logs/backend.log
+2026-06-06T04:00:18Z | auto-fix-worker | classify     | T-loop-1780718418-1 | tier=small risk=low council=single
+2026-06-06T04:03:18Z | auto-fix-worker | skip         | T-loop-1780718418-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T04:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-06T04:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780718598-2
+2026-06-06T04:03:19Z | auto-fix-worker | start        | T-loop-1780718598-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T04:03:19Z | auto-fix-worker | classify     | T-loop-1780718598-2 | tier=small risk=low council=single
+2026-06-06T04:06:19Z | auto-fix-worker | skip         | T-loop-1780718598-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T04:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-06T04:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780718779-3
+2026-06-06T04:06:19Z | auto-fix-worker | start        | T-loop-1780718779-3 | role=error target=jobs/logs/insur_bot.log
+2026-06-06T04:06:19Z | auto-fix-worker | classify     | T-loop-1780718779-3 | tier=small risk=low council=single
+2026-06-06T04:06:23Z | auto-fix-worker | apply_check  | T-loop-1780718779-3 | FAIL: git apply --check failed: error: corrupt patch at line 5
+2026-06-06T04:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-06T04:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T05:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T05:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T05:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T05:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T05:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780722019-1
+2026-06-06T05:00:20Z | auto-fix-worker | start        | T-loop-1780722019-1 | role=error target=jobs/logs/backend.log
+2026-06-06T05:00:20Z | auto-fix-worker | classify     | T-loop-1780722019-1 | tier=small risk=low council=single
+2026-06-06T05:03:20Z | auto-fix-worker | skip         | T-loop-1780722019-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T05:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-06T05:03:20Z | auto-fix-loop | dispatch #2: T-loop-1780722200-2
+2026-06-06T05:03:21Z | auto-fix-worker | start        | T-loop-1780722200-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T05:03:21Z | auto-fix-worker | classify     | T-loop-1780722200-2 | tier=small risk=low council=single
+2026-06-06T05:06:21Z | auto-fix-worker | skip         | T-loop-1780722200-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T05:06:21Z | auto-fix-loop |   → verdict=skip
+2026-06-06T05:06:21Z | auto-fix-loop | dispatch #3: T-loop-1780722381-3
+2026-06-06T05:06:21Z | auto-fix-worker | start        | T-loop-1780722381-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T05:06:21Z | auto-fix-worker | classify     | T-loop-1780722381-3 | tier=small risk=low council=single
+2026-06-06T05:06:25Z | auto-fix-worker | apply_check  | T-loop-1780722381-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-06T05:06:25Z | auto-fix-loop |   → verdict=fail
+2026-06-06T05:06:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T06:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T06:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T06:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T06:00:22Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T06:00:22Z | auto-fix-loop | dispatch #1: T-loop-1780725622-1
+2026-06-06T06:00:23Z | auto-fix-worker | start        | T-loop-1780725622-1 | role=error target=jobs/logs/backend.log
+2026-06-06T06:00:24Z | auto-fix-worker | classify     | T-loop-1780725622-1 | tier=small risk=low council=single
+2026-06-06T06:02:40Z | auto-fix-worker | apply_check  | T-loop-1780725622-1 | FAIL: git apply --check failed: error: patch failed: jobs/logs/backend.log:1
+error: jobs/logs/backend.log: patch does not apply
+2026-06-06T06:02:40Z | auto-fix-loop |   → verdict=fail
+2026-06-06T06:02:41Z | auto-fix-loop | dispatch #2: T-loop-1780725761-2
+2026-06-06T06:02:42Z | auto-fix-worker | start        | T-loop-1780725761-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T06:02:42Z | auto-fix-worker | classify     | T-loop-1780725761-2 | tier=small risk=low council=single
+2026-06-06T06:04:33Z | auto-fix-worker | apply_check  | T-loop-1780725761-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T06:04:33Z | auto-fix-loop |   → verdict=fail
+2026-06-06T06:04:34Z | auto-fix-loop | dispatch #3: T-loop-1780725874-3
+2026-06-06T06:04:34Z | auto-fix-worker | start        | T-loop-1780725874-3 | role=error target=jobs/logs/insur_bot.log
+2026-06-06T06:04:34Z | auto-fix-worker | classify     | T-loop-1780725874-3 | tier=small risk=low council=single
+2026-06-06T06:04:45Z | auto-fix-worker | apply_check  | T-loop-1780725874-3 | FAIL: git apply --check failed: error: corrupt patch at line 5
+2026-06-06T06:04:45Z | auto-fix-loop |   → verdict=fail
+2026-06-06T06:04:45Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T07:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T07:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T07:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T07:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T07:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780729219-1
+2026-06-06T07:00:21Z | auto-fix-worker | start        | T-loop-1780729219-1 | role=error target=jobs/logs/backend.log
+2026-06-06T07:00:21Z | auto-fix-worker | classify     | T-loop-1780729219-1 | tier=small risk=low council=single
+2026-06-06T07:03:21Z | auto-fix-worker | skip         | T-loop-1780729219-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T07:03:22Z | auto-fix-loop |   → verdict=skip
+2026-06-06T07:03:22Z | auto-fix-loop | dispatch #2: T-loop-1780729402-2
+2026-06-06T07:03:23Z | auto-fix-worker | start        | T-loop-1780729402-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T07:03:23Z | auto-fix-worker | classify     | T-loop-1780729402-2 | tier=small risk=low council=single
+2026-06-06T07:03:27Z | auto-fix-worker | apply_check  | T-loop-1780729402-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T07:03:27Z | auto-fix-loop |   → verdict=fail
+2026-06-06T07:03:27Z | auto-fix-loop | dispatch #3: T-loop-1780729407-3
+2026-06-06T07:03:27Z | auto-fix-worker | start        | T-loop-1780729407-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T07:03:27Z | auto-fix-worker | classify     | T-loop-1780729407-3 | tier=small risk=low council=single
+2026-06-06T07:06:28Z | auto-fix-worker | skip         | T-loop-1780729407-3 | model returned empty or NEEDS_HUMAN
+2026-06-06T07:06:28Z | auto-fix-loop |   → verdict=skip
+2026-06-06T07:06:28Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T08:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T08:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T08:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T08:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T08:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780732819-1
+2026-06-06T08:00:19Z | auto-fix-worker | start        | T-loop-1780732819-1 | role=error target=jobs/logs/backend.log
+2026-06-06T08:00:19Z | auto-fix-worker | classify     | T-loop-1780732819-1 | tier=small risk=low council=single
+2026-06-06T08:03:22Z | auto-fix-worker | skip         | T-loop-1780732819-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T08:07:07Z | auto-fix-loop |   → verdict=skip
+2026-06-06T08:07:08Z | auto-fix-loop | dispatch #2: T-loop-1780733227-2
+2026-06-06T08:07:26Z | auto-fix-worker | start        | T-loop-1780733227-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T08:07:27Z | auto-fix-worker | classify     | T-loop-1780733227-2 | tier=small risk=low council=single
+2026-06-06T08:10:27Z | auto-fix-worker | skip         | T-loop-1780733227-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T08:10:29Z | auto-fix-loop |   → verdict=skip
+2026-06-06T08:10:29Z | auto-fix-loop | dispatch #3: T-loop-1780733429-3
+2026-06-06T08:10:29Z | auto-fix-worker | start        | T-loop-1780733429-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T08:10:29Z | auto-fix-worker | classify     | T-loop-1780733429-3 | tier=small risk=low council=single
+2026-06-06T08:10:33Z | auto-fix-worker | apply_check  | T-loop-1780733429-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T08:10:33Z | auto-fix-loop |   → verdict=fail
+2026-06-06T08:10:33Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T09:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T09:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T09:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T09:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T09:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780736417-1
+2026-06-06T09:00:17Z | auto-fix-worker | start        | T-loop-1780736417-1 | role=error target=jobs/logs/backend.log
+2026-06-06T09:00:17Z | auto-fix-worker | classify     | T-loop-1780736417-1 | tier=small risk=low council=single
+2026-06-06T09:03:17Z | auto-fix-worker | skip         | T-loop-1780736417-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T09:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-06T09:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780736598-2
+2026-06-06T09:03:18Z | auto-fix-worker | start        | T-loop-1780736598-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T09:03:18Z | auto-fix-worker | classify     | T-loop-1780736598-2 | tier=small risk=low council=single
+2026-06-06T09:06:18Z | auto-fix-worker | skip         | T-loop-1780736598-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T09:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-06T09:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780736778-3
+2026-06-06T09:06:18Z | auto-fix-worker | start        | T-loop-1780736778-3 | role=testing target=tests/drills/drill_graph_ai.py
+2026-06-06T09:06:18Z | auto-fix-worker | classify     | T-loop-1780736778-3 | tier=medium risk=low council=single
+2026-06-06T09:07:02Z | auto-fix-worker | apply_check  | T-loop-1780736778-3 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-06T09:07:02Z | auto-fix-loop |   → verdict=fail
+2026-06-06T09:07:02Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T10:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T10:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T10:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T10:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T10:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780740018-1
+2026-06-06T10:00:18Z | auto-fix-worker | start        | T-loop-1780740018-1 | role=error target=jobs/logs/backend.log
+2026-06-06T10:00:18Z | auto-fix-worker | classify     | T-loop-1780740018-1 | tier=small risk=low council=single
+2026-06-06T10:03:18Z | auto-fix-worker | skip         | T-loop-1780740018-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T10:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-06T10:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780740199-2
+2026-06-06T10:03:19Z | auto-fix-worker | start        | T-loop-1780740199-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T10:03:19Z | auto-fix-worker | classify     | T-loop-1780740199-2 | tier=small risk=low council=single
+2026-06-06T10:06:19Z | auto-fix-worker | skip         | T-loop-1780740199-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T10:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-06T10:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780740379-3
+2026-06-06T10:06:19Z | auto-fix-worker | start        | T-loop-1780740379-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T10:06:19Z | auto-fix-worker | classify     | T-loop-1780740379-3 | tier=small risk=low council=single
+2026-06-06T10:06:23Z | auto-fix-worker | apply_check  | T-loop-1780740379-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-06T10:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-06T10:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T11:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T11:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T11:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T11:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T11:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780743617-1
+2026-06-06T11:00:17Z | auto-fix-worker | start        | T-loop-1780743617-1 | role=error target=jobs/logs/backend.log
+2026-06-06T11:00:17Z | auto-fix-worker | classify     | T-loop-1780743617-1 | tier=small risk=low council=single
+2026-06-06T11:03:17Z | auto-fix-worker | skip         | T-loop-1780743617-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T11:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T11:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780743797-2
+2026-06-06T11:03:17Z | auto-fix-worker | start        | T-loop-1780743797-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T11:03:17Z | auto-fix-worker | classify     | T-loop-1780743797-2 | tier=small risk=low council=single
+2026-06-06T11:06:17Z | auto-fix-worker | skip         | T-loop-1780743797-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T11:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T11:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780743977-3
+2026-06-06T11:06:17Z | auto-fix-worker | start        | T-loop-1780743977-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T11:06:17Z | auto-fix-worker | classify     | T-loop-1780743977-3 | tier=small risk=low council=single
+2026-06-06T11:06:20Z | auto-fix-worker | apply_check  | T-loop-1780743977-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T11:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-06T11:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T12:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T12:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T12:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T12:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T12:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780747217-1
+2026-06-06T12:00:17Z | auto-fix-worker | start        | T-loop-1780747217-1 | role=error target=jobs/logs/backend.log
+2026-06-06T12:00:17Z | auto-fix-worker | classify     | T-loop-1780747217-1 | tier=small risk=low council=single
+2026-06-06T12:03:17Z | auto-fix-worker | skip         | T-loop-1780747217-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T12:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-06T12:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780747399-2
+2026-06-06T12:03:20Z | auto-fix-worker | start        | T-loop-1780747399-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T12:03:20Z | auto-fix-worker | classify     | T-loop-1780747399-2 | tier=small risk=low council=single
+2026-06-06T12:06:21Z | auto-fix-worker | skip         | T-loop-1780747399-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T12:06:25Z | auto-fix-loop |   → verdict=skip
+2026-06-06T12:06:25Z | auto-fix-loop | dispatch #3: T-loop-1780747585-3
+2026-06-06T12:06:25Z | auto-fix-worker | start        | T-loop-1780747585-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T12:06:25Z | auto-fix-worker | classify     | T-loop-1780747585-3 | tier=small risk=low council=single
+2026-06-06T12:06:40Z | auto-fix-worker | apply_check  | T-loop-1780747585-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-06T12:06:40Z | auto-fix-loop |   → verdict=fail
+2026-06-06T12:06:40Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T13:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T13:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T13:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T13:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T13:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780750817-1
+2026-06-06T13:00:18Z | auto-fix-worker | start        | T-loop-1780750817-1 | role=error target=jobs/logs/backend.log
+2026-06-06T13:00:18Z | auto-fix-worker | classify     | T-loop-1780750817-1 | tier=small risk=low council=single
+2026-06-06T13:00:46Z | auto-fix-worker | apply_check  | T-loop-1780750817-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-06T13:00:46Z | auto-fix-loop |   → verdict=fail
+2026-06-06T13:00:46Z | auto-fix-loop | dispatch #2: T-loop-1780750846-2
+2026-06-06T13:00:46Z | auto-fix-worker | start        | T-loop-1780750846-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T13:00:46Z | auto-fix-worker | classify     | T-loop-1780750846-2 | tier=small risk=low council=single
+2026-06-06T13:03:46Z | auto-fix-worker | skip         | T-loop-1780750846-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T13:03:46Z | auto-fix-loop |   → verdict=skip
+2026-06-06T13:03:46Z | auto-fix-loop | dispatch #3: T-loop-1780751026-3
+2026-06-06T13:03:46Z | auto-fix-worker | start        | T-loop-1780751026-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T13:03:46Z | auto-fix-worker | classify     | T-loop-1780751026-3 | tier=small risk=low council=single
+2026-06-06T13:03:49Z | auto-fix-worker | apply_check  | T-loop-1780751026-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T13:03:49Z | auto-fix-loop |   → verdict=fail
+2026-06-06T13:03:49Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T14:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T14:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T14:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T14:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T14:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780754417-1
+2026-06-06T14:00:17Z | auto-fix-worker | start        | T-loop-1780754417-1 | role=error target=jobs/logs/backend.log
+2026-06-06T14:00:17Z | auto-fix-worker | classify     | T-loop-1780754417-1 | tier=small risk=low council=single
+2026-06-06T14:03:17Z | auto-fix-worker | skip         | T-loop-1780754417-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T14:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T14:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780754597-2
+2026-06-06T14:03:18Z | auto-fix-worker | start        | T-loop-1780754597-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T14:03:18Z | auto-fix-worker | classify     | T-loop-1780754597-2 | tier=small risk=low council=single
+2026-06-06T14:06:18Z | auto-fix-worker | skip         | T-loop-1780754597-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T14:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-06T14:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780754778-3
+2026-06-06T14:06:18Z | auto-fix-worker | start        | T-loop-1780754778-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T14:06:18Z | auto-fix-worker | classify     | T-loop-1780754778-3 | tier=small risk=low council=single
+2026-06-06T14:06:22Z | auto-fix-worker | apply_check  | T-loop-1780754778-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-06T14:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-06T14:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T15:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T15:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T15:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T15:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T15:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780758017-1
+2026-06-06T15:00:17Z | auto-fix-worker | start        | T-loop-1780758017-1 | role=error target=jobs/logs/backend.log
+2026-06-06T15:00:17Z | auto-fix-worker | classify     | T-loop-1780758017-1 | tier=small risk=low council=single
+2026-06-06T15:03:17Z | auto-fix-worker | skip         | T-loop-1780758017-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T15:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T15:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780758197-2
+2026-06-06T15:03:17Z | auto-fix-worker | start        | T-loop-1780758197-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T15:03:17Z | auto-fix-worker | classify     | T-loop-1780758197-2 | tier=small risk=low council=single
+2026-06-06T15:06:17Z | auto-fix-worker | skip         | T-loop-1780758197-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T15:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-06T15:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780758378-3
+2026-06-06T15:06:18Z | auto-fix-worker | start        | T-loop-1780758378-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T15:06:18Z | auto-fix-worker | classify     | T-loop-1780758378-3 | tier=small risk=low council=single
+2026-06-06T15:06:21Z | auto-fix-worker | apply_check  | T-loop-1780758378-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-06T15:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-06T15:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T16:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T16:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T16:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T16:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T16:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780761617-1
+2026-06-06T16:00:17Z | auto-fix-worker | start        | T-loop-1780761617-1 | role=error target=jobs/logs/backend.log
+2026-06-06T16:00:17Z | auto-fix-worker | classify     | T-loop-1780761617-1 | tier=small risk=low council=single
+2026-06-06T16:03:17Z | auto-fix-worker | skip         | T-loop-1780761617-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T16:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T16:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780761797-2
+2026-06-06T16:03:17Z | auto-fix-worker | start        | T-loop-1780761797-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T16:03:17Z | auto-fix-worker | classify     | T-loop-1780761797-2 | tier=small risk=low council=single
+2026-06-06T16:06:17Z | auto-fix-worker | skip         | T-loop-1780761797-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T16:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T16:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780761977-3
+2026-06-06T16:06:17Z | auto-fix-worker | start        | T-loop-1780761977-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T16:06:17Z | auto-fix-worker | classify     | T-loop-1780761977-3 | tier=small risk=low council=single
+2026-06-06T16:06:20Z | auto-fix-worker | apply_check  | T-loop-1780761977-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T16:06:20Z | auto-fix-loop |   → verdict=fail
+2026-06-06T16:06:20Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T17:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T17:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T17:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T17:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T17:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780765217-1
+2026-06-06T17:00:17Z | auto-fix-worker | start        | T-loop-1780765217-1 | role=error target=jobs/logs/backend.log
+2026-06-06T17:00:17Z | auto-fix-worker | classify     | T-loop-1780765217-1 | tier=small risk=low council=single
+2026-06-06T17:00:24Z | auto-fix-worker | apply_check  | T-loop-1780765217-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-06T17:00:24Z | auto-fix-loop |   → verdict=fail
+2026-06-06T17:00:24Z | auto-fix-loop | dispatch #2: T-loop-1780765224-2
+2026-06-06T17:00:24Z | auto-fix-worker | start        | T-loop-1780765224-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T17:00:24Z | auto-fix-worker | classify     | T-loop-1780765224-2 | tier=small risk=low council=single
+2026-06-06T17:03:24Z | auto-fix-worker | skip         | T-loop-1780765224-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T17:03:24Z | auto-fix-loop |   → verdict=skip
+2026-06-06T17:03:24Z | auto-fix-loop | dispatch #3: T-loop-1780765404-3
+2026-06-06T17:03:24Z | auto-fix-worker | start        | T-loop-1780765404-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T17:03:24Z | auto-fix-worker | classify     | T-loop-1780765404-3 | tier=small risk=low council=single
+2026-06-06T17:03:28Z | auto-fix-worker | apply_check  | T-loop-1780765404-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-06T17:03:28Z | auto-fix-loop |   → verdict=fail
+2026-06-06T17:03:28Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T18:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T18:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T18:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T18:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T18:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780768818-1
+2026-06-06T18:00:18Z | auto-fix-worker | start        | T-loop-1780768818-1 | role=error target=jobs/logs/backend.log
+2026-06-06T18:00:18Z | auto-fix-worker | classify     | T-loop-1780768818-1 | tier=small risk=low council=single
+2026-06-06T18:03:18Z | auto-fix-worker | skip         | T-loop-1780768818-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T18:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-06T18:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780768999-2
+2026-06-06T18:03:20Z | auto-fix-worker | start        | T-loop-1780768999-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T18:03:20Z | auto-fix-worker | classify     | T-loop-1780768999-2 | tier=small risk=low council=single
+2026-06-06T18:03:24Z | auto-fix-worker | apply_check  | T-loop-1780768999-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T18:03:24Z | auto-fix-loop |   → verdict=fail
+2026-06-06T18:03:24Z | auto-fix-loop | dispatch #3: T-loop-1780769004-3
+2026-06-06T18:03:24Z | auto-fix-worker | start        | T-loop-1780769004-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T18:03:24Z | auto-fix-worker | classify     | T-loop-1780769004-3 | tier=small risk=low council=single
+2026-06-06T18:06:25Z | auto-fix-worker | skip         | T-loop-1780769004-3 | model returned empty or NEEDS_HUMAN
+2026-06-06T18:06:27Z | auto-fix-loop |   → verdict=skip
+2026-06-06T18:06:28Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T19:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T19:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T19:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T19:00:14Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T19:00:14Z | auto-fix-loop | dispatch #1: T-loop-1780772414-1
+2026-06-06T19:00:15Z | auto-fix-worker | start        | T-loop-1780772414-1 | role=error target=jobs/logs/backend.log
+2026-06-06T19:00:15Z | auto-fix-worker | classify     | T-loop-1780772414-1 | tier=small risk=low council=single
+2026-06-06T19:00:42Z | auto-fix-worker | apply_check  | T-loop-1780772414-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-06T19:00:42Z | auto-fix-loop |   → verdict=fail
+2026-06-06T19:00:42Z | auto-fix-loop | dispatch #2: T-loop-1780772442-2
+2026-06-06T19:00:43Z | auto-fix-worker | start        | T-loop-1780772442-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T19:00:43Z | auto-fix-worker | classify     | T-loop-1780772442-2 | tier=small risk=low council=single
+2026-06-06T19:03:43Z | auto-fix-worker | skip         | T-loop-1780772442-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T19:03:43Z | auto-fix-loop |   → verdict=skip
+2026-06-06T19:03:43Z | auto-fix-loop | dispatch #3: T-loop-1780772623-3
+2026-06-06T19:03:43Z | auto-fix-worker | start        | T-loop-1780772623-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T19:03:43Z | auto-fix-worker | classify     | T-loop-1780772623-3 | tier=small risk=low council=single
+2026-06-06T19:03:47Z | auto-fix-worker | apply_check  | T-loop-1780772623-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-06T19:03:47Z | auto-fix-loop |   → verdict=fail
+2026-06-06T19:03:47Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T20:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T20:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T20:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T20:00:13Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T20:00:13Z | auto-fix-loop | dispatch #1: T-loop-1780776013-1
+2026-06-06T20:00:14Z | auto-fix-worker | start        | T-loop-1780776013-1 | role=error target=jobs/logs/backend.log
+2026-06-06T20:00:14Z | auto-fix-worker | classify     | T-loop-1780776013-1 | tier=small risk=low council=single
+2026-06-06T20:00:22Z | auto-fix-worker | apply_check  | T-loop-1780776013-1 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-06T20:00:22Z | auto-fix-loop |   → verdict=fail
+2026-06-06T20:00:22Z | auto-fix-loop | dispatch #2: T-loop-1780776022-2
+2026-06-06T20:00:22Z | auto-fix-worker | start        | T-loop-1780776022-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T20:00:22Z | auto-fix-worker | classify     | T-loop-1780776022-2 | tier=small risk=low council=single
+2026-06-06T20:03:22Z | auto-fix-worker | skip         | T-loop-1780776022-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T20:03:22Z | auto-fix-loop |   → verdict=skip
+2026-06-06T20:03:22Z | auto-fix-loop | dispatch #3: T-loop-1780776202-3
+2026-06-06T20:03:22Z | auto-fix-worker | start        | T-loop-1780776202-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T20:03:22Z | auto-fix-worker | classify     | T-loop-1780776202-3 | tier=small risk=low council=single
+2026-06-06T20:03:25Z | auto-fix-worker | apply_check  | T-loop-1780776202-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T20:03:25Z | auto-fix-loop |   → verdict=fail
+2026-06-06T20:03:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T21:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T21:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T21:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T21:00:16Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T21:00:16Z | auto-fix-loop | dispatch #1: T-loop-1780779616-1
+2026-06-06T21:00:17Z | auto-fix-worker | start        | T-loop-1780779616-1 | role=error target=jobs/logs/backend.log
+2026-06-06T21:00:17Z | auto-fix-worker | classify     | T-loop-1780779616-1 | tier=small risk=low council=single
+2026-06-06T21:03:17Z | auto-fix-worker | skip         | T-loop-1780779616-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T21:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T21:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780779797-2
+2026-06-06T21:03:17Z | auto-fix-worker | start        | T-loop-1780779797-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T21:03:17Z | auto-fix-worker | classify     | T-loop-1780779797-2 | tier=small risk=low council=single
+2026-06-06T21:06:17Z | auto-fix-worker | skip         | T-loop-1780779797-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T21:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T21:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780779977-3
+2026-06-06T21:06:17Z | auto-fix-worker | start        | T-loop-1780779977-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T21:06:17Z | auto-fix-worker | classify     | T-loop-1780779977-3 | tier=small risk=low council=single
+2026-06-06T21:06:21Z | auto-fix-worker | apply_check  | T-loop-1780779977-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-06T21:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-06T21:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T22:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T22:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T22:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T22:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T22:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780783217-1
+2026-06-06T22:00:17Z | auto-fix-worker | start        | T-loop-1780783217-1 | role=error target=jobs/logs/backend.log
+2026-06-06T22:00:17Z | auto-fix-worker | classify     | T-loop-1780783217-1 | tier=small risk=low council=single
+2026-06-06T22:03:17Z | auto-fix-worker | skip         | T-loop-1780783217-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T22:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T22:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780783397-2
+2026-06-06T22:03:17Z | auto-fix-worker | start        | T-loop-1780783397-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T22:03:17Z | auto-fix-worker | classify     | T-loop-1780783397-2 | tier=small risk=low council=single
+2026-06-06T22:06:17Z | auto-fix-worker | skip         | T-loop-1780783397-2 | model returned empty or NEEDS_HUMAN
+2026-06-06T22:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-06T22:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780783577-3
+2026-06-06T22:06:17Z | auto-fix-worker | start        | T-loop-1780783577-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T22:06:17Z | auto-fix-worker | classify     | T-loop-1780783577-3 | tier=small risk=low council=single
+2026-06-06T22:06:20Z | auto-fix-worker | apply_check  | T-loop-1780783577-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T22:06:20Z | auto-fix-loop |   → verdict=fail
+2026-06-06T22:06:20Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-06T23:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-06T23:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-06T23:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-06T23:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-06T23:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780786817-1
+2026-06-06T23:00:18Z | auto-fix-worker | start        | T-loop-1780786817-1 | role=error target=jobs/logs/backend.log
+2026-06-06T23:00:18Z | auto-fix-worker | classify     | T-loop-1780786817-1 | tier=small risk=low council=single
+2026-06-06T23:03:18Z | auto-fix-worker | skip         | T-loop-1780786817-1 | model returned empty or NEEDS_HUMAN
+2026-06-06T23:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-06T23:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780786998-2
+2026-06-06T23:03:18Z | auto-fix-worker | start        | T-loop-1780786998-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-06T23:03:18Z | auto-fix-worker | classify     | T-loop-1780786998-2 | tier=small risk=low council=single
+2026-06-06T23:03:27Z | auto-fix-worker | apply_check  | T-loop-1780786998-2 | FAIL: git apply --check failed: error: corrupt patch at line 37
+2026-06-06T23:03:27Z | auto-fix-loop |   → verdict=fail
+2026-06-06T23:03:27Z | auto-fix-loop | dispatch #3: T-loop-1780787007-3
+2026-06-06T23:03:28Z | auto-fix-worker | start        | T-loop-1780787007-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-06T23:03:28Z | auto-fix-worker | classify     | T-loop-1780787007-3 | tier=small risk=low council=single
+2026-06-06T23:03:31Z | auto-fix-worker | apply_check  | T-loop-1780787007-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-06T23:03:31Z | auto-fix-loop |   → verdict=fail
+2026-06-06T23:03:31Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T00:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T00:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T00:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T00:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T00:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780790419-1
+2026-06-07T00:00:19Z | auto-fix-worker | start        | T-loop-1780790419-1 | role=error target=jobs/logs/backend.log
+2026-06-07T00:00:19Z | auto-fix-worker | classify     | T-loop-1780790419-1 | tier=small risk=low council=single
+2026-06-07T00:03:22Z | auto-fix-worker | skip         | T-loop-1780790419-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T00:03:33Z | auto-fix-loop |   → verdict=skip
+2026-06-07T00:03:33Z | auto-fix-loop | dispatch #2: T-loop-1780790613-2
+2026-06-07T00:03:35Z | auto-fix-worker | start        | T-loop-1780790613-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T00:03:35Z | auto-fix-worker | classify     | T-loop-1780790613-2 | tier=small risk=low council=single
+2026-06-07T00:03:43Z | auto-fix-worker | apply_check  | T-loop-1780790613-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-07T00:03:43Z | auto-fix-loop |   → verdict=fail
+2026-06-07T00:03:43Z | auto-fix-loop | dispatch #3: T-loop-1780790623-3
+2026-06-07T00:03:44Z | auto-fix-worker | start        | T-loop-1780790623-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T00:03:44Z | auto-fix-worker | classify     | T-loop-1780790623-3 | tier=small risk=low council=single
+2026-06-07T00:06:44Z | auto-fix-worker | skip         | T-loop-1780790623-3 | model returned empty or NEEDS_HUMAN
+2026-06-07T00:06:52Z | auto-fix-loop |   → verdict=skip
+2026-06-07T00:06:53Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T01:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T01:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T01:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T01:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T01:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780794018-1
+2026-06-07T01:00:18Z | auto-fix-worker | start        | T-loop-1780794018-1 | role=error target=jobs/logs/backend.log
+2026-06-07T01:00:18Z | auto-fix-worker | classify     | T-loop-1780794018-1 | tier=small risk=low council=single
+2026-06-07T01:03:18Z | auto-fix-worker | skip         | T-loop-1780794018-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T01:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T01:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780794198-2
+2026-06-07T01:03:18Z | auto-fix-worker | start        | T-loop-1780794198-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T01:03:18Z | auto-fix-worker | classify     | T-loop-1780794198-2 | tier=small risk=low council=single
+2026-06-07T01:03:21Z | auto-fix-worker | apply_check  | T-loop-1780794198-2 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-07T01:03:21Z | auto-fix-loop |   → verdict=fail
+2026-06-07T01:03:21Z | auto-fix-loop | dispatch #3: T-loop-1780794201-3
+2026-06-07T01:03:21Z | auto-fix-worker | start        | T-loop-1780794201-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T01:03:21Z | auto-fix-worker | classify     | T-loop-1780794201-3 | tier=small risk=low council=single
+2026-06-07T01:03:25Z | auto-fix-worker | apply_check  | T-loop-1780794201-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-07T01:03:25Z | auto-fix-loop |   → verdict=fail
+2026-06-07T01:03:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T02:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T02:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T02:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T02:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T02:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780797618-1
+2026-06-07T02:00:18Z | auto-fix-worker | start        | T-loop-1780797618-1 | role=error target=jobs/logs/backend.log
+2026-06-07T02:00:18Z | auto-fix-worker | classify     | T-loop-1780797618-1 | tier=small risk=low council=single
+2026-06-07T02:03:18Z | auto-fix-worker | skip         | T-loop-1780797618-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T02:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T02:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780797798-2
+2026-06-07T02:03:18Z | auto-fix-worker | start        | T-loop-1780797798-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T02:03:18Z | auto-fix-worker | classify     | T-loop-1780797798-2 | tier=small risk=low council=single
+2026-06-07T02:06:18Z | auto-fix-worker | skip         | T-loop-1780797798-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T02:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T02:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780797978-3
+2026-06-07T02:06:19Z | auto-fix-worker | start        | T-loop-1780797978-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T02:06:19Z | auto-fix-worker | classify     | T-loop-1780797978-3 | tier=small risk=low council=single
+2026-06-07T02:06:22Z | auto-fix-worker | apply_check  | T-loop-1780797978-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-07T02:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-07T02:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T03:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T03:00:03Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T03:00:04Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T03:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T03:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780801219-1
+2026-06-07T03:00:20Z | auto-fix-worker | start        | T-loop-1780801219-1 | role=error target=jobs/logs/backend.log
+2026-06-07T03:00:20Z | auto-fix-worker | classify     | T-loop-1780801219-1 | tier=small risk=low council=single
+2026-06-07T03:03:20Z | auto-fix-worker | skip         | T-loop-1780801219-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T03:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-07T03:03:20Z | auto-fix-loop | dispatch #2: T-loop-1780801400-2
+2026-06-07T03:03:20Z | auto-fix-worker | start        | T-loop-1780801400-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T03:03:20Z | auto-fix-worker | classify     | T-loop-1780801400-2 | tier=small risk=low council=single
+2026-06-07T03:06:20Z | auto-fix-worker | skip         | T-loop-1780801400-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T03:06:20Z | auto-fix-loop |   → verdict=skip
+2026-06-07T03:06:20Z | auto-fix-loop | dispatch #3: T-loop-1780801580-3
+2026-06-07T03:06:20Z | auto-fix-worker | start        | T-loop-1780801580-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T03:06:20Z | auto-fix-worker | classify     | T-loop-1780801580-3 | tier=small risk=low council=single
+2026-06-07T03:06:24Z | auto-fix-worker | apply_check  | T-loop-1780801580-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-07T03:06:24Z | auto-fix-loop |   → verdict=fail
+2026-06-07T03:06:24Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T04:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T04:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T04:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T04:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T04:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780804818-1
+2026-06-07T04:00:18Z | auto-fix-worker | start        | T-loop-1780804818-1 | role=error target=jobs/logs/backend.log
+2026-06-07T04:00:18Z | auto-fix-worker | classify     | T-loop-1780804818-1 | tier=small risk=low council=single
+2026-06-07T04:03:18Z | auto-fix-worker | skip         | T-loop-1780804818-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T04:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T04:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780804998-2
+2026-06-07T04:03:18Z | auto-fix-worker | start        | T-loop-1780804998-2 | role=error target=jobs/logs/opa_test.log
+2026-06-07T04:03:18Z | auto-fix-worker | classify     | T-loop-1780804998-2 | tier=small risk=low council=single
+2026-06-07T04:03:23Z | auto-fix-worker | apply_check  | T-loop-1780804998-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-07T04:03:23Z | auto-fix-loop |   → verdict=fail
+2026-06-07T04:03:23Z | auto-fix-loop | dispatch #3: T-loop-1780805003-3
+2026-06-07T04:03:23Z | auto-fix-worker | start        | T-loop-1780805003-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T04:03:23Z | auto-fix-worker | classify     | T-loop-1780805003-3 | tier=small risk=low council=single
+2026-06-07T04:03:26Z | auto-fix-worker | apply_check  | T-loop-1780805003-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-07T04:03:27Z | auto-fix-loop |   → verdict=fail
+2026-06-07T04:03:27Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T05:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T05:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T05:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T05:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T05:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780808417-1
+2026-06-07T05:00:18Z | auto-fix-worker | start        | T-loop-1780808417-1 | role=error target=jobs/logs/backend.log
+2026-06-07T05:00:18Z | auto-fix-worker | classify     | T-loop-1780808417-1 | tier=small risk=low council=single
+2026-06-07T05:03:18Z | auto-fix-worker | skip         | T-loop-1780808417-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T05:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T05:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780808598-2
+2026-06-07T05:03:18Z | auto-fix-worker | start        | T-loop-1780808598-2 | role=error target=jobs/logs/insur_bot.log
+2026-06-07T05:03:18Z | auto-fix-worker | classify     | T-loop-1780808598-2 | tier=small risk=low council=single
+2026-06-07T05:03:22Z | auto-fix-worker | apply_check  | T-loop-1780808598-2 | FAIL: git apply --check failed: error: corrupt patch at line 5
+2026-06-07T05:03:22Z | auto-fix-loop |   → verdict=fail
+2026-06-07T05:03:22Z | auto-fix-loop | dispatch #3: T-loop-1780808602-3
+2026-06-07T05:03:22Z | auto-fix-worker | start        | T-loop-1780808602-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T05:03:22Z | auto-fix-worker | classify     | T-loop-1780808602-3 | tier=small risk=low council=single
+2026-06-07T05:03:26Z | auto-fix-worker | apply_check  | T-loop-1780808602-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-07T05:03:27Z | auto-fix-loop |   → verdict=fail
+2026-06-07T05:03:27Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T06:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T06:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T06:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T06:00:21Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T06:00:21Z | auto-fix-loop | dispatch #1: T-loop-1780812021-1
+2026-06-07T06:00:23Z | auto-fix-worker | start        | T-loop-1780812021-1 | role=error target=jobs/logs/backend.log
+2026-06-07T06:00:23Z | auto-fix-worker | classify     | T-loop-1780812021-1 | tier=small risk=low council=single
+2026-06-07T06:02:21Z | auto-fix-worker | apply_check  | T-loop-1780812021-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-07T06:02:21Z | auto-fix-loop |   → verdict=fail
+2026-06-07T06:02:21Z | auto-fix-loop | dispatch #2: T-loop-1780812141-2
+2026-06-07T06:02:22Z | auto-fix-worker | start        | T-loop-1780812141-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T06:02:22Z | auto-fix-worker | classify     | T-loop-1780812141-2 | tier=small risk=low council=single
+2026-06-07T06:05:23Z | auto-fix-worker | skip         | T-loop-1780812141-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T06:05:24Z | auto-fix-loop |   → verdict=skip
+2026-06-07T06:05:24Z | auto-fix-loop | dispatch #3: T-loop-1780812324-3
+2026-06-07T06:05:25Z | auto-fix-worker | start        | T-loop-1780812324-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T06:05:25Z | auto-fix-worker | classify     | T-loop-1780812324-3 | tier=small risk=low council=single
+2026-06-07T06:05:37Z | auto-fix-worker | apply_check  | T-loop-1780812324-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-07T06:05:37Z | auto-fix-loop |   → verdict=fail
+2026-06-07T06:05:37Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T07:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T07:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T07:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T07:00:15Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T07:00:15Z | auto-fix-loop | dispatch #1: T-loop-1780815615-1
+2026-06-07T07:00:15Z | auto-fix-worker | start        | T-loop-1780815615-1 | role=error target=jobs/logs/backend.log
+2026-06-07T07:00:15Z | auto-fix-worker | classify     | T-loop-1780815615-1 | tier=small risk=low council=single
+2026-06-07T07:03:15Z | auto-fix-worker | skip         | T-loop-1780815615-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T07:03:15Z | auto-fix-loop |   → verdict=skip
+2026-06-07T07:03:15Z | auto-fix-loop | dispatch #2: T-loop-1780815795-2
+2026-06-07T07:03:16Z | auto-fix-worker | start        | T-loop-1780815795-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T07:03:16Z | auto-fix-worker | classify     | T-loop-1780815795-2 | tier=small risk=low council=single
+2026-06-07T07:06:16Z | auto-fix-worker | skip         | T-loop-1780815795-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T07:06:16Z | auto-fix-loop |   → verdict=skip
+2026-06-07T07:06:16Z | auto-fix-loop | dispatch #3: T-loop-1780815976-3
+2026-06-07T07:06:16Z | auto-fix-worker | start        | T-loop-1780815976-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T07:06:16Z | auto-fix-worker | classify     | T-loop-1780815976-3 | tier=small risk=low council=single
+2026-06-07T07:06:20Z | auto-fix-worker | apply_check  | T-loop-1780815976-3 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-07T07:06:20Z | auto-fix-loop |   → verdict=fail
+2026-06-07T07:06:20Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T08:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T08:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T08:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T08:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T08:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780819218-1
+2026-06-07T08:00:18Z | auto-fix-worker | start        | T-loop-1780819218-1 | role=error target=jobs/logs/backend.log
+2026-06-07T08:00:18Z | auto-fix-worker | classify     | T-loop-1780819218-1 | tier=small risk=low council=single
+2026-06-07T08:03:18Z | auto-fix-worker | skip         | T-loop-1780819218-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T08:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T08:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780819398-2
+2026-06-07T08:03:18Z | auto-fix-worker | start        | T-loop-1780819398-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T08:03:18Z | auto-fix-worker | classify     | T-loop-1780819398-2 | tier=small risk=low council=single
+2026-06-07T08:06:18Z | auto-fix-worker | skip         | T-loop-1780819398-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T08:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T08:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780819578-3
+2026-06-07T08:06:18Z | auto-fix-worker | start        | T-loop-1780819578-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T08:06:18Z | auto-fix-worker | classify     | T-loop-1780819578-3 | tier=small risk=low council=single
+2026-06-07T08:06:21Z | auto-fix-worker | apply_check  | T-loop-1780819578-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-07T08:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-07T08:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T09:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T09:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T09:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T09:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T09:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780822817-1
+2026-06-07T09:00:17Z | auto-fix-worker | start        | T-loop-1780822817-1 | role=error target=jobs/logs/backend.log
+2026-06-07T09:00:17Z | auto-fix-worker | classify     | T-loop-1780822817-1 | tier=small risk=low council=single
+2026-06-07T09:03:17Z | auto-fix-worker | skip         | T-loop-1780822817-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T09:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T09:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780822997-2
+2026-06-07T09:03:18Z | auto-fix-worker | start        | T-loop-1780822997-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T09:03:18Z | auto-fix-worker | classify     | T-loop-1780822997-2 | tier=small risk=low council=single
+2026-06-07T09:06:18Z | auto-fix-worker | skip         | T-loop-1780822997-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T09:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T09:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780823178-3
+2026-06-07T09:06:18Z | auto-fix-worker | start        | T-loop-1780823178-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T09:06:18Z | auto-fix-worker | classify     | T-loop-1780823178-3 | tier=small risk=low council=single
+2026-06-07T09:06:23Z | auto-fix-worker | apply_check  | T-loop-1780823178-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-07T09:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-07T09:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T10:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T10:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T10:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T10:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T10:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780826417-1
+2026-06-07T10:00:17Z | auto-fix-worker | start        | T-loop-1780826417-1 | role=error target=jobs/logs/backend.log
+2026-06-07T10:00:17Z | auto-fix-worker | classify     | T-loop-1780826417-1 | tier=small risk=low council=single
+2026-06-07T10:03:17Z | auto-fix-worker | skip         | T-loop-1780826417-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T10:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T10:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780826597-2
+2026-06-07T10:03:17Z | auto-fix-worker | start        | T-loop-1780826597-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T10:03:17Z | auto-fix-worker | classify     | T-loop-1780826597-2 | tier=small risk=low council=single
+2026-06-07T10:06:17Z | auto-fix-worker | skip         | T-loop-1780826597-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T10:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T10:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780826777-3
+2026-06-07T10:06:18Z | auto-fix-worker | start        | T-loop-1780826777-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T10:06:18Z | auto-fix-worker | classify     | T-loop-1780826777-3 | tier=small risk=low council=single
+2026-06-07T10:06:21Z | auto-fix-worker | apply_check  | T-loop-1780826777-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-07T10:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-07T10:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T11:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T11:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T11:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T11:00:16Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T11:00:16Z | auto-fix-loop | dispatch #1: T-loop-1780830016-1
+2026-06-07T11:00:16Z | auto-fix-worker | start        | T-loop-1780830016-1 | role=error target=jobs/logs/backend.log
+2026-06-07T11:00:16Z | auto-fix-worker | classify     | T-loop-1780830016-1 | tier=small risk=low council=single
+2026-06-07T11:03:16Z | auto-fix-worker | skip         | T-loop-1780830016-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T11:03:16Z | auto-fix-loop |   → verdict=skip
+2026-06-07T11:03:16Z | auto-fix-loop | dispatch #2: T-loop-1780830196-2
+2026-06-07T11:03:17Z | auto-fix-worker | start        | T-loop-1780830196-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T11:03:17Z | auto-fix-worker | classify     | T-loop-1780830196-2 | tier=small risk=low council=single
+2026-06-07T11:06:17Z | auto-fix-worker | skip         | T-loop-1780830196-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T11:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T11:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780830377-3
+2026-06-07T11:06:17Z | auto-fix-worker | start        | T-loop-1780830377-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T11:06:17Z | auto-fix-worker | classify     | T-loop-1780830377-3 | tier=small risk=low council=single
+2026-06-07T11:06:21Z | auto-fix-worker | apply_check  | T-loop-1780830377-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-07T11:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-07T11:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T12:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T12:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T12:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T12:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T12:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780833619-1
+2026-06-07T12:00:20Z | auto-fix-worker | start        | T-loop-1780833619-1 | role=error target=jobs/logs/backend.log
+2026-06-07T12:00:20Z | auto-fix-worker | classify     | T-loop-1780833619-1 | tier=small risk=low council=single
+2026-06-07T12:03:20Z | auto-fix-worker | skip         | T-loop-1780833619-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T12:03:26Z | auto-fix-loop |   → verdict=skip
+2026-06-07T12:03:27Z | auto-fix-loop | dispatch #2: T-loop-1780833807-2
+2026-06-07T12:03:28Z | auto-fix-worker | start        | T-loop-1780833807-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T12:03:28Z | auto-fix-worker | classify     | T-loop-1780833807-2 | tier=small risk=low council=single
+2026-06-07T12:06:29Z | auto-fix-worker | skip         | T-loop-1780833807-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T12:06:30Z | auto-fix-loop |   → verdict=skip
+2026-06-07T12:06:31Z | auto-fix-loop | dispatch #3: T-loop-1780833991-3
+2026-06-07T12:06:31Z | auto-fix-worker | start        | T-loop-1780833991-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T12:06:31Z | auto-fix-worker | classify     | T-loop-1780833991-3 | tier=small risk=low council=single
+2026-06-07T12:08:40Z | auto-fix-worker | apply_check  | T-loop-1780833991-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-07T12:08:42Z | auto-fix-loop |   → verdict=fail
+2026-06-07T12:08:43Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T13:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T13:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T13:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T13:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T13:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780837218-1
+2026-06-07T13:00:18Z | auto-fix-worker | start        | T-loop-1780837218-1 | role=error target=jobs/logs/backend.log
+2026-06-07T13:00:18Z | auto-fix-worker | classify     | T-loop-1780837218-1 | tier=small risk=low council=single
+2026-06-07T13:03:18Z | auto-fix-worker | skip         | T-loop-1780837218-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T13:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T13:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780837398-2
+2026-06-07T13:03:19Z | auto-fix-worker | start        | T-loop-1780837398-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T13:03:19Z | auto-fix-worker | classify     | T-loop-1780837398-2 | tier=small risk=low council=single
+2026-06-07T13:06:19Z | auto-fix-worker | skip         | T-loop-1780837398-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T13:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-07T13:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780837579-3
+2026-06-07T13:06:19Z | auto-fix-worker | start        | T-loop-1780837579-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T13:06:19Z | auto-fix-worker | classify     | T-loop-1780837579-3 | tier=small risk=low council=single
+2026-06-07T13:06:24Z | auto-fix-worker | apply_check  | T-loop-1780837579-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-07T13:06:24Z | auto-fix-loop |   → verdict=fail
+2026-06-07T13:06:24Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T14:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T14:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T14:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T14:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T14:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780840818-1
+2026-06-07T14:00:18Z | auto-fix-worker | start        | T-loop-1780840818-1 | role=error target=jobs/logs/backend.log
+2026-06-07T14:00:18Z | auto-fix-worker | classify     | T-loop-1780840818-1 | tier=small risk=low council=single
+2026-06-07T14:03:18Z | auto-fix-worker | skip         | T-loop-1780840818-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T14:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T14:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780840998-2
+2026-06-07T14:03:18Z | auto-fix-worker | start        | T-loop-1780840998-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T14:03:18Z | auto-fix-worker | classify     | T-loop-1780840998-2 | tier=small risk=low council=single
+2026-06-07T14:03:23Z | auto-fix-worker | apply_check  | T-loop-1780840998-2 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -24,7 +24,7 @@
+2026-06-07T14:03:23Z | auto-fix-loop |   → verdict=fail
+2026-06-07T14:03:23Z | auto-fix-loop | dispatch #3: T-loop-1780841003-3
+2026-06-07T14:03:23Z | auto-fix-worker | start        | T-loop-1780841003-3 | role=testing target=tests/drills/drill_graph_ai.py
+2026-06-07T14:03:23Z | auto-fix-worker | classify     | T-loop-1780841003-3 | tier=medium risk=low council=single
+2026-06-07T14:04:01Z | auto-fix-worker | apply_check  | T-loop-1780841003-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-07T14:04:02Z | auto-fix-loop |   → verdict=fail
+2026-06-07T14:04:02Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T15:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T15:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T15:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T15:00:04Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T15:00:04Z | auto-fix-loop | dispatch #1: T-loop-1780844404-1
+2026-06-07T15:00:04Z | auto-fix-worker | start        | T-loop-1780844404-1 | role=error target=jobs/logs/insur_bot.log
+2026-06-07T15:00:04Z | auto-fix-worker | classify     | T-loop-1780844404-1 | tier=small risk=low council=single
+2026-06-07T15:01:28Z | auto-fix-worker | apply_check  | T-loop-1780844404-1 | FAIL: git apply --check failed: error: corrupt patch at line 25
+2026-06-07T15:01:28Z | auto-fix-loop |   → verdict=fail
+2026-06-07T15:01:28Z | auto-fix-loop | dispatch #2: T-loop-1780844488-2
+2026-06-07T15:01:28Z | auto-fix-worker | start        | T-loop-1780844488-2 | role=error target=jobs/logs/opa_test.log
+2026-06-07T15:01:28Z | auto-fix-worker | classify     | T-loop-1780844488-2 | tier=small risk=low council=single
+2026-06-07T15:01:30Z | auto-fix-worker | apply_check  | T-loop-1780844488-2 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-07T15:01:30Z | auto-fix-loop |   → verdict=fail
+2026-06-07T15:01:30Z | auto-fix-loop | dispatch #3: T-loop-1780844490-3
+2026-06-07T15:01:31Z | auto-fix-worker | start        | T-loop-1780844490-3 | role=testing target=tests/drills/drill_operator_readiness.py
+2026-06-07T15:01:31Z | auto-fix-worker | classify     | T-loop-1780844490-3 | tier=medium risk=low council=single
+2026-06-07T15:02:17Z | auto-fix-worker | apply_check  | T-loop-1780844490-3 | FAIL: git apply --check failed: error: corrupt patch at line 25
+2026-06-07T15:02:17Z | auto-fix-loop |   → verdict=fail
+2026-06-07T15:02:18Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T16:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T16:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T16:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T16:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T16:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780848018-1
+2026-06-07T16:00:18Z | auto-fix-worker | start        | T-loop-1780848018-1 | role=error target=jobs/logs/backend.log
+2026-06-07T16:00:18Z | auto-fix-worker | classify     | T-loop-1780848018-1 | tier=small risk=low council=single
+2026-06-07T16:03:18Z | auto-fix-worker | skip         | T-loop-1780848018-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T16:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T16:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780848198-2
+2026-06-07T16:03:18Z | auto-fix-worker | start        | T-loop-1780848198-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T16:03:18Z | auto-fix-worker | classify     | T-loop-1780848198-2 | tier=small risk=low council=single
+2026-06-07T16:06:18Z | auto-fix-worker | skip         | T-loop-1780848198-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T16:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T16:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780848378-3
+2026-06-07T16:06:18Z | auto-fix-worker | start        | T-loop-1780848378-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T16:06:18Z | auto-fix-worker | classify     | T-loop-1780848378-3 | tier=small risk=low council=single
+2026-06-07T16:06:23Z | auto-fix-worker | apply_check  | T-loop-1780848378-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-07T16:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-07T16:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T17:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T17:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T17:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T17:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T17:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780851617-1
+2026-06-07T17:00:17Z | auto-fix-worker | start        | T-loop-1780851617-1 | role=error target=jobs/logs/backend.log
+2026-06-07T17:00:17Z | auto-fix-worker | classify     | T-loop-1780851617-1 | tier=small risk=low council=single
+2026-06-07T17:03:17Z | auto-fix-worker | skip         | T-loop-1780851617-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T17:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T17:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780851797-2
+2026-06-07T17:03:18Z | auto-fix-worker | start        | T-loop-1780851797-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T17:03:18Z | auto-fix-worker | classify     | T-loop-1780851797-2 | tier=small risk=low council=single
+2026-06-07T17:03:22Z | auto-fix-worker | apply_check  | T-loop-1780851797-2 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-07T17:03:22Z | auto-fix-loop |   → verdict=fail
+2026-06-07T17:03:22Z | auto-fix-loop | dispatch #3: T-loop-1780851802-3
+2026-06-07T17:03:23Z | auto-fix-worker | start        | T-loop-1780851802-3 | role=testing target=tests/drills/drill_openclaw_paperclip_federation.py
+2026-06-07T17:03:23Z | auto-fix-worker | classify     | T-loop-1780851802-3 | tier=medium risk=low council=single
+2026-06-07T17:04:04Z | auto-fix-worker | apply_check  | T-loop-1780851802-3 | FAIL: git apply --check failed: error: patch failed: tests/drills/drill_openclaw_paperclip_federation.py:140
+error: tests/drills/drill_openclaw_paperclip_federation.py: patch does not apply
+2026-06-07T17:04:05Z | auto-fix-loop |   → verdict=fail
+2026-06-07T17:04:05Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T18:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T18:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T18:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T18:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T18:00:20Z | auto-fix-loop | dispatch #1: T-loop-1780855220-1
+2026-06-07T18:00:22Z | auto-fix-worker | start        | T-loop-1780855220-1 | role=error target=jobs/logs/backend.log
+2026-06-07T18:00:22Z | auto-fix-worker | classify     | T-loop-1780855220-1 | tier=small risk=low council=single
+2026-06-07T18:03:22Z | auto-fix-worker | skip         | T-loop-1780855220-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T18:03:27Z | auto-fix-loop |   → verdict=skip
+2026-06-07T18:03:28Z | auto-fix-loop | dispatch #2: T-loop-1780855408-2
+2026-06-07T18:03:29Z | auto-fix-worker | start        | T-loop-1780855408-2 | role=error target=jobs/logs/opa_test.log
+2026-06-07T18:03:29Z | auto-fix-worker | classify     | T-loop-1780855408-2 | tier=small risk=low council=single
+2026-06-07T18:03:37Z | auto-fix-worker | apply_check  | T-loop-1780855408-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-07T18:03:37Z | auto-fix-loop |   → verdict=fail
+2026-06-07T18:03:37Z | auto-fix-loop | dispatch #3: T-loop-1780855417-3
+2026-06-07T18:03:37Z | auto-fix-worker | start        | T-loop-1780855417-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T18:03:37Z | auto-fix-worker | classify     | T-loop-1780855417-3 | tier=small risk=low council=single
+2026-06-07T18:06:38Z | auto-fix-worker | skip         | T-loop-1780855417-3 | model returned empty or NEEDS_HUMAN
+2026-06-07T18:06:41Z | auto-fix-loop |   → verdict=skip
+2026-06-07T18:06:42Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T19:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T19:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T19:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T19:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T19:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780858818-1
+2026-06-07T19:00:18Z | auto-fix-worker | start        | T-loop-1780858818-1 | role=error target=jobs/logs/backend.log
+2026-06-07T19:00:18Z | auto-fix-worker | classify     | T-loop-1780858818-1 | tier=small risk=low council=single
+2026-06-07T19:03:18Z | auto-fix-worker | skip         | T-loop-1780858818-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T19:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T19:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780858998-2
+2026-06-07T19:03:18Z | auto-fix-worker | start        | T-loop-1780858998-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T19:03:18Z | auto-fix-worker | classify     | T-loop-1780858998-2 | tier=small risk=low council=single
+2026-06-07T19:06:18Z | auto-fix-worker | skip         | T-loop-1780858998-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T19:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-07T19:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780859179-3
+2026-06-07T19:06:19Z | auto-fix-worker | start        | T-loop-1780859179-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T19:06:19Z | auto-fix-worker | classify     | T-loop-1780859179-3 | tier=small risk=low council=single
+2026-06-07T19:06:22Z | auto-fix-worker | apply_check  | T-loop-1780859179-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-07T19:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-07T19:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T20:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T20:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T20:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T20:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T20:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780862417-1
+2026-06-07T20:00:17Z | auto-fix-worker | start        | T-loop-1780862417-1 | role=error target=jobs/logs/backend.log
+2026-06-07T20:00:17Z | auto-fix-worker | classify     | T-loop-1780862417-1 | tier=small risk=low council=single
+2026-06-07T20:00:23Z | auto-fix-worker | apply_check  | T-loop-1780862417-1 | FAIL: git apply --check failed: error: patch failed: jobs/logs/backend.log:1
+error: jobs/logs/backend.log: patch does not apply
+2026-06-07T20:00:23Z | auto-fix-loop |   → verdict=fail
+2026-06-07T20:00:23Z | auto-fix-loop | dispatch #2: T-loop-1780862423-2
+2026-06-07T20:00:23Z | auto-fix-worker | start        | T-loop-1780862423-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T20:00:23Z | auto-fix-worker | classify     | T-loop-1780862423-2 | tier=small risk=low council=single
+2026-06-07T20:03:24Z | auto-fix-worker | skip         | T-loop-1780862423-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T20:03:24Z | auto-fix-loop |   → verdict=skip
+2026-06-07T20:03:24Z | auto-fix-loop | dispatch #3: T-loop-1780862604-3
+2026-06-07T20:03:24Z | auto-fix-worker | start        | T-loop-1780862604-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T20:03:24Z | auto-fix-worker | classify     | T-loop-1780862604-3 | tier=small risk=low council=single
+2026-06-07T20:03:27Z | auto-fix-worker | apply_check  | T-loop-1780862604-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-07T20:03:27Z | auto-fix-loop |   → verdict=fail
+2026-06-07T20:03:27Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T21:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T21:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T21:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T21:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T21:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780866017-1
+2026-06-07T21:00:17Z | auto-fix-worker | start        | T-loop-1780866017-1 | role=error target=jobs/logs/backend.log
+2026-06-07T21:00:17Z | auto-fix-worker | classify     | T-loop-1780866017-1 | tier=small risk=low council=single
+2026-06-07T21:03:17Z | auto-fix-worker | skip         | T-loop-1780866017-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T21:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T21:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780866197-2
+2026-06-07T21:03:17Z | auto-fix-worker | start        | T-loop-1780866197-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T21:03:17Z | auto-fix-worker | classify     | T-loop-1780866197-2 | tier=small risk=low council=single
+2026-06-07T21:06:17Z | auto-fix-worker | skip         | T-loop-1780866197-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T21:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T21:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780866377-3
+2026-06-07T21:06:17Z | auto-fix-worker | start        | T-loop-1780866377-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T21:06:17Z | auto-fix-worker | classify     | T-loop-1780866377-3 | tier=small risk=low council=single
+2026-06-07T21:06:22Z | auto-fix-worker | apply_check  | T-loop-1780866377-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-07T21:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-07T21:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T22:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T22:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T22:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T22:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T22:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780869617-1
+2026-06-07T22:00:17Z | auto-fix-worker | start        | T-loop-1780869617-1 | role=error target=jobs/logs/backend.log
+2026-06-07T22:00:17Z | auto-fix-worker | classify     | T-loop-1780869617-1 | tier=small risk=low council=single
+2026-06-07T22:03:17Z | auto-fix-worker | skip         | T-loop-1780869617-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T22:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T22:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780869797-2
+2026-06-07T22:03:18Z | auto-fix-worker | start        | T-loop-1780869797-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T22:03:18Z | auto-fix-worker | classify     | T-loop-1780869797-2 | tier=small risk=low council=single
+2026-06-07T22:03:20Z | auto-fix-worker | apply_check  | T-loop-1780869797-2 | FAIL: git apply --check failed: error: corrupt patch at line 5
+2026-06-07T22:03:20Z | auto-fix-loop |   → verdict=fail
+2026-06-07T22:03:20Z | auto-fix-loop | dispatch #3: T-loop-1780869800-3
+2026-06-07T22:03:20Z | auto-fix-worker | start        | T-loop-1780869800-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T22:03:20Z | auto-fix-worker | classify     | T-loop-1780869800-3 | tier=small risk=low council=single
+2026-06-07T22:03:25Z | auto-fix-worker | apply_check  | T-loop-1780869800-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-07T22:03:25Z | auto-fix-loop |   → verdict=fail
+2026-06-07T22:03:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-07T23:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-07T23:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-07T23:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-07T23:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-07T23:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780873217-1
+2026-06-07T23:00:17Z | auto-fix-worker | start        | T-loop-1780873217-1 | role=error target=jobs/logs/backend.log
+2026-06-07T23:00:17Z | auto-fix-worker | classify     | T-loop-1780873217-1 | tier=small risk=low council=single
+2026-06-07T23:03:17Z | auto-fix-worker | skip         | T-loop-1780873217-1 | model returned empty or NEEDS_HUMAN
+2026-06-07T23:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-07T23:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780873397-2
+2026-06-07T23:03:18Z | auto-fix-worker | start        | T-loop-1780873397-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-07T23:03:18Z | auto-fix-worker | classify     | T-loop-1780873397-2 | tier=small risk=low council=single
+2026-06-07T23:06:18Z | auto-fix-worker | skip         | T-loop-1780873397-2 | model returned empty or NEEDS_HUMAN
+2026-06-07T23:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-07T23:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780873578-3
+2026-06-07T23:06:18Z | auto-fix-worker | start        | T-loop-1780873578-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-07T23:06:18Z | auto-fix-worker | classify     | T-loop-1780873578-3 | tier=small risk=low council=single
+2026-06-07T23:06:23Z | auto-fix-worker | apply_check  | T-loop-1780873578-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-07T23:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-07T23:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T00:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T00:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T00:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T00:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T00:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780876818-1
+2026-06-08T00:00:18Z | auto-fix-worker | start        | T-loop-1780876818-1 | role=error target=jobs/logs/backend.log
+2026-06-08T00:00:18Z | auto-fix-worker | classify     | T-loop-1780876818-1 | tier=small risk=low council=single
+2026-06-08T00:03:18Z | auto-fix-worker | skip         | T-loop-1780876818-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T00:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-08T00:03:22Z | auto-fix-loop | dispatch #2: T-loop-1780877002-2
+2026-06-08T00:03:22Z | auto-fix-worker | start        | T-loop-1780877002-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T00:03:22Z | auto-fix-worker | classify     | T-loop-1780877002-2 | tier=small risk=low council=single
+2026-06-08T00:03:26Z | auto-fix-worker | apply_check  | T-loop-1780877002-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T00:03:26Z | auto-fix-loop |   → verdict=fail
+2026-06-08T00:03:26Z | auto-fix-loop | dispatch #3: T-loop-1780877006-3
+2026-06-08T00:03:26Z | auto-fix-worker | start        | T-loop-1780877006-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T00:03:26Z | auto-fix-worker | classify     | T-loop-1780877006-3 | tier=small risk=low council=single
+2026-06-08T00:06:26Z | auto-fix-worker | skip         | T-loop-1780877006-3 | model returned empty or NEEDS_HUMAN
+2026-06-08T00:06:27Z | auto-fix-loop |   → verdict=skip
+2026-06-08T00:06:27Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T01:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T01:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T01:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T01:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T01:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780880417-1
+2026-06-08T01:00:18Z | auto-fix-worker | start        | T-loop-1780880417-1 | role=error target=jobs/logs/backend.log
+2026-06-08T01:00:18Z | auto-fix-worker | classify     | T-loop-1780880417-1 | tier=small risk=low council=single
+2026-06-08T01:03:18Z | auto-fix-worker | skip         | T-loop-1780880417-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T01:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T01:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780880598-2
+2026-06-08T01:03:18Z | auto-fix-worker | start        | T-loop-1780880598-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T01:03:18Z | auto-fix-worker | classify     | T-loop-1780880598-2 | tier=small risk=low council=single
+2026-06-08T01:03:27Z | auto-fix-worker | apply_check  | T-loop-1780880598-2 | FAIL: git apply --check failed: error: corrupt patch at line 38
+2026-06-08T01:03:27Z | auto-fix-loop |   → verdict=fail
+2026-06-08T01:03:27Z | auto-fix-loop | dispatch #3: T-loop-1780880607-3
+2026-06-08T01:03:28Z | auto-fix-worker | start        | T-loop-1780880607-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T01:03:28Z | auto-fix-worker | classify     | T-loop-1780880607-3 | tier=small risk=low council=single
+2026-06-08T01:03:33Z | auto-fix-worker | apply_check  | T-loop-1780880607-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-08T01:03:33Z | auto-fix-loop |   → verdict=fail
+2026-06-08T01:03:33Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T02:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T02:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T02:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T02:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T02:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780884017-1
+2026-06-08T02:00:17Z | auto-fix-worker | start        | T-loop-1780884017-1 | role=error target=jobs/logs/backend.log
+2026-06-08T02:00:17Z | auto-fix-worker | classify     | T-loop-1780884017-1 | tier=small risk=low council=single
+2026-06-08T02:03:17Z | auto-fix-worker | skip         | T-loop-1780884017-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T02:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-08T02:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780884197-2
+2026-06-08T02:03:17Z | auto-fix-worker | start        | T-loop-1780884197-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T02:03:17Z | auto-fix-worker | classify     | T-loop-1780884197-2 | tier=small risk=low council=single
+2026-06-08T02:03:22Z | auto-fix-worker | apply_check  | T-loop-1780884197-2 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-08T02:03:22Z | auto-fix-loop |   → verdict=fail
+2026-06-08T02:03:22Z | auto-fix-loop | dispatch #3: T-loop-1780884202-3
+2026-06-08T02:03:22Z | auto-fix-worker | start        | T-loop-1780884202-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T02:03:22Z | auto-fix-worker | classify     | T-loop-1780884202-3 | tier=small risk=low council=single
+2026-06-08T02:06:22Z | auto-fix-worker | skip         | T-loop-1780884202-3 | model returned empty or NEEDS_HUMAN
+2026-06-08T02:06:22Z | auto-fix-loop |   → verdict=skip
+2026-06-08T02:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T03:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T03:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T03:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T03:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T03:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780887617-1
+2026-06-08T03:00:17Z | auto-fix-worker | start        | T-loop-1780887617-1 | role=error target=jobs/logs/backend.log
+2026-06-08T03:00:17Z | auto-fix-worker | classify     | T-loop-1780887617-1 | tier=small risk=low council=single
+2026-06-08T03:03:18Z | auto-fix-worker | skip         | T-loop-1780887617-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T03:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T03:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780887798-2
+2026-06-08T03:03:18Z | auto-fix-worker | start        | T-loop-1780887798-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T03:03:18Z | auto-fix-worker | classify     | T-loop-1780887798-2 | tier=small risk=low council=single
+2026-06-08T03:06:18Z | auto-fix-worker | skip         | T-loop-1780887798-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T03:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T03:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780887978-3
+2026-06-08T03:06:18Z | auto-fix-worker | start        | T-loop-1780887978-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T03:06:18Z | auto-fix-worker | classify     | T-loop-1780887978-3 | tier=small risk=low council=single
+2026-06-08T03:06:22Z | auto-fix-worker | apply_check  | T-loop-1780887978-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T03:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-08T03:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T04:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T04:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T04:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T04:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T04:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780891217-1
+2026-06-08T04:00:18Z | auto-fix-worker | start        | T-loop-1780891217-1 | role=error target=jobs/logs/backend.log
+2026-06-08T04:00:18Z | auto-fix-worker | classify     | T-loop-1780891217-1 | tier=small risk=low council=single
+2026-06-08T04:03:18Z | auto-fix-worker | skip         | T-loop-1780891217-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T04:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T04:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780891398-2
+2026-06-08T04:03:18Z | auto-fix-worker | start        | T-loop-1780891398-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T04:03:18Z | auto-fix-worker | classify     | T-loop-1780891398-2 | tier=small risk=low council=single
+2026-06-08T04:06:18Z | auto-fix-worker | skip         | T-loop-1780891398-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T04:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T04:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780891578-3
+2026-06-08T04:06:18Z | auto-fix-worker | start        | T-loop-1780891578-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T04:06:18Z | auto-fix-worker | classify     | T-loop-1780891578-3 | tier=small risk=low council=single
+2026-06-08T04:06:21Z | auto-fix-worker | apply_check  | T-loop-1780891578-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T04:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-08T04:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T05:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T05:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T05:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T05:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T05:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780894818-1
+2026-06-08T05:00:19Z | auto-fix-worker | start        | T-loop-1780894818-1 | role=error target=jobs/logs/backend.log
+2026-06-08T05:00:19Z | auto-fix-worker | classify     | T-loop-1780894818-1 | tier=small risk=low council=single
+2026-06-08T05:00:27Z | auto-fix-worker | apply_check  | T-loop-1780894818-1 | FAIL: git apply --check failed: error: patch failed: jobs/logs/backend.log:1
+error: jobs/logs/backend.log: patch does not apply
+2026-06-08T05:00:27Z | auto-fix-loop |   → verdict=fail
+2026-06-08T05:00:27Z | auto-fix-loop | dispatch #2: T-loop-1780894827-2
+2026-06-08T05:00:28Z | auto-fix-worker | start        | T-loop-1780894827-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T05:00:28Z | auto-fix-worker | classify     | T-loop-1780894827-2 | tier=small risk=low council=single
+2026-06-08T05:03:28Z | auto-fix-worker | skip         | T-loop-1780894827-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T05:03:28Z | auto-fix-loop |   → verdict=skip
+2026-06-08T05:03:28Z | auto-fix-loop | dispatch #3: T-loop-1780895008-3
+2026-06-08T05:03:28Z | auto-fix-worker | start        | T-loop-1780895008-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T05:03:28Z | auto-fix-worker | classify     | T-loop-1780895008-3 | tier=small risk=low council=single
+2026-06-08T05:03:34Z | auto-fix-worker | apply_check  | T-loop-1780895008-3 | FAIL: git apply --check failed: error: patch fragment without header at line 13: @@ -20,7 +20,7 @@
+2026-06-08T05:03:34Z | auto-fix-loop |   → verdict=fail
+2026-06-08T05:03:34Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T06:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T06:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T06:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T06:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T06:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780898419-1
+2026-06-08T06:00:19Z | auto-fix-worker | start        | T-loop-1780898419-1 | role=error target=jobs/logs/backend.log
+2026-06-08T06:00:19Z | auto-fix-worker | classify     | T-loop-1780898419-1 | tier=small risk=low council=single
+2026-06-08T06:03:20Z | auto-fix-worker | skip         | T-loop-1780898419-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T06:03:22Z | auto-fix-loop |   → verdict=skip
+2026-06-08T06:03:23Z | auto-fix-loop | dispatch #2: T-loop-1780898602-2
+2026-06-08T06:03:23Z | auto-fix-worker | start        | T-loop-1780898602-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T06:03:23Z | auto-fix-worker | classify     | T-loop-1780898602-2 | tier=small risk=low council=single
+2026-06-08T06:06:25Z | auto-fix-worker | skip         | T-loop-1780898602-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T06:06:31Z | auto-fix-loop |   → verdict=skip
+2026-06-08T06:06:32Z | auto-fix-loop | dispatch #3: T-loop-1780898792-3
+2026-06-08T06:06:34Z | auto-fix-worker | start        | T-loop-1780898792-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T06:06:34Z | auto-fix-worker | classify     | T-loop-1780898792-3 | tier=small risk=low council=single
+2026-06-08T06:06:49Z | auto-fix-worker | apply_check  | T-loop-1780898792-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-08T06:06:49Z | auto-fix-loop |   → verdict=fail
+2026-06-08T06:06:49Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T07:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T07:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T07:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T07:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T07:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780902018-1
+2026-06-08T07:00:18Z | auto-fix-worker | start        | T-loop-1780902018-1 | role=error target=jobs/logs/backend.log
+2026-06-08T07:00:18Z | auto-fix-worker | classify     | T-loop-1780902018-1 | tier=small risk=low council=single
+2026-06-08T07:03:18Z | auto-fix-worker | skip         | T-loop-1780902018-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T07:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T07:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780902198-2
+2026-06-08T07:03:19Z | auto-fix-worker | start        | T-loop-1780902198-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T07:03:19Z | auto-fix-worker | classify     | T-loop-1780902198-2 | tier=small risk=low council=single
+2026-06-08T07:06:19Z | auto-fix-worker | skip         | T-loop-1780902198-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T07:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T07:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780902379-3
+2026-06-08T07:06:19Z | auto-fix-worker | start        | T-loop-1780902379-3 | role=error target=jobs/logs/opa_test.log
+2026-06-08T07:06:19Z | auto-fix-worker | classify     | T-loop-1780902379-3 | tier=small risk=low council=single
+2026-06-08T07:06:25Z | auto-fix-worker | apply_check  | T-loop-1780902379-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-08T07:06:25Z | auto-fix-loop |   → verdict=fail
+2026-06-08T07:06:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T08:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T08:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T08:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T08:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T08:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780905618-1
+2026-06-08T08:00:19Z | auto-fix-worker | start        | T-loop-1780905618-1 | role=error target=jobs/logs/backend.log
+2026-06-08T08:00:19Z | auto-fix-worker | classify     | T-loop-1780905618-1 | tier=small risk=low council=single
+2026-06-08T08:00:27Z | auto-fix-worker | apply_check  | T-loop-1780905618-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-08T08:00:27Z | auto-fix-loop |   → verdict=fail
+2026-06-08T08:00:27Z | auto-fix-loop | dispatch #2: T-loop-1780905627-2
+2026-06-08T08:00:27Z | auto-fix-worker | start        | T-loop-1780905627-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T08:00:27Z | auto-fix-worker | classify     | T-loop-1780905627-2 | tier=small risk=low council=single
+2026-06-08T08:00:33Z | auto-fix-worker | apply_check  | T-loop-1780905627-2 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-08T08:00:33Z | auto-fix-loop |   → verdict=fail
+2026-06-08T08:00:33Z | auto-fix-loop | dispatch #3: T-loop-1780905633-3
+2026-06-08T08:00:33Z | auto-fix-worker | start        | T-loop-1780905633-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T08:00:33Z | auto-fix-worker | classify     | T-loop-1780905633-3 | tier=small risk=low council=single
+2026-06-08T08:03:33Z | auto-fix-worker | skip         | T-loop-1780905633-3 | model returned empty or NEEDS_HUMAN
+2026-06-08T08:03:33Z | auto-fix-loop |   → verdict=skip
+2026-06-08T08:03:33Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T09:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T09:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T09:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T09:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T09:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780909218-1
+2026-06-08T09:00:18Z | auto-fix-worker | start        | T-loop-1780909218-1 | role=error target=jobs/logs/backend.log
+2026-06-08T09:00:18Z | auto-fix-worker | classify     | T-loop-1780909218-1 | tier=small risk=low council=single
+2026-06-08T09:03:18Z | auto-fix-worker | skip         | T-loop-1780909218-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T09:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T09:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780909398-2
+2026-06-08T09:03:18Z | auto-fix-worker | start        | T-loop-1780909398-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T09:03:18Z | auto-fix-worker | classify     | T-loop-1780909398-2 | tier=small risk=low council=single
+2026-06-08T09:03:22Z | auto-fix-worker | apply_check  | T-loop-1780909398-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T09:03:22Z | auto-fix-loop |   → verdict=fail
+2026-06-08T09:03:22Z | auto-fix-loop | dispatch #3: T-loop-1780909402-3
+2026-06-08T09:03:22Z | auto-fix-worker | start        | T-loop-1780909402-3 | role=error target=jobs/logs/opa_test.log
+2026-06-08T09:03:22Z | auto-fix-worker | classify     | T-loop-1780909402-3 | tier=small risk=low council=single
+2026-06-08T09:03:25Z | auto-fix-worker | apply_check  | T-loop-1780909402-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-08T09:03:25Z | auto-fix-loop |   → verdict=fail
+2026-06-08T09:03:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T10:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T10:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T10:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T10:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T10:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780912818-1
+2026-06-08T10:00:18Z | auto-fix-worker | start        | T-loop-1780912818-1 | role=error target=jobs/logs/backend.log
+2026-06-08T10:00:18Z | auto-fix-worker | classify     | T-loop-1780912818-1 | tier=small risk=low council=single
+2026-06-08T10:03:18Z | auto-fix-worker | skip         | T-loop-1780912818-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T10:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T10:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780912998-2
+2026-06-08T10:03:19Z | auto-fix-worker | start        | T-loop-1780912998-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T10:03:19Z | auto-fix-worker | classify     | T-loop-1780912998-2 | tier=small risk=low council=single
+2026-06-08T10:06:19Z | auto-fix-worker | skip         | T-loop-1780912998-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T10:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T10:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780913179-3
+2026-06-08T10:06:19Z | auto-fix-worker | start        | T-loop-1780913179-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T10:06:19Z | auto-fix-worker | classify     | T-loop-1780913179-3 | tier=small risk=low council=single
+2026-06-08T10:06:22Z | auto-fix-worker | apply_check  | T-loop-1780913179-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T10:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-08T10:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T11:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T11:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T11:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T11:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T11:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780916417-1
+2026-06-08T11:00:18Z | auto-fix-worker | start        | T-loop-1780916417-1 | role=error target=jobs/logs/backend.log
+2026-06-08T11:00:18Z | auto-fix-worker | classify     | T-loop-1780916417-1 | tier=small risk=low council=single
+2026-06-08T11:03:18Z | auto-fix-worker | skip         | T-loop-1780916417-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T11:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T11:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780916598-2
+2026-06-08T11:03:18Z | auto-fix-worker | start        | T-loop-1780916598-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T11:03:18Z | auto-fix-worker | classify     | T-loop-1780916598-2 | tier=small risk=low council=single
+2026-06-08T11:06:18Z | auto-fix-worker | skip         | T-loop-1780916598-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T11:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T11:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780916778-3
+2026-06-08T11:06:18Z | auto-fix-worker | start        | T-loop-1780916778-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T11:06:18Z | auto-fix-worker | classify     | T-loop-1780916778-3 | tier=small risk=low council=single
+2026-06-08T11:06:24Z | auto-fix-worker | apply_check  | T-loop-1780916778-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-08T11:06:24Z | auto-fix-loop |   → verdict=fail
+2026-06-08T11:06:24Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T12:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T12:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T12:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T12:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T12:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780920019-1
+2026-06-08T12:00:19Z | auto-fix-worker | start        | T-loop-1780920019-1 | role=error target=jobs/logs/backend.log
+2026-06-08T12:00:19Z | auto-fix-worker | classify     | T-loop-1780920019-1 | tier=small risk=low council=single
+2026-06-08T12:03:19Z | auto-fix-worker | skip         | T-loop-1780920019-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T12:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-08T12:03:20Z | auto-fix-loop | dispatch #2: T-loop-1780920200-2
+2026-06-08T12:03:21Z | auto-fix-worker | start        | T-loop-1780920200-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T12:03:21Z | auto-fix-worker | classify     | T-loop-1780920200-2 | tier=small risk=low council=single
+2026-06-08T12:06:21Z | auto-fix-worker | skip         | T-loop-1780920200-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T12:06:23Z | auto-fix-loop |   → verdict=skip
+2026-06-08T12:06:23Z | auto-fix-loop | dispatch #3: T-loop-1780920383-3
+2026-06-08T12:06:24Z | auto-fix-worker | start        | T-loop-1780920383-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T12:06:24Z | auto-fix-worker | classify     | T-loop-1780920383-3 | tier=small risk=low council=single
+2026-06-08T12:06:30Z | auto-fix-worker | apply_check  | T-loop-1780920383-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T12:06:30Z | auto-fix-loop |   → verdict=fail
+2026-06-08T12:06:30Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T13:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T13:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T13:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T13:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T13:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780923618-1
+2026-06-08T13:00:18Z | auto-fix-worker | start        | T-loop-1780923618-1 | role=error target=jobs/logs/backend.log
+2026-06-08T13:00:18Z | auto-fix-worker | classify     | T-loop-1780923618-1 | tier=small risk=low council=single
+2026-06-08T13:03:18Z | auto-fix-worker | skip         | T-loop-1780923618-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T13:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T13:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780923799-2
+2026-06-08T13:03:19Z | auto-fix-worker | start        | T-loop-1780923799-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T13:03:19Z | auto-fix-worker | classify     | T-loop-1780923799-2 | tier=small risk=low council=single
+2026-06-08T13:03:23Z | auto-fix-worker | apply_check  | T-loop-1780923799-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T13:03:23Z | auto-fix-loop |   → verdict=fail
+2026-06-08T13:03:23Z | auto-fix-loop | dispatch #3: T-loop-1780923803-3
+2026-06-08T13:03:23Z | auto-fix-worker | start        | T-loop-1780923803-3 | role=testing target=tests/drills/drill_graph_ai.py
+2026-06-08T13:03:23Z | auto-fix-worker | classify     | T-loop-1780923803-3 | tier=medium risk=low council=single
+2026-06-08T13:04:00Z | auto-fix-worker | apply_check  | T-loop-1780923803-3 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-08T13:04:00Z | auto-fix-loop |   → verdict=fail
+2026-06-08T13:04:00Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T14:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T14:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T14:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T14:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T14:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780927218-1
+2026-06-08T14:00:18Z | auto-fix-worker | start        | T-loop-1780927218-1 | role=error target=jobs/logs/backend.log
+2026-06-08T14:00:18Z | auto-fix-worker | classify     | T-loop-1780927218-1 | tier=small risk=low council=single
+2026-06-08T14:03:18Z | auto-fix-worker | skip         | T-loop-1780927218-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T14:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T14:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780927398-2
+2026-06-08T14:03:19Z | auto-fix-worker | start        | T-loop-1780927398-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T14:03:19Z | auto-fix-worker | classify     | T-loop-1780927398-2 | tier=small risk=low council=single
+2026-06-08T14:06:19Z | auto-fix-worker | skip         | T-loop-1780927398-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T14:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T14:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780927579-3
+2026-06-08T14:06:19Z | auto-fix-worker | start        | T-loop-1780927579-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T14:06:19Z | auto-fix-worker | classify     | T-loop-1780927579-3 | tier=small risk=low council=single
+2026-06-08T14:06:22Z | auto-fix-worker | apply_check  | T-loop-1780927579-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T14:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-08T14:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T15:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T15:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T15:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T15:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T15:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780930819-1
+2026-06-08T15:00:19Z | auto-fix-worker | start        | T-loop-1780930819-1 | role=error target=jobs/logs/backend.log
+2026-06-08T15:00:19Z | auto-fix-worker | classify     | T-loop-1780930819-1 | tier=small risk=low council=single
+2026-06-08T15:00:39Z | auto-fix-worker | apply_check  | T-loop-1780930819-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-08T15:00:39Z | auto-fix-loop |   → verdict=fail
+2026-06-08T15:00:39Z | auto-fix-loop | dispatch #2: T-loop-1780930839-2
+2026-06-08T15:00:40Z | auto-fix-worker | start        | T-loop-1780930839-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T15:00:40Z | auto-fix-worker | classify     | T-loop-1780930839-2 | tier=small risk=low council=single
+2026-06-08T15:00:42Z | auto-fix-worker | apply_check  | T-loop-1780930839-2 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-08T15:00:42Z | auto-fix-loop |   → verdict=fail
+2026-06-08T15:00:42Z | auto-fix-loop | dispatch #3: T-loop-1780930842-3
+2026-06-08T15:00:42Z | auto-fix-worker | start        | T-loop-1780930842-3 | role=error target=jobs/logs/opa_test.log
+2026-06-08T15:00:42Z | auto-fix-worker | classify     | T-loop-1780930842-3 | tier=small risk=low council=single
+2026-06-08T15:00:46Z | auto-fix-worker | apply_check  | T-loop-1780930842-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-08T15:00:46Z | auto-fix-loop |   → verdict=fail
+2026-06-08T15:00:46Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T16:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T16:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T16:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T16:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T16:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780934417-1
+2026-06-08T16:00:17Z | auto-fix-worker | start        | T-loop-1780934417-1 | role=error target=jobs/logs/backend.log
+2026-06-08T16:00:17Z | auto-fix-worker | classify     | T-loop-1780934417-1 | tier=small risk=low council=single
+2026-06-08T16:03:17Z | auto-fix-worker | skip         | T-loop-1780934417-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T16:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-08T16:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780934597-2
+2026-06-08T16:03:17Z | auto-fix-worker | start        | T-loop-1780934597-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T16:03:17Z | auto-fix-worker | classify     | T-loop-1780934597-2 | tier=small risk=low council=single
+2026-06-08T16:06:18Z | auto-fix-worker | skip         | T-loop-1780934597-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T16:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T16:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780934778-3
+2026-06-08T16:06:18Z | auto-fix-worker | start        | T-loop-1780934778-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T16:06:18Z | auto-fix-worker | classify     | T-loop-1780934778-3 | tier=small risk=low council=single
+2026-06-08T16:06:21Z | auto-fix-worker | apply_check  | T-loop-1780934778-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T16:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-08T16:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T17:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T17:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T17:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T17:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T17:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780938018-1
+2026-06-08T17:00:18Z | auto-fix-worker | start        | T-loop-1780938018-1 | role=error target=jobs/logs/backend.log
+2026-06-08T17:00:18Z | auto-fix-worker | classify     | T-loop-1780938018-1 | tier=small risk=low council=single
+2026-06-08T17:03:18Z | auto-fix-worker | skip         | T-loop-1780938018-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T17:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T17:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780938198-2
+2026-06-08T17:03:18Z | auto-fix-worker | start        | T-loop-1780938198-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T17:03:18Z | auto-fix-worker | classify     | T-loop-1780938198-2 | tier=small risk=low council=single
+2026-06-08T17:06:19Z | auto-fix-worker | skip         | T-loop-1780938198-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T17:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T17:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780938379-3
+2026-06-08T17:06:19Z | auto-fix-worker | start        | T-loop-1780938379-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T17:06:19Z | auto-fix-worker | classify     | T-loop-1780938379-3 | tier=small risk=low council=single
+2026-06-08T17:06:22Z | auto-fix-worker | apply_check  | T-loop-1780938379-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T17:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-08T17:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T18:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T18:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T18:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T18:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T18:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780941617-1
+2026-06-08T18:00:17Z | auto-fix-worker | start        | T-loop-1780941617-1 | role=error target=jobs/logs/backend.log
+2026-06-08T18:00:17Z | auto-fix-worker | classify     | T-loop-1780941617-1 | tier=small risk=low council=single
+2026-06-08T18:03:18Z | auto-fix-worker | skip         | T-loop-1780941617-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T18:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T18:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780941798-2
+2026-06-08T18:03:19Z | auto-fix-worker | start        | T-loop-1780941798-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T18:03:19Z | auto-fix-worker | classify     | T-loop-1780941798-2 | tier=small risk=low council=single
+2026-06-08T18:06:20Z | auto-fix-worker | skip         | T-loop-1780941798-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T18:06:22Z | auto-fix-loop |   → verdict=skip
+2026-06-08T18:06:23Z | auto-fix-loop | dispatch #3: T-loop-1780941983-3
+2026-06-08T18:06:23Z | auto-fix-worker | start        | T-loop-1780941983-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T18:06:23Z | auto-fix-worker | classify     | T-loop-1780941983-3 | tier=small risk=low council=single
+2026-06-08T18:06:45Z | auto-fix-worker | apply_check  | T-loop-1780941983-3 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-08T18:06:45Z | auto-fix-loop |   → verdict=fail
+2026-06-08T18:06:45Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T19:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T19:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T19:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T19:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T19:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780945218-1
+2026-06-08T19:00:18Z | auto-fix-worker | start        | T-loop-1780945218-1 | role=error target=jobs/logs/backend.log
+2026-06-08T19:00:18Z | auto-fix-worker | classify     | T-loop-1780945218-1 | tier=small risk=low council=single
+2026-06-08T19:03:18Z | auto-fix-worker | skip         | T-loop-1780945218-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T19:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T19:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780945399-2
+2026-06-08T19:03:19Z | auto-fix-worker | start        | T-loop-1780945399-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T19:03:19Z | auto-fix-worker | classify     | T-loop-1780945399-2 | tier=small risk=low council=single
+2026-06-08T19:06:19Z | auto-fix-worker | skip         | T-loop-1780945399-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T19:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T19:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780945579-3
+2026-06-08T19:06:19Z | auto-fix-worker | start        | T-loop-1780945579-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T19:06:19Z | auto-fix-worker | classify     | T-loop-1780945579-3 | tier=small risk=low council=single
+2026-06-08T19:06:25Z | auto-fix-worker | apply_check  | T-loop-1780945579-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-08T19:06:25Z | auto-fix-loop |   → verdict=fail
+2026-06-08T19:06:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T20:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T20:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T20:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T20:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T20:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780948818-1
+2026-06-08T20:00:18Z | auto-fix-worker | start        | T-loop-1780948818-1 | role=error target=jobs/logs/backend.log
+2026-06-08T20:00:18Z | auto-fix-worker | classify     | T-loop-1780948818-1 | tier=small risk=low council=single
+2026-06-08T20:03:18Z | auto-fix-worker | skip         | T-loop-1780948818-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T20:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T20:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780948998-2
+2026-06-08T20:03:19Z | auto-fix-worker | start        | T-loop-1780948998-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T20:03:19Z | auto-fix-worker | classify     | T-loop-1780948998-2 | tier=small risk=low council=single
+2026-06-08T20:06:19Z | auto-fix-worker | skip         | T-loop-1780948998-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T20:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T20:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780949179-3
+2026-06-08T20:06:19Z | auto-fix-worker | start        | T-loop-1780949179-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T20:06:19Z | auto-fix-worker | classify     | T-loop-1780949179-3 | tier=small risk=low council=single
+2026-06-08T20:06:22Z | auto-fix-worker | apply_check  | T-loop-1780949179-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T20:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-08T20:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T21:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T21:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T21:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T21:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T21:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780952417-1
+2026-06-08T21:00:17Z | auto-fix-worker | start        | T-loop-1780952417-1 | role=error target=jobs/logs/backend.log
+2026-06-08T21:00:17Z | auto-fix-worker | classify     | T-loop-1780952417-1 | tier=small risk=low council=single
+2026-06-08T21:03:18Z | auto-fix-worker | skip         | T-loop-1780952417-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T21:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T21:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780952598-2
+2026-06-08T21:03:18Z | auto-fix-worker | start        | T-loop-1780952598-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T21:03:18Z | auto-fix-worker | classify     | T-loop-1780952598-2 | tier=small risk=low council=single
+2026-06-08T21:06:18Z | auto-fix-worker | skip         | T-loop-1780952598-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T21:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-08T21:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780952778-3
+2026-06-08T21:06:18Z | auto-fix-worker | start        | T-loop-1780952778-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T21:06:18Z | auto-fix-worker | classify     | T-loop-1780952778-3 | tier=small risk=low council=single
+2026-06-08T21:06:23Z | auto-fix-worker | apply_check  | T-loop-1780952778-3 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-08T21:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-08T21:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T22:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T22:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T22:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T22:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T22:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780956017-1
+2026-06-08T22:00:17Z | auto-fix-worker | start        | T-loop-1780956017-1 | role=error target=jobs/logs/backend.log
+2026-06-08T22:00:17Z | auto-fix-worker | classify     | T-loop-1780956017-1 | tier=small risk=low council=single
+2026-06-08T22:00:31Z | auto-fix-worker | apply_check  | T-loop-1780956017-1 | FAIL: git apply --check failed: error: patch failed: jobs/logs/backend.log:1
+error: jobs/logs/backend.log: patch does not apply
+2026-06-08T22:00:31Z | auto-fix-loop |   → verdict=fail
+2026-06-08T22:00:31Z | auto-fix-loop | dispatch #2: T-loop-1780956031-2
+2026-06-08T22:00:31Z | auto-fix-worker | start        | T-loop-1780956031-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T22:00:31Z | auto-fix-worker | classify     | T-loop-1780956031-2 | tier=small risk=low council=single
+2026-06-08T22:03:32Z | auto-fix-worker | skip         | T-loop-1780956031-2 | model returned empty or NEEDS_HUMAN
+2026-06-08T22:03:32Z | auto-fix-loop |   → verdict=skip
+2026-06-08T22:03:32Z | auto-fix-loop | dispatch #3: T-loop-1780956212-3
+2026-06-08T22:03:32Z | auto-fix-worker | start        | T-loop-1780956212-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T22:03:32Z | auto-fix-worker | classify     | T-loop-1780956212-3 | tier=small risk=low council=single
+2026-06-08T22:03:37Z | auto-fix-worker | apply_check  | T-loop-1780956212-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-08T22:03:37Z | auto-fix-loop |   → verdict=fail
+2026-06-08T22:03:37Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-08T23:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-08T23:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-08T23:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-08T23:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-08T23:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780959619-1
+2026-06-08T23:00:19Z | auto-fix-worker | start        | T-loop-1780959619-1 | role=error target=jobs/logs/backend.log
+2026-06-08T23:00:19Z | auto-fix-worker | classify     | T-loop-1780959619-1 | tier=small risk=low council=single
+2026-06-08T23:03:19Z | auto-fix-worker | skip         | T-loop-1780959619-1 | model returned empty or NEEDS_HUMAN
+2026-06-08T23:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-08T23:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780959799-2
+2026-06-08T23:03:19Z | auto-fix-worker | start        | T-loop-1780959799-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-08T23:03:19Z | auto-fix-worker | classify     | T-loop-1780959799-2 | tier=small risk=low council=single
+2026-06-08T23:03:28Z | auto-fix-worker | apply_check  | T-loop-1780959799-2 | FAIL: git apply --check failed: error: corrupt patch at line 38
+2026-06-08T23:03:28Z | auto-fix-loop |   → verdict=fail
+2026-06-08T23:03:28Z | auto-fix-loop | dispatch #3: T-loop-1780959808-3
+2026-06-08T23:03:29Z | auto-fix-worker | start        | T-loop-1780959808-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-08T23:03:29Z | auto-fix-worker | classify     | T-loop-1780959808-3 | tier=small risk=low council=single
+2026-06-08T23:03:32Z | auto-fix-worker | apply_check  | T-loop-1780959808-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-08T23:03:32Z | auto-fix-loop |   → verdict=fail
+2026-06-08T23:03:32Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T00:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T00:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T00:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T00:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T00:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780963218-1
+2026-06-09T00:00:18Z | auto-fix-worker | start        | T-loop-1780963218-1 | role=error target=jobs/logs/backend.log
+2026-06-09T00:00:18Z | auto-fix-worker | classify     | T-loop-1780963218-1 | tier=small risk=low council=single
+2026-06-09T00:02:37Z | auto-fix-worker | apply_check  | T-loop-1780963218-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-09T00:02:38Z | auto-fix-loop |   → verdict=fail
+2026-06-09T00:02:38Z | auto-fix-loop | dispatch #2: T-loop-1780963358-2
+2026-06-09T00:02:39Z | auto-fix-worker | start        | T-loop-1780963358-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T00:02:39Z | auto-fix-worker | classify     | T-loop-1780963358-2 | tier=small risk=low council=single
+2026-06-09T00:05:39Z | auto-fix-worker | skip         | T-loop-1780963358-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T00:05:41Z | auto-fix-loop |   → verdict=skip
+2026-06-09T00:05:41Z | auto-fix-loop | dispatch #3: T-loop-1780963541-3
+2026-06-09T00:05:42Z | auto-fix-worker | start        | T-loop-1780963541-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T00:05:42Z | auto-fix-worker | classify     | T-loop-1780963541-3 | tier=small risk=low council=single
+2026-06-09T00:07:37Z | auto-fix-worker | apply_check  | T-loop-1780963541-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T00:07:38Z | auto-fix-loop |   → verdict=fail
+2026-06-09T00:07:40Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T01:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T01:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T01:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T01:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T01:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780966818-1
+2026-06-09T01:00:18Z | auto-fix-worker | start        | T-loop-1780966818-1 | role=error target=jobs/logs/backend.log
+2026-06-09T01:00:18Z | auto-fix-worker | classify     | T-loop-1780966818-1 | tier=small risk=low council=single
+2026-06-09T01:03:18Z | auto-fix-worker | skip         | T-loop-1780966818-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T01:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T01:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780966999-2
+2026-06-09T01:03:19Z | auto-fix-worker | start        | T-loop-1780966999-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T01:03:19Z | auto-fix-worker | classify     | T-loop-1780966999-2 | tier=small risk=low council=single
+2026-06-09T01:06:19Z | auto-fix-worker | skip         | T-loop-1780966999-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T01:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T01:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780967179-3
+2026-06-09T01:06:19Z | auto-fix-worker | start        | T-loop-1780967179-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T01:06:19Z | auto-fix-worker | classify     | T-loop-1780967179-3 | tier=small risk=low council=single
+2026-06-09T01:06:22Z | auto-fix-worker | apply_check  | T-loop-1780967179-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T01:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-09T01:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T02:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T02:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T02:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T02:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T02:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780970417-1
+2026-06-09T02:00:17Z | auto-fix-worker | start        | T-loop-1780970417-1 | role=error target=jobs/logs/backend.log
+2026-06-09T02:00:17Z | auto-fix-worker | classify     | T-loop-1780970417-1 | tier=small risk=low council=single
+2026-06-09T02:03:17Z | auto-fix-worker | skip         | T-loop-1780970417-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T02:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-09T02:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780970597-2
+2026-06-09T02:03:17Z | auto-fix-worker | start        | T-loop-1780970597-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T02:03:17Z | auto-fix-worker | classify     | T-loop-1780970597-2 | tier=small risk=low council=single
+2026-06-09T02:06:17Z | auto-fix-worker | skip         | T-loop-1780970597-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T02:06:17Z | auto-fix-loop |   → verdict=skip
+2026-06-09T02:06:17Z | auto-fix-loop | dispatch #3: T-loop-1780970777-3
+2026-06-09T02:06:17Z | auto-fix-worker | start        | T-loop-1780970777-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T02:06:17Z | auto-fix-worker | classify     | T-loop-1780970777-3 | tier=small risk=low council=single
+2026-06-09T02:06:21Z | auto-fix-worker | apply_check  | T-loop-1780970777-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T02:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-09T02:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T03:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T03:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T03:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T03:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T03:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780974017-1
+2026-06-09T03:00:17Z | auto-fix-worker | start        | T-loop-1780974017-1 | role=error target=jobs/logs/backend.log
+2026-06-09T03:00:17Z | auto-fix-worker | classify     | T-loop-1780974017-1 | tier=small risk=low council=single
+2026-06-09T03:00:25Z | auto-fix-worker | apply_check  | T-loop-1780974017-1 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-09T03:00:25Z | auto-fix-loop |   → verdict=fail
+2026-06-09T03:00:25Z | auto-fix-loop | dispatch #2: T-loop-1780974025-2
+2026-06-09T03:00:26Z | auto-fix-worker | start        | T-loop-1780974025-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T03:00:26Z | auto-fix-worker | classify     | T-loop-1780974025-2 | tier=small risk=low council=single
+2026-06-09T03:03:26Z | auto-fix-worker | skip         | T-loop-1780974025-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T03:03:26Z | auto-fix-loop |   → verdict=skip
+2026-06-09T03:03:26Z | auto-fix-loop | dispatch #3: T-loop-1780974206-3
+2026-06-09T03:03:26Z | auto-fix-worker | start        | T-loop-1780974206-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T03:03:26Z | auto-fix-worker | classify     | T-loop-1780974206-3 | tier=small risk=low council=single
+2026-06-09T03:03:29Z | auto-fix-worker | apply_check  | T-loop-1780974206-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T03:03:29Z | auto-fix-loop |   → verdict=fail
+2026-06-09T03:03:29Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T04:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T04:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T04:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T04:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T04:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780977617-1
+2026-06-09T04:00:17Z | auto-fix-worker | start        | T-loop-1780977617-1 | role=error target=jobs/logs/backend.log
+2026-06-09T04:00:17Z | auto-fix-worker | classify     | T-loop-1780977617-1 | tier=small risk=low council=single
+2026-06-09T04:03:17Z | auto-fix-worker | skip         | T-loop-1780977617-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T04:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T04:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780977798-2
+2026-06-09T04:03:18Z | auto-fix-worker | start        | T-loop-1780977798-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T04:03:18Z | auto-fix-worker | classify     | T-loop-1780977798-2 | tier=small risk=low council=single
+2026-06-09T04:06:18Z | auto-fix-worker | skip         | T-loop-1780977798-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T04:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T04:06:18Z | auto-fix-loop | dispatch #3: T-loop-1780977978-3
+2026-06-09T04:06:18Z | auto-fix-worker | start        | T-loop-1780977978-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-09T04:06:18Z | auto-fix-worker | classify     | T-loop-1780977978-3 | tier=small risk=low council=single
+2026-06-09T04:06:25Z | auto-fix-worker | apply_check  | T-loop-1780977978-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-09T04:06:25Z | auto-fix-loop |   → verdict=fail
+2026-06-09T04:06:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T05:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T05:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T05:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T05:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T05:00:17Z | auto-fix-loop | dispatch #1: T-loop-1780981217-1
+2026-06-09T05:00:17Z | auto-fix-worker | start        | T-loop-1780981217-1 | role=error target=jobs/logs/backend.log
+2026-06-09T05:00:17Z | auto-fix-worker | classify     | T-loop-1780981217-1 | tier=small risk=low council=single
+2026-06-09T05:03:17Z | auto-fix-worker | skip         | T-loop-1780981217-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T05:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-09T05:03:17Z | auto-fix-loop | dispatch #2: T-loop-1780981397-2
+2026-06-09T05:03:18Z | auto-fix-worker | start        | T-loop-1780981397-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T05:03:18Z | auto-fix-worker | classify     | T-loop-1780981397-2 | tier=small risk=low council=single
+2026-06-09T05:03:26Z | auto-fix-worker | apply_check  | T-loop-1780981397-2 | FAIL: git apply --check failed: error: corrupt patch at line 38
+2026-06-09T05:03:26Z | auto-fix-loop |   → verdict=fail
+2026-06-09T05:03:26Z | auto-fix-loop | dispatch #3: T-loop-1780981406-3
+2026-06-09T05:03:27Z | auto-fix-worker | start        | T-loop-1780981406-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T05:03:27Z | auto-fix-worker | classify     | T-loop-1780981406-3 | tier=small risk=low council=single
+2026-06-09T05:03:31Z | auto-fix-worker | apply_check  | T-loop-1780981406-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-09T05:03:31Z | auto-fix-loop |   → verdict=fail
+2026-06-09T05:03:31Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T06:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T06:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T06:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T06:00:23Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T06:00:25Z | auto-fix-loop | dispatch #1: T-loop-1780984825-1
+2026-06-09T06:00:27Z | auto-fix-worker | start        | T-loop-1780984825-1 | role=error target=jobs/logs/backend.log
+2026-06-09T06:00:27Z | auto-fix-worker | classify     | T-loop-1780984825-1 | tier=small risk=low council=single
+2026-06-09T06:03:29Z | auto-fix-worker | skip         | T-loop-1780984825-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T06:03:31Z | auto-fix-loop |   → verdict=skip
+2026-06-09T06:03:32Z | auto-fix-loop | dispatch #2: T-loop-1780985012-2
+2026-06-09T06:03:32Z | auto-fix-worker | start        | T-loop-1780985012-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T06:03:32Z | auto-fix-worker | classify     | T-loop-1780985012-2 | tier=small risk=low council=single
+2026-06-09T06:04:02Z | auto-fix-worker | apply_check  | T-loop-1780985012-2 | FAIL: git apply --check failed: error: corrupt patch at line 37
+2026-06-09T06:04:02Z | auto-fix-loop |   → verdict=fail
+2026-06-09T06:04:02Z | auto-fix-loop | dispatch #3: T-loop-1780985042-3
+2026-06-09T06:04:02Z | auto-fix-worker | start        | T-loop-1780985042-3 | role=error target=jobs/logs/opa_test.log
+2026-06-09T06:04:02Z | auto-fix-worker | classify     | T-loop-1780985042-3 | tier=small risk=low council=single
+2026-06-09T06:04:09Z | auto-fix-worker | apply_check  | T-loop-1780985042-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-09T06:04:09Z | auto-fix-loop |   → verdict=fail
+2026-06-09T06:04:09Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T07:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T07:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T07:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T07:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T07:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780988418-1
+2026-06-09T07:00:18Z | auto-fix-worker | start        | T-loop-1780988418-1 | role=error target=jobs/logs/backend.log
+2026-06-09T07:00:18Z | auto-fix-worker | classify     | T-loop-1780988418-1 | tier=small risk=low council=single
+2026-06-09T07:03:18Z | auto-fix-worker | skip         | T-loop-1780988418-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T07:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T07:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780988598-2
+2026-06-09T07:03:19Z | auto-fix-worker | start        | T-loop-1780988598-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T07:03:19Z | auto-fix-worker | classify     | T-loop-1780988598-2 | tier=small risk=low council=single
+2026-06-09T07:06:19Z | auto-fix-worker | skip         | T-loop-1780988598-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T07:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T07:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780988779-3
+2026-06-09T07:06:19Z | auto-fix-worker | start        | T-loop-1780988779-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T07:06:19Z | auto-fix-worker | classify     | T-loop-1780988779-3 | tier=small risk=low council=single
+2026-06-09T07:06:22Z | auto-fix-worker | apply_check  | T-loop-1780988779-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T07:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-09T07:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T08:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T08:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T08:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T08:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T08:00:19Z | auto-fix-loop | dispatch #1: T-loop-1780992019-1
+2026-06-09T08:00:19Z | auto-fix-worker | start        | T-loop-1780992019-1 | role=error target=jobs/logs/backend.log
+2026-06-09T08:00:19Z | auto-fix-worker | classify     | T-loop-1780992019-1 | tier=small risk=low council=single
+2026-06-09T08:03:20Z | auto-fix-worker | skip         | T-loop-1780992019-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T08:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-09T08:03:20Z | auto-fix-loop | dispatch #2: T-loop-1780992200-2
+2026-06-09T08:03:20Z | auto-fix-worker | start        | T-loop-1780992200-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T08:03:20Z | auto-fix-worker | classify     | T-loop-1780992200-2 | tier=small risk=low council=single
+2026-06-09T08:06:20Z | auto-fix-worker | skip         | T-loop-1780992200-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T08:06:20Z | auto-fix-loop |   → verdict=skip
+2026-06-09T08:06:20Z | auto-fix-loop | dispatch #3: T-loop-1780992380-3
+2026-06-09T08:06:20Z | auto-fix-worker | start        | T-loop-1780992380-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T08:06:20Z | auto-fix-worker | classify     | T-loop-1780992380-3 | tier=small risk=low council=single
+2026-06-09T08:06:23Z | auto-fix-worker | apply_check  | T-loop-1780992380-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T08:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-09T08:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T09:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T09:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T09:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T09:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T09:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780995618-1
+2026-06-09T09:00:19Z | auto-fix-worker | start        | T-loop-1780995618-1 | role=error target=jobs/logs/backend.log
+2026-06-09T09:00:19Z | auto-fix-worker | classify     | T-loop-1780995618-1 | tier=small risk=low council=single
+2026-06-09T09:03:19Z | auto-fix-worker | skip         | T-loop-1780995618-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T09:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T09:03:19Z | auto-fix-loop | dispatch #2: T-loop-1780995799-2
+2026-06-09T09:03:19Z | auto-fix-worker | start        | T-loop-1780995799-2 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-09T09:03:19Z | auto-fix-worker | classify     | T-loop-1780995799-2 | tier=small risk=low council=single
+2026-06-09T09:03:26Z | auto-fix-worker | apply_check  | T-loop-1780995799-2 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-09T09:03:26Z | auto-fix-loop |   → verdict=fail
+2026-06-09T09:03:26Z | auto-fix-loop | dispatch #3: T-loop-1780995806-3
+2026-06-09T09:03:26Z | auto-fix-worker | start        | T-loop-1780995806-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T09:03:26Z | auto-fix-worker | classify     | T-loop-1780995806-3 | tier=small risk=low council=single
+2026-06-09T09:03:29Z | auto-fix-worker | apply_check  | T-loop-1780995806-3 | FAIL: git apply --check failed: error: corrupt patch at line 11
+2026-06-09T09:03:29Z | auto-fix-loop |   → verdict=fail
+2026-06-09T09:03:29Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T10:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T10:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T10:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T10:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T10:00:18Z | auto-fix-loop | dispatch #1: T-loop-1780999218-1
+2026-06-09T10:00:18Z | auto-fix-worker | start        | T-loop-1780999218-1 | role=error target=jobs/logs/backend.log
+2026-06-09T10:00:18Z | auto-fix-worker | classify     | T-loop-1780999218-1 | tier=small risk=low council=single
+2026-06-09T10:03:18Z | auto-fix-worker | skip         | T-loop-1780999218-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T10:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T10:03:18Z | auto-fix-loop | dispatch #2: T-loop-1780999398-2
+2026-06-09T10:03:19Z | auto-fix-worker | start        | T-loop-1780999398-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T10:03:19Z | auto-fix-worker | classify     | T-loop-1780999398-2 | tier=small risk=low council=single
+2026-06-09T10:06:19Z | auto-fix-worker | skip         | T-loop-1780999398-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T10:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T10:06:19Z | auto-fix-loop | dispatch #3: T-loop-1780999579-3
+2026-06-09T10:06:19Z | auto-fix-worker | start        | T-loop-1780999579-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T10:06:19Z | auto-fix-worker | classify     | T-loop-1780999579-3 | tier=small risk=low council=single
+2026-06-09T10:06:21Z | auto-fix-worker | apply_check  | T-loop-1780999579-3 | FAIL: git apply --check failed: error: corrupt patch at line 12
+2026-06-09T10:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-09T10:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T11:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T11:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T11:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T11:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T11:00:17Z | auto-fix-loop | dispatch #1: T-loop-1781002817-1
+2026-06-09T11:00:17Z | auto-fix-worker | start        | T-loop-1781002817-1 | role=error target=jobs/logs/backend.log
+2026-06-09T11:00:17Z | auto-fix-worker | classify     | T-loop-1781002817-1 | tier=small risk=low council=single
+2026-06-09T11:03:18Z | auto-fix-worker | skip         | T-loop-1781002817-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T11:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T11:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781002998-2
+2026-06-09T11:03:18Z | auto-fix-worker | start        | T-loop-1781002998-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T11:03:18Z | auto-fix-worker | classify     | T-loop-1781002998-2 | tier=small risk=low council=single
+2026-06-09T11:03:20Z | auto-fix-worker | skip         | T-loop-1781002998-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T11:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-09T11:03:20Z | auto-fix-loop | dispatch #3: T-loop-1781003000-3
+2026-06-09T11:03:21Z | auto-fix-worker | start        | T-loop-1781003000-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T11:03:21Z | auto-fix-worker | classify     | T-loop-1781003000-3 | tier=small risk=low council=single
+2026-06-09T11:03:24Z | auto-fix-worker | apply_check  | T-loop-1781003000-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T11:03:24Z | auto-fix-loop |   → verdict=fail
+2026-06-09T11:03:24Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T12:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T12:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T12:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T12:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T12:00:20Z | auto-fix-loop | dispatch #1: T-loop-1781006420-1
+2026-06-09T12:00:22Z | auto-fix-worker | start        | T-loop-1781006420-1 | role=error target=jobs/logs/backend.log
+2026-06-09T12:00:22Z | auto-fix-worker | classify     | T-loop-1781006420-1 | tier=small risk=low council=single
+2026-06-09T12:03:22Z | auto-fix-worker | skip         | T-loop-1781006420-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T12:03:25Z | auto-fix-loop |   → verdict=skip
+2026-06-09T12:03:26Z | auto-fix-loop | dispatch #2: T-loop-1781006606-2
+2026-06-09T12:03:26Z | auto-fix-worker | start        | T-loop-1781006606-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T12:03:26Z | auto-fix-worker | classify     | T-loop-1781006606-2 | tier=small risk=low council=single
+2026-06-09T12:06:28Z | auto-fix-worker | skip         | T-loop-1781006606-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T12:06:29Z | auto-fix-loop |   → verdict=skip
+2026-06-09T12:06:29Z | auto-fix-loop | dispatch #3: T-loop-1781006789-3
+2026-06-09T12:06:30Z | auto-fix-worker | start        | T-loop-1781006789-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T12:06:30Z | auto-fix-worker | classify     | T-loop-1781006789-3 | tier=small risk=low council=single
+2026-06-09T12:06:47Z | auto-fix-worker | apply_check  | T-loop-1781006789-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T12:06:47Z | auto-fix-loop |   → verdict=fail
+2026-06-09T12:06:47Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T13:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T13:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T13:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T13:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T13:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781010018-1
+2026-06-09T13:00:18Z | auto-fix-worker | start        | T-loop-1781010018-1 | role=error target=jobs/logs/backend.log
+2026-06-09T13:00:18Z | auto-fix-worker | classify     | T-loop-1781010018-1 | tier=small risk=low council=single
+2026-06-09T13:03:18Z | auto-fix-worker | skip         | T-loop-1781010018-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T13:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T13:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781010198-2
+2026-06-09T13:03:18Z | auto-fix-worker | start        | T-loop-1781010198-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T13:03:18Z | auto-fix-worker | classify     | T-loop-1781010198-2 | tier=small risk=low council=single
+2026-06-09T13:03:23Z | auto-fix-worker | apply_check  | T-loop-1781010198-2 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -20,7 +20,7 @@
+2026-06-09T13:03:23Z | auto-fix-loop |   → verdict=fail
+2026-06-09T13:03:23Z | auto-fix-loop | dispatch #3: T-loop-1781010203-3
+2026-06-09T13:03:23Z | auto-fix-worker | start        | T-loop-1781010203-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T13:03:23Z | auto-fix-worker | classify     | T-loop-1781010203-3 | tier=small risk=low council=single
+2026-06-09T13:06:23Z | auto-fix-worker | skip         | T-loop-1781010203-3 | model returned empty or NEEDS_HUMAN
+2026-06-09T13:06:24Z | auto-fix-loop |   → verdict=skip
+2026-06-09T13:06:24Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T14:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T14:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T14:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T14:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T14:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781013618-1
+2026-06-09T14:00:18Z | auto-fix-worker | start        | T-loop-1781013618-1 | role=error target=jobs/logs/backend.log
+2026-06-09T14:00:18Z | auto-fix-worker | classify     | T-loop-1781013618-1 | tier=small risk=low council=single
+2026-06-09T14:03:18Z | auto-fix-worker | skip         | T-loop-1781013618-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T14:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T14:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781013798-2
+2026-06-09T14:03:19Z | auto-fix-worker | start        | T-loop-1781013798-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T14:03:19Z | auto-fix-worker | classify     | T-loop-1781013798-2 | tier=small risk=low council=single
+2026-06-09T14:06:19Z | auto-fix-worker | skip         | T-loop-1781013798-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T14:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T14:06:19Z | auto-fix-loop | dispatch #3: T-loop-1781013979-3
+2026-06-09T14:06:19Z | auto-fix-worker | start        | T-loop-1781013979-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T14:06:19Z | auto-fix-worker | classify     | T-loop-1781013979-3 | tier=small risk=low council=single
+2026-06-09T14:06:22Z | auto-fix-worker | apply_check  | T-loop-1781013979-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T14:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-09T14:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T15:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T15:00:03Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T15:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T15:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T15:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781017219-1
+2026-06-09T15:00:19Z | auto-fix-worker | start        | T-loop-1781017219-1 | role=error target=jobs/logs/backend.log
+2026-06-09T15:00:19Z | auto-fix-worker | classify     | T-loop-1781017219-1 | tier=small risk=low council=single
+2026-06-09T15:03:19Z | auto-fix-worker | skip         | T-loop-1781017219-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T15:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T15:03:19Z | auto-fix-loop | dispatch #2: T-loop-1781017399-2
+2026-06-09T15:03:19Z | auto-fix-worker | start        | T-loop-1781017399-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T15:03:19Z | auto-fix-worker | classify     | T-loop-1781017399-2 | tier=small risk=low council=single
+2026-06-09T15:03:26Z | auto-fix-worker | apply_check  | T-loop-1781017399-2 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-09T15:03:26Z | auto-fix-loop |   → verdict=fail
+2026-06-09T15:03:26Z | auto-fix-loop | dispatch #3: T-loop-1781017406-3
+2026-06-09T15:03:26Z | auto-fix-worker | start        | T-loop-1781017406-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-09T15:03:26Z | auto-fix-worker | classify     | T-loop-1781017406-3 | tier=small risk=low council=single
+2026-06-09T15:03:33Z | auto-fix-worker | apply_check  | T-loop-1781017406-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-09T15:03:33Z | auto-fix-loop |   → verdict=fail
+2026-06-09T15:03:33Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T16:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T16:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T16:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T16:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T16:00:17Z | auto-fix-loop | dispatch #1: T-loop-1781020817-1
+2026-06-09T16:00:17Z | auto-fix-worker | start        | T-loop-1781020817-1 | role=error target=jobs/logs/backend.log
+2026-06-09T16:00:17Z | auto-fix-worker | classify     | T-loop-1781020817-1 | tier=small risk=low council=single
+2026-06-09T16:00:42Z | auto-fix-worker | apply_check  | T-loop-1781020817-1 | FAIL: git apply --check failed: error: patch failed: jobs/logs/backend.log:1
+error: jobs/logs/backend.log: patch does not apply
+2026-06-09T16:00:42Z | auto-fix-loop |   → verdict=fail
+2026-06-09T16:00:42Z | auto-fix-loop | dispatch #2: T-loop-1781020842-2
+2026-06-09T16:00:42Z | auto-fix-worker | start        | T-loop-1781020842-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T16:00:42Z | auto-fix-worker | classify     | T-loop-1781020842-2 | tier=small risk=low council=single
+2026-06-09T16:03:42Z | auto-fix-worker | skip         | T-loop-1781020842-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T16:03:42Z | auto-fix-loop |   → verdict=skip
+2026-06-09T16:03:42Z | auto-fix-loop | dispatch #3: T-loop-1781021022-3
+2026-06-09T16:03:43Z | auto-fix-worker | start        | T-loop-1781021022-3 | role=error target=jobs/logs/opa_test.log
+2026-06-09T16:03:43Z | auto-fix-worker | classify     | T-loop-1781021022-3 | tier=small risk=low council=single
+2026-06-09T16:03:47Z | auto-fix-worker | apply_check  | T-loop-1781021022-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-09T16:03:47Z | auto-fix-loop |   → verdict=fail
+2026-06-09T16:03:47Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T17:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T17:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T17:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T17:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T17:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781024418-1
+2026-06-09T17:00:19Z | auto-fix-worker | start        | T-loop-1781024418-1 | role=error target=jobs/logs/backend.log
+2026-06-09T17:00:19Z | auto-fix-worker | classify     | T-loop-1781024418-1 | tier=small risk=low council=single
+2026-06-09T17:03:19Z | auto-fix-worker | skip         | T-loop-1781024418-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T17:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-09T17:03:19Z | auto-fix-loop | dispatch #2: T-loop-1781024599-2
+2026-06-09T17:03:19Z | auto-fix-worker | start        | T-loop-1781024599-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T17:03:19Z | auto-fix-worker | classify     | T-loop-1781024599-2 | tier=small risk=low council=single
+2026-06-09T17:06:20Z | auto-fix-worker | skip         | T-loop-1781024599-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T17:06:20Z | auto-fix-loop |   → verdict=skip
+2026-06-09T17:06:20Z | auto-fix-loop | dispatch #3: T-loop-1781024780-3
+2026-06-09T17:06:20Z | auto-fix-worker | start        | T-loop-1781024780-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T17:06:20Z | auto-fix-worker | classify     | T-loop-1781024780-3 | tier=small risk=low council=single
+2026-06-09T17:06:26Z | auto-fix-worker | apply_check  | T-loop-1781024780-3 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-09T17:06:26Z | auto-fix-loop |   → verdict=fail
+2026-06-09T17:06:26Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T18:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T18:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T18:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T18:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T18:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781028018-1
+2026-06-09T18:00:18Z | auto-fix-worker | start        | T-loop-1781028018-1 | role=error target=jobs/logs/backend.log
+2026-06-09T18:00:18Z | auto-fix-worker | classify     | T-loop-1781028018-1 | tier=small risk=low council=single
+2026-06-09T18:03:18Z | auto-fix-worker | skip         | T-loop-1781028018-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T18:03:22Z | auto-fix-loop |   → verdict=skip
+2026-06-09T18:03:24Z | auto-fix-loop | dispatch #2: T-loop-1781028204-2
+2026-06-09T18:03:25Z | auto-fix-worker | start        | T-loop-1781028204-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T18:03:25Z | auto-fix-worker | classify     | T-loop-1781028204-2 | tier=small risk=low council=single
+2026-06-09T18:06:29Z | auto-fix-worker | skip         | T-loop-1781028204-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T18:06:39Z | auto-fix-loop |   → verdict=skip
+2026-06-09T18:06:40Z | auto-fix-loop | dispatch #3: T-loop-1781028400-3
+2026-06-09T18:06:42Z | auto-fix-worker | start        | T-loop-1781028400-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T18:06:42Z | auto-fix-worker | classify     | T-loop-1781028400-3 | tier=small risk=low council=single
+2026-06-09T18:07:13Z | auto-fix-worker | apply_check  | T-loop-1781028400-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T18:07:14Z | auto-fix-loop |   → verdict=fail
+2026-06-09T18:07:16Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T19:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T19:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T19:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T19:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T19:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781031619-1
+2026-06-09T19:00:20Z | auto-fix-worker | start        | T-loop-1781031619-1 | role=error target=jobs/logs/backend.log
+2026-06-09T19:00:20Z | auto-fix-worker | classify     | T-loop-1781031619-1 | tier=small risk=low council=single
+2026-06-09T19:00:50Z | auto-fix-worker | apply_check  | T-loop-1781031619-1 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-09T19:00:51Z | auto-fix-loop |   → verdict=fail
+2026-06-09T19:00:51Z | auto-fix-loop | dispatch #2: T-loop-1781031651-2
+2026-06-09T19:00:51Z | auto-fix-worker | start        | T-loop-1781031651-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T19:00:51Z | auto-fix-worker | classify     | T-loop-1781031651-2 | tier=small risk=low council=single
+2026-06-09T19:03:51Z | auto-fix-worker | skip         | T-loop-1781031651-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T19:03:51Z | auto-fix-loop |   → verdict=skip
+2026-06-09T19:03:51Z | auto-fix-loop | dispatch #3: T-loop-1781031831-3
+2026-06-09T19:03:51Z | auto-fix-worker | start        | T-loop-1781031831-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T19:03:51Z | auto-fix-worker | classify     | T-loop-1781031831-3 | tier=small risk=low council=single
+2026-06-09T19:03:54Z | auto-fix-worker | apply_check  | T-loop-1781031831-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T19:03:54Z | auto-fix-loop |   → verdict=fail
+2026-06-09T19:03:54Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T20:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T20:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T20:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T20:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T20:00:17Z | auto-fix-loop | dispatch #1: T-loop-1781035217-1
+2026-06-09T20:00:18Z | auto-fix-worker | start        | T-loop-1781035217-1 | role=error target=jobs/logs/backend.log
+2026-06-09T20:00:18Z | auto-fix-worker | classify     | T-loop-1781035217-1 | tier=small risk=low council=single
+2026-06-09T20:03:18Z | auto-fix-worker | skip         | T-loop-1781035217-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T20:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T20:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781035398-2
+2026-06-09T20:03:18Z | auto-fix-worker | start        | T-loop-1781035398-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T20:03:18Z | auto-fix-worker | classify     | T-loop-1781035398-2 | tier=small risk=low council=single
+2026-06-09T20:06:18Z | auto-fix-worker | skip         | T-loop-1781035398-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T20:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T20:06:18Z | auto-fix-loop | dispatch #3: T-loop-1781035578-3
+2026-06-09T20:06:18Z | auto-fix-worker | start        | T-loop-1781035578-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T20:06:18Z | auto-fix-worker | classify     | T-loop-1781035578-3 | tier=small risk=low council=single
+2026-06-09T20:06:21Z | auto-fix-worker | apply_check  | T-loop-1781035578-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T20:06:21Z | auto-fix-loop |   → verdict=fail
+2026-06-09T20:06:21Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T21:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T21:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T21:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T21:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T21:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781038818-1
+2026-06-09T21:00:18Z | auto-fix-worker | start        | T-loop-1781038818-1 | role=error target=jobs/logs/backend.log
+2026-06-09T21:00:18Z | auto-fix-worker | classify     | T-loop-1781038818-1 | tier=small risk=low council=single
+2026-06-09T21:03:18Z | auto-fix-worker | skip         | T-loop-1781038818-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T21:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T21:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781038998-2
+2026-06-09T21:03:18Z | auto-fix-worker | start        | T-loop-1781038998-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T21:03:18Z | auto-fix-worker | classify     | T-loop-1781038998-2 | tier=small risk=low council=single
+2026-06-09T21:03:22Z | auto-fix-worker | skip         | T-loop-1781038998-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T21:03:22Z | auto-fix-loop |   → verdict=skip
+2026-06-09T21:03:22Z | auto-fix-loop | dispatch #3: T-loop-1781039002-3
+2026-06-09T21:03:22Z | auto-fix-worker | start        | T-loop-1781039002-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-09T21:03:22Z | auto-fix-worker | classify     | T-loop-1781039002-3 | tier=small risk=low council=single
+2026-06-09T21:03:30Z | auto-fix-worker | apply_check  | T-loop-1781039002-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-09T21:03:30Z | auto-fix-loop |   → verdict=fail
+2026-06-09T21:03:30Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T22:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T22:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T22:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T22:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T22:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781042419-1
+2026-06-09T22:00:19Z | auto-fix-worker | start        | T-loop-1781042419-1 | role=error target=jobs/logs/backend.log
+2026-06-09T22:00:19Z | auto-fix-worker | classify     | T-loop-1781042419-1 | tier=small risk=low council=single
+2026-06-09T22:03:19Z | auto-fix-worker | skip         | T-loop-1781042419-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T22:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-09T22:03:20Z | auto-fix-loop | dispatch #2: T-loop-1781042600-2
+2026-06-09T22:03:20Z | auto-fix-worker | start        | T-loop-1781042600-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T22:03:20Z | auto-fix-worker | classify     | T-loop-1781042600-2 | tier=small risk=low council=single
+2026-06-09T22:03:23Z | auto-fix-worker | skip         | T-loop-1781042600-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T22:03:23Z | auto-fix-loop |   → verdict=skip
+2026-06-09T22:03:23Z | auto-fix-loop | dispatch #3: T-loop-1781042603-3
+2026-06-09T22:03:23Z | auto-fix-worker | start        | T-loop-1781042603-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T22:03:23Z | auto-fix-worker | classify     | T-loop-1781042603-3 | tier=small risk=low council=single
+2026-06-09T22:03:26Z | auto-fix-worker | apply_check  | T-loop-1781042603-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-09T22:03:26Z | auto-fix-loop |   → verdict=fail
+2026-06-09T22:03:26Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-09T23:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-09T23:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-09T23:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-09T23:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-09T23:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781046018-1
+2026-06-09T23:00:18Z | auto-fix-worker | start        | T-loop-1781046018-1 | role=error target=jobs/logs/backend.log
+2026-06-09T23:00:18Z | auto-fix-worker | classify     | T-loop-1781046018-1 | tier=small risk=low council=single
+2026-06-09T23:03:18Z | auto-fix-worker | skip         | T-loop-1781046018-1 | model returned empty or NEEDS_HUMAN
+2026-06-09T23:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-09T23:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781046198-2
+2026-06-09T23:03:18Z | auto-fix-worker | start        | T-loop-1781046198-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-09T23:03:18Z | auto-fix-worker | classify     | T-loop-1781046198-2 | tier=small risk=low council=single
+2026-06-09T23:03:22Z | auto-fix-worker | skip         | T-loop-1781046198-2 | model returned empty or NEEDS_HUMAN
+2026-06-09T23:03:22Z | auto-fix-loop |   → verdict=skip
+2026-06-09T23:03:22Z | auto-fix-loop | dispatch #3: T-loop-1781046202-3
+2026-06-09T23:03:22Z | auto-fix-worker | start        | T-loop-1781046202-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-09T23:03:22Z | auto-fix-worker | classify     | T-loop-1781046202-3 | tier=small risk=low council=single
+2026-06-09T23:06:23Z | auto-fix-worker | skip         | T-loop-1781046202-3 | model returned empty or NEEDS_HUMAN
+2026-06-09T23:06:23Z | auto-fix-loop |   → verdict=skip
+2026-06-09T23:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T00:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T00:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T00:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T00:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T00:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781049619-1
+2026-06-10T00:00:19Z | auto-fix-worker | start        | T-loop-1781049619-1 | role=error target=jobs/logs/backend.log
+2026-06-10T00:00:19Z | auto-fix-worker | classify     | T-loop-1781049619-1 | tier=small risk=low council=single
+2026-06-10T00:03:20Z | auto-fix-worker | skip         | T-loop-1781049619-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T00:03:22Z | auto-fix-loop |   → verdict=skip
+2026-06-10T00:03:22Z | auto-fix-loop | dispatch #2: T-loop-1781049802-2
+2026-06-10T00:03:24Z | auto-fix-worker | start        | T-loop-1781049802-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T00:03:24Z | auto-fix-worker | classify     | T-loop-1781049802-2 | tier=small risk=low council=single
+2026-06-10T00:06:25Z | auto-fix-worker | skip         | T-loop-1781049802-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T00:06:29Z | auto-fix-loop |   → verdict=skip
+2026-06-10T00:06:30Z | auto-fix-loop | dispatch #3: T-loop-1781049990-3
+2026-06-10T00:06:31Z | auto-fix-worker | start        | T-loop-1781049990-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T00:06:31Z | auto-fix-worker | classify     | T-loop-1781049990-3 | tier=small risk=low council=single
+2026-06-10T00:06:44Z | auto-fix-worker | apply_check  | T-loop-1781049990-3 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-10T00:06:44Z | auto-fix-loop |   → verdict=fail
+2026-06-10T00:06:44Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T01:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T01:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T01:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T01:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T01:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781053218-1
+2026-06-10T01:00:18Z | auto-fix-worker | start        | T-loop-1781053218-1 | role=error target=jobs/logs/backend.log
+2026-06-10T01:00:18Z | auto-fix-worker | classify     | T-loop-1781053218-1 | tier=small risk=low council=single
+2026-06-10T01:03:18Z | auto-fix-worker | skip         | T-loop-1781053218-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T01:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T01:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781053398-2
+2026-06-10T01:03:18Z | auto-fix-worker | start        | T-loop-1781053398-2 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-10T01:03:18Z | auto-fix-worker | classify     | T-loop-1781053398-2 | tier=small risk=low council=single
+2026-06-10T01:03:25Z | auto-fix-worker | apply_check  | T-loop-1781053398-2 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-10T01:03:25Z | auto-fix-loop |   → verdict=fail
+2026-06-10T01:03:25Z | auto-fix-loop | dispatch #3: T-loop-1781053405-3
+2026-06-10T01:03:25Z | auto-fix-worker | start        | T-loop-1781053405-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T01:03:25Z | auto-fix-worker | classify     | T-loop-1781053405-3 | tier=small risk=low council=single
+2026-06-10T01:06:26Z | auto-fix-worker | skip         | T-loop-1781053405-3 | model returned empty or NEEDS_HUMAN
+2026-06-10T01:06:26Z | auto-fix-loop |   → verdict=skip
+2026-06-10T01:06:26Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T02:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T02:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T02:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T02:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T02:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781056818-1
+2026-06-10T02:00:18Z | auto-fix-worker | start        | T-loop-1781056818-1 | role=error target=jobs/logs/backend.log
+2026-06-10T02:00:18Z | auto-fix-worker | classify     | T-loop-1781056818-1 | tier=small risk=low council=single
+2026-06-10T02:00:50Z | auto-fix-worker | apply_check  | T-loop-1781056818-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-10T02:00:50Z | auto-fix-loop |   → verdict=fail
+2026-06-10T02:00:50Z | auto-fix-loop | dispatch #2: T-loop-1781056850-2
+2026-06-10T02:00:51Z | auto-fix-worker | start        | T-loop-1781056850-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T02:00:51Z | auto-fix-worker | classify     | T-loop-1781056850-2 | tier=small risk=low council=single
+2026-06-10T02:03:51Z | auto-fix-worker | skip         | T-loop-1781056850-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T02:03:51Z | auto-fix-loop |   → verdict=skip
+2026-06-10T02:03:51Z | auto-fix-loop | dispatch #3: T-loop-1781057031-3
+2026-06-10T02:03:51Z | auto-fix-worker | start        | T-loop-1781057031-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T02:03:51Z | auto-fix-worker | classify     | T-loop-1781057031-3 | tier=small risk=low council=single
+2026-06-10T02:03:54Z | auto-fix-worker | apply_check  | T-loop-1781057031-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T02:03:54Z | auto-fix-loop |   → verdict=fail
+2026-06-10T02:03:54Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T03:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T03:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T03:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T03:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T03:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781060418-1
+2026-06-10T03:00:18Z | auto-fix-worker | start        | T-loop-1781060418-1 | role=error target=jobs/logs/backend.log
+2026-06-10T03:00:18Z | auto-fix-worker | classify     | T-loop-1781060418-1 | tier=small risk=low council=single
+2026-06-10T03:03:18Z | auto-fix-worker | skip         | T-loop-1781060418-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T03:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T03:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781060598-2
+2026-06-10T03:03:18Z | auto-fix-worker | start        | T-loop-1781060598-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T03:03:18Z | auto-fix-worker | classify     | T-loop-1781060598-2 | tier=small risk=low council=single
+2026-06-10T03:06:18Z | auto-fix-worker | skip         | T-loop-1781060598-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T03:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T03:06:18Z | auto-fix-loop | dispatch #3: T-loop-1781060778-3
+2026-06-10T03:06:19Z | auto-fix-worker | start        | T-loop-1781060778-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T03:06:19Z | auto-fix-worker | classify     | T-loop-1781060778-3 | tier=small risk=low council=single
+2026-06-10T03:06:25Z | auto-fix-worker | apply_check  | T-loop-1781060778-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-10T03:06:25Z | auto-fix-loop |   → verdict=fail
+2026-06-10T03:06:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T04:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T04:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T04:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T04:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T04:00:17Z | auto-fix-loop | dispatch #1: T-loop-1781064017-1
+2026-06-10T04:00:18Z | auto-fix-worker | start        | T-loop-1781064017-1 | role=error target=jobs/logs/backend.log
+2026-06-10T04:00:18Z | auto-fix-worker | classify     | T-loop-1781064017-1 | tier=small risk=low council=single
+2026-06-10T04:03:18Z | auto-fix-worker | skip         | T-loop-1781064017-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T04:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T04:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781064198-2
+2026-06-10T04:03:18Z | auto-fix-worker | start        | T-loop-1781064198-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T04:03:18Z | auto-fix-worker | classify     | T-loop-1781064198-2 | tier=small risk=low council=single
+2026-06-10T04:06:18Z | auto-fix-worker | skip         | T-loop-1781064198-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T04:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T04:06:18Z | auto-fix-loop | dispatch #3: T-loop-1781064378-3
+2026-06-10T04:06:18Z | auto-fix-worker | start        | T-loop-1781064378-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T04:06:18Z | auto-fix-worker | classify     | T-loop-1781064378-3 | tier=small risk=low council=single
+2026-06-10T04:06:21Z | auto-fix-worker | apply_check  | T-loop-1781064378-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T04:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-10T04:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T05:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T05:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T05:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T05:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T05:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781067618-1
+2026-06-10T05:00:18Z | auto-fix-worker | start        | T-loop-1781067618-1 | role=error target=jobs/logs/backend.log
+2026-06-10T05:00:18Z | auto-fix-worker | classify     | T-loop-1781067618-1 | tier=small risk=low council=single
+2026-06-10T05:03:18Z | auto-fix-worker | skip         | T-loop-1781067618-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T05:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-10T05:03:19Z | auto-fix-loop | dispatch #2: T-loop-1781067799-2
+2026-06-10T05:03:19Z | auto-fix-worker | start        | T-loop-1781067799-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T05:03:19Z | auto-fix-worker | classify     | T-loop-1781067799-2 | tier=small risk=low council=single
+2026-06-10T05:03:22Z | auto-fix-worker | apply_check  | T-loop-1781067799-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T05:03:22Z | auto-fix-loop |   → verdict=fail
+2026-06-10T05:03:22Z | auto-fix-loop | dispatch #3: T-loop-1781067802-3
+2026-06-10T05:03:22Z | auto-fix-worker | start        | T-loop-1781067802-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T05:03:22Z | auto-fix-worker | classify     | T-loop-1781067802-3 | tier=small risk=low council=single
+2026-06-10T05:06:22Z | auto-fix-worker | skip         | T-loop-1781067802-3 | model returned empty or NEEDS_HUMAN
+2026-06-10T05:06:22Z | auto-fix-loop |   → verdict=skip
+2026-06-10T05:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T06:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T06:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T06:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T06:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T06:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781071219-1
+2026-06-10T06:00:19Z | auto-fix-worker | start        | T-loop-1781071219-1 | role=error target=jobs/logs/backend.log
+2026-06-10T06:00:19Z | auto-fix-worker | classify     | T-loop-1781071219-1 | tier=small risk=low council=single
+2026-06-10T06:03:20Z | auto-fix-worker | skip         | T-loop-1781071219-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T06:03:25Z | auto-fix-loop |   → verdict=skip
+2026-06-10T06:03:25Z | auto-fix-loop | dispatch #2: T-loop-1781071405-2
+2026-06-10T06:03:27Z | auto-fix-worker | start        | T-loop-1781071405-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T06:03:27Z | auto-fix-worker | classify     | T-loop-1781071405-2 | tier=small risk=low council=single
+2026-06-10T06:06:28Z | auto-fix-worker | skip         | T-loop-1781071405-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T06:06:29Z | auto-fix-loop |   → verdict=skip
+2026-06-10T06:06:29Z | auto-fix-loop | dispatch #3: T-loop-1781071589-3
+2026-06-10T06:06:30Z | auto-fix-worker | start        | T-loop-1781071589-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T06:06:30Z | auto-fix-worker | classify     | T-loop-1781071589-3 | tier=small risk=low council=single
+2026-06-10T06:06:40Z | auto-fix-worker | apply_check  | T-loop-1781071589-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T06:06:40Z | auto-fix-loop |   → verdict=fail
+2026-06-10T06:06:40Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T07:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T07:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T07:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T07:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T07:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781074818-1
+2026-06-10T07:00:18Z | auto-fix-worker | start        | T-loop-1781074818-1 | role=error target=jobs/logs/backend.log
+2026-06-10T07:00:18Z | auto-fix-worker | classify     | T-loop-1781074818-1 | tier=small risk=low council=single
+2026-06-10T07:03:19Z | auto-fix-worker | skip         | T-loop-1781074818-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T07:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-10T07:03:19Z | auto-fix-loop | dispatch #2: T-loop-1781074999-2
+2026-06-10T07:03:19Z | auto-fix-worker | start        | T-loop-1781074999-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T07:03:19Z | auto-fix-worker | classify     | T-loop-1781074999-2 | tier=small risk=low council=single
+2026-06-10T07:06:19Z | auto-fix-worker | skip         | T-loop-1781074999-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T07:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-10T07:06:19Z | auto-fix-loop | dispatch #3: T-loop-1781075179-3
+2026-06-10T07:06:20Z | auto-fix-worker | start        | T-loop-1781075179-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T07:06:20Z | auto-fix-worker | classify     | T-loop-1781075179-3 | tier=small risk=low council=single
+2026-06-10T07:06:25Z | auto-fix-worker | apply_check  | T-loop-1781075179-3 | FAIL: git apply --check failed: error: patch fragment without header at line 14: @@ -19,7 +19,7 @@
+2026-06-10T07:06:25Z | auto-fix-loop |   → verdict=fail
+2026-06-10T07:06:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T08:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T08:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T08:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T08:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T08:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781078418-1
+2026-06-10T08:00:19Z | auto-fix-worker | start        | T-loop-1781078418-1 | role=error target=jobs/logs/backend.log
+2026-06-10T08:00:19Z | auto-fix-worker | classify     | T-loop-1781078418-1 | tier=small risk=low council=single
+2026-06-10T08:00:27Z | auto-fix-worker | apply_check  | T-loop-1781078418-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-10T08:00:27Z | auto-fix-loop |   → verdict=fail
+2026-06-10T08:00:27Z | auto-fix-loop | dispatch #2: T-loop-1781078427-2
+2026-06-10T08:00:27Z | auto-fix-worker | start        | T-loop-1781078427-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T08:00:27Z | auto-fix-worker | classify     | T-loop-1781078427-2 | tier=small risk=low council=single
+2026-06-10T08:03:27Z | auto-fix-worker | skip         | T-loop-1781078427-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T08:03:27Z | auto-fix-loop |   → verdict=skip
+2026-06-10T08:03:27Z | auto-fix-loop | dispatch #3: T-loop-1781078607-3
+2026-06-10T08:03:27Z | auto-fix-worker | start        | T-loop-1781078607-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T08:03:27Z | auto-fix-worker | classify     | T-loop-1781078607-3 | tier=small risk=low council=single
+2026-06-10T08:03:30Z | auto-fix-worker | apply_check  | T-loop-1781078607-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T08:03:31Z | auto-fix-loop |   → verdict=fail
+2026-06-10T08:03:31Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T09:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T09:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T09:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T09:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T09:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781082018-1
+2026-06-10T09:00:18Z | auto-fix-worker | start        | T-loop-1781082018-1 | role=error target=jobs/logs/backend.log
+2026-06-10T09:00:18Z | auto-fix-worker | classify     | T-loop-1781082018-1 | tier=small risk=low council=single
+2026-06-10T09:00:48Z | auto-fix-worker | apply_check  | T-loop-1781082018-1 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-10T09:00:48Z | auto-fix-loop |   → verdict=fail
+2026-06-10T09:00:48Z | auto-fix-loop | dispatch #2: T-loop-1781082048-2
+2026-06-10T09:00:49Z | auto-fix-worker | start        | T-loop-1781082048-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T09:00:49Z | auto-fix-worker | classify     | T-loop-1781082048-2 | tier=small risk=low council=single
+2026-06-10T09:03:49Z | auto-fix-worker | skip         | T-loop-1781082048-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T09:03:49Z | auto-fix-loop |   → verdict=skip
+2026-06-10T09:03:49Z | auto-fix-loop | dispatch #3: T-loop-1781082229-3
+2026-06-10T09:03:49Z | auto-fix-worker | start        | T-loop-1781082229-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T09:03:49Z | auto-fix-worker | classify     | T-loop-1781082229-3 | tier=small risk=low council=single
+2026-06-10T09:03:52Z | auto-fix-worker | apply_check  | T-loop-1781082229-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T09:03:52Z | auto-fix-loop |   → verdict=fail
+2026-06-10T09:03:52Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T10:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T10:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T10:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T10:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T10:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781085618-1
+2026-06-10T10:00:19Z | auto-fix-worker | start        | T-loop-1781085618-1 | role=error target=jobs/logs/backend.log
+2026-06-10T10:00:19Z | auto-fix-worker | classify     | T-loop-1781085618-1 | tier=small risk=low council=single
+2026-06-10T10:03:19Z | auto-fix-worker | skip         | T-loop-1781085618-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T10:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-10T10:03:19Z | auto-fix-loop | dispatch #2: T-loop-1781085799-2
+2026-06-10T10:03:19Z | auto-fix-worker | start        | T-loop-1781085799-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T10:03:19Z | auto-fix-worker | classify     | T-loop-1781085799-2 | tier=small risk=low council=single
+2026-06-10T10:06:19Z | auto-fix-worker | skip         | T-loop-1781085799-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T10:06:19Z | auto-fix-loop |   → verdict=skip
+2026-06-10T10:06:19Z | auto-fix-loop | dispatch #3: T-loop-1781085979-3
+2026-06-10T10:06:19Z | auto-fix-worker | start        | T-loop-1781085979-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T10:06:19Z | auto-fix-worker | classify     | T-loop-1781085979-3 | tier=small risk=low council=single
+2026-06-10T10:06:23Z | auto-fix-worker | apply_check  | T-loop-1781085979-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T10:06:23Z | auto-fix-loop |   → verdict=fail
+2026-06-10T10:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T11:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T11:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T11:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T11:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T11:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781089218-1
+2026-06-10T11:00:18Z | auto-fix-worker | start        | T-loop-1781089218-1 | role=error target=jobs/logs/backend.log
+2026-06-10T11:00:18Z | auto-fix-worker | classify     | T-loop-1781089218-1 | tier=small risk=low council=single
+2026-06-10T11:00:37Z | auto-fix-worker | apply_check  | T-loop-1781089218-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-10T11:00:37Z | auto-fix-loop |   → verdict=fail
+2026-06-10T11:00:37Z | auto-fix-loop | dispatch #2: T-loop-1781089237-2
+2026-06-10T11:00:37Z | auto-fix-worker | start        | T-loop-1781089237-2 | role=error target=jobs/logs/opa_test.log
+2026-06-10T11:00:37Z | auto-fix-worker | classify     | T-loop-1781089237-2 | tier=small risk=low council=single
+2026-06-10T11:00:40Z | auto-fix-worker | apply_check  | T-loop-1781089237-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-10T11:00:40Z | auto-fix-loop |   → verdict=fail
+2026-06-10T11:00:40Z | auto-fix-loop | dispatch #3: T-loop-1781089240-3
+2026-06-10T11:00:40Z | auto-fix-worker | start        | T-loop-1781089240-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T11:00:40Z | auto-fix-worker | classify     | T-loop-1781089240-3 | tier=small risk=low council=single
+2026-06-10T11:03:40Z | auto-fix-worker | skip         | T-loop-1781089240-3 | model returned empty or NEEDS_HUMAN
+2026-06-10T11:03:40Z | auto-fix-loop |   → verdict=skip
+2026-06-10T11:03:40Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T12:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T12:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T12:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T12:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T12:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781092819-1
+2026-06-10T12:00:19Z | auto-fix-worker | start        | T-loop-1781092819-1 | role=error target=jobs/logs/backend.log
+2026-06-10T12:00:19Z | auto-fix-worker | classify     | T-loop-1781092819-1 | tier=small risk=low council=single
+2026-06-10T12:03:19Z | auto-fix-worker | skip         | T-loop-1781092819-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T12:03:26Z | auto-fix-loop |   → verdict=skip
+2026-06-10T12:03:27Z | auto-fix-loop | dispatch #2: T-loop-1781093007-2
+2026-06-10T12:03:28Z | auto-fix-worker | start        | T-loop-1781093007-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T12:03:28Z | auto-fix-worker | classify     | T-loop-1781093007-2 | tier=small risk=low council=single
+2026-06-10T12:06:29Z | auto-fix-worker | skip         | T-loop-1781093007-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T12:06:30Z | auto-fix-loop |   → verdict=skip
+2026-06-10T12:06:30Z | auto-fix-loop | dispatch #3: T-loop-1781093190-3
+2026-06-10T12:06:31Z | auto-fix-worker | start        | T-loop-1781093190-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-10T12:06:31Z | auto-fix-worker | classify     | T-loop-1781093190-3 | tier=small risk=low council=single
+2026-06-10T12:09:00Z | auto-fix-worker | apply_check  | T-loop-1781093190-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-10T12:09:04Z | auto-fix-loop |   → verdict=fail
+2026-06-10T12:09:04Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T13:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T13:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T13:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T13:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T13:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781096418-1
+2026-06-10T13:00:19Z | auto-fix-worker | start        | T-loop-1781096418-1 | role=error target=jobs/logs/backend.log
+2026-06-10T13:00:19Z | auto-fix-worker | classify     | T-loop-1781096418-1 | tier=small risk=low council=single
+2026-06-10T13:03:19Z | auto-fix-worker | skip         | T-loop-1781096418-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T13:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-10T13:03:19Z | auto-fix-loop | dispatch #2: T-loop-1781096599-2
+2026-06-10T13:03:19Z | auto-fix-worker | start        | T-loop-1781096599-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T13:03:19Z | auto-fix-worker | classify     | T-loop-1781096599-2 | tier=small risk=low council=single
+2026-06-10T13:03:22Z | auto-fix-worker | apply_check  | T-loop-1781096599-2 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T13:03:23Z | auto-fix-loop |   → verdict=fail
+2026-06-10T13:03:23Z | auto-fix-loop | dispatch #3: T-loop-1781096603-3
+2026-06-10T13:03:23Z | auto-fix-worker | start        | T-loop-1781096603-3 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T13:03:23Z | auto-fix-worker | classify     | T-loop-1781096603-3 | tier=small risk=low council=single
+2026-06-10T13:06:23Z | auto-fix-worker | skip         | T-loop-1781096603-3 | model returned empty or NEEDS_HUMAN
+2026-06-10T13:06:23Z | auto-fix-loop |   → verdict=skip
+2026-06-10T13:06:23Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T14:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T14:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T14:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T14:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T14:00:17Z | auto-fix-loop | dispatch #1: T-loop-1781100017-1
+2026-06-10T14:00:17Z | auto-fix-worker | start        | T-loop-1781100017-1 | role=error target=jobs/logs/backend.log
+2026-06-10T14:00:17Z | auto-fix-worker | classify     | T-loop-1781100017-1 | tier=small risk=low council=single
+2026-06-10T14:03:17Z | auto-fix-worker | skip         | T-loop-1781100017-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T14:03:17Z | auto-fix-loop |   → verdict=skip
+2026-06-10T14:03:17Z | auto-fix-loop | dispatch #2: T-loop-1781100197-2
+2026-06-10T14:03:17Z | auto-fix-worker | start        | T-loop-1781100197-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T14:03:17Z | auto-fix-worker | classify     | T-loop-1781100197-2 | tier=small risk=low council=single
+2026-06-10T14:06:18Z | auto-fix-worker | skip         | T-loop-1781100197-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T14:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T14:06:18Z | auto-fix-loop | dispatch #3: T-loop-1781100378-3
+2026-06-10T14:06:18Z | auto-fix-worker | start        | T-loop-1781100378-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-10T14:06:18Z | auto-fix-worker | classify     | T-loop-1781100378-3 | tier=small risk=low council=single
+2026-06-10T14:06:25Z | auto-fix-worker | apply_check  | T-loop-1781100378-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-10T14:06:25Z | auto-fix-loop |   → verdict=fail
+2026-06-10T14:06:25Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T15:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T15:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T15:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T15:00:17Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T15:00:17Z | auto-fix-loop | dispatch #1: T-loop-1781103617-1
+2026-06-10T15:00:18Z | auto-fix-worker | start        | T-loop-1781103617-1 | role=error target=jobs/logs/backend.log
+2026-06-10T15:00:18Z | auto-fix-worker | classify     | T-loop-1781103617-1 | tier=small risk=low council=single
+2026-06-10T15:00:49Z | auto-fix-worker | apply_check  | T-loop-1781103617-1 | FAIL: git apply --check failed: error: patch failed: jobs/logs/backend.log:1
+error: jobs/logs/backend.log: patch does not apply
+2026-06-10T15:00:49Z | auto-fix-loop |   → verdict=fail
+2026-06-10T15:00:49Z | auto-fix-loop | dispatch #2: T-loop-1781103649-2
+2026-06-10T15:00:49Z | auto-fix-worker | start        | T-loop-1781103649-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T15:00:49Z | auto-fix-worker | classify     | T-loop-1781103649-2 | tier=small risk=low council=single
+2026-06-10T15:00:52Z | auto-fix-worker | apply_check  | T-loop-1781103649-2 | FAIL: git apply --check failed: error: corrupt patch at line 5
+2026-06-10T15:00:52Z | auto-fix-loop |   → verdict=fail
+2026-06-10T15:00:52Z | auto-fix-loop | dispatch #3: T-loop-1781103652-3
+2026-06-10T15:00:53Z | auto-fix-worker | start        | T-loop-1781103652-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-10T15:00:53Z | auto-fix-worker | classify     | T-loop-1781103652-3 | tier=small risk=low council=single
+2026-06-10T15:01:00Z | auto-fix-worker | apply_check  | T-loop-1781103652-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-10T15:01:00Z | auto-fix-loop |   → verdict=fail
+2026-06-10T15:01:00Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T16:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T16:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T16:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T16:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T16:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781107218-1
+2026-06-10T16:00:18Z | auto-fix-worker | start        | T-loop-1781107218-1 | role=error target=jobs/logs/backend.log
+2026-06-10T16:00:18Z | auto-fix-worker | classify     | T-loop-1781107218-1 | tier=small risk=low council=single
+2026-06-10T16:03:18Z | auto-fix-worker | skip         | T-loop-1781107218-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T16:03:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T16:03:18Z | auto-fix-loop | dispatch #2: T-loop-1781107398-2
+2026-06-10T16:03:18Z | auto-fix-worker | start        | T-loop-1781107398-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T16:03:18Z | auto-fix-worker | classify     | T-loop-1781107398-2 | tier=small risk=low council=single
+2026-06-10T16:06:18Z | auto-fix-worker | skip         | T-loop-1781107398-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T16:06:18Z | auto-fix-loop |   → verdict=skip
+2026-06-10T16:06:18Z | auto-fix-loop | dispatch #3: T-loop-1781107578-3
+2026-06-10T16:06:19Z | auto-fix-worker | start        | T-loop-1781107578-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T16:06:19Z | auto-fix-worker | classify     | T-loop-1781107578-3 | tier=small risk=low council=single
+2026-06-10T16:06:22Z | auto-fix-worker | apply_check  | T-loop-1781107578-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/rag_cache.log:10
+error: jobs/logs/rag_cache.log: patch does not apply
+2026-06-10T16:06:22Z | auto-fix-loop |   → verdict=fail
+2026-06-10T16:06:22Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T17:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T17:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T17:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T17:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T17:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781110819-1
+2026-06-10T17:00:19Z | auto-fix-worker | start        | T-loop-1781110819-1 | role=error target=jobs/logs/backend.log
+2026-06-10T17:00:19Z | auto-fix-worker | classify     | T-loop-1781110819-1 | tier=small risk=low council=single
+2026-06-10T17:03:19Z | auto-fix-worker | skip         | T-loop-1781110819-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T17:03:19Z | auto-fix-loop |   → verdict=skip
+2026-06-10T17:03:19Z | auto-fix-loop | dispatch #2: T-loop-1781110999-2
+2026-06-10T17:03:19Z | auto-fix-worker | start        | T-loop-1781110999-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T17:03:19Z | auto-fix-worker | classify     | T-loop-1781110999-2 | tier=small risk=low council=single
+2026-06-10T17:06:20Z | auto-fix-worker | skip         | T-loop-1781110999-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T17:06:20Z | auto-fix-loop |   → verdict=skip
+2026-06-10T17:06:20Z | auto-fix-loop | dispatch #3: T-loop-1781111180-3
+2026-06-10T17:06:20Z | auto-fix-worker | start        | T-loop-1781111180-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T17:06:20Z | auto-fix-worker | classify     | T-loop-1781111180-3 | tier=small risk=low council=single
+2026-06-10T17:06:27Z | auto-fix-worker | apply_check  | T-loop-1781111180-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-10T17:06:28Z | auto-fix-loop |   → verdict=fail
+2026-06-10T17:06:28Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-10T18:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T18:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T18:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T18:00:20Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T18:00:23Z | auto-fix-loop | dispatch #1: T-loop-1781114423-1
+2026-06-10T18:00:24Z | auto-fix-worker | start        | T-loop-1781114423-1 | role=error target=jobs/logs/backend.log
+2026-06-10T18:00:24Z | auto-fix-worker | classify     | T-loop-1781114423-1 | tier=small risk=low council=single
+2026-06-10T18:03:25Z | auto-fix-worker | skip         | T-loop-1781114423-1 | model returned empty or NEEDS_HUMAN
+2026-06-10T18:03:29Z | auto-fix-loop |   → verdict=skip
+2026-06-10T18:03:29Z | auto-fix-loop | dispatch #2: T-loop-1781114609-2
+2026-06-10T18:03:31Z | auto-fix-worker | start        | T-loop-1781114609-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-10T18:03:31Z | auto-fix-worker | classify     | T-loop-1781114609-2 | tier=small risk=low council=single
+2026-06-10T18:06:32Z | auto-fix-worker | skip         | T-loop-1781114609-2 | model returned empty or NEEDS_HUMAN
+2026-06-10T18:06:32Z | auto-fix-loop |   → verdict=skip
+2026-06-10T18:06:32Z | auto-fix-loop | dispatch #3: T-loop-1781114792-3
+2026-06-10T18:06:33Z | auto-fix-worker | start        | T-loop-1781114792-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T18:06:33Z | auto-fix-worker | classify     | T-loop-1781114792-3 | tier=small risk=low council=single
+2026-06-10T18:06:52Z | auto-fix-worker | validate     | T-loop-1781114792-3 | ok: no validator for jobs/logs/rag_cache.log

@@ -1,14 +1,21 @@
 {
-  "generated_at": "2026-06-04T08:15:01.696542+00:00",
+  "generated_at": "2026-06-10T10:15:01.746787+00:00",
   "dry_run": false,
   "refresh": true,
   "downloads": [
+    {
+      "slug": "claims/auto_insurance_claims",
+      "dataset": "buntyshah/auto-insurance-claims-data",
+      "desc": "Auto claims with fraud flags",
+      "status": "ok",
+      "message": "already present (1 files)"
+    },
     {
       "slug": "claims/vehicle_insurance_fraud",
       "dataset": "shivamb/vehicle-claim-fraud-detection",
       "desc": "Vehicle claim fraud detection",
       "status": "ok",
-      "message": "already present (1 files)"
+      "message": "downloaded (1 files): fraud_oracle.csv"
     },
     {
       "slug": "claims/health_insurance_claims",
@@ -16,6 +23,27 @@
       "desc": "US Health Insurance dataset",
       "status": "ok",
       "message": "downloaded (1 files): insurance.csv"
+    },
+    {
+      "slug": "customer-service/nlp_intent_classification",
+      "dataset": "bittlingmayer/amazonreviews",
+      "desc": "Sentiment / intent corpus",
+      "status": "skipped",
+      "reason": "skipped: ~3GB too large for scaffold"
+    },
+    {
+      "slug": "fraud-siu/auto_insurance_fraud",
+      "dataset": "buntyshah/auto-insurance-claims-data",
+      "desc": "Auto fraud (also in claims)",
+      "status": "ok",
+      "message": "downloaded (1 files): insurance_claims.csv"
+    },
+    {
+      "slug": "fraud-siu/ieee_fraud",
+      "dataset": "ieee-fraud-detection/ieee-fraud-detection",
+      "desc": "IEEE-CIS fraud",
+      "status": "skipped",
+      "reason": "skipped: competition-only, requires acceptance"
     },
     {
       "slug": "claims/property_claims",
@@ -36,77 +64,49 @@
       "dataset": "easonlai/sample-insurance-claim-prediction-dataset",
       "desc": "Auto UW + claims features",
       "status": "ok",
-      "message": "already present (2 files)"
-    },
-    {
-      "slug": "customer-service/nlp_intent_classification",
-      "dataset": "bittlingmayer/amazonreviews",
-      "desc": "Sentiment / intent corpus",
-      "status": "skipped",
-      "reason": "skipped: ~3GB too large for scaffold"
-    },
-    {
-      "slug": "fraud-siu/ieee_fraud",
-      "dataset": "ieee-fraud-detection/ieee-fraud-detection",
-      "desc": "IEEE-CIS fraud",
-      "status": "skipped",
-      "reason": "skipped: competition-only, requires acceptance"
-    },
-    {
-      "slug": "claims/auto_insurance_claims",
-      "dataset": "buntyshah/auto-insurance-claims-data",
-      "desc": "Auto claims with fraud flags",
-      "status": "ok",
-      "message": "already present (1 files)"
+      "message": "downloaded (2 files): insurance2.csv, insurance3r2.csv"
     },
     {
       "slug": "underwriting/medical_cost",
       "dataset": "mirichoi0218/insurance",
       "desc": "Medical cost personal dataset",
-      "status": "fail",
-      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+      "status": "ok",
+      "message": "downloaded (1 files): insurance.csv"
     },
     {
       "slug": "customer-service/call_center_data",
       "dataset": "satvicoder/call-center-data",
       "desc": "Call Center metrics dataset",
-      "status": "fail",
-      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+      "status": "ok",
+      "message": "downloaded (1 files): Call Center Data.csv"
     },
     {
       "slug": "customer-service/customer_complaints",
       "dataset": "adelanseur/insurance-company-complaints",
       "desc": "Insurance Company Complaints",
-      "status": "fail",
-      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+      "status": "ok",
+      "message": "downloaded (1 files): Insurance_Company_Complaints__Resolutions__Status__and_Recoveries.csv"
     },
     {
       "slug": "customer-service/customer_churn",
       "dataset": "blastchar/telco-customer-churn",
       "desc": "Telco Customer Churn (Kaggle classic, 550K downloads)",
-      "status": "fail",
-      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+      "status": "ok",
+      "message": "downloaded (1 files): WA_Fn-UseC_-Telco-Customer-Churn.csv"
     },
     {
       "slug": "fraud-siu/vehicle_claim_fraud",
       "dataset": "shivamb/vehicle-claim-fraud-detection",
       "desc": "Vehicle fraud (also in claims)",
-      "status": "fail",
-      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+      "status": "ok",
+      "message": "downloaded (1 files): fraud_oracle.csv"
     },
     {
       "slug": "fraud-siu/creditcard_fraud",
       "dataset": "mlg-ulb/creditcardfraud",
       "desc": "Credit-card fraud benchmark",
-      "status": "fail",
-      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
-    },
-    {
-      "slug": "fraud-siu/auto_insurance_fraud",
-      "dataset": "buntyshah/auto-insurance-claims-data",
-      "desc": "Auto fraud (also in claims)",
-      "status": "fail",
-      "message": "exception: [Errno 2] No such file or directory: 'kaggle'"
+      "status": "ok",
+      "message": "downloaded (1 files): creditcard.csv"
     }
   ]
 }

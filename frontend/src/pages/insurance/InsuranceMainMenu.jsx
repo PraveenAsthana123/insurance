@@ -1,13 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
-// Per §73 two-menu layout: main menu = Dept → Business Domain (B2C/B2B/B2E).
-// Three canonical domains rendered as children of the active dept.
-const DOMAINS = [
-  { id: 'b2c', label: 'B2C', title: 'Business-to-Consumer' },
-  { id: 'b2b', label: 'B2B', title: 'Business-to-Business' },
-  { id: 'b2e', label: 'B2E', title: 'Business-to-Employee' },
-];
+import { CANONICAL_DOMAINS, canonicalDomainId } from '../../utils/insuranceNavigation';
 
 export function InsuranceMainMenu({ bp }) {
   const navigate = useNavigate();
@@ -76,8 +69,8 @@ export function InsuranceMainMenu({ bp }) {
                   display: 'flex', flexDirection: 'column', gap: 2,
                 }}
               >
-                {DOMAINS.map((dom) => {
-                  const isActiveDomain = params.domain === dom.id;
+                {CANONICAL_DOMAINS.map((dom) => {
+                  const isActiveDomain = canonicalDomainId(params.domain) === dom.id;
                   return (
                     <span
                       key={dom.id}

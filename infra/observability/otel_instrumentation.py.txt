@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # infra/observability/otel_instrumentation.py
-# auto-generated explainer · 2026-06-05T10:00:12Z
+# auto-generated explainer · 2026-06-10T10:00:32Z
 
 ## Purpose
 OTel instrumentation bootstrap — call once at backend boot.

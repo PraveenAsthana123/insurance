@@ -2,7 +2,7 @@
 
 This repo uses a layered approval model for AI-assisted development.
 
-For day-to-day coding-agent behavior, use `docs/NO_APPROVAL_AUTONOMY_POLICY.md` first. Agents should proceed without asking for approval on safe repo-local work, and only request approval for hard gates such as dependency downloads, sandbox escalation, destructive commands, credentials, production changes, external writes, or files outside the writable workspace.
+For day-to-day coding-agent behavior, use `docs/NO_APPROVAL_AUTONOMY_POLICY.md` first. The user has granted standing approval for all safe repo-local work. Agents should proceed without asking for approval on reads, edits, docs, local tests, local workflow gates, and validation. Use explicit tool/platform approval only for hard gates such as dependency downloads, sandbox escalation, destructive commands, credentials, production changes, external writes, or files outside the writable workspace.
 
 ## Local AI Workflow Gates
 
@@ -61,7 +61,7 @@ python3 scripts/archon_auto_approve_safe.py --watch --approve
 
 Auto-approval is allowed only for the BEV local workflows `insur-project-doctor-fix` and `insur-api-change-governance`, and only for plan/handoff gates that do not mention production deploys, secrets, destructive commands, browser/CUA real execution, external SaaS writes, GitHub auth, branch protection, or git reset/force-push operations.
 
-This policy does not bypass Codex sandbox approvals, GitHub PR approvals, CODEOWNERS, deployment environment approvals, or any operator-only credential/login flow.
+This policy does not bypass Codex sandbox approval mechanisms, GitHub PR approvals, CODEOWNERS, deployment environment approvals, or any operator-only credential/login flow. It does mean agents should not ask conversational approval before taking safe repo-local next steps.
 
 ## Approval Broker
 

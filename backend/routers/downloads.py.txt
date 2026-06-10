@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/downloads.py
-# auto-generated explainer · 2026-06-05T10:00:46Z
+# auto-generated explainer · 2026-06-10T10:01:15Z
 
 ## Purpose
 INSUR data-downloads router — per-dept downloadable sample data.

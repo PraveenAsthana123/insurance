@@ -28,6 +28,7 @@ The project is now expected to support production-grade foundations:
 - backend global policy for DDD, service boundaries, testing, security, observability, and documentation
 - default project doctor command
 - default global testing policy with agent assignment, reports, notifications, and update rules
+- governed autonomous-AI operating model per department with explicit approval boundaries
 - CI baseline for frontend and backend checks
 - database viewer for local debugging
 
@@ -42,6 +43,7 @@ The project is now expected to support production-grade foundations:
 - Added docstrings to model route/schema/service/repository files.
 - Added Adminer database viewer to Docker Compose.
 - Added default global testing policy and agent assignment catalog for health, code quality, API, frontend/F12, 1000-request/load, data, DB, model, report, and notification coverage.
+- Added autonomous-AI department operating model and machine-readable autonomy catalog.
 
 ## Requirement Change Rule
 

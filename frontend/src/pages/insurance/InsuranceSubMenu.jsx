@@ -1,28 +1,12 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
-// Per §73: domain ids are lowercase in URLs (b2c/b2b/b2e); display labels are uppercase.
-// Aligned with InsuranceMainMenu.jsx so navigation from either menu activates both.
-const DOMAINS = [
-  { id: 'b2c', label: 'B2C' },
-  { id: 'b2b', label: 'B2B' },
-  { id: 'b2e', label: 'B2E' },
-];
-
-function processIdOf(p) {
-  return (p?.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-}
-
-function domainsForProcess(process, dept) {
-  const explicit = process.channels || process.domains || process.business_domains || process.audiences;
-  if (Array.isArray(explicit) && explicit.length > 0) {
-    return explicit.map((domain) => String(domain).toLowerCase());
-  }
-  const deptDomains = DOMAINS
-    .map((d) => d.id)
-    .filter((id) => dept.channel_scenarios?.[id] || dept.channel_scenarios?.[id.toUpperCase()]);
-  return deptDomains.length > 0 ? deptDomains : DOMAINS.map((d) => d.id);
-}
+import {
+  CANONICAL_DOMAINS,
+  canonicalDomainId,
+  domainsForProcess,
+  scenarioForDomain,
+  slugOf,
+} from '../../utils/insuranceNavigation';
 
 export function InsuranceSubMenu({ bp }) {
   const navigate = useNavigate();
@@ -91,12 +75,12 @@ export function InsuranceSubMenu({ bp }) {
               <strong>#{dept.id}</strong> {dept.name}
             </span>
 
-            {deptOpen && DOMAINS.map((dom) => {
+            {deptOpen && CANONICAL_DOMAINS.map((dom) => {
               const domain = dom.id;
               const domainKey = `domain:${dept.id}:${domain}`;
-              const domainOpen = expanded[domainKey] || (params.deptId === String(dept.id) && params.domain === domain) || q;
-              const activeDomain = params.deptId === String(dept.id) && params.domain === domain;
-              const hasDomain = dept.channel_scenarios && (dept.channel_scenarios[domain] || dept.channel_scenarios[dom.label]);
+              const domainOpen = expanded[domainKey] || (params.deptId === String(dept.id) && canonicalDomainId(params.domain) === domain) || q;
+              const activeDomain = params.deptId === String(dept.id) && canonicalDomainId(params.domain) === domain;
+              const hasDomain = scenarioForDomain(dept, domain);
               const domainProcesses = processes.filter((process) => domainsForProcess(process, dept).includes(domain));
 
               return (
@@ -114,8 +98,8 @@ export function InsuranceSubMenu({ bp }) {
                   </span>
 
                   {domainOpen && domainProcesses.map((process, index) => {
-                    const pid = processIdOf(process) || `p${index}`;
-                    const activeProcess = params.deptId === String(dept.id) && params.domain === domain && params.processId === pid;
+                    const pid = slugOf(process.name) || `p`;
+                    const activeProcess = params.deptId === String(dept.id) && canonicalDomainId(params.domain) === domain && params.processId === pid;
                     const aiCount = (process.ai || []).length;
                     return (
                       <span

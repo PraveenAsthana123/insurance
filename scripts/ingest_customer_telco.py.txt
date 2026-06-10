@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/ingest_customer_telco.py
-# auto-generated explainer · 2026-06-05T10:00:09Z
+# auto-generated explainer · 2026-06-10T10:00:17Z
 
 ## Purpose
 ingest_customer_telco.py — load IBM Telco Churn CSV into customer-pilot star schema.
@@ -38,6 +38,7 @@ CSV column adaptation notes:
 
 ## Inputs
 - CLI args: --limit
+- Env vars: BEV_POSTGRES_PASSWORD
 
 ## Process
 ### Functions
@@ -51,5 +52,6 @@ CSV column adaptation notes:
 - Return values from functions above
 
 ## Notable inline comments
+- Per Phase 2.3 of docs/AUDIT_FIX_PLAN.md — no hardcoded password fallback.
 - Count how many add-on services the customer has subscribed ("Yes").
 - One interaction row per add-on service + phone service.

@@ -39,6 +39,9 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/LAYERED_ARCHITECTURE_MAP.md` | User, application, model, service, infra, orchestration, trust/governance layers. |
 | `docs/INSURANCE_IMPLEMENTATION_PLAN.md` | Insurance verticalization plan for claims, underwriting, customer-service, and fraud/SIU across frontend, API, data, ML/RAG, observability, and governance. |
 | `docs/DEPARTMENT_AI_STRATEGY_PROCESS_AUDIT_2026-06-08.md` | Department/process AI strategy, pain, ROI, dollar impact, data availability, AI lever, B2B/B2C/B2E, transactional/analytical/decision AI, and demo scenario audit. |
+| `docs/FLOW_DATA_DEMO_DASHBOARD_REPORT_AUDIT_2026-06-08.md` | Flowchart, data, demo, problem, pain, AI type, real-data, dashboard, and report coverage audit. |
+| `docs/AUTONOMOUS_AI_DEPARTMENT_OPERATING_MODEL_2026-06-08.md` | Governed autonomous-AI operating model by department: agents, autonomy level, approval boundary, triggers, actions, data, tests, and controls. |
+| `docs/AUTONOMOUS_AI_DEPARTMENT_AUTONOMY_CATALOG.json` | Machine-readable autonomous-AI department catalog. |
 | `docs/architecture/ENTERPRISE_AI_REFERENCE_ARCHITECTURE.md` | Enterprise AI reference architecture. |
 | `docs/architecture/DEPARTMENT_OPERATING_SYSTEM.md` | Department operating system model. |
 | `docs/architecture/DEPARTMENT_OS_BLUEPRINT.md` | Department OS blueprint. |

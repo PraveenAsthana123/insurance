@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/agent_supervisor.py
-# auto-generated explainer · 2026-06-05T10:00:08Z
+# auto-generated explainer · 2026-06-10T10:00:15Z
 
 ## Purpose
 Supervise INSUR agent queues, schedules, heartbeats, and task results.
@@ -38,11 +38,11 @@ operators can see whether agents are taking work and finishing it.
 - `result_is_failure(item)`: (no docstring)
 - `schedule_rows(client)`: (no docstring)
 - `process_catalog_summary()`: (no docstring)
+- `trace_log_summary(limit)`: (no docstring)
+- `derive_operations(report)`: (no docstring)
+- `advanced_feature_gap_report(report)`: Summarize missing advanced agent features and safe delegation advice.
 - `build_report(client, sample)`: (no docstring)
 - `print_status(report, sample)`: (no docstring)
-- `find_task(client, task_id, limit)`: (no docstring)
-- `print_schedules(report)`: (no docstring)
-- `main()`: (no docstring)
 
 ## Outputs
 - Writes files (detected 1 patterns)

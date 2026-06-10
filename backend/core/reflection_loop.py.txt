@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/core/reflection_loop.py
-# auto-generated explainer · 2026-06-05T10:00:45Z
+# auto-generated explainer · 2026-06-10T10:01:14Z
 
 ## Purpose
 reflection_loop — §77 row 1419, §64.43 #10.

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # agents/council_agent.py
-# auto-generated explainer · 2026-06-05T10:00:04Z
+# auto-generated explainer · 2026-06-10T10:00:03Z
 
 ## Purpose
 INSUR Beverage — Council-of-Agents worker.
@@ -38,10 +38,11 @@ Environment:
 - from `_` import redis
 
 ## Inputs
-- Env vars: AGENT_ID, AUTHOR_MODEL, CHAIR_MODEL, OLLAMA_URL, POLL_TIMEOUT, REDIS_URL, REVIEWER_MODEL, STAGE_TIMEOUT
+- Env vars: AGENT_ID, AGENT_STARTUP_SMOKE, AUTHOR_MODEL, CHAIR_MODEL, OLLAMA_URL, POLL_TIMEOUT, REDIS_URL, REVIEWER_MODEL, STAGE_TIMEOUT
 
 ## Process
 ### Functions
+- `write_heartbeat(r, state, processed, task_id)`: Publish lightweight liveness/task state for supervisor dashboards.
 - `call_ollama(model, prompt, num_predict)`: (no docstring)
 - `run_council(task_prompt, department)`: Execute the 3-stage council on one task. Returns full audit trail.
 - `main()`: (no docstring)

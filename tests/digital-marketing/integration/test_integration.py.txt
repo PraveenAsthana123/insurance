@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/digital-marketing/integration/test_integration.py
-# auto-generated explainer · 2026-06-05T10:00:44Z
+# auto-generated explainer · 2026-06-10T10:01:12Z
 
 ## Purpose
 Tier 2 — Integration tests for digital-marketing.

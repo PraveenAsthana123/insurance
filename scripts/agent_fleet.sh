@@ -34,6 +34,7 @@ Commands:
   supervisor-watch                  Refresh supervisor every 5 seconds.
   supervisor-health                 Exit non-zero when queues/results are unhealthy.
   supervisor-report [path]          Write JSON supervisor report.
+  supervisor-advanced               Print advanced monitoring/tracking/delegation readiness JSON.
   task-status <task_id>             Inspect one completed task result.
   platform-status                   Check Harness/OpenClaw/Paperclip/PoliysAI/CUA/Stagehand setup.
   platform-manifest                 Print unified agent platform manifest JSON.
@@ -168,6 +169,9 @@ case "${1:-}" in
     ;;
   supervisor-report)
     "$(python_bin)" "$ROOT_DIR/scripts/agent_supervisor.py" --redis-url "$REDIS_URL" report --output "${2:-data/agent-supervisor/latest.json}"
+    ;;
+  supervisor-advanced)
+    "$(python_bin)" "$ROOT_DIR/scripts/agent_supervisor.py" --redis-url "$REDIS_URL" advanced
     ;;
   task-status)
     [[ $# -ge 2 ]] || { usage; exit 2; }

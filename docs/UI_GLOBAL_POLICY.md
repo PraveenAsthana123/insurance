@@ -428,3 +428,19 @@ Implement this policy in this order:
 8. Accessibility pass for sidebar, tabs, drawers, and charts.
 9. Public-page SEO only where pages are intentionally public.
 10. Microfrontend boundaries only if independent deployment becomes real.
+
+## 18. User Input Persistence Policy
+
+All frontend work that accepts meaningful user input must follow `docs/GLOBAL_INPUT_PERSISTENCE_POLICY.md`.
+
+Required frontend behavior:
+
+- Send prompts, chats, forms, filters, simulations, approvals, feedback, uploads, exports, and agent commands through backend APIs that persist input events.
+- Use shared API bindings; never write directly from browser code to the database.
+- Include route path, component ID, department/process context, input kind, input name, purpose, and non-sensitive payload in the request envelope when available.
+- Do not store sensitive input in localStorage.
+- Do not send known secrets, tokens, passwords, private keys, or unnecessary PII.
+- Surface `input_event_id` or correlation ID in debug/error UI when backend returns it.
+- For critical inputs, show a clear error if persistence fails and the backend rejects processing.
+- Add E2E or component tests for high-value input surfaces such as Ask AI, chat, prompts, simulations, approvals, and feedback.
+

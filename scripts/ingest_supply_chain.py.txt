@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/ingest_supply_chain.py
-# auto-generated explainer · 2026-06-05T10:00:08Z
+# auto-generated explainer · 2026-06-10T10:00:16Z
 
 ## Purpose
 ingest_supply_chain.py — load Supply Chain Analysis CSV into canonical star schema.
@@ -29,7 +29,7 @@ CSV column adaptation notes (see docs/superpowers/plans/2026-04-19-supply-chain-
 - from `_` import psycopg
 
 ## Inputs
-(no CLI / env inputs — library module or implicit)
+- Env vars: BEV_POSTGRES_PASSWORD
 
 ## Process
 ### Functions
@@ -43,8 +43,8 @@ CSV column adaptation notes (see docs/superpowers/plans/2026-04-19-supply-chain-
 - Return values from functions above
 
 ## Notable inline comments
+- Per Phase 2.3 of docs/AUDIT_FIX_PLAN.md — no hardcoded password fallback.
 - --- dim_sku ---
 - --- dim_supplier ---
 - --- dim_customer ---
 - --- fact_shipment ---
-- NOTE: fact_shipment has a SERIAL pk so we insert without shipment_id;

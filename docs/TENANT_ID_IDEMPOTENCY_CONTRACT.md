@@ -141,6 +141,11 @@ Drill: [`tests/drills/drill_agentops_adapter.py`](../tests/drills/drill_agentops
 — 10 steps, 5 negative (default off, both vars required, SDK init/start/record exceptions
 all swallowed, response shape stable, API key never leaks).
 
+
+## User Input Event Persistence
+
+`docs/GLOBAL_INPUT_PERSISTENCE_POLICY.md` extends this contract for all meaningful user inputs. Input-event rows must use middleware-stamped tenant identity, not tenant values supplied in request bodies. When an `Idempotency-Key` is present, input persistence must use `(tenant_id, idempotency_key)` to avoid duplicate processing while preserving an auditable record of the received request.
+
 ## Drill coverage
 
 | Drill | Steps | Negative assertions | Cycle time |

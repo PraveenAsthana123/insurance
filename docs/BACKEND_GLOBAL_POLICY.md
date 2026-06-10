@@ -310,3 +310,19 @@ AI/RAG/model features must document:
 ## 16. Design Methodology Policy
 
 Backend feature design must follow `docs/DESIGN_METHODOLOGY_POLICY.md`.
+
+## 17. User Input Persistence Policy
+
+All backend work that receives meaningful user input must follow `docs/GLOBAL_INPUT_PERSISTENCE_POLICY.md`.
+
+Required backend behavior:
+
+- Persist prompts, chats, forms, filters, simulations, approvals, feedback, uploads, exports, and agent commands through backend services.
+- Use `user_input_events` from `backend/migrations/051_user_input_events.sql` as the canonical append-only table.
+- Stamp tenant, actor, role, request/correlation ID, route/API path, component/surface, input kind, purpose, and idempotency key where available.
+- Redact or reject secrets and restricted PII before storing payloads.
+- Link downstream model calls, simulations, reports, agent runs, and decisions back to `input_event_id` when possible.
+- Keep routers thin: validate HTTP, stamp request context, call service, return schema.
+- Keep repositories SQL-only and parameterized.
+- Add tenant-scoping, redaction, and cross-tenant negative tests for every input-event API.
+

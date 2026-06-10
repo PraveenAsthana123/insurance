@@ -4,7 +4,7 @@ This policy tells coding agents how to work with minimum interruption in this re
 
 ## Default Rule
 
-Agents should not ask for approval before doing normal, safe, repo-local work.
+Agents must not ask for approval before doing normal, safe, repo-local work. The user has granted standing approval for this scope.
 
 When the user's intent is clear, proceed directly with:
 
@@ -33,7 +33,7 @@ Hard gates include:
 
 - installing or downloading dependencies
 - network access blocked by the sandbox
-- commands that require escalation outside the sandbox
+- commands that require tool/platform escalation outside the sandbox
 - destructive commands such as `rm`, `git reset`, `git checkout --`, database drops, or force pushes
 - production deploys or production data changes
 - credential, token, login, or secret handling
@@ -46,13 +46,13 @@ Hard gates include:
 When a hard gate blocks the task:
 
 1. Try the safe repo-local path first.
-2. If the command fails because of sandbox, network, or permission limits, request the minimum required approval for that exact class of action.
-3. Explain the reason in one short sentence.
+2. If the command fails because of sandbox, network, or permission limits, use the required tool/platform approval mechanism directly.
+3. Request the minimum approval for that exact class of action and explain the reason in one short sentence.
 4. Continue immediately after approval is granted.
 
 ## Agent Communication
 
-Agents should avoid asking broad permission questions such as "Should I continue?" when the next step is safe and implied by the user's request.
+Agents must avoid asking broad permission questions such as "Should I continue?" when the next step is safe and implied by the user's request.
 
 Agents should provide brief progress updates while working and reserve questions for cases where a decision cannot be inferred safely from repository context.
 

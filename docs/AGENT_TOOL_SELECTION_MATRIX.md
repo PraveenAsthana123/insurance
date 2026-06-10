@@ -263,6 +263,15 @@ Any future production integration must update:
 - `README.md`
 
 
+## Requested Agentic Tool Readiness Audit
+
+For the latest requested audit across BMAD, Paperclip, Harness Agent, OpenClaw, orchestration patterns, Spec/OpenSpec, CUA, Stagehand, Playwright, Archon, OpenHands, Augment Code Intent, Bernstein, circuit breaker, Istio, Kiali, and service discovery, see:
+
+- `docs/AGENTIC_TOOL_READINESS_REPORT.md`
+- `jobs/reports/advanced_agentic_os_tool_tests.md`
+
+The governing rule is: local adapters and documented patterns may be used where marked working; external tools, browser side effects, service mesh components, and autonomous coding agents remain candidate or target-only until validated with credentials, isolation, audit, and approval gates.
+
 ## Related Architecture Study
 
 See `docs/AGENT_ARCHITECTURE_PATTERNS.md` for hub-and-spoke, council, swarm, hierarchical, blackboard, event-driven, federated, DAG, debate, reflection, society-of-mind, mixture-of-agents, recursive delegation, and digital-twin agent patterns.

@@ -109,6 +109,35 @@ List runtime schedules:
 
 The global per-process cron catalog is documented in `docs/testing/PROCESS_AGENT_CRON_CATALOG.md` and read by the supervisor for coverage visibility.
 
+## Advanced Monitoring, Tracking, And Delegation Readiness
+
+The supervisor now emits a read-only `advanced_agent_features` block in both CLI and API reports. It does not auto-route, retry, or mutate queues; it turns live Redis state into operator-safe recommendations.
+
+CLI:
+
+```bash
+./scripts/agent_fleet.sh supervisor-advanced
+python3 scripts/agent_supervisor.py advanced
+```
+
+API:
+
+```bash
+curl -sS http://localhost:8000/api/v1/agent-supervisor/report?sample=10 \
+  | jq .advanced_agent_features
+```
+
+The block includes:
+
+- `readiness_score` and `status` for advanced agent readiness.
+- `monitoring_features_present` for queue, heartbeat, schedule, trace, and failure visibility already wired.
+- `missing_advanced_features` for capability-aware routing, dead-letter/retry backoff, SLA monitoring, agent capability registry, task lineage, metrics export, and owner escalation.
+- `capability_registry` mapping simple, council, and test queues to agent kinds and recommended task types.
+- `delegation_plan` showing whether workers should drain, matching workers should be started, or smoke tasks/schedules should be added.
+- `tracking_controls` for live agents, stale agents, processed total, pending total, recent failures, durable traces, and retryable failures.
+
+Use this as the current Harness-Agent-style control-plane report. Do not treat it as autonomous orchestration until task lineage, scored routing, retry/dead-letter queues, SLA counters, and approval-gated escalation are implemented.
+
 ## Health Gate
 
 Run a supervisor health check:

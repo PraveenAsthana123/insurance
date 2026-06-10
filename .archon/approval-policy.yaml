@@ -1,14 +1,15 @@
 # BEV local Archon approval policy
 #
 # Purpose:
-#   Reduce repetitive approval clicks for low-risk local developer workflows
-#   while keeping destructive, external, deployment, production, browser/CUA,
+#   Auto-approve safe local developer workflow gates under the user's standing
+#   approval while keeping destructive, external, deployment, production, browser/CUA,
 #   secret, and broad-permission actions human-approved.
 #
 # This file is consumed by scripts/archon_auto_approve_safe.py. Archon itself
 # still owns workflow execution and approval state.
 version: 1
-mode: safe-local-auto-approval
+mode: standing-safe-local-auto-approval
+standing_user_approval: true
 
 allow_auto_approve:
   workflows:
@@ -37,7 +38,7 @@ require_human_approval:
   - broad_copilot_or_agent_allow_all_session
   - git_push_merge_release_or_branch_protection_change
   - deleting_files_or_resetting_git_state
-  - changing_this_policy
+  - changing_this_policy_without_explicit_user_request
 
 commands:
   dry_run: python3 scripts/archon_auto_approve_safe.py --dry-run

@@ -217,6 +217,68 @@ def test_autonomous_enterprise_os() -> ToolResult:
     return result(15, "Autonomous Enterprise OS", checks, gated=True, summary="Future target only; autonomy remains bounded by approval and governance policy.")
 
 
+def test_openclaw_paperclip_harness() -> ToolResult:
+    checks = [
+        path_exists("backend/routers/openclaw.py"),
+        path_exists("backend/services/openclaw_gateway_service.py"),
+        path_exists("backend/tests/test_openclaw_router.py"),
+        path_exists("backend/routers/paperclip.py"),
+        path_exists("backend/services/paperclip_service.py"),
+        path_exists("backend/tests/test_paperclip_router.py"),
+        path_exists("scripts/agent_supervisor.py"),
+        path_exists("backend/routers/agent_supervisor.py"),
+        path_exists("docs/AGENT_SUPERVISOR_RUNBOOK.md"),
+    ]
+    return result(16, "OpenClaw + Paperclip + Harness Agent", checks, summary="Local adapters and supervisor evidence for task routing, context artifacts, and harness visibility.")
+
+
+def test_agent_architecture_patterns() -> ToolResult:
+    checks = [
+        path_exists("docs/AGENT_ARCHITECTURE_PATTERNS.md"),
+        path_exists("docs/AGENT_COUNCIL_ARCHITECTURE.md"),
+        path_exists("docs/GLOBAL_AGENT_ARCHITECTURE_POLICY.md"),
+        path_exists("docs/diagrams/agent-platform-architecture.md"),
+        path_exists("docs/DARK_FACTORY_OPERATING_MODEL.md"),
+    ]
+    return result(17, "Agent Architecture Patterns", checks, summary="Covers hierarchical, mesh/peer, hub-and-spoke, council, spec-driven, and Dark Factory architecture documentation.")
+
+
+def test_browser_cua_stack() -> ToolResult:
+    checks = [
+        path_exists("backend/routers/agent_platform.py"),
+        path_exists("backend/services/agent_platform_service.py"),
+        path_exists("backend/ml/reference/agentic_stack.py"),
+        path_exists("docs/AGENTIC_BROWSER_WIRING_STATUS.md"),
+        path_exists("frontend/package.json"),
+        command_ok("frontend:playwright-package", [sys.executable, "-c", "import json; p=json.load(open('frontend/package.json')); deps={**p.get('dependencies',{}), **p.get('devDependencies',{})}; raise SystemExit(0 if '@playwright/test' in deps else 1)"]),
+    ]
+    return result(18, "CUA + Stagehand + Playwright", checks, summary="CUA is policy-gated dry-run; Stagehand/agentic Playwright are stubbed; frontend Playwright package is present if package check passes.")
+
+
+def test_resilience_mesh_discovery() -> ToolResult:
+    checks = [
+        command_ok("rag:circuit-breaker", ["rg", "-n", "class CircuitBreaker|circuit_breaker", "backend/ml/reference/rag_lifecycle.py"]),
+        path_exists("docs/AGENTIC_BROWSER_WIRING_STATUS.md"),
+        path_exists("docs/ENTERPRISE_INTEGRATION_OPERATIONS_MATRIX.md"),
+        path_exists("docker-compose.yml"),
+        command_ok("compose:service-discovery", ["rg", "-n", "postgres:|redis:|backend:|frontend:", "docker-compose.yml"]),
+    ]
+    return result(19, "Circuit Breaker + Istio/Kiali + Service Discovery", checks, summary="Circuit breaker exists in RAG; Docker Compose service names provide local discovery; Istio/Kiali remain target-only docs.")
+
+
+def test_spec_and_external_coding_candidates() -> ToolResult:
+    checks = [
+        path_exists("scripts/spec_kit.py"),
+        path_exists("docs/SPEC_KIT_RUNBOOK.md"),
+        path_exists("config/advanced_agentic_os_tools.json"),
+        dist_check("openhands-ai"),
+        command_ok("augment:command", [sys.executable, "-c", "import shutil; raise SystemExit(0 if shutil.which('augment') else 1)"]),
+        command_ok("kiro:command", [sys.executable, "-c", "import shutil; raise SystemExit(0 if shutil.which('kiro') else 1)"]),
+        command_ok("bernstein:command", [sys.executable, "-c", "import shutil; raise SystemExit(0 if shutil.which('bernstein') else 1)"]),
+    ]
+    return result(20, "OpenSpec/GitHub Spec/AWS Kiro/OpenHands/Augment/Bernstein", checks, summary="Spec Kit is local; OpenHands is dependency-checked; Kiro, Augment, and Bernstein are command/discovery checks only.")
+
+
 TESTS: list[Callable[[], ToolResult]] = [
     test_spec_kit,
     test_bmad,
@@ -233,6 +295,11 @@ TESTS: list[Callable[[], ToolResult]] = [
     test_ai_command_center,
     test_enterprise_decision_os,
     test_autonomous_enterprise_os,
+    test_openclaw_paperclip_harness,
+    test_agent_architecture_patterns,
+    test_browser_cua_stack,
+    test_resilience_mesh_discovery,
+    test_spec_and_external_coding_candidates,
 ]
 
 

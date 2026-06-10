@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/main.py
-# auto-generated explainer · 2026-06-05T10:00:05Z
+# auto-generated explainer · 2026-06-10T10:00:05Z
 
 ## Purpose
 (no module docstring — add one to improve this)
@@ -8,6 +8,7 @@
 ## Imports
 - from `__future__` import annotations
 - from `_` import logging
+- from `_` import os
 - from `contextlib` import asynccontextmanager
 - from `typing` import AsyncIterator
 - from `fastapi` import FastAPI
@@ -15,10 +16,9 @@
 - from `fastapi.middleware.gzip` import GZipMiddleware
 - from `core.config` import get_settings
 - from `core.error_handlers` import register_error_handlers
-- from `core.logging_config` import setup_logging
 
 ## Inputs
-(no CLI / env inputs — library module or implicit)
+- Env vars: INSUR_SKIP_MIGRATIONS
 
 ## Process
 ### Functions
@@ -29,8 +29,8 @@
 - Return values from functions above
 
 ## Notable inline comments
+- Optional skip for local dev when schema state is known-good.
+- Default behavior unchanged (migrations run on every startup).
 - ── Middleware (outermost first — CorrelationId wraps everything) ──────────
-- RBAC runs INSIDE CorrelationId so request.state.correlation_id is set
-- before RBAC returns 403/400. add_middleware stacks in reverse: last-added
-- is outermost. CorrelationId (added last) wraps RBAC (added just before).
-- TenantId sits BETWEEN RBAC and CorrelationId: it needs correlation_id in
+- Iter 25 · C2 · idempotency-key safe retry · §47.7
+- Iter 30 · API version negotiation

@@ -58,6 +58,7 @@ def parse_args() -> argparse.Namespace:
     report.add_argument("--output", default=str(DEFAULT_REPORT), help="Report path, or '-' for stdout")
 
     sub.add_parser("schedules", help="List recurring agent schedules and process-test cron coverage")
+    sub.add_parser("advanced", help="Print advanced monitoring, tracking, and delegation readiness")
     return parser.parse_args()
 
 
@@ -315,6 +316,183 @@ def derive_operations(report: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+def advanced_feature_gap_report(report: dict[str, Any]) -> dict[str, Any]:
+    """Summarize missing advanced agent features and safe delegation advice.
+
+    This is a read-only recommendation layer. It does not enqueue, retry, or
+    reassign tasks; workers and OpenClaw keep owning execution.
+    """
+    queues = report["queues"]
+    heartbeats = report["heartbeats"]["rows"]
+    schedules = report["schedules"]
+    trace_log = report.get("trace_log", {})
+    pending_total = int(report.get("pending_total", 0) or 0)
+    recent_failures = int(report.get("recent_failure_count", 0) or 0)
+    live_by_kind = Counter(str(row.get("kind", "unknown")) for row in heartbeats)
+    stale_agents = sum(1 for row in heartbeats if (row.get("age_sec") or 0) > 30)
+    processed_total = sum(int(row.get("processed", 0) or 0) for row in heartbeats)
+    durable_traces = int(trace_log.get("total", 0) or 0)
+    retryable = int(trace_log.get("retryable", 0) or 0)
+
+    capability_rows = [
+        {
+            "capability": "simple execution",
+            "queue": "tasks",
+            "done_queue": "done",
+            "agent_kind": "simple",
+            "live_agents": live_by_kind.get("simple", 0),
+            "pending": queues.get("simple", {}).get("pending", 0),
+            "recommended_for": "low-risk implementation, summarization, data checks, and repeatable single-agent tasks",
+        },
+        {
+            "capability": "council review",
+            "queue": "council_tasks",
+            "done_queue": "council_done",
+            "agent_kind": "council",
+            "live_agents": live_by_kind.get("council", 0),
+            "pending": queues.get("council", {}).get("pending", 0),
+            "recommended_for": "architecture review, governance checks, risk review, and multi-agent arbitration",
+        },
+        {
+            "capability": "test validation",
+            "queue": "test_tasks",
+            "done_queue": "test_results",
+            "agent_kind": "test",
+            "live_agents": live_by_kind.get("test", 0),
+            "pending": queues.get("test", {}).get("pending", 0),
+            "recommended_for": "targeted test execution, cron drills, quality gates, and regression checks",
+        },
+    ]
+
+    delegation_plan: list[dict[str, Any]] = []
+    for row in capability_rows:
+        if row["pending"] and row["live_agents"]:
+            delegation_plan.append(
+                {
+                    "queue": row["queue"],
+                    "agent_kind": row["agent_kind"],
+                    "action": "let workers drain existing queue",
+                    "priority": "high" if row["pending"] > row["live_agents"] * 2 else "normal",
+                    "reason": f"{row['pending']} pending tasks and {row['live_agents']} live {row['agent_kind']} agents",
+                }
+            )
+        elif row["pending"] and not row["live_agents"]:
+            delegation_plan.append(
+                {
+                    "queue": row["queue"],
+                    "agent_kind": row["agent_kind"],
+                    "action": "start matching workers before adding more tasks",
+                    "priority": "critical",
+                    "reason": f"{row['pending']} pending tasks but no live {row['agent_kind']} agents",
+                }
+            )
+    if not delegation_plan:
+        delegation_plan.append(
+            {
+                "queue": "all",
+                "agent_kind": "supervisor",
+                "action": "submit a smoke task or schedule recurring checks before claiming throughput",
+                "priority": "normal",
+                "reason": "no pending delegation pressure was found in the sampled queues",
+            }
+        )
+
+    missing_features = [
+        {
+            "feature": "capability-aware routing",
+            "status": "partial",
+            "gap": "OpenClaw chooses simple/council mode, but there is no scored router that selects agents from skills, cost, SLA, or risk.",
+            "enhancement": "Add a router policy that maps task type, department, risk, and required tools to queue and agent role.",
+        },
+        {
+            "feature": "dead-letter queue and retry backoff",
+            "status": "missing" if retryable == 0 else "partial",
+            "gap": "Failed tasks are visible, but retry lanes and dead-letter queues are not first-class supervisor objects.",
+            "enhancement": "Persist retry_count, next_retry_at, failure_category, and owner; move exhausted failures to dlq_tasks.",
+        },
+        {
+            "feature": "SLA monitoring",
+            "status": "partial",
+            "gap": "Queue depth and heartbeat age exist, but task age, due time, and SLA breach counters are not enforced.",
+            "enhancement": "Track queued_at/started_at/completed_at and emit breach counts by department and queue.",
+        },
+        {
+            "feature": "agent capability registry",
+            "status": "partial",
+            "gap": "Heartbeats expose kind/state/processed, but not model, skills, max concurrency, tools, or current assignment.",
+            "enhancement": "Extend heartbeat payloads with capabilities, model, active_task_id, lease_expires_at, and tool allowlist.",
+        },
+        {
+            "feature": "task lineage and parent-child delegation",
+            "status": "missing",
+            "gap": "Task IDs are tracked, but parent_task_id, delegated_by, and child task fanout are not normalized.",
+            "enhancement": "Add parent_task_id, delegated_by, delegation_reason, and child_task_ids to task/result envelopes.",
+        },
+        {
+            "feature": "metrics export",
+            "status": "partial",
+            "gap": "JSON reports exist, but Prometheus/OpenTelemetry export is target-only.",
+            "enhancement": "Expose queue depth, success rate, stale heartbeat count, failures, and SLA breaches as scrapeable metrics.",
+        },
+        {
+            "feature": "operator escalation policy",
+            "status": "partial",
+            "gap": "Recommendations exist, but owner escalation and alert routing are not automated.",
+            "enhancement": "Map failure categories to owners, severity, notification channel, and required approval gate.",
+        },
+    ]
+
+    readiness_score = max(
+        0,
+        min(
+            100,
+            round(
+                (100 if heartbeats else 0) * 0.20
+                + (100 if schedules else 35) * 0.10
+                + (100 if durable_traces else 35) * 0.15
+                + (100 if processed_total else 50) * 0.15
+                + (100 if not recent_failures else 50) * 0.15
+                + (100 if pending_total <= max(len(heartbeats), 1) * 2 else 45) * 0.15
+                + (100 if not stale_agents else 60) * 0.10
+            ),
+        ),
+    )
+
+    return {
+        "readiness_score": readiness_score,
+        "status": "ready" if readiness_score >= 80 else "watch" if readiness_score >= 60 else "needs_work",
+        "monitoring_features_present": [
+            "queue depth",
+            "completion samples",
+            "agent heartbeats",
+            "heartbeat age",
+            "schedule visibility",
+            "process-test catalog coverage",
+            "durable trace JSONL summary",
+            "failure taxonomy summary",
+            "operator recommendations",
+        ],
+        "missing_advanced_features": missing_features,
+        "capability_registry": capability_rows,
+        "delegation_plan": delegation_plan,
+        "tracking_controls": {
+            "live_agents": len(heartbeats),
+            "stale_agents": stale_agents,
+            "processed_total": processed_total,
+            "pending_total": pending_total,
+            "recent_failures": recent_failures,
+            "durable_traces": durable_traces,
+            "retryable_failures": retryable,
+        },
+        "safe_next_steps": [
+            "Use OpenClaw mode routing for simple vs council tasks until a scored router exists.",
+            "Start matching workers before adding work to a queue with pending backlog.",
+            "Add parent_task_id/delegated_by fields before enabling multi-step delegation.",
+            "Keep real browser/CUA actions approval-gated and excluded from auto-delegation.",
+        ],
+    }
+
 def build_report(client: redis.Redis, sample: int) -> dict[str, Any]:
     queues = queue_snapshot(client)
     heartbeats = heartbeat_rows(client)
@@ -349,6 +527,7 @@ def build_report(client: redis.Redis, sample: int) -> dict[str, Any]:
         "recommendations": recommendations,
     }
     report["operations_visibility"] = derive_operations(report)
+    report["advanced_agent_features"] = advanced_feature_gap_report(report)
     return report
 
 
@@ -389,6 +568,11 @@ def print_status(report: dict[str, Any], sample: int) -> None:
                 break
         if shown >= sample:
             break
+    advanced = report.get("advanced_agent_features", {})
+    if advanced:
+        print(f"Advanced readiness: {advanced.get('status')} score={advanced.get('readiness_score')}")
+        for item in advanced.get("delegation_plan", [])[:5]:
+            print(f"Delegation: {item.get('priority')} {item.get('agent_kind')} -> {item.get('action')} ({item.get('reason')})")
     for recommendation in report["recommendations"]:
         print(f"Recommendation: {recommendation}")
 
@@ -442,6 +626,9 @@ def main() -> int:
         return 0
     if args.cmd == "schedules":
         print_schedules(report)
+        return 0
+    if args.cmd == "advanced":
+        print(json.dumps(report.get("advanced_agent_features", {}), indent=2, sort_keys=True))
         return 0
     if args.cmd == "task":
         found = find_task(client, args.task_id, args.limit)

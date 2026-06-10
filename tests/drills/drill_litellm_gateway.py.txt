@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_litellm_gateway.py
-# auto-generated explainer · 2026-06-05T10:00:42Z
+# auto-generated explainer · 2026-06-10T10:01:11Z
 
 ## Purpose
 Drill: LiteLLM gateway Stage-1 adapter (backend/services/llm_gateway.py).
