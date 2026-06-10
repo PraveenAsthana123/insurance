@@ -1,0 +1,207 @@
+#!/usr/bin/env bash
+# insur · consolidated operational CLI · Iter 36 polish.
+#
+# Replaces 7+ ad-hoc shell invocations with one entrypoint:
+#   ./scripts/insur start              · boot uvicorn backend
+#   ./scripts/insur stop               · kill running backend
+#   ./scripts/insur status             · check if backend is up
+#   ./scripts/insur audit              · run ALL top-1% audits
+#   ./scripts/insur audit-weekly       · run 26-audit weekly stack
+#   ./scripts/insur audit <iter>       · run specific iter audit
+#   ./scripts/insur drill              · backup + retention + DQ drills
+#   ./scripts/insur top1pct            · run the daily top-1% loop
+#   ./scripts/insur smoke              · curl every documented endpoint
+#   ./scripts/insur stats              · show codebase stats
+#   ./scripts/insur help               · this message
+#
+# Per §57.7 honest: each subcommand prints what it ran + what failed.
+
+set -uo pipefail
+
+# ───────────────────────────────────────────────────────────────────
+# Resolution
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT"
+
+PT="/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python"
+[ ! -x "$PT" ] && PT="$(command -v python3)"
+
+PORT="${INSUR_PORT:-8001}"
+HOST="${INSUR_HOST:-0.0.0.0}"
+BACKEND_LOG="/tmp/insur-backend.log"
+PID_FILE="/tmp/insur-backend.pid"
+
+# Default env for backend processes (operator override via shell env)
+: "${INSUR_SKIP_MIGRATIONS:=1}"
+: "${INSUR_DISABLE_PRESIDIO:=1}"
+: "${BEV_POSTGRES_HOST:=localhost}"
+: "${BEV_POSTGRES_PORT:=5434}"
+: "${BEV_POSTGRES_USER:=insur_user}"
+: "${BEV_POSTGRES_PASSWORD:=insur_secret_password}"
+: "${BEV_POSTGRES_DB:=insur_analytics}"
+
+export INSUR_SKIP_MIGRATIONS INSUR_DISABLE_PRESIDIO
+export BEV_POSTGRES_HOST BEV_POSTGRES_PORT BEV_POSTGRES_USER BEV_POSTGRES_PASSWORD BEV_POSTGRES_DB
+export TF_CPP_MIN_LOG_LEVEL=3
+
+# ───────────────────────────────────────────────────────────────────
+# Subcommands
+
+cmd_help() {
+  sed -n '2,18p' "$0"
+}
+
+cmd_start() {
+  if cmd_status >/dev/null 2>&1; then
+    echo "✓ backend already running on :$PORT"
+    return 0
+  fi
+  echo "Starting backend on $HOST:$PORT ..."
+  nohup "$PT" -m uvicorn main:create_app --factory \
+    --host "$HOST" --port "$PORT" \
+    --app-dir backend > "$BACKEND_LOG" 2>&1 &
+  echo $! > "$PID_FILE"
+  disown 2>/dev/null || true
+  sleep 4
+  if cmd_status >/dev/null 2>&1; then
+    echo "✓ backend up · PID $(cat $PID_FILE) · log $BACKEND_LOG"
+  else
+    echo "✗ backend failed to bind · check $BACKEND_LOG"
+    tail -20 "$BACKEND_LOG" 2>/dev/null
+    return 1
+  fi
+}
+
+cmd_stop() {
+  if [ -f "$PID_FILE" ] && kill -0 "$(cat $PID_FILE)" 2>/dev/null; then
+    kill "$(cat $PID_FILE)" && rm -f "$PID_FILE"
+    echo "✓ stopped"
+  else
+    pkill -f "uvicorn main:create_app" && echo "✓ stopped via pkill" || echo "no running backend"
+  fi
+}
+
+cmd_status() {
+  if curl -s -f -m 2 "http://localhost:$PORT/healthz/live" >/dev/null; then
+    echo "✓ backend up on :$PORT"
+    return 0
+  else
+    echo "✗ backend not reachable on :$PORT"
+    return 1
+  fi
+}
+
+cmd_audit() {
+  local target="${1:-}"
+  if [ -z "$target" ]; then
+    "$PT" scripts/run_all_top1pct_audits.py
+  else
+    local script="scripts/audit_top1pct_iter${target}.py"
+    if [ ! -f "$script" ]; then
+      echo "✗ no audit for iter $target · available:"
+      ls scripts/audit_top1pct_iter*.py | sed 's|.*iter||;s|\.py$||' | sort -n | tr '\n' ' '
+      echo
+      return 1
+    fi
+    "$PT" "$script"
+  fi
+}
+
+cmd_audit_weekly() {
+  echo "═══ Weekly audit stack (26 audits) ═══"
+  local ok=0 fail=0
+  for a in scripts/audit_*.py; do
+    [[ "$a" == *iter* ]] && continue   # iter audits handled separately
+    [[ "$a" == *retention* ]] && continue  # retention is enforcer, not audit
+    if "$PT" "$a" >/dev/null 2>&1; then
+      ok=$((ok + 1))
+    else
+      fail=$((fail + 1))
+      echo "  ✗ $a"
+    fi
+  done
+  echo "Weekly: $ok pass · $fail fail"
+}
+
+cmd_drill() {
+  echo "═══ Drill suite · backup + retention + DQ ═══"
+  echo ""
+  echo "─── Data quality ───"
+  "$PT" scripts/data_quality_runner.py 2>&1 | tail -3
+  echo ""
+  echo "─── Backup ───"
+  "$PT" scripts/backup_restore_drill.py 2>&1 | tail -3
+  echo ""
+  echo "─── Retention ───"
+  "$PT" scripts/audit_retention_enforcer.py 2>&1 | tail -3
+}
+
+cmd_top1pct() {
+  bash scripts/top1pct_loop.sh
+}
+
+cmd_smoke() {
+  echo "═══ Curl smoke · documented endpoints ═══"
+  for path in \
+    "/healthz/live" \
+    "/healthz/ready" \
+    "/metrics" \
+    "/robots.txt" \
+    "/.well-known/security.txt" \
+    "/api/v1/alerts/counts" \
+    "/api/v1/feature-flags" \
+    "/api/v1/regulatory/test" \
+    "/api/v1/cron-registry" \
+    "/api/v1/heatmap?top=3" \
+    "/api/v1/metrics-latency" \
+    "/api/v1/openapi-export/stats" \
+    "/api/v1/changelog/summary"
+  do
+    code=$(curl -s -o /dev/null -w '%{http_code}' -m 5 "http://localhost:$PORT$path")
+    if [[ "$code" =~ ^2 ]]; then
+      printf "  ✓ %-50s %s\n" "$path" "$code"
+    else
+      printf "  ✗ %-50s %s\n" "$path" "$code"
+    fi
+  done
+}
+
+cmd_stats() {
+  echo "═══ Codebase stats ═══"
+  echo "  Backend modules:    $(find backend -maxdepth 2 -name router.py | wc -l) routers"
+  echo "  Audit scripts:      $(ls scripts/audit_*.py | wc -l) total"
+  echo "  Iter audits:        $(ls scripts/audit_top1pct_iter*.py | wc -l)"
+  echo "  Frontend panels:    $(find frontend/src/components -name '*.jsx' | wc -l) JSX files"
+  echo "  Commits this 6e490afc..HEAD:"
+  git rev-list --count 6e490afc..HEAD 2>/dev/null || echo "    (range invalid)"
+  echo ""
+  echo "  Cron jobs (INSUR-tagged):"
+  crontab -l 2>/dev/null | grep -c "INSUR-" || echo "    0"
+  echo ""
+  echo "  Live OpenAPI:"
+  if cmd_status >/dev/null 2>&1; then
+    curl -s "http://localhost:$PORT/api/v1/openapi-export/stats" | \
+      "$PT" -c "import json,sys; d=json.load(sys.stdin); print(f\"    {d['endpoints']} endpoints across {d['n_tags']} tags\")" 2>/dev/null || \
+      echo "    (backend up but stats unreachable)"
+  else
+    echo "    (backend not running · start with: ./scripts/insur start)"
+  fi
+}
+
+# ───────────────────────────────────────────────────────────────────
+# Dispatch
+
+case "${1:-help}" in
+  start)         shift; cmd_start "$@" ;;
+  stop)          shift; cmd_stop "$@" ;;
+  status)        shift; cmd_status "$@" ;;
+  audit)         shift; cmd_audit "$@" ;;
+  audit-weekly)  shift; cmd_audit_weekly "$@" ;;
+  drill)         shift; cmd_drill "$@" ;;
+  top1pct)       shift; cmd_top1pct "$@" ;;
+  smoke)         shift; cmd_smoke "$@" ;;
+  stats)         shift; cmd_stats "$@" ;;
+  help|-h|--help) cmd_help ;;
+  *) echo "Unknown command: $1"; cmd_help; exit 1 ;;
+esac
