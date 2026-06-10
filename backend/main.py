@@ -203,7 +203,8 @@ def create_app() -> FastAPI:
     from enterprise_governance.router import router as governance_router  # /api/v1/governance — Iter 39
     from risk_incident_learning.router import router as ril_router  # /api/v1/ril — Iter 40
     from agentic_adapter.router import router as adapter_router  # /api/v1/agentic-adapter — Iter 45
-    from test_catalog.router import router as test_catalog_router  # /api/v1/test-catalog — Iter 47  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from test_catalog.router import router as test_catalog_router  # /api/v1/test-catalog — Iter 47
+    from slack_integration.router import router as slack_router  # /api/v1/slack — Iter 49  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -306,6 +307,7 @@ def create_app() -> FastAPI:
     app.include_router(ril_router)                 # /api/v1/ril — Iter 40
     app.include_router(adapter_router)             # /api/v1/agentic-adapter — Iter 45
     app.include_router(test_catalog_router)        # /api/v1/test-catalog — Iter 47
+    app.include_router(slack_router)               # /api/v1/slack — Iter 49
     # Iter 36 · install httpx auto-audit hook
     from core.httpx_audit_hook import install_httpx_audit_hook
     install_httpx_audit_hook()
