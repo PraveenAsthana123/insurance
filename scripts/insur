@@ -67,6 +67,7 @@ cmd_help() {
   ./scripts/insur agentic      · /agentic + /ops + /governance + /ril rollup
   ./scripts/insur migrate      · apply agentic migrations 063-066
   ./scripts/insur seed         · seed 100 agents · 25 skills · 25 tools
+  ./scripts/insur cover        · register all non-agentic routers as System Agents (Iter 45)
   ./scripts/insur contracts    · export Pydantic schemas + regen Zod (Iter 44)
   ./scripts/insur stats        · codebase stats + OpenAPI counts
 
@@ -236,6 +237,11 @@ cmd_seed() {
   "$PT" scripts/seed_100_agents.py "$@"
 }
 
+cmd_cover() {
+  echo "═══ Agentic coverage · register every non-agentic router ═══"
+  "$PT" scripts/agentic_coverage_loop.py "$@"
+}
+
 cmd_contracts() {
   echo "═══ Export Pydantic schemas + regenerate Zod ═══"
   "$PT" scripts/export_pydantic_schemas.py "$@"
@@ -303,6 +309,7 @@ case "${1:-help}" in
   agentic)       shift; cmd_agentic "$@" ;;
   migrate)       shift; cmd_migrate "$@" ;;
   seed)          shift; cmd_seed "$@" ;;
+  cover)         shift; cmd_cover "$@" ;;
   contracts)     shift; cmd_contracts "$@" ;;
   validate)      shift; cmd_validate "$@" ;;
   stats)         shift; cmd_stats "$@" ;;
