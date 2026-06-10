@@ -12,6 +12,7 @@ const HUB_TABS = [
   { key: 'task-tracer',   label: '▶ Run Task (live trace)' },
   { key: 'production-pipeline', label: '🏭 22-Stage Production Pipeline (Iter 56)' },
   { key: 'challenges', label: '⚠️ Challenges & Plans (Iter 58)' },
+  { key: 'status-agents', label: '📊 Status Agents (Iter 59)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
@@ -1091,6 +1092,59 @@ function ChallengesView() {
   );
 }
 
+
+function StatusAgentsView() {
+  const [data, setData] = useState(null);
+  const [auto, setAuto] = useState(true);
+  const load = useCallback(async () => {
+    const r = await fetch(`${API}/api/v1/status-agents/all`).then(r => r.json());
+    setData(r);
+  }, []);
+  useEffect(() => {
+    load();
+    if (auto) {
+      const t = setInterval(load, 5000);
+      return () => clearInterval(t);
+    }
+  }, [load, auto]);
+  if (!data) return <em>Loading…</em>;
+  return (
+    <Section title={`7 Status Aggregator Agents · live · ${auto ? 'refresh 5s' : 'manual'}`} accent="#3b82f6">
+      <button onClick={() => setAuto(!auto)}
+        style={{ marginBottom: 8, padding: '4px 10px', fontSize: 10, cursor: 'pointer',
+          background: auto ? '#10b981' : '#94a3b8', color: '#fff',
+          border: 'none', borderRadius: 3 }}>
+        Auto-refresh 5s: {auto ? 'ON' : 'OFF'}
+      </button>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
+        {data.status_agents.map(sa => (
+          <div key={sa.agent_id} style={{
+            padding: 12, background: `${sa.color}15`,
+            border: `2px solid ${sa.color}`, borderRadius: 4,
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <strong style={{ fontSize: 12, color: sa.color }}>{sa.label}</strong>
+              <code style={{ fontSize: 9, color: '#64748b' }}>{sa.agent_id}</code>
+            </div>
+            <div style={{ fontSize: 11, marginTop: 6, color: '#1e293b' }}>{sa.summary}</div>
+            {sa.metrics && Object.keys(sa.metrics).length > 0 && (
+              <details style={{ marginTop: 6 }}>
+                <summary style={{ cursor: 'pointer', fontSize: 9 }}>metrics</summary>
+                <pre style={{ fontSize: 9, marginTop: 4, color: '#475569' }}>
+                  {JSON.stringify(sa.metrics, null, 2)}
+                </pre>
+              </details>
+            )}
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: 8, fontSize: 9, color: '#64748b' }}>
+        As of: {data.as_of} · also available via <code>./scripts/insur status-snapshot</code>
+      </div>
+    </Section>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1448,6 +1502,7 @@ export default function AgenticHubPage() {
         {activeTab === 'task-tracer'  && <TaskTracerView />}
         {activeTab === 'production-pipeline' && <ProductionPipelineView />}
         {activeTab === 'challenges'         && <ChallengesView />}
+        {activeTab === 'status-agents'     && <StatusAgentsView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}

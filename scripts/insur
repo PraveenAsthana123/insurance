@@ -68,6 +68,7 @@ cmd_help() {
   ./scripts/insur migrate      · apply agentic migrations 063-066
   ./scripts/insur seed         · seed 100 agents · 25 skills · 25 tools
   ./scripts/insur which-working· live per-agent terminal feed (Iter 53)
+  ./scripts/insur status-snapshot · 7-agent live status terminal view (Iter 59)
   ./scripts/insur watchdog     · run 24-agent watchdog cycle now (Iter 53)
   ./scripts/insur load-test    · 5-phase load test now (Iter 55)
   ./scripts/insur cover        · register all non-agentic routers as System Agents (Iter 45)
@@ -244,6 +245,10 @@ cmd_which_working() {
   "$PT" scripts/which_working.py "$@"
 }
 
+cmd_status_snapshot() {
+  "$PT" scripts/status_snapshot.py "$@"
+}
+
 cmd_load_test() {
   echo "═══ 5-phase load test (smoke/load/stress/spike/soak) ═══"
   "$PT" scripts/load_test_smoke.py "$@"
@@ -327,6 +332,7 @@ case "${1:-help}" in
   migrate)       shift; cmd_migrate "$@" ;;
   seed)          shift; cmd_seed "$@" ;;
   which-working) shift; cmd_which_working "$@" ;;
+  status-snapshot) shift; cmd_status_snapshot "$@" ;;
   load-test)     shift; cmd_load_test "$@" ;;
   watchdog)      shift; cmd_watchdog "$@" ;;
   cover)         shift; cmd_cover "$@" ;;
