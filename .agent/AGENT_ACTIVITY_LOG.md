@@ -4273,3 +4273,19 @@ error: jobs/logs/opa_test.log: patch does not apply
 2026-06-10T20:00:33Z | auto-fix-worker | start        | T-loop-1781121633-3 | role=error target=jobs/logs/rag_cache.log
 2026-06-10T20:00:33Z | auto-fix-worker | classify     | T-loop-1781121633-3 | tier=small risk=low council=single
 2026-06-10T20:00:36Z | auto-fix-worker | validate     | T-loop-1781121633-3 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-10T20:00:37Z | auto-fix-worker | commit       | T-loop-1781121633-3 | ok sha=af81cf2132463d2f300e7b2e50699824b2056e99
+2026-06-10T20:00:37Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-10T20:00:37Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2
+2026-06-10T21:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-10T21:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-10T21:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-10T21:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-10T21:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781125219-1
+2026-06-10T21:00:20Z | auto-fix-worker | start        | T-loop-1781125219-1 | role=error target=jobs/logs/backend.log
+2026-06-10T21:00:20Z | auto-fix-worker | classify     | T-loop-1781125219-1 | tier=small risk=low council=single
+2026-06-10T21:00:46Z | auto-fix-worker | apply_check  | T-loop-1781125219-1 | FAIL: git apply --check failed: error: corrupt patch at line 9
+2026-06-10T21:00:46Z | auto-fix-loop |   → verdict=fail
+2026-06-10T21:00:46Z | auto-fix-loop | dispatch #2: T-loop-1781125246-2
+2026-06-10T21:00:47Z | auto-fix-worker | start        | T-loop-1781125246-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-10T21:00:47Z | auto-fix-worker | classify     | T-loop-1781125246-2 | tier=small risk=low council=single
+2026-06-10T21:00:50Z | auto-fix-worker | validate     | T-loop-1781125246-2 | ok: no validator for jobs/logs/rag_cache.log
