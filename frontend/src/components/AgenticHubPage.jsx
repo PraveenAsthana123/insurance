@@ -13,6 +13,7 @@ const HUB_TABS = [
   { key: 'production-pipeline', label: '🏭 22-Stage Production Pipeline (Iter 56)' },
   { key: 'challenges', label: '⚠️ Challenges & Plans (Iter 58)' },
   { key: 'status-agents', label: '📊 Status Agents (Iter 59)' },
+  { key: 'checklist', label: '☑️ Production Checklist (Iter 60)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
@@ -1145,6 +1146,96 @@ function StatusAgentsView() {
   );
 }
 
+
+function ChecklistView() {
+  const [data, setData] = useState(null);
+  const [filter, setFilter] = useState('all');
+  useEffect(() => {
+    fetch(`${API}/api/v1/production-checklist/full`).then(r => r.json()).then(setData);
+  }, []);
+  if (!data) return <em>Loading…</em>;
+  const s = data.summary;
+  const grade = s.production_ready_pct >= 95 ? 'A' :
+                s.production_ready_pct >= 80 ? 'B' :
+                s.production_ready_pct >= 60 ? 'C' : 'D';
+  const gradeColor = grade === 'A' ? '#10b981' :
+                     grade === 'B' ? '#3b82f6' :
+                     grade === 'C' ? '#f59e0b' : '#ef4444';
+  return (
+    <>
+      <Section title="Multi-Agent Production Checklist (8 sections · 106 items)" accent={gradeColor}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+          <div style={{ padding: 12, background: `${gradeColor}15`, borderRadius: 4, border: `1px solid ${gradeColor}40` }}>
+            <div style={{ fontSize: 9 }}>PROD-READY GRADE</div>
+            <div style={{ fontSize: 36, fontWeight: 800, color: gradeColor }}>{grade}</div>
+            <div style={{ fontSize: 10 }}>{s.production_ready_pct}%</div>
+          </div>
+          <div style={{ padding: 12, background: '#dcfce7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>✅ DONE</div>
+            <div style={{ fontSize: 36, fontWeight: 800, color: '#15803d' }}>{s.done}</div>
+            <div style={{ fontSize: 10 }}>{s.done_pct}%</div>
+          </div>
+          <div style={{ padding: 12, background: '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>⚠️ PARTIAL</div>
+            <div style={{ fontSize: 36, fontWeight: 800, color: '#a16207' }}>{s.partial}</div>
+          </div>
+          <div style={{ padding: 12, background: '#fee2e2', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>❌ MISSING</div>
+            <div style={{ fontSize: 36, fontWeight: 800, color: '#991b1b' }}>{s.missing}</div>
+          </div>
+          <div style={{ padding: 12, background: '#dbeafe', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>TOTAL</div>
+            <div style={{ fontSize: 36, fontWeight: 800, color: '#1d4ed8' }}>{s.total_items}</div>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="Per section · done % bar" accent="#3b82f6">
+        <select value={filter} onChange={e => setFilter(e.target.value)}
+          style={{ padding: '4px 8px', fontSize: 11, border: '1px solid #cbd5e1', borderRadius: 3, marginBottom: 8 }}>
+          <option value="all">All sections</option>
+          <option value="missing">Only ❌ missing</option>
+          <option value="partial">Only ⚠️ partial</option>
+        </select>
+        {Object.entries(data.sections).map(([key, items]) => {
+          const sCounts = data.summary.by_section[key];
+          return (
+            <details key={key} open style={{ marginTop: 8, padding: 10, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 4 }}>
+              <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: 11 }}>
+                {key.replace(/_/g, ' ').toUpperCase()} ·{' '}
+                <code>{sCounts.done}/{sCounts.total} done ({sCounts.done_pct}%)</code>
+                {sCounts.missing > 0 && <Pill color="#ef4444">{sCounts.missing} missing</Pill>}
+                {sCounts.partial > 0 && <Pill color="#f59e0b">{sCounts.partial} partial</Pill>}
+              </summary>
+              <table style={{ fontSize: 10, width: '100%', marginTop: 6 }}>
+                <thead style={{ background: '#f1f5f9', color: '#475569' }}>
+                  <tr>
+                    <th style={{ textAlign: 'left', padding: 4 }}>ITEM</th>
+                    <th style={{ textAlign: 'center', padding: 4 }}>STATUS</th>
+                    <th style={{ textAlign: 'left', padding: 4 }}>WHERE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.filter(it => filter === 'all' ||
+                    (filter === 'missing' && it.status === '❌') ||
+                    (filter === 'partial' && it.status === '⚠️')
+                  ).map((it, i) => (
+                    <tr key={i} style={{ borderTop: '1px solid #f1f5f9' }}>
+                      <td style={{ padding: 4 }}>{it.item}</td>
+                      <td style={{ padding: 4, textAlign: 'center', fontSize: 14 }}>{it.status}</td>
+                      <td style={{ padding: 4, fontSize: 9, color: '#475569' }}>{it.where}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </details>
+          );
+        })}
+      </Section>
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1503,6 +1594,7 @@ export default function AgenticHubPage() {
         {activeTab === 'production-pipeline' && <ProductionPipelineView />}
         {activeTab === 'challenges'         && <ChallengesView />}
         {activeTab === 'status-agents'     && <StatusAgentsView />}
+        {activeTab === 'checklist'        && <ChecklistView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}
