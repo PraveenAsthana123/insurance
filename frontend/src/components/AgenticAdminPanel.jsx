@@ -119,6 +119,7 @@ function AgenticAdminPanel() {
   const [invocations, setInvocations] = useState([]);
   const [stats, setStats] = useState(null);
   const [opsRollup, setOpsRollup] = useState(null);
+  const [blueprint, setBlueprint] = useState(null);  // Iter 41 per-agent blueprint
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
   const [toast, setToast] = useState(null);
@@ -156,6 +157,9 @@ function AgenticAdminPanel() {
       // Iter 38 ops rollup · 7 surfaces in one fetch
       const ops = await fetch(`${API}/api/v1/agentic-ops/agent/${id}/rollup`).then(x => x.json());
       setOpsRollup(ops || null);
+      // Iter 41 per-agent blueprint
+      const bp = await fetch(`${API}/api/v1/agentic/agents/${id}/blueprint`).then(x => x.json());
+      setBlueprint(bp || null);
     } catch (e) { setError(`Load: ${e.message}`); }
   }, []);
 
@@ -683,42 +687,99 @@ function AgenticAdminPanel() {
   }
 
   function renderIPO() {
+    // Iter 41 · use blueprint's per-agent IPO when available
+    if (blueprint?.inputs) {
+      return (
+        <Section title="IPO · agent-specific input/process/output" accent="#0891b2">
+          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 8 }}>
+            {blueprint.process_summary}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, fontSize: 11 }}>
+            <div style={{ padding: 10, background: '#eff6ff', borderRadius: 4 }}>
+              <strong style={{ fontSize: 10, color: '#1d4ed8' }}>INPUT ({blueprint.inputs.length})</strong>
+              <table style={{ fontSize: 10, width: '100%', marginTop: 4 }}>
+                <tbody>
+                  {blueprint.inputs.map(i => (
+                    <tr key={i.name} style={{ borderTop: '1px solid #dbeafe' }}>
+                      <td style={{ padding: 2 }}><code style={{ fontSize: 9 }}>{i.name}</code></td>
+                      <td style={{ padding: 2 }}><Pill color="#3b82f6">{i.type}</Pill></td>
+                      <td style={{ padding: 2, fontSize: 9, color: '#64748b' }}>← {i.from}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div style={{ padding: 10, background: '#f0fdf4', borderRadius: 4 }}>
+              <strong style={{ fontSize: 10, color: '#15803d' }}>PROCESS ({blueprint.steps.length} steps)</strong>
+              <ol style={{ marginTop: 4, paddingLeft: 18, fontSize: 10 }}>
+                {blueprint.steps.map((s, i) => (
+                  <li key={i} style={{ marginBottom: 3 }}>{s}</li>
+                ))}
+              </ol>
+            </div>
+            <div style={{ padding: 10, background: '#fef3c7', borderRadius: 4 }}>
+              <strong style={{ fontSize: 10, color: '#a16207' }}>OUTPUT ({blueprint.outputs.length})</strong>
+              <table style={{ fontSize: 10, width: '100%', marginTop: 4 }}>
+                <tbody>
+                  {blueprint.outputs.map(o => (
+                    <tr key={o.name} style={{ borderTop: '1px solid #fde68a' }}>
+                      <td style={{ padding: 2 }}><code style={{ fontSize: 9 }}>{o.name}</code></td>
+                      <td style={{ padding: 2 }}><Pill color="#a16207">{o.type}</Pill></td>
+                      <td style={{ padding: 2, fontSize: 9, color: '#64748b' }}>→ {o.to}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Section>
+      );
+    }
     return (
       <Section title="IPO · Input · Process · Output" accent="#0891b2">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, fontSize: 11 }}>
-          <div style={{ padding: 10, background: '#eff6ff', borderRadius: 4 }}>
-            <strong style={{ fontSize: 10, color: '#1d4ed8' }}>INPUT</strong>
-            <ul style={{ marginTop: 4, paddingLeft: 16 }}>
-              <li>Event payload (alerts · webhooks · API)</li>
-              <li>Tenant + correlation ID</li>
-              <li>Trigger source (cron · user · agent)</li>
-              <li>RAG-retrieved context (top-k chunks)</li>
-            </ul>
-          </div>
-          <div style={{ padding: 10, background: '#f0fdf4', borderRadius: 4 }}>
-            <strong style={{ fontSize: 10, color: '#15803d' }}>PROCESS</strong>
-            <ul style={{ marginTop: 4, paddingLeft: 16 }}>
-              <li>Skill selection (planner)</li>
-              <li>Tool/MCP allowlist check (guardrails)</li>
-              <li>Sub-task fan-out (if multi-step)</li>
-              <li>Supervisor agent validation</li>
-            </ul>
-          </div>
-          <div style={{ padding: 10, background: '#fef3c7', borderRadius: 4 }}>
-            <strong style={{ fontSize: 10, color: '#a16207' }}>OUTPUT</strong>
-            <ul style={{ marginTop: 4, paddingLeft: 16 }}>
-              <li>Decision/action result</li>
-              <li>Audit row → agent_invocation</li>
-              <li>Cost + latency + token counts</li>
-              <li>Citation + reasoning trace</li>
-            </ul>
-          </div>
-        </div>
+        <em style={{ fontSize: 11 }}>Loading blueprint…</em>
       </Section>
     );
   }
 
   function renderMcpRag() {
+    // Iter 41 · use blueprint's per-agent MCP + RAG when available
+    if (blueprint?.mcp_servers) {
+      return (
+        <Section title={`MCP + RAG · ${blueprint.agent_id}`} accent="#8b5cf6">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+            <div>
+              <strong style={{ fontSize: 10, color: '#7e22ce' }}>MCP SERVERS ({blueprint.mcp_servers.length})</strong>
+              <ul style={{ fontSize: 11, marginTop: 4 }}>
+                {blueprint.mcp_servers.map(m => (
+                  <li key={m}><code style={{ fontSize: 10, background: '#f3e8ff', padding: '1px 4px', borderRadius: 2 }}>{m}</code></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <strong style={{ fontSize: 10, color: '#0e7490' }}>RAG CORPORA ({blueprint.rag_corpora.length})</strong>
+              <ul style={{ fontSize: 11, marginTop: 4 }}>
+                {blueprint.rag_corpora.map(c => (
+                  <li key={c}><code style={{ fontSize: 10, background: '#ecfeff', padding: '1px 4px', borderRadius: 2 }}>{c}</code></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div style={{ marginTop: 10, padding: 8, background: '#faf5ff', borderRadius: 4 }}>
+            <strong style={{ fontSize: 10, color: '#7e22ce' }}>TOOLS · {blueprint.tools_mapped?.length || 0} mapped + {blueprint.tools_template?.length || 0} from dept template</strong>
+            <div style={{ marginTop: 4, fontSize: 10 }}>
+              {(blueprint.tools_mapped || []).concat(blueprint.tools_template || []).map((t, i) => (
+                <code key={`${t}-${i}`} style={{ display: 'inline-block', margin: '2px 4px 2px 0',
+                  fontSize: 9, padding: '1px 4px', background: '#fff', borderRadius: 2 }}>{t}</code>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginTop: 8, fontSize: 10, color: '#64748b' }}>
+            Per §57.7 scaffold · live mcp_server_registry + agent_mcp_mapping = Iter 42+.
+          </div>
+        </Section>
+      );
+    }
     return (
       <Section title="MCP + RAG · external integrations" accent="#8b5cf6">
         <div style={{ fontSize: 11, marginBottom: 8 }}>
@@ -840,6 +901,20 @@ function AgenticAdminPanel() {
 
   function renderFlowchart() {
     const id = selectedAgent?.agent_id || 'agent';
+    // Iter 41 · use blueprint's flowchart when available
+    if (blueprint?.flowchart_ascii) {
+      return (
+        <Section title={`Flowchart · ${id}`} accent="#3b82f6">
+          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 8 }}>
+            {blueprint.process_summary}
+          </div>
+          <pre style={{
+            fontSize: 11, lineHeight: 1.6, background: '#0f172a', color: '#e2e8f0',
+            padding: 12, borderRadius: 4, overflowX: 'auto', whiteSpace: 'pre-wrap',
+          }}>{blueprint.flowchart_ascii}</pre>
+        </Section>
+      );
+    }
     return (
       <Section title="Flowchart · execution graph" accent="#3b82f6">
         <pre style={{

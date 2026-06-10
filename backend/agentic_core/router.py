@@ -180,6 +180,33 @@ def list_agents(status: str | None = None, tenant_id: str = "default", limit: in
         return {"agents": rows, "count": len(rows), "tenant_id": tenant_id}
 
 
+@router.get("/agents/{agent_id}/blueprint")
+def get_agent_blueprint(agent_id: str):
+    """Per-agent blueprint · IPO + flowchart + MCP + RAG + tools (Iter 41)."""
+    from agentic_core.blueprints import build_blueprint
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute("SELECT * FROM agent_registry WHERE agent_id = %s", (agent_id,))
+        agent = cur.fetchone()
+        if not agent:
+            raise HTTPException(404, {"detail": f"agent not found: {agent_id}",
+                                       "error_code": "AGENT_404"})
+        cur.execute("""
+            SELECT s.skill_id
+            FROM agent_skill_mapping m
+            JOIN skill_registry s ON s.skill_id = m.skill_id
+            WHERE m.agent_id = %s AND m.status = 'Active'
+            ORDER BY m.priority
+        """, (agent_id,))
+        skills = [r["skill_id"] for r in cur.fetchall()]
+    return build_blueprint(
+        agent_id=agent["agent_id"],
+        agent_name=agent["agent_name"],
+        department_id=agent["department_id"] or "",
+        risk_level=agent["risk_level"] or "Medium",
+        skills=skills,
+    )
+
+
 @router.get("/agents/{agent_id}")
 def get_agent(agent_id: str):
     with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
