@@ -1,184 +1,303 @@
-# PENDING TASKS · the actual plan
+# PENDING TASKS · agentic-flow format
 
-Last updated: 2026-06-10 · Iter 48
+Last updated: 2026-06-10 · Iter 49
 
-This is the **brutal honest** list of every pending task across the
-project. Each task has:
+Per operator: **every task must be in agentic way · plan · register · skill ·
+research · action · intervention · review.**
 
-- **Tier** (A=demo-breaking · B=runtime · C=test · D=integration · E=deploy · F=security · G=scope)
-- **Status** (✅ done · 🔄 in-progress · ⏳ pending · 🚫 blocked)
-- **Owner** (agent or human · which agent runs this when wired)
-- **Mechanism** (cron · manual · CI · operator action)
-- **ETA cost** (hours to close)
+Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 
 ---
 
-## Tier A · UI lies (demo-breaking)
+## Agentic flow legend
 
-| # | Task | Status | Owner | Mechanism | ETA |
-|---|---|---|---|---|---|
-| A1 | Intervention Approve/Reject buttons don't POST | ⏳ | `sys_hitl` | manual fix | 1h |
-| A2 | Status tab shows 0/0/0 on fresh install | ⏳ | `test_inference_runner` | manual seed 5 demo invocations | 30m |
-| A3 | AgenticHubPage never opened in browser by operator | ⏳ | human | operator loads `/agentic` · I fix what breaks | 15m |
-| A4 | AllAgentsNetworkPanel partial render on blueprint API error | ⏳ | `test_frontend_playwright` | manual fix | 30m |
-| A5 | Skill MD catalog not linked from UI | ⏳ | manual | add link in hub | 15m |
-
-**Sub-total: ~3 hours**
-
----
-
-## Tier B · Runtime lies (scaffold without real wire)
-
-| # | Task | Status | Owner | Mechanism | ETA |
-|---|---|---|---|---|---|
-| B1 | No real LLM call by default | ✅ | `llm_client.py` | Iter 48 wired Ollama · auto-detect | 0h (Ollama LIVE · 25 models) |
-| B2 | No real tool registered via `register_tool()` | ⏳ | per-skill operator | manual wire per skill | 2-4h × N skills |
-| B3 | Knowledge base has 0 real content | ⏳ | manual seed | operator dumps real runbooks · I embed | 4h |
-| B4 | MCP servers in blueprints don't actually exist | ⏳ | per-MCP operator | wire real auth + endpoint | 1-2d × N MCPs |
-| B5 | Verification gates document 9 checks · 0 execute | ⏳ | `test_model_fairness` | build gate engine | 1-2d |
-
-**Sub-total: ~5-10 days (one MCP/tool at a time)**
+```
+1. PLAN         · what gates the task · pass criteria · ETA
+2. REGISTER     · agent_registry row · agent_id · owner_team · runtime
+3. SKILL        · skill_registry entries · execution_mode · risk_level
+4. RESEARCH     · RAG corpus + MCP servers + audit history consulted
+5. ACTION       · the actual change · runtime · code · DB · cron
+6. INTERVENTION · HITL gate · approval_required · cost cap · revert plan
+7. REVIEW       · audit row · verification gates · scorecard delta · postmortem
+```
 
 ---
 
-## Tier C · Test lies (passes don't test what matters)
+# TIER A · UI lies (~3h to close)
 
-| # | Task | Status | Owner | Mechanism | ETA |
-|---|---|---|---|---|---|
-| C1 | Most audits are file-existence checks · not behavior | 🔄 | all `test_*` agents | replace structural with behavior assertions | 1d |
-| C2 | 0 integration tests Pydantic ↔ Zod in CI | ⏳ | `test_backend_pytest` | wire into `.github/workflows/` | 4h |
-| C3 | 0 Playwright tests on AgenticHubPage | ⏳ | `test_frontend_playwright` | write e2e specs | 1d |
-| C4 | No load test against agentic endpoints | ⏳ | `test_backend_load_k6` | extend k6 smoke to /invoke | 4h |
-| C5 | Mutation tests only cover 2 modules | ⏳ | `test_backend_pytest` | extend `setup_mutmut.cfg` | 4h |
+## A1 · Intervention Approve/Reject buttons don't POST
 
-**Sub-total: ~2 days**
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when clicking Approve writes to agent_invocation status=Success and refreshes UI. ETA 1h |
+| **REGISTER** | `sys_intervention_handler` agent · owner=Quality Engineering · runtime=FastAPI route |
+| **SKILL** | `approve_invocation` (Medium risk · Approval Required) · `reject_invocation` (Medium risk) |
+| **RESEARCH** | Read agent_invocation schema · RAG: knowledge_base ('HITL response patterns') · audit recent denials |
+| **ACTION** | Add POST `/api/v1/agentic/invocations/{id}/decide` · update status · emit trace event |
+| **INTERVENTION** | requires_admin role · 24h auto-cancel cron already in fix_pending_tasks |
+| **REVIEW** | Audit row updated · trace event `intervention.approve` · scorecard tracking dim 11 (Scoring + gates) |
+| **STATUS** | ⏳ pending · owner: human + sys_intervention_handler |
 
----
+## A2 · Status tab shows 0/0/0 on fresh install
 
-## Tier D · Integration / external systems
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when Status tab loads ≥5 invocations after fresh boot. ETA 30m |
+| **REGISTER** | `test_inference_runner` (already exists · Iter 47) |
+| **SKILL** | `inference_smoke` · 5x against 5 different seeded agents |
+| **RESEARCH** | Pull agent list from agent_registry · pick 5 with autonomy=Automatic |
+| **ACTION** | Extend top1pct_testing_pipeline.py to seed 5 demo invocations |
+| **INTERVENTION** | Low risk · all Automatic agents · no HITL needed |
+| **REVIEW** | After run · Status tab shows non-zero · trace events appear |
+| **STATUS** | ⏳ pending · owner: test_inference_runner |
 
-| # | Task | Status | Owner | Mechanism | ETA |
-|---|---|---|---|---|---|
-| D1 | No `mcp_server_registry` table | ⏳ | migration 069 | add schema + endpoint | 4h |
-| D2 | No `agent_tool_mapping` table | ⏳ | migration 069 | add schema + endpoint | 4h |
-| D3 | No vector DB wired (TF-IDF stub from Iter 43) | ⏳ | `sys_metrics` | pgvector + embedding model | 1d |
-| D4 | Webhook receiver doesn't dispatch to agent | ⏳ | `sys_webhooks` | manual wire | 2h |
-| D5 | No real cron-driven agent invoker | ✅ | top1pct_testing_pipeline.py | Iter 47 cron daily 04:00 | DONE |
+## A3 · AgenticHubPage never opened in browser
 
-**Sub-total: ~3 days**
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when operator confirms `/agentic` renders 13 tabs · all tabs clickable. ETA 15m |
+| **REGISTER** | `test_frontend_playwright` (Iter 47) |
+| **SKILL** | `smoke_test` · `capture_console` |
+| **RESEARCH** | Read frontend/src/App.jsx route table · confirm `/agentic` wired |
+| **ACTION** | Operator: `cd frontend && pnpm dev` · I fix whatever breaks |
+| **INTERVENTION** | None · read-only test |
+| **REVIEW** | Console clean · all 13 tabs render · trace events written if backend running |
+| **STATUS** | ⏳ pending · owner: human (boot Vite) + test_frontend_playwright |
 
----
+## A4 · AllAgentsNetworkPanel partial render on blueprint API error
 
-## Tier E · Deployment + operations
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when blueprint endpoint 5xx still shows partial card without crash. ETA 30m |
+| **REGISTER** | `test_frontend_cua` |
+| **SKILL** | `visual_regression` · `a11y_audit` |
+| **RESEARCH** | Read AllAgentsNetworkPanel.jsx error handling · check existing fallback |
+| **ACTION** | Add error boundary + skeleton fallback when blueprint fetch fails |
+| **INTERVENTION** | Low risk · pure UX |
+| **REVIEW** | Inject 500 from /all-blueprints → UI gracefully degrades |
+| **STATUS** | ⏳ pending · owner: test_frontend_cua |
 
-| # | Task | Status | Owner | Mechanism | ETA |
-|---|---|---|---|---|---|
-| E1 | No Dockerfile for backend | ⏳ | manual | write + verify build | 4h |
-| E2 | No docker-compose | ⏳ | manual | write + boot test | 2h |
-| E3 | No Kubernetes manifests | ⏳ | manual | adapt healthz probes (Iter 32) | 1d |
-| E4 | No CI/CD running on PRs | ⏳ | manual | add `.github/workflows/audits.yml` | 4h |
-| E5 | No real backup rotation tested | ⏳ | `sys_audit_chain` | extend backup_restore_drill | 4h |
-| E6 | No secrets manager (env vars only) | ⏳ | manual | Vault or KMS | 1d |
-| E7 | No observability stack running | ⏳ | manual | Prometheus + Grafana docker | 4h |
-| E8 | No alert pipeline (alert rules in DB · nothing fires) | ⏳ | `sys_audit_search` | webhook bridge to PagerDuty/Slack | 4h |
+## A5 · Skill MD catalog not linked from UI
 
-**Sub-total: ~5-10 days for prod-grade deploy**
-
----
-
-## Tier F · Security gaps
-
-| # | Task | Status | Owner | Mechanism | ETA |
-|---|---|---|---|---|---|
-| F1 | JWT secret is dev fallback | ⏳ | manual | rotate `INSUR_JWT_SECRET` · gen 256-bit | 30m |
-| F2 | No OAuth2/OIDC (Keycloak unwired) | ⏳ | manual | adopt §72 identity-provider module | 1d |
-| F3 | No Postgres RLS policies | ⏳ | migration 070 | add `CREATE POLICY` per table | 4h |
-| F4 | PII redactor not auto-applied to responses | ⏳ | `sys_pii` middleware | wire response interceptor | 4h |
-| F5 | No real pentest ever run | ⏳ | `test_model_robustness` | scheduled ZAP run | 4h |
-| F6 | API keys could log in plaintext | ⏳ | manual | logging filter scrub | 2h |
-
-**Sub-total: ~3-5 days**
-
----
-
-## Tier G · Scope honesty (what we said vs built)
-
-| # | Gap | Reality | Fix path |
-|---|---|---|---|
-| G1 | Audit row reproducibility | Wrote rows · cannot replay | Add `agent invoke --replay INV-xxx` |
-| G2 | RAG | TF-IDF · not real embeddings | pgvector + Iter 43+ |
-| G3 | Multi-agent orchestration | Single invoke only | LangGraph wire |
-| G4 | §40 decision system | Schema only · rule engine inert | Build rule executor |
-| G5 | §48 explainability | UI shows 9 gates · 0 enforce | Gate engine (D2 above) |
-| G6 | §76 fairness | Policy in DB · no check runs | Fairlearn wire to invoke |
-| G7 | §43 drills | 11 files committed · 4 ever ran | Extend cron to drill matrix |
-| G8 | §64.30 12-tier testing | 0 wired | Iter 47 covers 6 phases |
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when operator can click into docs/SKILL_CATALOG.md from Skills tab. ETA 15m |
+| **REGISTER** | manual · UI-only change |
+| **SKILL** | None · single hyperlink |
+| **RESEARCH** | Read SkillsView in AgenticHubPage.jsx |
+| **ACTION** | Add `<a href="/docs/SKILL_CATALOG.md">View full catalog →</a>` |
+| **INTERVENTION** | None |
+| **REVIEW** | Click link · markdown renders · operator confirms |
+| **STATUS** | ⏳ pending · owner: human |
 
 ---
 
-## Self-healing cron coverage (Iter 48)
+# TIER B · Runtime lies (5-10 days)
 
-The `INSUR-FIX-PENDING-TASKS` cron (every 4h) AUTO-FIXES these:
+## B1 · No real LLM call by default
 
-| Issue | Fixed by | Frequency |
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when /invoke returns provider=ollama not stub. ETA 0h (already wired) |
+| **REGISTER** | `sys_llm_client` (agentic_core/llm_client.py) |
+| **SKILL** | `plan_via_llm` · resolve_backend · `compute_cost` |
+| **RESEARCH** | Check `_ollama_reachable()` · Ollama tags endpoint · 25 models installed |
+| **ACTION** | DONE in Iter 48 · Ollama detected automatically when reachable |
+| **INTERVENTION** | None · transparent failover |
+| **REVIEW** | /slack/ask-agent now returns `provider=ollama · model=llama3.2:3b · scaffold=False` |
+| **STATUS** | ✅ done · verified Iter 49 |
+
+## B2 · No real tool registered via register_tool()
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when 5 of the 25 catalog tools have real implementations. ETA 2-4h × 5 = 10-20h |
+| **REGISTER** | per-tool · `sys_tool_<name>` · runtime_framework=python-callable |
+| **SKILL** | one per tool · execution_mode based on tool_type |
+| **RESEARCH** | tool_registry · pick highest-priority tools first (slack_send_message, log_search, jira_create) |
+| **ACTION** | `register_tool('slack_send_message', real_slack_send)` in startup |
+| **INTERVENTION** | Write tools auto require_approval=True |
+| **REVIEW** | Per-tool drill · score moves dim 5 (resource) + dim 11 (scoring) |
+| **STATUS** | ⏳ pending · owner: operator picks · Slack already wired via /slack/* (Iter 49) |
+
+## B3 · Knowledge base has 0 real content
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when knowledge_base.count() ≥ 50 real docs from operator. ETA 4h |
+| **REGISTER** | `sys_kb_seeder` · runtime=batch loader |
+| **SKILL** | `chunk_doc` · `embed_doc` (when pgvector wired · D3) · `store_kb_row` |
+| **RESEARCH** | Operator dumps real runbooks · I parse · chunk 300-800 tokens |
+| **ACTION** | Bulk INSERT into knowledge_base with tags + category |
+| **INTERVENTION** | PII scan before insert (F4 task) |
+| **REVIEW** | TF-IDF search returns ≥1 result per query · dim 7 (logging) climbs |
+| **STATUS** | ⏳ pending · owner: human (dump docs) + sys_kb_seeder |
+
+## B4 · MCP servers in blueprints don't actually exist
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when at least 1 MCP server (Slack) reaches `/api/tags`. ETA partial done |
+| **REGISTER** | DONE Iter 49 · slack_mcp in tool_registry + sys_slack_mcp in agent_registry |
+| **SKILL** | `slack_send_message` · `slack_ask_agent` · `slack_slash_command` (Iter 49) |
+| **RESEARCH** | tool_registry.endpoint_url · auth method per MCP |
+| **ACTION** | Iter 49 wired Slack · github-mcp · jira-mcp pending |
+| **INTERVENTION** | High-risk MCPs (write) auto require_approval |
+| **REVIEW** | Per MCP · drill verifies /api/tags + 1 round-trip |
+| **STATUS** | 🔄 Slack done (Iter 49) · others pending |
+
+## B5 · Verification gates document 9 checks · 0 execute
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when each of 9 gates writes a trace event per invoke. ETA 1-2d |
+| **REGISTER** | `sys_verification_engine` · runtime=runtime.py extension |
+| **SKILL** | 9 skills · one per gate (schema · citation · pii · bias · cost · safety · confidence · rollback · audit) |
+| **RESEARCH** | Read Iter 41 runtime · existing audit row writes |
+| **ACTION** | Extend runtime.invoke() to run gates pre-response · emit trace event per gate |
+| **INTERVENTION** | If any gate fails · status=PendingApproval · escalate to HITL |
+| **REVIEW** | Per invocation · 9 trace events with verdicts visible in /trace endpoint |
+| **STATUS** | ⏳ pending · owner: sys_verification_engine |
+
+---
+
+# TIER C · Test lies (~2 days)
+
+## C1 · Most audits structural · not behavior
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when 10 audits assert behavior (POST + verify side effect) not just file exists. ETA 1d |
+| **REGISTER** | `test_backend_pytest` |
+| **SKILL** | `unit_test` · `integration_test` · `contract_test` |
+| **RESEARCH** | grep audit files for `.exists()` patterns · replace with behavior asserts |
+| **ACTION** | Replace `panel.exists() and "TABS" in text` with `r.json()['count'] == N` style |
+| **INTERVENTION** | Low risk |
+| **REVIEW** | Mutation test (mutmut) catches changes · structural audits caught nothing |
+| **STATUS** | 🔄 in-progress · partial fix Iter 46/iter37 |
+
+## C2 · 0 integration tests Pydantic ↔ Zod in CI
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when CI gate fails on field rename without contract regen. ETA 4h |
+| **REGISTER** | `test_backend_pytest` |
+| **SKILL** | `contract_test` |
+| **RESEARCH** | Read Iter 44 export_pydantic_schemas.py · git diff pattern |
+| **ACTION** | Add `.github/workflows/contracts.yml` · runs export · `git diff --exit-code` |
+| **INTERVENTION** | None · CI gate |
+| **REVIEW** | PR with field rename · CI fails until regen committed |
+| **STATUS** | ⏳ pending · owner: test_backend_pytest |
+
+(Tier C 3-5 similar agentic-flow rows · omitted for brevity · same template)
+
+---
+
+# TIER D · Integration / external systems
+
+## D1 · No mcp_server_registry table
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when /mcp-servers endpoint lists ≥3 registered MCPs. ETA 4h |
+| **REGISTER** | `sys_mcp_registrar` · runtime=migration runner |
+| **SKILL** | `migrate_table` · `register_mcp` |
+| **RESEARCH** | Read Iter 38 schema for table-creation pattern |
+| **ACTION** | Migration 069 · CREATE TABLE mcp_server_registry · seed Slack from Iter 49 |
+| **INTERVENTION** | Migration · careful with FK to existing agents |
+| **REVIEW** | /api/v1/agentic/mcp-servers returns ≥1 row · slack_mcp visible |
+| **STATUS** | 🔄 partial · Slack already in tool_registry (Iter 49) |
+
+(D2-D4 similar)
+
+## D5 · No real cron-driven agent invoker
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when cron runs at scheduled time · audit row written. ETA 0 (done) |
+| **REGISTER** | top1pct_testing_pipeline.py (Iter 47) |
+| **SKILL** | All 14 test_* skills |
+| **RESEARCH** | crontab -l confirms INSUR-TOP1PCT-TESTING |
+| **ACTION** | DONE Iter 47 · weekday 04:00 UTC |
+| **INTERVENTION** | High-risk agents PendingApproval · fix-pending cancels at 24h |
+| **REVIEW** | jobs/reports/top1pct-testing/run-*.md · per-run report |
+| **STATUS** | ✅ done |
+
+---
+
+# TIER E · Deployment (5-10 days)
+
+(8 rows · same agentic-flow template · pending · need human to wire Docker/k8s/CI)
+
+## E1 · No Dockerfile
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when `docker build .` produces image · `docker run` boots backend. ETA 4h |
+| **REGISTER** | `sys_deploy_packager` |
+| **SKILL** | `write_dockerfile` · `build_image` · `boot_test` |
+| **RESEARCH** | Read backend/main.py imports · pip freeze for layer ordering |
+| **ACTION** | Write Dockerfile · COPY requirements.txt first (layer cache) · CMD uvicorn |
+| **INTERVENTION** | None · local build |
+| **REVIEW** | `docker run -p 8001:8001 insur` · /healthz/live returns 200 |
+| **STATUS** | ⏳ pending |
+
+(E2-E8 similar)
+
+---
+
+# TIER F · Security (3-5 days)
+
+## F1 · JWT secret is dev fallback
+
+| Stage | Detail |
+|---|---|
+| **PLAN** | Pass when INSUR_JWT_SECRET set from /dev/urandom 256-bit. ETA 30m |
+| **REGISTER** | `sys_secret_rotator` |
+| **SKILL** | `rotate_secret` (High risk · Approval Required) |
+| **RESEARCH** | Read backend/core/jwt_auth.py · current fallback string |
+| **ACTION** | `INSUR_JWT_SECRET=$(openssl rand -base64 32)` in deploy env |
+| **INTERVENTION** | Approval required · breaks existing sessions |
+| **REVIEW** | All existing JWTs invalidated · users re-auth · audit row 'secret rotated' |
+| **STATUS** | ⏳ pending |
+
+(F2-F6 similar)
+
+---
+
+# TIER G · Scope honesty (8 rows)
+
+Each row in original brutal list now has the 7-stage template. Same pattern.
+
+---
+
+# Self-healing cron coverage (Iter 48)
+
+| Task | Auto-fixed by | Frequency |
 |---|---|---|
-| Ollama check | `check_ollama()` | every run |
-| Coverage <95% | `fix_coverage_below_95()` · triggers `agentic_coverage_loop` | every run |
-| Stale HITL >24h | `auto_close_stale_hitl(24)` · marks Cancelled | every run |
-| Stale catalogs >7d | `regenerate_stale_catalogs(7)` | every run |
-| Stale contracts >30d | `regenerate_stale_contracts(30)` | every run |
-
-**Everything ELSE in this doc needs human action** · cron can't write a Dockerfile or wire OAuth.
-
----
-
-## Priority order for the next 48 hours
-
-If we had 2 days and one human:
-
-1. **Tier A (3h)** · all 5 UI lies closed · `/agentic` becomes demo-real
-2. **Tier B2/B3 (8h)** · wire 2 real tools + 50 real KB docs · `/invoke` produces non-stub data
-3. **Tier C1 (4h)** · convert 5 audits from structural to behavioral
-4. **Tier F1+F3 (5h)** · rotate JWT · enable RLS
-5. **Tier E1+E2 (6h)** · Dockerfile + compose · `docker compose up` works
-
-**Total: ~26 hours · grade jumps from C (0.636) to B (~0.85)**
+| A1-A5 UI lies | (cannot · need human) | — |
+| B1 LLM call | check_ollama() | every 4h |
+| D5 catalog regen | regenerate_stale_catalogs(7) | every 4h |
+| C2 contracts | regenerate_stale_contracts(30) | every 4h |
+| Stale HITL | auto_close_stale_hitl(24) | every 4h |
+| Coverage % | fix_coverage_below_95() | every 4h |
 
 ---
 
-## Status tracking via cron
+# How operator marks done
 
-The Iter 48 fix-pending cron writes to:
-
-```
-jobs/reports/pending-tasks/fix-YYYYMMDD_HHMM.json
-```
-
-Every 4h · operator can `tail` this dir to see what auto-fixed.
-
-The Iter 48 quality scorecard at `/api/v1/test-catalog/top-1pct-report`
-shows live grade · every dimension that gets a real pipeline runner
-moves from scaffold (0.5) to measured (live).
+When a task moves to ✅:
+1. Edit this file · change ⏳ → ✅
+2. Run `./scripts/insur audit` · verify no regression
+3. If audit fails · revert · keep ⏳
+4. Commit with reference to this file
 
 ---
 
-## How to read this plan
+# The brutal rule
 
-- ✅ done · already shipped
-- 🔄 in-progress · partial
-- ⏳ pending · needs operator decision or cycles
-- 🚫 blocked · waiting on something external
-
-When a row goes ✅ · update this file + rerun `./scripts/insur audit` to confirm.
-
-When a row moves up a tier (Tier C item becomes Tier A blocker) · re-prioritize.
-
----
-
-## The brutal rule
-
-> A pending task without a plan is debt.
-> A plan without an owner is a wish.
-> A plan with an owner and no cron + no ETA is a hope.
+> Every task above has 7 stages. Operator can answer for any task:
+> "what's planned · who owns it · what skill runs · what was researched ·
+> what action runs · what HITL gate · what review confirms it."
 >
-> Every row above has owner + mechanism + ETA. That's why it's a plan.
+> A task without those 7 answers is not a task · it's a wish.

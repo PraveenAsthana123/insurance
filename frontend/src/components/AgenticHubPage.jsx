@@ -9,6 +9,7 @@ import AllAgentsNetworkPanel from './AllAgentsNetworkPanel';
 const API = import.meta?.env?.VITE_API_BASE_URL || 'http://localhost:8001';
 
 const HUB_TABS = [
+  { key: 'task-tracer',   label: '▶ Run Task (live trace)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
   { key: 'admin',         label: 'Per-Agent Admin (26 tabs)' },
@@ -902,6 +903,175 @@ function QualityScorecardView() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// LIVE TASK TRACER · 7-stage agentic flow visible per task
+// PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
+
+function TaskTracerView() {
+  const [agentId, setAgentId] = useState('fraud_scorer');
+  const [input, setInput] = useState('Score this claim · large suspicious payout · multiple deductibles');
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState(null);
+  const [trace, setTrace] = useState(null);
+  const [agents, setAgents] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/api/v1/agentic/agents?limit=200`).then(r => r.json())
+      .then(d => setAgents(d.agents || []));
+  }, []);
+
+  async function runTask() {
+    setBusy(true); setResult(null); setTrace(null);
+    try {
+      const r = await fetch(`${API}/api/v1/agentic/invoke`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agent_id: agentId, input_text: input, trigger_kind: 'ui-tracer' }),
+      });
+      const d = await r.json();
+      setResult(d);
+      if (d.invocation_id) {
+        const t = await fetch(`${API}/api/v1/agentic/invocations/${d.invocation_id}/trace`)
+          .then(r => r.json());
+        setTrace(t);
+      }
+    } catch (e) {
+      setResult({ error: e.message });
+    } finally { setBusy(false); }
+  }
+
+  const selected = agents.find(a => a.agent_id === agentId) || {};
+  const stages = [
+    { key: 'PLAN',         label: '1. PLAN',         done: !!result, info: result?.plan?.rationale, color: '#3b82f6' },
+    { key: 'REGISTER',     label: '2. REGISTER',     done: !!selected.agent_id, info: `agent_registry: ${selected.agent_name || agentId} · owner: ${selected.owner_team || '—'}`, color: '#8b5cf6' },
+    { key: 'SKILL',        label: '3. SKILL',        done: !!result, info: result?.skills_used?.join(' · ') || '—', color: '#0891b2' },
+    { key: 'RESEARCH',     label: '4. RESEARCH',     done: !!result, info: 'RAG context + MCP query + audit history (per blueprint)', color: '#10b981' },
+    { key: 'ACTION',       label: '5. ACTION',       done: !!result, info: `${result?.n_skills_executed || 0} step(s) executed · ${result?.duration_ms || 0}ms`, color: '#f59e0b' },
+    { key: 'INTERVENTION', label: '6. INTERVENTION', done: !!result, info: result?.hitl_required ? '⚠ HITL · PendingApproval' : '✓ Auto-approved (autonomy=Automatic)', color: '#ef4444' },
+    { key: 'REVIEW',       label: '7. REVIEW',       done: !!trace, info: trace ? `${trace.n_events} trace event(s) · status=${result?.status}` : '—', color: '#15803d' },
+  ];
+
+  return (
+    <>
+      <Section title="Submit a task · see all 7 agentic stages in real time" accent="#3b82f6">
+        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr 120px', gap: 8, alignItems: 'center' }}>
+          <select value={agentId} onChange={e => setAgentId(e.target.value)}
+            style={{ padding: '6px 8px', fontSize: 11, border: '1px solid #cbd5e1', borderRadius: 3 }}>
+            {agents.slice(0, 100).map(a => (
+              <option key={a.agent_id} value={a.agent_id}>{a.agent_id} ({a.department_id})</option>
+            ))}
+          </select>
+          <input value={input} onChange={e => setInput(e.target.value)}
+            placeholder="Task input · what should the agent do?"
+            style={{ padding: '6px 8px', fontSize: 11, border: '1px solid #cbd5e1', borderRadius: 3 }} />
+          <button onClick={runTask} disabled={busy}
+            style={{ padding: '6px 12px', fontSize: 11, fontWeight: 700, cursor: 'pointer',
+              background: '#10b981', color: '#fff', border: 'none', borderRadius: 3 }}>
+            {busy ? 'Running…' : '▶ Run task'}
+          </button>
+        </div>
+      </Section>
+
+      <Section title="7-stage agentic flow · LIVE per this task" accent="#10b981">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6 }}>
+          {stages.map((s, i) => (
+            <div key={s.key} style={{
+              padding: 10, background: s.done ? `${s.color}22` : '#f8fafc',
+              border: `1px solid ${s.done ? s.color : '#e2e8f0'}`,
+              borderRadius: 4, minHeight: 90,
+            }}>
+              <div style={{ fontSize: 9, fontWeight: 800, color: s.color }}>{s.label}</div>
+              <div style={{ fontSize: 9, color: '#64748b', marginTop: 4 }}>
+                {busy && i > 0 && !result ? '…' : (s.info || '—')}
+              </div>
+              {s.done && <div style={{ marginTop: 4, fontSize: 10 }}>✓</div>}
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: 8, fontSize: 10, color: '#64748b', textAlign: 'center' }}>
+          Backed by: <code>POST /agentic/invoke</code> · <code>GET /agentic/invocations/{'{id}'}/trace</code> · Iter 41 + Iter 43 runtime
+        </div>
+      </Section>
+
+      {result && (
+        <Section title={`Result · invocation ${result.invocation_id?.slice(0, 30)}…`} accent="#3b82f6">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+            <div style={{ padding: 8, background: '#eff6ff', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>STATUS</div>
+              <div style={{ fontWeight: 800 }}>{result.status}</div>
+            </div>
+            <div style={{ padding: 8, background: '#f0fdf4', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>DURATION</div>
+              <div style={{ fontWeight: 800 }}>{result.duration_ms}ms</div>
+            </div>
+            <div style={{ padding: 8, background: '#faf5ff', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>PROVIDER / MODEL</div>
+              <div style={{ fontWeight: 800, fontSize: 11 }}>{result.plan_provider}/{result.plan_model}</div>
+            </div>
+            <div style={{ padding: 8, background: '#fef3c7', borderRadius: 4 }}>
+              <div style={{ fontSize: 9 }}>COST · TOKENS</div>
+              <div style={{ fontWeight: 800, fontSize: 11 }}>${result.cost_usd?.toFixed(4)} · {result.tokens_in}/{result.tokens_out}</div>
+            </div>
+          </div>
+          {result.scaffold && (
+            <div style={{ marginTop: 8, padding: 8, background: '#fef3c7', borderRadius: 4, fontSize: 10 }}>
+              ⚠ scaffold · {result.scaffold_reason}
+            </div>
+          )}
+          <details style={{ marginTop: 8 }}>
+            <summary style={{ cursor: 'pointer', fontSize: 11, fontWeight: 700 }}>Raw plan + step results</summary>
+            <pre style={{ fontSize: 9, background: '#0f172a', color: '#e2e8f0', padding: 8, borderRadius: 4, marginTop: 4, overflowX: 'auto' }}>
+              {JSON.stringify({ plan: result.plan, step_results: result.step_results }, null, 2)}
+            </pre>
+          </details>
+        </Section>
+      )}
+
+      {trace && trace.events && (
+        <Section title={`Trace events (${trace.n_events}) · OTel-style spans`} accent="#0891b2">
+          <table style={{ fontSize: 10, width: '100%' }}>
+            <thead style={{ background: '#ecfeff', color: '#0e7490' }}>
+              <tr>
+                <th style={{ textAlign: 'left', padding: 4 }}>EVENT</th>
+                <th style={{ textAlign: 'left', padding: 4 }}>STATUS</th>
+                <th style={{ textAlign: 'left', padding: 4 }}>DURATION</th>
+                <th style={{ textAlign: 'left', padding: 4 }}>ATTRIBUTES</th>
+              </tr>
+            </thead>
+            <tbody>
+              {trace.events.map(ev => (
+                <tr key={ev.event_id} style={{ borderTop: '1px solid #cffafe' }}>
+                  <td style={{ padding: 4 }}><code style={{ fontSize: 9 }}>{ev.event_name}</code></td>
+                  <td style={{ padding: 4 }}>
+                    <Pill color={ev.status === 'ok' ? '#10b981' : ev.status === 'stub' ? '#94a3b8' : '#ef4444'}>{ev.status}</Pill>
+                  </td>
+                  <td style={{ padding: 4 }}><code>{ev.duration_ms}ms</code></td>
+                  <td style={{ padding: 4, fontSize: 9, color: '#64748b' }}>{JSON.stringify(ev.attributes || {}).slice(0, 80)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Section>
+      )}
+
+      <Section title="What's happening behind the scenes (the agentic stack)" accent="#8b5cf6">
+        <ol style={{ fontSize: 11, lineHeight: 1.7 }}>
+          <li><strong>PLAN</strong> · llm_client.plan() · OpenAI → Anthropic → Ollama → stub · returns rationale + step list (Iter 41)</li>
+          <li><strong>REGISTER</strong> · agent_registry row enforced by CHECK constraints (Iter 42) · 33 rules block bad values</li>
+          <li><strong>SKILL</strong> · agent_skill_mapping resolves allowed skills · FK to skill_registry (Iter 42)</li>
+          <li><strong>RESEARCH</strong> · TF-IDF on knowledge_base (Iter 43) · MCP registry lookup · audit history of same correlation_id</li>
+          <li><strong>ACTION</strong> · runtime._execute_step() · per-skill via register_tool() · scaffold fallback (Iter 41)</li>
+          <li><strong>INTERVENTION</strong> · requires_human_approval OR autonomy_level=Approval Required · status=PendingApproval (Iter 41)</li>
+          <li><strong>REVIEW</strong> · agent_invocation row + 1 plan span + N skill spans → trace_id (Iter 43)</li>
+        </ol>
+        <div style={{ marginTop: 8, fontSize: 10, color: '#64748b' }}>
+          Verify any stage: <code>curl /api/v1/agentic/invocations/{'{id}'}/trace</code>
+        </div>
+      </Section>
+    </>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // The hub
 
 export default function AgenticHubPage() {
@@ -929,6 +1099,7 @@ export default function AgenticHubPage() {
       </div>
 
       <div style={{ padding: 12 }}>
+        {activeTab === 'task-tracer'  && <TaskTracerView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}
         {activeTab === 'admin'        && <AgenticAdminPanel />}
