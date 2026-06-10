@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, useParams, Link } from 'react-router-dom';
 import GlobalCmdK from '../../components/GlobalCmdK';
 import AlertsBadge from '../../components/AlertsBadge';
+import ThemeToggle from '../../components/ThemeToggle';
 import { InsuranceMainMenu } from './InsuranceMainMenu';
 import { InsuranceSubMenu } from './InsuranceSubMenu';
 
@@ -27,6 +28,7 @@ function Breadcrumb({ bp }) {
     <div className="insurance-breadcrumb">
       <GlobalCmdK />
       <div style={{ position: "fixed", top: 12, right: 16, zIndex: 100 }}>
+        <ThemeToggle />
         <AlertsBadge />
       </div>
       <Link to="/insurance">Insurance</Link>

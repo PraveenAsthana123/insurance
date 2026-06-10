@@ -1,0 +1,74 @@
+/* Dark mode · Iter 22 · CSS-variable theme overrides. */
+
+:root {
+  --insur-bg: #ffffff;
+  --insur-bg-subtle: #f8fafc;
+  --insur-fg: #1e293b;
+  --insur-fg-subtle: #64748b;
+  --insur-border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --insur-bg: #0f172a;
+  --insur-bg-subtle: #1e293b;
+  --insur-fg: #f1f5f9;
+  --insur-fg-subtle: #94a3b8;
+  --insur-border: #334155;
+}
+
+/* Soft dark-mode overrides for inline-styled panels.
+   We don't refactor every inline style; we override the most-common
+   white-background + black-text combos via attribute selectors. */
+
+[data-theme="dark"] body,
+[data-theme="dark"] .insurance-layout,
+[data-theme="dark"] .insurance-main-menu,
+[data-theme="dark"] .insurance-sub-menu {
+  background: var(--insur-bg);
+  color: var(--insur-fg);
+}
+
+[data-theme="dark"] table th,
+[data-theme="dark"] table td {
+  color: var(--insur-fg);
+}
+
+[data-theme="dark"] pre,
+[data-theme="dark"] code {
+  background: var(--insur-bg-subtle) !important;
+  color: var(--insur-fg) !important;
+}
+
+/* Responsive grids · Iter 22 mobile reflow */
+@media (max-width: 768px) {
+  div[style*="repeat(5, 1fr)"],
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="repeat(auto-fill, minmax(280px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* a11y · focus outline */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Screen-reader-only utility */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}

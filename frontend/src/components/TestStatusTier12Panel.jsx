@@ -2,6 +2,7 @@
 // Wired to /api/v1/test-status/{process_id}.
 
 import { useEffect, useState } from 'react';
+import { SkeletonRow } from './Skeleton';
 import TimeSeriesLine from './charts/TimeSeriesLine';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
@@ -42,7 +43,7 @@ export default function TestStatusTier12Panel({ accent = '#0ea5e9', processId = 
     marginBottom: 12,
   };
 
-  if (busy) return <div style={cardStyle}><em style={{fontSize: 11, color: '#94a3b8'}}>Loading test status…</em></div>;
+  if (busy) return <div style={cardStyle}><SkeletonRow cols={5} rows={3} /></div>;
   if (error || !data) return <div style={{...cardStyle, borderLeftColor: '#dc2626', background: '#fef2f2'}}><div style={{fontSize: 11, color: '#991b1b'}}>{error || 'no data'}</div></div>;
 
   const tiers = data.tiers || [];

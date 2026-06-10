@@ -8,6 +8,7 @@
 // Final outcome · Summary report.
 
 import { useEffect, useState } from 'react';
+import { SkeletonRow } from './Skeleton';
 import TimeSeriesLine from './charts/TimeSeriesLine';
 import ExportButton from './ExportButton';
 import CommentsThread from './CommentsThread';
@@ -53,7 +54,7 @@ export default function ResponsibleAIPanel({ accent = '#dc2626', processId = 'fr
     marginBottom: 12,
   };
 
-  if (busy) return <div style={card}><em style={{fontSize: 11, color: '#94a3b8'}}>Loading 12-lens ResAI…</em></div>;
+  if (busy) return <div style={card}><SkeletonRow cols={5} rows={3} /></div>;
   if (error) {
     return (
       <div style={{...card, borderLeftColor: '#dc2626', background: '#fef2f2'}}>

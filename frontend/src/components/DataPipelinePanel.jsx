@@ -13,6 +13,7 @@
 //   - flowchart + IPO + status one-liner
 
 import { useEffect, useState } from 'react';
+import { SkeletonRow } from './Skeleton';
 import MermaidDiagram from './MermaidDiagram';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
@@ -79,7 +80,7 @@ export default function DataPipelinePanel({ accent = '#0ea5e9', processId = 'fra
     marginBottom: 12,
   };
 
-  if (busy) return <div style={card}><em style={{fontSize: 11, color: '#94a3b8'}}>Loading data pipeline…</em></div>;
+  if (busy) return <div style={card}><SkeletonRow cols={5} rows={3} /></div>;
   if (error) {
     return (
       <div style={{...card, borderLeftColor: '#dc2626', background: '#fef2f2'}}>

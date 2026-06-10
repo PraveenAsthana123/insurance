@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { SkeletonRow } from './Skeleton';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
 const STATUS_TONE = {
@@ -45,7 +46,7 @@ export default function RegulatoryMappingPanel({ accent = '#dc2626', processId =
     marginBottom: 12,
   };
 
-  if (busy) return <div style={cardStyle}><em style={{fontSize: 11, color: '#94a3b8'}}>Loading regulatory mapping…</em></div>;
+  if (busy) return <div style={cardStyle}><SkeletonRow cols={5} rows={3} /></div>;
   if (!data) return null;
 
   const articles = (data.articles || []).filter((a) => !filter || a.category === filter);
