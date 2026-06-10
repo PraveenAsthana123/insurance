@@ -45,11 +45,11 @@ The gap is **substance · not structure**.
 
 | # | Fix | Effort (hr) |
 |---|---|---|
-| 11 | Stage promotion + rollback UI for ModelRegistryPanel | 8 |
-| 12 | 12-tier test status panel (replace TestsTab single-panel) | 10 |
-| 13 | Per-cohort fairness drill (Fairness AI lens deep) | 8 |
-| 14 | Model card preview (full §48.3 card per model) | 6 |
-| 15 | Counterfactual examples in ShapPanel | 6 |
+| ~~11~~ **DONE** ModelCardPanel + promote/rollback ✓ 2026-06-09 | 8 |
+| ~~12~~ **DONE** TestStatusTier12Panel ✓ 2026-06-09 | 10 |
+| ~~13~~ **DONE** CohortFairnessPanel ✓ 2026-06-09 | 8 |
+| ~~14~~ **DONE** ModelCardPanel covers §48.3 ✓ 2026-06-09 | 6 |
+| ~~15~~ **DONE** CounterfactualPanel ✓ 2026-06-09 | 6 |
 | 16 | Regulatory mapping (EU AI Act per-article + SOC2 per-control) | 12 |
 | 17 | Per-role views (CFO/DS/SRE/Auditor) | 16 |
 | 18 | Comments/collaboration on any panel | 12 |

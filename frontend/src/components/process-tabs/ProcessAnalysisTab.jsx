@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import CounterfactualPanel from '../CounterfactualPanel';
 import ShapPanel from '../ShapPanel';
 
 /* ── Statistical Data ── */
@@ -111,6 +112,7 @@ export default function ProcessAnalysisTab() {
       accent="#dc2626"
       todos={[]}
     >
+      <CounterfactualPanel accent="#dc2626" modelName="fraud-ring-detection" />
       <ShapPanel accent="#dc2626" modelName="process-model" />
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
 

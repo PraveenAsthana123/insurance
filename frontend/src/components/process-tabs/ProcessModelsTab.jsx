@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import ModelCardPanel from '../ModelCardPanel';
 import ModelRegistryPanel from '../ModelRegistryPanel';
 
 /* ---- Model Categories ---- */
@@ -386,6 +387,7 @@ export default function ProcessModelsTab({ process }) {
       accent="#0ea5e9"
       todos={[]}
     >
+      <ModelCardPanel accent="#8b5cf6" modelName="fraud-ring-detection-v1" />
       <ModelRegistryPanel accent="#0ea5e9" />
     <div>
       {/* Section Nav */}

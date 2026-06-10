@@ -8,6 +8,10 @@ import AuditPanel from '../../../components/AuditPanel';
 import HITLPanel from '../../../components/HITLPanel';
 import FeedbackPanel from '../../../components/FeedbackPanel';
 import ResponsibleAIPanel from '../../../components/ResponsibleAIPanel';
+import ModelCardPanel from '../../../components/ModelCardPanel';
+import CounterfactualPanel from '../../../components/CounterfactualPanel';
+import CohortFairnessPanel from '../../../components/CohortFairnessPanel';
+import TestStatusTier12Panel from '../../../components/TestStatusTier12Panel';
 import DataPipelinePanel from '../../../components/DataPipelinePanel';
 import ModelRegistryPanel from '../../../components/ModelRegistryPanel';
 import ShapPanel from '../../../components/ShapPanel';
@@ -656,6 +660,8 @@ export function ModelTab({ proc, dept, bp }) {
       accent="#0ea5e9"
       todos={[]}
     >
+      <ModelCardPanel accent="#8b5cf6" modelName="fraud-ring-detection-v1" />
+      <CohortFairnessPanel accent="#16a34a" modelName="fraud-ring-detection" />
       <ModelRegistryPanel accent="#0ea5e9" />
       <IPOSection number="1" kind="input" title="Input — Model candidates" subtitle="AI capabilities and catalog model metadata for this process.">
         <table className="insurance-matrix">
@@ -1498,8 +1504,10 @@ export function TestsTab({ proc, dept }) {
       accent="#f59e0b"
       todos={[]}
     >
+      <TestStatusTier12Panel accent="#0ea5e9" processId="fraud-ring-detection" />
       <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
       <ShapPanel accent="#dc2626" modelName="expai-model" />
+      <CounterfactualPanel accent="#dc2626" modelName="expai-model" />
       <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
       <IPOSection number="1" kind="input" title="Input — Test plan" subtitle="Per global §64.30 12-tier testing + §65.8 8-tier agent assignment.">
         <Field label="Test surfaces">API · Frontend · Backend · Drills (§43)</Field>

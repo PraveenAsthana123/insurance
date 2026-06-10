@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import '../../styles/workbench.css';
 import { TabShell } from '../../pages/insurance/tabs/IPOLayout';
+import TestStatusTier12Panel from '../TestStatusTier12Panel';
 import E2ELatencyPanel from '../E2ELatencyPanel';
 
 /* ============================================================
@@ -167,6 +168,7 @@ export default function ProcessTestingTab({ process }) {
       accent="#f59e0b"
       todos={[]}
     >
+      <TestStatusTier12Panel accent="#0ea5e9" processId="fraud-ring-detection" />
       <E2ELatencyPanel accent="#f59e0b" />
     <div>
       {/* Summary KPIs */}
