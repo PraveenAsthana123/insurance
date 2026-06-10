@@ -21,6 +21,37 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
   const [busyKey, setBusyKey] = useState(null);
   const [actionError, setActionError] = useState(null);
 
+  // Iter 21 P0+ · bulk approve/reject
+  const [selected, setSelected] = useState(new Set());
+  async function bulkAct(action) {
+    const sel = (data?.queue || []).filter((q) => selected.has(`${q.run_ref}-${q.decision_iter}`));
+    if (sel.length === 0) return;
+    setBusyKey('bulk');
+    try {
+      await fetch(`${API_BASE}/api/v1/alerts/hitl/bulk`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          decisions: sel.map((s) => ({ run_ref: s.run_ref, decision_iter: s.decision_iter })),
+          action,
+          actor: localStorage.getItem('insur.activeRole') || 'hitl-bulk',
+        }),
+      });
+      const newDecisions = { ...decisions };
+      sel.forEach((s) => {
+        newDecisions[`${s.run_ref}-${s.decision_iter}`] = action === 'approve' ? 'approved' : 'rejected';
+      });
+      setDecisions(newDecisions);
+      setSelected(new Set());
+    } catch (e) { setActionError(`bulk ${action} failed: ${e.message}`); }
+    finally { setBusyKey(null); }
+  }
+  function toggleSelect(key) {
+    const next = new Set(selected);
+    if (next.has(key)) next.delete(key); else next.add(key);
+    setSelected(next);
+  }
+
   // Iteration 4 P0 #6 · operator-driven approve/reject via /corrections POST
   async function actOnDecision(p, kind) {
     const key = `${p.run_ref}-${p.decision_iter}`;
@@ -144,9 +175,38 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
               borderRadius: 3, fontSize: 10, marginBottom: 6,
             }}>✗ {actionError}</div>
           )}
+          {/* Iter 21 · bulk action toolbar */}
+          {selected.size > 0 && (
+            <div style={{
+              padding: 6, marginBottom: 6, background: '#dbeafe',
+              border: '1px solid #3b82f6', borderRadius: 3,
+              display: 'flex', alignItems: 'center', gap: 6, fontSize: 11,
+            }}>
+              <strong style={{ color: '#1e40af' }}>{selected.size} selected</strong>
+              <span style={{ flex: 1 }} />
+              <button onClick={() => bulkAct('approve')} disabled={busyKey === 'bulk'} style={hitlBtn('#16a34a', busyKey === 'bulk')}>
+                ✓ Bulk approve
+              </button>
+              <button onClick={() => bulkAct('reject')} disabled={busyKey === 'bulk'} style={hitlBtn('#dc2626', busyKey === 'bulk')}>
+                ✗ Bulk reject
+              </button>
+              <button onClick={() => setSelected(new Set())} style={hitlBtn('#94a3b8', false)}>
+                Clear
+              </button>
+            </div>
+          )}
           <table style={{ width: '100%', fontSize: 11 }}>
             <thead>
               <tr style={{ textAlign: 'left', color: '#64748b' }}>
+                <th style={{ padding: 4, width: 20 }}>
+                  <input type="checkbox"
+                    checked={(data?.queue || []).every((q) => selected.has(`${q.run_ref}-${q.decision_iter}`)) && (data?.queue?.length || 0) > 0}
+                    onChange={(e) => {
+                      if (e.target.checked) setSelected(new Set((data?.queue || []).map((q) => `${q.run_ref}-${q.decision_iter}`)));
+                      else setSelected(new Set());
+                    }}
+                  />
+                </th>
                 <th style={{ padding: 4 }}>Run</th>
                 <th style={{ padding: 4 }}>Iter</th>
                 <th style={{ padding: 4 }}>Action</th>
@@ -164,6 +224,14 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
                 const isBusy = busyKey === key;
                 return (
                   <tr key={`${p.run_ref}-${i}`} style={{ borderTop: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: 4 }}>
+                      {!resolved && (
+                        <input type="checkbox"
+                          checked={selected.has(key)}
+                          onChange={() => toggleSelect(key)}
+                        />
+                      )}
+                    </td>
                     <td style={{ padding: 4, fontFamily: 'monospace', fontSize: 10 }}>{p.run_ref?.slice(0, 12)}…</td>
                     <td style={{ padding: 4 }}>{p.decision_iter}</td>
                     <td style={{ padding: 4 }}>{p.action}</td>

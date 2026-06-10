@@ -14,6 +14,9 @@ import CohortFairnessPanel from '../../../components/CohortFairnessPanel';
 import TestStatusTier12Panel from '../../../components/TestStatusTier12Panel';
 import RegulatoryMappingPanel from '../../../components/RegulatoryMappingPanel';
 import RoleViewSelector from '../../../components/RoleViewSelector';
+import ProcessComparePanel from '../../../components/ProcessComparePanel';
+import ActivityLogPanel from '../../../components/ActivityLogPanel';
+import PermalinkShare from '../../../components/PermalinkShare';
 import DataPipelinePanel from '../../../components/DataPipelinePanel';
 import ModelRegistryPanel from '../../../components/ModelRegistryPanel';
 import ShapPanel from '../../../components/ShapPanel';
@@ -1510,6 +1513,8 @@ export function TestsTab({ proc, dept }) {
       <TestStatusTier12Panel accent="#0ea5e9" processId="fraud-ring-detection" />
       <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
       <RegulatoryMappingPanel accent="#dc2626" processId="fraud-ring-detection" />
+      <ActivityLogPanel accent="#475569" />
+      <ProcessComparePanel accent="#8b5cf6" />
       <ShapPanel accent="#dc2626" modelName="expai-model" />
       <CounterfactualPanel accent="#dc2626" modelName="expai-model" />
       <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
