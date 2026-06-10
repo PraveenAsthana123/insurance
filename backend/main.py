@@ -167,7 +167,10 @@ def create_app() -> FastAPI:
     from audit_search.router import router as audit_search_router  # /api/v1/audit-search — Iter 30
     from service_registry.router import router as service_registry_router  # /api/v1/service-registry — Iter 30
     from metrics.router import router as metrics_router  # /metrics — Iter 31
-    from approval_workflow.router import router as approvals_router  # /api/v1/approvals — Iter 31  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from approval_workflow.router import router as approvals_router  # /api/v1/approvals — Iter 31
+    from healthz.router import router as healthz_router, mark_startup_done  # /healthz/* — Iter 32
+    from cors_admin.router import router as cors_admin_router  # /api/v1/cors-admin — Iter 32
+    from notifications.router import router as notifications_router  # /api/v1/notifications — Iter 32  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -244,7 +247,11 @@ def create_app() -> FastAPI:
     app.include_router(audit_search_router)        # /api/v1/audit-search — Iter 30
     app.include_router(service_registry_router)    # /api/v1/service-registry — Iter 30
     app.include_router(metrics_router)             # /metrics — Iter 31
-    app.include_router(approvals_router)           # /api/v1/approvals — Iter 31                # /api/v1/vulnerabilities — Iter 25              # /api/v1/alerts/* — Iter 21            # /api/v1/comments/* — P1 #18         # /api/v1/test-status/* — §64.30 12-tier       # /api/v1/data-pipeline/* — 5-phase      # /api/v1/responsible-ai/* — 12-lens           # /api/v1/use-cases/* — §94            # /api/v1/pipeline/* — §93 process modes            # /api/v1/feedback/* — Tier 7 gate #4                # /api/v1/hitl/* — Tier 7 gate #3          # /api/v1/ml/* — honest stubs P0.3+P0.4+P0.5        # /api/v1/corrections/* — T7.10    # /api/v1/autonomous-dept/* — framework registry        # /api/v1/attribution/* — T5.9   # /api/v1/ai-tools/* — Enterprise AI Tool Landscape     # /api/v1/marketing-kpis/* — KPI registry (read-only)          # /api/v1/content-ops/* — postings + contacts + schedules
+    app.include_router(approvals_router)           # /api/v1/approvals — Iter 31
+    app.include_router(healthz_router)             # /healthz/* — Iter 32
+    app.include_router(cors_admin_router)          # /api/v1/cors-admin — Iter 32
+    app.include_router(notifications_router)       # /api/v1/notifications — Iter 32
+    mark_startup_done()                            # Iter 32 · k8s startup probe                # /api/v1/vulnerabilities — Iter 25              # /api/v1/alerts/* — Iter 21            # /api/v1/comments/* — P1 #18         # /api/v1/test-status/* — §64.30 12-tier       # /api/v1/data-pipeline/* — 5-phase      # /api/v1/responsible-ai/* — 12-lens           # /api/v1/use-cases/* — §94            # /api/v1/pipeline/* — §93 process modes            # /api/v1/feedback/* — Tier 7 gate #4                # /api/v1/hitl/* — Tier 7 gate #3          # /api/v1/ml/* — honest stubs P0.3+P0.4+P0.5        # /api/v1/corrections/* — T7.10    # /api/v1/autonomous-dept/* — framework registry        # /api/v1/attribution/* — T5.9   # /api/v1/ai-tools/* — Enterprise AI Tool Landscape     # /api/v1/marketing-kpis/* — KPI registry (read-only)          # /api/v1/content-ops/* — postings + contacts + schedules
 
     return app
 
