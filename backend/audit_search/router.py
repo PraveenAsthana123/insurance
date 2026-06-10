@@ -53,7 +53,13 @@ def search(q: str = "", source: str = "all", offset: int = 0, limit: int = 50):
         rows.extend({**r, "source": "audit-chain"} for r in _search_chain(q))
     if source in ("all", "activity"):
         rows.extend({**r, "source": "activity"} for r in _search_activity(q))
-    rows.sort(key=lambda r: r.get("timestamp", 0), reverse=True)
+    # Iter 30 fix: normalize timestamps to comparable strings (ISO or float→str)
+    def _ts(r):
+        t = r.get("timestamp", "")
+        if isinstance(t, (int, float)):
+            return str(t)
+        return str(t)
+    rows.sort(key=_ts, reverse=True)
     total = len(rows)
     page = rows[offset:offset + limit]
     env = paginate(page, total, offset, limit)
