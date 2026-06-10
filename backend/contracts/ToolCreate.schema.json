@@ -1,0 +1,86 @@
+{
+  "name": "ToolCreate",
+  "module": "agentic_core.router",
+  "fields": {
+    "tool_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "tool_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "tool_type": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Read"
+    },
+    "system_name": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "endpoint_url": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "auth_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "permission_scope": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "read"
+    },
+    "risk_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Low"
+    },
+    "timeout_seconds": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "15"
+    },
+    "retry_count": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "2"
+    },
+    "rate_limit_per_min": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "60"
+    },
+    "requires_approval": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Available"
+    },
+    "owner_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

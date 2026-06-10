@@ -1,0 +1,86 @@
+{
+  "name": "SkillCreate",
+  "module": "agentic_core.router",
+  "fields": {
+    "skill_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "skill_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "skill_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "input_schema": {
+      "type": "dict[str, typing.Any] | None",
+      "required": false,
+      "default": "None"
+    },
+    "output_schema": {
+      "type": "dict[str, typing.Any] | None",
+      "required": false,
+      "default": "None"
+    },
+    "risk_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Low"
+    },
+    "execution_mode": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Automatic"
+    },
+    "requires_tool": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "True"
+    },
+    "requires_mcp": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "requires_human_approval": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "timeout_seconds": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "30"
+    },
+    "retry_count": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "2"
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Draft"
+    },
+    "owner_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

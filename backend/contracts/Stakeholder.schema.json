@@ -1,0 +1,71 @@
+{
+  "name": "Stakeholder",
+  "module": "enterprise_governance.router",
+  "fields": {
+    "stakeholder_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "stakeholder_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "department_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "role_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "influence_level": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "interest_level": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "decision_authority": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "funding_authority": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "approval_authority": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "communication_preference": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "stakeholder_risk_score": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "stakeholder_notes": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

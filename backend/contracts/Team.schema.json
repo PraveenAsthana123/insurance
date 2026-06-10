@@ -1,0 +1,66 @@
+{
+  "name": "Team",
+  "module": "enterprise_governance.router",
+  "fields": {
+    "department_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "team_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "team_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "manager_name": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "technical_lead": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "team_size": {
+      "type": "int | None",
+      "required": false,
+      "default": "None"
+    },
+    "primary_responsibility": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "support_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "L2"
+    },
+    "on_call_enabled": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "budget": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "maturity_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "L2"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

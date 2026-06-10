@@ -1,0 +1,46 @@
+{
+  "name": "RACI",
+  "module": "enterprise_governance.router",
+  "fields": {
+    "object_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "object_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "role_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "responsibility_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "responsibility_description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "escalation_level": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "1"
+    },
+    "approval_required": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

@@ -1,0 +1,507 @@
+{
+  "models": {
+    "AgentCreate": {
+      "module": "agentic_core.router",
+      "n_fields": 17,
+      "field_names": [
+        "agent_id",
+        "agent_name",
+        "agent_type",
+        "autonomy_level",
+        "business_domain",
+        "cost_limit",
+        "department_id",
+        "max_steps",
+        "model_name",
+        "owner_team",
+        "purpose",
+        "risk_level",
+        "runtime_framework",
+        "status",
+        "tenant_id",
+        "timeout_seconds",
+        "version"
+      ]
+    },
+    "InvokeRequest": {
+      "module": "agentic_core.router",
+      "n_fields": 6,
+      "field_names": [
+        "agent_id",
+        "correlation_id",
+        "incident_id",
+        "input_text",
+        "tenant_id",
+        "trigger_kind"
+      ]
+    },
+    "MappingCreate": {
+      "module": "agentic_core.router",
+      "n_fields": 5,
+      "field_names": [
+        "agent_id",
+        "execution_mode",
+        "priority",
+        "skill_id",
+        "status"
+      ]
+    },
+    "SkillCreate": {
+      "module": "agentic_core.router",
+      "n_fields": 16,
+      "field_names": [
+        "description",
+        "execution_mode",
+        "input_schema",
+        "output_schema",
+        "owner_team",
+        "requires_human_approval",
+        "requires_mcp",
+        "requires_tool",
+        "retry_count",
+        "risk_level",
+        "skill_category",
+        "skill_id",
+        "skill_name",
+        "status",
+        "tenant_id",
+        "timeout_seconds"
+      ]
+    },
+    "ToolCreate": {
+      "module": "agentic_core.router",
+      "n_fields": 16,
+      "field_names": [
+        "auth_type",
+        "category",
+        "endpoint_url",
+        "owner_team",
+        "permission_scope",
+        "rate_limit_per_min",
+        "requires_approval",
+        "retry_count",
+        "risk_level",
+        "status",
+        "system_name",
+        "tenant_id",
+        "timeout_seconds",
+        "tool_id",
+        "tool_name",
+        "tool_type"
+      ]
+    },
+    "CapacityCreate": {
+      "module": "agentic_ops.router",
+      "n_fields": 14,
+      "field_names": [
+        "agent_id",
+        "autoscale_max_instances",
+        "autoscale_min_instances",
+        "autoscale_trigger",
+        "current_utilization",
+        "max_concurrent_requests",
+        "max_cpu_cores",
+        "max_gpu_memory_mb",
+        "max_memory_mb",
+        "max_queue_depth",
+        "max_tokens_per_request",
+        "target_latency_ms",
+        "target_throughput_rps",
+        "tenant_id"
+      ]
+    },
+    "DependencyCreate": {
+      "module": "agentic_ops.router",
+      "n_fields": 11,
+      "field_names": [
+        "agent_id",
+        "criticality",
+        "dependency_category",
+        "dependency_name",
+        "dependency_type",
+        "fallback_dependency",
+        "health_score",
+        "owner_team",
+        "sla_id",
+        "status",
+        "tenant_id"
+      ]
+    },
+    "FeedbackCreate": {
+      "module": "agentic_ops.router",
+      "n_fields": 12,
+      "field_names": [
+        "action_required",
+        "agent_id",
+        "category",
+        "correction_text",
+        "feedback_text",
+        "feedback_type",
+        "invocation_id",
+        "rating",
+        "sentiment",
+        "severity",
+        "tenant_id",
+        "user_id"
+      ]
+    },
+    "IncidentCreate": {
+      "module": "agentic_ops.router",
+      "n_fields": 14,
+      "field_names": [
+        "affected_systems",
+        "affected_users",
+        "agent_id",
+        "business_impact",
+        "category",
+        "description",
+        "detected_by",
+        "incident_type",
+        "invocation_id",
+        "owner_team",
+        "root_cause",
+        "severity",
+        "tenant_id",
+        "title"
+      ]
+    },
+    "QueueEnqueue": {
+      "module": "agentic_ops.router",
+      "n_fields": 7,
+      "field_names": [
+        "agent_id",
+        "flow_id",
+        "job_type",
+        "max_retries",
+        "payload",
+        "priority",
+        "tenant_id"
+      ]
+    },
+    "SLACreate": {
+      "module": "agentic_ops.router",
+      "n_fields": 15,
+      "field_names": [
+        "accuracy_target",
+        "agent_id",
+        "availability_target",
+        "escalation_policy",
+        "latency_target_ms",
+        "max_cost_per_run",
+        "max_incidents_per_month",
+        "mtta_target_minutes",
+        "mttr_target_minutes",
+        "owner_team",
+        "sla_name",
+        "sla_tier",
+        "success_rate_target",
+        "support_model",
+        "tenant_id"
+      ]
+    },
+    "TeamCreate": {
+      "module": "agentic_ops.router",
+      "n_fields": 13,
+      "field_names": [
+        "agent_id",
+        "business_owner",
+        "compliance_owner",
+        "escalation_group",
+        "incident_manager",
+        "platform_team",
+        "release_manager",
+        "security_owner",
+        "support_hours",
+        "support_model",
+        "support_team",
+        "technical_owner",
+        "tenant_id"
+      ]
+    },
+    "AIPolicy": {
+      "module": "enterprise_governance.router",
+      "n_fields": 12,
+      "field_names": [
+        "approval_required",
+        "compliance_requirement",
+        "enforcement_level",
+        "exception_allowed",
+        "executive_owner",
+        "policy_category",
+        "policy_description",
+        "policy_name",
+        "policy_owner",
+        "review_frequency",
+        "tenant_id",
+        "version"
+      ]
+    },
+    "AIStandard": {
+      "module": "enterprise_governance.router",
+      "n_fields": 11,
+      "field_names": [
+        "enforcement_level",
+        "implementation_requirements",
+        "owner",
+        "policy_id",
+        "review_frequency",
+        "standard_category",
+        "standard_description",
+        "standard_name",
+        "tenant_id",
+        "validation_method",
+        "version"
+      ]
+    },
+    "Department": {
+      "module": "enterprise_governance.router",
+      "n_fields": 11,
+      "field_names": [
+        "annual_budget",
+        "business_unit",
+        "department_description",
+        "department_head",
+        "department_name",
+        "employee_count",
+        "executive_owner",
+        "maturity_level",
+        "primary_value_stream",
+        "strategic_objectives",
+        "tenant_id"
+      ]
+    },
+    "RACI": {
+      "module": "enterprise_governance.router",
+      "n_fields": 8,
+      "field_names": [
+        "approval_required",
+        "escalation_level",
+        "object_id",
+        "object_type",
+        "responsibility_description",
+        "responsibility_type",
+        "role_id",
+        "tenant_id"
+      ]
+    },
+    "Role": {
+      "module": "enterprise_governance.router",
+      "n_fields": 12,
+      "field_names": [
+        "approval_authority",
+        "on_call_eligible",
+        "primary_responsibilities",
+        "production_access",
+        "required_certifications",
+        "required_skills",
+        "role_category",
+        "role_description",
+        "role_name",
+        "seniority_level",
+        "team_id",
+        "tenant_id"
+      ]
+    },
+    "Stakeholder": {
+      "module": "enterprise_governance.router",
+      "n_fields": 13,
+      "field_names": [
+        "approval_authority",
+        "communication_preference",
+        "decision_authority",
+        "department_id",
+        "funding_authority",
+        "influence_level",
+        "interest_level",
+        "role_id",
+        "stakeholder_name",
+        "stakeholder_notes",
+        "stakeholder_risk_score",
+        "stakeholder_type",
+        "tenant_id"
+      ]
+    },
+    "Team": {
+      "module": "enterprise_governance.router",
+      "n_fields": 12,
+      "field_names": [
+        "budget",
+        "department_id",
+        "manager_name",
+        "maturity_level",
+        "on_call_enabled",
+        "primary_responsibility",
+        "support_level",
+        "team_name",
+        "team_size",
+        "team_type",
+        "technical_lead",
+        "tenant_id"
+      ]
+    },
+    "ValueStream": {
+      "module": "enterprise_governance.router",
+      "n_fields": 15,
+      "field_names": [
+        "ai_maturity_score",
+        "annual_business_value",
+        "annual_cost",
+        "annual_revenue",
+        "automation_rate",
+        "business_owner",
+        "capability_count",
+        "customer_count",
+        "customer_type",
+        "executive_owner",
+        "process_count",
+        "tenant_id",
+        "value_stream_category",
+        "value_stream_description",
+        "value_stream_name"
+      ]
+    },
+    "AlertRule": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 11,
+      "field_names": [
+        "critical_threshold",
+        "enabled",
+        "escalation_level",
+        "kri_id",
+        "notification_channel",
+        "risk_id",
+        "rule_category",
+        "rule_name",
+        "tenant_id",
+        "trigger_condition",
+        "warning_threshold"
+      ]
+    },
+    "Escalation": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 11,
+      "field_names": [
+        "alert_id",
+        "assigned_role",
+        "assigned_team",
+        "escalation_level",
+        "escalation_owner",
+        "escalation_reason",
+        "executive_notification",
+        "regulatory_notification",
+        "response_sla_minutes",
+        "risk_id",
+        "tenant_id"
+      ]
+    },
+    "Incident": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 12,
+      "field_names": [
+        "affected_systems",
+        "business_impact",
+        "executive_notification_required",
+        "incident_category",
+        "incident_owner",
+        "incident_severity",
+        "incident_title",
+        "regulatory_reporting_required",
+        "reported_by",
+        "response_team",
+        "root_cause_summary",
+        "tenant_id"
+      ]
+    },
+    "Knowledge": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 10,
+      "field_names": [
+        "content",
+        "knowledge_category",
+        "knowledge_title",
+        "knowledge_type",
+        "owner",
+        "source_id",
+        "source_type",
+        "tags",
+        "tenant_id",
+        "version"
+      ]
+    },
+    "Lesson": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 12,
+      "field_names": [
+        "anti_pattern",
+        "best_practice",
+        "lesson_category",
+        "lesson_description",
+        "lesson_title",
+        "owner",
+        "recommendation",
+        "reusable_control",
+        "root_cause_summary",
+        "source_id",
+        "source_type",
+        "tenant_id"
+      ]
+    },
+    "Postmortem": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 13,
+      "field_names": [
+        "approved_by",
+        "business_impact",
+        "executive_summary",
+        "governance_improvements",
+        "incident_id",
+        "lessons_learned",
+        "postmortem_title",
+        "process_improvements",
+        "root_cause_summary",
+        "tenant_id",
+        "timeline_summary",
+        "what_went_poorly",
+        "what_went_well"
+      ]
+    },
+    "RCA": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 12,
+      "field_names": [
+        "contributing_factors",
+        "corrective_actions",
+        "executive_summary",
+        "failed_controls",
+        "impacted_processes",
+        "incident_id",
+        "investigation_owner",
+        "preventive_actions",
+        "primary_root_cause",
+        "rca_title",
+        "recurrence_probability",
+        "tenant_id"
+      ]
+    },
+    "TimelineEvent": {
+      "module": "risk_incident_learning.router",
+      "n_fields": 12,
+      "field_names": [
+        "actor_id",
+        "actor_type",
+        "event_category",
+        "event_description",
+        "event_timestamp",
+        "event_type",
+        "evidence_reference",
+        "incident_id",
+        "related_object_id",
+        "related_object_type",
+        "severity",
+        "tenant_id"
+      ]
+    }
+  },
+  "generated_at_iter": 44,
+  "note": "Auto \u00b7 do not edit"
+}

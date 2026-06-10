@@ -1,0 +1,76 @@
+{
+  "name": "CapacityCreate",
+  "module": "agentic_ops.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "max_concurrent_requests": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "50"
+    },
+    "max_queue_depth": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "500"
+    },
+    "max_tokens_per_request": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "8192"
+    },
+    "max_memory_mb": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "4096"
+    },
+    "max_cpu_cores": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "4"
+    },
+    "max_gpu_memory_mb": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0"
+    },
+    "autoscale_min_instances": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "1"
+    },
+    "autoscale_max_instances": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "10"
+    },
+    "autoscale_trigger": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "cpu_70"
+    },
+    "target_latency_ms": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "5000"
+    },
+    "target_throughput_rps": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "50"
+    },
+    "current_utilization": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "0.0"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

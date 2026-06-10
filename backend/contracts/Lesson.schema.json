@@ -1,0 +1,66 @@
+{
+  "name": "Lesson",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "lesson_title": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "lesson_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "source_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "source_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "lesson_description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "root_cause_summary": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "recommendation": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "reusable_control": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "best_practice": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "anti_pattern": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

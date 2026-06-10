@@ -1,0 +1,91 @@
+{
+  "name": "AgentCreate",
+  "module": "agentic_core.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "agent_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "agent_type": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Worker"
+    },
+    "department_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "business_domain": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "purpose": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "owner_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Draft"
+    },
+    "version": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "v1.0"
+    },
+    "autonomy_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Approval Required"
+    },
+    "risk_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Medium"
+    },
+    "model_name": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "runtime_framework": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "LangGraph"
+    },
+    "max_steps": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "10"
+    },
+    "timeout_seconds": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "60"
+    },
+    "cost_limit": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "5.0"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

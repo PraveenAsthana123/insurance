@@ -1,0 +1,61 @@
+{
+  "name": "Escalation",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "alert_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "risk_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "escalation_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "L1"
+    },
+    "escalation_reason": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "assigned_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "assigned_role": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "escalation_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "response_sla_minutes": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "60"
+    },
+    "executive_notification": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "regulatory_notification": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

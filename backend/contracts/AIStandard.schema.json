@@ -1,0 +1,61 @@
+{
+  "name": "AIStandard",
+  "module": "enterprise_governance.router",
+  "fields": {
+    "policy_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "standard_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "standard_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "standard_description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "implementation_requirements": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "validation_method": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "enforcement_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Mandatory"
+    },
+    "owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "review_frequency": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Quarterly"
+    },
+    "version": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "v1.0"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

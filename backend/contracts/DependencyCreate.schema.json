@@ -1,0 +1,61 @@
+{
+  "name": "DependencyCreate",
+  "module": "agentic_ops.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "dependency_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "dependency_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "dependency_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "criticality": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "High"
+    },
+    "fallback_dependency": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "owner_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "sla_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Healthy"
+    },
+    "health_score": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

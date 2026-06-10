@@ -1,0 +1,66 @@
+{
+  "name": "TimelineEvent",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "incident_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "event_timestamp": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": null
+    },
+    "event_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "event_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "event_description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "actor_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "actor_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "related_object_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "related_object_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "severity": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "evidence_reference": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "RCA",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "incident_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "rca_title": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "investigation_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "primary_root_cause": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "contributing_factors": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "failed_controls": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "impacted_processes": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "corrective_actions": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "preventive_actions": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "recurrence_probability": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "executive_summary": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "FeedbackCreate",
+  "module": "agentic_ops.router",
+  "fields": {
+    "invocation_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "user_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "feedback_type": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "rating"
+    },
+    "rating": {
+      "type": "int | None",
+      "required": false,
+      "default": "None"
+    },
+    "sentiment": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "feedback_text": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "correction_text": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "severity": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Low"
+    },
+    "action_required": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

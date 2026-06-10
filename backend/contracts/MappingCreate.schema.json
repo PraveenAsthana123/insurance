@@ -1,0 +1,31 @@
+{
+  "name": "MappingCreate",
+  "module": "agentic_core.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "skill_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "execution_mode": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Automatic"
+    },
+    "priority": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "100"
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Active"
+    }
+  }
+}

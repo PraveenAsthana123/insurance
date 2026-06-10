@@ -1,0 +1,61 @@
+{
+  "name": "AlertRule",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "rule_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "rule_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "risk_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "kri_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "trigger_condition": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "warning_threshold": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "critical_threshold": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "notification_channel": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "escalation_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "L1"
+    },
+    "enabled": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "True"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

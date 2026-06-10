@@ -1,0 +1,56 @@
+{
+  "name": "Knowledge",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "knowledge_title": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "knowledge_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "knowledge_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "source_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "source_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "content": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tags": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "version": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "v1.0"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

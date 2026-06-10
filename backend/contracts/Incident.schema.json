@@ -1,0 +1,66 @@
+{
+  "name": "Incident",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "incident_title": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "incident_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "incident_severity": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Sev-3"
+    },
+    "business_impact": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "affected_systems": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "reported_by": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "incident_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "response_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "root_cause_summary": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "regulatory_reporting_required": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "executive_notification_required": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

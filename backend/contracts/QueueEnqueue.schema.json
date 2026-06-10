@@ -1,0 +1,41 @@
+{
+  "name": "QueueEnqueue",
+  "module": "agentic_ops.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "job_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "priority": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "3"
+    },
+    "payload": {
+      "type": "dict[str, typing.Any] | None",
+      "required": false,
+      "default": "None"
+    },
+    "max_retries": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "3"
+    },
+    "flow_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

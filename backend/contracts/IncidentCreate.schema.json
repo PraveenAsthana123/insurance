@@ -1,0 +1,76 @@
+{
+  "name": "IncidentCreate",
+  "module": "agentic_ops.router",
+  "fields": {
+    "invocation_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "incident_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "severity": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "P3"
+    },
+    "category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "title": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "root_cause": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "business_impact": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "affected_users": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0"
+    },
+    "affected_systems": {
+      "type": "list[str] | None",
+      "required": false,
+      "default": "None"
+    },
+    "detected_by": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "owner_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

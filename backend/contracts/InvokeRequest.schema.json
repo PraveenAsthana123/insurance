@@ -1,0 +1,36 @@
+{
+  "name": "InvokeRequest",
+  "module": "agentic_core.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "input_text": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "trigger_kind": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "api"
+    },
+    "incident_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "correlation_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

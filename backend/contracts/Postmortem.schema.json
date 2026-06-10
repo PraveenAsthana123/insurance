@@ -1,0 +1,71 @@
+{
+  "name": "Postmortem",
+  "module": "risk_incident_learning.router",
+  "fields": {
+    "incident_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "postmortem_title": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "executive_summary": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "business_impact": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "timeline_summary": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "root_cause_summary": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "what_went_well": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "what_went_poorly": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "lessons_learned": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "process_improvements": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "governance_improvements": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "approved_by": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "Department",
+  "module": "enterprise_governance.router",
+  "fields": {
+    "department_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "business_unit": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "executive_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "department_head": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "annual_budget": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "employee_count": {
+      "type": "int | None",
+      "required": false,
+      "default": "None"
+    },
+    "department_description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "primary_value_stream": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "strategic_objectives": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "maturity_level": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "L2"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

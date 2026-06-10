@@ -1,0 +1,81 @@
+{
+  "name": "SLACreate",
+  "module": "agentic_ops.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "sla_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "sla_tier": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Tier2"
+    },
+    "availability_target": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "99.9"
+    },
+    "latency_target_ms": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "5000"
+    },
+    "accuracy_target": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "95.0"
+    },
+    "success_rate_target": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "98.0"
+    },
+    "mttr_target_minutes": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "120"
+    },
+    "mtta_target_minutes": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "15"
+    },
+    "max_cost_per_run": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "0.1"
+    },
+    "max_incidents_per_month": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "5"
+    },
+    "support_model": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "escalation_policy": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "owner_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

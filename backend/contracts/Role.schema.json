@@ -1,0 +1,66 @@
+{
+  "name": "Role",
+  "module": "enterprise_governance.router",
+  "fields": {
+    "team_id": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "role_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "role_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "role_description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "seniority_level": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "primary_responsibilities": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "required_skills": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "required_certifications": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "approval_authority": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "production_access": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "on_call_eligible": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

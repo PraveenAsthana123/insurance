@@ -1,0 +1,81 @@
+{
+  "name": "ValueStream",
+  "module": "enterprise_governance.router",
+  "fields": {
+    "value_stream_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "value_stream_category": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "customer_type": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "business_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "executive_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "value_stream_description": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "annual_revenue": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "annual_cost": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "annual_business_value": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "customer_count": {
+      "type": "int | None",
+      "required": false,
+      "default": "None"
+    },
+    "process_count": {
+      "type": "int | None",
+      "required": false,
+      "default": "None"
+    },
+    "capability_count": {
+      "type": "int | None",
+      "required": false,
+      "default": "None"
+    },
+    "automation_rate": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "ai_maturity_score": {
+      "type": "float | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}

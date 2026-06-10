@@ -1,0 +1,71 @@
+{
+  "name": "TeamCreate",
+  "module": "agentic_ops.router",
+  "fields": {
+    "agent_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": null
+    },
+    "business_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "technical_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "support_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "platform_team": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "security_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "compliance_owner": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "incident_manager": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "release_manager": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "escalation_group": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "support_model": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Business Hours"
+    },
+    "support_hours": {
+      "type": "str | None",
+      "required": false,
+      "default": "None"
+    },
+    "tenant_id": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "default"
+    }
+  }
+}
