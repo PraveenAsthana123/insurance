@@ -54,8 +54,12 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
   }
 
   // Iteration 4 P0 #6 · operator-driven approve/reject via /corrections POST
+  // Iter 24 · optimistic UI · update first · rollback on failure
   async function actOnDecision(p, kind) {
     const key = `${p.run_ref}-${p.decision_iter}`;
+    const optimisticState = kind === 'approve' ? 'approved' : 'rejected';
+    // OPTIMISTIC: apply immediately so operator sees the action before the POST returns
+    setDecisions((d) => ({ ...d, [key]: optimisticState }));
     setBusyKey(key);
     setActionError(null);
     try {
@@ -81,11 +85,15 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
         const txt = await r.text();
         throw new Error(`${r.status} · ${txt.slice(0, 80)}`);
       }
-      setDecisions((d) => ({ ...d, [key]: kind === 'approve' ? 'approved' : 'rejected' }));
       toastSuccess(`Decision ${kind === 'approve' ? 'approved' : 'rejected'} · ${p.run_ref}`);
     } catch (e) {
-      setActionError(`HITL action failed: ${e.message}`);
-      toastError(`HITL action failed: ${e.message}`);
+      // Iter 24 · rollback optimistic update on failure
+      setDecisions((d) => {
+        const { [key]: _, ...rest } = d;
+        return rest;
+      });
+      setActionError(`HITL action failed: ${e.message} · rolled back`);
+      toastError(`HITL action failed: ${e.message} · rolled back`);
     } finally {
       setBusyKey(null);
     }

@@ -4,6 +4,9 @@ import GlobalCmdK from '../../components/GlobalCmdK';
 import AlertsBadge from '../../components/AlertsBadge';
 import ThemeToggle from '../../components/ThemeToggle';
 import ToastHost from '../../components/Toast';
+import KeyboardShortcuts from '../../components/KeyboardShortcuts';
+import TopProgressBar from '../../components/TopProgressBar';
+import { useTrackRecent } from '../../components/FavoritesPanel';
 import { InsuranceMainMenu } from './InsuranceMainMenu';
 import { InsuranceSubMenu } from './InsuranceSubMenu';
 
@@ -33,6 +36,8 @@ function Breadcrumb({ bp }) {
         <AlertsBadge />
       </div>
       <ToastHost />
+      <KeyboardShortcuts />
+      <TopProgressBar />
       <Link to="/insurance">Insurance</Link>
       {dept && (
         <>

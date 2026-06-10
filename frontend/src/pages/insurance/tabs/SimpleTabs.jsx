@@ -15,6 +15,7 @@ import TestStatusTier12Panel from '../../../components/TestStatusTier12Panel';
 import RegulatoryMappingPanel from '../../../components/RegulatoryMappingPanel';
 import RoleViewSelector from '../../../components/RoleViewSelector';
 import ProcessComparePanel from '../../../components/ProcessComparePanel';
+import FavoritesPanel from '../../../components/FavoritesPanel';
 import ErrorBoundary from '../../../components/ErrorBoundary';
 import ActivityLogPanel from '../../../components/ActivityLogPanel';
 import PermalinkShare from '../../../components/PermalinkShare';
@@ -1516,6 +1517,7 @@ export function TestsTab({ proc, dept }) {
       <RegulatoryMappingPanel accent="#dc2626" processId="fraud-ring-detection" />
       <ActivityLogPanel accent="#475569" />
       <ProcessComparePanel accent="#8b5cf6" />
+      <FavoritesPanel accent="#0ea5e9" />
       <ShapPanel accent="#dc2626" modelName="expai-model" />
       <CounterfactualPanel accent="#dc2626" modelName="expai-model" />
       <ErrorBoundary label="ResponsibleAIPanel"><ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" /></ErrorBoundary>
