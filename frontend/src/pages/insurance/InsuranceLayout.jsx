@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useParams, Link } from 'react-router-dom';
+import GlobalCmdK from '../../components/GlobalCmdK';
 import { InsuranceMainMenu } from './InsuranceMainMenu';
 import { InsuranceSubMenu } from './InsuranceSubMenu';
 
@@ -23,6 +24,7 @@ function Breadcrumb({ bp }) {
   const dept = bp?.department_catalog?.find((d) => String(d.id) === params.deptId);
   return (
     <div className="insurance-breadcrumb">
+      <GlobalCmdK />
       <Link to="/insurance">Insurance</Link>
       {dept && (
         <>

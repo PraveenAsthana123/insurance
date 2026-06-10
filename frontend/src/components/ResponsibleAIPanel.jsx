@@ -9,6 +9,8 @@
 
 import { useEffect, useState } from 'react';
 import TimeSeriesLine from './charts/TimeSeriesLine';
+import ExportButton from './ExportButton';
+import CommentsThread from './CommentsThread';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
@@ -187,9 +189,16 @@ export default function ResponsibleAIPanel({ accent = '#dc2626', processId = 'fr
         })}
       </div>
 
-      <div style={{ marginTop: 8, fontSize: 10, color: '#94a3b8' }}>
-        Source · GET /api/v1/responsible-ai/{processId}/lenses · 12-lens structure · §57.7 scaffold when library not installed
+      <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{ fontSize: 10, color: '#94a3b8', flex: 1 }}>
+          Source · GET /api/v1/responsible-ai/{processId}/lenses · 12-lens · §57.7 scaffold flag
+        </span>
+        {/* P1 #19 · Export */}
+        <ExportButton data={data} filenameBase={`resai-${processId}`} accent={accent} />
       </div>
+
+      {/* P1 #18 · Comments thread */}
+      <CommentsThread panelId="responsible-ai" processId={processId} accent={accent} />
     </div>
   );
 }

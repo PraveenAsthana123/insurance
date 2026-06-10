@@ -50,11 +50,11 @@ The gap is **substance · not structure**.
 | ~~13~~ **DONE** CohortFairnessPanel ✓ 2026-06-09 | 8 |
 | ~~14~~ **DONE** ModelCardPanel covers §48.3 ✓ 2026-06-09 | 6 |
 | ~~15~~ **DONE** CounterfactualPanel ✓ 2026-06-09 | 6 |
-| 16 | Regulatory mapping (EU AI Act per-article + SOC2 per-control) | 12 |
-| 17 | Per-role views (CFO/DS/SRE/Auditor) | 16 |
-| 18 | Comments/collaboration on any panel | 12 |
-| 19 | Export PDF/CSV per panel | 8 |
-| 20 | Cmd+K global search | 6 |
+| ~~16~~ **DONE** RegulatoryMappingPanel ✓ 2026-06-09 | 12 |
+| ~~17~~ **DONE** RoleViewSelector + RoleGate ✓ 2026-06-09 | 16 |
+| ~~18~~ **DONE** CommentsThread ✓ 2026-06-09 | 12 |
+| ~~19~~ **DONE** ExportButton CSV/JSON ✓ 2026-06-09 | 8 |
+| ~~20~~ **DONE** GlobalCmdK ✓ 2026-06-09 | 6 |
 
 **Total P1 effort: ~92 hours.** ~14 days at same cadence.
 
