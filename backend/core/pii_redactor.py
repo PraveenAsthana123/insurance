@@ -18,15 +18,26 @@ except Exception:
 
 
 # Regex fallback patterns (§57.7 honest: high-precision · misses edge cases)
+# Iter 27 fix: PHONE pattern rewritten to actually match 555-123-4567 ·
+# was using lazy quantifier that consumed digits non-greedily.
 _PATTERNS = {
-    "EMAIL":  re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"),
-    "PHONE":  re.compile(r"\+?\d{1,3}?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3,4}[-.\s]?\d{4}\b"),
-    "SSN":    re.compile(r"\b\d{3}-\d{2}-\d{4}\b"),
-    "CC":     re.compile(r"\b(?:\d[ -]*?){13,16}\b"),
-    "IBAN":   re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{4,30}\b"),
-    "IPV4":   re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b"),
-    "POLICY": re.compile(r"\bPL-\d{6,}\b"),
-    "CLAIM":  re.compile(r"\bCL-\d{5,}\b"),
+    "EMAIL":     re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"),
+    "PHONE":     re.compile(
+        r"(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b"
+    ),
+    "SSN":       re.compile(r"\b\d{3}-\d{2}-\d{4}\b"),
+    "CC":        re.compile(r"\b(?:\d[ -]?){13,16}\b"),
+    "IBAN":      re.compile(r"\b[A-Z]{2}\d{2}[A-Z0-9]{4,30}\b"),
+    "IPV4":      re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b"),
+    "POLICY":    re.compile(r"\bPL-\d{6,}\b"),
+    "CLAIM":     re.compile(r"\bCL-\d{5,}\b"),
+    # Iter 27 · new entity types
+    "DOB":       re.compile(r"\b(?:0[1-9]|1[0-2])[/-](?:0[1-9]|[12]\d|3[01])[/-](?:19|20)\d{2}\b"),
+    "VIN":       re.compile(r"\b[A-HJ-NPR-Z0-9]{17}\b"),
+    "LICENSE":   re.compile(r"\b[A-Z]{1,3}-?\d{4,8}\b"),  # driver's license loose
+    "DRIVER_LICENSE": re.compile(r"\bDL-?\d{6,12}\b"),
+    "MEDICARE":  re.compile(r"\b\d{4}-?\d{2}-?\d{4}-?[A-Z]\d?\b"),
+    "URL":       re.compile(r"\bhttps?://[^\s<>\"'\)]+"),
 }
 
 

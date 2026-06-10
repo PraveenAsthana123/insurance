@@ -72,6 +72,9 @@ def create_app() -> FastAPI:
     # Iter 25 · C2 · idempotency-key safe retry · §47.7
     from middleware.idempotency import IdempotencyMiddleware
     app.add_middleware(IdempotencyMiddleware)
+    # Iter 27 · C4 · ETag/304 caching for GET responses
+    from middleware.etag import ETagMiddleware
+    app.add_middleware(ETagMiddleware)
     # RBAC runs INSIDE CorrelationId so request.state.correlation_id is set
     # before RBAC returns 403/400. add_middleware stacks in reverse: last-added
     # is outermost. CorrelationId (added last) wraps RBAC (added just before).
