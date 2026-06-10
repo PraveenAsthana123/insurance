@@ -19,6 +19,7 @@ const HUB_TABS = [
   { key: 'intervention',  label: 'Intervention (HITL)' },
   { key: 'verification',  label: 'Verification Gates' },
   { key: 'issues',        label: 'Issues & Solutions' },
+  { key: 'testing',       label: 'Testing & Pipelines (Iter 47)' },
   { key: 'coverage',      label: 'Coverage (Iter 45)' },
 ];
 
@@ -626,6 +627,157 @@ function IssuesView() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// Testing & Pipelines (Iter 47)
+
+function TestingView() {
+  const [stats, setStats] = useState(null);
+  const [pipelines, setPipelines] = useState(null);
+  const [resp, setResp] = useState([]);
+  const [agents, setAgents] = useState([]);
+  const [plan, setPlan] = useState(null);
+
+  useEffect(() => {
+    Promise.all([
+      fetch(`${API}/api/v1/test-catalog/stats`).then(r => r.json()),
+      fetch(`${API}/api/v1/test-catalog/pipelines`).then(r => r.json()),
+      fetch(`${API}/api/v1/test-catalog/responsibility-table`).then(r => r.json()),
+      fetch(`${API}/api/v1/test-catalog/test-agents`).then(r => r.json()),
+      fetch(`${API}/api/v1/test-catalog/top-1pct-plan`).then(r => r.json()),
+    ]).then(([s, p, r, a, pl]) => {
+      setStats(s); setPipelines(p); setResp(r.rows || []);
+      setAgents(a.agents || []); setPlan(pl);
+    });
+  }, []);
+
+  if (!stats) return <em>Loading…</em>;
+
+  return (
+    <>
+      <Section title="Testing summary" accent="#3b82f6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+          <div style={{ padding: 10, background: '#dbeafe', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#1d4ed8' }}>TEST AGENTS</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: '#1d4ed8' }}>{stats.n_test_agents}</div>
+          </div>
+          <div style={{ padding: 10, background: '#faf5ff', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#7e22ce' }}>TEST SKILLS</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: '#7e22ce' }}>{stats.n_test_skills}</div>
+          </div>
+          <div style={{ padding: 10, background: '#ecfeff', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#0e7490' }}>PIPELINE CATEGORIES</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: '#0e7490' }}>{stats.n_pipeline_categories}</div>
+          </div>
+          <div style={{ padding: 10, background: '#dcfce7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9, color: '#15803d' }}>PIPELINES TOTAL</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: '#15803d' }}>{stats.n_pipelines_total}</div>
+          </div>
+        </div>
+      </Section>
+
+      <Section title={`Top-1% testing plan · cron daily 04:00 UTC · Ollama-driven`} accent="#10b981">
+        {plan && (
+          <>
+            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 8 }}>
+              <strong>Runner:</strong> <code>{plan.runner}</code> ·
+              <strong> LLM:</strong> {plan.llm} ·
+              <strong> Schedule:</strong> {plan.schedule}
+            </div>
+            <table style={{ fontSize: 10, width: '100%' }}>
+              <thead style={{ background: '#dcfce7', color: '#15803d' }}>
+                <tr>
+                  <th style={{ textAlign: 'left', padding: 4 }}>PHASE</th>
+                  <th style={{ textAlign: 'left', padding: 4 }}>AGENTS</th>
+                  <th style={{ textAlign: 'left', padding: 4 }}>TOOLS</th>
+                  <th style={{ textAlign: 'left', padding: 4 }}>TRIGGER</th>
+                  <th style={{ textAlign: 'left', padding: 4 }}>PASS GATE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(plan.phases || []).map(ph => (
+                  <tr key={ph.phase} style={{ borderTop: '1px solid #bbf7d0' }}>
+                    <td style={{ padding: 4 }}><strong>{ph.phase}. {ph.name}</strong></td>
+                    <td style={{ padding: 4, fontSize: 9 }}>{(ph.agents || []).map(a => <code key={a} style={{ display: 'block' }}>{a}</code>)}</td>
+                    <td style={{ padding: 4, fontSize: 9 }}>{(ph.tools || []).join(' · ')}</td>
+                    <td style={{ padding: 4, fontSize: 9 }}>{ph.trigger}</td>
+                    <td style={{ padding: 4, fontSize: 9, color: '#15803d' }}>{ph.pass_gate}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
+      </Section>
+
+      <Section title={`Pipeline catalog · ${stats.n_pipelines_total} pipelines across ${stats.n_pipeline_categories} categories`} accent="#0891b2">
+        {pipelines && Object.entries(pipelines.categories).map(([cat, info]) => (
+          <div key={cat} style={{ marginTop: 8, padding: 8, background: '#f8fafc', borderRadius: 4 }}>
+            <strong style={{ fontSize: 11, color: '#0e7490' }}>{cat.toUpperCase()} ({info.count})</strong>
+            <ul style={{ fontSize: 10, marginTop: 4 }}>
+              {info.entries.map((e, i) => <li key={i}><code style={{ fontSize: 9 }}>{e}</code></li>)}
+            </ul>
+          </div>
+        ))}
+      </Section>
+
+      <Section title={`Responsibility table · ${resp.length} processes · who tests what`} accent="#8b5cf6">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#f3e8ff', color: '#7e22ce' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 4 }}>PROCESS</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>OWNER AGENT</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>SUPPORTING SKILLS</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>DATA SOURCE</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>MODEL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {resp.map((row, i) => (
+              <tr key={i} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: 4 }}><strong>{row.process}</strong></td>
+                <td style={{ padding: 4 }}><code style={{ fontSize: 9 }}>{row.owner_agent}</code></td>
+                <td style={{ padding: 4, fontSize: 9 }}>{(row.supporting_skills || []).join(' · ')}</td>
+                <td style={{ padding: 4, fontSize: 9 }}>{row.data_source}</td>
+                <td style={{ padding: 4, fontSize: 9 }}>{row.model_used}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      <Section title={`Live test agents in DB · ${agents.length}`} accent="#10b981">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#dcfce7', color: '#15803d' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 4 }}>AGENT</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>DOMAIN</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>RUNTIME</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>RISK</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>SKILLS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {agents.map(a => (
+              <tr key={a.agent_id} style={{ borderTop: '1px solid #bbf7d0' }}>
+                <td style={{ padding: 4 }}>
+                  <code style={{ fontSize: 9 }}>{a.agent_id}</code>
+                  <div style={{ fontSize: 9, color: '#64748b' }}>{a.agent_name}</div>
+                </td>
+                <td style={{ padding: 4, fontSize: 9 }}>{a.business_domain}</td>
+                <td style={{ padding: 4, fontSize: 9 }}>{a.runtime_framework}</td>
+                <td style={{ padding: 4 }}>
+                  <Pill color={RISK_COLOR[a.risk_level] || '#94a3b8'}>{a.risk_level}</Pill>
+                </td>
+                <td style={{ padding: 4, textAlign: 'center' }}><Pill color="#10b981">{a.n_skills}</Pill></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+    </>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // The hub
 
 export default function AgenticHubPage() {
@@ -663,6 +815,7 @@ export default function AgenticHubPage() {
         {activeTab === 'intervention' && <InterventionView />}
         {activeTab === 'verification' && <VerificationView />}
         {activeTab === 'issues'       && <IssuesView />}
+        {activeTab === 'testing'      && <TestingView />}
         {activeTab === 'coverage'     && <CoverageView />}
       </div>
     </div>
