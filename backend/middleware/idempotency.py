@@ -62,12 +62,16 @@ class IdempotencyMiddleware(BaseHTTPMiddleware):
                         "error_code": "IDEMPOTENCY_CONFLICT",
                     },
                 )
-            return Response(
+            # Iter 26 · explicit Response.headers set on cache hit per Starlette doc
+            r = Response(
                 content=cached["body"],
                 status_code=cached["status_code"],
-                headers=dict(cached["headers"]) | {"X-Idempotency-Cache": "hit"},
                 media_type=cached["media_type"],
             )
+            for k, v in cached["headers"]:
+                r.headers[k] = v
+            r.headers["X-Idempotency-Cache"] = "hit"
+            return r
 
         # Rebuild request stream so handler can read body
         async def receive():

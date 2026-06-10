@@ -109,15 +109,16 @@ async def stream():
 
 
 @router.get("/activity")
-def list_activity(limit: int = 50, action: str | None = None):
-    """Iter 21 · recent UI activity · filter by action."""
+def list_activity(offset: int = 0, limit: int = 50, action: str | None = None):
+    """Iter 21+26 · paginated activity · §6.1 envelope · C3 closure."""
+    from core.pagination import paginate
     rows = [r for r in _ACTIVITY if not action or r["action"] == action]
     rows.sort(key=lambda r: r["timestamp"], reverse=True)
-    return {
-        "activity": rows[:limit],
-        "count": len(_ACTIVITY),
-        "filter": {"action": action, "limit": limit},
-    }
+    total = len(rows)
+    page = rows[offset:offset + limit]
+    env = paginate(page, total, offset, limit)
+    env["filter"] = {"action": action}
+    return env
 
 
 @router.post("/hitl/bulk")

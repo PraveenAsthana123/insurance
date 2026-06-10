@@ -1,0 +1,62 @@
+name: Load Test (k6)
+
+on:
+  schedule:
+    - cron: "30 4 * * 0"
+  workflow_dispatch:
+  push:
+    paths:
+      - 'load-testing/**'
+      - '.github/workflows/loadtest.yml'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: insur_user
+          POSTGRES_PASSWORD: insur_secret_password
+          POSTGRES_DB: insur_analytics
+        options: >-
+          --health-cmd "pg_isready -U insur_user"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend deps
+        run: pip install --quiet fastapi uvicorn psycopg2-binary pydantic-settings
+      - name: Boot backend
+        env:
+          BEV_POSTGRES_HOST: localhost
+          BEV_POSTGRES_PORT: '5432'
+          BEV_POSTGRES_USER: insur_user
+          BEV_POSTGRES_PASSWORD: insur_secret_password
+          BEV_POSTGRES_DB: insur_analytics
+          INSUR_SKIP_MIGRATIONS: '1'
+        run: |
+          cd backend && uvicorn main:create_app --factory --host 0.0.0.0 --port 8001 &
+          sleep 8
+      - name: Install k6
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gnupg curl
+          curl -fsSL https://dl.k6.io/key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/k6-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update -qq
+          sudo apt-get install -y k6
+      - name: Run k6 smoke
+        env:
+          BASE_URL: http://localhost:8001
+        run: k6 run --summary-export=load-result.json load-testing/insur-smoke.js
+      - name: Upload result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-result
+          path: load-result.json
