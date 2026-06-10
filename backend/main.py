@@ -84,6 +84,11 @@ def create_app() -> FastAPI:
     # Iter 35 · Deprecation + Sunset headers per RFC 8594 / 9745
     from middleware.deprecation import DeprecationHeaderMiddleware
     app.add_middleware(DeprecationHeaderMiddleware)
+    # Iter 36 · endpoint heat map + body size monitor
+    from middleware.endpoint_heatmap import EndpointHeatmapMiddleware
+    app.add_middleware(EndpointHeatmapMiddleware)
+    from middleware.body_size_monitor import BodySizeMonitorMiddleware
+    app.add_middleware(BodySizeMonitorMiddleware)
     # Iter 27 · C4 · ETag/304 caching for GET responses
     from middleware.etag import ETagMiddleware
     app.add_middleware(ETagMiddleware)
@@ -189,7 +194,10 @@ def create_app() -> FastAPI:
     from settings_admin.router import router as settings_router  # /api/v1/settings — Iter 35
     from health_history.router import router as health_history_router  # /api/v1/health-history — Iter 35
     from openapi_diff.router import router as openapi_diff_router  # /api/v1/openapi-diff — Iter 35
-    from outbound_audit.router import router as outbound_audit_router  # /api/v1/outbound-audit — Iter 35  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from outbound_audit.router import router as outbound_audit_router  # /api/v1/outbound-audit — Iter 35
+    from heatmap.router import router as heatmap_router  # /api/v1/heatmap — Iter 36
+    from well_known.router import router as well_known_router  # /robots.txt + /.well-known/* — Iter 36
+    from cron_registry.router import router as cron_registry_router  # /api/v1/cron-registry — Iter 36  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -283,6 +291,12 @@ def create_app() -> FastAPI:
     app.include_router(health_history_router)      # /api/v1/health-history — Iter 35
     app.include_router(openapi_diff_router)        # /api/v1/openapi-diff — Iter 35
     app.include_router(outbound_audit_router)      # /api/v1/outbound-audit — Iter 35
+    app.include_router(heatmap_router)             # /api/v1/heatmap — Iter 36
+    app.include_router(well_known_router)          # /robots.txt + /.well-known/* — Iter 36
+    app.include_router(cron_registry_router)       # /api/v1/cron-registry — Iter 36
+    # Iter 36 · install httpx auto-audit hook
+    from core.httpx_audit_hook import install_httpx_audit_hook
+    install_httpx_audit_hook()
     mark_startup_done()                            # Iter 32 · k8s startup probe                # /api/v1/vulnerabilities — Iter 25              # /api/v1/alerts/* — Iter 21            # /api/v1/comments/* — P1 #18         # /api/v1/test-status/* — §64.30 12-tier       # /api/v1/data-pipeline/* — 5-phase      # /api/v1/responsible-ai/* — 12-lens           # /api/v1/use-cases/* — §94            # /api/v1/pipeline/* — §93 process modes            # /api/v1/feedback/* — Tier 7 gate #4                # /api/v1/hitl/* — Tier 7 gate #3          # /api/v1/ml/* — honest stubs P0.3+P0.4+P0.5        # /api/v1/corrections/* — T7.10    # /api/v1/autonomous-dept/* — framework registry        # /api/v1/attribution/* — T5.9   # /api/v1/ai-tools/* — Enterprise AI Tool Landscape     # /api/v1/marketing-kpis/* — KPI registry (read-only)          # /api/v1/content-ops/* — postings + contacts + schedules
 
     return app
