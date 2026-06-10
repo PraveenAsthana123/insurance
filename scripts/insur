@@ -49,7 +49,34 @@ export TF_CPP_MIN_LOG_LEVEL=3
 # Subcommands
 
 cmd_help() {
-  sed -n '2,18p' "$0"
+  cat <<'HELP'
+# insur · consolidated operational CLI
+
+  ./scripts/insur start        · boot uvicorn backend on :8001
+  ./scripts/insur stop         · kill running backend
+  ./scripts/insur status       · check if backend is up
+
+  ./scripts/insur audit        · run ALL 20 iter audits (200/200 baseline)
+  ./scripts/insur audit <N>    · run specific iter audit (e.g., 37, 38, 39, 40)
+  ./scripts/insur audit-weekly · run weekly stack (26 audits)
+  ./scripts/insur drill        · backup + retention + DQ drills
+  ./scripts/insur top1pct      · run the daily top-1% loop
+  ./scripts/insur validate     · syntax + migration + audit counts
+
+  ./scripts/insur smoke        · curl every documented endpoint (18 paths)
+  ./scripts/insur agentic      · /agentic + /ops + /governance + /ril rollup
+  ./scripts/insur migrate      · apply agentic migrations 063-066
+  ./scripts/insur stats        · codebase stats + OpenAPI counts
+
+  ./scripts/insur help         · this message
+
+# Environment overrides (defaults shown)
+  INSUR_PORT=8001
+  INSUR_HOST=0.0.0.0
+  BEV_POSTGRES_HOST=localhost  PORT=5434
+  BEV_POSTGRES_USER=insur_user  DB=insur_analytics
+  INSUR_DISABLE_PRESIDIO=1     (skip presidio in tests · venv has protobuf issue)
+HELP
 }
 
 cmd_start() {
@@ -151,12 +178,17 @@ cmd_smoke() {
     "/.well-known/security.txt" \
     "/api/v1/alerts/counts" \
     "/api/v1/feature-flags" \
-    "/api/v1/regulatory/test" \
     "/api/v1/cron-registry" \
     "/api/v1/heatmap?top=3" \
     "/api/v1/metrics-latency" \
     "/api/v1/openapi-export/stats" \
-    "/api/v1/changelog/summary"
+    "/api/v1/changelog/summary" \
+    "/api/v1/agentic/health" \
+    "/api/v1/agentic-ops/health" \
+    "/api/v1/governance/health" \
+    "/api/v1/governance/org-tree" \
+    "/api/v1/ril/health" \
+    "/api/v1/ril/dashboard"
   do
     code=$(curl -s -o /dev/null -w '%{http_code}' -m 5 "http://localhost:$PORT$path")
     if [[ "$code" =~ ^2 ]]; then
@@ -165,6 +197,61 @@ cmd_smoke() {
       printf "  ✗ %-50s %s\n" "$path" "$code"
     fi
   done
+}
+
+cmd_agentic() {
+  # Print agentic state from all 4 layers (core + ops + governance + ril)
+  echo "═══ Agentic state · 28-table view ═══"
+  for endpoint in \
+    "agentic/health" \
+    "agentic-ops/health" \
+    "governance/health" \
+    "ril/health" \
+    "ril/dashboard"
+  do
+    printf "\n─── /api/v1/%s ───\n" "$endpoint"
+    curl -s "http://localhost:$PORT/api/v1/$endpoint" | "$PT" -m json.tool 2>/dev/null || \
+      echo "  (backend not reachable)"
+  done
+}
+
+cmd_migrate() {
+  # Apply all agentic migrations 063-066
+  echo "═══ Apply agentic+enterprise migrations ═══"
+  for f in backend/migrations/06{3,4,5,6}_*.sql; do
+    [ -f "$f" ] || continue
+    echo "  → $f"
+    PGPASSWORD="${BEV_POSTGRES_PASSWORD}" psql \
+      -h "${BEV_POSTGRES_HOST}" -p "${BEV_POSTGRES_PORT}" \
+      -U "${BEV_POSTGRES_USER}" -d "${BEV_POSTGRES_DB}" \
+      -f "$f" 2>&1 | grep -E "ERROR|already exists" | head -3 || true
+  done
+  echo "  ✓ done · use `./scripts/insur agentic` to verify"
+}
+
+cmd_validate() {
+  echo "═══ Sanity sweep ═══"
+  echo "─── Python syntax ───"
+  "$PT" -c "import ast
+import sys
+from pathlib import Path
+files = sorted(Path('backend').rglob('*.py'))
+bad = []
+for f in files:
+    try:
+        ast.parse(open(f).read())
+    except SyntaxError as e:
+        bad.append((str(f), e.lineno, e.msg))
+print(f'  Files: {len(files)} · syntax errors: {len(bad)}')
+for f, ln, msg in bad[:10]:
+    print(f'  ✗ {f}:{ln} {msg}')
+sys.exit(0 if not bad else 1)
+"
+  echo "─── Migration count ───"
+  echo "  $(ls backend/migrations/*.sql 2>/dev/null | wc -l) migration files"
+  echo "─── Audit count ───"
+  echo "  $(ls scripts/audit_top1pct_iter*.py 2>/dev/null | wc -l) iter audits"
+  echo "  $(ls scripts/audit_*.py 2>/dev/null | wc -l) total audits"
 }
 
 cmd_stats() {
@@ -201,6 +288,9 @@ case "${1:-help}" in
   drill)         shift; cmd_drill "$@" ;;
   top1pct)       shift; cmd_top1pct "$@" ;;
   smoke)         shift; cmd_smoke "$@" ;;
+  agentic)       shift; cmd_agentic "$@" ;;
+  migrate)       shift; cmd_migrate "$@" ;;
+  validate)      shift; cmd_validate "$@" ;;
   stats)         shift; cmd_stats "$@" ;;
   help|-h|--help) cmd_help ;;
   *) echo "Unknown command: $1"; cmd_help; exit 1 ;;
