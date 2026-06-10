@@ -10,6 +10,7 @@ const API = import.meta?.env?.VITE_API_BASE_URL || 'http://localhost:8001';
 
 const HUB_TABS = [
   { key: 'task-tracer',   label: '▶ Run Task (live trace)' },
+  { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
   { key: 'admin',         label: 'Per-Agent Admin (26 tabs)' },
@@ -1072,6 +1073,163 @@ function TaskTracerView() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// LIVE ACTIVITY · per-agent · what is each agent doing RIGHT NOW
+
+function LiveActivityView() {
+  const [data, setData] = useState({ invocations: [] });
+  const [auto, setAuto] = useState(true);
+  const [filter, setFilter] = useState('');
+  const load = useCallback(async () => {
+    const r = await fetch(`${API}/api/v1/agentic/invocations?limit=200`).then(r => r.json());
+    setData(r);
+  }, []);
+  useEffect(() => {
+    load();
+    if (auto) {
+      const t = setInterval(load, 5000);
+      return () => clearInterval(t);
+    }
+  }, [load, auto]);
+
+  let invs = data.invocations || [];
+  if (filter) {
+    const q = filter.toLowerCase();
+    invs = invs.filter(i =>
+      (i.agent_id || '').toLowerCase().includes(q) ||
+      (i.status || '').toLowerCase().includes(q) ||
+      (i.trigger_kind || '').toLowerCase().includes(q)
+    );
+  }
+
+  // Group by agent_id
+  const byAgent = {};
+  for (const inv of invs) {
+    const k = inv.agent_id || 'unknown';
+    byAgent[k] = byAgent[k] || [];
+    byAgent[k].push(inv);
+  }
+  const agents = Object.entries(byAgent)
+    .sort((a, b) => b[1].length - a[1].length);
+
+  return (
+    <>
+      <Section title={`Live per-agent activity · ${invs.length} invocations · ${agents.length} agents active`} accent="#ef4444">
+        <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+          <input value={filter} onChange={e => setFilter(e.target.value)}
+            placeholder="filter by agent_id / status / trigger"
+            style={{ padding: '4px 8px', fontSize: 11, width: 280,
+              border: '1px solid #cbd5e1', borderRadius: 3 }} />
+          <button onClick={() => setAuto(!auto)}
+            style={{ padding: '4px 10px', fontSize: 10, cursor: 'pointer',
+              background: auto ? '#10b981' : '#94a3b8', color: '#fff',
+              border: 'none', borderRadius: 3 }}>
+            Auto-refresh 5s: {auto ? 'ON' : 'OFF'}
+          </button>
+          <button onClick={load}
+            style={{ padding: '4px 10px', fontSize: 10, cursor: 'pointer',
+              border: '1px solid #cbd5e1', borderRadius: 3, background: '#fff' }}>↻ Reload</button>
+        </div>
+
+        {invs.length === 0 && (
+          <div style={{ padding: 20, background: '#fef3c7', borderRadius: 4, fontSize: 11 }}>
+            <strong>No invocations yet.</strong>
+            <br /><br />
+            Either no agent has run yet, OR backend can't connect.
+            Run the watchdog cycle to seed:
+            <pre style={{ marginTop: 4 }}>python3 scripts/watchdog_agents_loop.py</pre>
+            Or wait for cron · runs every 5 min (INSUR-WATCHDOG-AGENTS).
+          </div>
+        )}
+
+        <div style={{ maxHeight: 700, overflowY: 'auto' }}>
+          {agents.map(([agentId, rows]) => {
+            const recent = rows.slice(0, 5);
+            const lastStatus = recent[0]?.status;
+            const color = lastStatus === 'Success' ? '#10b981' :
+                          lastStatus === 'Failed' ? '#ef4444' :
+                          lastStatus === 'PendingApproval' ? '#f59e0b' : '#94a3b8';
+            return (
+              <details key={agentId} open style={{ marginBottom: 6, padding: 8,
+                background: '#fff', border: '1px solid #e2e8f0', borderRadius: 4 }}>
+                <summary style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: color, display: 'inline-block' }} />
+                  <code style={{ fontSize: 11, fontWeight: 700 }}>{agentId}</code>
+                  <Pill color={color}>{rows.length} invocation{rows.length !== 1 ? 's' : ''}</Pill>
+                  <span style={{ fontSize: 10, color: '#64748b' }}>last: {lastStatus}</span>
+                </summary>
+                <table style={{ fontSize: 10, width: '100%', marginTop: 6 }}>
+                  <thead style={{ color: '#64748b' }}>
+                    <tr>
+                      <th style={{ textAlign: 'left', padding: 3 }}>Time</th>
+                      <th style={{ textAlign: 'left', padding: 3 }}>Status</th>
+                      <th style={{ textAlign: 'left', padding: 3 }}>Trigger</th>
+                      <th style={{ textAlign: 'left', padding: 3 }}>Input (truncated)</th>
+                      <th style={{ textAlign: 'left', padding: 3 }}>Duration</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recent.map(inv => (
+                      <tr key={inv.invocation_id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                        <td style={{ padding: 3, fontSize: 9 }}>{(inv.created_at || '').slice(11, 19)}</td>
+                        <td style={{ padding: 3 }}><Pill color={
+                          inv.status === 'Success' ? '#10b981' :
+                          inv.status === 'PendingApproval' ? '#f59e0b' :
+                          inv.status === 'Failed' ? '#ef4444' : '#94a3b8'
+                        }>{inv.status}</Pill></td>
+                        <td style={{ padding: 3, fontSize: 9 }}>{inv.trigger_kind}</td>
+                        <td style={{ padding: 3, fontSize: 9 }}>{(inv.input_text || '').slice(0, 80)}…</td>
+                        <td style={{ padding: 3, fontSize: 9 }}>{inv.duration_ms}ms</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </details>
+            );
+          })}
+        </div>
+      </Section>
+
+      <Section title="What each watchdog checks · Iter 52" accent="#3b82f6">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#f1f5f9', color: '#475569' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 4 }}>WATCHDOG</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>CATEGORY</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>QUESTION ANSWERED</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>LIVE QUERY / CHECK</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['sys_watchdog_jobs',     'Jobs',       'Is anything stuck in agent_queue?', 'SELECT queue_status, COUNT(*) FROM agent_queue GROUP BY queue_status'],
+              ['sys_watchdog_cron',     'Cron',       'Are scheduled jobs running on time?', 'ls jobs/reports/*/cron.log'],
+              ['sys_watchdog_vector',   'Vector DB',  'Are knowledge embeddings up to date?', 'SELECT COUNT(*) FROM knowledge_base'],
+              ['sys_watchdog_errors',   'Errors',     'Any errors in the last hour?', 'SELECT COUNT(*) FROM agent_invocation WHERE status IN ... AND created_at > NOW() - INTERVAL 1 hour'],
+              ['sys_watchdog_db',       'Database',   'DB connections healthy? Disk OK?', 'SELECT pg_size_pretty(pg_database_size(current_database()))'],
+              ['sys_watchdog_api',      'API',        'All routers reachable? p95 within SLA?', 'SELECT COUNT(*) FROM agent_invocation WHERE created_at > NOW() - 5min'],
+              ['sys_watchdog_frontend', 'Frontend',   'UI building? Console errors?', 'check frontend/dist/ + vitest run'],
+              ['sys_watchdog_logic',    'Code',       'Pending code-gen? Schema drift?', 'mtime of backend/contracts/MANIFEST.json'],
+              ['sys_watchdog_status',   'Status',     'Rollup of all 8 above', 'aggregate jobs/reports/watchdog/*.json'],
+            ].map(([id, cat, q, sql]) => (
+              <tr key={id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: 4 }}><code style={{ fontSize: 9 }}>{id}</code></td>
+                <td style={{ padding: 4 }}><Pill color="#3b82f6">{cat}</Pill></td>
+                <td style={{ padding: 4 }}>{q}</td>
+                <td style={{ padding: 4, fontFamily: 'monospace', fontSize: 9, color: '#475569' }}>{sql}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ marginTop: 8, fontSize: 10, color: '#64748b' }}>
+          Cron: every 5 min · <code>INSUR-WATCHDOG-AGENTS</code> · so this stream
+          ALWAYS has fresh data even if no one POSTs /invoke.
+        </div>
+      </Section>
+    </>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // The hub
 
 export default function AgenticHubPage() {
@@ -1100,6 +1258,7 @@ export default function AgenticHubPage() {
 
       <div style={{ padding: 12 }}>
         {activeTab === 'task-tracer'  && <TaskTracerView />}
+        {activeTab === 'live-activity' && <LiveActivityView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}
         {activeTab === 'admin'        && <AgenticAdminPanel />}
