@@ -66,6 +66,7 @@ cmd_help() {
   ./scripts/insur smoke        · curl every documented endpoint (18 paths)
   ./scripts/insur agentic      · /agentic + /ops + /governance + /ril rollup
   ./scripts/insur migrate      · apply agentic migrations 063-066
+  ./scripts/insur seed         · seed 100 agents · 25 skills · 25 tools
   ./scripts/insur stats        · codebase stats + OpenAPI counts
 
   ./scripts/insur help         · this message
@@ -229,6 +230,11 @@ cmd_migrate() {
   echo "  ✓ done · use `./scripts/insur agentic` to verify"
 }
 
+cmd_seed() {
+  echo "═══ Seed 100 agents · 25 skills · 25 tools ═══"
+  "$PT" scripts/seed_100_agents.py "$@"
+}
+
 cmd_validate() {
   echo "═══ Sanity sweep ═══"
   echo "─── Python syntax ───"
@@ -290,6 +296,7 @@ case "${1:-help}" in
   smoke)         shift; cmd_smoke "$@" ;;
   agentic)       shift; cmd_agentic "$@" ;;
   migrate)       shift; cmd_migrate "$@" ;;
+  seed)          shift; cmd_seed "$@" ;;
   validate)      shift; cmd_validate "$@" ;;
   stats)         shift; cmd_stats "$@" ;;
   help|-h|--help) cmd_help ;;
