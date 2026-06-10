@@ -1,0 +1,64 @@
+{
+  "annotations": { "list": [] },
+  "title": "Insur · Service Health",
+  "tags": ["insur", "service-health"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "panels": [
+    {
+      "title": "HITL queue size",
+      "type": "stat",
+      "targets": [{ "expr": "insur_hitl_queue_size", "refId": "A" }],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green",  "value": null },
+              { "color": "yellow", "value": 10 },
+              { "color": "red",    "value": 30 }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 }
+    },
+    {
+      "title": "Drift alerts",
+      "type": "stat",
+      "targets": [{ "expr": "insur_drift_alerts_total", "refId": "A" }],
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 }
+    },
+    {
+      "title": "API p95 latency",
+      "type": "timeseries",
+      "targets": [{ "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+    },
+    {
+      "title": "Per-tier test pass rate",
+      "type": "barchart",
+      "targets": [{ "expr": "insur_test_tier_pass_rate", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 }
+    },
+    {
+      "title": "ResAI aggregate score (lens drift)",
+      "type": "timeseries",
+      "targets": [{ "expr": "insur_resai_aggregate_score", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 }
+    },
+    {
+      "title": "Cohort fairness DI per cohort",
+      "type": "barchart",
+      "targets": [{ "expr": "insur_fairness_disparate_impact", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 }
+    },
+    {
+      "title": "Vulnerabilities by severity",
+      "type": "piechart",
+      "targets": [{ "expr": "insur_vulnerabilities_by_severity", "refId": "A" }],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 }
+    }
+  ]
+}
