@@ -69,6 +69,7 @@ cmd_help() {
   ./scripts/insur seed         · seed 100 agents · 25 skills · 25 tools
   ./scripts/insur which-working· live per-agent terminal feed (Iter 53)
   ./scripts/insur watchdog     · run 24-agent watchdog cycle now (Iter 53)
+  ./scripts/insur load-test    · 5-phase load test now (Iter 55)
   ./scripts/insur cover        · register all non-agentic routers as System Agents (Iter 45)
   ./scripts/insur contracts    · export Pydantic schemas + regen Zod (Iter 44)
   ./scripts/insur stats        · codebase stats + OpenAPI counts
@@ -243,6 +244,11 @@ cmd_which_working() {
   "$PT" scripts/which_working.py "$@"
 }
 
+cmd_load_test() {
+  echo "═══ 5-phase load test (smoke/load/stress/spike/soak) ═══"
+  "$PT" scripts/load_test_smoke.py "$@"
+}
+
 cmd_watchdog() {
   echo "═══ Watchdog cycle (24 agents · checks job/cron/db/api/...) ═══"
   "$PT" scripts/watchdog_agents_loop.py "$@"
@@ -321,6 +327,7 @@ case "${1:-help}" in
   migrate)       shift; cmd_migrate "$@" ;;
   seed)          shift; cmd_seed "$@" ;;
   which-working) shift; cmd_which_working "$@" ;;
+  load-test)     shift; cmd_load_test "$@" ;;
   watchdog)      shift; cmd_watchdog "$@" ;;
   cover)         shift; cmd_cover "$@" ;;
   contracts)     shift; cmd_contracts "$@" ;;

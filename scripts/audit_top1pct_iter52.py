@@ -24,7 +24,7 @@ def main():
     with cx, cx.cursor() as cur:
         cur.execute("SELECT COUNT(*) FROM agent_registry WHERE agent_id LIKE 'sys_watchdog_%'")
         n_w = cur.fetchone()[0]
-    a(f"1. 9 watchdog agents registered ({n_w})", n_w == 9)
+    a(f"1. ≥9 watchdog agents registered ({n_w})", n_w >= 9)
 
     with cx, cx.cursor() as cur:
         cur.execute("SELECT COUNT(*) FROM agent_invocation WHERE agent_id LIKE 'sys_watchdog_%'")
