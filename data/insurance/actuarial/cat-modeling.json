@@ -1,0 +1,94 @@
+{
+  "process": "cat-modeling",
+  "department": "actuarial",
+  "columns": [
+    "scenario_id",
+    "peril",
+    "region",
+    "PML",
+    "EP_curve",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "scenario_id": "val_812",
+      "peril": "val_812",
+      "region": "val_812",
+      "PML": "val_812",
+      "EP_curve": "val_812",
+      "as_of": "val_812"
+    },
+    {
+      "scenario_id": "val_843",
+      "peril": "val_843",
+      "region": "val_843",
+      "PML": "val_843",
+      "EP_curve": "val_843",
+      "as_of": "val_843"
+    },
+    {
+      "scenario_id": "val_874",
+      "peril": "val_874",
+      "region": "val_874",
+      "PML": "val_874",
+      "EP_curve": "val_874",
+      "as_of": "val_874"
+    },
+    {
+      "scenario_id": "val_905",
+      "peril": "val_905",
+      "region": "val_905",
+      "PML": "val_905",
+      "EP_curve": "val_905",
+      "as_of": "val_905"
+    },
+    {
+      "scenario_id": "val_936",
+      "peril": "val_936",
+      "region": "val_936",
+      "PML": "val_936",
+      "EP_curve": "val_936",
+      "as_of": "val_936"
+    },
+    {
+      "scenario_id": "val_967",
+      "peril": "val_967",
+      "region": "val_967",
+      "PML": "val_967",
+      "EP_curve": "val_967",
+      "as_of": "val_967"
+    },
+    {
+      "scenario_id": "val_998",
+      "peril": "val_998",
+      "region": "val_998",
+      "PML": "val_998",
+      "EP_curve": "val_998",
+      "as_of": "val_998"
+    },
+    {
+      "scenario_id": "val_29",
+      "peril": "val_29",
+      "region": "val_29",
+      "PML": "val_29",
+      "EP_curve": "val_29",
+      "as_of": "val_29"
+    },
+    {
+      "scenario_id": "val_60",
+      "peril": "val_60",
+      "region": "val_60",
+      "PML": "val_60",
+      "EP_curve": "val_60",
+      "as_of": "val_60"
+    },
+    {
+      "scenario_id": "val_91",
+      "peril": "val_91",
+      "region": "val_91",
+      "PML": "val_91",
+      "EP_curve": "val_91",
+      "as_of": "val_91"
+    }
+  ]
+}

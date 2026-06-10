@@ -1,0 +1,119 @@
+{
+  "depts": {
+    "22": {
+      "current_level": "L0",
+      "name": "Product Management, Innovation & Digital Products",
+      "notes": ""
+    },
+    "21": {
+      "current_level": "L0",
+      "name": "Sales, Distribution, Broker, Agency & Partner Management",
+      "notes": ""
+    },
+    "20": {
+      "current_level": "L0",
+      "name": "Cybersecurity, Identity & Fraud Defense",
+      "notes": ""
+    },
+    "19": {
+      "current_level": "L0",
+      "name": "Information Technology (IT), Cloud, Infrastructure & Platform Engineering",
+      "notes": ""
+    },
+    "18": {
+      "current_level": "L0",
+      "name": "Data, Analytics & Enterprise Intelligence",
+      "notes": ""
+    },
+    "17": {
+      "current_level": "L0",
+      "name": "Procurement & Vendor Management",
+      "notes": ""
+    },
+    "16": {
+      "current_level": "L0",
+      "name": "Human Resources (HR), Learning & Workforce Management",
+      "notes": ""
+    },
+    "15": {
+      "current_level": "L0",
+      "name": "Enterprise Risk Management (ERM)",
+      "notes": ""
+    },
+    "14": {
+      "current_level": "L0",
+      "name": "Finance & Accounting",
+      "notes": ""
+    },
+    "13": {
+      "current_level": "L0",
+      "name": "Legal",
+      "notes": ""
+    },
+    "12": {
+      "current_level": "L0",
+      "name": "Compliance & Regulatory Affairs",
+      "notes": ""
+    },
+    "11": {
+      "current_level": "L0",
+      "name": "Reinsurance",
+      "notes": ""
+    },
+    "10": {
+      "current_level": "L0",
+      "name": "Actuarial",
+      "notes": ""
+    },
+    "9": {
+      "current_level": "L0",
+      "name": "Customer Service / Contact Center",
+      "notes": ""
+    },
+    "8": {
+      "current_level": "L0",
+      "name": "Special Investigation Unit (SIU) / Fraud",
+      "notes": ""
+    },
+    "7": {
+      "current_level": "L0",
+      "name": "Claims",
+      "notes": ""
+    },
+    "6": {
+      "current_level": "L0",
+      "name": "Billing & Collections",
+      "notes": ""
+    },
+    "5": {
+      "current_level": "L0",
+      "name": "Policy Administration",
+      "notes": ""
+    },
+    "4": {
+      "current_level": "L0",
+      "name": "Underwriting",
+      "notes": ""
+    },
+    "3": {
+      "current_level": "L0",
+      "name": "Sales & Distribution",
+      "notes": ""
+    },
+    "1": {
+      "current_level": "L0",
+      "name": "Product Management Department",
+      "notes": ""
+    }
+  },
+  "version": "1.0",
+  "valid_levels": [
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+  ]
+}

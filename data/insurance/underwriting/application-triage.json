@@ -1,0 +1,94 @@
+{
+  "process": "application-triage",
+  "department": "underwriting",
+  "columns": [
+    "application_id",
+    "product",
+    "state",
+    "completeness",
+    "owner",
+    "received_at"
+  ],
+  "rows": [
+    {
+      "application_id": "val_724",
+      "product": "val_724",
+      "state": "val_724",
+      "completeness": "val_724",
+      "owner": "alice",
+      "received_at": "2026-01-13"
+    },
+    {
+      "application_id": "val_755",
+      "product": "val_755",
+      "state": "val_755",
+      "completeness": "val_755",
+      "owner": "erin",
+      "received_at": "2026-08-16"
+    },
+    {
+      "application_id": "val_786",
+      "product": "val_786",
+      "state": "val_786",
+      "completeness": "val_786",
+      "owner": "dave",
+      "received_at": "2026-03-19"
+    },
+    {
+      "application_id": "val_817",
+      "product": "val_817",
+      "state": "val_817",
+      "completeness": "val_817",
+      "owner": "carol",
+      "received_at": "2026-10-22"
+    },
+    {
+      "application_id": "val_848",
+      "product": "val_848",
+      "state": "val_848",
+      "completeness": "val_848",
+      "owner": "bob",
+      "received_at": "2026-05-25"
+    },
+    {
+      "application_id": "val_879",
+      "product": "val_879",
+      "state": "val_879",
+      "completeness": "val_879",
+      "owner": "erin",
+      "received_at": "2026-12-28"
+    },
+    {
+      "application_id": "val_910",
+      "product": "val_910",
+      "state": "val_910",
+      "completeness": "val_910",
+      "owner": "dave",
+      "received_at": "2026-07-03"
+    },
+    {
+      "application_id": "val_941",
+      "product": "val_941",
+      "state": "val_941",
+      "completeness": "val_941",
+      "owner": "carol",
+      "received_at": "2026-02-06"
+    },
+    {
+      "application_id": "val_972",
+      "product": "val_972",
+      "state": "val_972",
+      "completeness": "val_972",
+      "owner": "bob",
+      "received_at": "2026-09-09"
+    },
+    {
+      "application_id": "val_3",
+      "product": "val_3",
+      "state": "val_3",
+      "completeness": "val_3",
+      "owner": "alice",
+      "received_at": "2026-04-12"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+```diff
+--- a/tests/drills/drill_graph_ai.py
++++ b/tests/drills/drill_graph_ai.py
+@@ -190,6 +190,7 @@ def main():
+         f"depts={len(depts_in)} totals={totals}")
+ 
+ if __name__ == "__main__":
++    assert main() == 0, "Test failed"
+     main()
+```

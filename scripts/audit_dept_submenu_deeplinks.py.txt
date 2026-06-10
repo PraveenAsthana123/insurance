@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_dept_submenu_deeplinks.py
+# auto-generated explainer · 2026-06-10T10:00:09Z
+
+## Purpose
+Dept sub-menu deep-link integrity audit.
+
+Per docs/PATH_E_EXECUTION_REPORT_2026-06-09.md P1 closure ·
+'18 of 22 dept sub-menus don't deep-link'.
+
+Verifies that EVERY dept × process × sub-process in
+config/insurance.catalog.json has:
+  - non-empty id
+  - non-empty name
+  - URL-safe id (no spaces · no special chars)
+  - resolvable through the (dept_id, process_id) lookup pattern
+
+Plus checks that key depts have at least 1 process with subProcesses.
+
+10 assertions:
+  1. catalog file exists + parses
+  2. departments array non-empty
+  3. every dept has id + name
+  4. every dept has at least 1 process
+  5. every process has id + name
+  6. every process id is URL-safe (alphanumeric + dash)
+  7. dept ids are unique
+  8. process ids are unique WITHIN each dept
+  9. cross-dept dept-id uniqueness preserved
+ 10. all 22 depts traversable (no missing/empty rows)
+
+## Imports
+- from `_` import json
+- from `_` import re
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. Catalog exists + parses
+- 2. departments array
+- 3. Every dept has id + name
+- 4. Every dept has ≥1 process
+- 5. Every process has id + name

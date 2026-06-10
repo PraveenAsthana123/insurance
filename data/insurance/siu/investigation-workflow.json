@@ -1,0 +1,94 @@
+{
+  "process": "investigation-workflow",
+  "department": "siu",
+  "columns": [
+    "case_id",
+    "investigator",
+    "stage",
+    "evidence_count",
+    "sla_days",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "case_id": "val_913",
+      "investigator": "val_913",
+      "stage": "val_913",
+      "evidence_count": "val_913",
+      "sla_days": "val_913",
+      "updated_at": "2026-10-02"
+    },
+    {
+      "case_id": "val_944",
+      "investigator": "val_944",
+      "stage": "val_944",
+      "evidence_count": "val_944",
+      "sla_days": "val_944",
+      "updated_at": "2026-05-05"
+    },
+    {
+      "case_id": "val_975",
+      "investigator": "val_975",
+      "stage": "val_975",
+      "evidence_count": "val_975",
+      "sla_days": "val_975",
+      "updated_at": "2026-12-08"
+    },
+    {
+      "case_id": "val_6",
+      "investigator": "val_6",
+      "stage": "val_6",
+      "evidence_count": "val_6",
+      "sla_days": "val_6",
+      "updated_at": "2026-07-11"
+    },
+    {
+      "case_id": "val_37",
+      "investigator": "val_37",
+      "stage": "val_37",
+      "evidence_count": "val_37",
+      "sla_days": "val_37",
+      "updated_at": "2026-02-14"
+    },
+    {
+      "case_id": "val_68",
+      "investigator": "val_68",
+      "stage": "val_68",
+      "evidence_count": "val_68",
+      "sla_days": "val_68",
+      "updated_at": "2026-09-17"
+    },
+    {
+      "case_id": "val_99",
+      "investigator": "val_99",
+      "stage": "val_99",
+      "evidence_count": "val_99",
+      "sla_days": "val_99",
+      "updated_at": "2026-04-20"
+    },
+    {
+      "case_id": "val_130",
+      "investigator": "val_130",
+      "stage": "val_130",
+      "evidence_count": "val_130",
+      "sla_days": "val_130",
+      "updated_at": "2026-11-23"
+    },
+    {
+      "case_id": "val_161",
+      "investigator": "val_161",
+      "stage": "val_161",
+      "evidence_count": "val_161",
+      "sla_days": "val_161",
+      "updated_at": "2026-06-26"
+    },
+    {
+      "case_id": "val_192",
+      "investigator": "val_192",
+      "stage": "val_192",
+      "evidence_count": "val_192",
+      "sla_days": "val_192",
+      "updated_at": "2026-01-01"
+    }
+  ]
+}

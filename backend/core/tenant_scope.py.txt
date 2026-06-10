@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/tenant_scope.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Tenant scope guard · Iter 31.
+
+Per §41.3 multi-tenant isolation: every query that reads org-scoped
+data MUST filter by tenant_id. This module provides:
+
+  1. require_tenant_filter(sql) → raise if missing
+  2. ensure_tenant_filter(sql, tenant_id) → injects WHERE tenant_id = '...'
+  3. assert_tenant_match(rows, expected) → drill audit · raise on mismatch
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `TenantIsolationError`: (no docstring)
+### Functions
+- `require_tenant_filter(sql)`: Raise TenantIsolationError if the SQL has no tenant_id reference.
+- `ensure_tenant_filter(sql, tenant_id)`: Inject WHERE tenant_id = '...' if not present.
+- `assert_tenant_match(rows, expected)`: Return count of rows that violated tenant_id == expected.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Insert WHERE before clause

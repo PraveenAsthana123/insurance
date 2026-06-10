@@ -1,0 +1,45 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_responsible_ai.py
+# auto-generated explainer · 2026-06-10T10:00:07Z
+
+## Purpose
+Responsible AI 12-lens audit · per-process structure.
+
+Per operator brief 2026-06-09 · 12 lens cards in ResAI tab.
+
+11 assertions:
+  1. /health 200 + 12 lenses listed
+  2. /lenses catalog returns 12 entries
+  3. each lens has required fields (id · name · icon · purpose · library
+     · input · process · output · section_color)
+  4. /{process_id}/lenses materializes for one process (12 entries)
+  5. each materialized lens has score in [0..1]
+  6. each has final_outcome in {pass, partial, fail, scaffold}
+  7. each has library_state (installed or reason)
+  8. each has summary_report string
+  9. /{process_id}/{lens_id} returns single lens
+ 10. /{process_id}/{lens_id} returns 404 for invalid lens
+ 11. /{process_id}/summary/report aggregates correctly
+
+## Imports
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. /health
+- 2. /lenses catalog
+- 3. Each lens has required fields
+- 4. Materialized for process
+- 5. Score in [0,1]

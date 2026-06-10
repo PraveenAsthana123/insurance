@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# config/build_insurance_catalog.py
+# auto-generated explainer · 2026-06-10T10:00:04Z
+
+## Purpose
+build_insurance_catalog.py — single editable source for the insurance catalog.
+
+Per global §82. Emits:
+  - config/brand.config.json          (lean nav, all 22 depts)
+  - config/insurance.catalog.json     (deep tree, all processes + sub-procs)
+  - config/ai_capabilities.json       (the cross-cutting AI registry)
+  - config/stakeholders.json          (the stakeholder role registry)
+  - data/insurance/<dept>/<process>.<ext>  (multi-format sample data)
+  - data/insurance/manifest.json      (download index for the UI)
+
+Idempotent: rerun anytime. Sample data is deterministic per (dept, process).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import json
+- from `_` import sys
+- from `dataclasses` import dataclass, field
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `typing` import Sequence
+- from `lib` import datafmt
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `SubProcess`: (no docstring)
+- `Process`: (no docstring)
+- `Department`: (no docstring)
+### Functions
+- `synth_rows(process_id, columns, n)`: Deterministic per-process sample rows. Hash-seeded for stability.
+- `sub(id_, name, desc, channels, stakeholders)`: (no docstring)
+- `proc(id_, name, desc, channels, stakeholders)`: (no docstring)
+- `build()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- =============================================================================
+- 1. AI CAPABILITY REGISTRY  (per global §82.1, 90+ entries)
+- =============================================================================
+- Each entry: (id, name, family, icon, description). De-duped across depts.
+- Foundational

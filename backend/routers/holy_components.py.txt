@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/holy_components.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+HOLY component operation router — wired by the workspace SpecComponentCard.
+
+Every operation card in the workspace (Run · View · Edit · Validate) posts
+to /api/v1/holy/components/<op> with { component, op } and expects a real
+{ outcome, latency_ms, audit_row_id, message } envelope back.
+
+This is a SAFE STUB:
+  - Does NOT actually run/edit/validate anything — pure observability surface
+  - Returns deterministic synthesized outcomes so the frontend can demo
+    end-to-end without a real backend behind every component
+  - Logs every invocation to data/eval/holy/components/<date>/calls.jsonl
+    for audit-trail visibility per global §38.3
+
+Replaces the "Backend unreachable" fallback notice the workspace was
+showing. Real run/edit/validate handlers can replace this stub later.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `typing` import Optional
+- from `fastapi` import APIRouter, HTTPException
+- from `pydantic` import BaseModel
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ComponentOpRequest`: (no docstring)
+- `ComponentOpResponse`: (no docstring)
+### Functions
+- `_audit_log_path()`: (no docstring)
+- `_log_call(envelope)`: Best-effort append to the audit log. Never crashes the request.
+- `component_op(op, body)`: Handle Run · View · Edit · Validate for any workspace component card.
+- `health()`: Liveness probe for the components router.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Per-op outcome semantics — what does success look like for each op?

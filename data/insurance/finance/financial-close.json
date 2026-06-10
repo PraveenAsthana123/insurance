@@ -1,0 +1,94 @@
+{
+  "process": "financial-close",
+  "department": "finance",
+  "columns": [
+    "period",
+    "entity",
+    "stage",
+    "open_items",
+    "owner",
+    "closed_at"
+  ],
+  "rows": [
+    {
+      "period": "val_100",
+      "entity": "val_100",
+      "stage": "val_100",
+      "open_items": "val_100",
+      "owner": "carol",
+      "closed_at": "2026-05-17"
+    },
+    {
+      "period": "val_131",
+      "entity": "val_131",
+      "stage": "val_131",
+      "open_items": "val_131",
+      "owner": "bob",
+      "closed_at": "2026-12-20"
+    },
+    {
+      "period": "val_162",
+      "entity": "val_162",
+      "stage": "val_162",
+      "open_items": "val_162",
+      "owner": "alice",
+      "closed_at": "2026-07-23"
+    },
+    {
+      "period": "val_193",
+      "entity": "val_193",
+      "stage": "val_193",
+      "open_items": "val_193",
+      "owner": "erin",
+      "closed_at": "2026-02-26"
+    },
+    {
+      "period": "val_224",
+      "entity": "val_224",
+      "stage": "val_224",
+      "open_items": "val_224",
+      "owner": "dave",
+      "closed_at": "2026-09-01"
+    },
+    {
+      "period": "val_255",
+      "entity": "val_255",
+      "stage": "val_255",
+      "open_items": "val_255",
+      "owner": "bob",
+      "closed_at": "2026-04-04"
+    },
+    {
+      "period": "val_286",
+      "entity": "val_286",
+      "stage": "val_286",
+      "open_items": "val_286",
+      "owner": "alice",
+      "closed_at": "2026-11-07"
+    },
+    {
+      "period": "val_317",
+      "entity": "val_317",
+      "stage": "val_317",
+      "open_items": "val_317",
+      "owner": "erin",
+      "closed_at": "2026-06-10"
+    },
+    {
+      "period": "val_348",
+      "entity": "val_348",
+      "stage": "val_348",
+      "open_items": "val_348",
+      "owner": "dave",
+      "closed_at": "2026-01-13"
+    },
+    {
+      "period": "val_379",
+      "entity": "val_379",
+      "stage": "val_379",
+      "open_items": "val_379",
+      "owner": "carol",
+      "closed_at": "2026-08-16"
+    }
+  ]
+}

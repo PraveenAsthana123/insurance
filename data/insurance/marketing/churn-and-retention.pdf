@@ -1,0 +1,42 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 641 >>
+stream
+BT /F1 11 Tf 50 750 Td (Churn & Retention - Marketing) Tj ET
+BT /F1 11 Tf 50 734 Td () Tj ET
+BT /F1 11 Tf 50 718 Td (Predict at-risk policyholders + retention treatments.) Tj ET
+BT /F1 11 Tf 50 702 Td () Tj ET
+BT /F1 11 Tf 50 686 Td (Channels: B2E, B2C) Tj ET
+BT /F1 11 Tf 50 670 Td (Stakeholders: marketing-manager, data-scientist, policyholder) Tj ET
+BT /F1 11 Tf 50 654 Td (AI capabilities: churn, retention, nextbestaction, personalization, predictive) Tj ET
+BT /F1 11 Tf 50 638 Td () Tj ET
+BT /F1 11 Tf 50 622 Td (Sample columns:) Tj ET
+BT /F1 11 Tf 50 606 Td (policy_id, tenure_months, churn_score, offer_id, outcome, updated_at) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000000939 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1009
+%%EOF

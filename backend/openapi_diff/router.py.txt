@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/openapi_diff/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/openapi-diff/* · Iter 35 · diff current OpenAPI vs saved baseline.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `fastapi` import APIRouter, Depends, Request
+- from `core.role_dependency` import require_admin
+
+## Inputs
+- Env vars: INSUR_OPENAPI_BASELINE_PATH
+
+## Process
+### Functions
+- `_routes(spec)`: Extract set of '{METHOD} {path}' strings from OpenAPI spec.
+- `health()`: (no docstring)
+- `snapshot_baseline(request)`: Save current spec as baseline · all future diffs compare to this.
+- `diff(request)`: Compare current OpenAPI against saved baseline.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

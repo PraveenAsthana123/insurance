@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ws_broadcast/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/ws/activity · Iter 34 · C9 simplified · server-side broadcast WebSocket.
+
+Operator clients connect to /ws/activity · server pushes JSON events.
+Per §57.7: stays connected · sends keepalive · doesn't pretend to receive.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import asyncio
+- from `_` import json
+- from `_` import logging
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+- from `fastapi` import APIRouter, WebSocket, WebSocketDisconnect
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `async broadcast(message)`: Send to all connected clients · return count delivered.
+- `async activity_channel(ws)`: Long-lived push channel for activity events.
+- `list_clients()`: Operational view · how many WS clients connected.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Track connected clients
+- Keepalive loop · keeps the connection healthy through proxies

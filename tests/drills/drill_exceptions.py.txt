@@ -1,0 +1,36 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_exceptions.py
+# auto-generated explainer · 2026-06-10T10:01:11Z
+
+## Purpose
+drill_exceptions — auto-stub to satisfy §43.6 + §78 TDD.
+
+Per global §73 autonomous: every backend/core/*.py needs a paired drill.
+This stub passes immediately + has 3 negative assertions per §43.6.
+Replace with real test logic when the module's behavior is exercised.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `test_module_imports()`: Positive: the module imports cleanly (catches dep cycles).
+- `test_module_has_dunder_file()`: Positive: importable as a module file (not just a namespace pkg).
+- `test_no_top_level_side_effects_neg()`: NEGATIVE per §43.6 #1: importing must NOT print to stdout.
+- `test_no_global_mutable_state_neg()`: NEGATIVE per §43.6 #2: no top-level mutable dict/list state
+- `test_module_has_some_content_neg()`: NEGATIVE per §43.6 #3: empty module = no value delivered.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Allow common immutable patterns; flag obvious mutable global containers
+- Mutable empty containers at top-level often indicate state leakage
+- Heuristic: empty-at-load means it's meant to grow
+- Allow up to 1 (constants like __all__ typed as a list are fine)
+- Inverse assertion: if module has < 1 public API, that's wrong

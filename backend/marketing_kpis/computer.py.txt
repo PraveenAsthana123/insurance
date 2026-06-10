@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/marketing_kpis/computer.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+KPI value computer · wires 'live'/'scaffolded' KPIs to actual DB queries.
+
+Per T5.4 + T6.8. Each function returns (value, sample_window) or None
+if data isn't available. Returns are JSON-safe (float / int / dict).
+
+Per §57.7: returns None honest when data missing · UI shows "—".
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_safe(func, default)`: Wraps a DB query with honest fallback per §57.7.
+- `compute_cust_total()`: (no docstring)
+- `compute_cust_new()`: (no docstring)
+- `compute_seg_size()`: (no docstring)
+- `compute_camp_reach()`: (no docstring)
+- `compute_camp_completion_rate()`: (no docstring)
+- `compute_lead_generated()`: (no docstring)
+- `compute_lead_quality_score()`: (no docstring)
+- `compute_survey_response_rate()`: (no docstring)
+- `compute_loyalty_gold_share()`: (no docstring)
+- `compute_ai_adoption_rate()`: Ratio of autonomous-agent-created campaigns to total campaigns.
+- `compute_gov_consent_compliance()`: (no docstring)
+- `compute_gov_pii_violations()`: (no docstring)
+- `compute_gov_data_quality_score()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── Registry of KPI ID → compute function ────────────────────
+- Marketing contribution proxy: avg-attributed-per-journey / max-possible
+- ─── Map KPI ID → compute function ─────────────────────────
+- T5.9 · attribution-derived KPIs

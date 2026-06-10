@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/backup_restore_drill.py
+# auto-generated explainer · 2026-06-10T10:00:07Z
+
+## Purpose
+Backup/restore drill · Iter 29.
+
+Per §47.7 + global §6 · operations runbook drill.
+
+Drill:
+  1. pg_dump key tables → backup file
+  2. validate dump is non-empty + parseable
+  3. write drill report under jobs/reports/backup-drill/
+  4. exit 0 if drill PASS · 1 if any step fails
+
+Per §57.7: real pg_dump invocation when available · scaffold report
+when pg_dump unavailable.
+
+## Imports
+- from `_` import json
+- from `_` import os
+- from `_` import shlex
+- from `_` import subprocess
+- from `_` import sys
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: BEV_POSTGRES_DB, BEV_POSTGRES_HOST, BEV_POSTGRES_PASSWORD, BEV_POSTGRES_PORT, BEV_POSTGRES_USER
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Step 1 · pg_dump
+- Step 2 · validate
+- Determine pass
+- Write reports

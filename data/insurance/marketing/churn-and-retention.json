@@ -1,0 +1,94 @@
+{
+  "process": "churn-and-retention",
+  "department": "marketing",
+  "columns": [
+    "policy_id",
+    "tenure_months",
+    "churn_score",
+    "offer_id",
+    "outcome",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "policy_id": "val_201",
+      "tenure_months": "val_201",
+      "churn_score": "val_201",
+      "offer_id": "val_201",
+      "outcome": "val_201",
+      "updated_at": "2026-10-14"
+    },
+    {
+      "policy_id": "val_232",
+      "tenure_months": "val_232",
+      "churn_score": "val_232",
+      "offer_id": "val_232",
+      "outcome": "val_232",
+      "updated_at": "2026-05-17"
+    },
+    {
+      "policy_id": "val_263",
+      "tenure_months": "val_263",
+      "churn_score": "val_263",
+      "offer_id": "val_263",
+      "outcome": "val_263",
+      "updated_at": "2026-12-20"
+    },
+    {
+      "policy_id": "val_294",
+      "tenure_months": "val_294",
+      "churn_score": "val_294",
+      "offer_id": "val_294",
+      "outcome": "val_294",
+      "updated_at": "2026-07-23"
+    },
+    {
+      "policy_id": "val_325",
+      "tenure_months": "val_325",
+      "churn_score": "val_325",
+      "offer_id": "val_325",
+      "outcome": "val_325",
+      "updated_at": "2026-02-26"
+    },
+    {
+      "policy_id": "val_356",
+      "tenure_months": "val_356",
+      "churn_score": "val_356",
+      "offer_id": "val_356",
+      "outcome": "val_356",
+      "updated_at": "2026-09-01"
+    },
+    {
+      "policy_id": "val_387",
+      "tenure_months": "val_387",
+      "churn_score": "val_387",
+      "offer_id": "val_387",
+      "outcome": "val_387",
+      "updated_at": "2026-04-04"
+    },
+    {
+      "policy_id": "val_418",
+      "tenure_months": "val_418",
+      "churn_score": "val_418",
+      "offer_id": "val_418",
+      "outcome": "val_418",
+      "updated_at": "2026-11-07"
+    },
+    {
+      "policy_id": "val_449",
+      "tenure_months": "val_449",
+      "churn_score": "val_449",
+      "offer_id": "val_449",
+      "outcome": "val_449",
+      "updated_at": "2026-06-10"
+    },
+    {
+      "policy_id": "val_480",
+      "tenure_months": "val_480",
+      "churn_score": "val_480",
+      "offer_id": "val_480",
+      "outcome": "val_480",
+      "updated_at": "2026-01-13"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/hitl/router.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+/api/v1/hitl/* — Human-in-the-Loop queue · Tier 7 gate #3.
+
+Reads pending decisions from autonomous_agent_runs where routing
+== 'human_approval' or 'manual_processing' (from T7.9 confidence routing).
+
+Per §57.7 honest: returns empty when no decisions need human review ·
+NEVER fabricates queue entries.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `typing` import Any
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter, HTTPException, Request
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `health()`: (no docstring)
+- `get_queue(request, tier, limit)`: Pending decisions awaiting human review.
+- `stats(request)`: Aggregate HITL stats · count by routing tier · overall queue size.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Filter to decisions needing human review
+- Aggregate counts by routing tier
+- Fetch queue + count

@@ -1,0 +1,94 @@
+{
+  "process": "model-monitoring",
+  "department": "ai-data-science",
+  "columns": [
+    "model",
+    "metric",
+    "value",
+    "baseline",
+    "drift",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "model": "val_172",
+      "metric": "val_172",
+      "value": "val_172",
+      "baseline": "val_172",
+      "drift": "val_172",
+      "as_of": "val_172"
+    },
+    {
+      "model": "val_203",
+      "metric": "val_203",
+      "value": "val_203",
+      "baseline": "val_203",
+      "drift": "val_203",
+      "as_of": "val_203"
+    },
+    {
+      "model": "val_234",
+      "metric": "val_234",
+      "value": "val_234",
+      "baseline": "val_234",
+      "drift": "val_234",
+      "as_of": "val_234"
+    },
+    {
+      "model": "val_265",
+      "metric": "val_265",
+      "value": "val_265",
+      "baseline": "val_265",
+      "drift": "val_265",
+      "as_of": "val_265"
+    },
+    {
+      "model": "val_296",
+      "metric": "val_296",
+      "value": "val_296",
+      "baseline": "val_296",
+      "drift": "val_296",
+      "as_of": "val_296"
+    },
+    {
+      "model": "val_327",
+      "metric": "val_327",
+      "value": "val_327",
+      "baseline": "val_327",
+      "drift": "val_327",
+      "as_of": "val_327"
+    },
+    {
+      "model": "val_358",
+      "metric": "val_358",
+      "value": "val_358",
+      "baseline": "val_358",
+      "drift": "val_358",
+      "as_of": "val_358"
+    },
+    {
+      "model": "val_389",
+      "metric": "val_389",
+      "value": "val_389",
+      "baseline": "val_389",
+      "drift": "val_389",
+      "as_of": "val_389"
+    },
+    {
+      "model": "val_420",
+      "metric": "val_420",
+      "value": "val_420",
+      "baseline": "val_420",
+      "drift": "val_420",
+      "as_of": "val_420"
+    },
+    {
+      "model": "val_451",
+      "metric": "val_451",
+      "value": "val_451",
+      "baseline": "val_451",
+      "drift": "val_451",
+      "as_of": "val_451"
+    }
+  ]
+}

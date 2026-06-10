@@ -1,0 +1,8 @@
+```diff
+--- a/jobs/logs/codex_approval_cron.log
++++ b/jobs/logs/codex_approval_cron.log
+@@ -1,20 +1,2 @@
+ No Archon workflow runs found.
+-No Archon workflow runs found.
++No Archon workflows found.
+```

@@ -1,0 +1,94 @@
+{
+  "process": "contract-drafting",
+  "department": "legal",
+  "columns": [
+    "contract_id",
+    "counterparty",
+    "value",
+    "stage",
+    "owner",
+    "expires_at"
+  ],
+  "rows": [
+    {
+      "contract_id": "val_503",
+      "counterparty": "val_503",
+      "value": "val_503",
+      "stage": "val_503",
+      "owner": "carol",
+      "expires_at": "2026-04-28"
+    },
+    {
+      "contract_id": "val_534",
+      "counterparty": "val_534",
+      "value": "val_534",
+      "stage": "val_534",
+      "owner": "bob",
+      "expires_at": "2026-11-03"
+    },
+    {
+      "contract_id": "val_565",
+      "counterparty": "val_565",
+      "value": "val_565",
+      "stage": "val_565",
+      "owner": "alice",
+      "expires_at": "2026-06-06"
+    },
+    {
+      "contract_id": "val_596",
+      "counterparty": "val_596",
+      "value": "val_596",
+      "stage": "val_596",
+      "owner": "erin",
+      "expires_at": "2026-01-09"
+    },
+    {
+      "contract_id": "val_627",
+      "counterparty": "val_627",
+      "value": "val_627",
+      "stage": "val_627",
+      "owner": "dave",
+      "expires_at": "2026-08-12"
+    },
+    {
+      "contract_id": "val_658",
+      "counterparty": "val_658",
+      "value": "val_658",
+      "stage": "val_658",
+      "owner": "carol",
+      "expires_at": "2026-03-15"
+    },
+    {
+      "contract_id": "val_689",
+      "counterparty": "val_689",
+      "value": "val_689",
+      "stage": "val_689",
+      "owner": "bob",
+      "expires_at": "2026-10-18"
+    },
+    {
+      "contract_id": "val_720",
+      "counterparty": "val_720",
+      "value": "val_720",
+      "stage": "val_720",
+      "owner": "alice",
+      "expires_at": "2026-05-21"
+    },
+    {
+      "contract_id": "val_751",
+      "counterparty": "val_751",
+      "value": "val_751",
+      "stage": "val_751",
+      "owner": "dave",
+      "expires_at": "2026-12-24"
+    },
+    {
+      "contract_id": "val_782",
+      "counterparty": "val_782",
+      "value": "val_782",
+      "stage": "val_782",
+      "owner": "carol",
+      "expires_at": "2026-07-27"
+    }
+  ]
+}

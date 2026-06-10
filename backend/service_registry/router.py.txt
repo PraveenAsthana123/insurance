@@ -1,0 +1,22 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/service_registry/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/service-registry · Iter 30 · live route + version inventory.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Request
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `list_routes(request, prefix)`: List every registered route + tag + module · for ops audit.
+- `by_tag(request)`: Aggregate · count routes per tag.
+
+## Outputs
+- Return values from functions above

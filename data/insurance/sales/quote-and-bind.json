@@ -1,0 +1,94 @@
+{
+  "process": "quote-and-bind",
+  "department": "sales",
+  "columns": [
+    "quote_id",
+    "product",
+    "annual_premium",
+    "stage",
+    "broker",
+    "expires_at"
+  ],
+  "rows": [
+    {
+      "quote_id": "val_510",
+      "product": "val_510",
+      "annual_premium": "val_510",
+      "stage": "val_510",
+      "broker": "val_510",
+      "expires_at": "2026-07-19"
+    },
+    {
+      "quote_id": "val_541",
+      "product": "val_541",
+      "annual_premium": "val_541",
+      "stage": "val_541",
+      "broker": "val_541",
+      "expires_at": "2026-02-22"
+    },
+    {
+      "quote_id": "val_572",
+      "product": "val_572",
+      "annual_premium": "val_572",
+      "stage": "val_572",
+      "broker": "val_572",
+      "expires_at": "2026-09-25"
+    },
+    {
+      "quote_id": "val_603",
+      "product": "val_603",
+      "annual_premium": "val_603",
+      "stage": "val_603",
+      "broker": "val_603",
+      "expires_at": "2026-04-28"
+    },
+    {
+      "quote_id": "val_634",
+      "product": "val_634",
+      "annual_premium": "val_634",
+      "stage": "val_634",
+      "broker": "val_634",
+      "expires_at": "2026-11-03"
+    },
+    {
+      "quote_id": "val_665",
+      "product": "val_665",
+      "annual_premium": "val_665",
+      "stage": "val_665",
+      "broker": "val_665",
+      "expires_at": "2026-06-06"
+    },
+    {
+      "quote_id": "val_696",
+      "product": "val_696",
+      "annual_premium": "val_696",
+      "stage": "val_696",
+      "broker": "val_696",
+      "expires_at": "2026-01-09"
+    },
+    {
+      "quote_id": "val_727",
+      "product": "val_727",
+      "annual_premium": "val_727",
+      "stage": "val_727",
+      "broker": "val_727",
+      "expires_at": "2026-08-12"
+    },
+    {
+      "quote_id": "val_758",
+      "product": "val_758",
+      "annual_premium": "val_758",
+      "stage": "val_758",
+      "broker": "val_758",
+      "expires_at": "2026-03-15"
+    },
+    {
+      "quote_id": "val_789",
+      "product": "val_789",
+      "annual_premium": "val_789",
+      "stage": "val_789",
+      "broker": "val_789",
+      "expires_at": "2026-10-18"
+    }
+  ]
+}

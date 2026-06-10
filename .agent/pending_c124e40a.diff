@@ -1,0 +1,130 @@
+--- a/jobs/logs/insur_bot.log
++++ b/jobs/logs/insur_bot.log
+@@ -1,3 +1,4 @@
++Retry mechanism added to handle read timeouts.
+ ERROR:    Exception in ASGI application
+ Traceback (most recent call last):
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+     response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/connection.py", line 571, in getresponse
+     httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+   File "/usr/lib/python3.12/http/client.py", line 1448, in getresponse
+     response.begin()
+   File "/usr/lib/python3.12/http/client.py", line 336, in begin
+     version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+   File "/usr/lib/python3.12/http/client.py", line 297, in _read_status
+     line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/usr/lib/python3.12/socket.py", line 707, in readinto
+     return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ TimeoutError: timed out
+
+ The above exception was the direct cause of the following exception:
+
+ Traceback (most recent call last):
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/requests/adapters.py", line 696, in send
+     resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+     retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 498, in increment
+     raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/util/util.py", line 39, in reraise
+     raise value
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+     response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+     self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 367, in _raise_timeout
+     raise ReadTimeoutError(
+ urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)
+
+ During handling of the above exception, another exception occurred:
+
+ Traceback (most recent call last):
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/uvicorn/protocols/http/httptools_impl.py", line 421, in run_asgi
+     result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+     return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1159, in __call__
+     await super().__call__(scope, receive, send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/applications.py", line 90, in __call__
+     await self.middleware_stack(scope, receive, send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+     raise exc
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+     await self.app(scope, receive, _send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+     raise exc
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+     await app(scope, receive, sender)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+     await self.app(scope, receive, send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+     await self.middleware_stack(scope, receive, send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+     await route.handle(scope, receive, send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+     await self.app(scope, receive, send)
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+     response = await f(request)
+               ^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+     raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/fastapi/routing.py", line 330, in run_endpoint_function
+     return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+     return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 56, in run_sync
+     return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+     return await future
+           ^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+     result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/mnt/deepa/insur_project/scripts/insur_bot.py", line 358, in ask
+     result = answer_query(query, idx)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/mnt/deepa/insur_project/scripts/insur_bot.py", line 166, in answer_query
+     ctx = build_context(query, idx)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/mnt/deepa/insur_project/scripts/insur_bot.py", line 103, in build_context
+     vec_hits = vector_search(idx["chroma_dir"], query, k=k)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/mnt/deepa/insur_project/scripts/insur_bot.py", line 63, in vector_search
+     qv = embed(query)
+         ^^^^^^^^^^^^
+   File "/mnt/deepa/insur_project/scripts/insur_bot.py", line 54, in embed
+     r = requests.post(f"{OLLAMA}/api/embeddings", json={"model": EMBED_MODEL, "prompt": text}, timeout=30)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/requests/api.py", line 134, in post
+     return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+     return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+     resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/requests/sessions.py", line 784, in send
+     r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   File "/media/praveen/praveenlinux21/praveen/aman/cuda/venv/lib/python3.12/site-packages/requests/adapters.py", line 742, in send
+     raise ReadTimeout(e, request=request)
+ requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=30)

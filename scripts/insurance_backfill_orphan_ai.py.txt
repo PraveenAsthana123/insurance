@@ -1,0 +1,36 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/insurance_backfill_orphan_ai.py
+# auto-generated explainer · 2026-06-10T10:00:06Z
+
+## Purpose
+Back-fill orphan AI references into bp.ai_opportunities[].
+
+Per §73.3a — every AI in process.automatic_process.ai_workflow + process.ai[].ai_type
+MUST exist in the catalog. Operator picks from catalog vocabulary, never free text.
+
+This script finds orphans and adds them as `derived: true` catalog entries with the
+5 mandatory sub-sections (Data / Model / Accuracy / Benchmark / Stakeholder) per §73.3b.
+
+Idempotent: re-running NEVER overwrites operator content.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `collect_orphans(bp)`: Return (orphan_set, first_occurrence_map). Covers process-level + top20_roi refs.
+- `derived_catalog_entry(ai_type, ctx)`: Build a §73.3b-compliant derived catalog entry for an orphan AI type.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Process-level refs
+- top20_roi refs (per §73.3a — also expected to resolve to catalog)

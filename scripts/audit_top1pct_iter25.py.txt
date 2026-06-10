@@ -1,0 +1,27 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter25.py
+# auto-generated explainer · 2026-06-10T10:00:10Z
+
+## Purpose
+Iter 25 audit · idempotency + vuln tracker + empty-state + grafana + universal-errorboundary.
+
+## Imports
+- from `_` import logging, os, sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. IdempotencyMiddleware
+- 2. Vuln tracker backend
+- 3. Vuln endpoints reachable
+- 4. Idempotency middleware loaded
+- 5. Replay returns cached

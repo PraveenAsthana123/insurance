@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/run_all_top1pct_audits.py
+# auto-generated explainer · 2026-06-10T10:00:18Z
+
+## Purpose
+Consolidated top-1% audit runner · runs all iter audits in one process.
+
+Replaces 20 separate `audit_top1pct_iterN.py` invocations with one
+in-process run · ~5× faster · single summary report.
+
+Usage:
+  python3 scripts/run_all_top1pct_audits.py                # run all
+  python3 scripts/run_all_top1pct_audits.py --only 30,33   # only specified iters
+  python3 scripts/run_all_top1pct_audits.py --since 25     # iters ≥ 25
+  python3 scripts/run_all_top1pct_audits.py --json         # JSON output for CI
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import importlib
+- from `_` import io
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `contextlib` import redirect_stdout
+
+## Inputs
+- CLI args: --only, --since, --json, --verbose
+
+## Process
+### Functions
+- `discover_iters()`: Find all audit_top1pct_iterN.py · return [(n, modname)].
+- `run_one(modname)`: Run one iter audit · capture stdout · return summary dict.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Parse the "Summary: X/N pass · Y fail" line.
+- FIX: match "Summary:" prefix only · per-step lines also contain
+- "pass · http=200" detail suffixes that previously false-positive matched.
+- "10/10 pass · 0 fail"
+- Pretty summary

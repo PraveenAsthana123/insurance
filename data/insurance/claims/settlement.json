@@ -1,0 +1,94 @@
+{
+  "process": "settlement",
+  "department": "claims",
+  "columns": [
+    "claim_id",
+    "settlement_amount",
+    "method",
+    "letter_sent",
+    "closed_at",
+    "owner"
+  ],
+  "rows": [
+    {
+      "claim_id": "val_282",
+      "settlement_amount": "val_282",
+      "method": "val_282",
+      "letter_sent": "val_282",
+      "closed_at": "2026-07-07",
+      "owner": "alice"
+    },
+    {
+      "claim_id": "val_313",
+      "settlement_amount": "val_313",
+      "method": "val_313",
+      "letter_sent": "val_313",
+      "closed_at": "2026-02-10",
+      "owner": "erin"
+    },
+    {
+      "claim_id": "val_344",
+      "settlement_amount": "val_344",
+      "method": "val_344",
+      "letter_sent": "val_344",
+      "closed_at": "2026-09-13",
+      "owner": "dave"
+    },
+    {
+      "claim_id": "val_375",
+      "settlement_amount": "val_375",
+      "method": "val_375",
+      "letter_sent": "val_375",
+      "closed_at": "2026-04-16",
+      "owner": "bob"
+    },
+    {
+      "claim_id": "val_406",
+      "settlement_amount": "val_406",
+      "method": "val_406",
+      "letter_sent": "val_406",
+      "closed_at": "2026-11-19",
+      "owner": "alice"
+    },
+    {
+      "claim_id": "val_437",
+      "settlement_amount": "val_437",
+      "method": "val_437",
+      "letter_sent": "val_437",
+      "closed_at": "2026-06-22",
+      "owner": "erin"
+    },
+    {
+      "claim_id": "val_468",
+      "settlement_amount": "val_468",
+      "method": "val_468",
+      "letter_sent": "val_468",
+      "closed_at": "2026-01-25",
+      "owner": "dave"
+    },
+    {
+      "claim_id": "val_499",
+      "settlement_amount": "val_499",
+      "method": "val_499",
+      "letter_sent": "val_499",
+      "closed_at": "2026-08-28",
+      "owner": "carol"
+    },
+    {
+      "claim_id": "val_530",
+      "settlement_amount": "val_530",
+      "method": "val_530",
+      "letter_sent": "val_530",
+      "closed_at": "2026-03-03",
+      "owner": "bob"
+    },
+    {
+      "claim_id": "val_561",
+      "settlement_amount": "val_561",
+      "method": "val_561",
+      "letter_sent": "val_561",
+      "closed_at": "2026-10-06",
+      "owner": "alice"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/autonomous_dept_registry/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/autonomous-dept/* — read-only autonomous-department framework registry.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Optional
+- from `fastapi` import APIRouter, HTTPException
+- from `_` import registry
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `maturity()`: 10-level autonomy maturity model · this project's position annotated.
+- `governance()`: 14 continuous-learning governance gates.
+- `mcp_categories(priority_lte)`: 13 MCP marketing categories · optional priority filter.
+- `hybrids(value, level)`: 10 multi-AI hybrid use cases.
+- `marketing_stack()`: Open-source autonomous marketing stack.
+- `contact_center()`: Contact center voice AI stack (STT · TTS · platforms · LLMs).
+- `browser_stack(layer)`: 6-layer browser-agent + computer-use stack.
+- `hitl_tiers()`: Human-in-the-loop risk tier matrix.
+- `stats()`: (no docstring)
+
+## Outputs
+- Return values from functions above

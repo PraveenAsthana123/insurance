@@ -1,0 +1,94 @@
+{
+  "process": "renewal-processing",
+  "department": "policy-admin",
+  "columns": [
+    "policy_id",
+    "renewal_type",
+    "next_premium",
+    "owner",
+    "status",
+    "renewed_at"
+  ],
+  "rows": [
+    {
+      "policy_id": "val_68",
+      "renewal_type": "val_68",
+      "next_premium": "val_68",
+      "owner": "dave",
+      "status": "open",
+      "renewed_at": "2026-09-21"
+    },
+    {
+      "policy_id": "val_99",
+      "renewal_type": "val_99",
+      "next_premium": "val_99",
+      "owner": "carol",
+      "status": "closed",
+      "renewed_at": "2026-04-24"
+    },
+    {
+      "policy_id": "val_130",
+      "renewal_type": "val_130",
+      "next_premium": "val_130",
+      "owner": "bob",
+      "status": "review",
+      "renewed_at": "2026-11-27"
+    },
+    {
+      "policy_id": "val_161",
+      "renewal_type": "val_161",
+      "next_premium": "val_161",
+      "owner": "alice",
+      "status": "in-progress",
+      "renewed_at": "2026-06-02"
+    },
+    {
+      "policy_id": "val_192",
+      "renewal_type": "val_192",
+      "next_premium": "val_192",
+      "owner": "erin",
+      "status": "open",
+      "renewed_at": "2026-01-05"
+    },
+    {
+      "policy_id": "val_223",
+      "renewal_type": "val_223",
+      "next_premium": "val_223",
+      "owner": "carol",
+      "status": "closed",
+      "renewed_at": "2026-08-08"
+    },
+    {
+      "policy_id": "val_254",
+      "renewal_type": "val_254",
+      "next_premium": "val_254",
+      "owner": "bob",
+      "status": "review",
+      "renewed_at": "2026-03-11"
+    },
+    {
+      "policy_id": "val_285",
+      "renewal_type": "val_285",
+      "next_premium": "val_285",
+      "owner": "alice",
+      "status": "in-progress",
+      "renewed_at": "2026-10-14"
+    },
+    {
+      "policy_id": "val_316",
+      "renewal_type": "val_316",
+      "next_premium": "val_316",
+      "owner": "erin",
+      "status": "open",
+      "renewed_at": "2026-05-17"
+    },
+    {
+      "policy_id": "val_347",
+      "renewal_type": "val_347",
+      "next_premium": "val_347",
+      "owner": "dave",
+      "status": "closed",
+      "renewed_at": "2026-12-20"
+    }
+  ]
+}

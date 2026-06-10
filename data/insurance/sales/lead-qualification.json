@@ -1,0 +1,94 @@
+{
+  "process": "lead-qualification",
+  "department": "sales",
+  "columns": [
+    "lead_id",
+    "channel",
+    "score",
+    "owner",
+    "stage",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "lead_id": "val_540",
+      "channel": "B2E",
+      "score": 90.27,
+      "owner": "carol",
+      "stage": "val_540",
+      "updated_at": "2026-01-13"
+    },
+    {
+      "lead_id": "val_571",
+      "channel": "B2B",
+      "score": 71.27,
+      "owner": "bob",
+      "stage": "val_571",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "lead_id": "val_602",
+      "channel": "B2C",
+      "score": 52.28,
+      "owner": "alice",
+      "stage": "val_602",
+      "updated_at": "2026-03-19"
+    },
+    {
+      "lead_id": "val_633",
+      "channel": "B2E",
+      "score": 83.28,
+      "owner": "erin",
+      "stage": "val_633",
+      "updated_at": "2026-10-22"
+    },
+    {
+      "lead_id": "val_664",
+      "channel": "B2B",
+      "score": 64.28,
+      "owner": "dave",
+      "stage": "val_664",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "lead_id": "val_695",
+      "channel": "B2C",
+      "score": 95.28,
+      "owner": "bob",
+      "stage": "val_695",
+      "updated_at": "2026-12-28"
+    },
+    {
+      "lead_id": "val_726",
+      "channel": "B2E",
+      "score": 76.29,
+      "owner": "alice",
+      "stage": "val_726",
+      "updated_at": "2026-07-03"
+    },
+    {
+      "lead_id": "val_757",
+      "channel": "B2B",
+      "score": 57.29,
+      "owner": "erin",
+      "stage": "val_757",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "lead_id": "val_788",
+      "channel": "B2C",
+      "score": 88.29,
+      "owner": "dave",
+      "stage": "val_788",
+      "updated_at": "2026-09-09"
+    },
+    {
+      "lead_id": "val_819",
+      "channel": "B2E",
+      "score": 69.29,
+      "owner": "carol",
+      "stage": "val_819",
+      "updated_at": "2026-04-12"
+    }
+  ]
+}

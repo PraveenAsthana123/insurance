@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/middleware/idempotency.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Idempotency-Key middleware · Iter 25 · C2 closure.
+
+Per §47.7 (write paths · safe retry contract):
+  · POST/PUT/PATCH endpoints honor `Idempotency-Key` header
+  · First request: process + cache response (status + body) by key
+  · Retries with same key + same body hash: return cached response · skip handler
+  · 24-hour TTL (in-memory · production would use Redis)
+
+Per §57.7 honest: cache survives ONLY for the process lifetime
+(in-memory dict). Cross-restart durability needs Redis.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import time
+- from `typing` import Any
+- from `starlette.middleware.base` import BaseHTTPMiddleware
+- from `starlette.requests` import Request
+- from `starlette.responses` import Response, JSONResponse
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `IdempotencyMiddleware`: Honor Idempotency-Key for write methods · cache successful responses.
+### Functions
+- `_body_hash(body)`: (no docstring)
+- `_evict_expired()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Iter 26 · explicit Response.headers set on cache hit per Starlette doc
+- Rebuild request stream so handler can read body
+- Cache only successful responses

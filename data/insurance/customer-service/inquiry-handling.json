@@ -1,0 +1,94 @@
+{
+  "process": "inquiry-handling",
+  "department": "customer-service",
+  "columns": [
+    "interaction_id",
+    "channel",
+    "intent",
+    "sentiment",
+    "csat",
+    "captured_at"
+  ],
+  "rows": [
+    {
+      "interaction_id": "val_52",
+      "channel": "B2E",
+      "intent": "val_52",
+      "sentiment": "val_52",
+      "csat": "val_52",
+      "captured_at": "2026-01-17"
+    },
+    {
+      "interaction_id": "val_83",
+      "channel": "B2B",
+      "intent": "val_83",
+      "sentiment": "val_83",
+      "csat": "val_83",
+      "captured_at": "2026-08-20"
+    },
+    {
+      "interaction_id": "val_114",
+      "channel": "B2C",
+      "intent": "val_114",
+      "sentiment": "val_114",
+      "csat": "val_114",
+      "captured_at": "2026-03-23"
+    },
+    {
+      "interaction_id": "val_145",
+      "channel": "B2E",
+      "intent": "val_145",
+      "sentiment": "val_145",
+      "csat": "val_145",
+      "captured_at": "2026-10-26"
+    },
+    {
+      "interaction_id": "val_176",
+      "channel": "B2B",
+      "intent": "val_176",
+      "sentiment": "val_176",
+      "csat": "val_176",
+      "captured_at": "2026-05-01"
+    },
+    {
+      "interaction_id": "val_207",
+      "channel": "B2C",
+      "intent": "val_207",
+      "sentiment": "val_207",
+      "csat": "val_207",
+      "captured_at": "2026-12-04"
+    },
+    {
+      "interaction_id": "val_238",
+      "channel": "B2E",
+      "intent": "val_238",
+      "sentiment": "val_238",
+      "csat": "val_238",
+      "captured_at": "2026-07-07"
+    },
+    {
+      "interaction_id": "val_269",
+      "channel": "B2B",
+      "intent": "val_269",
+      "sentiment": "val_269",
+      "csat": "val_269",
+      "captured_at": "2026-02-10"
+    },
+    {
+      "interaction_id": "val_300",
+      "channel": "B2C",
+      "intent": "val_300",
+      "sentiment": "val_300",
+      "csat": "val_300",
+      "captured_at": "2026-09-13"
+    },
+    {
+      "interaction_id": "val_331",
+      "channel": "B2E",
+      "intent": "val_331",
+      "sentiment": "val_331",
+      "csat": "val_331",
+      "captured_at": "2026-04-16"
+    }
+  ]
+}

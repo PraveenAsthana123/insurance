@@ -1,0 +1,24 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ai_tool_registry/__init__.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Enterprise AI Tool Landscape registry.
+
+Per operator brief 2026-06-08 · captures the 200+ tool ecosystem typically
+discussed in Principal AI Architect / FDE / Staff Engineer interviews
+(OpenAI · Anthropic · Databricks · NVIDIA · AWS · Microsoft · Google).
+
+See docs/ENTERPRISE_AI_TOOL_LANDSCAPE.md for the full reference.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

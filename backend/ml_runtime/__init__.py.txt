@@ -1,0 +1,25 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml_runtime/__init__.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Backend ML runtime · honest stubs per §57.7.
+
+Provides minimal endpoints surfacing whatever model/SHAP/eval data IS
+available (MLflow if installed · empty otherwise). Each endpoint returns
+honest empty-state on missing dependency · never fabricates demo data.
+
+Per docs/PATH_E_EXECUTION_REPORT_2026-06-09.md P0.3 + P0.4 + P0.5
+backend-wire closure.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

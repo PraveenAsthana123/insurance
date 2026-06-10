@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_marketing_100_customers.py
+# auto-generated explainer · 2026-06-10T10:00:08Z
+
+## Purpose
+End-to-end test for marketing campaigns at scale (100+ customers).
+
+Per operator 2026-06-08: "test for 100 customer ..end to end"
+
+Verifies scale-out behavior with 100+ seeded customers (CUST-SYN-001..100):
+  1. Customer pool size ≥ 100
+  2. Create email campaign for 'standard' segment (≥ 50 candidates)
+  3. Execute · should create runs in proportion (consent + segment gates)
+  4. Check timing · execute completes in < 5 seconds for 100 candidates
+  5. Verify all runs share same correlation_id
+  6. Mark all runs as 'opened' + verify metrics update
+  7. Test bulk cohort_distribution captures segment split
+  8. RAI fairness DI ≥ 0.8 across observed cohorts
+  9. Cleanup leaves 0 test campaigns
+
+Per §47.6 + §57.7 + §64.13 + §75 + §76 (RAI · scale) + §82.7.
+
+## Imports
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `_` import uuid
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_cleanup()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ── 1. Customer pool size ≥ 100 ───────────────────────────
+- Count by segment for fairness baseline
+- ── 2. Create email campaign for 'standard' ──────────────
+- ── 3. Execute + time ────────────────────────────────────
+- ── 4. Timing budget ─────────────────────────────────────

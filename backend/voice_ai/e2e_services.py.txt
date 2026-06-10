@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/voice_ai/e2e_services.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+End-to-end observability services for voice AI.
+
+Per operator 2026-06-08: "each phase, component in detail and manual and
+automatic both scenario end to end with quality, benchmark, scoring,
+tracking date, timestamp, user".
+
+Per §64.34 (Per-Dept Simulation UI · 5 mandatory simulation layers):
+1. Backend layer (HTTP/DB/queue/agent/LLM with latency + status)
+2. Process layer (sub-process transitions · actor switch · decision branch)
+3. Data layer (input row → cleaned → enriched → predicted)
+4. Accuracy layer (model confidence + rules + override + final)
+5. Reporting layer (per-run summary · time/cost/error/accuracy delta)
+
+Per §82.7 (drift monitoring) · §75 (12-axis metrics) · §86 (arch docs).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import statistics
+- from `datetime` import datetime
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `phase_breakdown(tenant_id)`: Returns the 8-phase × component breakdown with live metrics per phase.
+- `session_tracking(session_id, tenant_id)`: Returns chronological timeline of a session for the tracking grid.
+- `benchmark(tenant_id)`: Compare manual baseline vs live automatic metrics per phase.
+- `quality_scoring(tenant_id)`: Aggregate quality score per phase · 0..1.
+- `explainability_trace(session_id, tenant_id)`: Per-turn attribution: which keyword triggered which feature/category/match.
+- `voice_catalog()`: Return supported language taxonomy + Indian-accent flags + tier mapping.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Phase + Component static map (per §64.34 architecture)
+- ─────────────────────────────────────────────────────────────────────
+- ─────────────────────────────────────────────────────────────────────
+- Phase breakdown · what each phase does + components + metrics

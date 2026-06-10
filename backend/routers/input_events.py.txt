@@ -1,0 +1,56 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/input_events.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+/api/v1/input-events — global input persistence per GLOBAL_INPUT_PERSISTENCE_POLICY.
+
+Contract:
+- Append-only writes to user_input_events (migration 051).
+- Tenant from middleware (X-Tenant-ID · case-insensitive · falls back to 'default').
+- Actor + role from request state (auth middleware sets request.state.actor · .role_code).
+- Idempotency-Key honored for safe retries.
+- Payload redaction at boundary · never store secrets.
+- Reads tenant-scoped by default.
+
+Per docs/GLOBAL_INPUT_PERSISTENCE_POLICY.md non-negotiable rule #1: persist through
+backend, never direct browser-to-DB.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import uuid
+- from `typing` import Any, Optional
+- from `fastapi` import APIRouter, Depends, HTTPException, Query, Request
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `InputEventCreate`: (no docstring)
+- `InputEventResponse`: (no docstring)
+### Functions
+- `redact(payload, pii_classification)`: Return (redacted_payload, was_redacted). Recursive · best-effort.
+- `_tenant(request)`: (no docstring)
+- `_actor(request)`: (no docstring)
+- `_role(request)`: (no docstring)
+- `_request_id(request)`: (no docstring)
+- `_idempotency_key(request)`: (no docstring)
+- `async create_input_event(body, request)`: (no docstring)
+- `async get_input_event(event_id, request)`: Tenant-scoped read.
+- `async list_input_events(request, source_surface, input_kind, department_id, process_id)`: List tenant-scoped input events with filters.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- -------------- Redaction (boundary defense) ----------------
+- Restricted classification → opaque hash for everything
+- -------------- Schemas ----------------
+- -------------- Helpers ----------------
+- -------------- Routes ----------------

@@ -1,0 +1,40 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/insurance_alignment_audit.py
+# auto-generated explainer · 2026-06-10T10:00:15Z
+
+## Purpose
+Insurance alignment audit.
+
+Deterministic coverage check for the department / channel / data / AI / bot
+alignment surface that the /insurance UI route renders. Writes timestamped
+and `*_latest` Markdown + JSON reports under jobs/reports/insurance/ for
+hourly governance review (see scripts/install_insurance_alignment_cron.sh).
+
+Exit 0 = all checks pass.
+Exit 1 = at least one check failed (cron job surfaces this in the log).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_audit_blueprint(checks)`: Verify the autonomous-insurance blueprint (B2C/B2B/B2E + maturity +
+- `_audit_state_files(checks)`: Validate the three operator-editable state files: capability_status,
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Agentic AI reference architecture (operator-provided)
+- §73.14 — every AI catalog row has 5 enriched fields (Data/Model/Accuracy/Benchmark/Stakeholder)
+- Per §73.3a referential integrity — every AI in
+- process.automatic_process.ai_workflow + process.ai[].ai_type + top20_roi[].ai_opportunity
+- must resolve to a catalog entry. Mirrors drill BP44.

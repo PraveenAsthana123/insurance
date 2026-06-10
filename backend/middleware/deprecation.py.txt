@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/middleware/deprecation.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Deprecation header middleware · Iter 35.
+
+Per RFC 8594 + RFC 9745 · serve Deprecation + Sunset headers on routes
+marked as deprecated. Other requests pass through untouched.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `pathlib` import Path
+- from `starlette.middleware.base` import BaseHTTPMiddleware
+- from `starlette.requests` import Request
+
+## Inputs
+- Env vars: INSUR_DEPRECATION_PATH
+
+## Process
+### Classes
+- `DeprecationHeaderMiddleware`: (no docstring)
+### Functions
+- `_load()`: (no docstring)
+
+## Outputs
+- Return values from functions above

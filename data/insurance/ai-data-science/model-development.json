@@ -1,0 +1,94 @@
+{
+  "process": "model-development",
+  "department": "ai-data-science",
+  "columns": [
+    "experiment_id",
+    "model",
+    "metric",
+    "value",
+    "owner",
+    "trained_at"
+  ],
+  "rows": [
+    {
+      "experiment_id": "val_643",
+      "model": "val_643",
+      "metric": "val_643",
+      "value": "val_643",
+      "owner": "alice",
+      "trained_at": "2026-12-20"
+    },
+    {
+      "experiment_id": "val_674",
+      "model": "val_674",
+      "metric": "val_674",
+      "value": "val_674",
+      "owner": "erin",
+      "trained_at": "2026-07-23"
+    },
+    {
+      "experiment_id": "val_705",
+      "model": "val_705",
+      "metric": "val_705",
+      "value": "val_705",
+      "owner": "dave",
+      "trained_at": "2026-02-26"
+    },
+    {
+      "experiment_id": "val_736",
+      "model": "val_736",
+      "metric": "val_736",
+      "value": "val_736",
+      "owner": "carol",
+      "trained_at": "2026-09-01"
+    },
+    {
+      "experiment_id": "val_767",
+      "model": "val_767",
+      "metric": "val_767",
+      "value": "val_767",
+      "owner": "alice",
+      "trained_at": "2026-04-04"
+    },
+    {
+      "experiment_id": "val_798",
+      "model": "val_798",
+      "metric": "val_798",
+      "value": "val_798",
+      "owner": "erin",
+      "trained_at": "2026-11-07"
+    },
+    {
+      "experiment_id": "val_829",
+      "model": "val_829",
+      "metric": "val_829",
+      "value": "val_829",
+      "owner": "dave",
+      "trained_at": "2026-06-10"
+    },
+    {
+      "experiment_id": "val_860",
+      "model": "val_860",
+      "metric": "val_860",
+      "value": "val_860",
+      "owner": "carol",
+      "trained_at": "2026-01-13"
+    },
+    {
+      "experiment_id": "val_891",
+      "model": "val_891",
+      "metric": "val_891",
+      "value": "val_891",
+      "owner": "bob",
+      "trained_at": "2026-08-16"
+    },
+    {
+      "experiment_id": "val_922",
+      "model": "val_922",
+      "metric": "val_922",
+      "value": "val_922",
+      "owner": "alice",
+      "trained_at": "2026-03-19"
+    }
+  ]
+}

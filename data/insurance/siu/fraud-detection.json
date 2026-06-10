@@ -1,0 +1,94 @@
+{
+  "process": "fraud-detection",
+  "department": "siu",
+  "columns": [
+    "alert_id",
+    "claim_id",
+    "score",
+    "ring_id",
+    "status",
+    "raised_at"
+  ],
+  "rows": [
+    {
+      "alert_id": "val_588",
+      "claim_id": "val_588",
+      "score": 88.04,
+      "ring_id": "val_588",
+      "status": "open",
+      "raised_at": "2026-01-01"
+    },
+    {
+      "alert_id": "val_619",
+      "claim_id": "val_619",
+      "score": 69.04,
+      "ring_id": "val_619",
+      "status": "closed",
+      "raised_at": "2026-08-04"
+    },
+    {
+      "alert_id": "val_650",
+      "claim_id": "val_650",
+      "score": 50.05,
+      "ring_id": "val_650",
+      "status": "review",
+      "raised_at": "2026-03-07"
+    },
+    {
+      "alert_id": "val_681",
+      "claim_id": "val_681",
+      "score": 81.05,
+      "ring_id": "val_681",
+      "status": "in-progress",
+      "raised_at": "2026-10-10"
+    },
+    {
+      "alert_id": "val_712",
+      "claim_id": "val_712",
+      "score": 62.05,
+      "ring_id": "val_712",
+      "status": "open",
+      "raised_at": "2026-05-13"
+    },
+    {
+      "alert_id": "val_743",
+      "claim_id": "val_743",
+      "score": 93.05,
+      "ring_id": "val_743",
+      "status": "closed",
+      "raised_at": "2026-12-16"
+    },
+    {
+      "alert_id": "val_774",
+      "claim_id": "val_774",
+      "score": 74.06,
+      "ring_id": "val_774",
+      "status": "review",
+      "raised_at": "2026-07-19"
+    },
+    {
+      "alert_id": "val_805",
+      "claim_id": "val_805",
+      "score": 55.06,
+      "ring_id": "val_805",
+      "status": "in-progress",
+      "raised_at": "2026-02-22"
+    },
+    {
+      "alert_id": "val_836",
+      "claim_id": "val_836",
+      "score": 86.06,
+      "ring_id": "val_836",
+      "status": "open",
+      "raised_at": "2026-09-25"
+    },
+    {
+      "alert_id": "val_867",
+      "claim_id": "val_867",
+      "score": 67.06,
+      "ring_id": "val_867",
+      "status": "closed",
+      "raised_at": "2026-04-28"
+    }
+  ]
+}

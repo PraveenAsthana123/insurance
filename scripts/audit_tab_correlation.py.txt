@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_tab_correlation.py
+# auto-generated explainer · 2026-06-10T10:00:09Z
+
+## Purpose
+Per-tab correlation audit · checks each Process*Tab + Insurance Tab
+file for the canonical UI pattern established in commits 82d16642 +
+c76e1f4b.
+
+Per docs/COMPREHENSIVE_MATRIX_2026-06-09.md Matrix 7 + 10.
+
+Checks each tab for 7 canonical-pattern markers:
+  1. Imports canonical components (InfoCard · JourneyFlow · TodoList)?
+  2. Renders JourneyFlow at top?
+  3. Renders TodoList at top?
+  4. Renders ≥ 1 InfoCard (info vs action affordance)?
+  5. Reads a per-tab unique proc.* field (not shared with other tabs)?
+  6. Has tab-specific InfoCard text (sequence/priority/info/operation)?
+  7. Differentiated content when data missing (no generic EmptyState)?
+
+NOT a release-gate · INFORMATIONAL only · exits 0 always. Output goes
+to jobs/reports/tab-correlation-audit/.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import re
+- from `_` import sys
+- from `collections` import Counter
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `score_tab(text)`: Return per-marker findings + composite 1-5 score.
+- `find_tabs()`: Returns list of (tab_id, path, source) tuples.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Per-tab unique proc.* field map (operator-correlated by name)
+- TabShell wrapper credit (canonical pattern propagation)
+- Score components (out of 5)
+- ProcessPage tabs · one file per tab
+- Insurance tabs · one big file with multiple exports

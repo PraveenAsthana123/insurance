@@ -1,0 +1,55 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_insurance_alignment.py
+# auto-generated explainer · 2026-06-10T10:01:11Z
+
+## Purpose
+drill_insurance_alignment — locks the audit invariants for /insurance.
+
+Both directions: positive cases must pass; mutations that violate the
+operating model must be detected as fail. ≥3 negative assertions per §43.
+
+Run:
+    python tests/drills/drill_insurance_alignment.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import copy
+- from `_` import importlib.util
+- from `_` import json
+- from `_` import sys
+- from `pathlib` import Path
+- from `_` import insurance_alignment_audit
+- from `_` import shutil
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `check(name, ok, detail)`: (no docstring)
+- `load_module()`: (no docstring)
+- `run_audit(mod)`: (no docstring)
+- `run_audit_with_mutated_blueprint(mutator)`: Returns {check_name: status} from running the production audit's
+- `_corrupt_matrix(b)`: (no docstring)
+- `_dup_rank(b)`: (no docstring)
+- `_strip_scenario(b)`: (no docstring)
+- `_dup_type(b)`: (no docstring)
+- `_strip_missing_ai(b)`: (no docstring)
+- `_dup_top50(b)`: (no docstring)
+- `_empty_dept22_processes(b)`: (no docstring)
+- `_drop_b2e_scenarios(b)`: (no docstring)
+- `_empty_dept6_kpis(b)`: (no docstring)
+- `_strip_dept1_partial(b)`: (no docstring)
+- `_strip_dept14_partial(b)`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- === Positive invariants ===
+- === Negative invariants (mutations that MUST be detected as fail) ===
+- N1: removing B2E from Sales must NOT break enterprise channel coverage
+- (Underwriting + Policy Servicing + Finance also carry B2E) BUT must
+- reduce the per-dept channel breadth visible in the row.

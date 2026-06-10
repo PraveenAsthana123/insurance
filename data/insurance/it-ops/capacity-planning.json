@@ -1,0 +1,94 @@
+{
+  "process": "capacity-planning",
+  "department": "it-ops",
+  "columns": [
+    "service",
+    "metric",
+    "current",
+    "forecast",
+    "headroom",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "service": "val_487",
+      "metric": "val_487",
+      "current": "val_487",
+      "forecast": "val_487",
+      "headroom": "val_487",
+      "as_of": "val_487"
+    },
+    {
+      "service": "val_518",
+      "metric": "val_518",
+      "current": "val_518",
+      "forecast": "val_518",
+      "headroom": "val_518",
+      "as_of": "val_518"
+    },
+    {
+      "service": "val_549",
+      "metric": "val_549",
+      "current": "val_549",
+      "forecast": "val_549",
+      "headroom": "val_549",
+      "as_of": "val_549"
+    },
+    {
+      "service": "val_580",
+      "metric": "val_580",
+      "current": "val_580",
+      "forecast": "val_580",
+      "headroom": "val_580",
+      "as_of": "val_580"
+    },
+    {
+      "service": "val_611",
+      "metric": "val_611",
+      "current": "val_611",
+      "forecast": "val_611",
+      "headroom": "val_611",
+      "as_of": "val_611"
+    },
+    {
+      "service": "val_642",
+      "metric": "val_642",
+      "current": "val_642",
+      "forecast": "val_642",
+      "headroom": "val_642",
+      "as_of": "val_642"
+    },
+    {
+      "service": "val_673",
+      "metric": "val_673",
+      "current": "val_673",
+      "forecast": "val_673",
+      "headroom": "val_673",
+      "as_of": "val_673"
+    },
+    {
+      "service": "val_704",
+      "metric": "val_704",
+      "current": "val_704",
+      "forecast": "val_704",
+      "headroom": "val_704",
+      "as_of": "val_704"
+    },
+    {
+      "service": "val_735",
+      "metric": "val_735",
+      "current": "val_735",
+      "forecast": "val_735",
+      "headroom": "val_735",
+      "as_of": "val_735"
+    },
+    {
+      "service": "val_766",
+      "metric": "val_766",
+      "current": "val_766",
+      "forecast": "val_766",
+      "headroom": "val_766",
+      "as_of": "val_766"
+    }
+  ]
+}

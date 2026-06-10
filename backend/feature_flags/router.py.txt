@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/feature_flags/router.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+/api/v1/feature-flags/* · Iter 28 · K4 · simple feature flag store.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `pathlib` import Path
+- from `typing` import Any
+- from `fastapi` import APIRouter, Depends, HTTPException
+- from `pydantic` import BaseModel
+- from `core.role_dependency` import require_admin
+
+## Inputs
+- Env vars: INSUR_FLAGS_PATH
+
+## Process
+### Classes
+- `FlagUpdate`: (no docstring)
+### Functions
+- `_load()`: (no docstring)
+- `_save(flags)`: (no docstring)
+- `health()`: (no docstring)
+- `list_flags()`: (no docstring)
+- `get_flag(key)`: (no docstring)
+- `update_flag(key, body)`: (no docstring)
+- `check_flag(key)`: Public check · returns just {enabled, rollout_pct} · safe for UI.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Default flags · operator can override via POST or by editing the file.

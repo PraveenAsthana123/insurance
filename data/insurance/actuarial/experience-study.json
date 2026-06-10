@@ -1,0 +1,94 @@
+{
+  "process": "experience-study",
+  "department": "actuarial",
+  "columns": [
+    "study_id",
+    "cohort",
+    "actual",
+    "expected",
+    "ae_ratio",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "study_id": "val_69",
+      "cohort": "val_69",
+      "actual": "val_69",
+      "expected": "val_69",
+      "ae_ratio": "val_69",
+      "as_of": "val_69"
+    },
+    {
+      "study_id": "val_100",
+      "cohort": "val_100",
+      "actual": "val_100",
+      "expected": "val_100",
+      "ae_ratio": "val_100",
+      "as_of": "val_100"
+    },
+    {
+      "study_id": "val_131",
+      "cohort": "val_131",
+      "actual": "val_131",
+      "expected": "val_131",
+      "ae_ratio": "val_131",
+      "as_of": "val_131"
+    },
+    {
+      "study_id": "val_162",
+      "cohort": "val_162",
+      "actual": "val_162",
+      "expected": "val_162",
+      "ae_ratio": "val_162",
+      "as_of": "val_162"
+    },
+    {
+      "study_id": "val_193",
+      "cohort": "val_193",
+      "actual": "val_193",
+      "expected": "val_193",
+      "ae_ratio": "val_193",
+      "as_of": "val_193"
+    },
+    {
+      "study_id": "val_224",
+      "cohort": "val_224",
+      "actual": "val_224",
+      "expected": "val_224",
+      "ae_ratio": "val_224",
+      "as_of": "val_224"
+    },
+    {
+      "study_id": "val_255",
+      "cohort": "val_255",
+      "actual": "val_255",
+      "expected": "val_255",
+      "ae_ratio": "val_255",
+      "as_of": "val_255"
+    },
+    {
+      "study_id": "val_286",
+      "cohort": "val_286",
+      "actual": "val_286",
+      "expected": "val_286",
+      "ae_ratio": "val_286",
+      "as_of": "val_286"
+    },
+    {
+      "study_id": "val_317",
+      "cohort": "val_317",
+      "actual": "val_317",
+      "expected": "val_317",
+      "ae_ratio": "val_317",
+      "as_of": "val_317"
+    },
+    {
+      "study_id": "val_348",
+      "cohort": "val_348",
+      "actual": "val_348",
+      "expected": "val_348",
+      "ae_ratio": "val_348",
+      "as_of": "val_348"
+    }
+  ]
+}

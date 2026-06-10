@@ -1,0 +1,94 @@
+{
+  "process": "invoicing",
+  "department": "billing",
+  "columns": [
+    "invoice_id",
+    "policy_id",
+    "amount",
+    "due_at",
+    "channel",
+    "status"
+  ],
+  "rows": [
+    {
+      "invoice_id": "val_214",
+      "policy_id": "val_214",
+      "amount": 32.14,
+      "due_at": "2026-11-23",
+      "channel": "B2C",
+      "status": "review"
+    },
+    {
+      "invoice_id": "val_245",
+      "policy_id": "val_245",
+      "amount": 32.45,
+      "due_at": "2026-06-26",
+      "channel": "B2E",
+      "status": "in-progress"
+    },
+    {
+      "invoice_id": "val_276",
+      "policy_id": "val_276",
+      "amount": 32.76,
+      "due_at": "2026-01-01",
+      "channel": "B2B",
+      "status": "open"
+    },
+    {
+      "invoice_id": "val_307",
+      "policy_id": "val_307",
+      "amount": 33.07,
+      "due_at": "2026-08-04",
+      "channel": "B2C",
+      "status": "closed"
+    },
+    {
+      "invoice_id": "val_338",
+      "policy_id": "val_338",
+      "amount": 33.38,
+      "due_at": "2026-03-07",
+      "channel": "B2E",
+      "status": "review"
+    },
+    {
+      "invoice_id": "val_369",
+      "policy_id": "val_369",
+      "amount": 33.69,
+      "due_at": "2026-10-10",
+      "channel": "B2B",
+      "status": "in-progress"
+    },
+    {
+      "invoice_id": "val_400",
+      "policy_id": "val_400",
+      "amount": 34.0,
+      "due_at": "2026-05-13",
+      "channel": "B2C",
+      "status": "open"
+    },
+    {
+      "invoice_id": "val_431",
+      "policy_id": "val_431",
+      "amount": 34.31,
+      "due_at": "2026-12-16",
+      "channel": "B2E",
+      "status": "closed"
+    },
+    {
+      "invoice_id": "val_462",
+      "policy_id": "val_462",
+      "amount": 34.62,
+      "due_at": "2026-07-19",
+      "channel": "B2B",
+      "status": "review"
+    },
+    {
+      "invoice_id": "val_493",
+      "policy_id": "val_493",
+      "amount": 34.93,
+      "due_at": "2026-02-22",
+      "channel": "B2C",
+      "status": "in-progress"
+    }
+  ]
+}

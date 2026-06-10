@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/insurance_init_state.py
+# auto-generated explainer · 2026-06-10T10:00:06Z
+
+## Purpose
+Initialize / refresh the operator-editable state files that sit alongside
+the blueprint.
+
+Three state files live under data/insurance/:
+  - capability_status.json — name → status for every AI capability surfaced
+    by the blueprint (missing_capabilities · enterprise_arch layers ·
+    enterprise_missing_layers · top50_missing_ai · per-dept top_missing).
+  - maturity_state.json — current_level per dept in the catalog (L0..L6).
+  - implementation_state.json — current_step_index + per-step status across
+    the 12-step implementation_sequence.
+
+Idempotent. Re-running adds new keys (e.g., after new depts land) without
+ever overwriting an operator-set value. Default for new entries is
+"planned" / "L0" / 0.
+
+Valid status vocab: planned · in-progress · live · deferred.
+Valid maturity vocab: L0 · L1 · L2 · L3 · L4 · L5 · L6.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_load(path)`: (no docstring)
+- `_write(path, payload)`: (no docstring)
+- `_ensure(d, key, default)`: (no docstring)
+- `collect_capability_names(bp)`: Pull every AI capability / layer / role name out of the blueprint
+- `init_capability_status(bp)`: (no docstring)
+- `init_maturity_state(bp)`: (no docstring)
+- `init_implementation_state(bp)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- keep current_level + notes; refresh display name in case blueprint renamed it
+- clamp the current_step_index to a valid range

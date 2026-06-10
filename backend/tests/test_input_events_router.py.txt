@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_input_events_router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Tests for /api/v1/input-events router per GLOBAL_INPUT_PERSISTENCE_POLICY.
+
+Contract checks:
+- POST validates enums (input_kind · pii_classification · retention_class)
+- POST redacts payload at boundary (secrets · email · phone)
+- POST computes SHA-256 payload_hash
+- POST returns 503 INPUT_PERSIST_UNAVAILABLE for high-risk when DB unreachable (fail-closed)
+- POST returns 201 for low-risk even when DB unreachable (soft-fail per rule 9)
+- GET tenant-scoped (other-tenant request → 404)
+- LIST tenant-scoped + paginated
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import pytest
+- from `fastapi.testclient` import TestClient
+- from `core.rbac_middleware` import PERMS_MATRIX, _READ_ROLES
+- from `main` import app
+- from `routers.input_events` import router, redact
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `TestRedaction`: (no docstring)
+- `TestCreateInputEvent`: (no docstring)
+- `TestListInputEvents`: (no docstring)
+- `TestTenantScoping`: These tests verify tenant isolation behavior when DB is available.
+### Functions
+- `ensure_input_events_router_mounted()`: Mount router + permission patterns if not already (matches other test files' pattern).
+- `client()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ============= Redaction unit tests =============
+- ============= POST contract tests =============
+- 422 from Pydantic OR 400 from our explicit check
+- Without Postgres available, soft-fail returns 201 with hash · or
+- 503 if our DB module import-error fallback fires for high-risk only.

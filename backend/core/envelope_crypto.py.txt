@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/envelope_crypto.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Envelope encryption helper · Iter 31 · F4 simplified.
+
+Per §47.6 + §76 Privacy pillar · operator wires real KMS (AWS KMS · GCP
+KMS · Vault) at the master-key boundary. This helper uses Fernet for the
+data key + a master key in env for the wrap layer.
+
+PATTERN:
+  · master_key = env INSUR_MASTER_KEY (base64-encoded 32-byte secret)
+  · For each blob: generate a fresh data_key, encrypt blob with data_key,
+    encrypt data_key with master_key. Store (encrypted_data_key, ciphertext).
+  · Decrypt: unwrap data_key with master_key, then decrypt blob.
+
+Per §57.7: dev fallback master key when env not set · production must
+override.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import base64
+- from `_` import hashlib
+- from `_` import hmac
+- from `_` import json
+- from `_` import os
+- from `_` import secrets
+
+## Inputs
+- Env vars: INSUR_MASTER_KEY
+
+## Process
+### Functions
+- `_get_master_key()`: (no docstring)
+- `_xor(a, b)`: XOR-encrypt a with key b (b repeated to a's length).
+- `_wrap_key(data_key, master_key)`: Simple key-wrap: XOR + HMAC tag · operator wires real KMS for prod.
+- `_unwrap_key(blob, master_key)`: (no docstring)
+- `encrypt(plaintext)`: Encrypt with a fresh data key · returns {encrypted_data_key, ciphertext, alg}.
+- `decrypt(envelope)`: Decrypt an envelope · raises ValueError on tag mismatch.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Dev fallback · derived from a fixed phrase · operator MUST override
+- Fernet expects URL-safe base64 32-byte key
+- Per §57.7 fallback: XOR + HMAC tag · scaffold encryption only
+- XOR fallback

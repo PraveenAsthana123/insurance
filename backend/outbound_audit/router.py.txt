@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/outbound_audit/router.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+/api/v1/outbound-audit/* · Iter 35 · log all outbound HTTP calls.
+
+Per §47.6 + §38.3 · cross-service audit visibility.
+Other modules call log_outbound(url, method, status, ms) explicitly.
+This module surfaces the log + aggregate stats.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import time
+- from `collections` import deque
+- from `datetime` import datetime, timezone
+- from `typing` import Deque
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `OutboundEntry`: (no docstring)
+### Functions
+- `log_outbound(entry)`: Record an outbound call · usable from any module.
+- `health()`: (no docstring)
+- `log_endpoint(body)`: (no docstring)
+- `list_log(limit, target_module, status_lt)`: (no docstring)
+- `stats()`: (no docstring)
+
+## Outputs
+- Return values from functions above

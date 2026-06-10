@@ -1,0 +1,45 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_data_pipeline.py
+# auto-generated explainer · 2026-06-10T10:00:16Z
+
+## Purpose
+Data Pipeline structure audit · 5-phase per-process.
+
+Per operator brief 2026-06-09: Data tab must have one-row-per-task
+with info vs action cards + IPO + flowchart + status one-liner.
+
+11 assertions:
+  1. /health 200 + 5 phases + n_tasks > 15
+  2. /tasks catalog returns ≥ 15 tasks
+  3. each catalog task has required fields (id · card_kind · title · phase · input · process · output · library)
+  4. card_kind in {'info', 'action'}
+  5. phase in {Inventory · EDA · Quality · Image · Conversion}
+  6. /{pid}/tasks returns same N materialized
+  7. each materialized has score in [0,1]
+  8. each has status in {complete · running · pending · scaffold}
+  9. each has status_one_liner string
+ 10. /{pid}/{task_id} returns single task
+ 11. /summary/journey-flow returns ordered phases
+
+## Imports
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. /health
+- 2. /tasks catalog
+- 3. Required fields
+- 4. card_kind in valid set
+- 5. phase valid

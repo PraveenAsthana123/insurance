@@ -1,0 +1,94 @@
+{
+  "process": "social-listening",
+  "department": "marketing",
+  "columns": [
+    "post_id",
+    "platform",
+    "author",
+    "sentiment",
+    "reach",
+    "captured_at"
+  ],
+  "rows": [
+    {
+      "post_id": "val_611",
+      "platform": "val_611",
+      "author": "val_611",
+      "sentiment": "val_611",
+      "reach": "val_611",
+      "captured_at": "2026-04-16"
+    },
+    {
+      "post_id": "val_642",
+      "platform": "val_642",
+      "author": "val_642",
+      "sentiment": "val_642",
+      "reach": "val_642",
+      "captured_at": "2026-11-19"
+    },
+    {
+      "post_id": "val_673",
+      "platform": "val_673",
+      "author": "val_673",
+      "sentiment": "val_673",
+      "reach": "val_673",
+      "captured_at": "2026-06-22"
+    },
+    {
+      "post_id": "val_704",
+      "platform": "val_704",
+      "author": "val_704",
+      "sentiment": "val_704",
+      "reach": "val_704",
+      "captured_at": "2026-01-25"
+    },
+    {
+      "post_id": "val_735",
+      "platform": "val_735",
+      "author": "val_735",
+      "sentiment": "val_735",
+      "reach": "val_735",
+      "captured_at": "2026-08-28"
+    },
+    {
+      "post_id": "val_766",
+      "platform": "val_766",
+      "author": "val_766",
+      "sentiment": "val_766",
+      "reach": "val_766",
+      "captured_at": "2026-03-03"
+    },
+    {
+      "post_id": "val_797",
+      "platform": "val_797",
+      "author": "val_797",
+      "sentiment": "val_797",
+      "reach": "val_797",
+      "captured_at": "2026-10-06"
+    },
+    {
+      "post_id": "val_828",
+      "platform": "val_828",
+      "author": "val_828",
+      "sentiment": "val_828",
+      "reach": "val_828",
+      "captured_at": "2026-05-09"
+    },
+    {
+      "post_id": "val_859",
+      "platform": "val_859",
+      "author": "val_859",
+      "sentiment": "val_859",
+      "reach": "val_859",
+      "captured_at": "2026-12-12"
+    },
+    {
+      "post_id": "val_890",
+      "platform": "val_890",
+      "author": "val_890",
+      "sentiment": "val_890",
+      "reach": "val_890",
+      "captured_at": "2026-07-15"
+    }
+  ]
+}

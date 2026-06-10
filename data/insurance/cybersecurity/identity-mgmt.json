@@ -1,0 +1,94 @@
+{
+  "process": "identity-mgmt",
+  "department": "cybersecurity",
+  "columns": [
+    "identity",
+    "role",
+    "risk",
+    "mfa",
+    "last_review",
+    "owner"
+  ],
+  "rows": [
+    {
+      "identity": "val_944",
+      "role": "val_944",
+      "risk": "val_944",
+      "mfa": "val_944",
+      "last_review": "val_944",
+      "owner": "dave"
+    },
+    {
+      "identity": "val_975",
+      "role": "val_975",
+      "risk": "val_975",
+      "mfa": "val_975",
+      "last_review": "val_975",
+      "owner": "bob"
+    },
+    {
+      "identity": "val_6",
+      "role": "val_6",
+      "risk": "val_6",
+      "mfa": "val_6",
+      "last_review": "val_6",
+      "owner": "alice"
+    },
+    {
+      "identity": "val_37",
+      "role": "val_37",
+      "risk": "val_37",
+      "mfa": "val_37",
+      "last_review": "val_37",
+      "owner": "erin"
+    },
+    {
+      "identity": "val_68",
+      "role": "val_68",
+      "risk": "val_68",
+      "mfa": "val_68",
+      "last_review": "val_68",
+      "owner": "dave"
+    },
+    {
+      "identity": "val_99",
+      "role": "val_99",
+      "risk": "val_99",
+      "mfa": "val_99",
+      "last_review": "val_99",
+      "owner": "carol"
+    },
+    {
+      "identity": "val_130",
+      "role": "val_130",
+      "risk": "val_130",
+      "mfa": "val_130",
+      "last_review": "val_130",
+      "owner": "bob"
+    },
+    {
+      "identity": "val_161",
+      "role": "val_161",
+      "risk": "val_161",
+      "mfa": "val_161",
+      "last_review": "val_161",
+      "owner": "alice"
+    },
+    {
+      "identity": "val_192",
+      "role": "val_192",
+      "risk": "val_192",
+      "mfa": "val_192",
+      "last_review": "val_192",
+      "owner": "erin"
+    },
+    {
+      "identity": "val_223",
+      "role": "val_223",
+      "risk": "val_223",
+      "mfa": "val_223",
+      "last_review": "val_223",
+      "owner": "carol"
+    }
+  ]
+}

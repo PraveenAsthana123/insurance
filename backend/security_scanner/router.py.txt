@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/security_scanner/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/security-scanner/* · Iter 28 · F7 · Bandit + Semgrep findings.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import subprocess
+- from `fastapi` import APIRouter
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_run_bandit()`: (no docstring)
+- `_scaffold_findings()`: Per §57.7 · deterministic scaffold when scanners unavailable.
+- `health()`: (no docstring)
+- `findings(severity, tool)`: (no docstring)
+- `summary()`: (no docstring)
+
+## Outputs
+- Return values from functions above

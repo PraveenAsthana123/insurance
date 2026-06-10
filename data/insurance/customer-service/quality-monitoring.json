@@ -1,0 +1,94 @@
+{
+  "process": "quality-monitoring",
+  "department": "customer-service",
+  "columns": [
+    "interaction_id",
+    "csr",
+    "quality_score",
+    "issues",
+    "coach_nudge",
+    "scored_at"
+  ],
+  "rows": [
+    {
+      "interaction_id": "val_781",
+      "csr": "val_781",
+      "quality_score": "val_781",
+      "issues": "val_781",
+      "coach_nudge": "val_781",
+      "scored_at": "2026-06-26"
+    },
+    {
+      "interaction_id": "val_812",
+      "csr": "val_812",
+      "quality_score": "val_812",
+      "issues": "val_812",
+      "coach_nudge": "val_812",
+      "scored_at": "2026-01-01"
+    },
+    {
+      "interaction_id": "val_843",
+      "csr": "val_843",
+      "quality_score": "val_843",
+      "issues": "val_843",
+      "coach_nudge": "val_843",
+      "scored_at": "2026-08-04"
+    },
+    {
+      "interaction_id": "val_874",
+      "csr": "val_874",
+      "quality_score": "val_874",
+      "issues": "val_874",
+      "coach_nudge": "val_874",
+      "scored_at": "2026-03-07"
+    },
+    {
+      "interaction_id": "val_905",
+      "csr": "val_905",
+      "quality_score": "val_905",
+      "issues": "val_905",
+      "coach_nudge": "val_905",
+      "scored_at": "2026-10-10"
+    },
+    {
+      "interaction_id": "val_936",
+      "csr": "val_936",
+      "quality_score": "val_936",
+      "issues": "val_936",
+      "coach_nudge": "val_936",
+      "scored_at": "2026-05-13"
+    },
+    {
+      "interaction_id": "val_967",
+      "csr": "val_967",
+      "quality_score": "val_967",
+      "issues": "val_967",
+      "coach_nudge": "val_967",
+      "scored_at": "2026-12-16"
+    },
+    {
+      "interaction_id": "val_998",
+      "csr": "val_998",
+      "quality_score": "val_998",
+      "issues": "val_998",
+      "coach_nudge": "val_998",
+      "scored_at": "2026-07-19"
+    },
+    {
+      "interaction_id": "val_29",
+      "csr": "val_29",
+      "quality_score": "val_29",
+      "issues": "val_29",
+      "coach_nudge": "val_29",
+      "scored_at": "2026-02-22"
+    },
+    {
+      "interaction_id": "val_60",
+      "csr": "val_60",
+      "quality_score": "val_60",
+      "issues": "val_60",
+      "coach_nudge": "val_60",
+      "scored_at": "2026-09-25"
+    }
+  ]
+}

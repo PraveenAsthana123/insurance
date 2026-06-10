@@ -1,0 +1,25 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/heatmap/router.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+/api/v1/heatmap · Iter 36 · endpoint request heat map.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter
+- from `middleware.endpoint_heatmap` import snapshot
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `heatmap(top, min_count)`: (no docstring)
+- `by_status_aggregate()`: (no docstring)
+- `by_tenant_aggregate()`: (no docstring)
+- `body_sizes()`: Per-route request body size percentiles · Iter 36.
+
+## Outputs
+- Return values from functions above

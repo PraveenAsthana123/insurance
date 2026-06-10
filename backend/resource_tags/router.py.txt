@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/resource_tags/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/tags/* · Iter 34 · resource tagging (processes · models · alerts · any string ref).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+
+## Inputs
+- Env vars: INSUR_TAGS_PATH
+
+## Process
+### Classes
+- `TagBody`: (no docstring)
+### Functions
+- `_load()`: (no docstring)
+- `_save(d)`: (no docstring)
+- `health()`: (no docstring)
+- `add_tag(resource_ref, body)`: (no docstring)
+- `remove_tag(resource_ref, tag)`: (no docstring)
+- `get_tags(resource_ref)`: (no docstring)
+- `search_by_tag(tag, limit)`: Find resources tagged with `tag`.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

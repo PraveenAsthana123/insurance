@@ -1,0 +1,36 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/metrics/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/metrics + /metrics · Iter 31 · Prometheus exposition format.
+
+Aggregates live counters from existing modules · returns text/plain in
+Prometheus exposition format so Grafana / VictoriaMetrics / etc. can scrape.
+
+Per §47.6 + §47.10 · this closes the "real Prometheus /metrics" gap.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter
+- from `fastapi.responses` import PlainTextResponse
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_metric(name, value, labels, help_text)`: (no docstring)
+- `_collect_lines()`: (no docstring)
+- `metrics_versioned()`: (no docstring)
+- `metrics_root()`: Standard Prometheus scrape path.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- HITL queue size (live from DB)
+- Build a fake request to call function · skip · use stats path instead
+- Activity log size
+- Comments + webhooks + jobs
+- Feature flag count

@@ -1,0 +1,25 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/latency_endpoint/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/metrics-latency · Iter 33 · per-route p50/p95/p99 view.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter
+- from `middleware.latency` import snapshot
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `latency(min_samples, sort)`: Per-route latency · sort by p50/p95/p99/max/n_samples.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Aggregate overall

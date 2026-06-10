@@ -1,0 +1,94 @@
+{
+  "process": "privacy-dlp",
+  "department": "cybersecurity",
+  "columns": [
+    "scan_id",
+    "asset",
+    "pii_types",
+    "leaks",
+    "owner",
+    "scanned_at"
+  ],
+  "rows": [
+    {
+      "scan_id": "val_934",
+      "asset": "val_934",
+      "pii_types": "val_934",
+      "leaks": "val_934",
+      "owner": "bob",
+      "scanned_at": "2026-03-07"
+    },
+    {
+      "scan_id": "val_965",
+      "asset": "val_965",
+      "pii_types": "val_965",
+      "leaks": "val_965",
+      "owner": "alice",
+      "scanned_at": "2026-10-10"
+    },
+    {
+      "scan_id": "val_996",
+      "asset": "val_996",
+      "pii_types": "val_996",
+      "leaks": "val_996",
+      "owner": "erin",
+      "scanned_at": "2026-05-13"
+    },
+    {
+      "scan_id": "val_27",
+      "asset": "val_27",
+      "pii_types": "val_27",
+      "leaks": "val_27",
+      "owner": "dave",
+      "scanned_at": "2026-12-16"
+    },
+    {
+      "scan_id": "val_58",
+      "asset": "val_58",
+      "pii_types": "val_58",
+      "leaks": "val_58",
+      "owner": "carol",
+      "scanned_at": "2026-07-19"
+    },
+    {
+      "scan_id": "val_89",
+      "asset": "val_89",
+      "pii_types": "val_89",
+      "leaks": "val_89",
+      "owner": "bob",
+      "scanned_at": "2026-02-22"
+    },
+    {
+      "scan_id": "val_120",
+      "asset": "val_120",
+      "pii_types": "val_120",
+      "leaks": "val_120",
+      "owner": "alice",
+      "scanned_at": "2026-09-25"
+    },
+    {
+      "scan_id": "val_151",
+      "asset": "val_151",
+      "pii_types": "val_151",
+      "leaks": "val_151",
+      "owner": "dave",
+      "scanned_at": "2026-04-28"
+    },
+    {
+      "scan_id": "val_182",
+      "asset": "val_182",
+      "pii_types": "val_182",
+      "leaks": "val_182",
+      "owner": "carol",
+      "scanned_at": "2026-11-03"
+    },
+    {
+      "scan_id": "val_213",
+      "asset": "val_213",
+      "pii_types": "val_213",
+      "leaks": "val_213",
+      "owner": "bob",
+      "scanned_at": "2026-06-06"
+    }
+  ]
+}

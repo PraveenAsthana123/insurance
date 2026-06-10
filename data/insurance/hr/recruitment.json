@@ -1,0 +1,94 @@
+{
+  "process": "recruitment",
+  "department": "hr",
+  "columns": [
+    "req_id",
+    "role",
+    "candidate_id",
+    "stage",
+    "score",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "req_id": "val_262",
+      "role": "val_262",
+      "candidate_id": "val_262",
+      "stage": "val_262",
+      "score": 62.25,
+      "updated_at": "2026-11-15"
+    },
+    {
+      "req_id": "val_293",
+      "role": "val_293",
+      "candidate_id": "val_293",
+      "stage": "val_293",
+      "score": 93.25,
+      "updated_at": "2026-06-18"
+    },
+    {
+      "req_id": "val_324",
+      "role": "val_324",
+      "candidate_id": "val_324",
+      "stage": "val_324",
+      "score": 74.25,
+      "updated_at": "2026-01-21"
+    },
+    {
+      "req_id": "val_355",
+      "role": "val_355",
+      "candidate_id": "val_355",
+      "stage": "val_355",
+      "score": 55.26,
+      "updated_at": "2026-08-24"
+    },
+    {
+      "req_id": "val_386",
+      "role": "val_386",
+      "candidate_id": "val_386",
+      "stage": "val_386",
+      "score": 86.26,
+      "updated_at": "2026-03-27"
+    },
+    {
+      "req_id": "val_417",
+      "role": "val_417",
+      "candidate_id": "val_417",
+      "stage": "val_417",
+      "score": 67.26,
+      "updated_at": "2026-10-02"
+    },
+    {
+      "req_id": "val_448",
+      "role": "val_448",
+      "candidate_id": "val_448",
+      "stage": "val_448",
+      "score": 98.26,
+      "updated_at": "2026-05-05"
+    },
+    {
+      "req_id": "val_479",
+      "role": "val_479",
+      "candidate_id": "val_479",
+      "stage": "val_479",
+      "score": 79.27,
+      "updated_at": "2026-12-08"
+    },
+    {
+      "req_id": "val_510",
+      "role": "val_510",
+      "candidate_id": "val_510",
+      "stage": "val_510",
+      "score": 60.27,
+      "updated_at": "2026-07-11"
+    },
+    {
+      "req_id": "val_541",
+      "role": "val_541",
+      "candidate_id": "val_541",
+      "stage": "val_541",
+      "score": 91.27,
+      "updated_at": "2026-02-14"
+    }
+  ]
+}

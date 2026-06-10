@@ -1,0 +1,1059 @@
+{
+  "statuses": {
+    "Goal AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Decision AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Planning AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Orchestration AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Supervisor AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Self-Healing AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Organizational Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Learning AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Simulation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Trust AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Economic AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Governance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI COO": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI CFO": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI CRO": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Chief Underwriter": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Claims Director": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Chief Compliance Officer": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Security Operations Center": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Meta-AI Layer": {
+      "status": "planned",
+      "notes": ""
+    },
+    "CEO AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "COO AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Digital Twin": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Event Mesh": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise AgentOps": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise LLMOps": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise AI Security": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise AI Governance": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise AI Observability": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Decision Intelligence": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Insurance Command Center": {
+      "status": "planned",
+      "notes": ""
+    },
+    "CFO AI Platform": {
+      "status": "planned",
+      "notes": ""
+    },
+    "CRO AI Platform": {
+      "status": "planned",
+      "notes": ""
+    },
+    "CDO AI Platform": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Multi-Agent Orchestrator AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AgentOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "LLMOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Security AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Compliance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Audit AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Trust AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI FinOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Observability AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Decision AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Self-Evolving Enterprise AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Chief of Staff AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Strategy AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Decision Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Optimization AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Scenario AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Event Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "MLOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "FinOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AIOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "DataOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "ModelOps AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Workflow Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Process Mining AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Root Cause AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Governance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Ethics AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Fairness AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Explainability AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Reliability AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Resilience AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Recovery AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Continuous Validation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Continuous Verification AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Knowledge Management AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Organizational Learning AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Workforce Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Vendor Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Ecosystem Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Capital Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Risk Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Climate Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Regulatory Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Market Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Competitive Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Negotiation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Planning AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Orchestration AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Product Officer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Product Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Product Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Innovation Discovery AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Dynamic Product Design AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Embedded Insurance Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Product Lifecycle Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Product Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Product Factory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Revenue Officer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Broker Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Producer Copilot AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Sales Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Next Best Action AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Distribution Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Embedded Insurance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Revenue Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Channel Optimization AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Growth Engine AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous CISO AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Security Command Center": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Agent Security Platform AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "LLM Threat Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Cyber Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous SOC AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Identity Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Trust Fabric AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Red Team AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Continuous Adaptive Security AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous CIO AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous AIOps Platform": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Cloud Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AgentOps Command Center": {
+      "status": "planned",
+      "notes": ""
+    },
+    "LLMOps Governance Platform": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Technology Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Self-Healing Enterprise AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Infrastructure Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Data Officer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Data Trust AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Data Observability AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Data Product AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Data Marketplace AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Data Lineage Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Data Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Data Fabric AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Procurement Officer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Vendor Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Contract Negotiation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Supplier Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Vendor Risk Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Third-Party AI Governance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Procurement Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Sourcing AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Vendor Performance Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Procurement Orchestrator AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous CHRO AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Workforce Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Employee Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Skills Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Career Path AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Attrition Prevention AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Workforce Risk AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Learning Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Workforce Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Employee Agent Platform": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Risk Officer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Risk Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Risk Command Center": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Climate Intelligence Platform AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Risk Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Continuous Risk Monitoring AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Stress Testing AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Risk Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Emerging Risk Discovery AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Risk Orchestrator AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous General Counsel AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Legal Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Litigation Outcome Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Liability Risk AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Regulatory Interpretation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Legal Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "eDiscovery Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Legal Governance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Legal Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Compliance Officer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Compliance Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Continuous Compliance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Regulation Monitoring AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Ethics Governance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Regulatory Change Impact AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Compliance Digital Twin AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Explainability Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Enterprise Trust AI Platform": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Reinsurance Officer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Catastrophe Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Treaty Negotiation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Reinsurance Market Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Capital Allocation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Recovery Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Exposure Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Dynamic Reinsurance Optimization AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Global Risk Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Chief Actuary AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Dynamic Pricing Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Climate Risk Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Reinsurance Optimization AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Reserve Explainability AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Model Risk AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Economic Scenario Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Actuarial Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Customer Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Omnichannel AI Orchestrator": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Real-Time Voice Coaching AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Emotion Detection AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Complaint Prediction AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Customer Lifetime Value AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Resolution AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Knowledge Governance AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Service Quality AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "AI Contact Center Command Center": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Fraud Ring Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Cross-Carrier Fraud Network AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Synthetic Identity AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Social Graph Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Deepfake Detection AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Provider Collusion AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Investigator AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Fraud Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Real-Time Fraud Prevention AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Fraud Command Center AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Claims Director AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Claims Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Claim Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Litigation Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Claim Explainability AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Real-Time Damage Estimation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Multi-Agent Claims Orchestrator": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Self-Learning Claims AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Reconciliation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Revenue Leakage Detection AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Premium Affordability AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Collection Optimization AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Billing Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Payment Failure Prediction AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Broker Settlement Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Cash Flow Forecasting AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Finance Copilot AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Billing Orchestrator AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Policy Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Policy Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Endorsement AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Regulatory Change AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Customer Self-Service Agent": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Policy Explanation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Policy Lifecycle AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Retention Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Policy Compliance Copilot": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Policy Orchestrator AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Underwriter Copilot AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Referral AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Portfolio Risk AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Catastrophe Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Decision Certification AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Underwriting Knowledge Graph AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Underwriting Simulation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Broker Copilot AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Quote Explanation AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Sales Memory AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Meeting Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Commission Intelligence AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Distribution Optimization AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Renewal Risk AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Next Best Offer AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Proposal AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Sales Agent Orchestrator AI": {
+      "status": "planned",
+      "notes": ""
+    }
+  },
+  "version": "1.0",
+  "valid_statuses": [
+    "planned",
+    "in-progress",
+    "live",
+    "deferred"
+  ]
+}

@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/admin_feedback.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+/api/v1/admin/feedback — rollup view over user_input_events for operators.
+
+Reads aggregated feedback from the global input persistence layer. Tenant-scoped
+by default (per rule 8). Aggregations are operator-friendly (counts, ratings
+breakdown, comments by tab, recency).
+
+This is a READ-ONLY surface · no writes through this router.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any, Optional
+- from `fastapi` import APIRouter, HTTPException, Query, Request
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_tenant(request)`: (no docstring)
+- `async feedback_summary(request, days, department_id, process_id)`: Aggregated feedback summary for the tenant.
+- `async feedback_comments(request, limit, offset, rating)`: Recent feedback comments (filtered tenant-scoped).
+- `_empty_summary(days)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Soft-fail per rule 9 · reads can fail open
+- ---- Top-level totals (tenant-scoped + recency-filtered) ----
+- ---- Breakdown by active tab ----
+- ---- Top-N processes by volume ----
+- ---- Per-day time series ----

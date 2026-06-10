@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/marketing_kpis/alerter.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+KPI target-breach alerter · T5.10.
+
+Per docs/PENDING_PLAN.md T5.10. Compares each KPI's current value against
+its `target_op` + `target` in the registry · returns breach severity.
+
+Severity tiers (relative deviation from target):
+  critical · value ≥ 50% off the target threshold
+  warning  · value crosses target but within 50%
+  info     · still meeting target (no breach)
+
+Per §57.7: returns 'no_target' when KPI lacks a numeric target ·
+  no fake breach alarms for KPIs that don't have a measurable goal.
+Per §82.7: alerts feed drift detection · operator can see "marketing_roi
+  fell from 3.2 to 1.8 · warning · target 3.0" without manual scanning.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any, Optional
+- from `_` import computer, registry
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_deviation(value, target, op)`: How far off-target as a fraction (0 = at target · 1.0 = 100% off).
+- `check_breach(kpi, value)`: Returns alert dict if value breaches target · None otherwise.
+- `compute_all_breaches()`: Check every KPI with a computer + numeric target.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Don't alert when KPI has no computed value · §57.7
+- Non-numeric targets · skip per §57.7 (no fake comparison)
+- Does it actually breach?
+- Non-numeric / growth / budget targets
+- Severity counts

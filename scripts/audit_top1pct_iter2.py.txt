@@ -1,0 +1,39 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter2.py
+# auto-generated explainer · 2026-06-10T10:00:08Z
+
+## Purpose
+Top-1% Iteration 2-6 audit · charts + actions + scaffold.
+
+10 assertions:
+  1. /api/v1/ml/shap/{model} returns features array
+  2. features have name + importance + direction
+  3. /api/v1/ml/eval/{dept}/{process} returns confusion_matrix
+  4. confusion_matrix has labels + 2x2 matrix
+  5. eval returns roc_curve with points + auc
+  6. roc.points have fpr + tpr
+  7. /api/v1/data-pipeline/{pid}/{tid}/run returns run_id + outcome
+  8. run has library_state probe
+  9. invalid task → 404
+ 10. chart components exist (file probe)
+
+## Imports
+- from `_` import logging, os, sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 2. Feature structure
+- 3-5. Eval
+- 7-8. Run task
+- 9. Invalid task → 404
+- 10. Chart components exist

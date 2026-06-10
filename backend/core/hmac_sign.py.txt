@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/hmac_sign.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+HMAC request signing · Iter 28 · C5 closure.
+
+Per §47.6 + §6.x · for cross-service / webhook security · the receiver
+verifies signature was computed with a shared secret.
+
+Header contract:
+  X-Insur-Signature: v1=<hex>
+  X-Insur-Signature-Timestamp: <unix-epoch>
+
+The signed payload is: f"v1
+{timestamp}
+{method}
+{path}
+{body_hash}"
+where body_hash = sha256(body).hexdigest().
+
+Verifier rejects if timestamp older than MAX_AGE_SECONDS (default 300).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import hmac
+- from `_` import os
+- from `_` import time
+- from `fastapi` import HTTPException, Request
+
+## Inputs
+- Env vars: INSUR_HMAC_MAX_AGE, INSUR_HMAC_SECRET
+
+## Process
+### Functions
+- `_payload(method, path, body, timestamp)`: (no docstring)
+- `sign(method, path, body, secret, timestamp)`: (no docstring)
+- `verify(method, path, body, signature_header, timestamp_header)`: (no docstring)
+- `async require_hmac(request)`: FastAPI dependency · raises 401 when signature invalid.
+
+## Outputs
+- Return values from functions above

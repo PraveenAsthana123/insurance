@@ -1,0 +1,94 @@
+{
+  "process": "risk-assessment",
+  "department": "underwriting",
+  "columns": [
+    "application_id",
+    "risk_score",
+    "tier",
+    "factor_top",
+    "fairness_flag",
+    "decided_at"
+  ],
+  "rows": [
+    {
+      "application_id": "val_736",
+      "risk_score": "val_736",
+      "tier": "val_736",
+      "factor_top": "val_736",
+      "fairness_flag": "val_736",
+      "decided_at": "2026-01-01"
+    },
+    {
+      "application_id": "val_767",
+      "risk_score": "val_767",
+      "tier": "val_767",
+      "factor_top": "val_767",
+      "fairness_flag": "val_767",
+      "decided_at": "2026-08-04"
+    },
+    {
+      "application_id": "val_798",
+      "risk_score": "val_798",
+      "tier": "val_798",
+      "factor_top": "val_798",
+      "fairness_flag": "val_798",
+      "decided_at": "2026-03-07"
+    },
+    {
+      "application_id": "val_829",
+      "risk_score": "val_829",
+      "tier": "val_829",
+      "factor_top": "val_829",
+      "fairness_flag": "val_829",
+      "decided_at": "2026-10-10"
+    },
+    {
+      "application_id": "val_860",
+      "risk_score": "val_860",
+      "tier": "val_860",
+      "factor_top": "val_860",
+      "fairness_flag": "val_860",
+      "decided_at": "2026-05-13"
+    },
+    {
+      "application_id": "val_891",
+      "risk_score": "val_891",
+      "tier": "val_891",
+      "factor_top": "val_891",
+      "fairness_flag": "val_891",
+      "decided_at": "2026-12-16"
+    },
+    {
+      "application_id": "val_922",
+      "risk_score": "val_922",
+      "tier": "val_922",
+      "factor_top": "val_922",
+      "fairness_flag": "val_922",
+      "decided_at": "2026-07-19"
+    },
+    {
+      "application_id": "val_953",
+      "risk_score": "val_953",
+      "tier": "val_953",
+      "factor_top": "val_953",
+      "fairness_flag": "val_953",
+      "decided_at": "2026-02-22"
+    },
+    {
+      "application_id": "val_984",
+      "risk_score": "val_984",
+      "tier": "val_984",
+      "factor_top": "val_984",
+      "fairness_flag": "val_984",
+      "decided_at": "2026-09-25"
+    },
+    {
+      "application_id": "val_15",
+      "risk_score": "val_15",
+      "tier": "val_15",
+      "factor_top": "val_15",
+      "fairness_flag": "val_15",
+      "decided_at": "2026-04-28"
+    }
+  ]
+}

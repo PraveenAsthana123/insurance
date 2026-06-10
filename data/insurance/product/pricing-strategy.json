@@ -1,0 +1,94 @@
+{
+  "process": "pricing-strategy",
+  "department": "product",
+  "columns": [
+    "segment",
+    "base_premium",
+    "elasticity",
+    "loss_ratio",
+    "competitor_index",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "segment": "val_687",
+      "base_premium": "val_687",
+      "elasticity": "val_687",
+      "loss_ratio": "val_687",
+      "competitor_index": "val_687",
+      "updated_at": "2026-08-08"
+    },
+    {
+      "segment": "val_718",
+      "base_premium": "val_718",
+      "elasticity": "val_718",
+      "loss_ratio": "val_718",
+      "competitor_index": "val_718",
+      "updated_at": "2026-03-11"
+    },
+    {
+      "segment": "val_749",
+      "base_premium": "val_749",
+      "elasticity": "val_749",
+      "loss_ratio": "val_749",
+      "competitor_index": "val_749",
+      "updated_at": "2026-10-14"
+    },
+    {
+      "segment": "val_780",
+      "base_premium": "val_780",
+      "elasticity": "val_780",
+      "loss_ratio": "val_780",
+      "competitor_index": "val_780",
+      "updated_at": "2026-05-17"
+    },
+    {
+      "segment": "val_811",
+      "base_premium": "val_811",
+      "elasticity": "val_811",
+      "loss_ratio": "val_811",
+      "competitor_index": "val_811",
+      "updated_at": "2026-12-20"
+    },
+    {
+      "segment": "val_842",
+      "base_premium": "val_842",
+      "elasticity": "val_842",
+      "loss_ratio": "val_842",
+      "competitor_index": "val_842",
+      "updated_at": "2026-07-23"
+    },
+    {
+      "segment": "val_873",
+      "base_premium": "val_873",
+      "elasticity": "val_873",
+      "loss_ratio": "val_873",
+      "competitor_index": "val_873",
+      "updated_at": "2026-02-26"
+    },
+    {
+      "segment": "val_904",
+      "base_premium": "val_904",
+      "elasticity": "val_904",
+      "loss_ratio": "val_904",
+      "competitor_index": "val_904",
+      "updated_at": "2026-09-01"
+    },
+    {
+      "segment": "val_935",
+      "base_premium": "val_935",
+      "elasticity": "val_935",
+      "loss_ratio": "val_935",
+      "competitor_index": "val_935",
+      "updated_at": "2026-04-04"
+    },
+    {
+      "segment": "val_966",
+      "base_premium": "val_966",
+      "elasticity": "val_966",
+      "loss_ratio": "val_966",
+      "competitor_index": "val_966",
+      "updated_at": "2026-11-07"
+    }
+  ]
+}

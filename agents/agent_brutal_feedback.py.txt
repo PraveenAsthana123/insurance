@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# agents/agent_brutal_feedback.py
+# auto-generated explainer · 2026-06-10T10:00:04Z
+
+## Purpose
+WHAT:           Brutal-feedback scorer for the agent fleet — surfaces uncomfortable truths from the durable trace log.
+WHY:            "Dashboards show status" rolls up too cleanly. Operators need "agents alive but no throughput", "schedules without scheduled output", "failures without owner", "no dead-letter routing" — phrased as accusations, not metrics.
+WHEN:           Called by the agent-supervisor reporter. Re-runs on every cockpit refresh + on the cron-driven /api/v1/agent-supervisor/report endpoint.
+OBJECTIVE:      Replace polite "✓ healthy" with named gaps an on-call can act on within 5 minutes (per §57.5).
+GIVEN:          data/agent-supervisor/task_traces.jsonl exists with rows produced by agent_observability.build_trace(). Fleet state (agent count · queue depths · schedule names) provided by caller.
+APPROACH:       Apply N rules (each: name · severity · evaluator · evidence-emitter) against the most recent K trace rows + fleet snapshot. Each rule returns either None (pass) or a Finding(name, severity, message, evidence_rows).
+SEQUENCE:       1. load recent traces 2. snapshot fleet state 3. apply each rule 4. emit findings sorted by severity 5. caller renders in cockpit.
+INTEGRATION:    §38 audit · §40 decision · §43 drills · §57.5 5-question runbook · §57.6.1 16-field golden-rule (used by GoldenRuleIncompleteness rule) · §82 observability (Critical row alerts) · §83.6 forced-sequence gap (Council-bypass rule).
+OBSERVABILITY:  Findings JSON returned to caller. No file writes — stateless. Each finding includes evidence (up to 3 trace rows) so an operator can grep the JSONL.
+TRACING:        No OTel spans — read-only scoring layer.
+EXPLAINABILITY: Every finding includes the rule's intent + the rows that triggered it. Auditor query: `grep finding_id=<id> in cockpit logs`.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import time
+- from `collections` import Counter
+- from `dataclasses` import asdict, dataclass, field
+- from `pathlib` import Path
+- from `typing` import Any, Callable
+- from `agents.agent_observability` import GOLDEN_RULE_MANDATORY, TRACE_PATH, golden_rule_completeness
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Finding`: (no docstring)
+### Functions
+- `_load_recent_traces(limit)`: Read the last `limit` rows from the trace JSONL. Tolerant of missing file.
+- `rule_no_throughput(fleet, traces)`: Agents alive but no completions in the last 15 minutes.
+- `rule_schedules_without_output(fleet, traces)`: Schedules exist but their tasks have no completed runs in last 1h.
+- `rule_failures_without_owner(fleet, traces)`: Failed tasks where `owner` is 'none' or missing — no escalation path.
+- `rule_no_dead_letter_routing(fleet, traces)`: High retry_count rows still going to `tasks` instead of `dead_letter_tasks`.
+- `rule_golden_rule_incompleteness(fleet, traces)`: Trace rows missing mandatory §57.6.1 + §83.6 fields → tombstones.
+- `rule_failure_taxonomy_unknown_dominant(fleet, traces)`: If >20% of failures classify as 'unknown', the classifier is blind.
+- `rule_backlog_risk(fleet, traces)`: Pending queue depth > live_agents × 2 means workers are saturated.
+- `score(fleet, traces)`: Run every rule and return a structured report.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── Finding model ──────────────────────────────────────────────────────
+- Truncate evidence rows to keep cockpit payloads small
+- ─── Rule helpers ───────────────────────────────────────────────────────
+- ─── Brutal-feedback rules ──────────────────────────────────────────────
+- Each rule: (fleet, traces) → list[Finding]. Rules accuse, not describe.

@@ -1,0 +1,94 @@
+{
+  "process": "threat-detection",
+  "department": "cybersecurity",
+  "columns": [
+    "alert_id",
+    "rule",
+    "asset",
+    "severity",
+    "status",
+    "raised_at"
+  ],
+  "rows": [
+    {
+      "alert_id": "val_721",
+      "rule": "val_721",
+      "asset": "val_721",
+      "severity": "val_721",
+      "status": "in-progress",
+      "raised_at": "2026-10-14"
+    },
+    {
+      "alert_id": "val_752",
+      "rule": "val_752",
+      "asset": "val_752",
+      "severity": "val_752",
+      "status": "open",
+      "raised_at": "2026-05-17"
+    },
+    {
+      "alert_id": "val_783",
+      "rule": "val_783",
+      "asset": "val_783",
+      "severity": "val_783",
+      "status": "closed",
+      "raised_at": "2026-12-20"
+    },
+    {
+      "alert_id": "val_814",
+      "rule": "val_814",
+      "asset": "val_814",
+      "severity": "val_814",
+      "status": "review",
+      "raised_at": "2026-07-23"
+    },
+    {
+      "alert_id": "val_845",
+      "rule": "val_845",
+      "asset": "val_845",
+      "severity": "val_845",
+      "status": "in-progress",
+      "raised_at": "2026-02-26"
+    },
+    {
+      "alert_id": "val_876",
+      "rule": "val_876",
+      "asset": "val_876",
+      "severity": "val_876",
+      "status": "open",
+      "raised_at": "2026-09-01"
+    },
+    {
+      "alert_id": "val_907",
+      "rule": "val_907",
+      "asset": "val_907",
+      "severity": "val_907",
+      "status": "closed",
+      "raised_at": "2026-04-04"
+    },
+    {
+      "alert_id": "val_938",
+      "rule": "val_938",
+      "asset": "val_938",
+      "severity": "val_938",
+      "status": "review",
+      "raised_at": "2026-11-07"
+    },
+    {
+      "alert_id": "val_969",
+      "rule": "val_969",
+      "asset": "val_969",
+      "severity": "val_969",
+      "status": "in-progress",
+      "raised_at": "2026-06-10"
+    },
+    {
+      "alert_id": "val_0",
+      "rule": "val_0",
+      "asset": "val_0",
+      "severity": "val_0",
+      "status": "open",
+      "raised_at": "2026-01-13"
+    }
+  ]
+}

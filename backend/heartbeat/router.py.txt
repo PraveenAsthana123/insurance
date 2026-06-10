@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/heartbeat/router.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+/api/v1/heartbeat/* · Iter 33 · per-module last-success ping + stale detection.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PingBody`: (no docstring)
+### Functions
+- `health()`: (no docstring)
+- `ping(body)`: Any module pings here · operator sees stale heartbeats in /list.
+- `list_heartbeats()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- module → {ts, count, last_status}

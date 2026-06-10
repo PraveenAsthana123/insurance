@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "survey-core": "^2.5.27",
+    "survey-react-ui": "^2.5.27"
+  }
+}

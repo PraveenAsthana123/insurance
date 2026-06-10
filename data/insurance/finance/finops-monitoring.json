@@ -1,0 +1,94 @@
+{
+  "process": "finops-monitoring",
+  "department": "finance",
+  "columns": [
+    "date",
+    "service",
+    "cost",
+    "anomaly_flag",
+    "owner",
+    "captured_at"
+  ],
+  "rows": [
+    {
+      "date": "2026-06-06",
+      "service": "val_617",
+      "cost": "val_617",
+      "anomaly_flag": "val_617",
+      "owner": "carol",
+      "captured_at": "2026-06-06"
+    },
+    {
+      "date": "2026-01-09",
+      "service": "val_648",
+      "cost": "val_648",
+      "anomaly_flag": "val_648",
+      "owner": "bob",
+      "captured_at": "2026-01-09"
+    },
+    {
+      "date": "2026-08-12",
+      "service": "val_679",
+      "cost": "val_679",
+      "anomaly_flag": "val_679",
+      "owner": "erin",
+      "captured_at": "2026-08-12"
+    },
+    {
+      "date": "2026-03-15",
+      "service": "val_710",
+      "cost": "val_710",
+      "anomaly_flag": "val_710",
+      "owner": "dave",
+      "captured_at": "2026-03-15"
+    },
+    {
+      "date": "2026-10-18",
+      "service": "val_741",
+      "cost": "val_741",
+      "anomaly_flag": "val_741",
+      "owner": "carol",
+      "captured_at": "2026-10-18"
+    },
+    {
+      "date": "2026-05-21",
+      "service": "val_772",
+      "cost": "val_772",
+      "anomaly_flag": "val_772",
+      "owner": "bob",
+      "captured_at": "2026-05-21"
+    },
+    {
+      "date": "2026-12-24",
+      "service": "val_803",
+      "cost": "val_803",
+      "anomaly_flag": "val_803",
+      "owner": "alice",
+      "captured_at": "2026-12-24"
+    },
+    {
+      "date": "2026-07-27",
+      "service": "val_834",
+      "cost": "val_834",
+      "anomaly_flag": "val_834",
+      "owner": "erin",
+      "captured_at": "2026-07-27"
+    },
+    {
+      "date": "2026-02-02",
+      "service": "val_865",
+      "cost": "val_865",
+      "anomaly_flag": "val_865",
+      "owner": "dave",
+      "captured_at": "2026-02-02"
+    },
+    {
+      "date": "2026-09-05",
+      "service": "val_896",
+      "cost": "val_896",
+      "anomaly_flag": "val_896",
+      "owner": "carol",
+      "captured_at": "2026-09-05"
+    }
+  ]
+}

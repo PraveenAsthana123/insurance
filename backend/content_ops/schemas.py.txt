@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/content_ops/schemas.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+Pydantic schemas for content ops (postings · master contacts · schedules).
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import datetime, time
+- from `typing` import Any, Optional
+- from `pydantic` import BaseModel, EmailStr, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PostingCreate`: (no docstring)
+- `PostingUpdate`: (no docstring)
+- `Posting`: (no docstring)
+- `PostingRun`: (no docstring)
+- `PublishRequest`: Manager kicks off a publish · all listed platforms get attempted.
+- `PublishResponse`: (no docstring)
+- `ContactCreate`: (no docstring)
+- `Contact`: (no docstring)
+- `BulkUploadRequest`: CSV-style bulk upload · operator pastes rows OR uploads file (parsed
+- `BulkUploadResponse`: (no docstring)
+- `ScheduleCreate`: (no docstring)
+- `Schedule`: (no docstring)
+- `ScheduleUpdate`: (no docstring)
+- `PostingMonitoringSnapshot`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── Content postings ───────────────────────────────────────────────
+- ─── Master contacts ──────────────────────────────────────────────
+- ─── Campaign schedules ────────────────────────────────────────────
+- ─── Monitoring + quality ────────────────────────────────────────

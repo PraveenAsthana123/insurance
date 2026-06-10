@@ -1,0 +1,94 @@
+{
+  "process": "product-launch",
+  "department": "product",
+  "columns": [
+    "asset_id",
+    "asset_type",
+    "language",
+    "audience",
+    "version",
+    "published_at"
+  ],
+  "rows": [
+    {
+      "asset_id": "val_217",
+      "asset_type": "val_217",
+      "language": "val_217",
+      "audience": "val_217",
+      "version": "val_217",
+      "published_at": "2026-06-22"
+    },
+    {
+      "asset_id": "val_248",
+      "asset_type": "val_248",
+      "language": "val_248",
+      "audience": "val_248",
+      "version": "val_248",
+      "published_at": "2026-01-25"
+    },
+    {
+      "asset_id": "val_279",
+      "asset_type": "val_279",
+      "language": "val_279",
+      "audience": "val_279",
+      "version": "val_279",
+      "published_at": "2026-08-28"
+    },
+    {
+      "asset_id": "val_310",
+      "asset_type": "val_310",
+      "language": "val_310",
+      "audience": "val_310",
+      "version": "val_310",
+      "published_at": "2026-03-03"
+    },
+    {
+      "asset_id": "val_341",
+      "asset_type": "val_341",
+      "language": "val_341",
+      "audience": "val_341",
+      "version": "val_341",
+      "published_at": "2026-10-06"
+    },
+    {
+      "asset_id": "val_372",
+      "asset_type": "val_372",
+      "language": "val_372",
+      "audience": "val_372",
+      "version": "val_372",
+      "published_at": "2026-05-09"
+    },
+    {
+      "asset_id": "val_403",
+      "asset_type": "val_403",
+      "language": "val_403",
+      "audience": "val_403",
+      "version": "val_403",
+      "published_at": "2026-12-12"
+    },
+    {
+      "asset_id": "val_434",
+      "asset_type": "val_434",
+      "language": "val_434",
+      "audience": "val_434",
+      "version": "val_434",
+      "published_at": "2026-07-15"
+    },
+    {
+      "asset_id": "val_465",
+      "asset_type": "val_465",
+      "language": "val_465",
+      "audience": "val_465",
+      "version": "val_465",
+      "published_at": "2026-02-18"
+    },
+    {
+      "asset_id": "val_496",
+      "asset_type": "val_496",
+      "language": "val_496",
+      "audience": "val_496",
+      "version": "val_496",
+      "published_at": "2026-09-21"
+    }
+  ]
+}

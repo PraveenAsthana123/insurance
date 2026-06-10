@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/migration_tracker/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/migrations/* · Iter 33 · schema migration tracker.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `pathlib` import Path
+- from `fastapi` import APIRouter
+
+## Inputs
+- Env vars: INSUR_SKIP_MIGRATIONS
+
+## Process
+### Functions
+- `_applied_from_db()`: (no docstring)
+- `_all_on_disk()`: (no docstring)
+- `health()`: (no docstring)
+- `list_migrations()`: (no docstring)
+- `get_migration(name)`: (no docstring)
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,30 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_insurance_router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Tests for insurance department artifact and navigator endpoints.
+
+## Imports
+- from `__future__` import annotations
+- from `pathlib` import Path
+- from `fastapi.testclient` import TestClient
+- from `main` import app
+- from `routers` import insurance
+- from `routers` import insur
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `test_insurance_depts_lists_four_priority_domains()`: (no docstring)
+- `test_insurance_markdown_artifacts_are_served()`: (no docstring)
+- `test_insurance_invalid_dept_and_role_are_not_enumerable()`: (no docstring)
+- `test_insurance_missing_artifact_returns_404(tmp_path, monkeypatch)`: (no docstring)
+- `test_insurance_pipeline_list_uses_registry()`: (no docstring)
+- `test_insur_nav_lists_generated_insurance_departments()`: (no docstring)
+- `test_insur_nav_serves_generated_nav_shape()`: (no docstring)
+
+## Outputs
+- Return values from functions above

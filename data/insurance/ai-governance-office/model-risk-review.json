@@ -1,0 +1,94 @@
+{
+  "process": "model-risk-review",
+  "department": "ai-governance-office",
+  "columns": [
+    "model_id",
+    "tier",
+    "risk",
+    "approver",
+    "status",
+    "decided_at"
+  ],
+  "rows": [
+    {
+      "model_id": "val_407",
+      "tier": "val_407",
+      "risk": "val_407",
+      "approver": "val_407",
+      "status": "closed",
+      "decided_at": "2026-08-28"
+    },
+    {
+      "model_id": "val_438",
+      "tier": "val_438",
+      "risk": "val_438",
+      "approver": "val_438",
+      "status": "review",
+      "decided_at": "2026-03-03"
+    },
+    {
+      "model_id": "val_469",
+      "tier": "val_469",
+      "risk": "val_469",
+      "approver": "val_469",
+      "status": "in-progress",
+      "decided_at": "2026-10-06"
+    },
+    {
+      "model_id": "val_500",
+      "tier": "val_500",
+      "risk": "val_500",
+      "approver": "val_500",
+      "status": "open",
+      "decided_at": "2026-05-09"
+    },
+    {
+      "model_id": "val_531",
+      "tier": "val_531",
+      "risk": "val_531",
+      "approver": "val_531",
+      "status": "closed",
+      "decided_at": "2026-12-12"
+    },
+    {
+      "model_id": "val_562",
+      "tier": "val_562",
+      "risk": "val_562",
+      "approver": "val_562",
+      "status": "review",
+      "decided_at": "2026-07-15"
+    },
+    {
+      "model_id": "val_593",
+      "tier": "val_593",
+      "risk": "val_593",
+      "approver": "val_593",
+      "status": "in-progress",
+      "decided_at": "2026-02-18"
+    },
+    {
+      "model_id": "val_624",
+      "tier": "val_624",
+      "risk": "val_624",
+      "approver": "val_624",
+      "status": "open",
+      "decided_at": "2026-09-21"
+    },
+    {
+      "model_id": "val_655",
+      "tier": "val_655",
+      "risk": "val_655",
+      "approver": "val_655",
+      "status": "closed",
+      "decided_at": "2026-04-24"
+    },
+    {
+      "model_id": "val_686",
+      "tier": "val_686",
+      "risk": "val_686",
+      "approver": "val_686",
+      "status": "review",
+      "decided_at": "2026-11-27"
+    }
+  ]
+}

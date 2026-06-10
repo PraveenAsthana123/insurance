@@ -1,0 +1,94 @@
+{
+  "process": "emerging-risk",
+  "department": "erm",
+  "columns": [
+    "signal_id",
+    "topic",
+    "source",
+    "confidence",
+    "impact",
+    "captured_at"
+  ],
+  "rows": [
+    {
+      "signal_id": "val_256",
+      "topic": "val_256",
+      "source": "val_256",
+      "confidence": "val_256",
+      "impact": "val_256",
+      "captured_at": "2026-05-09"
+    },
+    {
+      "signal_id": "val_287",
+      "topic": "val_287",
+      "source": "val_287",
+      "confidence": "val_287",
+      "impact": "val_287",
+      "captured_at": "2026-12-12"
+    },
+    {
+      "signal_id": "val_318",
+      "topic": "val_318",
+      "source": "val_318",
+      "confidence": "val_318",
+      "impact": "val_318",
+      "captured_at": "2026-07-15"
+    },
+    {
+      "signal_id": "val_349",
+      "topic": "val_349",
+      "source": "val_349",
+      "confidence": "val_349",
+      "impact": "val_349",
+      "captured_at": "2026-02-18"
+    },
+    {
+      "signal_id": "val_380",
+      "topic": "val_380",
+      "source": "val_380",
+      "confidence": "val_380",
+      "impact": "val_380",
+      "captured_at": "2026-09-21"
+    },
+    {
+      "signal_id": "val_411",
+      "topic": "val_411",
+      "source": "val_411",
+      "confidence": "val_411",
+      "impact": "val_411",
+      "captured_at": "2026-04-24"
+    },
+    {
+      "signal_id": "val_442",
+      "topic": "val_442",
+      "source": "val_442",
+      "confidence": "val_442",
+      "impact": "val_442",
+      "captured_at": "2026-11-27"
+    },
+    {
+      "signal_id": "val_473",
+      "topic": "val_473",
+      "source": "val_473",
+      "confidence": "val_473",
+      "impact": "val_473",
+      "captured_at": "2026-06-02"
+    },
+    {
+      "signal_id": "val_504",
+      "topic": "val_504",
+      "source": "val_504",
+      "confidence": "val_504",
+      "impact": "val_504",
+      "captured_at": "2026-01-05"
+    },
+    {
+      "signal_id": "val_535",
+      "topic": "val_535",
+      "source": "val_535",
+      "confidence": "val_535",
+      "impact": "val_535",
+      "captured_at": "2026-08-08"
+    }
+  ]
+}

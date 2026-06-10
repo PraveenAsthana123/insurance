@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/webhooks/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/webhooks/* · Iter 29 · webhook receiver registry.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `fastapi` import APIRouter, Depends, HTTPException, Request
+- from `pydantic` import BaseModel, HttpUrl
+- from `core.role_dependency` import require_admin
+
+## Inputs
+- Env vars: INSUR_WEBHOOKS_PATH
+
+## Process
+### Classes
+- `HookCreate`: (no docstring)
+### Functions
+- `_load()`: (no docstring)
+- `_save(data)`: (no docstring)
+- `health()`: (no docstring)
+- `register(body)`: (no docstring)
+- `list_hooks()`: (no docstring)
+- `delete_hook(hook_id)`: (no docstring)
+- `_evict_expired_nonces(hook_id)`: (no docstring)
+- `async receive_webhook(hook_id, request)`: Generic webhook receiver · verifies HMAC + nonce against the registered secret.
+- `list_deliveries(limit)`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Per §57.7: hide secrets in list response
+- Iter 33 · webhook nonce replay protection
+- Iter 33 · reject replay: same nonce in last 5 minutes

@@ -1,0 +1,94 @@
+{
+  "process": "collections",
+  "department": "billing",
+  "columns": [
+    "account_id",
+    "days_late",
+    "balance",
+    "strategy",
+    "outcome",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "account_id": "val_818",
+      "days_late": "val_818",
+      "balance": "val_818",
+      "strategy": "val_818",
+      "outcome": "val_818",
+      "updated_at": "2026-03-07"
+    },
+    {
+      "account_id": "val_849",
+      "days_late": "val_849",
+      "balance": "val_849",
+      "strategy": "val_849",
+      "outcome": "val_849",
+      "updated_at": "2026-10-10"
+    },
+    {
+      "account_id": "val_880",
+      "days_late": "val_880",
+      "balance": "val_880",
+      "strategy": "val_880",
+      "outcome": "val_880",
+      "updated_at": "2026-05-13"
+    },
+    {
+      "account_id": "val_911",
+      "days_late": "val_911",
+      "balance": "val_911",
+      "strategy": "val_911",
+      "outcome": "val_911",
+      "updated_at": "2026-12-16"
+    },
+    {
+      "account_id": "val_942",
+      "days_late": "val_942",
+      "balance": "val_942",
+      "strategy": "val_942",
+      "outcome": "val_942",
+      "updated_at": "2026-07-19"
+    },
+    {
+      "account_id": "val_973",
+      "days_late": "val_973",
+      "balance": "val_973",
+      "strategy": "val_973",
+      "outcome": "val_973",
+      "updated_at": "2026-02-22"
+    },
+    {
+      "account_id": "val_4",
+      "days_late": "val_4",
+      "balance": "val_4",
+      "strategy": "val_4",
+      "outcome": "val_4",
+      "updated_at": "2026-09-25"
+    },
+    {
+      "account_id": "val_35",
+      "days_late": "val_35",
+      "balance": "val_35",
+      "strategy": "val_35",
+      "outcome": "val_35",
+      "updated_at": "2026-04-28"
+    },
+    {
+      "account_id": "val_66",
+      "days_late": "val_66",
+      "balance": "val_66",
+      "strategy": "val_66",
+      "outcome": "val_66",
+      "updated_at": "2026-11-03"
+    },
+    {
+      "account_id": "val_97",
+      "days_late": "val_97",
+      "balance": "val_97",
+      "strategy": "val_97",
+      "outcome": "val_97",
+      "updated_at": "2026-06-06"
+    }
+  ]
+}

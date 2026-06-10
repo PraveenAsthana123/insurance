@@ -1,0 +1,37 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/feedback/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/feedback/* — explicit + implicit feedback capture · gate #4.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import uuid
+- from `collections` import Counter
+- from `datetime` import datetime
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter, HTTPException, Request
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `FeedbackCreate`: (no docstring)
+- `Feedback`: (no docstring)
+- `FeedbackStats`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_validate_value(kind, value)`: (no docstring)
+- `health()`: (no docstring)
+- `create_feedback(body, request)`: (no docstring)
+- `list_feedback(request, run_ref, kind, value, limit)`: (no docstring)
+- `stats(request)`: (no docstring)
+
+## Outputs
+- Return values from functions above

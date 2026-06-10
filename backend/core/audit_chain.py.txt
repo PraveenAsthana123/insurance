@@ -1,0 +1,39 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/audit_chain.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Tamper-evident audit log HMAC chain · Iter 29 · C7 simplified closure.
+
+Per §38.3 + §47.7: each audit row carries an HMAC computed over
+(prev_hmac + content). Operator can replay the chain to detect any
+row insertion · deletion · or modification.
+
+Per §57.7: in-memory chain for dev · production wires to Postgres +
+secret rotation.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import hmac
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `typing` import Any
+
+## Inputs
+- Env vars: INSUR_AUDIT_CHAIN_SECRET
+
+## Process
+### Functions
+- `_hmac_for(prev_hmac, content, secret)`: (no docstring)
+- `append(content, secret)`: Append a new audit row · returns the chain entry.
+- `verify_chain(secret)`: Replay chain and report tamper status.
+- `list_chain(limit)`: (no docstring)
+- `reset_for_test()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- In-memory chain state · ((index, ts, hmac, content_json), ...)

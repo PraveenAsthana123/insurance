@@ -1,0 +1,18 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/heartbeat/__init__.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Heartbeat scheduler · Iter 33 · per-module last-success tracker.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/data_quality_runner.py
+# auto-generated explainer · 2026-06-10T10:00:11Z
+
+## Purpose
+Data quality runner · Iter 27 · H5 closure.
+
+Per §47.6 + §76 · daily data-quality scan with Great Expectations when
+installed · fall back to regex+null+range checks per §57.7.
+
+Runs the following per key table:
+  · null rate per column
+  · uniqueness violations
+  · range violations (numeric columns)
+  · referential integrity (rough · FK probes)
+
+Output: jobs/reports/data-quality/dq-<YYYY-MM-DD>.json + .md
+
+## Imports
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_probe_great_expectations()`: (no docstring)
+- `_check_tables()`: Per §57.7 scaffold checks · run against tables that exist.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

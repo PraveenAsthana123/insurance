@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tenant_config/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/tenant-config/* · Iter 34 · per-tenant feature flag overrides.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `pathlib` import Path
+- from `typing` import Any
+- from `fastapi` import APIRouter, Depends, HTTPException
+- from `pydantic` import BaseModel
+- from `core.role_dependency` import require_admin
+
+## Inputs
+- Env vars: INSUR_TENANT_CONFIG_PATH
+
+## Process
+### Classes
+- `OverrideRequest`: (no docstring)
+### Functions
+- `_load()`: (no docstring)
+- `_save(d)`: (no docstring)
+- `health()`: (no docstring)
+- `get_tenant_config(tenant_id)`: (no docstring)
+- `set_override(tenant_id, flag_key, body)`: (no docstring)
+- `remove_override(tenant_id, flag_key)`: (no docstring)
+- `effective_value(tenant_id, flag_key)`: Returns effective value · tenant override first · global default fallback.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

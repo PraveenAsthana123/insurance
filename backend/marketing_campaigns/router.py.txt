@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/marketing_campaigns/router.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+/api/v1/marketing-campaigns/* — multi-channel marketing campaigns.
+
+Reuses voice_ai_customers + voice_ai_products tables.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import uuid
+- from `typing` import Optional
+- from `fastapi` import APIRouter, HTTPException, Request
+- from `_` import services
+- from `schemas` import Campaign, CampaignCreate, CampaignExecuteRequest, CampaignExecuteResponse, CampaignMetrics
+- from `_` import autonomous_agent
+- from `autonomous_agent` import AgentObjective, AgentRunResult
+- from `pydantic` import BaseModel
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PublicResponse`: (no docstring)
+### Functions
+- `_correlation_id(request)`: (no docstring)
+- `_tenant(request)`: (no docstring)
+- `health()`: Health · DEFINED BEFORE /{campaign_id} so the int-path doesn't shadow it.
+- `dlp_status()`: T6.10 · Presidio Stage-1 adapter status.
+- `dlp_test(text)`: T6.10 · operator-facing DLP scan (use this to test what entities
+- `channels()`: Per-channel config docs for the operator UI.
+- `list_campaigns(request, channel)`: (no docstring)
+- `create_campaign(body, request)`: (no docstring)
+- `autonomous_run(body, request)`: Run the autonomous decision loop · returns full audit trail.
+- `autonomous_runs(request, limit)`: List recent agent runs · for the decision-loop dashboard.
+- `autonomous_run_one(run_ref, request)`: Single agent run · full decisions trail.
+- `get_campaign(campaign_id, request)`: (no docstring)
+- `patch_campaign(campaign_id, body, request)`: (no docstring)
+- `execute(campaign_id, body, request)`: (no docstring)
+- `runs(campaign_id, request)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── Autonomous AI agent endpoints (declared BEFORE /{campaign_id} so they
+- don't get shadowed by FastAPI route-precedence)
+- ─── Public submission endpoints · survey + form ─────────────────
+- These are reachable by the END CUSTOMER from the survey_url / form_url
+- in the rendered_payload. NO authentication required (public links) but:

@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/deprecation/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/deprecation/* · Iter 35 · per-route deprecation markers + Sunset header.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `fastapi` import APIRouter, Depends, Request
+- from `pydantic` import BaseModel
+- from `core.role_dependency` import require_admin
+
+## Inputs
+- Env vars: INSUR_DEPRECATION_PATH
+
+## Process
+### Classes
+- `DeprecationMark`: (no docstring)
+### Functions
+- `_load()`: (no docstring)
+- `_save(d)`: (no docstring)
+- `health()`: (no docstring)
+- `list_deprecations()`: (no docstring)
+- `mark_deprecated(body)`: (no docstring)
+- `unmark_deprecated(path, method)`: (no docstring)
+- `check_path(path, method)`: Lookup a single path · used by middleware/headers.
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

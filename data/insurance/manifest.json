@@ -1,0 +1,2191 @@
+{
+  "_generated": "2026-06-10T22:00:01.596336+00:00",
+  "totalFiles": 312,
+  "totalBytes": 347257,
+  "files": [
+    {
+      "department": "product",
+      "process": "product-design",
+      "format": "csv",
+      "path": "data/insurance/product/product-design.csv",
+      "sizeBytes": 545
+    },
+    {
+      "department": "product",
+      "process": "product-design",
+      "format": "json",
+      "path": "data/insurance/product/product-design.json",
+      "sizeBytes": 2021
+    },
+    {
+      "department": "product",
+      "process": "product-design",
+      "format": "txt",
+      "path": "data/insurance/product/product-design.txt",
+      "sizeBytes": 412
+    },
+    {
+      "department": "product",
+      "process": "product-design",
+      "format": "docx",
+      "path": "data/insurance/product/product-design.docx",
+      "sizeBytes": 1170
+    },
+    {
+      "department": "product",
+      "process": "product-design",
+      "format": "pdf",
+      "path": "data/insurance/product/product-design.pdf",
+      "sizeBytes": 1213
+    },
+    {
+      "department": "product",
+      "process": "pricing-strategy",
+      "format": "csv",
+      "path": "data/insurance/product/pricing-strategy.csv",
+      "sizeBytes": 592
+    },
+    {
+      "department": "product",
+      "process": "pricing-strategy",
+      "format": "json",
+      "path": "data/insurance/product/pricing-strategy.json",
+      "sizeBytes": 2270
+    },
+    {
+      "department": "product",
+      "process": "pricing-strategy",
+      "format": "txt",
+      "path": "data/insurance/product/pricing-strategy.txt",
+      "sizeBytes": 373
+    },
+    {
+      "department": "product",
+      "process": "pricing-strategy",
+      "format": "pdf",
+      "path": "data/insurance/product/pricing-strategy.pdf",
+      "sizeBytes": 1198
+    },
+    {
+      "department": "product",
+      "process": "product-launch",
+      "format": "csv",
+      "path": "data/insurance/product/product-launch.csv",
+      "sizeBytes": 580
+    },
+    {
+      "department": "product",
+      "process": "product-launch",
+      "format": "json",
+      "path": "data/insurance/product/product-launch.json",
+      "sizeBytes": 2136
+    },
+    {
+      "department": "product",
+      "process": "product-launch",
+      "format": "txt",
+      "path": "data/insurance/product/product-launch.txt",
+      "sizeBytes": 406
+    },
+    {
+      "department": "product",
+      "process": "product-launch",
+      "format": "pdf",
+      "path": "data/insurance/product/product-launch.pdf",
+      "sizeBytes": 1219
+    },
+    {
+      "department": "product",
+      "process": "product-launch",
+      "format": "png",
+      "path": "data/insurance/product/product-launch.png",
+      "sizeBytes": 179
+    },
+    {
+      "department": "product",
+      "process": "product-launch",
+      "format": "wav",
+      "path": "data/insurance/product/product-launch.wav",
+      "sizeBytes": 8044
+    },
+    {
+      "department": "product",
+      "process": "product-launch",
+      "format": "mp4",
+      "path": "data/insurance/product/product-launch.mp4",
+      "sizeBytes": 184
+    },
+    {
+      "department": "marketing",
+      "process": "campaign-planning",
+      "format": "csv",
+      "path": "data/insurance/marketing/campaign-planning.csv",
+      "sizeBytes": 500
+    },
+    {
+      "department": "marketing",
+      "process": "campaign-planning",
+      "format": "json",
+      "path": "data/insurance/marketing/campaign-planning.json",
+      "sizeBytes": 1961
+    },
+    {
+      "department": "marketing",
+      "process": "campaign-planning",
+      "format": "txt",
+      "path": "data/insurance/marketing/campaign-planning.txt",
+      "sizeBytes": 372
+    },
+    {
+      "department": "marketing",
+      "process": "campaign-planning",
+      "format": "docx",
+      "path": "data/insurance/marketing/campaign-planning.docx",
+      "sizeBytes": 1142
+    },
+    {
+      "department": "marketing",
+      "process": "campaign-planning",
+      "format": "pdf",
+      "path": "data/insurance/marketing/campaign-planning.pdf",
+      "sizeBytes": 1174
+    },
+    {
+      "department": "marketing",
+      "process": "churn-and-retention",
+      "format": "csv",
+      "path": "data/insurance/marketing/churn-and-retention.csv",
+      "sizeBytes": 585
+    },
+    {
+      "department": "marketing",
+      "process": "churn-and-retention",
+      "format": "json",
+      "path": "data/insurance/marketing/churn-and-retention.json",
+      "sizeBytes": 2198
+    },
+    {
+      "department": "marketing",
+      "process": "churn-and-retention",
+      "format": "txt",
+      "path": "data/insurance/marketing/churn-and-retention.txt",
+      "sizeBytes": 375
+    },
+    {
+      "department": "marketing",
+      "process": "churn-and-retention",
+      "format": "pdf",
+      "path": "data/insurance/marketing/churn-and-retention.pdf",
+      "sizeBytes": 1193
+    },
+    {
+      "department": "marketing",
+      "process": "social-listening",
+      "format": "csv",
+      "path": "data/insurance/marketing/social-listening.csv",
+      "sizeBytes": 573
+    },
+    {
+      "department": "marketing",
+      "process": "social-listening",
+      "format": "json",
+      "path": "data/insurance/marketing/social-listening.json",
+      "sizeBytes": 2063
+    },
+    {
+      "department": "marketing",
+      "process": "social-listening",
+      "format": "txt",
+      "path": "data/insurance/marketing/social-listening.txt",
+      "sizeBytes": 345
+    },
+    {
+      "department": "marketing",
+      "process": "social-listening",
+      "format": "pdf",
+      "path": "data/insurance/marketing/social-listening.pdf",
+      "sizeBytes": 1150
+    },
+    {
+      "department": "marketing",
+      "process": "social-listening",
+      "format": "png",
+      "path": "data/insurance/marketing/social-listening.png",
+      "sizeBytes": 179
+    },
+    {
+      "department": "marketing",
+      "process": "social-listening",
+      "format": "wav",
+      "path": "data/insurance/marketing/social-listening.wav",
+      "sizeBytes": 8044
+    },
+    {
+      "department": "marketing",
+      "process": "social-listening",
+      "format": "mp4",
+      "path": "data/insurance/marketing/social-listening.mp4",
+      "sizeBytes": 184
+    },
+    {
+      "department": "sales",
+      "process": "lead-qualification",
+      "format": "csv",
+      "path": "data/insurance/sales/lead-qualification.csv",
+      "sizeBytes": 478
+    },
+    {
+      "department": "sales",
+      "process": "lead-qualification",
+      "format": "json",
+      "path": "data/insurance/sales/lead-qualification.json",
+      "sizeBytes": 1876
+    },
+    {
+      "department": "sales",
+      "process": "lead-qualification",
+      "format": "txt",
+      "path": "data/insurance/sales/lead-qualification.txt",
+      "sizeBytes": 368
+    },
+    {
+      "department": "sales",
+      "process": "lead-qualification",
+      "format": "pdf",
+      "path": "data/insurance/sales/lead-qualification.pdf",
+      "sizeBytes": 1166
+    },
+    {
+      "department": "sales",
+      "process": "quote-and-bind",
+      "format": "csv",
+      "path": "data/insurance/sales/quote-and-bind.csv",
+      "sizeBytes": 577
+    },
+    {
+      "department": "sales",
+      "process": "quote-and-bind",
+      "format": "json",
+      "path": "data/insurance/sales/quote-and-bind.json",
+      "sizeBytes": 2101
+    },
+    {
+      "department": "sales",
+      "process": "quote-and-bind",
+      "format": "txt",
+      "path": "data/insurance/sales/quote-and-bind.txt",
+      "sizeBytes": 355
+    },
+    {
+      "department": "sales",
+      "process": "quote-and-bind",
+      "format": "docx",
+      "path": "data/insurance/sales/quote-and-bind.docx",
+      "sizeBytes": 1149
+    },
+    {
+      "department": "sales",
+      "process": "quote-and-bind",
+      "format": "pdf",
+      "path": "data/insurance/sales/quote-and-bind.pdf",
+      "sizeBytes": 1160
+    },
+    {
+      "department": "sales",
+      "process": "broker-enablement",
+      "format": "csv",
+      "path": "data/insurance/sales/broker-enablement.csv",
+      "sizeBytes": 577
+    },
+    {
+      "department": "sales",
+      "process": "broker-enablement",
+      "format": "json",
+      "path": "data/insurance/sales/broker-enablement.json",
+      "sizeBytes": 2104
+    },
+    {
+      "department": "sales",
+      "process": "broker-enablement",
+      "format": "txt",
+      "path": "data/insurance/sales/broker-enablement.txt",
+      "sizeBytes": 350
+    },
+    {
+      "department": "sales",
+      "process": "broker-enablement",
+      "format": "docx",
+      "path": "data/insurance/sales/broker-enablement.docx",
+      "sizeBytes": 1129
+    },
+    {
+      "department": "sales",
+      "process": "broker-enablement",
+      "format": "pdf",
+      "path": "data/insurance/sales/broker-enablement.pdf",
+      "sizeBytes": 1159
+    },
+    {
+      "department": "underwriting",
+      "process": "application-triage",
+      "format": "csv",
+      "path": "data/insurance/underwriting/application-triage.csv",
+      "sizeBytes": 545
+    },
+    {
+      "department": "underwriting",
+      "process": "application-triage",
+      "format": "json",
+      "path": "data/insurance/underwriting/application-triage.json",
+      "sizeBytes": 2120
+    },
+    {
+      "department": "underwriting",
+      "process": "application-triage",
+      "format": "txt",
+      "path": "data/insurance/underwriting/application-triage.txt",
+      "sizeBytes": 365
+    },
+    {
+      "department": "underwriting",
+      "process": "application-triage",
+      "format": "docx",
+      "path": "data/insurance/underwriting/application-triage.docx",
+      "sizeBytes": 1133
+    },
+    {
+      "department": "underwriting",
+      "process": "application-triage",
+      "format": "pdf",
+      "path": "data/insurance/underwriting/application-triage.pdf",
+      "sizeBytes": 1178
+    },
+    {
+      "department": "underwriting",
+      "process": "risk-assessment",
+      "format": "csv",
+      "path": "data/insurance/underwriting/risk-assessment.csv",
+      "sizeBytes": 583
+    },
+    {
+      "department": "underwriting",
+      "process": "risk-assessment",
+      "format": "json",
+      "path": "data/insurance/underwriting/risk-assessment.json",
+      "sizeBytes": 2225
+    },
+    {
+      "department": "underwriting",
+      "process": "risk-assessment",
+      "format": "txt",
+      "path": "data/insurance/underwriting/risk-assessment.txt",
+      "sizeBytes": 366
+    },
+    {
+      "department": "underwriting",
+      "process": "risk-assessment",
+      "format": "pdf",
+      "path": "data/insurance/underwriting/risk-assessment.pdf",
+      "sizeBytes": 1187
+    },
+    {
+      "department": "underwriting",
+      "process": "renewal-underwriting",
+      "format": "csv",
+      "path": "data/insurance/underwriting/renewal-underwriting.csv",
+      "sizeBytes": 588
+    },
+    {
+      "department": "underwriting",
+      "process": "renewal-underwriting",
+      "format": "json",
+      "path": "data/insurance/underwriting/renewal-underwriting.json",
+      "sizeBytes": 2235
+    },
+    {
+      "department": "underwriting",
+      "process": "renewal-underwriting",
+      "format": "txt",
+      "path": "data/insurance/underwriting/renewal-underwriting.txt",
+      "sizeBytes": 350
+    },
+    {
+      "department": "underwriting",
+      "process": "renewal-underwriting",
+      "format": "pdf",
+      "path": "data/insurance/underwriting/renewal-underwriting.pdf",
+      "sizeBytes": 1170
+    },
+    {
+      "department": "policy-admin",
+      "process": "policy-issuance",
+      "format": "csv",
+      "path": "data/insurance/policy-admin/policy-issuance.csv",
+      "sizeBytes": 568
+    },
+    {
+      "department": "policy-admin",
+      "process": "policy-issuance",
+      "format": "json",
+      "path": "data/insurance/policy-admin/policy-issuance.json",
+      "sizeBytes": 2070
+    },
+    {
+      "department": "policy-admin",
+      "process": "policy-issuance",
+      "format": "txt",
+      "path": "data/insurance/policy-admin/policy-issuance.txt",
+      "sizeBytes": 365
+    },
+    {
+      "department": "policy-admin",
+      "process": "policy-issuance",
+      "format": "docx",
+      "path": "data/insurance/policy-admin/policy-issuance.docx",
+      "sizeBytes": 1136
+    },
+    {
+      "department": "policy-admin",
+      "process": "policy-issuance",
+      "format": "pdf",
+      "path": "data/insurance/policy-admin/policy-issuance.pdf",
+      "sizeBytes": 1171
+    },
+    {
+      "department": "policy-admin",
+      "process": "endorsement",
+      "format": "csv",
+      "path": "data/insurance/policy-admin/endorsement.csv",
+      "sizeBytes": 570
+    },
+    {
+      "department": "policy-admin",
+      "process": "endorsement",
+      "format": "json",
+      "path": "data/insurance/policy-admin/endorsement.json",
+      "sizeBytes": 2218
+    },
+    {
+      "department": "policy-admin",
+      "process": "endorsement",
+      "format": "txt",
+      "path": "data/insurance/policy-admin/endorsement.txt",
+      "sizeBytes": 324
+    },
+    {
+      "department": "policy-admin",
+      "process": "endorsement",
+      "format": "docx",
+      "path": "data/insurance/policy-admin/endorsement.docx",
+      "sizeBytes": 1122
+    },
+    {
+      "department": "policy-admin",
+      "process": "endorsement",
+      "format": "pdf",
+      "path": "data/insurance/policy-admin/endorsement.pdf",
+      "sizeBytes": 1145
+    },
+    {
+      "department": "policy-admin",
+      "process": "renewal-processing",
+      "format": "csv",
+      "path": "data/insurance/policy-admin/renewal-processing.csv",
+      "sizeBytes": 541
+    },
+    {
+      "department": "policy-admin",
+      "process": "renewal-processing",
+      "format": "json",
+      "path": "data/insurance/policy-admin/renewal-processing.json",
+      "sizeBytes": 2116
+    },
+    {
+      "department": "policy-admin",
+      "process": "renewal-processing",
+      "format": "txt",
+      "path": "data/insurance/policy-admin/renewal-processing.txt",
+      "sizeBytes": 334
+    },
+    {
+      "department": "policy-admin",
+      "process": "renewal-processing",
+      "format": "pdf",
+      "path": "data/insurance/policy-admin/renewal-processing.pdf",
+      "sizeBytes": 1147
+    },
+    {
+      "department": "billing",
+      "process": "invoicing",
+      "format": "csv",
+      "path": "data/insurance/billing/invoicing.csv",
+      "sizeBytes": 511
+    },
+    {
+      "department": "billing",
+      "process": "invoicing",
+      "format": "json",
+      "path": "data/insurance/billing/invoicing.json",
+      "sizeBytes": 1952
+    },
+    {
+      "department": "billing",
+      "process": "invoicing",
+      "format": "txt",
+      "path": "data/insurance/billing/invoicing.txt",
+      "sizeBytes": 343
+    },
+    {
+      "department": "billing",
+      "process": "invoicing",
+      "format": "pdf",
+      "path": "data/insurance/billing/invoicing.pdf",
+      "sizeBytes": 1146
+    },
+    {
+      "department": "billing",
+      "process": "payment-processing",
+      "format": "csv",
+      "path": "data/insurance/billing/payment-processing.csv",
+      "sizeBytes": 543
+    },
+    {
+      "department": "billing",
+      "process": "payment-processing",
+      "format": "json",
+      "path": "data/insurance/billing/payment-processing.json",
+      "sizeBytes": 2083
+    },
+    {
+      "department": "billing",
+      "process": "payment-processing",
+      "format": "txt",
+      "path": "data/insurance/billing/payment-processing.txt",
+      "sizeBytes": 356
+    },
+    {
+      "department": "billing",
+      "process": "payment-processing",
+      "format": "pdf",
+      "path": "data/insurance/billing/payment-processing.pdf",
+      "sizeBytes": 1168
+    },
+    {
+      "department": "billing",
+      "process": "collections",
+      "format": "csv",
+      "path": "data/insurance/billing/collections.csv",
+      "sizeBytes": 553
+    },
+    {
+      "department": "billing",
+      "process": "collections",
+      "format": "json",
+      "path": "data/insurance/billing/collections.json",
+      "sizeBytes": 2086
+    },
+    {
+      "department": "billing",
+      "process": "collections",
+      "format": "txt",
+      "path": "data/insurance/billing/collections.txt",
+      "sizeBytes": 353
+    },
+    {
+      "department": "billing",
+      "process": "collections",
+      "format": "pdf",
+      "path": "data/insurance/billing/collections.pdf",
+      "sizeBytes": 1163
+    },
+    {
+      "department": "claims",
+      "process": "fnol-intake",
+      "format": "csv",
+      "path": "data/insurance/claims/fnol-intake.csv",
+      "sizeBytes": 503
+    },
+    {
+      "department": "claims",
+      "process": "fnol-intake",
+      "format": "json",
+      "path": "data/insurance/claims/fnol-intake.json",
+      "sizeBytes": 1985
+    },
+    {
+      "department": "claims",
+      "process": "fnol-intake",
+      "format": "txt",
+      "path": "data/insurance/claims/fnol-intake.txt",
+      "sizeBytes": 358
+    },
+    {
+      "department": "claims",
+      "process": "fnol-intake",
+      "format": "pdf",
+      "path": "data/insurance/claims/fnol-intake.pdf",
+      "sizeBytes": 1163
+    },
+    {
+      "department": "claims",
+      "process": "fnol-intake",
+      "format": "png",
+      "path": "data/insurance/claims/fnol-intake.png",
+      "sizeBytes": 179
+    },
+    {
+      "department": "claims",
+      "process": "fnol-intake",
+      "format": "wav",
+      "path": "data/insurance/claims/fnol-intake.wav",
+      "sizeBytes": 8044
+    },
+    {
+      "department": "claims",
+      "process": "fnol-intake",
+      "format": "mp4",
+      "path": "data/insurance/claims/fnol-intake.mp4",
+      "sizeBytes": 184
+    },
+    {
+      "department": "claims",
+      "process": "claim-triage",
+      "format": "csv",
+      "path": "data/insurance/claims/claim-triage.csv",
+      "sizeBytes": 581
+    },
+    {
+      "department": "claims",
+      "process": "claim-triage",
+      "format": "json",
+      "path": "data/insurance/claims/claim-triage.json",
+      "sizeBytes": 2144
+    },
+    {
+      "department": "claims",
+      "process": "claim-triage",
+      "format": "txt",
+      "path": "data/insurance/claims/claim-triage.txt",
+      "sizeBytes": 322
+    },
+    {
+      "department": "claims",
+      "process": "claim-triage",
+      "format": "pdf",
+      "path": "data/insurance/claims/claim-triage.pdf",
+      "sizeBytes": 1133
+    },
+    {
+      "department": "claims",
+      "process": "investigation",
+      "format": "csv",
+      "path": "data/insurance/claims/investigation.csv",
+      "sizeBytes": 585
+    },
+    {
+      "department": "claims",
+      "process": "investigation",
+      "format": "json",
+      "path": "data/insurance/claims/investigation.json",
+      "sizeBytes": 2189
+    },
+    {
+      "department": "claims",
+      "process": "investigation",
+      "format": "txt",
+      "path": "data/insurance/claims/investigation.txt",
+      "sizeBytes": 346
+    },
+    {
+      "department": "claims",
+      "process": "investigation",
+      "format": "pdf",
+      "path": "data/insurance/claims/investigation.pdf",
+      "sizeBytes": 1163
+    },
+    {
+      "department": "claims",
+      "process": "investigation",
+      "format": "png",
+      "path": "data/insurance/claims/investigation.png",
+      "sizeBytes": 179
+    },
+    {
+      "department": "claims",
+      "process": "investigation",
+      "format": "wav",
+      "path": "data/insurance/claims/investigation.wav",
+      "sizeBytes": 8044
+    },
+    {
+      "department": "claims",
+      "process": "investigation",
+      "format": "mp4",
+      "path": "data/insurance/claims/investigation.mp4",
+      "sizeBytes": 184
+    },
+    {
+      "department": "claims",
+      "process": "settlement",
+      "format": "csv",
+      "path": "data/insurance/claims/settlement.csv",
+      "sizeBytes": 555
+    },
+    {
+      "department": "claims",
+      "process": "settlement",
+      "format": "json",
+      "path": "data/insurance/claims/settlement.json",
+      "sizeBytes": 2136
+    },
+    {
+      "department": "claims",
+      "process": "settlement",
+      "format": "txt",
+      "path": "data/insurance/claims/settlement.txt",
+      "sizeBytes": 332
+    },
+    {
+      "department": "claims",
+      "process": "settlement",
+      "format": "docx",
+      "path": "data/insurance/claims/settlement.docx",
+      "sizeBytes": 1120
+    },
+    {
+      "department": "claims",
+      "process": "settlement",
+      "format": "pdf",
+      "path": "data/insurance/claims/settlement.pdf",
+      "sizeBytes": 1147
+    },
+    {
+      "department": "siu",
+      "process": "fraud-detection",
+      "format": "csv",
+      "path": "data/insurance/siu/fraud-detection.csv",
+      "sizeBytes": 544
+    },
+    {
+      "department": "siu",
+      "process": "fraud-detection",
+      "format": "json",
+      "path": "data/insurance/siu/fraud-detection.json",
+      "sizeBytes": 1977
+    },
+    {
+      "department": "siu",
+      "process": "fraud-detection",
+      "format": "txt",
+      "path": "data/insurance/siu/fraud-detection.txt",
+      "sizeBytes": 358
+    },
+    {
+      "department": "siu",
+      "process": "fraud-detection",
+      "format": "pdf",
+      "path": "data/insurance/siu/fraud-detection.pdf",
+      "sizeBytes": 1160
+    },
+    {
+      "department": "siu",
+      "process": "investigation-workflow",
+      "format": "csv",
+      "path": "data/insurance/siu/investigation-workflow.csv",
+      "sizeBytes": 558
+    },
+    {
+      "department": "siu",
+      "process": "investigation-workflow",
+      "format": "json",
+      "path": "data/insurance/siu/investigation-workflow.json",
+      "sizeBytes": 2148
+    },
+    {
+      "department": "siu",
+      "process": "investigation-workflow",
+      "format": "txt",
+      "path": "data/insurance/siu/investigation-workflow.txt",
+      "sizeBytes": 355
+    },
+    {
+      "department": "siu",
+      "process": "investigation-workflow",
+      "format": "docx",
+      "path": "data/insurance/siu/investigation-workflow.docx",
+      "sizeBytes": 1131
+    },
+    {
+      "department": "siu",
+      "process": "investigation-workflow",
+      "format": "pdf",
+      "path": "data/insurance/siu/investigation-workflow.pdf",
+      "sizeBytes": 1170
+    },
+    {
+      "department": "siu",
+      "process": "network-analytics",
+      "format": "csv",
+      "path": "data/insurance/siu/network-analytics.csv",
+      "sizeBytes": 516
+    },
+    {
+      "department": "siu",
+      "process": "network-analytics",
+      "format": "json",
+      "path": "data/insurance/siu/network-analytics.json",
+      "sizeBytes": 1951
+    },
+    {
+      "department": "siu",
+      "process": "network-analytics",
+      "format": "txt",
+      "path": "data/insurance/siu/network-analytics.txt",
+      "sizeBytes": 354
+    },
+    {
+      "department": "siu",
+      "process": "network-analytics",
+      "format": "pdf",
+      "path": "data/insurance/siu/network-analytics.pdf",
+      "sizeBytes": 1156
+    },
+    {
+      "department": "customer-service",
+      "process": "inquiry-handling",
+      "format": "csv",
+      "path": "data/insurance/customer-service/inquiry-handling.csv",
+      "sizeBytes": 530
+    },
+    {
+      "department": "customer-service",
+      "process": "inquiry-handling",
+      "format": "json",
+      "path": "data/insurance/customer-service/inquiry-handling.json",
+      "sizeBytes": 2077
+    },
+    {
+      "department": "customer-service",
+      "process": "inquiry-handling",
+      "format": "txt",
+      "path": "data/insurance/customer-service/inquiry-handling.txt",
+      "sizeBytes": 335
+    },
+    {
+      "department": "customer-service",
+      "process": "inquiry-handling",
+      "format": "pdf",
+      "path": "data/insurance/customer-service/inquiry-handling.pdf",
+      "sizeBytes": 1145
+    },
+    {
+      "department": "customer-service",
+      "process": "inquiry-handling",
+      "format": "png",
+      "path": "data/insurance/customer-service/inquiry-handling.png",
+      "sizeBytes": 179
+    },
+    {
+      "department": "customer-service",
+      "process": "inquiry-handling",
+      "format": "wav",
+      "path": "data/insurance/customer-service/inquiry-handling.wav",
+      "sizeBytes": 8044
+    },
+    {
+      "department": "customer-service",
+      "process": "inquiry-handling",
+      "format": "mp4",
+      "path": "data/insurance/customer-service/inquiry-handling.mp4",
+      "sizeBytes": 184
+    },
+    {
+      "department": "customer-service",
+      "process": "complaint-resolution",
+      "format": "csv",
+      "path": "data/insurance/customer-service/complaint-resolution.csv",
+      "sizeBytes": 561
+    },
+    {
+      "department": "customer-service",
+      "process": "complaint-resolution",
+      "format": "json",
+      "path": "data/insurance/customer-service/complaint-resolution.json",
+      "sizeBytes": 2092
+    },
+    {
+      "department": "customer-service",
+      "process": "complaint-resolution",
+      "format": "txt",
+      "path": "data/insurance/customer-service/complaint-resolution.txt",
+      "sizeBytes": 380
+    },
+    {
+      "department": "customer-service",
+      "process": "complaint-resolution",
+      "format": "docx",
+      "path": "data/insurance/customer-service/complaint-resolution.docx",
+      "sizeBytes": 1143
+    },
+    {
+      "department": "customer-service",
+      "process": "complaint-resolution",
+      "format": "pdf",
+      "path": "data/insurance/customer-service/complaint-resolution.pdf",
+      "sizeBytes": 1189
+    },
+    {
+      "department": "customer-service",
+      "process": "quality-monitoring",
+      "format": "csv",
+      "path": "data/insurance/customer-service/quality-monitoring.csv",
+      "sizeBytes": 573
+    },
+    {
+      "department": "customer-service",
+      "process": "quality-monitoring",
+      "format": "json",
+      "path": "data/insurance/customer-service/quality-monitoring.json",
+      "sizeBytes": 2172
+    },
+    {
+      "department": "customer-service",
+      "process": "quality-monitoring",
+      "format": "txt",
+      "path": "data/insurance/customer-service/quality-monitoring.txt",
+      "sizeBytes": 317
+    },
+    {
+      "department": "customer-service",
+      "process": "quality-monitoring",
+      "format": "pdf",
+      "path": "data/insurance/customer-service/quality-monitoring.pdf",
+      "sizeBytes": 1132
+    },
+    {
+      "department": "actuarial",
+      "process": "loss-reserving",
+      "format": "csv",
+      "path": "data/insurance/actuarial/loss-reserving.csv",
+      "sizeBytes": 525
+    },
+    {
+      "department": "actuarial",
+      "process": "loss-reserving",
+      "format": "json",
+      "path": "data/insurance/actuarial/loss-reserving.json",
+      "sizeBytes": 2013
+    },
+    {
+      "department": "actuarial",
+      "process": "loss-reserving",
+      "format": "txt",
+      "path": "data/insurance/actuarial/loss-reserving.txt",
+      "sizeBytes": 319
+    },
+    {
+      "department": "actuarial",
+      "process": "loss-reserving",
+      "format": "pdf",
+      "path": "data/insurance/actuarial/loss-reserving.pdf",
+      "sizeBytes": 1124
+    },
+    {
+      "department": "actuarial",
+      "process": "experience-study",
+      "format": "csv",
+      "path": "data/insurance/actuarial/experience-study.csv",
+      "sizeBytes": 532
+    },
+    {
+      "department": "actuarial",
+      "process": "experience-study",
+      "format": "json",
+      "path": "data/insurance/actuarial/experience-study.json",
+      "sizeBytes": 1972
+    },
+    {
+      "department": "actuarial",
+      "process": "experience-study",
+      "format": "txt",
+      "path": "data/insurance/actuarial/experience-study.txt",
+      "sizeBytes": 327
+    },
+    {
+      "department": "actuarial",
+      "process": "experience-study",
+      "format": "docx",
+      "path": "data/insurance/actuarial/experience-study.docx",
+      "sizeBytes": 1130
+    },
+    {
+      "department": "actuarial",
+      "process": "experience-study",
+      "format": "pdf",
+      "path": "data/insurance/actuarial/experience-study.pdf",
+      "sizeBytes": 1127
+    },
+    {
+      "department": "actuarial",
+      "process": "cat-modeling",
+      "format": "csv",
+      "path": "data/insurance/actuarial/cat-modeling.csv",
+      "sizeBytes": 517
+    },
+    {
+      "department": "actuarial",
+      "process": "cat-modeling",
+      "format": "json",
+      "path": "data/insurance/actuarial/cat-modeling.json",
+      "sizeBytes": 1923
+    },
+    {
+      "department": "actuarial",
+      "process": "cat-modeling",
+      "format": "txt",
+      "path": "data/insurance/actuarial/cat-modeling.txt",
+      "sizeBytes": 338
+    },
+    {
+      "department": "actuarial",
+      "process": "cat-modeling",
+      "format": "pdf",
+      "path": "data/insurance/actuarial/cat-modeling.pdf",
+      "sizeBytes": 1135
+    },
+    {
+      "department": "reinsurance",
+      "process": "treaty-placement",
+      "format": "csv",
+      "path": "data/insurance/reinsurance/treaty-placement.csv",
+      "sizeBytes": 574
+    },
+    {
+      "department": "reinsurance",
+      "process": "treaty-placement",
+      "format": "json",
+      "path": "data/insurance/reinsurance/treaty-placement.json",
+      "sizeBytes": 2076
+    },
+    {
+      "department": "reinsurance",
+      "process": "treaty-placement",
+      "format": "txt",
+      "path": "data/insurance/reinsurance/treaty-placement.txt",
+      "sizeBytes": 345
+    },
+    {
+      "department": "reinsurance",
+      "process": "treaty-placement",
+      "format": "docx",
+      "path": "data/insurance/reinsurance/treaty-placement.docx",
+      "sizeBytes": 1130
+    },
+    {
+      "department": "reinsurance",
+      "process": "treaty-placement",
+      "format": "pdf",
+      "path": "data/insurance/reinsurance/treaty-placement.pdf",
+      "sizeBytes": 1151
+    },
+    {
+      "department": "reinsurance",
+      "process": "facultative-placement",
+      "format": "csv",
+      "path": "data/insurance/reinsurance/facultative-placement.csv",
+      "sizeBytes": 575
+    },
+    {
+      "department": "reinsurance",
+      "process": "facultative-placement",
+      "format": "json",
+      "path": "data/insurance/reinsurance/facultative-placement.json",
+      "sizeBytes": 2092
+    },
+    {
+      "department": "reinsurance",
+      "process": "facultative-placement",
+      "format": "txt",
+      "path": "data/insurance/reinsurance/facultative-placement.txt",
+      "sizeBytes": 335
+    },
+    {
+      "department": "reinsurance",
+      "process": "facultative-placement",
+      "format": "pdf",
+      "path": "data/insurance/reinsurance/facultative-placement.pdf",
+      "sizeBytes": 1142
+    },
+    {
+      "department": "reinsurance",
+      "process": "cession-accounting",
+      "format": "csv",
+      "path": "data/insurance/reinsurance/cession-accounting.csv",
+      "sizeBytes": 546
+    },
+    {
+      "department": "reinsurance",
+      "process": "cession-accounting",
+      "format": "json",
+      "path": "data/insurance/reinsurance/cession-accounting.json",
+      "sizeBytes": 2070
+    },
+    {
+      "department": "reinsurance",
+      "process": "cession-accounting",
+      "format": "txt",
+      "path": "data/insurance/reinsurance/cession-accounting.txt",
+      "sizeBytes": 332
+    },
+    {
+      "department": "reinsurance",
+      "process": "cession-accounting",
+      "format": "pdf",
+      "path": "data/insurance/reinsurance/cession-accounting.pdf",
+      "sizeBytes": 1140
+    },
+    {
+      "department": "compliance",
+      "process": "regulatory-tracking",
+      "format": "csv",
+      "path": "data/insurance/compliance/regulatory-tracking.csv",
+      "sizeBytes": 542
+    },
+    {
+      "department": "compliance",
+      "process": "regulatory-tracking",
+      "format": "json",
+      "path": "data/insurance/compliance/regulatory-tracking.json",
+      "sizeBytes": 1986
+    },
+    {
+      "department": "compliance",
+      "process": "regulatory-tracking",
+      "format": "txt",
+      "path": "data/insurance/compliance/regulatory-tracking.txt",
+      "sizeBytes": 329
+    },
+    {
+      "department": "compliance",
+      "process": "regulatory-tracking",
+      "format": "docx",
+      "path": "data/insurance/compliance/regulatory-tracking.docx",
+      "sizeBytes": 1123
+    },
+    {
+      "department": "compliance",
+      "process": "regulatory-tracking",
+      "format": "pdf",
+      "path": "data/insurance/compliance/regulatory-tracking.pdf",
+      "sizeBytes": 1129
+    },
+    {
+      "department": "compliance",
+      "process": "filing-management",
+      "format": "csv",
+      "path": "data/insurance/compliance/filing-management.csv",
+      "sizeBytes": 522
+    },
+    {
+      "department": "compliance",
+      "process": "filing-management",
+      "format": "json",
+      "path": "data/insurance/compliance/filing-management.json",
+      "sizeBytes": 1994
+    },
+    {
+      "department": "compliance",
+      "process": "filing-management",
+      "format": "txt",
+      "path": "data/insurance/compliance/filing-management.txt",
+      "sizeBytes": 329
+    },
+    {
+      "department": "compliance",
+      "process": "filing-management",
+      "format": "docx",
+      "path": "data/insurance/compliance/filing-management.docx",
+      "sizeBytes": 1119
+    },
+    {
+      "department": "compliance",
+      "process": "filing-management",
+      "format": "pdf",
+      "path": "data/insurance/compliance/filing-management.pdf",
+      "sizeBytes": 1132
+    },
+    {
+      "department": "compliance",
+      "process": "audit-response",
+      "format": "csv",
+      "path": "data/insurance/compliance/audit-response.csv",
+      "sizeBytes": 524
+    },
+    {
+      "department": "compliance",
+      "process": "audit-response",
+      "format": "json",
+      "path": "data/insurance/compliance/audit-response.json",
+      "sizeBytes": 1953
+    },
+    {
+      "department": "compliance",
+      "process": "audit-response",
+      "format": "txt",
+      "path": "data/insurance/compliance/audit-response.txt",
+      "sizeBytes": 328
+    },
+    {
+      "department": "compliance",
+      "process": "audit-response",
+      "format": "docx",
+      "path": "data/insurance/compliance/audit-response.docx",
+      "sizeBytes": 1120
+    },
+    {
+      "department": "compliance",
+      "process": "audit-response",
+      "format": "pdf",
+      "path": "data/insurance/compliance/audit-response.pdf",
+      "sizeBytes": 1127
+    },
+    {
+      "department": "legal",
+      "process": "contract-drafting",
+      "format": "csv",
+      "path": "data/insurance/legal/contract-drafting.csv",
+      "sizeBytes": 548
+    },
+    {
+      "department": "legal",
+      "process": "contract-drafting",
+      "format": "json",
+      "path": "data/insurance/legal/contract-drafting.json",
+      "sizeBytes": 2055
+    },
+    {
+      "department": "legal",
+      "process": "contract-drafting",
+      "format": "txt",
+      "path": "data/insurance/legal/contract-drafting.txt",
+      "sizeBytes": 323
+    },
+    {
+      "department": "legal",
+      "process": "contract-drafting",
+      "format": "docx",
+      "path": "data/insurance/legal/contract-drafting.docx",
+      "sizeBytes": 1129
+    },
+    {
+      "department": "legal",
+      "process": "contract-drafting",
+      "format": "pdf",
+      "path": "data/insurance/legal/contract-drafting.pdf",
+      "sizeBytes": 1130
+    },
+    {
+      "department": "legal",
+      "process": "litigation-management",
+      "format": "csv",
+      "path": "data/insurance/legal/litigation-management.csv",
+      "sizeBytes": 564
+    },
+    {
+      "department": "legal",
+      "process": "litigation-management",
+      "format": "json",
+      "path": "data/insurance/legal/litigation-management.json",
+      "sizeBytes": 2065
+    },
+    {
+      "department": "legal",
+      "process": "litigation-management",
+      "format": "txt",
+      "path": "data/insurance/legal/litigation-management.txt",
+      "sizeBytes": 330
+    },
+    {
+      "department": "legal",
+      "process": "litigation-management",
+      "format": "docx",
+      "path": "data/insurance/legal/litigation-management.docx",
+      "sizeBytes": 1120
+    },
+    {
+      "department": "legal",
+      "process": "litigation-management",
+      "format": "pdf",
+      "path": "data/insurance/legal/litigation-management.pdf",
+      "sizeBytes": 1136
+    },
+    {
+      "department": "legal",
+      "process": "regulatory-liaison",
+      "format": "csv",
+      "path": "data/insurance/legal/regulatory-liaison.csv",
+      "sizeBytes": 537
+    },
+    {
+      "department": "legal",
+      "process": "regulatory-liaison",
+      "format": "json",
+      "path": "data/insurance/legal/regulatory-liaison.json",
+      "sizeBytes": 2005
+    },
+    {
+      "department": "legal",
+      "process": "regulatory-liaison",
+      "format": "txt",
+      "path": "data/insurance/legal/regulatory-liaison.txt",
+      "sizeBytes": 315
+    },
+    {
+      "department": "legal",
+      "process": "regulatory-liaison",
+      "format": "docx",
+      "path": "data/insurance/legal/regulatory-liaison.docx",
+      "sizeBytes": 1109
+    },
+    {
+      "department": "legal",
+      "process": "regulatory-liaison",
+      "format": "pdf",
+      "path": "data/insurance/legal/regulatory-liaison.pdf",
+      "sizeBytes": 1118
+    },
+    {
+      "department": "finance",
+      "process": "financial-close",
+      "format": "csv",
+      "path": "data/insurance/finance/financial-close.csv",
+      "sizeBytes": 540
+    },
+    {
+      "department": "finance",
+      "process": "financial-close",
+      "format": "json",
+      "path": "data/insurance/finance/financial-close.json",
+      "sizeBytes": 1977
+    },
+    {
+      "department": "finance",
+      "process": "financial-close",
+      "format": "txt",
+      "path": "data/insurance/finance/financial-close.txt",
+      "sizeBytes": 306
+    },
+    {
+      "department": "finance",
+      "process": "financial-close",
+      "format": "pdf",
+      "path": "data/insurance/finance/financial-close.pdf",
+      "sizeBytes": 1106
+    },
+    {
+      "department": "finance",
+      "process": "forecasting",
+      "format": "csv",
+      "path": "data/insurance/finance/forecasting.csv",
+      "sizeBytes": 485
+    },
+    {
+      "department": "finance",
+      "process": "forecasting",
+      "format": "json",
+      "path": "data/insurance/finance/forecasting.json",
+      "sizeBytes": 1838
+    },
+    {
+      "department": "finance",
+      "process": "forecasting",
+      "format": "txt",
+      "path": "data/insurance/finance/forecasting.txt",
+      "sizeBytes": 315
+    },
+    {
+      "department": "finance",
+      "process": "forecasting",
+      "format": "pdf",
+      "path": "data/insurance/finance/forecasting.pdf",
+      "sizeBytes": 1107
+    },
+    {
+      "department": "finance",
+      "process": "finops-monitoring",
+      "format": "csv",
+      "path": "data/insurance/finance/finops-monitoring.csv",
+      "sizeBytes": 572
+    },
+    {
+      "department": "finance",
+      "process": "finops-monitoring",
+      "format": "json",
+      "path": "data/insurance/finance/finops-monitoring.json",
+      "sizeBytes": 2031
+    },
+    {
+      "department": "finance",
+      "process": "finops-monitoring",
+      "format": "txt",
+      "path": "data/insurance/finance/finops-monitoring.txt",
+      "sizeBytes": 299
+    },
+    {
+      "department": "finance",
+      "process": "finops-monitoring",
+      "format": "pdf",
+      "path": "data/insurance/finance/finops-monitoring.pdf",
+      "sizeBytes": 1101
+    },
+    {
+      "department": "erm",
+      "process": "risk-register",
+      "format": "csv",
+      "path": "data/insurance/erm/risk-register.csv",
+      "sizeBytes": 532
+    },
+    {
+      "department": "erm",
+      "process": "risk-register",
+      "format": "json",
+      "path": "data/insurance/erm/risk-register.json",
+      "sizeBytes": 2003
+    },
+    {
+      "department": "erm",
+      "process": "risk-register",
+      "format": "txt",
+      "path": "data/insurance/erm/risk-register.txt",
+      "sizeBytes": 340
+    },
+    {
+      "department": "erm",
+      "process": "risk-register",
+      "format": "docx",
+      "path": "data/insurance/erm/risk-register.docx",
+      "sizeBytes": 1130
+    },
+    {
+      "department": "erm",
+      "process": "risk-register",
+      "format": "pdf",
+      "path": "data/insurance/erm/risk-register.pdf",
+      "sizeBytes": 1144
+    },
+    {
+      "department": "erm",
+      "process": "stress-testing",
+      "format": "csv",
+      "path": "data/insurance/erm/stress-testing.csv",
+      "sizeBytes": 522
+    },
+    {
+      "department": "erm",
+      "process": "stress-testing",
+      "format": "json",
+      "path": "data/insurance/erm/stress-testing.json",
+      "sizeBytes": 1974
+    },
+    {
+      "department": "erm",
+      "process": "stress-testing",
+      "format": "txt",
+      "path": "data/insurance/erm/stress-testing.txt",
+      "sizeBytes": 339
+    },
+    {
+      "department": "erm",
+      "process": "stress-testing",
+      "format": "pdf",
+      "path": "data/insurance/erm/stress-testing.pdf",
+      "sizeBytes": 1141
+    },
+    {
+      "department": "erm",
+      "process": "emerging-risk",
+      "format": "csv",
+      "path": "data/insurance/erm/emerging-risk.csv",
+      "sizeBytes": 574
+    },
+    {
+      "department": "erm",
+      "process": "emerging-risk",
+      "format": "json",
+      "path": "data/insurance/erm/emerging-risk.json",
+      "sizeBytes": 2065
+    },
+    {
+      "department": "erm",
+      "process": "emerging-risk",
+      "format": "txt",
+      "path": "data/insurance/erm/emerging-risk.txt",
+      "sizeBytes": 313
+    },
+    {
+      "department": "erm",
+      "process": "emerging-risk",
+      "format": "docx",
+      "path": "data/insurance/erm/emerging-risk.docx",
+      "sizeBytes": 1124
+    },
+    {
+      "department": "erm",
+      "process": "emerging-risk",
+      "format": "pdf",
+      "path": "data/insurance/erm/emerging-risk.pdf",
+      "sizeBytes": 1119
+    },
+    {
+      "department": "hr",
+      "process": "recruitment",
+      "format": "csv",
+      "path": "data/insurance/hr/recruitment.csv",
+      "sizeBytes": 549
+    },
+    {
+      "department": "hr",
+      "process": "recruitment",
+      "format": "json",
+      "path": "data/insurance/hr/recruitment.json",
+      "sizeBytes": 1967
+    },
+    {
+      "department": "hr",
+      "process": "recruitment",
+      "format": "txt",
+      "path": "data/insurance/hr/recruitment.txt",
+      "sizeBytes": 347
+    },
+    {
+      "department": "hr",
+      "process": "recruitment",
+      "format": "docx",
+      "path": "data/insurance/hr/recruitment.docx",
+      "sizeBytes": 1134
+    },
+    {
+      "department": "hr",
+      "process": "recruitment",
+      "format": "pdf",
+      "path": "data/insurance/hr/recruitment.pdf",
+      "sizeBytes": 1148
+    },
+    {
+      "department": "hr",
+      "process": "learning-paths",
+      "format": "csv",
+      "path": "data/insurance/hr/learning-paths.csv",
+      "sizeBytes": 572
+    },
+    {
+      "department": "hr",
+      "process": "learning-paths",
+      "format": "json",
+      "path": "data/insurance/hr/learning-paths.json",
+      "sizeBytes": 2043
+    },
+    {
+      "department": "hr",
+      "process": "learning-paths",
+      "format": "txt",
+      "path": "data/insurance/hr/learning-paths.txt",
+      "sizeBytes": 316
+    },
+    {
+      "department": "hr",
+      "process": "learning-paths",
+      "format": "docx",
+      "path": "data/insurance/hr/learning-paths.docx",
+      "sizeBytes": 1119
+    },
+    {
+      "department": "hr",
+      "process": "learning-paths",
+      "format": "pdf",
+      "path": "data/insurance/hr/learning-paths.pdf",
+      "sizeBytes": 1120
+    },
+    {
+      "department": "hr",
+      "process": "workforce-planning",
+      "format": "csv",
+      "path": "data/insurance/hr/workforce-planning.csv",
+      "sizeBytes": 514
+    },
+    {
+      "department": "hr",
+      "process": "workforce-planning",
+      "format": "json",
+      "path": "data/insurance/hr/workforce-planning.json",
+      "sizeBytes": 1999
+    },
+    {
+      "department": "hr",
+      "process": "workforce-planning",
+      "format": "txt",
+      "path": "data/insurance/hr/workforce-planning.txt",
+      "sizeBytes": 338
+    },
+    {
+      "department": "hr",
+      "process": "workforce-planning",
+      "format": "pdf",
+      "path": "data/insurance/hr/workforce-planning.pdf",
+      "sizeBytes": 1143
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-onboarding",
+      "format": "csv",
+      "path": "data/insurance/procurement/vendor-onboarding.csv",
+      "sizeBytes": 657
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-onboarding",
+      "format": "json",
+      "path": "data/insurance/procurement/vendor-onboarding.json",
+      "sizeBytes": 2110
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-onboarding",
+      "format": "txt",
+      "path": "data/insurance/procurement/vendor-onboarding.txt",
+      "sizeBytes": 344
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-onboarding",
+      "format": "docx",
+      "path": "data/insurance/procurement/vendor-onboarding.docx",
+      "sizeBytes": 1137
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-onboarding",
+      "format": "pdf",
+      "path": "data/insurance/procurement/vendor-onboarding.pdf",
+      "sizeBytes": 1145
+    },
+    {
+      "department": "procurement",
+      "process": "contract-mgmt",
+      "format": "csv",
+      "path": "data/insurance/procurement/contract-mgmt.csv",
+      "sizeBytes": 527
+    },
+    {
+      "department": "procurement",
+      "process": "contract-mgmt",
+      "format": "json",
+      "path": "data/insurance/procurement/contract-mgmt.json",
+      "sizeBytes": 1986
+    },
+    {
+      "department": "procurement",
+      "process": "contract-mgmt",
+      "format": "txt",
+      "path": "data/insurance/procurement/contract-mgmt.txt",
+      "sizeBytes": 332
+    },
+    {
+      "department": "procurement",
+      "process": "contract-mgmt",
+      "format": "docx",
+      "path": "data/insurance/procurement/contract-mgmt.docx",
+      "sizeBytes": 1134
+    },
+    {
+      "department": "procurement",
+      "process": "contract-mgmt",
+      "format": "pdf",
+      "path": "data/insurance/procurement/contract-mgmt.pdf",
+      "sizeBytes": 1134
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-performance",
+      "format": "csv",
+      "path": "data/insurance/procurement/vendor-performance.csv",
+      "sizeBytes": 502
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-performance",
+      "format": "json",
+      "path": "data/insurance/procurement/vendor-performance.json",
+      "sizeBytes": 1866
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-performance",
+      "format": "txt",
+      "path": "data/insurance/procurement/vendor-performance.txt",
+      "sizeBytes": 335
+    },
+    {
+      "department": "procurement",
+      "process": "vendor-performance",
+      "format": "pdf",
+      "path": "data/insurance/procurement/vendor-performance.pdf",
+      "sizeBytes": 1129
+    },
+    {
+      "department": "data-analytics",
+      "process": "dq-monitoring",
+      "format": "csv",
+      "path": "data/insurance/data-analytics/dq-monitoring.csv",
+      "sizeBytes": 505
+    },
+    {
+      "department": "data-analytics",
+      "process": "dq-monitoring",
+      "format": "json",
+      "path": "data/insurance/data-analytics/dq-monitoring.json",
+      "sizeBytes": 1917
+    },
+    {
+      "department": "data-analytics",
+      "process": "dq-monitoring",
+      "format": "txt",
+      "path": "data/insurance/data-analytics/dq-monitoring.txt",
+      "sizeBytes": 327
+    },
+    {
+      "department": "data-analytics",
+      "process": "dq-monitoring",
+      "format": "pdf",
+      "path": "data/insurance/data-analytics/dq-monitoring.pdf",
+      "sizeBytes": 1124
+    },
+    {
+      "department": "data-analytics",
+      "process": "mdm",
+      "format": "csv",
+      "path": "data/insurance/data-analytics/mdm.csv",
+      "sizeBytes": 571
+    },
+    {
+      "department": "data-analytics",
+      "process": "mdm",
+      "format": "json",
+      "path": "data/insurance/data-analytics/mdm.json",
+      "sizeBytes": 2133
+    },
+    {
+      "department": "data-analytics",
+      "process": "mdm",
+      "format": "txt",
+      "path": "data/insurance/data-analytics/mdm.txt",
+      "sizeBytes": 319
+    },
+    {
+      "department": "data-analytics",
+      "process": "mdm",
+      "format": "pdf",
+      "path": "data/insurance/data-analytics/mdm.pdf",
+      "sizeBytes": 1132
+    },
+    {
+      "department": "data-analytics",
+      "process": "self-serve-bi",
+      "format": "csv",
+      "path": "data/insurance/data-analytics/self-serve-bi.csv",
+      "sizeBytes": 494
+    },
+    {
+      "department": "data-analytics",
+      "process": "self-serve-bi",
+      "format": "json",
+      "path": "data/insurance/data-analytics/self-serve-bi.json",
+      "sizeBytes": 1936
+    },
+    {
+      "department": "data-analytics",
+      "process": "self-serve-bi",
+      "format": "txt",
+      "path": "data/insurance/data-analytics/self-serve-bi.txt",
+      "sizeBytes": 329
+    },
+    {
+      "department": "data-analytics",
+      "process": "self-serve-bi",
+      "format": "docx",
+      "path": "data/insurance/data-analytics/self-serve-bi.docx",
+      "sizeBytes": 1133
+    },
+    {
+      "department": "data-analytics",
+      "process": "self-serve-bi",
+      "format": "pdf",
+      "path": "data/insurance/data-analytics/self-serve-bi.pdf",
+      "sizeBytes": 1129
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-development",
+      "format": "csv",
+      "path": "data/insurance/ai-data-science/model-development.csv",
+      "sizeBytes": 545
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-development",
+      "format": "json",
+      "path": "data/insurance/ai-data-science/model-development.json",
+      "sizeBytes": 2022
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-development",
+      "format": "txt",
+      "path": "data/insurance/ai-data-science/model-development.txt",
+      "sizeBytes": 336
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-development",
+      "format": "docx",
+      "path": "data/insurance/ai-data-science/model-development.docx",
+      "sizeBytes": 1131
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-development",
+      "format": "pdf",
+      "path": "data/insurance/ai-data-science/model-development.pdf",
+      "sizeBytes": 1139
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-deployment",
+      "format": "csv",
+      "path": "data/insurance/ai-data-science/model-deployment.csv",
+      "sizeBytes": 576
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-deployment",
+      "format": "json",
+      "path": "data/insurance/ai-data-science/model-deployment.json",
+      "sizeBytes": 2102
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-deployment",
+      "format": "txt",
+      "path": "data/insurance/ai-data-science/model-deployment.txt",
+      "sizeBytes": 302
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-deployment",
+      "format": "pdf",
+      "path": "data/insurance/ai-data-science/model-deployment.pdf",
+      "sizeBytes": 1110
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-monitoring",
+      "format": "csv",
+      "path": "data/insurance/ai-data-science/model-monitoring.csv",
+      "sizeBytes": 531
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-monitoring",
+      "format": "json",
+      "path": "data/insurance/ai-data-science/model-monitoring.json",
+      "sizeBytes": 1907
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-monitoring",
+      "format": "txt",
+      "path": "data/insurance/ai-data-science/model-monitoring.txt",
+      "sizeBytes": 335
+    },
+    {
+      "department": "ai-data-science",
+      "process": "model-monitoring",
+      "format": "pdf",
+      "path": "data/insurance/ai-data-science/model-monitoring.pdf",
+      "sizeBytes": 1128
+    },
+    {
+      "department": "it-ops",
+      "process": "incident-mgmt",
+      "format": "csv",
+      "path": "data/insurance/it-ops/incident-mgmt.csv",
+      "sizeBytes": 500
+    },
+    {
+      "department": "it-ops",
+      "process": "incident-mgmt",
+      "format": "json",
+      "path": "data/insurance/it-ops/incident-mgmt.json",
+      "sizeBytes": 1844
+    },
+    {
+      "department": "it-ops",
+      "process": "incident-mgmt",
+      "format": "txt",
+      "path": "data/insurance/it-ops/incident-mgmt.txt",
+      "sizeBytes": 328
+    },
+    {
+      "department": "it-ops",
+      "process": "incident-mgmt",
+      "format": "docx",
+      "path": "data/insurance/it-ops/incident-mgmt.docx",
+      "sizeBytes": 1130
+    },
+    {
+      "department": "it-ops",
+      "process": "incident-mgmt",
+      "format": "pdf",
+      "path": "data/insurance/it-ops/incident-mgmt.pdf",
+      "sizeBytes": 1113
+    },
+    {
+      "department": "it-ops",
+      "process": "capacity-planning",
+      "format": "csv",
+      "path": "data/insurance/it-ops/capacity-planning.csv",
+      "sizeBytes": 538
+    },
+    {
+      "department": "it-ops",
+      "process": "capacity-planning",
+      "format": "json",
+      "path": "data/insurance/it-ops/capacity-planning.json",
+      "sizeBytes": 1976
+    },
+    {
+      "department": "it-ops",
+      "process": "capacity-planning",
+      "format": "txt",
+      "path": "data/insurance/it-ops/capacity-planning.txt",
+      "sizeBytes": 313
+    },
+    {
+      "department": "it-ops",
+      "process": "capacity-planning",
+      "format": "pdf",
+      "path": "data/insurance/it-ops/capacity-planning.pdf",
+      "sizeBytes": 1113
+    },
+    {
+      "department": "it-ops",
+      "process": "observability",
+      "format": "csv",
+      "path": "data/insurance/it-ops/observability.csv",
+      "sizeBytes": 555
+    },
+    {
+      "department": "it-ops",
+      "process": "observability",
+      "format": "json",
+      "path": "data/insurance/it-ops/observability.json",
+      "sizeBytes": 2009
+    },
+    {
+      "department": "it-ops",
+      "process": "observability",
+      "format": "txt",
+      "path": "data/insurance/it-ops/observability.txt",
+      "sizeBytes": 280
+    },
+    {
+      "department": "it-ops",
+      "process": "observability",
+      "format": "pdf",
+      "path": "data/insurance/it-ops/observability.pdf",
+      "sizeBytes": 1082
+    },
+    {
+      "department": "cybersecurity",
+      "process": "threat-detection",
+      "format": "csv",
+      "path": "data/insurance/cybersecurity/threat-detection.csv",
+      "sizeBytes": 558
+    },
+    {
+      "department": "cybersecurity",
+      "process": "threat-detection",
+      "format": "json",
+      "path": "data/insurance/cybersecurity/threat-detection.json",
+      "sizeBytes": 1992
+    },
+    {
+      "department": "cybersecurity",
+      "process": "threat-detection",
+      "format": "txt",
+      "path": "data/insurance/cybersecurity/threat-detection.txt",
+      "sizeBytes": 302
+    },
+    {
+      "department": "cybersecurity",
+      "process": "threat-detection",
+      "format": "pdf",
+      "path": "data/insurance/cybersecurity/threat-detection.pdf",
+      "sizeBytes": 1101
+    },
+    {
+      "department": "cybersecurity",
+      "process": "identity-mgmt",
+      "format": "csv",
+      "path": "data/insurance/cybersecurity/identity-mgmt.csv",
+      "sizeBytes": 479
+    },
+    {
+      "department": "cybersecurity",
+      "process": "identity-mgmt",
+      "format": "json",
+      "path": "data/insurance/cybersecurity/identity-mgmt.json",
+      "sizeBytes": 1860
+    },
+    {
+      "department": "cybersecurity",
+      "process": "identity-mgmt",
+      "format": "txt",
+      "path": "data/insurance/cybersecurity/identity-mgmt.txt",
+      "sizeBytes": 320
+    },
+    {
+      "department": "cybersecurity",
+      "process": "identity-mgmt",
+      "format": "docx",
+      "path": "data/insurance/cybersecurity/identity-mgmt.docx",
+      "sizeBytes": 1128
+    },
+    {
+      "department": "cybersecurity",
+      "process": "identity-mgmt",
+      "format": "pdf",
+      "path": "data/insurance/cybersecurity/identity-mgmt.pdf",
+      "sizeBytes": 1114
+    },
+    {
+      "department": "cybersecurity",
+      "process": "privacy-dlp",
+      "format": "csv",
+      "path": "data/insurance/cybersecurity/privacy-dlp.csv",
+      "sizeBytes": 527
+    },
+    {
+      "department": "cybersecurity",
+      "process": "privacy-dlp",
+      "format": "json",
+      "path": "data/insurance/cybersecurity/privacy-dlp.json",
+      "sizeBytes": 1966
+    },
+    {
+      "department": "cybersecurity",
+      "process": "privacy-dlp",
+      "format": "txt",
+      "path": "data/insurance/cybersecurity/privacy-dlp.txt",
+      "sizeBytes": 314
+    },
+    {
+      "department": "cybersecurity",
+      "process": "privacy-dlp",
+      "format": "pdf",
+      "path": "data/insurance/cybersecurity/privacy-dlp.pdf",
+      "sizeBytes": 1114
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "model-risk-review",
+      "format": "csv",
+      "path": "data/insurance/ai-governance-office/model-risk-review.csv",
+      "sizeBytes": 563
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "model-risk-review",
+      "format": "json",
+      "path": "data/insurance/ai-governance-office/model-risk-review.json",
+      "sizeBytes": 2005
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "model-risk-review",
+      "format": "txt",
+      "path": "data/insurance/ai-governance-office/model-risk-review.txt",
+      "sizeBytes": 330
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "model-risk-review",
+      "format": "docx",
+      "path": "data/insurance/ai-governance-office/model-risk-review.docx",
+      "sizeBytes": 1130
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "model-risk-review",
+      "format": "pdf",
+      "path": "data/insurance/ai-governance-office/model-risk-review.pdf",
+      "sizeBytes": 1129
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "fairness-audit",
+      "format": "csv",
+      "path": "data/insurance/ai-governance-office/fairness-audit.csv",
+      "sizeBytes": 574
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "fairness-audit",
+      "format": "json",
+      "path": "data/insurance/ai-governance-office/fairness-audit.json",
+      "sizeBytes": 2083
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "fairness-audit",
+      "format": "txt",
+      "path": "data/insurance/ai-governance-office/fairness-audit.txt",
+      "sizeBytes": 340
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "fairness-audit",
+      "format": "pdf",
+      "path": "data/insurance/ai-governance-office/fairness-audit.pdf",
+      "sizeBytes": 1146
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "policy-enforcement",
+      "format": "csv",
+      "path": "data/insurance/ai-governance-office/policy-enforcement.csv",
+      "sizeBytes": 556
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "policy-enforcement",
+      "format": "json",
+      "path": "data/insurance/ai-governance-office/policy-enforcement.json",
+      "sizeBytes": 2039
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "policy-enforcement",
+      "format": "txt",
+      "path": "data/insurance/ai-governance-office/policy-enforcement.txt",
+      "sizeBytes": 325
+    },
+    {
+      "department": "ai-governance-office",
+      "process": "policy-enforcement",
+      "format": "pdf",
+      "path": "data/insurance/ai-governance-office/policy-enforcement.pdf",
+      "sizeBytes": 1128
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "process": "learning-paths",
+  "department": "hr",
+  "columns": [
+    "employee_id",
+    "skill",
+    "level",
+    "gap",
+    "next_course",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "employee_id": "val_144",
+      "skill": "val_144",
+      "level": "val_144",
+      "gap": "val_144",
+      "next_course": "val_144",
+      "updated_at": "2026-01-13"
+    },
+    {
+      "employee_id": "val_175",
+      "skill": "val_175",
+      "level": "val_175",
+      "gap": "val_175",
+      "next_course": "val_175",
+      "updated_at": "2026-08-16"
+    },
+    {
+      "employee_id": "val_206",
+      "skill": "val_206",
+      "level": "val_206",
+      "gap": "val_206",
+      "next_course": "val_206",
+      "updated_at": "2026-03-19"
+    },
+    {
+      "employee_id": "val_237",
+      "skill": "val_237",
+      "level": "val_237",
+      "gap": "val_237",
+      "next_course": "val_237",
+      "updated_at": "2026-10-22"
+    },
+    {
+      "employee_id": "val_268",
+      "skill": "val_268",
+      "level": "val_268",
+      "gap": "val_268",
+      "next_course": "val_268",
+      "updated_at": "2026-05-25"
+    },
+    {
+      "employee_id": "val_299",
+      "skill": "val_299",
+      "level": "val_299",
+      "gap": "val_299",
+      "next_course": "val_299",
+      "updated_at": "2026-12-28"
+    },
+    {
+      "employee_id": "val_330",
+      "skill": "val_330",
+      "level": "val_330",
+      "gap": "val_330",
+      "next_course": "val_330",
+      "updated_at": "2026-07-03"
+    },
+    {
+      "employee_id": "val_361",
+      "skill": "val_361",
+      "level": "val_361",
+      "gap": "val_361",
+      "next_course": "val_361",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "employee_id": "val_392",
+      "skill": "val_392",
+      "level": "val_392",
+      "gap": "val_392",
+      "next_course": "val_392",
+      "updated_at": "2026-09-09"
+    },
+    {
+      "employee_id": "val_423",
+      "skill": "val_423",
+      "level": "val_423",
+      "gap": "val_423",
+      "next_course": "val_423",
+      "updated_at": "2026-04-12"
+    }
+  ]
+}

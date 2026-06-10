@@ -1,0 +1,94 @@
+{
+  "process": "mdm",
+  "department": "data-analytics",
+  "columns": [
+    "entity_type",
+    "golden_id",
+    "sources",
+    "confidence",
+    "steward",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "entity_type": "val_774",
+      "golden_id": "val_774",
+      "sources": "val_774",
+      "confidence": "val_774",
+      "steward": "val_774",
+      "updated_at": "2026-03-03"
+    },
+    {
+      "entity_type": "val_805",
+      "golden_id": "val_805",
+      "sources": "val_805",
+      "confidence": "val_805",
+      "steward": "val_805",
+      "updated_at": "2026-10-06"
+    },
+    {
+      "entity_type": "val_836",
+      "golden_id": "val_836",
+      "sources": "val_836",
+      "confidence": "val_836",
+      "steward": "val_836",
+      "updated_at": "2026-05-09"
+    },
+    {
+      "entity_type": "val_867",
+      "golden_id": "val_867",
+      "sources": "val_867",
+      "confidence": "val_867",
+      "steward": "val_867",
+      "updated_at": "2026-12-12"
+    },
+    {
+      "entity_type": "val_898",
+      "golden_id": "val_898",
+      "sources": "val_898",
+      "confidence": "val_898",
+      "steward": "val_898",
+      "updated_at": "2026-07-15"
+    },
+    {
+      "entity_type": "val_929",
+      "golden_id": "val_929",
+      "sources": "val_929",
+      "confidence": "val_929",
+      "steward": "val_929",
+      "updated_at": "2026-02-18"
+    },
+    {
+      "entity_type": "val_960",
+      "golden_id": "val_960",
+      "sources": "val_960",
+      "confidence": "val_960",
+      "steward": "val_960",
+      "updated_at": "2026-09-21"
+    },
+    {
+      "entity_type": "val_991",
+      "golden_id": "val_991",
+      "sources": "val_991",
+      "confidence": "val_991",
+      "steward": "val_991",
+      "updated_at": "2026-04-24"
+    },
+    {
+      "entity_type": "val_22",
+      "golden_id": "val_22",
+      "sources": "val_22",
+      "confidence": "val_22",
+      "steward": "val_22",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "entity_type": "val_53",
+      "golden_id": "val_53",
+      "sources": "val_53",
+      "confidence": "val_53",
+      "steward": "val_53",
+      "updated_at": "2026-06-02"
+    }
+  ]
+}

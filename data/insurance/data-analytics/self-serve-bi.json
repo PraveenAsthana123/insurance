@@ -1,0 +1,94 @@
+{
+  "process": "self-serve-bi",
+  "department": "data-analytics",
+  "columns": [
+    "dataset",
+    "owner",
+    "rows",
+    "freshness_min",
+    "queries",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "dataset": "val_908",
+      "owner": "dave",
+      "rows": "val_908",
+      "freshness_min": "val_908",
+      "queries": "val_908",
+      "as_of": "val_908"
+    },
+    {
+      "dataset": "val_939",
+      "owner": "carol",
+      "rows": "val_939",
+      "freshness_min": "val_939",
+      "queries": "val_939",
+      "as_of": "val_939"
+    },
+    {
+      "dataset": "val_970",
+      "owner": "bob",
+      "rows": "val_970",
+      "freshness_min": "val_970",
+      "queries": "val_970",
+      "as_of": "val_970"
+    },
+    {
+      "dataset": "val_28",
+      "owner": "dave",
+      "rows": "val_28",
+      "freshness_min": "val_28",
+      "queries": "val_28",
+      "as_of": "val_28"
+    },
+    {
+      "dataset": "val_59",
+      "owner": "carol",
+      "rows": "val_59",
+      "freshness_min": "val_59",
+      "queries": "val_59",
+      "as_of": "val_59"
+    },
+    {
+      "dataset": "val_90",
+      "owner": "bob",
+      "rows": "val_90",
+      "freshness_min": "val_90",
+      "queries": "val_90",
+      "as_of": "val_90"
+    },
+    {
+      "dataset": "val_121",
+      "owner": "alice",
+      "rows": "val_121",
+      "freshness_min": "val_121",
+      "queries": "val_121",
+      "as_of": "val_121"
+    },
+    {
+      "dataset": "val_152",
+      "owner": "erin",
+      "rows": "val_152",
+      "freshness_min": "val_152",
+      "queries": "val_152",
+      "as_of": "val_152"
+    },
+    {
+      "dataset": "val_183",
+      "owner": "carol",
+      "rows": "val_183",
+      "freshness_min": "val_183",
+      "queries": "val_183",
+      "as_of": "val_183"
+    },
+    {
+      "dataset": "val_214",
+      "owner": "bob",
+      "rows": "val_214",
+      "freshness_min": "val_214",
+      "queries": "val_214",
+      "as_of": "val_214"
+    }
+  ]
+}

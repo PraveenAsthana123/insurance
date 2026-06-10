@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/agent_supervisor.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+Live agent supervisor API.
+
+Read-only HTTP wrapper around the Redis-backed agent fleet state. This powers
+frontend command-center visibility without shell access.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import time
+- from `collections` import Counter
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `typing` import Any
+- from `_` import redis
+- from `fastapi` import APIRouter, Query
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_utc_now()`: (no docstring)
+- `_load_json(raw)`: (no docstring)
+- `_redact_redis_url(redis_url)`: (no docstring)
+- `_redis_client()`: (no docstring)
+- `_queue_snapshot(client)`: (no docstring)
+- `_heartbeat_rows(client)`: (no docstring)
+- `_recent_results(client, sample)`: (no docstring)
+- `_result_is_failure(item)`: (no docstring)
+- `_schedule_rows(client)`: (no docstring)
+- `_process_catalog_summary()`: (no docstring)
+- `_derive_operations(report)`: (no docstring)
+- `_trace_log_summary(limit)`: (no docstring)
+- `_advanced_feature_gap_report(report)`: Return read-only advanced monitoring, tracking, and delegation readiness.
+- `_empty_unavailable_report(detail)`: (no docstring)
+- `get_agent_supervisor_report(sample)`: Return live Redis queue, heartbeat, schedule, and recent-result state.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Operator 2026-06-05: structured brutal-feedback scorer (§57.5 + §82 alerting).
+- Wraps in try/except so a missing module never breaks the report endpoint.
+- Operator 2026-06-05: layer in structured findings from
+- agents/agent_brutal_feedback.py — per-rule severity + evidence + next-action.
+- Coexists with the legacy `brutal_feedback` list (which is human-readable

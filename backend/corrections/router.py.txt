@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/corrections/router.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+/api/v1/corrections/* — RLHF correction DB · T7.10.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import uuid
+- from `typing` import Optional
+- from `fastapi` import APIRouter, HTTPException, Request
+- from `_` import services
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_corr(r)`: (no docstring)
+- `_tenant(r)`: (no docstring)
+- `health()`: (no docstring)
+- `list_corrections(request, run_ref, severity, limit)`: (no docstring)
+- `create_correction(body, request)`: (no docstring)
+- `get_correction(correction_ref, request)`: (no docstring)
+- `stats(request)`: (no docstring)
+
+## Outputs
+- Return values from functions above

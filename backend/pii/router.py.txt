@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/pii/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/pii/* · PII detection + redaction surface · Iter 26 C8.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.pii_redactor` import detect_pii, redact_text, _try_presidio
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `TextIn`: (no docstring)
+### Functions
+- `health()`: (no docstring)
+- `detect(body)`: (no docstring)
+- `redact(body)`: (no docstring)
+
+## Outputs
+- Return values from functions above

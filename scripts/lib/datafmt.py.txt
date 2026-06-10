@@ -1,0 +1,55 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/lib/datafmt.py
+# auto-generated explainer · 2026-06-10T10:01:18Z
+
+## Purpose
+datafmt.py — minimum-valid file writers for the 10 mandatory formats.
+
+Stdlib only. Each writer produces a SPEC-VALID file that downstream tools
+(libreoffice, ffplay, image viewers, parsers) can open without error,
+even though the content is a placeholder sample.
+
+Per global §82.2. Reference implementation for every project's
+sample-data generator.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import csv
+- from `_` import io
+- from `_` import json
+- from `_` import math
+- from `_` import struct
+- from `_` import wave
+- from `_` import xml.etree.ElementTree
+- from `_` import zipfile
+- from `_` import zlib
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `write_csv(path, columns, rows)`: Write columns + rows as CSV. Returns byte count.
+- `write_json(path, payload)`: (no docstring)
+- `write_xml(path, root_name, rows)`: (no docstring)
+- `write_text(path, content)`: (no docstring)
+- `write_docx(path, paragraphs)`: Minimum-valid .docx (Word, LibreOffice, Pages all open it).
+- `write_pdf(path, lines)`: Hand-rolled minimum-valid PDF 1.4 with one page of text.
+- `write_png(path, width, height, color)`: Solid-color PNG. Valid PNG signature + IHDR + IDAT + IEND chunks.
+- `_png_chunk(tag, data)`: (no docstring)
+- `write_wav(path, seconds, freq, rate)`: Single-channel 16-bit PCM. By default a 1s 440Hz tone.
+- `write_mp4(path)`: Minimal MP4 container — ftyp + free + moov stub.
+- `_mp4_box(box_type, payload)`: (no docstring)
+- `_save(path, data)`: (no docstring)
+- `_xml_escape(s)`: (no docstring)
+- `is_valid(path)`: Best-effort signature check for the 10 formats.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ---------- text formats ------------------------------------------------------
+- ElementTree.tostring with declaration:
+- ---------- docx -------------------------------------------------------------
+- ---------- pdf --------------------------------------------------------------
+- Build the page content stream

@@ -1,0 +1,94 @@
+{
+  "process": "fnol-intake",
+  "department": "claims",
+  "columns": [
+    "claim_id",
+    "policy_id",
+    "peril",
+    "loss_date",
+    "channel",
+    "severity"
+  ],
+  "rows": [
+    {
+      "claim_id": "val_223",
+      "policy_id": "val_223",
+      "peril": "val_223",
+      "loss_date": "val_223",
+      "channel": "B2B",
+      "severity": "val_223"
+    },
+    {
+      "claim_id": "val_254",
+      "policy_id": "val_254",
+      "peril": "val_254",
+      "loss_date": "val_254",
+      "channel": "B2C",
+      "severity": "val_254"
+    },
+    {
+      "claim_id": "val_285",
+      "policy_id": "val_285",
+      "peril": "val_285",
+      "loss_date": "val_285",
+      "channel": "B2E",
+      "severity": "val_285"
+    },
+    {
+      "claim_id": "val_316",
+      "policy_id": "val_316",
+      "peril": "val_316",
+      "loss_date": "val_316",
+      "channel": "B2B",
+      "severity": "val_316"
+    },
+    {
+      "claim_id": "val_347",
+      "policy_id": "val_347",
+      "peril": "val_347",
+      "loss_date": "val_347",
+      "channel": "B2C",
+      "severity": "val_347"
+    },
+    {
+      "claim_id": "val_378",
+      "policy_id": "val_378",
+      "peril": "val_378",
+      "loss_date": "val_378",
+      "channel": "B2E",
+      "severity": "val_378"
+    },
+    {
+      "claim_id": "val_409",
+      "policy_id": "val_409",
+      "peril": "val_409",
+      "loss_date": "val_409",
+      "channel": "B2B",
+      "severity": "val_409"
+    },
+    {
+      "claim_id": "val_440",
+      "policy_id": "val_440",
+      "peril": "val_440",
+      "loss_date": "val_440",
+      "channel": "B2C",
+      "severity": "val_440"
+    },
+    {
+      "claim_id": "val_471",
+      "policy_id": "val_471",
+      "peril": "val_471",
+      "loss_date": "val_471",
+      "channel": "B2E",
+      "severity": "val_471"
+    },
+    {
+      "claim_id": "val_502",
+      "policy_id": "val_502",
+      "peril": "val_502",
+      "loss_date": "val_502",
+      "channel": "B2B",
+      "severity": "val_502"
+    }
+  ]
+}

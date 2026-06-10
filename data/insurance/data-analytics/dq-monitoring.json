@@ -1,0 +1,94 @@
+{
+  "process": "dq-monitoring",
+  "department": "data-analytics",
+  "columns": [
+    "dataset",
+    "rule",
+    "pass_pct",
+    "anomalies",
+    "owner",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "dataset": "val_691",
+      "rule": "val_691",
+      "pass_pct": "val_691",
+      "anomalies": "val_691",
+      "owner": "bob",
+      "as_of": "val_691"
+    },
+    {
+      "dataset": "val_722",
+      "rule": "val_722",
+      "pass_pct": "val_722",
+      "anomalies": "val_722",
+      "owner": "alice",
+      "as_of": "val_722"
+    },
+    {
+      "dataset": "val_753",
+      "rule": "val_753",
+      "pass_pct": "val_753",
+      "anomalies": "val_753",
+      "owner": "erin",
+      "as_of": "val_753"
+    },
+    {
+      "dataset": "val_784",
+      "rule": "val_784",
+      "pass_pct": "val_784",
+      "anomalies": "val_784",
+      "owner": "dave",
+      "as_of": "val_784"
+    },
+    {
+      "dataset": "val_815",
+      "rule": "val_815",
+      "pass_pct": "val_815",
+      "anomalies": "val_815",
+      "owner": "bob",
+      "as_of": "val_815"
+    },
+    {
+      "dataset": "val_846",
+      "rule": "val_846",
+      "pass_pct": "val_846",
+      "anomalies": "val_846",
+      "owner": "alice",
+      "as_of": "val_846"
+    },
+    {
+      "dataset": "val_877",
+      "rule": "val_877",
+      "pass_pct": "val_877",
+      "anomalies": "val_877",
+      "owner": "erin",
+      "as_of": "val_877"
+    },
+    {
+      "dataset": "val_908",
+      "rule": "val_908",
+      "pass_pct": "val_908",
+      "anomalies": "val_908",
+      "owner": "dave",
+      "as_of": "val_908"
+    },
+    {
+      "dataset": "val_939",
+      "rule": "val_939",
+      "pass_pct": "val_939",
+      "anomalies": "val_939",
+      "owner": "carol",
+      "as_of": "val_939"
+    },
+    {
+      "dataset": "val_970",
+      "rule": "val_970",
+      "pass_pct": "val_970",
+      "anomalies": "val_970",
+      "owner": "bob",
+      "as_of": "val_970"
+    }
+  ]
+}

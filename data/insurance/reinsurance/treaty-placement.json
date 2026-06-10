@@ -1,0 +1,94 @@
+{
+  "process": "treaty-placement",
+  "department": "reinsurance",
+  "columns": [
+    "treaty_id",
+    "type",
+    "layer",
+    "limit",
+    "rate_on_line",
+    "effective_at"
+  ],
+  "rows": [
+    {
+      "treaty_id": "val_569",
+      "type": "val_569",
+      "layer": "val_569",
+      "limit": "val_569",
+      "rate_on_line": "val_569",
+      "effective_at": "2026-02-02"
+    },
+    {
+      "treaty_id": "val_600",
+      "type": "val_600",
+      "layer": "val_600",
+      "limit": "val_600",
+      "rate_on_line": "val_600",
+      "effective_at": "2026-09-05"
+    },
+    {
+      "treaty_id": "val_631",
+      "type": "val_631",
+      "layer": "val_631",
+      "limit": "val_631",
+      "rate_on_line": "val_631",
+      "effective_at": "2026-04-08"
+    },
+    {
+      "treaty_id": "val_662",
+      "type": "val_662",
+      "layer": "val_662",
+      "limit": "val_662",
+      "rate_on_line": "val_662",
+      "effective_at": "2026-11-11"
+    },
+    {
+      "treaty_id": "val_693",
+      "type": "val_693",
+      "layer": "val_693",
+      "limit": "val_693",
+      "rate_on_line": "val_693",
+      "effective_at": "2026-06-14"
+    },
+    {
+      "treaty_id": "val_724",
+      "type": "val_724",
+      "layer": "val_724",
+      "limit": "val_724",
+      "rate_on_line": "val_724",
+      "effective_at": "2026-01-17"
+    },
+    {
+      "treaty_id": "val_755",
+      "type": "val_755",
+      "layer": "val_755",
+      "limit": "val_755",
+      "rate_on_line": "val_755",
+      "effective_at": "2026-08-20"
+    },
+    {
+      "treaty_id": "val_786",
+      "type": "val_786",
+      "layer": "val_786",
+      "limit": "val_786",
+      "rate_on_line": "val_786",
+      "effective_at": "2026-03-23"
+    },
+    {
+      "treaty_id": "val_817",
+      "type": "val_817",
+      "layer": "val_817",
+      "limit": "val_817",
+      "rate_on_line": "val_817",
+      "effective_at": "2026-10-26"
+    },
+    {
+      "treaty_id": "val_848",
+      "type": "val_848",
+      "layer": "val_848",
+      "limit": "val_848",
+      "rate_on_line": "val_848",
+      "effective_at": "2026-05-01"
+    }
+  ]
+}

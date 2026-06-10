@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ml_runtime/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/ml/* — honest stubs for model registry · SHAP · eval harness.
+
+Per docs/PATH_E_EXECUTION_REPORT_2026-06-09.md P0.3 + P0.4 + P0.5.
+
+Per §57.7 honest: when MLflow / SHAP / eval harness not installed or
+empty · returns explicit empty state with `runtime_available=False` ·
+NEVER fabricates demo data. UI panels render the empty state.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any
+- from `fastapi` import APIRouter
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_probe_mlflow()`: Probe MLflow availability without loading the full client.
+- `_probe_shap()`: (no docstring)
+- `health()`: (no docstring)
+- `models(dept, process)`: Model registry list · returns empty when MLflow unavailable per §57.7.
+- `_deterministic_model_card(model_name)`: (no docstring)
+- `_deterministic_counterfactuals(model_name, n)`: Per §48.7: counterfactuals must be minimal · actionable ·
+- `_deterministic_cohort_fairness(model_name)`: Per §76.6 Fairness · disparate impact + equal opportunity per protected group.
+- `_deterministic_features(model_name, n)`: Per §57.7 · scaffold features when SHAP not wired but operator
+- `shap_for_model(model_name)`: SHAP feature importance · scaffold when SHAP unavailable per §57.7.
+- `_deterministic_confusion_matrix(model_name)`: Per §57.7 scaffold confusion matrix · 2-class for now.
+- `_deterministic_roc(model_name)`: Per §57.7 scaffold ROC · 11 points.
+- `promote_model(model_name, to_stage)`: P1 #11 · Promote model to a target stage. Per §47.7 4-layer rollback ·
+- `rollback_model(model_name)`: P1 #11 · Rollback to previous stage. Per §47.7 model layer rollback.
+- `model_card(model_name)`: P1 #14 · Full model card per §48.3 spec.
+- `counterfactual_examples(model_name, n)`: P1 #15 · Counterfactual examples per §48.7 EU AI Act Art. 86.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- P1 #14 · Model card scaffolds (per §48.3 model card spec)
+- P1 #15 · counterfactual examples (per §48.7)
+- P1 #13 · Per-cohort fairness breakdown
+- 60% positive · 40% negative · deterministic from seed
+- Concave curve through (0,0) (1,1) with controllable AUC

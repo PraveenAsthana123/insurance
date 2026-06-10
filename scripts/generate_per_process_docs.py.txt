@@ -1,0 +1,56 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/generate_per_process_docs.py
+# auto-generated explainer · 2026-06-10T10:00:11Z
+
+## Purpose
+generate_per_process_docs.py — drop a per-process doc stub for every process in the blueprint.
+
+Per operator instructions (2026-06-08 · accumulated):
+Every process MUST have all 19 mandatory sections in `process-detail.md`:
+  1. Problem explanation
+  2. AS-IS flow (manual today)
+  3. TO-BE flow (automated target)
+  4. Impact analysis (productivity + cost + revenue · detailed)
+  5. AI capabilities (from blueprint)
+  6. User demo flow (per process · operator-runnable)
+  7. Simulation tab (what-if scenarios)
+  8. Manual process workbench (data/model/accuracy/HP picker)
+  9. Automatic process pipeline (Celery/LangGraph DAG)
+ 10. Phase tracking (threshold · score · update · QC · status)
+ 11. Final testing + summary report generation
+ 12. Cron jobs + DB update list
+ 13. Database layers (graph + vector + historical)
+ 14. RAG evaluation + DeepEval
+ 15. Vector DB ingestion cron
+ 16. Per-operation universal audit (input/process/output/log/trace/prompt)
+ 17. Crash recovery (every state change saved before continue)
+ 18. Comprehensive testing matrix (UI/API/data/model/accuracy/output/chunking/agent/orchestration/mCP/Ragas/DeepEval/PII)
+ 19. Statistical + DBA + management analysis (ResAI · ExpAI · etc.)
+
+Outputs: docs/processes/<dept_slug>/<process_slug>/process-detail.md (322 files).
+Idempotent. --force to overwrite. --dry-run to preview.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import re
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --force, --dry-run, --limit
+
+## Process
+### Functions
+- `slugify(s)`: (no docstring)
+- `render(dept, proc)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Template uses ${TOKEN} markers (no f-string · no Python format string conflict).
+- All literal {} braces in code/tables stay as-is.

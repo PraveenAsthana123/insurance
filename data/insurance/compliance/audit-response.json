@@ -1,0 +1,94 @@
+{
+  "process": "audit-response",
+  "department": "compliance",
+  "columns": [
+    "audit_id",
+    "finding",
+    "severity",
+    "owner",
+    "status",
+    "due_at"
+  ],
+  "rows": [
+    {
+      "audit_id": "val_814",
+      "finding": "val_814",
+      "severity": "val_814",
+      "owner": "bob",
+      "status": "review",
+      "due_at": "2026-11-11"
+    },
+    {
+      "audit_id": "val_845",
+      "finding": "val_845",
+      "severity": "val_845",
+      "owner": "alice",
+      "status": "in-progress",
+      "due_at": "2026-06-14"
+    },
+    {
+      "audit_id": "val_876",
+      "finding": "val_876",
+      "severity": "val_876",
+      "owner": "erin",
+      "status": "open",
+      "due_at": "2026-01-17"
+    },
+    {
+      "audit_id": "val_907",
+      "finding": "val_907",
+      "severity": "val_907",
+      "owner": "dave",
+      "status": "closed",
+      "due_at": "2026-08-20"
+    },
+    {
+      "audit_id": "val_938",
+      "finding": "val_938",
+      "severity": "val_938",
+      "owner": "carol",
+      "status": "review",
+      "due_at": "2026-03-23"
+    },
+    {
+      "audit_id": "val_969",
+      "finding": "val_969",
+      "severity": "val_969",
+      "owner": "bob",
+      "status": "in-progress",
+      "due_at": "2026-10-26"
+    },
+    {
+      "audit_id": "val_0",
+      "finding": "val_0",
+      "severity": "val_0",
+      "owner": "alice",
+      "status": "open",
+      "due_at": "2026-05-01"
+    },
+    {
+      "audit_id": "val_31",
+      "finding": "val_31",
+      "severity": "val_31",
+      "owner": "dave",
+      "status": "closed",
+      "due_at": "2026-12-04"
+    },
+    {
+      "audit_id": "val_62",
+      "finding": "val_62",
+      "severity": "val_62",
+      "owner": "carol",
+      "status": "review",
+      "due_at": "2026-07-07"
+    },
+    {
+      "audit_id": "val_93",
+      "finding": "val_93",
+      "severity": "val_93",
+      "owner": "bob",
+      "status": "in-progress",
+      "due_at": "2026-02-10"
+    }
+  ]
+}

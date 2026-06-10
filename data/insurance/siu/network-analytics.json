@@ -1,0 +1,94 @@
+{
+  "process": "network-analytics",
+  "department": "siu",
+  "columns": [
+    "ring_id",
+    "members",
+    "edges",
+    "score",
+    "first_seen",
+    "last_seen"
+  ],
+  "rows": [
+    {
+      "ring_id": "val_677",
+      "members": "val_677",
+      "edges": "val_677",
+      "score": 77.59,
+      "first_seen": "val_677",
+      "last_seen": "val_677"
+    },
+    {
+      "ring_id": "val_708",
+      "members": "val_708",
+      "edges": "val_708",
+      "score": 58.6,
+      "first_seen": "val_708",
+      "last_seen": "val_708"
+    },
+    {
+      "ring_id": "val_739",
+      "members": "val_739",
+      "edges": "val_739",
+      "score": 89.6,
+      "first_seen": "val_739",
+      "last_seen": "val_739"
+    },
+    {
+      "ring_id": "val_770",
+      "members": "val_770",
+      "edges": "val_770",
+      "score": 70.6,
+      "first_seen": "val_770",
+      "last_seen": "val_770"
+    },
+    {
+      "ring_id": "val_801",
+      "members": "val_801",
+      "edges": "val_801",
+      "score": 51.6,
+      "first_seen": "val_801",
+      "last_seen": "val_801"
+    },
+    {
+      "ring_id": "val_832",
+      "members": "val_832",
+      "edges": "val_832",
+      "score": 82.61,
+      "first_seen": "val_832",
+      "last_seen": "val_832"
+    },
+    {
+      "ring_id": "val_863",
+      "members": "val_863",
+      "edges": "val_863",
+      "score": 63.61,
+      "first_seen": "val_863",
+      "last_seen": "val_863"
+    },
+    {
+      "ring_id": "val_894",
+      "members": "val_894",
+      "edges": "val_894",
+      "score": 94.61,
+      "first_seen": "val_894",
+      "last_seen": "val_894"
+    },
+    {
+      "ring_id": "val_925",
+      "members": "val_925",
+      "edges": "val_925",
+      "score": 75.61,
+      "first_seen": "val_925",
+      "last_seen": "val_925"
+    },
+    {
+      "ring_id": "val_956",
+      "members": "val_956",
+      "edges": "val_956",
+      "score": 56.62,
+      "first_seen": "val_956",
+      "last_seen": "val_956"
+    }
+  ]
+}

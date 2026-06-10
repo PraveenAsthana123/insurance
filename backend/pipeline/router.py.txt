@@ -1,0 +1,65 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/pipeline/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/pipeline/* — manual + automatic process modes.
+
+MANUAL mode  · discrete user-driven steps · NO pipeline structure.
+              User invokes each action separately · controls every
+              hyperparameter · stops at any step.
+
+AUTOMATIC mode · pipeline-based execution · phases run sequentially ·
+                  each phase produces output + quality_score + report.
+
+Per §57.7 honest: scaffold-mode responses when sklearn/MLflow not
+fully wired. Real metrics arrive when the eval harness lands.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import math
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `typing` import Any, Optional
+- from `fastapi` import APIRouter, HTTPException
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ManualStartRequest`: (no docstring)
+- `ManualLoadDataRequest`: (no docstring)
+- `ManualSplitRequest`: (no docstring)
+- `ManualSelectModelRequest`: (no docstring)
+- `ManualHyperparamsRequest`: (no docstring)
+- `AutoRunRequest`: (no docstring)
+### Functions
+- `_empty_component()`: Per §93 · every component has 4 sub-sections: Input · Process · Output · Visualization.
+- `_new_manual_state(process_id, dataset)`: (no docstring)
+- `_set_component(state, component, section, content)`: Per §93 · update component.{Input|Process|Output|Visualization}.content + status.
+- `manual_start(body)`: Begin a manual session · returns session_id · NO auto-pipeline.
+- `manual_get_state(session_id)`: (no docstring)
+- `manual_load_data(session_id, body)`: Step 1 · operator loads data · sees row + feature counts.
+- `manual_split_data(session_id, body)`: Step 2 · operator chooses train/val/test ratios.
+- `manual_select_model(session_id, body)`: Step 3 · operator picks ONE or MULTIPLE models.
+- `manual_set_hyperparams(session_id, body)`: Step 4 · operator sets/changes hyperparameters · sigmoid temp · etc.
+- `manual_train(session_id)`: Step 5 · operator triggers training (one click per model selected).
+- `manual_inspect_errors(session_id)`: Step 6 · operator inspects errors · summary per model.
+- `manual_visualize(session_id)`: Step 7 · operator generates visualization (confusion matrix · ROC · etc.).
+- `manual_generate_report(session_id)`: Step 8 · operator generates a report from current state.
+- `_new_auto_run(process_id)`: (no docstring)
+- `auto_run(body)`: Start an automatic pipeline run · executes all phases sequentially.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── In-process state (operator dev convenience · prod would be Redis/DB) ───
+- ─── MANUAL MODE · discrete user-driven steps · NO pipeline ────────
+- Per §93 · 4 canonical components · each with 4 sub-sections (IPO+V)
+- Discrete state slots · user fills each separately (legacy + active)
+- No pipeline graph here · operator advances ad-hoc

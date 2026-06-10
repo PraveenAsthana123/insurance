@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# tests/drills/drill_brand_config.py
+# auto-generated explainer · 2026-06-10T10:01:12Z
+
+## Purpose
+drill_brand_config — locks invariants on config/brand.config.json.
+
+Per §43 (drill discipline): at least 3 negative assertions, exit 0 green / 1 red.
+Per §65.1 #8 + §78 (TDD-first): the config is the single source of truth — if it
+drifts, the UI lies. This drill runs in CI to catch drift before merge.
+
+POSITIVE assertions:
+  1. JSON parses
+  2. brand has name + icon + tagline
+  3. priorityDepartmentId resolves to a real dept
+  4. Required insurance depts present (underwriting, claims, broker)
+  5. All dept ids unique
+  6. Sidebar/Dashboard files import from config/brand
+
+NEGATIVE assertions:
+  N1. No stale BEV department (sales, supply-chain, telehealth, manufacturing)
+  N2. Brand name is NOT a beverage placeholder (no 🥤, no "CPG", no "BEV")
+  N3. departments.js does NOT hand-define dept objects (must re-export only)
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import re
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `check(name, ok, detail)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Note: 'sales' in the 22-dept catalog = Sales & Distribution (insurance broker channel).
+- 'supply-chain' / 'manufacturing' / 'retail' / 'telehealth' remain BEV-only stale ids.
+- ---- positive ----
+- ---- negative ----
+- departments.js must NOT define dept objects literally — only re-export.

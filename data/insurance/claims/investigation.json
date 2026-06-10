@@ -1,0 +1,94 @@
+{
+  "process": "investigation",
+  "department": "claims",
+  "columns": [
+    "claim_id",
+    "evidence_type",
+    "source",
+    "ai_finding",
+    "confidence",
+    "captured_at"
+  ],
+  "rows": [
+    {
+      "claim_id": "val_228",
+      "evidence_type": "val_228",
+      "source": "val_228",
+      "ai_finding": "val_228",
+      "confidence": "val_228",
+      "captured_at": "2026-01-05"
+    },
+    {
+      "claim_id": "val_259",
+      "evidence_type": "val_259",
+      "source": "val_259",
+      "ai_finding": "val_259",
+      "confidence": "val_259",
+      "captured_at": "2026-08-08"
+    },
+    {
+      "claim_id": "val_290",
+      "evidence_type": "val_290",
+      "source": "val_290",
+      "ai_finding": "val_290",
+      "confidence": "val_290",
+      "captured_at": "2026-03-11"
+    },
+    {
+      "claim_id": "val_321",
+      "evidence_type": "val_321",
+      "source": "val_321",
+      "ai_finding": "val_321",
+      "confidence": "val_321",
+      "captured_at": "2026-10-14"
+    },
+    {
+      "claim_id": "val_352",
+      "evidence_type": "val_352",
+      "source": "val_352",
+      "ai_finding": "val_352",
+      "confidence": "val_352",
+      "captured_at": "2026-05-17"
+    },
+    {
+      "claim_id": "val_383",
+      "evidence_type": "val_383",
+      "source": "val_383",
+      "ai_finding": "val_383",
+      "confidence": "val_383",
+      "captured_at": "2026-12-20"
+    },
+    {
+      "claim_id": "val_414",
+      "evidence_type": "val_414",
+      "source": "val_414",
+      "ai_finding": "val_414",
+      "confidence": "val_414",
+      "captured_at": "2026-07-23"
+    },
+    {
+      "claim_id": "val_445",
+      "evidence_type": "val_445",
+      "source": "val_445",
+      "ai_finding": "val_445",
+      "confidence": "val_445",
+      "captured_at": "2026-02-26"
+    },
+    {
+      "claim_id": "val_476",
+      "evidence_type": "val_476",
+      "source": "val_476",
+      "ai_finding": "val_476",
+      "confidence": "val_476",
+      "captured_at": "2026-09-01"
+    },
+    {
+      "claim_id": "val_507",
+      "evidence_type": "val_507",
+      "source": "val_507",
+      "ai_finding": "val_507",
+      "confidence": "val_507",
+      "captured_at": "2026-04-04"
+    }
+  ]
+}

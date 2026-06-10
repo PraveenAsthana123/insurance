@@ -1,0 +1,32 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/comments/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/comments/* · in-memory comment threads per panel/process · P1 #18.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `CommentCreate`: (no docstring)
+### Functions
+- `_key(panel_id, process_id)`: (no docstring)
+- `health()`: (no docstring)
+- `post_comment(body)`: (no docstring)
+- `list_thread(panel_id, process_id, limit)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- threads keyed by f"{panel_id}:{process_id}"

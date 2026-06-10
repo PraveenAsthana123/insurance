@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tests/test_admin_feedback_router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Tests for /api/v1/admin/feedback rollup router.
+
+Per GLOBAL_INPUT_PERSISTENCE_POLICY rule 8 (tenant-scoped reads) + rule 9
+(read paths soft-fail · never block UI). Contract:
+- GET /summary returns rollup with total_count · up_count · down_count · by_tab · by_process · by_day
+- GET /summary?days bounded 1-90
+- GET /summary?department_id and ?process_id filter the aggregate
+- GET /comments returns array · supports rating=up|down filter · pagination
+- DB unavailable → empty response (NOT 5xx) per rule 9
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import pytest
+- from `fastapi.testclient` import TestClient
+- from `core.rbac_middleware` import PERMS_MATRIX, _READ_ROLES
+- from `main` import app
+- from `routers.admin_feedback` import router
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `TestSummary`: (no docstring)
+- `TestComments`: (no docstring)
+- `TestSoftFail`: Per rule 9: read paths NEVER 5xx · always return empty/zero when DB unavailable.
+- `TestTenantScoping`: (no docstring)
+### Functions
+- `ensure_admin_feedback_router_mounted()`: (no docstring)
+- `client()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ============= /summary contract =============
+- Required keys must always be present (soft-fail per rule 9)
+- Type sanity
+- ============= /comments contract =============
+- Pydantic regex pattern validates → 422

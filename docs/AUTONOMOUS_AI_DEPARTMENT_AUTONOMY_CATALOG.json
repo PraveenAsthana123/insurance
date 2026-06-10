@@ -1,0 +1,825 @@
+{
+  "version": "2026-06-08",
+  "policy": "docs/AUTONOMOUS_AI_DEPARTMENT_OPERATING_MODEL_2026-06-08.md",
+  "autonomy_levels": {
+    "L0": "human-only; AI documents context",
+    "L1": "AI monitors and explains; no workflow action",
+    "L2": "AI recommends and drafts; human approves execution",
+    "L3": "AI executes safe internal low-risk workflow steps with audit; human approves high-risk or external actions",
+    "L4": "AI executes bounded production actions with policy, rollback, and post-audit; not default in this repo",
+    "L5": "full autonomous business control; explicitly forbidden for this repo"
+  },
+  "departments": [
+    {
+      "department_route": "sales",
+      "department_name": "Sales & Demand Planning",
+      "recommended_autonomy_level": "L3",
+      "approval_boundary": "recommend and auto-refresh forecasts; human approval for committed S&OP forecast, promo budget, or customer/channel commitments",
+      "primary_agents": [
+        "demand-sensing-agent",
+        "forecast-explanation-agent",
+        "promo-roi-agent",
+        "sop-council-review-agent"
+      ],
+      "processes": [
+        "baseline_forecasting",
+        "promo_uplift",
+        "seasonal_planning",
+        "channel_demand",
+        "new_product_forecast",
+        "forecast_reconciliation",
+        "exception_management",
+        "demand_sensing",
+        "reporting",
+        "forecast_explanation"
+      ],
+      "trigger_events": [
+        "new POS data",
+        "forecast error breach",
+        "promo calendar change",
+        "stockout signal"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "forecast API",
+        "Rossmann sales dataset",
+        "SHAP/forecast explanation",
+        "MLflow target"
+      ],
+      "real_data_status": "direct local dataset present",
+      "real_data_paths": [
+        "data/kaggle/rossmann/train.csv",
+        "data/kaggle/rossmann/store.csv",
+        "data/kaggle/rossmann/test.csv"
+      ],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "forecast bias creates excess inventory or stockouts",
+        "promo ROI overstatement",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "supply-chain",
+      "department_name": "Supply Chain & Inventory",
+      "recommended_autonomy_level": "L3",
+      "approval_boundary": "recommend reorder, transfer, and safety-stock changes; human approval for purchase orders, supplier changes, or inventory policy publication",
+      "primary_agents": [
+        "inventory-policy-agent",
+        "replenishment-agent",
+        "supplier-risk-agent",
+        "network-simulation-agent"
+      ],
+      "processes": [
+        "inventory_optimization",
+        "replenishment_planning",
+        "stock_balancing",
+        "supplier_lead_time_prediction",
+        "network_design"
+      ],
+      "trigger_events": [
+        "inventory threshold breach",
+        "lead-time drift",
+        "demand forecast update",
+        "supplier risk alert"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "inventory optimizer",
+        "supply-chain CSV",
+        "simulation engine",
+        "ERP/WMS target"
+      ],
+      "real_data_status": "direct local dataset present",
+      "real_data_paths": [
+        "data/kaggle/supply-chain/supply_chain_data.csv"
+      ],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "unapproved purchase order or excess working capital",
+        "supplier concentration blind spot",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "logistics",
+      "department_name": "Logistics & Transportation",
+      "recommended_autonomy_level": "L3",
+      "approval_boundary": "recommend routes, ETAs, carrier assignments; human approval for customer notifications, carrier booking, or penalty-impacting changes",
+      "primary_agents": [
+        "route-optimization-agent",
+        "eta-exception-agent",
+        "freight-cost-agent",
+        "carrier-performance-agent"
+      ],
+      "processes": [
+        "route_optimization",
+        "shipment_scheduling",
+        "delivery_tracking",
+        "freight_cost_optimization"
+      ],
+      "trigger_events": [
+        "new shipment",
+        "GPS delay",
+        "carrier EDI event",
+        "weather disruption"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "OR-Tools target",
+        "carrier API target",
+        "map/GPS target",
+        "ETA model"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "wrong ETA/customer notification",
+        "carrier commitment without authorization",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "manufacturing",
+      "department_name": "Manufacturing / Production",
+      "recommended_autonomy_level": "L2",
+      "approval_boundary": "simulate schedules, constraints, capacity/yield plans; human approval for shop-floor schedule publication or machine setpoint changes",
+      "primary_agents": [
+        "production-scheduler-agent",
+        "batch-sequencing-agent",
+        "yield-optimization-agent",
+        "capacity-simulation-agent"
+      ],
+      "processes": [
+        "production_planning",
+        "batch_scheduling",
+        "yield_optimization",
+        "capacity_planning"
+      ],
+      "trigger_events": [
+        "new demand plan",
+        "material shortage",
+        "line constraint change",
+        "yield anomaly"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "constraint optimizer target",
+        "MES/ERP target",
+        "capacity simulator",
+        "yield model"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "unsafe schedule or machine setting",
+        "constraint violation on allergens/regulatory hold",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "maintenance",
+      "department_name": "Maintenance",
+      "recommended_autonomy_level": "L3",
+      "approval_boundary": "detect anomalies and create draft work orders; human approval for downtime windows, safety-critical maintenance, or spare-part spend",
+      "primary_agents": [
+        "equipment-monitoring-agent",
+        "predictive-maintenance-agent",
+        "work-order-triage-agent",
+        "spare-parts-agent"
+      ],
+      "processes": [
+        "predictive_maintenance",
+        "equipment_monitoring",
+        "maintenance_scheduling",
+        "spare_parts_optimization"
+      ],
+      "trigger_events": [
+        "sensor anomaly",
+        "failure probability threshold",
+        "PM due date",
+        "spare-part shortage"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "IoT/SCADA target",
+        "anomaly detector",
+        "work-order system target",
+        "survival model"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "missed safety-critical failure",
+        "unplanned downtime from poor scheduling",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "retail",
+      "department_name": "Retail & Merchandising",
+      "recommended_autonomy_level": "L2",
+      "approval_boundary": "recommend assortment, shelf, and price tests; human approval for external retailer negotiation or price publication",
+      "primary_agents": [
+        "shelf-optimization-agent",
+        "assortment-agent",
+        "pricing-test-agent",
+        "store-analytics-agent"
+      ],
+      "processes": [
+        "shelf_optimization",
+        "product_assortment",
+        "store_analytics",
+        "pricing_optimization"
+      ],
+      "trigger_events": [
+        "store sales drift",
+        "OOS alert",
+        "price change candidate",
+        "planogram variance"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "planogram/shelf data target",
+        "price elasticity model",
+        "CV shelf target",
+        "A/B test tracker"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "wrong price or retailer-facing change",
+        "planogram noncompliance",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "customer",
+      "department_name": "Customer Analytics / Marketing",
+      "recommended_autonomy_level": "L2",
+      "approval_boundary": "score churn/CLV and draft next-best actions; human approval for outbound customer communication and offer spend",
+      "primary_agents": [
+        "segmentation-agent",
+        "churn-agent",
+        "clv-agent",
+        "personalization-agent",
+        "campaign-effectiveness-agent"
+      ],
+      "processes": [
+        "customer_segmentation",
+        "churn_prediction",
+        "clv_prediction",
+        "personalization",
+        "campaign_effectiveness"
+      ],
+      "trigger_events": [
+        "churn score refresh",
+        "campaign response",
+        "complaint trend",
+        "consent status change"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "Telco churn dataset",
+        "segmentation model",
+        "next-best-action target",
+        "consent guardrail"
+      ],
+      "real_data_status": "direct local dataset present",
+      "real_data_paths": [
+        "data/customer-analytics/WA_Fn-UseC_-Telco-Customer-Churn.csv"
+      ],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "privacy/consent breach",
+        "unfair or toxic personalization",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "finance",
+      "department_name": "Finance",
+      "recommended_autonomy_level": "L2",
+      "approval_boundary": "produce forecasts, variance explanations, and anomaly queues; human approval for journal entries, payments, budgets, or external reporting",
+      "primary_agents": [
+        "revenue-forecast-agent",
+        "profitability-agent",
+        "trade-spend-agent",
+        "cashflow-agent"
+      ],
+      "processes": [
+        "revenue_forecasting",
+        "profitability_analysis",
+        "trade_spend_management",
+        "cashflow_forecasting"
+      ],
+      "trigger_events": [
+        "month-end close event",
+        "variance threshold",
+        "deduction exception",
+        "cash position change"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "forecast model",
+        "variance analyzer",
+        "deduction classifier",
+        "ERP/GL target"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "incorrect external number or journal entry",
+        "payment/deduction error",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "procurement",
+      "department_name": "Procurement / Supplier Management",
+      "recommended_autonomy_level": "L2",
+      "approval_boundary": "score suppliers, contracts, risk, and commodity exposure; human approval for awards, contract terms, hedges, or supplier removal",
+      "primary_agents": [
+        "supplier-selection-agent",
+        "contract-intelligence-agent",
+        "vendor-performance-agent",
+        "commodity-forecast-agent"
+      ],
+      "processes": [
+        "supplier_selection",
+        "contract_management",
+        "vendor_performance",
+        "commodity_price_forecasting"
+      ],
+      "trigger_events": [
+        "supplier score change",
+        "contract expiry",
+        "commodity price move",
+        "PO exception"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "supplier scorecard",
+        "contract RAG",
+        "commodity forecast",
+        "risk feed target"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "supplier award bias",
+        "contract or hedge risk",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "quality",
+      "department_name": "Quality Control",
+      "recommended_autonomy_level": "L3",
+      "approval_boundary": "detect defects, complaints, and batch risk; human approval for release/hold/recall/CAPA closure decisions",
+      "primary_agents": [
+        "vision-defect-agent",
+        "batch-validation-agent",
+        "supplier-quality-agent",
+        "complaint-intelligence-agent"
+      ],
+      "processes": [
+        "defect_detection",
+        "batch_validation",
+        "supplier_quality_management",
+        "consumer_complaint_analysis"
+      ],
+      "trigger_events": [
+        "vision defect signal",
+        "batch lab result",
+        "complaint cluster",
+        "supplier quality breach"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "CV inspection target",
+        "LIMS target",
+        "complaint NLP",
+        "CAPA workflow target"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "false release/hold decision",
+        "missed defect/recall signal",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    },
+    {
+      "department_route": "governance",
+      "department_name": "Governance / Compliance",
+      "recommended_autonomy_level": "L2",
+      "approval_boundary": "monitor regulations, risks, controls, evidence, and policy gaps; human approval for official filings, policy changes, or risk acceptance",
+      "primary_agents": [
+        "regulatory-rag-agent",
+        "audit-evidence-agent",
+        "risk-simulation-agent",
+        "data-governance-agent",
+        "esg-reporting-agent"
+      ],
+      "processes": [
+        "regulatory_compliance_tracking",
+        "audit_management",
+        "risk_assessment",
+        "data_governance",
+        "esg_reporting"
+      ],
+      "trigger_events": [
+        "new regulation",
+        "audit request",
+        "risk score breach",
+        "data quality or access violation"
+      ],
+      "allowed_autonomous_actions": [
+        "monitor inputs and freshness",
+        "score/rank exceptions",
+        "generate recommendation with evidence",
+        "simulate before/after impact",
+        "draft report or work item",
+        "submit P0/P1 decisions to council/human review"
+      ],
+      "forbidden_without_approval": [
+        "production write without approval",
+        "external customer/supplier/regulator notification without approval",
+        "payment, PO, journal, price, recall, policy, or filing commitment without approval",
+        "credential or secret access outside approved connector scope",
+        "destructive command, production deploy, or external SaaS write without hard gate"
+      ],
+      "tools_and_data": [
+        "OpenClaw task queue",
+        "Paperclip context pack",
+        "Redis/agent supervisor",
+        "RAG/context retrieval",
+        "audit log",
+        "testing report",
+        "policy RAG",
+        "knowledge graph target",
+        "OPA/Conftest target",
+        "evidence vault target"
+      ],
+      "real_data_status": "no direct local real dataset mapped; synthetic/insurance corpus or connector needed",
+      "real_data_paths": [],
+      "monitoring_and_tests": [
+        "default project doctor",
+        "agent task contract",
+        "RBAC/tenant isolation",
+        "idempotency",
+        "audit trail",
+        "human approval gate",
+        "model/RAG evals",
+        "dead-letter/retry behavior"
+      ],
+      "risk_controls": [
+        "incorrect regulatory interpretation",
+        "unauthorized risk acceptance",
+        "bad recommendation accepted without review",
+        "data drift",
+        "stale context",
+        "missing audit evidence",
+        "tenant/PII leakage"
+      ]
+    }
+  ]
+}

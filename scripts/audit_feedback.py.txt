@@ -1,0 +1,45 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_feedback.py
+# auto-generated explainer · 2026-06-10T10:00:16Z
+
+## Purpose
+Decision feedback audit · Tier 7 governance gate #4.
+
+Per PATH_E backlog · closes gate #4 (explicit + implicit feedback).
+Companion to audit_corrections.py (gate #5).
+
+11 assertions:
+  1. Table decision_feedback exists with expected schema
+  2. /feedback/health returns 200 with allowed values
+  3-5. POST explicit good/bad/correct OK
+  6. POST implicit accepted OK
+  7. POST invalid kind=wrong returns 400
+  8. POST invalid value for explicit returns 400
+  9. POST invalid value for implicit returns 400
+ 10. GET filter by kind returns correct count
+ 11. /stats/summary returns by_value counts
+
+## Imports
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `_` import uuid
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_cleanup()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. Table schema
+- 2-11. API
+- 3-6. POST valid combinations
+- 7. Invalid kind
+- 8. Invalid explicit value

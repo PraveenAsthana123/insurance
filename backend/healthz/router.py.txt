@@ -1,0 +1,39 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/healthz/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+K8s liveness + readiness probes · Iter 32.
+
+Per §47.8 (Kubernetes 3-probe pattern):
+  · /healthz/live    · DUMB process check · 'am I alive?' · never deps
+  · /healthz/ready   · SMART deps check · 'can I serve right now?' · DB + cache
+  · /healthz/startup · Slow boot tolerance · 'have I finished booting?'
+
+Liveness check must NOT check deps · cascade pod restart antipattern.
+Readiness removes pod from service when deps degrade · still alive.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `fastapi` import APIRouter
+- from `fastapi.responses` import JSONResponse
+
+## Inputs
+- Env vars: REDIS_URL
+
+## Process
+### Functions
+- `mark_startup_done()`: (no docstring)
+- `live()`: Liveness · DUMB · always returns 200 if process can answer.
+- `startup()`: Startup probe · returns 503 if not yet finished booting.
+- `ready()`: Readiness · checks DB + Redis (if configured) · returns 503 on dep failure.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Set to True only after lifespan startup has completed (read by /startup)
+- Redis probe (only if configured)

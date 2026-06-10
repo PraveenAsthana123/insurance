@@ -1,0 +1,33 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/middleware/endpoint_heatmap.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Endpoint heat map middleware · Iter 36.
+
+Per-route request count + per-status histogram + by-tenant breakdown.
+Exposed via /api/v1/heatmap.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import time
+- from `collections` import defaultdict
+- from `typing` import Any
+- from `starlette.middleware.base` import BaseHTTPMiddleware
+- from `starlette.requests` import Request
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `EndpointHeatmapMiddleware`: (no docstring)
+### Functions
+- `snapshot()`: Return current heatmap snapshot.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Bucket by route-template if available
+- Bucket per-tenant if present

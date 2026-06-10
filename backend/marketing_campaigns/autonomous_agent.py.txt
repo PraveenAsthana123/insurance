@@ -1,0 +1,67 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/marketing_campaigns/autonomous_agent.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Autonomous marketing campaign agent · objective → strategy → execute → measure → adjust.
+
+Per operator 2026-06-08: "autonomous AI for campaign ..end to end process"
+
+The agent runs a decision loop:
+  1. Read objective + strategy
+  2. Pick channel + segment + template per strategy
+  3. Auto-create + execute a campaign
+  4. Measure outcome (consent rate · conversion · cohort fairness)
+  5. Decide next iteration:
+     - If objective met → halt 'complete'
+     - If RAI fairness gate fails (DI < 0.8) → halt 'rai_failed'
+     - If iterations exhausted → halt 'budget_exhausted'
+     - Otherwise → adjust (switch channel · loosen segment · etc.) → iterate
+
+Per §38.3 (per-decision audit row) + §76 (RAI · MANDATORY DI ≥ 0.8) +
+§82.7 (drift detection · halt if decline) + §57.7 (honest fallback ·
+rule-based, no LLM dependency).
+
+Decision policy is rule-based + transparent · every decision has a
+human-readable reasoning field.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import uuid
+- from `collections` import Counter
+- from `datetime` import datetime, timezone
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AgentObjective`: (no docstring)
+- `AgentDecision`: (no docstring)
+- `AgentRunResult`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_route_by_confidence(confidence)`: T7.9 · maps confidence (0..1) → routing tier per Tier 7 gate #1.
+- `_compute_confidence(metrics, last_metrics)`: T7.9 · synthesizes a confidence score (0..1) for an agent decision.
+- `_pick_initial_strategy(obj)`: Heuristic: start with the lowest-friction channel for the segment.
+- `_decide_next(iteration, obj, last_metric, strategy)`: Returns (next_action, next_channel, reasoning).
+- `run_agent(obj, tenant_id, correlation_id)`: Run the autonomous decision loop. Persists each decision per §38.3.
+- `list_runs(tenant_id, limit)`: (no docstring)
+- `get_run(run_ref, tenant_id)`: (no docstring)
+- `cleanup_agent_campaigns()`: Defensive cleanup · deletes campaigns created by agent runs.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- ─────────────────────────────────────────────────────────────────────
+- T7.9 · Confidence-score routing per Tier 7 governance gate #1
+- ─── T7.9 · Confidence-score routing thresholds (per governance gate #1) ─
+- Sample-size component (caps at 50 runs for max signal)

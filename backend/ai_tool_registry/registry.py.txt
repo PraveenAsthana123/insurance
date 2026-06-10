@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/ai_tool_registry/registry.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+AI tool registry · single source of truth.
+
+Per docs/ENTERPRISE_AI_TOOL_LANDSCAPE.md (operator brief 2026-06-08).
+
+Schema per tool: {id, name, category, role, alternatives, this_project_status,
+                  priority, notes}
+
+this_project_status:
+  - 'used'         · tool wired into this codebase
+  - 'scaffolded'   · partially wired (see file pointer)
+  - 'reference'    · listed for interview-readiness · not used here
+  - 'planned'      · scheduled for future adoption per PENDING_PLAN
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `stats()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── Categories (25 layers per operator's master matrix) ──────────
+- ─── Tools (~140 across 26 categories) ──────────────────────────
+- Tokenization
+- Embedding
+- Vector DB

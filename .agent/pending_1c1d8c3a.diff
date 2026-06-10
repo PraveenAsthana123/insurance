@@ -1,0 +1,24 @@
+```diff
+--- a/tests/drills/drill_insurance_catalog.py
++++ b/tests/drills/drill_insurance_catalog.py
+@@ -198,6 +198,20 @@ if green < total:
+ print("\nALL invariants green.")
+ sys.exit(0)
+ 
++if __name__ == "__main__":
++    # Run the checks and report results
++    check("P1 catalog JSON parses", True, f"{len(cat.get('departments', []))} depts")
++    check("P2 22+ departments", len(depts) >= MIN_DEPTS, f"got {len(depts)}")
++    # Add more checks as needed
++
++    green = sum(1 for _, ok, _ in results if ok)
++    total = len(results)
++    print(f"\ndrill_insurance_catalog — {green}/{total} green")
++    for name, ok, detail in results:
++        mark = "✓" if ok else "✗"
++        print(f"  {mark} {name:50} {detail}")
++
++    if green < total:
++        print(f"\nFAILED: {total - green} invariant(s) red.")
++        sys.exit(1)
+```

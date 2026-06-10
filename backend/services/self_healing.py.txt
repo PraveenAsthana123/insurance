@@ -1,0 +1,61 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/self_healing.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+Self-Healing AI · LLM fallback chain · T7.13 (governance gate #13).
+
+Per Tier 7 governance gate #13 (Self-Healing AI · model fallback chain)
+and PATH_E_EXECUTION_REPORT_2026-06-09.md backlog closure.
+
+Pattern: try a chain of providers in order · log every fall-through ·
+return the FIRST successful response. When all fail, return honest
+empty + error chain per §57.7.
+
+Usage:
+    from services.self_healing import resilient_call, LLMFallbackChain
+
+    chain = LLMFallbackChain([
+        ("ollama-llama3", call_ollama),
+        ("openai-gpt-4", call_openai),
+        ("cached-response", lookup_cached),
+        ("rule-based", rule_based_fallback),
+    ])
+    result = chain.invoke(prompt="...")
+    # result = {"response": "...", "served_by": "ollama-llama3",
+    #          "fallback_chain": ["ollama-llama3"], "n_attempts": 1}
+
+Composes with §38.3 (every fallback chain run = audit row) ·
+§40 (decision system · fallback IS the resilience layer) ·
+§57.7 (honest empty when all providers fail · NEVER fake response).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import time
+- from `dataclasses` import dataclass, field
+- from `typing` import Any, Callable
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `FallbackAttempt`: One attempt at a provider in the chain.
+- `FallbackResult`: Result of a complete fallback chain invocation.
+- `LLMFallbackChain`: Try a list of providers in order · return first success.
+### Functions
+- `resilient_call(primary, fallbacks)`: Convenience wrapper for a primary + fallbacks pattern.
+- `_ollama_provider(prompt)`: Try Ollama local LLM · raise on unavailable.
+- `_cached_provider(prompt)`: Look up cached response by prompt hash · raise if no cache.
+- `_rule_based_provider(prompt)`: Last-resort rule-based response · always returns something safe.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- result = {"response": "...", "served_by": "ollama-llama3",
+- "fallback_chain": ["ollama-llama3"], "n_attempts": 1}
+- All providers failed · honest per §57.7
+- ─── Default providers for autonomous_agent / autonomous_dept_registry ──
+- No cache yet · always raise per §57.7

@@ -1,0 +1,39 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_retention_enforcer.py
+# auto-generated explainer · 2026-06-10T10:00:07Z
+
+## Purpose
+Audit log retention enforcer · Iter 32.
+
+Per §47.7 + GDPR Art. 5(e) · data minimization · §38.3 audit retention:
+  · Compliance-relevant rows: keep 7 years
+  · Operational rows: keep 90 days
+  · Activity log: keep 30 days
+
+This runner trims in-memory + DB stores past retention windows.
+Writes Markdown + JSON report under jobs/reports/retention/.
+
+Cron: weekly Sun 02:30 UTC.
+
+## Imports
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `datetime` import datetime, timezone, timedelta
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_evict_activity(now)`: (no docstring)
+- `_evict_audit_chain(now)`: (no docstring)
+- `_evict_comments(now)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

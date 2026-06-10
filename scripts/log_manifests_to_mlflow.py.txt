@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/log_manifests_to_mlflow.py
+# auto-generated explainer · 2026-06-10T10:00:13Z
+
+## Purpose
+Back-fill MLflow with the manifest.json files already on disk.
+
+Discovers data/eval/<dept>/<pipeline>/<run_id>/manifest.json,
+logs each as an MLflow run (params + metrics + manifest as artifact).
+
+Per the deep audit: `mlruns/` was empty even though 6 manifests
+existed on disk. This script catches MLflow up to disk reality.
+
+Usage:
+  python3 scripts/log_manifests_to_mlflow.py            # dry-run summary
+  python3 scripts/log_manifests_to_mlflow.py --apply    # actually log
+  python3 scripts/log_manifests_to_mlflow.py --apply --tracking-uri http://localhost:5001
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+- CLI args: --apply
+- Env vars: MLFLOW_TRACKING_URI
+
+## Process
+### Functions
+- `discover_manifests()`: (no docstring)
+- `parse_run(manifest_path)`: (no docstring)
+- `log_to_mlflow(runs, tracking_uri)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Path structure: data/eval/<dept>/<pipeline>/<run_id>/manifest.json
+- Note: artifact upload skipped — MLflow container's /mlartifacts
+- is not writable from outside; params + metrics persist via the
+- tracking server's DB. Manifest paths logged as tag for traceability.
+- Pick best summary metric

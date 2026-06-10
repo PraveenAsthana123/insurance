@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/content_ops/services.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+Services for content postings + master contacts + schedules.
+
+Per §38.3 (every operation logged) · §82.7 (quality + drift) · §57.7 (LinkedIn
+adapter is rule-based stub when no API key · honest fallback).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import uuid
+- from `collections` import Counter
+- from `datetime` import datetime, time, timezone, timedelta
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_row(r)`: (no docstring)
+- `_now_iso()`: (no docstring)
+- `_log_op(actor, action, from_status, to_status, notes)`: (no docstring)
+- `list_postings(tenant_id, channel)`: (no docstring)
+- `get_posting(posting_id, tenant_id)`: (no docstring)
+- `create_posting(data, tenant_id, correlation_id)`: (no docstring)
+- `update_posting(posting_id, patch, tenant_id)`: (no docstring)
+- `_adapt_for_platform(posting, platform)`: Render the posting for a specific platform · honest stub for LinkedIn.
+- `publish_posting(posting_id, req, tenant_id, correlation_id)`: (no docstring)
+- `_quality_score_for(posting, runs)`: Quality 0..1 · simple proxy: title length + body length + platform success.
+- `posting_monitoring(tenant_id)`: (no docstring)
+- `list_contacts(tenant_id, limit, segment)`: (no docstring)
+- `create_contact(data, tenant_id)`: (no docstring)
+- `_contact_quality(c)`: 0..1 · email + phone + segment + at-least-one-consent.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Content postings CRUD
+- ─────────────────────────────────────────────────────────────────────
+- Build update set
+- Append operation log

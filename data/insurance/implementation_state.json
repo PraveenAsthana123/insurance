@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "current_step_index": 0,
+  "valid_statuses": [
+    "planned",
+    "in-progress",
+    "live",
+    "deferred"
+  ],
+  "step_status": {
+    "Content AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Search AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "RAG AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Employee Self-Service AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Incident AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Policy AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Claims AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Underwriting AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Fraud AI": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Multi-Agent Department": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Autonomous Department": {
+      "status": "planned",
+      "notes": ""
+    },
+    "Self-Learning Department": {
+      "status": "planned",
+      "notes": ""
+    }
+  },
+  "total_steps": 12
+}

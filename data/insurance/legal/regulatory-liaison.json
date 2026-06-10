@@ -1,0 +1,94 @@
+{
+  "process": "regulatory-liaison",
+  "department": "legal",
+  "columns": [
+    "engagement_id",
+    "regulator",
+    "topic",
+    "owner",
+    "status",
+    "due_at"
+  ],
+  "rows": [
+    {
+      "engagement_id": "val_452",
+      "regulator": "val_452",
+      "topic": "val_452",
+      "owner": "bob",
+      "status": "open",
+      "due_at": "2026-01-05"
+    },
+    {
+      "engagement_id": "val_483",
+      "regulator": "val_483",
+      "topic": "val_483",
+      "owner": "alice",
+      "status": "closed",
+      "due_at": "2026-08-08"
+    },
+    {
+      "engagement_id": "val_514",
+      "regulator": "val_514",
+      "topic": "val_514",
+      "owner": "erin",
+      "status": "review",
+      "due_at": "2026-03-11"
+    },
+    {
+      "engagement_id": "val_545",
+      "regulator": "val_545",
+      "topic": "val_545",
+      "owner": "dave",
+      "status": "in-progress",
+      "due_at": "2026-10-14"
+    },
+    {
+      "engagement_id": "val_576",
+      "regulator": "val_576",
+      "topic": "val_576",
+      "owner": "carol",
+      "status": "open",
+      "due_at": "2026-05-17"
+    },
+    {
+      "engagement_id": "val_607",
+      "regulator": "val_607",
+      "topic": "val_607",
+      "owner": "alice",
+      "status": "closed",
+      "due_at": "2026-12-20"
+    },
+    {
+      "engagement_id": "val_638",
+      "regulator": "val_638",
+      "topic": "val_638",
+      "owner": "erin",
+      "status": "review",
+      "due_at": "2026-07-23"
+    },
+    {
+      "engagement_id": "val_669",
+      "regulator": "val_669",
+      "topic": "val_669",
+      "owner": "dave",
+      "status": "in-progress",
+      "due_at": "2026-02-26"
+    },
+    {
+      "engagement_id": "val_700",
+      "regulator": "val_700",
+      "topic": "val_700",
+      "owner": "carol",
+      "status": "open",
+      "due_at": "2026-09-01"
+    },
+    {
+      "engagement_id": "val_731",
+      "regulator": "val_731",
+      "topic": "val_731",
+      "owner": "bob",
+      "status": "closed",
+      "due_at": "2026-04-04"
+    }
+  ]
+}

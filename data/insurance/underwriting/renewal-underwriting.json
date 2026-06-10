@@ -1,0 +1,94 @@
+{
+  "process": "renewal-underwriting",
+  "department": "underwriting",
+  "columns": [
+    "policy_id",
+    "prior_premium",
+    "new_premium",
+    "loss_ratio",
+    "action",
+    "effective_at"
+  ],
+  "rows": [
+    {
+      "policy_id": "val_116",
+      "prior_premium": "val_116",
+      "new_premium": "val_116",
+      "loss_ratio": "val_116",
+      "action": "val_116",
+      "effective_at": "2026-09-13"
+    },
+    {
+      "policy_id": "val_147",
+      "prior_premium": "val_147",
+      "new_premium": "val_147",
+      "loss_ratio": "val_147",
+      "action": "val_147",
+      "effective_at": "2026-04-16"
+    },
+    {
+      "policy_id": "val_178",
+      "prior_premium": "val_178",
+      "new_premium": "val_178",
+      "loss_ratio": "val_178",
+      "action": "val_178",
+      "effective_at": "2026-11-19"
+    },
+    {
+      "policy_id": "val_209",
+      "prior_premium": "val_209",
+      "new_premium": "val_209",
+      "loss_ratio": "val_209",
+      "action": "val_209",
+      "effective_at": "2026-06-22"
+    },
+    {
+      "policy_id": "val_240",
+      "prior_premium": "val_240",
+      "new_premium": "val_240",
+      "loss_ratio": "val_240",
+      "action": "val_240",
+      "effective_at": "2026-01-25"
+    },
+    {
+      "policy_id": "val_271",
+      "prior_premium": "val_271",
+      "new_premium": "val_271",
+      "loss_ratio": "val_271",
+      "action": "val_271",
+      "effective_at": "2026-08-28"
+    },
+    {
+      "policy_id": "val_302",
+      "prior_premium": "val_302",
+      "new_premium": "val_302",
+      "loss_ratio": "val_302",
+      "action": "val_302",
+      "effective_at": "2026-03-03"
+    },
+    {
+      "policy_id": "val_333",
+      "prior_premium": "val_333",
+      "new_premium": "val_333",
+      "loss_ratio": "val_333",
+      "action": "val_333",
+      "effective_at": "2026-10-06"
+    },
+    {
+      "policy_id": "val_364",
+      "prior_premium": "val_364",
+      "new_premium": "val_364",
+      "loss_ratio": "val_364",
+      "action": "val_364",
+      "effective_at": "2026-05-09"
+    },
+    {
+      "policy_id": "val_395",
+      "prior_premium": "val_395",
+      "new_premium": "val_395",
+      "loss_ratio": "val_395",
+      "action": "val_395",
+      "effective_at": "2026-12-12"
+    }
+  ]
+}

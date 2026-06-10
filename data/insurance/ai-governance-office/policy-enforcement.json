@@ -1,0 +1,94 @@
+{
+  "process": "policy-enforcement",
+  "department": "ai-governance-office",
+  "columns": [
+    "event_id",
+    "policy",
+    "actor",
+    "decision",
+    "reason",
+    "captured_at"
+  ],
+  "rows": [
+    {
+      "event_id": "val_927",
+      "policy": "val_927",
+      "actor": "val_927",
+      "decision": "val_927",
+      "reason": "val_927",
+      "captured_at": "2026-12-24"
+    },
+    {
+      "event_id": "val_958",
+      "policy": "val_958",
+      "actor": "val_958",
+      "decision": "val_958",
+      "reason": "val_958",
+      "captured_at": "2026-07-27"
+    },
+    {
+      "event_id": "val_989",
+      "policy": "val_989",
+      "actor": "val_989",
+      "decision": "val_989",
+      "reason": "val_989",
+      "captured_at": "2026-02-02"
+    },
+    {
+      "event_id": "val_20",
+      "policy": "val_20",
+      "actor": "val_20",
+      "decision": "val_20",
+      "reason": "val_20",
+      "captured_at": "2026-09-05"
+    },
+    {
+      "event_id": "val_51",
+      "policy": "val_51",
+      "actor": "val_51",
+      "decision": "val_51",
+      "reason": "val_51",
+      "captured_at": "2026-04-08"
+    },
+    {
+      "event_id": "val_82",
+      "policy": "val_82",
+      "actor": "val_82",
+      "decision": "val_82",
+      "reason": "val_82",
+      "captured_at": "2026-11-11"
+    },
+    {
+      "event_id": "val_113",
+      "policy": "val_113",
+      "actor": "val_113",
+      "decision": "val_113",
+      "reason": "val_113",
+      "captured_at": "2026-06-14"
+    },
+    {
+      "event_id": "val_144",
+      "policy": "val_144",
+      "actor": "val_144",
+      "decision": "val_144",
+      "reason": "val_144",
+      "captured_at": "2026-01-17"
+    },
+    {
+      "event_id": "val_175",
+      "policy": "val_175",
+      "actor": "val_175",
+      "decision": "val_175",
+      "reason": "val_175",
+      "captured_at": "2026-08-20"
+    },
+    {
+      "event_id": "val_206",
+      "policy": "val_206",
+      "actor": "val_206",
+      "decision": "val_206",
+      "reason": "val_206",
+      "captured_at": "2026-03-23"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "process": "filing-management",
+  "department": "compliance",
+  "columns": [
+    "filing_id",
+    "jurisdiction",
+    "type",
+    "status",
+    "owner",
+    "filed_at"
+  ],
+  "rows": [
+    {
+      "filing_id": "val_851",
+      "jurisdiction": "val_851",
+      "type": "val_851",
+      "status": "closed",
+      "owner": "bob",
+      "filed_at": "2026-12-12"
+    },
+    {
+      "filing_id": "val_882",
+      "jurisdiction": "val_882",
+      "type": "val_882",
+      "status": "review",
+      "owner": "alice",
+      "filed_at": "2026-07-15"
+    },
+    {
+      "filing_id": "val_913",
+      "jurisdiction": "val_913",
+      "type": "val_913",
+      "status": "in-progress",
+      "owner": "erin",
+      "filed_at": "2026-02-18"
+    },
+    {
+      "filing_id": "val_944",
+      "jurisdiction": "val_944",
+      "type": "val_944",
+      "status": "open",
+      "owner": "dave",
+      "filed_at": "2026-09-21"
+    },
+    {
+      "filing_id": "val_975",
+      "jurisdiction": "val_975",
+      "type": "val_975",
+      "status": "closed",
+      "owner": "bob",
+      "filed_at": "2026-04-24"
+    },
+    {
+      "filing_id": "val_6",
+      "jurisdiction": "val_6",
+      "type": "val_6",
+      "status": "review",
+      "owner": "alice",
+      "filed_at": "2026-11-27"
+    },
+    {
+      "filing_id": "val_37",
+      "jurisdiction": "val_37",
+      "type": "val_37",
+      "status": "in-progress",
+      "owner": "erin",
+      "filed_at": "2026-06-02"
+    },
+    {
+      "filing_id": "val_68",
+      "jurisdiction": "val_68",
+      "type": "val_68",
+      "status": "open",
+      "owner": "dave",
+      "filed_at": "2026-01-05"
+    },
+    {
+      "filing_id": "val_99",
+      "jurisdiction": "val_99",
+      "type": "val_99",
+      "status": "closed",
+      "owner": "carol",
+      "filed_at": "2026-08-08"
+    },
+    {
+      "filing_id": "val_130",
+      "jurisdiction": "val_130",
+      "type": "val_130",
+      "status": "review",
+      "owner": "bob",
+      "filed_at": "2026-03-11"
+    }
+  ]
+}

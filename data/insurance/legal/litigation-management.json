@@ -1,0 +1,94 @@
+{
+  "process": "litigation-management",
+  "department": "legal",
+  "columns": [
+    "matter_id",
+    "court",
+    "stage",
+    "exposure",
+    "next_event",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "matter_id": "val_67",
+      "court": "val_67",
+      "stage": "val_67",
+      "exposure": "val_67",
+      "next_event": "val_67",
+      "updated_at": "2026-08-12"
+    },
+    {
+      "matter_id": "val_98",
+      "court": "val_98",
+      "stage": "val_98",
+      "exposure": "val_98",
+      "next_event": "val_98",
+      "updated_at": "2026-03-15"
+    },
+    {
+      "matter_id": "val_129",
+      "court": "val_129",
+      "stage": "val_129",
+      "exposure": "val_129",
+      "next_event": "val_129",
+      "updated_at": "2026-10-18"
+    },
+    {
+      "matter_id": "val_160",
+      "court": "val_160",
+      "stage": "val_160",
+      "exposure": "val_160",
+      "next_event": "val_160",
+      "updated_at": "2026-05-21"
+    },
+    {
+      "matter_id": "val_191",
+      "court": "val_191",
+      "stage": "val_191",
+      "exposure": "val_191",
+      "next_event": "val_191",
+      "updated_at": "2026-12-24"
+    },
+    {
+      "matter_id": "val_222",
+      "court": "val_222",
+      "stage": "val_222",
+      "exposure": "val_222",
+      "next_event": "val_222",
+      "updated_at": "2026-07-27"
+    },
+    {
+      "matter_id": "val_253",
+      "court": "val_253",
+      "stage": "val_253",
+      "exposure": "val_253",
+      "next_event": "val_253",
+      "updated_at": "2026-02-02"
+    },
+    {
+      "matter_id": "val_284",
+      "court": "val_284",
+      "stage": "val_284",
+      "exposure": "val_284",
+      "next_event": "val_284",
+      "updated_at": "2026-09-05"
+    },
+    {
+      "matter_id": "val_315",
+      "court": "val_315",
+      "stage": "val_315",
+      "exposure": "val_315",
+      "next_event": "val_315",
+      "updated_at": "2026-04-08"
+    },
+    {
+      "matter_id": "val_346",
+      "court": "val_346",
+      "stage": "val_346",
+      "exposure": "val_346",
+      "next_event": "val_346",
+      "updated_at": "2026-11-11"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/audit_chain/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/audit-chain/* · Iter 29 · C7 simplified · tamper-evident audit log.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends
+- from `pydantic` import BaseModel
+- from `core.audit_chain` import append, list_chain, verify_chain
+- from `core.role_dependency` import require_admin
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AppendRequest`: (no docstring)
+### Functions
+- `health()`: (no docstring)
+- `append_row(body)`: Public · append a row · chain advances.
+- `verify()`: Admin · verify chain integrity end-to-end.
+- `recent(limit)`: (no docstring)
+
+## Outputs
+- Return values from functions above

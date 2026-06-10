@@ -1,0 +1,243 @@
+{
+  "_generated": "2026-06-10T22:00:01.596336+00:00",
+  "stakeholders": [
+    {
+      "role": "product-manager",
+      "displayName": "Product Manager",
+      "side": "B2E",
+      "icon": "\ud83e\uddea",
+      "defaultResponsibility": "Owns product P&L + roadmap."
+    },
+    {
+      "role": "actuary",
+      "displayName": "Actuary",
+      "side": "B2E",
+      "icon": "\ud83d\udcd0",
+      "defaultResponsibility": "Pricing + reserving + experience analysis."
+    },
+    {
+      "role": "underwriter",
+      "displayName": "Underwriter",
+      "side": "B2E",
+      "icon": "\ud83e\uddee",
+      "defaultResponsibility": "Risk acceptance + tier assignment."
+    },
+    {
+      "role": "claims-adjuster",
+      "displayName": "Claims Adjuster",
+      "side": "B2E",
+      "icon": "\ud83e\uddfe",
+      "defaultResponsibility": "Claim triage + investigation + settlement."
+    },
+    {
+      "role": "siu-investigator",
+      "displayName": "SIU Investigator",
+      "side": "B2E",
+      "icon": "\ud83d\udd75",
+      "defaultResponsibility": "Fraud investigation + interviewing."
+    },
+    {
+      "role": "csr",
+      "displayName": "Customer Service Rep",
+      "side": "B2E",
+      "icon": "\ud83d\udcde",
+      "defaultResponsibility": "Customer inquiries + service."
+    },
+    {
+      "role": "compliance-officer",
+      "displayName": "Compliance Officer",
+      "side": "B2E",
+      "icon": "\u2705",
+      "defaultResponsibility": "Reg filings + audit response."
+    },
+    {
+      "role": "legal-counsel",
+      "displayName": "Legal Counsel",
+      "side": "B2E",
+      "icon": "\u2696\ufe0f",
+      "defaultResponsibility": "Legal advice + contract review."
+    },
+    {
+      "role": "finance-controller",
+      "displayName": "Finance Controller",
+      "side": "B2E",
+      "icon": "\ud83d\udcb0",
+      "defaultResponsibility": "Financial close + reporting."
+    },
+    {
+      "role": "risk-officer",
+      "displayName": "Risk Officer",
+      "side": "B2E",
+      "icon": "\ud83d\udee1",
+      "defaultResponsibility": "Enterprise risk + capital."
+    },
+    {
+      "role": "hr-business-partner",
+      "displayName": "HR Business Partner",
+      "side": "B2E",
+      "icon": "\ud83e\uddd1\u200d\ud83d\udcbc",
+      "defaultResponsibility": "Workforce planning + employee experience."
+    },
+    {
+      "role": "procurement-officer",
+      "displayName": "Procurement Officer",
+      "side": "B2E",
+      "icon": "\ud83d\uded2",
+      "defaultResponsibility": "Sourcing + supplier mgmt."
+    },
+    {
+      "role": "data-steward",
+      "displayName": "Data Steward",
+      "side": "B2E",
+      "icon": "\ud83e\uddd1\u200d\ud83c\udf3e",
+      "defaultResponsibility": "Data quality + governance."
+    },
+    {
+      "role": "data-scientist",
+      "displayName": "Data Scientist",
+      "side": "B2E",
+      "icon": "\ud83e\uddea",
+      "defaultResponsibility": "Modelling + experimentation."
+    },
+    {
+      "role": "ml-engineer",
+      "displayName": "ML Engineer",
+      "side": "B2E",
+      "icon": "\ud83d\udd01",
+      "defaultResponsibility": "Productionising models."
+    },
+    {
+      "role": "sre",
+      "displayName": "Site Reliability Eng",
+      "side": "B2E",
+      "icon": "\ud83d\udee0",
+      "defaultResponsibility": "Reliability + on-call."
+    },
+    {
+      "role": "ciso-team",
+      "displayName": "CISO Team",
+      "side": "B2E",
+      "icon": "\ud83d\udd12",
+      "defaultResponsibility": "Cybersecurity controls + response."
+    },
+    {
+      "role": "ai-governance",
+      "displayName": "AI Governance Lead",
+      "side": "B2E",
+      "icon": "\ud83c\udfdb",
+      "defaultResponsibility": "AI policy + risk approvals."
+    },
+    {
+      "role": "marketing-manager",
+      "displayName": "Marketing Manager",
+      "side": "B2E",
+      "icon": "\ud83d\udce3",
+      "defaultResponsibility": "Campaign + brand."
+    },
+    {
+      "role": "sales-manager",
+      "displayName": "Sales Manager",
+      "side": "B2E",
+      "icon": "\ud83d\udcbc",
+      "defaultResponsibility": "Sales pipeline + targets."
+    },
+    {
+      "role": "billing-clerk",
+      "displayName": "Billing Clerk",
+      "side": "B2E",
+      "icon": "\ud83e\uddee",
+      "defaultResponsibility": "Premium billing operations."
+    },
+    {
+      "role": "collections-analyst",
+      "displayName": "Collections Analyst",
+      "side": "B2E",
+      "icon": "\ud83d\udce5",
+      "defaultResponsibility": "Receivables + dunning."
+    },
+    {
+      "role": "broker",
+      "displayName": "Broker / Agent",
+      "side": "B2B",
+      "icon": "\ud83e\udd1d",
+      "defaultResponsibility": "Distributes products + serves clients."
+    },
+    {
+      "role": "reinsurer",
+      "displayName": "Reinsurer",
+      "side": "B2B",
+      "icon": "\ud83c\udf10",
+      "defaultResponsibility": "Provides treaty / facultative capacity."
+    },
+    {
+      "role": "vendor",
+      "displayName": "Vendor",
+      "side": "B2B",
+      "icon": "\ud83c\udfe2",
+      "defaultResponsibility": "Third-party service / data provider."
+    },
+    {
+      "role": "regulator",
+      "displayName": "Regulator",
+      "side": "B2B",
+      "icon": "\ud83c\udfdb",
+      "defaultResponsibility": "DOI / NAIC / EU AI Act authority."
+    },
+    {
+      "role": "auditor",
+      "displayName": "External Auditor",
+      "side": "B2B",
+      "icon": "\ud83d\uddc2",
+      "defaultResponsibility": "Independent audit."
+    },
+    {
+      "role": "rating-agency",
+      "displayName": "Rating Agency",
+      "side": "B2B",
+      "icon": "\ud83c\udfc5",
+      "defaultResponsibility": "Financial strength rating."
+    },
+    {
+      "role": "partner",
+      "displayName": "Strategic Partner",
+      "side": "B2B",
+      "icon": "\ud83e\udd1d",
+      "defaultResponsibility": "Channel / data partner."
+    },
+    {
+      "role": "law-firm",
+      "displayName": "External Law Firm",
+      "side": "B2B",
+      "icon": "\u2696\ufe0f",
+      "defaultResponsibility": "Outside counsel."
+    },
+    {
+      "role": "policyholder",
+      "displayName": "Policyholder",
+      "side": "B2C",
+      "icon": "\ud83e\uddd1",
+      "defaultResponsibility": "Holds an insurance policy."
+    },
+    {
+      "role": "prospect",
+      "displayName": "Prospect",
+      "side": "B2C",
+      "icon": "\ud83c\udfaf",
+      "defaultResponsibility": "Considering a quote."
+    },
+    {
+      "role": "claimant",
+      "displayName": "Claimant",
+      "side": "B2C",
+      "icon": "\ud83e\uddfe",
+      "defaultResponsibility": "Files / receives a claim."
+    },
+    {
+      "role": "beneficiary",
+      "displayName": "Beneficiary",
+      "side": "B2C",
+      "icon": "\ud83d\udc9d",
+      "defaultResponsibility": "Named on a life / annuity policy."
+    }
+  ]
+}

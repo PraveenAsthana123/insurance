@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/routers/audit.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+/api/v1/insur/audit/* — surface audit reports for /admin/audit dashboard.
+
+Per audit triad in scripts/audit_*.py (cron-installed weekly).
+Reports land in jobs/reports/recommender-audit/ + jobs/reports/folder-readme-audit/.
+
+Endpoints:
+- GET /api/v1/insur/audit/list                   list all audit kinds + last run
+- GET /api/v1/insur/audit/{kind}/latest          latest report for kind
+- GET /api/v1/insur/audit/{kind}/history?n=10    last N reports
+- POST /api/v1/insur/audit/{kind}/run            trigger immediate run
+
+Read-only per §68.3 invariant.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import re
+- from `_` import subprocess
+- from `_` import sys
+- from `pathlib` import Path
+- from `typing` import Literal
+- from `fastapi` import APIRouter, HTTPException
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_audits()`: List all audit kinds + their latest run.
+- `latest(kind)`: Return latest audit report for a given kind.
+- `history(kind, n)`: Last N reports for a kind, newest first.
+- `run_audit(kind)`: Trigger immediate run of an audit (synchronous · capped at 60s).
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Use the current Python interpreter (or PY env override)

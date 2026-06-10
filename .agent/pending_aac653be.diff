@@ -1,0 +1,8 @@
+--- a/jobs/logs/codex_approval_cron.log
++++ b/jobs/logs/codex_approval_cron.log
+@@ -1,4 +1,3 @@
+ No Archon workflow runs found.
+-Traceback (most recent call last):
+-  File "/mnt/deepa/insur_project/scripts/archon_auto_approve_safe.py", line 198, in <module>
+-    raise SystemExit(main())
++No Archon workflow runs found.

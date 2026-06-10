@@ -1,0 +1,49 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/voice_ai/router.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+/api/v1/voice-ai/* — REST surface for the voice AI demo.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import uuid
+- from `typing` import Optional
+- from `fastapi` import APIRouter, HTTPException, Request
+- from `schemas` import MonitoringSnapshot, Order, Product, ProductCreate, SessionStartRequest
+- from `_` import services
+- from `campaign_schemas` import Campaign, CampaignCreate, CampaignUpdate, CampaignExecuteRequest, CampaignExecuteResponse
+- from `_` import campaign_services
+- from `_` import e2e_services
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_correlation_id(request)`: (no docstring)
+- `_tenant(request)`: (no docstring)
+- `get_products(request, category)`: (no docstring)
+- `post_product(body, request)`: (no docstring)
+- `del_product(product_id, request)`: (no docstring)
+- `get_customers(request)`: (no docstring)
+- `get_welcome_templates(request)`: (no docstring)
+- `patch_welcome_template(template_id, body, request)`: (no docstring)
+- `start_session(body, request)`: (no docstring)
+- `session_turn(body, request)`: (no docstring)
+- `get_orders(request)`: (no docstring)
+- `monitoring(request)`: (no docstring)
+- `health()`: (no docstring)
+- `list_campaigns(request)`: (no docstring)
+- `create_campaign(body, request)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ── products ─────────────────────────────────────────────────────
+- ── customers ────────────────────────────────────────────────────
+- ── welcome templates ────────────────────────────────────────────
+- ── sessions / conversation ──────────────────────────────────────
+- ── orders ───────────────────────────────────────────────────────

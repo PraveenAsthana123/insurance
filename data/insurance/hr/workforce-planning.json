@@ -1,0 +1,94 @@
+{
+  "process": "workforce-planning",
+  "department": "hr",
+  "columns": [
+    "team",
+    "headcount",
+    "attrition_pred",
+    "hire_plan",
+    "owner",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "team": "val_718",
+      "headcount": "val_718",
+      "attrition_pred": "val_718",
+      "hire_plan": "val_718",
+      "owner": "erin",
+      "as_of": "val_718"
+    },
+    {
+      "team": "val_749",
+      "headcount": "val_749",
+      "attrition_pred": "val_749",
+      "hire_plan": "val_749",
+      "owner": "dave",
+      "as_of": "val_749"
+    },
+    {
+      "team": "val_780",
+      "headcount": "val_780",
+      "attrition_pred": "val_780",
+      "hire_plan": "val_780",
+      "owner": "carol",
+      "as_of": "val_780"
+    },
+    {
+      "team": "val_811",
+      "headcount": "val_811",
+      "attrition_pred": "val_811",
+      "hire_plan": "val_811",
+      "owner": "bob",
+      "as_of": "val_811"
+    },
+    {
+      "team": "val_842",
+      "headcount": "val_842",
+      "attrition_pred": "val_842",
+      "hire_plan": "val_842",
+      "owner": "alice",
+      "as_of": "val_842"
+    },
+    {
+      "team": "val_873",
+      "headcount": "val_873",
+      "attrition_pred": "val_873",
+      "hire_plan": "val_873",
+      "owner": "erin",
+      "as_of": "val_873"
+    },
+    {
+      "team": "val_904",
+      "headcount": "val_904",
+      "attrition_pred": "val_904",
+      "hire_plan": "val_904",
+      "owner": "dave",
+      "as_of": "val_904"
+    },
+    {
+      "team": "val_935",
+      "headcount": "val_935",
+      "attrition_pred": "val_935",
+      "hire_plan": "val_935",
+      "owner": "bob",
+      "as_of": "val_935"
+    },
+    {
+      "team": "val_966",
+      "headcount": "val_966",
+      "attrition_pred": "val_966",
+      "hire_plan": "val_966",
+      "owner": "alice",
+      "as_of": "val_966"
+    },
+    {
+      "team": "val_997",
+      "headcount": "val_997",
+      "attrition_pred": "val_997",
+      "hire_plan": "val_997",
+      "owner": "erin",
+      "as_of": "val_997"
+    }
+  ]
+}

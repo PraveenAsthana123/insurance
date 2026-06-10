@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/insurance_enrich_processes.py
+# auto-generated explainer · 2026-06-10T10:00:09Z
+
+## Purpose
+Enrich every process in data/insurance/blueprint.json with 7 new fields:
+
+  - manual_process      — current AS-IS (humans + tools)
+  - automatic_process   — TO-BE (AI workflow)
+  - data_process        — data lineage (input → transform → output)
+  - explainable_ai      — ExpAI methods (per global §48)
+  - responsible_ai      — ResAI fairness/bias gates (per global §38)
+  - governance_ai       — decision audit + HITL + scope (per global §40)
+  - smart_kpi           — Specific / Measurable / Achievable / Relevant / Time-bound
+
+Each field is marked `derived: true` so the operator can distinguish auto-filled
+skeletons from operator-edited specifics. Idempotent: re-running NEVER overwrites
+operator edits (existing fields are preserved unchanged).
+
+Run:
+    python scripts/insurance_enrich_processes.py
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_ensure(obj, key, default)`: Set obj[key] = default only if key absent. Preserves operator edits.
+- `enrich_process(proc, dept)`: Add the 7 derived fields to a process if absent. Returns count added.
+- `enrich_remaining_tabs(proc, dept)`: Seed the other 9 tab fields per process (per global §73.10):
+- `enrich_ai_catalog_entry(ai_row)`: Add the 5 per-AI fields (Data/Model/Accuracy/Benchmark/Stakeholder) to
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Generic actor archetypes per dept-ID range (derived from operator's depts)
+- 0. Issues — seed a derived skeleton so the Problem tab renders for every
+- process. Operator paste replaces the array (idempotent guard preserves it).
+- 1. Manual process — derived from issues + actors
+- 2. Automatic process — derived from ai field

@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_use_cases.py
+# auto-generated explainer · 2026-06-10T10:00:16Z
+
+## Purpose
+Use Case audit · §94 process-use-case-mandatory-structure.
+
+Per ~/.claude/policies/process-use-case-mandatory-structure.md §94.4.
+
+11 assertions:
+  1. /use-cases/health 200 + section_groups + 17 total
+  2. /use-cases lists ≥ 1 use case
+  3. /use-cases/{process_id} returns 5-part structure
+  4. Part A.problem has 3 sub-sections (as_is, sub_problems, impact)
+  5. Part A.impact has 4 quantified axes (time/cost/productivity/$)
+  6. Part B.solution has 4 sub-sections
+  7. Part B.ai_options is a scored list (relevance/cost/time/risk)
+  8. Part C.analysis has 4 sub-sections (swot/first_principles/ai_capabilities/end_to_end_steps)
+  9. Part D.data has data_types list + goal_achievement
+ 10. Part E.transformation has 4P + six_sigma_bpm + stakeholders + kpi_roi_value
+ 11. /score returns 0-17 + missing list
+
+## Imports
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. /health
+- 3. Specific use case structure
+- 4. Part A
+- 5. Impact 4 axes
+- 6. Part B

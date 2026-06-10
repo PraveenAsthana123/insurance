@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/voice_ai/campaign_schemas.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Pydantic schemas for outbound voice AI campaigns.
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import datetime
+- from `typing` import Optional
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `CampaignCreate`: (no docstring)
+- `CampaignUpdate`: (no docstring)
+- `Campaign`: (no docstring)
+- `CampaignRun`: (no docstring)
+- `CampaignExecuteRequest`: (no docstring)
+- `CampaignExecuteResponse`: (no docstring)
+- `CampaignRunUpdate`: Frontend marks a run done after browser TTS completes (or STT capture).
+- `CampaignMetrics`: Aggregate metrics per campaign · per §75 + §82.7.
+
+## Outputs
+- Return values from functions above

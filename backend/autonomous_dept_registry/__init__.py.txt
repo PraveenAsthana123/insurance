@@ -1,0 +1,24 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/autonomous_dept_registry/__init__.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Autonomous Enterprise AI Department · framework registry.
+
+Per operator brief 2026-06-08 · captures the 10-level autonomy maturity
+model + multi-AI hybrid use cases + MCP categories + continuous learning
+governance gates + open-source autonomous stack.
+
+See docs/AUTONOMOUS_DEPARTMENT_FRAMEWORK.md for the full reference.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

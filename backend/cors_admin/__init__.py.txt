@@ -1,0 +1,18 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/cors_admin/__init__.py
+# auto-generated explainer · 2026-06-10T10:01:12Z
+
+## Purpose
+CORS allowlist admin · Iter 32.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

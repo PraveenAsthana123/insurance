@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/responsible_ai/__init__.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Responsible AI module · 12-lens structure for ResAI tab.
+
+Per operator brief 2026-06-09: ResAI tab must expose a component for
+each AI lens (Input · Process · Output · Recommendation · Score ·
+Explainable · Portability · Performance · Ethical · Governance ·
+Interpretable · Fairness) with the same shape per lens (Input · Output ·
+Process · Library used · Score · Final outcome · Summary report).
+
+Per §57.7 honest: library availability is probed at runtime · scores
+are deterministic hash-seeded when the underlying library is not
+installed · `scaffold: true` flag marks honest empty.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

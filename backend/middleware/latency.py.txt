@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/middleware/latency.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Per-route latency histogram · Iter 33.
+
+Records request duration in a sliding window per route · exposes p50/p95/p99
+via /api/v1/metrics-latency + adds counters to Prometheus /metrics.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import time
+- from `collections` import deque
+- from `typing` import Deque
+- from `starlette.middleware.base` import BaseHTTPMiddleware
+- from `starlette.requests` import Request
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `LatencyHistogramMiddleware`: (no docstring)
+### Functions
+- `_route_key(method, path)`: (no docstring)
+- `percentile(values, pct)`: Linear-interp percentile · pct in 0..100.
+- `snapshot()`: Per-route p50/p95/p99 + sample count for /metrics-latency endpoint.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Bucket by route (FastAPI path param-templated key when available)

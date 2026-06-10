@@ -1,0 +1,94 @@
+{
+  "process": "fairness-audit",
+  "department": "ai-governance-office",
+  "columns": [
+    "model_id",
+    "attribute",
+    "metric",
+    "value",
+    "threshold",
+    "audited_at"
+  ],
+  "rows": [
+    {
+      "model_id": "val_408",
+      "attribute": "val_408",
+      "metric": "val_408",
+      "value": "val_408",
+      "threshold": "val_408",
+      "audited_at": "2026-01-21"
+    },
+    {
+      "model_id": "val_439",
+      "attribute": "val_439",
+      "metric": "val_439",
+      "value": "val_439",
+      "threshold": "val_439",
+      "audited_at": "2026-08-24"
+    },
+    {
+      "model_id": "val_470",
+      "attribute": "val_470",
+      "metric": "val_470",
+      "value": "val_470",
+      "threshold": "val_470",
+      "audited_at": "2026-03-27"
+    },
+    {
+      "model_id": "val_501",
+      "attribute": "val_501",
+      "metric": "val_501",
+      "value": "val_501",
+      "threshold": "val_501",
+      "audited_at": "2026-10-02"
+    },
+    {
+      "model_id": "val_532",
+      "attribute": "val_532",
+      "metric": "val_532",
+      "value": "val_532",
+      "threshold": "val_532",
+      "audited_at": "2026-05-05"
+    },
+    {
+      "model_id": "val_563",
+      "attribute": "val_563",
+      "metric": "val_563",
+      "value": "val_563",
+      "threshold": "val_563",
+      "audited_at": "2026-12-08"
+    },
+    {
+      "model_id": "val_594",
+      "attribute": "val_594",
+      "metric": "val_594",
+      "value": "val_594",
+      "threshold": "val_594",
+      "audited_at": "2026-07-11"
+    },
+    {
+      "model_id": "val_625",
+      "attribute": "val_625",
+      "metric": "val_625",
+      "value": "val_625",
+      "threshold": "val_625",
+      "audited_at": "2026-02-14"
+    },
+    {
+      "model_id": "val_656",
+      "attribute": "val_656",
+      "metric": "val_656",
+      "value": "val_656",
+      "threshold": "val_656",
+      "audited_at": "2026-09-17"
+    },
+    {
+      "model_id": "val_687",
+      "attribute": "val_687",
+      "metric": "val_687",
+      "value": "val_687",
+      "threshold": "val_687",
+      "audited_at": "2026-04-20"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/middleware/csp_nonce.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+CSP nonce middleware · Iter 31.
+
+Generates a per-request nonce · adds Content-Security-Policy header
+that allows only nonce-tagged inline scripts/styles. Stricter than the
+existing baseline CSP.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import secrets
+- from `starlette.middleware.base` import BaseHTTPMiddleware
+- from `starlette.requests` import Request
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `CSPNonceMiddleware`: Per-request nonce in Content-Security-Policy.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Append nonce sources to script-src / style-src · preserve baseline

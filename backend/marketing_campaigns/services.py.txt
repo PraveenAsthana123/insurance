@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/marketing_campaigns/services.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Services for marketing_campaigns + per-channel renderers.
+
+Per operator 2026-06-08 (email · banner · survey · form end-to-end).
+Top 1% gates per §76 + §82.21 + §38.3.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import uuid
+- from `collections` import Counter
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_row(r)`: (no docstring)
+- `channel_help_all()`: (no docstring)
+- `_dlp_scan(text)`: Refuse PII-shape patterns across jurisdictions (T3.5 multilingual).
+- `_consent_gate(customer, require_consent)`: (no docstring)
+- `_segment_match(customer, target)`: (no docstring)
+- `_substitute(template, customer, product, call_to_action)`: Replace {name} {phone} {product_name} {price} {call_to_action}.
+- `render_payload(channel, campaign, customer, product)`: (no docstring)
+- `list_campaigns(tenant_id, channel)`: (no docstring)
+- `get_campaign(campaign_id, tenant_id)`: (no docstring)
+- `create_campaign(data, tenant_id)`: (no docstring)
+- `update_campaign(campaign_id, patch, tenant_id)`: (no docstring)
+- `execute_campaign(campaign_id, req, tenant_id, correlation_id)`: (no docstring)
+- `list_runs(campaign_id, tenant_id)`: (no docstring)
+- `update_run(run_id, patch, tenant_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Channel help (operator-facing config docs)
+- ─────────────────────────────────────────────────────────────────────
+- ─────────────────────────────────────────────────────────────────────
+- Top 1% gate helpers (mirror voice campaign · §76 + §82.21)

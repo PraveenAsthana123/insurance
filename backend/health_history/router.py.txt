@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/health_history/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/health-history/* · Iter 35 · keep last N health probes.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import time
+- from `collections` import deque
+- from `datetime` import datetime, timezone
+- from `typing` import Deque
+- from `fastapi` import APIRouter
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_take_snapshot()`: Take one health snapshot · runs probes from service_health.
+- `health()`: (no docstring)
+- `take_snapshot()`: Capture a snapshot now · operator triggers manually or via cron.
+- `recent(limit)`: (no docstring)
+- `availability(component)`: Compute % uptime for one component across history.
+
+## Outputs
+- Return values from functions above

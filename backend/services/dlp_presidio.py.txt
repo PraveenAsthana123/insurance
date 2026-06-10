@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/services/dlp_presidio.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+Presidio Stage-1 §56 adapter · T6.10.
+
+Per docs/PENDING_PLAN.md T6.10. Wraps Microsoft Presidio for extended
+PII detection (12 entity types) alongside the existing regex DLP in
+marketing_campaigns/services._dlp_scan.
+
+Per §56 Stage-1 contract:
+  - feature-flag opt-in
+  - lazy import
+  - drill-locked signature
+  - graceful fallback when not available
+
+Per §57.7: this environment has a transformers/tensorflow/protobuf
+conflict that blocks Presidio's AnalyzerEngine from loading. Adapter
+detects this and falls back to an internal 12-entity regex pack ·
+operator gets EXTENDED PII coverage either way.
+
+Entity coverage (12 types · all available in fallback mode):
+  US_SSN · CREDIT_CARD · EMAIL_ADDRESS · IP_ADDRESS · IBAN_CODE
+  PHONE_NUMBER · URL · UK_NHS · AU_TFN · IN_AADHAAR · BR_CPF · DATE_TIME
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `_` import os
+- from `_` import re
+- from `typing` import Any, Optional
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_try_load_presidio()`: Lazy + graceful import per §56 Stage-1 contract.
+- `scan(text)`: Detect PII entities in `text` · returns:
+- `has_pii(text)`: Convenience predicate · True if ANY PII found.
+- `status()`: Health snapshot for operator (and audit).
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── 12-entity regex pack (fallback when Presidio unavailable) ──
+- Each: name → (entity_type, regex_pattern, default_score)
+- ─── Stage-1 mode detection (try Presidio · fall back gracefully) ──
+- Suppress tensorflow noise during the probe
+- Construct AnalyzerEngine · this is where tensorflow/transformers may fail

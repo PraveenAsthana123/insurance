@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_pipeline_modes.py
+# auto-generated explainer · 2026-06-10T10:00:13Z
+
+## Purpose
+Pipeline manual + automatic modes audit · §93.
+
+Per ~/.claude/policies/process-component-ipo-pattern.md §93.7.
+Verifies both modes work end-to-end with the 4-component × 4-sub-section
+structure.
+
+11 assertions:
+  1. POST /manual/start returns session_id + state
+  2. state.components has all 4 (data · model · accuracy · reporting)
+  3. each component has 4 sub-sections (Input · Process · Output · Visualization)
+  4. POST /manual/{id}/load-data populates data component
+  5. POST /manual/{id}/split-data requires data_loaded (400)
+  6. POST /manual/{id}/select-model accepts list (one OR multiple)
+  7. POST /manual/{id}/set-hyperparams updates dict
+  8. POST /manual/{id}/train requires model_selection + split (400)
+  9. POST /automatic/run completes all 10 phases
+ 10. each automatic phase has output + quality_score + completed
+ 11. overall_quality_score = mean of phase scores
+
+## Imports
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. POST /manual/start
+- 2. state.components has all 4
+- 3. each component has 4 sub-sections
+- 4. POST load-data populates data component
+- 5. /split-data requires data_loaded

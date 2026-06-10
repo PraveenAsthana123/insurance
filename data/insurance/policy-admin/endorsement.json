@@ -1,0 +1,94 @@
+{
+  "process": "endorsement",
+  "department": "policy-admin",
+  "columns": [
+    "endorsement_id",
+    "policy_id",
+    "change_type",
+    "premium_delta",
+    "status",
+    "issued_at"
+  ],
+  "rows": [
+    {
+      "endorsement_id": "val_938",
+      "policy_id": "val_938",
+      "change_type": "val_938",
+      "premium_delta": "val_938",
+      "status": "review",
+      "issued_at": "2026-11-03"
+    },
+    {
+      "endorsement_id": "val_969",
+      "policy_id": "val_969",
+      "change_type": "val_969",
+      "premium_delta": "val_969",
+      "status": "in-progress",
+      "issued_at": "2026-06-06"
+    },
+    {
+      "endorsement_id": "val_0",
+      "policy_id": "val_0",
+      "change_type": "val_0",
+      "premium_delta": "val_0",
+      "status": "open",
+      "issued_at": "2026-01-09"
+    },
+    {
+      "endorsement_id": "val_31",
+      "policy_id": "val_31",
+      "change_type": "val_31",
+      "premium_delta": "val_31",
+      "status": "closed",
+      "issued_at": "2026-08-12"
+    },
+    {
+      "endorsement_id": "val_62",
+      "policy_id": "val_62",
+      "change_type": "val_62",
+      "premium_delta": "val_62",
+      "status": "review",
+      "issued_at": "2026-03-15"
+    },
+    {
+      "endorsement_id": "val_93",
+      "policy_id": "val_93",
+      "change_type": "val_93",
+      "premium_delta": "val_93",
+      "status": "in-progress",
+      "issued_at": "2026-10-18"
+    },
+    {
+      "endorsement_id": "val_124",
+      "policy_id": "val_124",
+      "change_type": "val_124",
+      "premium_delta": "val_124",
+      "status": "open",
+      "issued_at": "2026-05-21"
+    },
+    {
+      "endorsement_id": "val_155",
+      "policy_id": "val_155",
+      "change_type": "val_155",
+      "premium_delta": "val_155",
+      "status": "closed",
+      "issued_at": "2026-12-24"
+    },
+    {
+      "endorsement_id": "val_186",
+      "policy_id": "val_186",
+      "change_type": "val_186",
+      "premium_delta": "val_186",
+      "status": "review",
+      "issued_at": "2026-07-27"
+    },
+    {
+      "endorsement_id": "val_217",
+      "policy_id": "val_217",
+      "change_type": "val_217",
+      "premium_delta": "val_217",
+      "status": "in-progress",
+      "issued_at": "2026-02-02"
+    }
+  ]
+}

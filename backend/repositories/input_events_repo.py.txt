@@ -1,0 +1,24 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/repositories/input_events_repo.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+input_events_repo — append-only repository for user_input_events.
+
+Per GLOBAL_INPUT_PERSISTENCE_POLICY · migration 051_user_input_events.sql.
+Parameterized SQL only (rule 6). Tenant-scoped reads (rule 8).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `typing` import Any, Optional
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `InputEventsRepo`: Repository for the user_input_events table. Append-only writes.
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_self_healing.py
+# auto-generated explainer · 2026-06-10T10:00:14Z
+
+## Purpose
+Self-Healing AI fallback chain audit · T7.13 · governance gate #13.
+
+Per docs/PATH_E_EXECUTION_REPORT_2026-06-09.md T7.13 closure. Verifies
+the LLMFallbackChain pattern with synthetic providers.
+
+10 assertions:
+  1. LLMFallbackChain empty providers → raises ValueError
+  2. Single working provider → success, n_attempts=1, served_by=name
+  3. First fails → second succeeds → n_attempts=2, fallback path captured
+  4. All fail → all_failed=True, response=None, attempts list populated
+  5. Successful response is the WORKING provider's output
+  6. Latency tracked per attempt (>= 0)
+  7. Total latency tracked
+  8. Fallback chain order preserved
+  9. DEFAULT_LLM_CHAIN constructs without error (3 providers wired)
+ 10. Rule-based fallback always returns safe text (last-resort works)
+
+## Imports
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. Empty providers → ValueError
+- 2. Single working provider
+- 3. First fails, second succeeds
+- 4. All fail
+- 5. Working provider's output returned

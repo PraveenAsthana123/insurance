@@ -1,0 +1,94 @@
+{
+  "process": "claim-triage",
+  "department": "claims",
+  "columns": [
+    "claim_id",
+    "severity",
+    "complexity",
+    "adjuster",
+    "sla_hours",
+    "assigned_at"
+  ],
+  "rows": [
+    {
+      "claim_id": "val_329",
+      "severity": "val_329",
+      "complexity": "val_329",
+      "adjuster": "val_329",
+      "sla_hours": "val_329",
+      "assigned_at": "2026-02-14"
+    },
+    {
+      "claim_id": "val_360",
+      "severity": "val_360",
+      "complexity": "val_360",
+      "adjuster": "val_360",
+      "sla_hours": "val_360",
+      "assigned_at": "2026-09-17"
+    },
+    {
+      "claim_id": "val_391",
+      "severity": "val_391",
+      "complexity": "val_391",
+      "adjuster": "val_391",
+      "sla_hours": "val_391",
+      "assigned_at": "2026-04-20"
+    },
+    {
+      "claim_id": "val_422",
+      "severity": "val_422",
+      "complexity": "val_422",
+      "adjuster": "val_422",
+      "sla_hours": "val_422",
+      "assigned_at": "2026-11-23"
+    },
+    {
+      "claim_id": "val_453",
+      "severity": "val_453",
+      "complexity": "val_453",
+      "adjuster": "val_453",
+      "sla_hours": "val_453",
+      "assigned_at": "2026-06-26"
+    },
+    {
+      "claim_id": "val_484",
+      "severity": "val_484",
+      "complexity": "val_484",
+      "adjuster": "val_484",
+      "sla_hours": "val_484",
+      "assigned_at": "2026-01-01"
+    },
+    {
+      "claim_id": "val_515",
+      "severity": "val_515",
+      "complexity": "val_515",
+      "adjuster": "val_515",
+      "sla_hours": "val_515",
+      "assigned_at": "2026-08-04"
+    },
+    {
+      "claim_id": "val_546",
+      "severity": "val_546",
+      "complexity": "val_546",
+      "adjuster": "val_546",
+      "sla_hours": "val_546",
+      "assigned_at": "2026-03-07"
+    },
+    {
+      "claim_id": "val_577",
+      "severity": "val_577",
+      "complexity": "val_577",
+      "adjuster": "val_577",
+      "sla_hours": "val_577",
+      "assigned_at": "2026-10-10"
+    },
+    {
+      "claim_id": "val_608",
+      "severity": "val_608",
+      "complexity": "val_608",
+      "adjuster": "val_608",
+      "sla_hours": "val_608",
+      "assigned_at": "2026-05-13"
+    }
+  ]
+}

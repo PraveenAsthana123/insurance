@@ -1,0 +1,94 @@
+{
+  "process": "payment-processing",
+  "department": "billing",
+  "columns": [
+    "payment_id",
+    "policy_id",
+    "amount",
+    "method",
+    "fraud_score",
+    "captured_at"
+  ],
+  "rows": [
+    {
+      "payment_id": "val_763",
+      "policy_id": "val_763",
+      "amount": 7.63,
+      "method": "val_763",
+      "fraud_score": "val_763",
+      "captured_at": "2026-08-08"
+    },
+    {
+      "payment_id": "val_794",
+      "policy_id": "val_794",
+      "amount": 7.94,
+      "method": "val_794",
+      "fraud_score": "val_794",
+      "captured_at": "2026-03-11"
+    },
+    {
+      "payment_id": "val_825",
+      "policy_id": "val_825",
+      "amount": 8.25,
+      "method": "val_825",
+      "fraud_score": "val_825",
+      "captured_at": "2026-10-14"
+    },
+    {
+      "payment_id": "val_856",
+      "policy_id": "val_856",
+      "amount": 8.56,
+      "method": "val_856",
+      "fraud_score": "val_856",
+      "captured_at": "2026-05-17"
+    },
+    {
+      "payment_id": "val_887",
+      "policy_id": "val_887",
+      "amount": 8.87,
+      "method": "val_887",
+      "fraud_score": "val_887",
+      "captured_at": "2026-12-20"
+    },
+    {
+      "payment_id": "val_918",
+      "policy_id": "val_918",
+      "amount": 9.18,
+      "method": "val_918",
+      "fraud_score": "val_918",
+      "captured_at": "2026-07-23"
+    },
+    {
+      "payment_id": "val_949",
+      "policy_id": "val_949",
+      "amount": 9.49,
+      "method": "val_949",
+      "fraud_score": "val_949",
+      "captured_at": "2026-02-26"
+    },
+    {
+      "payment_id": "val_980",
+      "policy_id": "val_980",
+      "amount": 9.8,
+      "method": "val_980",
+      "fraud_score": "val_980",
+      "captured_at": "2026-09-01"
+    },
+    {
+      "payment_id": "val_11",
+      "policy_id": "val_11",
+      "amount": 10.11,
+      "method": "val_11",
+      "fraud_score": "val_11",
+      "captured_at": "2026-04-04"
+    },
+    {
+      "payment_id": "val_42",
+      "policy_id": "val_42",
+      "amount": 10.42,
+      "method": "val_42",
+      "fraud_score": "val_42",
+      "captured_at": "2026-11-07"
+    }
+  ]
+}

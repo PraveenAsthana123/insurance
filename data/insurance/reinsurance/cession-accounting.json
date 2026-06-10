@@ -1,0 +1,94 @@
+{
+  "process": "cession-accounting",
+  "department": "reinsurance",
+  "columns": [
+    "period",
+    "treaty_id",
+    "ceded_premium",
+    "ceded_loss",
+    "comm",
+    "balance"
+  ],
+  "rows": [
+    {
+      "period": "val_510",
+      "treaty_id": "val_510",
+      "ceded_premium": "val_510",
+      "ceded_loss": "val_510",
+      "comm": "val_510",
+      "balance": "val_510"
+    },
+    {
+      "period": "val_541",
+      "treaty_id": "val_541",
+      "ceded_premium": "val_541",
+      "ceded_loss": "val_541",
+      "comm": "val_541",
+      "balance": "val_541"
+    },
+    {
+      "period": "val_572",
+      "treaty_id": "val_572",
+      "ceded_premium": "val_572",
+      "ceded_loss": "val_572",
+      "comm": "val_572",
+      "balance": "val_572"
+    },
+    {
+      "period": "val_603",
+      "treaty_id": "val_603",
+      "ceded_premium": "val_603",
+      "ceded_loss": "val_603",
+      "comm": "val_603",
+      "balance": "val_603"
+    },
+    {
+      "period": "val_634",
+      "treaty_id": "val_634",
+      "ceded_premium": "val_634",
+      "ceded_loss": "val_634",
+      "comm": "val_634",
+      "balance": "val_634"
+    },
+    {
+      "period": "val_665",
+      "treaty_id": "val_665",
+      "ceded_premium": "val_665",
+      "ceded_loss": "val_665",
+      "comm": "val_665",
+      "balance": "val_665"
+    },
+    {
+      "period": "val_696",
+      "treaty_id": "val_696",
+      "ceded_premium": "val_696",
+      "ceded_loss": "val_696",
+      "comm": "val_696",
+      "balance": "val_696"
+    },
+    {
+      "period": "val_727",
+      "treaty_id": "val_727",
+      "ceded_premium": "val_727",
+      "ceded_loss": "val_727",
+      "comm": "val_727",
+      "balance": "val_727"
+    },
+    {
+      "period": "val_758",
+      "treaty_id": "val_758",
+      "ceded_premium": "val_758",
+      "ceded_loss": "val_758",
+      "comm": "val_758",
+      "balance": "val_758"
+    },
+    {
+      "period": "val_789",
+      "treaty_id": "val_789",
+      "ceded_premium": "val_789",
+      "ceded_loss": "val_789",
+      "comm": "val_789",
+      "balance": "val_789"
+    }
+  ]
+}

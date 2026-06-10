@@ -1,0 +1,94 @@
+{
+  "process": "campaign-planning",
+  "department": "marketing",
+  "columns": [
+    "campaign_id",
+    "segment",
+    "channel",
+    "spend",
+    "ctr",
+    "conversion"
+  ],
+  "rows": [
+    {
+      "campaign_id": "val_405",
+      "segment": "val_405",
+      "channel": "B2E",
+      "spend": "val_405",
+      "ctr": "val_405",
+      "conversion": "val_405"
+    },
+    {
+      "campaign_id": "val_436",
+      "segment": "val_436",
+      "channel": "B2B",
+      "spend": "val_436",
+      "ctr": "val_436",
+      "conversion": "val_436"
+    },
+    {
+      "campaign_id": "val_467",
+      "segment": "val_467",
+      "channel": "B2C",
+      "spend": "val_467",
+      "ctr": "val_467",
+      "conversion": "val_467"
+    },
+    {
+      "campaign_id": "val_498",
+      "segment": "val_498",
+      "channel": "B2E",
+      "spend": "val_498",
+      "ctr": "val_498",
+      "conversion": "val_498"
+    },
+    {
+      "campaign_id": "val_529",
+      "segment": "val_529",
+      "channel": "B2B",
+      "spend": "val_529",
+      "ctr": "val_529",
+      "conversion": "val_529"
+    },
+    {
+      "campaign_id": "val_560",
+      "segment": "val_560",
+      "channel": "B2C",
+      "spend": "val_560",
+      "ctr": "val_560",
+      "conversion": "val_560"
+    },
+    {
+      "campaign_id": "val_591",
+      "segment": "val_591",
+      "channel": "B2C",
+      "spend": "val_591",
+      "ctr": "val_591",
+      "conversion": "val_591"
+    },
+    {
+      "campaign_id": "val_622",
+      "segment": "val_622",
+      "channel": "B2E",
+      "spend": "val_622",
+      "ctr": "val_622",
+      "conversion": "val_622"
+    },
+    {
+      "campaign_id": "val_653",
+      "segment": "val_653",
+      "channel": "B2B",
+      "spend": "val_653",
+      "ctr": "val_653",
+      "conversion": "val_653"
+    },
+    {
+      "campaign_id": "val_684",
+      "segment": "val_684",
+      "channel": "B2C",
+      "spend": "val_684",
+      "ctr": "val_684",
+      "conversion": "val_684"
+    }
+  ]
+}

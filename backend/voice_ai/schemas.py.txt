@@ -1,0 +1,33 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/voice_ai/schemas.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Pydantic schemas for the voice AI end-to-end flow.
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import datetime
+- from `typing` import Any, Optional
+- from `pydantic` import BaseModel, Field
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Product`: (no docstring)
+- `ProductCreate`: (no docstring)
+- `Customer`: (no docstring)
+- `Order`: (no docstring)
+- `WelcomeTemplate`: (no docstring)
+- `WelcomeTemplateUpdate`: (no docstring)
+- `TranscriptTurn`: (no docstring)
+- `Session`: (no docstring)
+- `SessionStartRequest`: (no docstring)
+- `TurnRequest`: (no docstring)
+- `TurnResponse`: (no docstring)
+- `MonitoringSnapshot`: Live monitoring + scoring per §82.7 + §75.
+
+## Outputs
+- Return values from functions above

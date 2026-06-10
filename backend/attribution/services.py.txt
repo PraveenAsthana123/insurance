@@ -1,0 +1,64 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/attribution/services.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Multi-touch attribution computation · 5 models · T5.9.
+
+Models (all conserve total revenue per customer):
+
+  last_touch    · 100% credit to the FINAL touchpoint before conversion
+                  · Used by default in most ad analytics platforms
+  first_touch   · 100% credit to the FIRST touchpoint
+                  · Useful for brand awareness measurement
+  linear        · Equal split across all touchpoints
+                  · Default fairness baseline
+  time_decay    · More weight to recent touchpoints (half-life=7 days)
+                  · Weight = 2^(-days_before_conv / half_life)
+  position_based · 40% first · 40% last · 20% split across middle
+                  · Aka 'U-shaped' · common in B2B
+
+Touchpoints are synthesized from marketing_campaign_runs:
+  customer_id + campaign_id + created_at = touchpoint
+  outcome_score = revenue proxy (§57.7 honest · operator wires real $ later)
+  Conversion = run with status='converted'
+
+Per §57.7: if customer has no converted run · they contribute 0 (no
+fabricated attribution to non-converters).
+Per §76 RAI: attribution is segment-aware (cohort_distribution returned).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `collections` import defaultdict
+- from `datetime` import datetime
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_load_touchpoints(tenant_id, value_per_outcome)`: Build customer journey · returns {customer_id: {touchpoints, converted_at, total_value}}.
+- `_attr_last_touch(touchpoints, total_value)`: (no docstring)
+- `_attr_first_touch(touchpoints, total_value)`: (no docstring)
+- `_attr_linear(touchpoints, total_value)`: (no docstring)
+- `_attr_time_decay(touchpoints, total_value, conv_at, half_life_days)`: (no docstring)
+- `_attr_position_based(touchpoints, total_value, first_pct, last_pct)`: (no docstring)
+- `compute_attribution(model, tenant_id, value_per_outcome)`: Run a single attribution model · returns per-campaign aggregate.
+- `compare_models(tenant_id)`: Run all 5 models · return per-campaign per-model matrix for operator
+- `list_touchpoints(tenant_id, limit)`: Read-only · raw touchpoint feed for operator inspection.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── Notional value (operator-overridable) ────────────────────
+- ─── Load raw touchpoints from marketing_campaign_runs ────────
+- Filter to customers with at least one conversion (per §57.7)
+- ─── 5 Attribution models ──────────────────────────────────────
+- Weight = 2^(-days_before / half_life)

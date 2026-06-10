@@ -1,0 +1,9 @@
+```diff
+--- a/tests/drills/drill_graph_ai.py
++++ b/tests/drills/drill_graph_ai.py
+@@ -198,6 +198,7 @@ if __name__ == "__main__":
+     print(f"\n\033[32mALL 10 STEPS PASSED\033[0m  ({time.time() - t0:.1f}s)")
+ 
+ if __name__ == "__main__":
++    main()
+```

@@ -1,0 +1,94 @@
+{
+  "process": "broker-enablement",
+  "department": "sales",
+  "columns": [
+    "broker_id",
+    "agency",
+    "premium_ytd",
+    "loss_ratio",
+    "tier",
+    "updated_at"
+  ],
+  "rows": [
+    {
+      "broker_id": "val_716",
+      "agency": "val_716",
+      "premium_ytd": "val_716",
+      "loss_ratio": "val_716",
+      "tier": "val_716",
+      "updated_at": "2026-05-09"
+    },
+    {
+      "broker_id": "val_747",
+      "agency": "val_747",
+      "premium_ytd": "val_747",
+      "loss_ratio": "val_747",
+      "tier": "val_747",
+      "updated_at": "2026-12-12"
+    },
+    {
+      "broker_id": "val_778",
+      "agency": "val_778",
+      "premium_ytd": "val_778",
+      "loss_ratio": "val_778",
+      "tier": "val_778",
+      "updated_at": "2026-07-15"
+    },
+    {
+      "broker_id": "val_809",
+      "agency": "val_809",
+      "premium_ytd": "val_809",
+      "loss_ratio": "val_809",
+      "tier": "val_809",
+      "updated_at": "2026-02-18"
+    },
+    {
+      "broker_id": "val_840",
+      "agency": "val_840",
+      "premium_ytd": "val_840",
+      "loss_ratio": "val_840",
+      "tier": "val_840",
+      "updated_at": "2026-09-21"
+    },
+    {
+      "broker_id": "val_871",
+      "agency": "val_871",
+      "premium_ytd": "val_871",
+      "loss_ratio": "val_871",
+      "tier": "val_871",
+      "updated_at": "2026-04-24"
+    },
+    {
+      "broker_id": "val_902",
+      "agency": "val_902",
+      "premium_ytd": "val_902",
+      "loss_ratio": "val_902",
+      "tier": "val_902",
+      "updated_at": "2026-11-27"
+    },
+    {
+      "broker_id": "val_933",
+      "agency": "val_933",
+      "premium_ytd": "val_933",
+      "loss_ratio": "val_933",
+      "tier": "val_933",
+      "updated_at": "2026-06-02"
+    },
+    {
+      "broker_id": "val_964",
+      "agency": "val_964",
+      "premium_ytd": "val_964",
+      "loss_ratio": "val_964",
+      "tier": "val_964",
+      "updated_at": "2026-01-05"
+    },
+    {
+      "broker_id": "val_995",
+      "agency": "val_995",
+      "premium_ytd": "val_995",
+      "loss_ratio": "val_995",
+      "tier": "val_995",
+      "updated_at": "2026-08-08"
+    }
+  ]
+}

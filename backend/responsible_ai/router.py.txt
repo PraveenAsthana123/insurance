@@ -1,0 +1,36 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/responsible_ai/router.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+/api/v1/responsible-ai/* — 12-lens Responsible AI structure per process.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any
+- from `fastapi` import APIRouter, HTTPException
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_probe_library(module_names)`: Probe if any of the listed modules is importable.
+- `_score_lens(lens_id, process_id)`: Deterministic hash-based score per §57.7 (stable across calls).
+- `_outcome(score, lib_installed)`: Outcome per score + library state.
+- `_build_lens_for_process(lens, process_id)`: Materialize one lens with per-process score + outcome.
+- `_summary(lens, process_id, score, outcome, lib_state)`: One-line summary report per lens.
+- `health()`: (no docstring)
+- `list_lenses()`: Catalog of 12 lens definitions (no process binding).
+- `lenses_for_process(process_id)`: All 12 lenses materialized for one process · scored · with outcome.
+- `lens_for_process(process_id, lens_id)`: Single lens detail for one process.
+- `lens_timeseries(process_id, lens_id, days)`: P0 #8 · 30-day time-series of lens scores for drift detection.
+- `summary_report(process_id)`: Aggregate report · used by ResponsibleAIPanel summary section.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── 12 lenses · canonical per operator brief ──────────────────────
+- ±0.1 per-day noise + slight downward drift per day

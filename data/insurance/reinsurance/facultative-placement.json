@@ -1,0 +1,94 @@
+{
+  "process": "facultative-placement",
+  "department": "reinsurance",
+  "columns": [
+    "fac_id",
+    "risk_ref",
+    "sum_insured",
+    "ceded_pct",
+    "broker",
+    "bound_at"
+  ],
+  "rows": [
+    {
+      "fac_id": "val_570",
+      "risk_ref": "val_570",
+      "sum_insured": "val_570",
+      "ceded_pct": "val_570",
+      "broker": "val_570",
+      "bound_at": "2026-07-23"
+    },
+    {
+      "fac_id": "val_601",
+      "risk_ref": "val_601",
+      "sum_insured": "val_601",
+      "ceded_pct": "val_601",
+      "broker": "val_601",
+      "bound_at": "2026-02-26"
+    },
+    {
+      "fac_id": "val_632",
+      "risk_ref": "val_632",
+      "sum_insured": "val_632",
+      "ceded_pct": "val_632",
+      "broker": "val_632",
+      "bound_at": "2026-09-01"
+    },
+    {
+      "fac_id": "val_663",
+      "risk_ref": "val_663",
+      "sum_insured": "val_663",
+      "ceded_pct": "val_663",
+      "broker": "val_663",
+      "bound_at": "2026-04-04"
+    },
+    {
+      "fac_id": "val_694",
+      "risk_ref": "val_694",
+      "sum_insured": "val_694",
+      "ceded_pct": "val_694",
+      "broker": "val_694",
+      "bound_at": "2026-11-07"
+    },
+    {
+      "fac_id": "val_725",
+      "risk_ref": "val_725",
+      "sum_insured": "val_725",
+      "ceded_pct": "val_725",
+      "broker": "val_725",
+      "bound_at": "2026-06-10"
+    },
+    {
+      "fac_id": "val_756",
+      "risk_ref": "val_756",
+      "sum_insured": "val_756",
+      "ceded_pct": "val_756",
+      "broker": "val_756",
+      "bound_at": "2026-01-13"
+    },
+    {
+      "fac_id": "val_787",
+      "risk_ref": "val_787",
+      "sum_insured": "val_787",
+      "ceded_pct": "val_787",
+      "broker": "val_787",
+      "bound_at": "2026-08-16"
+    },
+    {
+      "fac_id": "val_818",
+      "risk_ref": "val_818",
+      "sum_insured": "val_818",
+      "ceded_pct": "val_818",
+      "broker": "val_818",
+      "bound_at": "2026-03-19"
+    },
+    {
+      "fac_id": "val_849",
+      "risk_ref": "val_849",
+      "sum_insured": "val_849",
+      "ceded_pct": "val_849",
+      "broker": "val_849",
+      "bound_at": "2026-10-22"
+    }
+  ]
+}

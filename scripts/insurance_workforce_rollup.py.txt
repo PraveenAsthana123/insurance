@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/insurance_workforce_rollup.py
+# auto-generated explainer · 2026-06-10T10:00:09Z
+
+## Purpose
+Roll the insurance alignment audit + state files into work_tracker.
+
+Writes data/work_tracker/insurance_alignment.json with a compact summary:
+  - audit verdict + check counts + timestamp
+  - capability_status breakdown (count per status)
+  - maturity ladder distribution (count per L0..L6)
+  - implementation current_step + progress %
+  - cron last-fired timestamp from jobs/logs/insurance_alignment_cron.log
+
+Designed for the global work_tracker dashboard to consume. Idempotent.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `collections` import Counter
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_load(path)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

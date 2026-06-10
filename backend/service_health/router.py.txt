@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/service_health/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/service-health · Iter 29 · aggregated probe across all modules.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import time
+- from `fastapi` import APIRouter
+
+## Inputs
+- Env vars: REDIS_URL
+
+## Process
+### Functions
+- `_probe_db()`: (no docstring)
+- `_probe_redis()`: (no docstring)
+- `_probe_library(name)`: (no docstring)
+- `aggregate()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Iter 29 fix: catch ALL exceptions · presidio raises RuntimeError due
+- to transformers/protobuf incompat · not ImportError.

@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/insurance_config.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Insurance dept + role scope — single source of truth.
+
+Per Phase 2.2 of docs/AUDIT_FIX_PLAN.md. Removes the 4-dept hardcoding from
+backend/routers/insurance.py and scripts/audit_insurance_artifacts.py.
+
+Three scope modes (env var INSUR_DEPT_SCOPE):
+  - 'core'   (default): the 4 wired-end-to-end depts (claims/underwriting/CS/fraud-siu)
+  - 'full'   : all 22 depts from data/insurance/blueprint.json or config/insurance.catalog.json
+  - 'custom' : comma-separated list in env INSUR_DEPT_CUSTOM
+
+Returns deterministic order (sorted) so downstream code is stable.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `functools` import lru_cache
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: INSUR_DEPT_CUSTOM, INSUR_DEPT_SCOPE
+
+## Process
+### Functions
+- `_load_full_depts()`: Load full dept list from catalog or blueprint. Cached.
+- `get_insurance_depts()`: Return the active dept list per INSUR_DEPT_SCOPE env var.
+- `get_roles()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Prefer config/insurance.catalog.json (lighter)

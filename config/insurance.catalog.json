@@ -1,0 +1,5946 @@
+{
+  "_generated": "2026-06-10T22:00:01.596336+00:00",
+  "_version": "1.0.0",
+  "departments": [
+    {
+      "id": "product",
+      "name": "Product Management",
+      "icon": "\ud83e\uddea",
+      "color": "#1e40af",
+      "priority": 1,
+      "description": "Product design, filing, pricing strategy, performance review.",
+      "roi": "15\u201320% time-to-market",
+      "aiCapabilities": [
+        "product",
+        "pricing",
+        "recommendation",
+        "predictive",
+        "risk",
+        "customerintel",
+        "personalization",
+        "decision",
+        "explainable",
+        "fairness",
+        "compliance",
+        "governance",
+        "simulation",
+        "scenario",
+        "benchmark",
+        "market_intel",
+        "competitor_intel"
+      ],
+      "processes": [
+        {
+          "id": "product-design",
+          "name": "Product Design & Filing",
+          "description": "Concept \u2192 spec \u2192 state DOI filing for new insurance products.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "product-manager",
+              "verb": "owns"
+            },
+            {
+              "role": "actuary",
+              "verb": "owns"
+            },
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "regulator",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "product",
+            "simulation",
+            "scenario",
+            "compliance",
+            "governance",
+            "fairness"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "product-design.csv",
+              "path": "data/insurance/product/product-design.csv",
+              "downloadUrl": "/data/insurance/product/product-design.csv",
+              "sizeBytes": 545
+            },
+            {
+              "format": "json",
+              "filename": "product-design.json",
+              "path": "data/insurance/product/product-design.json",
+              "downloadUrl": "/data/insurance/product/product-design.json",
+              "sizeBytes": 2021
+            },
+            {
+              "format": "txt",
+              "filename": "product-design.txt",
+              "path": "data/insurance/product/product-design.txt",
+              "downloadUrl": "/data/insurance/product/product-design.txt",
+              "sizeBytes": 412
+            },
+            {
+              "format": "docx",
+              "filename": "product-design.docx",
+              "path": "data/insurance/product/product-design.docx",
+              "downloadUrl": "/data/insurance/product/product-design.docx",
+              "sizeBytes": 1170
+            },
+            {
+              "format": "pdf",
+              "filename": "product-design.pdf",
+              "path": "data/insurance/product/product-design.pdf",
+              "downloadUrl": "/data/insurance/product/product-design.pdf",
+              "sizeBytes": 1213
+            }
+          ],
+          "columns": [
+            "filing_id",
+            "product_name",
+            "state",
+            "status",
+            "owner",
+            "filed_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "concept-ideation",
+              "name": "Concept ideation",
+              "description": "Market gap analysis + concept brief.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "product-manager",
+                  "verb": "supports"
+                },
+                {
+                  "role": "actuary",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "market_intel",
+                "competitor_intel",
+                "scenario"
+              ]
+            },
+            {
+              "id": "doi-filing",
+              "name": "State DOI filing",
+              "description": "SERFF / state submission + tracking.",
+              "channels": [
+                "B2E",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "compliance-officer",
+                  "verb": "supports"
+                },
+                {
+                  "role": "regulator",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "compliance",
+                "documentation",
+                "validation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "pricing-strategy",
+          "name": "Pricing Strategy",
+          "description": "Per-segment pricing curves with explainable factor weights.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "actuary",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            },
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "pricing",
+            "predictive",
+            "explainable",
+            "fairness",
+            "simulation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "pricing-strategy.csv",
+              "path": "data/insurance/product/pricing-strategy.csv",
+              "downloadUrl": "/data/insurance/product/pricing-strategy.csv",
+              "sizeBytes": 592
+            },
+            {
+              "format": "json",
+              "filename": "pricing-strategy.json",
+              "path": "data/insurance/product/pricing-strategy.json",
+              "downloadUrl": "/data/insurance/product/pricing-strategy.json",
+              "sizeBytes": 2270
+            },
+            {
+              "format": "txt",
+              "filename": "pricing-strategy.txt",
+              "path": "data/insurance/product/pricing-strategy.txt",
+              "downloadUrl": "/data/insurance/product/pricing-strategy.txt",
+              "sizeBytes": 373
+            },
+            {
+              "format": "pdf",
+              "filename": "pricing-strategy.pdf",
+              "path": "data/insurance/product/pricing-strategy.pdf",
+              "downloadUrl": "/data/insurance/product/pricing-strategy.pdf",
+              "sizeBytes": 1198
+            }
+          ],
+          "columns": [
+            "segment",
+            "base_premium",
+            "elasticity",
+            "loss_ratio",
+            "competitor_index",
+            "updated_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "factor-analysis",
+              "name": "Factor analysis",
+              "description": "GLM + SHAP feature importance review.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "actuary",
+                  "verb": "supports"
+                },
+                {
+                  "role": "data-scientist",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "explainable",
+                "predictive",
+                "fairness"
+              ]
+            },
+            {
+              "id": "price-monitor",
+              "name": "Price monitoring",
+              "description": "Real-time loss-ratio + competitor gap dashboard.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "product-manager",
+                  "verb": "supports"
+                },
+                {
+                  "role": "actuary",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "monitoring",
+                "benchmark",
+                "competitor_intel"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "product-launch",
+          "name": "Product Launch & Enablement",
+          "description": "Broker enablement, customer materials, KPIs go-live.",
+          "channels": [
+            "B2E",
+            "B2B",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "product-manager",
+              "verb": "owns"
+            },
+            {
+              "role": "marketing-manager",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "campaign",
+            "content",
+            "generative",
+            "personalization",
+            "notification"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "product-launch.csv",
+              "path": "data/insurance/product/product-launch.csv",
+              "downloadUrl": "/data/insurance/product/product-launch.csv",
+              "sizeBytes": 580
+            },
+            {
+              "format": "json",
+              "filename": "product-launch.json",
+              "path": "data/insurance/product/product-launch.json",
+              "downloadUrl": "/data/insurance/product/product-launch.json",
+              "sizeBytes": 2136
+            },
+            {
+              "format": "txt",
+              "filename": "product-launch.txt",
+              "path": "data/insurance/product/product-launch.txt",
+              "downloadUrl": "/data/insurance/product/product-launch.txt",
+              "sizeBytes": 406
+            },
+            {
+              "format": "pdf",
+              "filename": "product-launch.pdf",
+              "path": "data/insurance/product/product-launch.pdf",
+              "downloadUrl": "/data/insurance/product/product-launch.pdf",
+              "sizeBytes": 1219
+            },
+            {
+              "format": "png",
+              "filename": "product-launch.png",
+              "path": "data/insurance/product/product-launch.png",
+              "downloadUrl": "/data/insurance/product/product-launch.png",
+              "sizeBytes": 179
+            },
+            {
+              "format": "wav",
+              "filename": "product-launch.wav",
+              "path": "data/insurance/product/product-launch.wav",
+              "downloadUrl": "/data/insurance/product/product-launch.wav",
+              "sizeBytes": 8044
+            },
+            {
+              "format": "mp4",
+              "filename": "product-launch.mp4",
+              "path": "data/insurance/product/product-launch.mp4",
+              "downloadUrl": "/data/insurance/product/product-launch.mp4",
+              "sizeBytes": 184
+            }
+          ],
+          "columns": [
+            "asset_id",
+            "asset_type",
+            "language",
+            "audience",
+            "version",
+            "published_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "broker-kit",
+              "name": "Broker kit assembly",
+              "description": "Brochures + FAQs + training video.",
+              "channels": [
+                "B2E",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "product-manager",
+                  "verb": "supports"
+                },
+                {
+                  "role": "broker",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "content",
+                "generative",
+                "documentation"
+              ]
+            },
+            {
+              "id": "kpi-readiness",
+              "name": "KPI dashboard readiness",
+              "description": "Pre-launch metric + tracking sanity.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "product-manager",
+                  "verb": "supports"
+                },
+                {
+                  "role": "data-scientist",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "reporting",
+                "monitoring",
+                "validation"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "icon": "\ud83d\udce3",
+      "color": "#f97316",
+      "priority": 2,
+      "description": "Customer 360, segmentation, campaigns, content, social, reporting.",
+      "roi": "20\u201330% campaign ROI uplift",
+      "aiCapabilities": [
+        "marketing",
+        "customer360",
+        "segmentation",
+        "personalization",
+        "campaign",
+        "recommendation",
+        "nextbestaction",
+        "churn",
+        "retention",
+        "crosssell",
+        "upsell",
+        "sentiment",
+        "predictive",
+        "generative",
+        "content",
+        "socialmedia",
+        "reporting"
+      ],
+      "processes": [
+        {
+          "id": "campaign-planning",
+          "name": "Campaign Planning",
+          "description": "Audience segmentation + creative + channel mix optimisation.",
+          "channels": [
+            "B2E",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "marketing-manager",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            },
+            {
+              "role": "prospect",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "campaign",
+            "segmentation",
+            "predictive",
+            "generative",
+            "content"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "campaign-planning.csv",
+              "path": "data/insurance/marketing/campaign-planning.csv",
+              "downloadUrl": "/data/insurance/marketing/campaign-planning.csv",
+              "sizeBytes": 500
+            },
+            {
+              "format": "json",
+              "filename": "campaign-planning.json",
+              "path": "data/insurance/marketing/campaign-planning.json",
+              "downloadUrl": "/data/insurance/marketing/campaign-planning.json",
+              "sizeBytes": 1961
+            },
+            {
+              "format": "txt",
+              "filename": "campaign-planning.txt",
+              "path": "data/insurance/marketing/campaign-planning.txt",
+              "downloadUrl": "/data/insurance/marketing/campaign-planning.txt",
+              "sizeBytes": 372
+            },
+            {
+              "format": "docx",
+              "filename": "campaign-planning.docx",
+              "path": "data/insurance/marketing/campaign-planning.docx",
+              "downloadUrl": "/data/insurance/marketing/campaign-planning.docx",
+              "sizeBytes": 1142
+            },
+            {
+              "format": "pdf",
+              "filename": "campaign-planning.pdf",
+              "path": "data/insurance/marketing/campaign-planning.pdf",
+              "downloadUrl": "/data/insurance/marketing/campaign-planning.pdf",
+              "sizeBytes": 1174
+            }
+          ],
+          "columns": [
+            "campaign_id",
+            "segment",
+            "channel",
+            "spend",
+            "ctr",
+            "conversion"
+          ],
+          "subProcesses": [
+            {
+              "id": "segment-build",
+              "name": "Segment build",
+              "description": "Behavioural + demographic segmentation.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "data-scientist",
+                  "verb": "supports"
+                },
+                {
+                  "role": "marketing-manager",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "segmentation",
+                "customer360",
+                "predictive"
+              ]
+            },
+            {
+              "id": "creative-test",
+              "name": "Creative A/B test",
+              "description": "GenAI variant + lift testing.",
+              "channels": [
+                "B2E",
+                "B2C"
+              ],
+              "stakeholders": [
+                {
+                  "role": "marketing-manager",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "generative",
+                "content",
+                "evaluation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "churn-and-retention",
+          "name": "Churn & Retention",
+          "description": "Predict at-risk policyholders + retention treatments.",
+          "channels": [
+            "B2E",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "marketing-manager",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            },
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "churn",
+            "retention",
+            "nextbestaction",
+            "personalization",
+            "predictive"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "churn-and-retention.csv",
+              "path": "data/insurance/marketing/churn-and-retention.csv",
+              "downloadUrl": "/data/insurance/marketing/churn-and-retention.csv",
+              "sizeBytes": 585
+            },
+            {
+              "format": "json",
+              "filename": "churn-and-retention.json",
+              "path": "data/insurance/marketing/churn-and-retention.json",
+              "downloadUrl": "/data/insurance/marketing/churn-and-retention.json",
+              "sizeBytes": 2198
+            },
+            {
+              "format": "txt",
+              "filename": "churn-and-retention.txt",
+              "path": "data/insurance/marketing/churn-and-retention.txt",
+              "downloadUrl": "/data/insurance/marketing/churn-and-retention.txt",
+              "sizeBytes": 375
+            },
+            {
+              "format": "pdf",
+              "filename": "churn-and-retention.pdf",
+              "path": "data/insurance/marketing/churn-and-retention.pdf",
+              "downloadUrl": "/data/insurance/marketing/churn-and-retention.pdf",
+              "sizeBytes": 1193
+            }
+          ],
+          "columns": [
+            "policy_id",
+            "tenure_months",
+            "churn_score",
+            "offer_id",
+            "outcome",
+            "updated_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "churn-model",
+              "name": "Churn model",
+              "description": "GBM model + monthly drift check.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "data-scientist",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "predictive",
+                "monitoring",
+                "explainable"
+              ]
+            },
+            {
+              "id": "save-offer",
+              "name": "Save-offer engine",
+              "description": "NBA-based retention offers + audit.",
+              "channels": [
+                "B2E",
+                "B2C"
+              ],
+              "stakeholders": [
+                {
+                  "role": "marketing-manager",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "nextbestaction",
+                "personalization",
+                "audit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "social-listening",
+          "name": "Social Listening",
+          "description": "Brand mentions + sentiment + competitor signals.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "marketing-manager",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "socialmedia",
+            "sentiment",
+            "nlp",
+            "competitor_intel",
+            "reporting"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "social-listening.csv",
+              "path": "data/insurance/marketing/social-listening.csv",
+              "downloadUrl": "/data/insurance/marketing/social-listening.csv",
+              "sizeBytes": 573
+            },
+            {
+              "format": "json",
+              "filename": "social-listening.json",
+              "path": "data/insurance/marketing/social-listening.json",
+              "downloadUrl": "/data/insurance/marketing/social-listening.json",
+              "sizeBytes": 2063
+            },
+            {
+              "format": "txt",
+              "filename": "social-listening.txt",
+              "path": "data/insurance/marketing/social-listening.txt",
+              "downloadUrl": "/data/insurance/marketing/social-listening.txt",
+              "sizeBytes": 345
+            },
+            {
+              "format": "pdf",
+              "filename": "social-listening.pdf",
+              "path": "data/insurance/marketing/social-listening.pdf",
+              "downloadUrl": "/data/insurance/marketing/social-listening.pdf",
+              "sizeBytes": 1150
+            },
+            {
+              "format": "png",
+              "filename": "social-listening.png",
+              "path": "data/insurance/marketing/social-listening.png",
+              "downloadUrl": "/data/insurance/marketing/social-listening.png",
+              "sizeBytes": 179
+            },
+            {
+              "format": "wav",
+              "filename": "social-listening.wav",
+              "path": "data/insurance/marketing/social-listening.wav",
+              "downloadUrl": "/data/insurance/marketing/social-listening.wav",
+              "sizeBytes": 8044
+            },
+            {
+              "format": "mp4",
+              "filename": "social-listening.mp4",
+              "path": "data/insurance/marketing/social-listening.mp4",
+              "downloadUrl": "/data/insurance/marketing/social-listening.mp4",
+              "sizeBytes": 184
+            }
+          ],
+          "columns": [
+            "post_id",
+            "platform",
+            "author",
+            "sentiment",
+            "reach",
+            "captured_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "sales",
+      "name": "Sales & Distribution",
+      "icon": "\ud83d\udcbc",
+      "color": "#10b981",
+      "priority": 3,
+      "description": "Quote-to-bind, broker enablement, conversational + voice + agentic.",
+      "roi": "20\u201330% lead conversion uplift",
+      "aiCapabilities": [
+        "sales",
+        "conversational",
+        "voice",
+        "recommendation",
+        "quote",
+        "proposal",
+        "customerintel",
+        "predictive",
+        "agentic",
+        "search",
+        "knowledge",
+        "rag",
+        "notification",
+        "communication",
+        "crm",
+        "meeting",
+        "performance"
+      ],
+      "processes": [
+        {
+          "id": "lead-qualification",
+          "name": "Lead Qualification",
+          "description": "Score inbound leads + route to best agent / channel.",
+          "channels": [
+            "B2E",
+            "B2B",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "sales-manager",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "prospect",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "sales",
+            "predictive",
+            "recommendation",
+            "nextbestaction",
+            "crm"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "lead-qualification.csv",
+              "path": "data/insurance/sales/lead-qualification.csv",
+              "downloadUrl": "/data/insurance/sales/lead-qualification.csv",
+              "sizeBytes": 478
+            },
+            {
+              "format": "json",
+              "filename": "lead-qualification.json",
+              "path": "data/insurance/sales/lead-qualification.json",
+              "downloadUrl": "/data/insurance/sales/lead-qualification.json",
+              "sizeBytes": 1876
+            },
+            {
+              "format": "txt",
+              "filename": "lead-qualification.txt",
+              "path": "data/insurance/sales/lead-qualification.txt",
+              "downloadUrl": "/data/insurance/sales/lead-qualification.txt",
+              "sizeBytes": 368
+            },
+            {
+              "format": "pdf",
+              "filename": "lead-qualification.pdf",
+              "path": "data/insurance/sales/lead-qualification.pdf",
+              "downloadUrl": "/data/insurance/sales/lead-qualification.pdf",
+              "sizeBytes": 1166
+            }
+          ],
+          "columns": [
+            "lead_id",
+            "channel",
+            "score",
+            "owner",
+            "stage",
+            "updated_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "score-lead",
+              "name": "Score lead",
+              "description": "Propensity + risk + lifetime value.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "sales-manager",
+                  "verb": "supports"
+                },
+                {
+                  "role": "data-scientist",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "predictive",
+                "risk",
+                "customer360"
+              ]
+            },
+            {
+              "id": "route-lead",
+              "name": "Route lead",
+              "description": "NBA + broker assignment + SLA.",
+              "channels": [
+                "B2E",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "sales-manager",
+                  "verb": "supports"
+                },
+                {
+                  "role": "broker",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "nextbestaction",
+                "recommendation",
+                "crm",
+                "notification"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quote-and-bind",
+          "name": "Quote & Bind",
+          "description": "Multi-line quote \u2192 underwriting \u2192 bind.",
+          "channels": [
+            "B2C",
+            "B2B",
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "prospect",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "underwriter",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "quote",
+            "underwriting",
+            "decision",
+            "explainable",
+            "conversational"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "quote-and-bind.csv",
+              "path": "data/insurance/sales/quote-and-bind.csv",
+              "downloadUrl": "/data/insurance/sales/quote-and-bind.csv",
+              "sizeBytes": 577
+            },
+            {
+              "format": "json",
+              "filename": "quote-and-bind.json",
+              "path": "data/insurance/sales/quote-and-bind.json",
+              "downloadUrl": "/data/insurance/sales/quote-and-bind.json",
+              "sizeBytes": 2101
+            },
+            {
+              "format": "txt",
+              "filename": "quote-and-bind.txt",
+              "path": "data/insurance/sales/quote-and-bind.txt",
+              "downloadUrl": "/data/insurance/sales/quote-and-bind.txt",
+              "sizeBytes": 355
+            },
+            {
+              "format": "docx",
+              "filename": "quote-and-bind.docx",
+              "path": "data/insurance/sales/quote-and-bind.docx",
+              "downloadUrl": "/data/insurance/sales/quote-and-bind.docx",
+              "sizeBytes": 1149
+            },
+            {
+              "format": "pdf",
+              "filename": "quote-and-bind.pdf",
+              "path": "data/insurance/sales/quote-and-bind.pdf",
+              "downloadUrl": "/data/insurance/sales/quote-and-bind.pdf",
+              "sizeBytes": 1160
+            }
+          ],
+          "columns": [
+            "quote_id",
+            "product",
+            "annual_premium",
+            "stage",
+            "broker",
+            "expires_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "quote-gen",
+              "name": "Quote generation",
+              "description": "Generative + factor-aware quote.",
+              "channels": [
+                "B2C",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "prospect",
+                  "verb": "supports"
+                },
+                {
+                  "role": "broker",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "quote",
+                "generative",
+                "personalization"
+              ]
+            },
+            {
+              "id": "bind",
+              "name": "Bind",
+              "description": "Policy issue + payment + welcome pack.",
+              "channels": [
+                "B2C",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "policyholder",
+                  "verb": "supports"
+                },
+                {
+                  "role": "broker",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "workflow",
+                "notification",
+                "documentation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "broker-enablement",
+          "name": "Broker Enablement",
+          "description": "Broker portal, training, performance scorecards.",
+          "channels": [
+            "B2B",
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "sales-manager",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "knowledge",
+            "rag",
+            "training",
+            "performance",
+            "search",
+            "reporting"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "broker-enablement.csv",
+              "path": "data/insurance/sales/broker-enablement.csv",
+              "downloadUrl": "/data/insurance/sales/broker-enablement.csv",
+              "sizeBytes": 577
+            },
+            {
+              "format": "json",
+              "filename": "broker-enablement.json",
+              "path": "data/insurance/sales/broker-enablement.json",
+              "downloadUrl": "/data/insurance/sales/broker-enablement.json",
+              "sizeBytes": 2104
+            },
+            {
+              "format": "txt",
+              "filename": "broker-enablement.txt",
+              "path": "data/insurance/sales/broker-enablement.txt",
+              "downloadUrl": "/data/insurance/sales/broker-enablement.txt",
+              "sizeBytes": 350
+            },
+            {
+              "format": "docx",
+              "filename": "broker-enablement.docx",
+              "path": "data/insurance/sales/broker-enablement.docx",
+              "downloadUrl": "/data/insurance/sales/broker-enablement.docx",
+              "sizeBytes": 1129
+            },
+            {
+              "format": "pdf",
+              "filename": "broker-enablement.pdf",
+              "path": "data/insurance/sales/broker-enablement.pdf",
+              "downloadUrl": "/data/insurance/sales/broker-enablement.pdf",
+              "sizeBytes": 1159
+            }
+          ],
+          "columns": [
+            "broker_id",
+            "agency",
+            "premium_ytd",
+            "loss_ratio",
+            "tier",
+            "updated_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "underwriting",
+      "name": "Underwriting",
+      "icon": "\ud83d\udccb",
+      "color": "#1e3a8a",
+      "priority": 4,
+      "description": "Application triage, risk assessment, pricing, renewal underwriting.",
+      "roi": "15\u201325% loss ratio improvement",
+      "aiCapabilities": [
+        "underwriting",
+        "risk",
+        "predictive",
+        "pricing",
+        "decision",
+        "explainable",
+        "verification",
+        "validation",
+        "compliance",
+        "fairness",
+        "trust",
+        "search",
+        "rag",
+        "document",
+        "ocr",
+        "knowledgegraph",
+        "agentic",
+        "governance"
+      ],
+      "processes": [
+        {
+          "id": "application-triage",
+          "name": "Application Triage",
+          "description": "Classify + route applications + missing-info chase.",
+          "channels": [
+            "B2E",
+            "B2B",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "underwriter",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "prospect",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "underwriting",
+            "document",
+            "ocr",
+            "validation",
+            "verification",
+            "agentic"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "application-triage.csv",
+              "path": "data/insurance/underwriting/application-triage.csv",
+              "downloadUrl": "/data/insurance/underwriting/application-triage.csv",
+              "sizeBytes": 545
+            },
+            {
+              "format": "json",
+              "filename": "application-triage.json",
+              "path": "data/insurance/underwriting/application-triage.json",
+              "downloadUrl": "/data/insurance/underwriting/application-triage.json",
+              "sizeBytes": 2120
+            },
+            {
+              "format": "txt",
+              "filename": "application-triage.txt",
+              "path": "data/insurance/underwriting/application-triage.txt",
+              "downloadUrl": "/data/insurance/underwriting/application-triage.txt",
+              "sizeBytes": 365
+            },
+            {
+              "format": "docx",
+              "filename": "application-triage.docx",
+              "path": "data/insurance/underwriting/application-triage.docx",
+              "downloadUrl": "/data/insurance/underwriting/application-triage.docx",
+              "sizeBytes": 1133
+            },
+            {
+              "format": "pdf",
+              "filename": "application-triage.pdf",
+              "path": "data/insurance/underwriting/application-triage.pdf",
+              "downloadUrl": "/data/insurance/underwriting/application-triage.pdf",
+              "sizeBytes": 1178
+            }
+          ],
+          "columns": [
+            "application_id",
+            "product",
+            "state",
+            "completeness",
+            "owner",
+            "received_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "doc-ingest",
+              "name": "Document ingest",
+              "description": "OCR + entity extraction from broker submissions.",
+              "channels": [
+                "B2E",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "underwriter",
+                  "verb": "supports"
+                },
+                {
+                  "role": "broker",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "ocr",
+                "document",
+                "verification"
+              ]
+            },
+            {
+              "id": "missing-info-chase",
+              "name": "Missing-info chase",
+              "description": "Conversational agent fills gaps.",
+              "channels": [
+                "B2E",
+                "B2B",
+                "B2C"
+              ],
+              "stakeholders": [
+                {
+                  "role": "underwriter",
+                  "verb": "supports"
+                },
+                {
+                  "role": "prospect",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "conversational",
+                "agentic",
+                "communication"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "risk-assessment",
+          "name": "Risk Assessment",
+          "description": "Risk score + tier + explainability + fairness check.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "underwriter",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            },
+            {
+              "role": "ai-governance",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "risk",
+            "predictive",
+            "explainable",
+            "fairness",
+            "trust",
+            "knowledgegraph"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "risk-assessment.csv",
+              "path": "data/insurance/underwriting/risk-assessment.csv",
+              "downloadUrl": "/data/insurance/underwriting/risk-assessment.csv",
+              "sizeBytes": 583
+            },
+            {
+              "format": "json",
+              "filename": "risk-assessment.json",
+              "path": "data/insurance/underwriting/risk-assessment.json",
+              "downloadUrl": "/data/insurance/underwriting/risk-assessment.json",
+              "sizeBytes": 2225
+            },
+            {
+              "format": "txt",
+              "filename": "risk-assessment.txt",
+              "path": "data/insurance/underwriting/risk-assessment.txt",
+              "downloadUrl": "/data/insurance/underwriting/risk-assessment.txt",
+              "sizeBytes": 366
+            },
+            {
+              "format": "pdf",
+              "filename": "risk-assessment.pdf",
+              "path": "data/insurance/underwriting/risk-assessment.pdf",
+              "downloadUrl": "/data/insurance/underwriting/risk-assessment.pdf",
+              "sizeBytes": 1187
+            }
+          ],
+          "columns": [
+            "application_id",
+            "risk_score",
+            "tier",
+            "factor_top",
+            "fairness_flag",
+            "decided_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "score-risk",
+              "name": "Score risk",
+              "description": "Ensemble risk score with SHAP.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "data-scientist",
+                  "verb": "supports"
+                },
+                {
+                  "role": "underwriter",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "predictive",
+                "explainable",
+                "risk"
+              ]
+            },
+            {
+              "id": "fairness-gate",
+              "name": "Fairness gate",
+              "description": "Disparate impact + equal opportunity check.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "ai-governance",
+                  "verb": "supports"
+                },
+                {
+                  "role": "compliance-officer",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "fairness",
+                "governance",
+                "audit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "renewal-underwriting",
+          "name": "Renewal Underwriting",
+          "description": "Loss-ratio aware re-tiering + retention offers.",
+          "channels": [
+            "B2E",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "underwriter",
+              "verb": "owns"
+            },
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "underwriting",
+            "predictive",
+            "retention",
+            "decision",
+            "explainable"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "renewal-underwriting.csv",
+              "path": "data/insurance/underwriting/renewal-underwriting.csv",
+              "downloadUrl": "/data/insurance/underwriting/renewal-underwriting.csv",
+              "sizeBytes": 588
+            },
+            {
+              "format": "json",
+              "filename": "renewal-underwriting.json",
+              "path": "data/insurance/underwriting/renewal-underwriting.json",
+              "downloadUrl": "/data/insurance/underwriting/renewal-underwriting.json",
+              "sizeBytes": 2235
+            },
+            {
+              "format": "txt",
+              "filename": "renewal-underwriting.txt",
+              "path": "data/insurance/underwriting/renewal-underwriting.txt",
+              "downloadUrl": "/data/insurance/underwriting/renewal-underwriting.txt",
+              "sizeBytes": 350
+            },
+            {
+              "format": "pdf",
+              "filename": "renewal-underwriting.pdf",
+              "path": "data/insurance/underwriting/renewal-underwriting.pdf",
+              "downloadUrl": "/data/insurance/underwriting/renewal-underwriting.pdf",
+              "sizeBytes": 1170
+            }
+          ],
+          "columns": [
+            "policy_id",
+            "prior_premium",
+            "new_premium",
+            "loss_ratio",
+            "action",
+            "effective_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "policy-admin",
+      "name": "Policy Administration",
+      "icon": "\ud83d\udcd1",
+      "color": "#7c3aed",
+      "priority": 5,
+      "description": "Policy lifecycle \u2014 issue, endorsements, renewals, cancellations.",
+      "roi": "20% admin cost reduction",
+      "aiCapabilities": [
+        "process",
+        "workflow",
+        "document",
+        "ocr",
+        "search",
+        "rag",
+        "verification",
+        "validation",
+        "notification",
+        "communication",
+        "agentic",
+        "reporting",
+        "governance",
+        "monitoring"
+      ],
+      "processes": [
+        {
+          "id": "policy-issuance",
+          "name": "Policy Issuance",
+          "description": "Generate policy docs + welcome pack + first-bill.",
+          "channels": [
+            "B2E",
+            "B2C",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "billing-clerk",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "workflow",
+            "documentation",
+            "communication",
+            "notification"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "policy-issuance.csv",
+              "path": "data/insurance/policy-admin/policy-issuance.csv",
+              "downloadUrl": "/data/insurance/policy-admin/policy-issuance.csv",
+              "sizeBytes": 568
+            },
+            {
+              "format": "json",
+              "filename": "policy-issuance.json",
+              "path": "data/insurance/policy-admin/policy-issuance.json",
+              "downloadUrl": "/data/insurance/policy-admin/policy-issuance.json",
+              "sizeBytes": 2070
+            },
+            {
+              "format": "txt",
+              "filename": "policy-issuance.txt",
+              "path": "data/insurance/policy-admin/policy-issuance.txt",
+              "downloadUrl": "/data/insurance/policy-admin/policy-issuance.txt",
+              "sizeBytes": 365
+            },
+            {
+              "format": "docx",
+              "filename": "policy-issuance.docx",
+              "path": "data/insurance/policy-admin/policy-issuance.docx",
+              "downloadUrl": "/data/insurance/policy-admin/policy-issuance.docx",
+              "sizeBytes": 1136
+            },
+            {
+              "format": "pdf",
+              "filename": "policy-issuance.pdf",
+              "path": "data/insurance/policy-admin/policy-issuance.pdf",
+              "downloadUrl": "/data/insurance/policy-admin/policy-issuance.pdf",
+              "sizeBytes": 1171
+            }
+          ],
+          "columns": [
+            "policy_id",
+            "product",
+            "effective_at",
+            "premium",
+            "broker",
+            "status"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "endorsement",
+          "name": "Endorsement",
+          "description": "Mid-term changes + recalc + audit.",
+          "channels": [
+            "B2E",
+            "B2C",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "csr",
+              "verb": "owns"
+            },
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "process",
+            "validation",
+            "verification",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "endorsement.csv",
+              "path": "data/insurance/policy-admin/endorsement.csv",
+              "downloadUrl": "/data/insurance/policy-admin/endorsement.csv",
+              "sizeBytes": 570
+            },
+            {
+              "format": "json",
+              "filename": "endorsement.json",
+              "path": "data/insurance/policy-admin/endorsement.json",
+              "downloadUrl": "/data/insurance/policy-admin/endorsement.json",
+              "sizeBytes": 2218
+            },
+            {
+              "format": "txt",
+              "filename": "endorsement.txt",
+              "path": "data/insurance/policy-admin/endorsement.txt",
+              "downloadUrl": "/data/insurance/policy-admin/endorsement.txt",
+              "sizeBytes": 324
+            },
+            {
+              "format": "docx",
+              "filename": "endorsement.docx",
+              "path": "data/insurance/policy-admin/endorsement.docx",
+              "downloadUrl": "/data/insurance/policy-admin/endorsement.docx",
+              "sizeBytes": 1122
+            },
+            {
+              "format": "pdf",
+              "filename": "endorsement.pdf",
+              "path": "data/insurance/policy-admin/endorsement.pdf",
+              "downloadUrl": "/data/insurance/policy-admin/endorsement.pdf",
+              "sizeBytes": 1145
+            }
+          ],
+          "columns": [
+            "endorsement_id",
+            "policy_id",
+            "change_type",
+            "premium_delta",
+            "status",
+            "issued_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "endorse-validate",
+              "name": "Validate change",
+              "description": "Rule + business validation.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "csr",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "validation",
+                "verification"
+              ]
+            },
+            {
+              "id": "endorse-doc",
+              "name": "Issue endorsement doc",
+              "description": "Doc gen + delivery.",
+              "channels": [
+                "B2E",
+                "B2C"
+              ],
+              "stakeholders": [
+                {
+                  "role": "csr",
+                  "verb": "supports"
+                },
+                {
+                  "role": "policyholder",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "documentation",
+                "communication"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "renewal-processing",
+          "name": "Renewal Processing",
+          "description": "Auto-renewal + non-renewal + customer comms.",
+          "channels": [
+            "B2E",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "csr",
+              "verb": "owns"
+            },
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "workflow",
+            "communication",
+            "monitoring",
+            "reporting"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "renewal-processing.csv",
+              "path": "data/insurance/policy-admin/renewal-processing.csv",
+              "downloadUrl": "/data/insurance/policy-admin/renewal-processing.csv",
+              "sizeBytes": 541
+            },
+            {
+              "format": "json",
+              "filename": "renewal-processing.json",
+              "path": "data/insurance/policy-admin/renewal-processing.json",
+              "downloadUrl": "/data/insurance/policy-admin/renewal-processing.json",
+              "sizeBytes": 2116
+            },
+            {
+              "format": "txt",
+              "filename": "renewal-processing.txt",
+              "path": "data/insurance/policy-admin/renewal-processing.txt",
+              "downloadUrl": "/data/insurance/policy-admin/renewal-processing.txt",
+              "sizeBytes": 334
+            },
+            {
+              "format": "pdf",
+              "filename": "renewal-processing.pdf",
+              "path": "data/insurance/policy-admin/renewal-processing.pdf",
+              "downloadUrl": "/data/insurance/policy-admin/renewal-processing.pdf",
+              "sizeBytes": 1147
+            }
+          ],
+          "columns": [
+            "policy_id",
+            "renewal_type",
+            "next_premium",
+            "owner",
+            "status",
+            "renewed_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "billing",
+      "name": "Billing & Collections",
+      "icon": "\ud83d\udcb3",
+      "color": "#10b981",
+      "priority": 6,
+      "description": "Premium billing, payment, collections, reconciliation.",
+      "roi": "5\u201310% collection rate gain",
+      "aiCapabilities": [
+        "billing",
+        "payment",
+        "collection",
+        "fraud",
+        "predictive",
+        "validation",
+        "verification",
+        "notification",
+        "reporting",
+        "reconciliation",
+        "process",
+        "automation",
+        "governance",
+        "compliance"
+      ],
+      "processes": [
+        {
+          "id": "invoicing",
+          "name": "Invoicing",
+          "description": "Generate + deliver premium invoices.",
+          "channels": [
+            "B2E",
+            "B2C",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "billing-clerk",
+              "verb": "owns"
+            },
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "billing",
+            "automation",
+            "documentation",
+            "communication"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "invoicing.csv",
+              "path": "data/insurance/billing/invoicing.csv",
+              "downloadUrl": "/data/insurance/billing/invoicing.csv",
+              "sizeBytes": 511
+            },
+            {
+              "format": "json",
+              "filename": "invoicing.json",
+              "path": "data/insurance/billing/invoicing.json",
+              "downloadUrl": "/data/insurance/billing/invoicing.json",
+              "sizeBytes": 1952
+            },
+            {
+              "format": "txt",
+              "filename": "invoicing.txt",
+              "path": "data/insurance/billing/invoicing.txt",
+              "downloadUrl": "/data/insurance/billing/invoicing.txt",
+              "sizeBytes": 343
+            },
+            {
+              "format": "pdf",
+              "filename": "invoicing.pdf",
+              "path": "data/insurance/billing/invoicing.pdf",
+              "downloadUrl": "/data/insurance/billing/invoicing.pdf",
+              "sizeBytes": 1146
+            }
+          ],
+          "columns": [
+            "invoice_id",
+            "policy_id",
+            "amount",
+            "due_at",
+            "channel",
+            "status"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "payment-processing",
+          "name": "Payment Processing",
+          "description": "Card + ACH + check intake + fraud screen.",
+          "channels": [
+            "B2C",
+            "B2B",
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            },
+            {
+              "role": "billing-clerk",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "payment",
+            "fraud",
+            "validation",
+            "verification",
+            "reconciliation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "payment-processing.csv",
+              "path": "data/insurance/billing/payment-processing.csv",
+              "downloadUrl": "/data/insurance/billing/payment-processing.csv",
+              "sizeBytes": 543
+            },
+            {
+              "format": "json",
+              "filename": "payment-processing.json",
+              "path": "data/insurance/billing/payment-processing.json",
+              "downloadUrl": "/data/insurance/billing/payment-processing.json",
+              "sizeBytes": 2083
+            },
+            {
+              "format": "txt",
+              "filename": "payment-processing.txt",
+              "path": "data/insurance/billing/payment-processing.txt",
+              "downloadUrl": "/data/insurance/billing/payment-processing.txt",
+              "sizeBytes": 356
+            },
+            {
+              "format": "pdf",
+              "filename": "payment-processing.pdf",
+              "path": "data/insurance/billing/payment-processing.pdf",
+              "downloadUrl": "/data/insurance/billing/payment-processing.pdf",
+              "sizeBytes": 1168
+            }
+          ],
+          "columns": [
+            "payment_id",
+            "policy_id",
+            "amount",
+            "method",
+            "fraud_score",
+            "captured_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "auth-and-capture",
+              "name": "Auth & capture",
+              "description": "Tokenised payment + risk score.",
+              "channels": [
+                "B2C",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "policyholder",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "payment",
+                "fraud",
+                "secure"
+              ]
+            },
+            {
+              "id": "recon-daily",
+              "name": "Daily reconciliation",
+              "description": "Card processor \u2194 ledger match.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "finance-controller",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "reconciliation",
+                "audit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "collections",
+          "name": "Collections",
+          "description": "Dunning strategy + write-off + agency referral.",
+          "channels": [
+            "B2E",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "collections-analyst",
+              "verb": "owns"
+            },
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "collection",
+            "predictive",
+            "nextbestaction",
+            "communication"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "collections.csv",
+              "path": "data/insurance/billing/collections.csv",
+              "downloadUrl": "/data/insurance/billing/collections.csv",
+              "sizeBytes": 553
+            },
+            {
+              "format": "json",
+              "filename": "collections.json",
+              "path": "data/insurance/billing/collections.json",
+              "downloadUrl": "/data/insurance/billing/collections.json",
+              "sizeBytes": 2086
+            },
+            {
+              "format": "txt",
+              "filename": "collections.txt",
+              "path": "data/insurance/billing/collections.txt",
+              "downloadUrl": "/data/insurance/billing/collections.txt",
+              "sizeBytes": 353
+            },
+            {
+              "format": "pdf",
+              "filename": "collections.pdf",
+              "path": "data/insurance/billing/collections.pdf",
+              "downloadUrl": "/data/insurance/billing/collections.pdf",
+              "sizeBytes": 1163
+            }
+          ],
+          "columns": [
+            "account_id",
+            "days_late",
+            "balance",
+            "strategy",
+            "outcome",
+            "updated_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "claims",
+      "name": "Claims",
+      "icon": "\ud83e\uddfe",
+      "color": "#dc2626",
+      "priority": 7,
+      "description": "FNOL \u2192 investigation \u2192 settlement \u2192 recovery, multi-modal AI-heavy.",
+      "roi": "20\u201330% cycle time reduction",
+      "aiCapabilities": [
+        "claims",
+        "fnol",
+        "fraud",
+        "investigation",
+        "vision",
+        "video",
+        "ocr",
+        "document",
+        "multimodal",
+        "predictive",
+        "decision",
+        "explainable",
+        "verification",
+        "validation",
+        "agentic",
+        "search",
+        "rag",
+        "knowledge",
+        "reporting",
+        "notification",
+        "communication",
+        "monitoring",
+        "incident",
+        "governance"
+      ],
+      "processes": [
+        {
+          "id": "fnol-intake",
+          "name": "FNOL Intake",
+          "description": "First notice of loss across voice / portal / broker / mobile.",
+          "channels": [
+            "B2C",
+            "B2B",
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "claimant",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "claims-adjuster",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "fnol",
+            "conversational",
+            "voice",
+            "document",
+            "rag",
+            "multimodal"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "fnol-intake.csv",
+              "path": "data/insurance/claims/fnol-intake.csv",
+              "downloadUrl": "/data/insurance/claims/fnol-intake.csv",
+              "sizeBytes": 503
+            },
+            {
+              "format": "json",
+              "filename": "fnol-intake.json",
+              "path": "data/insurance/claims/fnol-intake.json",
+              "downloadUrl": "/data/insurance/claims/fnol-intake.json",
+              "sizeBytes": 1985
+            },
+            {
+              "format": "txt",
+              "filename": "fnol-intake.txt",
+              "path": "data/insurance/claims/fnol-intake.txt",
+              "downloadUrl": "/data/insurance/claims/fnol-intake.txt",
+              "sizeBytes": 358
+            },
+            {
+              "format": "pdf",
+              "filename": "fnol-intake.pdf",
+              "path": "data/insurance/claims/fnol-intake.pdf",
+              "downloadUrl": "/data/insurance/claims/fnol-intake.pdf",
+              "sizeBytes": 1163
+            },
+            {
+              "format": "png",
+              "filename": "fnol-intake.png",
+              "path": "data/insurance/claims/fnol-intake.png",
+              "downloadUrl": "/data/insurance/claims/fnol-intake.png",
+              "sizeBytes": 179
+            },
+            {
+              "format": "wav",
+              "filename": "fnol-intake.wav",
+              "path": "data/insurance/claims/fnol-intake.wav",
+              "downloadUrl": "/data/insurance/claims/fnol-intake.wav",
+              "sizeBytes": 8044
+            },
+            {
+              "format": "mp4",
+              "filename": "fnol-intake.mp4",
+              "path": "data/insurance/claims/fnol-intake.mp4",
+              "downloadUrl": "/data/insurance/claims/fnol-intake.mp4",
+              "sizeBytes": 184
+            }
+          ],
+          "columns": [
+            "claim_id",
+            "policy_id",
+            "peril",
+            "loss_date",
+            "channel",
+            "severity"
+          ],
+          "subProcesses": [
+            {
+              "id": "fnol-voice",
+              "name": "Voice-channel FNOL",
+              "description": "Voice agent intake with transcript + summary.",
+              "channels": [
+                "B2C"
+              ],
+              "stakeholders": [
+                {
+                  "role": "claimant",
+                  "verb": "supports"
+                },
+                {
+                  "role": "csr",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "voice",
+                "conversational",
+                "documentation"
+              ]
+            },
+            {
+              "id": "fnol-portal",
+              "name": "Portal FNOL",
+              "description": "Self-service portal with photo / doc upload.",
+              "channels": [
+                "B2C",
+                "B2B"
+              ],
+              "stakeholders": [
+                {
+                  "role": "claimant",
+                  "verb": "supports"
+                },
+                {
+                  "role": "broker",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "document",
+                "vision",
+                "validation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "claim-triage",
+          "name": "Claim Triage & Assignment",
+          "description": "Severity + complexity \u2192 adjuster routing.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "claims-adjuster",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "claims",
+            "decision",
+            "predictive",
+            "explainable",
+            "agentic"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "claim-triage.csv",
+              "path": "data/insurance/claims/claim-triage.csv",
+              "downloadUrl": "/data/insurance/claims/claim-triage.csv",
+              "sizeBytes": 581
+            },
+            {
+              "format": "json",
+              "filename": "claim-triage.json",
+              "path": "data/insurance/claims/claim-triage.json",
+              "downloadUrl": "/data/insurance/claims/claim-triage.json",
+              "sizeBytes": 2144
+            },
+            {
+              "format": "txt",
+              "filename": "claim-triage.txt",
+              "path": "data/insurance/claims/claim-triage.txt",
+              "downloadUrl": "/data/insurance/claims/claim-triage.txt",
+              "sizeBytes": 322
+            },
+            {
+              "format": "pdf",
+              "filename": "claim-triage.pdf",
+              "path": "data/insurance/claims/claim-triage.pdf",
+              "downloadUrl": "/data/insurance/claims/claim-triage.pdf",
+              "sizeBytes": 1133
+            }
+          ],
+          "columns": [
+            "claim_id",
+            "severity",
+            "complexity",
+            "adjuster",
+            "sla_hours",
+            "assigned_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "investigation",
+          "name": "Investigation",
+          "description": "Damage assessment via vision + interviews + docs.",
+          "channels": [
+            "B2E",
+            "B2B",
+            "B2C"
+          ],
+          "stakeholders": [
+            {
+              "role": "claims-adjuster",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            },
+            {
+              "role": "claimant",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "investigation",
+            "vision",
+            "video",
+            "ocr",
+            "multimodal",
+            "fraud"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "investigation.csv",
+              "path": "data/insurance/claims/investigation.csv",
+              "downloadUrl": "/data/insurance/claims/investigation.csv",
+              "sizeBytes": 585
+            },
+            {
+              "format": "json",
+              "filename": "investigation.json",
+              "path": "data/insurance/claims/investigation.json",
+              "downloadUrl": "/data/insurance/claims/investigation.json",
+              "sizeBytes": 2189
+            },
+            {
+              "format": "txt",
+              "filename": "investigation.txt",
+              "path": "data/insurance/claims/investigation.txt",
+              "downloadUrl": "/data/insurance/claims/investigation.txt",
+              "sizeBytes": 346
+            },
+            {
+              "format": "pdf",
+              "filename": "investigation.pdf",
+              "path": "data/insurance/claims/investigation.pdf",
+              "downloadUrl": "/data/insurance/claims/investigation.pdf",
+              "sizeBytes": 1163
+            },
+            {
+              "format": "png",
+              "filename": "investigation.png",
+              "path": "data/insurance/claims/investigation.png",
+              "downloadUrl": "/data/insurance/claims/investigation.png",
+              "sizeBytes": 179
+            },
+            {
+              "format": "wav",
+              "filename": "investigation.wav",
+              "path": "data/insurance/claims/investigation.wav",
+              "downloadUrl": "/data/insurance/claims/investigation.wav",
+              "sizeBytes": 8044
+            },
+            {
+              "format": "mp4",
+              "filename": "investigation.mp4",
+              "path": "data/insurance/claims/investigation.mp4",
+              "downloadUrl": "/data/insurance/claims/investigation.mp4",
+              "sizeBytes": 184
+            }
+          ],
+          "columns": [
+            "claim_id",
+            "evidence_type",
+            "source",
+            "ai_finding",
+            "confidence",
+            "captured_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "damage-assessment",
+              "name": "Damage assessment",
+              "description": "CV-based estimate from photos / video.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "claims-adjuster",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "vision",
+                "video",
+                "multimodal"
+              ]
+            },
+            {
+              "id": "fraud-screen",
+              "name": "Fraud screen",
+              "description": "Anomaly + network + behavioural signals.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "claims-adjuster",
+                  "verb": "supports"
+                },
+                {
+                  "role": "siu-investigator",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "fraud",
+                "anomaly",
+                "graph"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "settlement",
+          "name": "Settlement",
+          "description": "Payment + closing letter + recovery posture.",
+          "channels": [
+            "B2E",
+            "B2C",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "claims-adjuster",
+              "verb": "owns"
+            },
+            {
+              "role": "claimant",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "decision",
+            "payment",
+            "documentation",
+            "communication",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "settlement.csv",
+              "path": "data/insurance/claims/settlement.csv",
+              "downloadUrl": "/data/insurance/claims/settlement.csv",
+              "sizeBytes": 555
+            },
+            {
+              "format": "json",
+              "filename": "settlement.json",
+              "path": "data/insurance/claims/settlement.json",
+              "downloadUrl": "/data/insurance/claims/settlement.json",
+              "sizeBytes": 2136
+            },
+            {
+              "format": "txt",
+              "filename": "settlement.txt",
+              "path": "data/insurance/claims/settlement.txt",
+              "downloadUrl": "/data/insurance/claims/settlement.txt",
+              "sizeBytes": 332
+            },
+            {
+              "format": "docx",
+              "filename": "settlement.docx",
+              "path": "data/insurance/claims/settlement.docx",
+              "downloadUrl": "/data/insurance/claims/settlement.docx",
+              "sizeBytes": 1120
+            },
+            {
+              "format": "pdf",
+              "filename": "settlement.pdf",
+              "path": "data/insurance/claims/settlement.pdf",
+              "downloadUrl": "/data/insurance/claims/settlement.pdf",
+              "sizeBytes": 1147
+            }
+          ],
+          "columns": [
+            "claim_id",
+            "settlement_amount",
+            "method",
+            "letter_sent",
+            "closed_at",
+            "owner"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "siu",
+      "name": "Special Investigation Unit",
+      "icon": "\ud83d\udd75",
+      "color": "#ef4444",
+      "priority": 8,
+      "description": "Fraud detection, investigation, behavioural + network analytics.",
+      "roi": "30\u201340% fraud loss reduction",
+      "aiCapabilities": [
+        "fraud",
+        "anomaly",
+        "investigation",
+        "behavioral",
+        "networkanalytics",
+        "graph",
+        "verification",
+        "validation",
+        "risk",
+        "predictive",
+        "search",
+        "rag",
+        "secure",
+        "governance",
+        "monitoring"
+      ],
+      "processes": [
+        {
+          "id": "fraud-detection",
+          "name": "Fraud Detection",
+          "description": "Continuous scoring across claims + payments + identities.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "siu-investigator",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "fraud",
+            "anomaly",
+            "predictive",
+            "behavioral",
+            "graph"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "fraud-detection.csv",
+              "path": "data/insurance/siu/fraud-detection.csv",
+              "downloadUrl": "/data/insurance/siu/fraud-detection.csv",
+              "sizeBytes": 544
+            },
+            {
+              "format": "json",
+              "filename": "fraud-detection.json",
+              "path": "data/insurance/siu/fraud-detection.json",
+              "downloadUrl": "/data/insurance/siu/fraud-detection.json",
+              "sizeBytes": 1977
+            },
+            {
+              "format": "txt",
+              "filename": "fraud-detection.txt",
+              "path": "data/insurance/siu/fraud-detection.txt",
+              "downloadUrl": "/data/insurance/siu/fraud-detection.txt",
+              "sizeBytes": 358
+            },
+            {
+              "format": "pdf",
+              "filename": "fraud-detection.pdf",
+              "path": "data/insurance/siu/fraud-detection.pdf",
+              "downloadUrl": "/data/insurance/siu/fraud-detection.pdf",
+              "sizeBytes": 1160
+            }
+          ],
+          "columns": [
+            "alert_id",
+            "claim_id",
+            "score",
+            "ring_id",
+            "status",
+            "raised_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "model-scoring",
+              "name": "Model scoring",
+              "description": "Ensemble + GNN scoring.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "data-scientist",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "predictive",
+                "graph",
+                "anomaly"
+              ]
+            },
+            {
+              "id": "alert-triage",
+              "name": "Alert triage",
+              "description": "Investigator queue + prioritisation.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "siu-investigator",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "decision",
+                "nextbestaction"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "investigation-workflow",
+          "name": "Investigation Workflow",
+          "description": "Case management + interviews + evidence chain.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "siu-investigator",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "investigation",
+            "documentation",
+            "search",
+            "rag",
+            "secure"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "investigation-workflow.csv",
+              "path": "data/insurance/siu/investigation-workflow.csv",
+              "downloadUrl": "/data/insurance/siu/investigation-workflow.csv",
+              "sizeBytes": 558
+            },
+            {
+              "format": "json",
+              "filename": "investigation-workflow.json",
+              "path": "data/insurance/siu/investigation-workflow.json",
+              "downloadUrl": "/data/insurance/siu/investigation-workflow.json",
+              "sizeBytes": 2148
+            },
+            {
+              "format": "txt",
+              "filename": "investigation-workflow.txt",
+              "path": "data/insurance/siu/investigation-workflow.txt",
+              "downloadUrl": "/data/insurance/siu/investigation-workflow.txt",
+              "sizeBytes": 355
+            },
+            {
+              "format": "docx",
+              "filename": "investigation-workflow.docx",
+              "path": "data/insurance/siu/investigation-workflow.docx",
+              "downloadUrl": "/data/insurance/siu/investigation-workflow.docx",
+              "sizeBytes": 1131
+            },
+            {
+              "format": "pdf",
+              "filename": "investigation-workflow.pdf",
+              "path": "data/insurance/siu/investigation-workflow.pdf",
+              "downloadUrl": "/data/insurance/siu/investigation-workflow.pdf",
+              "sizeBytes": 1170
+            }
+          ],
+          "columns": [
+            "case_id",
+            "investigator",
+            "stage",
+            "evidence_count",
+            "sla_days",
+            "updated_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "network-analytics",
+          "name": "Network Analytics",
+          "description": "Ring detection + collusion + repeat-claimant graphs.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "siu-investigator",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "graph",
+            "networkanalytics",
+            "anomaly",
+            "behavioral"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "network-analytics.csv",
+              "path": "data/insurance/siu/network-analytics.csv",
+              "downloadUrl": "/data/insurance/siu/network-analytics.csv",
+              "sizeBytes": 516
+            },
+            {
+              "format": "json",
+              "filename": "network-analytics.json",
+              "path": "data/insurance/siu/network-analytics.json",
+              "downloadUrl": "/data/insurance/siu/network-analytics.json",
+              "sizeBytes": 1951
+            },
+            {
+              "format": "txt",
+              "filename": "network-analytics.txt",
+              "path": "data/insurance/siu/network-analytics.txt",
+              "downloadUrl": "/data/insurance/siu/network-analytics.txt",
+              "sizeBytes": 354
+            },
+            {
+              "format": "pdf",
+              "filename": "network-analytics.pdf",
+              "path": "data/insurance/siu/network-analytics.pdf",
+              "downloadUrl": "/data/insurance/siu/network-analytics.pdf",
+              "sizeBytes": 1156
+            }
+          ],
+          "columns": [
+            "ring_id",
+            "members",
+            "edges",
+            "score",
+            "first_seen",
+            "last_seen"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "customer-service",
+      "name": "Customer Service",
+      "icon": "\ud83d\udcde",
+      "color": "#0ea5e9",
+      "priority": 9,
+      "description": "Voice + chat + agent assist + sentiment + quality monitoring.",
+      "roi": "25\u201335% AHT reduction",
+      "aiCapabilities": [
+        "conversational",
+        "voice",
+        "rag",
+        "knowledge",
+        "agentic",
+        "generative",
+        "sentiment",
+        "translation",
+        "communication",
+        "notification",
+        "documentation",
+        "reporting",
+        "quality",
+        "monitoring",
+        "search"
+      ],
+      "processes": [
+        {
+          "id": "inquiry-handling",
+          "name": "Inquiry Handling",
+          "description": "Voice + chat + email intent + resolution.",
+          "channels": [
+            "B2C",
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            },
+            {
+              "role": "csr",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "conversational",
+            "voice",
+            "rag",
+            "knowledge",
+            "sentiment",
+            "agentic"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "inquiry-handling.csv",
+              "path": "data/insurance/customer-service/inquiry-handling.csv",
+              "downloadUrl": "/data/insurance/customer-service/inquiry-handling.csv",
+              "sizeBytes": 530
+            },
+            {
+              "format": "json",
+              "filename": "inquiry-handling.json",
+              "path": "data/insurance/customer-service/inquiry-handling.json",
+              "downloadUrl": "/data/insurance/customer-service/inquiry-handling.json",
+              "sizeBytes": 2077
+            },
+            {
+              "format": "txt",
+              "filename": "inquiry-handling.txt",
+              "path": "data/insurance/customer-service/inquiry-handling.txt",
+              "downloadUrl": "/data/insurance/customer-service/inquiry-handling.txt",
+              "sizeBytes": 335
+            },
+            {
+              "format": "pdf",
+              "filename": "inquiry-handling.pdf",
+              "path": "data/insurance/customer-service/inquiry-handling.pdf",
+              "downloadUrl": "/data/insurance/customer-service/inquiry-handling.pdf",
+              "sizeBytes": 1145
+            },
+            {
+              "format": "png",
+              "filename": "inquiry-handling.png",
+              "path": "data/insurance/customer-service/inquiry-handling.png",
+              "downloadUrl": "/data/insurance/customer-service/inquiry-handling.png",
+              "sizeBytes": 179
+            },
+            {
+              "format": "wav",
+              "filename": "inquiry-handling.wav",
+              "path": "data/insurance/customer-service/inquiry-handling.wav",
+              "downloadUrl": "/data/insurance/customer-service/inquiry-handling.wav",
+              "sizeBytes": 8044
+            },
+            {
+              "format": "mp4",
+              "filename": "inquiry-handling.mp4",
+              "path": "data/insurance/customer-service/inquiry-handling.mp4",
+              "downloadUrl": "/data/insurance/customer-service/inquiry-handling.mp4",
+              "sizeBytes": 184
+            }
+          ],
+          "columns": [
+            "interaction_id",
+            "channel",
+            "intent",
+            "sentiment",
+            "csat",
+            "captured_at"
+          ],
+          "subProcesses": [
+            {
+              "id": "voice-intent",
+              "name": "Voice intent + routing",
+              "description": "ASR + intent + agent / bot routing.",
+              "channels": [
+                "B2C",
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "policyholder",
+                  "verb": "supports"
+                },
+                {
+                  "role": "csr",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "voice",
+                "conversational",
+                "nextbestaction"
+              ]
+            },
+            {
+              "id": "agent-assist",
+              "name": "Agent assist",
+              "description": "Real-time RAG suggestions + summary.",
+              "channels": [
+                "B2E"
+              ],
+              "stakeholders": [
+                {
+                  "role": "csr",
+                  "verb": "supports"
+                }
+              ],
+              "aiCapabilities": [
+                "rag",
+                "knowledge",
+                "documentation"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "complaint-resolution",
+          "name": "Complaint Resolution",
+          "description": "Complaint triage + escalation + root cause + close-loop.",
+          "channels": [
+            "B2C",
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "policyholder",
+              "verb": "owns"
+            },
+            {
+              "role": "csr",
+              "verb": "owns"
+            },
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "sentiment",
+            "decision",
+            "documentation",
+            "compliance",
+            "monitoring"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "complaint-resolution.csv",
+              "path": "data/insurance/customer-service/complaint-resolution.csv",
+              "downloadUrl": "/data/insurance/customer-service/complaint-resolution.csv",
+              "sizeBytes": 561
+            },
+            {
+              "format": "json",
+              "filename": "complaint-resolution.json",
+              "path": "data/insurance/customer-service/complaint-resolution.json",
+              "downloadUrl": "/data/insurance/customer-service/complaint-resolution.json",
+              "sizeBytes": 2092
+            },
+            {
+              "format": "txt",
+              "filename": "complaint-resolution.txt",
+              "path": "data/insurance/customer-service/complaint-resolution.txt",
+              "downloadUrl": "/data/insurance/customer-service/complaint-resolution.txt",
+              "sizeBytes": 380
+            },
+            {
+              "format": "docx",
+              "filename": "complaint-resolution.docx",
+              "path": "data/insurance/customer-service/complaint-resolution.docx",
+              "downloadUrl": "/data/insurance/customer-service/complaint-resolution.docx",
+              "sizeBytes": 1143
+            },
+            {
+              "format": "pdf",
+              "filename": "complaint-resolution.pdf",
+              "path": "data/insurance/customer-service/complaint-resolution.pdf",
+              "downloadUrl": "/data/insurance/customer-service/complaint-resolution.pdf",
+              "sizeBytes": 1189
+            }
+          ],
+          "columns": [
+            "complaint_id",
+            "policy_id",
+            "topic",
+            "sentiment",
+            "stage",
+            "closed_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "quality-monitoring",
+          "name": "Quality Monitoring",
+          "description": "Auto-score interactions + coaching nudges.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "csr",
+              "verb": "owns"
+            },
+            {
+              "role": "sales-manager",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "quality",
+            "evaluation",
+            "sentiment",
+            "coaching"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "quality-monitoring.csv",
+              "path": "data/insurance/customer-service/quality-monitoring.csv",
+              "downloadUrl": "/data/insurance/customer-service/quality-monitoring.csv",
+              "sizeBytes": 573
+            },
+            {
+              "format": "json",
+              "filename": "quality-monitoring.json",
+              "path": "data/insurance/customer-service/quality-monitoring.json",
+              "downloadUrl": "/data/insurance/customer-service/quality-monitoring.json",
+              "sizeBytes": 2172
+            },
+            {
+              "format": "txt",
+              "filename": "quality-monitoring.txt",
+              "path": "data/insurance/customer-service/quality-monitoring.txt",
+              "downloadUrl": "/data/insurance/customer-service/quality-monitoring.txt",
+              "sizeBytes": 317
+            },
+            {
+              "format": "pdf",
+              "filename": "quality-monitoring.pdf",
+              "path": "data/insurance/customer-service/quality-monitoring.pdf",
+              "downloadUrl": "/data/insurance/customer-service/quality-monitoring.pdf",
+              "sizeBytes": 1132
+            }
+          ],
+          "columns": [
+            "interaction_id",
+            "csr",
+            "quality_score",
+            "issues",
+            "coach_nudge",
+            "scored_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "actuarial",
+      "name": "Actuarial",
+      "icon": "\ud83d\udcd0",
+      "color": "#f59e0b",
+      "priority": 10,
+      "description": "Pricing, reserving, forecasting, scenario + simulation.",
+      "roi": "5\u20138% combined ratio gain",
+      "aiCapabilities": [
+        "actuarial",
+        "pricing",
+        "reserving",
+        "forecasting",
+        "predictive",
+        "simulation",
+        "montecarlo",
+        "scenario",
+        "risk",
+        "explainable",
+        "benchmark",
+        "validation",
+        "verification",
+        "governance"
+      ],
+      "processes": [
+        {
+          "id": "loss-reserving",
+          "name": "Loss Reserving",
+          "description": "Chain ladder + ML + IBNR + roll-forward.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "actuary",
+              "verb": "owns"
+            },
+            {
+              "role": "finance-controller",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "reserving",
+            "predictive",
+            "explainable",
+            "validation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "loss-reserving.csv",
+              "path": "data/insurance/actuarial/loss-reserving.csv",
+              "downloadUrl": "/data/insurance/actuarial/loss-reserving.csv",
+              "sizeBytes": 525
+            },
+            {
+              "format": "json",
+              "filename": "loss-reserving.json",
+              "path": "data/insurance/actuarial/loss-reserving.json",
+              "downloadUrl": "/data/insurance/actuarial/loss-reserving.json",
+              "sizeBytes": 2013
+            },
+            {
+              "format": "txt",
+              "filename": "loss-reserving.txt",
+              "path": "data/insurance/actuarial/loss-reserving.txt",
+              "downloadUrl": "/data/insurance/actuarial/loss-reserving.txt",
+              "sizeBytes": 319
+            },
+            {
+              "format": "pdf",
+              "filename": "loss-reserving.pdf",
+              "path": "data/insurance/actuarial/loss-reserving.pdf",
+              "downloadUrl": "/data/insurance/actuarial/loss-reserving.pdf",
+              "sizeBytes": 1124
+            }
+          ],
+          "columns": [
+            "triangle_id",
+            "method",
+            "ibnr",
+            "case_reserve",
+            "ultimate",
+            "as_of"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "experience-study",
+          "name": "Experience Study",
+          "description": "Mortality / morbidity / lapse studies + benchmark.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "actuary",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "forecasting",
+            "predictive",
+            "benchmark",
+            "validation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "experience-study.csv",
+              "path": "data/insurance/actuarial/experience-study.csv",
+              "downloadUrl": "/data/insurance/actuarial/experience-study.csv",
+              "sizeBytes": 532
+            },
+            {
+              "format": "json",
+              "filename": "experience-study.json",
+              "path": "data/insurance/actuarial/experience-study.json",
+              "downloadUrl": "/data/insurance/actuarial/experience-study.json",
+              "sizeBytes": 1972
+            },
+            {
+              "format": "txt",
+              "filename": "experience-study.txt",
+              "path": "data/insurance/actuarial/experience-study.txt",
+              "downloadUrl": "/data/insurance/actuarial/experience-study.txt",
+              "sizeBytes": 327
+            },
+            {
+              "format": "docx",
+              "filename": "experience-study.docx",
+              "path": "data/insurance/actuarial/experience-study.docx",
+              "downloadUrl": "/data/insurance/actuarial/experience-study.docx",
+              "sizeBytes": 1130
+            },
+            {
+              "format": "pdf",
+              "filename": "experience-study.pdf",
+              "path": "data/insurance/actuarial/experience-study.pdf",
+              "downloadUrl": "/data/insurance/actuarial/experience-study.pdf",
+              "sizeBytes": 1127
+            }
+          ],
+          "columns": [
+            "study_id",
+            "cohort",
+            "actual",
+            "expected",
+            "ae_ratio",
+            "as_of"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "cat-modeling",
+          "name": "Catastrophe Modelling",
+          "description": "Hurricane / earthquake / wildfire scenarios.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "actuary",
+              "verb": "owns"
+            },
+            {
+              "role": "reinsurer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "catastrophe",
+            "simulation",
+            "montecarlo",
+            "scenario",
+            "climaterisk"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "cat-modeling.csv",
+              "path": "data/insurance/actuarial/cat-modeling.csv",
+              "downloadUrl": "/data/insurance/actuarial/cat-modeling.csv",
+              "sizeBytes": 517
+            },
+            {
+              "format": "json",
+              "filename": "cat-modeling.json",
+              "path": "data/insurance/actuarial/cat-modeling.json",
+              "downloadUrl": "/data/insurance/actuarial/cat-modeling.json",
+              "sizeBytes": 1923
+            },
+            {
+              "format": "txt",
+              "filename": "cat-modeling.txt",
+              "path": "data/insurance/actuarial/cat-modeling.txt",
+              "downloadUrl": "/data/insurance/actuarial/cat-modeling.txt",
+              "sizeBytes": 338
+            },
+            {
+              "format": "pdf",
+              "filename": "cat-modeling.pdf",
+              "path": "data/insurance/actuarial/cat-modeling.pdf",
+              "downloadUrl": "/data/insurance/actuarial/cat-modeling.pdf",
+              "sizeBytes": 1135
+            }
+          ],
+          "columns": [
+            "scenario_id",
+            "peril",
+            "region",
+            "PML",
+            "EP_curve",
+            "as_of"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "reinsurance",
+      "name": "Reinsurance",
+      "icon": "\ud83c\udf10",
+      "color": "#8b5cf6",
+      "priority": 11,
+      "description": "Treaty + facultative placement, exposure, cession accounting.",
+      "roi": "Capital efficiency uplift",
+      "aiCapabilities": [
+        "reinsurance",
+        "exposure",
+        "catastrophe",
+        "risk",
+        "simulation",
+        "scenario",
+        "forecasting",
+        "reporting",
+        "contractai",
+        "document",
+        "search",
+        "rag",
+        "governance"
+      ],
+      "processes": [
+        {
+          "id": "treaty-placement",
+          "name": "Treaty Placement",
+          "description": "Annual treaty renewal + broker negotiation.",
+          "channels": [
+            "B2B",
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "reinsurer",
+              "verb": "owns"
+            },
+            {
+              "role": "broker",
+              "verb": "owns"
+            },
+            {
+              "role": "risk-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "reinsurance",
+            "contractai",
+            "document",
+            "scenario",
+            "explainable"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "treaty-placement.csv",
+              "path": "data/insurance/reinsurance/treaty-placement.csv",
+              "downloadUrl": "/data/insurance/reinsurance/treaty-placement.csv",
+              "sizeBytes": 574
+            },
+            {
+              "format": "json",
+              "filename": "treaty-placement.json",
+              "path": "data/insurance/reinsurance/treaty-placement.json",
+              "downloadUrl": "/data/insurance/reinsurance/treaty-placement.json",
+              "sizeBytes": 2076
+            },
+            {
+              "format": "txt",
+              "filename": "treaty-placement.txt",
+              "path": "data/insurance/reinsurance/treaty-placement.txt",
+              "downloadUrl": "/data/insurance/reinsurance/treaty-placement.txt",
+              "sizeBytes": 345
+            },
+            {
+              "format": "docx",
+              "filename": "treaty-placement.docx",
+              "path": "data/insurance/reinsurance/treaty-placement.docx",
+              "downloadUrl": "/data/insurance/reinsurance/treaty-placement.docx",
+              "sizeBytes": 1130
+            },
+            {
+              "format": "pdf",
+              "filename": "treaty-placement.pdf",
+              "path": "data/insurance/reinsurance/treaty-placement.pdf",
+              "downloadUrl": "/data/insurance/reinsurance/treaty-placement.pdf",
+              "sizeBytes": 1151
+            }
+          ],
+          "columns": [
+            "treaty_id",
+            "type",
+            "layer",
+            "limit",
+            "rate_on_line",
+            "effective_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "facultative-placement",
+          "name": "Facultative Placement",
+          "description": "Per-risk reinsurance for large or unusual risks.",
+          "channels": [
+            "B2B",
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "reinsurer",
+              "verb": "owns"
+            },
+            {
+              "role": "underwriter",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "reinsurance",
+            "risk",
+            "explainable",
+            "documentation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "facultative-placement.csv",
+              "path": "data/insurance/reinsurance/facultative-placement.csv",
+              "downloadUrl": "/data/insurance/reinsurance/facultative-placement.csv",
+              "sizeBytes": 575
+            },
+            {
+              "format": "json",
+              "filename": "facultative-placement.json",
+              "path": "data/insurance/reinsurance/facultative-placement.json",
+              "downloadUrl": "/data/insurance/reinsurance/facultative-placement.json",
+              "sizeBytes": 2092
+            },
+            {
+              "format": "txt",
+              "filename": "facultative-placement.txt",
+              "path": "data/insurance/reinsurance/facultative-placement.txt",
+              "downloadUrl": "/data/insurance/reinsurance/facultative-placement.txt",
+              "sizeBytes": 335
+            },
+            {
+              "format": "pdf",
+              "filename": "facultative-placement.pdf",
+              "path": "data/insurance/reinsurance/facultative-placement.pdf",
+              "downloadUrl": "/data/insurance/reinsurance/facultative-placement.pdf",
+              "sizeBytes": 1142
+            }
+          ],
+          "columns": [
+            "fac_id",
+            "risk_ref",
+            "sum_insured",
+            "ceded_pct",
+            "broker",
+            "bound_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "cession-accounting",
+          "name": "Cession Accounting",
+          "description": "Bordereau + cash settlement + commutation.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "finance-controller",
+              "verb": "owns"
+            },
+            {
+              "role": "reinsurer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "reconciliation",
+            "validation",
+            "reporting",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "cession-accounting.csv",
+              "path": "data/insurance/reinsurance/cession-accounting.csv",
+              "downloadUrl": "/data/insurance/reinsurance/cession-accounting.csv",
+              "sizeBytes": 546
+            },
+            {
+              "format": "json",
+              "filename": "cession-accounting.json",
+              "path": "data/insurance/reinsurance/cession-accounting.json",
+              "downloadUrl": "/data/insurance/reinsurance/cession-accounting.json",
+              "sizeBytes": 2070
+            },
+            {
+              "format": "txt",
+              "filename": "cession-accounting.txt",
+              "path": "data/insurance/reinsurance/cession-accounting.txt",
+              "downloadUrl": "/data/insurance/reinsurance/cession-accounting.txt",
+              "sizeBytes": 332
+            },
+            {
+              "format": "pdf",
+              "filename": "cession-accounting.pdf",
+              "path": "data/insurance/reinsurance/cession-accounting.pdf",
+              "downloadUrl": "/data/insurance/reinsurance/cession-accounting.pdf",
+              "sizeBytes": 1140
+            }
+          ],
+          "columns": [
+            "period",
+            "treaty_id",
+            "ceded_premium",
+            "ceded_loss",
+            "comm",
+            "balance"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "compliance",
+      "name": "Compliance",
+      "icon": "\ud83c\udfdb",
+      "color": "#78716c",
+      "priority": 12,
+      "description": "Regulatory tracking, filings, audit response, responsible AI.",
+      "roi": "Risk + penalty avoidance",
+      "aiCapabilities": [
+        "compliance",
+        "regulatory",
+        "audit",
+        "governance",
+        "responsible",
+        "ethical",
+        "fairness",
+        "explainable",
+        "verification",
+        "validation",
+        "policy",
+        "documentation",
+        "reporting",
+        "monitoring",
+        "trust"
+      ],
+      "processes": [
+        {
+          "id": "regulatory-tracking",
+          "name": "Regulatory Tracking",
+          "description": "Horizon scan + impact assessment.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "regulator",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "regulatory",
+            "search",
+            "rag",
+            "documentation",
+            "monitoring"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "regulatory-tracking.csv",
+              "path": "data/insurance/compliance/regulatory-tracking.csv",
+              "downloadUrl": "/data/insurance/compliance/regulatory-tracking.csv",
+              "sizeBytes": 542
+            },
+            {
+              "format": "json",
+              "filename": "regulatory-tracking.json",
+              "path": "data/insurance/compliance/regulatory-tracking.json",
+              "downloadUrl": "/data/insurance/compliance/regulatory-tracking.json",
+              "sizeBytes": 1986
+            },
+            {
+              "format": "txt",
+              "filename": "regulatory-tracking.txt",
+              "path": "data/insurance/compliance/regulatory-tracking.txt",
+              "downloadUrl": "/data/insurance/compliance/regulatory-tracking.txt",
+              "sizeBytes": 329
+            },
+            {
+              "format": "docx",
+              "filename": "regulatory-tracking.docx",
+              "path": "data/insurance/compliance/regulatory-tracking.docx",
+              "downloadUrl": "/data/insurance/compliance/regulatory-tracking.docx",
+              "sizeBytes": 1123
+            },
+            {
+              "format": "pdf",
+              "filename": "regulatory-tracking.pdf",
+              "path": "data/insurance/compliance/regulatory-tracking.pdf",
+              "downloadUrl": "/data/insurance/compliance/regulatory-tracking.pdf",
+              "sizeBytes": 1129
+            }
+          ],
+          "columns": [
+            "reg_id",
+            "jurisdiction",
+            "topic",
+            "impact",
+            "status",
+            "due_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "filing-management",
+          "name": "Filing Management",
+          "description": "State DOI + NAIC + EU filings + tracking.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "regulator",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "compliance",
+            "validation",
+            "documentation",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "filing-management.csv",
+              "path": "data/insurance/compliance/filing-management.csv",
+              "downloadUrl": "/data/insurance/compliance/filing-management.csv",
+              "sizeBytes": 522
+            },
+            {
+              "format": "json",
+              "filename": "filing-management.json",
+              "path": "data/insurance/compliance/filing-management.json",
+              "downloadUrl": "/data/insurance/compliance/filing-management.json",
+              "sizeBytes": 1994
+            },
+            {
+              "format": "txt",
+              "filename": "filing-management.txt",
+              "path": "data/insurance/compliance/filing-management.txt",
+              "downloadUrl": "/data/insurance/compliance/filing-management.txt",
+              "sizeBytes": 329
+            },
+            {
+              "format": "docx",
+              "filename": "filing-management.docx",
+              "path": "data/insurance/compliance/filing-management.docx",
+              "downloadUrl": "/data/insurance/compliance/filing-management.docx",
+              "sizeBytes": 1119
+            },
+            {
+              "format": "pdf",
+              "filename": "filing-management.pdf",
+              "path": "data/insurance/compliance/filing-management.pdf",
+              "downloadUrl": "/data/insurance/compliance/filing-management.pdf",
+              "sizeBytes": 1132
+            }
+          ],
+          "columns": [
+            "filing_id",
+            "jurisdiction",
+            "type",
+            "status",
+            "owner",
+            "filed_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "audit-response",
+          "name": "Audit Response",
+          "description": "Internal + external audit findings + remediation.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "auditor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "audit",
+            "documentation",
+            "explainable",
+            "trust"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "audit-response.csv",
+              "path": "data/insurance/compliance/audit-response.csv",
+              "downloadUrl": "/data/insurance/compliance/audit-response.csv",
+              "sizeBytes": 524
+            },
+            {
+              "format": "json",
+              "filename": "audit-response.json",
+              "path": "data/insurance/compliance/audit-response.json",
+              "downloadUrl": "/data/insurance/compliance/audit-response.json",
+              "sizeBytes": 1953
+            },
+            {
+              "format": "txt",
+              "filename": "audit-response.txt",
+              "path": "data/insurance/compliance/audit-response.txt",
+              "downloadUrl": "/data/insurance/compliance/audit-response.txt",
+              "sizeBytes": 328
+            },
+            {
+              "format": "docx",
+              "filename": "audit-response.docx",
+              "path": "data/insurance/compliance/audit-response.docx",
+              "downloadUrl": "/data/insurance/compliance/audit-response.docx",
+              "sizeBytes": 1120
+            },
+            {
+              "format": "pdf",
+              "filename": "audit-response.pdf",
+              "path": "data/insurance/compliance/audit-response.pdf",
+              "downloadUrl": "/data/insurance/compliance/audit-response.pdf",
+              "sizeBytes": 1127
+            }
+          ],
+          "columns": [
+            "audit_id",
+            "finding",
+            "severity",
+            "owner",
+            "status",
+            "due_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "legal",
+      "name": "Legal",
+      "icon": "\u2696\ufe0f",
+      "color": "#475569",
+      "priority": 13,
+      "description": "Contracts, litigation, regulatory liaison, document AI.",
+      "roi": "Reduced legal cycle time",
+      "aiCapabilities": [
+        "legal",
+        "contractai",
+        "document",
+        "search",
+        "rag",
+        "knowledge",
+        "compliance",
+        "litigation",
+        "investigation",
+        "reporting",
+        "governance"
+      ],
+      "processes": [
+        {
+          "id": "contract-drafting",
+          "name": "Contract Drafting & Review",
+          "description": "Clause library + redline + risk flags.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "legal-counsel",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "contractai",
+            "document",
+            "search",
+            "rag",
+            "compliance"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "contract-drafting.csv",
+              "path": "data/insurance/legal/contract-drafting.csv",
+              "downloadUrl": "/data/insurance/legal/contract-drafting.csv",
+              "sizeBytes": 548
+            },
+            {
+              "format": "json",
+              "filename": "contract-drafting.json",
+              "path": "data/insurance/legal/contract-drafting.json",
+              "downloadUrl": "/data/insurance/legal/contract-drafting.json",
+              "sizeBytes": 2055
+            },
+            {
+              "format": "txt",
+              "filename": "contract-drafting.txt",
+              "path": "data/insurance/legal/contract-drafting.txt",
+              "downloadUrl": "/data/insurance/legal/contract-drafting.txt",
+              "sizeBytes": 323
+            },
+            {
+              "format": "docx",
+              "filename": "contract-drafting.docx",
+              "path": "data/insurance/legal/contract-drafting.docx",
+              "downloadUrl": "/data/insurance/legal/contract-drafting.docx",
+              "sizeBytes": 1129
+            },
+            {
+              "format": "pdf",
+              "filename": "contract-drafting.pdf",
+              "path": "data/insurance/legal/contract-drafting.pdf",
+              "downloadUrl": "/data/insurance/legal/contract-drafting.pdf",
+              "sizeBytes": 1130
+            }
+          ],
+          "columns": [
+            "contract_id",
+            "counterparty",
+            "value",
+            "stage",
+            "owner",
+            "expires_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "litigation-management",
+          "name": "Litigation Management",
+          "description": "Matter management + e-discovery + outcome prediction.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "legal-counsel",
+              "verb": "owns"
+            },
+            {
+              "role": "law-firm",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "litigation",
+            "document",
+            "predictive",
+            "search"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "litigation-management.csv",
+              "path": "data/insurance/legal/litigation-management.csv",
+              "downloadUrl": "/data/insurance/legal/litigation-management.csv",
+              "sizeBytes": 564
+            },
+            {
+              "format": "json",
+              "filename": "litigation-management.json",
+              "path": "data/insurance/legal/litigation-management.json",
+              "downloadUrl": "/data/insurance/legal/litigation-management.json",
+              "sizeBytes": 2065
+            },
+            {
+              "format": "txt",
+              "filename": "litigation-management.txt",
+              "path": "data/insurance/legal/litigation-management.txt",
+              "downloadUrl": "/data/insurance/legal/litigation-management.txt",
+              "sizeBytes": 330
+            },
+            {
+              "format": "docx",
+              "filename": "litigation-management.docx",
+              "path": "data/insurance/legal/litigation-management.docx",
+              "downloadUrl": "/data/insurance/legal/litigation-management.docx",
+              "sizeBytes": 1120
+            },
+            {
+              "format": "pdf",
+              "filename": "litigation-management.pdf",
+              "path": "data/insurance/legal/litigation-management.pdf",
+              "downloadUrl": "/data/insurance/legal/litigation-management.pdf",
+              "sizeBytes": 1136
+            }
+          ],
+          "columns": [
+            "matter_id",
+            "court",
+            "stage",
+            "exposure",
+            "next_event",
+            "updated_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "regulatory-liaison",
+          "name": "Regulatory Liaison",
+          "description": "Outbound regulator engagement + records.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "legal-counsel",
+              "verb": "owns"
+            },
+            {
+              "role": "regulator",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "regulatory",
+            "documentation",
+            "communication"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "regulatory-liaison.csv",
+              "path": "data/insurance/legal/regulatory-liaison.csv",
+              "downloadUrl": "/data/insurance/legal/regulatory-liaison.csv",
+              "sizeBytes": 537
+            },
+            {
+              "format": "json",
+              "filename": "regulatory-liaison.json",
+              "path": "data/insurance/legal/regulatory-liaison.json",
+              "downloadUrl": "/data/insurance/legal/regulatory-liaison.json",
+              "sizeBytes": 2005
+            },
+            {
+              "format": "txt",
+              "filename": "regulatory-liaison.txt",
+              "path": "data/insurance/legal/regulatory-liaison.txt",
+              "downloadUrl": "/data/insurance/legal/regulatory-liaison.txt",
+              "sizeBytes": 315
+            },
+            {
+              "format": "docx",
+              "filename": "regulatory-liaison.docx",
+              "path": "data/insurance/legal/regulatory-liaison.docx",
+              "downloadUrl": "/data/insurance/legal/regulatory-liaison.docx",
+              "sizeBytes": 1109
+            },
+            {
+              "format": "pdf",
+              "filename": "regulatory-liaison.pdf",
+              "path": "data/insurance/legal/regulatory-liaison.pdf",
+              "downloadUrl": "/data/insurance/legal/regulatory-liaison.pdf",
+              "sizeBytes": 1118
+            }
+          ],
+          "columns": [
+            "engagement_id",
+            "regulator",
+            "topic",
+            "owner",
+            "status",
+            "due_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "name": "Finance",
+      "icon": "\ud83d\udcb0",
+      "color": "#16a34a",
+      "priority": 14,
+      "description": "Premium accounting, loss reserves, financial reporting, FinOps.",
+      "roi": "Close-cycle + cost-avoidance gains",
+      "aiCapabilities": [
+        "financial",
+        "reporting",
+        "forecasting",
+        "predictive",
+        "reconciliation",
+        "validation",
+        "verification",
+        "cost",
+        "finops",
+        "governance",
+        "audit",
+        "monitoring"
+      ],
+      "processes": [
+        {
+          "id": "financial-close",
+          "name": "Financial Close",
+          "description": "Sub-ledger close + journal automation.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "finance-controller",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "reconciliation",
+            "validation",
+            "automation",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "financial-close.csv",
+              "path": "data/insurance/finance/financial-close.csv",
+              "downloadUrl": "/data/insurance/finance/financial-close.csv",
+              "sizeBytes": 540
+            },
+            {
+              "format": "json",
+              "filename": "financial-close.json",
+              "path": "data/insurance/finance/financial-close.json",
+              "downloadUrl": "/data/insurance/finance/financial-close.json",
+              "sizeBytes": 1977
+            },
+            {
+              "format": "txt",
+              "filename": "financial-close.txt",
+              "path": "data/insurance/finance/financial-close.txt",
+              "downloadUrl": "/data/insurance/finance/financial-close.txt",
+              "sizeBytes": 306
+            },
+            {
+              "format": "pdf",
+              "filename": "financial-close.pdf",
+              "path": "data/insurance/finance/financial-close.pdf",
+              "downloadUrl": "/data/insurance/finance/financial-close.pdf",
+              "sizeBytes": 1106
+            }
+          ],
+          "columns": [
+            "period",
+            "entity",
+            "stage",
+            "open_items",
+            "owner",
+            "closed_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "forecasting",
+          "name": "Forecasting & FP&A",
+          "description": "Premium + loss + expense forecast.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "finance-controller",
+              "verb": "owns"
+            },
+            {
+              "role": "actuary",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "forecasting",
+            "predictive",
+            "scenario",
+            "explainable"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "forecasting.csv",
+              "path": "data/insurance/finance/forecasting.csv",
+              "downloadUrl": "/data/insurance/finance/forecasting.csv",
+              "sizeBytes": 485
+            },
+            {
+              "format": "json",
+              "filename": "forecasting.json",
+              "path": "data/insurance/finance/forecasting.json",
+              "downloadUrl": "/data/insurance/finance/forecasting.json",
+              "sizeBytes": 1838
+            },
+            {
+              "format": "txt",
+              "filename": "forecasting.txt",
+              "path": "data/insurance/finance/forecasting.txt",
+              "downloadUrl": "/data/insurance/finance/forecasting.txt",
+              "sizeBytes": 315
+            },
+            {
+              "format": "pdf",
+              "filename": "forecasting.pdf",
+              "path": "data/insurance/finance/forecasting.pdf",
+              "downloadUrl": "/data/insurance/finance/forecasting.pdf",
+              "sizeBytes": 1107
+            }
+          ],
+          "columns": [
+            "scenario",
+            "line",
+            "metric",
+            "value",
+            "as_of",
+            "owner"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "finops-monitoring",
+          "name": "FinOps Monitoring",
+          "description": "Cloud + AI cost tracking + alerts.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "finance-controller",
+              "verb": "owns"
+            },
+            {
+              "role": "sre",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "finops",
+            "cost",
+            "monitoring",
+            "reporting"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "finops-monitoring.csv",
+              "path": "data/insurance/finance/finops-monitoring.csv",
+              "downloadUrl": "/data/insurance/finance/finops-monitoring.csv",
+              "sizeBytes": 572
+            },
+            {
+              "format": "json",
+              "filename": "finops-monitoring.json",
+              "path": "data/insurance/finance/finops-monitoring.json",
+              "downloadUrl": "/data/insurance/finance/finops-monitoring.json",
+              "sizeBytes": 2031
+            },
+            {
+              "format": "txt",
+              "filename": "finops-monitoring.txt",
+              "path": "data/insurance/finance/finops-monitoring.txt",
+              "downloadUrl": "/data/insurance/finance/finops-monitoring.txt",
+              "sizeBytes": 299
+            },
+            {
+              "format": "pdf",
+              "filename": "finops-monitoring.pdf",
+              "path": "data/insurance/finance/finops-monitoring.pdf",
+              "downloadUrl": "/data/insurance/finance/finops-monitoring.pdf",
+              "sizeBytes": 1101
+            }
+          ],
+          "columns": [
+            "date",
+            "service",
+            "cost",
+            "anomaly_flag",
+            "owner",
+            "captured_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "erm",
+      "name": "Enterprise Risk Management",
+      "icon": "\ud83d\udee1",
+      "color": "#dc2626",
+      "priority": 15,
+      "description": "Enterprise risks: operational, credit, market, cat, climate, ESG.",
+      "roi": "Capital + risk integration",
+      "aiCapabilities": [
+        "enterpriserisk",
+        "opsrisk",
+        "creditrisk",
+        "marketrisk",
+        "catastrophe",
+        "climaterisk",
+        "esg",
+        "scenario",
+        "simulation",
+        "predictive",
+        "monitoring",
+        "governance"
+      ],
+      "processes": [
+        {
+          "id": "risk-register",
+          "name": "Risk Register",
+          "description": "Top risks + control owners + heatmap.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "risk-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "enterpriserisk",
+            "monitoring",
+            "reporting",
+            "governance"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "risk-register.csv",
+              "path": "data/insurance/erm/risk-register.csv",
+              "downloadUrl": "/data/insurance/erm/risk-register.csv",
+              "sizeBytes": 532
+            },
+            {
+              "format": "json",
+              "filename": "risk-register.json",
+              "path": "data/insurance/erm/risk-register.json",
+              "downloadUrl": "/data/insurance/erm/risk-register.json",
+              "sizeBytes": 2003
+            },
+            {
+              "format": "txt",
+              "filename": "risk-register.txt",
+              "path": "data/insurance/erm/risk-register.txt",
+              "downloadUrl": "/data/insurance/erm/risk-register.txt",
+              "sizeBytes": 340
+            },
+            {
+              "format": "docx",
+              "filename": "risk-register.docx",
+              "path": "data/insurance/erm/risk-register.docx",
+              "downloadUrl": "/data/insurance/erm/risk-register.docx",
+              "sizeBytes": 1130
+            },
+            {
+              "format": "pdf",
+              "filename": "risk-register.pdf",
+              "path": "data/insurance/erm/risk-register.pdf",
+              "downloadUrl": "/data/insurance/erm/risk-register.pdf",
+              "sizeBytes": 1144
+            }
+          ],
+          "columns": [
+            "risk_id",
+            "category",
+            "likelihood",
+            "impact",
+            "owner",
+            "review_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "stress-testing",
+          "name": "Stress Testing",
+          "description": "ICAAP / ORSA / climate stress scenarios.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "risk-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "actuary",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "scenario",
+            "simulation",
+            "montecarlo",
+            "climaterisk",
+            "esg"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "stress-testing.csv",
+              "path": "data/insurance/erm/stress-testing.csv",
+              "downloadUrl": "/data/insurance/erm/stress-testing.csv",
+              "sizeBytes": 522
+            },
+            {
+              "format": "json",
+              "filename": "stress-testing.json",
+              "path": "data/insurance/erm/stress-testing.json",
+              "downloadUrl": "/data/insurance/erm/stress-testing.json",
+              "sizeBytes": 1974
+            },
+            {
+              "format": "txt",
+              "filename": "stress-testing.txt",
+              "path": "data/insurance/erm/stress-testing.txt",
+              "downloadUrl": "/data/insurance/erm/stress-testing.txt",
+              "sizeBytes": 339
+            },
+            {
+              "format": "pdf",
+              "filename": "stress-testing.pdf",
+              "path": "data/insurance/erm/stress-testing.pdf",
+              "downloadUrl": "/data/insurance/erm/stress-testing.pdf",
+              "sizeBytes": 1141
+            }
+          ],
+          "columns": [
+            "scenario",
+            "metric",
+            "baseline",
+            "stressed",
+            "headroom",
+            "as_of"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "emerging-risk",
+          "name": "Emerging Risk Scan",
+          "description": "Horizon scan + signals + Bayesian update.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "risk-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "search",
+            "rag",
+            "predictive",
+            "scenario"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "emerging-risk.csv",
+              "path": "data/insurance/erm/emerging-risk.csv",
+              "downloadUrl": "/data/insurance/erm/emerging-risk.csv",
+              "sizeBytes": 574
+            },
+            {
+              "format": "json",
+              "filename": "emerging-risk.json",
+              "path": "data/insurance/erm/emerging-risk.json",
+              "downloadUrl": "/data/insurance/erm/emerging-risk.json",
+              "sizeBytes": 2065
+            },
+            {
+              "format": "txt",
+              "filename": "emerging-risk.txt",
+              "path": "data/insurance/erm/emerging-risk.txt",
+              "downloadUrl": "/data/insurance/erm/emerging-risk.txt",
+              "sizeBytes": 313
+            },
+            {
+              "format": "docx",
+              "filename": "emerging-risk.docx",
+              "path": "data/insurance/erm/emerging-risk.docx",
+              "downloadUrl": "/data/insurance/erm/emerging-risk.docx",
+              "sizeBytes": 1124
+            },
+            {
+              "format": "pdf",
+              "filename": "emerging-risk.pdf",
+              "path": "data/insurance/erm/emerging-risk.pdf",
+              "downloadUrl": "/data/insurance/erm/emerging-risk.pdf",
+              "sizeBytes": 1119
+            }
+          ],
+          "columns": [
+            "signal_id",
+            "topic",
+            "source",
+            "confidence",
+            "impact",
+            "captured_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "hr",
+      "name": "Human Resources",
+      "icon": "\ud83e\uddd1\u200d\ud83d\udcbc",
+      "color": "#a855f7",
+      "priority": 16,
+      "description": "Talent, learning, workforce, coaching, meeting AI.",
+      "roi": "Engagement + productivity gains",
+      "aiCapabilities": [
+        "talent",
+        "workforce",
+        "learning",
+        "training",
+        "coaching",
+        "recruitment",
+        "knowledge",
+        "conversational",
+        "meeting",
+        "documentation",
+        "notification",
+        "performance"
+      ],
+      "processes": [
+        {
+          "id": "recruitment",
+          "name": "Recruitment",
+          "description": "Screening + scoring + scheduling.",
+          "channels": [
+            "B2E",
+            "B2C",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "hr-business-partner",
+              "verb": "owns"
+            },
+            {
+              "role": "prospect",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "recruitment",
+            "talent",
+            "conversational",
+            "fairness",
+            "explainable"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "recruitment.csv",
+              "path": "data/insurance/hr/recruitment.csv",
+              "downloadUrl": "/data/insurance/hr/recruitment.csv",
+              "sizeBytes": 549
+            },
+            {
+              "format": "json",
+              "filename": "recruitment.json",
+              "path": "data/insurance/hr/recruitment.json",
+              "downloadUrl": "/data/insurance/hr/recruitment.json",
+              "sizeBytes": 1967
+            },
+            {
+              "format": "txt",
+              "filename": "recruitment.txt",
+              "path": "data/insurance/hr/recruitment.txt",
+              "downloadUrl": "/data/insurance/hr/recruitment.txt",
+              "sizeBytes": 347
+            },
+            {
+              "format": "docx",
+              "filename": "recruitment.docx",
+              "path": "data/insurance/hr/recruitment.docx",
+              "downloadUrl": "/data/insurance/hr/recruitment.docx",
+              "sizeBytes": 1134
+            },
+            {
+              "format": "pdf",
+              "filename": "recruitment.pdf",
+              "path": "data/insurance/hr/recruitment.pdf",
+              "downloadUrl": "/data/insurance/hr/recruitment.pdf",
+              "sizeBytes": 1148
+            }
+          ],
+          "columns": [
+            "req_id",
+            "role",
+            "candidate_id",
+            "stage",
+            "score",
+            "updated_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "learning-paths",
+          "name": "Learning Paths",
+          "description": "Skill-gap driven adaptive learning.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "hr-business-partner",
+              "verb": "owns"
+            },
+            {
+              "role": "csr",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "learning",
+            "training",
+            "coaching",
+            "personalization"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "learning-paths.csv",
+              "path": "data/insurance/hr/learning-paths.csv",
+              "downloadUrl": "/data/insurance/hr/learning-paths.csv",
+              "sizeBytes": 572
+            },
+            {
+              "format": "json",
+              "filename": "learning-paths.json",
+              "path": "data/insurance/hr/learning-paths.json",
+              "downloadUrl": "/data/insurance/hr/learning-paths.json",
+              "sizeBytes": 2043
+            },
+            {
+              "format": "txt",
+              "filename": "learning-paths.txt",
+              "path": "data/insurance/hr/learning-paths.txt",
+              "downloadUrl": "/data/insurance/hr/learning-paths.txt",
+              "sizeBytes": 316
+            },
+            {
+              "format": "docx",
+              "filename": "learning-paths.docx",
+              "path": "data/insurance/hr/learning-paths.docx",
+              "downloadUrl": "/data/insurance/hr/learning-paths.docx",
+              "sizeBytes": 1119
+            },
+            {
+              "format": "pdf",
+              "filename": "learning-paths.pdf",
+              "path": "data/insurance/hr/learning-paths.pdf",
+              "downloadUrl": "/data/insurance/hr/learning-paths.pdf",
+              "sizeBytes": 1120
+            }
+          ],
+          "columns": [
+            "employee_id",
+            "skill",
+            "level",
+            "gap",
+            "next_course",
+            "updated_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "workforce-planning",
+          "name": "Workforce Planning",
+          "description": "Headcount + scheduling + attrition forecast.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "hr-business-partner",
+              "verb": "owns"
+            },
+            {
+              "role": "sales-manager",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "workforce",
+            "forecasting",
+            "predictive",
+            "scenario"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "workforce-planning.csv",
+              "path": "data/insurance/hr/workforce-planning.csv",
+              "downloadUrl": "/data/insurance/hr/workforce-planning.csv",
+              "sizeBytes": 514
+            },
+            {
+              "format": "json",
+              "filename": "workforce-planning.json",
+              "path": "data/insurance/hr/workforce-planning.json",
+              "downloadUrl": "/data/insurance/hr/workforce-planning.json",
+              "sizeBytes": 1999
+            },
+            {
+              "format": "txt",
+              "filename": "workforce-planning.txt",
+              "path": "data/insurance/hr/workforce-planning.txt",
+              "downloadUrl": "/data/insurance/hr/workforce-planning.txt",
+              "sizeBytes": 338
+            },
+            {
+              "format": "pdf",
+              "filename": "workforce-planning.pdf",
+              "path": "data/insurance/hr/workforce-planning.pdf",
+              "downloadUrl": "/data/insurance/hr/workforce-planning.pdf",
+              "sizeBytes": 1143
+            }
+          ],
+          "columns": [
+            "team",
+            "headcount",
+            "attrition_pred",
+            "hire_plan",
+            "owner",
+            "as_of"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "procurement",
+      "name": "Procurement & Vendor Mgmt",
+      "icon": "\ud83d\uded2",
+      "color": "#84cc16",
+      "priority": 17,
+      "description": "Sourcing, vendor performance, contract risk, compliance.",
+      "roi": "7\u201312% spend savings",
+      "aiCapabilities": [
+        "vendor",
+        "contractai",
+        "procurement",
+        "risk",
+        "compliance",
+        "performance",
+        "search",
+        "rag",
+        "governance",
+        "monitoring"
+      ],
+      "processes": [
+        {
+          "id": "vendor-onboarding",
+          "name": "Vendor Onboarding",
+          "description": "KYC + sanctions + risk + contract.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "procurement-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "vendor",
+            "risk",
+            "compliance",
+            "verification",
+            "documentation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "vendor-onboarding.csv",
+              "path": "data/insurance/procurement/vendor-onboarding.csv",
+              "downloadUrl": "/data/insurance/procurement/vendor-onboarding.csv",
+              "sizeBytes": 657
+            },
+            {
+              "format": "json",
+              "filename": "vendor-onboarding.json",
+              "path": "data/insurance/procurement/vendor-onboarding.json",
+              "downloadUrl": "/data/insurance/procurement/vendor-onboarding.json",
+              "sizeBytes": 2110
+            },
+            {
+              "format": "txt",
+              "filename": "vendor-onboarding.txt",
+              "path": "data/insurance/procurement/vendor-onboarding.txt",
+              "downloadUrl": "/data/insurance/procurement/vendor-onboarding.txt",
+              "sizeBytes": 344
+            },
+            {
+              "format": "docx",
+              "filename": "vendor-onboarding.docx",
+              "path": "data/insurance/procurement/vendor-onboarding.docx",
+              "downloadUrl": "/data/insurance/procurement/vendor-onboarding.docx",
+              "sizeBytes": 1137
+            },
+            {
+              "format": "pdf",
+              "filename": "vendor-onboarding.pdf",
+              "path": "data/insurance/procurement/vendor-onboarding.pdf",
+              "downloadUrl": "/data/insurance/procurement/vendor-onboarding.pdf",
+              "sizeBytes": 1145
+            }
+          ],
+          "columns": [
+            "vendor_id",
+            "name",
+            "category",
+            "risk",
+            "owner",
+            "onboarded_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "contract-mgmt",
+          "name": "Contract Management",
+          "description": "Renewal alerts + obligation tracking.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "procurement-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "contractai",
+            "monitoring",
+            "notification"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "contract-mgmt.csv",
+              "path": "data/insurance/procurement/contract-mgmt.csv",
+              "downloadUrl": "/data/insurance/procurement/contract-mgmt.csv",
+              "sizeBytes": 527
+            },
+            {
+              "format": "json",
+              "filename": "contract-mgmt.json",
+              "path": "data/insurance/procurement/contract-mgmt.json",
+              "downloadUrl": "/data/insurance/procurement/contract-mgmt.json",
+              "sizeBytes": 1986
+            },
+            {
+              "format": "txt",
+              "filename": "contract-mgmt.txt",
+              "path": "data/insurance/procurement/contract-mgmt.txt",
+              "downloadUrl": "/data/insurance/procurement/contract-mgmt.txt",
+              "sizeBytes": 332
+            },
+            {
+              "format": "docx",
+              "filename": "contract-mgmt.docx",
+              "path": "data/insurance/procurement/contract-mgmt.docx",
+              "downloadUrl": "/data/insurance/procurement/contract-mgmt.docx",
+              "sizeBytes": 1134
+            },
+            {
+              "format": "pdf",
+              "filename": "contract-mgmt.pdf",
+              "path": "data/insurance/procurement/contract-mgmt.pdf",
+              "downloadUrl": "/data/insurance/procurement/contract-mgmt.pdf",
+              "sizeBytes": 1134
+            }
+          ],
+          "columns": [
+            "contract_id",
+            "vendor",
+            "value",
+            "renewal_at",
+            "owner",
+            "status"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "vendor-performance",
+          "name": "Vendor Performance",
+          "description": "SLA + quality + cost scorecards.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "procurement-officer",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "performance",
+            "monitoring",
+            "reporting",
+            "benchmark"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "vendor-performance.csv",
+              "path": "data/insurance/procurement/vendor-performance.csv",
+              "downloadUrl": "/data/insurance/procurement/vendor-performance.csv",
+              "sizeBytes": 502
+            },
+            {
+              "format": "json",
+              "filename": "vendor-performance.json",
+              "path": "data/insurance/procurement/vendor-performance.json",
+              "downloadUrl": "/data/insurance/procurement/vendor-performance.json",
+              "sizeBytes": 1866
+            },
+            {
+              "format": "txt",
+              "filename": "vendor-performance.txt",
+              "path": "data/insurance/procurement/vendor-performance.txt",
+              "downloadUrl": "/data/insurance/procurement/vendor-performance.txt",
+              "sizeBytes": 335
+            },
+            {
+              "format": "pdf",
+              "filename": "vendor-performance.pdf",
+              "path": "data/insurance/procurement/vendor-performance.pdf",
+              "downloadUrl": "/data/insurance/procurement/vendor-performance.pdf",
+              "sizeBytes": 1129
+            }
+          ],
+          "columns": [
+            "vendor",
+            "period",
+            "sla_pct",
+            "quality",
+            "cost",
+            "score"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "data-analytics",
+      "name": "Data & Analytics",
+      "icon": "\ud83d\udcca",
+      "color": "#0891b2",
+      "priority": 18,
+      "description": "Data quality, governance, master data, reporting.",
+      "roi": "Decision quality uplift",
+      "aiCapabilities": [
+        "dataquality",
+        "datagovernance",
+        "datastewardship",
+        "metadata",
+        "lineage",
+        "masterdata",
+        "duplicate",
+        "datareconciliation",
+        "analytical",
+        "reporting",
+        "monitoring"
+      ],
+      "processes": [
+        {
+          "id": "dq-monitoring",
+          "name": "Data Quality Monitoring",
+          "description": "Per-domain DQ scoring + alerts.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "data-steward",
+              "verb": "owns"
+            },
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "dataquality",
+            "monitoring",
+            "anomaly",
+            "notification"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "dq-monitoring.csv",
+              "path": "data/insurance/data-analytics/dq-monitoring.csv",
+              "downloadUrl": "/data/insurance/data-analytics/dq-monitoring.csv",
+              "sizeBytes": 505
+            },
+            {
+              "format": "json",
+              "filename": "dq-monitoring.json",
+              "path": "data/insurance/data-analytics/dq-monitoring.json",
+              "downloadUrl": "/data/insurance/data-analytics/dq-monitoring.json",
+              "sizeBytes": 1917
+            },
+            {
+              "format": "txt",
+              "filename": "dq-monitoring.txt",
+              "path": "data/insurance/data-analytics/dq-monitoring.txt",
+              "downloadUrl": "/data/insurance/data-analytics/dq-monitoring.txt",
+              "sizeBytes": 327
+            },
+            {
+              "format": "pdf",
+              "filename": "dq-monitoring.pdf",
+              "path": "data/insurance/data-analytics/dq-monitoring.pdf",
+              "downloadUrl": "/data/insurance/data-analytics/dq-monitoring.pdf",
+              "sizeBytes": 1124
+            }
+          ],
+          "columns": [
+            "dataset",
+            "rule",
+            "pass_pct",
+            "anomalies",
+            "owner",
+            "as_of"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "mdm",
+          "name": "Master Data Mgmt",
+          "description": "Golden record + dedup + steward review.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "data-steward",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "masterdata",
+            "duplicate",
+            "datareconciliation",
+            "validation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "mdm.csv",
+              "path": "data/insurance/data-analytics/mdm.csv",
+              "downloadUrl": "/data/insurance/data-analytics/mdm.csv",
+              "sizeBytes": 571
+            },
+            {
+              "format": "json",
+              "filename": "mdm.json",
+              "path": "data/insurance/data-analytics/mdm.json",
+              "downloadUrl": "/data/insurance/data-analytics/mdm.json",
+              "sizeBytes": 2133
+            },
+            {
+              "format": "txt",
+              "filename": "mdm.txt",
+              "path": "data/insurance/data-analytics/mdm.txt",
+              "downloadUrl": "/data/insurance/data-analytics/mdm.txt",
+              "sizeBytes": 319
+            },
+            {
+              "format": "pdf",
+              "filename": "mdm.pdf",
+              "path": "data/insurance/data-analytics/mdm.pdf",
+              "downloadUrl": "/data/insurance/data-analytics/mdm.pdf",
+              "sizeBytes": 1132
+            }
+          ],
+          "columns": [
+            "entity_type",
+            "golden_id",
+            "sources",
+            "confidence",
+            "steward",
+            "updated_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "self-serve-bi",
+          "name": "Self-Serve BI",
+          "description": "Catalogued datasets + dashboards + narratives.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "data-steward",
+              "verb": "owns"
+            },
+            {
+              "role": "marketing-manager",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "analytical",
+            "reporting",
+            "knowledge",
+            "search"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "self-serve-bi.csv",
+              "path": "data/insurance/data-analytics/self-serve-bi.csv",
+              "downloadUrl": "/data/insurance/data-analytics/self-serve-bi.csv",
+              "sizeBytes": 494
+            },
+            {
+              "format": "json",
+              "filename": "self-serve-bi.json",
+              "path": "data/insurance/data-analytics/self-serve-bi.json",
+              "downloadUrl": "/data/insurance/data-analytics/self-serve-bi.json",
+              "sizeBytes": 1936
+            },
+            {
+              "format": "txt",
+              "filename": "self-serve-bi.txt",
+              "path": "data/insurance/data-analytics/self-serve-bi.txt",
+              "downloadUrl": "/data/insurance/data-analytics/self-serve-bi.txt",
+              "sizeBytes": 329
+            },
+            {
+              "format": "docx",
+              "filename": "self-serve-bi.docx",
+              "path": "data/insurance/data-analytics/self-serve-bi.docx",
+              "downloadUrl": "/data/insurance/data-analytics/self-serve-bi.docx",
+              "sizeBytes": 1133
+            },
+            {
+              "format": "pdf",
+              "filename": "self-serve-bi.pdf",
+              "path": "data/insurance/data-analytics/self-serve-bi.pdf",
+              "downloadUrl": "/data/insurance/data-analytics/self-serve-bi.pdf",
+              "sizeBytes": 1129
+            }
+          ],
+          "columns": [
+            "dataset",
+            "owner",
+            "rows",
+            "freshness_min",
+            "queries",
+            "as_of"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "ai-data-science",
+      "name": "AI / Data Science",
+      "icon": "\ud83e\udde0",
+      "color": "#6366f1",
+      "priority": 19,
+      "description": "Predictive, generative, agentic, multi-agent, RL, MLOps.",
+      "roi": "Cross-enterprise uplift",
+      "aiCapabilities": [
+        "predictive",
+        "generative",
+        "agentic",
+        "multiagent",
+        "rl",
+        "evaluation",
+        "benchmark",
+        "modelops",
+        "mlops",
+        "llmops",
+        "agentops",
+        "governance",
+        "monitoring",
+        "trust"
+      ],
+      "processes": [
+        {
+          "id": "model-development",
+          "name": "Model Development",
+          "description": "Experiment tracking + eval + reproducibility.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "data-scientist",
+              "verb": "owns"
+            },
+            {
+              "role": "ml-engineer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "predictive",
+            "evaluation",
+            "explainable",
+            "validation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "model-development.csv",
+              "path": "data/insurance/ai-data-science/model-development.csv",
+              "downloadUrl": "/data/insurance/ai-data-science/model-development.csv",
+              "sizeBytes": 545
+            },
+            {
+              "format": "json",
+              "filename": "model-development.json",
+              "path": "data/insurance/ai-data-science/model-development.json",
+              "downloadUrl": "/data/insurance/ai-data-science/model-development.json",
+              "sizeBytes": 2022
+            },
+            {
+              "format": "txt",
+              "filename": "model-development.txt",
+              "path": "data/insurance/ai-data-science/model-development.txt",
+              "downloadUrl": "/data/insurance/ai-data-science/model-development.txt",
+              "sizeBytes": 336
+            },
+            {
+              "format": "docx",
+              "filename": "model-development.docx",
+              "path": "data/insurance/ai-data-science/model-development.docx",
+              "downloadUrl": "/data/insurance/ai-data-science/model-development.docx",
+              "sizeBytes": 1131
+            },
+            {
+              "format": "pdf",
+              "filename": "model-development.pdf",
+              "path": "data/insurance/ai-data-science/model-development.pdf",
+              "downloadUrl": "/data/insurance/ai-data-science/model-development.pdf",
+              "sizeBytes": 1139
+            }
+          ],
+          "columns": [
+            "experiment_id",
+            "model",
+            "metric",
+            "value",
+            "owner",
+            "trained_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "model-deployment",
+          "name": "Model Deployment",
+          "description": "Canary + shadow + rollback.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "ml-engineer",
+              "verb": "owns"
+            },
+            {
+              "role": "sre",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "mlops",
+            "monitoring",
+            "selfhealing",
+            "reliability"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "model-deployment.csv",
+              "path": "data/insurance/ai-data-science/model-deployment.csv",
+              "downloadUrl": "/data/insurance/ai-data-science/model-deployment.csv",
+              "sizeBytes": 576
+            },
+            {
+              "format": "json",
+              "filename": "model-deployment.json",
+              "path": "data/insurance/ai-data-science/model-deployment.json",
+              "downloadUrl": "/data/insurance/ai-data-science/model-deployment.json",
+              "sizeBytes": 2102
+            },
+            {
+              "format": "txt",
+              "filename": "model-deployment.txt",
+              "path": "data/insurance/ai-data-science/model-deployment.txt",
+              "downloadUrl": "/data/insurance/ai-data-science/model-deployment.txt",
+              "sizeBytes": 302
+            },
+            {
+              "format": "pdf",
+              "filename": "model-deployment.pdf",
+              "path": "data/insurance/ai-data-science/model-deployment.pdf",
+              "downloadUrl": "/data/insurance/ai-data-science/model-deployment.pdf",
+              "sizeBytes": 1110
+            }
+          ],
+          "columns": [
+            "model",
+            "version",
+            "stage",
+            "traffic_pct",
+            "latency_ms",
+            "deployed_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "model-monitoring",
+          "name": "Model Monitoring",
+          "description": "Drift + performance + fairness in production.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "ml-engineer",
+              "verb": "owns"
+            },
+            {
+              "role": "ai-governance",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "monitoring",
+            "anomaly",
+            "fairness",
+            "trust",
+            "evaluation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "model-monitoring.csv",
+              "path": "data/insurance/ai-data-science/model-monitoring.csv",
+              "downloadUrl": "/data/insurance/ai-data-science/model-monitoring.csv",
+              "sizeBytes": 531
+            },
+            {
+              "format": "json",
+              "filename": "model-monitoring.json",
+              "path": "data/insurance/ai-data-science/model-monitoring.json",
+              "downloadUrl": "/data/insurance/ai-data-science/model-monitoring.json",
+              "sizeBytes": 1907
+            },
+            {
+              "format": "txt",
+              "filename": "model-monitoring.txt",
+              "path": "data/insurance/ai-data-science/model-monitoring.txt",
+              "downloadUrl": "/data/insurance/ai-data-science/model-monitoring.txt",
+              "sizeBytes": 335
+            },
+            {
+              "format": "pdf",
+              "filename": "model-monitoring.pdf",
+              "path": "data/insurance/ai-data-science/model-monitoring.pdf",
+              "downloadUrl": "/data/insurance/ai-data-science/model-monitoring.pdf",
+              "sizeBytes": 1128
+            }
+          ],
+          "columns": [
+            "model",
+            "metric",
+            "value",
+            "baseline",
+            "drift",
+            "as_of"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "it-ops",
+      "name": "IT Operations",
+      "icon": "\ud83d\udee0",
+      "color": "#0ea5e9",
+      "priority": 20,
+      "description": "AIOps, incident, observability, performance, capacity, FinOps.",
+      "roi": "MTTR + uptime gains",
+      "aiCapabilities": [
+        "aiops",
+        "incident",
+        "monitoring",
+        "observability",
+        "performance",
+        "capacityplanning",
+        "reliability",
+        "selfhealing",
+        "recovery",
+        "automation",
+        "agentic",
+        "finops"
+      ],
+      "processes": [
+        {
+          "id": "incident-mgmt",
+          "name": "Incident Management",
+          "description": "Detect \u2192 triage \u2192 resolve \u2192 post-mortem.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "sre",
+              "verb": "owns"
+            },
+            {
+              "role": "ciso-team",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "incident",
+            "anomaly",
+            "selfhealing",
+            "agentic",
+            "notification"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "incident-mgmt.csv",
+              "path": "data/insurance/it-ops/incident-mgmt.csv",
+              "downloadUrl": "/data/insurance/it-ops/incident-mgmt.csv",
+              "sizeBytes": 500
+            },
+            {
+              "format": "json",
+              "filename": "incident-mgmt.json",
+              "path": "data/insurance/it-ops/incident-mgmt.json",
+              "downloadUrl": "/data/insurance/it-ops/incident-mgmt.json",
+              "sizeBytes": 1844
+            },
+            {
+              "format": "txt",
+              "filename": "incident-mgmt.txt",
+              "path": "data/insurance/it-ops/incident-mgmt.txt",
+              "downloadUrl": "/data/insurance/it-ops/incident-mgmt.txt",
+              "sizeBytes": 328
+            },
+            {
+              "format": "docx",
+              "filename": "incident-mgmt.docx",
+              "path": "data/insurance/it-ops/incident-mgmt.docx",
+              "downloadUrl": "/data/insurance/it-ops/incident-mgmt.docx",
+              "sizeBytes": 1130
+            },
+            {
+              "format": "pdf",
+              "filename": "incident-mgmt.pdf",
+              "path": "data/insurance/it-ops/incident-mgmt.pdf",
+              "downloadUrl": "/data/insurance/it-ops/incident-mgmt.pdf",
+              "sizeBytes": 1113
+            }
+          ],
+          "columns": [
+            "inc_id",
+            "severity",
+            "service",
+            "owner",
+            "ttf",
+            "ttr"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "capacity-planning",
+          "name": "Capacity Planning",
+          "description": "Forecast + buffer + cost view.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "sre",
+              "verb": "owns"
+            },
+            {
+              "role": "finance-controller",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "capacityplanning",
+            "forecasting",
+            "finops",
+            "scenario"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "capacity-planning.csv",
+              "path": "data/insurance/it-ops/capacity-planning.csv",
+              "downloadUrl": "/data/insurance/it-ops/capacity-planning.csv",
+              "sizeBytes": 538
+            },
+            {
+              "format": "json",
+              "filename": "capacity-planning.json",
+              "path": "data/insurance/it-ops/capacity-planning.json",
+              "downloadUrl": "/data/insurance/it-ops/capacity-planning.json",
+              "sizeBytes": 1976
+            },
+            {
+              "format": "txt",
+              "filename": "capacity-planning.txt",
+              "path": "data/insurance/it-ops/capacity-planning.txt",
+              "downloadUrl": "/data/insurance/it-ops/capacity-planning.txt",
+              "sizeBytes": 313
+            },
+            {
+              "format": "pdf",
+              "filename": "capacity-planning.pdf",
+              "path": "data/insurance/it-ops/capacity-planning.pdf",
+              "downloadUrl": "/data/insurance/it-ops/capacity-planning.pdf",
+              "sizeBytes": 1113
+            }
+          ],
+          "columns": [
+            "service",
+            "metric",
+            "current",
+            "forecast",
+            "headroom",
+            "as_of"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "observability",
+          "name": "Observability",
+          "description": "Logs + metrics + traces + RUM.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "sre",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "observability",
+            "monitoring",
+            "performance"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "observability.csv",
+              "path": "data/insurance/it-ops/observability.csv",
+              "downloadUrl": "/data/insurance/it-ops/observability.csv",
+              "sizeBytes": 555
+            },
+            {
+              "format": "json",
+              "filename": "observability.json",
+              "path": "data/insurance/it-ops/observability.json",
+              "downloadUrl": "/data/insurance/it-ops/observability.json",
+              "sizeBytes": 2009
+            },
+            {
+              "format": "txt",
+              "filename": "observability.txt",
+              "path": "data/insurance/it-ops/observability.txt",
+              "downloadUrl": "/data/insurance/it-ops/observability.txt",
+              "sizeBytes": 280
+            },
+            {
+              "format": "pdf",
+              "filename": "observability.pdf",
+              "path": "data/insurance/it-ops/observability.pdf",
+              "downloadUrl": "/data/insurance/it-ops/observability.pdf",
+              "sizeBytes": 1082
+            }
+          ],
+          "columns": [
+            "service",
+            "p95_ms",
+            "errors",
+            "rps",
+            "saturation",
+            "captured_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity",
+      "name": "Cybersecurity",
+      "icon": "\ud83d\udd12",
+      "color": "#9333ea",
+      "priority": 21,
+      "description": "Threat detection, identity, access, zero-trust, privacy, DLP.",
+      "roi": "Breach + penalty avoidance",
+      "aiCapabilities": [
+        "secure",
+        "threatdetection",
+        "identity",
+        "accesscontrol",
+        "zerotrust",
+        "privacy",
+        "pii",
+        "dlp",
+        "incident",
+        "governance",
+        "monitoring",
+        "audit"
+      ],
+      "processes": [
+        {
+          "id": "threat-detection",
+          "name": "Threat Detection",
+          "description": "SOC alert pipeline + AI triage.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "ciso-team",
+              "verb": "owns"
+            },
+            {
+              "role": "sre",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "threatdetection",
+            "anomaly",
+            "behavioral",
+            "agentic"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "threat-detection.csv",
+              "path": "data/insurance/cybersecurity/threat-detection.csv",
+              "downloadUrl": "/data/insurance/cybersecurity/threat-detection.csv",
+              "sizeBytes": 558
+            },
+            {
+              "format": "json",
+              "filename": "threat-detection.json",
+              "path": "data/insurance/cybersecurity/threat-detection.json",
+              "downloadUrl": "/data/insurance/cybersecurity/threat-detection.json",
+              "sizeBytes": 1992
+            },
+            {
+              "format": "txt",
+              "filename": "threat-detection.txt",
+              "path": "data/insurance/cybersecurity/threat-detection.txt",
+              "downloadUrl": "/data/insurance/cybersecurity/threat-detection.txt",
+              "sizeBytes": 302
+            },
+            {
+              "format": "pdf",
+              "filename": "threat-detection.pdf",
+              "path": "data/insurance/cybersecurity/threat-detection.pdf",
+              "downloadUrl": "/data/insurance/cybersecurity/threat-detection.pdf",
+              "sizeBytes": 1101
+            }
+          ],
+          "columns": [
+            "alert_id",
+            "rule",
+            "asset",
+            "severity",
+            "status",
+            "raised_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "identity-mgmt",
+          "name": "Identity & Access",
+          "description": "Adaptive auth + privileged access + reviews.",
+          "channels": [
+            "B2E",
+            "B2B"
+          ],
+          "stakeholders": [
+            {
+              "role": "ciso-team",
+              "verb": "owns"
+            },
+            {
+              "role": "vendor",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "identity",
+            "accesscontrol",
+            "zerotrust",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "identity-mgmt.csv",
+              "path": "data/insurance/cybersecurity/identity-mgmt.csv",
+              "downloadUrl": "/data/insurance/cybersecurity/identity-mgmt.csv",
+              "sizeBytes": 479
+            },
+            {
+              "format": "json",
+              "filename": "identity-mgmt.json",
+              "path": "data/insurance/cybersecurity/identity-mgmt.json",
+              "downloadUrl": "/data/insurance/cybersecurity/identity-mgmt.json",
+              "sizeBytes": 1860
+            },
+            {
+              "format": "txt",
+              "filename": "identity-mgmt.txt",
+              "path": "data/insurance/cybersecurity/identity-mgmt.txt",
+              "downloadUrl": "/data/insurance/cybersecurity/identity-mgmt.txt",
+              "sizeBytes": 320
+            },
+            {
+              "format": "docx",
+              "filename": "identity-mgmt.docx",
+              "path": "data/insurance/cybersecurity/identity-mgmt.docx",
+              "downloadUrl": "/data/insurance/cybersecurity/identity-mgmt.docx",
+              "sizeBytes": 1128
+            },
+            {
+              "format": "pdf",
+              "filename": "identity-mgmt.pdf",
+              "path": "data/insurance/cybersecurity/identity-mgmt.pdf",
+              "downloadUrl": "/data/insurance/cybersecurity/identity-mgmt.pdf",
+              "sizeBytes": 1114
+            }
+          ],
+          "columns": [
+            "identity",
+            "role",
+            "risk",
+            "mfa",
+            "last_review",
+            "owner"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "privacy-dlp",
+          "name": "Privacy & DLP",
+          "description": "PII discovery + redaction + DLP enforcement.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "ciso-team",
+              "verb": "owns"
+            },
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "privacy",
+            "pii",
+            "dlp",
+            "documentation"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "privacy-dlp.csv",
+              "path": "data/insurance/cybersecurity/privacy-dlp.csv",
+              "downloadUrl": "/data/insurance/cybersecurity/privacy-dlp.csv",
+              "sizeBytes": 527
+            },
+            {
+              "format": "json",
+              "filename": "privacy-dlp.json",
+              "path": "data/insurance/cybersecurity/privacy-dlp.json",
+              "downloadUrl": "/data/insurance/cybersecurity/privacy-dlp.json",
+              "sizeBytes": 1966
+            },
+            {
+              "format": "txt",
+              "filename": "privacy-dlp.txt",
+              "path": "data/insurance/cybersecurity/privacy-dlp.txt",
+              "downloadUrl": "/data/insurance/cybersecurity/privacy-dlp.txt",
+              "sizeBytes": 314
+            },
+            {
+              "format": "pdf",
+              "filename": "privacy-dlp.pdf",
+              "path": "data/insurance/cybersecurity/privacy-dlp.pdf",
+              "downloadUrl": "/data/insurance/cybersecurity/privacy-dlp.pdf",
+              "sizeBytes": 1114
+            }
+          ],
+          "columns": [
+            "scan_id",
+            "asset",
+            "pii_types",
+            "leaks",
+            "owner",
+            "scanned_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    },
+    {
+      "id": "ai-governance-office",
+      "name": "Enterprise AI Governance Office",
+      "icon": "\ud83c\udfdb",
+      "color": "#0f172a",
+      "priority": 22,
+      "description": "AI policy + risk + evaluation + responsible + ethical.",
+      "roi": "AI risk + trust gains",
+      "aiCapabilities": [
+        "governance",
+        "responsible",
+        "ethical",
+        "trust",
+        "fairness",
+        "explainable",
+        "audit",
+        "compliance",
+        "evaluation",
+        "benchmark",
+        "risk",
+        "monitoring",
+        "policy",
+        "validation"
+      ],
+      "processes": [
+        {
+          "id": "model-risk-review",
+          "name": "Model Risk Review",
+          "description": "Pre-deploy risk approval + sign-off.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "ai-governance",
+              "verb": "owns"
+            },
+            {
+              "role": "risk-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "risk",
+            "governance",
+            "explainable",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "model-risk-review.csv",
+              "path": "data/insurance/ai-governance-office/model-risk-review.csv",
+              "downloadUrl": "/data/insurance/ai-governance-office/model-risk-review.csv",
+              "sizeBytes": 563
+            },
+            {
+              "format": "json",
+              "filename": "model-risk-review.json",
+              "path": "data/insurance/ai-governance-office/model-risk-review.json",
+              "downloadUrl": "/data/insurance/ai-governance-office/model-risk-review.json",
+              "sizeBytes": 2005
+            },
+            {
+              "format": "txt",
+              "filename": "model-risk-review.txt",
+              "path": "data/insurance/ai-governance-office/model-risk-review.txt",
+              "downloadUrl": "/data/insurance/ai-governance-office/model-risk-review.txt",
+              "sizeBytes": 330
+            },
+            {
+              "format": "docx",
+              "filename": "model-risk-review.docx",
+              "path": "data/insurance/ai-governance-office/model-risk-review.docx",
+              "downloadUrl": "/data/insurance/ai-governance-office/model-risk-review.docx",
+              "sizeBytes": 1130
+            },
+            {
+              "format": "pdf",
+              "filename": "model-risk-review.pdf",
+              "path": "data/insurance/ai-governance-office/model-risk-review.pdf",
+              "downloadUrl": "/data/insurance/ai-governance-office/model-risk-review.pdf",
+              "sizeBytes": 1129
+            }
+          ],
+          "columns": [
+            "model_id",
+            "tier",
+            "risk",
+            "approver",
+            "status",
+            "decided_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "fairness-audit",
+          "name": "Fairness Audit",
+          "description": "Bias scan across protected attributes.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "ai-governance",
+              "verb": "owns"
+            },
+            {
+              "role": "compliance-officer",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "fairness",
+            "explainable",
+            "audit",
+            "responsible"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "fairness-audit.csv",
+              "path": "data/insurance/ai-governance-office/fairness-audit.csv",
+              "downloadUrl": "/data/insurance/ai-governance-office/fairness-audit.csv",
+              "sizeBytes": 574
+            },
+            {
+              "format": "json",
+              "filename": "fairness-audit.json",
+              "path": "data/insurance/ai-governance-office/fairness-audit.json",
+              "downloadUrl": "/data/insurance/ai-governance-office/fairness-audit.json",
+              "sizeBytes": 2083
+            },
+            {
+              "format": "txt",
+              "filename": "fairness-audit.txt",
+              "path": "data/insurance/ai-governance-office/fairness-audit.txt",
+              "downloadUrl": "/data/insurance/ai-governance-office/fairness-audit.txt",
+              "sizeBytes": 340
+            },
+            {
+              "format": "pdf",
+              "filename": "fairness-audit.pdf",
+              "path": "data/insurance/ai-governance-office/fairness-audit.pdf",
+              "downloadUrl": "/data/insurance/ai-governance-office/fairness-audit.pdf",
+              "sizeBytes": 1146
+            }
+          ],
+          "columns": [
+            "model_id",
+            "attribute",
+            "metric",
+            "value",
+            "threshold",
+            "audited_at"
+          ],
+          "subProcesses": []
+        },
+        {
+          "id": "policy-enforcement",
+          "name": "Policy Enforcement",
+          "description": "Real-time guardrail + audit-row generation.",
+          "channels": [
+            "B2E"
+          ],
+          "stakeholders": [
+            {
+              "role": "ai-governance",
+              "verb": "owns"
+            }
+          ],
+          "aiCapabilities": [
+            "policy",
+            "governance",
+            "monitoring",
+            "audit"
+          ],
+          "dataSamples": [
+            {
+              "format": "csv",
+              "filename": "policy-enforcement.csv",
+              "path": "data/insurance/ai-governance-office/policy-enforcement.csv",
+              "downloadUrl": "/data/insurance/ai-governance-office/policy-enforcement.csv",
+              "sizeBytes": 556
+            },
+            {
+              "format": "json",
+              "filename": "policy-enforcement.json",
+              "path": "data/insurance/ai-governance-office/policy-enforcement.json",
+              "downloadUrl": "/data/insurance/ai-governance-office/policy-enforcement.json",
+              "sizeBytes": 2039
+            },
+            {
+              "format": "txt",
+              "filename": "policy-enforcement.txt",
+              "path": "data/insurance/ai-governance-office/policy-enforcement.txt",
+              "downloadUrl": "/data/insurance/ai-governance-office/policy-enforcement.txt",
+              "sizeBytes": 325
+            },
+            {
+              "format": "pdf",
+              "filename": "policy-enforcement.pdf",
+              "path": "data/insurance/ai-governance-office/policy-enforcement.pdf",
+              "downloadUrl": "/data/insurance/ai-governance-office/policy-enforcement.pdf",
+              "sizeBytes": 1128
+            }
+          ],
+          "columns": [
+            "event_id",
+            "policy",
+            "actor",
+            "decision",
+            "reason",
+            "captured_at"
+          ],
+          "subProcesses": []
+        }
+      ]
+    }
+  ]
+}

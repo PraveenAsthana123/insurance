@@ -1,0 +1,38 @@
+--- a/jobs/logs/codex_approval_cron.log
++++ b/jobs/logs/codex_approval_cron.log
+@@ -1,20 +1,3 @@
+ No Archon workflow runs found.
+-No Archon workflow runs found.
+-Traceback (most recent call last):
+-  File "/mnt/deepa/insur_project/scripts/archon_auto_approve_safe.py", line 198, in <module>
+-    raise SystemExit(main())
+-                     ~~~~^^
+-  File "/mnt/deepa/insur_project/scripts/archon_auto_approve_safe.py", line 191, in main
+-    scan_once(approve=args.approve)
+-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+-  File "/mnt/deepa/insur_project/scripts/archon_auto_approve_safe.py", line 156, in scan_once
+-    status = _status()
+-  File "/mnt/deepa/insur_project/scripts/archon_auto_approve_safe.py", line 65, in _status
+-    proc = subprocess.run(
+-        ["archon", "workflow", "status", "--json"],
+-    ...<4 lines>...
+-        check=False,
+-    )
+-  File "/home/praveen/miniconda3/lib/python3.13/subprocess.py", line 554, in run
+-    with Popen(*popenargs, **kwargs) as process:
+-         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+-  File "/home/praveen/miniconda3/lib/python3.13/subprocess.py", line 1039, in __init__
+-    self._execute_child(args, executable, preexec_fn, close_fds,
+-    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-                        pass_fds, cwd, env,
+-                        ^^^^^^^^^^^^^^^^^^^
+-    ...<5 lines>...
+-                        gid, gids, uid, umask,
+-                        ^^^^^^^^^^^^^^^^^^^^^^
+-                        start_new_session, process_group)
+-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "/home/praveen/miniconda3/lib/python3.13/subprocess.py", line 1972, in _execute_child
+-    raise child_exception_type(errno_num, err_msg, err_filename)
+-FileNotFoundError: [Errno 2] No such file or directory: 'archon'
++ERROR: archon not found. Please ensure it is installed and accessible in the PATH.
+```

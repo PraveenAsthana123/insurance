@@ -1,0 +1,999 @@
+{
+  "_generated": "2026-06-10T22:00:01.596336+00:00",
+  "capabilities": [
+    {
+      "id": "predictive",
+      "name": "Predictive AI",
+      "family": "Foundational",
+      "icon": "\ud83d\udd2e",
+      "description": "Forecasts + propensity scoring."
+    },
+    {
+      "id": "generative",
+      "name": "Generative AI",
+      "family": "Foundational",
+      "icon": "\u2728",
+      "description": "LLM/diffusion content generation."
+    },
+    {
+      "id": "conversational",
+      "name": "Conversational AI",
+      "family": "Foundational",
+      "icon": "\ud83d\udcac",
+      "description": "Multi-turn dialogue agents."
+    },
+    {
+      "id": "voice",
+      "name": "Voice AI",
+      "family": "Foundational",
+      "icon": "\ud83c\udf99\ufe0f",
+      "description": "ASR + TTS + voice biometrics."
+    },
+    {
+      "id": "multimodal",
+      "name": "Multimodal AI",
+      "family": "Foundational",
+      "icon": "\ud83c\udf9b\ufe0f",
+      "description": "Text + image + voice fusion."
+    },
+    {
+      "id": "vision",
+      "name": "Vision AI",
+      "family": "Foundational",
+      "icon": "\ud83d\udc41",
+      "description": "Image classification + object detection."
+    },
+    {
+      "id": "video",
+      "name": "Video AI",
+      "family": "Foundational",
+      "icon": "\ud83c\udfac",
+      "description": "Video analytics + scene parsing."
+    },
+    {
+      "id": "ocr",
+      "name": "OCR AI",
+      "family": "Foundational",
+      "icon": "\ud83d\udcc4",
+      "description": "Text extraction from images + scans."
+    },
+    {
+      "id": "nlp",
+      "name": "NLP AI",
+      "family": "Foundational",
+      "icon": "\ud83c\udd70",
+      "description": "Tokenisation, NER, classification, summarisation."
+    },
+    {
+      "id": "decision",
+      "name": "Decision Intelligence",
+      "family": "Decision",
+      "icon": "\ud83e\udded",
+      "description": "Rule+ML+HITL decisioning layer."
+    },
+    {
+      "id": "recommendation",
+      "name": "Recommendation AI",
+      "family": "Decision",
+      "icon": "\ud83c\udfaf",
+      "description": "Personalised offer / next-best-action."
+    },
+    {
+      "id": "nextbestaction",
+      "name": "Next-Best-Action AI",
+      "family": "Decision",
+      "icon": "\u27a1\ufe0f",
+      "description": "Real-time best follow-up suggestion."
+    },
+    {
+      "id": "risk",
+      "name": "Risk AI",
+      "family": "Decision",
+      "icon": "\u26a0\ufe0f",
+      "description": "Risk scoring + exposure analytics."
+    },
+    {
+      "id": "pricing",
+      "name": "Pricing AI",
+      "family": "Decision",
+      "icon": "\ud83d\udcb2",
+      "description": "Premium / quote pricing models."
+    },
+    {
+      "id": "underwriting",
+      "name": "Underwriting AI",
+      "family": "Decision",
+      "icon": "\ud83d\udccb",
+      "description": "Risk acceptance + tier assignment."
+    },
+    {
+      "id": "rag",
+      "name": "RAG AI",
+      "family": "Reasoning",
+      "icon": "\ud83d\udcda",
+      "description": "Retrieval-augmented generation."
+    },
+    {
+      "id": "knowledge",
+      "name": "Knowledge AI",
+      "family": "Reasoning",
+      "icon": "\ud83e\udde0",
+      "description": "Structured + curated knowledge access."
+    },
+    {
+      "id": "knowledgegraph",
+      "name": "Knowledge Graph AI",
+      "family": "Reasoning",
+      "icon": "\ud83d\udd78",
+      "description": "Entity + relation reasoning."
+    },
+    {
+      "id": "search",
+      "name": "Search AI",
+      "family": "Reasoning",
+      "icon": "\ud83d\udd0e",
+      "description": "Semantic + hybrid search."
+    },
+    {
+      "id": "document",
+      "name": "Document AI",
+      "family": "Reasoning",
+      "icon": "\ud83d\udcd1",
+      "description": "Layout-aware document understanding."
+    },
+    {
+      "id": "agentic",
+      "name": "Agentic AI",
+      "family": "Reasoning",
+      "icon": "\ud83e\udd16",
+      "description": "Plan\u2192tool\u2192act autonomous workflows."
+    },
+    {
+      "id": "multiagent",
+      "name": "Multi-Agent AI",
+      "family": "Reasoning",
+      "icon": "\ud83d\udc1d",
+      "description": "Collaborating specialised agents."
+    },
+    {
+      "id": "process",
+      "name": "Process AI",
+      "family": "Operations",
+      "icon": "\ud83e\udde9",
+      "description": "Process mining + orchestration."
+    },
+    {
+      "id": "workflow",
+      "name": "Workflow AI",
+      "family": "Operations",
+      "icon": "\ud83e\udea2",
+      "description": "Stateful long-running workflows."
+    },
+    {
+      "id": "automation",
+      "name": "Automation AI",
+      "family": "Operations",
+      "icon": "\u2699\ufe0f",
+      "description": "RPA + intelligent automation."
+    },
+    {
+      "id": "reconciliation",
+      "name": "Reconciliation AI",
+      "family": "Operations",
+      "icon": "\ud83e\uddfe",
+      "description": "Two-/three-way matching + break detection."
+    },
+    {
+      "id": "notification",
+      "name": "Notification AI",
+      "family": "Operations",
+      "icon": "\ud83d\udd14",
+      "description": "Smart routing + throttling of alerts."
+    },
+    {
+      "id": "communication",
+      "name": "Communication AI",
+      "family": "Operations",
+      "icon": "\ud83d\udce8",
+      "description": "Outbound email / SMS / push generation."
+    },
+    {
+      "id": "meeting",
+      "name": "Meeting AI",
+      "family": "Operations",
+      "icon": "\ud83d\udcc5",
+      "description": "Transcripts + summaries + action items."
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation AI",
+      "family": "Operations",
+      "icon": "\ud83d\udcdd",
+      "description": "Auto-doc generation + sidecar refresh."
+    },
+    {
+      "id": "reporting",
+      "name": "Reporting AI",
+      "family": "Operations",
+      "icon": "\ud83d\udcca",
+      "description": "Auto-build dashboards + narratives."
+    },
+    {
+      "id": "cron",
+      "name": "Cron AI",
+      "family": "Operations",
+      "icon": "\u23f0",
+      "description": "Self-tuning scheduled job orchestration."
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring AI",
+      "family": "Operations",
+      "icon": "\ud83d\udcc8",
+      "description": "Service + KPI monitoring."
+    },
+    {
+      "id": "incident",
+      "name": "Incident AI",
+      "family": "Operations",
+      "icon": "\ud83d\ude92",
+      "description": "Detection + triage + on-call routing."
+    },
+    {
+      "id": "aiops",
+      "name": "AIOps",
+      "family": "Operations",
+      "icon": "\ud83d\udee0",
+      "description": "AI-assisted IT operations."
+    },
+    {
+      "id": "governance",
+      "name": "Governance AI",
+      "family": "Governance",
+      "icon": "\ud83c\udfdb",
+      "description": "AI policy + change-mgmt + risk register."
+    },
+    {
+      "id": "responsible",
+      "name": "Responsible AI",
+      "family": "Governance",
+      "icon": "\ud83e\udd1d",
+      "description": "Stakeholder-aware design + review."
+    },
+    {
+      "id": "ethical",
+      "name": "Ethical AI",
+      "family": "Governance",
+      "icon": "\u2696\ufe0f",
+      "description": "Ethics review + redlines."
+    },
+    {
+      "id": "fairness",
+      "name": "Fairness AI",
+      "family": "Governance",
+      "icon": "\ud83d\udcd0",
+      "description": "Bias scans + parity gates."
+    },
+    {
+      "id": "explainable",
+      "name": "Explainable AI",
+      "family": "Governance",
+      "icon": "\ud83d\udd0d",
+      "description": "SHAP / LIME / counterfactual."
+    },
+    {
+      "id": "trust",
+      "name": "Trust AI",
+      "family": "Governance",
+      "icon": "\ud83d\udee1",
+      "description": "Trust signals + provenance + watermarking."
+    },
+    {
+      "id": "compliance",
+      "name": "Compliance AI",
+      "family": "Governance",
+      "icon": "\u2705",
+      "description": "Regulatory rule mapping + filing checks."
+    },
+    {
+      "id": "audit",
+      "name": "Audit AI",
+      "family": "Governance",
+      "icon": "\ud83d\uddc2",
+      "description": "Audit-row generation + trace linkage."
+    },
+    {
+      "id": "validation",
+      "name": "Validation AI",
+      "family": "Governance",
+      "icon": "\ud83d\udfe2",
+      "description": "Schema + business-rule validation."
+    },
+    {
+      "id": "verification",
+      "name": "Verification AI",
+      "family": "Governance",
+      "icon": "\u2714\ufe0f",
+      "description": "Identity / document / fact verification."
+    },
+    {
+      "id": "policy",
+      "name": "Policy AI",
+      "family": "Governance",
+      "icon": "\ud83d\udcdc",
+      "description": "Policy text drafting + diff."
+    },
+    {
+      "id": "secure",
+      "name": "Secure AI",
+      "family": "Governance",
+      "icon": "\ud83d\udd12",
+      "description": "Threat-aware secure development."
+    },
+    {
+      "id": "privacy",
+      "name": "Privacy AI",
+      "family": "Governance",
+      "icon": "\ud83d\udd76",
+      "description": "Privacy-preserving processing."
+    },
+    {
+      "id": "pii",
+      "name": "PII AI",
+      "family": "Governance",
+      "icon": "\ud83d\udc64",
+      "description": "PII detection + redaction."
+    },
+    {
+      "id": "dlp",
+      "name": "DLP AI",
+      "family": "Governance",
+      "icon": "\ud83d\udeab",
+      "description": "Data loss prevention scanning."
+    },
+    {
+      "id": "evaluation",
+      "name": "Evaluation AI",
+      "family": "Quality",
+      "icon": "\ud83d\udccf",
+      "description": "Eval harness + golden datasets."
+    },
+    {
+      "id": "benchmark",
+      "name": "Benchmark AI",
+      "family": "Quality",
+      "icon": "\ud83c\udfc1",
+      "description": "Continuous benchmark suites."
+    },
+    {
+      "id": "performance",
+      "name": "Performance AI",
+      "family": "Quality",
+      "icon": "\u26a1",
+      "description": "Latency / throughput / cost tracking."
+    },
+    {
+      "id": "quality",
+      "name": "Quality AI",
+      "family": "Quality",
+      "icon": "\ud83d\udc8e",
+      "description": "Output quality monitoring."
+    },
+    {
+      "id": "sentiment",
+      "name": "Sentiment AI",
+      "family": "Quality",
+      "icon": "\ud83d\ude42",
+      "description": "Sentiment + emotion analysis."
+    },
+    {
+      "id": "anomaly",
+      "name": "Anomaly Detection AI",
+      "family": "Quality",
+      "icon": "\ud83d\udea8",
+      "description": "Outlier + change-point detection."
+    },
+    {
+      "id": "behavioral",
+      "name": "Behavioral AI",
+      "family": "Quality",
+      "icon": "\ud83e\uddec",
+      "description": "User / entity behaviour analytics."
+    },
+    {
+      "id": "networkanalytics",
+      "name": "Network Analytics AI",
+      "family": "Quality",
+      "icon": "\ud83c\udf10",
+      "description": "Network / link analysis."
+    },
+    {
+      "id": "graph",
+      "name": "Graph AI",
+      "family": "Quality",
+      "icon": "\ud83d\udd17",
+      "description": "Graph algorithms + GNN reasoning."
+    },
+    {
+      "id": "product",
+      "name": "Product AI",
+      "family": "Domain",
+      "icon": "\ud83e\uddea",
+      "description": "Product design + lifecycle analytics."
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing AI",
+      "family": "Domain",
+      "icon": "\ud83d\udce3",
+      "description": "Campaign + content + attribution."
+    },
+    {
+      "id": "customer360",
+      "name": "Customer 360 AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf1f",
+      "description": "Unified customer profile."
+    },
+    {
+      "id": "segmentation",
+      "name": "Segmentation AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf9a",
+      "description": "Behavioural + demographic segmentation."
+    },
+    {
+      "id": "campaign",
+      "name": "Campaign AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfaa",
+      "description": "Campaign planning + optimisation."
+    },
+    {
+      "id": "churn",
+      "name": "Churn AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcc9",
+      "description": "Churn prediction + intervention."
+    },
+    {
+      "id": "retention",
+      "name": "Retention AI",
+      "family": "Domain",
+      "icon": "\ud83e\ude9d",
+      "description": "Retention treatments."
+    },
+    {
+      "id": "crosssell",
+      "name": "Cross-Sell AI",
+      "family": "Domain",
+      "icon": "\ud83d\udd04",
+      "description": "Cross-product opportunity scoring."
+    },
+    {
+      "id": "upsell",
+      "name": "Upsell AI",
+      "family": "Domain",
+      "icon": "\u2b06\ufe0f",
+      "description": "Upgrade opportunity scoring."
+    },
+    {
+      "id": "personalization",
+      "name": "Personalization AI",
+      "family": "Domain",
+      "icon": "\ud83e\uddd1\u200d\ud83c\udfa8",
+      "description": "Personalised UX + offers."
+    },
+    {
+      "id": "content",
+      "name": "Content AI",
+      "family": "Domain",
+      "icon": "\u270d\ufe0f",
+      "description": "Content generation + ranking."
+    },
+    {
+      "id": "socialmedia",
+      "name": "Social Media AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcf1",
+      "description": "Social signal analytics."
+    },
+    {
+      "id": "sales",
+      "name": "Sales AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcbc",
+      "description": "Sales pipeline + forecasting."
+    },
+    {
+      "id": "quote",
+      "name": "Quote AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcb1",
+      "description": "Quote generation + pricing."
+    },
+    {
+      "id": "proposal",
+      "name": "Proposal AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcc3",
+      "description": "Proposal drafting + tracking."
+    },
+    {
+      "id": "crm",
+      "name": "CRM AI",
+      "family": "Domain",
+      "icon": "\ud83d\udc65",
+      "description": "CRM enrichment + automation."
+    },
+    {
+      "id": "customerintel",
+      "name": "Customer Intelligence AI",
+      "family": "Domain",
+      "icon": "\ud83d\udd2d",
+      "description": "Customer intent + behaviour insights."
+    },
+    {
+      "id": "claims",
+      "name": "Claims AI",
+      "family": "Domain",
+      "icon": "\ud83e\uddfe",
+      "description": "Claims triage + settlement automation."
+    },
+    {
+      "id": "fnol",
+      "name": "FNOL AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcde",
+      "description": "First notice of loss capture."
+    },
+    {
+      "id": "investigation",
+      "name": "Investigation AI",
+      "family": "Domain",
+      "icon": "\ud83d\udd75",
+      "description": "SIU + fraud investigation workflows."
+    },
+    {
+      "id": "siu",
+      "name": "SIU AI",
+      "family": "Domain",
+      "icon": "\ud83d\ude93",
+      "description": "Special Investigation Unit tooling."
+    },
+    {
+      "id": "fraud",
+      "name": "Fraud AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfad",
+      "description": "Fraud detection + scoring."
+    },
+    {
+      "id": "actuarial",
+      "name": "Actuarial AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcd0",
+      "description": "Actuarial modelling + reserving."
+    },
+    {
+      "id": "reserving",
+      "name": "Reserving AI",
+      "family": "Domain",
+      "icon": "\ud83d\uddc4",
+      "description": "IBNR + loss reserving."
+    },
+    {
+      "id": "forecasting",
+      "name": "Forecasting AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcc8",
+      "description": "Time-series + scenario forecasting."
+    },
+    {
+      "id": "reinsurance",
+      "name": "Reinsurance AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf10",
+      "description": "Treaty + facultative analytics."
+    },
+    {
+      "id": "catastrophe",
+      "name": "Catastrophe AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf2a",
+      "description": "Cat modelling + accumulation."
+    },
+    {
+      "id": "exposure",
+      "name": "Exposure AI",
+      "family": "Domain",
+      "icon": "\ud83d\uddfa",
+      "description": "Exposure aggregation + concentration."
+    },
+    {
+      "id": "billing",
+      "name": "Billing AI",
+      "family": "Domain",
+      "icon": "\ud83e\uddee",
+      "description": "Premium billing automation."
+    },
+    {
+      "id": "payment",
+      "name": "Payment AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcb3",
+      "description": "Payment orchestration + fraud."
+    },
+    {
+      "id": "collection",
+      "name": "Collection AI",
+      "family": "Domain",
+      "icon": "\ud83d\udce5",
+      "description": "Dunning + collections strategy."
+    },
+    {
+      "id": "translation",
+      "name": "Translation AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf0d",
+      "description": "Multilingual translation + localisation."
+    },
+    {
+      "id": "contractai",
+      "name": "Contract AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcdc",
+      "description": "Contract parsing + clause analytics."
+    },
+    {
+      "id": "vendor",
+      "name": "Vendor AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfe2",
+      "description": "Vendor scoring + performance."
+    },
+    {
+      "id": "procurement",
+      "name": "Procurement AI",
+      "family": "Domain",
+      "icon": "\ud83d\uded2",
+      "description": "Procurement + spend analytics."
+    },
+    {
+      "id": "legal",
+      "name": "Legal AI",
+      "family": "Domain",
+      "icon": "\u2696\ufe0f",
+      "description": "Legal research + drafting assist."
+    },
+    {
+      "id": "litigation",
+      "name": "Litigation AI",
+      "family": "Domain",
+      "icon": "\ud83e\uddd1\u200d\u2696\ufe0f",
+      "description": "Litigation prediction + strategy."
+    },
+    {
+      "id": "financial",
+      "name": "Financial AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcb0",
+      "description": "Financial analytics + planning."
+    },
+    {
+      "id": "cost",
+      "name": "Cost AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcb8",
+      "description": "Cost analysis + allocation."
+    },
+    {
+      "id": "finops",
+      "name": "FinOps AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcca",
+      "description": "Cloud + AI cost optimisation."
+    },
+    {
+      "id": "talent",
+      "name": "Talent AI",
+      "family": "Domain",
+      "icon": "\ud83e\uddd1\u200d\ud83d\udcbc",
+      "description": "Talent acquisition + retention."
+    },
+    {
+      "id": "workforce",
+      "name": "Workforce AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfd7",
+      "description": "Workforce planning + scheduling."
+    },
+    {
+      "id": "learning",
+      "name": "Learning AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf93",
+      "description": "Adaptive learning paths."
+    },
+    {
+      "id": "training",
+      "name": "Training AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfcb",
+      "description": "Training content + skill gaps."
+    },
+    {
+      "id": "coaching",
+      "name": "Coaching AI",
+      "family": "Domain",
+      "icon": "\ud83e\udd32",
+      "description": "Coaching + nudges + feedback."
+    },
+    {
+      "id": "recruitment",
+      "name": "Recruitment AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfaf",
+      "description": "Recruitment + screening."
+    },
+    {
+      "id": "regulatory",
+      "name": "Regulatory AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfdb",
+      "description": "Regulatory tracking + horizon scan."
+    },
+    {
+      "id": "esg",
+      "name": "ESG AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf31",
+      "description": "ESG metrics + reporting."
+    },
+    {
+      "id": "climaterisk",
+      "name": "Climate Risk AI",
+      "family": "Domain",
+      "icon": "\ud83c\udf21",
+      "description": "Climate scenario + transition risk."
+    },
+    {
+      "id": "marketrisk",
+      "name": "Market Risk AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcc9",
+      "description": "Market risk modelling."
+    },
+    {
+      "id": "creditrisk",
+      "name": "Credit Risk AI",
+      "family": "Domain",
+      "icon": "\ud83d\udcb5",
+      "description": "Credit risk + counterparty exposure."
+    },
+    {
+      "id": "opsrisk",
+      "name": "Operational Risk AI",
+      "family": "Domain",
+      "icon": "\ud83d\udee1",
+      "description": "Operational loss event scoring."
+    },
+    {
+      "id": "enterpriserisk",
+      "name": "Enterprise Risk AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfe2",
+      "description": "Enterprise-wide risk integration."
+    },
+    {
+      "id": "modelops",
+      "name": "ModelOps AI",
+      "family": "Platform",
+      "icon": "\ud83e\uddf0",
+      "description": "Model lifecycle + registry."
+    },
+    {
+      "id": "mlops",
+      "name": "MLOps AI",
+      "family": "Platform",
+      "icon": "\ud83d\udd01",
+      "description": "Training + serving + monitoring."
+    },
+    {
+      "id": "llmops",
+      "name": "LLMOps AI",
+      "family": "Platform",
+      "icon": "\ud83e\udde0",
+      "description": "Prompt + eval + cost mgmt for LLMs."
+    },
+    {
+      "id": "agentops",
+      "name": "AgentOps AI",
+      "family": "Platform",
+      "icon": "\ud83d\udc19",
+      "description": "Agent fleet observability + control."
+    },
+    {
+      "id": "rl",
+      "name": "Reinforcement Learning AI",
+      "family": "Platform",
+      "icon": "\ud83c\udfae",
+      "description": "RL training + policy serving."
+    },
+    {
+      "id": "simulation",
+      "name": "Simulation AI",
+      "family": "Platform",
+      "icon": "\ud83e\uddea",
+      "description": "Discrete + agent-based simulation."
+    },
+    {
+      "id": "montecarlo",
+      "name": "Monte Carlo AI",
+      "family": "Platform",
+      "icon": "\ud83c\udfb2",
+      "description": "Stochastic simulation."
+    },
+    {
+      "id": "scenario",
+      "name": "Scenario Planning AI",
+      "family": "Platform",
+      "icon": "\ud83d\uddfa",
+      "description": "Scenario tree + impact modelling."
+    },
+    {
+      "id": "reliability",
+      "name": "Reliability AI",
+      "family": "Platform",
+      "icon": "\ud83e\uddf1",
+      "description": "SRE + chaos + drift control."
+    },
+    {
+      "id": "selfhealing",
+      "name": "Self-Healing AI",
+      "family": "Platform",
+      "icon": "\ud83e\ude79",
+      "description": "Autonomous remediation."
+    },
+    {
+      "id": "recovery",
+      "name": "Recovery AI",
+      "family": "Platform",
+      "icon": "\u267b\ufe0f",
+      "description": "Backup + DR orchestration."
+    },
+    {
+      "id": "capacityplanning",
+      "name": "Capacity Planning AI",
+      "family": "Platform",
+      "icon": "\ud83d\udce6",
+      "description": "Capacity forecasting + sizing."
+    },
+    {
+      "id": "observability",
+      "name": "Observability AI",
+      "family": "Platform",
+      "icon": "\ud83d\udd2d",
+      "description": "Trace + log + metric correlation."
+    },
+    {
+      "id": "threatdetection",
+      "name": "Threat Detection AI",
+      "family": "Platform",
+      "icon": "\ud83d\udee1",
+      "description": "Cyber threat scoring."
+    },
+    {
+      "id": "identity",
+      "name": "Identity AI",
+      "family": "Platform",
+      "icon": "\ud83c\udd94",
+      "description": "Identity verification + risk."
+    },
+    {
+      "id": "accesscontrol",
+      "name": "Access Control AI",
+      "family": "Platform",
+      "icon": "\ud83d\udd11",
+      "description": "Adaptive RBAC + ABAC."
+    },
+    {
+      "id": "zerotrust",
+      "name": "Zero Trust AI",
+      "family": "Platform",
+      "icon": "\ud83d\udea7",
+      "description": "Zero-trust posture continuous eval."
+    },
+    {
+      "id": "dataquality",
+      "name": "Data Quality AI",
+      "family": "Platform",
+      "icon": "\ud83d\udc8e",
+      "description": "DQ monitoring + scoring."
+    },
+    {
+      "id": "datagovernance",
+      "name": "Data Governance AI",
+      "family": "Platform",
+      "icon": "\ud83c\udfdb",
+      "description": "Data governance + classification."
+    },
+    {
+      "id": "datastewardship",
+      "name": "Data Stewardship AI",
+      "family": "Platform",
+      "icon": "\ud83e\uddd1\u200d\ud83c\udf3e",
+      "description": "Stewardship workflow."
+    },
+    {
+      "id": "metadata",
+      "name": "Metadata AI",
+      "family": "Platform",
+      "icon": "\ud83c\udff7",
+      "description": "Metadata enrichment."
+    },
+    {
+      "id": "lineage",
+      "name": "Lineage AI",
+      "family": "Platform",
+      "icon": "\ud83c\udf33",
+      "description": "Data lineage tracking."
+    },
+    {
+      "id": "masterdata",
+      "name": "Master Data AI",
+      "family": "Platform",
+      "icon": "\ud83d\udddd",
+      "description": "MDM + golden record."
+    },
+    {
+      "id": "duplicate",
+      "name": "Duplicate Detection AI",
+      "family": "Platform",
+      "icon": "\ud83d\udc6f",
+      "description": "Entity-resolution + dedup."
+    },
+    {
+      "id": "datareconciliation",
+      "name": "Data Reconciliation AI",
+      "family": "Platform",
+      "icon": "\ud83e\ude9e",
+      "description": "Cross-source reconciliation."
+    },
+    {
+      "id": "analytical",
+      "name": "Analytical AI",
+      "family": "Platform",
+      "icon": "\ud83e\uddee",
+      "description": "Descriptive + diagnostic analytics."
+    },
+    {
+      "id": "market_intel",
+      "name": "Market Intelligence AI",
+      "family": "Domain",
+      "icon": "\ud83d\udef0",
+      "description": "Market intel + share-of-voice."
+    },
+    {
+      "id": "competitor_intel",
+      "name": "Competitor Intelligence AI",
+      "family": "Domain",
+      "icon": "\ud83c\udfaf",
+      "description": "Competitor watch + signals."
+    },
+    {
+      "id": "redundancy",
+      "name": "Redundancy AI",
+      "family": "Operations",
+      "icon": "\u267b",
+      "description": "Eliminate duplicate work + idle compute."
+    },
+    {
+      "id": "transactional",
+      "name": "Transactional AI",
+      "family": "Operations",
+      "icon": "\ud83d\udcb1",
+      "description": "Transaction enrichment + scoring."
+    }
+  ]
+}

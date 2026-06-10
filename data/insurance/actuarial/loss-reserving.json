@@ -1,0 +1,94 @@
+{
+  "process": "loss-reserving",
+  "department": "actuarial",
+  "columns": [
+    "triangle_id",
+    "method",
+    "ibnr",
+    "case_reserve",
+    "ultimate",
+    "as_of"
+  ],
+  "rows": [
+    {
+      "triangle_id": "val_10",
+      "method": "val_10",
+      "ibnr": "val_10",
+      "case_reserve": "val_10",
+      "ultimate": "val_10",
+      "as_of": "val_10"
+    },
+    {
+      "triangle_id": "val_41",
+      "method": "val_41",
+      "ibnr": "val_41",
+      "case_reserve": "val_41",
+      "ultimate": "val_41",
+      "as_of": "val_41"
+    },
+    {
+      "triangle_id": "val_72",
+      "method": "val_72",
+      "ibnr": "val_72",
+      "case_reserve": "val_72",
+      "ultimate": "val_72",
+      "as_of": "val_72"
+    },
+    {
+      "triangle_id": "val_103",
+      "method": "val_103",
+      "ibnr": "val_103",
+      "case_reserve": "val_103",
+      "ultimate": "val_103",
+      "as_of": "val_103"
+    },
+    {
+      "triangle_id": "val_134",
+      "method": "val_134",
+      "ibnr": "val_134",
+      "case_reserve": "val_134",
+      "ultimate": "val_134",
+      "as_of": "val_134"
+    },
+    {
+      "triangle_id": "val_165",
+      "method": "val_165",
+      "ibnr": "val_165",
+      "case_reserve": "val_165",
+      "ultimate": "val_165",
+      "as_of": "val_165"
+    },
+    {
+      "triangle_id": "val_196",
+      "method": "val_196",
+      "ibnr": "val_196",
+      "case_reserve": "val_196",
+      "ultimate": "val_196",
+      "as_of": "val_196"
+    },
+    {
+      "triangle_id": "val_227",
+      "method": "val_227",
+      "ibnr": "val_227",
+      "case_reserve": "val_227",
+      "ultimate": "val_227",
+      "as_of": "val_227"
+    },
+    {
+      "triangle_id": "val_258",
+      "method": "val_258",
+      "ibnr": "val_258",
+      "case_reserve": "val_258",
+      "ultimate": "val_258",
+      "as_of": "val_258"
+    },
+    {
+      "triangle_id": "val_289",
+      "method": "val_289",
+      "ibnr": "val_289",
+      "case_reserve": "val_289",
+      "ultimate": "val_289",
+      "as_of": "val_289"
+    }
+  ]
+}

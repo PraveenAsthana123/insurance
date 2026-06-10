@@ -1,0 +1,27 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/role_dependency.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Role dependency · Iter 26 · C1 closure.
+
+Convenience wrappers for FastAPI endpoints to declare role requirements.
+
+## Imports
+- from `__future__` import annotations
+- from `typing` import Iterable
+- from `fastapi` import Depends, HTTPException, Request
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `get_current_role(request)`: Read role from RBACMiddleware-set request.state · default 'manager'.
+- `require_role()`: Endpoint dependency · 403 if role not in allowed set.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Pre-bound common dependencies

@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/voice_ai/campaign_services.py
+# auto-generated explainer · 2026-06-10T10:01:14Z
+
+## Purpose
+Campaign services · outbound voice AI flow with top 1% gates.
+
+Per §76 (RAI 5-pillar · privacy + consent MANDATORY) + §82.21 (DLP) + §38.3
+(audit row per outreach) + §82.7 (drift monitoring).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import logging
+- from `_` import re
+- from `_` import uuid
+- from `collections` import Counter
+- from `typing` import Any, Optional
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_row(r)`: (no docstring)
+- `_dlp_scan(script)`: §82.21 DLP · refuse scripts containing pii-shaped patterns.
+- `_consent_gate(customer, require_consent)`: §76 + GDPR · consent_marketing must be true if require_consent set.
+- `_segment_match(customer, target)`: (no docstring)
+- `_render_script(template, customer, product, call_to_action)`: Variable substitution. Missing values render as empty (safer than crash).
+- `list_campaigns(tenant_id)`: (no docstring)
+- `get_campaign(campaign_id, tenant_id)`: (no docstring)
+- `create_campaign(data, tenant_id)`: (no docstring)
+- `update_campaign(campaign_id, patch, tenant_id)`: (no docstring)
+- `execute_campaign(campaign_id, req, tenant_id, correlation_id)`: Iterate customers · apply gates · create campaign_run rows.
+- `list_runs(campaign_id, tenant_id)`: (no docstring)
+- `update_run(run_id, patch, tenant_id)`: Frontend reports outcome after browser TTS playback + optional STT capture.
+- `campaign_metrics(campaign_id, tenant_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Top 1% gate helpers
+- ─────────────────────────────────────────────────────────────────────
+- SSN-like 9-digit · credit-card-like 13-19 digit
+- ─────────────────────────────────────────────────────────────────────

@@ -1,0 +1,94 @@
+{
+  "process": "policy-issuance",
+  "department": "policy-admin",
+  "columns": [
+    "policy_id",
+    "product",
+    "effective_at",
+    "premium",
+    "broker",
+    "status"
+  ],
+  "rows": [
+    {
+      "policy_id": "val_220",
+      "product": "val_220",
+      "effective_at": "2026-01-13",
+      "premium": "val_220",
+      "broker": "val_220",
+      "status": "open"
+    },
+    {
+      "policy_id": "val_251",
+      "product": "val_251",
+      "effective_at": "2026-08-16",
+      "premium": "val_251",
+      "broker": "val_251",
+      "status": "closed"
+    },
+    {
+      "policy_id": "val_282",
+      "product": "val_282",
+      "effective_at": "2026-03-19",
+      "premium": "val_282",
+      "broker": "val_282",
+      "status": "review"
+    },
+    {
+      "policy_id": "val_313",
+      "product": "val_313",
+      "effective_at": "2026-10-22",
+      "premium": "val_313",
+      "broker": "val_313",
+      "status": "in-progress"
+    },
+    {
+      "policy_id": "val_344",
+      "product": "val_344",
+      "effective_at": "2026-05-25",
+      "premium": "val_344",
+      "broker": "val_344",
+      "status": "open"
+    },
+    {
+      "policy_id": "val_375",
+      "product": "val_375",
+      "effective_at": "2026-12-28",
+      "premium": "val_375",
+      "broker": "val_375",
+      "status": "closed"
+    },
+    {
+      "policy_id": "val_406",
+      "product": "val_406",
+      "effective_at": "2026-07-03",
+      "premium": "val_406",
+      "broker": "val_406",
+      "status": "review"
+    },
+    {
+      "policy_id": "val_437",
+      "product": "val_437",
+      "effective_at": "2026-02-06",
+      "premium": "val_437",
+      "broker": "val_437",
+      "status": "in-progress"
+    },
+    {
+      "policy_id": "val_468",
+      "product": "val_468",
+      "effective_at": "2026-09-09",
+      "premium": "val_468",
+      "broker": "val_468",
+      "status": "open"
+    },
+    {
+      "policy_id": "val_499",
+      "product": "val_499",
+      "effective_at": "2026-04-12",
+      "premium": "val_499",
+      "broker": "val_499",
+      "status": "closed"
+    }
+  ]
+}

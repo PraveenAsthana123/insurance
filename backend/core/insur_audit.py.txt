@@ -1,0 +1,51 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/core/insur_audit.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+Shared §38.3 audit-trail helper for INSUR/* routers under §64.43 #7 federation.
+
+The pattern (first proven on /api/v1/insur/monitoring/* in commit ff0fc9f9):
+  - Data layer stays fleet-wide / dept-scoped where appropriate
+  - Access trail IS tenant-attributed: every read writes one §38.3 audit
+    row with caller's tenant_id + actor + endpoint + path-param tags
+
+This module is the reusable contract so the 7 remaining insur/* routers
+(master_data, transactions, pipelines, reports, demo_stories, graph,
+downloads) can opt in with three lines:
+
+    from core.insur_audit import log_insur_access
+    @router.get("/...")
+    def handler(http_request: Request, ...):
+        log_insur_access(http_request, "<surface>", "<endpoint>", dept=...)
+        ...
+
+Per §57.7: disk failures do NOT crash the request. The audit write is
+best-effort; the read path is the contract.
+
+Per §47.6 anti-info-leak: validators (e.g. _validate_dept) MUST run
+BEFORE log_insur_access so failed-enumeration attempts don't pollute
+the audit trail (matches the existing 404-not-400 pattern).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import time
+- from `pathlib` import Path
+- from `typing` import Any
+- from `fastapi` import Request
+- from `core.middleware` import current_tenant_id
+
+## Inputs
+- Env vars: INSUR_AUDIT_PATH
+
+## Process
+### Functions
+- `log_insur_access(http_request, surface, endpoint)`: Append one §38.3 audit row attributing the read to caller's tenant + actor.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Don't allow extras to clobber the canonical §38.3 fields

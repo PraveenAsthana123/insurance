@@ -1,0 +1,94 @@
+{
+  "process": "complaint-resolution",
+  "department": "customer-service",
+  "columns": [
+    "complaint_id",
+    "policy_id",
+    "topic",
+    "sentiment",
+    "stage",
+    "closed_at"
+  ],
+  "rows": [
+    {
+      "complaint_id": "val_810",
+      "policy_id": "val_810",
+      "topic": "val_810",
+      "sentiment": "val_810",
+      "stage": "val_810",
+      "closed_at": "2026-11-23"
+    },
+    {
+      "complaint_id": "val_841",
+      "policy_id": "val_841",
+      "topic": "val_841",
+      "sentiment": "val_841",
+      "stage": "val_841",
+      "closed_at": "2026-06-26"
+    },
+    {
+      "complaint_id": "val_872",
+      "policy_id": "val_872",
+      "topic": "val_872",
+      "sentiment": "val_872",
+      "stage": "val_872",
+      "closed_at": "2026-01-01"
+    },
+    {
+      "complaint_id": "val_903",
+      "policy_id": "val_903",
+      "topic": "val_903",
+      "sentiment": "val_903",
+      "stage": "val_903",
+      "closed_at": "2026-08-04"
+    },
+    {
+      "complaint_id": "val_934",
+      "policy_id": "val_934",
+      "topic": "val_934",
+      "sentiment": "val_934",
+      "stage": "val_934",
+      "closed_at": "2026-03-07"
+    },
+    {
+      "complaint_id": "val_965",
+      "policy_id": "val_965",
+      "topic": "val_965",
+      "sentiment": "val_965",
+      "stage": "val_965",
+      "closed_at": "2026-10-10"
+    },
+    {
+      "complaint_id": "val_996",
+      "policy_id": "val_996",
+      "topic": "val_996",
+      "sentiment": "val_996",
+      "stage": "val_996",
+      "closed_at": "2026-05-13"
+    },
+    {
+      "complaint_id": "val_27",
+      "policy_id": "val_27",
+      "topic": "val_27",
+      "sentiment": "val_27",
+      "stage": "val_27",
+      "closed_at": "2026-12-16"
+    },
+    {
+      "complaint_id": "val_58",
+      "policy_id": "val_58",
+      "topic": "val_58",
+      "sentiment": "val_58",
+      "stage": "val_58",
+      "closed_at": "2026-07-19"
+    },
+    {
+      "complaint_id": "val_89",
+      "policy_id": "val_89",
+      "topic": "val_89",
+      "sentiment": "val_89",
+      "stage": "val_89",
+      "closed_at": "2026-02-22"
+    }
+  ]
+}

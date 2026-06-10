@@ -1,0 +1,33 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/middleware/body_size_monitor.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+Request body size monitor · Iter 36.
+
+Tracks p50/p95/p99 body sizes per route · helps operator decide when to
+tune GZip threshold, rate limits, or reject large payloads.
+
+## Imports
+- from `__future__` import annotations
+- from `collections` import deque
+- from `typing` import Deque
+- from `starlette.middleware.base` import BaseHTTPMiddleware
+- from `starlette.requests` import Request
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `BodySizeMonitorMiddleware`: (no docstring)
+### Functions
+- `_pct(values, p)`: (no docstring)
+- `snapshot()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Only meaningful for write methods
+- Rebuild stream so handler can read body

@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/approval_workflow/router.py
+# auto-generated explainer · 2026-06-10T10:01:16Z
+
+## Purpose
+/api/v1/approvals/* · Iter 31 · request → reviewer → decide state machine.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `fastapi` import APIRouter, Depends, HTTPException
+- from `pydantic` import BaseModel
+- from `core.role_dependency` import require_authenticated, require_manager_or_above
+
+## Inputs
+- Env vars: INSUR_APPROVALS_PATH
+
+## Process
+### Classes
+- `RequestApproval`: (no docstring)
+- `Decide`: (no docstring)
+### Functions
+- `_load()`: (no docstring)
+- `_save(d)`: (no docstring)
+- `health()`: (no docstring)
+- `request_approval(body)`: (no docstring)
+- `get_approval(req_id)`: (no docstring)
+- `list_approvals(state, limit)`: (no docstring)
+- `decide(req_id, body)`: (no docstring)
+- `withdraw(req_id, requester)`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above

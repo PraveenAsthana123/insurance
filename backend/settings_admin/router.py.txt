@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/settings_admin/router.py
+# auto-generated explainer · 2026-06-10T10:01:15Z
+
+## Purpose
+/api/v1/settings/* · Iter 35 · reload pydantic Settings without restart.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends
+- from `core.config` import get_settings
+- from `core.role_dependency` import require_admin
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_redact(value)`: Per §47.6 + §76 Privacy · never leak secrets.
+- `health()`: (no docstring)
+- `view_settings()`: View current settings · admin only · secrets redacted.
+- `reload_settings()`: Bust the LRU cache on get_settings · force re-read of env vars.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Pydantic v2 .model_fields_set / model_dump
+- Truncate long lists / dicts

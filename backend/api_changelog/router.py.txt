@@ -1,0 +1,25 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/api_changelog/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/changelog · Iter 34 · API change log.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `list_changelog(since, type, limit)`: (no docstring)
+- `summary()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Curated changelog · each iteration adds 1+ entries

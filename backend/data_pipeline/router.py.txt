@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/data_pipeline/router.py
+# auto-generated explainer · 2026-06-10T10:01:13Z
+
+## Purpose
+/api/v1/data-pipeline/* — comprehensive Data tab structure per process.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import logging
+- from `typing` import Any
+- from `fastapi` import APIRouter
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_info(id, title)`: (no docstring)
+- `_action(id, title)`: (no docstring)
+- `_probe_library(lib_str)`: Probe primary library mentioned in 'library' field.
+- `_score_task(task_id, process_id)`: (no docstring)
+- `_status(score, lib_installed)`: (no docstring)
+- `_materialize(task, process_id)`: (no docstring)
+- `health()`: (no docstring)
+- `list_tasks()`: (no docstring)
+- `tasks_for_process(process_id)`: All tasks materialized for one process · one row per task.
+- `task_for_process(process_id, task_id)`: (no docstring)
+- `journey_flow(process_id)`: Horizontal journey-flow per operator brief · ordered phase progression.
+- `_deterministic_sample_rows(task_id, n)`: Per §57.7 scaffold · 10 deterministic insurance-themed sample rows.
+- `run_task(process_id, task_id)`: Trigger a per-task run · returns run_id + status + sample rows.
+- `list_recent_runs(limit)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─── Tasks catalog · grouped by phase per operator brief ───────────
+- ─── 5-phase task catalog ─────────────────────────────────────
+- === Phase 1 · INVENTORY ===
+- === Phase 2 · EDA ===
+- === Phase 3 · QUALITY ===

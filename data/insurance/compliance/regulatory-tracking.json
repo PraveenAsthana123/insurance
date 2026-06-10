@@ -1,0 +1,94 @@
+{
+  "process": "regulatory-tracking",
+  "department": "compliance",
+  "columns": [
+    "reg_id",
+    "jurisdiction",
+    "topic",
+    "impact",
+    "status",
+    "due_at"
+  ],
+  "rows": [
+    {
+      "reg_id": "val_816",
+      "jurisdiction": "val_816",
+      "topic": "val_816",
+      "impact": "val_816",
+      "status": "open",
+      "due_at": "2026-01-05"
+    },
+    {
+      "reg_id": "val_847",
+      "jurisdiction": "val_847",
+      "topic": "val_847",
+      "impact": "val_847",
+      "status": "closed",
+      "due_at": "2026-08-08"
+    },
+    {
+      "reg_id": "val_878",
+      "jurisdiction": "val_878",
+      "topic": "val_878",
+      "impact": "val_878",
+      "status": "review",
+      "due_at": "2026-03-11"
+    },
+    {
+      "reg_id": "val_909",
+      "jurisdiction": "val_909",
+      "topic": "val_909",
+      "impact": "val_909",
+      "status": "in-progress",
+      "due_at": "2026-10-14"
+    },
+    {
+      "reg_id": "val_940",
+      "jurisdiction": "val_940",
+      "topic": "val_940",
+      "impact": "val_940",
+      "status": "open",
+      "due_at": "2026-05-17"
+    },
+    {
+      "reg_id": "val_971",
+      "jurisdiction": "val_971",
+      "topic": "val_971",
+      "impact": "val_971",
+      "status": "closed",
+      "due_at": "2026-12-20"
+    },
+    {
+      "reg_id": "val_2",
+      "jurisdiction": "val_2",
+      "topic": "val_2",
+      "impact": "val_2",
+      "status": "review",
+      "due_at": "2026-07-23"
+    },
+    {
+      "reg_id": "val_33",
+      "jurisdiction": "val_33",
+      "topic": "val_33",
+      "impact": "val_33",
+      "status": "in-progress",
+      "due_at": "2026-02-26"
+    },
+    {
+      "reg_id": "val_64",
+      "jurisdiction": "val_64",
+      "topic": "val_64",
+      "impact": "val_64",
+      "status": "open",
+      "due_at": "2026-09-01"
+    },
+    {
+      "reg_id": "val_95",
+      "jurisdiction": "val_95",
+      "topic": "val_95",
+      "impact": "val_95",
+      "status": "closed",
+      "due_at": "2026-04-04"
+    }
+  ]
+}

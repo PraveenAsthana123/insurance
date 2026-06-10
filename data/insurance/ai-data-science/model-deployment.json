@@ -1,0 +1,94 @@
+{
+  "process": "model-deployment",
+  "department": "ai-data-science",
+  "columns": [
+    "model",
+    "version",
+    "stage",
+    "traffic_pct",
+    "latency_ms",
+    "deployed_at"
+  ],
+  "rows": [
+    {
+      "model": "val_275",
+      "version": "val_275",
+      "stage": "val_275",
+      "traffic_pct": "val_275",
+      "latency_ms": "val_275",
+      "deployed_at": "2026-04-24"
+    },
+    {
+      "model": "val_306",
+      "version": "val_306",
+      "stage": "val_306",
+      "traffic_pct": "val_306",
+      "latency_ms": "val_306",
+      "deployed_at": "2026-11-27"
+    },
+    {
+      "model": "val_337",
+      "version": "val_337",
+      "stage": "val_337",
+      "traffic_pct": "val_337",
+      "latency_ms": "val_337",
+      "deployed_at": "2026-06-02"
+    },
+    {
+      "model": "val_368",
+      "version": "val_368",
+      "stage": "val_368",
+      "traffic_pct": "val_368",
+      "latency_ms": "val_368",
+      "deployed_at": "2026-01-05"
+    },
+    {
+      "model": "val_399",
+      "version": "val_399",
+      "stage": "val_399",
+      "traffic_pct": "val_399",
+      "latency_ms": "val_399",
+      "deployed_at": "2026-08-08"
+    },
+    {
+      "model": "val_430",
+      "version": "val_430",
+      "stage": "val_430",
+      "traffic_pct": "val_430",
+      "latency_ms": "val_430",
+      "deployed_at": "2026-03-11"
+    },
+    {
+      "model": "val_461",
+      "version": "val_461",
+      "stage": "val_461",
+      "traffic_pct": "val_461",
+      "latency_ms": "val_461",
+      "deployed_at": "2026-10-14"
+    },
+    {
+      "model": "val_492",
+      "version": "val_492",
+      "stage": "val_492",
+      "traffic_pct": "val_492",
+      "latency_ms": "val_492",
+      "deployed_at": "2026-05-17"
+    },
+    {
+      "model": "val_523",
+      "version": "val_523",
+      "stage": "val_523",
+      "traffic_pct": "val_523",
+      "latency_ms": "val_523",
+      "deployed_at": "2026-12-20"
+    },
+    {
+      "model": "val_554",
+      "version": "val_554",
+      "stage": "val_554",
+      "traffic_pct": "val_554",
+      "latency_ms": "val_554",
+      "deployed_at": "2026-07-23"
+    }
+  ]
+}
