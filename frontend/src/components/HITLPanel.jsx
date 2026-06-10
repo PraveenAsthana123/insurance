@@ -4,6 +4,7 @@
 // Injects into governance tabs to surface decisions awaiting human review.
 
 import { useEffect, useState } from 'react';
+import { toastSuccess, toastError } from './Toast';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001';
 
@@ -81,8 +82,10 @@ export default function HITLPanel({ accent = '#d97706', limit = 10 }) {
         throw new Error(`${r.status} · ${txt.slice(0, 80)}`);
       }
       setDecisions((d) => ({ ...d, [key]: kind === 'approve' ? 'approved' : 'rejected' }));
+      toastSuccess(`Decision ${kind === 'approve' ? 'approved' : 'rejected'} · ${p.run_ref}`);
     } catch (e) {
       setActionError(`HITL action failed: ${e.message}`);
+      toastError(`HITL action failed: ${e.message}`);
     } finally {
       setBusyKey(null);
     }

@@ -86,6 +86,28 @@ async def log_activity(request: Request):
     return entry
 
 
+@router.get("/stream")
+async def stream():
+    """Iter 23 · SSE stream of alert counts every 10s · push replaces polling."""
+    import asyncio
+    import json as _json
+    from starlette.responses import StreamingResponse
+
+    async def gen():
+        prev = None
+        for _ in range(360):  # ~1 hour cap
+            payload = alert_counts()
+            if payload != prev:
+                yield f"data: {_json.dumps(payload)}\n\n"
+                prev = payload
+            await asyncio.sleep(10)
+
+    return StreamingResponse(gen(), media_type="text/event-stream", headers={
+        "Cache-Control": "no-cache",
+        "X-Accel-Buffering": "no",
+    })
+
+
 @router.get("/activity")
 def list_activity(limit: int = 50, action: str | None = None):
     """Iter 21 · recent UI activity · filter by action."""

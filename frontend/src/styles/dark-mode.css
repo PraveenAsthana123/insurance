@@ -72,3 +72,39 @@ textarea:focus-visible {
   white-space: nowrap;
   border: 0;
 }
+
+/* Print stylesheet · Iter 23 · clean per-panel print */
+@media print {
+  /* hide chrome */
+  .insurance-sub-menu,
+  .insurance-main-menu,
+  button[aria-label*="mode"],
+  .no-print {
+    display: none !important;
+  }
+  /* force light · black-on-white for ink savings */
+  body, [data-theme="dark"] body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  div[role="region"][aria-label="Notifications"] {
+    display: none !important;
+  }
+  /* expand all collapsibles */
+  details:not([open]) {
+    display: block !important;
+  }
+  details > summary {
+    display: none;
+  }
+  /* link URLs visible */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+  }
+  /* avoid breaking panels mid-content */
+  div[style*="borderLeft"] {
+    page-break-inside: avoid;
+  }
+}

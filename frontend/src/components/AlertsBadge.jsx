@@ -18,8 +18,27 @@ export default function AlertsBadge({ accent = '#dc2626' }) {
 
   useEffect(() => {
     load();
-    const id = setInterval(load, 30_000);
-    return () => clearInterval(id);
+    // Iter 23 · prefer SSE push · fall back to polling on error
+    let es = null;
+    let pollId = null;
+    try {
+      es = new EventSource(`${API_BASE}/api/v1/alerts/stream`);
+      es.onmessage = (e) => {
+        try { setCounts(JSON.parse(e.data)); }
+        catch { /* skip malformed */ }
+      };
+      es.onerror = () => {
+        // Fall back to polling if SSE unsupported/blocked
+        es?.close();
+        if (!pollId) pollId = setInterval(load, 30_000);
+      };
+    } catch {
+      pollId = setInterval(load, 30_000);
+    }
+    return () => {
+      es?.close();
+      if (pollId) clearInterval(pollId);
+    };
   }, []);
 
   if (!counts) return null;

@@ -3,6 +3,7 @@ import { Outlet, useParams, Link } from 'react-router-dom';
 import GlobalCmdK from '../../components/GlobalCmdK';
 import AlertsBadge from '../../components/AlertsBadge';
 import ThemeToggle from '../../components/ThemeToggle';
+import ToastHost from '../../components/Toast';
 import { InsuranceMainMenu } from './InsuranceMainMenu';
 import { InsuranceSubMenu } from './InsuranceSubMenu';
 
@@ -30,6 +31,9 @@ function Breadcrumb({ bp }) {
       <div style={{ position: "fixed", top: 12, right: 16, zIndex: 100 }}>
         <ThemeToggle />
         <AlertsBadge />
+      </div>
+      <ToastHost />
+      
       </div>
       <Link to="/insurance">Insurance</Link>
       {dept && (

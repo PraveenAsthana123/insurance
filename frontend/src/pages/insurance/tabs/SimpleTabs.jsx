@@ -15,6 +15,7 @@ import TestStatusTier12Panel from '../../../components/TestStatusTier12Panel';
 import RegulatoryMappingPanel from '../../../components/RegulatoryMappingPanel';
 import RoleViewSelector from '../../../components/RoleViewSelector';
 import ProcessComparePanel from '../../../components/ProcessComparePanel';
+import ErrorBoundary from '../../../components/ErrorBoundary';
 import ActivityLogPanel from '../../../components/ActivityLogPanel';
 import PermalinkShare from '../../../components/PermalinkShare';
 import DataPipelinePanel from '../../../components/DataPipelinePanel';
@@ -601,7 +602,7 @@ export function DataTab({ proc, dept }) {
       accent="#0ea5e9"
       todos={[]}
     >
-      <DataPipelinePanel accent="#0ea5e9" processId="fraud-ring-detection" />
+      <ErrorBoundary label="DataPipelinePanel"><DataPipelinePanel accent="#0ea5e9" processId="fraud-ring-detection" /></ErrorBoundary>
       <p style={{ margin: '0 0 var(--spacing-md)', color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
         {d.summary} <DerivedBadge derived={!!d.derived} />
       </p>
@@ -665,7 +666,7 @@ export function ModelTab({ proc, dept, bp }) {
       accent="#0ea5e9"
       todos={[]}
     >
-      <ModelCardPanel accent="#8b5cf6" modelName="fraud-ring-detection-v1" />
+      <ErrorBoundary label="ModelCardPanel"><ModelCardPanel accent="#8b5cf6" modelName="fraud-ring-detection-v1" /></ErrorBoundary>
       <CohortFairnessPanel accent="#16a34a" modelName="fraud-ring-detection" />
       <ModelRegistryPanel accent="#0ea5e9" />
       <IPOSection number="1" kind="input" title="Input — Model candidates" subtitle="AI capabilities and catalog model metadata for this process.">
@@ -1430,9 +1431,9 @@ export function GovernanceAITab({ proc, dept }) {
             <CorrectionsPanel accent="#dc2626" />
       
       <AuditPanel accent="#dc2626" />
-      <HITLPanel accent="#d97706" />
+      <ErrorBoundary label="HITLPanel"><HITLPanel accent="#d97706" /></ErrorBoundary>
       <FeedbackPanel accent="#8b5cf6" />
-      <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />{!g ? (
+      <ErrorBoundary label="ResponsibleAIPanel"><ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" /></ErrorBoundary>{!g ? (
         <InfoCard icon="🏛️" title="What this tab will contain (when populated)" accent="#dc2626">
           <ul style={{ margin: 0, paddingLeft: 16 }}>
             <li><strong>Decision layer</strong>: per §40 (rule + confidence + HITL)</li>
@@ -1510,14 +1511,14 @@ export function TestsTab({ proc, dept }) {
       todos={[]}
     >
       <RoleViewSelector accent="#475569" />
-      <TestStatusTier12Panel accent="#0ea5e9" processId="fraud-ring-detection" />
-      <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
+      <ErrorBoundary label="TestStatusTier12Panel"><TestStatusTier12Panel accent="#0ea5e9" processId="fraud-ring-detection" /></ErrorBoundary>
+      <ErrorBoundary label="ResponsibleAIPanel"><ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" /></ErrorBoundary>
       <RegulatoryMappingPanel accent="#dc2626" processId="fraud-ring-detection" />
       <ActivityLogPanel accent="#475569" />
       <ProcessComparePanel accent="#8b5cf6" />
       <ShapPanel accent="#dc2626" modelName="expai-model" />
       <CounterfactualPanel accent="#dc2626" modelName="expai-model" />
-      <ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" />
+      <ErrorBoundary label="ResponsibleAIPanel"><ResponsibleAIPanel accent="#dc2626" processId="fraud-ring-detection" /></ErrorBoundary>
       <IPOSection number="1" kind="input" title="Input — Test plan" subtitle="Per global §64.30 12-tier testing + §65.8 8-tier agent assignment.">
         <Field label="Test surfaces">API · Frontend · Backend · Drills (§43)</Field>
       </IPOSection>

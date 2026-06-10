@@ -10,6 +10,7 @@ export default function GlobalCmdK() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [activeIdx, setActiveIdx] = useState(0);
+  const [typeFilter, setTypeFilter] = useState(null);  // Iter 23 · facet
 
   // Build index from catalog
   const index = useMemo(() => {
@@ -57,12 +58,22 @@ export default function GlobalCmdK() {
   }, []);
 
   const results = useMemo(() => {
-    if (!query.trim()) return index.slice(0, 12);
+    let pool = index;
+    // Iter 23 · faceted filter by type
+    if (typeFilter) pool = pool.filter((i) => i.type === typeFilter);
+    if (!query.trim()) return pool.slice(0, 12);
     const q = query.toLowerCase();
-    return index
+    return pool
       .filter((i) => i.title.toLowerCase().includes(q) || i.subtitle.toLowerCase().includes(q))
       .slice(0, 20);
-  }, [query, index]);
+  }, [query, typeFilter, index]);
+
+  // Per-type counts (Iter 23 · facet badges)
+  const typeCounts = useMemo(() => {
+    const c = { dept: 0, process: 0, subprocess: 0, lens: 0 };
+    index.forEach((i) => { if (c[i.type] != null) c[i.type]++; });
+    return c;
+  }, [index]);
 
   useEffect(() => {
     function onKey(e) {
@@ -116,12 +127,21 @@ export default function GlobalCmdK() {
             value={query}
             onChange={(e) => { setQuery(e.target.value); setActiveIdx(0); }}
             placeholder="🔍 Search departments · processes · sub-processes · lenses…"
+            aria-label="Search command palette"
             style={{
               width: '100%', padding: 8, fontSize: 13,
               border: '1px solid #cbd5e1', borderRadius: 4,
               outline: 'none',
             }}
           />
+          {/* Iter 23 · faceted filter chips */}
+          <div style={{ display: 'flex', gap: 4, marginTop: 6, flexWrap: 'wrap' }}>
+            <FacetChip active={!typeFilter} onClick={() => setTypeFilter(null)} label="ALL" count={index.length} />
+            <FacetChip active={typeFilter === 'dept'} onClick={() => setTypeFilter(typeFilter === 'dept' ? null : 'dept')} label="DEPT" count={typeCounts.dept} color="#1e40af" />
+            <FacetChip active={typeFilter === 'process'} onClick={() => setTypeFilter(typeFilter === 'process' ? null : 'process')} label="PROCESS" count={typeCounts.process} color="#166534" />
+            <FacetChip active={typeFilter === 'subprocess'} onClick={() => setTypeFilter(typeFilter === 'subprocess' ? null : 'subprocess')} label="SUB" count={typeCounts.subprocess} color="#92400e" />
+            <FacetChip active={typeFilter === 'lens'} onClick={() => setTypeFilter(typeFilter === 'lens' ? null : 'lens')} label="LENS" count={typeCounts.lens} color="#991b1b" />
+          </div>
         </div>
         <div style={{ maxHeight: '50vh', overflow: 'auto' }}>
           {results.length === 0 ? (
@@ -164,3 +184,18 @@ const TYPE_TONE = {
   subprocess: { bg: '#fef3c7', fg: '#92400e' },
   lens:       { bg: '#fee2e2', fg: '#991b1b' },
 };
+
+function FacetChip({ active, onClick, label, count, color = '#475569' }) {
+  return (
+    <button onClick={onClick}
+      aria-pressed={active}
+      style={{
+        padding: '2px 8px', fontSize: 10, fontWeight: 700, cursor: 'pointer',
+        background: active ? color : '#fff',
+        color: active ? '#fff' : color,
+        border: `1px solid ${color}`, borderRadius: 3,
+      }}>
+      {label} <span style={{ opacity: 0.7 }}>({count})</span>
+    </button>
+  );
+}
