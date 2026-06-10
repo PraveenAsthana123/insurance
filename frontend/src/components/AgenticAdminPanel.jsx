@@ -23,6 +23,13 @@ const TABS = [
   { key: 'mcp_rag', label: 'MCP + RAG' },
   { key: 'tracking', label: 'Tracking' },
   { key: 'failures', label: 'Failures' },
+  { key: 'feedback', label: 'Feedback' },          // Iter 38
+  { key: 'incidents', label: 'Incidents' },        // Iter 38
+  { key: 'dependencies', label: 'Deps' },          // Iter 38
+  { key: 'team', label: 'Team' },                  // Iter 38
+  { key: 'sla', label: 'SLA' },                    // Iter 38
+  { key: 'capacity', label: 'Capacity' },          // Iter 38
+  { key: 'queue', label: 'Queue' },                // Iter 38
   { key: 'challenges', label: 'Challenges' },
   { key: 'supervisor', label: 'Supervisor' },
   { key: 'delegation', label: 'Delegation' },
@@ -81,6 +88,7 @@ function AgenticAdminPanel() {
   const [toolsRegistry, setToolsRegistry] = useState([]);
   const [invocations, setInvocations] = useState([]);
   const [stats, setStats] = useState(null);
+  const [opsRollup, setOpsRollup] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
   const [toast, setToast] = useState(null);
@@ -115,6 +123,9 @@ function AgenticAdminPanel() {
       setSelectedSkills(d.skills || []);
       const inv = await fetch(`${API}/api/v1/agentic/invocations?agent_id=${id}&limit=20`).then(x => x.json());
       setInvocations(inv.invocations || []);
+      // Iter 38 ops rollup · 7 surfaces in one fetch
+      const ops = await fetch(`${API}/api/v1/agentic-ops/agent/${id}/rollup`).then(x => x.json());
+      setOpsRollup(ops || null);
     } catch (e) { setError(`Load: ${e.message}`); }
   }, []);
 
@@ -382,6 +393,253 @@ function AgenticAdminPanel() {
     );
   }
 
+  function renderFeedback() {
+    const fbList = opsRollup?.feedback || [];
+    return (
+      <Section title="Feedback · last 10 (Iter 38 · agent_feedback)" accent="#0891b2">
+        {fbList.length === 0 && <em style={{ fontSize: 11 }}>No feedback yet · POST /agentic-ops/feedback.</em>}
+        {fbList.length > 0 && (
+          <table style={{ fontSize: 10, width: '100%' }}>
+            <thead style={{ color: '#64748b' }}>
+              <tr>
+                <th style={{ textAlign: 'left', padding: 3 }}>Type</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Rating</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Severity</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Category</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Action?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fbList.map(f => (
+                <tr key={f.feedback_id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  <td style={{ padding: 3 }}>{f.feedback_type}</td>
+                  <td style={{ padding: 3 }}>{f.rating ?? '—'}</td>
+                  <td style={{ padding: 3 }}>
+                    <Pill color={f.severity === 'Critical' ? '#ef4444' : f.severity === 'High' ? '#f97316' : '#10b981'}>{f.severity}</Pill>
+                  </td>
+                  <td style={{ padding: 3, fontSize: 9 }}>{f.category || '—'}</td>
+                  <td style={{ padding: 3 }}>{f.action_required ? '⚠' : '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Section>
+    );
+  }
+
+  function renderIncidents() {
+    const list = opsRollup?.incidents || [];
+    return (
+      <Section title="Incidents · last 10 (Iter 38 · agent_incident)" accent="#ef4444">
+        {list.length === 0 && <em style={{ fontSize: 11 }}>No incidents recorded.</em>}
+        {list.length > 0 && (
+          <table style={{ fontSize: 10, width: '100%' }}>
+            <thead style={{ color: '#64748b' }}>
+              <tr>
+                <th style={{ textAlign: 'left', padding: 3 }}>ID</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Severity</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Type</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Status</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map(i => (
+                <tr key={i.incident_id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  <td style={{ padding: 3 }}><code style={{ fontSize: 9 }}>{i.incident_id}</code></td>
+                  <td style={{ padding: 3 }}>
+                    <Pill color={i.severity === 'P1' ? '#ef4444' : i.severity === 'P2' ? '#f97316' : '#f59e0b'}>{i.severity}</Pill>
+                  </td>
+                  <td style={{ padding: 3 }}>{i.incident_type}</td>
+                  <td style={{ padding: 3 }}>{i.status}</td>
+                  <td style={{ padding: 3, fontSize: 9 }}>{i.title?.slice(0, 50)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Section>
+    );
+  }
+
+  function renderDependencies() {
+    const list = opsRollup?.dependencies || [];
+    return (
+      <Section title="Dependencies · what this agent needs" accent="#8b5cf6">
+        {list.length === 0 && <em style={{ fontSize: 11 }}>No dependencies registered · POST /agentic-ops/dependencies.</em>}
+        {list.length > 0 && (
+          <table style={{ fontSize: 11, width: '100%' }}>
+            <thead style={{ color: '#64748b' }}>
+              <tr>
+                <th style={{ textAlign: 'left', padding: 3 }}>Type</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Name</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Criticality</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Status</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Fallback</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map(d => (
+                <tr key={d.dependency_id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  <td style={{ padding: 3 }}><code style={{ fontSize: 9 }}>{d.dependency_type}</code></td>
+                  <td style={{ padding: 3 }}>{d.dependency_name}</td>
+                  <td style={{ padding: 3 }}>
+                    <Pill color={d.criticality === 'Critical' ? '#ef4444' : d.criticality === 'High' ? '#f97316' : '#10b981'}>{d.criticality}</Pill>
+                  </td>
+                  <td style={{ padding: 3 }}>
+                    <Pill color={STATUS_COLOR[d.status] || (d.status === 'Healthy' ? '#10b981' : '#ef4444')}>{d.status}</Pill>
+                  </td>
+                  <td style={{ padding: 3, fontSize: 9 }}>{d.fallback_dependency || '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Section>
+    );
+  }
+
+  function renderTeam() {
+    const t = opsRollup?.team;
+    return (
+      <Section title="Team · ownership + escalation (Iter 38 · agent_team)" accent="#3b82f6">
+        {!t && <em style={{ fontSize: 11 }}>No team assigned · POST /agentic-ops/teams.</em>}
+        {t && (
+          <table style={{ fontSize: 11, width: '100%' }}>
+            <tbody>
+              {[
+                ['Business Owner', t.business_owner],
+                ['Technical Owner', t.technical_owner],
+                ['Support Team', t.support_team],
+                ['Platform Team', t.platform_team],
+                ['Security Owner', t.security_owner],
+                ['Compliance Owner', t.compliance_owner],
+                ['Incident Manager', t.incident_manager],
+                ['Release Manager', t.release_manager],
+                ['Escalation Group', t.escalation_group],
+                ['Support Model', t.support_model],
+                ['Support Hours', t.support_hours],
+              ].map(([k, v]) => (
+                <tr key={k} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  <td style={{ padding: 4, color: '#64748b', width: 160 }}>{k}</td>
+                  <td style={{ padding: 4 }}>{v || <span style={{ color: '#94a3b8' }}>—</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Section>
+    );
+  }
+
+  function renderSLA() {
+    const s = opsRollup?.sla;
+    return (
+      <Section title="SLA · commitments (Iter 38 · agent_sla)" accent="#10b981">
+        {!s && <em style={{ fontSize: 11 }}>No SLA defined · POST /agentic-ops/slas.</em>}
+        {s && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+            {[
+              { k: 'Tier', v: s.sla_tier, accent: '#3b82f6' },
+              { k: 'Availability', v: `${s.availability_target}%`, accent: '#10b981' },
+              { k: 'Latency', v: `${s.latency_target_ms}ms`, accent: '#f59e0b' },
+              { k: 'Accuracy', v: `${s.accuracy_target}%`, accent: '#8b5cf6' },
+              { k: 'Success Rate', v: `${s.success_rate_target}%`, accent: '#10b981' },
+              { k: 'MTTR', v: `${s.mttr_target_minutes}m`, accent: '#0891b2' },
+              { k: 'MTTA', v: `${s.mtta_target_minutes}m`, accent: '#0891b2' },
+              { k: 'Cost/run', v: `$${s.max_cost_per_run}`, accent: '#f97316' },
+              { k: 'Incidents/mo', v: s.max_incidents_per_month, accent: '#ef4444' },
+            ].map(({ k, v, accent }) => (
+              <div key={k} style={{ padding: 8, background: `${accent}10`, borderRadius: 4 }}>
+                <div style={{ fontSize: 9, color: '#64748b' }}>{k.toUpperCase()}</div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: accent }}>{v}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </Section>
+    );
+  }
+
+  function renderCapacity() {
+    const c = opsRollup?.capacity;
+    return (
+      <Section title="Capacity · concurrency + autoscale (Iter 38 · agent_capacity)" accent="#f97316">
+        {!c && <em style={{ fontSize: 11 }}>No capacity defined · POST /agentic-ops/capacities.</em>}
+        {c && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8, fontSize: 11 }}>
+            <div>
+              <div style={{ fontWeight: 700, color: '#475569' }}>Concurrency</div>
+              <ul style={{ marginTop: 4 }}>
+                <li>Max concurrent: {c.max_concurrent_requests}</li>
+                <li>Max queue depth: {c.max_queue_depth}</li>
+                <li>Target RPS: {c.target_throughput_rps}</li>
+                <li>Target latency: {c.target_latency_ms}ms</li>
+              </ul>
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, color: '#475569' }}>Resources</div>
+              <ul style={{ marginTop: 4 }}>
+                <li>CPU: {c.max_cpu_cores} cores</li>
+                <li>Memory: {c.max_memory_mb}MB</li>
+                <li>GPU: {c.max_gpu_memory_mb}MB</li>
+                <li>Tokens/req: {c.max_tokens_per_request}</li>
+              </ul>
+            </div>
+            <div style={{ gridColumn: 'span 2' }}>
+              <div style={{ fontWeight: 700, color: '#475569' }}>Autoscale</div>
+              <p style={{ marginTop: 4 }}>
+                {c.autoscale_min_instances}–{c.autoscale_max_instances} instances ·
+                trigger: <code>{c.autoscale_trigger}</code> ·
+                utilization now: <strong>{c.current_utilization}%</strong>
+              </p>
+            </div>
+          </div>
+        )}
+      </Section>
+    );
+  }
+
+  function renderQueue() {
+    const list = opsRollup?.queue || [];
+    return (
+      <Section title="Queue · pending + running jobs (Iter 38 · agent_queue)" accent="#0891b2">
+        {list.length === 0 && <em style={{ fontSize: 11 }}>No jobs queued · POST /agentic-ops/queue/enqueue.</em>}
+        {list.length > 0 && (
+          <table style={{ fontSize: 10, width: '100%' }}>
+            <thead style={{ color: '#64748b' }}>
+              <tr>
+                <th style={{ textAlign: 'left', padding: 3 }}>Job</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Type</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Priority</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Status</th>
+                <th style={{ textAlign: 'left', padding: 3 }}>Retries</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map(q => (
+                <tr key={q.queue_id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  <td style={{ padding: 3 }}><code style={{ fontSize: 9 }}>{q.job_id}</code></td>
+                  <td style={{ padding: 3 }}>{q.job_type}</td>
+                  <td style={{ padding: 3 }}><Pill color="#0891b2">P{q.priority}</Pill></td>
+                  <td style={{ padding: 3 }}>
+                    <Pill color={
+                      q.queue_status === 'Completed' ? '#10b981' :
+                        q.queue_status === 'Failed' ? '#ef4444' :
+                        q.queue_status === 'Running' ? '#3b82f6' : '#94a3b8'
+                    }>{q.queue_status}</Pill>
+                  </td>
+                  <td style={{ padding: 3 }}>{q.retry_count}/{q.max_retries}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Section>
+    );
+  }
+
   function renderApprovals() {
     return (
       <Section title="Approvals · pending human gates" accent="#ef4444">
@@ -552,6 +810,10 @@ function AgenticAdminPanel() {
     tracking: renderTracking, failures: renderFailures, challenges: renderChallenges,
     supervisor: renderSupervisor, delegation: renderDelegation,
     scorecard: renderScorecard, approvals: renderApprovals,
+    // Iter 38 ops layer
+    feedback: renderFeedback, incidents: renderIncidents,
+    dependencies: renderDependencies, team: renderTeam,
+    sla: renderSLA, capacity: renderCapacity, queue: renderQueue,
   };
 
   // Apply dept filter
