@@ -36,11 +36,15 @@ def _probe_redis() -> dict:
 
 
 def _probe_library(name: str) -> dict:
+    # Iter 29 fix: catch ALL exceptions · presidio raises RuntimeError due
+    # to transformers/protobuf incompat · not ImportError.
     try:
         __import__(name)
         return {"status": "ok"}
     except ImportError:
         return {"status": "not_installed"}
+    except BaseException as e:
+        return {"status": "error", "error": f"{type(e).__name__}: {str(e)[:120]}"}
 
 
 @router.get("")
