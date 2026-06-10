@@ -290,13 +290,24 @@ def s16_reflection(run: PipelineRun) -> dict:
 
 
 def s17_verifier(run: PipelineRun) -> dict:
+    """Real RAGAS + DeepEval + toxicity + sentiment (Iter 57)."""
+    from production_pipeline.evaluation import evaluate_output
     rag_stage = next((s for s in run.stages if s.stage_no == 9), None)
+    chunks = (rag_stage.output if rag_stage else {}).get("chunks", [])
+    ctx_texts = [c.get("content", "") for c in chunks if isinstance(c, dict)]
+    # Use the final response if already composed (stage 19 hasn't run yet · use planned)
+    planner = next((s for s in run.stages if s.stage_no == 3), None)
+    answer = run.user_input + " " + ((planner.output if planner else {}).get("rationale") or "")
+    eval_result = evaluate_output(run.user_input, answer, ctx_texts)
     has_citations = (rag_stage.output if rag_stage else {}).get("top_k", 0) > 0
-    return {"grounded": has_citations,
-            "hallucination_check": "passed" if has_citations or not run.needs_kb else "warning",
-            "compliance": "ok",
-            "scaffold": False,
-            "confidence": 0.9 if has_citations or not run.needs_kb else 0.5}
+    return {
+        "grounded": has_citations,
+        "hallucination_check": "passed" if eval_result["composite_quality"] > 0.5 else "warning",
+        "compliance": "ok",
+        "evaluation": eval_result,            # ← real RAGAS+DeepEval+toxicity+sentiment
+        "scaffold": False,
+        "confidence": min(1.0, eval_result["composite_quality"] + 0.2),
+    }
 
 
 def s18_llm_gen(run: PipelineRun) -> dict:

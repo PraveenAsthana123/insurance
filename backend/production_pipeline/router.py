@@ -5,6 +5,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from production_pipeline.stages import STAGES, run_pipeline, PipelineRun
+from production_pipeline.evaluation import evaluate_output
 
 router = APIRouter(prefix="/api/v1/production-pipeline", tags=["production-pipeline"])
 
@@ -60,6 +61,12 @@ def stages():
         ],
         "count": len(STAGES),
     }
+
+
+@router.post("/evaluate")
+def evaluate_endpoint(question: str, answer: str, contexts: list[str] = []):
+    """Run RAGAS + DeepEval + toxicity + sentiment on operator-provided text."""
+    return evaluate_output(question, answer, contexts)
 
 
 @router.post("/run")
