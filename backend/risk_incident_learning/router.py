@@ -7,7 +7,7 @@ from typing import Any
 
 import psycopg2
 import psycopg2.extras
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from core.config import get_settings
@@ -382,8 +382,63 @@ def list_knowledge(category: str | None = None, knowledge_type: str | None = Non
 
 
 @router.get("/knowledge/search")
-def search_knowledge(q: str, tenant_id: str = "default", limit: int = 50):
-    """Substring search across title + content + tags."""
+def search_knowledge(q: str, tenant_id: str = "default", limit: int = 50,
+                     mode: str = "auto"):
+    """Iter 43 · Tier-1 #3 · similarity search.
+
+    mode=auto · sklearn TF-IDF when installed · falls back to ILIKE substring.
+    mode=ilike · force substring (legacy)
+    mode=tfidf · force TF-IDF (errors when sklearn unavailable)
+    """
+    # Load all candidate rows for the tenant
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute("""
+            SELECT * FROM knowledge_base
+            WHERE tenant_id = %s
+            ORDER BY created_at DESC
+        """, (tenant_id,))
+        all_rows = [dict(r) for r in cur.fetchall()]
+
+    # Try TF-IDF cosine similarity
+    use_tfidf = mode in ("auto", "tfidf")
+    sklearn_ok = False
+    if use_tfidf and all_rows:
+        try:
+            from sklearn.feature_extraction.text import TfidfVectorizer
+            from sklearn.metrics.pairwise import cosine_similarity
+            corpus = [
+                (r.get("knowledge_title") or "") + " " +
+                (r.get("content") or "") + " " +
+                (r.get("tags") or "")
+                for r in all_rows
+            ]
+            corpus.append(q)
+            vec = TfidfVectorizer(stop_words="english", max_features=5000)
+            X = vec.fit_transform(corpus)
+            sims = cosine_similarity(X[-1], X[:-1])[0]
+            scored = sorted(
+                zip(all_rows, sims), key=lambda x: x[1], reverse=True
+            )[:limit]
+            # Filter zero-similarity
+            scored = [(r, s) for r, s in scored if s > 0]
+            rows = [{**r, "_score": float(round(s, 4))} for r, s in scored]
+            sklearn_ok = True
+            return {
+                "knowledge": rows,
+                "count": len(rows),
+                "query": q,
+                "engine": "sklearn-tfidf",
+                "scaffold": False,
+            }
+        except ImportError:
+            sklearn_ok = False
+        except Exception:
+            sklearn_ok = False
+
+    # Fallback · ILIKE substring (Iter 40 behavior)
+    if mode == "tfidf" and not sklearn_ok:
+        raise HTTPException(503, {"detail": "sklearn not installed",
+                                   "error_code": "TFIDF_UNAVAILABLE"})
     with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute("""
             SELECT * FROM knowledge_base
@@ -393,7 +448,12 @@ def search_knowledge(q: str, tenant_id: str = "default", limit: int = 50):
             LIMIT %s
         """, (tenant_id, f"%{q}%", f"%{q}%", f"%{q}%", limit))
         rows = [dict(r) for r in cur.fetchall()]
-    return {"knowledge": rows, "count": len(rows), "query": q}
+    return {
+        "knowledge": rows, "count": len(rows), "query": q,
+        "engine": "ilike-fallback",
+        "scaffold": True,
+        "scaffold_reason": "sklearn not installed · TF-IDF unavailable",
+    }
 
 
 # ──────────────────────────────────────────────────────────────────────

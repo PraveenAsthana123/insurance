@@ -180,6 +180,98 @@ def list_agents(status: str | None = None, tenant_id: str = "default", limit: in
         return {"agents": rows, "count": len(rows), "tenant_id": tenant_id}
 
 
+@router.get("/agents/all-blueprints")
+def all_blueprints(department: str | None = None, risk_level: str | None = None,
+                   tenant_id: str = "default", limit: int = 200):
+    """Iter 43 · single fetch · ALL 100 agents with working/flow/network rollup."""
+    from agentic_core.blueprints import build_blueprint
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        sql = "SELECT * FROM agent_registry WHERE tenant_id = %s"
+        params: list[Any] = [tenant_id]
+        if department:
+            sql += " AND department_id = %s"
+            params.append(department)
+        if risk_level:
+            sql += " AND risk_level = %s"
+            params.append(risk_level)
+        sql += " ORDER BY department_id, agent_id LIMIT %s"
+        params.append(limit)
+        cur.execute(sql, params)
+        agents = [dict(r) for r in cur.fetchall()]
+
+        # Bulk-load skills for all agents
+        agent_ids = [a["agent_id"] for a in agents]
+        skills_by_agent: dict[str, list[str]] = {}
+        if agent_ids:
+            cur.execute("""
+                SELECT m.agent_id, s.skill_id
+                FROM agent_skill_mapping m
+                JOIN skill_registry s ON s.skill_id = m.skill_id
+                WHERE m.agent_id = ANY(%s) AND m.status = 'Active'
+                ORDER BY m.agent_id, m.priority
+            """, (agent_ids,))
+            for r in cur.fetchall():
+                skills_by_agent.setdefault(r["agent_id"], []).append(r["skill_id"])
+
+    # Compose blueprint per agent
+    rows = []
+    for a in agents:
+        bp = build_blueprint(
+            agent_id=a["agent_id"],
+            agent_name=a["agent_name"],
+            department_id=a["department_id"] or "",
+            risk_level=a["risk_level"] or "Medium",
+            skills=skills_by_agent.get(a["agent_id"], []),
+        )
+        rows.append({
+            # Identity
+            "agent_id":         a["agent_id"],
+            "agent_name":       a["agent_name"],
+            "department":       a["department_id"],
+            "domain":           a["business_domain"],
+            "risk_level":       a["risk_level"],
+            "autonomy":         a["autonomy_level"],
+            # Working
+            "process_summary":  bp["process_summary"],
+            "n_inputs":         len(bp["inputs"]),
+            "n_steps":          len(bp["steps"]),
+            "n_outputs":        len(bp["outputs"]),
+            "n_skills":         len(skills_by_agent.get(a["agent_id"], [])),
+            # Network
+            "mcp_servers":      bp["mcp_servers"],
+            "rag_corpora":      bp["rag_corpora"],
+            "tools":            bp["tools_mapped"] + bp["tools_template"],
+            # Flow
+            "autonomy_marker":  bp["autonomy_marker"],
+            "blueprint_hash":   bp["blueprint_hash"],
+            "model":            a["model_name"],
+        })
+
+    # Aggregate stats
+    by_dept: dict[str, int] = {}
+    by_risk: dict[str, int] = {}
+    all_mcps: set[str] = set()
+    all_rag: set[str] = set()
+    for r in rows:
+        by_dept[r["department"]] = by_dept.get(r["department"], 0) + 1
+        by_risk[r["risk_level"]] = by_risk.get(r["risk_level"], 0) + 1
+        all_mcps.update(r["mcp_servers"])
+        all_rag.update(r["rag_corpora"])
+
+    return {
+        "agents": rows,
+        "count": len(rows),
+        "stats": {
+            "by_department": by_dept,
+            "by_risk_level": by_risk,
+            "unique_mcps": sorted(all_mcps),
+            "unique_rag_corpora": sorted(all_rag),
+            "n_unique_mcps": len(all_mcps),
+            "n_unique_rag": len(all_rag),
+        },
+    }
+
+
 @router.get("/agents/{agent_id}/blueprint")
 def get_agent_blueprint(agent_id: str):
     """Per-agent blueprint · IPO + flowchart + MCP + RAG + tools (Iter 41)."""
@@ -411,6 +503,31 @@ def get_invocation(invocation_id: str):
             raise HTTPException(404, {"detail": f"invocation not found: {invocation_id}",
                                        "error_code": "INVOCATION_404"})
         return dict(row)
+
+
+@router.get("/invocations/{invocation_id}/trace")
+def invocation_trace(invocation_id: str):
+    """Iter 43 · Tier-1 #4 · OpenTelemetry-style trace events for one invocation."""
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute("SELECT * FROM agent_invocation WHERE invocation_id = %s",
+                    (invocation_id,))
+        inv = cur.fetchone()
+        if not inv:
+            raise HTTPException(404, {"detail": "invocation not found"})
+        cur.execute("""
+            SELECT * FROM agent_trace_event
+            WHERE invocation_id = %s
+            ORDER BY started_at
+        """, (invocation_id,))
+        events = [dict(r) for r in cur.fetchall()]
+    return {
+        "invocation_id": invocation_id,
+        "trace_id": inv["trace_id"],
+        "agent_id": inv["agent_id"],
+        "total_duration_ms": inv.get("duration_ms"),
+        "events": events,
+        "n_events": len(events),
+    }
 
 
 @router.get("/invocations/stats")

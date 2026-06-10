@@ -80,6 +80,27 @@ def _execute_step(skill_id: str, args: dict, agent_id: str) -> dict:
 # ──────────────────────────────────────────────────────────────────────
 # Main runtime entry point
 
+def _emit_event(cur, invocation_id: str, trace_id: str, event_name: str,
+                started: datetime, duration_ms: float, status: str,
+                parent_span_id: str | None = None,
+                attributes: dict | None = None, error: str | None = None) -> str:
+    """Iter 43 · Tier-1 #4 · write one trace event (OTel-style span)."""
+    span_id = uuid.uuid4().hex[:16]
+    cur.execute("""
+        INSERT INTO agent_trace_event
+        (event_id, invocation_id, trace_id, span_id, parent_span_id,
+         event_name, event_kind, started_at, completed_at, duration_ms,
+         status, attributes, error_text)
+        VALUES (%s, %s, %s, %s, %s, %s, 'internal', %s, %s, %s, %s, %s::jsonb, %s)
+    """, (
+        f"EV-{uuid.uuid4().hex[:14]}",
+        invocation_id, trace_id, span_id, parent_span_id,
+        event_name, started, datetime.now(timezone.utc), duration_ms,
+        status, json.dumps(attributes or {}, default=str), error,
+    ))
+    return span_id
+
+
 def invoke(
     agent_id: str,
     input_text: str,
@@ -88,12 +109,14 @@ def invoke(
     correlation_id: str | None = None,
     tenant_id: str = "default",
 ) -> dict[str, Any]:
-    """End-to-end invocation · LLM plan → tool execution → audit row.
+    """End-to-end invocation · LLM plan → tool execution → audit row + trace.
 
-    Returns full execution trace · also persisted to agent_invocation table.
+    Returns full execution trace · also persisted to agent_invocation table
+    AND per-step events to agent_trace_event (Iter 43 · Tier-1 #4).
     """
     invocation_id = f"INV-{uuid.uuid4().hex[:14]}"
     correlation_id = correlation_id or f"CORR-{uuid.uuid4().hex[:14]}"
+    trace_id = uuid.uuid4().hex
     t_total = time.perf_counter()
 
     with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
@@ -120,16 +143,37 @@ def invoke(
         skill_rows = [dict(r) for r in cur.fetchall()]
         available_skills = [s["skill_id"] for s in skill_rows]
 
-    # 3. Plan via LLM (or stub)
+    # 3. Plan via LLM (or stub) · emit plan span
+    plan_started = datetime.now(timezone.utc)
+    t_plan = time.perf_counter()
     plan_result = llm_plan(
         agent_id=agent_id,
         agent_model=agent.get("model_name") or "",
         input_text=input_text,
         skills=available_skills,
     )
+    plan_duration_ms = round((time.perf_counter() - t_plan) * 1000, 2)
 
     plan_text = json.dumps(plan_result["plan"], default=str)
     plan_steps = plan_result["plan"].get("steps", []) or []
+
+    # Emit plan span
+    plan_span_id = None
+    with _conn() as c, c.cursor() as cur:
+        plan_span_id = _emit_event(
+            cur, invocation_id, trace_id, "plan",
+            started=plan_started, duration_ms=plan_duration_ms,
+            status="ok" if not plan_result["scaffold"] else "stub",
+            attributes={
+                "provider": plan_result["provider"],
+                "model": plan_result["model"],
+                "tokens_in": plan_result["tokens_in"],
+                "tokens_out": plan_result["tokens_out"],
+                "cost_usd": plan_result["cost_usd"],
+                "n_steps_planned": len(plan_steps),
+            },
+            error=plan_result.get("error"),
+        )
 
     # 4. Execute each planned step (respecting autonomy_level)
     skills_used: list[str] = []
@@ -161,28 +205,42 @@ def invoke(
                 hitl_required = True
                 continue
 
-        # Execute
+        # Execute · emit per-skill span
+        step_started = datetime.now(timezone.utc)
         result = _execute_step(skill_id, step.get("args") or {}, agent_id)
         step_results.append(result)
         skills_used.append(skill_id)
-        # Tools used = derived from skill registry's mapped tools (Iter 42+)
-        # For now · track the skill name as proxy
         tools_used.append(skill_id)
+        # Emit trace event
+        try:
+            with _conn() as c, c.cursor() as cur:
+                _emit_event(
+                    cur, invocation_id, trace_id, f"skill.{skill_id}",
+                    started=step_started, duration_ms=result["duration_ms"],
+                    status=result["status"], parent_span_id=plan_span_id,
+                    attributes={
+                        "skill_id": skill_id,
+                        "args": step.get("args") or {},
+                    },
+                    error=result.get("error"),
+                )
+        except Exception:
+            pass  # trace failure doesn't block runtime
 
     duration_ms = round((time.perf_counter() - t_total) * 1000, 2)
     status = "Success" if not hitl_required and all(s["status"] in ("ok", "stub") for s in step_results) \
              else "PendingApproval" if hitl_required else "PartialFailure"
 
-    # 5. Write the audit row (REAL data · not scaffold)
+    # 5. Write the audit row (REAL data · not scaffold) · with trace_id
     with _conn() as c, c.cursor() as cur:
         cur.execute("""
             INSERT INTO agent_invocation
             (invocation_id, agent_id, correlation_id, incident_id, trigger_kind,
              input_text, plan_text, skills_used, tools_used, actions_taken,
              output_text, status, duration_ms, tokens_in, tokens_out,
-             cost_usd, tenant_id, completed_at)
+             cost_usd, tenant_id, trace_id, parent_span_id, completed_at)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s::jsonb, %s::jsonb, %s::jsonb,
-                    %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+                    %s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
         """, (
             invocation_id, agent_id, correlation_id, incident_id, trigger_kind,
             input_text, plan_text,
@@ -190,12 +248,13 @@ def invoke(
             json.dumps({"summary": f"{len(skills_used)} step(s) executed · status={status}",
                        "step_results": step_results}, default=str),
             status, int(duration_ms), plan_result["tokens_in"], plan_result["tokens_out"],
-            plan_result["cost_usd"], tenant_id,
+            plan_result["cost_usd"], tenant_id, trace_id, plan_span_id,
         ))
 
     return {
         "invocation_id": invocation_id,
         "correlation_id": correlation_id,
+        "trace_id": trace_id,
         "agent_id": agent_id,
         "status": status,
         "duration_ms": duration_ms,
