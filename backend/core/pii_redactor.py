@@ -9,21 +9,27 @@ import re
 from typing import Any
 
 # Probe Presidio · lazy + tolerant of transformers/protobuf version mismatches
-_PRESIDIO = None
+# Iter 29 fix: opt-in only · audit env sets INSUR_DISABLE_PRESIDIO=1 to skip
+# entirely. Catches RuntimeError too (protobuf gencode mismatch raises that).
+_PRESIDIO: object = None  # None=not probed · False=probed-and-failed · tuple=ok
+
 
 def _try_presidio():
-    """Iter 29 fix: probe lazily so transformers/protobuf incompat in venv
-    doesn't break unrelated audits."""
+    """Returns tuple (analyzer, anonymizer) or False · idempotent."""
     global _PRESIDIO
-    if _PRESIDIO is not None or _PRESIDIO is False:
+    import os as _os
+    if _PRESIDIO is False or isinstance(_PRESIDIO, tuple):
         return _PRESIDIO
+    if _os.environ.get("INSUR_DISABLE_PRESIDIO", "").lower() in ("1", "true", "yes"):
+        _PRESIDIO = False
+        return False
     try:
         from presidio_analyzer import AnalyzerEngine
         from presidio_anonymizer import AnonymizerEngine
         _PRESIDIO = (AnalyzerEngine(), AnonymizerEngine())
         return _PRESIDIO
-    except Exception:
-        _PRESIDIO = False  # mark probed-and-failed so retry-cost is zero
+    except BaseException:  # noqa: BLE001 · includes RuntimeError + ImportError
+        _PRESIDIO = False
         return False
 
 
@@ -58,7 +64,7 @@ def redact_text(text: str) -> tuple[str, list[dict]]:
     findings: list[dict] = []
     out = text
     presidio = _try_presidio()
-    if presidio and presidio is not False:
+    if isinstance(presidio, tuple):
         analyzer, anonymizer = presidio
         try:
             results = analyzer.analyze(text=text, language="en")
