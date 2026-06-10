@@ -8,13 +8,23 @@ from __future__ import annotations
 import re
 from typing import Any
 
-# Probe Presidio
-try:
-    from presidio_analyzer import AnalyzerEngine
-    from presidio_anonymizer import AnonymizerEngine
-    _PRESIDIO = (AnalyzerEngine(), AnonymizerEngine())
-except Exception:
-    _PRESIDIO = None
+# Probe Presidio · lazy + tolerant of transformers/protobuf version mismatches
+_PRESIDIO = None
+
+def _try_presidio():
+    """Iter 29 fix: probe lazily so transformers/protobuf incompat in venv
+    doesn't break unrelated audits."""
+    global _PRESIDIO
+    if _PRESIDIO is not None or _PRESIDIO is False:
+        return _PRESIDIO
+    try:
+        from presidio_analyzer import AnalyzerEngine
+        from presidio_anonymizer import AnonymizerEngine
+        _PRESIDIO = (AnalyzerEngine(), AnonymizerEngine())
+        return _PRESIDIO
+    except Exception:
+        _PRESIDIO = False  # mark probed-and-failed so retry-cost is zero
+        return False
 
 
 # Regex fallback patterns (§57.7 honest: high-precision · misses edge cases)
@@ -47,8 +57,9 @@ def redact_text(text: str) -> tuple[str, list[dict]]:
         return text, []
     findings: list[dict] = []
     out = text
-    if _PRESIDIO:
-        analyzer, anonymizer = _PRESIDIO
+    presidio = _try_presidio()
+    if presidio and presidio is not False:
+        analyzer, anonymizer = presidio
         try:
             results = analyzer.analyze(text=text, language="en")
             if results:
