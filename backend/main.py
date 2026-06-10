@@ -6,7 +6,6 @@ from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
 from fastapi import FastAPI
-    from middleware.idempotency import IdempotencyMiddleware  # Iter 25
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
@@ -70,6 +69,9 @@ def create_app() -> FastAPI:
     )
     app.add_middleware(RateLimitMiddleware, requests_per_minute=settings.rate_limit_api)
     app.add_middleware(SecurityHeadersMiddleware)
+    # Iter 25 · C2 · idempotency-key safe retry · §47.7
+    from middleware.idempotency import IdempotencyMiddleware
+    app.add_middleware(IdempotencyMiddleware)
     # RBAC runs INSIDE CorrelationId so request.state.correlation_id is set
     # before RBAC returns 403/400. add_middleware stacks in reverse: last-added
     # is outermost. CorrelationId (added last) wraps RBAC (added just before).

@@ -17,7 +17,7 @@ import RoleViewSelector from '../../../components/RoleViewSelector';
 import ProcessComparePanel from '../../../components/ProcessComparePanel';
 import FavoritesPanel from '../../../components/FavoritesPanel';
 import VulnerabilityPanel from '../../../components/VulnerabilityPanel';
-import EmptyState from '../../../components/EmptyState';
+// Iter 25 · 'EmptyState' name collides with local function below · skip shared import here
 import ErrorBoundary from '../../../components/ErrorBoundary';
 import ActivityLogPanel from '../../../components/ActivityLogPanel';
 import PermalinkShare from '../../../components/PermalinkShare';
