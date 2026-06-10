@@ -42,8 +42,10 @@ def main():
 
     r = c.get("/api/v1/alerts/activity?limit=5")
     d = r.json()
-    a(f"5. GET /activity returns rows ({d.get('count')})",
-      r.status_code == 200 and d.get("count", 0) >= 1)
+    # Iter 26 retrofit · /activity returns paginated envelope (items/total)
+    n = d.get("total") if d.get("total") is not None else len(d.get("items") or d.get("rows") or [])
+    a(f"5. GET /activity returns rows ({n})",
+      r.status_code == 200 and n >= 1)
 
     # 6. Bulk HITL
     r = c.post("/api/v1/alerts/hitl/bulk", json={

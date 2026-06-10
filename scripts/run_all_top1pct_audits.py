@@ -64,13 +64,15 @@ def run_one(modname: str) -> dict:
         buf.write(f"\nFATAL: {type(e).__name__}: {e}\n")
         rc = 2
     output = buf.getvalue()
-    # Parse the "X/10 pass · Y fail" line
+    # Parse the "Summary: X/N pass · Y fail" line.
+    # FIX: match "Summary:" prefix only · per-step lines also contain
+    # "pass · http=200" detail suffixes that previously false-positive matched.
     passed = total = failed = 0
     for line in output.splitlines():
-        if "pass ·" in line.lower():
-            # e.g. "  Summary: 10/10 pass · 0 fail"
+        low = line.lower().strip()
+        if low.startswith("summary:") and "pass" in low and "fail" in low:
             try:
-                left = line.split(":")[1].strip()
+                left = line.split(":", 1)[1].strip()
                 # "10/10 pass · 0 fail"
                 num, _, rest = left.partition("/")
                 passed = int(num.strip())
