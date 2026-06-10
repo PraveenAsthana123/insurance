@@ -77,3 +77,43 @@ def stats():
         "activity_rows": len(_ACTIVITY),
         "now_utc": datetime.now(timezone.utc).isoformat(),
     }
+
+
+@router.get("/export")
+def export(q: str = "", source: str = "all", fmt: str = "json"):
+    """Iter 33 · export audit search results · JSON or CSV."""
+    rows: list[dict] = []
+    if source in ("all", "audit-chain"):
+        rows.extend({**r, "source": "audit-chain"} for r in _search_chain(q))
+    if source in ("all", "activity"):
+        rows.extend({**r, "source": "activity"} for r in _search_activity(q))
+
+    if fmt == "csv":
+        from fastapi.responses import PlainTextResponse
+        if not rows:
+            return PlainTextResponse("", media_type="text/csv")
+        cols = sorted(set().union(*[r.keys() for r in rows]))
+        out_lines = [",".join(cols)]
+        for r in rows:
+            vals = []
+            for c in cols:
+                v = r.get(c, "")
+                if isinstance(v, (dict, list)):
+                    v = json.dumps(v)
+                s = str(v).replace('"', '""')
+                if "," in s or '"' in s or "\n" in s:
+                    s = f'"{s}"'
+                vals.append(s)
+            out_lines.append(",".join(vals))
+        return PlainTextResponse(
+            "\n".join(out_lines) + "\n",
+            media_type="text/csv",
+            headers={"Content-Disposition": "attachment; filename=audit-export.csv"},
+        )
+
+    # default JSON
+    from fastapi.responses import JSONResponse
+    return JSONResponse(
+        {"rows": rows, "count": len(rows), "query": q, "source": source},
+        headers={"Content-Disposition": "attachment; filename=audit-export.json"},
+    )

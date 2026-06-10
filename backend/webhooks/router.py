@@ -90,9 +90,23 @@ def delete_hook(hook_id: str):
     return {"deleted": hook_id, "name": h["name"]}
 
 
+# Iter 33 · webhook nonce replay protection
+_NONCE_CACHE: dict[str, dict[str, float]] = {}  # hook_id → {nonce: expires_ts}
+_NONCE_TTL_S = 300
+
+
+def _evict_expired_nonces(hook_id: str) -> None:
+    import time
+    nonces = _NONCE_CACHE.get(hook_id, {})
+    now = time.time()
+    stale = [n for n, exp in nonces.items() if exp < now]
+    for n in stale:
+        nonces.pop(n, None)
+
+
 @router.post("/receive/{hook_id}")
 async def receive_webhook(hook_id: str, request: Request):
-    """Generic webhook receiver · verifies HMAC against the registered secret."""
+    """Generic webhook receiver · verifies HMAC + nonce against the registered secret."""
     d = _load()
     hook = d["hooks"].get(hook_id)
     if not hook:
@@ -103,6 +117,18 @@ async def receive_webhook(hook_id: str, request: Request):
     body = await request.body()
     sig = request.headers.get("X-Insur-Signature")
     ts = request.headers.get("X-Insur-Signature-Timestamp")
+    nonce = request.headers.get("X-Insur-Nonce")
+
+    # Iter 33 · reject replay: same nonce in last 5 minutes
+    if nonce:
+        _evict_expired_nonces(hook_id)
+        cache = _NONCE_CACHE.setdefault(hook_id, {})
+        if nonce in cache:
+            raise HTTPException(409, {
+                "detail": "nonce already seen · replay rejected",
+                "error_code": "NONCE_REPLAY",
+            })
+
     valid = verify_hmac(
         request.method, request.url.path, body, sig, ts,
         secret=hook["secret"],
@@ -111,11 +137,17 @@ async def receive_webhook(hook_id: str, request: Request):
         raise HTTPException(401, {"detail": "HMAC verification failed",
                                    "error_code": "HMAC_INVALID"})
 
+    if nonce:
+        import time
+        cache = _NONCE_CACHE.setdefault(hook_id, {})
+        cache[nonce] = time.time() + _NONCE_TTL_S
+
     delivery = {
         "delivery_id": f"D-{uuid.uuid4().hex[:10]}",
         "hook_id": hook_id,
         "received_at": datetime.now(timezone.utc).isoformat(),
         "size_bytes": len(body),
+        "nonce_provided": nonce is not None,
     }
     d["deliveries"].append(delivery)
     d["deliveries"] = d["deliveries"][-100:]  # cap at 100 most recent

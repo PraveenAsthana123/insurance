@@ -78,6 +78,9 @@ def create_app() -> FastAPI:
     # Iter 31 · CSP nonce middleware
     from middleware.csp_nonce import CSPNonceMiddleware
     app.add_middleware(CSPNonceMiddleware)
+    # Iter 33 · per-route latency histogram
+    from middleware.latency import LatencyHistogramMiddleware
+    app.add_middleware(LatencyHistogramMiddleware)
     # Iter 27 · C4 · ETag/304 caching for GET responses
     from middleware.etag import ETagMiddleware
     app.add_middleware(ETagMiddleware)
@@ -170,7 +173,10 @@ def create_app() -> FastAPI:
     from approval_workflow.router import router as approvals_router  # /api/v1/approvals — Iter 31
     from healthz.router import router as healthz_router, mark_startup_done  # /healthz/* — Iter 32
     from cors_admin.router import router as cors_admin_router  # /api/v1/cors-admin — Iter 32
-    from notifications.router import router as notifications_router  # /api/v1/notifications — Iter 32  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from notifications.router import router as notifications_router  # /api/v1/notifications — Iter 32
+    from latency_endpoint.router import router as latency_router  # /api/v1/metrics-latency — Iter 33
+    from migration_tracker.router import router as migration_tracker_router  # /api/v1/migrations — Iter 33
+    from heartbeat.router import router as heartbeat_router  # /api/v1/heartbeat — Iter 33  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -251,6 +257,9 @@ def create_app() -> FastAPI:
     app.include_router(healthz_router)             # /healthz/* — Iter 32
     app.include_router(cors_admin_router)          # /api/v1/cors-admin — Iter 32
     app.include_router(notifications_router)       # /api/v1/notifications — Iter 32
+    app.include_router(latency_router)             # /api/v1/metrics-latency — Iter 33
+    app.include_router(migration_tracker_router)   # /api/v1/migrations — Iter 33
+    app.include_router(heartbeat_router)           # /api/v1/heartbeat — Iter 33
     mark_startup_done()                            # Iter 32 · k8s startup probe                # /api/v1/vulnerabilities — Iter 25              # /api/v1/alerts/* — Iter 21            # /api/v1/comments/* — P1 #18         # /api/v1/test-status/* — §64.30 12-tier       # /api/v1/data-pipeline/* — 5-phase      # /api/v1/responsible-ai/* — 12-lens           # /api/v1/use-cases/* — §94            # /api/v1/pipeline/* — §93 process modes            # /api/v1/feedback/* — Tier 7 gate #4                # /api/v1/hitl/* — Tier 7 gate #3          # /api/v1/ml/* — honest stubs P0.3+P0.4+P0.5        # /api/v1/corrections/* — T7.10    # /api/v1/autonomous-dept/* — framework registry        # /api/v1/attribution/* — T5.9   # /api/v1/ai-tools/* — Enterprise AI Tool Landscape     # /api/v1/marketing-kpis/* — KPI registry (read-only)          # /api/v1/content-ops/* — postings + contacts + schedules
 
     return app
