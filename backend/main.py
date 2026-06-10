@@ -72,6 +72,9 @@ def create_app() -> FastAPI:
     # Iter 25 · C2 · idempotency-key safe retry · §47.7
     from middleware.idempotency import IdempotencyMiddleware
     app.add_middleware(IdempotencyMiddleware)
+    # Iter 30 · API version negotiation
+    from middleware.api_version import APIVersionMiddleware
+    app.add_middleware(APIVersionMiddleware)
     # Iter 27 · C4 · ETag/304 caching for GET responses
     from middleware.etag import ETagMiddleware
     app.add_middleware(ETagMiddleware)
@@ -156,7 +159,10 @@ def create_app() -> FastAPI:
     from audit_chain.router import router as audit_chain_router  # /api/v1/audit-chain — Iter 29
     from job_queue.router import router as job_queue_router  # /api/v1/jobs — Iter 29
     from service_health.router import router as svc_health_router  # /api/v1/service-health — Iter 29
-    from webhooks.router import router as webhooks_router  # /api/v1/webhooks — Iter 29  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from webhooks.router import router as webhooks_router  # /api/v1/webhooks — Iter 29
+    from session.router import router as session_router  # /api/v1/session — Iter 30
+    from audit_search.router import router as audit_search_router  # /api/v1/audit-search — Iter 30
+    from service_registry.router import router as service_registry_router  # /api/v1/service-registry — Iter 30  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -228,7 +234,10 @@ def create_app() -> FastAPI:
     app.include_router(audit_chain_router)         # /api/v1/audit-chain — Iter 29
     app.include_router(job_queue_router)           # /api/v1/jobs — Iter 29
     app.include_router(svc_health_router)          # /api/v1/service-health — Iter 29
-    app.include_router(webhooks_router)            # /api/v1/webhooks — Iter 29                # /api/v1/vulnerabilities — Iter 25              # /api/v1/alerts/* — Iter 21            # /api/v1/comments/* — P1 #18         # /api/v1/test-status/* — §64.30 12-tier       # /api/v1/data-pipeline/* — 5-phase      # /api/v1/responsible-ai/* — 12-lens           # /api/v1/use-cases/* — §94            # /api/v1/pipeline/* — §93 process modes            # /api/v1/feedback/* — Tier 7 gate #4                # /api/v1/hitl/* — Tier 7 gate #3          # /api/v1/ml/* — honest stubs P0.3+P0.4+P0.5        # /api/v1/corrections/* — T7.10    # /api/v1/autonomous-dept/* — framework registry        # /api/v1/attribution/* — T5.9   # /api/v1/ai-tools/* — Enterprise AI Tool Landscape     # /api/v1/marketing-kpis/* — KPI registry (read-only)          # /api/v1/content-ops/* — postings + contacts + schedules
+    app.include_router(webhooks_router)            # /api/v1/webhooks — Iter 29
+    app.include_router(session_router)             # /api/v1/session — Iter 30
+    app.include_router(audit_search_router)        # /api/v1/audit-search — Iter 30
+    app.include_router(service_registry_router)    # /api/v1/service-registry — Iter 30                # /api/v1/vulnerabilities — Iter 25              # /api/v1/alerts/* — Iter 21            # /api/v1/comments/* — P1 #18         # /api/v1/test-status/* — §64.30 12-tier       # /api/v1/data-pipeline/* — 5-phase      # /api/v1/responsible-ai/* — 12-lens           # /api/v1/use-cases/* — §94            # /api/v1/pipeline/* — §93 process modes            # /api/v1/feedback/* — Tier 7 gate #4                # /api/v1/hitl/* — Tier 7 gate #3          # /api/v1/ml/* — honest stubs P0.3+P0.4+P0.5        # /api/v1/corrections/* — T7.10    # /api/v1/autonomous-dept/* — framework registry        # /api/v1/attribution/* — T5.9   # /api/v1/ai-tools/* — Enterprise AI Tool Landscape     # /api/v1/marketing-kpis/* — KPI registry (read-only)          # /api/v1/content-ops/* — postings + contacts + schedules
 
     return app
 
