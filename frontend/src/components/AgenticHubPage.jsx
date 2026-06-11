@@ -14,6 +14,7 @@ const HUB_TABS = [
   { key: 'challenges', label: '⚠️ Challenges & Plans (Iter 58)' },
   { key: 'status-agents', label: '📊 Status Agents (Iter 59)' },
   { key: 'checklist', label: '☑️ Production Checklist (Iter 60)' },
+  { key: 'enterprise', label: '🏛 Enterprise Standard §101 (Iter 61)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
@@ -1236,6 +1237,99 @@ function ChecklistView() {
   );
 }
 
+
+function EnterpriseStandardView() {
+  const [cov, setCov] = useState(null);
+  const [gate, setGate] = useState(null);
+  useEffect(() => {
+    fetch(`${API}/api/v1/enterprise-standard/coverage`).then(r => r.json()).then(setCov);
+    fetch(`${API}/api/v1/enterprise-standard/production-gate`).then(r => r.json()).then(setGate);
+  }, []);
+  if (!cov || !gate) return <em>Loading…</em>;
+  const STATUS_COLOR = { "✅": '#10b981', "⚠️": '#f59e0b', "❌": '#ef4444', "⏳": '#94a3b8' };
+  return (
+    <>
+      <Section title="🏛 §101 · The 15 Mandatory Policy Areas · LIVE" accent="#3b82f6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 10 }}>
+          <div style={{ padding: 10, background: '#dcfce7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>POLICY DONE</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#15803d' }}>{cov.policy_summary.done}/{cov.policy_summary.total}</div>
+          </div>
+          <div style={{ padding: 10, background: '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>PARTIAL</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#a16207' }}>{cov.policy_summary.partial}</div>
+          </div>
+          <div style={{ padding: 10, background: '#fee2e2', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>MISSING</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#991b1b' }}>{cov.policy_summary.missing}</div>
+          </div>
+          <div style={{ padding: 10, background: '#dbeafe', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>PROD-READY</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#1d4ed8' }}>{cov.policy_summary.production_ready_pct}%</div>
+          </div>
+        </div>
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#f1f5f9' }}>
+            <tr><th style={{ textAlign:'left', padding:4 }}>#</th><th style={{ textAlign:'left', padding:4 }}>AREA</th>
+                <th style={{ textAlign:'left', padding:4 }}>RULE</th><th style={{ textAlign:'center', padding:4 }}>STATUS</th>
+                <th style={{ textAlign:'left', padding:4 }}>WHERE</th></tr>
+          </thead>
+          <tbody>
+            {cov.policy_areas.map(p => (
+              <tr key={p.id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding:4 }}><code>{p.id}</code></td>
+                <td style={{ padding:4 }}><strong>{p.area}</strong></td>
+                <td style={{ padding:4, fontSize: 9 }}>{p.rule}</td>
+                <td style={{ padding:4, textAlign:'center', fontSize: 14 }}>{p.status}</td>
+                <td style={{ padding:4, fontSize: 9, color:'#475569' }}>{p.where}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      <Section title={`12-Check Production Gate · ${gate.pass_pct}% ready`} accent={gate.ready_for_prod ? '#10b981' : '#f59e0b'}>
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#f1f5f9' }}>
+            <tr><th style={{ textAlign:'left', padding:4 }}>CHECK</th>
+                <th style={{ textAlign:'center', padding:4 }}>STATUS</th>
+                <th style={{ textAlign:'left', padding:4 }}>DETAIL</th></tr>
+          </thead>
+          <tbody>
+            {gate.checks.map((c, i) => (
+              <tr key={i} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding:4 }}><strong>{c.check}</strong></td>
+                <td style={{ padding:4, textAlign:'center', fontSize: 14 }}>{c.status}</td>
+                <td style={{ padding:4, fontSize: 9, color:'#475569' }}>{c.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      <Section title="12 Mandatory DB Tables · §101.E" accent="#8b5cf6">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#faf5ff' }}>
+            <tr><th style={{ textAlign:'left', padding:4 }}>TABLE</th>
+                <th style={{ textAlign:'center', padding:4 }}>STATUS</th></tr>
+          </thead>
+          <tbody>
+            {cov.mandatory_tables.map(t => (
+              <tr key={t.table} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding:4 }}><code>{t.table}</code></td>
+                <td style={{ padding:4, textAlign:'center', fontSize: 14 }}>{t.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ marginTop: 6, fontSize: 10 }}>
+          {cov.tables_summary.present}/{cov.tables_summary.total} present ({cov.tables_summary.done_pct}%)
+        </div>
+      </Section>
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1595,6 +1689,7 @@ export default function AgenticHubPage() {
         {activeTab === 'challenges'         && <ChallengesView />}
         {activeTab === 'status-agents'     && <StatusAgentsView />}
         {activeTab === 'checklist'        && <ChecklistView />}
+        {activeTab === 'enterprise'      && <EnterpriseStandardView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}

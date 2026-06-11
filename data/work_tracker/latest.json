@@ -1,13 +1,13 @@
 {
-  "ts": "2026-06-10T23:00:01Z",
+  "ts": "2026-06-11T00:05:04Z",
   "cron_logs": {
     "agent_test_runner.log": {
-      "size": 136808,
-      "last_modified": "2026-06-10T22:30:02Z",
+      "size": 137373,
+      "last_modified": "2026-06-11T00:00:02Z",
       "tail": [
-        "2026-06-10T22:30:02Z | test-runner | TDD check: every feature must have a paired drill (\u00a743)",
-        "2026-06-10T22:30:02Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260610T223001Z.json",
-        "2026-06-10T23:00:01Z | test-runner | api: 4 endpoints"
+        "2026-06-10T23:30:02Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260610T233001Z.json",
+        "2026-06-11T00:00:02Z | test-runner | api: 4 endpoints",
+        "2026-06-11T00:00:02Z | test-runner | api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260611T000001Z.json"
       ]
     },
     "agentic_readiness_cron.log": {
@@ -37,12 +37,12 @@
       ]
     },
     "auto_fix_loop.log": {
-      "size": 404732,
-      "last_modified": "2026-06-10T23:00:01Z",
+      "size": 407505,
+      "last_modified": "2026-06-11T00:03:21Z",
       "tail": [
-        "Seeded 339 tasks \u2192 /mnt/deepa/insur_project/jobs/fleet/tasks.jsonl",
-        "\u001b[36m[2026-06-10T23:00:01Z]\u001b[0m discover: running insur_fleet (200 workers)",
-        "2026-06-10T23:00:01Z | auto-fix-loop | discover: running insur_fleet (200 workers)"
+        "2026-06-11T00:03:21Z | auto-fix-loop |   \u2192 verdict=skip",
+        "\u001b[36m[2026-06-11T00:03:21Z]\u001b[0m dispatch #2: T-loop-1781136201-2",
+        "2026-06-11T00:03:21Z | auto-fix-loop | dispatch #2: T-loop-1781136201-2"
       ]
     },
     "automation_daily-health-voice-text.log": {
@@ -64,8 +64,8 @@
       ]
     },
     "codex_approval_cron.log": {
-      "size": 947039,
-      "last_modified": "2026-06-10T23:00:01Z",
+      "size": 949054,
+      "last_modified": "2026-06-11T00:05:04Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -73,8 +73,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 10720572,
-      "last_modified": "2026-06-10T22:58:58Z",
+      "size": 10778077,
+      "last_modified": "2026-06-11T00:00:49Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -91,12 +91,12 @@
       ]
     },
     "fix_all_quick.log": {
-      "size": 84000,
-      "last_modified": "2026-06-10T22:15:01Z",
+      "size": 84400,
+      "last_modified": "2026-06-10T23:15:02Z",
       "tail": [
         "workforce: fleet+ollama \u2192 /mnt/deepa/insur_project/data/registry/workforce_health.json",
-        "[2026-06-10T22:15:01Z] \u2713 workforce",
-        "[2026-06-10T22:15:01Z] report \u2192 /mnt/deepa/insur_project/jobs/reports/fix_all_20260610T221501Z.md"
+        "[2026-06-10T23:15:01Z] \u2713 workforce",
+        "[2026-06-10T23:15:01Z] report \u2192 /mnt/deepa/insur_project/jobs/reports/fix_all_20260610T231501Z.md"
       ]
     },
     "fix_all_weekly.log": {
@@ -127,12 +127,12 @@
       ]
     },
     "insurance_alignment_cron.log": {
-      "size": 43006,
-      "last_modified": "2026-06-10T22:12:01Z",
+      "size": 43238,
+      "last_modified": "2026-06-10T23:12:01Z",
       "tail": [
         "Insurance alignment audit: 312 checks, 0 failed",
-        "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260610_2212.md",
-        "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260610_2212.json"
+        "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260610_2312.md",
+        "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260610_2312.json"
       ]
     },
     "insurance_audit_20260601T221059Z.log": {
@@ -334,12 +334,12 @@
       ]
     },
     "insurance_catalog_cron.log": {
-      "size": 59804,
-      "last_modified": "2026-06-10T23:00:05Z",
+      "size": 60121,
+      "last_modified": "2026-06-11T00:00:04Z",
       "tail": [
-        "[23:00:04] Running drill\u2026",
-        "[23:00:05] Drill OK",
-        "[23:00:05] Cycle complete \u00b7 audit appended."
+        "[00:00:03] Running drill\u2026",
+        "[00:00:04] Drill OK",
+        "[00:00:04] Cycle complete \u00b7 audit appended."
       ]
     },
     "insurance_data_refresh_auto_insurance_claims.log": {
@@ -460,8 +460,8 @@
       ]
     },
     "insurance_workforce_rollup_cron.log": {
-      "size": 36687,
-      "last_modified": "2026-06-10T22:13:02Z",
+      "size": 36887,
+      "last_modified": "2026-06-10T23:13:01Z",
       "tail": [
         "out: /mnt/deepa/insur_project/data/work_tracker/insurance_alignment.json",
         "insurance rollup: 262 caps \u00b7 1 maturity levels \u00b7 impl 0.0% \u00b7 audit green \u00b7 depts 21/22 (15 complete, 6 partial, 1 missing)",
@@ -479,10 +479,10 @@
     },
     "kpi-snapshot-20260610.log": {
       "size": 330,
-      "last_modified": "2026-06-10T23:00:02Z",
+      "last_modified": "2026-06-11T00:00:03Z",
       "tail": [
-        "  2. persisted snapshot \u00b7 id=43",
-        "  3. total snapshots in DB                              | 43",
+        "  2. persisted snapshot \u00b7 id=44",
+        "  3. total snapshots in DB                              | 44",
         "  Reference: \u00a782.7 + T5.8"
       ]
     },
@@ -519,12 +519,12 @@
       ]
     },
     "pending_boot.log": {
-      "size": 41029,
-      "last_modified": "2026-06-10T23:00:01Z",
+      "size": 41308,
+      "last_modified": "2026-06-11T00:00:08Z",
       "tail": [
-        "[2026-06-10T22:30:01Z] verifying backend create_app()",
         "BOOT_FAIL ModuleNotFoundError: No module named 'backend'",
-        "[2026-06-10T23:00:01Z] verifying backend create_app()"
+        "[2026-06-11T00:00:01Z] verifying backend create_app()",
+        "BOOT_FAIL ModuleNotFoundError: No module named 'backend'"
       ]
     },
     "pending_claude-md-drift.log": {
@@ -582,21 +582,21 @@
       ]
     },
     "pending_push-hint.log": {
-      "size": 5152,
-      "last_modified": "2026-06-10T18:00:04Z",
+      "size": 5300,
+      "last_modified": "2026-06-11T00:00:04Z",
       "tail": [
-        "[2026-06-10T18:00:01Z] git remote + push status",
-        "[2026-06-10T18:00:01Z] remote: (no origin)",
-        "[2026-06-10T18:00:01Z] commits ahead of origin/main: 192"
+        "[2026-06-11T00:00:01Z] git remote + push status",
+        "[2026-06-11T00:00:01Z] remote: (no origin)",
+        "[2026-06-11T00:00:01Z] commits ahead of origin/main: 228"
       ]
     },
     "pending_push.log": {
-      "size": 144664,
-      "last_modified": "2026-06-10T23:00:01Z",
+      "size": 145340,
+      "last_modified": "2026-06-11T00:00:01Z",
       "tail": [
-        "[2026-06-10T23:00:01Z] push task",
-        "[2026-06-10T23:00:01Z] skip \u2014 no origin remote configured",
-        "[2026-06-10T23:00:01Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-11T00:00:01Z] push task",
+        "[2026-06-11T00:00:01Z] skip \u2014 no origin remote configured",
+        "[2026-06-11T00:00:01Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "pending_reports-cleanup.log": {
@@ -635,7 +635,7 @@
     },
     "rag_cache.log": {
       "size": 1687,
-      "last_modified": "2026-06-10T21:00:50Z",
+      "last_modified": "2026-06-10T23:00:50Z",
       "tail": [
         "Traceback (most recent call last):",
         "  File \"<stdin>\", line 10, in <module>",
@@ -643,12 +643,12 @@
       ]
     },
     "rag_chunking.log": {
-      "size": 36027,
-      "last_modified": "2026-06-10T22:35:06Z",
+      "size": 36241,
+      "last_modified": "2026-06-11T00:05:02Z",
       "tail": [
+        "[2026-06-10T23:35:01Z] running chunking sweep",
         "chunked 4959 docs, wrote 0 new chunks",
-        "[2026-06-10T22:35:01Z] running chunking sweep",
-        "chunked 4959 docs, wrote 0 new chunks"
+        "[2026-06-11T00:05:02Z] running chunking sweep"
       ]
     },
     "rag_deepeval.log": {
@@ -661,21 +661,21 @@
       ]
     },
     "rag_embedding.log": {
-      "size": 43712,
-      "last_modified": "2026-06-10T22:40:02Z",
+      "size": 43904,
+      "last_modified": "2026-06-10T23:40:02Z",
       "tail": [
-        "[2026-06-10T22:40:01Z] embedding sweep",
+        "[2026-06-10T23:40:01Z] embedding sweep",
         "chunks=33139 embedded=33139 todo=0",
         "embedded 0 new chunks"
       ]
     },
     "rag_guardrail.log": {
-      "size": 87112,
-      "last_modified": "2026-06-10T23:00:01Z",
+      "size": 87520,
+      "last_modified": "2026-06-11T00:00:02Z",
       "tail": [
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260610.jsonl",
-        "[2026-06-10T23:00:01Z] guardrail probes",
-        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260610.jsonl"
+        "[2026-06-11T00:00:01Z] guardrail probes",
+        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260611.jsonl"
       ]
     },
     "rag_ragas.log": {
@@ -688,11 +688,11 @@
       ]
     },
     "rag_token.log": {
-      "size": 18318,
-      "last_modified": "2026-06-10T22:15:01Z",
+      "size": 18404,
+      "last_modified": "2026-06-10T23:15:01Z",
       "tail": [
         "token usage: 2 models tallied for 2026-06-10",
-        "[2026-06-10T22:15:01Z] token usage tally",
+        "[2026-06-10T23:15:01Z] token usage tally",
         "token usage: 2 models tallied for 2026-06-10"
       ]
     },
@@ -724,12 +724,12 @@
       ]
     },
     "test_runner_api_hourly.log": {
-      "size": 30702,
-      "last_modified": "2026-06-10T23:00:02Z",
+      "size": 30849,
+      "last_modified": "2026-06-11T00:00:02Z",
       "tail": [
-        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260610T220001Z.json",
+        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260610T230001Z.json",
         "\u001b[36m[test-runner]\u001b[0m api: 4 endpoints",
-        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260610T230001Z.json"
+        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260611T000001Z.json"
       ]
     },
     "test_runner_nightly.log": {
@@ -742,19 +742,19 @@
       ]
     },
     "test_runner_tdd_hourly.log": {
-      "size": 38902,
-      "last_modified": "2026-06-10T22:30:02Z",
+      "size": 39089,
+      "last_modified": "2026-06-10T23:30:02Z",
       "tail": [
-        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260610T213001Z.json",
+        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260610T223001Z.json",
         "\u001b[36m[test-runner]\u001b[0m TDD check: every feature must have a paired drill (\u00a743)",
-        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260610T223001Z.json"
+        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260610T233001Z.json"
       ]
     },
     "work_tracker.log": {
-      "size": 268323,
-      "last_modified": "2026-06-10T22:55:02Z",
+      "size": 269688,
+      "last_modified": "2026-06-11T00:00:02Z",
       "tail": [
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=89, fleet=339)",
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=90, fleet=339)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=90, fleet=339)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=90, fleet=339)"
       ]
@@ -763,14 +763,14 @@
   "fleet": {
     "tasks": 339,
     "workers": 200,
-    "elapsed_seconds": 15.39,
-    "throughput_per_sec": 22.0,
+    "elapsed_seconds": 15.47,
+    "throughput_per_sec": 21.9,
     "verdicts": {
       "ok": 240,
       "issue_found": 97,
       "escalate": 2
     },
-    "completed_at": "2026-06-10T22:00:17Z"
+    "completed_at": "2026-06-11T00:00:18Z"
   },
   "rag": {
     "chunks": 33139,
@@ -786,6 +786,6 @@
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 1085
+    "count": 1089
   }
 }
