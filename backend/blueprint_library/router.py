@@ -45,7 +45,7 @@ def list_categories():
     return {"categories": categories(), "count": len(categories())}
 
 
-@router.get("/{bp_id}")
+@router.get("/by-id/{bp_id}")
 def get_one(bp_id: str):
     bp = get_blueprint(bp_id)
     if not bp:

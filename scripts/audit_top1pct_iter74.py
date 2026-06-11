@@ -42,7 +42,7 @@ def main():
       not missing)
 
     # Detail with readiness
-    r = c.get("/api/v1/blueprint-library/basic_rag")
+    r = c.get("/api/v1/blueprint-library/by-id/basic_rag")
     detail = r.json()
     a("5. Detail returns agents_present + tables_present",
       "agents_present" in detail and "tables_present" in detail)
