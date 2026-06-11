@@ -221,5 +221,172 @@
   "n_types": 200,
   "avg_score": 6.54,
   "pct_implemented": 100.0,
-  "timestamp": "2026-06-11T17:02:53.601487"
+  "timestamp": "2026-06-11T17:02:53.601487",
+  "phase_1_trained": 27,
+  "phase_1_fail": 0,
+  "phase_1_complete_at": "2026-06-11T17:06:40.790221",
+  "upgrade_log": [
+    {
+      "slug": "aml-ai",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.956
+    },
+    {
+      "slug": "anomaly-detection-ai",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.957
+    },
+    {
+      "slug": "fraud-detection-ai",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.961
+    },
+    {
+      "slug": "predictive-ai",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.968
+    },
+    {
+      "slug": "risk-scoring-ai",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.967
+    },
+    {
+      "slug": "self-supervised-learning",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.966
+    },
+    {
+      "slug": "semi-supervised-learning",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.972
+    },
+    {
+      "slug": "supervised-learning",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.965
+    },
+    {
+      "slug": "unsupervised-learning",
+      "kind": "tabular_ml",
+      "score": 8,
+      "metric": 0.958
+    },
+    {
+      "slug": "entity-extraction-ai",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "information-retrieval-ai",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "nlg",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "nlp-ai",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "nlu",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "question-answering-ai",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "sentiment-ai",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "summarization-ai",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "translation-ai",
+      "kind": "nlp_baseline",
+      "score": 8,
+      "metric": 1.0
+    },
+    {
+      "slug": "adaptive-rag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "agentic-rag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "corrective-rag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "graphrag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "multimodal-rag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "rag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "ragops",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "self-rag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    },
+    {
+      "slug": "sql-rag",
+      "kind": "rag_variant",
+      "score": 7,
+      "metric": 0.9341
+    }
+  ]
 }

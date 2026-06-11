@@ -1,0 +1,26 @@
+{
+  "ai_type": "NLU",
+  "slug": "nlu",
+  "algorithm": "TF-IDF + LogisticRegression",
+  "accuracy": 1.0,
+  "f1": 1.0,
+  "n_train": 1600,
+  "n_test": 400,
+  "vocab_size": 200,
+  "data_kind": "synthetic positive/negative text (baseline)",
+  "sample_pos_words": [
+    "great",
+    "excellent",
+    "satisfied",
+    "happy",
+    "approved"
+  ],
+  "sample_neg_words": [
+    "terrible",
+    "denied",
+    "delayed",
+    "unprofessional",
+    "slow"
+  ],
+  "trained_at": "2026-06-11T17:06:39.220995"
+}

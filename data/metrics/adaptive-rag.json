@@ -1,0 +1,12 @@
+{
+  "ai_type": "Adaptive RAG",
+  "slug": "adaptive-rag",
+  "algorithm": "TF-IDF retrieval (baseline \u00b7 upgrade to BGE-M3 in prod)",
+  "n_docs": 200,
+  "n_queries": 50,
+  "top_k": 5,
+  "avg_top1_similarity": 0.9341,
+  "vocab_size": 300,
+  "data_kind": "synthetic doc corpus",
+  "trained_at": "2026-06-11T17:06:40.159675"
+}
