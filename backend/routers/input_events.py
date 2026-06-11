@@ -172,8 +172,8 @@ async def create_input_event(
         or body.input_kind in {"approval", "upload", "command"}
 
     try:
-        from backend.repositories.input_events_repo import InputEventsRepo
-        from backend.core.db import get_pg_conn  # type: ignore
+        from repositories.input_events_repo import InputEventsRepo
+        from core.db import get_pg_conn  # type: ignore
         with get_pg_conn() as conn:
             repo = InputEventsRepo(conn)
             repo.insert(
@@ -230,8 +230,8 @@ async def get_input_event(event_id: str, request: Request) -> InputEventResponse
     """Tenant-scoped read."""
     tenant_id = _tenant(request)
     try:
-        from backend.repositories.input_events_repo import InputEventsRepo
-        from backend.core.db import get_pg_conn  # type: ignore
+        from repositories.input_events_repo import InputEventsRepo
+        from core.db import get_pg_conn  # type: ignore
         with get_pg_conn() as conn:
             repo = InputEventsRepo(conn)
             row = repo.get(event_id, tenant_id)
@@ -256,8 +256,8 @@ async def list_input_events(
     """List tenant-scoped input events with filters."""
     tenant_id = _tenant(request)
     try:
-        from backend.repositories.input_events_repo import InputEventsRepo
-        from backend.core.db import get_pg_conn  # type: ignore
+        from repositories.input_events_repo import InputEventsRepo
+        from core.db import get_pg_conn  # type: ignore
         with get_pg_conn() as conn:
             repo = InputEventsRepo(conn)
             rows = repo.list(

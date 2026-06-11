@@ -558,6 +558,19 @@
       "state": "requested",
       "created_at": "2026-06-11T05:49:08.600051+00:00",
       "decisions": []
+    },
+    "AR-c3db591362": {
+      "id": "AR-c3db591362",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T18:02:00.989624+00:00",
+      "decisions": []
     }
   }
 }

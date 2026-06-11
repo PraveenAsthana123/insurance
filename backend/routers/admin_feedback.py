@@ -39,7 +39,7 @@ async def feedback_summary(
     """
     tenant_id = _tenant(request)
     try:
-        from backend.core.db import get_pg_conn  # type: ignore
+        from core.db import get_pg_conn  # type: ignore
     except ImportError:
         # Soft-fail per rule 9 · reads can fail open
         return _empty_summary(days)
@@ -160,7 +160,7 @@ async def feedback_comments(
     """Recent feedback comments (filtered tenant-scoped)."""
     tenant_id = _tenant(request)
     try:
-        from backend.core.db import get_pg_conn  # type: ignore
+        from core.db import get_pg_conn  # type: ignore
     except ImportError:
         return []
 

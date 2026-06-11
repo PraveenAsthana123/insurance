@@ -30,7 +30,7 @@ RUNNER = REPO_ROOT / "backend" / "ml" / "insurance" / "run_dept_pipelines.py"
 
 # Per Phase 2.2 of docs/AUDIT_FIX_PLAN.md — single source of truth lives in
 # backend/core/insurance_config.py and is env-driven (INSUR_DEPT_SCOPE).
-from backend.core.insurance_config import get_insurance_depts, get_roles
+from core.insurance_config import get_insurance_depts, get_roles
 INSURANCE_DEPTS = list(get_insurance_depts())
 ROLES = list(get_roles())
 
