@@ -39,6 +39,10 @@ logging.disable(logging.CRITICAL)
 
 import psycopg2
 
+# §107 actor stamp
+import getpass, platform
+ACTOR_USER = getpass.getuser()
+ACTOR_HOST = platform.node().split('.')[0]
 REPORT_DIR = REPO / "jobs/reports/auto-next"
 LOG_DIR = REPO / "jobs/logs"
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
@@ -208,6 +212,9 @@ def main():
 
     record = {
         "tick_id": tick_id, "started_at": started_at,
+        "actor_user": ACTOR_USER, "actor_host": ACTOR_HOST,
+        "actor_kind": "cron", "agent_id": "sys_auto_next_loop",
+        "tz_local": time.strftime("%Z"),
         "findings_total": len(findings),
         "p0_p1_p2_actionable": len(actionable),
     }
