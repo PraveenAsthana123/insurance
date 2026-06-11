@@ -39,7 +39,7 @@ def _has_agent(agent_id: str) -> bool:
 
 POLICY_AREAS = [
     {"id": 1,  "area": "Naming",     "rule": "no hardcoded names · tenant.project.env.service",
-     "status": "⚠️", "where": "core/config.py · Pydantic settings (Iter 4)"},
+     "status": "✅", "where": "naming_policy table + /naming-policy/validate (Iter 70)"},
     {"id": 2,  "area": "Config",     "rule": "everything from env/config · validation at boot",
      "status": "✅", "where": "core/config.py Pydantic BaseSettings"},
     {"id": 3,  "area": "Prompt",     "rule": "every prompt logged · versioned · reviewed",
@@ -67,7 +67,7 @@ POLICY_AREAS = [
     {"id": 14, "area": "Recovery",   "rule": "checkpoint · retry · resume · rollback",
      "status": "✅", "where": "checkpoint_store + /api/v1/governance-tables/checkpoint (Iter 67)"},
     {"id": 15, "area": "Release",    "rule": "Dev → QA → UAT → Prod approval",
-     "status": "⚠️", "where": "approval_workflow (Iter 31) · no env-gate"},
+     "status": "✅", "where": "release_environment + release_promotion · /release-gate/promote (Iter 70)"},
 ]
 
 
