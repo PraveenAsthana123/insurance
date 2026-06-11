@@ -23,6 +23,7 @@ const HUB_TABS = [
   { key: 'status-agents', label: '📊 Status Agents (Iter 59)' },
   { key: 'checklist', label: '☑️ Production Checklist (Iter 60)' },
   { key: 'governance-registries', label: '🏛 Governance Registries (Iter 68-69)' },
+  { key: 'blueprints', label: '🧱 Blueprint Library (Iter 74 · Phase 6)' },
   { key: 'enterprise', label: '🏛 Enterprise Standard §101 (Iter 61)' },
   { key: 'frontend-gov', label: '🖥 Frontend Governance §102 (Iter 62)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
@@ -1556,6 +1557,146 @@ function GovernanceRegistriesView() {
   );
 }
 
+
+function BlueprintLibraryView() {
+  const [bps, setBps] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [readiness, setReadiness] = useState({});
+  const [category, setCategory] = useState('all');
+
+  useEffect(() => {
+    fetch(`${API}/api/v1/blueprint-library`).then(r => r.json()).then(d => setBps(d.blueprints || []));
+    fetch(`${API}/api/v1/blueprint-library/readiness/all`).then(r => r.json()).then(setReadiness);
+  }, []);
+
+  const cats = [...new Set(bps.map(b => b.category))];
+  const filtered = category === 'all' ? bps : bps.filter(b => b.category === category);
+
+  return (
+    <>
+      <Section title={`§103.6 · 12 Reference Architecture Blueprints`} accent="#8b5cf6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 10 }}>
+          {readiness.summary && (
+            <>
+              <div style={{ padding: 10, background: '#faf5ff', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>BLUEPRINTS</div>
+                <div style={{ fontSize: 26, fontWeight: 800 }}>{readiness.count}</div>
+              </div>
+              <div style={{ padding: 10, background: '#dcfce7', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>READY TO DEPLOY</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#15803d' }}>{readiness.summary.n_ready_to_deploy}</div>
+              </div>
+              <div style={{ padding: 10, background: '#dbeafe', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>AVG READINESS</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#1d4ed8' }}>{readiness.summary.average_readiness_pct}%</div>
+              </div>
+              <div style={{ padding: 10, background: '#fef3c7', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>CATEGORIES</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#a16207' }}>{cats.length}</div>
+              </div>
+            </>
+          )}
+        </div>
+        <select value={category} onChange={e => setCategory(e.target.value)}
+          style={{ padding: '4px 8px', fontSize: 11, marginBottom: 8 }}>
+          <option value="all">All categories</option>
+          {cats.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#f3e8ff' }}>
+            <tr>
+              <th style={{ textAlign:'left', padding: 4 }}>BLUEPRINT</th>
+              <th style={{ textAlign:'left', padding: 4 }}>CATEGORY</th>
+              <th style={{ textAlign:'center', padding: 4 }}>LEVEL</th>
+              <th style={{ textAlign:'center', padding: 4 }}>RISK</th>
+              <th style={{ textAlign:'right', padding: 4 }}>SETUP HRS</th>
+              <th style={{ textAlign:'right', padding: 4 }}>$/MONTH</th>
+              <th style={{ textAlign:'center', padding: 4 }}>READY</th>
+              <th style={{ textAlign:'center', padding: 4 }}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map(bp => {
+              const r = (readiness.blueprints || []).find(x => x.id === bp.id);
+              const pct = r ? r.readiness_pct : 0;
+              const ready = pct >= 80;
+              return (
+                <tr key={bp.id} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  <td style={{ padding: 4 }}>
+                    <strong>{bp.name}</strong>
+                    <div style={{ fontSize: 9, color: '#64748b' }}>{bp.description.slice(0, 70)}…</div>
+                  </td>
+                  <td style={{ padding: 4 }}><Pill color="#8b5cf6">{bp.category}</Pill></td>
+                  <td style={{ padding: 4, textAlign: 'center' }}><Pill color="#3b82f6">L{bp.level}</Pill></td>
+                  <td style={{ padding: 4, textAlign: 'center' }}>
+                    <Pill color={bp.risk_level==='Low'?'#10b981':bp.risk_level==='Medium'?'#f59e0b':'#ef4444'}>
+                      {bp.risk_level}
+                    </Pill>
+                  </td>
+                  <td style={{ padding: 4, textAlign: 'right' }}>{bp.estimated_setup_hours}</td>
+                  <td style={{ padding: 4, textAlign: 'right' }}>${bp.estimated_monthly_cost_usd}</td>
+                  <td style={{ padding: 4, textAlign: 'center' }}>
+                    <Pill color={ready?'#10b981':'#94a3b8'}>{pct}%</Pill>
+                  </td>
+                  <td style={{ padding: 4, textAlign: 'center' }}>
+                    <button onClick={() => setSelected(bp.id)}
+                      style={{ padding: '2px 8px', fontSize: 9, cursor: 'pointer',
+                        background: '#3b82f6', color: '#fff', border: 'none', borderRadius: 3 }}>
+                      View
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </Section>
+
+      {selected && <BlueprintDetail bpId={selected} onClose={() => setSelected(null)} />}
+    </>
+  );
+}
+
+function BlueprintDetail({ bpId, onClose }) {
+  const [bp, setBp] = useState(null);
+  useEffect(() => {
+    fetch(`${API}/api/v1/blueprint-library/${bpId}`).then(r => r.json()).then(setBp);
+  }, [bpId]);
+  if (!bp) return null;
+  return (
+    <Section title={`${bp.name} · readiness ${bp.readiness_pct}%`} accent="#8b5cf6">
+      <button onClick={onClose} style={{ float: 'right', padding: '2px 8px', fontSize: 9, cursor: 'pointer' }}>Close ✕</button>
+      <p>{bp.description}</p>
+      <strong>Use cases:</strong> {bp.use_cases?.join(' · ')}<br/>
+      <strong>Dependencies:</strong> {bp.dependencies?.join(' · ')}<br/>
+      <em>{bp.adr_notes}</em>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 8 }}>
+        <div>
+          <strong style={{ fontSize: 10 }}>AGENTS REQUIRED:</strong>
+          {bp.agents_present?.map(a => (
+            <div key={a.agent_id} style={{ fontSize: 10 }}>
+              {a.present ? '✅' : '❌'} <code>{a.agent_id}</code>
+            </div>
+          ))}
+        </div>
+        <div>
+          <strong style={{ fontSize: 10 }}>TABLES REQUIRED:</strong>
+          {bp.tables_present?.map(t => (
+            <div key={t.table} style={{ fontSize: 10 }}>
+              {t.present ? '✅' : '❌'} <code>{t.table}</code>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ marginTop: 8 }}>
+        <strong style={{ fontSize: 10 }}>ENDPOINTS:</strong>
+        {bp.endpoints?.map((e, i) => <div key={i} style={{ fontSize: 10 }}><code>{e}</code></div>)}
+      </div>
+    </Section>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1922,6 +2063,7 @@ export default function AgenticHubPage() {
         {activeTab === 'status-agents'     && <StatusAgentsView />}
         {activeTab === 'checklist'        && <ChecklistView />}
         {activeTab === 'governance-registries' && <GovernanceRegistriesView />}
+        {activeTab === 'blueprints'        && <BlueprintLibraryView />}
         {activeTab === 'enterprise'      && <EnterpriseStandardView />}
         {activeTab === 'frontend-gov'   && <FrontendGovernanceView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
