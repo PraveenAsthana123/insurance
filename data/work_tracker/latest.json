@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-11T20:45:01Z",
+  "ts": "2026-06-11T21:00:01Z",
   "cron_logs": {
     "agent_test_runner.log": {
       "size": 148254,
@@ -46,17 +46,17 @@
       ]
     },
     "auto-next.log": {
-      "size": 19224,
-      "last_modified": "2026-06-11T20:45:01Z",
+      "size": 20055,
+      "last_modified": "2026-06-11T21:00:01Z",
       "tail": [
         "[dispatcher] cooldown \u00b7 stopping chain \u00b7 cron will fire again",
-        "[dispatcher] 2026-06-11T20:45:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] 2026-06-11T21:00:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
     "auto_fix_loop.log": {
       "size": 446985,
-      "last_modified": "2026-06-11T20:02:39Z",
+      "last_modified": "2026-06-11T21:00:01Z",
       "tail": [
         "2026-06-11T20:02:39Z | auto-fix-loop |   \u2192 verdict=fail",
         "\u001b[36m[2026-06-11T20:02:39Z]\u001b[0m iteration done: ok=0 queued=0 fail=3",
@@ -73,17 +73,17 @@
       ]
     },
     "backend.log": {
-      "size": 1109,
-      "last_modified": "2026-06-11T20:20:35Z",
+      "size": 5764,
+      "last_modified": "2026-06-11T20:55:08Z",
       "tail": [
-        "INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)",
-        "{\"timestamp\": \"2026-06-11T20:20:35.895535+00:00\", \"correlation_id\": \"43eb98d8271a4306\", \"event\": \"http.request\", \"path\": \"/api/v1/health\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 17}",
-        "{\"timestamp\": \"2026-06-11T20:20:35.905998+00:00\", \"correlation_id\": \"f4e6b1e7c707476a\", \"event\": \"http.request\", \"path\": \"/api/v1/health\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 2}"
+        "{\"timestamp\": \"2026-06-11T20:48:52.269537+00:00\", \"correlation_id\": \"2f9468b3c89d4123\", \"event\": \"http.request\", \"path\": \"/api/v1/health\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 2}",
+        "{\"timestamp\": \"2026-06-11T20:50:12.024654+00:00\", \"correlation_id\": \"ac3afb38290b4b0b\", \"event\": \"http.request\", \"path\": \"/api/v2/auth/identity\", \"method\": \"GET\", \"status\": 404, \"latency_ms\": 6}",
+        "{\"timestamp\": \"2026-06-11T20:55:08.826314+00:00\", \"correlation_id\": \"30b888763e154b99\", \"event\": \"http.request\", \"path\": \"/api/v2/auth/identity\", \"method\": \"GET\", \"status\": 404, \"latency_ms\": 6}"
       ]
     },
     "codex_approval_cron.log": {
-      "size": 987494,
-      "last_modified": "2026-06-11T20:45:01Z",
+      "size": 987959,
+      "last_modified": "2026-06-11T21:00:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -91,8 +91,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 11928177,
-      "last_modified": "2026-06-11T20:37:41Z",
+      "size": 11944607,
+      "last_modified": "2026-06-11T20:55:21Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -371,7 +371,7 @@
     },
     "insurance_catalog_cron.log": {
       "size": 66461,
-      "last_modified": "2026-06-11T20:00:04Z",
+      "last_modified": "2026-06-11T21:00:01Z",
       "tail": [
         "[20:00:03] Running drill\u2026",
         "[20:00:03] Drill OK",
@@ -523,13 +523,9 @@
       ]
     },
     "kpi-snapshot-20260611.log": {
-      "size": 330,
-      "last_modified": "2026-06-11T20:00:16Z",
-      "tail": [
-        "  2. persisted snapshot \u00b7 id=64",
-        "  3. total snapshots in DB                              | 64",
-        "  Reference: \u00a782.7 + T5.8"
-      ]
+      "size": 0,
+      "last_modified": "2026-06-11T21:00:01Z",
+      "tail": []
     },
     "local_backend.log": {
       "size": 0,
@@ -573,12 +569,12 @@
       ]
     },
     "pending_boot.log": {
-      "size": 45926,
-      "last_modified": "2026-06-11T20:30:13Z",
+      "size": 45980,
+      "last_modified": "2026-06-11T21:00:01Z",
       "tail": [
-        "[2026-06-11T20:30:02Z] verifying backend create_app()",
         "chroma connect failed: Could not connect to a Chroma server. Are you sure it is running?",
-        "BOOT_OK routes=837"
+        "BOOT_OK routes=837",
+        "[2026-06-11T21:00:01Z] verifying backend create_app()"
       ]
     },
     "pending_claude-md-drift.log": {
@@ -645,12 +641,12 @@
       ]
     },
     "pending_push.log": {
-      "size": 159367,
-      "last_modified": "2026-06-11T20:45:01Z",
+      "size": 159536,
+      "last_modified": "2026-06-11T21:00:01Z",
       "tail": [
-        "[2026-06-11T20:45:01Z] push task",
-        "[2026-06-11T20:45:01Z] skip \u2014 no origin remote configured",
-        "[2026-06-11T20:45:01Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-11T21:00:01Z] push task",
+        "[2026-06-11T21:00:01Z] skip \u2014 no origin remote configured",
+        "[2026-06-11T21:00:01Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "pending_reports-cleanup.log": {
@@ -778,12 +774,12 @@
       ]
     },
     "test_runner_api_hourly.log": {
-      "size": 33789,
-      "last_modified": "2026-06-11T20:00:02Z",
+      "size": 33829,
+      "last_modified": "2026-06-11T21:00:01Z",
       "tail": [
-        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260611T190001Z.json",
         "\u001b[36m[test-runner]\u001b[0m api: 4 endpoints",
-        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260611T200001Z.json"
+        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260611T200001Z.json",
+        "\u001b[36m[test-runner]\u001b[0m api: 4 endpoints"
       ]
     },
     "test_runner_nightly.log": {
@@ -805,8 +801,8 @@
       ]
     },
     "work_tracker.log": {
-      "size": 295728,
-      "last_modified": "2026-06-11T20:40:06Z",
+      "size": 296043,
+      "last_modified": "2026-06-11T20:55:02Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=93, fleet=345)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=93, fleet=345)",

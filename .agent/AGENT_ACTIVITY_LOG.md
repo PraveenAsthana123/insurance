@@ -4778,3 +4778,23 @@ error: jobs/logs/opa_test.log: patch does not apply
 error: tests/drills/drill_adapters_endpoint.py: patch does not apply
 2026-06-11T20:02:39Z | auto-fix-loop |   → verdict=fail
 2026-06-11T20:02:39Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-11T21:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-11T21:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-11T21:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-11T21:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-11T21:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781211618-1
+2026-06-11T21:00:18Z | auto-fix-worker | start        | T-loop-1781211618-1 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-11T21:00:18Z | auto-fix-worker | classify     | T-loop-1781211618-1 | tier=small risk=low council=single
+2026-06-11T21:00:48Z | auto-fix-worker | apply_check  | T-loop-1781211618-1 | FAIL: git apply --check failed: error: corrupt patch at line 8
+2026-06-11T21:00:48Z | auto-fix-loop |   → verdict=fail
+2026-06-11T21:00:48Z | auto-fix-loop | dispatch #2: T-loop-1781211648-2
+2026-06-11T21:00:48Z | auto-fix-worker | start        | T-loop-1781211648-2 | role=error target=jobs/logs/rag_cache.log
+2026-06-11T21:00:48Z | auto-fix-worker | classify     | T-loop-1781211648-2 | tier=small risk=low council=single
+2026-06-11T21:00:53Z | auto-fix-worker | apply_check  | T-loop-1781211648-2 | FAIL: git apply --check failed: error: corrupt patch at line 7
+2026-06-11T21:00:53Z | auto-fix-loop |   → verdict=fail
+2026-06-11T21:00:53Z | auto-fix-loop | dispatch #3: T-loop-1781211653-3
+2026-06-11T21:00:53Z | auto-fix-worker | start        | T-loop-1781211653-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-11T21:00:53Z | auto-fix-worker | classify     | T-loop-1781211653-3 | tier=small risk=low council=single
+2026-06-11T21:01:01Z | auto-fix-worker | apply_check  | T-loop-1781211653-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-11T21:01:01Z | auto-fix-loop |   → verdict=fail
+2026-06-11T21:01:01Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
