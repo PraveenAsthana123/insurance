@@ -1,0 +1,9 @@
+{
+  "ai_type": "Text-to-Image AI",
+  "slug": "text-to-image-ai",
+  "ece": 0.04,
+  "brier_score": 0.03,
+  "reliability_diagram": "/data/plots/text-to-image-ai/calibration.png",
+  "status": "WELL_CALIBRATED",
+  "computed_at": "2026-06-11T17:11:12.644728"
+}

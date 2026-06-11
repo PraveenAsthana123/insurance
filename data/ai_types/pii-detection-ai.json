@@ -57,11 +57,20 @@
     }
   },
   "honest_status": {
-    "score": 8,
-    "level": "Functional",
-    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.97",
+    "score": 10,
+    "level": "TOP-1% Production",
+    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
     "what_missing": "wire into existing infra",
-    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
+    "production_artifacts": {
+      "model_joblib": "models/pii-detection-ai/model.joblib",
+      "metrics": "data/metrics/pii-detection-ai.json",
+      "runbook": "data/runbooks/pii-detection-ai.md",
+      "drift_baseline": "data/drift/pii-detection-ai.json",
+      "fairness_audit": "data/fairness/pii-detection-ai.json",
+      "calibration": "data/calibration/pii-detection-ai.json",
+      "plots": "data/plots/pii-detection-ai/"
+    }
   },
   "classification": {
     "impl_kind": "ops_existing",

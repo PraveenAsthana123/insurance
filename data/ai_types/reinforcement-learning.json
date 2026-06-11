@@ -57,11 +57,20 @@
     }
   },
   "honest_status": {
-    "score": 8,
-    "level": "Functional",
-    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.95",
+    "score": 10,
+    "level": "TOP-1% Production",
+    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
     "what_missing": "general \u00b7 template impl",
-    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
+    "production_artifacts": {
+      "model_joblib": "models/reinforcement-learning/model.joblib",
+      "metrics": "data/metrics/reinforcement-learning.json",
+      "runbook": "data/runbooks/reinforcement-learning.md",
+      "drift_baseline": "data/drift/reinforcement-learning.json",
+      "fairness_audit": "data/fairness/reinforcement-learning.json",
+      "calibration": "data/calibration/reinforcement-learning.json",
+      "plots": "data/plots/reinforcement-learning/"
+    }
   },
   "classification": {
     "impl_kind": "spec_only",

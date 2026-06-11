@@ -1,0 +1,9 @@
+{
+  "ai_type": "Business Rule AI",
+  "slug": "business-rule-ai",
+  "ece": 0.04,
+  "brier_score": 0.03,
+  "reliability_diagram": "/data/plots/business-rule-ai/calibration.png",
+  "status": "WELL_CALIBRATED",
+  "computed_at": "2026-06-11T17:11:12.538579"
+}

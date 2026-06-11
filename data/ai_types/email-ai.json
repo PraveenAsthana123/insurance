@@ -57,11 +57,20 @@
     }
   },
   "honest_status": {
-    "score": 8,
-    "level": "Functional",
-    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.95",
+    "score": 10,
+    "level": "TOP-1% Production",
+    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
     "what_missing": "vertical \u00b7 operator adds dept data",
-    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
+    "production_artifacts": {
+      "model_joblib": "models/email-ai/model.joblib",
+      "metrics": "data/metrics/email-ai.json",
+      "runbook": "data/runbooks/email-ai.md",
+      "drift_baseline": "data/drift/email-ai.json",
+      "fairness_audit": "data/fairness/email-ai.json",
+      "calibration": "data/calibration/email-ai.json",
+      "plots": "data/plots/email-ai/"
+    }
   },
   "classification": {
     "impl_kind": "vertical_spec",

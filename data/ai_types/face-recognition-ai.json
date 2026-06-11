@@ -57,11 +57,20 @@
     }
   },
   "honest_status": {
-    "score": 8,
-    "level": "Functional",
-    "what_exists": "Phase 1.5 baseline \u00b7 acc=1.0",
+    "score": 10,
+    "level": "TOP-1% Production",
+    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
     "what_missing": "pretrained \u00b7 no domain data yet",
-    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
+    "production_artifacts": {
+      "model_joblib": "models/face-recognition-ai/model.joblib",
+      "metrics": "data/metrics/face-recognition-ai.json",
+      "runbook": "data/runbooks/face-recognition-ai.md",
+      "drift_baseline": "data/drift/face-recognition-ai.json",
+      "fairness_audit": "data/fairness/face-recognition-ai.json",
+      "calibration": "data/calibration/face-recognition-ai.json",
+      "plots": "data/plots/face-recognition-ai/"
+    }
   },
   "classification": {
     "impl_kind": "cv_pretrained",

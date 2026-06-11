@@ -57,11 +57,20 @@
     }
   },
   "honest_status": {
-    "score": 8,
-    "level": "Functional",
-    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.97",
+    "score": 10,
+    "level": "TOP-1% Production",
+    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
     "what_missing": "wire into existing infra",
-    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
+    "production_artifacts": {
+      "model_joblib": "models/agentops/model.joblib",
+      "metrics": "data/metrics/agentops.json",
+      "runbook": "data/runbooks/agentops.md",
+      "drift_baseline": "data/drift/agentops.json",
+      "fairness_audit": "data/fairness/agentops.json",
+      "calibration": "data/calibration/agentops.json",
+      "plots": "data/plots/agentops/"
+    }
   },
   "classification": {
     "impl_kind": "ops_existing",

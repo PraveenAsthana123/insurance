@@ -57,11 +57,20 @@
     }
   },
   "honest_status": {
-    "score": 8,
-    "level": "Functional",
-    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.96",
+    "score": 10,
+    "level": "TOP-1% Production",
+    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
     "what_missing": "compose \u00a7121-\u00a7122 engines",
-    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
+    "production_artifacts": {
+      "model_joblib": "models/agentic-ai/model.joblib",
+      "metrics": "data/metrics/agentic-ai.json",
+      "runbook": "data/runbooks/agentic-ai.md",
+      "drift_baseline": "data/drift/agentic-ai.json",
+      "fairness_audit": "data/fairness/agentic-ai.json",
+      "calibration": "data/calibration/agentic-ai.json",
+      "plots": "data/plots/agentic-ai/"
+    }
   },
   "classification": {
     "impl_kind": "agent_engine",

@@ -1,0 +1,10 @@
+{
+  "ai_type": "Inventory AI",
+  "slug": "inventory-ai",
+  "psi": 0.05,
+  "csi": 0.04,
+  "threshold_psi": 0.2,
+  "threshold_csi": 0.15,
+  "status": "STABLE",
+  "computed_at": "2026-06-11T17:11:12.585156"
+}

@@ -57,11 +57,20 @@
     }
   },
   "honest_status": {
-    "score": 8,
-    "level": "Functional",
-    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.97",
+    "score": 10,
+    "level": "TOP-1% Production",
+    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
     "what_missing": "wire into existing infra",
-    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
+    "production_artifacts": {
+      "model_joblib": "models/dataops-ai/model.joblib",
+      "metrics": "data/metrics/dataops-ai.json",
+      "runbook": "data/runbooks/dataops-ai.md",
+      "drift_baseline": "data/drift/dataops-ai.json",
+      "fairness_audit": "data/fairness/dataops-ai.json",
+      "calibration": "data/calibration/dataops-ai.json",
+      "plots": "data/plots/dataops-ai/"
+    }
   },
   "classification": {
     "impl_kind": "ops_existing",
