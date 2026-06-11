@@ -350,6 +350,97 @@
       "state": "requested",
       "created_at": "2026-06-11T00:01:13.527393+00:00",
       "decisions": []
+    },
+    "AR-5ce0821a11": {
+      "id": "AR-5ce0821a11",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T00:16:35.301848+00:00",
+      "decisions": []
+    },
+    "AR-b2d28fab55": {
+      "id": "AR-b2d28fab55",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T00:22:58.360276+00:00",
+      "decisions": []
+    },
+    "AR-95e8c5c9ca": {
+      "id": "AR-95e8c5c9ca",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T00:25:54.474997+00:00",
+      "decisions": []
+    },
+    "AR-9b091342a4": {
+      "id": "AR-9b091342a4",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T00:27:53.711033+00:00",
+      "decisions": []
+    },
+    "AR-5a78ef8265": {
+      "id": "AR-5a78ef8265",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T00:46:45.174288+00:00",
+      "decisions": []
+    },
+    "AR-82386b5aff": {
+      "id": "AR-82386b5aff",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T01:03:13.344840+00:00",
+      "decisions": []
+    },
+    "AR-73c61510b3": {
+      "id": "AR-73c61510b3",
+      "title": "Promote model",
+      "kind": "model.promote",
+      "payload": {},
+      "requester": "alice",
+      "reviewers": [
+        "bob"
+      ],
+      "state": "requested",
+      "created_at": "2026-06-11T01:06:23.683580+00:00",
+      "decisions": []
     }
   }
 }
