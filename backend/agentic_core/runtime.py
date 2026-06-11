@@ -182,7 +182,12 @@ def invoke(
     hitl_required = False
 
     for step in plan_steps:
-        skill_id = step.get("skill_id")
+        # Iter 74.2 fix · Ollama sometimes returns steps as strings · normalize.
+        if isinstance(step, str):
+            step = {"skill_id": step, "args": {}}
+        elif not isinstance(step, dict):
+            continue
+        skill_id = step.get("skill_id") or step.get("skill") or step.get("action")
         if not skill_id:
             continue
         # Find the skill in the mapping to check risk + execution mode
