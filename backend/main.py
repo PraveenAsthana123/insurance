@@ -242,6 +242,7 @@ def create_app() -> FastAPI:
     from ai_taxonomy.router import router as tax_router  # Iter 113 · §131 AI taxonomy
     from depth_audit.router import router as depth_router  # Iter 114 · §132 depth audit
     from ai_type_impl.router import router as impl_router  # Iter 115 · §133 per-AI-type impl
+    from master_plan.router import router as mp_router  # Iter 117 · §134 master plan
     from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     from opa_adapter.router import router as opa_router
     from agentops_adapter.router import router as agops_router
@@ -392,6 +393,7 @@ def create_app() -> FastAPI:
     app.include_router(tax_router)                 # Iter 113 · §131 AI taxonomy
     app.include_router(depth_router)               # Iter 114 · §132 depth audit
     app.include_router(impl_router)                # Iter 115 · §133 ai-type impl
+    app.include_router(mp_router)                  # Iter 117 · §134 master plan
     app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     app.include_router(opa_router)
     app.include_router(agops_router)
