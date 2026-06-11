@@ -4436,3 +4436,41 @@ error: jobs/logs/opa_test.log: patch does not apply
 2026-06-11T04:03:18Z | auto-fix-worker | start        | T-loop-1781150598-2 | role=error target=jobs/logs/rag_cache.log
 2026-06-11T04:03:18Z | auto-fix-worker | classify     | T-loop-1781150598-2 | tier=small risk=low council=single
 2026-06-11T04:03:21Z | auto-fix-worker | validate     | T-loop-1781150598-2 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-11T04:03:23Z | auto-fix-worker | commit       | T-loop-1781150598-2 | ok sha=42629e43a3e5bf4b38b04e8360ad60a44751a7ce
+2026-06-11T04:03:23Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-11T04:03:23Z | auto-fix-loop | dispatch #3: T-loop-1781150603-3
+2026-06-11T04:03:24Z | auto-fix-worker | start        | T-loop-1781150603-3 | role=error target=jobs/logs/opa_test.log
+2026-06-11T04:03:24Z | auto-fix-worker | classify     | T-loop-1781150603-3 | tier=small risk=low council=single
+2026-06-11T04:03:28Z | auto-fix-worker | apply_check  | T-loop-1781150603-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-11T04:03:28Z | auto-fix-loop |   → verdict=fail
+2026-06-11T04:03:28Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2
+2026-06-11T05:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-11T05:00:03Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-11T05:00:04Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-11T05:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-11T05:00:19Z | auto-fix-loop | dispatch #1: T-loop-1781154019-1
+2026-06-11T05:00:20Z | auto-fix-worker | start        | T-loop-1781154019-1 | role=error target=jobs/logs/backend.log
+2026-06-11T05:00:20Z | auto-fix-worker | classify     | T-loop-1781154019-1 | tier=small risk=low council=single
+2026-06-11T05:03:20Z | auto-fix-worker | skip         | T-loop-1781154019-1 | model returned empty or NEEDS_HUMAN
+2026-06-11T05:03:20Z | auto-fix-loop |   → verdict=skip
+2026-06-11T05:03:20Z | auto-fix-loop | dispatch #2: T-loop-1781154200-2
+2026-06-11T05:03:21Z | auto-fix-worker | start        | T-loop-1781154200-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-11T05:03:21Z | auto-fix-worker | classify     | T-loop-1781154200-2 | tier=small risk=low council=single
+2026-06-11T05:06:21Z | auto-fix-worker | skip         | T-loop-1781154200-2 | model returned empty or NEEDS_HUMAN
+2026-06-11T05:06:21Z | auto-fix-loop |   → verdict=skip
+2026-06-11T05:06:21Z | auto-fix-loop | dispatch #3: T-loop-1781154381-3
+2026-06-11T05:06:21Z | auto-fix-worker | start        | T-loop-1781154381-3 | role=error target=jobs/logs/opa_test.log
+2026-06-11T05:06:21Z | auto-fix-worker | classify     | T-loop-1781154381-3 | tier=small risk=low council=single
+2026-06-11T05:06:27Z | auto-fix-worker | apply_check  | T-loop-1781154381-3 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-11T05:06:27Z | auto-fix-loop |   → verdict=fail
+2026-06-11T05:06:27Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3
+2026-06-11T06:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-11T06:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-11T06:00:03Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-11T06:00:20Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-11T06:00:22Z | auto-fix-loop | dispatch #1: T-loop-1781157622-1
+2026-06-11T06:00:22Z | auto-fix-worker | start        | T-loop-1781157622-1 | role=error target=jobs/logs/rag_cache.log
+2026-06-11T06:00:22Z | auto-fix-worker | classify     | T-loop-1781157622-1 | tier=small risk=low council=single
+2026-06-11T06:02:43Z | auto-fix-worker | validate     | T-loop-1781157622-1 | ok: no validator for jobs/logs/rag_cache.log
