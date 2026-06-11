@@ -24,6 +24,7 @@ const HUB_TABS = [
   { key: 'checklist', label: '☑️ Production Checklist (Iter 60)' },
   { key: 'governance-registries', label: '🏛 Governance Registries (Iter 68-69)' },
   { key: 'blueprints', label: '🧱 Blueprint Library (Iter 74 · Phase 6)' },
+  { key: 'enterprise-ai-domains', label: '🏛 Enterprise AI Governance · 22 domains (Iter 78)' },
   { key: 'enterprise', label: '🏛 Enterprise Standard §101 (Iter 61)' },
   { key: 'frontend-gov', label: '🖥 Frontend Governance §102 (Iter 62)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
@@ -1697,6 +1698,126 @@ function BlueprintDetail({ bpId, onClose }) {
   );
 }
 
+
+function EnterpriseAIDomainsView() {
+  const [domains, setDomains] = useState([]);
+  const [readiness, setReadiness] = useState({});
+  const [selected, setSelected] = useState(null);
+  const [category, setCategory] = useState('all');
+
+  useEffect(() => {
+    fetch(`${API}/api/v1/enterprise-ai-domains`).then(r => r.json()).then(d => setDomains(d.domains || []));
+    fetch(`${API}/api/v1/enterprise-ai-domains/readiness/all`).then(r => r.json()).then(setReadiness);
+  }, []);
+
+  const cats = [...new Set(domains.map(d => d.category))];
+  const filtered = category === 'all' ? domains : domains.filter(d => d.category === category);
+
+  return (
+    <>
+      <Section title="22 Enterprise AI Governance Domains · operator brief 2026-06-11" accent="#7c3aed">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 10 }}>
+          {readiness.summary && (
+            <>
+              <div style={{ padding: 10, background: '#faf5ff', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>DOMAINS</div>
+                <div style={{ fontSize: 26, fontWeight: 800 }}>{readiness.summary.total}</div>
+              </div>
+              <div style={{ padding: 10, background: '#dcfce7', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>READY (≥50%)</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#15803d' }}>{readiness.summary.n_ready}</div>
+              </div>
+              <div style={{ padding: 10, background: '#dbeafe', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>AVG READINESS</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#1d4ed8' }}>{readiness.summary.average_readiness_pct}%</div>
+              </div>
+              <div style={{ padding: 10, background: '#fef3c7', borderRadius: 4 }}>
+                <div style={{ fontSize: 9 }}>CATEGORIES</div>
+                <div style={{ fontSize: 26, fontWeight: 800, color: '#a16207' }}>{cats.length}</div>
+              </div>
+            </>
+          )}
+        </div>
+        <select value={category} onChange={e => setCategory(e.target.value)}
+          style={{ padding: '4px 8px', fontSize: 11, marginBottom: 8 }}>
+          <option value="all">All categories</option>
+          {cats.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+          {filtered.map(d => {
+            const r = (readiness.domains || []).find(x => x.id === d.id);
+            const pct = r ? r.readiness_pct : 0;
+            return (
+              <div key={d.id} onClick={() => setSelected(d.id)}
+                style={{
+                  padding: 10, border: '1px solid #e5e7eb', borderRadius: 6,
+                  cursor: 'pointer', background: '#fff',
+                  borderLeft: `4px solid ${pct >= 80 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#94a3b8'}`,
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#f9fafb'}
+                onMouseLeave={e => e.currentTarget.style.background = '#fff'}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <strong style={{ fontSize: 11 }}>{d.name}</strong>
+                  <Pill color={pct >= 80 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#94a3b8'}>{pct}%</Pill>
+                </div>
+                <div style={{ fontSize: 9, color: '#64748b', marginTop: 3 }}>
+                  <Pill color="#8b5cf6">{d.category}</Pill> · {d.purpose.slice(0, 65)}…
+                </div>
+                <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 4 }}>
+                  {d.n_agents} agents · {d.n_mcps} MCPs · {d.n_kpis} KPIs
+                </div>
+                <a href={`#detail-${d.id}`} onClick={(e) => { e.stopPropagation(); setSelected(d.id); }}
+                   style={{ fontSize: 9, color: '#3b82f6', textDecoration: 'underline' }}>
+                  Open detail →
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {selected && <EnterpriseAIDomainDetail did={selected} onClose={() => setSelected(null)} />}
+    </>
+  );
+}
+
+function EnterpriseAIDomainDetail({ did, onClose }) {
+  const [d, setD] = useState(null);
+  useEffect(() => {
+    fetch(`${API}/api/v1/enterprise-ai-domains/by-id/${did}`).then(r => r.json()).then(setD);
+  }, [did]);
+  if (!d) return null;
+  return (
+    <Section title={`${d.name} · readiness ${d.readiness_pct}%`} accent="#7c3aed">
+      <button onClick={onClose} style={{ float: 'right', padding: '2px 8px', fontSize: 9, cursor: 'pointer' }}>Close ✕</button>
+      <p><Pill color="#8b5cf6">{d.category}</Pill> · {d.purpose}</p>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginTop: 8 }}>
+        <div>
+          <strong style={{ fontSize: 10 }}>AGENTS ({d.n_agents_active}/{d.agents?.length} active):</strong>
+          {d.agents_status?.map(a => (
+            <div key={a.agent_id} style={{ fontSize: 10 }}>
+              {a.active ? '✅' : '⚠️'} <code>{a.agent_id}</code>
+            </div>
+          ))}
+        </div>
+        <div>
+          <strong style={{ fontSize: 10 }}>MCPs:</strong>
+          {d.mcps?.map(m => <div key={m} style={{ fontSize: 10 }}>• {m}</div>)}
+        </div>
+        <div>
+          <strong style={{ fontSize: 10 }}>KPIs:</strong>
+          {d.kpis?.map(k => <div key={k} style={{ fontSize: 10 }}>• {k}</div>)}
+        </div>
+      </div>
+      <div style={{ marginTop: 8 }}>
+        <strong style={{ fontSize: 10 }}>QUESTIONS THIS DOMAIN ANSWERS:</strong>
+        {d.questions?.map((q, i) => <div key={i} style={{ fontSize: 10, fontStyle: 'italic' }}>· {q}</div>)}
+      </div>
+    </Section>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -2064,6 +2185,7 @@ export default function AgenticHubPage() {
         {activeTab === 'checklist'        && <ChecklistView />}
         {activeTab === 'governance-registries' && <GovernanceRegistriesView />}
         {activeTab === 'blueprints'        && <BlueprintLibraryView />}
+        {activeTab === 'enterprise-ai-domains' && <EnterpriseAIDomainsView />}
         {activeTab === 'enterprise'      && <EnterpriseStandardView />}
         {activeTab === 'frontend-gov'   && <FrontendGovernanceView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
