@@ -24,7 +24,7 @@ REPO="/mnt/deepa/insur_project"
 PY="/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python"
 LOG_DIR="$REPO/jobs/logs"
 MAX_ITERATIONS=10
-MAX_WALL_S=240  # 4 min
+MAX_WALL_S=90  # 4 min
 
 mkdir -p "$LOG_DIR"
 cd "$REPO"
