@@ -1,0 +1,14 @@
+# maestro_smoke.yaml · Iter 72 · §102.9.6 (mobile testing via Maestro)
+# Run: maestro test scripts/maestro_smoke.yaml
+# Cron-friendly · Maestro Studio runs the Pixel 7 / iPhone simulator.
+
+appId: chrome  # browser-based · works for web apps
+---
+- launchApp
+- openLink: ${MAESTRO_TARGET:-http://localhost:5173/agentic}
+- assertVisible: "Agentic Platform Hub"
+- tapOn: "Status (live)"
+- assertVisible: "Status"
+- tapOn: "Skills"
+- assertVisible: "Skills"
+- takeScreenshot: agentic-mobile
