@@ -8,6 +8,8 @@ import { useWebVitals } from '../hooks/useWebVitals';
 import { useTabSync, publishTab } from '../hooks/useTabSync';
 import ErrorBoundary, { installGlobalErrorHandlers } from './common/ErrorBoundary';
 import { useClickTracking, useRefreshTracking } from '../hooks/useUserAnalytics';
+import { useAuditBoot } from '../hooks/useFrontendAudit';
+import { useSSE } from '../hooks/useSSE';
 installGlobalErrorHandlers();
 import AgenticAdminPanel from './AgenticAdminPanel';
 import AllAgentsNetworkPanel from './AllAgentsNetworkPanel';
@@ -1764,6 +1766,7 @@ export default function AgenticHubPage() {
   useTabSync('hub-tab', (msg) => { /* placeholder · tab sync ready */ });
   useClickTracking();   // §102.7.4
   useRefreshTracking(); // §102.7.6
+  useAuditBoot();       // §102.11
   const [activeTab, setActiveTab] = useState('all-agents');
 
   return (
