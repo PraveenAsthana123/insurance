@@ -2,20 +2,20 @@
   "ai_type": "Predictive AI",
   "slug": "predictive-ai",
   "algorithm": "GradientBoostingClassifier",
-  "accuracy": 0.957,
-  "precision": 0.9465,
-  "recall": 0.9532,
-  "f1": 0.9498,
-  "auc": 0.9931,
-  "brier": 0.0389,
+  "accuracy": 0.975,
+  "precision": 0.9756,
+  "recall": 0.9639,
+  "f1": 0.9697,
+  "auc": 0.9973,
+  "brier": 0.0264,
   "confusion_matrix": [
     [
-      550,
-      23
+      575,
+      10
     ],
     [
-      20,
-      407
+      15,
+      400
     ]
   ],
   "n_train": 4000,
@@ -32,15 +32,15 @@
     "f7"
   ],
   "feature_importance": {
-    "f0": 0.4388,
-    "f1": 0.3178,
-    "f2": 0.2424,
-    "f3": 0.0001,
+    "f0": 0.4202,
+    "f1": 0.3324,
+    "f2": 0.2467,
+    "f3": 0.0,
     "f4": 0.0004,
-    "f5": 0.0002,
-    "f6": 0.0002,
-    "f7": 0.0002
+    "f5": 0.0,
+    "f6": 0.0,
+    "f7": 0.0004
   },
   "data_kind": "synthetic (baseline \u00b7 operator adds real data for prod)",
-  "trained_at": "2026-06-11T17:07:09.528164"
+  "trained_at": "2026-06-11T17:08:03.003782"
 }

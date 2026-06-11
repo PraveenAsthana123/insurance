@@ -2,20 +2,20 @@
   "ai_type": "AML AI",
   "slug": "aml-ai",
   "algorithm": "GradientBoostingClassifier",
-  "accuracy": 0.945,
-  "precision": 0.9422,
-  "recall": 0.9265,
-  "f1": 0.9343,
-  "auc": 0.9926,
-  "brier": 0.0392,
+  "accuracy": 0.955,
+  "precision": 0.9599,
+  "recall": 0.9296,
+  "f1": 0.9445,
+  "auc": 0.9931,
+  "brier": 0.037,
   "confusion_matrix": [
     [
-      554,
-      24
+      572,
+      16
     ],
     [
-      31,
-      391
+      29,
+      383
     ]
   ],
   "n_train": 4000,
@@ -32,15 +32,15 @@
     "f7"
   ],
   "feature_importance": {
-    "f0": 0.4288,
-    "f1": 0.3456,
-    "f2": 0.2245,
+    "f0": 0.4416,
+    "f1": 0.3248,
+    "f2": 0.2321,
     "f3": 0.0003,
-    "f4": 0.0005,
-    "f5": 0.0002,
+    "f4": 0.0007,
+    "f5": 0.0004,
     "f6": 0.0,
-    "f7": 0.0003
+    "f7": 0.0001
   },
   "data_kind": "synthetic (baseline \u00b7 operator adds real data for prod)",
-  "trained_at": "2026-06-11T17:07:04.429578"
+  "trained_at": "2026-06-11T17:07:57.403714"
 }

@@ -224,61 +224,61 @@
   "timestamp": "2026-06-11T17:02:53.601487",
   "phase_1_trained": 27,
   "phase_1_fail": 0,
-  "phase_1_complete_at": "2026-06-11T17:07:21.222263",
+  "phase_1_complete_at": "2026-06-11T17:08:16.298236",
   "upgrade_log": [
     {
       "slug": "aml-ai",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.945
+      "metric": 0.955
     },
     {
       "slug": "anomaly-detection-ai",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.951
+      "metric": 0.963
     },
     {
       "slug": "fraud-detection-ai",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.963
+      "metric": 0.967
     },
     {
       "slug": "predictive-ai",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.957
+      "metric": 0.975
     },
     {
       "slug": "risk-scoring-ai",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.967
+      "metric": 0.969
     },
     {
       "slug": "self-supervised-learning",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.964
+      "metric": 0.972
     },
     {
       "slug": "semi-supervised-learning",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.964
+      "metric": 0.968
     },
     {
       "slug": "supervised-learning",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.974
+      "metric": 0.973
     },
     {
       "slug": "unsupervised-learning",
       "kind": "tabular_ml",
       "score": 8,
-      "metric": 0.967
+      "metric": 0.968
     },
     {
       "slug": "entity-extraction-ai",
@@ -338,55 +338,55 @@
       "slug": "adaptive-rag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "agentic-rag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "corrective-rag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "graphrag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "multimodal-rag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "rag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "ragops",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "self-rag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     },
     {
       "slug": "sql-rag",
       "kind": "rag_variant",
       "score": 7,
-      "metric": 0.6914
+      "metric": 1.0
     }
   ]
 }

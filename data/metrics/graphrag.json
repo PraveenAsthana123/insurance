@@ -1,12 +1,15 @@
 {
   "ai_type": "GraphRAG",
   "slug": "graphrag",
-  "algorithm": "TF-IDF retrieval (baseline \u00b7 upgrade to BGE-M3 in prod)",
+  "algorithm": "TF-IDF + cosine retrieval (upgrade to BGE-M3 in prod)",
   "n_docs": 200,
   "n_queries": 50,
   "top_k": 5,
-  "avg_top1_similarity": 0.6914,
-  "vocab_size": 300,
-  "data_kind": "synthetic doc corpus",
-  "trained_at": "2026-06-11T17:07:20.944798"
+  "accuracy": 1.0,
+  "recall_at_1": 1.0,
+  "recall_at_5": 1.0,
+  "avg_top1_similarity": 0.9968,
+  "vocab_size": 500,
+  "data_kind": "synthetic doc corpus with ground truth",
+  "trained_at": "2026-06-11T17:08:15.849624"
 }

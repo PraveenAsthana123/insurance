@@ -2,20 +2,20 @@
   "ai_type": "Risk Scoring AI",
   "slug": "risk-scoring-ai",
   "algorithm": "GradientBoostingClassifier",
-  "accuracy": 0.967,
-  "precision": 0.9671,
-  "recall": 0.9558,
-  "f1": 0.9614,
-  "auc": 0.9961,
-  "brier": 0.0324,
+  "accuracy": 0.969,
+  "precision": 0.9734,
+  "recall": 0.9526,
+  "f1": 0.9629,
+  "auc": 0.9966,
+  "brier": 0.0299,
   "confusion_matrix": [
     [
-      556,
-      14
+      567,
+      11
     ],
     [
-      19,
-      411
+      20,
+      402
     ]
   ],
   "n_train": 4000,
@@ -32,15 +32,15 @@
     "f7"
   ],
   "feature_importance": {
-    "f0": 0.4296,
-    "f1": 0.3248,
-    "f2": 0.2437,
-    "f3": 0.0004,
+    "f0": 0.414,
+    "f1": 0.3395,
+    "f2": 0.2445,
+    "f3": 0.0003,
     "f4": 0.0001,
-    "f5": 0.0009,
-    "f6": 0.0001,
-    "f7": 0.0004
+    "f5": 0.0003,
+    "f6": 0.0012,
+    "f7": 0.0001
   },
   "data_kind": "synthetic (baseline \u00b7 operator adds real data for prod)",
-  "trained_at": "2026-06-11T17:07:11.257324"
+  "trained_at": "2026-06-11T17:08:04.801114"
 }

@@ -59,7 +59,7 @@
   "honest_status": {
     "score": 8,
     "level": "Functional",
-    "what_exists": "REAL baseline trained \u00b7 model.joblib saved \u00b7 3 PNGs \u00b7 metrics live (acc=0.964)",
+    "what_exists": "REAL baseline trained \u00b7 model.joblib saved \u00b7 3 PNGs \u00b7 metrics live (acc=0.972)",
     "what_missing": "tabular \u00b7 we have claims data",
     "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
   },
