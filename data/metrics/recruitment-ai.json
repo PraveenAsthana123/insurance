@@ -1,9 +1,51 @@
 {
   "ai_type": "Recruitment AI",
   "slug": "recruitment-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 vertical_spec)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:10.458111"
+  "kind": "vertical_spec",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9317,
+  "precision": 0.9553,
+  "recall": 0.8868,
+  "f1": 0.9198,
+  "auc": 0.9892,
+  "brier": 0.047,
+  "confusion_matrix": [
+    [
+      324,
+      11
+    ],
+    [
+      30,
+      235
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0002,
+    "f1": 0.0011,
+    "f2": 0.2365,
+    "f3": 0.0009,
+    "f4": 0.0016,
+    "f5": 0.4554,
+    "f6": 0.0006,
+    "f7": 0.0002,
+    "f8": 0.3033,
+    "f9": 0.0002
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=301 \u00b7 dominant features f5/f8/f2",
+  "trained_at": "2026-06-11T17:22:02.643730"
 }

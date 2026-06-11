@@ -1,10 +1,10 @@
 {
   "ai_type": "Adversarial AI",
   "slug": "adversarial-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.058,
+  "csi": 0.125,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.511837"
+  "computed_at": "2026-06-11T17:19:34.083137"
 }

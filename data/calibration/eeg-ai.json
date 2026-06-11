@@ -1,9 +1,9 @@
 {
   "ai_type": "EEG AI",
   "slug": "eeg-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/eeg-ai/calibration.png",
+  "ece": 0.0296,
+  "brier_score": 0.037,
+  "reliability_diagram": "data/plots/eeg-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.560655"
+  "computed_at": "2026-06-11T17:20:40.966448"
 }

@@ -1,10 +1,10 @@
 {
   "ai_type": "Semantic Search AI",
   "slug": "semantic-search-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.09,
+  "csi": 0.109,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.633766"
+  "computed_at": "2026-06-11T17:22:18.515012"
 }

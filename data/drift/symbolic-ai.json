@@ -1,10 +1,10 @@
 {
   "ai_type": "Symbolic AI",
   "slug": "symbolic-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.113,
+  "csi": 0.1,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.641496"
+  "computed_at": "2026-06-11T17:22:24.139389"
 }

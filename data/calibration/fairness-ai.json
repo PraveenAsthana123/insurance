@@ -1,9 +1,9 @@
 {
   "ai_type": "Fairness AI",
   "slug": "fairness-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/fairness-ai/calibration.png",
+  "ece": 0.0374,
+  "brier_score": 0.0467,
+  "reliability_diagram": "data/plots/fairness-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.565802"
+  "computed_at": "2026-06-11T17:20:49.281870"
 }

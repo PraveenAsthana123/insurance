@@ -1,9 +1,51 @@
 {
   "ai_type": "Energy AI",
   "slug": "energy-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 vertical_spec)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:09.855572"
+  "kind": "vertical_spec",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9483,
+  "precision": 0.9412,
+  "recall": 0.9446,
+  "f1": 0.9429,
+  "auc": 0.9909,
+  "brier": 0.0404,
+  "confusion_matrix": [
+    [
+      313,
+      16
+    ],
+    [
+      15,
+      256
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0006,
+    "f1": 0.4666,
+    "f2": 0.0004,
+    "f3": 0.0006,
+    "f4": 0.3073,
+    "f5": 0.0004,
+    "f6": 0.0001,
+    "f7": 0.0007,
+    "f8": 0.2228,
+    "f9": 0.0006
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=4740 \u00b7 dominant features f1/f4/f8",
+  "trained_at": "2026-06-11T17:20:44.234775"
 }

@@ -1,10 +1,10 @@
 {
   "ai_type": "EEG AI",
   "slug": "eeg-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.071,
+  "csi": 0.037,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.560475"
+  "computed_at": "2026-06-11T17:20:40.966344"
 }

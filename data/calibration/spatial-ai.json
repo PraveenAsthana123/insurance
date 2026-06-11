@@ -1,9 +1,9 @@
 {
   "ai_type": "Spatial AI",
   "slug": "spatial-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/spatial-ai/calibration.png",
+  "ece": 0.0309,
+  "brier_score": 0.0386,
+  "reliability_diagram": "data/plots/spatial-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.637518"
+  "computed_at": "2026-06-11T17:22:21.689539"
 }

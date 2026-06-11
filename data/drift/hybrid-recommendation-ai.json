@@ -1,10 +1,10 @@
 {
   "ai_type": "Hybrid Recommendation AI",
   "slug": "hybrid-recommendation-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.032,
+  "csi": 0.023,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.579286"
+  "computed_at": "2026-06-11T17:21:09.666259"
 }

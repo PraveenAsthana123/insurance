@@ -1,9 +1,9 @@
 {
   "ai_type": "AI Guardrails",
   "slug": "ai-guardrails",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/ai-guardrails/calibration.png",
+  "ece": 0.0257,
+  "brier_score": 0.0321,
+  "reliability_diagram": "data/plots/ai-guardrails/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.528350"
+  "computed_at": "2026-06-11T17:19:42.956461"
 }

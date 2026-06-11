@@ -1,9 +1,9 @@
 {
   "ai_type": "Model Monitoring AI",
   "slug": "model-monitoring-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/model-monitoring-ai/calibration.png",
+  "ece": 0.0261,
+  "brier_score": 0.0326,
+  "reliability_diagram": "data/plots/model-monitoring-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.597353"
+  "computed_at": "2026-06-11T17:21:35.496376"
 }

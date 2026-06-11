@@ -1,9 +1,51 @@
 {
   "ai_type": "Document AI",
   "slug": "document-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:12.018024"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9483,
+  "precision": 0.9608,
+  "recall": 0.9211,
+  "f1": 0.9405,
+  "auc": 0.9924,
+  "brier": 0.0396,
+  "confusion_matrix": [
+    [
+      324,
+      10
+    ],
+    [
+      21,
+      245
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0007,
+    "f1": 0.0005,
+    "f2": 0.3072,
+    "f3": 0.0003,
+    "f4": 0.0014,
+    "f5": 0.0002,
+    "f6": 0.2287,
+    "f7": 0.0004,
+    "f8": 0.0014,
+    "f9": 0.4592
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=8240 \u00b7 dominant features f9/f2/f6",
+  "trained_at": "2026-06-11T17:20:34.593916"
 }

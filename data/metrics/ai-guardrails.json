@@ -1,9 +1,51 @@
 {
   "ai_type": "AI Guardrails",
   "slug": "ai-guardrails",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
-  "accuracy": 0.97,
-  "composition_score": 0.97,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:07.633501"
+  "kind": "ops_existing",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9667,
+  "precision": 0.9627,
+  "recall": 0.9627,
+  "f1": 0.9627,
+  "auc": 0.9948,
+  "brier": 0.0321,
+  "confusion_matrix": [
+    [
+      322,
+      10
+    ],
+    [
+      10,
+      258
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0009,
+    "f1": 0.0004,
+    "f2": 0.3351,
+    "f3": 0.0001,
+    "f4": 0.0005,
+    "f5": 0.0005,
+    "f6": 0.2411,
+    "f7": 0.0005,
+    "f8": 0.0001,
+    "f9": 0.4207
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=2570 \u00b7 dominant features f9/f2/f6",
+  "trained_at": "2026-06-11T17:19:42.952060"
 }

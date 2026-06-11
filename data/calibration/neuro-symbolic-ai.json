@@ -1,9 +1,9 @@
 {
   "ai_type": "Neuro-Symbolic AI",
   "slug": "neuro-symbolic-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/neuro-symbolic-ai/calibration.png",
+  "ece": 0.0358,
+  "brier_score": 0.0447,
+  "reliability_diagram": "data/plots/neuro-symbolic-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.601550"
+  "computed_at": "2026-06-11T17:21:41.335908"
 }

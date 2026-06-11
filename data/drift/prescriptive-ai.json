@@ -1,10 +1,10 @@
 {
   "ai_type": "Prescriptive AI",
   "slug": "prescriptive-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.104,
+  "csi": 0.085,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.612746"
+  "computed_at": "2026-06-11T17:21:52.722911"
 }

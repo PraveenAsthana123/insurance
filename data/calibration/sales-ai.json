@@ -1,9 +1,9 @@
 {
   "ai_type": "Sales AI",
   "slug": "sales-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/sales-ai/calibration.png",
+  "ece": 0.035,
+  "brier_score": 0.0437,
+  "reliability_diagram": "data/plots/sales-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.628505"
+  "computed_at": "2026-06-11T17:22:11.469668"
 }

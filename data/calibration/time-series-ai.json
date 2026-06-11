@@ -1,9 +1,9 @@
 {
   "ai_type": "Time-Series AI",
   "slug": "time-series-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/time-series-ai/calibration.png",
+  "ece": 0.0305,
+  "brier_score": 0.0381,
+  "reliability_diagram": "data/plots/time-series-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.647650"
+  "computed_at": "2026-06-11T17:22:31.279977"
 }

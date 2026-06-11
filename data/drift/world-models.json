@@ -1,10 +1,10 @@
 {
   "ai_type": "World Models",
   "slug": "world-models",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.036,
+  "csi": 0.069,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.656410"
+  "computed_at": "2026-06-11T17:22:39.525349"
 }

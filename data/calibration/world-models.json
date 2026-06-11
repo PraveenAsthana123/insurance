@@ -1,9 +1,9 @@
 {
   "ai_type": "World Models",
   "slug": "world-models",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/world-models/calibration.png",
+  "ece": 0.037,
+  "brier_score": 0.0462,
+  "reliability_diagram": "data/plots/world-models/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.656626"
+  "computed_at": "2026-06-11T17:22:39.525476"
 }

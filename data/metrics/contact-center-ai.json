@@ -1,9 +1,51 @@
 {
   "ai_type": "Contact Center AI",
   "slug": "contact-center-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 vertical_spec)",
+  "kind": "vertical_spec",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
   "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:09.660217"
+  "precision": 0.9641,
+  "recall": 0.9202,
+  "f1": 0.9416,
+  "auc": 0.9926,
+  "brier": 0.0399,
+  "confusion_matrix": [
+    [
+      328,
+      9
+    ],
+    [
+      21,
+      242
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0006,
+    "f1": 0.0005,
+    "f2": 0.3192,
+    "f3": 0.0005,
+    "f4": 0.0004,
+    "f5": 0.0005,
+    "f6": 0.2628,
+    "f7": 0.0008,
+    "f8": 0.0007,
+    "f9": 0.4141
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=2173 \u00b7 dominant features f9/f2/f6",
+  "trained_at": "2026-06-11T17:20:13.192565"
 }

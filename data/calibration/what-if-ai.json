@@ -1,9 +1,9 @@
 {
   "ai_type": "What-if AI",
   "slug": "what-if-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/what-if-ai/calibration.png",
+  "ece": 0.0346,
+  "brier_score": 0.0433,
+  "reliability_diagram": "data/plots/what-if-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.655782"
+  "computed_at": "2026-06-11T17:22:38.488969"
 }

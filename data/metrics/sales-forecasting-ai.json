@@ -1,9 +1,51 @@
 {
   "ai_type": "Sales Forecasting AI",
   "slug": "sales-forecasting-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:14.071530"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9583,
+  "precision": 0.9531,
+  "recall": 0.9494,
+  "f1": 0.9513,
+  "auc": 0.9943,
+  "brier": 0.0347,
+  "confusion_matrix": [
+    [
+      331,
+      12
+    ],
+    [
+      13,
+      244
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0001,
+    "f1": 0.3118,
+    "f2": 0.0005,
+    "f3": 0.0012,
+    "f4": 0.0001,
+    "f5": 0.2358,
+    "f6": 0.0004,
+    "f7": 0.0013,
+    "f8": 0.4475,
+    "f9": 0.0012
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=183 \u00b7 dominant features f8/f1/f5",
+  "trained_at": "2026-06-11T17:22:12.759908"
 }

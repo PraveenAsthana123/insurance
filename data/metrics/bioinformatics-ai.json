@@ -1,9 +1,51 @@
 {
   "ai_type": "Bioinformatics AI",
   "slug": "bioinformatics-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:11.014647"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9333,
+  "precision": 0.9167,
+  "recall": 0.937,
+  "f1": 0.9267,
+  "auc": 0.9888,
+  "brier": 0.0458,
+  "confusion_matrix": [
+    [
+      307,
+      23
+    ],
+    [
+      17,
+      253
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0003,
+    "f1": 0.2773,
+    "f2": 0.0005,
+    "f3": 0.0007,
+    "f4": 0.0006,
+    "f5": 0.275,
+    "f6": 0.001,
+    "f7": 0.0003,
+    "f8": 0.4434,
+    "f9": 0.001
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=3732 \u00b7 dominant features f8/f1/f5",
+  "trained_at": "2026-06-11T17:19:59.856300"
 }

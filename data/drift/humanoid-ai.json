@@ -1,10 +1,10 @@
 {
   "ai_type": "Humanoid AI",
   "slug": "humanoid-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.158,
+  "csi": 0.021,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.578599"
+  "computed_at": "2026-06-11T17:21:08.608861"
 }

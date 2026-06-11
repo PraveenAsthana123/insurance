@@ -1,9 +1,51 @@
 {
   "ai_type": "Banking AI",
   "slug": "banking-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 vertical_spec)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:09.617982"
+  "kind": "vertical_spec",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9583,
+  "precision": 0.9556,
+  "recall": 0.952,
+  "f1": 0.9538,
+  "auc": 0.9937,
+  "brier": 0.0367,
+  "confusion_matrix": [
+    [
+      317,
+      12
+    ],
+    [
+      13,
+      258
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.2697,
+    "f1": 0.0003,
+    "f2": 0.0002,
+    "f3": 0.4171,
+    "f4": 0.0018,
+    "f5": 0.0005,
+    "f6": 0.3082,
+    "f7": 0.0012,
+    "f8": 0.0002,
+    "f9": 0.0009
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=8438 \u00b7 dominant features f3/f6/f0",
+  "trained_at": "2026-06-11T17:19:56.408006"
 }

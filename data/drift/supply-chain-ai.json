@@ -1,10 +1,10 @@
 {
   "ai_type": "Supply Chain AI",
   "slug": "supply-chain-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.109,
+  "csi": 0.084,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.640809"
+  "computed_at": "2026-06-11T17:22:22.953017"
 }

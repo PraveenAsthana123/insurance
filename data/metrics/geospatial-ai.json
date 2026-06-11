@@ -1,9 +1,51 @@
 {
   "ai_type": "Geospatial AI",
   "slug": "geospatial-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:12.565454"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9517,
+  "precision": 0.9552,
+  "recall": 0.9377,
+  "f1": 0.9464,
+  "auc": 0.9912,
+  "brier": 0.04,
+  "confusion_matrix": [
+    [
+      315,
+      12
+    ],
+    [
+      17,
+      256
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0005,
+    "f1": 0.3078,
+    "f2": 0.0012,
+    "f3": 0.0014,
+    "f4": 0.0003,
+    "f5": 0.2636,
+    "f6": 0.0007,
+    "f7": 0.0005,
+    "f8": 0.4227,
+    "f9": 0.0012
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=3394 \u00b7 dominant features f8/f1/f5",
+  "trained_at": "2026-06-11T17:20:59.918779"
 }

@@ -1,9 +1,9 @@
 {
   "ai_type": "Text-to-Video AI",
   "slug": "text-to-video-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/text-to-video-ai/calibration.png",
+  "ece": 0.0322,
+  "brier_score": 0.0403,
+  "reliability_diagram": "data/plots/text-to-video-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.645500"
+  "computed_at": "2026-06-11T17:22:27.960642"
 }

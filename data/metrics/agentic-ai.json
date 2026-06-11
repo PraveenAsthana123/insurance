@@ -1,9 +1,51 @@
 {
   "ai_type": "Agentic AI",
   "slug": "agentic-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 agent_engine)",
-  "accuracy": 0.96,
-  "composition_score": 0.96,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:06.860551"
+  "kind": "agent_engine",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9533,
+  "precision": 0.964,
+  "recall": 0.9269,
+  "f1": 0.9451,
+  "auc": 0.9914,
+  "brier": 0.0404,
+  "confusion_matrix": [
+    [
+      331,
+      9
+    ],
+    [
+      19,
+      241
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0002,
+    "f1": 0.0004,
+    "f2": 0.0004,
+    "f3": 0.2541,
+    "f4": 0.0001,
+    "f5": 0.0006,
+    "f6": 0.4538,
+    "f7": 0.0006,
+    "f8": 0.0008,
+    "f9": 0.2891
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=7688 \u00b7 dominant features f6/f9/f3",
+  "trained_at": "2026-06-11T17:19:37.556848"
 }

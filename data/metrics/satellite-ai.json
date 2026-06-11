@@ -1,9 +1,51 @@
 {
   "ai_type": "Satellite AI",
   "slug": "satellite-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:14.134976"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9583,
+  "precision": 0.9621,
+  "recall": 0.9442,
+  "f1": 0.9531,
+  "auc": 0.9915,
+  "brier": 0.0392,
+  "confusion_matrix": [
+    [
+      321,
+      10
+    ],
+    [
+      15,
+      254
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0001,
+    "f1": 0.2252,
+    "f2": 0.0007,
+    "f3": 0.001,
+    "f4": 0.4574,
+    "f5": 0.001,
+    "f6": 0.0001,
+    "f7": 0.3139,
+    "f8": 0.0005,
+    "f9": 0.0002
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=1920 \u00b7 dominant features f4/f7/f1",
+  "trained_at": "2026-06-11T17:22:14.035096"
 }

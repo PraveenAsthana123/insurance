@@ -1,9 +1,9 @@
 {
   "ai_type": "ReAct AI",
   "slug": "react-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/react-ai/calibration.png",
+  "ece": 0.0316,
+  "brier_score": 0.0395,
+  "reliability_diagram": "data/plots/react-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.618938"
+  "computed_at": "2026-06-11T17:21:58.055200"
 }

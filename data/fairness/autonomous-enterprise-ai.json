@@ -1,11 +1,11 @@
 {
   "ai_type": "Autonomous Enterprise AI",
   "slug": "autonomous-enterprise-ai",
-  "disparate_impact_age": 0.91,
-  "disparate_impact_gender": 0.89,
-  "disparate_impact_region": 0.87,
+  "disparate_impact_age": 0.953,
+  "disparate_impact_gender": 0.939,
+  "disparate_impact_region": 0.905,
   "equal_opportunity_gap": 0.03,
   "calibration_within_groups": "within 2pp",
   "audit_status": "PASS",
-  "computed_at": "2026-06-11T17:11:12.535275"
+  "computed_at": "2026-06-11T17:19:54.106499"
 }

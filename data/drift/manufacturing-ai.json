@@ -1,10 +1,10 @@
 {
   "ai_type": "Manufacturing AI",
   "slug": "manufacturing-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.043,
+  "csi": 0.06,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.591614"
+  "computed_at": "2026-06-11T17:21:26.618733"
 }

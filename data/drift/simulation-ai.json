@@ -1,10 +1,10 @@
 {
   "ai_type": "Simulation AI",
   "slug": "simulation-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.092,
+  "csi": 0.122,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.635949"
+  "computed_at": "2026-06-11T17:22:19.587472"
 }

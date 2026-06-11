@@ -1,9 +1,51 @@
 {
   "ai_type": "Model Governance",
   "slug": "model-governance",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
-  "accuracy": 0.97,
-  "composition_score": 0.97,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:09.336995"
+  "kind": "ops_existing",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9533,
+  "precision": 0.9519,
+  "recall": 0.9449,
+  "f1": 0.9483,
+  "auc": 0.9934,
+  "brier": 0.0369,
+  "confusion_matrix": [
+    [
+      315,
+      13
+    ],
+    [
+      15,
+      257
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0006,
+    "f1": 0.0013,
+    "f2": 0.0006,
+    "f3": 0.2488,
+    "f4": 0.0014,
+    "f5": 0.0,
+    "f6": 0.3905,
+    "f7": 0.0007,
+    "f8": 0.0001,
+    "f9": 0.3559
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=155 \u00b7 dominant features f6/f9/f3",
+  "trained_at": "2026-06-11T17:21:34.442551"
 }

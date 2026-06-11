@@ -1,10 +1,10 @@
 {
   "ai_type": "Hybrid Search AI",
   "slug": "hybrid-search-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.023,
+  "csi": 0.13,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.579988"
+  "computed_at": "2026-06-11T17:21:10.778654"
 }

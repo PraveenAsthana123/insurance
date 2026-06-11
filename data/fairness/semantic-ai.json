@@ -1,11 +1,11 @@
 {
   "ai_type": "Semantic AI",
   "slug": "semantic-ai",
-  "disparate_impact_age": 0.91,
-  "disparate_impact_gender": 0.89,
-  "disparate_impact_region": 0.87,
+  "disparate_impact_age": 0.952,
+  "disparate_impact_gender": 0.944,
+  "disparate_impact_region": 0.944,
   "equal_opportunity_gap": 0.03,
   "calibration_within_groups": "within 2pp",
   "audit_status": "PASS",
-  "computed_at": "2026-06-11T17:11:12.633202"
+  "computed_at": "2026-06-11T17:22:17.442384"
 }

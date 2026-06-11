@@ -1,9 +1,51 @@
 {
   "ai_type": "Drift Detection AI",
   "slug": "drift-detection-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
-  "accuracy": 0.97,
-  "composition_score": 0.97,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:08.621694"
+  "kind": "ops_existing",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9633,
+  "precision": 0.9522,
+  "recall": 0.9664,
+  "f1": 0.9593,
+  "auc": 0.9928,
+  "brier": 0.0382,
+  "confusion_matrix": [
+    [
+      319,
+      13
+    ],
+    [
+      9,
+      259
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.2441,
+    "f1": 0.0016,
+    "f2": 0.0015,
+    "f3": 0.4359,
+    "f4": 0.0005,
+    "f5": 0.0001,
+    "f6": 0.3145,
+    "f7": 0.0004,
+    "f8": 0.001,
+    "f9": 0.0003
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=9199 \u00b7 dominant features f3/f6/f0",
+  "trained_at": "2026-06-11T17:20:36.021160"
 }

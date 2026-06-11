@@ -1,10 +1,10 @@
 {
   "ai_type": "AI Control Tower",
   "slug": "ai-control-tower",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.07,
+  "csi": 0.025,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.527680"
+  "computed_at": "2026-06-11T17:19:41.883418"
 }

@@ -1,9 +1,51 @@
 {
   "ai_type": "Reasoning AI",
   "slug": "reasoning-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 agent_engine)",
-  "accuracy": 0.96,
-  "composition_score": 0.96,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:07.305934"
+  "kind": "agent_engine",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.955,
+  "precision": 0.958,
+  "recall": 0.9401,
+  "f1": 0.949,
+  "auc": 0.9926,
+  "brier": 0.0398,
+  "confusion_matrix": [
+    [
+      322,
+      11
+    ],
+    [
+      16,
+      251
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.4563,
+    "f1": 0.0002,
+    "f2": 0.0006,
+    "f3": 0.3107,
+    "f4": 0.0008,
+    "f5": 0.0003,
+    "f6": 0.0008,
+    "f7": 0.2297,
+    "f8": 0.0005,
+    "f9": 0.0002
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=3384 \u00b7 dominant features f0/f3/f7",
+  "trained_at": "2026-06-11T17:22:00.265264"
 }

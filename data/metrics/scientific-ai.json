@@ -1,9 +1,51 @@
 {
   "ai_type": "Scientific AI",
   "slug": "scientific-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:14.215304"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9567,
+  "precision": 0.9424,
+  "recall": 0.9632,
+  "f1": 0.9527,
+  "auc": 0.9936,
+  "brier": 0.0358,
+  "confusion_matrix": [
+    [
+      312,
+      16
+    ],
+    [
+      10,
+      262
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0006,
+    "f1": 0.0017,
+    "f2": 0.4259,
+    "f3": 0.0018,
+    "f4": 0.0002,
+    "f5": 0.319,
+    "f6": 0.0003,
+    "f7": 0.0005,
+    "f8": 0.0002,
+    "f9": 0.2498
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=1756 \u00b7 dominant features f2/f5/f9",
+  "trained_at": "2026-06-11T17:22:16.334594"
 }

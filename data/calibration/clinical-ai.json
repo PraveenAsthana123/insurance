@@ -1,9 +1,9 @@
 {
   "ai_type": "Clinical AI",
   "slug": "clinical-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/clinical-ai/calibration.png",
+  "ece": 0.0386,
+  "brier_score": 0.0482,
+  "reliability_diagram": "data/plots/clinical-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.540887"
+  "computed_at": "2026-06-11T17:20:06.399011"
 }

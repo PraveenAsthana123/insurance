@@ -1,10 +1,10 @@
 {
   "ai_type": "AGI",
   "slug": "agi",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.07,
+  "csi": 0.039,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.517120"
+  "computed_at": "2026-06-11T17:19:39.607998"
 }

@@ -1,9 +1,51 @@
 {
   "ai_type": "Quantum Machine Learning",
   "slug": "quantum-machine-learning",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:13.803016"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9483,
+  "precision": 0.9353,
+  "recall": 0.9524,
+  "f1": 0.9437,
+  "auc": 0.9921,
+  "brier": 0.0396,
+  "confusion_matrix": [
+    [
+      309,
+      18
+    ],
+    [
+      13,
+      260
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0014,
+    "f1": 0.0003,
+    "f2": 0.2498,
+    "f3": 0.0008,
+    "f4": 0.0005,
+    "f5": 0.4327,
+    "f6": 0.0,
+    "f7": 0.0002,
+    "f8": 0.3133,
+    "f9": 0.0011
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=986 \u00b7 dominant features f5/f8/f2",
+  "trained_at": "2026-06-11T17:21:57.003187"
 }

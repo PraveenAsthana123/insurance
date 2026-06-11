@@ -1,9 +1,51 @@
 {
   "ai_type": "SLM",
   "slug": "slm",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:14.433956"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9533,
+  "precision": 0.9522,
+  "recall": 0.9373,
+  "f1": 0.9447,
+  "auc": 0.9912,
+  "brier": 0.0399,
+  "confusion_matrix": [
+    [
+      333,
+      12
+    ],
+    [
+      16,
+      239
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.296,
+    "f1": 0.0004,
+    "f2": 0.0007,
+    "f3": 0.0011,
+    "f4": 0.2268,
+    "f5": 0.0012,
+    "f6": 0.0005,
+    "f7": 0.472,
+    "f8": 0.0001,
+    "f9": 0.001
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=5805 \u00b7 dominant features f7/f0/f4",
+  "trained_at": "2026-06-11T17:22:20.638528"
 }

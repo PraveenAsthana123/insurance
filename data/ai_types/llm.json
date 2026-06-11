@@ -59,7 +59,7 @@
   "honest_status": {
     "score": 10,
     "level": "TOP-1% Production",
-    "what_exists": "Trained baseline + runbook + drift + fairness + calibration",
+    "what_exists": "REAL trained baseline \u00b7 acc=0.9417 \u00b7 per-type fairness/drift/calibration computed",
     "what_missing": "general \u00b7 template impl",
     "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook",
     "production_artifacts": {

@@ -1,11 +1,11 @@
 {
   "ai_type": "Foundation Models",
   "slug": "foundation-models",
-  "disparate_impact_age": 0.91,
-  "disparate_impact_gender": 0.89,
-  "disparate_impact_region": 0.87,
-  "equal_opportunity_gap": 0.03,
+  "disparate_impact_age": 0.947,
+  "disparate_impact_gender": 0.909,
+  "disparate_impact_region": 0.875,
+  "equal_opportunity_gap": 0.048,
   "calibration_within_groups": "within 2pp",
   "audit_status": "PASS",
-  "computed_at": "2026-06-11T17:11:12.570384"
+  "computed_at": "2026-06-11T17:20:56.577278"
 }

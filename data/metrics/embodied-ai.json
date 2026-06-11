@@ -1,9 +1,51 @@
 {
   "ai_type": "Embodied AI",
   "slug": "embodied-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:12.259518"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.96,
+  "precision": 0.9582,
+  "recall": 0.9509,
+  "f1": 0.9545,
+  "auc": 0.9958,
+  "brier": 0.0324,
+  "confusion_matrix": [
+    [
+      324,
+      11
+    ],
+    [
+      13,
+      252
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0011,
+    "f1": 0.0003,
+    "f2": 0.2528,
+    "f3": 0.0012,
+    "f4": 0.0008,
+    "f5": 0.4318,
+    "f6": 0.0005,
+    "f7": 0.0021,
+    "f8": 0.3088,
+    "f9": 0.0006
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=7953 \u00b7 dominant features f5/f8/f2",
+  "trained_at": "2026-06-11T17:20:43.154028"
 }

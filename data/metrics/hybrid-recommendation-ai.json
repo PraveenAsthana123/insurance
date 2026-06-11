@@ -1,9 +1,51 @@
 {
   "ai_type": "Hybrid Recommendation AI",
   "slug": "hybrid-recommendation-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:12.748000"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9417,
+  "precision": 0.9524,
+  "recall": 0.9125,
+  "f1": 0.932,
+  "auc": 0.9871,
+  "brier": 0.0479,
+  "confusion_matrix": [
+    [
+      325,
+      12
+    ],
+    [
+      23,
+      240
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.2276,
+    "f1": 0.001,
+    "f2": 0.0007,
+    "f3": 0.4625,
+    "f4": 0.0001,
+    "f5": 0.001,
+    "f6": 0.3045,
+    "f7": 0.0005,
+    "f8": 0.0016,
+    "f9": 0.0006
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=9247 \u00b7 dominant features f3/f6/f0",
+  "trained_at": "2026-06-11T17:21:09.662526"
 }

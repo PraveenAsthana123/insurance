@@ -1,9 +1,51 @@
 {
   "ai_type": "Online Learning",
   "slug": "online-learning",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:13.452346"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9383,
+  "precision": 0.9419,
+  "recall": 0.917,
+  "f1": 0.9293,
+  "auc": 0.9892,
+  "brier": 0.045,
+  "confusion_matrix": [
+    [
+      320,
+      15
+    ],
+    [
+      22,
+      243
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0007,
+    "f1": 0.0003,
+    "f2": 0.0004,
+    "f3": 0.2087,
+    "f4": 0.0009,
+    "f5": 0.0003,
+    "f6": 0.4591,
+    "f7": 0.0008,
+    "f8": 0.0003,
+    "f9": 0.3285
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=9013 \u00b7 dominant features f6/f9/f3",
+  "trained_at": "2026-06-11T17:21:43.493429"
 }

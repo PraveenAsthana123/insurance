@@ -1,10 +1,10 @@
 {
   "ai_type": "Quantum Machine Learning",
   "slug": "quantum-machine-learning",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.051,
+  "csi": 0.115,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.615471"
+  "computed_at": "2026-06-11T17:21:57.006512"
 }

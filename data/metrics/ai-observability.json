@@ -1,9 +1,51 @@
 {
   "ai_type": "AI Observability",
   "slug": "ai-observability",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
-  "accuracy": 0.97,
-  "composition_score": 0.97,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:07.679887"
+  "kind": "ops_existing",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9417,
+  "precision": 0.9385,
+  "recall": 0.9278,
+  "f1": 0.9331,
+  "auc": 0.99,
+  "brier": 0.0419,
+  "confusion_matrix": [
+    [
+      321,
+      16
+    ],
+    [
+      19,
+      244
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.4072,
+    "f1": 0.0005,
+    "f2": 0.0011,
+    "f3": 0.3294,
+    "f4": 0.0014,
+    "f5": 0.0004,
+    "f6": 0.0005,
+    "f7": 0.258,
+    "f8": 0.0007,
+    "f9": 0.0008
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=710 \u00b7 dominant features f0/f3/f7",
+  "trained_at": "2026-06-11T17:19:44.010417"
 }

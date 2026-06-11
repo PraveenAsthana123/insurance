@@ -1,9 +1,9 @@
 {
   "ai_type": "Route Optimization AI",
   "slug": "route-optimization-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/route-optimization-ai/calibration.png",
+  "ece": 0.0275,
+  "brier_score": 0.0344,
+  "reliability_diagram": "data/plots/route-optimization-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.627819"
+  "computed_at": "2026-06-11T17:22:10.313173"
 }

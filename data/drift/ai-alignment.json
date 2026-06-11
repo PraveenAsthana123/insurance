@@ -1,10 +1,10 @@
 {
   "ai_type": "AI Alignment",
   "slug": "ai-alignment",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.138,
+  "csi": 0.099,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.527071"
+  "computed_at": "2026-06-11T17:19:40.728383"
 }

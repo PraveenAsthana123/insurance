@@ -1,9 +1,9 @@
 {
   "ai_type": "Distributed AI",
   "slug": "distributed-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/distributed-ai/calibration.png",
+  "ece": 0.0339,
+  "brier_score": 0.0424,
+  "reliability_diagram": "data/plots/distributed-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.557361"
+  "computed_at": "2026-06-11T17:20:33.476993"
 }

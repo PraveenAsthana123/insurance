@@ -1,9 +1,51 @@
 {
   "ai_type": "XR AI",
   "slug": "xr-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:15.273034"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9567,
+  "precision": 0.9535,
+  "recall": 0.9462,
+  "f1": 0.9498,
+  "auc": 0.9938,
+  "brier": 0.0359,
+  "confusion_matrix": [
+    [
+      328,
+      12
+    ],
+    [
+      14,
+      246
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.001,
+    "f1": 0.0002,
+    "f2": 0.432,
+    "f3": 0.0003,
+    "f4": 0.0008,
+    "f5": 0.3259,
+    "f6": 0.0003,
+    "f7": 0.0001,
+    "f8": 0.0013,
+    "f9": 0.2381
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=3507 \u00b7 dominant features f2/f5/f9",
+  "trained_at": "2026-06-11T17:22:40.739976"
 }

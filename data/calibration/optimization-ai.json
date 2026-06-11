@@ -1,9 +1,9 @@
 {
   "ai_type": "Optimization AI",
   "slug": "optimization-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/optimization-ai/calibration.png",
+  "ece": 0.0332,
+  "brier_score": 0.0415,
+  "reliability_diagram": "data/plots/optimization-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.608068"
+  "computed_at": "2026-06-11T17:21:45.694085"
 }

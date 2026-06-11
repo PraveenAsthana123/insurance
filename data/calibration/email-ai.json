@@ -1,9 +1,9 @@
 {
   "ai_type": "Email AI",
   "slug": "email-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/email-ai/calibration.png",
+  "ece": 0.0312,
+  "brier_score": 0.039,
+  "reliability_diagram": "data/plots/email-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.561216"
+  "computed_at": "2026-06-11T17:20:42.055577"
 }

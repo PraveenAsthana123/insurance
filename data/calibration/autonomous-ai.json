@@ -1,9 +1,9 @@
 {
   "ai_type": "Autonomous AI",
   "slug": "autonomous-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/autonomous-ai/calibration.png",
+  "ece": 0.0282,
+  "brier_score": 0.0353,
+  "reliability_diagram": "data/plots/autonomous-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.534686"
+  "computed_at": "2026-06-11T17:19:53.016705"
 }

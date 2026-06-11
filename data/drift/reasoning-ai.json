@@ -1,10 +1,10 @@
 {
   "ai_type": "Reasoning AI",
   "slug": "reasoning-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.076,
+  "csi": 0.108,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.620146"
+  "computed_at": "2026-06-11T17:22:00.270978"
 }

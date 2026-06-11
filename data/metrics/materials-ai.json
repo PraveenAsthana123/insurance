@@ -1,9 +1,51 @@
 {
   "ai_type": "Materials AI",
   "slug": "materials-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:13.216904"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.94,
+  "precision": 0.9299,
+  "recall": 0.9368,
+  "f1": 0.9333,
+  "auc": 0.9888,
+  "brier": 0.046,
+  "confusion_matrix": [
+    [
+      312,
+      19
+    ],
+    [
+      17,
+      252
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0001,
+    "f1": 0.2296,
+    "f2": 0.0009,
+    "f3": 0.0001,
+    "f4": 0.4372,
+    "f5": 0.0003,
+    "f6": 0.0003,
+    "f7": 0.3296,
+    "f8": 0.0013,
+    "f9": 0.0005
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=2600 \u00b7 dominant features f4/f7/f1",
+  "trained_at": "2026-06-11T17:21:28.888074"
 }

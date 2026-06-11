@@ -1,9 +1,51 @@
 {
   "ai_type": "Bias Detection AI",
   "slug": "bias-detection-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
-  "accuracy": 0.97,
-  "composition_score": 0.97,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:07.956517"
+  "kind": "ops_existing",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9467,
+  "precision": 0.9567,
+  "recall": 0.9205,
+  "f1": 0.9382,
+  "auc": 0.9915,
+  "brier": 0.0431,
+  "confusion_matrix": [
+    [
+      325,
+      11
+    ],
+    [
+      21,
+      243
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.251,
+    "f1": 0.0011,
+    "f2": 0.0004,
+    "f3": 0.4373,
+    "f4": 0.0006,
+    "f5": 0.0008,
+    "f6": 0.3071,
+    "f7": 0.0002,
+    "f8": 0.0007,
+    "f9": 0.0007
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=660 \u00b7 dominant features f3/f6/f0",
+  "trained_at": "2026-06-11T17:19:58.643873"
 }

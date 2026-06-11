@@ -1,9 +1,51 @@
 {
   "ai_type": "AI Red Teaming",
   "slug": "ai-red-teaming",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:10.774514"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9683,
+  "precision": 0.969,
+  "recall": 0.9579,
+  "f1": 0.9634,
+  "auc": 0.9938,
+  "brier": 0.0344,
+  "confusion_matrix": [
+    [
+      331,
+      8
+    ],
+    [
+      11,
+      250
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0003,
+    "f1": 0.4389,
+    "f2": 0.0005,
+    "f3": 0.0003,
+    "f4": 0.3064,
+    "f5": 0.0003,
+    "f6": 0.0004,
+    "f7": 0.0003,
+    "f8": 0.2518,
+    "f9": 0.0009
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=2292 \u00b7 dominant features f1/f4/f8",
+  "trained_at": "2026-06-11T17:19:45.162872"
 }

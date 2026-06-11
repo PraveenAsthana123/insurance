@@ -1,9 +1,9 @@
 {
   "ai_type": "Tree-of-Thought AI",
   "slug": "tree-of-thought-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/tree-of-thought-ai/calibration.png",
+  "ece": 0.0351,
+  "brier_score": 0.0439,
+  "reliability_diagram": "data/plots/tree-of-thought-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.650295"
+  "computed_at": "2026-06-11T17:22:34.764515"
 }

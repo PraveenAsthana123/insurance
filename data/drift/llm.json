@@ -1,10 +1,10 @@
 {
   "ai_type": "LLM",
   "slug": "llm",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.077,
+  "csi": 0.12,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.589278"
+  "computed_at": "2026-06-11T17:21:23.218160"
 }

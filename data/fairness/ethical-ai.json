@@ -1,11 +1,11 @@
 {
   "ai_type": "Ethical AI",
   "slug": "ethical-ai",
-  "disparate_impact_age": 0.91,
-  "disparate_impact_gender": 0.89,
-  "disparate_impact_region": 0.87,
-  "equal_opportunity_gap": 0.03,
+  "disparate_impact_age": 0.894,
+  "disparate_impact_gender": 0.877,
+  "disparate_impact_region": 0.844,
+  "equal_opportunity_gap": 0.068,
   "calibration_within_groups": "within 2pp",
   "audit_status": "PASS",
-  "computed_at": "2026-06-11T17:11:12.563471"
+  "computed_at": "2026-06-11T17:20:45.607746"
 }

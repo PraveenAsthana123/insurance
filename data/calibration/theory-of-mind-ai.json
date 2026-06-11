@@ -1,9 +1,9 @@
 {
   "ai_type": "Theory of Mind AI",
   "slug": "theory-of-mind-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/theory-of-mind-ai/calibration.png",
+  "ece": 0.0345,
+  "brier_score": 0.0431,
+  "reliability_diagram": "data/plots/theory-of-mind-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.646185"
+  "computed_at": "2026-06-11T17:22:29.020279"
 }

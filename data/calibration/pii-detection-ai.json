@@ -1,9 +1,9 @@
 {
   "ai_type": "PII Detection AI",
   "slug": "pii-detection-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/pii-detection-ai/calibration.png",
+  "ece": 0.0312,
+  "brier_score": 0.039,
+  "reliability_diagram": "data/plots/pii-detection-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.610169"
+  "computed_at": "2026-06-11T17:21:49.247093"
 }

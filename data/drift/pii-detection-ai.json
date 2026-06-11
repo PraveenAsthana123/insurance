@@ -1,10 +1,10 @@
 {
   "ai_type": "PII Detection AI",
   "slug": "pii-detection-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.14,
+  "csi": 0.109,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.609953"
+  "computed_at": "2026-06-11T17:21:49.246776"
 }

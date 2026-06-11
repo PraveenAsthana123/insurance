@@ -1,9 +1,51 @@
 {
   "ai_type": "Email AI",
   "slug": "email-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 vertical_spec)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:09.811898"
+  "kind": "vertical_spec",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9567,
+  "precision": 0.9515,
+  "recall": 0.9515,
+  "f1": 0.9515,
+  "auc": 0.993,
+  "brier": 0.039,
+  "confusion_matrix": [
+    [
+      319,
+      13
+    ],
+    [
+      13,
+      255
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0003,
+    "f1": 0.3703,
+    "f2": 0.0006,
+    "f3": 0.0007,
+    "f4": 0.0003,
+    "f5": 0.2313,
+    "f6": 0.0003,
+    "f7": 0.0006,
+    "f8": 0.3952,
+    "f9": 0.0005
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=3969 \u00b7 dominant features f8/f1/f5",
+  "trained_at": "2026-06-11T17:20:42.050547"
 }

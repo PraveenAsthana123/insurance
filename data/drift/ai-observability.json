@@ -1,10 +1,10 @@
 {
   "ai_type": "AI Observability",
   "slug": "ai-observability",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.016,
+  "csi": 0.068,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.528752"
+  "computed_at": "2026-06-11T17:19:44.014396"
 }

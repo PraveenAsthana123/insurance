@@ -1,9 +1,9 @@
 {
   "ai_type": "Collaborative Filtering AI",
   "slug": "collaborative-filtering-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/collaborative-filtering-ai/calibration.png",
+  "ece": 0.0281,
+  "brier_score": 0.0351,
+  "reliability_diagram": "data/plots/collaborative-filtering-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.542737"
+  "computed_at": "2026-06-11T17:20:10.528285"
 }

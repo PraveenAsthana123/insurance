@@ -1,9 +1,51 @@
 {
   "ai_type": "Time-Series AI",
   "slug": "time-series-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
-  "accuracy": 0.95,
-  "composition_score": 0.95,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:14.851597"
+  "kind": "spec_only",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.9467,
+  "precision": 0.9476,
+  "recall": 0.9252,
+  "f1": 0.9363,
+  "auc": 0.9921,
+  "brier": 0.0381,
+  "confusion_matrix": [
+    [
+      333,
+      13
+    ],
+    [
+      19,
+      235
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.4456,
+    "f1": 0.0001,
+    "f2": 0.0018,
+    "f3": 0.3164,
+    "f4": 0.0003,
+    "f5": 0.0003,
+    "f6": 0.0017,
+    "f7": 0.2329,
+    "f8": 0.0005,
+    "f9": 0.0002
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=10041 \u00b7 dominant features f0/f3/f7",
+  "trained_at": "2026-06-11T17:22:31.273778"
 }

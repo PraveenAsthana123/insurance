@@ -1,10 +1,10 @@
 {
   "ai_type": "Banking AI",
   "slug": "banking-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.138,
+  "csi": 0.096,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.536433"
+  "computed_at": "2026-06-11T17:19:56.411677"
 }

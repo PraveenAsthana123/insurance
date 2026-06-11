@@ -1,9 +1,51 @@
 {
   "ai_type": "Ethical AI",
   "slug": "ethical-ai",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
-  "accuracy": 0.97,
-  "composition_score": 0.97,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:08.661527"
+  "kind": "ops_existing",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.955,
+  "precision": 0.962,
+  "recall": 0.937,
+  "f1": 0.9493,
+  "auc": 0.9942,
+  "brier": 0.0352,
+  "confusion_matrix": [
+    [
+      320,
+      10
+    ],
+    [
+      17,
+      253
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.2345,
+    "f1": 0.0009,
+    "f2": 0.0007,
+    "f3": 0.4495,
+    "f4": 0.0003,
+    "f5": 0.001,
+    "f6": 0.3119,
+    "f7": 0.0001,
+    "f8": 0.0007,
+    "f9": 0.0005
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=4353 \u00b7 dominant features f3/f6/f0",
+  "trained_at": "2026-06-11T17:20:45.602448"
 }

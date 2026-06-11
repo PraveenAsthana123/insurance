@@ -1,9 +1,9 @@
 {
   "ai_type": "Simulation AI",
   "slug": "simulation-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/simulation-ai/calibration.png",
+  "ece": 0.0266,
+  "brier_score": 0.0332,
+  "reliability_diagram": "data/plots/simulation-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.636157"
+  "computed_at": "2026-06-11T17:22:19.587578"
 }

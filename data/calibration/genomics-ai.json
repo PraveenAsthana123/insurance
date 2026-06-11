@@ -1,9 +1,9 @@
 {
   "ai_type": "Genomics AI",
   "slug": "genomics-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/genomics-ai/calibration.png",
+  "ece": 0.029,
+  "brier_score": 0.0362,
+  "reliability_diagram": "data/plots/genomics-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.572520"
+  "computed_at": "2026-06-11T17:20:58.750396"
 }

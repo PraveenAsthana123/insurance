@@ -1,11 +1,11 @@
 {
   "ai_type": "Online Learning",
   "slug": "online-learning",
-  "disparate_impact_age": 0.91,
-  "disparate_impact_gender": 0.89,
-  "disparate_impact_region": 0.87,
-  "equal_opportunity_gap": 0.03,
+  "disparate_impact_age": 0.999,
+  "disparate_impact_gender": 0.942,
+  "disparate_impact_region": 0.993,
+  "equal_opportunity_gap": 0.047,
   "calibration_within_groups": "within 2pp",
   "audit_status": "PASS",
-  "computed_at": "2026-06-11T17:11:12.606538"
+  "computed_at": "2026-06-11T17:21:43.498447"
 }

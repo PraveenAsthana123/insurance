@@ -1,9 +1,9 @@
 {
   "ai_type": "Drift Detection AI",
   "slug": "drift-detection-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/drift-detection-ai/calibration.png",
+  "ece": 0.0306,
+  "brier_score": 0.0382,
+  "reliability_diagram": "data/plots/drift-detection-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.558577"
+  "computed_at": "2026-06-11T17:20:36.026569"
 }

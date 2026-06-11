@@ -1,9 +1,9 @@
 {
   "ai_type": "Supply Chain AI",
   "slug": "supply-chain-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/supply-chain-ai/calibration.png",
+  "ece": 0.0311,
+  "brier_score": 0.0389,
+  "reliability_diagram": "data/plots/supply-chain-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.641037"
+  "computed_at": "2026-06-11T17:22:22.953124"
 }

@@ -1,9 +1,9 @@
 {
   "ai_type": "Bioinformatics AI",
   "slug": "bioinformatics-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/bioinformatics-ai/calibration.png",
+  "ece": 0.0366,
+  "brier_score": 0.0458,
+  "reliability_diagram": "data/plots/bioinformatics-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.538139"
+  "computed_at": "2026-06-11T17:19:59.861135"
 }

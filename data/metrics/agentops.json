@@ -1,9 +1,51 @@
 {
   "ai_type": "AgentOps",
   "slug": "agentops",
-  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
-  "accuracy": 0.97,
-  "composition_score": 0.97,
-  "data_kind": "platform composition readiness",
-  "trained_at": "2026-06-11T17:10:07.511391"
+  "kind": "ops_existing",
+  "algorithm": "GradientBoostingClassifier (per-type baseline)",
+  "accuracy": 0.95,
+  "precision": 0.9394,
+  "recall": 0.9466,
+  "f1": 0.943,
+  "auc": 0.9908,
+  "brier": 0.0422,
+  "confusion_matrix": [
+    [
+      322,
+      16
+    ],
+    [
+      14,
+      248
+    ]
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 10,
+  "feature_cols": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9"
+  ],
+  "feature_importance": {
+    "f0": 0.0013,
+    "f1": 0.234,
+    "f2": 0.0006,
+    "f3": 0.0003,
+    "f4": 0.4398,
+    "f5": 0.0005,
+    "f6": 0.0003,
+    "f7": 0.3186,
+    "f8": 0.0003,
+    "f9": 0.0043
+  },
+  "data_kind": "synthetic per-type \u00b7 seed=2609 \u00b7 dominant features f4/f7/f1",
+  "trained_at": "2026-06-11T17:19:38.576297"
 }

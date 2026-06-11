@@ -1,11 +1,11 @@
 {
   "ai_type": "Pricing AI",
   "slug": "pricing-ai",
-  "disparate_impact_age": 0.91,
-  "disparate_impact_gender": 0.89,
-  "disparate_impact_region": 0.87,
-  "equal_opportunity_gap": 0.03,
+  "disparate_impact_age": 0.891,
+  "disparate_impact_gender": 0.842,
+  "disparate_impact_region": 0.841,
+  "equal_opportunity_gap": 0.068,
   "calibration_within_groups": "within 2pp",
   "audit_status": "PASS",
-  "computed_at": "2026-06-11T17:11:12.613526"
+  "computed_at": "2026-06-11T17:21:53.803731"
 }

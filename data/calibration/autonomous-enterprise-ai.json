@@ -1,9 +1,9 @@
 {
   "ai_type": "Autonomous Enterprise AI",
   "slug": "autonomous-enterprise-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/autonomous-enterprise-ai/calibration.png",
+  "ece": 0.0319,
+  "brier_score": 0.0399,
+  "reliability_diagram": "data/plots/autonomous-enterprise-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.535365"
+  "computed_at": "2026-06-11T17:19:54.106814"
 }

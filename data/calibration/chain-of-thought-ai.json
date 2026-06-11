@@ -1,9 +1,9 @@
 {
   "ai_type": "Chain-of-Thought AI",
   "slug": "chain-of-thought-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/chain-of-thought-ai/calibration.png",
+  "ece": 0.038,
+  "brier_score": 0.0475,
+  "reliability_diagram": "data/plots/chain-of-thought-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.539710"
+  "computed_at": "2026-06-11T17:20:03.654968"
 }

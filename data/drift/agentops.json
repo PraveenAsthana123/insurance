@@ -1,10 +1,10 @@
 {
   "ai_type": "AgentOps",
   "slug": "agentops",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.019,
+  "csi": 0.053,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.516220"
+  "computed_at": "2026-06-11T17:19:38.580753"
 }

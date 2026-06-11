@@ -1,9 +1,9 @@
 {
   "ai_type": "XR AI",
   "slug": "xr-ai",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/xr-ai/calibration.png",
+  "ece": 0.0287,
+  "brier_score": 0.0359,
+  "reliability_diagram": "data/plots/xr-ai/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.657323"
+  "computed_at": "2026-06-11T17:22:40.745709"
 }

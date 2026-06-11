@@ -1,9 +1,9 @@
 {
   "ai_type": "AgentOps",
   "slug": "agentops",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/agentops/calibration.png",
+  "ece": 0.0338,
+  "brier_score": 0.0422,
+  "reliability_diagram": "data/plots/agentops/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.516446"
+  "computed_at": "2026-06-11T17:19:38.580900"
 }

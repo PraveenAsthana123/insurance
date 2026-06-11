@@ -1,11 +1,11 @@
 {
   "ai_type": "Reactive AI",
   "slug": "reactive-ai",
-  "disparate_impact_age": 0.91,
-  "disparate_impact_gender": 0.89,
-  "disparate_impact_region": 0.87,
+  "disparate_impact_age": 0.891,
+  "disparate_impact_gender": 0.836,
+  "disparate_impact_region": 0.818,
   "equal_opportunity_gap": 0.03,
-  "calibration_within_groups": "within 2pp",
+  "calibration_within_groups": "needs review",
   "audit_status": "PASS",
-  "computed_at": "2026-06-11T17:11:12.619569"
+  "computed_at": "2026-06-11T17:21:59.103544"
 }

@@ -1,10 +1,10 @@
 {
   "ai_type": "Time-Series AI",
   "slug": "time-series-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.099,
+  "csi": 0.114,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.647434"
+  "computed_at": "2026-06-11T17:22:31.279821"
 }

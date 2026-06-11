@@ -1,10 +1,10 @@
 {
   "ai_type": "Lineage AI",
   "slug": "lineage-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.118,
+  "csi": 0.038,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.588593"
+  "computed_at": "2026-06-11T17:21:21.889742"
 }

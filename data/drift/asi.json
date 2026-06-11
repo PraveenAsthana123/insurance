@@ -1,10 +1,10 @@
 {
   "ai_type": "ASI",
   "slug": "asi",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.161,
+  "csi": 0.112,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.533151"
+  "computed_at": "2026-06-11T17:19:50.773040"
 }

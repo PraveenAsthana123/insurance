@@ -1,9 +1,9 @@
 {
   "ai_type": "AI Workforce",
   "slug": "ai-workforce",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/ai-workforce/calibration.png",
+  "ece": 0.0288,
+  "brier_score": 0.036,
+  "reliability_diagram": "data/plots/ai-workforce/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.530350"
+  "computed_at": "2026-06-11T17:19:47.557811"
 }

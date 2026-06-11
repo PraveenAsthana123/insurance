@@ -1,10 +1,10 @@
 {
   "ai_type": "Descriptive AI",
   "slug": "descriptive-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.162,
+  "csi": 0.018,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.555406"
+  "computed_at": "2026-06-11T17:20:29.788215"
 }

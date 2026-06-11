@@ -1,9 +1,9 @@
 {
   "ai_type": "AI Red Teaming",
   "slug": "ai-red-teaming",
-  "ece": 0.04,
-  "brier_score": 0.03,
-  "reliability_diagram": "/data/plots/ai-red-teaming/calibration.png",
+  "ece": 0.0275,
+  "brier_score": 0.0344,
+  "reliability_diagram": "data/plots/ai-red-teaming/metrics_summary.png",
   "status": "WELL_CALIBRATED",
-  "computed_at": "2026-06-11T17:11:12.529358"
+  "computed_at": "2026-06-11T17:19:45.167639"
 }

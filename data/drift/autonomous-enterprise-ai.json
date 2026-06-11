@@ -1,10 +1,10 @@
 {
   "ai_type": "Autonomous Enterprise AI",
   "slug": "autonomous-enterprise-ai",
-  "psi": 0.05,
-  "csi": 0.04,
+  "psi": 0.17,
+  "csi": 0.122,
   "threshold_psi": 0.2,
   "threshold_csi": 0.15,
   "status": "STABLE",
-  "computed_at": "2026-06-11T17:11:12.535184"
+  "computed_at": "2026-06-11T17:19:54.106696"
 }
