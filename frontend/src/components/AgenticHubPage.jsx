@@ -6,6 +6,9 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { SkeletonText, SkeletonCard, SkeletonTable } from './common/Skeleton';
 import { useWebVitals } from '../hooks/useWebVitals';
 import { useTabSync, publishTab } from '../hooks/useTabSync';
+import ErrorBoundary, { installGlobalErrorHandlers } from './common/ErrorBoundary';
+import { useClickTracking, useRefreshTracking } from '../hooks/useUserAnalytics';
+installGlobalErrorHandlers();
 import AgenticAdminPanel from './AgenticAdminPanel';
 import AllAgentsNetworkPanel from './AllAgentsNetworkPanel';
 
@@ -1759,6 +1762,8 @@ function LiveActivityView() {
 export default function AgenticHubPage() {
   useWebVitals();  // §102.7 frontend monitoring
   useTabSync('hub-tab', (msg) => { /* placeholder · tab sync ready */ });
+  useClickTracking();   // §102.7.4
+  useRefreshTracking(); // §102.7.6
   const [activeTab, setActiveTab] = useState('all-agents');
 
   return (
@@ -1783,6 +1788,7 @@ export default function AgenticHubPage() {
       </div>
 
       <div style={{ padding: 12 }}>
+        <ErrorBoundary>
         {activeTab === 'task-tracer'  && <TaskTracerView />}
         {activeTab === 'production-pipeline' && <ProductionPipelineView />}
         {activeTab === 'challenges'         && <ChallengesView />}
@@ -1804,6 +1810,7 @@ export default function AgenticHubPage() {
         {activeTab === 'testing'      && <TestingView />}
         {activeTab === 'quality'      && <QualityScorecardView />}
         {activeTab === 'coverage'     && <CoverageView />}
+        </ErrorBoundary>
       </div>
     </div>
   );
