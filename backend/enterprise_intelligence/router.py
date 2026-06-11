@@ -206,9 +206,11 @@ def advisor_ask(body: AdvisorQuery):
             """)
             r = dict(cur.fetchone())
             cur.execute("""
-                SELECT model_name, COUNT(*) AS n, SUM(cost_usd) AS cost
-                FROM agent_invocation WHERE created_at > NOW() - INTERVAL '24 hours'
-                GROUP BY model_name ORDER BY cost DESC NULLS LAST LIMIT 5
+                SELECT ar.model_name, COUNT(*) AS n, SUM(ai.cost_usd) AS cost
+                FROM agent_invocation ai
+                LEFT JOIN agent_registry ar ON ar.agent_id = ai.agent_id
+                WHERE ai.created_at > NOW() - INTERVAL '24 hours'
+                GROUP BY ar.model_name ORDER BY cost DESC NULLS LAST LIMIT 5
             """)
             top_models = [dict(x) for x in cur.fetchall()]
             answers.append({
