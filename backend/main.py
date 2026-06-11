@@ -218,7 +218,8 @@ def create_app() -> FastAPI:
     from governance_registries.router import router as gov_reg_router  # /api/v1/governance-registries — Iter 68
     from release_gate.router import router as rel_gate_router  # /api/v1/naming-policy + /release-gate — Iter 70
     from maturity_model.router import router as mat_router  # /api/v1/maturity-model — Iter 73 (§103)
-    from blueprint_library.router import router as bp_router  # /api/v1/blueprint-library — Iter 74 (Phase 6)  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from blueprint_library.router import router as bp_router  # /api/v1/blueprint-library — Iter 74 (Phase 6)
+    from enterprise_intelligence.router import router as eil_router  # /api/v1/enterprise-intelligence — Iter 76 (Phase 9)  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -336,6 +337,7 @@ def create_app() -> FastAPI:
     app.include_router(rel_gate_router)            # /api/v1/naming-policy + /release-gate — Iter 70
     app.include_router(mat_router)                 # /api/v1/maturity-model — Iter 73 (§103)
     app.include_router(bp_router)                  # /api/v1/blueprint-library — Iter 74 (Phase 6)
+    app.include_router(eil_router)                 # /api/v1/enterprise-intelligence — Iter 76 (Phase 9)
     # Iter 36 · install httpx auto-audit hook
     from core.httpx_audit_hook import install_httpx_audit_hook
     install_httpx_audit_hook()
