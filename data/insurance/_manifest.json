@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T10:15:01.746787+00:00",
+  "generated_at": "2026-06-11T08:15:01.900935+00:00",
   "dry_run": false,
   "refresh": true,
   "downloads": [
@@ -30,13 +30,6 @@
       "desc": "Sentiment / intent corpus",
       "status": "skipped",
       "reason": "skipped: ~3GB too large for scaffold"
-    },
-    {
-      "slug": "fraud-siu/auto_insurance_fraud",
-      "dataset": "buntyshah/auto-insurance-claims-data",
-      "desc": "Auto fraud (also in claims)",
-      "status": "ok",
-      "message": "downloaded (1 files): insurance_claims.csv"
     },
     {
       "slug": "fraud-siu/ieee_fraud",
@@ -107,6 +100,13 @@
       "desc": "Credit-card fraud benchmark",
       "status": "ok",
       "message": "downloaded (1 files): creditcard.csv"
+    },
+    {
+      "slug": "fraud-siu/auto_insurance_fraud",
+      "dataset": "buntyshah/auto-insurance-claims-data",
+      "desc": "Auto fraud (also in claims)",
+      "status": "ok",
+      "message": "downloaded (1 files): insurance_claims.csv"
     }
   ]
 }
