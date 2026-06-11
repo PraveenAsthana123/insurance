@@ -225,7 +225,8 @@ def create_app() -> FastAPI:
     from missing_offices.router import router as mo_router  # /api/v1/missing-offices — Iter 79 (§104)
     from missing_items_advisor.router import router as mia_router  # /api/v1/missing-items-advisor — Iter 80
     from platform_identity.router import router as pi_router  # /api/v1/platform-identity — Iter 86 (§107)
-    from llm_gateway.router import router as gw_router  # /api/v1/llm-gateway — Iter 87 (§108)  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from llm_gateway.router import router as gw_router  # /api/v1/llm-gateway — Iter 87 (§108)
+    from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -350,6 +351,7 @@ def create_app() -> FastAPI:
     app.include_router(mia_router)                 # /api/v1/missing-items-advisor — Iter 80
     app.include_router(pi_router)                  # /api/v1/platform-identity — Iter 86 (§107)
     app.include_router(gw_router)                  # /api/v1/llm-gateway — Iter 87 (§108)
+    app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     # Iter 36 · install httpx auto-audit hook
     from core.httpx_audit_hook import install_httpx_audit_hook
     install_httpx_audit_hook()
