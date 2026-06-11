@@ -234,6 +234,7 @@ def create_app() -> FastAPI:
     from agent_kernel.router import router as kernel_router  # Iter 103 · §121 agent kernel
     from agent_kernel.engines import router as kernel_eng_router  # Iter 104 · §122 top-3 engines + brutal feedback
     from semantic_graph.router import router as semgraph_router  # Iter 105 · §123 semantic graph stack
+    from semantic_graph.kg_stack import router as kgstack_router  # Iter 106 · §124 enterprise KG ref
     from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     from opa_adapter.router import router as opa_router
     from agentops_adapter.router import router as agops_router
@@ -376,6 +377,7 @@ def create_app() -> FastAPI:
     app.include_router(kernel_router)              # Iter 103 · §121 agent kernel
     app.include_router(kernel_eng_router)          # Iter 104 · §122 engines + brutal feedback
     app.include_router(semgraph_router)            # Iter 105 · §123 semantic graph stack
+    app.include_router(kgstack_router)             # Iter 106 · §124 enterprise KG canonical
     app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     app.include_router(opa_router)
     app.include_router(agops_router)
