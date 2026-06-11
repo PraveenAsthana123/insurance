@@ -142,8 +142,10 @@ def knowledge_graph(limit: int = 200):
         edges_skill = [dict(r) for r in cur.fetchall()]
 
         cur.execute("""
-            SELECT project_id, blueprint_id, artifact_type, artifact_id
-            FROM deploy_manifest LIMIT %s
+            SELECT dm.project_id, tp.blueprint_id, dm.artifact_type, dm.artifact_id
+            FROM deploy_manifest dm
+            LEFT JOIN tenant_project tp ON tp.project_id = dm.project_id
+            LIMIT %s
         """, (limit,))
         deploys = [dict(r) for r in cur.fetchall()]
 
