@@ -54,7 +54,7 @@ while [ $ITER -lt $MAX_ITERATIONS ]; do
   # Determine action from the latest tick report
   LATEST=$(ls -t jobs/reports/auto-next/run-*.json 2>/dev/null | head -1)
   if [ -n "$LATEST" ]; then
-    STATUS=$(grep -o '"status":"[^"]*"' "$LATEST" | head -1 | cut -d'"' -f4)
+    STATUS=$(grep -m1 '"status"' "$LATEST" | head -1 | sed -E 's/.*"status"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/')
     echo "[dispatcher] tick status: $STATUS"
   else
     STATUS="unknown"
