@@ -239,6 +239,7 @@ def create_app() -> FastAPI:
     from dept_claims.router import router as claims_router  # Iter 108 · §126 claims dept demo
     from video_intel.router import router as video_router  # Iter 110 · §128 video intel
     from platform_hub.router import router as hub_router  # Iter 112 · §130 platform hub UI
+    from ai_taxonomy.router import router as tax_router  # Iter 113 · §131 AI taxonomy
     from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     from opa_adapter.router import router as opa_router
     from agentops_adapter.router import router as agops_router
@@ -386,6 +387,7 @@ def create_app() -> FastAPI:
     app.include_router(claims_router)              # Iter 108 · §126 claims dept demo
     app.include_router(video_router)               # Iter 110 · §128 video intelligence
     app.include_router(hub_router)                 # Iter 112 · §130 platform hub UI
+    app.include_router(tax_router)                 # Iter 113 · §131 AI taxonomy
     app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     app.include_router(opa_router)
     app.include_router(agops_router)
