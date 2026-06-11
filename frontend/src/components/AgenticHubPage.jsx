@@ -22,6 +22,7 @@ const HUB_TABS = [
   { key: 'challenges', label: '⚠️ Challenges & Plans (Iter 58)' },
   { key: 'status-agents', label: '📊 Status Agents (Iter 59)' },
   { key: 'checklist', label: '☑️ Production Checklist (Iter 60)' },
+  { key: 'governance-registries', label: '🏛 Governance Registries (Iter 68-69)' },
   { key: 'enterprise', label: '🏛 Enterprise Standard §101 (Iter 61)' },
   { key: 'frontend-gov', label: '🖥 Frontend Governance §102 (Iter 62)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
@@ -1432,6 +1433,129 @@ function FrontendGovernanceView() {
   );
 }
 
+
+function GovernanceRegistriesView() {
+  const [data, setData] = useState({});
+  const load = useCallback(async () => {
+    const [h, ms, ev, ds, ar, dlq, ks, ap, cc, sv, gt, sd] = await Promise.all([
+      fetch(`${API}/api/v1/governance-registries/health`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/mcp-registry`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/eval-registry`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/dataset-registry`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/access-registry`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/dlq`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/kill-switches`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/abac-policies`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/concurrency`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/secrets-vault`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/golden-tests`).then(r => r.json()),
+      fetch(`${API}/api/v1/governance-registries/synthetic-datasets`).then(r => r.json()),
+    ]);
+    setData({h, ms, ev, ds, ar, dlq, ks, ap, cc, sv, gt, sd});
+  }, []);
+  useEffect(() => { load(); }, [load]);
+  if (!data.h) return <SkeletonCard count={3} />;
+
+  async function toggleKill(sw) {
+    await fetch(`${API}/api/v1/governance-registries/kill-switch/toggle`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        switch_id: sw.switch_id, target_type: sw.target_type,
+        target_id: sw.target_id, kill: !sw.is_killed,
+        by: 'operator', reason: 'UI toggle'
+      })
+    });
+    load();
+  }
+
+  const sections = [
+    { title: 'MCP Registry',     data: data.ms?.servers,    n: data.ms?.count,    cols: ['mcp_id','server_name','risk_level','status'] },
+    { title: 'Eval Registry',    data: data.ev?.evals,      n: data.ev?.count,    cols: ['eval_id','name','eval_type','pass_threshold'] },
+    { title: 'Dataset Registry', data: data.ds?.datasets,   n: data.ds?.count,    cols: ['dataset_id','name','pii_classification','owner_team'] },
+    { title: 'Access Registry',  data: data.ar?.grants,     n: data.ar?.count,    cols: ['access_id','principal_type','principal_id','permission'] },
+    { title: 'DLQ',              data: data.dlq?.items,     n: data.dlq?.count,   cols: ['dlq_id','workflow_id','agent_id','retry_count','status'] },
+    { title: 'ABAC Policies',    data: data.ap?.policies,   n: data.ap?.count,    cols: ['policy_id','policy_name','effect','priority'] },
+    { title: 'Concurrency',      data: data.cc?.controls,   n: data.cc?.count,    cols: ['control_id','target_type','target_id','current_count','max_concurrent'] },
+    { title: 'Secrets Vault',    data: data.sv?.secrets,    n: data.sv?.count,    cols: ['secret_id','secret_name','secret_type','rotation_period_days'] },
+    { title: 'Golden Tests',     data: data.gt?.tests,      n: data.gt?.count,    cols: ['test_id','target_agent_id','expected_status'] },
+    { title: 'Synthetic Data',   data: data.sd?.datasets,   n: data.sd?.count,    cols: ['synth_id','name','generator_type','target_volume'] },
+  ];
+
+  return (
+    <>
+      <Section title="Iter 68-69 · 11 governance registries · LIVE" accent="#3b82f6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 6 }}>
+          {Object.entries(data.h?.counts || {}).map(([k, v]) => (
+            <div key={k} style={{ padding: 8, background: '#f0fdf4', borderRadius: 4 }}>
+              <div style={{ fontSize: 9, color: '#15803d' }}>{k.replace(/_/g, ' ').toUpperCase()}</div>
+              <div style={{ fontSize: 20, fontWeight: 800 }}>{v}</div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section title={`Kill Switches · ${data.ks?.count || 0} · operator-toggleable`} accent="#ef4444">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#fee2e2' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 4 }}>SWITCH</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>TARGET</th>
+              <th style={{ textAlign: 'center', padding: 4 }}>STATE</th>
+              <th style={{ textAlign: 'center', padding: 4 }}>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(data.ks?.switches || []).map(sw => (
+              <tr key={sw.switch_id} style={{ borderTop: '1px solid #fecaca' }}>
+                <td style={{ padding: 4 }}><code>{sw.switch_id}</code></td>
+                <td style={{ padding: 4 }}>{sw.target_type}/{sw.target_id}</td>
+                <td style={{ padding: 4, textAlign: 'center' }}>
+                  <Pill color={sw.is_killed ? '#ef4444' : '#10b981'}>
+                    {sw.is_killed ? 'KILLED' : 'LIVE'}
+                  </Pill>
+                </td>
+                <td style={{ padding: 4, textAlign: 'center' }}>
+                  <button onClick={() => toggleKill(sw)}
+                    style={{
+                      padding: '3px 8px', fontSize: 10, cursor: 'pointer',
+                      background: sw.is_killed ? '#10b981' : '#ef4444',
+                      color: '#fff', border: 'none', borderRadius: 3,
+                    }}>
+                    {sw.is_killed ? 'Unkill' : 'Kill'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      {sections.map(sec => (
+        <Section key={sec.title} title={`${sec.title} · ${sec.n || 0}`} accent="#8b5cf6">
+          <table style={{ fontSize: 10, width: '100%' }}>
+            <thead style={{ background: '#f3e8ff' }}>
+              <tr>{sec.cols.map(c => (
+                <th key={c} style={{ textAlign: 'left', padding: 4 }}>{c.toUpperCase()}</th>
+              ))}</tr>
+            </thead>
+            <tbody>
+              {(sec.data || []).slice(0, 10).map((row, i) => (
+                <tr key={i} style={{ borderTop: '1px solid #f1f5f9' }}>
+                  {sec.cols.map(c => (
+                    <td key={c} style={{ padding: 4 }}>
+                      {typeof row[c] === 'object' ? JSON.stringify(row[c]) : String(row[c] ?? '')}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Section>
+      ))}
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1797,6 +1921,7 @@ export default function AgenticHubPage() {
         {activeTab === 'challenges'         && <ChallengesView />}
         {activeTab === 'status-agents'     && <StatusAgentsView />}
         {activeTab === 'checklist'        && <ChecklistView />}
+        {activeTab === 'governance-registries' && <GovernanceRegistriesView />}
         {activeTab === 'enterprise'      && <EnterpriseStandardView />}
         {activeTab === 'frontend-gov'   && <FrontendGovernanceView />}
         {activeTab === 'live-activity' && <LiveActivityView />}

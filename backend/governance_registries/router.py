@@ -183,7 +183,125 @@ def abac_evaluate(body: AbacRequest):
 
 
 # ─────────────────────────────────────────────────────────────────────
-# Health · summary across the 7 new tables
+# Iter 69 · concurrency · secrets · golden tests · synthetic data
+
+@router.get("/concurrency")
+def concurrency_control():
+    rows = _all("concurrency_control")
+    return {"count": len(rows), "controls": rows}
+
+
+class ConcurrencyAcquire(BaseModel):
+    control_id: str
+    increment: int = 1
+
+
+@router.post("/concurrency/acquire")
+def concurrency_acquire(body: ConcurrencyAcquire):
+    with _conn() as c, c.cursor() as cur:
+        cur.execute("""
+            UPDATE concurrency_control
+            SET current_count = current_count + %s,
+                last_acquired_at = CURRENT_TIMESTAMP
+            WHERE control_id = %s AND current_count + %s <= max_concurrent
+            RETURNING current_count, max_concurrent
+        """, (body.increment, body.control_id, body.increment))
+        row = cur.fetchone()
+        if not row:
+            return {"acquired": False, "reason": "max_concurrent would be exceeded"}
+    return {"acquired": True, "current": row[0], "max": row[1]}
+
+
+@router.post("/concurrency/release")
+def concurrency_release(body: ConcurrencyAcquire):
+    with _conn() as c, c.cursor() as cur:
+        cur.execute("""
+            UPDATE concurrency_control
+            SET current_count = GREATEST(0, current_count - %s),
+                last_released_at = CURRENT_TIMESTAMP
+            WHERE control_id = %s
+            RETURNING current_count
+        """, (body.increment, body.control_id))
+        row = cur.fetchone()
+    return {"released": True, "current": row[0] if row else 0}
+
+
+@router.get("/secrets-vault")
+def secrets_vault():
+    rows = _all("secrets_vault")
+    # Mask the encrypted value
+    for r in rows:
+        if "encrypted_value" in r:
+            r["encrypted_value"] = "__masked__"
+    return {"count": len(rows), "secrets": rows}
+
+
+@router.get("/golden-tests")
+def golden_tests(agent_id: str | None = None):
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        if agent_id:
+            cur.execute("""
+                SELECT * FROM golden_test_set WHERE target_agent_id=%s
+                ORDER BY created_at LIMIT 100
+            """, (agent_id,))
+        else:
+            cur.execute("""
+                SELECT * FROM golden_test_set ORDER BY created_at LIMIT 100
+            """)
+        rows = [dict(r) for r in cur.fetchall()]
+    return {"count": len(rows), "tests": rows}
+
+
+@router.get("/synthetic-datasets")
+def synthetic_datasets():
+    rows = _all("synthetic_dataset")
+    return {"count": len(rows), "datasets": rows}
+
+
+class SynthGenRequest(BaseModel):
+    synth_id: str
+    n: int = 5
+
+
+@router.post("/synthetic/generate")
+def synthetic_generate(body: SynthGenRequest):
+    """Tiny synthetic data generator · uses Python's hash + counter (no Faker dep)."""
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute("SELECT * FROM synthetic_dataset WHERE synth_id=%s", (body.synth_id,))
+        ds = cur.fetchone()
+    if not ds:
+        return {"error": "synth_id not found"}
+    template = ds["template"]
+    fields = template.get("fields", []) if isinstance(template, dict) else []
+    rows = []
+    for i in range(min(body.n, 100)):
+        row = {}
+        for f in fields:
+            t = f.get("type", "string")
+            if t == "uuid":
+                row[f["name"]] = f"u-{i:06d}-{abs(hash(f['name']+str(i))) % 10000}"
+            elif t == "float":
+                lo = f.get("min", 0)
+                hi = f.get("max", 100)
+                row[f["name"]] = round(lo + (hi - lo) * ((i * 37 + 13) % 100) / 100.0, 2)
+            elif t == "choice":
+                vals = f.get("values", ["a"])
+                row[f["name"]] = vals[i % len(vals)]
+            elif t == "name":
+                row[f["name"]] = f"Customer-{i}"
+            elif t == "email":
+                row[f["name"]] = f"user{i}@synthetic.local"
+            elif t == "phone":
+                row[f["name"]] = f"555-{(i * 7) % 1000:03d}-{(i * 13) % 10000:04d}"
+            else:
+                row[f["name"]] = f"value-{i}"
+        rows.append(row)
+    return {"synth_id": body.synth_id, "generated": len(rows), "rows": rows[:50],
+            "scaffold_note": "Deterministic stub generator · plug Faker for prod"}
+
+
+# ─────────────────────────────────────────────────────────────────────
+# Health · summary across all tables
 
 @router.get("/health")
 def health():
@@ -192,7 +310,8 @@ def health():
     with _conn() as c, c.cursor() as cur:
         for t in ["mcp_server_registry", "eval_registry", "dataset_registry",
                   "access_registry", "dead_letter_queue", "kill_switch",
-                  "abac_policy"]:
+                  "abac_policy", "concurrency_control", "secrets_vault",
+                  "golden_test_set", "synthetic_dataset"]:
             cur.execute(f"SELECT COUNT(*) FROM {t}")
             out[t] = cur.fetchone()[0]
         # Check new agents
