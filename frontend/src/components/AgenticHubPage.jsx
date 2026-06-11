@@ -15,6 +15,7 @@ const HUB_TABS = [
   { key: 'status-agents', label: '📊 Status Agents (Iter 59)' },
   { key: 'checklist', label: '☑️ Production Checklist (Iter 60)' },
   { key: 'enterprise', label: '🏛 Enterprise Standard §101 (Iter 61)' },
+  { key: 'frontend-gov', label: '🖥 Frontend Governance §102 (Iter 62)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
   { key: 'status',        label: 'Status (live)' },
   { key: 'all-agents',    label: 'All Agents (table)' },
@@ -1330,6 +1331,99 @@ function EnterpriseStandardView() {
   );
 }
 
+
+function FrontendGovernanceView() {
+  const [cov, setCov] = useState(null);
+  const [leaks, setLeaks] = useState(null);
+  useEffect(() => {
+    fetch(`${API}/api/v1/frontend-governance/coverage`).then(r => r.json()).then(setCov);
+    fetch(`${API}/api/v1/frontend-governance/forbidden-leaks`).then(r => r.json()).then(setLeaks);
+  }, []);
+  if (!cov || !leaks) return <em>Loading…</em>;
+  const s = cov.summary;
+  const grade = s.production_ready_pct >= 90 ? 'A' :
+                s.production_ready_pct >= 75 ? 'B' :
+                s.production_ready_pct >= 60 ? 'C' : 'D';
+  const gradeColor = grade === 'A' ? '#10b981' : grade === 'B' ? '#3b82f6' : grade === 'C' ? '#f59e0b' : '#ef4444';
+  return (
+    <>
+      <Section title="🖥 §102 Frontend/UI Governance · LIVE" accent={gradeColor}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+          <div style={{ padding: 10, background: `${gradeColor}15`, borderRadius: 4, border: `1px solid ${gradeColor}40` }}>
+            <div style={{ fontSize: 9 }}>FRONTEND GRADE</div>
+            <div style={{ fontSize: 32, fontWeight: 800, color: gradeColor }}>{grade}</div>
+            <div style={{ fontSize: 10 }}>{s.production_ready_pct}%</div>
+          </div>
+          <div style={{ padding: 10, background: '#dcfce7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>✅ DONE</div>
+            <div style={{ fontSize: 32, fontWeight: 800, color: '#15803d' }}>{s.done}</div>
+          </div>
+          <div style={{ padding: 10, background: '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>⚠️ PARTIAL</div>
+            <div style={{ fontSize: 32, fontWeight: 800, color: '#a16207' }}>{s.partial}</div>
+          </div>
+          <div style={{ padding: 10, background: '#fee2e2', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>❌ MISSING</div>
+            <div style={{ fontSize: 32, fontWeight: 800, color: '#991b1b' }}>{s.missing}</div>
+          </div>
+          <div style={{ padding: 10, background: '#dbeafe', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>F12 LEAKS</div>
+            <div style={{ fontSize: 32, fontWeight: 800, color: leaks.score_pct >= 85 ? '#15803d' : '#a16207' }}>{leaks.score_pct}%</div>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="F12 / DevTools Security Scan" accent="#ef4444">
+        <table style={{ fontSize: 10, width: '100%' }}>
+          <thead style={{ background: '#fee2e2' }}>
+            <tr><th style={{ textAlign:'left', padding:4 }}>CHECK</th>
+                <th style={{ textAlign:'center', padding:4 }}>STATUS</th>
+                <th style={{ textAlign:'left', padding:4 }}>SAMPLE FILES</th></tr>
+          </thead>
+          <tbody>
+            {leaks.results.map((r, i) => (
+              <tr key={i} style={{ borderTop: '1px solid #fecaca' }}>
+                <td style={{ padding:4 }}><strong>{r.check}</strong></td>
+                <td style={{ padding:4, textAlign:'center' }}>{r.status}</td>
+                <td style={{ padding:4, fontSize: 9, color: '#475569' }}>
+                  {(r.files || []).slice(0, 3).map((f, j) => <div key={j}><code>{f}</code></div>)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+
+      <Section title="12 sections · per-row status" accent="#3b82f6">
+        {Object.entries(cov.sections).map(([key, items]) => {
+          const sc = cov.summary.by_section[key];
+          return (
+            <details key={key} open style={{ marginTop: 8, padding: 10, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 4 }}>
+              <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: 11 }}>
+                {key.replace(/_/g, ' ').toUpperCase()} ·{' '}
+                <code>{sc.done}/{sc.total} ({sc.done_pct}%)</code>
+                {sc.missing > 0 && <Pill color="#ef4444">{sc.missing} missing</Pill>}
+                {sc.partial > 0 && <Pill color="#f59e0b">{sc.partial} partial</Pill>}
+              </summary>
+              <table style={{ fontSize: 10, width: '100%', marginTop: 4 }}>
+                <tbody>
+                  {items.map((it, i) => (
+                    <tr key={i} style={{ borderTop: '1px solid #f1f5f9' }}>
+                      <td style={{ padding:3, fontSize: 14, width: 24 }}>{it.status}</td>
+                      <td style={{ padding:3 }}>{it.item}</td>
+                      <td style={{ padding:3, fontSize: 9, color: '#475569' }}>{it.where || ''}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </details>
+          );
+        })}
+      </Section>
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -1690,6 +1784,7 @@ export default function AgenticHubPage() {
         {activeTab === 'status-agents'     && <StatusAgentsView />}
         {activeTab === 'checklist'        && <ChecklistView />}
         {activeTab === 'enterprise'      && <EnterpriseStandardView />}
+        {activeTab === 'frontend-gov'   && <FrontendGovernanceView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
         {activeTab === 'status'       && <StatusView />}
         {activeTab === 'all-agents'   && <AllAgentsNetworkPanel />}
