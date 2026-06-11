@@ -1,0 +1,13 @@
+{
+  "ai_type": "Image Classification AI",
+  "slug": "image-classification-ai",
+  "algorithm": "RandomForest on synthetic ResNet50-like features",
+  "accuracy": 1.0,
+  "f1_macro": 1.0,
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features": 64,
+  "n_classes": 4,
+  "data_kind": "synthetic 64-d image features (baseline)",
+  "trained_at": "2026-06-11T17:09:38.101872"
+}

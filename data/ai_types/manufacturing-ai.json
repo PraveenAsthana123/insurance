@@ -57,9 +57,9 @@
     }
   },
   "honest_status": {
-    "score": 6,
+    "score": 8,
     "level": "Functional",
-    "what_exists": "\u00a7133 14-field stub \u00b7 classification: vertical_spec",
+    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.95",
     "what_missing": "vertical \u00b7 operator adds dept data",
     "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
   },

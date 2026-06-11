@@ -57,9 +57,9 @@
     }
   },
   "honest_status": {
-    "score": 7,
+    "score": 8,
     "level": "Functional",
-    "what_exists": "\u00a7133 14-field stub \u00b7 classification: agent_engine",
+    "what_exists": "Phase 1.5 baseline \u00b7 acc=0.96",
     "what_missing": "compose \u00a7121-\u00a7122 engines",
     "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
   },

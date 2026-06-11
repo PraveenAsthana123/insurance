@@ -1,0 +1,9 @@
+{
+  "ai_type": "Agent Governance",
+  "slug": "agent-governance",
+  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 ops_existing)",
+  "accuracy": 0.97,
+  "composition_score": 0.97,
+  "data_kind": "platform composition readiness",
+  "trained_at": "2026-06-11T17:10:07.472618"
+}

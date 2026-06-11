@@ -1,0 +1,11 @@
+{
+  "ai_type": "Voice AI",
+  "slug": "voice-ai",
+  "algorithm": "GradientBoost on synthetic mel-spectrogram features",
+  "accuracy": 0.935,
+  "n_train": 1600,
+  "n_test": 400,
+  "n_features": 128,
+  "data_kind": "synthetic audio features (baseline)",
+  "trained_at": "2026-06-11T17:10:06.788413"
+}

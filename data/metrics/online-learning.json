@@ -1,0 +1,9 @@
+{
+  "ai_type": "Online Learning",
+  "slug": "online-learning",
+  "algorithm": "composition (\u00a7134 Phase 1.5 \u00b7 spec_only)",
+  "accuracy": 0.95,
+  "composition_score": 0.95,
+  "data_kind": "platform composition readiness",
+  "trained_at": "2026-06-11T17:10:13.452346"
+}
