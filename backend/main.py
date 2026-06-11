@@ -221,7 +221,8 @@ def create_app() -> FastAPI:
     from blueprint_library.router import router as bp_router  # /api/v1/blueprint-library — Iter 74 (Phase 6)
     from enterprise_intelligence.router import router as eil_router  # /api/v1/enterprise-intelligence — Iter 76 (Phase 9)
     from autonomous_loop.router import router as al_router  # /api/v1/autonomous-loop — Iter 77 (Phase 8)
-    from enterprise_ai_domains.router import router as eaid_router  # /api/v1/enterprise-ai-domains — Iter 78  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
+    from enterprise_ai_domains.router import router as eaid_router  # /api/v1/enterprise-ai-domains — Iter 78
+    from missing_offices.router import router as mo_router  # /api/v1/missing-offices — Iter 79 (§104)  # /api/v1/vulnerabilities — Iter 25  # /api/v1/alerts/* — Iter 21  # /api/v1/comments/* — P1 #18  # /api/v1/test-status/* — §64.30 12-tier  # /api/v1/data-pipeline/* — 5-phase  # /api/v1/responsible-ai/* — 12-lens  # /api/v1/use-cases/* — §94  # /api/v1/pipeline/* — §93 Manual + Automatic  # /api/v1/feedback/* — gate #4  # /api/v1/hitl/* — gate #3  # /api/v1/ml/* — model registry · SHAP · eval  # /api/v1/corrections/* — T7.10 RLHF DB  # /api/v1/autonomous-dept/*  # /api/v1/attribution/* — T5.9 multi-touch  # /api/v1/ai-tools/* — tool landscape  # /api/v1/marketing-kpis/* — KPI registry  # /api/v1/content-ops/* — job+blog postings · contacts · schedules  # /api/v1/marketing-campaigns/* — 4 channels (email/banner/survey/form)
 
     app.include_router(health_router)
     app.include_router(health_unversioned_router)  # /api/health alias for Docker healthcheck
@@ -342,6 +343,7 @@ def create_app() -> FastAPI:
     app.include_router(eil_router)                 # /api/v1/enterprise-intelligence — Iter 76 (Phase 9)
     app.include_router(al_router)                  # /api/v1/autonomous-loop — Iter 77 (Phase 8)
     app.include_router(eaid_router)                # /api/v1/enterprise-ai-domains — Iter 78
+    app.include_router(mo_router)                  # /api/v1/missing-offices — Iter 79 (§104)
     # Iter 36 · install httpx auto-audit hook
     from core.httpx_audit_hook import install_httpx_audit_hook
     install_httpx_audit_hook()
