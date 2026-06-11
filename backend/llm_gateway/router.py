@@ -841,6 +841,40 @@ def ollama_model_plan():
     }
 
 
+@router.get("/ollama/route")
+def ollama_route(intent: str = "general", tier: str | None = None):
+    """Operator-facing routing demo · which Ollama model fires for a given intent?"""
+    import httpx as _httpx
+    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
+    try:
+        installed = [m["name"] for m in _httpx.get(f"{host}/api/tags", timeout=5).json().get("models", [])]
+    except Exception:
+        installed = []
+    # Intent → tier mapping
+    intent_tier_map = {
+        "classify": "tier_1_fast", "guard": "tier_1_fast", "route": "tier_1_fast",
+        "rag_answer": "tier_2_balanced", "summarize": "tier_2_balanced",
+        "code_completion": "tier_2_balanced",
+        "reasoning": "tier_3_heavy", "long_context": "tier_3_heavy",
+        "code_generation": "tier_4_specialty", "code_review": "tier_4_specialty",
+        "general": "tier_2_balanced",
+    }
+    tier = tier or intent_tier_map.get(intent, "tier_2_balanced")
+    tier_models = {
+        "tier_1_fast": ["llama3.2:1b", "qwen2.5:0.5b"],
+        "tier_2_balanced": ["llama3.2:3b", "qwen2.5:3b", "phi3.5:3.8b"],
+        "tier_3_heavy": ["llama3.1:8b", "qwen2.5:7b", "mistral:7b"],
+        "tier_4_specialty": ["deepseek-coder:6.7b", "codellama:7b"],
+    }
+    candidates = tier_models.get(tier, [])
+    pick = next((m for m in candidates if any(m in i for i in installed)), candidates[0] if candidates else None)
+    return {**_stamp(), "intent": intent, "tier": tier,
+            "candidates": candidates,
+            "installed_candidates": [m for m in candidates if any(m in i for i in installed)],
+            "picked": pick,
+            "reason": f"intent={intent} → {tier} → first installed candidate"}
+
+
 @router.get("/audit/recent")
 def audit_recent(limit: int = 50):
     with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
