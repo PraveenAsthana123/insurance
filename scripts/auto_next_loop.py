@@ -312,5 +312,35 @@ def main():
     print(f"[§106] {tick_id} · acted · {top['topic']} · {record['duration_s']}s")
 
 
+EXIT_CODE_MAP = {
+    "acted": 0, "cooldown": 10, "gated": 20,
+    "stable": 30, "no-handler": 31, "error": 40,
+    "cap-hit": 30, "needs-handler": 31,
+}
+
+
+def _main_with_exit():
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"[§106] crash: {e}")
+        import sys
+        sys.exit(40)
+    # Read latest status to set exit
+    import json as _json
+    try:
+        latest_dir = REPO / "jobs/reports/auto-next"
+        latest_files = sorted(latest_dir.glob("run-*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+        if latest_files:
+            with open(latest_files[0]) as f:
+                rec = _json.load(f)
+            import sys
+            sys.exit(EXIT_CODE_MAP.get(rec.get("status"), 30))
+    except Exception:
+        pass
+
+
 if __name__ == "__main__":
-    main()
+    _main_with_exit()
