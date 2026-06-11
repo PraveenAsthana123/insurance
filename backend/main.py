@@ -227,6 +227,7 @@ def create_app() -> FastAPI:
     from platform_identity.router import router as pi_router  # /api/v1/platform-identity — Iter 86 (§107)
     from llm_gateway.router import router as gw_router  # /api/v1/llm-gateway — Iter 87 (§108)
     from llm_gateway.extensions import router as gw_ext_router  # Iter 91 · smart router + callbacks + PII
+    from integrations_hub.router import router as ih_router  # Iter 92 · unified tools view
     from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     from opa_adapter.router import router as opa_router
     from agentops_adapter.router import router as agops_router
@@ -362,6 +363,7 @@ def create_app() -> FastAPI:
     app.include_router(pi_router)                  # /api/v1/platform-identity — Iter 86 (§107)
     app.include_router(gw_router)                  # /api/v1/llm-gateway — Iter 87 (§108)
     app.include_router(gw_ext_router)              # Iter 91 · gateway extensions
+    app.include_router(ih_router)                  # Iter 92 · integrations-hub
     app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     app.include_router(opa_router)
     app.include_router(agops_router)

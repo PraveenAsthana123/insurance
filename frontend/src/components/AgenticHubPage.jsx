@@ -25,6 +25,7 @@ const HUB_TABS = [
   { key: 'governance-registries', label: '🏛 Governance Registries (Iter 68-69)' },
   { key: 'blueprints', label: '🧱 Blueprint Library (Iter 74 · Phase 6)' },
   { key: 'enterprise-ai-domains', label: '🏛 Enterprise AI Governance · 22 domains (Iter 78)' },
+  { key: 'integrations-hub', label: '🧰 Integrations Hub · all installed tools (Iter 92)' },
   { key: 'enterprise', label: '🏛 Enterprise Standard §101 (Iter 61)' },
   { key: 'frontend-gov', label: '🖥 Frontend Governance §102 (Iter 62)' },
   { key: 'live-activity', label: '🔴 Live Activity (per-agent stream)' },
@@ -1818,6 +1819,128 @@ function EnterpriseAIDomainDetail({ did, onClose }) {
   );
 }
 
+
+function IntegrationsHubView() {
+  const [data, setData] = useState(null);
+  const [filter, setFilter] = useState('all');
+
+  const load = useCallback(async () => {
+    const r = await fetch(`${API}/api/v1/integrations-hub`);
+    setData(await r.json());
+  }, []);
+
+  useEffect(() => {
+    load();
+    const t = setInterval(load, 30000); // §109 refresh 30s
+    return () => clearInterval(t);
+  }, [load]);
+
+  if (!data) return <SkeletonCard count={3} />;
+
+  const filtered = filter === 'all'
+    ? data.integrations
+    : data.integrations.filter(i => i.category === filter);
+
+  const colorByStatus = {
+    live: '#10b981', live_unreachable: '#f59e0b', core: '#3b82f6',
+    scaffold: '#94a3b8', unknown: '#a1a1aa',
+  };
+
+  return (
+    <>
+      <Section title={`🧰 ${data.summary.total} Integrations · last refresh ${data.ts_local}`} accent="#3b82f6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8, marginBottom: 10 }}>
+          <div style={{ padding: 10, background: '#dcfce7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>LIVE</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#15803d' }}>{data.summary.live}</div>
+          </div>
+          <div style={{ padding: 10, background: '#fef3c7', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>LIVE BUT UNREACHABLE</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#a16207' }}>{data.summary.live_unreachable}</div>
+          </div>
+          <div style={{ padding: 10, background: '#dbeafe', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>CORE</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#1d4ed8' }}>{data.summary.core}</div>
+          </div>
+          <div style={{ padding: 10, background: '#f1f5f9', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>SCAFFOLD</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#64748b' }}>{data.summary.scaffold}</div>
+          </div>
+          <div style={{ padding: 10, background: '#fee2e2', borderRadius: 4 }}>
+            <div style={{ fontSize: 9 }}>UNKNOWN</div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: '#b91c1c' }}>{data.summary.unknown}</div>
+          </div>
+        </div>
+
+        <select value={filter} onChange={e => setFilter(e.target.value)}
+          style={{ padding: '4px 8px', fontSize: 11, marginBottom: 8 }}>
+          <option value="all">All categories ({data.summary.total})</option>
+          {Object.entries(data.by_category).map(([c, n]) => (
+            <option key={c} value={c}>{c} ({n})</option>
+          ))}
+        </select>
+
+        <table style={{ fontSize: 10, width: '100%', borderCollapse: 'collapse' }}>
+          <thead style={{ background: '#f1f5f9' }}>
+            <tr>
+              <th style={{ textAlign: 'left', padding: 4 }}>NAME</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>CATEGORY</th>
+              <th style={{ textAlign: 'center', padding: 4 }}>STATUS</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>PURPOSE</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>POLICY</th>
+              <th style={{ textAlign: 'left', padding: 4 }}>LICENSE</th>
+              <th style={{ textAlign: 'center', padding: 4 }}>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map(i => (
+              <tr key={i.id} style={{ borderTop: '1px solid #e5e7eb' }}>
+                <td style={{ padding: 6 }}>
+                  <strong>{i.name}</strong>
+                  <div style={{ fontSize: 9, color: '#94a3b8' }}>iter {i.iter} · {i.type}</div>
+                </td>
+                <td style={{ padding: 6 }}><Pill color="#8b5cf6">{i.category}</Pill></td>
+                <td style={{ padding: 6, textAlign: 'center' }}>
+                  <Pill color={colorByStatus[i.status]}>{i.status.toUpperCase()}</Pill>
+                  {i.detail && i.detail.env_var && !i.detail.env_set && (
+                    <div style={{ fontSize: 8, color: '#94a3b8', marginTop: 2 }}>
+                      Set <code>{i.detail.env_var}</code>
+                    </div>
+                  )}
+                  {i.detail && i.detail.target && (
+                    <div style={{ fontSize: 8, color: '#94a3b8', marginTop: 2 }}>
+                      {i.detail.target}
+                    </div>
+                  )}
+                </td>
+                <td style={{ padding: 6, fontSize: 10 }}>{i.purpose}</td>
+                <td style={{ padding: 6 }}>{i.global_policy}</td>
+                <td style={{ padding: 6, fontSize: 9 }}>{i.license}</td>
+                <td style={{ padding: 6, textAlign: 'center' }}>
+                  {i.config_link && (
+                    <a href={`${API}${i.config_link}`} target="_blank" rel="noopener"
+                       style={{ fontSize: 9, padding: '2px 6px', background: '#3b82f6',
+                                color: '#fff', borderRadius: 3, textDecoration: 'none', marginRight: 3 }}>
+                      Config
+                    </a>
+                  )}
+                  {i.docs && i.docs !== 'internal' && (
+                    <a href={i.docs} target="_blank" rel="noopener"
+                       style={{ fontSize: 9, padding: '2px 6px', background: '#64748b',
+                                color: '#fff', borderRadius: 3, textDecoration: 'none' }}>
+                      Docs
+                    </a>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // LIVE TASK TRACER · 7-stage agentic flow visible per task
 // PLAN → REGISTER → SKILL → RESEARCH → ACTION → INTERVENTION → REVIEW
@@ -2186,6 +2309,7 @@ export default function AgenticHubPage() {
         {activeTab === 'governance-registries' && <GovernanceRegistriesView />}
         {activeTab === 'blueprints'        && <BlueprintLibraryView />}
         {activeTab === 'enterprise-ai-domains' && <EnterpriseAIDomainsView />}
+        {activeTab === 'integrations-hub' && <IntegrationsHubView />}
         {activeTab === 'enterprise'      && <EnterpriseStandardView />}
         {activeTab === 'frontend-gov'   && <FrontendGovernanceView />}
         {activeTab === 'live-activity' && <LiveActivityView />}
