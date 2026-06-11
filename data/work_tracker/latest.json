@@ -1,13 +1,13 @@
 {
-  "ts": "2026-06-11T20:25:01Z",
+  "ts": "2026-06-11T20:45:01Z",
   "cron_logs": {
     "agent_test_runner.log": {
-      "size": 148039,
-      "last_modified": "2026-06-11T20:00:02Z",
+      "size": 148254,
+      "last_modified": "2026-06-11T20:30:02Z",
       "tail": [
-        "2026-06-11T19:30:01Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260611T193001Z.json",
-        "2026-06-11T20:00:01Z | test-runner | api: 4 endpoints",
-        "2026-06-11T20:00:02Z | test-runner | api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260611T200001Z.json"
+        "2026-06-11T20:00:02Z | test-runner | api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260611T200001Z.json",
+        "2026-06-11T20:30:02Z | test-runner | TDD check: every feature must have a paired drill (\u00a743)",
+        "2026-06-11T20:30:02Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260611T203002Z.json"
       ]
     },
     "agentic_readiness_cron.log": {
@@ -46,11 +46,11 @@
       ]
     },
     "auto-next.log": {
-      "size": 18116,
-      "last_modified": "2026-06-11T20:25:01Z",
+      "size": 19224,
+      "last_modified": "2026-06-11T20:45:01Z",
       "tail": [
         "[dispatcher] cooldown \u00b7 stopping chain \u00b7 cron will fire again",
-        "[dispatcher] 2026-06-11T20:25:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] 2026-06-11T20:45:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
@@ -82,8 +82,8 @@
       ]
     },
     "codex_approval_cron.log": {
-      "size": 986874,
-      "last_modified": "2026-06-11T20:25:01Z",
+      "size": 987494,
+      "last_modified": "2026-06-11T20:45:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -91,8 +91,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 11911747,
-      "last_modified": "2026-06-11T20:20:01Z",
+      "size": 11928177,
+      "last_modified": "2026-06-11T20:37:41Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -573,12 +573,12 @@
       ]
     },
     "pending_boot.log": {
-      "size": 45764,
-      "last_modified": "2026-06-11T20:01:00Z",
+      "size": 45926,
+      "last_modified": "2026-06-11T20:30:13Z",
       "tail": [
-        "[2026-06-11T20:00:01Z] verifying backend create_app()",
-        "chroma connect failed: {\"detail\":\"Not Found\"}",
-        "BOOT_OK routes=802"
+        "[2026-06-11T20:30:02Z] verifying backend create_app()",
+        "chroma connect failed: Could not connect to a Chroma server. Are you sure it is running?",
+        "BOOT_OK routes=837"
       ]
     },
     "pending_claude-md-drift.log": {
@@ -645,12 +645,12 @@
       ]
     },
     "pending_push.log": {
-      "size": 159029,
-      "last_modified": "2026-06-11T20:15:01Z",
+      "size": 159367,
+      "last_modified": "2026-06-11T20:45:01Z",
       "tail": [
-        "[2026-06-11T20:15:01Z] push task",
-        "[2026-06-11T20:15:01Z] skip \u2014 no origin remote configured",
-        "[2026-06-11T20:15:01Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-11T20:45:01Z] push task",
+        "[2026-06-11T20:45:01Z] skip \u2014 no origin remote configured",
+        "[2026-06-11T20:45:01Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "pending_reports-cleanup.log": {
@@ -697,11 +697,11 @@
       ]
     },
     "rag_chunking.log": {
-      "size": 39639,
-      "last_modified": "2026-06-11T20:05:10Z",
+      "size": 39723,
+      "last_modified": "2026-06-11T20:35:07Z",
       "tail": [
         "chunked 4959 docs, wrote 0 new chunks",
-        "[2026-06-11T20:05:01Z] running chunking sweep",
+        "[2026-06-11T20:35:01Z] running chunking sweep",
         "chunked 4959 docs, wrote 0 new chunks"
       ]
     },
@@ -715,20 +715,20 @@
       ]
     },
     "rag_embedding.log": {
-      "size": 47840,
-      "last_modified": "2026-06-11T20:10:02Z",
+      "size": 47936,
+      "last_modified": "2026-06-11T20:40:01Z",
       "tail": [
-        "[2026-06-11T20:10:01Z] embedding sweep",
+        "[2026-06-11T20:40:01Z] embedding sweep",
         "chunks=33139 embedded=33139 todo=0",
         "embedded 0 new chunks"
       ]
     },
     "rag_guardrail.log": {
-      "size": 95816,
-      "last_modified": "2026-06-11T20:20:01Z",
+      "size": 95952,
+      "last_modified": "2026-06-11T20:40:01Z",
       "tail": [
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260611.jsonl",
-        "[2026-06-11T20:20:01Z] guardrail probes",
+        "[2026-06-11T20:40:01Z] guardrail probes",
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260611.jsonl"
       ]
     },
@@ -796,17 +796,17 @@
       ]
     },
     "test_runner_tdd_hourly.log": {
-      "size": 42829,
-      "last_modified": "2026-06-11T19:30:01Z",
+      "size": 43016,
+      "last_modified": "2026-06-11T20:30:02Z",
       "tail": [
-        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260611T183002Z.json",
+        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260611T193001Z.json",
         "\u001b[36m[test-runner]\u001b[0m TDD check: every feature must have a paired drill (\u00a743)",
-        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260611T193001Z.json"
+        "\u001b[36m[test-runner]\u001b[0m tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260611T203002Z.json"
       ]
     },
     "work_tracker.log": {
-      "size": 295308,
-      "last_modified": "2026-06-11T20:20:06Z",
+      "size": 295728,
+      "last_modified": "2026-06-11T20:40:06Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=93, fleet=345)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=93, fleet=345)",
@@ -840,6 +840,6 @@
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 1176
+    "count": 1177
   }
 }

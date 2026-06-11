@@ -1,0 +1,94 @@
+# §127 KG stack docker-compose · Iter 109
+# Start: docker compose -f docker-compose.kg.yml up -d
+# Stop:  docker compose -f docker-compose.kg.yml down
+
+services:
+  fuseki:
+    image: stain/jena-fuseki:latest-fuseki-4
+    container_name: insur-fuseki
+    ports: ["3030:3030"]
+    environment:
+      - ADMIN_PASSWORD=admin123
+    volumes:
+      - fuseki-data:/fuseki
+    restart: unless-stopped
+
+  graphdb:
+    image: ontotext/graphdb:10.6.4
+    container_name: insur-graphdb
+    ports: ["7200:7200"]
+    volumes:
+      - graphdb-data:/opt/graphdb/home
+    restart: unless-stopped
+
+  memgraph:
+    image: memgraph/memgraph-platform:latest
+    container_name: insur-memgraph
+    ports:
+      - "7687:7687"   # bolt
+      - "7444:7444"   # ws
+      - "3000:3000"   # lab UI
+    volumes:
+      - memgraph-data:/var/lib/memgraph
+    restart: unless-stopped
+
+  tika:
+    image: apache/tika:latest-full
+    container_name: insur-tika
+    ports: ["9998:9998"]
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: insur-qdrant
+    ports: ["6333:6333"]
+    volumes:
+      - qdrant-data:/qdrant/storage
+    restart: unless-stopped
+
+  # Enterprise tier
+  stardog:
+    image: stardog/stardog:latest
+    container_name: insur-stardog
+    ports: ["5820:5820"]
+    profiles: ["enterprise"]
+    environment:
+      - STARDOG_PASSWORD=admin123
+    volumes:
+      - stardog-data:/var/opt/stardog
+
+  rdf4j:
+    image: eclipse/rdf4j-workbench:latest
+    container_name: insur-rdf4j
+    ports: ["8080:8080"]
+    profiles: ["enterprise"]
+    volumes:
+      - rdf4j-data:/var/rdf4j
+
+  virtuoso:
+    image: openlink/virtuoso-opensource-7:latest
+    container_name: insur-virtuoso
+    ports:
+      - "8890:8890"
+      - "1111:1111"
+    profiles: ["enterprise"]
+    environment:
+      - DBA_PASSWORD=admin123
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: insur-keycloak
+    ports: ["8180:8080"]
+    profiles: ["enterprise"]
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin123
+    command: start-dev
+
+volumes:
+  fuseki-data:
+  graphdb-data:
+  memgraph-data:
+  qdrant-data:
+  stardog-data:
+  rdf4j-data:

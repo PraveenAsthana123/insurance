@@ -262,6 +262,9 @@ case "${1:-}" in
   --docker-compose-up)
     compose_up_core
     ;;
+  --video-pipeline)
+    install_video_pipeline
+    ;;
   --models)
     install_ollama_models
     ;;
@@ -326,3 +329,34 @@ USAGE
     exit 2
     ;;
 esac
+
+# Iter 110 extension · video pipeline tier
+install_video_pipeline() {
+  stamp "${B}Installing Video Pipeline tools${R}"
+  echo "  pip libs (~600MB): faster-whisper + opencv + ffmpeg-python + scenedetect + moviepy + paddleocr"
+  $PIP install --quiet --no-input \
+    faster-whisper opencv-python ffmpeg-python scenedetect moviepy 2>&1 | tail -3 || true
+  for lib in "faster_whisper" "cv2" "ffmpeg" "scenedetect" "moviepy"; do
+    if $PT -c "import $lib" 2>/dev/null; then
+      echo -e "  ${GREEN}✓${R} $lib"
+    else
+      echo -e "  ${RED}✗${R} $lib"
+    fi
+  done
+
+  echo ""
+  echo "  System binaries (apt-get):"
+  for bin in ffmpeg; do
+    if command -v "$bin" >/dev/null 2>&1; then
+      echo -e "  ${GREEN}✓${R} $bin ($(which $bin))"
+    else
+      echo -e "  ${YLW}!${R} $bin missing · run: sudo apt-get install -y $bin"
+    fi
+  done
+
+  echo ""
+  echo "  Vision-LLM via Ollama (optional):"
+  echo "    ollama pull qwen2.5vl                # ~5GB"
+  echo "    ollama pull llava                    # ~4GB"
+  echo "    ollama pull minicpm-v                # ~5GB"
+}
