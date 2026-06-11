@@ -1,0 +1,24 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/platform_identity/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+GET /api/v1/platform-identity · §107 time + user + host stamp.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import getpass
+- from `_` import platform
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `fastapi` import APIRouter
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `stamp()`: Returns the §107 triple-stamp · usable on every UI tile + API consumer.
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/llm_gateway/extensions.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+LLM Gateway extensions · Iter 91 · smart router + callbacks + guardrails + 50-PII catalog.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `_` import httpx
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+
+## Inputs
+- Env vars: OLLAMA_HOST
+
+## Process
+### Classes
+- `SmartRouteRequest`: (no docstring)
+- `PIIScanRequest`: (no docstring)
+### Functions
+- `smart_route(body)`: Classify intent (heuristic OR LLM) → pick tier + model.
+- `callbacks_catalog()`: Operator-facing callback registry · 12 hooks across pre+post call.
+- `guardrails_catalog()`: 16 guardrail catalog · 8 input + 8 output · 8 active + 8 scaffold.
+- `pii_patterns_catalog()`: 50+ PII patterns · alternative to Presidio · used by gateway guardrails.
+- `pii_scan(body)`: Scan text against the 50+ pattern catalog.
+- `extensions_health()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- 1. SMART ROUTER · classify intent + route to optimal model
+- Heuristic pass
+- Optional LLM classifier (uses Ollama tier-1 model)
+- ─────────────────────────────────────────────────────────────────────

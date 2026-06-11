@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/production_pipeline/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/production-pipeline/* · Iter 56 · 22-stage agentic flow.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `production_pipeline.stages` import STAGES, run_pipeline, PipelineRun
+- from `production_pipeline.evaluation` import evaluate_output
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `PipelineRequest`: (no docstring)
+### Functions
+- `_to_dict(run)`: (no docstring)
+- `health()`: (no docstring)
+- `stages()`: The canonical 22-stage catalog.
+- `evaluate_endpoint(question, answer, contexts)`: Run RAGAS + DeepEval + toxicity + sentiment on operator-provided text.
+- `run(body)`: Execute the 22-stage flow · return per-stage results.
+
+## Outputs
+- Return values from functions above

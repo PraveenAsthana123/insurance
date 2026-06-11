@@ -1,0 +1,43 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/integrations_hub/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/integrations-hub/* · Iter 92 · unified view of all platform integrations.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `_` import httpx
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `_adapter_helpers` import stamp, conn
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `InjectionScanRequest`: (no docstring)
+### Functions
+- `_check_url(url, path, timeout)`: (no docstring)
+- `_status_one(integ)`: (no docstring)
+- `health()`: (no docstring)
+- `list_all()`: Live status check for every integration · returns sorted by status.
+- `by_category(category)`: (no docstring)
+- `prompt_injection_scan(body)`: 30-pattern prompt injection scanner · returns severity + class.
+- `prompt_injection_catalog()`: 30-pattern catalog · grouped by attack class.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- THE INTEGRATIONS REGISTRY · single source of truth
+- === LLM Infrastructure ===
+- === LLM Gateway ===
+- === Observability · Traces ===

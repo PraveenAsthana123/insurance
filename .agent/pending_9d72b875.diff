@@ -1,0 +1,10 @@
+```diff
+--- a/jobs/logs/setup_ai_agent_stack.log
++++ b/jobs/logs/setup_ai_agent_stack.log
+@@ -108,7 +108,7 @@
+   $ bash /mnt/deepa/insur_project/ai-agents/listmonk/deep/scripts/install.sh
+ Installing Listmonk ...
+   $ docker run -p 9000:9000 listmonk/listmonk
+-Unable to find image 'listmonk/listmonk:latest' locally
++Unable to find image 'listmonk/listmonk:latest' locally (already exists)
+```

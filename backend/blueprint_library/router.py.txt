@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/blueprint_library/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/blueprint-library/* · Iter 74 · Phase 6 reference architectures.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+- from `blueprint_library.blueprints` import all_blueprints, get_blueprint, categories, BLUEPRINTS
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `DeployRequest`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `health()`: (no docstring)
+- `list_blueprints(category)`: (no docstring)
+- `list_categories()`: (no docstring)
+- `get_one(bp_id)`: (no docstring)
+- `deploy_request(body)`: Create an approval_request to deploy a blueprint into a project.
+- `deploy_execute(approval_id, deployed_by)`: Provisioner · runs after approval_request status='approved'.
+- `list_projects()`: All blueprint-provisioned projects.
+- `project_manifest(project_id)`: (no docstring)
+- `readiness_all()`: Bulk readiness · all 12 blueprints · per-blueprint readiness % live.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Live · verify which referenced agents/tables exist in this project
+- Check idempotency
+- 1. Clone agents into the tenant
+- 2. Verify tables exist (don't create · they're shared)
+- 3. Record endpoints + ui_tabs as references

@@ -1,0 +1,31 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/production_pipeline/evaluation.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+Output evaluation · Iter 57 · RAGAS + DeepEval + simple toxicity.
+
+Plugs into stage 17 (Verifier) of the production pipeline.
+Returns per-metric scores so operator sees Top-1% delta on Quality Scorecard.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_tokens(text)`: (no docstring)
+- `toxicity_score(text)`: (no docstring)
+- `social_score(text)`: (no docstring)
+- `sentiment_score(text)`: (no docstring)
+- `ragas_faithfulness(answer, contexts)`: (no docstring)
+- `ragas_answer_relevance(question, answer)`: (no docstring)
+- `deepeval_g_score(question, answer, contexts)`: (no docstring)
+- `evaluate_output(question, answer, contexts)`: Full per-metric eval · returns scores for the UI scorecard.
+- `try_real_ragas(question, answer, contexts)`: Attempt the real RAGAS library if installed · returns None if unavailable.
+
+## Outputs
+- Return values from functions above

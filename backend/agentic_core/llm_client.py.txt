@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agentic_core/llm_client.py
+# auto-generated explainer · 2026-06-11T10:01:43Z
+
+## Purpose
+LLM client abstraction · Iter 41.
+
+Backend resolution order:
+  1. OPENAI_API_KEY set → call OpenAI Chat Completions API
+  2. ANTHROPIC_API_KEY set → call Anthropic Messages API
+  3. Neither → deterministic stub (honest · seeded by agent_id + input hash)
+
+Per §57.7: stub is HONEST · returns deterministic plan + clearly tagged
+'executed_with_stub': True so the UI + audit row can show it.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import time
+- from `typing` import Any
+
+## Inputs
+- Env vars: ANTHROPIC_API_KEY, OLLAMA_MODEL, OLLAMA_URL, OPENAI_API_KEY
+
+## Process
+### Functions
+- `_compute_cost(model, tokens_in, tokens_out)`: (no docstring)
+- `_ollama_reachable(url)`: (no docstring)
+- `_ollama_plan(url, model, agent_id, input_text, skills)`: Real Ollama call · per global §96 + §50.
+- `_stub_plan(agent_id, input_text, skills)`: Deterministic plan from agent_id + input hash · honest §57.7.
+- `_openai_plan(model, agent_id, input_text, skills)`: Real OpenAI call · returns (plan, tokens_in, tokens_out).
+- `_anthropic_plan(model, agent_id, input_text, skills)`: Real Anthropic call · returns (plan, tokens_in, tokens_out).
+- `plan(agent_id, agent_model, input_text, skills)`: Returns dict with: plan + provider + model + tokens + cost + latency_ms + scaffold.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Pricing per 1M tokens (USD) · approximate · for cost telemetry
+- Recover · extract first {…}
+- Pick 2-4 skills deterministically
+- Try to extract JSON if model wrapped it
+- Resolve backend per global §96 + §50 · OpenAI → Anthropic → Ollama → stub

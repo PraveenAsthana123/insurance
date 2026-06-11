@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/langsmith_adapter/router.py
+# auto-generated explainer · 2026-06-11T10:01:43Z
+
+## Purpose
+/api/v1/langsmith/* · Iter 88 · LangSmith adapter (Stage-1 opt-in).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import getpass
+- from `_` import json
+- from `_` import os
+- from `_` import platform
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `_` import httpx
+- from `_` import psycopg2
+
+## Inputs
+- Env vars: LANGSMITH_API_KEY, LANGSMITH_ENDPOINT, LANGSMITH_PROJECT
+
+## Process
+### Classes
+- `TraceCall`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_stamp()`: §107 triple-stamp.
+- `_is_configured()`: (no docstring)
+- `_try_sdk()`: Lazy import · §56 Stage-1 pattern.
+- `health()`: (no docstring)
+- `trace(body)`: Send a trace to LangSmith · honest scaffold when not configured.
+- `mirror_gateway(hours)`: Mirror llm_gateway_call rows from the last N hours to LangSmith.
+- `datasets()`: List datasets · scaffold when not configured.
+- `runs_recent(limit)`: Recent runs · scaffold when not configured · returns local audit instead.
+- `config_example()`: How to configure LangSmith · operator setup guide.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- LangSmith config from env (§42 secrets · §61 venv path)
+- ─────────────────────────────────────────────────────────────────────
+- Endpoints
+- §57.7 honest scaffold · write to local audit instead
+- Real LangSmith POST

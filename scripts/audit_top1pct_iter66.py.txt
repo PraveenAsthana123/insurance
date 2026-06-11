@@ -1,0 +1,23 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter66.py
+# auto-generated explainer · 2026-06-11T10:00:20Z
+
+## Purpose
+Iter 66 · §102 push 3 · SSE + audit + StatusBanner + Vitest.
+
+## Imports
+- from `_` import os, sys, logging
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- §102 score

@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter74.py
+# auto-generated explainer · 2026-06-11T10:00:39Z
+
+## Purpose
+Iter 74 · §103 Phase 6 · 12 reference blueprints.
+
+## Imports
+- from `_` import os, sys, logging
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Each blueprint has required fields
+- Detail with readiness
+- Bulk readiness
+- Deploy request → approval_request

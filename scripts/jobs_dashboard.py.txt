@@ -1,0 +1,54 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/jobs_dashboard.py
+# auto-generated explainer · 2026-06-11T10:00:11Z
+
+## Purpose
+Jobs Dashboard · Iter 95 · terminal view of platform jobs.
+
+Shows in 4 panels:
+  1. Cron jobs (installed crontab entries)
+  2. Recent ticks (auto-next loop history)
+  3. Active goal-loops + autonomous loops
+  4. Pending findings (from missing-items-advisor)
+
+Run:
+  python3 scripts/jobs_dashboard.py
+  python3 scripts/jobs_dashboard.py --watch 10
+  python3 scripts/jobs_dashboard.py --format json
+
+## Imports
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `_` import logging
+
+## Inputs
+- CLI args: --format, --watch
+
+## Process
+### Classes
+- `C`: (no docstring)
+### Functions
+- `cron_jobs()`: Get all cron entries · highlight project-related ones.
+- `recent_ticks(limit)`: Recent auto-next ticks.
+- `active_goal_loops()`: Recent goal-loop runs from DB.
+- `autonomous_loops()`: Recent autonomous_loop runs.
+- `pending_findings()`: Current advisor findings (lightweight).
+- `render(data)`: (no docstring)
+- `collect()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. CRON JOBS
+- 2. RECENT TICKS
+- 3. GOAL LOOPS
+- 4. AUTONOMOUS LOOPS
+- 5. PENDING FINDINGS

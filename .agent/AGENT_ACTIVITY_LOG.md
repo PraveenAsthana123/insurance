@@ -4753,3 +4753,28 @@ error: jobs/logs/backend.log: patch does not apply
 2026-06-11T19:03:57Z | auto-fix-worker | start        | T-loop-1781204637-3 | role=error target=jobs/logs/rag_cache.log
 2026-06-11T19:03:57Z | auto-fix-worker | classify     | T-loop-1781204637-3 | tier=small risk=low council=single
 2026-06-11T19:04:00Z | auto-fix-worker | validate     | T-loop-1781204637-3 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-11T19:04:06Z | auto-fix-worker | commit       | T-loop-1781204637-3 | ok sha=8f6092be6d6bd2b43d3deca710f181125a779fc4
+2026-06-11T19:04:06Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-11T19:04:06Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2
+2026-06-11T20:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-11T20:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-11T20:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-11T20:00:19Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-11T20:00:20Z | auto-fix-loop | dispatch #1: T-loop-1781208020-1
+2026-06-11T20:00:20Z | auto-fix-worker | start        | T-loop-1781208020-1 | role=error target=jobs/logs/opa_test.log
+2026-06-11T20:00:20Z | auto-fix-worker | classify     | T-loop-1781208020-1 | tier=small risk=low council=single
+2026-06-11T20:01:13Z | auto-fix-worker | apply_check  | T-loop-1781208020-1 | FAIL: git apply --check failed: error: patch failed: jobs/logs/opa_test.log:30
+error: jobs/logs/opa_test.log: patch does not apply
+2026-06-11T20:01:13Z | auto-fix-loop |   → verdict=fail
+2026-06-11T20:01:13Z | auto-fix-loop | dispatch #2: T-loop-1781208073-2
+2026-06-11T20:01:13Z | auto-fix-worker | start        | T-loop-1781208073-2 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-11T20:01:13Z | auto-fix-worker | classify     | T-loop-1781208073-2 | tier=small risk=low council=single
+2026-06-11T20:01:22Z | auto-fix-worker | apply_check  | T-loop-1781208073-2 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-11T20:01:22Z | auto-fix-loop |   → verdict=fail
+2026-06-11T20:01:22Z | auto-fix-loop | dispatch #3: T-loop-1781208082-3
+2026-06-11T20:01:22Z | auto-fix-worker | start        | T-loop-1781208082-3 | role=testing target=tests/drills/drill_adapters_endpoint.py
+2026-06-11T20:01:22Z | auto-fix-worker | classify     | T-loop-1781208082-3 | tier=medium risk=low council=single
+2026-06-11T20:02:39Z | auto-fix-worker | apply_check  | T-loop-1781208082-3 | FAIL: git apply --check failed: error: patch failed: tests/drills/drill_adapters_endpoint.py:102
+error: tests/drills/drill_adapters_endpoint.py: patch does not apply
+2026-06-11T20:02:39Z | auto-fix-loop |   → verdict=fail
+2026-06-11T20:02:39Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3

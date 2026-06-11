@@ -1,0 +1,19 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/llm_gateway/__init__.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+LLM Gateway · Iter 87 · 6 capabilities composed:
+routing · fallback · cache · rate-limit · guardrails · cost tracking.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

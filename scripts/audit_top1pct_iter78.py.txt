@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter78.py
+# auto-generated explainer · 2026-06-11T10:00:47Z
+
+## Purpose
+Iter 78 · 22 enterprise AI governance domains · operator brief.
+
+## Imports
+- from `_` import os, sys, logging
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Each row has a link
+- Specific domains required by operator brief
+- Detail returns agent verification
+- Bulk readiness

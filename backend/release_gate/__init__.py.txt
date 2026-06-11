@@ -1,0 +1,18 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/release_gate/__init__.py
+# auto-generated explainer · 2026-06-11T10:01:43Z
+
+## Purpose
+Naming gate + Release env-gate · Iter 70 · §101 final 2 partials.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

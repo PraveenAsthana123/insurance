@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agentops_adapter/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/agentops/* · Iter 89 · AgentOps Stage-1 adapter.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import httpx
+- from `_` import json
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `_adapter_helpers` import stamp, configured_when, env_config, scaffold_note, conn
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Session`: (no docstring)
+### Functions
+- `health()`: (no docstring)
+- `session_start(body)`: (no docstring)
+- `config_example()`: (no docstring)
+
+## Outputs
+- Return values from functions above

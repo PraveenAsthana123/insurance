@@ -1,0 +1,56 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/enterprise_governance/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/governance/* · Iter 39 · 8 enterprise tables + endpoints.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import uuid
+- from `typing` import Any
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ValueStream`: (no docstring)
+- `Department`: (no docstring)
+- `Team`: (no docstring)
+- `Role`: (no docstring)
+- `RACI`: (no docstring)
+- `Stakeholder`: (no docstring)
+- `AIPolicy`: (no docstring)
+- `AIStandard`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_insert(table, body, id_col, id_prefix)`: (no docstring)
+- `_list(table, filters, limit, order_by)`: (no docstring)
+- `health()`: (no docstring)
+- `create_value_stream(body)`: (no docstring)
+- `list_value_streams(tenant_id, limit)`: (no docstring)
+- `create_department(body)`: (no docstring)
+- `list_departments(tenant_id, limit)`: (no docstring)
+- `create_team(body)`: (no docstring)
+- `list_teams(department_id, tenant_id, limit)`: (no docstring)
+- `create_role(body)`: (no docstring)
+- `list_roles(team_id, role_category, tenant_id, limit)`: (no docstring)
+- `create_raci(body)`: (no docstring)
+- `list_raci(object_type, object_id, role_id, tenant_id, limit)`: (no docstring)
+- `raci_for_object(object_type, object_id, tenant_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Pydantic shells per table · operator may PATCH any field optionally on create
+- Generic helpers
+- ──────────────────────────────────────────────────────────────────────
+- ──────────────────────────────────────────────────────────────────────
+- 65. value streams

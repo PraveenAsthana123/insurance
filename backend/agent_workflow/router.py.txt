@@ -1,0 +1,21 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agent_workflow/router.py
+# auto-generated explainer · 2026-06-11T10:01:40Z
+
+## Purpose
+/api/v1/agent-workflow/* · catalog of all agent workflows/loops in the platform.
+
+## Imports
+- from `fastapi` import APIRouter
+- from `_adapter_helpers` import stamp
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `list_workflows()`: (no docstring)
+- `health()`: (no docstring)
+
+## Outputs
+- Return values from functions above

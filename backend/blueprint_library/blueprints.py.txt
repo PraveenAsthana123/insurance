@@ -1,0 +1,28 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/blueprint_library/blueprints.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+12 reference architecture blueprints · Iter 74.
+
+Per §103 Phase 6 · each blueprint declares:
+  · description · use cases · mandatory components (agents · tables · endpoints · UI tabs)
+  · estimated cost/time · risk level · dependencies · ADR notes
+
+Operator selects one → API returns the full spec → Phase 7 (Marketplace)
+deploys it · audited via §103 mandate.
+
+## Imports
+- from `__future__` import annotations
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `all_blueprints()`: (no docstring)
+- `get_blueprint(bp_id)`: (no docstring)
+- `categories()`: (no docstring)
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,31 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/frontend_governance/router.py
+# auto-generated explainer · 2026-06-11T10:01:41Z
+
+## Purpose
+/api/v1/frontend-governance/* · Iter 62 · §102 live coverage.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `pathlib` import Path
+- from `fastapi` import APIRouter
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_scan(pattern, ext)`: Find files matching pattern in frontend/src.
+- `_summary()`: (no docstring)
+- `health()`: (no docstring)
+- `coverage()`: (no docstring)
+- `forbidden_leaks()`: F12 leak scan · runs grep over frontend/src for forbidden patterns.
+- `most_forgotten()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- §102 The 12 sections · live coverage

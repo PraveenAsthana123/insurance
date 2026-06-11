@@ -1,0 +1,29 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/sse_stream/router.py
+# auto-generated explainer · 2026-06-11T10:01:40Z
+
+## Purpose
+/api/v1/sse/* · Iter 66 · Server-Sent Events for workflow status.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import asyncio
+- from `_` import json
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `fastapi.responses` import StreamingResponse
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `async workflow_stream(run_id)`: SSE stream · polls invocation + emits status events every 2s.
+- `health()`: (no docstring)
+
+## Outputs
+- Return values from functions above

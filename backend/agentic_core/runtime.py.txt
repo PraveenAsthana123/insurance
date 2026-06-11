@@ -1,0 +1,48 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agentic_core/runtime.py
+# auto-generated explainer · 2026-06-11T10:01:43Z
+
+## Purpose
+Agentic runtime · Iter 41.
+
+Replaces the §57.7 scaffold from Iter 37 with REAL end-to-end execution:
+  1. Plan via LLM (or honest stub when no API key)
+  2. Execute each planned skill via tool_executor
+  3. Track per-step timing + tokens + cost
+  4. Write COMPLETE audit row to agent_invocation
+
+Operator runs: POST /api/v1/agentic/invoke
+Result: a real invocation that returns the full execution trace.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `_` import json
+- from `_` import logging
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `register_tool(skill_id, fn)`: Operator registers a real implementation for a skill.
+- `_execute_step(skill_id, args, agent_id)`: Execute one skill · returns result + timing + status.
+- `_emit_event(cur, invocation_id, trace_id, event_name, started)`: Iter 43 · Tier-1 #4 · write one trace event (OTel-style span).
+- `invoke(agent_id, input_text, trigger_kind, incident_id, correlation_id)`: End-to-end invocation · LLM plan → tool execution → audit row + trace.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ──────────────────────────────────────────────────────────────────────
+- Tool executor · honest stub that simulates tool work
+- Real tools wire via _TOOL_REGISTRY · operator extends per tool_id
+- Honest deterministic stub · seeded by args + skill
+- ──────────────────────────────────────────────────────────────────────

@@ -1,0 +1,21 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/missing_offices/offices.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+20 missing offices · operator brief 2026-06-11 §104.
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `all_offices()`: (no docstring)
+- `get_office(office_id)`: (no docstring)
+- `categories()`: (no docstring)
+
+## Outputs
+- Return values from functions above

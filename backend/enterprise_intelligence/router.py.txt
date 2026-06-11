@@ -1,0 +1,41 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/enterprise_intelligence/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/enterprise-intelligence/* · Iter 76 · §103 Phase 9 (EIL).
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AdvisorQuery`: (no docstring)
+- `Scenario`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `digital_twin()`: Live snapshot · agents · workflows · cost · risk · compliance.
+- `knowledge_graph(limit)`: Entity-relationship snapshot · agents → skills → mappings · workflows → steps.
+- `advisor_ask(body)`: Heuristic Executive AI Advisor · routes question → data-backed answer.
+- `predictions()`: Forward-looking signals · simple heuristic predictions.
+- `simulate(body)`: Simulate · projects current state under hypothetical change.
+- `health()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Digital Twin · live snapshot of the platform
+- Workflows
+- Recent invocations
+- Cost centers

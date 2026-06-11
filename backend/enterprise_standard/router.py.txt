@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/enterprise_standard/router.py
+# auto-generated explainer · 2026-06-11T10:01:41Z
+
+## Purpose
+/api/v1/enterprise-standard/* · Iter 61 · live §101 coverage.
+
+## Imports
+- from `__future__` import annotations
+- from `pathlib` import Path
+- from `_` import subprocess
+- from `_` import psycopg2
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `ProjectCopyValidate`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_has_table(name)`: (no docstring)
+- `_has_agent(agent_id)`: (no docstring)
+- `health()`: (no docstring)
+- `coverage()`: Live coverage % per area · mandatory tables · production gate.
+- `workflow_states()`: (no docstring)
+- `notification_events()`: (no docstring)
+- `governance_gaps()`: (no docstring)
+- `project_copy_gate()`: (no docstring)
+- `project_copy_validate(body)`: Run the 10-step copy gate · honest scaffold per §57.7.
+- `production_gate()`: The 12-check pre-prod gate · live status.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- A. The 15 mandatory policy areas
+- B. 12 mandatory workflow states
+- D. 13 notification events
+- E. 12 mandatory DB tables

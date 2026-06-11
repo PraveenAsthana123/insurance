@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/production_checklist/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/production-checklist/* · Iter 60.
+
+The operator's canonical 9-section multi-agent production checklist.
+Each item maps to a real location in the codebase · live status: ✅/⚠️/❌.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import subprocess
+- from `pathlib` import Path
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_check_table(name)`: (no docstring)
+- `_check_agent(agent_id)`: (no docstring)
+- `_check_file(rel_path)`: (no docstring)
+- `_check_cron(tag)`: (no docstring)
+- `section_1_terminal()`: (no docstring)
+- `section_2_ui()`: (no docstring)
+- `section_3_agents()`: (no docstring)
+- `section_4_registries()`: (no docstring)
+- `section_5_controls()`: (no docstring)
+- `section_6_security()`: (no docstring)
+- `section_7_testing()`: (no docstring)
+- `section_8_observability()`: (no docstring)
+- `all_sections()`: (no docstring)
+- `coverage_summary(sections)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- 9 sections · live coverage per row

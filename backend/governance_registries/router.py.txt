@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/governance_registries/router.py
+# auto-generated explainer · 2026-06-11T10:01:41Z
+
+## Purpose
+/api/v1/governance-registries/* · Iter 68 · 6 registries + DLQ + kill_switch + ABAC.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `KillToggle`: (no docstring)
+- `DlqRetry`: (no docstring)
+- `AbacRequest`: (no docstring)
+- `ConcurrencyAcquire`: (no docstring)
+- `SynthGenRequest`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_all(table, limit)`: (no docstring)
+- `mcp_registry()`: (no docstring)
+- `eval_registry()`: (no docstring)
+- `dataset_registry()`: (no docstring)
+- `access_registry()`: (no docstring)
+- `dead_letter_queue()`: (no docstring)
+- `kill_switches()`: (no docstring)
+- `abac_policies()`: (no docstring)
+- `kill_toggle(body)`: (no docstring)
+- `dlq_retry(body)`: (no docstring)
+- `abac_evaluate(body)`: Simplified ABAC eval · matches operator-provided context against active policies.
+- `concurrency_control()`: (no docstring)
+- `concurrency_acquire(body)`: (no docstring)
+- `concurrency_release(body)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- READ endpoints
+- ─────────────────────────────────────────────────────────────────────
+- Kill-switch toggle
+- ─────────────────────────────────────────────────────────────────────

@@ -1,0 +1,27 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/status_snapshot.py
+# auto-generated explainer · 2026-06-11T10:00:18Z
+
+## Purpose
+./scripts/insur status-snapshot · terminal view of all 7 status agents.
+
+Per operator: 'must show on UI AND terminal'.
+
+## Imports
+- from `_` import os, sys, logging
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `color(s, c)`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Color-code per status agent's own signal
+- Current number of agents working (per operator "current number of agent working status")

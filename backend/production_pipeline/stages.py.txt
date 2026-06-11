@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/production_pipeline/stages.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+22-stage production pipeline · operator's canonical flow.
+
+Per operator brief: User → Auth → Orchestrator → Planner → Tool → MCP →
+Enterprise → Tool Response → Need-Knowledge → RAG → Chunks → Context
+Builder → Specialist → Reasoning → Guardrails → Action → Reflection →
+Verifier → LLM Generation → Final Response → Memory → Monitoring.
+
+LLM: Ollama-only (no OpenAI key required) per operator instruction.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import os
+- from `_` import time
+- from `_` import uuid
+- from `_` import json
+- from `dataclasses` import dataclass, field
+- from `datetime` import datetime, timezone
+- from `typing` import Any, Callable
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `StageResult`: (no docstring)
+- `PipelineRun`: (no docstring)
+### Functions
+- `_now()`: (no docstring)
+- `_stage(no)`: (no docstring)
+- `stage_run(run, no, fn)`: Execute a single stage · honest scaffold flag + timing.
+- `s1_auth(run)`: (no docstring)
+- `s2_orchestrator(run)`: (no docstring)
+- `s3_planner(run)`: Real Ollama call · plan via llm_client.
+- `s4_tool_picker(run)`: (no docstring)
+- `s5_mcp_layer(run)`: (no docstring)
+- `s6_enterprise(run)`: (no docstring)
+- `s7_tool_response(run)`: (no docstring)
+- `s8_need_kb(run)`: (no docstring)
+- `s9_rag_layer(run)`: (no docstring)
+- `s10_chunks(run)`: (no docstring)
+- `s11_context_builder(run)`: (no docstring)
+- `s12_specialist(run)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Per-stage agent registration
+- (stage_no, agent_id, agent_name, purpose, risk_level)
+- ─────────────────────────────────────────────────────────────────────
+- Stage executors · each is a function that takes the run + returns StageResult

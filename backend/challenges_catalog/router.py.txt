@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/challenges_catalog/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/challenges-catalog/* · Iter 58.
+
+Per operator stream: '<X> list of challenges' for frontend · API · data ·
+MCP · output · accuracy · benchmarking · plus mitigation plan · agent plan ·
+solution plan · cron job · tracking · tracing plan · system crash plan ·
+prompt saving · prompt showcasing.
+
+Plus the tool catalog: circuit breaker · pybreaker · service discovery ·
+Istio · Kiali · Temporal · SonarQube · CUA · Stagehand · Playwright ·
+gRPC · SOLID · microservice.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `by_category()`: Full catalog · 7 categories × 5 challenges = 35 rows.
+- `by_severity()`: Aggregate · all challenges by severity.
+- `tools()`: (no docstring)
+- `plans()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 7 categories × ~5 challenges each · with mitigation + owner agent + cron
+- Tool catalog · per operator's stream
+- Plans · operator's stream

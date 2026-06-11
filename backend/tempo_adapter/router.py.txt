@@ -1,0 +1,23 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/tempo_adapter/router.py
+# auto-generated explainer · 2026-06-11T10:01:41Z
+
+## Purpose
+/api/v1/tempo/* · Iter 90 · Grafana Tempo Stage-1 adapter.
+
+## Imports
+- from `_` import httpx
+- from `fastapi` import APIRouter
+- from `_adapter_helpers` import stamp, configured_when, env_config, scaffold_note, conn
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `get_trace(trace_id)`: (no docstring)
+- `config_example()`: (no docstring)
+
+## Outputs
+- Return values from functions above

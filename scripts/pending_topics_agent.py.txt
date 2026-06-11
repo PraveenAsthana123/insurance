@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/pending_topics_agent.py
+# auto-generated explainer · 2026-06-11T10:00:16Z
+
+## Purpose
+sys_pending_topics_consolidator · Iter 81.
+
+CLI agent · consolidates ALL pending topics from missing_items_advisor +
+extends with own scans (cron jobs · invocations · audit drift) · prints
+operator-readable consolidated view to terminal.
+
+Run:
+  python3 scripts/pending_topics_agent.py
+  python3 scripts/pending_topics_agent.py --severity P0,P1
+  python3 scripts/pending_topics_agent.py --format json
+  python3 scripts/pending_topics_agent.py --watch    # refresh every 30s
+
+Per operator brief 2026-06-11 · 'create agent which must consolidate all
+the pending topic and showcase on terminal'.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `_` import logging
+
+## Inputs
+- CLI args: --severity, --format, --watch
+
+## Process
+### Classes
+- `C`: (no docstring)
+### Functions
+- `scan_via_advisor()`: Run the advisor agent · returns its findings.
+- `extra_scans()`: Extend with own scans: cron jobs · ollama status · platform vitals.
+- `render_terminal(report, sev_filter)`: Print operator-readable consolidated view.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Set venv path
+- ANSI colors
+- Watchdog activity (last hour)
+- Stale agents (no invocations in 14 days but Active)
+- Cron health

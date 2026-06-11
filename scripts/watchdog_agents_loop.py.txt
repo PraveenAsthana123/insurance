@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/watchdog_agents_loop.py
+# auto-generated explainer · 2026-06-11T10:00:17Z
+
+## Purpose
+Watchdog · runs every 5 min · invokes 9 system checker agents.
+
+Per operator brief: 'I don't even get to know what is happening by each agent.
+Is someone checking the job · cron · vector DB · error · DB · API · frontend
+· logic writing · status?'
+
+This script creates a continuous stream of REAL invocations so the operator
+sees per-agent activity in the UI Status tab + Live Activity tab.
+
+Cron: every 5 minutes · INSUR-WATCHDOG-AGENTS
+
+## Imports
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `ensure_watchdog_agents_exist()`: Idempotent · register the 9 watchdogs in agent_registry.
+- `run_one_check(w)`: Execute the watchdog's actual check · returns observation.
+- `invoke_via_runtime(agent_id, observation)`: Write the audit row + trace via the real runtime path.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- 9 watchdog agents + the question each one answers + the live check it runs
+- Iter 53 additions (per operator stream)

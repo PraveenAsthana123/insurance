@@ -1,0 +1,40 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/fix_pending_tasks.py
+# auto-generated explainer · 2026-06-11T10:00:09Z
+
+## Purpose
+Self-healing cron · fix all known pending tasks · Iter 48.
+
+Per global agentic-quality-benchmarks policy + operator brief
+'create plan for all pending task · cron and fix'.
+
+Scans for repairable issues + auto-fixes them. Schedule: every 4h.
+
+## Imports
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import subprocess
+- from `_` import sys
+- from `datetime` import datetime, timezone, timedelta
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: OLLAMA_URL
+
+## Process
+### Functions
+- `_log(action, detail, ok)`: (no docstring)
+- `check_ollama()`: Fix #1 · verify Ollama is reachable; if so · export env for downstream.
+- `fix_coverage_below_95()`: Fix #2 · if coverage <95% re-run agentic_coverage_loop.
+- `auto_close_stale_hitl(hours)`: Fix #3 · pending HITL invocations older than N hours · mark Cancelled.
+- `regenerate_stale_catalogs(days)`: Fix #4 · catalogs older than N days · regenerate.
+- `regenerate_stale_contracts(days)`: Fix #5 · Pydantic contracts older than N days · regen Zod.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Write report

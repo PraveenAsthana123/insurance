@@ -1,0 +1,27 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter45.py
+# auto-generated explainer · 2026-06-11T10:00:33Z
+
+## Purpose
+Iter 45 audit · agentic coverage · every router as a System Agent.
+
+## Imports
+- from `_` import logging, os, sys
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. Discovery endpoint
+- 2. Each discovered router has endpoints
+- 3. Coverage endpoint
+- 4. System agents in DB
+- 5. System skills in DB

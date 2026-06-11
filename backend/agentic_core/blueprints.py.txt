@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agentic_core/blueprints.py
+# auto-generated explainer · 2026-06-11T10:01:43Z
+
+## Purpose
+Per-agent blueprint generator · Iter 41.
+
+Returns agent-specific IPO + flowchart + MCP + RAG + integration shape
+so the UI tabs render REAL agent-specific data, not generic placeholders.
+
+Pattern: agent_id → (dept-based template) → blueprint dict
+Per §57.7: dept + skills + risk drive the blueprint deterministically.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import hashlib
+- from `typing` import Any
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `build_blueprint(agent_id, agent_name, department_id, risk_level, skills)`: Compose a per-agent blueprint from dept template + agent specifics.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ──────────────────────────────────────────────────────────────────────
+- Per-department blueprint templates
+- Each template defines: process_summary · inputs · steps · outputs ·
+- mcp_servers · rag_corpora · tools
+- Default fallback for unknown depts

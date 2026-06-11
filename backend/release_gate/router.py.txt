@@ -1,0 +1,45 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/release_gate/router.py
+# auto-generated explainer · 2026-06-11T10:01:43Z
+
+## Purpose
+/api/v1/naming-policy + /api/v1/release-gate · Iter 70 · §101 final.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import re
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `NamingValidate`: (no docstring)
+- `PromoteRequest`: (no docstring)
+- `ApproveRequest`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `naming_policies()`: (no docstring)
+- `validate_name(body)`: Check a candidate name against the named policy regex.
+- `scan_codebase_names()`: Scan agent_registry agent_ids against naming-agent policy · returns violations.
+- `list_environments()`: (no docstring)
+- `request_promotion(body)`: Create a promotion request · status=pending until approved.
+- `approve_promotion(body)`: (no docstring)
+- `list_promotions(status, limit)`: (no docstring)
+- `health()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Naming gate (§101.A.1)
+- ─────────────────────────────────────────────────────────────────────
+- Release env-gate (§101.A.15)

@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter55.py
+# auto-generated explainer · 2026-06-11T10:00:14Z
+
+## Purpose
+Iter 55 · load test + top-1% achievement.
+
+## Imports
+- from `_` import os, sys, logging, subprocess
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Scorecard checks
+- Grade A floor (≥ 90%) · top-1% requires ≥ 95% but Grade A is the bar
+- Load testing dim specifically
+- No scaffold flags remaining

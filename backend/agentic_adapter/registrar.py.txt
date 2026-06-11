@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agentic_adapter/registrar.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+Register non-agentic routers as System Agents · idempotent · cron-safe.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `typing` import Any
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `core.config` import get_settings
+- from `agentic_adapter.discovery` import discover_all
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_slug(s)`: (no docstring)
+- `register_router_as_agent(mod_info)`: Upsert one System Agent for the router · plus skills per endpoint.
+- `run_coverage_loop()`: Discover + register every non-agentic router. Idempotent. Cron-safe.
+- `coverage_stats()`: Current coverage · agentic + system agents counted separately.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- 1. Upsert the system agent
+- 2. Upsert one skill per endpoint · map to agent
+- Risk · Write/Delete are higher · Read is Low
+- 3. Map agent → skill

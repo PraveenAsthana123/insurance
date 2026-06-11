@@ -1,0 +1,26 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agentic_adapter/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/agentic-adapter/* · Iter 45 · coverage status + manual register.
+
+## Imports
+- from `__future__` import annotations
+- from `fastapi` import APIRouter, Depends
+- from `agentic_adapter.discovery` import discover_all
+- from `agentic_adapter.registrar` import coverage_stats, run_coverage_loop
+- from `core.role_dependency` import require_admin
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `health()`: (no docstring)
+- `coverage()`: Current coverage stats · system agents + skills + per-category breakdown.
+- `discovery()`: List every non-agentic router · endpoint inventory + category.
+- `register_all()`: Run the coverage loop manually · same code path as the cron job.
+
+## Outputs
+- Return values from functions above

@@ -1,0 +1,54 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/mandatory_governance/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/governance-tables/* · Iter 67 · §101.E mandatory tables.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `WorkflowCreate`: (no docstring)
+- `StatusChange`: (no docstring)
+- `CheckpointCreate`: (no docstring)
+- `ErrorLogEntry`: (no docstring)
+- `NotificationCreate`: (no docstring)
+- `Text2SqlRequest`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `create_workflow(body)`: (no docstring)
+- `get_workflow(wf_id)`: (no docstring)
+- `change_status(wf_id, body)`: (no docstring)
+- `save_checkpoint(body)`: (no docstring)
+- `latest_checkpoint(workflow_id)`: (no docstring)
+- `log_error(body)`: (no docstring)
+- `error_summary()`: (no docstring)
+- `create_notification(body)`: (no docstring)
+- `notification_summary()`: (no docstring)
+- `audit_recent(limit)`: (no docstring)
+- `list_models()`: (no docstring)
+- `health()`: Coverage of the 12 mandatory tables per §101.E.
+- `text2sql_translate(body)`: Stub Text2SQL · validates + adds LIMIT + RLS filter · per §101.A.8.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Models for write endpoints
+- ─────────────────────────────────────────────────────────────────────
+- Workflow run + steps + status history
+- ─────────────────────────────────────────────────────────────────────

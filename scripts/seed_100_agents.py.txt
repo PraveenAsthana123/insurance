@@ -1,0 +1,47 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/seed_100_agents.py
+# auto-generated explainer · 2026-06-11T10:00:21Z
+
+## Purpose
+Seed 100 agents + 25 skills + 25 tools across 12 departments.
+
+Per operator request · ships a realistic demo catalog so the
+agentic admin UI has data to render.
+
+Direct SQL · idempotent (ON CONFLICT upsert) · bypasses RBAC.
+Usage:
+    python3 scripts/seed_100_agents.py
+    ./scripts/insur seed
+
+## Imports
+- from `__future__` import annotations
+- from `_` import argparse
+- from `_` import logging
+- from `_` import os
+- from `_` import random
+- from `_` import sys
+- from `pathlib` import Path
+- from `_` import psycopg2
+
+## Inputs
+- CLI args: --quiet
+- Env vars: BEV_POSTGRES_DB, BEV_POSTGRES_HOST, BEV_POSTGRES_PASSWORD, BEV_POSTGRES_PORT, BEV_POSTGRES_USER
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `seed_skills()`: (no docstring)
+- `seed_tools()`: (no docstring)
+- `seed_agents()`: Returns (n_agents, n_mappings).
+- `_agent_belongs(agent_id, dept)`: Heuristic match: agent_id mentions dept keyword.
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Use in-process TestClient by default · no need to start uvicorn
+- ─────────────────────────────────────────────────────────────────────
+- Catalog · 12 departments × 8-9 agents/dept = 100 agents
+- 25 reusable skills across the catalog (any agent may map multiple)
+- 25 tools (APIs/MCP/cloud) any agent may connect to

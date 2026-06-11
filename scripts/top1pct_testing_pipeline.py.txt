@@ -1,0 +1,38 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/top1pct_testing_pipeline.py
+# auto-generated explainer · 2026-06-11T10:00:39Z
+
+## Purpose
+Top-1% testing pipeline · Iter 47.
+
+Runs every test agent through Ollama (local LLM · no API key).
+Falls back to honest stub plan when Ollama unreachable.
+
+Cron: daily 04:00 UTC · INSUR-TOP1PCT-TESTING
+Reports: jobs/reports/top1pct-testing/run-YYYYMMDD_HHMM.md|.json
+
+## Imports
+- from `_` import json
+- from `_` import logging
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: INSUR_LLM_BACKEND, INSUR_LLM_OLLAMA_MODEL, INSUR_LLM_OLLAMA_URL, OLLAMA_MODEL, OLLAMA_URL
+
+## Process
+### Functions
+- `_ollama_available()`: (no docstring)
+- `_invoke_via_runtime(agent_id, input_text)`: Invoke via in-process runtime · NOT via HTTP.
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- Pull test agents from DB
+- Per-phase test inputs

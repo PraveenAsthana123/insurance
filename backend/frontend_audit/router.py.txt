@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/frontend_audit/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/frontend-audit/* · Iter 66 · §102.11.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AuditEvent`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_ensure_table()`: (no docstring)
+- `log_event(body)`: (no docstring)
+- `list_events(limit, event)`: (no docstring)
+- `summary()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Allow any event but tag whether it's in the canonical set

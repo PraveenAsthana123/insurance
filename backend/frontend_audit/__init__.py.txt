@@ -1,0 +1,18 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/frontend_audit/__init__.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+Frontend audit · Iter 66 · §102.11 (10 mandatory events).
+
+## Imports
+(no imports)
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+(no top-level classes/functions)
+
+## Outputs
+- Return values from functions above

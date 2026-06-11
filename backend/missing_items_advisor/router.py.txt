@@ -1,0 +1,45 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/missing_items_advisor/router.py
+# auto-generated explainer · 2026-06-11T10:01:41Z
+
+## Purpose
+/api/v1/missing-items-advisor/* · Iter 80 · scans platform for gaps.
+
+## Imports
+- from `__future__` import annotations
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `core.config` import get_settings
+- from `enterprise_ai_domains.domains` import all_domains
+- from `missing_offices.offices` import all_offices
+- from `blueprint_library.blueprints` import BLUEPRINTS
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_agent_active(agent_id)`: (no docstring)
+- `_table_exists(name)`: (no docstring)
+- `_scan_domains()`: 22 §103 domains · find missing agents.
+- `_scan_offices()`: 20 §104 offices · find offices with no backing agent.
+- `_scan_blueprints()`: 12 blueprints · find ones with sub-100% readiness.
+- `_scan_data_health()`: Check key tables for staleness · empty · or anomaly.
+- `_scan_governance_compliance()`: Per §101 + §99 · find policy areas / checklist items still ⚠️/❌.
+- `health()`: (no docstring)
+- `scan()`: Run all scanners · return prioritized findings list.
+- `advise(focus)`: Scoped advice: 'domains' · 'offices' · 'blueprints' · 'data' · 'governance'.
+- `summary()`: Quick rollup · no scanner detail · per-category counts.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- Check §101 mandatory 12 tables
+- ─────────────────────────────────────────────────────────────────────
+- Endpoints
+- Sort by severity P0 → P3

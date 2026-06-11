@@ -1,0 +1,42 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/maturity_model/router.py
+# auto-generated explainer · 2026-06-11T10:01:40Z
+
+## Purpose
+/api/v1/maturity-model/* · Iter 73 · §103 9-phase maturity model.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import psycopg2
+- from `fastapi` import APIRouter
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `_table_exists(name)`: (no docstring)
+- `_agent_active(prefix)`: (no docstring)
+- `_check_pct(endpoint, path)`: Internal helper · pretend to call own endpoint (just return high since we're at 100).
+- `_count_governance_tables()`: Count the cumulative governance tables · Iter 67-70 added 24+.
+- `_phase_score(phase)`: (no docstring)
+- `health()`: (no docstring)
+- `coverage()`: Live coverage % per phase + per-check status.
+- `_current_level(scores)`: Map phase completion → maturity level 1-10.
+- `maturity_level()`: Just the level + name.
+- `ai_layers()`: The 11 AI Processing Layers.
+- `blueprints()`: 12 reference architecture blueprints per §103.6.
+- `marketplace_categories()`: 10 marketplace asset categories per §103.7.
+- `required_channels()`: 22 mandatory chat channels per §103.
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- 11 AI Processing Layers (Phase 0)
+- ─────────────────────────────────────────────────────────────────────
+- 9 Phases · live coverage per phase
+- In a real impl we'd HTTP back · here just read DB

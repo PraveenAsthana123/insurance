@@ -1,0 +1,34 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/frontend_telemetry/router.py
+# auto-generated explainer · 2026-06-11T10:01:40Z
+
+## Purpose
+/api/v1/frontend-telemetry · drafts · Iter 64.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `datetime` import datetime, timezone
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter, Request
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Vital`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_ensure_tables()`: (no docstring)
+- `post_vital(body)`: Capture LCP / FID / CLS / TTFB · POST from useWebVitals hook.
+- `telemetry_summary()`: Aggregate · last 24h per metric · p50/p95.
+- `async save_draft(key, request)`: Upsert draft state · used by useAutoSave hook.
+- `get_draft(key)`: Load draft · returns null if none.
+- `delete_draft(key)`: (no docstring)
+
+## Outputs
+- Return values from functions above

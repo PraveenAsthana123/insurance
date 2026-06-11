@@ -1,0 +1,52 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/llm_gateway/router.py
+# auto-generated explainer · 2026-06-11T10:01:42Z
+
+## Purpose
+/api/v1/llm-gateway/* · Iter 87 · LLM Gateway with 6 capabilities.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import getpass
+- from `_` import hashlib
+- from `_` import json
+- from `_` import os
+- from `_` import platform
+- from `_` import re
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+
+## Inputs
+- Env vars: OLLAMA_HOST
+
+## Process
+### Classes
+- `ChatRequest`: (no docstring)
+- `ContextRequest`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_route(requested, tier)`: Pick model · returns (model_record, reason).
+- `_cache_key(tenant_id, model, prompt)`: (no docstring)
+- `_cache_get(key)`: (no docstring)
+- `_cache_set(key, tenant_id, model, prompt_hash, response)`: (no docstring)
+- `_rate_check(tenant_id, model, est_tokens)`: (no docstring)
+- `_guardrails_input(prompt)`: Returns (allow, blocked_reason, sanitized_prompt).
+- `_guardrails_output(text)`: Output safety check.
+- `_calc_cost(model_record, in_tokens, out_tokens)`: (no docstring)
+- `_call_ollama(model, prompt, timeout)`: Returns (response_text, prompt_tokens, completion_tokens).
+- `_stamp()`: §107 triple-stamp.
+- `chat(body)`: LLM Gateway · composes all 6 capabilities in order:
+- `_audit_call(call_id, body, model_rec, status)`: Insert per §107 stamped row in llm_gateway_call.
+- `health()`: (no docstring)
+- `list_models()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- 1. ROUTING · request → model selection
+- Live fallback to first available
+- Default: cheapest live
+- ─────────────────────────────────────────────────────────────────────

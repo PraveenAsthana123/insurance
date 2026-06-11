@@ -1,0 +1,40 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/load_test_smoke.py
+# auto-generated explainer · 2026-06-11T10:00:17Z
+
+## Purpose
+Load test smoke · Iter 55 · async concurrent + p50/p95/p99 + cost.
+
+Writes report to jobs/reports/load-testing/load-YYYYMMDD_HHMM.md
+which the Top-1% scorecard (Iter 54) reads.
+
+Cron: weekly Sunday 03:00 UTC · INSUR-LOAD-TEST
+Manual: ./scripts/insur load-test
+
+## Imports
+- from `_` import asyncio
+- from `_` import json
+- from `_` import os
+- from `_` import statistics
+- from `_` import sys
+- from `_` import time
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+
+## Inputs
+- Env vars: INSUR_TARGET_URL
+
+## Process
+### Functions
+- `async run_one(client, target_url, idx)`: Single request · returns latency + status.
+- `async phase(name, target_url, n_concurrent, duration_s)`: Run a phase · concurrent loop for duration_s seconds.
+- `async main_async()`: (no docstring)
+- `main()`: (no docstring)
+
+## Outputs
+- Writes files (detected 1 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- 5-phase per §47.10
+- Gate per §47.10 · pass if all 5 phases p95 < 500ms and error < 1%

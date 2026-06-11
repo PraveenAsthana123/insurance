@@ -1,0 +1,44 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/goal_loop/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/goal-loop/* · Iter 93 · goal/loop-driven agentic program.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import re
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `_` import httpx
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+
+## Inputs
+- Env vars: OLLAMA_HOST
+
+## Process
+### Classes
+- `GoalRequest`: (no docstring)
+- `AdvancedGoalRequest`: (no docstring)
+### Functions
+- `_call_ollama(prompt, model, timeout)`: LLM call · used for planning / executing / reflecting.
+- `_record_step(goal_id, iteration, kind, description, input_text)`: (no docstring)
+- `start(body)`: Goal-loop driven program:
+- `start_advanced(body)`: Advanced goal-loop · self-test + iterate-on-failure + per-task completion.
+- `list_runs(limit)`: (no docstring)
+- `get_run(goal_id)`: (no docstring)
+- `health()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ─────────────────────────────────────────────────────────────────────
+- THE goal-loop endpoint
+- Pre-check: prompt injection on goal
+- Create goal_run row
+- STEP 1: PLAN

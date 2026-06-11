@@ -1,0 +1,27 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/audit_top1pct_iter77.py
+# auto-generated explainer · 2026-06-11T10:00:42Z
+
+## Purpose
+Iter 77 · §103 Phase 8 · autonomous loop · 8 self-* composed.
+
+## Imports
+- from `_` import os, sys, logging
+- from `pathlib` import Path
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Low-risk run
+- Trace shape
+- Get the loop detail
+- High-risk run · should halt at governing
+- Lesson learned recorded

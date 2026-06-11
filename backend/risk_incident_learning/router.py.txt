@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/risk_incident_learning/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/ril/* · Iter 40 · 8 tables · risk/incident/learning.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter, HTTPException
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `AlertRule`: (no docstring)
+- `Escalation`: (no docstring)
+- `Incident`: (no docstring)
+- `TimelineEvent`: (no docstring)
+- `RCA`: (no docstring)
+- `Postmortem`: (no docstring)
+- `Lesson`: (no docstring)
+- `Knowledge`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `_insert(table, body, id_col, id_prefix)`: (no docstring)
+- `_list(table, filters, limit, order_by)`: (no docstring)
+- `health()`: (no docstring)
+- `create_alert_rule(body)`: (no docstring)
+- `list_alert_rules(enabled, tenant_id, limit)`: (no docstring)
+- `create_escalation(body)`: (no docstring)
+- `list_escalations(escalation_level, escalation_status, tenant_id, limit)`: (no docstring)
+- `create_incident(body)`: (no docstring)
+- `list_incidents(incident_severity, incident_status, tenant_id, limit)`: (no docstring)
+- `incident_full(incident_id)`: Single fetch · incident + timeline + RCA + postmortem · for forensics.
+- `create_timeline(body)`: (no docstring)
+- `list_timeline(incident_id, tenant_id, limit)`: (no docstring)
+- `create_rca(body)`: (no docstring)
+- `list_rcas(incident_id, approval_status, tenant_id, limit)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ──────────────────────────────────────────────────────────────────────
+- Pydantic shells
+- ──────────────────────────────────────────────────────────────────────
+- ──────────────────────────────────────────────────────────────────────
+- ──────────────────────────────────────────────────────────────────────

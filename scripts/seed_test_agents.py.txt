@@ -1,0 +1,35 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/seed_test_agents.py
+# auto-generated explainer · 2026-06-11T10:00:13Z
+
+## Purpose
+Seed 12 testing-specific agents · Iter 47.
+
+Per operator brief: 'have agent for testing · frontend · backend · model
+· data · accuracy · pipeline · CUA · Stagehand · Playwright · pytest ·
+fallback · inference · training · job'.
+
+Direct SQL upsert (same pattern as seed_100_agents.py · bypasses RBAC).
+
+## Imports
+- from `_` import os, sys, logging
+- from `pathlib` import Path
+- from `_` import psycopg2
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `main()`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- (agent_id, name, runtime, purpose, risk, skills[])
+- ─── Frontend test agents ───
+- ─── Backend test agents ───
+- ─── Model + accuracy test agents ───
+- ─── Data quality test agents ───

@@ -1,0 +1,31 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/langfuse_adapter/router.py
+# auto-generated explainer · 2026-06-11T10:01:43Z
+
+## Purpose
+/api/v1/langfuse/* · Iter 89 · Langfuse Stage-1 adapter (OSS LangSmith alternative).
+
+## Imports
+- from `__future__` import annotations
+- from `_` import base64
+- from `_` import json
+- from `_` import httpx
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `_adapter_helpers` import stamp, configured_when, env_config, scaffold_note, conn
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `Trace`: (no docstring)
+### Functions
+- `_is_configured()`: (no docstring)
+- `_auth_header()`: (no docstring)
+- `health()`: (no docstring)
+- `trace(body)`: (no docstring)
+- `config_example()`: (no docstring)
+
+## Outputs
+- Return values from functions above

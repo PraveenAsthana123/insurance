@@ -1,0 +1,53 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# scripts/auto_next_loop.py
+# auto-generated explainer · 2026-06-11T10:00:19Z
+
+## Purpose
+§106 · Auto-Next Loop · cron-driven §105 picker (every 5 min).
+
+Run by:
+  */5 * * * * cd /path && /venv/bin/python scripts/auto_next_loop.py
+
+What it does (within §106 safe-action allowlist):
+  1. Query advisor /scan
+  2. Pick top-1 finding by severity
+  3. If action class is on allowlist → act atomically · log · audit
+  4. If gated → log to needs-operator-action.json · skip
+  5. Return ≤60s · safe for cron
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import os
+- from `_` import sys
+- from `_` import time
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `pathlib` import Path
+- from `_` import logging
+- from `_` import psycopg2
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `cooldown_active(finding_topic)`: Check audit_log for recent action on this topic.
+- `act_agent_gap(finding)`: Register missing agents in agent_registry.
+- `act_approval_backlog(finding)`: Auto-approve Low-risk · escalate Medium/High to operator queue.
+- `act_stale_agents(finding)`: Retire Active agents with 0 invocations in 30+ days.
+- `_audit(actor, action, resource, payload)`: §38.3 audit log · append-only.
+- `main()`: (no docstring)
+- `_main_with_exit()`: (no docstring)
+
+## Outputs
+- Writes files (detected 2 patterns)
+- Return values from functions above
+
+## Notable inline comments
+- §107 actor stamp
+- ─────────────────────────────────────────────────────────────────────
+- §106 safe-action handlers (idempotent · ON CONFLICT)
+- Heuristic risk
+- Count High that we leave alone

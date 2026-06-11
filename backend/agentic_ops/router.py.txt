@@ -1,0 +1,57 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/agentic_ops/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/agentic-ops/* · Iter 38 · feedback + incident + dep + team + sla + capacity + queue.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import json
+- from `_` import uuid
+- from `datetime` import datetime, timezone
+- from `typing` import Any
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter, Depends, HTTPException
+- from `pydantic` import BaseModel
+- from `core.config` import get_settings
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Classes
+- `FeedbackCreate`: (no docstring)
+- `IncidentCreate`: (no docstring)
+- `DependencyCreate`: (no docstring)
+- `TeamCreate`: (no docstring)
+- `SLACreate`: (no docstring)
+- `CapacityCreate`: (no docstring)
+- `QueueEnqueue`: (no docstring)
+### Functions
+- `_conn()`: (no docstring)
+- `health()`: (no docstring)
+- `_insert(table, body, id_col, id_prefix)`: Generic upsert · returns the assigned ID.
+- `_list(table, filters, limit, order_by)`: (no docstring)
+- `create_feedback(body)`: (no docstring)
+- `list_feedback(agent_id, severity, tenant_id, limit)`: (no docstring)
+- `feedback_stats(agent_id, tenant_id)`: (no docstring)
+- `create_incident(body)`: (no docstring)
+- `list_incidents(agent_id, severity, status, tenant_id, limit)`: (no docstring)
+- `incident_stats(tenant_id)`: (no docstring)
+- `create_dependency(body)`: (no docstring)
+- `list_dependencies(agent_id, criticality, tenant_id, limit)`: (no docstring)
+- `create_team(body)`: (no docstring)
+- `list_teams(agent_id, tenant_id, limit)`: (no docstring)
+- `get_team_for_agent(agent_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- ──────────────────────────────────────────────────────────────────────
+- Pydantic models · one per table
+- ──────────────────────────────────────────────────────────────────────
+- Health · counts across all 7 tables
+- ──────────────────────────────────────────────────────────────────────

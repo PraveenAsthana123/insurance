@@ -1,0 +1,46 @@
+<!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
+# backend/missing_offices/router.py
+# auto-generated explainer · 2026-06-11T10:01:44Z
+
+## Purpose
+/api/v1/missing-offices/* · Iter 79 · §104 20 offices + 6 dimensions per topic.
+
+## Imports
+- from `__future__` import annotations
+- from `_` import psycopg2
+- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `core.config` import get_settings
+- from `missing_offices.offices` import all_offices, get_office, categories, OFFICES
+- from `enterprise_ai_domains.domains` import all_domains, get_domain
+
+## Inputs
+(no CLI / env inputs — library module or implicit)
+
+## Process
+### Functions
+- `_conn()`: (no docstring)
+- `health()`: (no docstring)
+- `list_offices(category)`: (no docstring)
+- `get_one(office_id)`: (no docstring)
+- `_topic_dashboard(office_or_domain)`: KPIs + live metrics + alert thresholds.
+- `_topic_operation(office_or_domain)`: Day-to-day ops · who runs it · cadence · escalation.
+- `_topic_resai(office_or_domain)`: Responsible AI · 5 pillars per global §76.
+- `_topic_manual_process(office_or_domain)`: AS-IS · what humans do today step-by-step.
+- `_topic_automatic_process(office_or_domain)`: TO-BE · agent + MCP automated flow.
+- `_topic_database(office_or_domain)`: Database schema · tables · key columns · indexes.
+- `office_dashboard(office_id)`: (no docstring)
+- `office_operation(office_id)`: (no docstring)
+- `office_resai(office_id)`: (no docstring)
+- `office_manual(office_id)`: (no docstring)
+- `office_automatic(office_id)`: (no docstring)
+
+## Outputs
+- Return values from functions above
+
+## Notable inline comments
+- Compose with 22 domains
+- ─────────────────────────────────────────────────────────────────────
+- 20 OFFICES
+- ─────────────────────────────────────────────────────────────────────
+- 6 dimensions per topic · per operator brief
