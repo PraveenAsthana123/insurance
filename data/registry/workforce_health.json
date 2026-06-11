@@ -1,19 +1,36 @@
 {
-  "ts": "2026-06-11T21:15:02Z",
+  "ts": "2026-06-11T22:15:01Z",
   "fleet": {
     "tasks": 345,
     "workers": 200,
-    "elapsed_seconds": 15.66,
-    "throughput_per_sec": 22.0,
+    "elapsed_seconds": 15.4,
+    "throughput_per_sec": 22.4,
     "verdicts": {
       "ok": 247,
       "issue_found": 96,
       "escalate": 2
     },
-    "completed_at": "2026-06-11T21:00:18Z"
+    "completed_at": "2026-06-11T22:00:18Z"
   },
   "ollama": {
     "models": [
+      {
+        "name": "qwen2.5vl:latest",
+        "model": "qwen2.5vl:latest",
+        "modified_at": "2026-06-11T15:17:28.468959226-06:00",
+        "size": 5969245856,
+        "digest": "5ced39dfa4bac325dc183dd1e4febaa1c46b3ea28bce48896c8e69c1e79611cc",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen25vl",
+          "families": [
+            "qwen25vl"
+          ],
+          "parameter_size": "8.3B",
+          "quantization_level": "Q4_K_M"
+        }
+      },
       {
         "name": "mxbai-embed-large:latest",
         "model": "mxbai-embed-large:latest",

@@ -532,3 +532,216 @@ def data_prep_section(n: int):
     name, content = sections[n]
     return {**stamp(), "section_n": n, "name": name, "content": content,
             "spec": "§133.B"}
+
+
+# ════════════════════ §133.C · MODEL TRAINING DETAIL ════════════════════
+MODEL_TRAINING_DETAIL = {
+    "1_model_selection": {
+        "tabular_classification": [
+            "LogisticRegression", "RandomForest", "GradientBoost", "XGBoost",
+            "LightGBM", "CatBoost", "TabNet (deep)", "FT-Transformer (deep)",
+            "SVM (kernel)", "KNN", "Naive Bayes",
+        ],
+        "tabular_regression": [
+            "Linear/Ridge/Lasso/ElasticNet",
+            "RandomForest Regressor", "GradientBoost Regressor",
+            "XGBoost/LightGBM/CatBoost Regressor", "MLP",
+        ],
+        "imbalanced": ["SMOTE/ADASYN oversample", "class_weight='balanced'",
+                        "focal loss", "anomaly detection (IsolationForest · OneClassSVM)"],
+        "text_classification": [
+            "BERT-finetune", "DistilBERT", "DeBERTa", "spaCy textcat",
+            "fastText (cheap baseline)", "TF-IDF + LogisticRegression (cheap)",
+        ],
+        "image_classification": [
+            "ResNet50", "EfficientNet", "ViT-B/16", "ConvNeXt", "CLIP zero-shot",
+        ],
+        "object_detection": ["YOLOv8", "DETR", "Faster R-CNN"],
+        "segmentation": ["U-Net", "Mask R-CNN", "SAM (Segment Anything)"],
+        "time_series": ["Prophet", "ARIMA/SARIMA", "LSTM", "TFT (Temporal Fusion)",
+                          "NBEATS", "DeepAR"],
+        "graph": ["GraphSAGE", "GAT", "GCN", "HeteroGNN"],
+        "decision_method": "cheap baseline FIRST · then heavy only if cheap underperforms",
+    },
+    "2_hyperparameter_tuning": {
+        "methods": [
+            "GridSearchCV (small space)",
+            "RandomizedSearchCV (medium space)",
+            "Bayesian Optimization (Optuna · Hyperopt · BoTorch)",
+            "Hyperband · ASHA (resource-aware)",
+            "Population-Based Training (PBT)",
+            "AutoML (FLAML · Auto-sklearn · TPOT · H2O)",
+        ],
+        "cross_validation": [
+            "StratifiedKFold (classification)",
+            "KFold (regression)", "TimeSeriesSplit (time-series)",
+            "GroupKFold (subject-wise · cohort-wise per §83)",
+            "Leave-One-Subject-Out (LOSO)",
+        ],
+        "early_stopping": "yes · patience=10 · monitor=val_loss",
+        "track_with": ["MLflow", "Weights & Biases", "Tensorboard", "Aim"],
+    },
+    "3_loss_function": {
+        "classification": [
+            "BinaryCrossEntropy / LogLoss",
+            "CategoricalCrossEntropy",
+            "SparseCategoricalCrossEntropy",
+            "FocalLoss (imbalanced)",
+            "Label Smoothing CE",
+            "Hinge Loss (SVM-style)",
+        ],
+        "regression": [
+            "MSE / MAE / Huber / Quantile",
+            "MAPE (percent error)",
+            "Tweedie (count + continuous)",
+        ],
+        "ranking": ["pairwise (RankNet)", "listwise (LambdaRank)", "NDCG approx"],
+        "metric_learning": ["TripletLoss", "ContrastiveLoss", "NTXentLoss (CLIP)"],
+        "generative": ["KL Divergence (VAE)", "Adversarial (GAN)",
+                        "Diffusion noise prediction (DDPM)"],
+        "rl": ["PPO clip", "TRPO", "DPO / IPO (preference)"],
+        "production_note": "loss must align with business metric · don't optimize MSE if business cares about MAPE",
+    },
+    "4_gradient": {
+        "optimizers": [
+            "SGD + momentum", "Nesterov",
+            "Adam", "AdamW (weight decay decoupled)", "RAdam",
+            "LARS / LAMB (large batch)", "Lion (memory-efficient)",
+            "AdaGrad", "RMSProp",
+        ],
+        "learning_rate_schedules": [
+            "constant", "step decay", "exponential decay",
+            "cosine annealing", "warm restarts (SGDR)",
+            "OneCycleLR", "ReduceLROnPlateau",
+            "warmup + linear/cosine decay (LLM standard)",
+        ],
+        "gradient_clipping": "yes · clip_grad_norm=1.0 for RNN/transformer",
+        "gradient_accumulation": "use when batch can't fit GPU memory",
+        "mixed_precision": "fp16 / bf16 (Ampere+) · AMP / Apex / accelerate",
+        "diagnostics": ["grad norm monitor", "dead neurons %",
+                          "vanishing/exploding gradient detection"],
+    },
+    "5_batch_size": {
+        "selection": [
+            "tabular small <100K rows: 32-256",
+            "tabular large >1M rows: 512-2048",
+            "image: 32-128 (fits 24GB GPU)",
+            "transformer fine-tune: 8-32",
+            "LLM pretraining: 1-4M tokens effective",
+        ],
+        "techniques": [
+            "gradient accumulation (effective batch = micro × accumulation_steps)",
+            "data parallel (DDP)",
+            "gradient checkpointing (memory saver · slower)",
+            "FSDP / DeepSpeed Zero-2/3 (LLM)",
+        ],
+        "rules_of_thumb": [
+            "doubling batch size → 1.4x learning rate (linear scaling rule)",
+            "very large batch (>4K) needs warmup + LARS",
+            "validate with a held-out batch · not training one",
+        ],
+    },
+    "6_epoch": {
+        "selection": [
+            "tabular: 100-300 epochs with early stopping",
+            "image transfer learning: 10-30 epochs",
+            "text fine-tune: 3-5 epochs",
+            "training from scratch: 100-1000 epochs",
+            "LLM pretraining: 1 epoch typical (data >> params)",
+        ],
+        "early_stopping": "patience=10 epochs on val_loss · restore best weights",
+        "checkpoint": "save every N epochs · keep top-3 by val_metric",
+        "warmup": "1-10 epochs at low lr",
+        "cyclical": "SGDR / Cosine annealing with warm restarts",
+    },
+    "7_accuracy_evaluation": {
+        "classification_metrics": [
+            "Accuracy", "Precision", "Recall", "F1",
+            "F0.5 / F2 (precision-weighted / recall-weighted)",
+            "ROC-AUC", "PR-AUC (imbalanced)",
+            "Log-loss / Brier Score (calibration)",
+            "Cohen's Kappa", "MCC", "Confusion Matrix",
+        ],
+        "regression_metrics": [
+            "RMSE", "MAE", "MAPE", "SMAPE",
+            "R² · Adjusted R²", "Quantile loss",
+        ],
+        "ranking_metrics": ["NDCG", "MAP", "MRR", "Precision@K", "Recall@K"],
+        "vision_metrics": ["IoU", "mAP", "Dice", "Pixel Accuracy"],
+        "nlp_metrics": ["BLEU", "ROUGE-L", "METEOR", "BERTScore",
+                          "Perplexity", "EM / F1 (QA)"],
+        "rag_metrics": ["RAGAS faithfulness · context precision · context recall · answer relevance",
+                          "Citation accuracy · hallucination rate (DeepEval)"],
+        "ml_explainability_metrics": ["SHAP global+local", "LIME", "Integrated Gradients",
+                                         "PDP/ALE", "Counterfactual fidelity"],
+        "fairness_metrics": ["Disparate Impact", "Equal Opportunity Gap",
+                                "Calibration parity (across groups)"],
+        "robustness_metrics": ["Adversarial accuracy", "Out-of-distribution AUC",
+                                 "Worst-cohort performance"],
+        "calibration": ["Brier Score", "ECE (Expected Calibration Error)",
+                          "Reliability diagram"],
+        "production_metrics": ["Latency p50/p95/p99", "Throughput RPS",
+                                 "Cost per inference", "Drift PSI/CSI"],
+    },
+    "8_per_data_modality_pipeline": {
+        "structured_tabular": {
+            "preprocessing": "Section 1-4 (impute · outlier · normalize · standardize)",
+            "feature_eng": "Section 5 (interactions · binning · WOE)",
+            "model": "GradientBoost / TabNet / FT-Transformer",
+        },
+        "text": {
+            "preprocessing": "tokenize · lowercase · remove PII (Presidio) · spaCy",
+            "feature_eng": "TF-IDF · embeddings (BGE-M3) · entities · sentiment",
+            "model": "BERT-finetune / DistilBERT / spaCy / fastText",
+        },
+        "image": {
+            "preprocessing": "resize · center-crop · normalize ImageNet stats",
+            "feature_eng": "augmentation (flip · rotate · color jitter)",
+            "model": "ResNet / EfficientNet / ViT / CLIP",
+        },
+        "audio": {
+            "preprocessing": "resample 16kHz · noise reduce · VAD",
+            "feature_eng": "mel-spectrogram · MFCC",
+            "model": "Faster-Whisper / NeMo / Wav2Vec2",
+        },
+        "video": {
+            "preprocessing": "FFmpeg frame extract · scene split",
+            "feature_eng": "per-frame embeddings + temporal pooling",
+            "model": "Qwen2.5-VL / Video-LLaMA",
+        },
+        "graph": {
+            "preprocessing": "entity resolution · node features",
+            "feature_eng": "node2vec · DeepWalk · degree/pagerank",
+            "model": "GraphSAGE / GAT / GCN",
+        },
+        "timeseries": {
+            "preprocessing": "resample · stationarity check · differencing",
+            "feature_eng": "lag · rolling stats · seasonality decomposition",
+            "model": "Prophet / ARIMA / TFT / NBEATS",
+        },
+    },
+    "spec": "§133.C · MANDATORY model training detail per AI type",
+}
+
+
+@router.get("/model-detail")
+def model_detail():
+    """Complete model training contract · selection · tuning · loss · gradient · batch · epoch · accuracy."""
+    return {**stamp(), **MODEL_TRAINING_DETAIL}
+
+
+@router.get("/model-detail/{section}")
+def model_section(section: str):
+    sec_map = {
+        "selection":      MODEL_TRAINING_DETAIL["1_model_selection"],
+        "tuning":         MODEL_TRAINING_DETAIL["2_hyperparameter_tuning"],
+        "loss":           MODEL_TRAINING_DETAIL["3_loss_function"],
+        "gradient":       MODEL_TRAINING_DETAIL["4_gradient"],
+        "batch":          MODEL_TRAINING_DETAIL["5_batch_size"],
+        "epoch":          MODEL_TRAINING_DETAIL["6_epoch"],
+        "accuracy":       MODEL_TRAINING_DETAIL["7_accuracy_evaluation"],
+        "per_modality":   MODEL_TRAINING_DETAIL["8_per_data_modality_pipeline"],
+    }
+    if section not in sec_map:
+        return {"ok": False, "available": list(sec_map.keys())}
+    return {**stamp(), "section": section, "content": sec_map[section]}
