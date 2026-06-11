@@ -3,6 +3,9 @@
 // Verification · plus link to per-agent admin (existing AgenticAdminPanel).
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { SkeletonText, SkeletonCard, SkeletonTable } from './common/Skeleton';
+import { useWebVitals } from '../hooks/useWebVitals';
+import { useTabSync, publishTab } from '../hooks/useTabSync';
 import AgenticAdminPanel from './AgenticAdminPanel';
 import AllAgentsNetworkPanel from './AllAgentsNetworkPanel';
 
@@ -455,7 +458,7 @@ function CoverageView() {
   useEffect(() => {
     fetch(`${API}/api/v1/agentic-adapter/coverage`).then(r => r.json()).then(setCov);
   }, []);
-  if (!cov) return <em>Loading…</em>;
+  if (!cov) return <SkeletonCard count={2} />;
   return (
     <Section title={`Coverage · ${cov.coverage_pct}% of routers agentic-addressable (Iter 45)`} accent="#10b981">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
@@ -511,7 +514,7 @@ function StatusView() {
     }
   }, [load, auto]);
 
-  if (!data) return <em>Loading…</em>;
+  if (!data) return <SkeletonCard count={2} />;
 
   const activeAgents = (data.agents?.agents || []).filter(a => a.status === 'Active').length;
   const topAgents = (data.invStats?.top_agents || []).slice(0, 10);
@@ -658,7 +661,7 @@ function TestingView() {
     });
   }, []);
 
-  if (!stats) return <em>Loading…</em>;
+  if (!stats) return <SkeletonCard count={2} />;
 
   return (
     <>
@@ -803,7 +806,7 @@ function QualityScorecardView() {
   }, []);
   useEffect(() => { load(); }, [load]);
 
-  if (!data) return <em>Loading…</em>;
+  if (!data) return <SkeletonCard count={2} />;
 
   const summary = data.summary || {};
   const gradeColor = summary.overall_grade === 'A' ? '#10b981' :
@@ -1754,6 +1757,8 @@ function LiveActivityView() {
 // The hub
 
 export default function AgenticHubPage() {
+  useWebVitals();  // §102.7 frontend monitoring
+  useTabSync('hub-tab', (msg) => { /* placeholder · tab sync ready */ });
   const [activeTab, setActiveTab] = useState('all-agents');
 
   return (
