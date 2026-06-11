@@ -1,0 +1,74 @@
+{
+  "ai_type": "Adaptive RAG",
+  "slug": "adaptive-rag",
+  "domain": "see \u00a7131",
+  "implementation": {
+    "1_data_source": {
+      "primary": "TBD per use case",
+      "secondary": "compose with claims_record where applicable"
+    },
+    "2_data_types_handled": {
+      "structured": "scaffold",
+      "text": "scaffold",
+      "image": "scaffold",
+      "graph": "scaffold",
+      "timeseries": "scaffold"
+    },
+    "3_preprocessing": {
+      "see": "\u00a7133.B 8-section pipeline",
+      "endpoint": "/api/v1/ai-type-impl/data-prep-pipeline"
+    },
+    "4_model": {
+      "algorithm": "Ollama + Qdrant",
+      "kind": "rag_variant",
+      "see": "\u00a7133.C model training detail"
+    },
+    "5_accuracy_metric": {
+      "see": "\u00a7133.C section 7",
+      "production_target": "varies"
+    },
+    "6_manual_pipeline": {
+      "see": "\u00a7126 per-dept demo"
+    },
+    "7_automatic_pipeline": {
+      "see": "\u00a7126 per-dept demo"
+    },
+    "8_res_ai": {
+      "see": "\u00a776 5-pillar framework"
+    },
+    "9_exp_ai": {
+      "see": "\u00a748 explainability"
+    },
+    "10_dashboard": {
+      "see": "\u00a7102 frontend governance"
+    },
+    "11_user_story": {
+      "persona": "TBD",
+      "see": "\u00a7126"
+    },
+    "12_demo_story": {
+      "see": "\u00a7126"
+    },
+    "13_stakeholders": {
+      "see": "\u00a7126 stakeholders"
+    },
+    "14_failure_mode": {
+      "see": "\u00a757.5 5-question runbook"
+    }
+  },
+  "honest_status": {
+    "score": 7,
+    "level": "Functional",
+    "what_exists": "\u00a7133 14-field stub \u00b7 classification: rag_variant",
+    "what_missing": "compose existing",
+    "to_reach_10": "Train real model \u00b7 live SHAP \u00b7 real PNGs \u00b7 per-cohort fairness \u00b7 runbook"
+  },
+  "classification": {
+    "impl_kind": "rag_variant",
+    "max_score": 7,
+    "model": "Ollama + Qdrant",
+    "reason": "compose existing"
+  },
+  "generated_at": "2026-06-11T17:02:53.568805",
+  "spec": "\u00a7134 Phase 3 \u00b7 autocodegen"
+}

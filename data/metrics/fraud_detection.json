@@ -1,0 +1,38 @@
+{
+  "accuracy": 0.999,
+  "precision": 0.9231,
+  "recall": 1.0,
+  "f1": 0.96,
+  "auc": 1.0,
+  "brier": 0.001,
+  "confusion_matrix": [
+    [
+      989,
+      1
+    ],
+    [
+      0,
+      12
+    ]
+  ],
+  "n_train": 4008,
+  "n_test": 1002,
+  "n_features": 6,
+  "feature_cols": [
+    "amount_z",
+    "fraud_score",
+    "type_auto",
+    "type_health",
+    "type_home",
+    "type_life"
+  ],
+  "feature_importance": {
+    "amount_z": 0.7011,
+    "fraud_score": 0.2988,
+    "type_auto": 0.0,
+    "type_health": 0.0001,
+    "type_home": 0.0,
+    "type_life": 0.0
+  },
+  "trained_at": "2026-06-11T17:01:17.699871"
+}
