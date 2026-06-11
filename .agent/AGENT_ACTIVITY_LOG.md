@@ -4832,3 +4832,11 @@ error: tests/drills/drill_adapters_endpoint.py: patch does not apply
 2026-06-11T23:03:18Z | auto-fix-worker | start        | T-loop-1781218998-2 | role=error target=jobs/logs/rag_cache.log
 2026-06-11T23:03:18Z | auto-fix-worker | classify     | T-loop-1781218998-2 | tier=small risk=low council=single
 2026-06-11T23:03:21Z | auto-fix-worker | validate     | T-loop-1781218998-2 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-11T23:03:24Z | auto-fix-worker | commit       | T-loop-1781218998-2 | ok sha=ed2477be33ce7cd92c7267b0e6e8af70829431c6
+2026-06-11T23:03:24Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-11T23:03:24Z | auto-fix-loop | dispatch #3: T-loop-1781219004-3
+2026-06-11T23:03:24Z | auto-fix-worker | start        | T-loop-1781219004-3 | role=error target=jobs/logs/setup_ai_agent_stack.log
+2026-06-11T23:03:24Z | auto-fix-worker | classify     | T-loop-1781219004-3 | tier=small risk=low council=single
+2026-06-11T23:03:31Z | auto-fix-worker | apply_check  | T-loop-1781219004-3 | FAIL: git apply --check failed: error: corrupt patch at line 10
+2026-06-11T23:03:31Z | auto-fix-loop |   → verdict=fail
+2026-06-11T23:03:31Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2

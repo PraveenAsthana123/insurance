@@ -2,20 +2,20 @@
   "ai_type": "Supervised Learning",
   "slug": "supervised-learning",
   "algorithm": "GradientBoostingClassifier",
-  "accuracy": 0.965,
-  "precision": 0.9609,
-  "recall": 0.9539,
-  "f1": 0.9574,
-  "auc": 0.9961,
-  "brier": 0.0332,
+  "accuracy": 0.974,
+  "precision": 0.9783,
+  "recall": 0.9597,
+  "f1": 0.9689,
+  "auc": 0.9974,
+  "brier": 0.0306,
   "confusion_matrix": [
     [
-      572,
-      16
+      569,
+      9
     ],
     [
-      19,
-      393
+      17,
+      405
     ]
   ],
   "n_train": 4000,
@@ -32,15 +32,15 @@
     "f7"
   ],
   "feature_importance": {
-    "f0": 0.4023,
-    "f1": 0.3445,
-    "f2": 0.252,
-    "f3": 0.0006,
-    "f4": 0.0002,
+    "f0": 0.4496,
+    "f1": 0.2973,
+    "f2": 0.2518,
+    "f3": 0.0002,
+    "f4": 0.0003,
     "f5": 0.0002,
     "f6": 0.0002,
-    "f7": 0.0
+    "f7": 0.0004
   },
   "data_kind": "synthetic (baseline \u00b7 operator adds real data for prod)",
-  "trained_at": "2026-06-11T17:06:35.687799"
+  "trained_at": "2026-06-11T17:07:16.853211"
 }

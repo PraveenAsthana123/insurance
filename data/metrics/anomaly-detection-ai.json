@@ -2,20 +2,20 @@
   "ai_type": "Anomaly Detection AI",
   "slug": "anomaly-detection-ai",
   "algorithm": "GradientBoostingClassifier",
-  "accuracy": 0.957,
-  "precision": 0.9637,
-  "recall": 0.9343,
-  "f1": 0.9487,
-  "auc": 0.9945,
-  "brier": 0.0353,
+  "accuracy": 0.951,
+  "precision": 0.9597,
+  "recall": 0.9268,
+  "f1": 0.943,
+  "auc": 0.9928,
+  "brier": 0.0397,
   "confusion_matrix": [
     [
-      559,
-      15
+      546,
+      17
     ],
     [
-      28,
-      398
+      32,
+      405
     ]
   ],
   "n_train": 4000,
@@ -32,15 +32,15 @@
     "f7"
   ],
   "feature_importance": {
-    "f0": 0.4559,
-    "f1": 0.3145,
-    "f2": 0.2284,
-    "f3": 0.0005,
-    "f4": 0.0,
-    "f5": 0.0002,
-    "f6": 0.0001,
-    "f7": 0.0004
+    "f0": 0.4323,
+    "f1": 0.3289,
+    "f2": 0.2376,
+    "f3": 0.0002,
+    "f4": 0.0001,
+    "f5": 0.0001,
+    "f6": 0.0006,
+    "f7": 0.0002
   },
   "data_kind": "synthetic (baseline \u00b7 operator adds real data for prod)",
-  "trained_at": "2026-06-11T17:06:24.036222"
+  "trained_at": "2026-06-11T17:07:06.096267"
 }

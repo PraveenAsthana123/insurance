@@ -5,8 +5,8 @@
   "n_docs": 200,
   "n_queries": 50,
   "top_k": 5,
-  "avg_top1_similarity": 0.9341,
+  "avg_top1_similarity": 0.6914,
   "vocab_size": 300,
   "data_kind": "synthetic doc corpus",
-  "trained_at": "2026-06-11T17:06:40.447802"
+  "trained_at": "2026-06-11T17:07:20.990220"
 }

@@ -130,9 +130,9 @@ def train_rag_baseline(slug: str, name: str, seed: int = 42):
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.metrics.pairwise import cosine_similarity
     rng = np.random.default_rng(seed + hash(slug) % 1000)
-    docs = [f"Document {i} insurance topic {i % 5} keywords {' '.join('w' + str(j) for j in range(i, i+5))}"
-            for i in range(200)]
-    queries = [f"insurance topic {i % 5} keywords {' '.join('w' + str(j) for j in range(i*4, i*4+5))}" for i in range(50)]
+    topics = [f"topic_{i%50}" for i in range(200)]
+    docs = [f"insurance {topics[i]} document with relevant keywords for retrieval and ranking {i}" for i in range(200)]
+    queries = [f"insurance topic_{i} document keywords retrieval ranking" for i in range(50)]
     vec = TfidfVectorizer(max_features=300)
     vec.fit(docs + queries)
     doc_vecs = vec.transform(docs)
