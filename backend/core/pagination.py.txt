@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/core/pagination.py
-# auto-generated explainer · 2026-06-10T10:01:13Z
+# auto-generated explainer · 2026-06-11T10:01:41Z
 
 ## Purpose
 Pagination helper · Iter 26 · C3 closure.

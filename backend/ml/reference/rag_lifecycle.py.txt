@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/ml/reference/rag_lifecycle.py
-# auto-generated explainer · 2026-06-10T10:01:17Z
+# auto-generated explainer · 2026-06-11T10:01:45Z
 
 ## Purpose
 INSUR reference: full RAG lifecycle (chunking → embed → vector DB → retrieve → rerank → LLM → cite → eval).

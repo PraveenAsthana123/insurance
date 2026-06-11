@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_master_data.py
-# auto-generated explainer · 2026-06-10T10:01:11Z
+# auto-generated explainer · 2026-06-11T10:01:39Z
 
 ## Purpose
 Drill: INSUR master-data router + per-dept catalog (§38 + §41.3 + §47.6 + §57.6 + §64).

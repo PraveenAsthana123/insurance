@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11T08:13:01.307171+00:00",
+  "generated_at": "2026-06-11T11:13:01.548327+00:00",
   "source_files": {
     "audit": "jobs/reports/insurance/insurance_alignment_latest.json",
     "blueprint": "data/insurance/blueprint.json",
@@ -9,7 +9,7 @@
     "cron_log": "jobs/logs/insurance_alignment_cron.log"
   },
   "audit": {
-    "generated_at": "2026-06-11T08:12:02.076795+00:00",
+    "generated_at": "2026-06-11T11:12:01.355097+00:00",
     "total_checks": 312,
     "failed_checks": 0,
     "verdict": "green"
@@ -63,11 +63,11 @@
     "pct_complete": 0.0
   },
   "cron": {
-    "log_last_modified": "2026-06-11T08:12:02.176792+00:00",
+    "log_last_modified": "2026-06-11T11:12:01.445740+00:00",
     "log_tail": [
       "Insurance alignment audit: 312 checks, 0 failed",
-      "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260611_0812.md",
-      "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260611_0812.json"
+      "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260611_1112.md",
+      "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260611_1112.json"
     ]
   }
 }

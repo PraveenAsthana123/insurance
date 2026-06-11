@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/alerts/router.py
-# auto-generated explainer · 2026-06-10T10:01:16Z
+# auto-generated explainer · 2026-06-11T10:01:43Z
 
 ## Purpose
 /api/v1/alerts/* · alert dispatcher · Iter 21 · composite 95→100.

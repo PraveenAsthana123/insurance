@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/healthz/__init__.py
-# auto-generated explainer · 2026-06-10T10:01:16Z
+# auto-generated explainer · 2026-06-11T10:01:44Z
 
 ## Purpose
 K8s health probes · Iter 32 · live + ready endpoints.

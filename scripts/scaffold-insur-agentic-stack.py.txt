@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/scaffold-insur-agentic-stack.py
-# auto-generated explainer · 2026-06-10T10:00:16Z
+# auto-generated explainer · 2026-06-11T10:00:32Z
 
 ## Purpose
 Scaffold INSUR_AGENTIC_STACK.md per dept (§64.40.8 + §67).

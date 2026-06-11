@@ -1,12 +1,12 @@
 {
   "tasks": 342,
   "workers": 200,
-  "elapsed_seconds": 15.78,
-  "throughput_per_sec": 21.7,
+  "elapsed_seconds": 16.28,
+  "throughput_per_sec": 21.0,
   "verdicts": {
-    "ok": 244,
+    "ok": 240,
     "issue_found": 97,
-    "escalate": 1
+    "escalate": 5
   },
-  "completed_at": "2026-06-11T09:00:18Z"
+  "completed_at": "2026-06-11T12:00:19Z"
 }

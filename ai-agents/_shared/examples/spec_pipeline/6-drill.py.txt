@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # ai-agents/_shared/examples/spec_pipeline/6-drill.py
-# auto-generated explainer · 2026-06-10T10:00:31Z
+# auto-generated explainer · 2026-06-11T10:00:53Z
 
 ## Purpose
 §43-compliant drill · 1 positive + 1 negative per invariant.

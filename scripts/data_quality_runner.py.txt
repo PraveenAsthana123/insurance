@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/data_quality_runner.py
-# auto-generated explainer · 2026-06-10T10:00:11Z
+# auto-generated explainer · 2026-06-11T10:00:17Z
 
 ## Purpose
 Data quality runner · Iter 27 · H5 closure.

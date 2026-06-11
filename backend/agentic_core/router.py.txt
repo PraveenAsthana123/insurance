@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/agentic_core/router.py
-# auto-generated explainer · 2026-06-10T10:01:16Z
+# auto-generated explainer · 2026-06-11T10:01:43Z
 
 ## Purpose
 /api/v1/agentic/* · Iter 37 · agent + skill + tool registries + invocation.
@@ -32,16 +32,17 @@
 - `health()`: (no docstring)
 - `create_agent(body)`: (no docstring)
 - `list_agents(status, tenant_id, limit)`: (no docstring)
+- `all_blueprints(department, risk_level, tenant_id, limit)`: Iter 43 · single fetch · ALL 100 agents with working/flow/network rollup.
+- `get_agent_blueprint(agent_id)`: Per-agent blueprint · IPO + flowchart + MCP + RAG + tools (Iter 41).
 - `get_agent(agent_id)`: (no docstring)
 - `create_skill(body)`: (no docstring)
 - `list_skills(status, risk_level, tenant_id, limit)`: (no docstring)
 - `create_tool(body)`: (no docstring)
 - `list_tools(tool_type, tenant_id, limit)`: (no docstring)
 - `create_mapping(body)`: (no docstring)
-- `invoke_agent(body)`: Per §57.7 scaffold runtime · validates agent + plans skills + writes audit row.
+- `invoke_agent(body)`: Real end-to-end execution · Iter 41.
 - `list_invocations(agent_id, status, tenant_id, limit)`: (no docstring)
 - `get_invocation(invocation_id)`: (no docstring)
-- `invocation_stats(tenant_id)`: (no docstring)
 
 ## Outputs
 - Return values from functions above

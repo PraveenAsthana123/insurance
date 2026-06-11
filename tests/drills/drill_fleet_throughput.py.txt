@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_fleet_throughput.py
-# auto-generated explainer · 2026-06-10T10:01:12Z
+# auto-generated explainer · 2026-06-11T10:01:40Z
 
 ## Purpose
 Drill: INSUR agent-fleet throughput (§43, §65.8).

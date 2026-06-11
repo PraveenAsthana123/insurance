@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/health_history/__init__.py
-# auto-generated explainer · 2026-06-10T10:01:13Z
+# auto-generated explainer · 2026-06-11T10:01:41Z
 
 ## Purpose
 Health snapshot history · Iter 35.
