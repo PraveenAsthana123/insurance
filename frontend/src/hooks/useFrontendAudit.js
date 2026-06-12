@@ -50,7 +50,9 @@ export function useAuditBoot() {
               url: window.location.pathname,
               ts: new Date().toISOString(),
             }));
-      } catch (_) {}
+      } catch (_ignored) {
+        void _ignored;
+      }
     };
     window.addEventListener('beforeunload', onBeforeUnload);
     return () => window.removeEventListener('beforeunload', onBeforeUnload);

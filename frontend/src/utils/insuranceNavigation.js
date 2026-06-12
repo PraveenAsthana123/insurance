@@ -82,7 +82,7 @@ export function domainsForProcess(process, dept) {
       .filter(Boolean);
     return Array.from(new Set(ids));
   }
-  return availableDomainIdsForDept(dept);
+  return CANONICAL_DOMAINS.map((domain) => domain.id);
 }
 
 export function processAppliesToDomain(process, dept, domain) {

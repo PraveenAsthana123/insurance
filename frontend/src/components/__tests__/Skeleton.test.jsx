@@ -1,6 +1,7 @@
 // Skeleton.test.jsx · Iter 28 · J9 closure · snapshot test for Skeleton + SkeletonRow.
 // Vitest + React Testing Library. Run: npx vitest run
 
+import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import Skeleton, { SkeletonRow } from '../Skeleton';
 

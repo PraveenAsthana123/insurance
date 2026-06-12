@@ -78,7 +78,6 @@ export default function VoiceAIDemoPage() {
       setMonitoring(mn);
       setOrders(os.items || []);
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.warn('load failed:', e.message);
     }
   };

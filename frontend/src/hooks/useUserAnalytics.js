@@ -17,7 +17,9 @@ function report(metric, value, payload = {}) {
         event_payload: payload,
       }),
     });
-  } catch (_) {}
+  } catch (_ignored) {
+    void _ignored;
+  }
 }
 
 let bootedClickTracker = false;

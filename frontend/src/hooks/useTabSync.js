@@ -28,7 +28,7 @@ export function publishTab(channelName, payload) {
     localStorage.setItem(`tabsync:${channelName}`,
       JSON.stringify({ ts: Date.now(), payload }));
     setTimeout(() => localStorage.removeItem(`tabsync:${channelName}`), 100);
-  } catch (_) {}
+  } catch (_ignored) { void _ignored; }
 }
 
 /**
@@ -40,13 +40,13 @@ export function useTabSync(channelName, onMessage) {
 
   useEffect(() => {
     const ch = getChannel(channelName);
-    const cbBC = (e) => { try { handlerRef.current?.(e.data?.payload); } catch (_) {} };
+    const cbBC = (e) => { try { handlerRef.current?.(e.data?.payload); } catch (_ignored) { void _ignored; } };
     const cbStorage = (e) => {
       if (e.key === `tabsync:${channelName}` && e.newValue) {
         try {
           const data = JSON.parse(e.newValue);
           handlerRef.current?.(data.payload);
-        } catch (_) {}
+        } catch (_ignored) { void _ignored; }
       }
     };
     if (ch) ch.addEventListener('message', cbBC);

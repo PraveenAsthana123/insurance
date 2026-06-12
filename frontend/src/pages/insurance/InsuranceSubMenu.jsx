@@ -19,6 +19,14 @@ export function InsuranceSubMenu({ bp }) {
     return initial;
   });
   const toggle = (key) => setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+  const openAndNavigateDept = (deptId, deptKey) => {
+    setExpanded((prev) => ({ ...prev, [deptKey]: true }));
+    navigate(`/insurance/${deptId}`);
+  };
+  const openAndNavigateDomain = (deptId, domain, deptKey, domainKey) => {
+    setExpanded((prev) => ({ ...prev, [deptKey]: true, [domainKey]: true }));
+    navigate(`/insurance/${deptId}/${domain}`);
+  };
 
   const departments = (bp.department_catalog || []).slice().sort((a, b) => a.id - b.id);
   const q = filter.trim().toLowerCase();
@@ -65,13 +73,23 @@ export function InsuranceSubMenu({ bp }) {
           <div key={dept.id}>
             <span
               className={`insurance-process-row ${activeDept ? 'active' : ''}`}
-              onClick={() => toggle(deptKey)}
+              onClick={() => openAndNavigateDept(dept.id, deptKey)}
               role="button"
               aria-expanded={deptOpen}
               style={{ paddingLeft: 8, fontWeight: 700 }}
               title={dept.name}
             >
-              <span style={{ marginRight: 4 }}>{deptOpen ? '▾' : '▸'}</span>
+              <span
+                onClick={(event) => {
+                  event.stopPropagation();
+                  toggle(deptKey);
+                }}
+                role="button"
+                aria-label={`${deptOpen ? 'Collapse' : 'Expand'} ${dept.name}`}
+                style={{ marginRight: 4 }}
+              >
+                {deptOpen ? '▾' : '▸'}
+              </span>
               <strong>#{dept.id}</strong> {dept.name}
             </span>
 
@@ -87,13 +105,23 @@ export function InsuranceSubMenu({ bp }) {
                 <div key={domain}>
                   <span
                     className={`insurance-subprocess-row ${activeDomain ? 'active' : ''}`}
-                    onClick={() => toggle(domainKey)}
+                    onClick={() => openAndNavigateDomain(dept.id, domain, deptKey, domainKey)}
                     role="button"
                     aria-expanded={domainOpen}
                     style={{ paddingLeft: 24, opacity: hasDomain ? 1 : 0.55 }}
                     title={hasDomain ? (hasDomain.label || dom.label) : `${dom.label} (no operator content yet)`}
                   >
-                    <span style={{ marginRight: 4 }}>{domainOpen ? '▾' : '▸'}</span>
+                    <span
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        toggle(domainKey);
+                      }}
+                      role="button"
+                      aria-label={`${domainOpen ? 'Collapse' : 'Expand'} ${dept.name} ${dom.label}`}
+                      style={{ marginRight: 4 }}
+                    >
+                      {domainOpen ? '▾' : '▸'}
+                    </span>
                     {dom.label} <span style={{ fontSize: 10 }}>({domainProcesses.length})</span>
                   </span>
 

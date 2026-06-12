@@ -22,7 +22,9 @@ export function useSSE(url, onEvent) {
         const data = JSON.parse(e.data);
         setLastEvent(data);
         cbRef.current?.(data);
-      } catch (_) {}
+      } catch (_ignored) {
+        void _ignored;
+      }
     };
     es.addEventListener('status', (e) => {
       const data = JSON.parse(e.data);

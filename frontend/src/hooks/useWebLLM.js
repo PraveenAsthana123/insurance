@@ -32,7 +32,6 @@ export function useWebLLM(model = DEFAULT_MODEL) {
           initProgressCallback: (report) => {
             if (cancelled) return;
             setProgress(report.progress || 0);
-            // eslint-disable-next-line no-console
             console.log('[WebLLM]', report.text);
           },
         });

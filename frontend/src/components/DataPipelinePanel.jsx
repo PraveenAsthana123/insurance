@@ -41,7 +41,7 @@ function buildFlowchartMermaid(steps, taskId) {
   const prefix = `n_${taskId.replace(/[^a-z0-9]/gi, '_')}`;
   const lines = ['flowchart LR'];
   steps.forEach((step, i) => {
-    const safe = String(step).replace(/[\[\]"]/g, '').slice(0, 40);
+    const safe = String(step).replace(/[[\]"]/g, '').slice(0, 40);
     lines.push(`  ${prefix}_${i}["${safe}"]`);
     if (i > 0) lines.push(`  ${prefix}_${i - 1} --> ${prefix}_${i}`);
   });

@@ -53,7 +53,7 @@ export function useReconnectingWS(path, onMessage) {
 
     return () => {
       alive = false;
-      try { wsRef.current?.close(); } catch (_) {}
+      try { wsRef.current?.close(); } catch (_ignored) { void _ignored; }
     };
   }, [path, onMessage]);
 

@@ -57,7 +57,7 @@ export default function ItsmPage() {
     setPlanResp(await r.json());
   };
 
-  const usePattern = (issue) => {
+  const applyPattern = (issue) => {
     setActiveTab('finetune');
     setPlanForm({
       issue_pattern: issue.pattern_excerpt,
@@ -252,7 +252,7 @@ export default function ItsmPage() {
                         {issue.candidate_for_finetune ? '✓' : '○'}
                       </td>
                       <td style={{ padding: 8 }}>
-                        <button onClick={() => usePattern(issue)} style={{
+                        <button onClick={() => applyPattern(issue)} style={{
                           padding: '4px 10px', border: '1px solid #4f46e5', background: 'none',
                           color: '#4f46e5', borderRadius: 4, fontSize: 11, cursor: 'pointer',
                         }}>Plan fix</button>

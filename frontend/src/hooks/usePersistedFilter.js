@@ -16,7 +16,9 @@ export function usePersistedFilter(key, initial = {}) {
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify(filter));
-    } catch (_) {}
+    } catch (_ignored) {
+      void _ignored;
+    }
   }, [storageKey, filter]);
 
   const reset = useCallback(() => {

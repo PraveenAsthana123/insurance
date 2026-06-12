@@ -1918,14 +1918,14 @@ function IntegrationsHubView() {
                 <td style={{ padding: 6, fontSize: 9 }}>{i.license}</td>
                 <td style={{ padding: 6, textAlign: 'center' }}>
                   {i.config_link && (
-                    <a href={`${API}${i.config_link}`} target="_blank" rel="noopener"
+                    <a href={`${API}${i.config_link}`} target="_blank" rel="noreferrer"
                        style={{ fontSize: 9, padding: '2px 6px', background: '#3b82f6',
                                 color: '#fff', borderRadius: 3, textDecoration: 'none', marginRight: 3 }}>
                       Config
                     </a>
                   )}
                   {i.docs && i.docs !== 'internal' && (
-                    <a href={i.docs} target="_blank" rel="noopener"
+                    <a href={i.docs} target="_blank" rel="noreferrer"
                        style={{ fontSize: 9, padding: '2px 6px', background: '#64748b',
                                 color: '#fff', borderRadius: 3, textDecoration: 'none' }}>
                       Docs

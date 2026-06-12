@@ -73,7 +73,6 @@ export default function MermaidDiagram({ definition, accent = '#3b82f6', title =
   useEffect(() => {
     if (ref.current && renderedSvg) {
       // SAFE: SVG was sanitized via DOMPurify above per §47.6 / §76
-      // eslint-disable-next-line no-unsanitized/property
       ref.current.innerHTML = renderedSvg;
     }
   }, [renderedSvg]);
