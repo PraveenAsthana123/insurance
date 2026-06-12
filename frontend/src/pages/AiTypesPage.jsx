@@ -85,13 +85,13 @@ export default function AiTypesPage() {
     <div style={{ padding: 20, background: '#f3f4f6', minHeight: 'calc(100vh - 120px)' }}>
       <div style={{ marginBottom: 14 }}>
         <h1 style={{ margin: 0, fontSize: 22 }}>🤖 AI Types · §131 catalog</h1>
-        <div style={{ fontSize: 11, color: '#6b7280' }}>
+        <div style={{ fontSize: 13, color: '#6b7280' }}>
           3-level hierarchy: 10 Mega-Domains → 100 Categories → 200 AI Types
         </div>
       </div>
 
       {/* Breadcrumb */}
-      <div style={{ fontSize: 12, color: '#4338ca', marginBottom: 10 }}>
+      <div style={{ fontSize: 13, color: '#4338ca', marginBottom: 10 }}>
         <button onClick={() => { setSelDomain(null); setSelCategory(null); setSelType(null); }}
                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4338ca' }}>
           All
@@ -107,26 +107,26 @@ export default function AiTypesPage() {
         {selType && <> › <strong>{selType}</strong></>}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '220px 280px 1fr', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '260px 320px 1fr', gap: 18 }}>
 
         {/* COLUMN 1 · MAIN MENU · Mega-Domains */}
         <aside style={{ background: '#fff', borderRadius: 10, padding: 10,
                          border: '1px solid #e5e7eb', maxHeight: '74vh', overflowY: 'auto' }}>
-          <div style={{ fontWeight: 700, fontSize: 11, color: '#6b7280', marginBottom: 6,
+          <div style={{ fontWeight: 700, fontSize: 13, color: '#6b7280', marginBottom: 6,
                           textTransform: 'uppercase' }}>
             Main · Mega-Domain ({domains.length})
           </div>
           {domains.map((d, i) => (
             <div key={i} onClick={() => { setSelDomain(d); setSelCategory(null); setSelType(null); }}
-                  style={{ padding: '8px 10px', cursor: 'pointer', borderRadius: 6,
-                            marginBottom: 4, fontSize: 12,
+                  style={{ padding: '12px 14px', cursor: 'pointer', borderRadius: 6,
+                            marginBottom: 6, fontSize: 13,
                             background: selDomain?.id === d.id ? '#4f46e5' : 'transparent',
                             color: selDomain?.id === d.id ? '#fff' : '#374151' }}>
               <div style={{ fontWeight: 600 }}>
-                <span style={{ fontSize: 10, opacity: 0.6, marginRight: 4 }}>L{d.id}</span>
+                <span style={{ fontSize: 12, opacity: 0.6, marginRight: 4 }}>L{d.id}</span>
                 {d.name}
               </div>
-              <div style={{ fontSize: 10, opacity: 0.75, marginTop: 2 }}>
+              <div style={{ fontSize: 12, opacity: 0.75, marginTop: 2 }}>
                 cats {d.category_range}
               </div>
             </div>
@@ -136,24 +136,24 @@ export default function AiTypesPage() {
         {/* COLUMN 2 · SUB MENU · Categories */}
         <aside style={{ background: '#fff', borderRadius: 10, padding: 10,
                          border: '1px solid #e5e7eb', maxHeight: '74vh', overflowY: 'auto' }}>
-          <div style={{ fontWeight: 700, fontSize: 11, color: '#6b7280', marginBottom: 6,
+          <div style={{ fontWeight: 700, fontSize: 13, color: '#6b7280', marginBottom: 6,
                           textTransform: 'uppercase' }}>
             Sub · Category ({filteredCategories.length})
           </div>
           {filteredCategories.length === 0 && (
-            <div style={{ color: '#9ca3af', fontSize: 11, padding: 10 }}>Select a domain</div>
+            <div style={{ color: '#9ca3af', fontSize: 13, padding: 10 }}>Select a domain</div>
           )}
           {filteredCategories.map((c, i) => (
             <div key={i} onClick={() => { setSelCategory(c); setSelType(null); }}
-                  style={{ padding: '7px 10px', cursor: 'pointer', borderRadius: 5,
-                            marginBottom: 3, fontSize: 12,
+                  style={{ padding: '10px 14px', cursor: 'pointer', borderRadius: 5,
+                            marginBottom: 6, fontSize: 13,
                             background: selCategory?.n === c.n ? '#10b981' : 'transparent',
                             color: selCategory?.n === c.n ? '#fff' : '#374151' }}>
               <div style={{ fontWeight: 600 }}>
-                <span style={{ fontSize: 10, opacity: 0.6, marginRight: 4 }}>#{c.n}</span>
+                <span style={{ fontSize: 12, opacity: 0.6, marginRight: 4 }}>#{c.n}</span>
                 {c.name}
               </div>
-              <div style={{ fontSize: 10, opacity: 0.75, marginTop: 2 }}>
+              <div style={{ fontSize: 12, opacity: 0.75, marginTop: 2 }}>
                 {c.examples?.substring(0, 50)}
               </div>
             </div>
@@ -165,17 +165,17 @@ export default function AiTypesPage() {
                         border: '1px solid #e5e7eb', maxHeight: '74vh', overflowY: 'auto' }}>
           {!selType && (
             <>
-              <div style={{ fontWeight: 700, fontSize: 11, color: '#6b7280', marginBottom: 8,
+              <div style={{ fontWeight: 700, fontSize: 13, color: '#6b7280', marginBottom: 8,
                               textTransform: 'uppercase' }}>
                 AI Types ({selCategory ? filteredTypes.length : types.length}) {selCategory ? '· filtered' : '· all 200'}
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 6 }}>
                 {(selCategory ? filteredTypes : types).map((t, i) => t && (
                   <div key={i} onClick={() => selectType(t)}
-                        style={{ padding: '8px 10px', cursor: 'pointer', borderRadius: 6,
+                        style={{ padding: '12px 14px', cursor: 'pointer', borderRadius: 6,
                                   background: '#f9fafb', border: '1px solid #e5e7eb',
-                                  fontSize: 12 }}>
-                    <span style={{ color: '#9ca3af', fontSize: 10, marginRight: 4 }}>{i + 1}</span>
+                                  fontSize: 13 }}>
+                    <span style={{ color: '#9ca3af', fontSize: 12, marginRight: 4 }}>{i + 1}</span>
                     {t}
                   </div>
                 ))}
@@ -188,7 +188,7 @@ export default function AiTypesPage() {
               {/* Main + Sub reference visible INSIDE content (operator req) */}
               <div style={{
                 background: '#eef2ff', border: '1px solid #c7d2fe', borderRadius: 6,
-                padding: '8px 12px', marginBottom: 12, fontSize: 11, color: '#3730a3',
+                padding: '8px 12px', marginBottom: 12, fontSize: 13, color: '#3730a3',
                 display: 'flex', gap: 12, flexWrap: 'wrap',
               }}>
                 {selDomain && (
@@ -205,7 +205,7 @@ export default function AiTypesPage() {
                 )}
               </div>
               <h2 style={{ margin: '0 0 4px', fontSize: 17 }}>{detail.ai_type}</h2>
-              <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 10 }}>
+              <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 10 }}>
                 spec: {detail.spec}
                 {selCategory?.examples && <> · examples: {selCategory.examples}</>}
               </div>
@@ -215,7 +215,7 @@ export default function AiTypesPage() {
                 {['14-field', 'pipeline', 'model', 'raw'].map(t => (
                   <button key={t} onClick={() => setActiveTab(t)} style={{
                     padding: '5px 12px', border: 'none', background: 'none', cursor: 'pointer',
-                    fontSize: 11, fontWeight: 600,
+                    fontSize: 13, fontWeight: 600,
                     borderBottom: activeTab === t ? '3px solid #4f46e5' : '3px solid transparent',
                     color: activeTab === t ? '#1f2937' : '#6b7280',
                   }}>
@@ -230,10 +230,10 @@ export default function AiTypesPage() {
               {activeTab === '14-field' && detail.skeleton && (
                 <div>
                   {Object.entries(detail.skeleton).map(([k, v]) => (
-                    <div key={k} style={{ padding: 8, marginBottom: 5, background: '#f9fafb',
+                    <div key={k} style={{ padding: 14, marginBottom: 10, background: '#f9fafb',
                                             borderRadius: 4, borderLeft: '3px solid #4f46e5' }}>
-                      <div style={{ fontWeight: 700, fontSize: 11 }}>{FIELD_LABELS[k] || k}</div>
-                      <div style={{ fontSize: 11, color: String(v).startsWith('TODO') ? '#92400e' : '#374151',
+                      <div style={{ fontWeight: 700, fontSize: 13 }}>{FIELD_LABELS[k] || k}</div>
+                      <div style={{ fontSize: 13, color: String(v).startsWith('TODO') ? '#92400e' : '#374151',
                                       marginTop: 3 }}>
                         {v}
                       </div>
@@ -248,8 +248,8 @@ export default function AiTypesPage() {
                     <div key={p.id} style={{ marginBottom: 8, padding: 8,
                                                 background: '#f9fafb', borderRadius: 4,
                                                 borderLeft: '3px solid #10b981' }}>
-                      <div style={{ fontWeight: 700, fontSize: 11 }}>{p.name}</div>
-                      <pre style={{ fontSize: 10, margin: '4px 0 0', whiteSpace: 'pre-wrap',
+                      <div style={{ fontWeight: 700, fontSize: 13 }}>{p.name}</div>
+                      <pre style={{ fontSize: 12, margin: '4px 0 0', whiteSpace: 'pre-wrap',
                                       fontFamily: 'inherit', color: '#374151' }}>
                         {typeof pipeline[p.id] === 'string' ? pipeline[p.id]
                           : JSON.stringify(pipeline[p.id], null, 2).substring(0, 500)}
@@ -262,7 +262,7 @@ export default function AiTypesPage() {
               {activeTab === 'model' && <ModelDetail />}
 
               {activeTab === 'raw' && (
-                <pre style={{ fontSize: 10, background: '#1f2937', color: '#a7f3d0',
+                <pre style={{ fontSize: 12, background: '#1f2937', color: '#a7f3d0',
                                 padding: 10, borderRadius: 5, overflow: 'auto', maxHeight: '55vh' }}>
                   {JSON.stringify(detail, null, 2)}
                 </pre>
@@ -286,10 +286,10 @@ function ModelDetail() {
       {Object.entries(data).filter(([k]) =>
         !['ts_utc', 'ts_local', 'tz', 'actor_user', 'actor_host', 'spec'].includes(k)
       ).map(([k, v]) => (
-        <div key={k} style={{ padding: 8, marginBottom: 5, background: '#f9fafb',
+        <div key={k} style={{ padding: 14, marginBottom: 10, background: '#f9fafb',
                                  borderRadius: 4, borderLeft: '3px solid #f59e0b' }}>
-          <div style={{ fontWeight: 700, fontSize: 11 }}>{k}</div>
-          <pre style={{ fontSize: 10, margin: '4px 0 0', whiteSpace: 'pre-wrap',
+          <div style={{ fontWeight: 700, fontSize: 13 }}>{k}</div>
+          <pre style={{ fontSize: 12, margin: '4px 0 0', whiteSpace: 'pre-wrap',
                           fontFamily: 'inherit', color: '#374151' }}>
             {typeof v === 'string' ? v : JSON.stringify(v, null, 2).substring(0, 500)}
           </pre>
