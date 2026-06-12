@@ -1,0 +1,767 @@
+{
+  "started": "2026-06-12T00:05:27.268390",
+  "tiers": {
+    "api_health": {
+      "pass": 7,
+      "fail": 0,
+      "items": [
+        {
+          "name": "/api/v1/health",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "/api/v1/odysseus/health",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "/api/v1/use-case-matrix/score-card",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "/api/v1/141/score-card",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "/api/v1/n8n-rpa/score-card",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "/api/v1/itsm/score-card",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "/api/v1/eai-os/score-card",
+          "ok": true,
+          "detail": "status=200"
+        }
+      ]
+    },
+    "api_eaios": {
+      "pass": 53,
+      "fail": 0,
+      "items": [
+        {
+          "name": "pm/discoveries",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/bottlenecks",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/candidates",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/scores",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/tasks",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/workforce",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/autonomous-departments",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/discovery",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/conformance",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/bottleneck",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/automation-candidates",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pm/autonomy-readiness",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "fabric/domains",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "fabric/products",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "fabric/catalog",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "fabric/lineage",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "fabric/features",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "fabric/vector-assets",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "fabric/decisions",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "os/capabilities",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "os/workspaces",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "os/digital-workers",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "os/digital-teams",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "os/marketplace/agents",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "os/marketplace/prompts",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "os/departments",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "ct/inventory",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "ct/prompts",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "ct/workflows",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "ct/risks",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "ct/costs",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "ct/compliance",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "execution/plans",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "execution/validations",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "execution/rollbacks",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "execution/self-healing",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "execution/risk-matrix",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "execution/recent",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "learning/prompt-versions",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "learning/agent-versions",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "learning/workflow-learning",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "learning/feedback",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "learning/fine-tune-jobs",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "eval/benchmarks",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "eval/golden-datasets",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "eval/experiments",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "eval/rag",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "eval/health",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "telemetry/aggregate",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "twin/business/Claims",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pattern/discover",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "pattern/enforce-roster",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "overview",
+          "ok": true,
+          "detail": "status=200"
+        }
+      ]
+    },
+    "api_itsm": {
+      "pass": 17,
+      "fail": 0,
+      "items": [
+        {
+          "name": "health",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "playbook/templates",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "playbook/templates/prompt_injection",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "specialist/performance",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "security-score/sys_watchdog_pii",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "resolution-workflow/stages",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "l1-orchestration",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "incidents",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "finetune-planner/l1-issues",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "finetune-planner/knowledge-base",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "agent-autofix/queue",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "agents/showcase",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "agents/showcase?env=prod",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "l2-rca/list",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "l3-problem/clusters",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "l3-problem/list",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "p1-war-room/active",
+          "ok": true,
+          "detail": "status=200"
+        }
+      ]
+    },
+    "database": {
+      "pass": 35,
+      "fail": 0,
+      "items": [
+        {
+          "name": "process_discovery",
+          "ok": true,
+          "detail": "rows=41 (\u226541)"
+        },
+        {
+          "name": "bottleneck_analysis",
+          "ok": true,
+          "detail": "rows=30 (\u226530)"
+        },
+        {
+          "name": "automation_candidate",
+          "ok": true,
+          "detail": "rows=25 (\u226525)"
+        },
+        {
+          "name": "autonomy_score",
+          "ok": true,
+          "detail": "rows=41 (\u226541)"
+        },
+        {
+          "name": "autonomous_department",
+          "ok": true,
+          "detail": "rows=1 (\u22651)"
+        },
+        {
+          "name": "task_catalog",
+          "ok": true,
+          "detail": "rows=8 (\u22658)"
+        },
+        {
+          "name": "workforce_analysis",
+          "ok": true,
+          "detail": "rows=1 (\u22651)"
+        },
+        {
+          "name": "data_domain",
+          "ok": true,
+          "detail": "rows=5 (\u22655)"
+        },
+        {
+          "name": "data_product",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        },
+        {
+          "name": "data_catalog",
+          "ok": true,
+          "detail": "rows=50 (\u226550)"
+        },
+        {
+          "name": "feature_registry",
+          "ok": true,
+          "detail": "rows=5 (\u22655)"
+        },
+        {
+          "name": "vector_asset",
+          "ok": true,
+          "detail": "rows=30 (\u226530)"
+        },
+        {
+          "name": "rag_evaluation_v2",
+          "ok": true,
+          "detail": "rows=10 (\u226510)"
+        },
+        {
+          "name": "capability",
+          "ok": true,
+          "detail": "rows=8 (\u22658)"
+        },
+        {
+          "name": "workspace",
+          "ok": true,
+          "detail": "rows=5 (\u22655)"
+        },
+        {
+          "name": "digital_worker",
+          "ok": true,
+          "detail": "rows=100 (\u2265100)"
+        },
+        {
+          "name": "digital_team",
+          "ok": true,
+          "detail": "rows=5 (\u22655)"
+        },
+        {
+          "name": "agent_marketplace",
+          "ok": true,
+          "detail": "rows=30 (\u226530)"
+        },
+        {
+          "name": "prompt_inventory",
+          "ok": true,
+          "detail": "rows=5 (\u22655)"
+        },
+        {
+          "name": "workflow_inventory",
+          "ok": true,
+          "detail": "rows=5 (\u22655)"
+        },
+        {
+          "name": "ai_risk",
+          "ok": true,
+          "detail": "rows=6 (\u22656)"
+        },
+        {
+          "name": "ai_cost",
+          "ok": true,
+          "detail": "rows=6 (\u22656)"
+        },
+        {
+          "name": "compliance_control",
+          "ok": true,
+          "detail": "rows=9 (\u22659)"
+        },
+        {
+          "name": "execution_plan",
+          "ok": true,
+          "detail": "rows=1 (\u22651)"
+        },
+        {
+          "name": "execution_node",
+          "ok": true,
+          "detail": "rows=4 (\u22654)"
+        },
+        {
+          "name": "validation_result",
+          "ok": true,
+          "detail": "rows=1 (\u22651)"
+        },
+        {
+          "name": "self_healing_rule",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        },
+        {
+          "name": "prompt_version",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        },
+        {
+          "name": "agent_version",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        },
+        {
+          "name": "workflow_learning",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        },
+        {
+          "name": "feedback_learning",
+          "ok": true,
+          "detail": "rows=2 (\u22652)"
+        },
+        {
+          "name": "fine_tune_job",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        },
+        {
+          "name": "benchmark_registry",
+          "ok": true,
+          "detail": "rows=4 (\u22654)"
+        },
+        {
+          "name": "golden_dataset",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        },
+        {
+          "name": "experiment_run",
+          "ok": true,
+          "detail": "rows=3 (\u22653)"
+        }
+      ]
+    },
+    "feature": {
+      "pass": 5,
+      "fail": 1,
+      "items": [
+        {
+          "name": "L2 RCA submit",
+          "ok": true,
+          "detail": "rca_id=RCA-44351991 kb=False vec=True"
+        },
+        {
+          "name": "L3 problem consolidate",
+          "ok": true,
+          "detail": "problem_id=PRB-44352081 ke=False"
+        },
+        {
+          "name": "Pattern train queue",
+          "ok": true,
+          "detail": "job=FT-PAT-44352233"
+        },
+        {
+          "name": "text2sql run",
+          "ok": false,
+          "detail": "HTTPConnectionPool(host='localhost', port=8001): Read timed out. (read timeout=6"
+        },
+        {
+          "name": "Odysseus predict",
+          "ok": true,
+          "detail": "agent=fraud_scorer conf=0.6175"
+        },
+        {
+          "name": "P1 war-room assign",
+          "ok": true,
+          "detail": "team=Application owner=sys_l2_app_team"
+        }
+      ]
+    },
+    "frontend": {
+      "pass": 3,
+      "fail": 0,
+      "items": [
+        {
+          "name": "GET /",
+          "ok": true,
+          "detail": "status=200 bytes=616"
+        },
+        {
+          "name": "GET /itsm",
+          "ok": true,
+          "detail": "status=200 bytes=616"
+        },
+        {
+          "name": "GET /eai-os",
+          "ok": true,
+          "detail": "status=200 bytes=616"
+        }
+      ]
+    },
+    "ui_components": {
+      "pass": 2,
+      "fail": 0,
+      "items": [
+        {
+          "name": "ItsmPage.jsx",
+          "ok": true,
+          "detail": "bytes=55337 react=True hooks=True api=True"
+        },
+        {
+          "name": "EaiOsPage.jsx",
+          "ok": true,
+          "detail": "bytes=6939 react=True hooks=True api=True"
+        }
+      ]
+    },
+    "uiux": {
+      "pass": 7,
+      "fail": 0,
+      "items": [
+        {
+          "name": "ItsmPage \u00b7 9 expected tabs",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "ItsmPage \u00b7 L2 RCA 15 fields",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "ItsmPage \u00b7 agent envs dev/qa/prod",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "EaiOsPage \u00b7 9 LAYERS array",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "EaiOsPage \u00b7 vertical EndpointSection rows",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "EaiOsPage \u00b7 expandable accordion",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "ItsmPage \u00b7 P1 war-room 6 teams",
+          "ok": true,
+          "detail": ""
+        }
+      ]
+    },
+    "negative": {
+      "pass": 3,
+      "fail": 1,
+      "items": [
+        {
+          "name": "Unknown playbook \u2192 404",
+          "ok": true,
+          "detail": "got=404"
+        },
+        {
+          "name": "text2sql rejects DROP",
+          "ok": false,
+          "detail": "HTTPConnectionPool(host='localhost', port=8001): Read timed out. (read timeout=6"
+        },
+        {
+          "name": "Unknown agent security-score 200 with defaults",
+          "ok": true,
+          "detail": "status=200"
+        },
+        {
+          "name": "EAI-OS score not inflated",
+          "ok": true,
+          "detail": "score=1.0 zero_dims=[]"
+        }
+      ]
+    },
+    "perf": {
+      "pass": 5,
+      "fail": 0,
+      "items": [
+        {
+          "name": "/api/v1/eai-os/score-card",
+          "ok": true,
+          "detail": "p95=36ms budget=500ms"
+        },
+        {
+          "name": "/api/v1/itsm/specialist/performance",
+          "ok": true,
+          "detail": "p95=62ms budget=1000ms"
+        },
+        {
+          "name": "/api/v1/odysseus/health",
+          "ok": true,
+          "detail": "p95=23ms budget=200ms"
+        },
+        {
+          "name": "/api/v1/eai-os/ct/inventory",
+          "ok": true,
+          "detail": "p95=77ms budget=500ms"
+        },
+        {
+          "name": "/api/v1/eai-os/pm/bottlenecks",
+          "ok": true,
+          "detail": "p95=65ms budget=500ms"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total": 139,
+    "pass": 137,
+    "fail": 2,
+    "pass_pct": 98.6
+  },
+  "finished": "2026-06-12T00:08:04.836788"
+}
