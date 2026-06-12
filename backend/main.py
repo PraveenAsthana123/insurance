@@ -247,6 +247,7 @@ def create_app() -> FastAPI:
     from context7_adapter.router import router as ctx7_router  # Iter 124 · §136 context7
     from odysseus.router import router as odysseus_router    # §139 · Journey Orchestrator (REAL data)
     from use_case_matrix.router import router as ucm_router  # §140 · 19 depts × 18 techniques
+    from graphql_adapter.router import router as gql_router  # §56 Stage-1 GraphQL adapter
     from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     from opa_adapter.router import router as opa_router
     from agentops_adapter.router import router as agops_router
@@ -402,6 +403,7 @@ def create_app() -> FastAPI:
     app.include_router(ctx7_router)                # Iter 124 · §136 context7 MCP
     app.include_router(odysseus_router)            # §139 · Odysseus AI Journey Orchestrator (REAL data · 95.9% acc)
     app.include_router(ucm_router)                  # §140 · Use Case Matrix 19 depts × 18 techniques
+    app.include_router(gql_router)                  # §56 Stage-1 GraphQL (adapter)
     app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     app.include_router(opa_router)
     app.include_router(agops_router)

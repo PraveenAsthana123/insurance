@@ -102,7 +102,7 @@ def score_card():
         "depts_present":   1.0 if idx["n_depts"] >= 19 else round(idx["n_depts"] / 19, 4),
         "techs_present":   1.0 if idx["n_techniques"] >= 18 else round(idx["n_techniques"] / 18, 4),
         "honest_reporting": 1.0,  # § 57.7 honesty enforced by build script
-        "reference_models": round(idx.get("n_trained_references", 0) / 6, 4),
+        "reference_models": round(min(1.0, idx.get("n_trained_references", 0) / 18), 4),
         "spec_md_present": 1.0,
         "drill_present":   1.0,
         "manifest_present": 1.0,

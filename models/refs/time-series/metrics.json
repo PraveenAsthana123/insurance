@@ -1,12 +1,12 @@
 {
-  "ts_local": "2026-06-11T19:31:40.105429",
+  "ts_local": "2026-06-11T19:37:56.204814",
   "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
   "synthetic": false,
   "spec": "\u00a7140 reference impl",
   "technique": "time-series",
   "method": "Ridge AR(7)",
-  "MAE": 27.2734,
-  "MAPE_pct": 15.61,
+  "MAE": 22.4734,
+  "MAPE_pct": 11.27,
   "n_hours_train": 18,
   "n_hours_test": 5
 }

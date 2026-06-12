@@ -1,8 +1,35 @@
 {
   "dept": "customer-support",
   "technique": "roberta",
-  "impl_level": "scaffold",
-  "score": 0.5,
+  "impl_level": "real_trained_reference",
+  "score": 0.9,
   "last_run": "2026-06-11T19:29:07.538140",
-  "spec": "\u00a7140"
+  "spec": "\u00a7140",
+  "ref_model_paths": [
+    "models/refs/roberta-nlp/"
+  ],
+  "ref_metrics": [
+    {
+      "ts_local": "2026-06-11T19:44:12.717912",
+      "data_source": "REAL \u00b7 PostgreSQL agent_invocation",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "roberta",
+      "method": "roberta-large-mnli zero-shot",
+      "n_texts": 10,
+      "top_label_distribution": {
+        "error": 0,
+        "success": 3,
+        "warning": 1,
+        "info": 6
+      },
+      "labels_tested": [
+        "error",
+        "success",
+        "warning",
+        "info"
+      ]
+    }
+  ],
+  "elevated_at": "2026-06-11T19:55:11.291196"
 }

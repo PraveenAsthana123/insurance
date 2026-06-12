@@ -1,0 +1,11 @@
+{
+  "ts_local": "2026-06-11T19:42:08.909239",
+  "data_source": "REAL \u00b7 PostgreSQL agent_invocation",
+  "synthetic": false,
+  "spec": "\u00a7140 reference impl",
+  "technique": "arima-statistical",
+  "method": "ARIMA(p,d,q) statsmodels",
+  "MAE": 16.2486,
+  "n_train": 24,
+  "n_test": 6
+}

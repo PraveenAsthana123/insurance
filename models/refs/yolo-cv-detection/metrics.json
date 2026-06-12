@@ -1,0 +1,10 @@
+{
+  "ts_local": "2026-06-11T19:42:23.209391",
+  "data_source": "PRETRAINED \u00b7 no insurance imagery available",
+  "synthetic": false,
+  "spec": "\u00a7140 demo \u00b7 \u00a757.7 honest",
+  "technique": "cv-detection",
+  "method": "YOLOv8n COCO80 pretrained",
+  "honest_caveat": "No insurance imagery \u00b7 pretrained zero-shot only",
+  "n_boxes_random_input": 0
+}

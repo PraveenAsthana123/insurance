@@ -1,8 +1,26 @@
 {
   "dept": "sales",
   "technique": "small-data-fewshot",
-  "impl_level": "scaffold",
-  "score": 0.5,
+  "impl_level": "real_trained_reference",
+  "score": 0.9,
   "last_run": "2026-06-11T19:29:07.485128",
-  "spec": "\u00a7140"
+  "spec": "\u00a7140",
+  "ref_model_paths": [
+    "models/refs/sentence-transformers-fewshot/"
+  ],
+  "ref_metrics": [
+    {
+      "ts_local": "2026-06-11T19:42:18.055102",
+      "data_source": "REAL \u00b7 PostgreSQL agent_invocation",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "sentence-transformers-fewshot",
+      "method": "all-MiniLM-L6-v2 cosine retrieval",
+      "n_texts": 50,
+      "embedding_dim": 384,
+      "mean_self_similarity": 1.0,
+      "mean_pair_similarity": 0.40955621004104614
+    }
+  ],
+  "elevated_at": "2026-06-11T19:55:11.487372"
 }

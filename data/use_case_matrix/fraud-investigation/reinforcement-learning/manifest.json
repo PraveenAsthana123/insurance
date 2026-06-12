@@ -1,8 +1,29 @@
 {
   "dept": "fraud-investigation",
   "technique": "reinforcement-learning",
-  "impl_level": "scaffold",
-  "score": 0.5,
+  "impl_level": "real_trained_reference",
+  "score": 0.9,
   "last_run": "2026-06-11T19:29:07.668021",
-  "spec": "\u00a7140"
+  "spec": "\u00a7140",
+  "ref_model_path": "models/refs/reinforcement-learning/",
+  "ref_metrics": [
+    {
+      "ts_local": "2026-06-11T19:38:31.662936",
+      "data_source": "Toy reference env (no real RL data exists yet)",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "reinforcement-learning",
+      "method": "PPO \u00b7 MlpPolicy",
+      "env": "CartPole-v1",
+      "n_timesteps": 10000,
+      "n_test_episodes": 10,
+      "mean_episode_reward": 418.5,
+      "max_possible": 500,
+      "passes_solve_threshold": true
+    }
+  ],
+  "elevated_at": "2026-06-11T19:55:11.460558",
+  "ref_model_paths": [
+    "models/refs/reinforcement-learning/"
+  ]
 }

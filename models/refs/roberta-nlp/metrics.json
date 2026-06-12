@@ -1,0 +1,21 @@
+{
+  "ts_local": "2026-06-11T19:44:12.717912",
+  "data_source": "REAL \u00b7 PostgreSQL agent_invocation",
+  "synthetic": false,
+  "spec": "\u00a7140 reference impl",
+  "technique": "roberta",
+  "method": "roberta-large-mnli zero-shot",
+  "n_texts": 10,
+  "top_label_distribution": {
+    "error": 0,
+    "success": 3,
+    "warning": 1,
+    "info": 6
+  },
+  "labels_tested": [
+    "error",
+    "success",
+    "warning",
+    "info"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "ts_local": "2026-06-11T19:42:18.055102",
+  "data_source": "REAL \u00b7 PostgreSQL agent_invocation",
+  "synthetic": false,
+  "spec": "\u00a7140 reference impl",
+  "technique": "sentence-transformers-fewshot",
+  "method": "all-MiniLM-L6-v2 cosine retrieval",
+  "n_texts": 50,
+  "embedding_dim": 384,
+  "mean_self_similarity": 1.0,
+  "mean_pair_similarity": 0.40955621004104614
+}

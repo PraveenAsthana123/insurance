@@ -1,8 +1,26 @@
 {
   "dept": "hr",
   "technique": "transformer",
-  "impl_level": "scaffold",
-  "score": 0.5,
+  "impl_level": "real_trained_reference",
+  "score": 0.9,
   "last_run": "2026-06-11T19:29:07.468341",
-  "spec": "\u00a7140"
+  "spec": "\u00a7140",
+  "ref_model_path": "models/refs/transformer/",
+  "ref_metrics": [
+    {
+      "ts_local": "2026-06-11T19:38:04.265965",
+      "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "transformer",
+      "method": "distilbert-sst-2",
+      "n_texts": 20,
+      "positive_count": 3,
+      "avg_confidence": 0.9785
+    }
+  ],
+  "elevated_at": "2026-06-11T19:55:11.289439",
+  "ref_model_paths": [
+    "models/refs/transformer/"
+  ]
 }

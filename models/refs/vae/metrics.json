@@ -1,5 +1,5 @@
 {
-  "ts_local": "2026-06-11T19:31:59.674594",
+  "ts_local": "2026-06-11T19:38:00.297962",
   "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
   "synthetic": false,
   "spec": "\u00a7140 reference impl",
@@ -7,7 +7,7 @@
   "method": "VAE(d_z=3, d_h=16)",
   "n_samples": 5000,
   "n_epochs": 50,
-  "recon_p95": 2.1349,
-  "recon_p99": 7.4886,
+  "recon_p95": 2.0168,
+  "recon_p99": 8.1747,
   "n_params": 347
 }
