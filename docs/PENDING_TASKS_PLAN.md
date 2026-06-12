@@ -131,7 +131,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Bulk INSERT into knowledge_base with tags + category |
 | **INTERVENTION** | PII scan before insert (F4 task) |
 | **REVIEW** | TF-IDF search returns ≥1 result per query · dim 7 (logging) climbs |
-| **STATUS** | ⏳ pending · owner: human (dump docs) + sys_kb_seeder |
+| **STATUS** | ✅ done · 2026-06-12 14:57:47 MDT · auto-closed by fix_all_pending_loop · evidence: knowledge_base count=83 |
 
 ## B4 · MCP servers in blueprints don't actually exist
 
