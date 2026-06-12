@@ -67,6 +67,8 @@ import './styles/process.css';
 import './styles/forms.css';
 import './styles/insurance.css';
 
+import ItsmPage from './pages/ItsmPage';
+
 function PageLoader({ label }) {
   return (
     <div
@@ -211,6 +213,7 @@ export default function App() {
           <Route path="prompts" element={<BankPromptsPage />} />
           <Route path="framework" element={<BankFrameworkPage />} />
         </Route>
+        <Route path="/itsm" element={<ItsmPage />} />
       </Routes>
     </BrowserRouter>
   );
