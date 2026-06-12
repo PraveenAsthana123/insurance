@@ -656,6 +656,232 @@ def pattern_enforce_roster():
 # ═══════════════════════════════════════════════════════════════
 # §122 SCORE-CARD
 # ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
+# PERSISTED-TABLE ENDPOINTS · ALL 40 GAPS NOW WIRED
+# ═══════════════════════════════════════════════════════════════
+def _table_rows(table: str, limit: int = 50) -> list[dict]:
+    conn = db()
+    c = conn.cursor()
+    c.execute(f"""SELECT column_name FROM information_schema.columns
+                  WHERE table_name=%s ORDER BY ordinal_position""", (table,))
+    cols = [r[0] for r in c.fetchall()]
+    if not cols:
+        conn.close()
+        return []
+    c.execute(f"SELECT * FROM {table} ORDER BY created_at DESC LIMIT %s", (limit,))
+    items = [dict(zip(cols, [str(v) if v is not None else None for v in r])) for r in c.fetchall()]
+    conn.close()
+    return items
+
+
+# L12 · Evaluation
+@router.get("/eval/benchmarks")
+def eval_benchmarks(limit: int = 50):
+    return {**stamp(), "items": _table_rows("benchmark_registry", limit)}
+
+
+@router.get("/eval/golden-datasets")
+def eval_golden(limit: int = 50):
+    return {**stamp(), "items": _table_rows("golden_dataset", limit)}
+
+
+@router.get("/eval/experiments")
+def eval_experiments(limit: int = 50):
+    return {**stamp(), "items": _table_rows("experiment_run", limit)}
+
+
+@router.get("/eval/rag")
+def eval_rag(limit: int = 50):
+    return {**stamp(), "items": _table_rows("rag_evaluation_v2", limit)}
+
+
+# L13 · Learning
+@router.get("/learning/prompt-versions")
+def learning_prompt_versions(limit: int = 50):
+    return {**stamp(), "items": _table_rows("prompt_version", limit)}
+
+
+@router.get("/learning/agent-versions")
+def learning_agent_versions(limit: int = 50):
+    return {**stamp(), "items": _table_rows("agent_version", limit)}
+
+
+@router.get("/learning/workflow-learning")
+def learning_workflow(limit: int = 50):
+    return {**stamp(), "items": _table_rows("workflow_learning", limit)}
+
+
+@router.get("/learning/feedback")
+def learning_feedback(limit: int = 50):
+    return {**stamp(), "items": _table_rows("feedback_learning", limit)}
+
+
+@router.get("/learning/fine-tune-jobs")
+def learning_fine_tune(limit: int = 50):
+    return {**stamp(), "items": _table_rows("fine_tune_job", limit)}
+
+
+# L14 · Execution
+@router.get("/execution/plans")
+def execution_plans(limit: int = 50):
+    return {**stamp(), "items": _table_rows("execution_plan", limit)}
+
+
+@router.get("/execution/nodes/{plan_id}")
+def execution_nodes(plan_id: str):
+    conn = db()
+    c = conn.cursor()
+    c.execute("SELECT * FROM execution_node WHERE execution_plan_id::text=%s", (plan_id,))
+    cols = [d[0] for d in c.description]
+    items = [dict(zip(cols, [str(v) if v is not None else None for v in r])) for r in c.fetchall()]
+    conn.close()
+    return {**stamp(), "n": len(items), "items": items}
+
+
+@router.get("/execution/validations")
+def execution_validations(limit: int = 50):
+    return {**stamp(), "items": _table_rows("validation_result", limit)}
+
+
+@router.get("/execution/rollbacks")
+def execution_rollbacks(limit: int = 50):
+    return {**stamp(), "items": _table_rows("rollback_execution", limit)}
+
+
+@router.get("/execution/self-healing")
+def execution_self_healing(limit: int = 50):
+    return {**stamp(), "items": _table_rows("self_healing_rule", limit)}
+
+
+# L15 · Control Tower (extended)
+@router.get("/ct/prompts")
+def ct_prompts(limit: int = 50):
+    return {**stamp(), "items": _table_rows("prompt_inventory", limit)}
+
+
+@router.get("/ct/workflows")
+def ct_workflows(limit: int = 50):
+    return {**stamp(), "items": _table_rows("workflow_inventory", limit)}
+
+
+@router.get("/ct/risks")
+def ct_risks(limit: int = 50):
+    return {**stamp(), "items": _table_rows("ai_risk", limit)}
+
+
+@router.get("/ct/costs")
+def ct_costs(limit: int = 50):
+    return {**stamp(), "items": _table_rows("ai_cost", limit)}
+
+
+@router.get("/ct/compliance")
+def ct_compliance(limit: int = 50):
+    return {**stamp(), "items": _table_rows("compliance_control", limit)}
+
+
+# L16 · AI OS (extended)
+@router.get("/os/capabilities")
+def os_capabilities(limit: int = 50):
+    return {**stamp(), "items": _table_rows("capability", limit)}
+
+
+@router.get("/os/workspaces")
+def os_workspaces(limit: int = 50):
+    return {**stamp(), "items": _table_rows("workspace", limit)}
+
+
+@router.get("/os/digital-workers")
+def os_workers(limit: int = 100):
+    return {**stamp(), "items": _table_rows("digital_worker", limit)}
+
+
+@router.get("/os/digital-teams")
+def os_teams(limit: int = 50):
+    return {**stamp(), "items": _table_rows("digital_team", limit)}
+
+
+@router.get("/os/marketplace/agents")
+def os_marketplace_agents(limit: int = 50):
+    return {**stamp(), "items": _table_rows("agent_marketplace", limit)}
+
+
+@router.get("/os/marketplace/prompts")
+def os_marketplace_prompts(limit: int = 50):
+    return {**stamp(), "items": _table_rows("prompt_marketplace", limit)}
+
+
+# L17 · Data Fabric (extended)
+@router.get("/fabric/domains")
+def fabric_domains(limit: int = 50):
+    return {**stamp(), "items": _table_rows("data_domain", limit)}
+
+
+@router.get("/fabric/products")
+def fabric_products(limit: int = 50):
+    return {**stamp(), "items": _table_rows("data_product", limit)}
+
+
+@router.get("/fabric/catalog")
+def fabric_catalog(limit: int = 50):
+    return {**stamp(), "items": _table_rows("data_catalog", limit)}
+
+
+@router.get("/fabric/lineage")
+def fabric_lineage(limit: int = 50):
+    return {**stamp(), "items": _table_rows("data_lineage", limit)}
+
+
+@router.get("/fabric/features")
+def fabric_features(limit: int = 50):
+    return {**stamp(), "items": _table_rows("feature_registry", limit)}
+
+
+@router.get("/fabric/vector-assets")
+def fabric_vectors(limit: int = 50):
+    return {**stamp(), "items": _table_rows("vector_asset", limit)}
+
+
+@router.get("/fabric/decisions")
+def fabric_decisions(limit: int = 50):
+    return {**stamp(), "items": _table_rows("decision_asset", limit)}
+
+
+# L18 · Process Mining (extended · persisted)
+@router.get("/pm/discoveries")
+def pm_discoveries(limit: int = 50):
+    return {**stamp(), "items": _table_rows("process_discovery", limit)}
+
+
+@router.get("/pm/bottlenecks")
+def pm_bottlenecks(limit: int = 50):
+    return {**stamp(), "items": _table_rows("bottleneck_analysis", limit)}
+
+
+@router.get("/pm/candidates")
+def pm_candidates(limit: int = 50):
+    return {**stamp(), "items": _table_rows("automation_candidate", limit)}
+
+
+@router.get("/pm/scores")
+def pm_scores(limit: int = 50):
+    return {**stamp(), "items": _table_rows("autonomy_score", limit)}
+
+
+@router.get("/pm/tasks")
+def pm_tasks(limit: int = 50):
+    return {**stamp(), "items": _table_rows("task_catalog", limit)}
+
+
+@router.get("/pm/workforce")
+def pm_workforce(limit: int = 50):
+    return {**stamp(), "items": _table_rows("workforce_analysis", limit)}
+
+
+@router.get("/pm/autonomous-departments")
+def pm_auto_depts(limit: int = 50):
+    return {**stamp(), "items": _table_rows("autonomous_department", limit)}
+
+
 @router.get("/score-card")
 def score_card():
     conn = db()

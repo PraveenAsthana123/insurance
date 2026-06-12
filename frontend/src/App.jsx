@@ -68,6 +68,7 @@ import './styles/forms.css';
 import './styles/insurance.css';
 
 import ItsmPage from './pages/ItsmPage';
+import EaiOsPage from './pages/EaiOsPage';
 
 function PageLoader({ label }) {
   return (
@@ -214,6 +215,7 @@ export default function App() {
           <Route path="framework" element={<BankFrameworkPage />} />
         </Route>
         <Route path="/itsm" element={<ItsmPage />} />
+        <Route path="/eai-os" element={<EaiOsPage />} />
       </Routes>
     </BrowserRouter>
   );
