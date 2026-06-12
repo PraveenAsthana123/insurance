@@ -763,11 +763,47 @@ function renderAnalyticsSubTab(subId) {
   }
 }
 
+// All 200 AI types from §131 catalog · same source as /ai-types page
+let AI_TYPES_CACHE = null;
+function useAllAiTypes() {
+  const [types, setTypes] = useState(AI_TYPES_CACHE || []);
+  useEffect(() => {
+    if (AI_TYPES_CACHE) return;
+    fetch('http://localhost:8001/api/v1/ai-taxonomy/types')
+      .then(r => r.json())
+      .then(d => { AI_TYPES_CACHE = d.types || []; setTypes(AI_TYPES_CACHE); })
+      .catch(() => {});
+  }, []);
+  return types;
+}
+
+// Capabilities view · injects all 200 AI types from §131 catalog
+function CapabilitiesView({ ai }) {
+  const allTypes = useAllAiTypes();
+  return (
+    <>
+      <DataSection title={`AI Type catalog · §131 (${allTypes.length} types from global catalog)`} color="#8b5cf6">
+        <ComponentGrid items={allTypes.length > 0 ? allTypes : [
+          'Loading from /api/v1/ai-taxonomy/types…',
+        ]} />
+      </DataSection>
+      <DataSection title={`Usage mapping (${ai.length} mapped to this process)`} color="#3b82f6">
+        <ComponentGrid items={ai.map((a) => a.ai_type)} />
+      </DataSection>
+      <DataSection title="Process mapping" color="#10b981">
+        <ComponentGrid items={['Per-process AI catalog', 'Coverage matrix', 'Hand-off contracts']} />
+      </DataSection>
+    </>
+  );
+}
+
 // ========== AI sub-tab renderer (5 sub-tabs) ==========
 function renderAISubTab(subId, proc) {
   const ai = proc.ai || [];
   switch (subId) {
     case 'capabilities':
+      return <CapabilitiesView ai={ai} />;
+    case 'old-capabilities':
       return (
         <>
           <DataSection title="AI Type catalog" color="#8b5cf6">
