@@ -1,0 +1,21 @@
+[Unit]
+Description=insur_project §150 multi-process supervisor daemon
+After=network.target
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+[Service]
+Type=simple
+WorkingDirectory=/mnt/deepa/insur_project
+ExecStart=/media/praveen/praveenlinux21/praveen/aman/cuda/venv/bin/python /mnt/deepa/insur_project/scripts/multi_supervisor.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/mnt/deepa/insur_project/jobs/logs/supervisor_systemd.log
+StandardError=append:/mnt/deepa/insur_project/jobs/logs/supervisor_systemd.log
+Environment="BEV_CORS_ORIGINS=http://localhost:3000,http://localhost:3210,http://127.0.0.1:3000,http://127.0.0.1:3210"
+Environment="INSUR_SKIP_MIGRATIONS=1"
+Environment="INSUR_DISABLE_PRESIDIO=1"
+Environment="TF_CPP_MIN_LOG_LEVEL=3"
+
+[Install]
+WantedBy=default.target
