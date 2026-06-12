@@ -69,6 +69,7 @@ import './styles/insurance.css';
 
 import ItsmPage from './pages/ItsmPage';
 import EaiOsPage from './pages/EaiOsPage';
+import PromptsPage from './pages/PromptsPage';
 
 function PageLoader({ label }) {
   return (
@@ -216,6 +217,8 @@ export default function App() {
         </Route>
         <Route path="/itsm" element={<ItsmPage />} />
         <Route path="/eai-os" element={<EaiOsPage />} />
+        <Route path="/prompts" element={<PromptsPage />} />
+        <Route path="/prompt-history" element={<PromptsPage />} />
       </Routes>
     </BrowserRouter>
   );

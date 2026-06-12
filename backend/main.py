@@ -252,6 +252,7 @@ def create_app() -> FastAPI:
     from n8n_rpa.router import router as n8n_rpa_router  # §142 · n8n + RPA + hybrid scenarios
     from itsm_grade.router import router as itsm_router  # §143 · ServiceNow-grade ITSM (incidents/playbook/specialist/security/workflow)
     from eai_os.router import router as eai_os_router  # §144 · Enterprise AI OS · Autonomous Incident Mgmt · 9-layer unified
+    from operator_prompts.router import router as op_router  # §145 · MANDATORY prompt+response tracking
     from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     from opa_adapter.router import router as opa_router
     from agentops_adapter.router import router as agops_router
@@ -412,6 +413,7 @@ def create_app() -> FastAPI:
     app.include_router(n8n_rpa_router)              # §142 · n8n + RPA + hybrid scenarios
     app.include_router(itsm_router)                  # §143 · ServiceNow-grade ITSM module
     app.include_router(eai_os_router)                # §144 · Enterprise AI OS · 9-layer + Pattern enforcement
+    app.include_router(op_router)                    # §145 · MANDATORY operator prompt + conversation tracking
     app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     app.include_router(opa_router)
     app.include_router(agops_router)
