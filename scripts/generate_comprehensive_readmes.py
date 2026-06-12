@@ -100,7 +100,7 @@ Caller (frontend/agent)
 **Endpoints**:
 - `POST /api/v1/ai-types/{slug}/predict` · body: features → prediction
 - `GET /api/v1/ai-types/{slug}/metrics` → live metrics.json
-- `GET /api/v1/ai-types/{slug}/explain/{prediction_id}` → SHAP
+- `GET /api/v1/ai-types/{slug}/explain/{{prediction_id}}` → SHAP
 
 **Functions**:
 - `load_model()` → joblib.load + cache
