@@ -586,24 +586,64 @@ function DataSection({ title, color, children }) {
   );
 }
 
+// Heuristic: action labels look like verbs · everything else is info
+const ACTION_VERBS = [
+  'create','generate','submit','run','train','queue','deploy','rollback','approve',
+  'reject','escalate','assign','dispatch','trigger','execute','validate','test',
+  'review','publish','export','import','sync','launch','start','stop','pause',
+  'send','notify','alert','call','invoke','update','delete','add','remove',
+  'fix','resolve','retrain','retry','reset','reload','refresh',
+];
+function classifyCard(label) {
+  const lower = String(label || '').toLowerCase();
+  const firstWord = lower.split(/\s+/)[0];
+  return ACTION_VERBS.includes(firstWord) ? 'action' : 'info';
+}
+
 function ComponentGrid({ items }) {
   return (
     <div style={{
-      display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: 8,
+      display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+      gap: 10,
     }}>
-      {items.map((label, i) => (
-        <div key={i} style={{
-          padding: '10px 12px', background: '#f8fafc',
-          border: '1px solid #e2e8f0', borderRadius: 6,
-          fontSize: 12, color: '#0f172a',
-        }}>
-          <strong>{label}</strong>
-          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 2, fontStyle: 'italic' }}>
-            Operator-pending data
+      {items.map((label, i) => {
+        const kind = classifyCard(label);
+        const isAction = kind === 'action';
+        return (
+          <div key={i} style={{
+            padding: '12px 14px',
+            background: isAction ? '#eff6ff' : '#f8fafc',
+            border: `1px solid ${isAction ? '#bfdbfe' : '#e2e8f0'}`,
+            borderLeft: `4px solid ${isAction ? '#3b82f6' : '#8b5cf6'}`,
+            borderRadius: 6,
+            fontSize: 13, color: '#0f172a',
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8,
+          }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{
+                  padding: '1px 6px', borderRadius: 3,
+                  background: isAction ? '#3b82f6' : '#8b5cf6',
+                  color: '#fff', fontSize: 9, fontWeight: 700,
+                  textTransform: 'uppercase', letterSpacing: 0.5,
+                }}>
+                  {isAction ? 'Action' : 'Info'}
+                </span>
+                <strong style={{ fontSize: 13 }}>{label}</strong>
+              </div>
+              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4, fontStyle: 'italic' }}>
+                {isAction ? 'Click to trigger' : 'Reference content'}
+              </div>
+            </div>
+            {isAction && (
+              <button style={{
+                padding: '4px 10px', fontSize: 11, cursor: 'pointer',
+                background: '#3b82f6', color: '#fff', border: 'none', borderRadius: 4,
+              }}>Run</button>
+            )}
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
