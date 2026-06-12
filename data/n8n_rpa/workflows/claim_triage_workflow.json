@@ -1,0 +1,159 @@
+{
+  "name": "§142 · H-01 · Claim photo triage end-to-end",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claim-photo",
+        "responseMode": "responseNode",
+        "responseHeaders": {"entries": [{"name": "Content-Type", "value": "application/json"}]}
+      },
+      "name": "Webhook: claim photo",
+      "type": "n8n-nodes-base.webhook",
+      "position": [240, 300],
+      "id": "node-1"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8001/api/v1/cv/segmentation",
+        "method": "POST",
+        "bodyParameters": {"parameters": [{"name": "image_url", "value": "={{$json.image_url}}"}]}
+      },
+      "name": "CV: U-Net damage segmentation",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [440, 300],
+      "id": "node-2"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8001/api/v1/cv/detection",
+        "method": "POST",
+        "bodyParameters": {"parameters": [{"name": "image_url", "value": "={{$json.image_url}}"}]}
+      },
+      "name": "CV: YOLO part detection",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [440, 460],
+      "id": "node-3"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8001/api/v1/ml/severity-score",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {"name": "damage_area_pct", "value": "={{$node['CV: U-Net damage segmentation'].json.area_pct}}"},
+            {"name": "parts_damaged", "value": "={{$node['CV: YOLO part detection'].json.parts}}"}
+          ]
+        }
+      },
+      "name": "ML: severity scorer",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [640, 380],
+      "id": "node-4"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8001/api/v1/rag/query",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {"name": "query", "value": "payout policy for severity {{$json.severity}}"},
+            {"name": "top_k", "value": "5"}
+          ]
+        }
+      },
+      "name": "RAG: payout policy lookup",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [840, 380],
+      "id": "node-5"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8001/api/v1/odysseus/predict",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {"name": "status", "value": "Pending"},
+            {"name": "trigger_kind", "value": "webhook"},
+            {"name": "input_text", "value": "claim severity {{$json.severity}}"},
+            {"name": "skill", "value": "claim_triage"}
+          ]
+        }
+      },
+      "name": "Odysseus: agent route",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1040, 380],
+      "id": "node-6"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [{"value1": "={{$json.confidence}}", "operation": "smaller", "value2": "0.7"}]
+        }
+      },
+      "name": "IF: confidence < 0.7",
+      "type": "n8n-nodes-base.if",
+      "position": [1240, 380],
+      "id": "node-7"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO hitl_queue (claim_id, payload, created_at) VALUES ({{$json.claim_id}}, '{{$json | json}}', NOW())"
+      },
+      "name": "HITL: insert queue",
+      "type": "n8n-nodes-base.postgres",
+      "position": [1440, 260],
+      "id": "node-8"
+    },
+    {
+      "parameters": {
+        "channel": "#claims-auto",
+        "text": "Auto-route claim {{$json.claim_id}} → {{$node['Odysseus: agent route'].json.predicted_agent}} (conf {{$json.confidence}})"
+      },
+      "name": "Slack: notify",
+      "type": "n8n-nodes-base.slack",
+      "position": [1440, 500],
+      "id": "node-9"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO audit_log (request_id, event_type, payload, created_at) VALUES (gen_random_uuid(), 'claim.triaged', '{{$json | json}}'::jsonb, NOW())"
+      },
+      "name": "§38.3 audit row",
+      "type": "n8n-nodes-base.postgres",
+      "position": [1640, 380],
+      "id": "node-10"
+    },
+    {
+      "parameters": {
+        "responseBody": "={{$json | json}}",
+        "options": {"responseCode": 200}
+      },
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [1840, 380],
+      "id": "node-11"
+    }
+  ],
+  "connections": {
+    "node-1": {"main": [[{"node": "node-2", "type": "main", "index": 0}, {"node": "node-3", "type": "main", "index": 0}]]},
+    "node-2": {"main": [[{"node": "node-4", "type": "main", "index": 0}]]},
+    "node-3": {"main": [[{"node": "node-4", "type": "main", "index": 0}]]},
+    "node-4": {"main": [[{"node": "node-5", "type": "main", "index": 0}]]},
+    "node-5": {"main": [[{"node": "node-6", "type": "main", "index": 0}]]},
+    "node-6": {"main": [[{"node": "node-7", "type": "main", "index": 0}]]},
+    "node-7": {"main": [
+      [{"node": "node-8", "type": "main", "index": 0}],
+      [{"node": "node-9", "type": "main", "index": 0}]
+    ]},
+    "node-8": {"main": [[{"node": "node-10", "type": "main", "index": 0}]]},
+    "node-9": {"main": [[{"node": "node-10", "type": "main", "index": 0}]]},
+    "node-10": {"main": [[{"node": "node-11", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "active": false,
+  "version": 1,
+  "id": "claim-triage-h01"
+}

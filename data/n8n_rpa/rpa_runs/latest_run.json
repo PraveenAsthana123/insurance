@@ -1,0 +1,54 @@
+{
+  "started_at": "2026-06-11T20:14:04.417788",
+  "steps": [
+    {
+      "step": 1,
+      "name": "navigate /docs",
+      "url": "http://localhost:8001/docs",
+      "title": "Insur Analytics Dashboard API - Swagger UI",
+      "ts": "2026-06-11T20:14:09.107493"
+    },
+    {
+      "step": 2,
+      "name": "fetch OpenAPI",
+      "status": 200,
+      "n_paths": 846,
+      "title": "Insur Analytics Dashboard API",
+      "ts": "2026-06-11T20:14:11.001583"
+    },
+    {
+      "step": 3,
+      "name": "GET health",
+      "status": 200,
+      "body": {
+        "status": "healthy",
+        "service": "insur-analytics"
+      },
+      "ts": "2026-06-11T20:14:11.028676"
+    },
+    {
+      "step": 4,
+      "name": "POST text2sql/run",
+      "status": 200,
+      "generated_sql": "SELECT COUNT(invocation_id) FROM agent_invocation WHERE status = 'Success'",
+      "n_rows": 1,
+      "ts": "2026-06-11T20:14:13.724708"
+    },
+    {
+      "step": 5,
+      "name": "GET use-case-matrix score-card",
+      "status": 200,
+      "score": 0.8647,
+      "ts": "2026-06-11T20:14:13.752672"
+    },
+    {
+      "step": 6,
+      "name": "screenshot evidence",
+      "path": "data/n8n_rpa/rpa_runs/rpa_run_1781230453.png",
+      "ts": "2026-06-11T20:14:13.797348"
+    }
+  ],
+  "duration_ms": 9489.3,
+  "n_steps_ok": 6,
+  "spec": "\u00a7142 RPA demo"
+}
