@@ -73,6 +73,9 @@ import PromptsPage from './pages/PromptsPage';
 import PlatformExplorerPage from './pages/PlatformExplorerPage';
 import AiTypesPage from './pages/AiTypesPage';
 import ProcessesPage from './pages/ProcessesPage';
+import ChatGroupPage from './pages/ChatGroupPage';
+import ControlTowerPage from './pages/ControlTowerPage';
+import SpeechToTextPage from './pages/SpeechToTextPage';
 
 function PageLoader({ label }) {
   return (
@@ -230,6 +233,10 @@ export default function App() {
         <Route path="/types" element={<AiTypesPage />} />
         <Route path="/processes" element={<ProcessesPage />} />
         <Route path="/health/processes" element={<ProcessesPage />} />
+        <Route path="/chatgroup" element={<ChatGroupPage />} />
+        <Route path="/control-tower" element={<ControlTowerPage />} />
+        <Route path="/stt" element={<SpeechToTextPage />} />
+        <Route path="/speech-to-text" element={<SpeechToTextPage />} />
       </Routes>
     </BrowserRouter>
   );

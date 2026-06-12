@@ -1,6 +1,14 @@
 """/api/v1/video-intel/* · §128 · Iter 110 · Enterprise Video Intelligence Pipeline."""
 from __future__ import annotations
-from fastapi import APIRouter
+
+import base64
+import hashlib
+import os
+import uuid
+from typing import Any
+
+from fastapi import APIRouter, HTTPException, UploadFile, File
+from pydantic import BaseModel
 from _adapter_helpers import stamp
 
 router = APIRouter(prefix="/api/v1/video-intel", tags=["video-intel"])
@@ -379,3 +387,158 @@ def overview():
                                     "Qwen2.5-VL + BGE-M3 + Qdrant + Temporal + "
                                     "Langfuse + MinIO + OpenReplay"),
             "spec": "§128"}
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Stage-1 functional POST endpoints · operator 2026-06-12 'video-to-text + audio-to-text'
+# §57.7 honest scaffold: returns transcription with `scaffold: true` flag
+# when faster-whisper isn't installed. When the real model lands, the same
+# endpoint URL switches transparently from scaffold to real ASR.
+
+def _whisper_available() -> tuple[bool, str]:
+    try:
+        import faster_whisper  # noqa: F401
+        return True, "faster-whisper"
+    except Exception:
+        try:
+            import whisper  # noqa: F401
+            return True, "openai-whisper"
+        except Exception:
+            return False, "no-asr-installed"
+
+
+@router.post("/audio-to-text")
+async def audio_to_text_run(file: UploadFile = File(...)):
+    """§STT Stage-1 · POST audio file · returns transcript shape.
+
+    Honest scaffold: when no ASR library is installed (faster-whisper /
+    openai-whisper), returns a structured placeholder with `scaffold: true`
+    AND the same response shape a real transcript would have. UI can stay
+    stable; production wiring is a single pip-install away.
+    """
+    blob = await file.read()
+    audio_id = f"aud-{hashlib.sha1(blob).hexdigest()[:16]}"
+    available, backend = _whisper_available()
+
+    response: dict[str, Any] = {
+        **stamp(),
+        "audio_id": audio_id,
+        "filename": file.filename,
+        "size_bytes": len(blob),
+        "asr_backend": backend,
+        "scaffold": not available,
+        "language": "en",
+        "spec": "§128 STT POST · §57.7 honest stage-1",
+    }
+
+    if not available:
+        response["segments"] = [{
+            "start": 0.0, "end": float(len(blob)) / 16000 if len(blob) else 1.0,
+            "speaker": "unknown", "confidence": None,
+            "transcript": ("[STAGE-1 SCAFFOLD · install faster-whisper to enable "
+                           "real ASR: pip install faster-whisper]"),
+        }]
+        response["transcript"] = response["segments"][0]["transcript"]
+        return response
+
+    # Real ASR path · faster-whisper preferred
+    import tempfile
+    from pathlib import Path
+    tmp = Path(tempfile.gettempdir()) / f"{audio_id}{Path(file.filename or '.wav').suffix}"
+    tmp.write_bytes(blob)
+    try:
+        if backend == "faster-whisper":
+            from faster_whisper import WhisperModel
+            model = WhisperModel("small", device="cpu", compute_type="int8")
+            segments, info = model.transcribe(str(tmp), beam_size=5)
+            segs = []
+            for s in segments:
+                segs.append({
+                    "start": round(s.start, 2),
+                    "end": round(s.end, 2),
+                    "speaker": "speaker_0",
+                    "confidence": round(getattr(s, "avg_logprob", 0.0), 4),
+                    "transcript": s.text.strip(),
+                })
+            response["language"] = info.language
+            response["segments"] = segs
+            response["transcript"] = " ".join(s["transcript"] for s in segs)
+        else:
+            import whisper
+            model = whisper.load_model("base")
+            result = model.transcribe(str(tmp))
+            response["language"] = result.get("language", "en")
+            response["transcript"] = result.get("text", "")
+            response["segments"] = result.get("segments", [])
+    finally:
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
+
+    return response
+
+
+@router.post("/video-to-text")
+async def video_to_text_run(file: UploadFile = File(...)):
+    """§STT Stage-1 · POST video file · extract audio track → transcript.
+
+    Stage-1 implementation re-uses the audio-to-text path after a best-
+    effort audio extraction. Without ffmpeg available the endpoint still
+    returns a structured scaffold response per §57.7 honest.
+    """
+    blob = await file.read()
+    video_id = f"vid-{hashlib.sha1(blob).hexdigest()[:16]}"
+
+    import shutil
+    ffmpeg = shutil.which("ffmpeg")
+    if not ffmpeg:
+        return {
+            **stamp(),
+            "video_id": video_id,
+            "filename": file.filename,
+            "size_bytes": len(blob),
+            "scaffold": True,
+            "reason": "ffmpeg not on PATH · install to enable video→audio extraction",
+            "next_step": "POST /api/v1/video-intel/audio-to-text with extracted audio",
+            "spec": "§128 video-to-text POST · §57.7 honest stage-1",
+        }
+
+    # Extract audio via ffmpeg · pipe to audio-to-text
+    import tempfile, subprocess
+    from pathlib import Path
+    src = Path(tempfile.gettempdir()) / f"{video_id}{Path(file.filename or '.mp4').suffix}"
+    dst = Path(tempfile.gettempdir()) / f"{video_id}.wav"
+    src.write_bytes(blob)
+    try:
+        r = subprocess.run(
+            [ffmpeg, "-y", "-i", str(src), "-vn", "-ar", "16000", "-ac", "1",
+             "-f", "wav", str(dst)],
+            capture_output=True, timeout=120,
+        )
+        if r.returncode != 0:
+            raise HTTPException(
+                500,
+                {"detail": f"ffmpeg failed: {r.stderr.decode('utf-8', 'ignore')[:200]}",
+                 "error_code": "VIDEO_TO_TEXT_FFMPEG_FAILED"},
+            )
+        # Re-call audio path with the extracted file
+        wav_bytes = dst.read_bytes()
+
+        class _MockUpload:
+            filename = dst.name
+            def __init__(self, b: bytes) -> None:
+                self._b = b
+            async def read(self) -> bytes:
+                return self._b
+
+        result = await audio_to_text_run(_MockUpload(wav_bytes))  # type: ignore[arg-type]
+        result["video_id"] = video_id
+        result["video_filename"] = file.filename
+        return result
+    finally:
+        for p in (src, dst):
+            try:
+                p.unlink()
+            except OSError:
+                pass

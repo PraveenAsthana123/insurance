@@ -100,6 +100,9 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/platform',   icon: '🗺️', label: '§147 · Platform Explorer (all APIs)' },
           { to: '/ai-types',   icon: '🤖', label: '§148 · AI Types catalog (200)' },
           { to: '/processes',  icon: '🛡️', label: '§150 · Process Resilience (live)' },
+          { to: '/chatgroup',  icon: '💬', label: 'ChatGroup · human + agent rooms' },
+          { to: '/control-tower', icon: '🏗', label: '§144 · AI Control Tower (12 dashboards)' },
+          { to: '/stt',        icon: '🎙', label: 'Speech-to-Text · audio + video' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,

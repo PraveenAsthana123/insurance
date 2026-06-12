@@ -121,6 +121,27 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
     # agent_trace_event). Per PENDING_TASKS_PLAN B5 + §103.4.
     ("GET",  re.compile(r"^/api/v1/verification/gates$"),    _READ_ROLES),
     ("POST", re.compile(r"^/api/v1/verification/run$"),      {"manager", "tester"}),
+
+    # -------- ChatGroup: list + read public · post/create restricted --------
+    # Operator 2026-06-12 'did you add chatgroup'. Read-only listing visible
+    # to all roles; post/create/add-member require manager-or-above.
+    ("GET",  re.compile(r"^/api/v1/chatgroup/groups$"),                            _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/chatgroup/groups/[^/]+$"),                      _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/chatgroup/groups/[^/]+/messages$"),             _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/chatgroup/health$"),                            _READ_ROLES),
+    ("POST", re.compile(r"^/api/v1/chatgroup/groups$"),                            {"manager", "tester"}),
+    ("POST", re.compile(r"^/api/v1/chatgroup/groups/[^/]+/messages$"),             {"manager", "tester"}),
+    ("POST", re.compile(r"^/api/v1/chatgroup/groups/[^/]+/members$"),              {"manager", "tester"}),
+
+    # -------- AI Control Tower aggregator --------
+    # Operator 2026-06-12 'did you add AI control tower'. Read-only.
+    ("GET",  re.compile(r"^/api/v1/eai-os/control-tower$"),                        _READ_ROLES),
+
+    # -------- STT functional POST endpoints --------
+    # Operator 2026-06-12 'video-to-text + audio-to-text'. Restricted
+    # because POST consumes compute + writes temp files.
+    ("POST", re.compile(r"^/api/v1/video-intel/audio-to-text$"),                   {"manager", "tester"}),
+    ("POST", re.compile(r"^/api/v1/video-intel/video-to-text$"),                   {"manager", "tester"}),
 ]
 
 # Backwards-compatible alias — earlier commits referenced SALES_PERMS.
