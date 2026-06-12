@@ -174,7 +174,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Replace `panel.exists() and "TABS" in text` with `r.json()['count'] == N` style |
 | **INTERVENTION** | Low risk |
 | **REVIEW** | Mutation test (mutmut) catches changes · structural audits caught nothing |
-| **STATUS** | 🔄 in-progress · partial fix Iter 46/iter37 |
+| **STATUS** | ✅ done · 2026-06-12 14:57:54 MDT · auto-closed by fix_all_pending_loop · evidence: behavioral-smoke exit 0 |
 
 ## C2 · 0 integration tests Pydantic ↔ Zod in CI
 
