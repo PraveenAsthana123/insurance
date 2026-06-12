@@ -1,0 +1,9 @@
+{
+  "dept": "claims",
+  "technique": "nlp-general",
+  "primary_source": "claims_record",
+  "needs": "text",
+  "sample_query": "SELECT * FROM claims_record LIMIT 100",
+  "honest_caveat": "Real DB-backed data not yet wired per cell",
+  "spec": "\u00a7140"
+}

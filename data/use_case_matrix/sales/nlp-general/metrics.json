@@ -1,0 +1,10 @@
+{
+  "dept": "sales",
+  "technique": "nlp-general",
+  "impl_level": "scaffold",
+  "metric_name": "n/a \u00b7 scaffold",
+  "metric_value": null,
+  "honest_caveat": "Metrics are scaffold-zero until trained on real data",
+  "computed_at": "2026-06-11T19:29:07.477482",
+  "spec": "\u00a7140"
+}

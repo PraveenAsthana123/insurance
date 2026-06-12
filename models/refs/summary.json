@@ -1,0 +1,65 @@
+{
+  "computed_at": "2026-06-11T19:32:17.025625",
+  "n_techniques_attempted": 6,
+  "n_succeeded": 4,
+  "by_technique": {
+    "time-series": {
+      "ts_local": "2026-06-11T19:31:40.105429",
+      "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "time-series",
+      "method": "Ridge AR(7)",
+      "MAE": 27.2734,
+      "MAPE_pct": 15.61,
+      "n_hours_train": 18,
+      "n_hours_test": 5
+    },
+    "rnn-lstm": {
+      "ts_local": "2026-06-11T19:31:59.182031",
+      "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "rnn-lstm",
+      "method": "LSTM(2 layers, hidden=16)",
+      "MAE": 28.1612,
+      "n_epochs": 40,
+      "n_params": 3409
+    },
+    "vae": {
+      "ts_local": "2026-06-11T19:31:59.674594",
+      "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "vae",
+      "method": "VAE(d_z=3, d_h=16)",
+      "n_samples": 5000,
+      "n_epochs": 50,
+      "recon_p95": 2.1349,
+      "recon_p99": 7.4886,
+      "n_params": 347
+    },
+    "gan": {
+      "ts_local": "2026-06-11T19:32:00.178889",
+      "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
+      "synthetic": false,
+      "spec": "\u00a7140 reference impl",
+      "technique": "gan",
+      "method": "Vanilla GAN(2-feat)",
+      "n_samples_real": 3000,
+      "n_generated": 1000,
+      "n_epochs": 60,
+      "final_d_loss": 1.4125,
+      "final_g_loss": 0.7355
+    },
+    "transformer": {
+      "error": "Failed to import transformers.pipelines because of the following error (look up to see its traceback):\nDetected incompat",
+      "spec": "\u00a7140"
+    },
+    "reinforcement-learning": {
+      "error": "Detected incompatible Protobuf Gencode/Runtime versions when loading tensorflow/core/framework/attr_value.proto: gencode",
+      "spec": "\u00a7140"
+    }
+  },
+  "spec": "\u00a7140 reference impl training"
+}

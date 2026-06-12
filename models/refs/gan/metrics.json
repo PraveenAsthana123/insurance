@@ -1,0 +1,13 @@
+{
+  "ts_local": "2026-06-11T19:32:00.178889",
+  "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
+  "synthetic": false,
+  "spec": "\u00a7140 reference impl",
+  "technique": "gan",
+  "method": "Vanilla GAN(2-feat)",
+  "n_samples_real": 3000,
+  "n_generated": 1000,
+  "n_epochs": 60,
+  "final_d_loss": 1.4125,
+  "final_g_loss": 0.7355
+}

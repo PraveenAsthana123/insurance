@@ -1,0 +1,9 @@
+{
+  "dept": "customer-support",
+  "technique": "transformer",
+  "primary_source": "agent_invocation (where tag='cs')",
+  "needs": "text",
+  "sample_query": "SELECT * FROM agent_invocation LIMIT 100",
+  "honest_caveat": "Real DB-backed data not yet wired per cell",
+  "spec": "\u00a7140"
+}

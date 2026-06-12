@@ -1,0 +1,8 @@
+{
+  "dept": "fraud-investigation",
+  "technique": "transformer",
+  "impl_level": "spec_only",
+  "score": 0.2,
+  "last_run": "2026-06-11T19:29:07.664704",
+  "spec": "\u00a7140"
+}

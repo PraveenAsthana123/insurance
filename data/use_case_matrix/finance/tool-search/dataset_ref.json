@@ -1,0 +1,9 @@
+{
+  "dept": "finance",
+  "technique": "tool-search",
+  "primary_source": "voice_ai_customers (proxy until finance_record exists)",
+  "needs": "tool catalog",
+  "sample_query": "SELECT * FROM voice_ai_customers LIMIT 100",
+  "honest_caveat": "Real DB-backed data not yet wired per cell",
+  "spec": "\u00a7140"
+}

@@ -1,0 +1,9 @@
+{
+  "dept": "hr",
+  "technique": "time-series",
+  "primary_source": "stakeholder (proxy)",
+  "needs": "temporal",
+  "sample_query": "SELECT * FROM stakeholder LIMIT 100",
+  "honest_caveat": "Real DB-backed data not yet wired per cell",
+  "spec": "\u00a7140"
+}

@@ -1,0 +1,9 @@
+{
+  "dept": "engineering",
+  "technique": "rnn-lstm",
+  "primary_source": "deploy_manifest",
+  "needs": "sequences",
+  "sample_query": "SELECT * FROM deploy_manifest LIMIT 100",
+  "honest_caveat": "Real DB-backed data not yet wired per cell",
+  "spec": "\u00a7140"
+}

@@ -1,0 +1,9 @@
+{
+  "dept": "marketing",
+  "technique": "dl-pytorch",
+  "primary_source": "marketing_campaigns + marketing_kpis",
+  "needs": "tabular/imgs",
+  "sample_query": "SELECT * FROM marketing_campaigns LIMIT 100",
+  "honest_caveat": "Real DB-backed data not yet wired per cell",
+  "spec": "\u00a7140"
+}

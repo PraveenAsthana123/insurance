@@ -1,0 +1,11 @@
+{
+  "ts_local": "2026-06-11T19:31:59.182031",
+  "data_source": "REAL \u00b7 PostgreSQL agent_invocation OR toy env (RL only)",
+  "synthetic": false,
+  "spec": "\u00a7140 reference impl",
+  "technique": "rnn-lstm",
+  "method": "LSTM(2 layers, hidden=16)",
+  "MAE": 28.1612,
+  "n_epochs": 40,
+  "n_params": 3409
+}

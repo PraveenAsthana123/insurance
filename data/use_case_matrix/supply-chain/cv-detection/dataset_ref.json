@@ -1,0 +1,9 @@
+{
+  "dept": "supply-chain",
+  "technique": "cv-detection",
+  "primary_source": "(dept-specific table TBD)",
+  "needs": "images + bboxes",
+  "sample_query": "SELECT * FROM (dept-specific LIMIT 100",
+  "honest_caveat": "Real DB-backed data not yet wired per cell",
+  "spec": "\u00a7140"
+}
