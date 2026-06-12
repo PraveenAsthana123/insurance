@@ -72,6 +72,7 @@ import EaiOsPage from './pages/EaiOsPage';
 import PromptsPage from './pages/PromptsPage';
 import PlatformExplorerPage from './pages/PlatformExplorerPage';
 import AiTypesPage from './pages/AiTypesPage';
+import ProcessesPage from './pages/ProcessesPage';
 
 function PageLoader({ label }) {
   return (
@@ -227,6 +228,8 @@ export default function App() {
         <Route path="/ai-types" element={<AiTypesPage />} />
         <Route path="/ai-taxonomy" element={<AiTypesPage />} />
         <Route path="/types" element={<AiTypesPage />} />
+        <Route path="/processes" element={<ProcessesPage />} />
+        <Route path="/health/processes" element={<ProcessesPage />} />
       </Routes>
     </BrowserRouter>
   );

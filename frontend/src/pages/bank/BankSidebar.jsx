@@ -95,6 +95,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/prompts',    icon: '💬', label: '§145 · Conversation log' },
           { to: '/platform',   icon: '🗺️', label: '§147 · Platform Explorer (all APIs)' },
           { to: '/ai-types',   icon: '🤖', label: '§148 · AI Types catalog (200)' },
+          { to: '/processes',  icon: '🛡️', label: '§150 · Process Resilience (live)' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,
