@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from functools import lru_cache
 
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, HTTPException, Response, status
 
 from core.structured_logger import emit_event
 from schemas.ai_explain import ExplainRequest, ExplainResponse, FeedbackRequest

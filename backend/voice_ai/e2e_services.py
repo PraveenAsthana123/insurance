@@ -19,7 +19,7 @@ import json
 import logging
 import statistics
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 import psycopg2
 import psycopg2.extras

@@ -1,20 +1,14 @@
 """LLM Gateway extensions · Iter 91 · smart router + callbacks + guardrails + 50-PII catalog."""
 from __future__ import annotations
 
-import json
 import os
 import re
-import time
-import uuid
-from datetime import datetime, timezone
 
 import httpx
-import psycopg2
-import psycopg2.extras
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from _adapter_helpers import stamp, conn
+from _adapter_helpers import stamp
 
 router = APIRouter(prefix="/api/v1/llm-gateway", tags=["llm-gateway-extensions"])
 

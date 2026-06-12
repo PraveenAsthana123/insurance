@@ -1,7 +1,6 @@
 """/api/v1/notifications/* · Iter 32 · multi-channel dispatcher."""
 from __future__ import annotations
 
-import json
 import logging
 import os
 from datetime import datetime, timezone

@@ -10,11 +10,10 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Any
 
 import psycopg2
 import psycopg2.extras
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Request
 
 from core.config import get_settings
 

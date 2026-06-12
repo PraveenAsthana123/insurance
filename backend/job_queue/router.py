@@ -6,13 +6,11 @@ from __future__ import annotations
 
 import json
 import os
-import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/api/v1/job-queue", tags=["job-queue"])  # Iter 29 · avoid /jobs collision

@@ -3,8 +3,6 @@
 Tracks every operator request · install status · §-policies invoked · iter shipped.
 """
 from __future__ import annotations
-import json
-import re
 import subprocess
 import uuid
 from fastapi import APIRouter

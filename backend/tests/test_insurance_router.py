@@ -7,7 +7,6 @@ from fastapi.testclient import TestClient
 
 from main import app
 from routers import insurance as insurance_router
-from routers import insur as insur_router
 
 
 client = TestClient(app)

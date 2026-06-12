@@ -10,14 +10,13 @@ Per global §96 + §50 · LLM resolution Ollama → OpenAI → Anthropic → stu
 """
 from __future__ import annotations
 
-import json
 import logging
 import os
 import time
 from datetime import datetime, timezone
 
 import httpx
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)

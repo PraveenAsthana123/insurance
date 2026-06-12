@@ -13,8 +13,6 @@ fully wired. Real metrics arrive when the eval harness lands.
 from __future__ import annotations
 
 import logging
-import math
-import time
 import uuid
 from datetime import datetime, timezone
 from typing import Any, Optional

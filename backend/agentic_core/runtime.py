@@ -22,7 +22,7 @@ from typing import Any
 import psycopg2
 import psycopg2.extras
 
-from agentic_core.llm_client import plan as llm_plan, _compute_cost
+from agentic_core.llm_client import plan as llm_plan
 from core.config import get_settings
 
 logger = logging.getLogger(__name__)

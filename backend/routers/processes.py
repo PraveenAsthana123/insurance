@@ -2,11 +2,8 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends
 
-from core.dependencies import get_ml_service, get_process_service
-from schemas.common import PaginatedResponse
-from schemas.model import ModelSummary
+from core.dependencies import get_process_service
 from schemas.process import AIMappingResponse, DataFlowStepResponse, ProcessResponse
-from services.ml_service import MLService
 from services.process_service import ProcessService
 
 router = APIRouter(prefix="/api/v1/processes", tags=["processes"])

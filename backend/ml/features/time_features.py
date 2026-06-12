@@ -8,7 +8,6 @@ or chain them together before fitting a model.
 from __future__ import annotations
 
 import pandas as pd
-import numpy as np
 
 
 def add_time_features(df: pd.DataFrame, date_col: str = "date") -> pd.DataFrame:

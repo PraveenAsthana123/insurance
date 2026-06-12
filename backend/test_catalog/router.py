@@ -1,7 +1,6 @@
 """/api/v1/test-catalog/* · Iter 47 · pipelines + test agents + responsibility table."""
 from __future__ import annotations
 
-import subprocess
 from pathlib import Path
 
 import psycopg2
@@ -421,7 +420,7 @@ def top_1pct_report():
 
         # 3. Load testing · check jobs/reports/load-testing/*.md mtime
         from pathlib import Path
-        from datetime import datetime, timezone, timedelta
+        from datetime import datetime, timezone
         load_dir = Path(__file__).resolve().parent.parent.parent / "jobs/reports/load-testing"
         recent_load = list(load_dir.glob("*.md")) if load_dir.exists() else []
         if recent_load:

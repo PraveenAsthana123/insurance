@@ -10,7 +10,6 @@ external services are being called.
 from __future__ import annotations
 
 import time
-from typing import Any
 
 _INSTALLED = False
 

@@ -10,7 +10,7 @@ import logging
 import re
 import uuid
 from collections import Counter
-from datetime import datetime, time, timezone, timedelta
+from datetime import datetime, timezone, timedelta
 from typing import Any, Optional
 
 import psycopg2

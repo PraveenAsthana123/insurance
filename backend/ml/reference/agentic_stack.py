@@ -283,7 +283,7 @@ class PolicyEngine:
             # Denylist
             if any(p.search(t.target) for p in self.denylist_patterns):
                 t.policy_decision = "deny"
-                t.policy_reason = f"target matches denylist pattern"
+                t.policy_reason = "target matches denylist pattern"
                 continue
             # Scope check
             if t.scope_required not in self.granted_scopes:
@@ -582,7 +582,7 @@ class CouncilAdapter:
         # and poll. For drill-determinism, we return a synthetic interpretation.
         return {
             "draft": f"Author draft: interpret goal '{goal[:60]}' for {dept}",
-            "critique": f"Reviewer critique: scope is bounded; no PII flagged",
+            "critique": "Reviewer critique: scope is bounded; no PII flagged",
             "chair_decision": "approved",
             "council_run_id": f"council-{uuid.uuid4().hex[:8]}",
         }

@@ -1,7 +1,6 @@
 """Register non-agentic routers as System Agents · idempotent · cron-safe."""
 from __future__ import annotations
 
-import json
 from typing import Any
 
 import psycopg2

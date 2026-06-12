@@ -5,7 +5,6 @@ Each item maps to a real location in the codebase · live status: ✅/⚠️/❌
 """
 from __future__ import annotations
 
-import os
 import subprocess
 from pathlib import Path
 

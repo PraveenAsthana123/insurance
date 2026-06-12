@@ -13,7 +13,6 @@ from typing import Any
 from fastapi import APIRouter, HTTPException, Query, Response
 from fastapi.responses import PlainTextResponse
 
-from core.config import get_settings
 from repositories import catalogs_repo
 
 router = APIRouter(prefix="/api/v1/catalogs", tags=["catalogs"])

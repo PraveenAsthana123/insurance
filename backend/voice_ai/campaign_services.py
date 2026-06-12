@@ -5,7 +5,6 @@ Per §76 (RAI 5-pillar · privacy + consent MANDATORY) + §82.21 (DLP) + §38.3
 """
 from __future__ import annotations
 
-import json
 import logging
 import re
 import uuid

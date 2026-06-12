@@ -1,12 +1,10 @@
 """/api/v1/use-cases/* — Process Use Case · §94 (17-section structure)."""
 from __future__ import annotations
 
-import json
 import logging
-from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)

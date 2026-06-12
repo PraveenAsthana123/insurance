@@ -10,7 +10,6 @@ opt-in eval harness. These tests run without Ollama.
 """
 from __future__ import annotations
 
-from pathlib import Path
 
 import pytest
 from pydantic import ValidationError

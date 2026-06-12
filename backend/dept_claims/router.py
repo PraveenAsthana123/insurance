@@ -13,10 +13,7 @@
   10. Testing (12 tiers)
 """
 from __future__ import annotations
-import json
-from datetime import datetime, timezone
 
-import psycopg2.extras
 from fastapi import APIRouter
 
 from _adapter_helpers import stamp, conn

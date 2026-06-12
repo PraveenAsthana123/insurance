@@ -1,7 +1,6 @@
 """/api/v1/governance-registries/* · Iter 68 · 6 registries + DLQ + kill_switch + ABAC."""
 from __future__ import annotations
 
-import json
 from datetime import datetime, timezone
 
 import psycopg2

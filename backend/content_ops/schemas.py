@@ -1,7 +1,7 @@
 """Pydantic schemas for content ops (postings · master contacts · schedules)."""
 from __future__ import annotations
 
-from datetime import datetime, time
+from datetime import datetime
 from typing import Any, Optional
 
 from pydantic import BaseModel, EmailStr, Field

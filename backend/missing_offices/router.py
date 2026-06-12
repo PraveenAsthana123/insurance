@@ -6,7 +6,7 @@ import psycopg2.extras
 from fastapi import APIRouter
 
 from core.config import get_settings
-from missing_offices.offices import all_offices, get_office, categories, OFFICES
+from missing_offices.offices import all_offices, get_office, OFFICES
 
 # Compose with 22 domains
 from enterprise_ai_domains.domains import all_domains, get_domain

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 
 from core.dependencies import get_job_service
 from schemas.common import PaginatedResponse, SuccessResponse

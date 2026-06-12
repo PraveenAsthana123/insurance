@@ -14,7 +14,6 @@ import hmac
 import json
 import os
 import time
-from typing import Any
 
 DEFAULT_SECRET = os.environ.get("INSUR_AUDIT_CHAIN_SECRET", "dev-chain-secret")
 

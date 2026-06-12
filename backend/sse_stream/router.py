@@ -50,9 +50,9 @@ async def workflow_stream(run_id: str):
                         if row["status"] in ("Success", "Failed", "Cancelled", "Completed"):
                             break
                     else:
-                        yield f": keepalive\n\n"
+                        yield ": keepalive\n\n"
                 else:
-                    yield f": waiting\n\n"
+                    yield ": waiting\n\n"
             except Exception as e:
                 yield f"event: error\ndata: {json.dumps({'error': str(e)[:200]})}\n\n"
                 break

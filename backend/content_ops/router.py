@@ -16,7 +16,6 @@ from .schemas import (
     Posting,
     PostingCreate,
     PostingMonitoringSnapshot,
-    PostingRun,
     PostingUpdate,
     PublishRequest,
     PublishResponse,

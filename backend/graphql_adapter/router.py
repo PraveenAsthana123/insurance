@@ -5,10 +5,8 @@ adapter ships as Stage-1 — schema declared, resolvers wire to existing REST
 when activated, env-gated.
 """
 from __future__ import annotations
-import json
 import os
 from datetime import datetime
-from pathlib import Path
 
 from fastapi import APIRouter
 

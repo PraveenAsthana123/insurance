@@ -1,12 +1,10 @@
 """/api/v1/goal-loop/* · Iter 93 · goal/loop-driven agentic program."""
 from __future__ import annotations
 
-import json
 import os
 import re
 import time
 import uuid
-from datetime import datetime, timezone
 
 import httpx
 import psycopg2

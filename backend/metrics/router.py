@@ -31,8 +31,6 @@ def _collect_lines() -> list[str]:
 
     # HITL queue size (live from DB)
     try:
-        from hitl.router import get_queue
-        from fastapi import Request
         # Build a fake request to call function · skip · use stats path instead
         import psycopg2
         from core.config import get_settings

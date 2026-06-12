@@ -17,7 +17,6 @@ import logging
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Iterable
 
 import numpy as np
 import pandas as pd

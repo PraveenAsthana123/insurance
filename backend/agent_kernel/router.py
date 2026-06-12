@@ -10,8 +10,6 @@
 State transitions per §103.5 governance · audited via §107 stamp.
 """
 from __future__ import annotations
-import json
-import time
 import uuid
 from datetime import datetime, timezone, timedelta
 

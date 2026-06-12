@@ -3,11 +3,8 @@ from __future__ import annotations
 
 import os
 import re
-import time
 
 import httpx
-import psycopg2
-import psycopg2.extras
 from fastapi import APIRouter
 from pydantic import BaseModel
 

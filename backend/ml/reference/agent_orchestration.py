@@ -30,7 +30,7 @@ import uuid
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Iterable
+from typing import Any, Callable
 
 logger = logging.getLogger(__name__)
 

@@ -320,7 +320,10 @@ def run_structured_lifecycle(self, *, dataset, target, task_type, dept, pipeline
     """Run the full structured-ML lifecycle (EDA → eval → SHAP) and persist
     manifest + plots under data/eval/<dept>/<pipeline>/<run_id>/.
     """
+    from core.config import get_settings
     from ml.reference.full_lifecycle import FullLifecycle
+
+    settings = get_settings()
 
     logger.info(
         "insur.run_structured_lifecycle | dept=%s pipeline=%s dataset=%s",
@@ -406,6 +409,9 @@ def dispatch_test_fanout(self, *, tier: str, depts: list[str],
 
     import redis as _redis
 
+    from core.config import get_settings
+
+    settings = get_settings()
     redis_url = os.environ.get("REDIS_URL", settings.redis_url)
     try:
         r = _redis.from_url(redis_url, decode_responses=True, socket_connect_timeout=5)
@@ -500,8 +506,8 @@ def refresh_data_artifacts(self, *, depts: list[str], max_minutes: int = 30) -> 
         # Per-dept primary data file (best-effort scan)
         candidate_globs = [
             f"/data/{dept}/*.csv",
-            f"/data/customer-analytics/*.csv" if dept == "sales" else None,
-            f"/data/kaggle/rossmann/train.csv" if dept == "sales" else None,
+            "/data/customer-analytics/*.csv" if dept == "sales" else None,
+            "/data/kaggle/rossmann/train.csv" if dept == "sales" else None,
         ]
         primary = None
         for g in [c for c in candidate_globs if c]:

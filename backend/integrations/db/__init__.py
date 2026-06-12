@@ -64,7 +64,7 @@ def pg_dsn() -> str:
     """Build DSN from env. Falls back to docker-compose defaults."""
     return os.environ.get(
         "DATABASE_URL",
-        f"postgresql://insur:insur@localhost:5432/insur",
+        "postgresql://insur:insur@localhost:5432/insur",
     )
 
 

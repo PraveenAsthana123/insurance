@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import getpass
 import hashlib
-import json
 import os
 import platform
 import re
@@ -14,7 +13,7 @@ from datetime import datetime, timezone
 import httpx
 import psycopg2
 import psycopg2.extras
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel
 
 from core.config import get_settings

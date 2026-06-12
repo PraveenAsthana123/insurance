@@ -25,7 +25,6 @@ from __future__ import annotations
 import json
 import logging
 import uuid
-from collections import Counter
 from datetime import datetime, timezone
 from typing import Any, Optional
 

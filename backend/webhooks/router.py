@@ -96,7 +96,6 @@ _NONCE_TTL_S = 300
 
 
 def _evict_expired_nonces(hook_id: str) -> None:
-    import time
     nonces = _NONCE_CACHE.get(hook_id, {})
     now = time.time()
     stale = [n for n, exp in nonces.items() if exp < now]

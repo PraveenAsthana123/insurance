@@ -15,7 +15,6 @@ from typing import Any
 
 import mlflow
 import mlflow.sklearn
-import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, f1_score
@@ -23,7 +22,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from ml.features.text_features import add_text_features, clean_text
+from ml.features.text_features import clean_text
 
 logger = logging.getLogger(__name__)
 

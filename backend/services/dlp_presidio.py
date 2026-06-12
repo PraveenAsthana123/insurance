@@ -64,7 +64,7 @@ def _try_load_presidio():
     try:
         # Suppress tensorflow noise during the probe
         os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
-        from presidio_analyzer import AnalyzerEngine, Pattern, PatternRecognizer  # type: ignore
+        from presidio_analyzer import AnalyzerEngine  # type: ignore
         # Construct AnalyzerEngine · this is where tensorflow/transformers may fail
         _ANALYZER = AnalyzerEngine()
         _PRESIDIO_MODE = "presidio"

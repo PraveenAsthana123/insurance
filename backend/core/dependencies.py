@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 from contextlib import contextmanager
-from functools import lru_cache
 from typing import Generator
 
 import psycopg2

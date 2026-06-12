@@ -57,7 +57,6 @@ from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegress
 from sklearn.feature_selection import (
     SelectKBest,
     VarianceThreshold,
-    f_classif,
     mutual_info_classif,
     mutual_info_regression,
 )

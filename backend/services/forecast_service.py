@@ -10,7 +10,6 @@ import logging
 import time
 from dataclasses import dataclass
 from datetime import date as date_cls, timedelta
-from functools import lru_cache
 from typing import Iterable
 
 import pandas as pd

@@ -14,7 +14,6 @@ Read-only per §68.3 invariant.
 from __future__ import annotations
 
 import logging
-import re
 import subprocess
 import sys
 from pathlib import Path

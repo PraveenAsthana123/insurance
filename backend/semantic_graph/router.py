@@ -18,9 +18,7 @@ Tools surfaced (Stage-1 per §56):
   📌 Protégé     · desktop tool · not API-callable · linked for reference
 """
 from __future__ import annotations
-import json
 import os
-import uuid
 
 from fastapi import APIRouter
 from pydantic import BaseModel

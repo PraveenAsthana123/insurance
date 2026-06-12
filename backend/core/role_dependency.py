@@ -4,7 +4,6 @@ Convenience wrappers for FastAPI endpoints to declare role requirements.
 """
 from __future__ import annotations
 
-from typing import Iterable
 
 from fastapi import Depends, HTTPException, Request
 

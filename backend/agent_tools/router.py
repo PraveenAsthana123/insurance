@@ -1,9 +1,7 @@
 """/api/v1/agent-tools/* · §135 · Harness · Workspace · OpenRouter · Hook · Skill · Sub-agent."""
 from __future__ import annotations
 import os
-import subprocess
 from fastapi import APIRouter
-from pydantic import BaseModel
 from _adapter_helpers import stamp
 
 router = APIRouter(prefix="/api/v1/agent-tools", tags=["agent-tools"])

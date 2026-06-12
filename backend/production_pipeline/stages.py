@@ -9,10 +9,8 @@ LLM: Ollama-only (no OpenAI key required) per operator instruction.
 """
 from __future__ import annotations
 
-import os
 import time
 import uuid
-import json
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Callable
@@ -162,7 +160,8 @@ def s4_tool_picker(run: PipelineRun) -> dict:
 
 def s5_mcp_layer(run: PipelineRun) -> dict:
     # Real MCP call would be here; we return slack-mcp + (others) discovery
-    import psycopg2, psycopg2.extras
+    import psycopg2
+    import psycopg2.extras
     from core.config import get_settings
     with psycopg2.connect(get_settings().database_url) as c, \
          c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
@@ -196,7 +195,8 @@ def s9_rag_layer(run: PipelineRun) -> dict:
                 "scaffold": False, "confidence": 1.0}
     # Real RAG via Iter 43 TF-IDF search
     try:
-        import psycopg2, psycopg2.extras
+        import psycopg2
+        import psycopg2.extras
         from core.config import get_settings
         with psycopg2.connect(get_settings().database_url) as c, \
              c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
