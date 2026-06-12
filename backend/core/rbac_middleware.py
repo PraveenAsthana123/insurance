@@ -107,6 +107,13 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
     # PENDING_TASKS_PLAN A1 + §103.4 HITL gating.
     ("POST", re.compile(r"^/api/v1/agentic/invocations/[^/]+/decide$"),
      {"manager", "tester"}),
+
+    # -------- §D1 MCP server registry: read-only listing --------
+    # GET /agentic/mcp-servers + /agentic/mcp-servers/{mcp_id} per
+    # PENDING_TASKS_PLAN D1 review gate. Read-only · all roles incl.
+    # team-member can see the catalog (mutations remain CLI-only).
+    ("GET",  re.compile(r"^/api/v1/agentic/mcp-servers$"),         _READ_ROLES),
+    ("GET",  re.compile(r"^/api/v1/agentic/mcp-servers/[^/]+$"),   _READ_ROLES),
 ]
 
 # Backwards-compatible alias — earlier commits referenced SALES_PERMS.

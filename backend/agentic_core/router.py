@@ -663,3 +663,104 @@ def invocation_stats(tenant_id: str = "default"):
             "by_status": by_status,
             "top_agents": by_agent,
         }
+
+
+# ──────────────────────────────────────────────────────────────────────
+# §D1 · MCP server registry surface · operator brief PENDING_TASKS_PLAN D1.
+
+def _mcp_reachable(endpoint_url: str | None, timeout_s: float = 1.5) -> bool:
+    """Best-effort reachability probe for an MCP endpoint.
+
+    §57.7 honest: returns False when unreachable rather than fabricating
+    a green. Caller passes a small timeout because this is called on
+    every list request · we never block the response for a slow MCP.
+    """
+    if not endpoint_url:
+        return False
+    try:
+        from urllib.parse import urlparse
+        import socket
+        u = urlparse(endpoint_url)
+        host = u.hostname
+        port = u.port or (443 if u.scheme == "https" else 80)
+        if not host:
+            return False
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout_s)
+            return s.connect_ex((host, port)) == 0
+    except (OSError, ValueError):
+        return False
+
+
+@router.get("/mcp-servers")
+def list_mcp_servers(
+    status: str | None = None,
+    risk_level: str | None = None,
+    tenant_id: str = "default",
+    include_reachability: bool = True,
+):
+    """§D1 · list registered MCP servers with optional live reachability check.
+
+    Per PENDING_TASKS_PLAN D1 review gate: returns ≥1 row · slack_mcp
+    visible. Composes with §147 Platform Explorer (operators can see
+    every registered MCP) + §52 brutal tool review (per-MCP reachable
+    flag is honest scaffold per §57.7).
+    """
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        sql = """
+            SELECT mcp_id, server_name, endpoint_url, auth_type,
+                   sla_uptime_pct, version, risk_level, status,
+                   owner_team, timeout_seconds, approved_by, approved_at,
+                   tenant_id, created_at, updated_at
+            FROM mcp_server_registry
+            WHERE tenant_id = %s
+        """
+        params: list[Any] = [tenant_id]
+        if status:
+            sql += " AND status = %s"
+            params.append(status)
+        if risk_level:
+            sql += " AND risk_level = %s"
+            params.append(risk_level)
+        sql += " ORDER BY mcp_id"
+        cur.execute(sql, params)
+        rows = [dict(r) for r in cur.fetchall()]
+
+    if include_reachability:
+        for row in rows:
+            row["reachable"] = _mcp_reachable(row.get("endpoint_url"))
+            row["reachability_check_at"] = "live"
+
+    return {
+        "mcp_servers": rows,
+        "count": len(rows),
+        "filters": {"status": status, "risk_level": risk_level, "tenant_id": tenant_id},
+        "policy_ref": "§D1 PENDING_TASKS · §147 Platform Explorer composer",
+    }
+
+
+@router.get("/mcp-servers/{mcp_id}")
+def get_mcp_server(mcp_id: str, tenant_id: str = "default"):
+    """§D1 · single MCP server detail · with reachability probe."""
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute(
+            """
+            SELECT mcp_id, server_name, endpoint_url, auth_type,
+                   sla_uptime_pct, version, risk_level, status,
+                   owner_team, timeout_seconds, approved_by, approved_at,
+                   tenant_id, created_at, updated_at
+            FROM mcp_server_registry
+            WHERE mcp_id = %s AND tenant_id = %s
+            """,
+            (mcp_id, tenant_id),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise HTTPException(
+                404,
+                {"detail": f"mcp_server not found: {mcp_id}",
+                 "error_code": "MCP_SERVER_404"},
+            )
+        result = dict(row)
+        result["reachable"] = _mcp_reachable(result.get("endpoint_url"))
+        return result

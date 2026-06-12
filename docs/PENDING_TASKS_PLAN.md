@@ -206,7 +206,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Migration 069 · CREATE TABLE mcp_server_registry · seed Slack from Iter 49 |
 | **INTERVENTION** | Migration · careful with FK to existing agents |
 | **REVIEW** | /api/v1/agentic/mcp-servers returns ≥1 row · slack_mcp visible |
-| **STATUS** | 🔄 partial · Slack already in tool_registry (Iter 49) |
+| **STATUS** | ✅ done · 2026-06-12 · table existed since 100_eai_os_full.sql · seeded 4 MCPs (slack/github/jira/snowflake) · added GET /api/v1/agentic/mcp-servers + /{mcp_id} endpoints with live reachability probe + risk/status filters · 6/6 drill scenarios pass · PERMS_MATRIX entry for _READ_ROLES |
 
 (D2-D4 similar)
 
