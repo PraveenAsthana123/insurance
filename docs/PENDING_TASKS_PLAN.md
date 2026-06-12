@@ -157,7 +157,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Extend runtime.invoke() to run gates pre-response · emit trace event per gate |
 | **INTERVENTION** | If any gate fails · status=PendingApproval · escalate to HITL |
 | **REVIEW** | Per invocation · 9 trace events with verdicts visible in /trace endpoint |
-| **STATUS** | ⏳ pending · owner: sys_verification_engine |
+| **STATUS** | ✅ done · 2026-06-12 14:57:48 MDT · auto-closed by fix_all_pending_loop · evidence: verification gates n=9 |
 
 ---
 
