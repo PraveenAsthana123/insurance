@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter59.py
-# auto-generated explainer · 2026-06-11T10:00:21Z
+# auto-generated explainer · 2026-06-12T10:00:23Z
 
 ## Purpose
 Iter 59 · 7 status aggregator agents · UI + terminal + global policy.

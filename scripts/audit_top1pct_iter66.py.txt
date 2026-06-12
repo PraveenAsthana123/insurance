@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter66.py
-# auto-generated explainer · 2026-06-11T10:00:20Z
+# auto-generated explainer · 2026-06-12T10:00:22Z
 
 ## Purpose
 Iter 66 · §102 push 3 · SSE + audit + StatusBanner + Vitest.

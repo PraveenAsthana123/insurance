@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/llm_gateway/router.py
-# auto-generated explainer · 2026-06-11T10:01:42Z
+# auto-generated explainer · 2026-06-12T10:01:53Z
 
 ## Purpose
 /api/v1/llm-gateway/* · Iter 87 · LLM Gateway with 6 capabilities.
@@ -9,13 +9,13 @@
 - from `__future__` import annotations
 - from `_` import getpass
 - from `_` import hashlib
-- from `_` import json
 - from `_` import os
 - from `_` import platform
 - from `_` import re
 - from `_` import time
 - from `_` import uuid
 - from `datetime` import datetime, timezone
+- from `_` import httpx
 
 ## Inputs
 - Env vars: OLLAMA_HOST

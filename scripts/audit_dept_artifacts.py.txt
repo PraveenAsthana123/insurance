@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_dept_artifacts.py
-# auto-generated explainer · 2026-06-11T10:00:13Z
+# auto-generated explainer · 2026-06-12T10:00:13Z
 
 ## Purpose
 §64.29 audit · verify every dept has all mandatory business-layer/HOLY_*.md files.

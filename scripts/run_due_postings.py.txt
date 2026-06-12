@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/run_due_postings.py
-# auto-generated explainer · 2026-06-11T10:00:34Z
+# auto-generated explainer · 2026-06-12T10:00:27Z
 
 ## Purpose
 Content posting scheduler · publishes draft postings whose scheduled_for is due.

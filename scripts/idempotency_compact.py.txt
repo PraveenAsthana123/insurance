@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/idempotency_compact.py
-# auto-generated explainer · 2026-06-11T10:00:24Z
+# auto-generated explainer · 2026-06-12T10:00:25Z
 
 ## Purpose
 Compact the §10.3 CUA idempotency JSONL by removing expired entries.

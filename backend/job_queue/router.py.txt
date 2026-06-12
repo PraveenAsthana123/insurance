@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/job_queue/router.py
-# auto-generated explainer · 2026-06-11T10:01:40Z
+# auto-generated explainer · 2026-06-12T10:01:50Z
 
 ## Purpose
 /api/v1/jobs/* · Iter 29 · C10 · persistent job queue.
@@ -11,12 +11,10 @@ Redis-backed when REDIS_URL set · JSONL file fallback per §57.7.
 - from `__future__` import annotations
 - from `_` import json
 - from `_` import os
-- from `_` import time
 - from `_` import uuid
 - from `datetime` import datetime, timezone
 - from `pathlib` import Path
-- from `typing` import Any
-- from `fastapi` import APIRouter, HTTPException
+- from `fastapi` import APIRouter
 - from `pydantic` import BaseModel
 
 ## Inputs

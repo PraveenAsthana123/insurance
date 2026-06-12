@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/_adapter_helpers.py
-# auto-generated explainer · 2026-06-11T10:00:06Z
+# auto-generated explainer · 2026-06-12T10:00:09Z
 
 ## Purpose
 Shared helpers · Iter 89 · Stage-1 adapter common code.

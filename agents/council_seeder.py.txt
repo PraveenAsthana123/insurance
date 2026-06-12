@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # agents/council_seeder.py
-# auto-generated explainer · 2026-06-11T10:00:03Z
+# auto-generated explainer · 2026-06-12T10:00:02Z
 
 ## Purpose
 INSUR Beverage — council task seeder.

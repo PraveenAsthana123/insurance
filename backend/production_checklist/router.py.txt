@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/production_checklist/router.py
-# auto-generated explainer · 2026-06-11T10:01:44Z
+# auto-generated explainer · 2026-06-12T10:01:56Z
 
 ## Purpose
 /api/v1/production-checklist/* · Iter 60.
@@ -10,7 +10,6 @@ Each item maps to a real location in the codebase · live status: ✅/⚠️/❌
 
 ## Imports
 - from `__future__` import annotations
-- from `_` import os
 - from `_` import subprocess
 - from `pathlib` import Path
 - from `_` import psycopg2

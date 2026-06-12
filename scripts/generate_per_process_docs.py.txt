@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/generate_per_process_docs.py
-# auto-generated explainer · 2026-06-11T10:00:18Z
+# auto-generated explainer · 2026-06-12T10:00:20Z
 
 ## Purpose
 generate_per_process_docs.py — drop a per-process doc stub for every process in the blueprint.

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/agent_monitor.py
-# auto-generated explainer · 2026-06-11T10:00:14Z
+# auto-generated explainer · 2026-06-12T10:00:15Z
 
 ## Purpose
 Monitor the INSUR agent queues and live worker heartbeats.

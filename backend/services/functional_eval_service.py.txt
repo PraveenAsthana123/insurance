@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/functional_eval_service.py
-# auto-generated explainer · 2026-06-11T10:01:43Z
+# auto-generated explainer · 2026-06-12T10:01:55Z
 
 ## Purpose
 §68.8 Functional eval — "does the model still work?"
@@ -36,7 +36,6 @@ functional eval surface IS the per-pipeline scorecard) + §68
 - from `_` import os
 - from `_` import re
 - from `_` import time
-- from `collections` import defaultdict
 - from `pathlib` import Path
 - from `typing` import Any
 

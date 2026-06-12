@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/webllm_cdp_rag_langgraph/router.py
-# auto-generated explainer · 2026-06-11T10:01:43Z
+# auto-generated explainer · 2026-06-12T10:01:55Z
 
 ## Purpose
 /api/v1/webllm-agent · WebLLM + CDP + RAG + LangGraph integration.
@@ -9,7 +9,6 @@
 - from `__future__` import annotations
 - from `_` import logging
 - from `_` import uuid
-- from `typing` import Optional
 - from `fastapi` import APIRouter, WebSocket, Request, HTTPException
 - from `cdp_manager` import CDPManager
 - from `rag_service` import RAGService

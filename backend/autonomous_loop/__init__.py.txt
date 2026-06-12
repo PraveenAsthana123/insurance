@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/autonomous_loop/__init__.py
-# auto-generated explainer · 2026-06-11T10:01:43Z
+# auto-generated explainer · 2026-06-12T10:01:55Z
 
 ## Purpose
 Autonomous Loop · Iter 77 · §103 Phase 8 (8 self-* capabilities composed).

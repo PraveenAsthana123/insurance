@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter46.py
-# auto-generated explainer · 2026-06-11T10:00:39Z
+# auto-generated explainer · 2026-06-12T10:00:27Z
 
 ## Purpose
 Iter 46 · AgenticHubPage + catalogs.

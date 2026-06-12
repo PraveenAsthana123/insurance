@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/which_working.py
-# auto-generated explainer · 2026-06-11T10:00:16Z
+# auto-generated explainer · 2026-06-12T10:00:17Z
 
 ## Purpose
 ./scripts/insur which-working · terminal view of live per-agent activity.

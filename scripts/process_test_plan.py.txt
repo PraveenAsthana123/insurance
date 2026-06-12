@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/process_test_plan.py
-# auto-generated explainer · 2026-06-11T10:00:51Z
+# auto-generated explainer · 2026-06-12T10:00:44Z
 
 ## Purpose
 Process test plan operator.

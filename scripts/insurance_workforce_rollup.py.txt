@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/insurance_workforce_rollup.py
-# auto-generated explainer · 2026-06-11T10:00:14Z
+# auto-generated explainer · 2026-06-12T10:00:14Z
 
 ## Purpose
 Roll the insurance alignment audit + state files into work_tracker.

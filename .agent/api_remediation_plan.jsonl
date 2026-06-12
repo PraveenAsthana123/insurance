@@ -42,12 +42,6 @@
 {"task_id": "API-FIX-jobs-error_handle", "role": "backend", "target": "backend/routers/jobs.py", "issues": ["production-grade gap: error_handle"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-jobs-observe", "role": "backend", "target": "backend/routers/jobs.py", "issues": ["production-grade gap: observe"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-jobs-tests", "role": "backend", "target": "backend/routers/jobs.py", "issues": ["production-grade gap: tests"], "priority": "P2", "risk": "low"}
-{"task_id": "API-FIX-models-auth", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
-{"task_id": "API-FIX-models-rate_limit", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
-{"task_id": "API-FIX-models-audit", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: audit"], "priority": "P2", "risk": "low"}
-{"task_id": "API-FIX-models-error_handle", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: error_handle"], "priority": "P2", "risk": "low"}
-{"task_id": "API-FIX-models-observe", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: observe"], "priority": "P2", "risk": "low"}
-{"task_id": "API-FIX-models-tests", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: tests"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-observability_hub-auth", "role": "backend", "target": "backend/routers/observability_hub.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-observability_hub-rate_limit", "role": "backend", "target": "backend/routers/observability_hub.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-observability_hub-pydantic", "role": "backend", "target": "backend/routers/observability_hub.py", "issues": ["production-grade gap: pydantic"], "priority": "P2", "risk": "low"}
@@ -128,6 +122,11 @@
 {"task_id": "API-FIX-master_data-pydantic", "role": "backend", "target": "backend/routers/master_data.py", "issues": ["production-grade gap: pydantic"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-master_data-error_handle", "role": "backend", "target": "backend/routers/master_data.py", "issues": ["production-grade gap: error_handle"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-master_data-observe", "role": "backend", "target": "backend/routers/master_data.py", "issues": ["production-grade gap: observe"], "priority": "P2", "risk": "low"}
+{"task_id": "API-FIX-models-auth", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
+{"task_id": "API-FIX-models-rate_limit", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
+{"task_id": "API-FIX-models-audit", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: audit"], "priority": "P2", "risk": "low"}
+{"task_id": "API-FIX-models-error_handle", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: error_handle"], "priority": "P2", "risk": "low"}
+{"task_id": "API-FIX-models-observe", "role": "backend", "target": "backend/routers/models.py", "issues": ["production-grade gap: observe"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-openclaw-auth", "role": "backend", "target": "backend/routers/openclaw.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-openclaw-rate_limit", "role": "backend", "target": "backend/routers/openclaw.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-openclaw-error_handle", "role": "backend", "target": "backend/routers/openclaw.py", "issues": ["production-grade gap: error_handle"], "priority": "P2", "risk": "low"}
@@ -143,11 +142,6 @@
 {"task_id": "API-FIX-security-pydantic", "role": "backend", "target": "backend/routers/security.py", "issues": ["production-grade gap: pydantic"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-security-error_handle", "role": "backend", "target": "backend/routers/security.py", "issues": ["production-grade gap: error_handle"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-security-observe", "role": "backend", "target": "backend/routers/security.py", "issues": ["production-grade gap: observe"], "priority": "P2", "risk": "low"}
-{"task_id": "API-FIX-supply_chain-auth", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
-{"task_id": "API-FIX-supply_chain-rate_limit", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
-{"task_id": "API-FIX-supply_chain-audit", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: audit"], "priority": "P2", "risk": "low"}
-{"task_id": "API-FIX-supply_chain-validation", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: validation"], "priority": "P2", "risk": "low"}
-{"task_id": "API-FIX-supply_chain-tests", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: tests"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-admin-auth", "role": "backend", "target": "backend/routers/admin.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-admin-rate_limit", "role": "backend", "target": "backend/routers/admin.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-admin-error_handle", "role": "backend", "target": "backend/routers/admin.py", "issues": ["production-grade gap: error_handle"], "priority": "P2", "risk": "low"}
@@ -172,6 +166,10 @@
 {"task_id": "API-FIX-sales-rate_limit", "role": "backend", "target": "backend/routers/sales.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-sales-audit", "role": "backend", "target": "backend/routers/sales.py", "issues": ["production-grade gap: audit"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-sales-validation", "role": "backend", "target": "backend/routers/sales.py", "issues": ["production-grade gap: validation"], "priority": "P2", "risk": "low"}
+{"task_id": "API-FIX-supply_chain-auth", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
+{"task_id": "API-FIX-supply_chain-rate_limit", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
+{"task_id": "API-FIX-supply_chain-audit", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: audit"], "priority": "P2", "risk": "low"}
+{"task_id": "API-FIX-supply_chain-validation", "role": "backend", "target": "backend/routers/supply_chain.py", "issues": ["production-grade gap: validation"], "priority": "P2", "risk": "low"}
 {"task_id": "API-FIX-audit-auth", "role": "backend", "target": "backend/routers/audit.py", "issues": ["production-grade gap: auth"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-audit-rate_limit", "role": "backend", "target": "backend/routers/audit.py", "issues": ["production-grade gap: rate_limit"], "priority": "P2", "risk": "medium"}
 {"task_id": "API-FIX-audit-pydantic", "role": "backend", "target": "backend/routers/audit.py", "issues": ["production-grade gap: pydantic"], "priority": "P2", "risk": "low"}

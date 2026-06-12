@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/ingest_customer_telco.py
-# auto-generated explainer · 2026-06-11T10:00:43Z
+# auto-generated explainer · 2026-06-12T10:00:29Z
 
 ## Purpose
 ingest_customer_telco.py — load IBM Telco Churn CSV into customer-pilot star schema.

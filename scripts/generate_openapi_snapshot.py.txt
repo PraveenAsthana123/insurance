@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/generate_openapi_snapshot.py
-# auto-generated explainer · 2026-06-11T10:00:22Z
+# auto-generated explainer · 2026-06-12T10:00:23Z
 
 ## Purpose
 Snapshot OpenAPI spec to docs/openapi.json for contract evolution tracking.

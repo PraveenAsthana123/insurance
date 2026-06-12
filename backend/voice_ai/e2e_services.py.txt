@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/voice_ai/e2e_services.py
-# auto-generated explainer · 2026-06-11T10:01:42Z
+# auto-generated explainer · 2026-06-12T10:01:53Z
 
 ## Purpose
 End-to-end observability services for voice AI.
@@ -24,7 +24,7 @@ Per §82.7 (drift monitoring) · §75 (12-axis metrics) · §86 (arch docs).
 - from `_` import logging
 - from `_` import statistics
 - from `datetime` import datetime
-- from `typing` import Any, Optional
+- from `typing` import Any
 - from `_` import psycopg2
 - from `_` import psycopg2.extras
 - from `core.config` import get_settings

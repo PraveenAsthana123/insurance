@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/content_ops/services.py
-# auto-generated explainer · 2026-06-11T10:01:43Z
+# auto-generated explainer · 2026-06-12T10:01:54Z
 
 ## Purpose
 Services for content postings + master contacts + schedules.
@@ -15,7 +15,7 @@ adapter is rule-based stub when no API key · honest fallback).
 - from `_` import re
 - from `_` import uuid
 - from `collections` import Counter
-- from `datetime` import datetime, time, timezone, timedelta
+- from `datetime` import datetime, timezone, timedelta
 - from `typing` import Any, Optional
 - from `_` import psycopg2
 - from `_` import psycopg2.extras

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/enterprise_standard/router.py
-# auto-generated explainer · 2026-06-11T10:01:41Z
+# auto-generated explainer · 2026-06-12T10:01:52Z
 
 ## Purpose
 /api/v1/enterprise-standard/* · Iter 61 · live §101 coverage.
@@ -8,7 +8,6 @@
 ## Imports
 - from `__future__` import annotations
 - from `pathlib` import Path
-- from `_` import subprocess
 - from `_` import psycopg2
 - from `fastapi` import APIRouter
 - from `pydantic` import BaseModel

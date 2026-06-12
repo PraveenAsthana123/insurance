@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter48.py
-# auto-generated explainer · 2026-06-11T10:00:37Z
+# auto-generated explainer · 2026-06-12T10:00:27Z
 
 ## Purpose
 Iter 48 · 11 quality dimensions + Top-1% report + Ollama wired + fix-pending cron.

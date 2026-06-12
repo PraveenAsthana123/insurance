@@ -1,13 +1,13 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/jobs.py
-# auto-generated explainer · 2026-06-11T10:01:42Z
+# auto-generated explainer · 2026-06-12T10:01:54Z
 
 ## Purpose
 (no module docstring — add one to improve this)
 
 ## Imports
 - from `__future__` import annotations
-- from `fastapi` import APIRouter, Depends, HTTPException, Query
+- from `fastapi` import APIRouter, Depends, Query
 - from `core.dependencies` import get_job_service
 - from `schemas.common` import PaginatedResponse, SuccessResponse
 - from `schemas.job` import JobCreate, JobResponse, JobResultResponse, JobSummary, ScheduleCreate

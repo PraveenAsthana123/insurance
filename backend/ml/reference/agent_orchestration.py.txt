@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/ml/reference/agent_orchestration.py
-# auto-generated explainer · 2026-06-11T10:01:45Z
+# auto-generated explainer · 2026-06-12T10:01:57Z
 
 ## Purpose
 INSUR reference: agentic orchestration patterns (§64.43).
@@ -35,7 +35,7 @@ classification choices).
 - from `collections` import Counter, defaultdict
 - from `dataclasses` import asdict, dataclass, field
 - from `pathlib` import Path
-- from `typing` import Any, Callable, Iterable
+- from `typing` import Any, Callable
 
 ## Inputs
 - CLI args: --artifacts-root

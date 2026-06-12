@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/approval_workflow/router.py
-# auto-generated explainer · 2026-06-11T10:01:44Z
+# auto-generated explainer · 2026-06-12T10:01:56Z
 
 ## Purpose
 /api/v1/approvals/* · Iter 31 · request → reviewer → decide state machine.

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/generate_raf_stubs.py
-# auto-generated explainer · 2026-06-11T10:00:23Z
+# auto-generated explainer · 2026-06-12T10:00:24Z
 
 ## Purpose
 generate_raf_stubs.py — drop one stub per Recommender/Anomaly/Fraud scenario.

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/insur.py
-# auto-generated explainer · 2026-06-11T10:01:43Z
+# auto-generated explainer · 2026-06-12T10:01:54Z
 
 ## Purpose
 INSUR endpoints — nav (live INSUR_NAV.json) + council (Redis queue/poll).
@@ -13,9 +13,9 @@ INSUR endpoints — nav (live INSUR_NAV.json) + council (Redis queue/poll).
 - from `_` import time
 - from `_` import uuid
 - from `pathlib` import Path
-- from `typing` import Any
 - from `_` import redis
 - from `fastapi` import APIRouter, HTTPException
+- from `fastapi.responses` import FileResponse
 
 ## Inputs
 - Env vars: BEV_AUTHORIZED_ENV, BEV_REDIS_URL

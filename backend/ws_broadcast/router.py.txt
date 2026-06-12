@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/ws_broadcast/router.py
-# auto-generated explainer · 2026-06-11T10:01:44Z
+# auto-generated explainer · 2026-06-12T10:01:56Z
 
 ## Purpose
 /ws/activity · Iter 34 · C9 simplified · server-side broadcast WebSocket.
@@ -14,7 +14,6 @@ Per §57.7: stays connected · sends keepalive · doesn't pretend to receive.
 - from `_` import json
 - from `_` import logging
 - from `datetime` import datetime, timezone
-- from `typing` import Any
 - from `fastapi` import APIRouter, WebSocket, WebSocketDisconnect
 
 ## Inputs

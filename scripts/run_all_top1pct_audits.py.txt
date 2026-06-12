@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/run_all_top1pct_audits.py
-# auto-generated explainer · 2026-06-11T10:00:50Z
+# auto-generated explainer · 2026-06-12T10:00:40Z
 
 ## Purpose
 Consolidated top-1% audit runner · runs all iter audits in one process.

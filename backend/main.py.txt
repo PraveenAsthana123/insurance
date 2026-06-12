@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/main.py
-# auto-generated explainer · 2026-06-11T10:00:06Z
+# auto-generated explainer · 2026-06-12T10:00:08Z
 
 ## Purpose
 (no module docstring — add one to improve this)

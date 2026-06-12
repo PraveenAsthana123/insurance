@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/tempo_adapter/__init__.py
-# auto-generated explainer · 2026-06-11T10:01:41Z
+# auto-generated explainer · 2026-06-12T10:01:51Z
 
 ## Purpose
 tempo_adapter · Iter 90 · §56 Stage-1.

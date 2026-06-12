@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/setup_agent_platform.py
-# auto-generated explainer · 2026-06-11T10:00:11Z
+# auto-generated explainer · 2026-06-12T10:00:13Z
 
 ## Purpose
 Operator CLI for the local INSUR agent platform setup.

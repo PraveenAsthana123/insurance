@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter39.py
-# auto-generated explainer · 2026-06-11T10:00:31Z
+# auto-generated explainer · 2026-06-12T10:00:26Z
 
 ## Purpose
 Iter 39 audit · 8 enterprise governance tables + endpoints + org tree + UI.

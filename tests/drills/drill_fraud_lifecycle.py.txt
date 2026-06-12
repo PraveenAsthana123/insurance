@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/drills/drill_fraud_lifecycle.py
-# auto-generated explainer · 2026-06-11T10:01:39Z
+# auto-generated explainer · 2026-06-12T10:01:48Z
 
 ## Purpose
 Drill: INSUR fraud-detection lifecycle (§43, §64.23 + §40).

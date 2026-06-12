@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter30.py
-# auto-generated explainer · 2026-06-11T10:00:34Z
+# auto-generated explainer · 2026-06-12T10:00:27Z
 
 ## Purpose
 Iter 30 audit · JWT session + API version + audit search + service registry + drill-down chart.

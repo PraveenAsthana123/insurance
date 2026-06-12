@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/routers/audit.py
-# auto-generated explainer · 2026-06-11T10:01:43Z
+# auto-generated explainer · 2026-06-12T10:01:54Z
 
 ## Purpose
 /api/v1/insur/audit/* — surface audit reports for /admin/audit dashboard.
@@ -19,7 +19,6 @@ Read-only per §68.3 invariant.
 ## Imports
 - from `__future__` import annotations
 - from `_` import logging
-- from `_` import re
 - from `_` import subprocess
 - from `_` import sys
 - from `pathlib` import Path

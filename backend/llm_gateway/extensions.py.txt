@@ -1,21 +1,18 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/llm_gateway/extensions.py
-# auto-generated explainer · 2026-06-11T10:01:42Z
+# auto-generated explainer · 2026-06-12T10:01:53Z
 
 ## Purpose
 LLM Gateway extensions · Iter 91 · smart router + callbacks + guardrails + 50-PII catalog.
 
 ## Imports
 - from `__future__` import annotations
-- from `_` import json
 - from `_` import os
 - from `_` import re
-- from `_` import time
-- from `_` import uuid
-- from `datetime` import datetime, timezone
 - from `_` import httpx
-- from `_` import psycopg2
-- from `_` import psycopg2.extras
+- from `fastapi` import APIRouter
+- from `pydantic` import BaseModel
+- from `_adapter_helpers` import stamp
 
 ## Inputs
 - Env vars: OLLAMA_HOST

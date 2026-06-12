@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_confidence_routing.py
-# auto-generated explainer · 2026-06-11T10:00:48Z
+# auto-generated explainer · 2026-06-12T10:00:37Z
 
 ## Purpose
 Confidence-score routing audit · T7.9 · Tier 7 governance gate #1.

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/pending_topics_agent.py
-# auto-generated explainer · 2026-06-11T10:00:16Z
+# auto-generated explainer · 2026-06-12T10:00:17Z
 
 ## Purpose
 sys_pending_topics_consolidator · Iter 81.
@@ -47,6 +47,6 @@ the pending topic and showcase on terminal'.
 ## Notable inline comments
 - Set venv path
 - ANSI colors
-- Watchdog activity (last hour)
-- Stale agents (no invocations in 14 days but Active)
-- Cron health
+- Watchdog activity (last hour) — accept both trigger_kind='watchdog'
+- AND the canonical cron prefix 'cron-watchdog' that the autonomous loop emits.
+- Also fall back to agent_id LIKE 'sys_watchdog%%' so a renamed trigger_kind

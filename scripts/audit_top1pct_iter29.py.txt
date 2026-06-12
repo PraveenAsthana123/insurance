@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter29.py
-# auto-generated explainer · 2026-06-11T10:00:19Z
+# auto-generated explainer · 2026-06-12T10:00:21Z
 
 ## Purpose
 Iter 29 audit · HMAC chain + jobs + health + backup + webhooks.

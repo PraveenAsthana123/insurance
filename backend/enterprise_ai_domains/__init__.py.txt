@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/enterprise_ai_domains/__init__.py
-# auto-generated explainer · 2026-06-11T10:01:42Z
+# auto-generated explainer · 2026-06-12T10:01:53Z
 
 ## Purpose
 Enterprise AI Domains · Iter 78 · 22-process department from operator brief.

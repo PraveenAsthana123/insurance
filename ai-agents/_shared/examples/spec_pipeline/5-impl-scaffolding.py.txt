@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # ai-agents/_shared/examples/spec_pipeline/5-impl-scaffolding.py
-# auto-generated explainer · 2026-06-11T10:00:53Z
+# auto-generated explainer · 2026-06-12T10:01:02Z
 
 ## Purpose
 Implementation scaffolding generated from spec-kit.
