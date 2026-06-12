@@ -199,6 +199,7 @@ Event design requirements:
 - consumer service
 - schema version
 - idempotency key
+- router-managed idempotency exceptions: `/api/v1/openclaw/tasks` and `/api/v1/paperclip/clips` bypass the generic middleware so their tenant-scoped router caches can replay successful responses and preserve cross-tenant isolation
 - retry/dead-letter behavior
 - trace/correlation ID
 - security classification

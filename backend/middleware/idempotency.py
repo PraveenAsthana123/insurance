@@ -39,9 +39,15 @@ class IdempotencyMiddleware(BaseHTTPMiddleware):
     """Honor Idempotency-Key for write methods · cache successful responses."""
 
     WRITE_METHODS = {"POST", "PUT", "PATCH"}
+    ROUTER_MANAGED_PATHS = {
+        "/api/v1/openclaw/tasks",
+        "/api/v1/paperclip/clips",
+    }
 
     async def dispatch(self, request: Request, call_next):
         if request.method not in self.WRITE_METHODS:
+            return await call_next(request)
+        if request.url.path in self.ROUTER_MANAGED_PATHS:
             return await call_next(request)
         key = request.headers.get("Idempotency-Key")
         if not key:

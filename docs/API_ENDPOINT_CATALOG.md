@@ -5707,7 +5707,7 @@ JSON test case shape:
 - id: `create_task_api_v1_openclaw_tasks_post`
 - tags: `openclaw`
 - input: path/query params `0`, request body `present`
-- process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
+- process: Router validates HTTP input, applies tenant-scoped router-level idempotency replay for `Idempotency-Key`, injects middleware tenant metadata, and delegates enqueueing to the OpenClaw service.
 - output: response schema `{"$ref": "#/components/schemas/OpenClawTaskResponse"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs
@@ -5851,7 +5851,7 @@ JSON test case shape:
 - id: `create_clip_api_v1_paperclip_clips_post`
 - tags: `paperclip`
 - input: path/query params `0`, request body `present`
-- process: Router validates HTTP input and delegates to the matching service/repository/domain function. Expand per endpoint during feature hardening.
+- process: Router validates HTTP input, applies tenant-scoped router-level idempotency replay for `Idempotency-Key`, injects middleware tenant metadata, and delegates artifact creation to the Paperclip service.
 - output: response schema `{"$ref": "#/components/schemas/PaperclipArtifactResponse"}`
 - security: demo RBAC via `X-Demo-Role` where middleware matrix applies; production target is JWT + scopes/permissions
 - tracing: frontend sends `X-Client-Trace-Id`; backend correlation middleware should log correlation/request IDs

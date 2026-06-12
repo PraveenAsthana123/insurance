@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { canonicalDomainId, domainMeta, slugOf } from '../../utils/insuranceNavigation';
 
-const FS_SECTION_HEADER = 12;
-const FS_MID_ROW = 11;
-const FS_SMALL_LABEL = 10;
+const FS_SECTION_HEADER = 13;
+const FS_MID_ROW = 12;
+const FS_SMALL_LABEL = 11;
 
 const KIND_TO_TAB = {
   sub: 'process',
@@ -25,6 +25,7 @@ function CategoryBlock({ icon, title, items, color, emptyLabel, kind, activeFocu
         onClick={() => setOpen((v) => !v)}
         style={{
           width: '100%', textAlign: 'left',
+          minHeight: 36,
           padding: '8px 14px', background: 'transparent', border: 'none',
           color: '#fff', fontSize: FS_MID_ROW, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -50,16 +51,18 @@ function CategoryBlock({ icon, title, items, color, emptyLabel, kind, activeFocu
               <button
                 key={`${label}-${i}`}
                 type="button"
+                aria-current={isActive ? 'true' : undefined}
                 onClick={() => onClickItem(kind, label)}
                 style={{
                   width: '100%', textAlign: 'left',
-                  padding: '3px 14px 3px 30px',
+                  minHeight: 34,
+                  padding: '7px 14px 7px 30px',
                   fontSize: FS_MID_ROW,
                   color: isActive ? '#fff' : '#fecaca',
                   background: isActive ? '#b91c1c' : 'transparent',
                   borderLeft: `3px solid ${color}`,
                   border: 'none', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: color,
-                  cursor: 'pointer', font: 'inherit',
+                  cursor: 'pointer', fontFamily: 'inherit',
                   fontWeight: isActive ? 600 : 400,
                 }}
                 onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = '#991b1b'; }}
@@ -138,7 +141,7 @@ export function BankSubMenu({ bp }) {
         </div>
         {activeFocus && (
           <div style={{
-            marginTop: 6, padding: '4px 8px',
+            marginTop: 6, padding: '6px 8px',
             background: '#b91c1c', borderRadius: 4,
             fontSize: FS_SMALL_LABEL, color: '#fff', fontWeight: 600,
             display: 'flex', alignItems: 'center', gap: 6,
@@ -154,7 +157,7 @@ export function BankSubMenu({ bp }) {
               style={{
                 background: 'transparent', border: 'none', color: '#fff',
                 cursor: 'pointer', fontSize: FS_MID_ROW, fontWeight: 700,
-                padding: 0,
+                minWidth: 28, minHeight: 28, padding: 0,
               }}
               title="Clear focus"
             >x</button>

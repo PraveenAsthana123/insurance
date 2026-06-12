@@ -285,6 +285,42 @@ const TABS = [
   ]},
 ];
 
+
+const TAB_QUERY_ALIASES = {
+  resai: 'res-ai',
+  'res-ai': 'res-ai',
+  expai: 'exp-ai',
+  'exp-ai': 'exp-ai',
+  govai: 'gov-ai',
+  'gov-ai': 'gov-ai',
+  governance: 'gov-ai',
+  compai: 'comp-ai',
+  'comp-ai': 'comp-ai',
+  compliance: 'comp-ai',
+};
+
+function normalizeTabId(tabId) {
+  if (!tabId) return '';
+  return TAB_QUERY_ALIASES[tabId] || tabId;
+}
+
+function tabHasSub(tab, subId) {
+  return !!(tab && subId && (tab.subTabs || []).some((s) => s.id === subId));
+}
+
+function resolveDeepLinkTabId(tabId, subId) {
+  const normalized = normalizeTabId(tabId);
+  const requestedTab = TABS.find((t) => t.id === normalized);
+  if (requestedTab && (!subId || tabHasSub(requestedTab, subId))) {
+    return requestedTab.id;
+  }
+  if (subId) {
+    const owningTab = TABS.find((t) => tabHasSub(t, subId));
+    if (owningTab) return owningTab.id;
+  }
+  return requestedTab?.id || '';
+}
+
 // Tab supergroups — operator: "22 tabs is overwhelming". Group into 3 lenses:
 //   📋 Plan  — strategic / design (read mostly)
 //   🛠 Build — engineering (read+write)
@@ -611,23 +647,24 @@ function ComponentGrid({ items }) {
         const isAction = kind === 'action';
         return (
           <div key={i} style={{
-            padding: '12px 14px',
-            background: isAction ? '#eff6ff' : '#f8fafc',
-            border: `1px solid ${isAction ? '#bfdbfe' : '#e2e8f0'}`,
-            borderLeft: `4px solid ${isAction ? '#3b82f6' : '#8b5cf6'}`,
-            borderRadius: 6,
+            padding: '14px 16px',
+            background: isAction ? '#ecfdf5' : '#faf5ff',   // light mint vs light lavender
+            border: `1px solid ${isAction ? '#a7f3d0' : '#e9d5ff'}`,
+            borderLeft: `5px solid ${isAction ? '#10b981' : '#a855f7'}`,
+            borderRadius: 8,
             fontSize: 13, color: '#0f172a',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8,
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
+            boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
           }}>
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{
-                  padding: '1px 6px', borderRadius: 3,
-                  background: isAction ? '#3b82f6' : '#8b5cf6',
-                  color: '#fff', fontSize: 9, fontWeight: 700,
+                  padding: '2px 8px', borderRadius: 4,
+                  background: isAction ? '#10b981' : '#a855f7',
+                  color: '#fff', fontSize: 10, fontWeight: 700,
                   textTransform: 'uppercase', letterSpacing: 0.5,
                 }}>
-                  {isAction ? 'Action' : 'Info'}
+                  {isAction ? '⚡ Action' : 'ℹ️ Info'}
                 </span>
                 <strong style={{ fontSize: 13 }}>{label}</strong>
               </div>
@@ -635,12 +672,27 @@ function ComponentGrid({ items }) {
                 {isAction ? 'Click to trigger' : 'Reference content'}
               </div>
             </div>
-            {isAction && (
-              <button style={{
-                padding: '4px 10px', fontSize: 11, cursor: 'pointer',
-                background: '#3b82f6', color: '#fff', border: 'none', borderRadius: 4,
-              }}>Run</button>
-            )}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                // Click → next-level navigation
+                if (isAction) {
+                  // Action → opens action runner page
+                  window.location.href = `/run/${encodeURIComponent(label)}`;
+                } else {
+                  // Info → opens detail page (AI type detail if matches)
+                  window.location.href = `/ai-types?type=${encodeURIComponent(label)}`;
+                }
+              }}
+              style={{
+                minHeight: 30,
+                padding: '6px 12px', fontSize: 12, cursor: 'pointer', fontWeight: 600,
+                background: isAction ? '#10b981' : '#a855f7',
+                color: '#fff', border: 'none', borderRadius: 4,
+                whiteSpace: 'nowrap',
+              }}>
+              {isAction ? '⚡ Run →' : 'View detail →'}
+            </button>
           </div>
         );
       })}
@@ -3238,7 +3290,8 @@ function RoleLensChip({ color, tabId }) {
             onClick={() => setLens(l.id)}
             title={l.hint}
             style={{
-              padding: '3px 9px', fontSize: 10, fontWeight: 700,
+              minHeight: 30,
+              padding: '6px 10px', fontSize: 11, fontWeight: 700,
               background: active ? color : 'rgba(255,255,255,0.18)',
               color: active ? '#0f172a' : color,
               border: 'none', borderRadius: 3, cursor: 'pointer',
@@ -3639,8 +3692,8 @@ function VisualizationSlot({ tab, sub, proc }) {
         </div>
       )}
       <div style={{
-        display: 'grid', gap: 10,
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        display: 'grid', gap: 10, minWidth: 0,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
       }}>
         {/* Chart 1: 7-day trend (Line or Area) */}
         <div style={{
@@ -3843,7 +3896,8 @@ function TabMetadataFooter({ tab, sub, proc, onAction }) {
           <button key={fmt} type="button"
             onClick={() => onAction && onAction(`Export ${fmt} — ${tab.label}${sub ? `:${sub.label}` : ''}`)}
             style={{
-              padding: '3px 8px', fontSize: 10,
+              minHeight: 30,
+              padding: '6px 10px', fontSize: 11,
               background: '#fff', color: tab.color,
               border: `1px solid ${tab.color}55`, borderRadius: 3,
               cursor: 'pointer', fontWeight: 600,
@@ -5990,8 +6044,10 @@ export function BankUseCasePage() {
   const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const focusParam = searchParams.get('focus') || '';
-  const tabParam   = searchParams.get('tab') || '';
-  const subParam   = searchParams.get('sub') || '';
+  const rawTabParam = searchParams.get('tab') || '';
+  const tabParam = normalizeTabId(rawTabParam);
+  const subParam = searchParams.get('sub') || '';
+  const deepLinkTabId = resolveDeepLinkTabId(rawTabParam, subParam);
   const [focusKind, ...focusLabelParts] = focusParam ? focusParam.split(':') : ['', ''];
   const focusLabel = focusLabelParts.join(':'); // labels may legitimately contain ':'
 
@@ -6003,7 +6059,7 @@ export function BankUseCasePage() {
   const persistedGroup = (() => {
     try { return localStorage.getItem('insur.lastTabGroup') || 'all'; } catch (e) { return 'all'; }
   })();
-  const [activeTabId, setActiveTabId] = useState(tabParam || persistedTab || 'dashboard');
+  const [activeTabId, setActiveTabId] = useState(deepLinkTabId || persistedTab || 'dashboard');
   const [tabGroup, setTabGroup] = useState(persistedGroup);
   // activeSubId MUST be declared before scrollSlot below references it (TDZ fix · 2026-06-08).
   // Was previously at line ~6084 · operator hit "Cannot access 'activeSubId' before initialization" crash.
@@ -6145,14 +6201,20 @@ export function BankUseCasePage() {
     const roleFiltered = allowedByRole
       ? TABS.filter((t) => allowedByRole.has(t.id))
       : TABS;
-    // 2. Apply the Plan/Build/Run lens on top
+    // 2. Apply the Plan/Build/Run lens on top. Explicit shared URLs can still
+    // reveal their target tab so deep links do not snap away from the requested view.
     if (tabGroup === 'all') return roleFiltered;
     const groupKey = tabGroup === 'plan'  ? '📋 Plan'
                   : tabGroup === 'build' ? '🛠 Build'
                   : '🚀 Run';
     const allowedByGroup = new Set(TAB_GROUPS[groupKey] || []);
-    return roleFiltered.filter((t) => allowedByGroup.has(t.id));
-  }, [tabGroup, activeRole]);
+    const groupedTabs = roleFiltered.filter((t) => allowedByGroup.has(t.id));
+    const deepLinkedTab = roleFiltered.find((t) => t.id === deepLinkTabId);
+    if (deepLinkedTab && !groupedTabs.some((t) => t.id === deepLinkedTab.id)) {
+      return [...groupedTabs, deepLinkedTab];
+    }
+    return groupedTabs;
+  }, [tabGroup, activeRole, deepLinkTabId]);
   // Auto-snap to first visible tab when role filter hides current active tab.
   useEffect(() => {
     if (visibleTabs.length === 0) return;
@@ -6161,26 +6223,27 @@ export function BankUseCasePage() {
     }
   }, [visibleTabs, activeTabId]);
   // activeSubId moved to earlier in component (above scrollSlot) to fix TDZ crash.
-  // Persist active sub-tab to URL so refresh keeps the exact view
+  // Persist active tab/sub-tab to URL so refresh and shared links keep the exact view.
   useEffect(() => {
     const next = new URLSearchParams(searchParams);
+    if (activeTabId) next.set('tab', activeTabId);
+    else next.delete('tab');
     if (activeSubId) next.set('sub', activeSubId);
     else next.delete('sub');
     if (next.toString() !== searchParams.toString()) {
       setSearchParams(next, { replace: true });
     }
-  }, [activeSubId]);
+  }, [activeTabId, activeSubId, searchParams, setSearchParams]);
 
   const dept = bp.department_catalog?.find((d) => String(d.id) === params.deptId);
   const proc = dept?.processes?.find((p) => slug(p.name) === params.processId);
   const domainLabel = domainMeta(canonicalDomainId(params.domain))?.label || params.domain;
 
-  // When ?tab=... changes (e.g., maroon menu pushed it), jump to it
+  // When ?tab=... or ?sub=... changes (e.g., maroon menu or shared URL), jump to the canonical owner.
   useEffect(() => {
-    if (tabParam && TABS.some((t) => t.id === tabParam)) {
-      setActiveTabId(tabParam);
-    }
-  }, [tabParam]);
+    const targetTabId = resolveDeepLinkTabId(rawTabParam, subParam);
+    if (targetTabId) setActiveTabId(targetTabId);
+  }, [rawTabParam, subParam]);
 
   // Reset sub-tab when tab changes — honor ?sub=... if it matches a visible
   // sub-tab on the new active tab; otherwise default to first role-visible.
@@ -6193,8 +6256,7 @@ export function BankUseCasePage() {
     } else {
       setActiveSubId(subs[0]?.id || null);
     }
-  // subParam intentionally not in deps — URL is the source on tab change only
-  }, [activeTabId, activeRole]);
+  }, [activeTabId, activeRole, subParam]);
 
   // Hooks MUST be called unconditionally before any early return (rules-of-hooks).
   const windowW = useWindowWidth();
@@ -6265,7 +6327,8 @@ export function BankUseCasePage() {
             }}
             style={{
               marginLeft: 'auto',
-              padding: '4px 10px', fontSize: 11, fontWeight: 600,
+              minHeight: 30,
+              padding: '6px 10px', fontSize: 11, fontWeight: 600,
               background: '#fff', color: '#475569',
               border: '1px solid #cbd5e1', borderRadius: 4,
               cursor: 'pointer',
@@ -6279,7 +6342,9 @@ export function BankUseCasePage() {
           Stays visible even when tab strip is scrolled. */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 10,
+        flexWrap: isCompact ? 'wrap' : 'nowrap',
         padding: '8px 14px', marginBottom: 0,
+        minWidth: 0,
         background: `linear-gradient(90deg, ${activeTab.color} 0%, ${activeTab.color}cc 100%)`,
         borderTopLeftRadius: 6, borderTopRightRadius: 6,
         color: '#fff',
@@ -6296,12 +6361,19 @@ export function BankUseCasePage() {
             <strong style={{ fontSize: 13, color: '#fff', opacity: 0.95 }}>{activeSub.label}</strong>
           </>
         )}
-        <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{
+          marginLeft: isCompact ? 0 : 'auto',
+          width: isCompact ? '100%' : 'auto',
+          display: 'flex', alignItems: 'center', gap: 6,
+          flexWrap: 'wrap', justifyContent: isCompact ? 'flex-start' : 'flex-end',
+          minWidth: 0,
+        }}>
           <button type="button"
             onClick={() => setPaletteOpen(true)}
             title="Jump to any tab — Cmd+K / Ctrl+K"
             style={{
-              padding: '3px 10px', fontSize: 11, fontWeight: 700,
+              minHeight: 30,
+              padding: '6px 10px', fontSize: 11, fontWeight: 700,
               background: 'rgba(255,255,255,0.25)', color: '#fff',
               border: 'none', borderRadius: 3, cursor: 'pointer',
               display: 'inline-flex', alignItems: 'center', gap: 4,
@@ -6314,7 +6386,8 @@ export function BankUseCasePage() {
             title="Keyboard shortcuts — Cmd+/ / Ctrl+/"
             aria-label="Open keyboard shortcuts help"
             style={{
-              padding: '3px 10px', fontSize: 11, fontWeight: 700,
+              minHeight: 30,
+              padding: '6px 10px', fontSize: 11, fontWeight: 700,
               background: 'rgba(255,255,255,0.25)', color: '#fff',
               border: 'none', borderRadius: 3, cursor: 'pointer',
               display: 'inline-flex', alignItems: 'center', gap: 4,
@@ -6327,7 +6400,8 @@ export function BankUseCasePage() {
             title="5-second rule check — verify operator can answer the 6 critical questions"
             aria-label="Open 5-second rule check"
             style={{
-              padding: '3px 10px', fontSize: 11, fontWeight: 700,
+              minHeight: 30,
+              padding: '6px 10px', fontSize: 11, fontWeight: 700,
               background: 'rgba(255,255,255,0.25)', color: '#fff',
               border: 'none', borderRadius: 3, cursor: 'pointer',
               display: 'inline-flex', alignItems: 'center', gap: 4,
@@ -6355,9 +6429,10 @@ export function BankUseCasePage() {
               title="Clear journey progress — Cmd+Shift+E"
               aria-label="Clear journey progress for this process"
               style={{
-                padding: '2px 8px', borderRadius: 3,
+                minHeight: 30,
+                padding: '6px 10px', borderRadius: 3,
                 background: 'rgba(255,255,255,0.18)', color: '#fff',
-                fontSize: 10, fontWeight: 700,
+                fontSize: 11, fontWeight: 700,
                 border: 'none', cursor: 'pointer',
               }}>🗑 Clear</button>
           )}
@@ -6369,7 +6444,8 @@ export function BankUseCasePage() {
             disabled={TABS.findIndex((t) => t.id === activeTabId) === 0}
             title="Previous tab"
             style={{
-              padding: '2px 8px', fontSize: 11, fontWeight: 700,
+              minWidth: 32, minHeight: 30,
+              padding: '6px 10px', fontSize: 11, fontWeight: 700,
               background: 'rgba(255,255,255,0.2)', color: '#fff',
               border: 'none', borderRadius: 3, cursor: 'pointer',
             }}>◀</button>
@@ -6381,7 +6457,8 @@ export function BankUseCasePage() {
             disabled={TABS.findIndex((t) => t.id === activeTabId) === TABS.length - 1}
             title="Next tab"
             style={{
-              padding: '2px 8px', fontSize: 11, fontWeight: 700,
+              minWidth: 32, minHeight: 30,
+              padding: '6px 10px', fontSize: 11, fontWeight: 700,
               background: 'rgba(255,255,255,0.2)', color: '#fff',
               border: 'none', borderRadius: 3, cursor: 'pointer',
             }}>▶</button>
@@ -6390,6 +6467,7 @@ export function BankUseCasePage() {
       {/* ROW 2a.5: Supergroup chips — Plan / Build / Run filter to reduce overwhelm */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
+        flexWrap: 'wrap',
         padding: '6px 10px', background: '#f1f5f9',
         borderLeft: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0',
         fontSize: 11,
@@ -6409,7 +6487,8 @@ export function BankUseCasePage() {
               onClick={() => setTabGroup(g.id)}
               title={g.desc}
               style={{
-                padding: '3px 10px', fontSize: 11, fontWeight: 700,
+                minHeight: 30,
+                padding: '6px 10px', fontSize: 11, fontWeight: 700,
                 background: isActive ? '#0f172a' : '#fff',
                 color: isActive ? '#fff' : '#475569',
                 border: '1px solid ' + (isActive ? '#0f172a' : '#cbd5e1'),
@@ -6559,7 +6638,8 @@ export function BankUseCasePage() {
                 onClick={() => setActiveSubId(s.id)}
                 title={isExplored && !isActive ? `${s.label} — already explored` : s.label}
                 style={{
-                  padding: '4px 10px', fontSize: 11, fontWeight: 600,
+                  minHeight: 30,
+                  padding: '6px 10px', fontSize: 11, fontWeight: 600,
                   background: isActive ? '#fff' : (isExplored ? `${activeTab.color}22` : 'transparent'),
                   color: isActive ? activeTab.color : (isExplored ? activeTab.color : '#475569'),
                   border: isActive ? `1px solid ${activeTab.color}66` : '1px solid transparent',

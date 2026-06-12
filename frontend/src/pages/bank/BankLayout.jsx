@@ -8,6 +8,16 @@ import { BankHeader } from './BankHeader';
 import { BankSidebar } from './BankSidebar';
 import { BankSubMenu } from './BankSubMenu';
 
+function useViewportWidth() {
+  const [width, setWidth] = useState(() => (typeof window === 'undefined' ? 1440 : window.innerWidth));
+  useEffect(() => {
+    const onResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+  return width;
+}
+
 function useBlueprint() {
   const [data, setData] = useState(null);
   const [err, setErr] = useState(null);
@@ -24,22 +34,41 @@ function useBlueprint() {
 }
 
 function LayoutInner({ bp, collapsed, onToggle }) {
+  const width = useViewportWidth();
+  const isCompact = width < 700;
+  const isTablet = width >= 700 && width < 1100;
+  const effectiveCollapsed = isTablet ? true : collapsed;
+  const shellGrid = isCompact
+    ? {
+        gridTemplateColumns: 'minmax(0, 1fr)',
+        gridTemplateRows: `${collapsed ? 56 : 220}px 176px minmax(0, 1fr)`,
+      }
+    : {
+        gridTemplateColumns: effectiveCollapsed
+          ? '64px 220px minmax(0, 1fr)'
+          : '280px 260px minmax(0, 1fr)',
+        gridTemplateRows: 'minmax(0, 1fr)',
+      };
+
   return (
     <div style={{
       display: 'flex', flexDirection: 'column',
       height: '100vh',  // full viewport — /bank is outside the global Layout
+      minWidth: 0,
+      overflow: 'hidden',
     }}>
       <BankHeader />
       <div style={{
         display: 'grid',
-        gridTemplateColumns: collapsed ? '64px 260px 1fr' : '280px 260px 1fr',
-        flex: 1, minHeight: 0,
+        ...shellGrid,
+        flex: 1, minHeight: 0, minWidth: 0,
         background: '#f8fafc',
-        transition: 'grid-template-columns 0.2s',
+        transition: 'grid-template-columns 0.2s, grid-template-rows 0.2s',
+        overflow: 'hidden',
       }}>
-        <BankSidebar bp={bp} collapsed={collapsed} onToggle={onToggle} />
+        <BankSidebar bp={bp} collapsed={isCompact ? collapsed : effectiveCollapsed} onToggle={onToggle} />
         <BankSubMenu bp={bp} />
-        <div style={{ overflow: 'auto', padding: 'var(--spacing-md)' }}>
+        <div data-workspace style={{ overflow: 'auto', padding: 'var(--spacing-md)', minWidth: 0, minHeight: 0 }}>
           <Outlet context={{ bp }} />
         </div>
       </div>

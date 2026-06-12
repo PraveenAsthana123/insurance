@@ -2,7 +2,7 @@
 // Domain IDs are lowercase in URLs and uppercase only in labels.
 
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   CANONICAL_DOMAINS,
   aiCapabilitiesOf,
@@ -15,14 +15,16 @@ import {
 const FS_SECTION_HEADER = 14;
 const FS_TOP_ROW = 13;
 const FS_MID_ROW = 12;
-const FS_LEAF_ROW = 11;
-const FS_AI_CAPABILITY_ROW = 10;
-const FS_SMALL_LABEL = 9;
-const FS_TINY_LABEL = 8;
+const FS_LEAF_ROW = 12;
+const FS_AI_CAPABILITY_ROW = 11;
+const FS_SMALL_LABEL = 10;
+const FS_TINY_LABEL = 10;
 
 export function BankSidebar({ bp, collapsed, onToggle }) {
   const navigate = useNavigate();
   const params = useParams();
+  const [searchParams] = useSearchParams();
+  const activeFocus = searchParams.get('focus') || '';
   const activeDomain = canonicalDomainId(params.domain);
   const [filter, setFilter] = useState('');
   const [openDepts, setOpenDepts] = useState(() =>
@@ -40,7 +42,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         borderRight: '1px solid #1e40af',
         padding: '12px 0', display: 'flex', flexDirection: 'column', alignItems: 'center',
       }}>
-        <button onClick={onToggle} style={{
+        <button onClick={onToggle} aria-label="Expand business hierarchy" style={{
+          minWidth: 36, minHeight: 36,
           background: 'transparent', border: 'none', color: '#dbeafe',
           fontSize: 20, cursor: 'pointer', padding: 8,
         }}>≡</button>
@@ -76,7 +79,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           color: '#fff', fontSize: FS_SECTION_HEADER,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>BUSINESS HIERARCHY</strong>
-        <button onClick={onToggle} style={{
+        <button onClick={onToggle} aria-label="Collapse business hierarchy" style={{
+          minWidth: 36, minHeight: 36,
           background: 'transparent', border: 'none', color: '#93c5fd',
           fontSize: 18, cursor: 'pointer',
         }}>≡</button>
@@ -99,7 +103,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            padding: '5px 16px',
+            minHeight: 32,
+            padding: '6px 16px',
             color: '#dbeafe', textDecoration: 'none',
             fontSize: FS_LEAF_ROW,
           }}>
@@ -116,7 +121,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>AI Catalog (§131)</div>
         <Link to="/ai-types" style={{
-          display: 'flex', alignItems: 'center', gap: 8, padding: '6px 16px',
+          display: 'flex', alignItems: 'center', gap: 8, minHeight: 34, padding: '7px 16px',
           color: '#fbbf24', textDecoration: 'none',
           fontSize: FS_MID_ROW, fontWeight: 700,
         }}>
@@ -129,7 +134,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ].map((d) => (
           <Link key={d.domain} to={`/ai-types?domain=${d.domain}`} style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            padding: '4px 28px',
+            minHeight: 32,
+            padding: '6px 28px',
             color: '#dbeafe', textDecoration: 'none',
             fontSize: FS_LEAF_ROW,
           }}>
@@ -149,7 +155,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ].map((item) => (
           <Link key={item.to} to={item.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            padding: '5px 16px',
+            minHeight: 32,
+            padding: '6px 16px',
             color: '#dbeafe', textDecoration: 'none',
             fontSize: FS_MID_ROW, fontWeight: 600,
             borderLeft: `3px solid ${item.color}`,
@@ -218,8 +225,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
               const domainProcesses = processesForDomain(d.processes, d, dom.id);
               const domOpen = openDomains[domKey] || !!q ||
                 (params.deptId === String(d.id) && activeDomain === dom.id);
-              const isActiveDom = params.deptId === String(d.id) &&
-                activeDomain === dom.id && !params.processId;
+              const isActiveDom = params.deptId === String(d.id) && activeDomain === dom.id;
               return (
                 <div key={dom.id} style={{ paddingLeft: 14 }}>
                   <button
@@ -229,11 +235,14 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                       navigate(`/bank/dept/${d.id}/${dom.id}`);
                     }}
                     title={hasDomain ? (hasDomain.label || dom.label) : `${dom.label} (operator-pending)`}
+                    aria-current={isActiveDom ? 'location' : undefined}
                     style={{
                       width: '100%', textAlign: 'left',
+                      minHeight: 34,
                       padding: '8px 14px',
-                      background: isActiveDom ? '#b91c1c' : 'transparent',
-                      border: 'none',
+                      background: isActiveDom ? '#1d4ed8' : 'transparent',
+                      borderTop: 'none', borderRight: 'none', borderBottom: 'none',
+                      borderLeft: isActiveDom ? '3px solid #fff' : '3px solid transparent',
                       color: isActiveDom ? '#fff' : (hasDomain ? '#dbeafe' : '#60a5fa'),
                       fontSize: FS_MID_ROW, fontWeight: 600, cursor: 'pointer',
                       opacity: hasDomain ? 1 : 0.6,
@@ -263,9 +272,11 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                             setOpenProcs((s) => ({ ...s, [procKey]: !s[procKey] }));
                             navigate(`/bank/dept/${d.id}/${dom.id}/${procSlug}`);
                           }}
+                          aria-current={isActive ? 'page' : undefined}
                           style={{
                             width: '100%', textAlign: 'left',
-                            padding: '6px 14px 6px 32px',
+                            minHeight: 34,
+                            padding: '7px 14px 7px 32px',
                             background: isActive ? '#2563eb' : 'transparent',
                             // Avoid border shorthand + borderLeft conflict (React TDZ warning).
                             // Set per-side borders explicitly: only left has color.
@@ -296,15 +307,24 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                         )}
 
                         {procOpen && aiCaps.map((capability) => {
-                          const capabilityActive = params.subProcessId === capability.id;
+                          const capabilityFocus = `ai:${capability.label}`;
+                          const capabilityActive = activeFocus === capabilityFocus || params.subProcessId === capability.id;
                           return (
                             <button
                               key={capability.id}
                               type="button"
-                              onClick={() => navigate(`/bank/dept/${d.id}/${dom.id}/${procSlug}/${capability.id}`)}
+                              onClick={() => {
+                                const next = new URLSearchParams(searchParams);
+                                next.set('focus', capabilityFocus);
+                                next.set('tab', 'ai');
+                                next.delete('sub');
+                                navigate(`/bank/dept/${d.id}/${dom.id}/${procSlug}?${next.toString()}`);
+                              }}
+                              aria-current={capabilityActive ? 'true' : undefined}
                               style={{
                                 width: '100%', textAlign: 'left',
-                                padding: '5px 14px 5px 56px',
+                                minHeight: 32,
+                                padding: '7px 14px 7px 56px',
                                 background: capabilityActive ? '#1d4ed8' : 'transparent',
                                 // Avoid border shorthand + borderLeft conflict.
                                 borderTop: 'none', borderRight: 'none', borderBottom: 'none',
