@@ -82,6 +82,31 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         }}>≡</button>
       </div>
 
+      {/* §147 Platform Modules · ALL new topics as departments */}
+      <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
+        <div style={{
+          padding: '4px 16px 6px', color: '#10b981',
+          fontSize: FS_SMALL_LABEL, fontWeight: 700,
+          textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>Platform Modules</div>
+        {[
+          { to: '/eai-os',    icon: '🏢', label: '§144 · Enterprise AI OS (9 layers)' },
+          { to: '/itsm',       icon: '🎫', label: '§143 · ITSM (incidents · L2 RCA · P1)' },
+          { to: '/prompts',    icon: '💬', label: '§145 · Conversation log' },
+          { to: '/platform',   icon: '🗺️', label: '§147 · Platform Explorer (all APIs)' },
+          { to: '/ai-types',   icon: '🤖', label: '§148 · AI Types catalog (200)' },
+        ].map((m) => (
+          <Link key={m.to} to={m.to} style={{
+            display: 'flex', alignItems: 'center', gap: 8,
+            padding: '5px 16px',
+            color: '#dbeafe', textDecoration: 'none',
+            fontSize: FS_LEAF_ROW,
+          }}>
+            <span>{m.icon}</span><span style={{ flex: 1 }}>{m.label}</span>
+          </Link>
+        ))}
+      </div>
+
       {/* §148 AI Catalog · main menu entry · B2C/B2B/B2E sub-menu */}
       <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
         <div style={{
