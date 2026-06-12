@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { canonicalDomainId, domainMeta, slugOf } from '../../utils/insuranceNavigation';
 
-const FS_SECTION_HEADER = 13;
-const FS_MID_ROW = 12;
-const FS_SMALL_LABEL = 11;
+const FS_SECTION_HEADER = 14;
+const FS_MID_ROW = 13;
+const FS_SMALL_LABEL = 12;
 
 const KIND_TO_TAB = {
   sub: 'process',
@@ -25,8 +25,8 @@ function CategoryBlock({ icon, title, items, color, emptyLabel, kind, activeFocu
         onClick={() => setOpen((v) => !v)}
         style={{
           width: '100%', textAlign: 'left',
-          minHeight: 36,
-          padding: '8px 14px', background: 'transparent', border: 'none',
+          minHeight: 42,
+          padding: '10px 16px', background: 'transparent', border: 'none',
           color: '#fff', fontSize: FS_MID_ROW, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
           cursor: 'pointer',
@@ -40,9 +40,9 @@ function CategoryBlock({ icon, title, items, color, emptyLabel, kind, activeFocu
         </span>
       </button>
       {open && (
-        <div style={{ paddingBottom: 6 }}>
+        <div style={{ paddingBottom: 8 }}>
           {items.length === 0 ? (
-            <div style={{ padding: '4px 24px', fontSize: FS_SMALL_LABEL, color: '#fecaca', fontStyle: 'italic' }}>
+            <div style={{ padding: '8px 28px', fontSize: FS_SMALL_LABEL, color: '#fecaca', fontStyle: 'italic' }}>
               {emptyLabel || 'Operator-pending'}
             </div>
           ) : items.map((label, i) => {
@@ -55,8 +55,8 @@ function CategoryBlock({ icon, title, items, color, emptyLabel, kind, activeFocu
                 onClick={() => onClickItem(kind, label)}
                 style={{
                   width: '100%', textAlign: 'left',
-                  minHeight: 34,
-                  padding: '7px 14px 7px 30px',
+                  minHeight: 40,
+                  padding: '9px 16px 9px 34px',
                   fontSize: FS_MID_ROW,
                   color: isActive ? '#fff' : '#fecaca',
                   background: isActive ? '#b91c1c' : 'transparent',
@@ -126,7 +126,7 @@ export function BankSubMenu({ bp }) {
       overflow: 'auto',
     }}>
       <div style={{
-        padding: '12px 14px 10px',
+        padding: '16px 18px 14px',
         borderBottom: '2px solid #991b1b',
         background: '#991b1b',
       }}>
@@ -141,7 +141,7 @@ export function BankSubMenu({ bp }) {
         </div>
         {activeFocus && (
           <div style={{
-            marginTop: 6, padding: '6px 8px',
+            marginTop: 10, padding: '8px 10px',
             background: '#b91c1c', borderRadius: 4,
             fontSize: FS_SMALL_LABEL, color: '#fff', fontWeight: 600,
             display: 'flex', alignItems: 'center', gap: 6,
@@ -189,7 +189,7 @@ export function BankSubMenu({ bp }) {
             emptyLabel="Operator-pending process master data." />
         </>
       ) : (
-        <div style={{ padding: 14, fontSize: FS_MID_ROW, color: '#fecaca', fontStyle: 'italic' }}>
+        <div style={{ padding: 18, fontSize: FS_MID_ROW, color: '#fecaca', fontStyle: 'italic' }}>
           Expand a department, pick a domain, and click a Main Process.
           The maroon menu will populate from process-specific blueprint fields only.
         </div>

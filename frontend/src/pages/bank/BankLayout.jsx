@@ -41,14 +41,16 @@ function LayoutInner({ bp, collapsed, onToggle }) {
   const shellGrid = isCompact
     ? {
         gridTemplateColumns: 'minmax(0, 1fr)',
-        gridTemplateRows: `${collapsed ? 56 : 220}px 176px minmax(0, 1fr)`,
+        gridTemplateRows: `${collapsed ? 64 : 260}px 220px minmax(0, 1fr)`,
       }
     : {
         gridTemplateColumns: effectiveCollapsed
-          ? '64px 220px minmax(0, 1fr)'
-          : '280px 260px minmax(0, 1fr)',
+          ? '72px 240px minmax(0, 1fr)'
+          : '320px 300px minmax(0, 1fr)',
         gridTemplateRows: 'minmax(0, 1fr)',
       };
+
+  const workspacePadding = isCompact ? 16 : 24;
 
   return (
     <div style={{
@@ -68,7 +70,7 @@ function LayoutInner({ bp, collapsed, onToggle }) {
       }}>
         <BankSidebar bp={bp} collapsed={isCompact ? collapsed : effectiveCollapsed} onToggle={onToggle} />
         <BankSubMenu bp={bp} />
-        <div data-workspace style={{ overflow: 'auto', padding: 'var(--spacing-md)', minWidth: 0, minHeight: 0 }}>
+        <div data-workspace style={{ overflow: 'auto', padding: workspacePadding, minWidth: 0, minHeight: 0 }}>
           <Outlet context={{ bp }} />
         </div>
       </div>

@@ -12,13 +12,13 @@ import {
   slugOf,
 } from '../../utils/insuranceNavigation';
 
-const FS_SECTION_HEADER = 14;
-const FS_TOP_ROW = 13;
-const FS_MID_ROW = 12;
-const FS_LEAF_ROW = 12;
-const FS_AI_CAPABILITY_ROW = 11;
-const FS_SMALL_LABEL = 10;
-const FS_TINY_LABEL = 10;
+const FS_SECTION_HEADER = 15;
+const FS_TOP_ROW = 14;
+const FS_MID_ROW = 13;
+const FS_LEAF_ROW = 13;
+const FS_AI_CAPABILITY_ROW = 12;
+const FS_SMALL_LABEL = 11;
+const FS_TINY_LABEL = 11;
 
 export function BankSidebar({ bp, collapsed, onToggle }) {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
       <aside style={{
         background: '#1e3a8a', color: '#dbeafe',
         borderRight: '1px solid #1e40af',
-        padding: '12px 0', display: 'flex', flexDirection: 'column', alignItems: 'center',
+        padding: '16px 0', display: 'flex', flexDirection: 'column', alignItems: 'center',
       }}>
         <button onClick={onToggle} aria-label="Expand business hierarchy" style={{
           minWidth: 36, minHeight: 36,
@@ -69,11 +69,11 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
     <aside style={{
       background: '#1e3a8a', color: '#dbeafe',
       borderRight: '1px solid #1e40af',
-      overflow: 'auto', padding: '12px 0',
+      overflow: 'auto', padding: '16px 0',
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 16px 12px', borderBottom: '1px solid #1e40af',
+        padding: '0 18px 14px', borderBottom: '1px solid #1e40af',
       }}>
         <strong style={{
           color: '#fff', fontSize: FS_SECTION_HEADER,
@@ -87,9 +87,9 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
       </div>
 
       {/* §147 Platform Modules · ALL new topics as departments */}
-      <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
+      <div style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
         <div style={{
-          padding: '4px 16px 6px', color: '#10b981',
+          padding: '6px 18px 8px', color: '#10b981',
           fontSize: FS_SMALL_LABEL, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>Platform Modules</div>
@@ -103,8 +103,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            minHeight: 32,
-            padding: '6px 16px',
+            minHeight: 38,
+            padding: '8px 18px',
             color: '#dbeafe', textDecoration: 'none',
             fontSize: FS_LEAF_ROW,
           }}>
@@ -114,14 +114,14 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
       </div>
 
       {/* §148 AI Catalog · main menu entry · B2C/B2B/B2E sub-menu */}
-      <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
+      <div style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
         <div style={{
-          padding: '4px 16px 6px', color: '#fbbf24',
+          padding: '6px 18px 8px', color: '#fbbf24',
           fontSize: FS_SMALL_LABEL, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>AI Catalog (§131)</div>
         <Link to="/ai-types" style={{
-          display: 'flex', alignItems: 'center', gap: 8, minHeight: 34, padding: '7px 16px',
+          display: 'flex', alignItems: 'center', gap: 8, minHeight: 40, padding: '9px 18px',
           color: '#fbbf24', textDecoration: 'none',
           fontSize: FS_MID_ROW, fontWeight: 700,
         }}>
@@ -134,8 +134,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ].map((d) => (
           <Link key={d.domain} to={`/ai-types?domain=${d.domain}`} style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            minHeight: 32,
-            padding: '6px 28px',
+            minHeight: 38,
+            padding: '8px 30px',
             color: '#dbeafe', textDecoration: 'none',
             fontSize: FS_LEAF_ROW,
           }}>
@@ -144,7 +144,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ))}
       </div>
 
-      <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
+      <div style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
         {[
           { to: '/bank/prompts',   icon: '💬', label: 'My input prompts',        color: '#60a5fa' },
           { to: '/bank/agentic',   icon: '🧠', label: 'Agentic + MCP + Council', color: '#a78bfa' },
@@ -155,8 +155,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ].map((item) => (
           <Link key={item.to} to={item.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            minHeight: 32,
-            padding: '6px 16px',
+            minHeight: 38,
+            padding: '8px 18px',
             color: '#dbeafe', textDecoration: 'none',
             fontSize: FS_MID_ROW, fontWeight: 600,
             borderLeft: `3px solid ${item.color}`,
@@ -167,14 +167,14 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         ))}
       </div>
 
-      <div style={{ padding: '12px 16px' }}>
+      <div style={{ padding: '14px 18px' }}>
         <input
           type="search"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           placeholder="Filter dept / process..."
           style={{
-            width: '100%', padding: '6px 10px', fontSize: FS_MID_ROW,
+            width: '100%', padding: '9px 12px', fontSize: FS_MID_ROW,
             background: '#1e40af', color: '#fff',
             border: '1px solid #3b82f6', borderRadius: 6, outline: 'none',
           }}
@@ -182,7 +182,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
       </div>
 
       <div style={{
-        padding: '8px 16px 4px', fontSize: FS_SMALL_LABEL,
+        padding: '10px 18px 6px', fontSize: FS_SMALL_LABEL,
         color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.06em',
       }}>
         Dept &gt; Domain &gt; Main Process &gt; AI · {depts.length} dept{depts.length === 1 ? '' : 's'}
@@ -198,7 +198,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
               onClick={() => toggleDept(d.id)}
               style={{
                 width: '100%', textAlign: 'left',
-                padding: '11px 14px',
+                padding: '13px 16px',
                 background: isActiveDept ? '#1e40af' : 'transparent',
                 border: 'none', color: '#fff',
                 fontSize: FS_TOP_ROW, fontWeight: 700, cursor: 'pointer',
@@ -238,8 +238,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                     aria-current={isActiveDom ? 'location' : undefined}
                     style={{
                       width: '100%', textAlign: 'left',
-                      minHeight: 34,
-                      padding: '8px 14px',
+                      minHeight: 40,
+                      padding: '10px 16px',
                       background: isActiveDom ? '#1d4ed8' : 'transparent',
                       borderTop: 'none', borderRight: 'none', borderBottom: 'none',
                       borderLeft: isActiveDom ? '3px solid #fff' : '3px solid transparent',
@@ -275,8 +275,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                           aria-current={isActive ? 'page' : undefined}
                           style={{
                             width: '100%', textAlign: 'left',
-                            minHeight: 34,
-                            padding: '7px 14px 7px 32px',
+                            minHeight: 40,
+                            padding: '9px 16px 9px 36px',
                             background: isActive ? '#2563eb' : 'transparent',
                             // Avoid border shorthand + borderLeft conflict (React TDZ warning).
                             // Set per-side borders explicitly: only left has color.
@@ -323,8 +323,8 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                               aria-current={capabilityActive ? 'true' : undefined}
                               style={{
                                 width: '100%', textAlign: 'left',
-                                minHeight: 32,
-                                padding: '7px 14px 7px 56px',
+                                minHeight: 38,
+                                padding: '9px 16px 9px 62px',
                                 background: capabilityActive ? '#1d4ed8' : 'transparent',
                                 // Avoid border shorthand + borderLeft conflict.
                                 borderTop: 'none', borderRight: 'none', borderBottom: 'none',

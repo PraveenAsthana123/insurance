@@ -661,12 +661,12 @@ function ComponentGrid({ items }) {
                 <span style={{
                   padding: '2px 8px', borderRadius: 4,
                   background: isAction ? '#10b981' : '#a855f7',
-                  color: '#fff', fontSize: 10, fontWeight: 700,
+                  color: '#fff', fontSize: 11, fontWeight: 700,
                   textTransform: 'uppercase', letterSpacing: 0.5,
                 }}>
                   {isAction ? '⚡ Action' : 'ℹ️ Info'}
                 </span>
-                <strong style={{ fontSize: 13 }}>{label}</strong>
+                <strong style={{ fontSize: 14 }}>{label}</strong>
               </div>
               <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4, fontStyle: 'italic' }}>
                 {isAction ? 'Click to trigger' : 'Reference content'}
@@ -1676,7 +1676,7 @@ function SpecComponentCard({ label, color, onAction, phase, procKey }) {
               e.currentTarget.style.color = color;
             }}
             style={{
-              padding: '4px 10px', fontSize: 11, fontWeight: 700,
+              padding: '8px 12px', fontSize: 12, fontWeight: 700,
               background: '#fff', color,
               border: `1.5px solid ${color}`,
               borderRadius: 4,
@@ -4158,7 +4158,7 @@ function NavigationFlow({ tab, sub, color, allTabs, onJump }) {
         onClick={() => prev && onJump(prev.id)}
         disabled={!prev}
         style={{
-          padding: '4px 10px', fontSize: 11, fontWeight: 600,
+          padding: '8px 12px', fontSize: 12, fontWeight: 600,
           background: prev ? '#f8fafc' : '#f1f5f9',
           color: prev ? '#475569' : '#cbd5e1',
           border: '1px solid #e2e8f0', borderRadius: 4,
@@ -4178,7 +4178,7 @@ function NavigationFlow({ tab, sub, color, allTabs, onJump }) {
         onClick={() => next && onJump(next.id)}
         disabled={!next}
         style={{
-          padding: '4px 10px', fontSize: 11, fontWeight: 600,
+          padding: '8px 12px', fontSize: 12, fontWeight: 600,
           background: next ? '#f8fafc' : '#f1f5f9',
           color: next ? '#475569' : '#cbd5e1',
           border: '1px solid #e2e8f0', borderRadius: 4,
@@ -5191,7 +5191,7 @@ function TechnicalRuntimeSection({ color, tab, proc }) {
     <SectionBlock title={`Technical Runtime Layers · ${relevant.length} relevant of 9`} icon="⚙" color={color}>
       <div style={{
         fontSize: 11, color: '#475569', marginBottom: 10,
-        padding: '6px 10px', background: '#f1f5f9', borderRadius: 4,
+        padding: '10px 12px', background: '#f1f5f9', borderRadius: 4,
       }}>
         🔧 Per global <strong>§76</strong>: 9 enterprise AI runtime layers execute every request.
         For <strong>{tab.label}</strong> ({profile?.type || 'mixed'} tab) — showing the
@@ -5647,7 +5647,7 @@ function PromptHistorySection({ color }) {
     <SectionBlock title={`Prompt history · ${prompts.length} saved`} icon="💬" color={color}>
       <div style={{
         fontSize: 11, color: '#475569', marginBottom: 10,
-        padding: '6px 10px', background: '#f1f5f9', borderRadius: 4,
+        padding: '10px 12px', background: '#f1f5f9', borderRadius: 4,
         display: 'flex', alignItems: 'center', gap: 10,
       }}>
         <span style={{ flex: 1 }}>
@@ -5752,7 +5752,7 @@ function DatabaseAndApiSection({ color, tab }) {
     <SectionBlock title={`Database · Tables · API · per §57.6 canonical fields`} icon="🗄" color={color}>
       <div style={{
         fontSize: 11, color: '#475569', marginBottom: 10,
-        padding: '6px 10px', background: '#f1f5f9', borderRadius: 4,
+        padding: '10px 12px', background: '#f1f5f9', borderRadius: 4,
       }}>
         🗄 Every tab + runtime layer ships with a database schema + REST API
         per global §57.6 (canonical fields: <code>request_id · tenant_id · actor · latency_ms · outcome</code>).
@@ -6298,7 +6298,7 @@ export function BankUseCasePage() {
       {/* ROW 1.5: Focus banner — surfaces maroon sub-menu selection on workspace */}
       {focusKind && focusLabel && (
         <div style={{
-          padding: '10px 14px', marginBottom: 8,
+          padding: '12px 16px', marginBottom: 12,
           background: `${KIND_COLOR[focusKind] || '#7f1d1d'}11`,
           border: `1px solid ${KIND_COLOR[focusKind] || '#7f1d1d'}66`,
           borderLeft: `4px solid ${KIND_COLOR[focusKind] || '#7f1d1d'}`,
@@ -6314,7 +6314,7 @@ export function BankUseCasePage() {
           }}>
             {KIND_LABEL[focusKind] || 'Focus'}
           </span>
-          <strong style={{ fontSize: 14, color: '#0f172a' }}>{focusLabel}</strong>
+          <strong style={{ fontSize: 15, color: '#0f172a' }}>{focusLabel}</strong>
           <span style={{ color: '#64748b', fontSize: 11 }}>
             selected from sub-menu →
           </span>
@@ -6341,9 +6341,9 @@ export function BankUseCasePage() {
           "top tab is important .. so showcase which tab has been select on top".
           Stays visible even when tab strip is scrolled. */}
       <div style={{
-        display: 'flex', alignItems: 'center', gap: 10,
+        display: 'flex', alignItems: 'center', gap: 12,
         flexWrap: isCompact ? 'wrap' : 'nowrap',
-        padding: '8px 14px', marginBottom: 0,
+        padding: '12px 16px', marginBottom: 0,
         minWidth: 0,
         background: `linear-gradient(90deg, ${activeTab.color} 0%, ${activeTab.color}cc 100%)`,
         borderTopLeftRadius: 6, borderTopRightRadius: 6,
@@ -6468,7 +6468,7 @@ export function BankUseCasePage() {
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
         flexWrap: 'wrap',
-        padding: '6px 10px', background: '#f1f5f9',
+        padding: '10px 12px', background: '#f1f5f9',
         borderLeft: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0',
         fontSize: 11,
       }}>
@@ -6531,11 +6531,11 @@ export function BankUseCasePage() {
         role="tablist"
         aria-label="Workspace tabs"
         style={{
-          display: 'flex', flexWrap: 'nowrap', overflowX: 'auto', gap: 4,
+          display: 'flex', flexWrap: 'nowrap', overflowX: 'auto', gap: 6,
           marginBottom: 0,
           background: '#fff',
           border: '1px solid #e2e8f0', borderTop: 'none', borderBottom: 'none',
-          padding: '4px 4px 0',
+          padding: '8px 8px 0',
         }}
       >
         {visibleTabs.map((t) => {
@@ -6571,8 +6571,8 @@ export function BankUseCasePage() {
               data-explored={isExplored ? '1' : undefined}
               title={isExplored && !isActive ? `${t.label} — already explored` : t.label}
               style={{
-                padding: isActive ? '10px 18px' : '8px 16px',
-                fontSize: isActive ? 14 : 13, fontWeight: isActive ? 800 : 600,
+                padding: isActive ? '13px 22px' : '11px 18px',
+                fontSize: isActive ? 15 : 14, fontWeight: isActive ? 800 : 600,
                 background: isActive ? t.color : (isExplored ? `${t.color}14` : 'transparent'),
                 color: isActive ? '#fff' : (isExplored ? t.color : '#475569'),
                 border: 'none',
@@ -6584,7 +6584,7 @@ export function BankUseCasePage() {
               }}
             >
               {isActive && <span style={{ marginRight: 4 }}>●</span>}
-              {!isActive && isExplored && <span style={{ marginRight: 4, opacity: 0.7 }}>✓</span>}
+              {!isActive && isExplored && <span style={{ marginRight: 6, opacity: 0.7 }}>✓</span>}
               {t.label}
             </button>
           );
@@ -6596,7 +6596,7 @@ export function BankUseCasePage() {
           On narrow screens, replaced by a select dropdown to save horizontal space. */}
       {visibleSubTabs.length > 0 && isCompact ? (
         <div style={{
-          padding: '6px 8px',
+          padding: '10px 12px',
           background: `${activeTab.color}11`,
           borderLeft: `1px solid #e2e8f0`, borderRight: `1px solid #e2e8f0`,
         }}>
@@ -6644,7 +6644,7 @@ export function BankUseCasePage() {
                   color: isActive ? activeTab.color : (isExplored ? activeTab.color : '#475569'),
                   border: isActive ? `1px solid ${activeTab.color}66` : '1px solid transparent',
                   borderRadius: 4, cursor: 'pointer',
-                  marginRight: 4,
+                  marginRight: 6,
                 }}
               >
                 {!isActive && isExplored && <span style={{ marginRight: 3, opacity: 0.7 }}>✓</span>}
@@ -6941,14 +6941,14 @@ function WorkspaceWideAudit({ visibleTabs, proc, dept, onJump, activeTabId }) {
             onClick={snapshot}
             title="Save this audit result so you can track pass-rate evolution"
             style={{
-              padding: '4px 10px', fontSize: 11, fontWeight: 700,
+              padding: '8px 12px', fontSize: 12, fontWeight: 700,
               background: '#0f172a', color: '#fff',
               border: 'none', borderRadius: 3, cursor: 'pointer',
             }}>📸 Snapshot</button>
           <button type="button"
             onClick={() => setShowTrend((v) => !v)}
             style={{
-              padding: '4px 10px', fontSize: 11, fontWeight: 700,
+              padding: '8px 12px', fontSize: 12, fontWeight: 700,
               background: showTrend ? '#0f172a' : '#fff',
               color: showTrend ? '#fff' : '#475569',
               border: '1px solid ' + (showTrend ? '#0f172a' : '#cbd5e1'),
@@ -6958,7 +6958,7 @@ function WorkspaceWideAudit({ visibleTabs, proc, dept, onJump, activeTabId }) {
             <button type="button"
               onClick={clearLog}
               style={{
-                padding: '4px 10px', fontSize: 11, fontWeight: 700,
+                padding: '8px 12px', fontSize: 12, fontWeight: 700,
                 background: '#fff', color: '#dc2626',
                 border: '1px solid #fca5a5', borderRadius: 3, cursor: 'pointer',
               }}>🗑 Clear log</button>
@@ -7287,7 +7287,7 @@ function FiveSecRuleOverlay({ open, onClose, tab, sub, proc, dept, profile, visi
               <button key={m.id} type="button"
                 onClick={() => setMode(m.id)}
                 style={{
-                  padding: '4px 10px', fontSize: 11, fontWeight: 700,
+                  padding: '8px 12px', fontSize: 12, fontWeight: 700,
                   background: active ? '#0f172a' : '#fff',
                   color: active ? '#fff' : '#475569',
                   border: '1px solid ' + (active ? '#0f172a' : '#cbd5e1'),
