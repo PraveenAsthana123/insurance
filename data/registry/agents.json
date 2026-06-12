@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-06-11T09:00:01Z",
+  "generated_at": "2026-06-12T09:00:01Z",
   "n_agents": 8,
   "agents": [
     {
       "id": "fleet_supervisor",
       "source": "scripts/insur_fleet.py",
       "size_bytes": 15065,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "fleet_supervisor",
       "lifecycle": "active"
     },
@@ -14,7 +14,7 @@
       "id": "redis_supervisor",
       "source": "scripts/agent_supervisor.py",
       "size_bytes": 30548,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "redis_supervisor",
       "lifecycle": "active"
     },
@@ -22,7 +22,7 @@
       "id": "scheduler",
       "source": "scripts/agent_scheduler.py",
       "size_bytes": 5590,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "scheduler",
       "lifecycle": "active"
     },
@@ -30,7 +30,7 @@
       "id": "council_v77",
       "source": "backend/core/council_v77.py",
       "size_bytes": 4638,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "council_v77",
       "lifecycle": "active"
     },
@@ -38,7 +38,7 @@
       "id": "hitl_gate",
       "source": "backend/core/hitl_approval.py",
       "size_bytes": 8399,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "hitl_gate",
       "lifecycle": "active"
     },
@@ -46,15 +46,15 @@
       "id": "reflection_loop",
       "source": "backend/core/reflection_loop.py",
       "size_bytes": 3223,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "reflection_loop",
       "lifecycle": "active"
     },
     {
       "id": "blackboard",
       "source": "backend/core/blackboard.py",
-      "size_bytes": 3618,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "size_bytes": 3606,
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "blackboard",
       "lifecycle": "active"
     },
@@ -62,7 +62,7 @@
       "id": "rag_bot",
       "source": "scripts/insur_bot.py",
       "size_bytes": 15518,
-      "registered_at": "2026-06-11T09:00:01Z",
+      "registered_at": "2026-06-12T09:00:01Z",
       "kind": "rag_bot",
       "lifecycle": "active"
     }
