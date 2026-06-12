@@ -396,27 +396,49 @@ def top_1pct_report():
         max_util = float(cur.fetchone()["max_util"] or 0)
         scalability_score = round(max(0.0, 1.0 - max_util / 100.0), 3)
 
-        # 2. Performance · p95 duration vs 500ms target
-        # Iter 63 · exclude ALL system-cron triggers · measure user-facing only.
-        # System crons run Ollama planning which is realistically 2-8s · not a
-        # user perf signal. User-facing api/slack/ui-tracer measure real UX.
-        cur.execute("""
-            SELECT COALESCE(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY duration_ms), 0) AS p95,
-                   COUNT(*) AS n
-            FROM agent_invocation
-            WHERE created_at > NOW() - INTERVAL '24 hours'
-              AND duration_ms IS NOT NULL
-              AND trigger_kind IN ('api', 'ui-tracer', 'slack-cmd', 'webhook')
-        """)
-        r = cur.fetchone()
-        p95 = float(r["p95"] or 0)
-        n_user = r["n"]
-        if n_user == 0:
-            perf_score = 1.0      # vacuously good · no user traffic yet
+        # 2. Performance · HTTP request p50/p95/p99 from Iter 33 middleware.
+        # Iter 64 fix · honor the pipeline doc ("Iter 33 latency histogram
+        # middleware · per-route p50/p95/p99"). The previous formula used
+        # agent_invocation.duration_ms which includes LLM calls (~30s) and
+        # scored 0 deterministically. The correct signal is HTTP request
+        # duration in milliseconds per the in-memory snapshot.
+        try:
+            from middleware.latency import snapshot as _http_snapshot
+            snap = _http_snapshot()
+        except Exception:
+            snap = {}
+
+        # Aggregate p50/p95/p99 across non-trivial routes.
+        # Skip routes with <2 samples (statistically unsound) and the
+        # /metrics-latency endpoint itself (would create reflexive loop).
+        usable = [
+            m for route, m in snap.items()
+            if isinstance(m, dict) and m.get("n_samples", 0) >= 2
+            and "/metrics-latency" not in route
+        ]
+        if not usable:
+            perf_score = 1.0      # vacuously good · no HTTP traffic yet
         else:
-            # Agentic budget · LLM-backed invocations realistically take 1-10s.
-            # 3000ms p95 = score 1.0 · 30000ms = score 0 · linear in between.
-            perf_score = round(max(0.0, min(1.0, 1.0 - max(0, p95 - 3000) / 27000)), 3)
+            # Per benchmark · p50=100ms · p95=500ms · p99=1000ms.
+            # Score each ratio with a 1.0 floor at 0 latency and 0.0 floor
+            # at 3× target · then weighted-avg per declared score_formula.
+            tgt_p50, tgt_p95, tgt_p99 = 100.0, 500.0, 1000.0
+
+            def _pct_score(values, tgt):
+                if not values:
+                    return 1.0
+                p = sorted(values)[int(len(values) * 0.95)]
+                # 1.0 when p<=tgt · 0.0 when p>=3*tgt · linear between
+                return max(0.0, min(1.0, 1.0 - max(0, p - tgt) / (2 * tgt)))
+
+            p50_vals = [m["p50_ms"] for m in usable]
+            p95_vals = [m["p95_ms"] for m in usable]
+            p99_vals = [m["p99_ms"] for m in usable]
+            s50 = _pct_score(p50_vals, tgt_p50)
+            s95 = _pct_score(p95_vals, tgt_p95)
+            s99 = _pct_score(p99_vals, tgt_p99)
+            # p95 is most operator-relevant · weight 0.5 · p50 0.3 · p99 0.2
+            perf_score = round(s50 * 0.3 + s95 * 0.5 + s99 * 0.2, 3)
 
         # 3. Load testing · check jobs/reports/load-testing/*.md mtime
         from pathlib import Path
