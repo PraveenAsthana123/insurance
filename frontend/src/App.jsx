@@ -60,6 +60,7 @@ import './styles/sidebar.css';
 import './styles/topbar.css';
 import './styles/content.css';
 import './styles/cards.css';
+import './styles/glass.css';  // §149.2 · glassmorphism + card palette + flow strip + objective block
 import './styles/tables.css';
 import './styles/tabs.css';
 import './styles/charts.css';
@@ -79,6 +80,7 @@ import SpeechToTextPage from './pages/SpeechToTextPage';
 import TextToSpeechPage from './pages/TextToSpeechPage';
 import NotificationCenterPage from './pages/NotificationCenterPage';
 import FeatureFlagsPage from './pages/FeatureFlagsPage';
+import WorkspaceDemoPage from './pages/WorkspaceDemoPage';
 
 function PageLoader({ label }) {
   return (
@@ -246,6 +248,8 @@ export default function App() {
         <Route path="/notification-center" element={<NotificationCenterPage />} />
         <Route path="/feature-flags" element={<FeatureFlagsPage />} />
         <Route path="/flags" element={<FeatureFlagsPage />} />
+        <Route path="/workspace-demo" element={<WorkspaceDemoPage />} />
+        <Route path="/layout-demo" element={<WorkspaceDemoPage />} />
       </Routes>
     </BrowserRouter>
   );

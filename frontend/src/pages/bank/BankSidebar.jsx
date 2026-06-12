@@ -106,6 +106,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/tts',        icon: '🔊', label: 'Text-to-Speech (§F01)' },
           { to: '/notifications', icon: '🔔', label: 'Notification Center (§F02)' },
           { to: '/feature-flags', icon: '🎛', label: 'Feature Flags (§F03)' },
+          { to: '/workspace-demo', icon: '🧪', label: '§149.2 Layout Demo (drag · glass · flow)' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,

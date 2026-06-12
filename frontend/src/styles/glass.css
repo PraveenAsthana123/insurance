@@ -1,0 +1,211 @@
+/* §149.2 · Glassmorphism + card color palette + Bootstrap-flavored utility classes
+   Operator 2026-06-12 brief:
+     - content/workspace fixed · only menus resizable
+     - bootstrap UI glassy look
+     - card differentiation by color
+     - input/process/output/visualization horizontal flow strip
+     - objective + todo list on every workspace page
+*/
+
+:root {
+  /* glass tokens */
+  --glass-bg:        rgba(255, 255, 255, 0.72);
+  --glass-bg-strong: rgba(255, 255, 255, 0.86);
+  --glass-bg-tinted: rgba(248, 250, 252, 0.78);
+  --glass-border:    rgba(255, 255, 255, 0.55);
+  --glass-shadow:    0 4px 16px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.05);
+  --glass-blur:      14px;
+
+  /* card palette · 8 distinct hues for visual differentiation */
+  --card-1-bg: #ecfeff; --card-1-bd: #06b6d4; --card-1-tx: #155e75; /* cyan */
+  --card-2-bg: #ecfdf5; --card-2-bd: #10b981; --card-2-tx: #065f46; /* mint */
+  --card-3-bg: #fef3c7; --card-3-bd: #f59e0b; --card-3-tx: #92400e; /* amber */
+  --card-4-bg: #fee2e2; --card-4-bd: #ef4444; --card-4-tx: #991b1b; /* red */
+  --card-5-bg: #faf5ff; --card-5-bd: #a855f7; --card-5-tx: #581c87; /* lavender */
+  --card-6-bg: #dbeafe; --card-6-bd: #3b82f6; --card-6-tx: #1e3a8a; /* blue */
+  --card-7-bg: #fce7f3; --card-7-bd: #ec4899; --card-7-tx: #9d174d; /* pink */
+  --card-8-bg: #f3e8ff; --card-8-bd: #7c3aed; --card-8-tx: #5b21b6; /* violet */
+
+  /* IPO+V flow palette */
+  --ipo-input-bg:        #dbeafe; --ipo-input-bd:        #3b82f6;
+  --ipo-process-bg:      #fef3c7; --ipo-process-bd:      #f59e0b;
+  --ipo-output-bg:       #ecfdf5; --ipo-output-bd:       #10b981;
+  --ipo-visualization-bg:#faf5ff; --ipo-visualization-bd:#a855f7;
+}
+
+/* === GLASS CARD CORE === */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  padding: 16px;
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+}
+
+/* === KIND-SPECIFIC CARDS · pick by number 1..8 === */
+.card-1 { background: var(--card-1-bg); border-left: 5px solid var(--card-1-bd); color: var(--card-1-tx); }
+.card-2 { background: var(--card-2-bg); border-left: 5px solid var(--card-2-bd); color: var(--card-2-tx); }
+.card-3 { background: var(--card-3-bg); border-left: 5px solid var(--card-3-bd); color: var(--card-3-tx); }
+.card-4 { background: var(--card-4-bg); border-left: 5px solid var(--card-4-bd); color: var(--card-4-tx); }
+.card-5 { background: var(--card-5-bg); border-left: 5px solid var(--card-5-bd); color: var(--card-5-tx); }
+.card-6 { background: var(--card-6-bg); border-left: 5px solid var(--card-6-bd); color: var(--card-6-tx); }
+.card-7 { background: var(--card-7-bg); border-left: 5px solid var(--card-7-bd); color: var(--card-7-tx); }
+.card-8 { background: var(--card-8-bg); border-left: 5px solid var(--card-8-bd); color: var(--card-8-tx); }
+
+/* Semantic aliases */
+.card-info   { background: var(--card-5-bg); border-left: 5px solid var(--card-5-bd); color: var(--card-5-tx); }
+.card-action { background: var(--card-2-bg); border-left: 5px solid var(--card-2-bd); color: var(--card-2-tx); }
+.card-input        { background: var(--ipo-input-bg);         border-left: 5px solid var(--ipo-input-bd); }
+.card-process      { background: var(--ipo-process-bg);       border-left: 5px solid var(--ipo-process-bd); }
+.card-output       { background: var(--ipo-output-bg);        border-left: 5px solid var(--ipo-output-bd); }
+.card-visualization{ background: var(--ipo-visualization-bg); border-left: 5px solid var(--ipo-visualization-bd); }
+
+/* === BOOTSTRAP-FLAVORED UTILITY === */
+.btn-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.15s;
+}
+.btn-glass:hover { background: var(--glass-bg-strong); transform: translateY(-1px); }
+.btn-glass-primary { background: rgba(16, 185, 129, 0.9); color: #fff; border-color: rgba(16, 185, 129, 1); }
+.btn-glass-primary:hover { background: rgba(16, 185, 129, 1); }
+.btn-glass-danger { background: rgba(239, 68, 68, 0.9); color: #fff; border-color: rgba(239, 68, 68, 1); }
+
+/* === PAGE WORKSPACE === */
+.workspace-fixed {
+  /* Per operator: content/workspace remains fixed · only menus resize */
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* === RESIZABLE SPLITTER HANDLE === */
+.splitter-handle {
+  width: 6px;
+  cursor: col-resize;
+  background: linear-gradient(180deg, transparent, rgba(148, 163, 184, 0.5), transparent);
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.splitter-handle:hover {
+  background: linear-gradient(180deg, transparent, rgba(16, 185, 129, 0.6), transparent);
+}
+.splitter-handle.dragging {
+  background: rgba(16, 185, 129, 0.7);
+}
+
+/* === HORIZONTAL FLOW STRIP === */
+.flow-strip {
+  display: flex;
+  gap: 0;
+  margin-bottom: 16px;
+  background: var(--glass-bg);
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+}
+.flow-step {
+  flex: 1;
+  padding: 10px 14px;
+  background: transparent;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+}
+.flow-step.active.input        { background: var(--ipo-input-bg);         color: var(--ipo-input-bd); }
+.flow-step.active.process      { background: var(--ipo-process-bg);       color: var(--ipo-process-bd); }
+.flow-step.active.output       { background: var(--ipo-output-bg);        color: var(--ipo-output-bd); }
+.flow-step.active.visualization{ background: var(--ipo-visualization-bg); color: var(--ipo-visualization-bd); }
+.flow-step:not(:last-child)::after {
+  content: '›';
+  position: absolute;
+  right: -8px;
+  color: #cbd5e1;
+  font-size: 18px;
+}
+
+/* === OBJECTIVE + TODO BLOCK === */
+.objective-block {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.06), rgba(59, 130, 246, 0.06));
+  border-left: 5px solid #a855f7;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
+}
+.objective-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #581c87;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.objective-text {
+  font-size: 13px;
+  color: #1f2937;
+  line-height: 1.4;
+}
+.todo-list { list-style: none; padding: 0; margin: 10px 0 0; }
+.todo-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 0; font-size: 12px; color: #475569;
+}
+.todo-item input[type="checkbox"] {
+  accent-color: #10b981;
+  cursor: pointer;
+}
+.todo-item.done { color: #94a3b8; text-decoration: line-through; }
+
+/* === HEADING POLISH === */
+.h-glass {
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0f172a, #475569);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 4px;
+}
+.subtle {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* === FIRST 32 CARDS · auto-rotate palette · use .card-rotate inside parent === */
+.card-rotate > *:nth-child(8n+1) { background: var(--card-1-bg); border-left-color: var(--card-1-bd); color: var(--card-1-tx); }
+.card-rotate > *:nth-child(8n+2) { background: var(--card-2-bg); border-left-color: var(--card-2-bd); color: var(--card-2-tx); }
+.card-rotate > *:nth-child(8n+3) { background: var(--card-3-bg); border-left-color: var(--card-3-bd); color: var(--card-3-tx); }
+.card-rotate > *:nth-child(8n+4) { background: var(--card-4-bg); border-left-color: var(--card-4-bd); color: var(--card-4-tx); }
+.card-rotate > *:nth-child(8n+5) { background: var(--card-5-bg); border-left-color: var(--card-5-bd); color: var(--card-5-tx); }
+.card-rotate > *:nth-child(8n+6) { background: var(--card-6-bg); border-left-color: var(--card-6-bd); color: var(--card-6-tx); }
+.card-rotate > *:nth-child(8n+7) { background: var(--card-7-bg); border-left-color: var(--card-7-bd); color: var(--card-7-tx); }
+.card-rotate > *:nth-child(8n)   { background: var(--card-8-bg); border-left-color: var(--card-8-bd); color: var(--card-8-tx); }
+.card-rotate > * {
+  border-left: 5px solid;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
