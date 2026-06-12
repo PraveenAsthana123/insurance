@@ -103,6 +103,9 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/chatgroup',  icon: '💬', label: 'ChatGroup · human + agent rooms' },
           { to: '/control-tower', icon: '🏗', label: '§144 · AI Control Tower (12 dashboards)' },
           { to: '/stt',        icon: '🎙', label: 'Speech-to-Text · audio + video' },
+          { to: '/tts',        icon: '🔊', label: 'Text-to-Speech (§F01)' },
+          { to: '/notifications', icon: '🔔', label: 'Notification Center (§F02)' },
+          { to: '/feature-flags', icon: '🎛', label: 'Feature Flags (§F03)' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,

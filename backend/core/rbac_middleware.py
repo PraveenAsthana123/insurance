@@ -142,6 +142,10 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
     # because POST consumes compute + writes temp files.
     ("POST", re.compile(r"^/api/v1/video-intel/audio-to-text$"),                   {"manager", "tester"}),
     ("POST", re.compile(r"^/api/v1/video-intel/video-to-text$"),                   {"manager", "tester"}),
+
+    # -------- §F01 TTS endpoints --------
+    ("GET",  re.compile(r"^/api/v1/voice-ai/text-to-speech/voices$"),              _READ_ROLES),
+    ("POST", re.compile(r"^/api/v1/voice-ai/text-to-speech$"),                     {"manager", "tester"}),
 ]
 
 # Backwards-compatible alias — earlier commits referenced SALES_PERMS.

@@ -76,6 +76,9 @@ import ProcessesPage from './pages/ProcessesPage';
 import ChatGroupPage from './pages/ChatGroupPage';
 import ControlTowerPage from './pages/ControlTowerPage';
 import SpeechToTextPage from './pages/SpeechToTextPage';
+import TextToSpeechPage from './pages/TextToSpeechPage';
+import NotificationCenterPage from './pages/NotificationCenterPage';
+import FeatureFlagsPage from './pages/FeatureFlagsPage';
 
 function PageLoader({ label }) {
   return (
@@ -237,6 +240,12 @@ export default function App() {
         <Route path="/control-tower" element={<ControlTowerPage />} />
         <Route path="/stt" element={<SpeechToTextPage />} />
         <Route path="/speech-to-text" element={<SpeechToTextPage />} />
+        <Route path="/tts" element={<TextToSpeechPage />} />
+        <Route path="/text-to-speech" element={<TextToSpeechPage />} />
+        <Route path="/notifications" element={<NotificationCenterPage />} />
+        <Route path="/notification-center" element={<NotificationCenterPage />} />
+        <Route path="/feature-flags" element={<FeatureFlagsPage />} />
+        <Route path="/flags" element={<FeatureFlagsPage />} />
       </Routes>
     </BrowserRouter>
   );
