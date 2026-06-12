@@ -1,0 +1,27 @@
+# §E1 · keep image lean · skip dev artefacts
+.git/
+.github/
+*.pyc
+__pycache__/
+.venv/
+venv/
+node_modules/
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+jobs/logs/
+jobs/reports/
+jobs/state/
+data/eval/
+data/security-tests/
+mlruns/
+*.sqlite
+*.db
+*.log
+.env
+.env.local
+ComfyUI/
+docs/
+.agent/
+.claude/
+.serena/

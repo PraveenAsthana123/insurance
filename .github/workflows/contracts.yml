@@ -1,0 +1,46 @@
+name: contracts
+
+on:
+  pull_request:
+    paths:
+      - 'backend/**/*.py'
+      - 'frontend/src/schemas/**'
+      - 'scripts/export_pydantic_schemas.py'
+      - '.github/workflows/contracts.yml'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  pydantic-zod-drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install minimum deps for schema export
+        run: |
+          python -m pip install --upgrade pip
+          pip install pydantic fastapi psycopg2-binary uvicorn pyyaml httpx
+
+      - name: Run schema export
+        env:
+          INSUR_SKIP_MIGRATIONS: '1'
+          INSUR_DISABLE_PRESIDIO: '1'
+        run: python scripts/export_pydantic_schemas.py
+
+      - name: Check committed contracts match regenerated output
+        run: |
+          if ! git diff --exit-code -- backend/contracts frontend/src/schemas; then
+            echo "::error::Pydantic-Zod contract drift detected. Regenerate contracts and re-commit."
+            git status --short -- backend/contracts frontend/src/schemas
+            exit 1
+          fi
+          echo "Contracts in sync"

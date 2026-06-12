@@ -199,6 +199,7 @@ def create_app() -> FastAPI:
     from well_known.router import router as well_known_router  # /robots.txt + /.well-known/* — Iter 36
     from cron_registry.router import router as cron_registry_router  # /api/v1/cron-registry — Iter 36
     from agentic_core.router import router as agentic_router  # /api/v1/agentic — Iter 37
+    from verification_engine.router import router as verification_router  # /api/v1/verification — §B5
     from agentic_ops.router import router as agentic_ops_router  # /api/v1/agentic-ops — Iter 38
     from enterprise_governance.router import router as governance_router  # /api/v1/governance — Iter 39
     from risk_incident_learning.router import router as ril_router  # /api/v1/ril — Iter 40
@@ -360,6 +361,7 @@ def create_app() -> FastAPI:
     app.include_router(well_known_router)          # /robots.txt + /.well-known/* — Iter 36
     app.include_router(cron_registry_router)       # /api/v1/cron-registry — Iter 36
     app.include_router(agentic_router)             # /api/v1/agentic — Iter 37
+    app.include_router(verification_router)        # /api/v1/verification — §B5
     app.include_router(agentic_ops_router)         # /api/v1/agentic-ops — Iter 38
     app.include_router(governance_router)          # /api/v1/governance — Iter 39
     app.include_router(ril_router)                 # /api/v1/ril — Iter 40
