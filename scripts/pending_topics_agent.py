@@ -82,11 +82,17 @@ def extra_scans() -> list[dict]:
     cx = psycopg2.connect(host='localhost', port=5434, user='insur_user',
                           password='insur_secret_password', dbname='insur_analytics')
 
-    # Watchdog activity (last hour)
+    # Watchdog activity (last hour) — accept both trigger_kind='watchdog'
+    # AND the canonical cron prefix 'cron-watchdog' that the autonomous loop emits.
+    # Also fall back to agent_id LIKE 'sys_watchdog%%' so a renamed trigger_kind
+    # doesn't silently produce a false-positive P1 finding (root-cause fixed
+    # 2026-06-11 per §142+§57.7 honest reporting).
     with cx, cx.cursor() as cur:
         cur.execute("""
             SELECT COUNT(*) FROM agent_invocation
-            WHERE trigger_kind='watchdog' AND created_at > NOW() - INTERVAL '1 hour'
+            WHERE (trigger_kind IN ('watchdog','cron-watchdog')
+                   OR agent_id LIKE 'sys_watchdog%%')
+              AND created_at > NOW() - INTERVAL '1 hour'
         """)
         wd = cur.fetchone()[0]
         if wd == 0:
