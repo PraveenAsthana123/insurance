@@ -185,9 +185,29 @@ export default function AiTypesPage() {
 
           {selType && detail && (
             <>
+              {/* Main + Sub reference visible INSIDE content (operator req) */}
+              <div style={{
+                background: '#eef2ff', border: '1px solid #c7d2fe', borderRadius: 6,
+                padding: '8px 12px', marginBottom: 12, fontSize: 11, color: '#3730a3',
+                display: 'flex', gap: 12, flexWrap: 'wrap',
+              }}>
+                {selDomain && (
+                  <span>
+                    <strong>Main:</strong> L{selDomain.id} {selDomain.name}
+                    <span style={{ opacity: 0.7, marginLeft: 4 }}>· {selDomain.purpose?.substring(0, 60)}</span>
+                  </span>
+                )}
+                {selCategory && (
+                  <span>
+                    <strong>Sub:</strong> #{selCategory.n} {selCategory.name}
+                    <span style={{ opacity: 0.7, marginLeft: 4 }}>· {selCategory.purpose}</span>
+                  </span>
+                )}
+              </div>
               <h2 style={{ margin: '0 0 4px', fontSize: 17 }}>{detail.ai_type}</h2>
               <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 10 }}>
                 spec: {detail.spec}
+                {selCategory?.examples && <> · examples: {selCategory.examples}</>}
               </div>
 
               {/* Tabs */}
