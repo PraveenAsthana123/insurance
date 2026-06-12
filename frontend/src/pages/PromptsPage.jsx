@@ -13,13 +13,17 @@ export default function PromptsPage() {
   const [byDay, setByDay] = useState(null);
   const [q, setQ] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
-  const [hours, setHours] = useState(48);
+  const [hours, setHours] = useState(168);  // default = last 7 days
+  const [decisions, setDecisions] = useState([]);
+  const [showDecisions, setShowDecisions] = useState(true);
 
   const reload = () => {
     fetch(`${API}/api/v1/prompts/conversation/health`).then(r => r.json()).then(setHealth);
     fetch(`${API}/api/v1/prompts/conversation/by-day`).then(r => r.json()).then(setByDay);
-    fetch(`${API}/api/v1/prompts/conversation/recent?limit=500&hours=${hours}`)
+    fetch(`${API}/api/v1/prompts/conversation/recent?limit=1000&hours=${hours}`)
       .then(r => r.json()).then(d => setItems(d.items || []));
+    fetch(`${API}/api/v1/prompts/decisions/recent?hours=${hours}&limit=300`)
+      .then(r => r.json()).then(d => setDecisions(d.items || []));
   };
 
   useEffect(reload, [hours]);
@@ -103,9 +107,37 @@ export default function PromptsPage() {
         }}>Refresh</button>
       </div>
 
-      <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 8 }}>
-        Showing {filtered.length} turns
+      <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 8, display: 'flex', gap: 16, alignItems: 'center' }}>
+        <span>Showing {filtered.length} conversation turns · {decisions.length} decisions</span>
+        <label style={{ cursor: 'pointer' }}>
+          <input type="checkbox" checked={showDecisions} onChange={e => setShowDecisions(e.target.checked)} />
+          Show decisions (audit_log)
+        </label>
       </div>
+
+      {/* Decisions panel (collapsible) */}
+      {showDecisions && decisions.length > 0 && (
+        <div style={{
+          background: '#fef3c7', border: '1px solid #fde68a',
+          borderRadius: 8, padding: 12, marginBottom: 12,
+        }}>
+          <div style={{ fontWeight: 700, fontSize: 13, color: '#92400e', marginBottom: 8 }}>
+            🟡 DECISIONS · {decisions.length} actions tracked
+          </div>
+          <div style={{ maxHeight: 200, overflowY: 'auto' }}>
+            {decisions.slice(0, 30).map((d, i) => (
+              <div key={i} style={{ fontSize: 11, padding: '4px 0', borderBottom: '1px solid #fde68a' }}>
+                <span style={{ fontFamily: 'monospace', color: '#92400e' }}>{d.ts?.substring(0, 19)}</span>
+                {' · '}
+                <strong>{d.action}</strong>
+                {' · '}
+                <span style={{ color: '#78350f' }}>{d.actor}</span>
+                {d.resource && <span style={{ color: '#9ca3af' }}> · {d.resource}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Conversation list · vertical · one component per row */}
       {filtered.map((it, i) => (

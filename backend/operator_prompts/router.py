@@ -166,6 +166,51 @@ def conv_by_day():
     return {**stamp(), "items": items}
 
 
+@router.get("/decisions/recent")
+def decisions_recent(hours: int = 168, limit: int = 200):
+    """All decisions captured in audit_log over the last N hours (default 7 days)."""
+    conn = db()
+    c = conn.cursor()
+    c.execute("""SELECT created_at, actor, action, resource, payload
+                  FROM audit_log
+                  WHERE created_at > NOW() - (%s * INTERVAL '1 hour')
+                  ORDER BY created_at DESC LIMIT %s""", (hours, limit))
+    items = []
+    for r in c.fetchall():
+        pl = r[4] if isinstance(r[4], dict) else (json.loads(r[4]) if r[4] else {})
+        items.append({"ts": str(r[0]), "actor": r[1], "action": r[2],
+                      "resource": r[3], "payload_excerpt": json.dumps(pl)[:300]})
+    conn.close()
+    return {**stamp(), "n": len(items), "hours": hours, "items": items}
+
+
+@router.get("/timeline/full")
+def timeline_full(hours: int = 168, limit: int = 1000):
+    """Unified timeline · prompts + responses + decisions · last N hours."""
+    conn = db()
+    c = conn.cursor()
+    # Conversation turns
+    c.execute("""SELECT ts, role, LEFT(text_content, 4000) AS text, session_id
+                  FROM conversation_turn
+                  WHERE ts > NOW() - (%s * INTERVAL '1 hour')""", (hours,))
+    turns = [{"ts": str(r[0]), "kind": "conversation", "role": r[1],
+              "text": r[2], "session_id": r[3]} for r in c.fetchall()]
+    # Decisions
+    c.execute("""SELECT created_at, actor, action, resource, payload
+                  FROM audit_log
+                  WHERE created_at > NOW() - (%s * INTERVAL '1 hour')""", (hours,))
+    decisions = []
+    for r in c.fetchall():
+        pl = r[4] if isinstance(r[4], dict) else (json.loads(r[4]) if r[4] else {})
+        decisions.append({"ts": str(r[0]), "kind": "decision", "actor": r[1],
+                          "action": r[2], "resource": r[3],
+                          "payload_excerpt": json.dumps(pl)[:300]})
+    conn.close()
+    combined = sorted(turns + decisions, key=lambda x: x["ts"], reverse=True)[:limit]
+    return {**stamp(), "n_turns": len(turns), "n_decisions": len(decisions),
+            "n_total": len(combined), "items": combined}
+
+
 @router.get("/conversation/search")
 def conv_search(q: str, limit: int = 50, role: str = ""):
     conn = db()
