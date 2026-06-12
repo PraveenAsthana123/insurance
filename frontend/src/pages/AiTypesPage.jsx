@@ -5,6 +5,7 @@
  *   Right:     200 AI Types (filtered by selected category) · 4 detail tabs per type
  */
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const API = (typeof window !== 'undefined' && window.__BACKEND__) || 'http://localhost:8001';
 
@@ -42,6 +43,8 @@ const parseRange = (rangeStr) => {
 };
 
 export default function AiTypesPage() {
+  const [searchParams] = useSearchParams();
+  const businessDomain = searchParams.get('domain') || 'all';
   const [domains, setDomains] = useState([]);
   const [categories, setCategories] = useState([]);
   const [types, setTypes] = useState([]);
@@ -84,9 +87,23 @@ export default function AiTypesPage() {
   return (
     <div style={{ padding: 20, background: '#f3f4f6', minHeight: 'calc(100vh - 120px)' }}>
       <div style={{ marginBottom: 14 }}>
-        <h1 style={{ margin: 0, fontSize: 22 }}>🤖 AI Types · §131 catalog</h1>
+        <h1 style={{ margin: 0, fontSize: 22 }}>
+          🤖 AI Types · §131 catalog
+          {businessDomain !== 'all' && (
+            <span style={{
+              marginLeft: 12, fontSize: 14, padding: '4px 12px', borderRadius: 6,
+              background: businessDomain === 'b2c' ? '#dcfce7'
+                          : businessDomain === 'b2b' ? '#f3e8ff' : '#dbeafe',
+              color: businessDomain === 'b2c' ? '#15803d'
+                     : businessDomain === 'b2b' ? '#7e22ce' : '#1d4ed8',
+            }}>
+              {businessDomain.toUpperCase()}
+            </span>
+          )}
+        </h1>
         <div style={{ fontSize: 13, color: '#6b7280' }}>
-          3-level hierarchy: 10 Mega-Domains → 100 Categories → 200 AI Types
+          3-level: 10 Mega-Domains → 100 Categories → 200 AI Types
+          {businessDomain !== 'all' && ` · filtered by ${businessDomain.toUpperCase()} business domain`}
         </div>
       </div>
 

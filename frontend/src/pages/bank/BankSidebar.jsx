@@ -82,6 +82,36 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         }}>≡</button>
       </div>
 
+      {/* §148 AI Catalog · main menu entry · B2C/B2B/B2E sub-menu */}
+      <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
+        <div style={{
+          padding: '4px 16px 6px', color: '#fbbf24',
+          fontSize: FS_SMALL_LABEL, fontWeight: 700,
+          textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>AI Catalog (§131)</div>
+        <Link to="/ai-types" style={{
+          display: 'flex', alignItems: 'center', gap: 8, padding: '6px 16px',
+          color: '#fbbf24', textDecoration: 'none',
+          fontSize: FS_MID_ROW, fontWeight: 700,
+        }}>
+          <span>🤖</span><span style={{ flex: 1 }}>All 200 AI Types</span>
+        </Link>
+        {[
+          { domain: 'b2c', icon: '🟢', label: 'B2C · Consumer-facing AI' },
+          { domain: 'b2b', icon: '🟣', label: 'B2B · Business partner AI' },
+          { domain: 'b2e', icon: '🔵', label: 'B2E · Employee-facing AI' },
+        ].map((d) => (
+          <Link key={d.domain} to={`/ai-types?domain=${d.domain}`} style={{
+            display: 'flex', alignItems: 'center', gap: 8,
+            padding: '4px 28px',
+            color: '#dbeafe', textDecoration: 'none',
+            fontSize: FS_LEAF_ROW,
+          }}>
+            <span>{d.icon}</span><span style={{ flex: 1 }}>{d.label}</span>
+          </Link>
+        ))}
+      </div>
+
       <div style={{ padding: '8px 0', borderBottom: '1px solid #1e40af', marginBottom: 8 }}>
         {[
           { to: '/bank/prompts',   icon: '💬', label: 'My input prompts',        color: '#60a5fa' },
