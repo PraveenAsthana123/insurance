@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_dataops_ai_agent",
+  "agent_name": "DataOps AI Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of DataOps AI predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:24.568570"
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000758dc408e9687675",
+  "service": "customer-service-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204554752,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204555752,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204560752,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204568752,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204718752,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204748752,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204760752,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Customer Service AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

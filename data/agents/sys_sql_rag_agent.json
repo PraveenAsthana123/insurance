@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_sql_rag_agent",
+  "agent_name": "SQL RAG Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of SQL RAG predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:25.124763"
+}

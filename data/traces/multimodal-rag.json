@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000317ec6cbaeb3e0e5",
+  "service": "multimodal-rag-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204870684,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204871684,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204876684,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204884684,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205034684,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205064684,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205076684,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Multimodal RAG",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

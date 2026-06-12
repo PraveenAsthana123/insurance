@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000678d19bf4047f557",
+  "service": "manufacturing-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204834663,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204835663,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204840663,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204848663,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204998663,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205028663,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205040663,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Manufacturing AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

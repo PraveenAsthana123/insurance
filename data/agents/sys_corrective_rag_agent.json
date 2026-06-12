@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_corrective_rag_agent",
+  "agent_name": "Corrective RAG Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of Corrective RAG predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:24.552349"
+}

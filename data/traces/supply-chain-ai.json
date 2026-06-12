@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000005ebff350acfc1a3",
+  "service": "supply-chain-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205131662,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205132662,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205137662,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205145662,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205295662,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205325662,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205337662,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Supply Chain AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

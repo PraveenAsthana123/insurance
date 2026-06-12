@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000002aa6791c5b0ebe6b",
+  "service": "data-observability-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204562508,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204563508,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204568508,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204576508,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204726508,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204756508,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204768508,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Data Observability AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

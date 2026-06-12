@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_rlhf_agent",
+  "agent_name": "RLHF Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of RLHF predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:24.999675"
+}

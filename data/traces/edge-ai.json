@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000140b44e2ae62d6c7",
+  "service": "edge-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204627574,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204628574,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204633574,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204641574,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204791574,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204821574,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204833574,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Edge AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

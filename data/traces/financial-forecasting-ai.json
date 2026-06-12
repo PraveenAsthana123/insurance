@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000553ffd2b7682b21d",
+  "service": "financial-forecasting-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204662806,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204663806,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204668806,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204676806,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204826806,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204856806,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204868806,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Financial Forecasting AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000000be6b069f7dc8c08",
+  "service": "mlops-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204849953,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204850953,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204855953,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204863953,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205013953,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205043953,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205055953,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "MLOps",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000006b12b9e4f1758c8",
+  "service": "llmops-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204829887,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204830887,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204835887,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204843887,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204993887,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205023887,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205035887,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "LLMOps",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

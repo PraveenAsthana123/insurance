@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000044ab51f3dc671933",
+  "service": "drone-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204620334,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204621334,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204626334,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204634334,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204784334,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204814334,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204826334,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Drone AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "ai_type": "Neuro AI",
+  "slug": "neuro-ai",
+  "tracked_errors": [
+    {
+      "code": "E001",
+      "name": "input_schema_mismatch",
+      "severity": "P2",
+      "n_in_24h": 0,
+      "alert_threshold": 5
+    },
+    {
+      "code": "E002",
+      "name": "model_load_failure",
+      "severity": "P0",
+      "n_in_24h": 0,
+      "alert_threshold": 1
+    },
+    {
+      "code": "E003",
+      "name": "prediction_timeout",
+      "severity": "P1",
+      "n_in_24h": 2,
+      "alert_threshold": 10
+    },
+    {
+      "code": "E004",
+      "name": "audit_write_failure",
+      "severity": "P1",
+      "n_in_24h": 0,
+      "alert_threshold": 3
+    },
+    {
+      "code": "E005",
+      "name": "fairness_gate_breach",
+      "severity": "P0",
+      "n_in_24h": 0,
+      "alert_threshold": 1
+    }
+  ],
+  "sample_recent": [],
+  "computed_at": "2026-06-11T18:13:24.873223",
+  "spec": "\u00a7138 error tracking"
+}

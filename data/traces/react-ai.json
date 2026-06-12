@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000034086d28b199aeb2",
+  "service": "react-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204977564,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204978564,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204983564,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204991564,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205141564,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205171564,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205183564,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "ReAct AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

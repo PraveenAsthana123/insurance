@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001704569d6889953b",
+  "service": "cognitive-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204493448,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204494448,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204499448,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204507448,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204657448,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204687448,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204699448,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Cognitive AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

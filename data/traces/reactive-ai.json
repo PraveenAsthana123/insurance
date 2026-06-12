@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000007e333f5563edd835",
+  "service": "reactive-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204980239,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204981239,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204986239,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204994239,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205144239,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205174239,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205186239,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Reactive AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

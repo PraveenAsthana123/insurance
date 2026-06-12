@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000006c3ea5293efa0be7",
+  "service": "drug-discovery-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204623908,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204624908,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204629908,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204637908,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204787908,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204817908,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204829908,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Drug Discovery AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

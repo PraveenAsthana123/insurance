@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000002012c72357ebd07e",
+  "service": "voice-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205180469,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205181469,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205186469,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205194469,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205344469,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205374469,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205386469,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Voice AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

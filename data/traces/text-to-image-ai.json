@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000065a77015f5a2916f",
+  "service": "text-to-image-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205141359,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205142359,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205147359,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205155359,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205305359,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205335359,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205347359,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Text-to-Image AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

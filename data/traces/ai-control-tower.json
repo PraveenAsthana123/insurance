@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000024754952da17f6b4",
+  "service": "ai-control-tower-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204395220,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204396220,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204401220,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204409220,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204559220,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204589220,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204601220,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "AI Control Tower",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000000beaa3ac0171c266",
+  "service": "tree-of-thought-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205158149,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205159149,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205164149,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205172149,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205322149,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205352149,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205364149,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Tree-of-Thought AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

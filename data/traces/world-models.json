@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000006d5785442af21c2c",
+  "service": "world-models-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205187870,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205188870,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205193870,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205201870,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205351870,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205381870,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205393870,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "World Models",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

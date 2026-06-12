@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000007dd15d1a44bbf861",
+  "service": "face-recognition-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204651754,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204652754,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204657754,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204665754,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204815754,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204845754,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204857754,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Face Recognition AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

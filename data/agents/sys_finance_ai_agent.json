@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_finance_ai_agent",
+  "agent_name": "Finance AI Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of Finance AI predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:24.660637"
+}

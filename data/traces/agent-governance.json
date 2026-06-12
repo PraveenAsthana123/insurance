@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000003ae4b802bd45ba35",
+  "service": "agent-governance-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204310590,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204311590,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204316590,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204324590,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204474590,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204504590,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204516590,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Agent Governance",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

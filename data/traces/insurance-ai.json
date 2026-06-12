@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000045a025aa751053f4",
+  "service": "insurance-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204783230,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204784230,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204789230,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204797230,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204947230,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204977230,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204989230,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Insurance AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

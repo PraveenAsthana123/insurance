@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_time_series_ai_agent",
+  "agent_name": "Time-Series AI Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of Time-Series AI predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:25.150802"
+}

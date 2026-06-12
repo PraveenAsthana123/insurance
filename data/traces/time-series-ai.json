@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000004b79c2c1fc2791bc",
+  "service": "time-series-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205150265,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205151265,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205156265,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205164265,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205314265,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205344265,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205356265,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Time-Series AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

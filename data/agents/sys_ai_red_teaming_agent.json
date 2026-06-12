@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_ai_red_teaming_agent",
+  "agent_name": "AI Red Teaming Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of AI Red Teaming predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:24.407000"
+}

@@ -1,0 +1,49 @@
+{
+  "ai_type": "Industrial Robotics AI",
+  "slug": "industrial-robotics-ai",
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "baseline",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.9517
+    },
+    {
+      "id": "S2",
+      "name": "fraud_spike_20pct",
+      "fraud_rate": 0.048,
+      "expected_accuracy": 0.9327,
+      "$ impact": "+$240K leakage"
+    },
+    {
+      "id": "S3",
+      "name": "data_drift_PSI_0.3",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.8565,
+      "$ impact": "-15% recall"
+    },
+    {
+      "id": "S4",
+      "name": "model_attack_evasion",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.7138,
+      "$ impact": "+$1.2M leakage"
+    },
+    {
+      "id": "S5",
+      "name": "double_traffic",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.9517,
+      "$ impact": "2x infra cost"
+    }
+  ],
+  "monte_carlo": {
+    "n_runs": 1000,
+    "confidence_interval_95": [
+      0.9317,
+      0.9717
+    ]
+  },
+  "computed_at": "2026-06-11T18:13:24.776155",
+  "spec": "\u00a7138 simulation"
+}

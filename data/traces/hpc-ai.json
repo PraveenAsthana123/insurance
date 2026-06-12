@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000106f24bbe2443786",
+  "service": "hpc-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204756523,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204757523,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204762523,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204770523,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204920523,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204950523,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204962523,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "HPC AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

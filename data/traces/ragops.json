@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000000fc9e59d7a93a018",
+  "service": "ragops-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204974795,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204975795,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204980795,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204988795,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205138795,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205168795,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205180795,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "RAGOps",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

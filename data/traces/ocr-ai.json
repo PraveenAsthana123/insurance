@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001919c6da01d41cbc",
+  "service": "ocr-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204915851,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204916851,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204921851,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204929851,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205079851,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205109851,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205121851,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "OCR AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

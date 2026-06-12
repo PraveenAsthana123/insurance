@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000005e38d39b4a97e14a",
+  "service": "reflection-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204989134,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204990134,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204995134,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205003134,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205153134,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205183134,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205195134,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Reflection AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

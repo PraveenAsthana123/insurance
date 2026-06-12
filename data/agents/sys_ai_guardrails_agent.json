@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_ai_guardrails_agent",
+  "agent_name": "AI Guardrails Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of AI Guardrails predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:24.399785"
+}

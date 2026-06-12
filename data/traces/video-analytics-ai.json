@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000014cefe24cb54e1a8",
+  "service": "video-analytics-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205175569,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205176569,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205181569,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205189569,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205339569,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205369569,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205381569,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Video Analytics AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

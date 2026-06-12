@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000005ee83a77f97a5a4a",
+  "service": "model-monitoring-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204857030,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204858030,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204863030,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204871030,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205021030,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205051030,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205063030,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Model Monitoring AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

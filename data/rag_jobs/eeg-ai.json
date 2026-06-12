@@ -1,0 +1,23 @@
+{
+  "ai_type": "EEG AI",
+  "slug": "eeg-ai",
+  "embed_config": {
+    "model": "bge-m3",
+    "dimensions": 1024,
+    "batch_size": 32
+  },
+  "vector_db": {
+    "engine": "qdrant",
+    "collection": "eeg-ai_embeddings",
+    "url": "http://localhost:6333"
+  },
+  "retrieval": {
+    "top_k": 5,
+    "score_threshold": 0.7,
+    "rerank": true,
+    "rerank_model": "bge-reranker-v2-m3"
+  },
+  "indexing_schedule": "0 2 * * *",
+  "drift_schedule": "0 3 * * 0",
+  "spec": "\u00a7138 rag job"
+}

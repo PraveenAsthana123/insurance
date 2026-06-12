@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000059cedff35e42a96e",
+  "service": "governance-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204683136,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204684136,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204689136,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204697136,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204847136,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204877136,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204889136,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Governance AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

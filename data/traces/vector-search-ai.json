@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000469232c7804a9203",
+  "service": "vector-search-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205173171,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205174171,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205179171,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205187171,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205337171,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205367171,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205379171,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Vector Search AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

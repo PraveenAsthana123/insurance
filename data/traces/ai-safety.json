@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000012c90002cb9f3f25",
+  "service": "ai-safety-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204409137,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204410137,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204415137,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204423137,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204573137,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204603137,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204615137,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "AI Safety",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

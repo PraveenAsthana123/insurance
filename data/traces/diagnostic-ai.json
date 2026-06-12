@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000119991d4386b33ba",
+  "service": "diagnostic-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204595757,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204596757,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204601757,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204609757,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204759757,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204789757,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204801757,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Diagnostic AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

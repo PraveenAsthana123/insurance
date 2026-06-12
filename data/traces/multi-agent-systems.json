@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000736dc05d3e1e9c03",
+  "service": "multi-agent-systems-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204863059,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204864059,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204869059,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204877059,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205027059,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205057059,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205069059,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Multi-Agent Systems",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

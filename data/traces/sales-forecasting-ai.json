@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000003432f1fa03ec7b7c",
+  "service": "sales-forecasting-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205021223,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205022223,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205027223,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205035223,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205185223,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205215223,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205227223,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Sales Forecasting AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

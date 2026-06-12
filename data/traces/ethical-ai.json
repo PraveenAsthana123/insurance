@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000460c9bd8535ad287",
+  "service": "ethical-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204643813,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204644813,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204649813,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204657813,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204807813,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204837813,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204849813,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Ethical AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

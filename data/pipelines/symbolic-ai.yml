@@ -1,0 +1,47 @@
+# Symbolic AI · DAG pipeline · §138
+
+name: symbolic-ai_pipeline
+schedule: "@hourly"
+catchup: false
+
+dag:
+  - id: extract
+    operator: PostgresExtract
+    sql: "SELECT * FROM claims_record WHERE updated_at > '{ ds }'"
+    out: raw_df
+
+  - id: preprocess
+    operator: PythonOperator
+    callable: preprocessing.run
+    deps: [extract]
+    out: clean_df
+
+  - id: feature_eng
+    operator: PythonOperator
+    callable: features.engineer
+    deps: [preprocess]
+    out: feature_df
+
+  - id: predict
+    operator: PythonOperator
+    callable: inference.batch_predict
+    model_path: "models/symbolic-ai/model.joblib"
+    deps: [feature_eng]
+    out: predictions_df
+
+  - id: audit
+    operator: PostgresInsert
+    table: audit_log
+    deps: [predict]
+
+  - id: drift_check
+    operator: PythonOperator
+    callable: drift.check
+    threshold_psi: 0.2
+    deps: [predict]
+
+resources:
+  cpu: 2
+  memory: 4G
+  gpu: 0
+  timeout_minutes: 30

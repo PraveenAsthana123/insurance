@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000100a4ace53330e94",
+  "service": "lineage-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204825444,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204826444,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204831444,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204839444,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204989444,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205019444,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205031444,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Lineage AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

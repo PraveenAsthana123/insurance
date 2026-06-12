@@ -1,0 +1,49 @@
+{
+  "ai_type": "Drift Detection AI",
+  "slug": "drift-detection-ai",
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "baseline",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.9633
+    },
+    {
+      "id": "S2",
+      "name": "fraud_spike_20pct",
+      "fraud_rate": 0.048,
+      "expected_accuracy": 0.944,
+      "$ impact": "+$240K leakage"
+    },
+    {
+      "id": "S3",
+      "name": "data_drift_PSI_0.3",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.867,
+      "$ impact": "-15% recall"
+    },
+    {
+      "id": "S4",
+      "name": "model_attack_evasion",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.7225,
+      "$ impact": "+$1.2M leakage"
+    },
+    {
+      "id": "S5",
+      "name": "double_traffic",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.9633,
+      "$ impact": "2x infra cost"
+    }
+  ],
+  "monte_carlo": {
+    "n_runs": 1000,
+    "confidence_interval_95": [
+      0.9433,
+      0.9833000000000001
+    ]
+  },
+  "computed_at": "2026-06-11T18:13:24.615949",
+  "spec": "\u00a7138 simulation"
+}

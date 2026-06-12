@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000007eeb86ae12d463a8",
+  "service": "neuro-symbolic-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204874976,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204875976,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204880976,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204888976,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205038976,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205068976,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205080976,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Neuro-Symbolic AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

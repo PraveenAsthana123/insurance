@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000003ba8a62e862536f6",
+  "service": "dataops-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204568004,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204569004,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204574004,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204582004,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204732004,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204762004,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204774004,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "DataOps AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

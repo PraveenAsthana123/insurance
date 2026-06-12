@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000024e64059734c62ce",
+  "service": "summarization-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205127089,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205128089,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205133089,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205141089,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205291089,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205321089,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205333089,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Summarization AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

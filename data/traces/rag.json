@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000650c09883e7d858d",
+  "service": "rag-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204972622,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204973622,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204978622,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204986622,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205136622,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205166622,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205178622,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "RAG",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

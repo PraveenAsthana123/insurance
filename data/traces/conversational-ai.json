@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000005021d3982279d2ac",
+  "service": "conversational-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204549045,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204550045,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204555045,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204563045,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204713045,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204743045,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204755045,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Conversational AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

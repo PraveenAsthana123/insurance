@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000003863eab4cfec6e12",
+  "service": "quantum-machine-learning-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204954782,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204955782,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204960782,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204968782,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205118782,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205148782,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205160782,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Quantum Machine Learning",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

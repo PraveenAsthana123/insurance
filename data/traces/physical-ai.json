@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000064e475cbe4f9ed43",
+  "service": "physical-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204931276,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204932276,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204937276,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204945276,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205095276,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205125276,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205137276,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Physical AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

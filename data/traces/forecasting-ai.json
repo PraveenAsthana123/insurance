@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000067264087d4ee55f0",
+  "service": "forecasting-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204668162,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204669162,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204674162,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204682162,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204832162,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204862162,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204874162,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Forecasting AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001eebdde92c5ad981",
+  "service": "business-rule-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204463371,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204464371,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204469371,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204477371,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204627371,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204657371,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204669371,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Business Rule AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

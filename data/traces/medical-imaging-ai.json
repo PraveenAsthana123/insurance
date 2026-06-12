@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000020df13b550111b94",
+  "service": "medical-imaging-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204842896,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204843896,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204848896,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204856896,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205006896,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205036896,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205048896,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Medical Imaging AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

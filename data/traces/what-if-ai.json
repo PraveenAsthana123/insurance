@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001ebce2c6dcd2bd5c",
+  "service": "what-if-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205185493,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205186493,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205191493,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205199493,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205349493,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205379493,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205391493,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "What-if AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

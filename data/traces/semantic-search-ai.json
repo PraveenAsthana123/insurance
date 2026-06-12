@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000002623f5aff4cf5043",
+  "service": "semantic-search-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205068984,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205069984,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205074984,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205082984,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205232984,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205262984,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205274984,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Semantic Search AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

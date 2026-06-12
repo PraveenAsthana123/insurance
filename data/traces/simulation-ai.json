@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000005906a78a413060b3",
+  "service": "simulation-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205094282,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205095282,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205100282,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205108282,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205258282,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205288282,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205300282,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Simulation AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

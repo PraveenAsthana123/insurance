@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000005694961370f36f68",
+  "service": "contract-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204546654,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204547654,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204552654,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204560654,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204710654,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204740654,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204752654,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Contract AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

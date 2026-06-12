@@ -1,0 +1,69 @@
+{
+  "title": "Metadata AI \u00b7 metadata-ai \u00b7 production dashboard",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Predictions/sec",
+      "type": "graph",
+      "query": "rate(metadata-ai_predictions_total[5m])"
+    },
+    {
+      "id": 2,
+      "title": "p95 Latency",
+      "type": "graph",
+      "query": "histogram_quantile(0.95, rate(metadata-ai_latency_bucket[5m]))"
+    },
+    {
+      "id": 3,
+      "title": "Accuracy (Live)",
+      "type": "gauge",
+      "query": "avg(metadata-ai_accuracy)"
+    },
+    {
+      "id": 4,
+      "title": "Drift PSI",
+      "type": "graph",
+      "query": "metadata-ai_drift_psi"
+    },
+    {
+      "id": 5,
+      "title": "Fairness DI by Age",
+      "type": "gauge",
+      "query": "metadata-ai_fairness_di_age"
+    },
+    {
+      "id": 6,
+      "title": "Error Rate",
+      "type": "graph",
+      "query": "rate(metadata-ai_errors_total[5m])"
+    },
+    {
+      "id": 7,
+      "title": "HITL Escalations",
+      "type": "graph",
+      "query": "rate(metadata-ai_hitl_total[5m])"
+    },
+    {
+      "id": 8,
+      "title": "Cost/Request ($)",
+      "type": "graph",
+      "query": "rate(metadata-ai_cost_usd[5m])"
+    }
+  ],
+  "alerts": [
+    {
+      "name": "accuracy_below_0.85",
+      "expr": "metadata-ai_accuracy < 0.85"
+    },
+    {
+      "name": "drift_psi_above_0.2",
+      "expr": "metadata-ai_drift_psi > 0.2"
+    },
+    {
+      "name": "error_rate_above_5pct",
+      "expr": "rate(metadata-ai_errors_total[5m]) > 0.05"
+    }
+  ],
+  "refresh": "30s",
+  "spec": "\u00a7138 observability"
+}

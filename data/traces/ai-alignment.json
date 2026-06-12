@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000139d90064871e0b8",
+  "service": "ai-alignment-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204377476,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204378476,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204383476,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204391476,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204541476,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204571476,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204583476,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "AI Alignment",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

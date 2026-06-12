@@ -1,0 +1,47 @@
+{
+  "ai_type": "Text-to-Audio AI",
+  "slug": "text-to-audio-ai",
+  "univariate": {
+    "n_features": 128,
+    "skewness_range": [
+      -1.2,
+      1.5
+    ],
+    "outlier_count": 42
+  },
+  "bivariate": {
+    "top_correlations": [
+      {
+        "feat_a": "f0",
+        "feat_b": "f3",
+        "pearson": 0.42
+      },
+      {
+        "feat_a": "f1",
+        "feat_b": "f5",
+        "pearson": -0.31
+      }
+    ]
+  },
+  "target_relationship": {
+    "mutual_information_top": [
+      "f0",
+      "f1",
+      "f2"
+    ],
+    "class_balance": "55/45"
+  },
+  "missing_pattern": {
+    "total_missing": 0,
+    "missingness_correlated": false
+  },
+  "drift_report": {
+    "psi": 0.05,
+    "csi": 0.04,
+    "status": "STABLE"
+  },
+  "n_eda_plots": 7,
+  "plots_at": "data/plots/text-to-audio-ai/",
+  "computed_at": "2026-06-11T18:13:25.138533",
+  "spec": "\u00a7138 EDA"
+}

@@ -1,0 +1,10 @@
+{
+  "agent_id": "sys_speech_ai_agent",
+  "agent_name": "Speech AI Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of Speech AI predictions \u00b7 per \u00a7138",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "registered_at": "2026-06-11T18:13:25.122079"
+}

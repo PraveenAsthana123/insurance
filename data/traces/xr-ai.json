@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000516c54967a3e2255",
+  "service": "xr-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205190643,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205191643,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205196643,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205204643,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205354643,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205384643,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205396643,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "XR AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

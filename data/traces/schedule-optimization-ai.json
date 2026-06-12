@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000048111b3980eb2673",
+  "service": "schedule-optimization-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205025816,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205026816,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205031816,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205039816,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205189816,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205219816,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205231816,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Schedule Optimization AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

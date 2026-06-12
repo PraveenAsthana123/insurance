@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001cb5742a498e4111",
+  "service": "clinical-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204487780,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204488780,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204493780,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204501780,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204651780,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204681780,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204693780,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Clinical AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

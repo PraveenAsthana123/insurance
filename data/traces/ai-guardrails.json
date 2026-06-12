@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000037e732b3aca9ef79",
+  "service": "ai-guardrails-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204398912,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204399912,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204404912,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204412912,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204562912,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204592912,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204604912,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "AI Guardrails",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

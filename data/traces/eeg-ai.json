@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000002de23e32da1a3a17",
+  "service": "eeg-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204630574,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204631574,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204636574,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204644574,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204794574,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204824574,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204836574,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "EEG AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

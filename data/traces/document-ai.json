@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000005bc893c9128c4421",
+  "service": "document-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204606322,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204607322,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204612322,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204620322,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204770322,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204800322,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204812322,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Document AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

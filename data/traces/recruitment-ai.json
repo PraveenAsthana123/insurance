@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000799f5807b11f0cc6",
+  "service": "recruitment-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204987188,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204988188,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204993188,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205001188,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205151188,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205181188,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205193188,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Recruitment AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

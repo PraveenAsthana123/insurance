@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000006c0aa3174c29148f",
+  "service": "cybersecurity-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204557417,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204558417,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204563417,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204571417,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204721417,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204751417,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204763417,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Cybersecurity AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

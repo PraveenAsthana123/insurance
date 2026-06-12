@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000004a371e46606c7eae",
+  "service": "foundation-models-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204670635,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204671635,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204676635,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204684635,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204834635,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204864635,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204876635,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Foundation Models",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000035bd2b474f54569c",
+  "service": "unsupervised-learning-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205170303,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205171303,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205176303,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205184303,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205334303,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205364303,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205376303,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Unsupervised Learning",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

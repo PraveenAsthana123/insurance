@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000007173629f1412f545",
+  "service": "entity-extraction-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204641330,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204642330,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204647330,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204655330,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204805330,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204835330,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204847330,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Entity Extraction AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

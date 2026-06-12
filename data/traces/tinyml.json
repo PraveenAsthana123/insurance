@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000512b4ad4035926a5",
+  "service": "tinyml-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223205152401,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223205153401,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223205158401,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223205166401,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205316401,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205346401,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205358401,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "TinyML",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

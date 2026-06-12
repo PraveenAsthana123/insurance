@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001627332d2a602a59",
+  "service": "defect-detection-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204584788,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204585788,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204590788,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204598788,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204748788,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204778788,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204790788,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Defect Detection AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

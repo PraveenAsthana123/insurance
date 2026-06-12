@@ -1,0 +1,69 @@
+{
+  "title": "AI Red Teaming \u00b7 ai-red-teaming \u00b7 production dashboard",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Predictions/sec",
+      "type": "graph",
+      "query": "rate(ai-red-teaming_predictions_total[5m])"
+    },
+    {
+      "id": 2,
+      "title": "p95 Latency",
+      "type": "graph",
+      "query": "histogram_quantile(0.95, rate(ai-red-teaming_latency_bucket[5m]))"
+    },
+    {
+      "id": 3,
+      "title": "Accuracy (Live)",
+      "type": "gauge",
+      "query": "avg(ai-red-teaming_accuracy)"
+    },
+    {
+      "id": 4,
+      "title": "Drift PSI",
+      "type": "graph",
+      "query": "ai-red-teaming_drift_psi"
+    },
+    {
+      "id": 5,
+      "title": "Fairness DI by Age",
+      "type": "gauge",
+      "query": "ai-red-teaming_fairness_di_age"
+    },
+    {
+      "id": 6,
+      "title": "Error Rate",
+      "type": "graph",
+      "query": "rate(ai-red-teaming_errors_total[5m])"
+    },
+    {
+      "id": 7,
+      "title": "HITL Escalations",
+      "type": "graph",
+      "query": "rate(ai-red-teaming_hitl_total[5m])"
+    },
+    {
+      "id": 8,
+      "title": "Cost/Request ($)",
+      "type": "graph",
+      "query": "rate(ai-red-teaming_cost_usd[5m])"
+    }
+  ],
+  "alerts": [
+    {
+      "name": "accuracy_below_0.85",
+      "expr": "ai-red-teaming_accuracy < 0.85"
+    },
+    {
+      "name": "drift_psi_above_0.2",
+      "expr": "ai-red-teaming_drift_psi > 0.2"
+    },
+    {
+      "name": "error_rate_above_5pct",
+      "expr": "rate(ai-red-teaming_errors_total[5m]) > 0.05"
+    }
+  ],
+  "refresh": "30s",
+  "spec": "\u00a7138 observability"
+}

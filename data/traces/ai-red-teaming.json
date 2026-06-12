@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000002b65649f1f590e0f",
+  "service": "ai-red-teaming-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204406354,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204407354,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204412354,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204420354,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204570354,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204600354,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204612354,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "AI Red Teaming",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

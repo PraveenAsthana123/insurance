@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000176c1f151625bc72",
+  "service": "knowledge-graph-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204792609,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204793609,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204798609,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204806609,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204956609,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204986609,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204998609,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Knowledge Graph AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

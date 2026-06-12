@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000007d63a25871a20269",
+  "service": "distributed-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204603123,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204604123,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204609123,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204617123,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204767123,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204797123,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204809123,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Distributed AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

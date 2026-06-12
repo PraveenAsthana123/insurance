@@ -1,0 +1,49 @@
+{
+  "ai_type": "Computer Vision AI",
+  "slug": "computer-vision-ai",
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "baseline",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 1.0
+    },
+    {
+      "id": "S2",
+      "name": "fraud_spike_20pct",
+      "fraud_rate": 0.048,
+      "expected_accuracy": 0.98,
+      "$ impact": "+$240K leakage"
+    },
+    {
+      "id": "S3",
+      "name": "data_drift_PSI_0.3",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.9,
+      "$ impact": "-15% recall"
+    },
+    {
+      "id": "S4",
+      "name": "model_attack_evasion",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 0.75,
+      "$ impact": "+$1.2M leakage"
+    },
+    {
+      "id": "S5",
+      "name": "double_traffic",
+      "fraud_rate": 0.04,
+      "expected_accuracy": 1.0,
+      "$ impact": "2x infra cost"
+    }
+  ],
+  "monte_carlo": {
+    "n_runs": 1000,
+    "confidence_interval_95": [
+      0.98,
+      1.02
+    ]
+  },
+  "computed_at": "2026-06-11T18:13:24.518722",
+  "spec": "\u00a7138 simulation"
+}

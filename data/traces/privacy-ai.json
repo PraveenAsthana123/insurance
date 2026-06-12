@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001ace41e2c0f898f9",
+  "service": "privacy-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204949701,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204950701,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204955701,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204963701,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205113701,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205143701,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205155701,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Privacy AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

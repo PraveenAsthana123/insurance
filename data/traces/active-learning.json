@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001ceb6af34df6b61e",
+  "service": "active-learning-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204269251,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204270251,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204275251,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204283251,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204433251,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204463251,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204475251,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Active Learning",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000001e6a8fa63b0261b6",
+  "service": "geospatial-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204680659,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204681659,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204686659,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204694659,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204844659,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204874659,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204886659,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Geospatial AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "00000000000000002670fcbadd93888f",
+  "service": "nlu-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204894400,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204895400,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204900400,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204908400,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205058400,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205088400,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205100400,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "NLU",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

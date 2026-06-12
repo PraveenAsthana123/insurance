@@ -1,0 +1,46 @@
+{
+  "trace_id": "0000000000000000764ad32b22c0bfbc",
+  "service": "multimodal-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204867119,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204868119,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204873119,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204881119,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223205031119,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223205061119,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223205073119,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Multimodal AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}

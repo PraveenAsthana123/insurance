@@ -1,0 +1,46 @@
+{
+  "trace_id": "000000000000000050ec2cd457316f65",
+  "service": "digital-twin-ai-predictor",
+  "spans": [
+    {
+      "name": "http.request",
+      "start_us": 1781223204598827,
+      "duration_us": 250000
+    },
+    {
+      "name": "model.load",
+      "start_us": 1781223204599827,
+      "duration_us": 5000
+    },
+    {
+      "name": "preprocess",
+      "start_us": 1781223204604827,
+      "duration_us": 8000
+    },
+    {
+      "name": "predict",
+      "start_us": 1781223204612827,
+      "duration_us": 150000
+    },
+    {
+      "name": "shap.explain",
+      "start_us": 1781223204762827,
+      "duration_us": 30000
+    },
+    {
+      "name": "audit.emit",
+      "start_us": 1781223204792827,
+      "duration_us": 12000
+    },
+    {
+      "name": "http.response",
+      "start_us": 1781223204804827,
+      "duration_us": 4000
+    }
+  ],
+  "attributes": {
+    "ai_type": "Digital Twin AI",
+    "tenant_id": "default",
+    "model_version": "v1.2"
+  }
+}
