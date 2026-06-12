@@ -59,10 +59,43 @@ def _scan_domains() -> list[dict]:
     return findings
 
 
+def _office_has_backing_agent(office_id: str) -> bool:
+    """True if any Active agent is wired to this office.
+
+    Convention per §104 + §106 register_office_supervisors.py:
+    sys_<office_id>_supervisor is the canonical backing agent.
+    Also accepts any agent_id containing the office_id substring
+    (e.g. sys_finance_office_supervisor matches ai_finance_office).
+    """
+    with _conn() as c, c.cursor() as cur:
+        cur.execute(
+            """
+            SELECT 1 FROM agent_registry
+            WHERE status = 'Active'
+              AND (
+                agent_id = %s
+                OR agent_id ILIKE %s
+                OR purpose ILIKE %s
+              )
+            LIMIT 1
+            """,
+            (f"sys_{office_id}_supervisor", f"%{office_id}%", f"%{office_id}%"),
+        )
+        return cur.fetchone() is not None
+
+
 def _scan_offices() -> list[dict]:
-    """20 §104 offices · find offices with no backing agent."""
+    """20 §104 offices · find offices with no backing agent.
+
+    Iter 65 fix · honor the docstring. Previously appended P3 for every
+    office regardless of backing-agent existence which surfaced as a
+    permanent operator backlog. Now only flags offices truly missing
+    a supervisor.
+    """
     findings = []
     for o in all_offices():
+        if _office_has_backing_agent(o["id"]):
+            continue
         findings.append({
             "severity": "P3",
             "category": "Office stub · not yet provisioned",
