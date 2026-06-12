@@ -250,6 +250,7 @@ def create_app() -> FastAPI:
     from graphql_adapter.router import router as gql_router  # §56 Stage-1 GraphQL adapter
     from text2sql_finetune.router import router as t2sft_router  # §141 · text2sql + finetune + SLM
     from n8n_rpa.router import router as n8n_rpa_router  # §142 · n8n + RPA + hybrid scenarios
+    from itsm_grade.router import router as itsm_router  # §143 · ServiceNow-grade ITSM (incidents/playbook/specialist/security/workflow)
     from langsmith_adapter.router import router as ls_router  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     from opa_adapter.router import router as opa_router
     from agentops_adapter.router import router as agops_router
@@ -408,6 +409,7 @@ def create_app() -> FastAPI:
     app.include_router(gql_router)                  # §56 Stage-1 GraphQL (adapter)
     app.include_router(t2sft_router)                # §141 · text2sql + finetune + SLM
     app.include_router(n8n_rpa_router)              # §142 · n8n + RPA + hybrid scenarios
+    app.include_router(itsm_router)                  # §143 · ServiceNow-grade ITSM module
     app.include_router(ls_router)                  # /api/v1/langsmith — Iter 88 (§56 Stage-1)
     app.include_router(opa_router)
     app.include_router(agops_router)
