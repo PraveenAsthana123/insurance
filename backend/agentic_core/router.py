@@ -10,7 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from core.config import get_settings
-from core.role_dependency import require_admin
+from core.role_dependency import require_admin, require_manager_or_above
 
 router = APIRouter(prefix="/api/v1/agentic", tags=["agentic"])
 
@@ -501,6 +501,117 @@ def get_invocation(invocation_id: str):
             raise HTTPException(404, {"detail": f"invocation not found: {invocation_id}",
                                        "error_code": "INVOCATION_404"})
         return dict(row)
+
+
+# ──────────────────────────────────────────────────────────────────────
+# §A1 · Intervention endpoint · approve/reject pending invocation
+# Per PENDING_TASKS_PLAN A1 · operator-triggered HITL decision.
+
+class InvocationDecision(BaseModel):
+    decision: str  # 'approve' or 'reject'
+    decided_by: str = "operator"
+    reason: str | None = None
+
+
+@router.post("/invocations/{invocation_id}/decide")
+def decide_invocation(
+    invocation_id: str,
+    body: InvocationDecision,
+    _role: str = Depends(require_manager_or_above),
+):
+    """§A1 · intervention decision endpoint.
+
+    Per PENDING_TASKS_PLAN A1: operator can approve/reject pending agent
+    invocations from the UI. Idempotent · second call returns existing state.
+    Writes audit row · emits trace event · updates status to Success/Cancelled.
+    """
+    if body.decision not in ("approve", "reject"):
+        raise HTTPException(
+            400,
+            {"detail": "decision must be 'approve' or 'reject'",
+             "error_code": "INVOCATION_DECIDE_BAD_INPUT"},
+        )
+    new_status = "Success" if body.decision == "approve" else "Cancelled"
+
+    with _conn() as c, c.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        # Fetch current state for idempotency check
+        cur.execute(
+            "SELECT invocation_id, status, agent_id, human_override "
+            "FROM agent_invocation WHERE invocation_id = %s",
+            (invocation_id,),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise HTTPException(
+                404,
+                {"detail": f"invocation not found: {invocation_id}",
+                 "error_code": "INVOCATION_404"},
+            )
+
+        # Idempotency: if already decided, return existing
+        if row["status"] in ("Success", "Cancelled", "Failed"):
+            return {
+                "invocation_id": invocation_id,
+                "status": row["status"],
+                "decision": body.decision,
+                "idempotent": True,
+                "note": f"already in terminal state '{row['status']}' · no mutation",
+            }
+
+        # Apply decision
+        cur.execute(
+            """
+            UPDATE agent_invocation
+            SET status = %s,
+                completed_at = NOW(),
+                human_override = TRUE,
+                output_text = COALESCE(output_text, '') ||
+                              %s
+            WHERE invocation_id = %s
+            RETURNING invocation_id, status, agent_id, completed_at;
+            """,
+            (
+                new_status,
+                f"\n[§A1 intervention] {body.decision} by {body.decided_by}"
+                f" at {body.reason or 'no reason given'}",
+                invocation_id,
+            ),
+        )
+        updated = cur.fetchone()
+
+        # §38.3 audit row
+        cur.execute(
+            """
+            INSERT INTO audit_log (actor, action, resource, payload, correlation_id)
+            VALUES (%s, %s, %s, %s::jsonb, %s)
+            """,
+            (
+                body.decided_by,
+                f"intervention.{body.decision}",
+                f"agent_invocation:{invocation_id}",
+                json.dumps({
+                    "invocation_id": invocation_id,
+                    "agent_id": row["agent_id"],
+                    "decision": body.decision,
+                    "reason": body.reason,
+                    "policy_ref": "§A1 + §103.4 HITL + §106 safe-allowlist",
+                    "previous_status": row["status"],
+                    "new_status": new_status,
+                }),
+                invocation_id,
+            ),
+        )
+        c.commit()
+
+    return {
+        "invocation_id": invocation_id,
+        "status": new_status,
+        "decision": body.decision,
+        "decided_by": body.decided_by,
+        "completed_at": updated["completed_at"].isoformat() if updated["completed_at"] else None,
+        "idempotent": False,
+        "policy_ref": "§A1 intervention endpoint",
+    }
 
 
 @router.get("/invocations/{invocation_id}/trace")

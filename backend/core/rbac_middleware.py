@@ -100,6 +100,13 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
     # team-member roles MUST use the per-tenant /agent-platform/cua/audit.
     ("GET",  re.compile(r"^/api/v1/admin/cua/audit$"),
      {"compliance", "reporting-monitoring"}),
+
+    # -------- §A1 Intervention: POST /agentic/invocations/{id}/decide --------
+    # Operator-triggered HITL approve/reject. Same role set as
+    # cua/execute + approval-broker/decide (manager + tester) per
+    # PENDING_TASKS_PLAN A1 + §103.4 HITL gating.
+    ("POST", re.compile(r"^/api/v1/agentic/invocations/[^/]+/decide$"),
+     {"manager", "tester"}),
 ]
 
 # Backwards-compatible alias — earlier commits referenced SALES_PERMS.

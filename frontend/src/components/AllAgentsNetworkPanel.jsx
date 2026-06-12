@@ -31,9 +31,21 @@ export default function AllAgentsNetworkPanel() {
     setBusy(true); setError(null);
     try {
       const r = await fetch(`${API}/api/v1/agentic/agents/all-blueprints`);
+      // §A4 · graceful degrade on 5xx · partial render with skeleton
+      if (!r.ok) {
+        const text = await r.text().catch(() => '');
+        throw new Error(`blueprint fetch HTTP ${r.status} · ${text.slice(0, 100)}`);
+      }
       const d = await r.json();
+      // §A4 · defensive shape check · render skeleton with what we got
+      if (!d || typeof d !== 'object' || !Array.isArray(d.agents)) {
+        throw new Error('blueprint response missing agents array');
+      }
       setData(d);
-    } catch (e) { setError(e.message); }
+    } catch (e) {
+      // §A4 · keep last successful data visible · only setError for banner
+      setError(e.message);
+    }
     finally { setBusy(false); }
   }, []);
   useEffect(() => { load(); }, [load]);
@@ -128,8 +140,28 @@ export default function AllAgentsNetworkPanel() {
       </div>
 
       {error && (
-        <div style={{ padding: 10, fontSize: 11, background: '#fee2e2', color: '#991b1b', borderRadius: 4 }}>
-          {error}
+        <div style={{ padding: 10, fontSize: 11, background: '#fee2e2', color: '#991b1b',
+                      borderRadius: 4, borderLeft: '4px solid #ef4444',
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <strong>⚠ Blueprint API unreachable</strong> · {error}
+            {data && <span style={{ color: '#7f1d1d' }}> · Showing cached data ({data.agents?.length || 0} agents).</span>}
+            {!data && <span style={{ color: '#7f1d1d' }}> · No cached data · table will be empty.</span>}
+          </div>
+          <button onClick={load} style={{
+            background: '#fff', border: '1px solid #ef4444', color: '#991b1b',
+            padding: '4px 10px', borderRadius: 4, fontSize: 10, cursor: 'pointer',
+          }}>↻ Retry</button>
+        </div>
+      )}
+      {!data && busy && !error && (
+        <div style={{ padding: 30, textAlign: 'center', fontSize: 11, color: '#64748b' }}>
+          ⏳ Loading agent blueprints…
+        </div>
+      )}
+      {!data && !busy && !error && (
+        <div style={{ padding: 30, textAlign: 'center', fontSize: 11, color: '#64748b' }}>
+          No data yet. <button onClick={load} style={{ background: 'transparent', border: 'none', color: '#2563eb', cursor: 'pointer' }}>Load now</button>
         </div>
       )}
 

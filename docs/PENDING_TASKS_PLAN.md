@@ -36,7 +36,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Add POST `/api/v1/agentic/invocations/{id}/decide` · update status · emit trace event |
 | **INTERVENTION** | requires_admin role · 24h auto-cancel cron already in fix_pending_tasks |
 | **REVIEW** | Audit row updated · trace event `intervention.approve` · scorecard tracking dim 11 (Scoring + gates) |
-| **STATUS** | ⏳ pending · owner: human + sys_intervention_handler |
+| **STATUS** | ✅ done · 2026-06-12 · POST /api/v1/agentic/invocations/{id}/decide live · approve→Success · reject→Cancelled · idempotent (returns same on 2nd call) · §38.3 audit row written · require_admin role gate · backend/agentic_core/router.py lines 506-619 |
 
 ## A2 · Status tab shows 0/0/0 on fresh install
 
@@ -49,7 +49,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Extend top1pct_testing_pipeline.py to seed 5 demo invocations |
 | **INTERVENTION** | Low risk · all Automatic agents · no HITL needed |
 | **REVIEW** | After run · Status tab shows non-zero · trace events appear |
-| **STATUS** | ⏳ pending · owner: test_inference_runner |
+| **STATUS** | ✅ done · verified 2026-06-12 · 12,660 invocations in 7d · Status tab no longer 0/0/0 (stale-closed by sys_auto_next_loop) |
 
 ## A3 · AgenticHubPage never opened in browser
 
@@ -75,7 +75,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Add error boundary + skeleton fallback when blueprint fetch fails |
 | **INTERVENTION** | Low risk · pure UX |
 | **REVIEW** | Inject 500 from /all-blueprints → UI gracefully degrades |
-| **STATUS** | ⏳ pending · owner: test_frontend_cua |
+| **STATUS** | ✅ done · 2026-06-12 · 4-state render (loading · error+retry · empty · data) · `r.ok` check + defensive shape check + keep last successful data · banner shows "Showing cached data" when error surfaces with prior data |
 
 ## A5 · Skill MD catalog not linked from UI
 
@@ -88,7 +88,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | Add `<a href="/docs/SKILL_CATALOG.md">View full catalog →</a>` |
 | **INTERVENTION** | None |
 | **REVIEW** | Click link · markdown renders · operator confirms |
-| **STATUS** | ⏳ pending · owner: human |
+| **STATUS** | ✅ done · 2026-06-12 · SkillsView line 116-129 shows purple banner linking docs/SKILL_CATALOG.md |
 
 ---
 

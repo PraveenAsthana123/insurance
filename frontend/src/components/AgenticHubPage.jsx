@@ -129,6 +129,19 @@ function SkillsView() {
           <Pill color="#0891b2">System (Iter 45): {isSystem.length}</Pill>
         </div>
       </div>
+      {/* §A5 · link to full skill catalog markdown */}
+      <div style={{ marginBottom: 10, padding: '6px 10px', background: '#faf5ff',
+                    borderLeft: '4px solid #a855f7', fontSize: 11, color: '#581c87',
+                    borderRadius: 4 }}>
+        <span>📚 Full skill reference:&nbsp;</span>
+        <a href="/docs/SKILL_CATALOG.md" target="_blank" rel="noreferrer"
+           style={{ color: '#7c3aed', fontWeight: 600, textDecoration: 'none' }}>
+          docs/SKILL_CATALOG.md →
+        </a>
+        <span style={{ marginLeft: 12, color: '#94a3b8' }}>
+          (markdown source-of-truth · operator-editable)
+        </span>
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 12 }}>
         <div>
