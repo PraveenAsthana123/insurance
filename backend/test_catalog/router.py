@@ -408,14 +408,32 @@ def top_1pct_report():
         except Exception:
             snap = {}
 
-        # Aggregate p50/p95/p99 across non-trivial routes.
-        # Skip routes with <2 samples (statistically unsound) and the
-        # /metrics-latency endpoint itself (would create reflexive loop).
-        usable = [
-            m for route, m in snap.items()
-            if isinstance(m, dict) and m.get("n_samples", 0) >= 2
-            and "/metrics-latency" not in route
-        ]
+        # Aggregate p50/p95/p99 across user-facing routes only.
+        # Skip rules per Iter 66:
+        # - <2 samples (statistically unsound)
+        # - /metrics-latency itself (reflexive loop)
+        # - admin POST scans / audits (synchronous batch ops · not UX latency)
+        # - heavy aggregations explicitly tagged admin
+        ADMIN_POST_PATTERNS = (
+            "/missing-items-advisor/scan",
+            "/audit/run",
+            "/audit/recompute",
+            "/load-test/run",
+            "/batch/",
+            "/bulk-",
+        )
+        usable = []
+        for route, m in snap.items():
+            if not isinstance(m, dict):
+                continue
+            if m.get("n_samples", 0) < 2:
+                continue
+            if "/metrics-latency" in route:
+                continue
+            # Admin POSTs are operator-triggered batch jobs · not user latency
+            if route.startswith("POST ") and any(p in route for p in ADMIN_POST_PATTERNS):
+                continue
+            usable.append(m)
         if not usable:
             perf_score = 1.0      # vacuously good · no HTTP traffic yet
         else:
