@@ -1,0 +1,15 @@
+{
+  "scenario": "full",
+  "purpose": "Update ALL parameters \u00b7 highest quality \u00b7 highest cost",
+  "base_model_candidate": "distilbert-base-uncased OR TinyLlama-1.1B",
+  "method": "transformers.Trainer \u00b7 learning_rate=2e-5 \u00b7 3 epochs",
+  "needed_compute": "GPU required (CPU too slow for full param)",
+  "estimated_runtime_gpu_t4": "10-30 min \u00b7 CPU 6+ hours",
+  "deepa_save_path": "/mnt/deepa/models/finetuned/full-<task>/",
+  "drill_negative": "test set perplexity must drop vs base",
+  "next_step": "ensure GPU is visible \u00b7 run full-param training script",
+  "ts_local": "2026-06-11T20:07:17.280274",
+  "synthetic": false,
+  "honest_scaffold": true,
+  "spec": "\u00a7141 fine-tune"
+}

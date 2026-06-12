@@ -1,0 +1,21 @@
+{
+  "method": "LoRA fine-tune",
+  "base_model": "distilbert-base-uncased",
+  "task": "agent_invocation status classification",
+  "lora_rank": 4,
+  "lora_alpha": 8,
+  "trainable_params": 665858,
+  "total_params": 67620868,
+  "trainable_pct": 0.9847,
+  "n_samples_train": 800,
+  "n_samples_test": 200,
+  "n_epochs": 2,
+  "final_loss": 1.4901160305669237e-08,
+  "accuracy": 1.0,
+  "f1_weighted": 1.0,
+  "save_path": "/mnt/deepa/models/finetuned/distilbert-lora-status",
+  "data_source": "REAL \u00b7 agent_invocation",
+  "synthetic": false,
+  "trained_at": "2026-06-11T20:05:46.758816",
+  "spec": "\u00a7141 LoRA"
+}

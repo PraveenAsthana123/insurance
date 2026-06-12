@@ -1,0 +1,17 @@
+{
+  "scenario": "qlora",
+  "purpose": "4-bit base + LoRA \u00b7 larger base model in same memory budget",
+  "base_model_candidate": "llama3.2:1b OR phi-2 OR qwen2.5:0.5b",
+  "method": "bitsandbytes 4-bit \u00b7 peft LoraConfig",
+  "needed_lib": "bitsandbytes (NOT INSTALLED)",
+  "needed_data": "labeled task dataset (\u2265500 rows)",
+  "needed_compute": "CPU works but slow \u00b7 GPU 8GB ideal",
+  "estimated_runtime_cpu": "30-60 min for 2 epochs",
+  "deepa_save_path": "/mnt/deepa/models/finetuned/qlora-<task>/",
+  "drill_negative": "untrained model should perform at chance",
+  "next_step": "pip install bitsandbytes accelerate \u00b7 then mirror lora_demo.py",
+  "ts_local": "2026-06-11T20:07:17.280091",
+  "synthetic": false,
+  "honest_scaffold": true,
+  "spec": "\u00a7141 fine-tune"
+}

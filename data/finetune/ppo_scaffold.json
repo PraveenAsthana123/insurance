@@ -1,0 +1,17 @@
+{
+  "scenario": "ppo",
+  "purpose": "Policy optimization with reward model (RLHF stage 2)",
+  "base_model_candidate": "llama3.2:1b SFT-checkpoint",
+  "method": "trl.PPOTrainer \u00b7 reward model + value head",
+  "needed_lib": "trl (NOT INSTALLED) \u00b7 transformers \u00b7 peft",
+  "needed_data": "preference pairs (chosen/rejected) OR scalar rewards",
+  "data_source_for_insur": "agent_invocation human_override field as proxy reward",
+  "needed_compute": "GPU recommended \u00b7 2x H100 for stable training",
+  "estimated_runtime_gpu": "1-3 hours \u00b7 CPU not practical",
+  "deepa_save_path": "/mnt/deepa/models/finetuned/ppo-rlhf-<task>/",
+  "next_step": "pip install trl \u00b7 prepare reward signal from corrections table",
+  "ts_local": "2026-06-11T20:07:17.280398",
+  "synthetic": false,
+  "honest_scaffold": true,
+  "spec": "\u00a7141 fine-tune"
+}

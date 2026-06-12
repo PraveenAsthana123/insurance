@@ -1,0 +1,15 @@
+{
+  "scenario": "prompt",
+  "purpose": "Soft prompt tuning \u00b7 learn embeddings only \u00b7 tiny",
+  "base_model_candidate": "distilbert-base-uncased",
+  "method": "peft.PromptTuningConfig \u00b7 20 virtual tokens",
+  "needed_data": "small labeled task dataset (100-500)",
+  "needed_compute": "CPU works \u00b7 fastest of all methods",
+  "estimated_runtime_cpu": "5-10 min for classification",
+  "deepa_save_path": "/mnt/deepa/models/finetuned/prompt-<task>/",
+  "next_step": "use peft.PromptTuningConfig + LoraConfig together (DESCRIPTOR)",
+  "ts_local": "2026-06-11T20:07:17.280669",
+  "synthetic": false,
+  "honest_scaffold": true,
+  "spec": "\u00a7141 fine-tune"
+}

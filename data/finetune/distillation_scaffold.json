@@ -1,0 +1,16 @@
+{
+  "scenario": "distillation",
+  "purpose": "Shrink large teacher \u2192 small student \u00b7 keep accuracy",
+  "teacher_candidate": "llama3.1:8b OR qwen2.5-coder:14b",
+  "student_candidate": "llama3.2:1b OR distilbert-base",
+  "method": "KL divergence on teacher logits + task loss \u00b7 2-3x compression",
+  "needed_data": "task dataset (no labels needed for response distillation)",
+  "needed_compute": "GPU for teacher inference + student training",
+  "estimated_runtime_gpu": "1-2 hours for 5k samples",
+  "deepa_save_path": "/mnt/deepa/models/finetuned/distill-<task>/",
+  "next_step": "implement KL distillation loop \u00b7 evaluate student quality",
+  "ts_local": "2026-06-11T20:07:17.280592",
+  "synthetic": false,
+  "honest_scaffold": true,
+  "spec": "\u00a7141 fine-tune"
+}

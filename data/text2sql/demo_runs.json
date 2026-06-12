@@ -1,0 +1,244 @@
+[
+  {
+    "question": "How many agent invocations are there in total?",
+    "model": "llama3.2:1b",
+    "generated_sql": "SELECT COUNT(invocation_id) FROM agent_invocation",
+    "n_rows": 1,
+    "result_sample": [
+      {
+        "count": "8237"
+      }
+    ],
+    "latency_ms": 39460.571,
+    "ts_local": "2026-06-11T20:01:00.652073",
+    "spec": "\u00a7141 text2sql"
+  },
+  {
+    "question": "Count agent invocations by status.",
+    "model": "llama3.2:1b",
+    "generated_sql": "SELECT COUNT(*) FROM agent_invocation WHERE status = 'Success'",
+    "n_rows": 1,
+    "result_sample": [
+      {
+        "count": "8229"
+      }
+    ],
+    "latency_ms": 706.238,
+    "ts_local": "2026-06-11T20:01:01.358493",
+    "spec": "\u00a7141 text2sql"
+  },
+  {
+    "question": "Top 5 agents by total invocations.",
+    "model": "llama3.2:1b",
+    "generated_sql": "SELECT agent_id FROM agent_invocation GROUP BY agent_id ORDER BY COUNT(invocation_id) DESC LIMIT 5",
+    "n_rows": 5,
+    "result_sample": [
+      {
+        "agent_id": "sys_watchdog_status"
+      },
+      {
+        "agent_id": "sys_watchdog_logic"
+      },
+      {
+        "agent_id": "sys_watchdog_frontend"
+      },
+      {
+        "agent_id": "sys_watchdog_vector"
+      },
+      {
+        "agent_id": "sys_watchdog_jobs"
+      }
+    ],
+    "latency_ms": 952.348,
+    "ts_local": "2026-06-11T20:01:02.310948",
+    "spec": "\u00a7141 text2sql"
+  },
+  {
+    "question": "Average duration_ms per status.",
+    "model": "llama3.2:1b",
+    "generated_sql": "SELECT AVG(duration_ms) FROM agent_invocation WHERE status = 'Success'",
+    "n_rows": 1,
+    "result_sample": [
+      {
+        "avg": "3762.0456920646494106"
+      }
+    ],
+    "latency_ms": 757.287,
+    "ts_local": "2026-06-11T20:01:03.068391",
+    "spec": "\u00a7141 text2sql"
+  },
+  {
+    "question": "How many claims_record rows exist?",
+    "model": "llama3.2:1b",
+    "generated_sql": "SELECT COUNT(claim_id) FROM claims_record",
+    "n_rows": 1,
+    "result_sample": [
+      {
+        "count": "10"
+      }
+    ],
+    "latency_ms": 550.3829999999999,
+    "ts_local": "2026-06-11T20:01:03.618934",
+    "spec": "\u00a7141 text2sql"
+  },
+  {
+    "question": "List 5 most recent agent invocations with their status.",
+    "model": "llama3.2:1b",
+    "generated_sql": "SELECT * FROM agent_invocation ORDER BY created_at DESC LIMIT 5",
+    "n_rows": 5,
+    "result_sample": [
+      {
+        "invocation_id": "INV-0e2407dff8f845",
+        "agent_id": "sys_watchdog_security",
+        "correlation_id": "CORR-357b8bc4f49d47",
+        "incident_id": null,
+        "trigger_kind": "cron-watchdog",
+        "input_text": "{\"category\": \"Security\", \"agent_id\": \"sys_watchdog_security\", \"result\": [{\"count\": 0}], \"status\": \"ok\"}",
+        "plan_text": "{\"rationale\": \"Stub planner \\u00b7 seeded by hash(sys_watchd, input[:20]). Selected 1 skills from 1 available.\", \"steps\": [{\"step\": 1, \"skill_id\": \"sys_check_security_events\", \"args\": {\"input\": \"{\\\"category\\\": \\\"Security\\\", \\\"agent_id\\\": \\\"sys_watchdog_security\\\", \\\"result\\\": [{\\\"count\"}, \"depends_on\": []}], \"n_steps\": 1}",
+        "skills_used": "['sys_check_security_events']",
+        "tools_used": "['sys_check_security_events']",
+        "actions_taken": "[{'error': None, 'result': {'note': 'Stub executor \u00b7 sys_check_security_events not registered \u00b7 op wires real impl via register_tool()', 'stub': True, 'skill_id': 'sys_check_security_events', 'echo_args': {'input': '{\"category\": \"Security\", \"agent_id\": \"sys_watchdog_security\", \"result\": [{\"count'}, 'deterministic_output_id': 'OUT-040e5ba8'}, 'status': 'stub', 'skill_id': 'sys_check_security_events', 'duration_ms': 0.04}]",
+        "output_text": "{\"summary\": \"1 step(s) executed \\u00b7 status=Success\", \"step_results\": [{\"skill_id\": \"sys_check_security_events\", \"status\": \"stub\", \"duration_ms\": 0.04, \"result\": {\"skill_id\": \"sys_check_security_events\", \"stub\": true, \"deterministic_output_id\": \"OUT-040e5ba8\", \"echo_args\": {\"input\": \"{\\\"category\\\": \\\"Security\\\", \\\"agent_id\\\": \\\"sys_watchdog_security\\\", \\\"result\\\": [{\\\"count\"}, \"note\": \"Stub executor \\u00b7 sys_check_security_events not registered \\u00b7 op wires real impl via register_tool()\"}, \"error\": null}]}",
+        "status": "Success",
+        "duration_ms": "1567",
+        "cost_usd": "0.0000",
+        "tokens_in": "9",
+        "tokens_out": "14",
+        "error_text": null,
+        "human_override": "False",
+        "tenant_id": "default",
+        "created_at": "2026-06-12 02:00:56.920534",
+        "completed_at": "2026-06-12 02:00:56.920534",
+        "trace_id": "73a612ffbd784bca88b63d1463c0d92a",
+        "parent_span_id": "a1ad8ab1d9874958",
+        "retry_count": "0",
+        "last_retry_at": null
+      },
+      {
+        "invocation_id": "INV-c2073f2292e64c",
+        "agent_id": "sys_watchdog_performance",
+        "correlation_id": "CORR-35fed437238a44",
+        "incident_id": null,
+        "trigger_kind": "cron-watchdog",
+        "input_text": "{\"category\": \"Performance\", \"agent_id\": \"sys_watchdog_performance\", \"result\": [{\"avg\": \"4097.0000000000000000\"}], \"status\": \"ok\"}",
+        "plan_text": "{\"rationale\": \"Stub planner \\u00b7 seeded by hash(sys_watchd, input[:20]). Selected 1 skills from 1 available.\", \"steps\": [{\"step\": 1, \"skill_id\": \"sys_check_latency_percentiles\", \"args\": {\"input\": \"{\\\"category\\\": \\\"Performance\\\", \\\"agent_id\\\": \\\"sys_watchdog_performance\\\", \\\"result\\\": [{\"}, \"depends_on\": []}], \"n_steps\": 1}",
+        "skills_used": "['sys_check_latency_percentiles']",
+        "tools_used": "['sys_check_latency_percentiles']",
+        "actions_taken": "[{'error': None, 'result': {'note': 'Stub executor \u00b7 sys_check_latency_percentiles not registered \u00b7 op wires real impl via register_tool()', 'stub': True, 'skill_id': 'sys_check_latency_percentiles', 'echo_args': {'input': '{\"category\": \"Performance\", \"agent_id\": \"sys_watchdog_performance\", \"result\": [{'}, 'deterministic_output_id': 'OUT-bbae20c6'}, 'status': 'stub', 'skill_id': 'sys_check_latency_percentiles', 'duration_ms': 0.03}]",
+        "output_text": "{\"summary\": \"1 step(s) executed \\u00b7 status=Success\", \"step_results\": [{\"skill_id\": \"sys_check_latency_percentiles\", \"status\": \"stub\", \"duration_ms\": 0.03, \"result\": {\"skill_id\": \"sys_check_latency_percentiles\", \"stub\": true, \"deterministic_output_id\": \"OUT-bbae20c6\", \"echo_args\": {\"input\": \"{\\\"category\\\": \\\"Performance\\\", \\\"agent_id\\\": \\\"sys_watchdog_performance\\\", \\\"result\\\": [{\"}, \"note\": \"Stub executor \\u00b7 sys_check_latency_percentiles not registered \\u00b7 op wires real impl via register_tool()\"}, \"error\": null}]}",
+        "status": "Success",
+        "duration_ms": "1577",
+        "cost_usd": "0.0000",
+        "tokens_in": "9",
+        "tokens_out": "14",
+        "error_text": null,
+        "human_override": "False",
+        "tenant_id": "default",
+        "created_at": "2026-06-12 02:00:55.259763",
+        "completed_at": "2026-06-12 02:00:55.259763",
+        "trace_id": "86807d78f6d94a3c92fe4d66f44ac04d",
+        "parent_span_id": "b26469fd6a2345b8",
+        "retry_count": "0",
+        "last_retry_at": null
+      },
+      {
+        "invocation_id": "INV-d3973a9dce7b4b",
+        "agent_id": "sys_watchdog_load",
+        "correlation_id": "CORR-9c21c8e4328549",
+        "incident_id": null,
+        "trigger_kind": "cron-watchdog",
+        "input_text": "{\"category\": \"Load\", \"agent_id\": \"sys_watchdog_load\", \"result\": \"(reads jobs/reports/load-testing/*.md mtime)\", \"status\": \"narrative\"}",
+        "plan_text": "{\"rationale\": \"Stub planner \\u00b7 seeded by hash(sys_watchd, input[:20]). Selected 1 skills from 1 available.\", \"steps\": [{\"step\": 1, \"skill_id\": \"sys_check_load_test\", \"args\": {\"input\": \"{\\\"category\\\": \\\"Load\\\", \\\"agent_id\\\": \\\"sys_watchdog_load\\\", \\\"result\\\": \\\"(reads jobs/rep\"}, \"depends_on\": []}], \"n_steps\": 1}",
+        "skills_used": "['sys_check_load_test']",
+        "tools_used": "['sys_check_load_test']",
+        "actions_taken": "[{'error': None, 'result': {'note': 'Stub executor \u00b7 sys_check_load_test not registered \u00b7 op wires real impl via register_tool()', 'stub': True, 'skill_id': 'sys_check_load_test', 'echo_args': {'input': '{\"category\": \"Load\", \"agent_id\": \"sys_watchdog_load\", \"result\": \"(reads jobs/rep'}, 'deterministic_output_id': 'OUT-01e13edf'}, 'status': 'stub', 'skill_id': 'sys_check_load_test', 'duration_ms': 0.04}]",
+        "output_text": "{\"summary\": \"1 step(s) executed \\u00b7 status=Success\", \"step_results\": [{\"skill_id\": \"sys_check_load_test\", \"status\": \"stub\", \"duration_ms\": 0.04, \"result\": {\"skill_id\": \"sys_check_load_test\", \"stub\": true, \"deterministic_output_id\": \"OUT-01e13edf\", \"echo_args\": {\"input\": \"{\\\"category\\\": \\\"Load\\\", \\\"agent_id\\\": \\\"sys_watchdog_load\\\", \\\"result\\\": \\\"(reads jobs/rep\"}, \"note\": \"Stub executor \\u00b7 sys_check_load_test not registered \\u00b7 op wires real impl via register_tool()\"}, \"error\": null}]}",
+        "status": "Success",
+        "duration_ms": "1570",
+        "cost_usd": "0.0000",
+        "tokens_in": "10",
+        "tokens_out": "15",
+        "error_text": null,
+        "human_override": "False",
+        "tenant_id": "default",
+        "created_at": "2026-06-12 02:00:53.655758",
+        "completed_at": "2026-06-12 02:00:53.655758",
+        "trace_id": "8b599df652ed4cd3990ab16e8bb7229c",
+        "parent_span_id": "1faa668d55db487f",
+        "retry_count": "0",
+        "last_retry_at": null
+      },
+      {
+        "invocation_id": "INV-ee2e423a4c2847",
+        "agent_id": "sys_watchdog_scalability",
+        "correlation_id": "CORR-6e38e01296ab4f",
+        "incident_id": null,
+        "trigger_kind": "cron-watchdog",
+        "input_text": "{\"category\": \"Scalability\", \"agent_id\": \"sys_watchdog_scalability\", \"result\": [{\"max\": \"0.00\"}], \"status\": \"ok\"}",
+        "plan_text": "{\"rationale\": \"Checking scalability of sys_watchdog_scalability agent\", \"steps\": [{\"step\": 1, \"skill_id\": \"sys_check_scalability\", \"args\": {\"category\": \"Scalability\"}, \"depends_on\": []}, {\"step\": 2, \"skill_id\": \"sys_check_scalability\", \"args\": {\"category\": \"Scalability\"}, \"depends_on\": [\"step 1\"]}], \"n_steps\": 2}",
+        "skills_used": "['sys_check_scalability', 'sys_check_scalability']",
+        "tools_used": "['sys_check_scalability', 'sys_check_scalability']",
+        "actions_taken": "[{'error': None, 'result': {'note': 'Stub executor \u00b7 sys_check_scalability not registered \u00b7 op wires real impl via register_tool()', 'stub': True, 'skill_id': 'sys_check_scalability', 'echo_args': {'category': 'Scalability'}, 'deterministic_output_id': 'OUT-7c838af3'}, 'status': 'stub', 'skill_id': 'sys_check_scalability', 'duration_ms': 0.13}, {'error': None, 'result': {'note': 'Stub executor \u00b7 sys_check_scalability not registered \u00b7 op wires real impl via register_tool()', 'stub': True, 'skill_id': 'sys_check_scalability', 'echo_args': {'category': 'Scalability'}, 'deterministic_output_id': 'OUT-7c838af3'}, 'status': 'stub', 'skill_id': 'sys_check_scalability', 'duration_ms': 0.04}]",
+        "output_text": "{\"summary\": \"2 step(s) executed \\u00b7 status=Success\", \"step_results\": [{\"skill_id\": \"sys_check_scalability\", \"status\": \"stub\", \"duration_ms\": 0.13, \"result\": {\"skill_id\": \"sys_check_scalability\", \"stub\": true, \"deterministic_output_id\": \"OUT-7c838af3\", \"echo_args\": {\"category\": \"Scalability\"}, \"note\": \"Stub executor \\u00b7 sys_check_scalability not registered \\u00b7 op wires real impl via register_tool()\"}, \"error\": null}, {\"skill_id\": \"sys_check_scalability\", \"status\": \"stub\", \"duration_ms\": 0.04, \"result\": {\"skill_id\": \"sys_check_scalability\", \"stub\": true, \"deterministic_output_id\": \"OUT-7c838af3\", \"echo_args\": {\"category\": \"Scalability\"}, \"note\": \"Stub executor \\u00b7 sys_check_scalability not registered \\u00b7 op wires real impl via register_tool()\"}, \"error\": null}]}",
+        "status": "Success",
+        "duration_ms": "7652",
+        "cost_usd": "0.0000",
+        "tokens_in": "128",
+        "tokens_out": "96",
+        "error_text": null,
+        "human_override": "False",
+        "tenant_id": "default",
+        "created_at": "2026-06-12 02:00:52.072924",
+        "completed_at": "2026-06-12 02:00:52.072924",
+        "trace_id": "6a313ba57cfb48f09f2de5c123dffe8d",
+        "parent_span_id": "82083fab5a2e4bf9",
+        "retry_count": "0",
+        "last_retry_at": null
+      },
+      {
+        "invocation_id": "INV-0d39677878e548",
+        "agent_id": "sys_watchdog_status",
+        "correlation_id": "CORR-a26cadf755bd4e",
+        "incident_id": null,
+        "trigger_kind": "cron-watchdog",
+        "input_text": "{\"category\": \"Status\", \"agent_id\": \"sys_watchdog_status\", \"result\": \"(reads jobs/reports/watchdog/*.json)\", \"status\": \"narrative\"}",
+        "plan_text": "{\"rationale\": \"Generating narrative status report for sys_watchdog_status agent.\", \"steps\": [{\"step\": 1, \"skill_id\": \"sys_aggregate_status\", \"args\": {\"category\": \"Status\", \"agent_id\": \"sys_watchdog_status\"}, \"depends_on\": []}], \"n_steps\": 1}",
+        "skills_used": "['sys_aggregate_status']",
+        "tools_used": "['sys_aggregate_status']",
+        "actions_taken": "[{'error': None, 'result': {'note': 'Stub executor \u00b7 sys_aggregate_status not registered \u00b7 op wires real impl via register_tool()', 'stub': True, 'skill_id': 'sys_aggregate_status', 'echo_args': {'agent_id': 'sys_watchdog_status', 'category': 'Status'}, 'deterministic_output_id': 'OUT-4e2686bc'}, 'status': 'stub', 'skill_id': 'sys_aggregate_status', 'duration_ms': 0.06}]",
+        "output_text": "{\"summary\": \"1 step(s) executed \\u00b7 status=Success\", \"step_results\": [{\"skill_id\": \"sys_aggregate_status\", \"status\": \"stub\", \"duration_ms\": 0.06, \"result\": {\"skill_id\": \"sys_aggregate_status\", \"stub\": true, \"deterministic_output_id\": \"OUT-4e2686bc\", \"echo_args\": {\"category\": \"Status\", \"agent_id\": \"sys_watchdog_status\"}, \"note\": \"Stub executor \\u00b7 sys_aggregate_status not registered \\u00b7 op wires real impl via register_tool()\"}, \"error\": null}]}",
+        "status": "Success",
+        "duration_ms": "4345",
+        "cost_usd": "0.0000",
+        "tokens_in": "127",
+        "tokens_out": "68",
+        "error_text": null,
+        "human_override": "False",
+        "tenant_id": "default",
+        "created_at": "2026-06-12 02:00:44.387787",
+        "completed_at": "2026-06-12 02:00:44.387787",
+        "trace_id": "2d54fce18dc6405b8d129361c836be59",
+        "parent_span_id": "52ab1dfce0c04e35",
+        "retry_count": "0",
+        "last_retry_at": null
+      }
+    ],
+    "latency_ms": 654.124,
+    "ts_local": "2026-06-11T20:01:04.273259",
+    "spec": "\u00a7141 text2sql"
+  },
+  {
+    "question": "Sum of cost_usd across all agent_invocation rows.",
+    "model": "llama3.2:1b",
+    "generated_sql": "SELECT SUM(cost_usd) FROM agent_invocation WHERE status = 'Success'",
+    "n_rows": 1,
+    "result_sample": [
+      {
+        "sum": "0.0000"
+      }
+    ],
+    "latency_ms": 629.49,
+    "ts_local": "2026-06-11T20:01:04.902886",
+    "spec": "\u00a7141 text2sql"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "scenario": "dpo",
+  "purpose": "Direct Preference Optimization \u00b7 simpler than PPO",
+  "base_model_candidate": "llama3.2:1b SFT-checkpoint",
+  "method": "trl.DPOTrainer \u00b7 pairwise preferences only \u00b7 no reward model needed",
+  "needed_lib": "trl (NOT INSTALLED) \u00b7 transformers",
+  "needed_data": "preference pairs (chosen vs rejected response)",
+  "data_source_for_insur": "agent_invocation pairs where one rejected by HITL",
+  "needed_compute": "GPU recommended \u00b7 less than PPO",
+  "estimated_runtime_gpu": "30-60 min for 1000 pairs",
+  "deepa_save_path": "/mnt/deepa/models/finetuned/dpo-<task>/",
+  "next_step": "pip install trl \u00b7 curate preference dataset from audit logs",
+  "ts_local": "2026-06-11T20:07:17.280505",
+  "synthetic": false,
+  "honest_scaffold": true,
+  "spec": "\u00a7141 fine-tune"
+}

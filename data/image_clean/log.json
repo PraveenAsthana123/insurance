@@ -1,0 +1,102 @@
+{
+  "n_processed": 5,
+  "method_avg_psnr": {
+    "gaussian": 31.9,
+    "median": 29.82,
+    "smooth": 28.76,
+    "auto_contrast": 22.61,
+    "sharpen": 16.96
+  },
+  "results": [
+    {
+      "source": "data/kaggle/insurance-images/test/60.jpg",
+      "shape": [
+        1024,
+        1024,
+        3
+      ],
+      "psnr_methods": {
+        "gaussian": 31.5,
+        "median": 29.58,
+        "smooth": 28.63,
+        "auto_contrast": 22.55,
+        "sharpen": 16.92
+      },
+      "best_method": "gaussian",
+      "out_sample": "data/image_clean/60_cleaned.jpg"
+    },
+    {
+      "source": "data/kaggle/insurance-images/test/72.jpg",
+      "shape": [
+        1024,
+        1024,
+        3
+      ],
+      "psnr_methods": {
+        "gaussian": 31.59,
+        "median": 29.79,
+        "smooth": 28.67,
+        "auto_contrast": 22.61,
+        "sharpen": 16.87
+      },
+      "best_method": "gaussian",
+      "out_sample": "data/image_clean/72_cleaned.jpg"
+    },
+    {
+      "source": "data/kaggle/insurance-images/test/66.jpg",
+      "shape": [
+        1024,
+        1024,
+        3
+      ],
+      "psnr_methods": {
+        "gaussian": 31.86,
+        "median": 29.93,
+        "smooth": 28.86,
+        "auto_contrast": 22.82,
+        "sharpen": 17.23
+      },
+      "best_method": "gaussian",
+      "out_sample": "data/image_clean/66_cleaned.jpg"
+    },
+    {
+      "source": "data/kaggle/insurance-images/test/67.jpg",
+      "shape": [
+        1024,
+        1024,
+        3
+      ],
+      "psnr_methods": {
+        "gaussian": 32.07,
+        "median": 29.83,
+        "smooth": 28.8,
+        "auto_contrast": 22.57,
+        "sharpen": 16.98
+      },
+      "best_method": "gaussian",
+      "out_sample": "data/image_clean/67_cleaned.jpg"
+    },
+    {
+      "source": "data/kaggle/insurance-images/test/45.jpg",
+      "shape": [
+        1024,
+        1024,
+        3
+      ],
+      "psnr_methods": {
+        "gaussian": 32.5,
+        "median": 29.99,
+        "smooth": 28.84,
+        "auto_contrast": 22.5,
+        "sharpen": 16.8
+      },
+      "best_method": "gaussian",
+      "out_sample": "data/image_clean/45_cleaned.jpg"
+    }
+  ],
+  "data_source": "REAL \u00b7 Kaggle car-damage detection dataset",
+  "synthetic_noise_added_for_metric": true,
+  "synthetic_noise_sigma": 20,
+  "computed_at": "2026-06-11T20:02:33.711849",
+  "spec": "\u00a7141 image-denoise"
+}
