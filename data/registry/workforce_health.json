@@ -1,16 +1,16 @@
 {
-  "ts": "2026-06-12T13:15:01Z",
+  "ts": "2026-06-12T14:15:02Z",
   "fleet": {
     "tasks": 350,
     "workers": 200,
-    "elapsed_seconds": 15.56,
-    "throughput_per_sec": 22.5,
+    "elapsed_seconds": 16.08,
+    "throughput_per_sec": 21.8,
     "verdicts": {
       "issue_found": 97,
       "ok": 251,
       "escalate": 2
     },
-    "completed_at": "2026-06-12T13:00:20Z"
+    "completed_at": "2026-06-12T14:00:20Z"
   },
   "ollama": {
     "models": [

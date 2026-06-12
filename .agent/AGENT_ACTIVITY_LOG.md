@@ -5150,3 +5150,24 @@ error: jobs/logs/backend.log: patch does not apply
 2026-06-12T14:03:48Z | auto-fix-worker | start        | T-loop-1781273028-3 | role=error target=jobs/logs/rag_cache.log
 2026-06-12T14:03:48Z | auto-fix-worker | classify     | T-loop-1781273028-3 | tier=small risk=low council=single
 2026-06-12T14:03:51Z | auto-fix-worker | validate     | T-loop-1781273028-3 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-12T14:03:58Z | auto-fix-worker | commit       | T-loop-1781273028-3 | ok sha=4f27aed9c6c4d9737809a55409a05b9e00d920f4
+2026-06-12T14:03:58Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-12T14:03:58Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2
+2026-06-12T15:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-12T15:00:02Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-12T15:00:04Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-12T15:00:20Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-12T15:00:20Z | auto-fix-loop | dispatch #1: T-loop-1781276420-1
+2026-06-12T15:00:20Z | auto-fix-worker | start        | T-loop-1781276420-1 | role=error target=jobs/logs/backend.log
+2026-06-12T15:00:20Z | auto-fix-worker | classify     | T-loop-1781276420-1 | tier=small risk=low council=single
+2026-06-12T15:00:57Z | auto-fix-worker | skip         | T-loop-1781276420-1 | model returned empty or NEEDS_HUMAN
+2026-06-12T15:00:57Z | auto-fix-loop |   → verdict=skip
+2026-06-12T15:00:57Z | auto-fix-loop | dispatch #2: T-loop-1781276457-2
+2026-06-12T15:00:58Z | auto-fix-worker | start        | T-loop-1781276457-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-12T15:00:58Z | auto-fix-worker | classify     | T-loop-1781276457-2 | tier=small risk=low council=single
+2026-06-12T15:03:58Z | auto-fix-worker | skip         | T-loop-1781276457-2 | model returned empty or NEEDS_HUMAN
+2026-06-12T15:03:58Z | auto-fix-loop |   → verdict=skip
+2026-06-12T15:03:58Z | auto-fix-loop | dispatch #3: T-loop-1781276638-3
+2026-06-12T15:03:58Z | auto-fix-worker | start        | T-loop-1781276638-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-12T15:03:58Z | auto-fix-worker | classify     | T-loop-1781276638-3 | tier=small risk=low council=single
+2026-06-12T15:04:02Z | auto-fix-worker | validate     | T-loop-1781276638-3 | ok: no validator for jobs/logs/rag_cache.log
