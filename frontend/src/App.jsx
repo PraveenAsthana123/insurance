@@ -71,6 +71,7 @@ import ItsmPage from './pages/ItsmPage';
 import EaiOsPage from './pages/EaiOsPage';
 import PromptsPage from './pages/PromptsPage';
 import PlatformExplorerPage from './pages/PlatformExplorerPage';
+import AiTypesPage from './pages/AiTypesPage';
 
 function PageLoader({ label }) {
   return (
@@ -223,6 +224,9 @@ export default function App() {
         <Route path="/platform" element={<PlatformExplorerPage />} />
         <Route path="/explorer" element={<PlatformExplorerPage />} />
         <Route path="/all" element={<PlatformExplorerPage />} />
+        <Route path="/ai-types" element={<AiTypesPage />} />
+        <Route path="/ai-taxonomy" element={<AiTypesPage />} />
+        <Route path="/types" element={<AiTypesPage />} />
       </Routes>
     </BrowserRouter>
   );
