@@ -107,6 +107,11 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/notifications', icon: '🔔', label: 'Notification Center (§F02)' },
           { to: '/feature-flags', icon: '🎛', label: 'Feature Flags (§F03)' },
           { to: '/workspace-demo', icon: '🧪', label: '§149.2 Layout Demo (drag · glass · flow)' },
+          { to: '/eaos-dept',    icon: '🏢', label: '🆕 EAOS Department (10 sub-menu · 12 tabs each)' },
+          { to: '/eaos',         icon: '🏢', label: '§EAOS Top-10 Scoreboard' },
+          { to: '/command-center', icon: '🏛', label: 'Enterprise AI Command Center' },
+          { to: '/promptops',    icon: '📝', label: 'PromptOps' },
+          { to: '/evalops',      icon: '🧪', label: 'EvaluationOps' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,

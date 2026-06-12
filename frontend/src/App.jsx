@@ -81,6 +81,11 @@ import TextToSpeechPage from './pages/TextToSpeechPage';
 import NotificationCenterPage from './pages/NotificationCenterPage';
 import FeatureFlagsPage from './pages/FeatureFlagsPage';
 import WorkspaceDemoPage from './pages/WorkspaceDemoPage';
+import EaosScoreboardPage from './pages/EaosScorebardPage';
+import CommandCenterPage from './pages/CommandCenterPage';
+import PromptOpsPage from './pages/PromptOpsPage';
+import EvalOpsPage from './pages/EvalOpsPage';
+import EaosDepartmentPage from './pages/EaosDepartmentPage';
 
 function PageLoader({ label }) {
   return (
@@ -250,6 +255,15 @@ export default function App() {
         <Route path="/flags" element={<FeatureFlagsPage />} />
         <Route path="/workspace-demo" element={<WorkspaceDemoPage />} />
         <Route path="/layout-demo" element={<WorkspaceDemoPage />} />
+        <Route path="/eaos" element={<EaosScoreboardPage />} />
+        <Route path="/eaos-top10" element={<EaosScoreboardPage />} />
+        <Route path="/command-center" element={<CommandCenterPage />} />
+        <Route path="/promptops" element={<PromptOpsPage />} />
+        <Route path="/prompt-ops" element={<PromptOpsPage />} />
+        <Route path="/evalops" element={<EvalOpsPage />} />
+        <Route path="/eval-ops" element={<EvalOpsPage />} />
+        <Route path="/eaos-dept" element={<EaosDepartmentPage />} />
+        <Route path="/eaos-department" element={<EaosDepartmentPage />} />
       </Routes>
     </BrowserRouter>
   );

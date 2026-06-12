@@ -146,6 +146,9 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
     # -------- §F01 TTS endpoints --------
     ("GET",  re.compile(r"^/api/v1/voice-ai/text-to-speech/voices$"),              _READ_ROLES),
     ("POST", re.compile(r"^/api/v1/voice-ai/text-to-speech$"),                     {"manager", "tester"}),
+
+    # -------- §EAOS Top-10 scoreboard --------
+    ("GET",  re.compile(r"^/api/v1/eaos/scoreboard$"),                              _READ_ROLES),
 ]
 
 # Backwards-compatible alias — earlier commits referenced SALES_PERMS.
