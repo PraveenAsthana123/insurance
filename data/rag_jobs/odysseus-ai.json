@@ -1,0 +1,25 @@
+{
+  "ai_type": "Odysseus AI",
+  "slug": "odysseus-ai",
+  "purpose": "Retrieve top-5 similar past invocations + their resolution agent",
+  "embed_config": {
+    "model": "bge-m3",
+    "dimensions": 1024,
+    "batch_size": 32
+  },
+  "vector_db": {
+    "engine": "qdrant",
+    "collection": "odysseus_skill_corpus",
+    "url": "http://localhost:6333"
+  },
+  "indexed_source": "agent_invocation.input_text + skills_used (REAL \u00b7 7,743 docs)",
+  "retrieval": {
+    "top_k": 5,
+    "score_threshold": 0.7,
+    "rerank": true,
+    "rerank_model": "bge-reranker-v2-m3"
+  },
+  "indexing_schedule": "0 2 * * *",
+  "drift_schedule": "0 3 * * 0",
+  "spec": "\u00a7139 rag job \u00b7 REAL corpus"
+}

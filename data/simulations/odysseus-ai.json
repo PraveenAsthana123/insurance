@@ -1,0 +1,51 @@
+{
+  "ai_type": "Odysseus AI",
+  "slug": "odysseus-ai",
+  "data_source": "REAL \u00b7 scenarios derived from agent_invocation distribution",
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "baseline_today",
+      "description": "Current 7,743-invocation distribution",
+      "expected_accuracy": 0.9586,
+      "fraud_rate": "n/a"
+    },
+    {
+      "id": "S2",
+      "name": "new_agent_class_introduced",
+      "description": "Add a 28th agent \u00b7 100 fresh invocations",
+      "expected_accuracy": 0.8148,
+      "remediation": "auto-retrain triggered when PSI > 0.2"
+    },
+    {
+      "id": "S3",
+      "name": "10x_traffic_spike",
+      "description": "Volume goes from 60/h to 600/h",
+      "expected_accuracy": 0.9586,
+      "$ impact": "horizontal scale 1 \u2192 4 replicas \u00b7 ~$120/mo extra"
+    },
+    {
+      "id": "S4",
+      "name": "adversarial_status_swap",
+      "description": "Attacker swaps status text \u00b7 model must NOT trust it",
+      "expected_accuracy": 0.7477,
+      "remediation": "ensemble vote across 3 RF seeds \u00b7 \u00a7 76 robustness"
+    },
+    {
+      "id": "S5",
+      "name": "tenant_isolation_breach",
+      "description": "Cross-tenant data point leaks into training",
+      "expected_accuracy": 0.9586,
+      "$ impact": "compliance violation \u00b7 auto-retrain + audit row required"
+    }
+  ],
+  "monte_carlo": {
+    "n_runs": 1000,
+    "confidence_interval_95": [
+      0.9466,
+      0.9706
+    ]
+  },
+  "computed_at": "2026-06-11T18:28:47.314003",
+  "spec": "\u00a7139 simulation \u00b7 REAL signatures"
+}

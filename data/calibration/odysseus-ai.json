@@ -1,0 +1,9 @@
+{
+  "brier_score": 0.0082,
+  "ece": 0.0137,
+  "calibration_quality": "good",
+  "n_samples_calibration": 1000,
+  "data_source": "REAL \u00b7 1000 sample from training_pairs",
+  "computed_at": "2026-06-11T18:28:47.312951",
+  "spec": "\u00a7139 calibration \u00b7 REAL"
+}

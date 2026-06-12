@@ -1,0 +1,39 @@
+{
+  "ai_type": "Odysseus AI",
+  "slug": "odysseus-ai",
+  "data_source": "REAL \u00b7 agent_invocation",
+  "univariate": {
+    "n_features": 157,
+    "skewness_range_observed": [
+      -2.1,
+      8.4
+    ],
+    "outlier_count_duration_p99": 47
+  },
+  "class_balance": {
+    "sys_watchdog_status": 398,
+    "sys_watchdog_frontend": 313,
+    "sys_watchdog_api": 313,
+    "sys_watchdog_jobs": 313,
+    "sys_watchdog_vector": 313,
+    "sys_watchdog_logic": 313,
+    "sys_watchdog_errors": 312,
+    "sys_watchdog_cron": 312,
+    "sys_watchdog_db": 312,
+    "sys_watchdog_performance": 311
+  },
+  "n_classes": 27,
+  "imbalance_ratio_top_to_bottom": 10.21,
+  "missing_pattern": {
+    "input_text_null_pct": 12.3,
+    "skill_empty_pct": 8.7,
+    "cost_usd_null_pct": 0.0
+  },
+  "drift_report": {
+    "psi_current": 0.04,
+    "csi_current": 0.05,
+    "status": "STABLE"
+  },
+  "computed_at": "2026-06-11T18:28:47.314253",
+  "spec": "\u00a7139 EDA \u00b7 REAL"
+}

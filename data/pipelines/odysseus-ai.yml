@@ -1,0 +1,63 @@
+# Odysseus AI · DAG pipeline · §139
+
+name: odysseus_ai_pipeline
+schedule: "@hourly"
+catchup: false
+
+dag:
+  - id: extract_real_invocations
+    operator: PostgresExtract
+    sql: "SELECT * FROM agent_invocation WHERE created_at > '{{ ds }}' AND agent_id IS NOT NULL"
+    out: raw_df
+
+  - id: filter_signal_classes
+    operator: PythonOperator
+    callable: features.filter_min_count
+    threshold: 20
+    deps: [extract_real_invocations]
+    out: filtered_df
+
+  - id: prompt_injection_scan
+    operator: PythonOperator
+    callable: §113.scan_batch
+    deps: [filter_signal_classes]
+    out: clean_df
+
+  - id: feature_eng
+    operator: PythonOperator
+    callable: features.tfidf_plus_encoders
+    deps: [prompt_injection_scan]
+    out: feature_df
+
+  - id: predict
+    operator: PythonOperator
+    callable: inference.batch_predict
+    model_path: "models/odysseus-ai/model.joblib"
+    deps: [feature_eng]
+    out: predictions_df
+
+  - id: confidence_gate
+    operator: PythonOperator
+    callable: §103.5.confidence_check
+    threshold: 0.6
+    deps: [predict]
+
+  - id: audit_emit
+    operator: PostgresInsert
+    table: audit_log
+    deps: [confidence_gate]
+
+  - id: drift_check
+    operator: PythonOperator
+    callable: drift.check
+    threshold_psi: 0.2
+    deps: [predict]
+
+resources:
+  cpu: 2
+  memory: 4G
+  gpu: 0
+  timeout_minutes: 30
+
+owner: sys_odysseus_ai_agent
+spec: §139

@@ -1,0 +1,23 @@
+{
+  "feature_drift": {
+    "feature": "agent_id distribution",
+    "psi_threshold": 0.2,
+    "baseline_distribution": {
+      "sys_watchdog_status": 398,
+      "sys_watchdog_frontend": 313,
+      "sys_watchdog_api": 313,
+      "sys_watchdog_jobs": 313,
+      "sys_watchdog_vector": 313,
+      "sys_watchdog_logic": 313,
+      "sys_watchdog_errors": 312,
+      "sys_watchdog_cron": 312,
+      "sys_watchdog_db": 312,
+      "sys_watchdog_performance": 311
+    },
+    "method": "Population Stability Index over 90-day rolling window",
+    "alert_endpoint": "/api/v1/odysseus/health"
+  },
+  "data_source": "REAL agent_invocation \u00b7 live PostgreSQL",
+  "computed_at": "2026-06-11T18:28:46.249205",
+  "spec": "\u00a7139 drift baseline \u00b7 REAL"
+}

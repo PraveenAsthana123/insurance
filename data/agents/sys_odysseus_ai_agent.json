@@ -1,0 +1,21 @@
+{
+  "agent_id": "sys_odysseus_ai_agent",
+  "agent_name": "Odysseus AI Agent",
+  "agent_type": "Worker",
+  "purpose": "Owner of Odysseus journey orchestration predictions",
+  "status": "Active",
+  "autonomy_level": "Approval Required",
+  "risk_level": "Medium",
+  "owns": [
+    "models/odysseus-ai/model.joblib",
+    "/api/v1/odysseus/predict",
+    "/api/v1/odysseus/health"
+  ],
+  "alerts_on": [
+    "accuracy_drop",
+    "drift_breach",
+    "fairness_gate_breach"
+  ],
+  "registered_at": "2026-06-11T18:28:47.315165",
+  "spec": "\u00a7139"
+}

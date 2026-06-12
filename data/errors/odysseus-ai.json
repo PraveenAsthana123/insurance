@@ -1,0 +1,57 @@
+{
+  "ai_type": "Odysseus AI",
+  "slug": "odysseus-ai",
+  "tracked_errors": [
+    {
+      "code": "ODY001",
+      "name": "input_schema_mismatch",
+      "severity": "P2",
+      "n_in_24h": 0,
+      "alert_threshold": 5,
+      "playbook": "Validate Pydantic model \u00b7 reject 422 \u00b7 audit row"
+    },
+    {
+      "code": "ODY002",
+      "name": "model_load_failure",
+      "severity": "P0",
+      "n_in_24h": 0,
+      "alert_threshold": 1,
+      "playbook": "Backend restart \u00b7 verify model.joblib intact"
+    },
+    {
+      "code": "ODY003",
+      "name": "prediction_timeout",
+      "severity": "P1",
+      "n_in_24h": 0,
+      "alert_threshold": 10,
+      "playbook": "Check RF latency \u00b7 scale replicas \u00b7 circuit breaker"
+    },
+    {
+      "code": "ODY004",
+      "name": "audit_write_failure",
+      "severity": "P1",
+      "n_in_24h": 0,
+      "alert_threshold": 3,
+      "playbook": "DB connection check \u00b7 retry queue \u00b7 \u00a738.3 backstop"
+    },
+    {
+      "code": "ODY005",
+      "name": "fairness_gate_breach",
+      "severity": "P0",
+      "n_in_24h": 0,
+      "alert_threshold": 1,
+      "playbook": "Immediate auto-retrain \u00b7 audit row \u00b7 \u00a776 escalation"
+    },
+    {
+      "code": "ODY006",
+      "name": "drift_psi_above_threshold",
+      "severity": "P1",
+      "n_in_24h": 0,
+      "alert_threshold": 1,
+      "playbook": "Auto-retrain triggered \u00b7 rollback gate per \u00a7103.5"
+    }
+  ],
+  "sample_recent": [],
+  "computed_at": "2026-06-11T18:28:47.315032",
+  "spec": "\u00a7139 error tracking \u00b7 REAL baselines"
+}

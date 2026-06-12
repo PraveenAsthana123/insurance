@@ -1,0 +1,83 @@
+{
+  "title": "Odysseus AI \u00b7 production dashboard \u00b7 \u00a7139",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Predictions/sec",
+      "type": "graph",
+      "query": "rate(odysseus_predictions_total[5m])"
+    },
+    {
+      "id": 2,
+      "title": "p95 Latency (ms)",
+      "type": "graph",
+      "query": "histogram_quantile(0.95, rate(odysseus_latency_bucket[5m]))",
+      "alert_at": "> 500"
+    },
+    {
+      "id": 3,
+      "title": "Accuracy (Live)",
+      "type": "gauge",
+      "query": "avg(odysseus_accuracy)",
+      "baseline": 0.9586,
+      "alert_at": "< 0.85"
+    },
+    {
+      "id": 4,
+      "title": "Drift PSI",
+      "type": "graph",
+      "query": "odysseus_drift_psi",
+      "alert_at": "> 0.2"
+    },
+    {
+      "id": 5,
+      "title": "Fairness DI",
+      "type": "gauge",
+      "query": "odysseus_fairness_di",
+      "alert_at": "< 0.8"
+    },
+    {
+      "id": 6,
+      "title": "HITL Escalation Rate",
+      "type": "graph",
+      "query": "rate(odysseus_hitl_total[5m])",
+      "alert_at": "> 0.15"
+    },
+    {
+      "id": 7,
+      "title": "Confidence Histogram",
+      "type": "histogram",
+      "query": "odysseus_confidence_bucket"
+    },
+    {
+      "id": 8,
+      "title": "Cost ($/100 req)",
+      "type": "graph",
+      "query": "rate(odysseus_cost_usd[5m]) * 100"
+    }
+  ],
+  "alerts": [
+    {
+      "name": "accuracy_drop",
+      "expr": "odysseus_accuracy < 0.85",
+      "severity": "P1"
+    },
+    {
+      "name": "drift_breach",
+      "expr": "odysseus_drift_psi > 0.2",
+      "severity": "P1"
+    },
+    {
+      "name": "fairness_gate",
+      "expr": "odysseus_fairness_di < 0.8",
+      "severity": "P0"
+    },
+    {
+      "name": "hitl_spike",
+      "expr": "rate(odysseus_hitl_total[5m]) > 0.5",
+      "severity": "P2"
+    }
+  ],
+  "refresh": "30s",
+  "spec": "\u00a7139 observability \u00b7 REAL baselines"
+}
