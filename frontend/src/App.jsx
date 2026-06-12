@@ -70,6 +70,7 @@ import './styles/insurance.css';
 import ItsmPage from './pages/ItsmPage';
 import EaiOsPage from './pages/EaiOsPage';
 import PromptsPage from './pages/PromptsPage';
+import PlatformExplorerPage from './pages/PlatformExplorerPage';
 
 function PageLoader({ label }) {
   return (
@@ -219,6 +220,9 @@ export default function App() {
         <Route path="/eai-os" element={<EaiOsPage />} />
         <Route path="/prompts" element={<PromptsPage />} />
         <Route path="/prompt-history" element={<PromptsPage />} />
+        <Route path="/platform" element={<PlatformExplorerPage />} />
+        <Route path="/explorer" element={<PlatformExplorerPage />} />
+        <Route path="/all" element={<PlatformExplorerPage />} />
       </Routes>
     </BrowserRouter>
   );
