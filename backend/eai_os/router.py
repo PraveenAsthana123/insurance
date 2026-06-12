@@ -302,7 +302,7 @@ def ct_inventory():
     c.execute("SELECT COUNT(*) FROM agent_registry")
     out["agents"]["total"] = c.fetchone()[0]
 
-    c.execute("SELECT model_name, COALESCE(lifecycle_status,'?') FROM model_registry LIMIT 20")
+    c.execute("SELECT model_name, COALESCE(status,'?') FROM model_registry LIMIT 20")
     out["models"] = [{"name": r[0], "status": r[1]} for r in c.fetchall()]
 
     c.execute("SELECT COUNT(*) FROM workflow_run WHERE created_at > NOW() - INTERVAL '24 hours'")
