@@ -208,8 +208,18 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         return True, 0
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
-        # Skip rate limiting for health checks
-        if request.url.path in ("/api/health", "/health"):
+        # Skip rate limiting for health + observability probes.
+        # Iter 65 · §150 process-resilience: liveness probes must NEVER be
+        # rate-limited or the watchdog mis-reads "rate limited" as "down"
+        # and triggers a restart-storm. /metrics must serve every scrape
+        # for Prometheus continuity.
+        path = request.url.path
+        if (
+            path in ("/api/health", "/health", "/metrics", "/")
+            or path.startswith("/healthz")
+            or path.startswith("/api/v1/health")
+            or path.startswith("/api/v1/service-health")
+        ):
             return await call_next(request)
 
         client_ip = request.client.host if request.client else "unknown"
