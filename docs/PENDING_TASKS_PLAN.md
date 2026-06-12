@@ -259,7 +259,7 @@ Each task below has the 7 stages explicitly. Mark each ✅ as it's done.
 | **ACTION** | `INSUR_JWT_SECRET=$(openssl rand -base64 32)` in deploy env |
 | **INTERVENTION** | Approval required · breaks existing sessions |
 | **REVIEW** | All existing JWTs invalidated · users re-auth · audit row 'secret rotated' |
-| **STATUS** | ⏳ pending |
+| **STATUS** | ✅ done · 2026-06-12 14:58:15 MDT · auto-closed by fix_all_pending_loop · evidence: rotator+template_present |
 
 (F2-F6 similar)
 
