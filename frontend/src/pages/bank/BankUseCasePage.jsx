@@ -19,6 +19,7 @@ import {
 } from './BankFrameworkData';
 import { canonicalDomainId, domainMeta } from '../../utils/insuranceNavigation';
 import { TAB_OBJECTIVE_EVIDENCE, scoreTab, evaluateObjective } from './tabs/tab-objective-evidence';
+import { TAB_TECHNICAL_BRIEF } from './tabs/tab-technical-brief';
 
 // ─────────────────────────────────────────────────────────────────────
 // Operator 2026-06-05: "save all input prompt and show on UI".
@@ -5082,6 +5083,373 @@ function SummaryAndOutcomeRow({ tab, sub, proc }) {
   );
 }
 
+// TechnicalRiskBrief — operator 2026-06-13 13:42 MDT: "fix all these · quality
+// is very poor · need more number of technical graph, flow, challenges,
+// strategy, edge case, error handling, scalability, performance, error which
+// can come in error log .. how to handle them, error which will not come in
+// error log what to implement, daily issue, weekly rated issue, monthly rated
+// issue, user mistake, architect mistake" + "tester plan, positive, negative,
+// api, data, model, accuracy" + "security testing" + "admin testing, mlops
+// testing".
+//
+// 8 visually-distinct panels with DIFFERENT shapes (not 8 spec-cards). Per
+// §57.7 honest + "no creative" feedback: each panel uses its own layout,
+// color scheme, and visual idiom. README pilot rendered with substantive
+// content from TAB_TECHNICAL_BRIEF.
+//
+// Composes with: §43 (drill enforces panels + content floor) · §57.7
+// (honest substance · NO placeholder content) · §73 (per-tab differentiation)
+// · §93 (errors+cadence ARE the operational IPO) · §117 (every panel
+// surfaces concerns a CHECKER agent monitors) · §122 (creative ≠ catalog).
+function TechnicalRiskBrief({ tab, proc }) {
+  const brief = TAB_TECHNICAL_BRIEF[tab.id];
+  if (!brief) {
+    return (
+      <div style={{
+        padding: 14, background: '#fef3c7',
+        border: '1px solid #fcd34d', borderLeft: '5px solid #f59e0b',
+        borderRadius: 6, fontSize: 12, color: '#78350f',
+      }}>
+        ⚠ <strong>No technical brief registered for <code>{tab.id}</code></strong>.
+        Adding one to <code>tab-technical-brief.js</code> populates: diagrams ·
+        challenges/strategy · edge cases · scale+perf · errors (logged vs silent)
+        · issue cadence (daily/weekly/monthly) · mistakes (user vs architect)
+        · 9-category testing plan. Owner: <strong>sys_tab_monitor_agent</strong>.
+      </div>
+    );
+  }
+  return (
+    <div style={{ display: 'grid', gap: 14 }}>
+      {/* Panel 1 · Diagrams (mermaid blocks · code-editor feel) */}
+      <Panel title="Technical diagrams" accent="#7c3aed" icon="📐"
+             tagline={`${brief.diagrams.length} diagrams · architecture / sequence / C4`}>
+        <div style={{ display: 'grid', gap: 10 }}>
+          {brief.diagrams.map((d, i) => (
+            <div key={i} style={{
+              padding: 12,
+              background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: 6,
+            }}>
+              <div style={{ fontSize: 11, fontWeight: 800, color: '#7c3aed', marginBottom: 6 }}>
+                📐 {d.title}
+              </div>
+              <pre style={{
+                margin: 0, padding: 10,
+                background: '#fff', border: '1px dashed #cbd5e1', borderRadius: 4,
+                fontFamily: 'monospace', fontSize: 10, color: '#0f172a',
+                whiteSpace: 'pre-wrap', overflowX: 'auto',
+              }}>{d.mermaid}</pre>
+              <div style={{ marginTop: 6, fontSize: 10, color: '#475569', fontStyle: 'italic' }}>
+                <strong>Why it matters:</strong> {d.whyItMatters}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Panel>
+
+      {/* Panel 2 · Challenges + Strategy (2-column compare) */}
+      <Panel title="Challenges + strategy" accent="#dc2626" icon="⚠"
+             tagline={`${brief.challengesStrategy.length} pairs · pre-named mitigations`}>
+        <div style={{ display: 'grid', gap: 8 }}>
+          {brief.challengesStrategy.map((c, i) => (
+            <div key={i} style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0,
+              border: '1px solid #cbd5e1', borderRadius: 6, overflow: 'hidden',
+            }}>
+              <div style={{
+                padding: 10, background: '#fee2e2', borderRight: '1px solid #cbd5e1',
+              }}>
+                <div style={{ fontSize: 9, fontWeight: 800, color: '#dc2626', marginBottom: 4 }}>
+                  ⚠ CHALLENGE
+                </div>
+                <div style={{ fontSize: 11, color: '#0f172a' }}>{c.challenge}</div>
+                <div style={{ marginTop: 6, fontSize: 9, color: '#7f1d1d', fontStyle: 'italic' }}>
+                  Impact: {c.impact}
+                </div>
+              </div>
+              <div style={{ padding: 10, background: '#dbeafe' }}>
+                <div style={{ fontSize: 9, fontWeight: 800, color: '#1d4ed8', marginBottom: 4 }}>
+                  💡 STRATEGY
+                </div>
+                <div style={{ fontSize: 11, color: '#0f172a' }}>{c.strategy}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Panel>
+
+      {/* Panel 3 · Edge cases (yellow alert grid) */}
+      <Panel title="Edge cases + handling" accent="#f59e0b" icon="🔍"
+             tagline={`${brief.edgeCases.length} cases · failure-mode catalogue`}>
+        <div style={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 8,
+        }}>
+          {brief.edgeCases.map((e, i) => (
+            <div key={i} style={{
+              padding: 10, background: '#fef3c7',
+              border: '1px solid #fcd34d', borderLeft: '4px solid #f59e0b', borderRadius: 6,
+            }}>
+              <div style={{ fontSize: 9, fontWeight: 800, color: '#92400e', textTransform: 'uppercase', marginBottom: 4 }}>
+                🔍 Case {i + 1}
+              </div>
+              <div style={{ fontSize: 11, color: '#0f172a', marginBottom: 6, fontWeight: 600 }}>
+                {e.case}
+              </div>
+              <div style={{ fontSize: 10, color: '#78350f' }}>
+                <strong>Handling:</strong> {e.handling}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Panel>
+
+      {/* Panel 4 · Scalability + Performance (4-tile gauge) */}
+      <Panel title="Scalability + performance" accent="#0891b2" icon="📊"
+             tagline={`${brief.scalePerf.length} metrics · target vs actual`}>
+        <div style={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8,
+        }}>
+          {brief.scalePerf.map((m, i) => (
+            <div key={i} style={{
+              padding: 12, textAlign: 'center',
+              background: m.status === 'ok' ? '#dcfce7' : m.status === 'warn' ? '#fef3c7' : '#fee2e2',
+              border: `2px solid ${m.status === 'ok' ? '#16a34a' : m.status === 'warn' ? '#f59e0b' : '#dc2626'}`,
+              borderRadius: 8,
+            }}>
+              <div style={{ fontSize: 9, fontWeight: 800, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
+                {m.metric}
+              </div>
+              <div style={{ fontSize: 14, color: '#0f172a', fontWeight: 800, marginBottom: 4 }}>
+                {m.actual}
+              </div>
+              <div style={{ fontSize: 10, color: '#64748b' }}>
+                target: <strong>{m.target}</strong>
+              </div>
+              <div style={{
+                marginTop: 6,
+                fontSize: 9, fontWeight: 800,
+                color: m.status === 'ok' ? '#16a34a' : m.status === 'warn' ? '#f59e0b' : '#dc2626',
+              }}>
+                {m.status === 'ok' ? '✓ OK' : m.status === 'warn' ? '⚠ WARN' : '✗ FAIL'}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Panel>
+
+      {/* Panel 5 · Errors LOGGED (red header table) */}
+      <Panel title="Errors that REACH the error log" accent="#dc2626" icon="📜"
+             tagline={`${brief.errorsLogged.length} known · per-error handling rules`}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11 }}>
+          <thead>
+            <tr style={{ background: '#fee2e2' }}>
+              <th style={{ padding: '8px 10px', textAlign: 'left', color: '#dc2626', fontWeight: 800, borderBottom: '2px solid #dc2626' }}>Error</th>
+              <th style={{ padding: '8px 10px', textAlign: 'left', color: '#dc2626', fontWeight: 800, borderBottom: '2px solid #dc2626' }}>How to handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            {brief.errorsLogged.map((e, i) => (
+              <tr key={i} style={{ borderBottom: '1px solid #fee2e2' }}>
+                <td style={{ padding: '8px 10px', color: '#0f172a', fontWeight: 600 }}>{e.error}</td>
+                <td style={{ padding: '8px 10px', color: '#475569' }}>{e.handling}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Panel>
+
+      {/* Panel 5b · Errors SILENT (purple header table) */}
+      <Panel title="Errors that NEVER reach the error log" accent="#7c3aed" icon="👻"
+             tagline={`${brief.errorsSilent.length} silent · what to implement to surface them`}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11 }}>
+          <thead>
+            <tr style={{ background: '#ede9fe' }}>
+              <th style={{ padding: '8px 10px', textAlign: 'left', color: '#7c3aed', fontWeight: 800, borderBottom: '2px solid #7c3aed' }}>Silent error</th>
+              <th style={{ padding: '8px 10px', textAlign: 'left', color: '#7c3aed', fontWeight: 800, borderBottom: '2px solid #7c3aed' }}>What to implement</th>
+            </tr>
+          </thead>
+          <tbody>
+            {brief.errorsSilent.map((e, i) => (
+              <tr key={i} style={{ borderBottom: '1px solid #ede9fe' }}>
+                <td style={{ padding: '8px 10px', color: '#0f172a', fontWeight: 600 }}>{e.error}</td>
+                <td style={{ padding: '8px 10px', color: '#475569' }}>{e.implementWhat}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Panel>
+
+      {/* Panel 6 · Issue cadence (3-column timeline) */}
+      <Panel title="Issue cadence" accent="#0891b2" icon="📅"
+             tagline="daily · weekly · monthly catalogue with on-call action">
+        <div style={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 10,
+        }}>
+          {[
+            { key: 'daily',   label: 'DAILY',   color: '#f59e0b', items: brief.issueCadence.daily   },
+            { key: 'weekly',  label: 'WEEKLY',  color: '#0891b2', items: brief.issueCadence.weekly  },
+            { key: 'monthly', label: 'MONTHLY', color: '#7c3aed', items: brief.issueCadence.monthly },
+          ].map((col) => (
+            <div key={col.key} style={{
+              padding: 10,
+              background: '#fff', border: `2px solid ${col.color}`,
+              borderTop: `5px solid ${col.color}`, borderRadius: 6,
+            }}>
+              <div style={{
+                fontSize: 11, fontWeight: 800, color: col.color, marginBottom: 8,
+                textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center',
+              }}>
+                {col.label} · {col.items.length}
+              </div>
+              {col.items.map((it, i) => (
+                <div key={i} style={{
+                  marginBottom: 8, paddingBottom: 8,
+                  borderBottom: i < col.items.length - 1 ? '1px dashed #cbd5e1' : 'none',
+                }}>
+                  <div style={{ fontSize: 11, color: '#0f172a', fontWeight: 600, marginBottom: 3 }}>
+                    {it.issue}
+                  </div>
+                  <div style={{ fontSize: 10, color: '#475569' }}>
+                    <strong>Action:</strong> {it.action}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </Panel>
+
+      {/* Panel 7 · Mistakes (user vs architect split) */}
+      <Panel title="Mistakes catalogue" accent="#0891b2" icon="🚫"
+             tagline={`${brief.mistakesUser.length} user · ${brief.mistakesArchitect.length} architect · each with prevention`}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <div>
+            <div style={{
+              padding: '6px 10px', background: '#fee2e2', borderRadius: 4,
+              fontSize: 10, fontWeight: 800, color: '#dc2626', marginBottom: 8,
+              textTransform: 'uppercase', letterSpacing: '0.05em',
+            }}>👤 User mistakes ({brief.mistakesUser.length})</div>
+            {brief.mistakesUser.map((m, i) => (
+              <div key={i} style={{
+                marginBottom: 6, padding: 8,
+                background: '#fff', border: '1px solid #fca5a5', borderLeft: '3px solid #dc2626', borderRadius: 4,
+              }}>
+                <div style={{ fontSize: 11, color: '#0f172a', fontWeight: 600, marginBottom: 3 }}>{m.mistake}</div>
+                <div style={{ fontSize: 10, color: '#475569' }}><strong>Prevent:</strong> {m.prevention}</div>
+              </div>
+            ))}
+          </div>
+          <div>
+            <div style={{
+              padding: '6px 10px', background: '#ede9fe', borderRadius: 4,
+              fontSize: 10, fontWeight: 800, color: '#7c3aed', marginBottom: 8,
+              textTransform: 'uppercase', letterSpacing: '0.05em',
+            }}>🏛 Architect mistakes ({brief.mistakesArchitect.length})</div>
+            {brief.mistakesArchitect.map((m, i) => (
+              <div key={i} style={{
+                marginBottom: 6, padding: 8,
+                background: '#fff', border: '1px solid #c4b5fd', borderLeft: '3px solid #7c3aed', borderRadius: 4,
+              }}>
+                <div style={{ fontSize: 11, color: '#0f172a', fontWeight: 600, marginBottom: 3 }}>{m.mistake}</div>
+                <div style={{ fontSize: 10, color: '#475569' }}><strong>Prevent:</strong> {m.prevention}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Panel>
+
+      {/* Panel 8 · Testing plan (9-cell grid) */}
+      <Panel title="Testing plan" accent="#16a34a" icon="🧪"
+             tagline="9 categories per operator's stack: positive · negative · api · data · model · accuracy · security · admin · mlops">
+        <div style={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 10,
+        }}>
+          {[
+            ['positive', '✅', 'Positive tests',  '#16a34a'],
+            ['negative', '✗',  'Negative tests',  '#dc2626'],
+            ['api',      '🔌', 'API tests',       '#0891b2'],
+            ['data',     '📦', 'Data tests',      '#f59e0b'],
+            ['model',    '🧠', 'Model tests',     '#7c3aed'],
+            ['accuracy', '🎯', 'Accuracy tests',  '#0e7490'],
+            ['security', '🛡',  'Security tests',  '#b91c1c'],
+            ['admin',    '⚙',  'Admin tests',     '#475569'],
+            ['mlops',    '♻',  'MLOps tests',     '#15803d'],
+          ].map(([key, icon, label, color]) => {
+            const items = brief.testingPlan[key] || [];
+            return (
+              <div key={key} style={{
+                padding: 10,
+                background: '#fff', border: `2px solid ${color}`, borderTop: `5px solid ${color}`,
+                borderRadius: 6,
+              }}>
+                <div style={{
+                  fontSize: 11, fontWeight: 800, color, marginBottom: 6,
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                }}>
+                  <span>{icon} {label}</span>
+                  <span style={{
+                    padding: '1px 6px', background: color, color: '#fff',
+                    borderRadius: 3, fontSize: 9,
+                  }}>{items.length}</span>
+                </div>
+                {items.length === 0 ? (
+                  <div style={{ fontSize: 10, color: '#94a3b8', fontStyle: 'italic' }}>
+                    None registered. Add to brief.testingPlan.{key}[].
+                  </div>
+                ) : (
+                  <ul style={{ margin: 0, paddingLeft: 18 }}>
+                    {items.map((t, i) => (
+                      <li key={i} style={{ fontSize: 10, color: '#0f172a', marginBottom: 3, lineHeight: 1.35 }}>
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </Panel>
+
+      {/* Footer · agent attribution */}
+      <div style={{
+        padding: '8px 12px', background: '#f8fafc',
+        border: '1px dashed #cbd5e1', borderRadius: 4,
+        fontSize: 10, color: '#475569', fontStyle: 'italic',
+      }}>
+        Owned by <strong>sys_tab_monitor_agent</strong> (AGENT_ROSTER §11) ·
+        catalog at <code>tab-technical-brief.js</code> · per §57.7 honest:
+        empty panels render a "what to implement" badge instead of fake content.
+      </div>
+    </div>
+  );
+}
+
+// Small helper · panel wrapper with consistent header but unique inner shape
+function Panel({ title, accent, icon, tagline, children }) {
+  return (
+    <div style={{
+      background: '#fff', border: '1px solid #e2e8f0', borderTop: `4px solid ${accent}`,
+      borderRadius: 8, padding: 14,
+      boxShadow: '0 1px 3px rgba(15, 23, 42, 0.05)',
+    }}>
+      <div style={{ marginBottom: 10 }}>
+        <div style={{
+          fontSize: 14, fontWeight: 800, color: accent,
+          letterSpacing: '-0.01em',
+        }}>
+          {icon} {title}
+        </div>
+        {tagline && (
+          <div style={{ fontSize: 10, color: '#64748b', marginTop: 2, fontStyle: 'italic' }}>
+            {tagline}
+          </div>
+        )}
+      </div>
+      {children}
+    </div>
+  );
+}
+
 // TopBriefStrip — operator 2026-06-13 13:40-13:53 MDT (12-message stack):
 //   "create core objective on top, to do list on top ...which must be align
 //    with tab or sub tab" + "every tab must have one agent which is monitoing"
@@ -6014,6 +6382,11 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
         <TabOutcomeScorecard tab={tab} proc={proc} />
       </SectionBlock>
     ),
+    technicalBrief: (
+      <SectionBlock key="technicalBrief" title="Technical risk + operations brief" icon="🛠" color={tab.color}>
+        <TechnicalRiskBrief tab={tab} proc={proc} />
+      </SectionBlock>
+    ),
     kpiViz:    (
       <SectionBlock key="kpiViz" title="KPI · Success metrics + Visualization" icon="📊" color={tab.color}>
         <VisualizationSlot tab={tab} sub={sub} proc={proc} />
@@ -6041,20 +6414,20 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
   // Compute section order by tab type + lens (operator §74.6 + 74.6e).
   // `runtime` (TechnicalRuntimeSection) lives right after Components — surfaces
   // the §76 9-runtime-layers relevance check on every tab.
-  const baseOrder = ['objective', 'asIsToBe', 'process', 'ipo', 'aiLogic', 'output', 'outcomeScorecard', 'kpiViz', 'components', 'runtime', 'database', 'prompts', 'emphasis', 'actions'];
+  const baseOrder = ['objective', 'asIsToBe', 'process', 'ipo', 'aiLogic', 'output', 'outcomeScorecard', 'technicalBrief', 'kpiViz', 'components', 'runtime', 'database', 'prompts', 'emphasis', 'actions'];
   let order;
   if (promoteActions) {
     // Action tabs: Actions section lifted ABOVE KPI+Viz
     order = ['objective', 'asIsToBe', 'process', 'ipo', 'aiLogic', 'output', 'actions', 'kpiViz', 'components', 'runtime', 'database', 'prompts', 'emphasis'];
   } else if (lensActive && lens === 'engineer') {
     // Engineer lens: technical details first (runtime promoted up to position 4)
-    order = ['objective', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'ipo', 'process', 'output', 'outcomeScorecard', 'asIsToBe', 'kpiViz', 'emphasis', 'actions'];
+    order = ['objective', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'ipo', 'process', 'output', 'outcomeScorecard', 'technicalBrief', 'asIsToBe', 'kpiViz', 'emphasis', 'actions'];
   } else if (lensActive && lens === 'manager') {
     // Manager lens: KPIs, Actions, ROI first
-    order = ['objective', 'kpiViz', 'actions', 'asIsToBe', 'output', 'outcomeScorecard', 'process', 'ipo', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'emphasis'];
+    order = ['objective', 'kpiViz', 'actions', 'asIsToBe', 'output', 'outcomeScorecard', 'technicalBrief', 'process', 'ipo', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'emphasis'];
   } else if (lensActive && lens === 'business') {
     // Business lens: value first, technical details demoted (runtime moved last)
-    order = ['objective', 'asIsToBe', 'output', 'outcomeScorecard', 'kpiViz', 'process', 'actions', 'ipo', 'aiLogic', 'components', 'emphasis', 'runtime', 'database', 'prompts'];
+    order = ['objective', 'asIsToBe', 'output', 'outcomeScorecard', 'technicalBrief', 'kpiViz', 'process', 'actions', 'ipo', 'aiLogic', 'components', 'emphasis', 'runtime', 'database', 'prompts'];
   } else {
     order = baseOrder;
   }

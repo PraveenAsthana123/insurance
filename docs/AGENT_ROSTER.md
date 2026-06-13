@@ -140,7 +140,7 @@ Roll up per-tab scores into an aggregate workspace scorecard. Surface via `/api/
 | Field | Value |
 |---|---|
 | **Role** | CHECKER + MONITOR (§117) — per-tab feedback agent |
-| **Owned artifact** | `frontend/src/pages/bank/BankUseCasePage.jsx::TopBriefStrip` + `tab-objective-evidence.js` |
+| **Owned artifact** | `frontend/src/pages/bank/BankUseCasePage.jsx::TopBriefStrip` + `BankUseCasePage.jsx::TechnicalRiskBrief` + `tab-objective-evidence.js` + `tab-technical-brief.js` |
 | **Responsibility** | For every (dept, process, tab, sub-tab) tuple in the bank workspace: surface a 1-line objective (from TAB_PROFILES.intent), 1-2 line goal (from TAB_CHARTER.why), top-3 todos (from TAB_OBJECTIVE_EVIDENCE pending+failing), monitor agent attribution, and band (TOP-1% / OK / NEEDS-WORK / FAILING). The strip MUST be the first render item in every tab body — no widget pushes it down. |
 | **Aligns with** | Main Menu (department) · Sub Menu (process / AI type / process-type) · §73 17-tab right pane |
 | **Trigger** | Every TopBriefStrip render (frontend reactive) · per drill_tab_outcome_evaluator (CI) |

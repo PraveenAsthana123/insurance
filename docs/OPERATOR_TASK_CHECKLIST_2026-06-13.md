@@ -105,6 +105,20 @@
 | §137 self-catch | Initial commit used `background: '#0f172a'` for agent badge · §137 audit FAILED · reverted to `'#f1f5f9'` with border before commit |
 | Pending follow-up | Operator's "more diagrams/errors/cadence/mistakes/testing" stack remains · partially captured in `tab-technical-brief.js` (README pilot) · component to render not yet built (deferred to avoid ceremony per "no creative" feedback) |
 
+### OP-11 · "fix all" → render TechnicalRiskBrief · 8 visually-distinct panels · README pilot
+
+| Field | Value |
+|---|---|
+| Operator quotes (15:36 MDT) | "fix all" (follow-up to 13:42 stack about diagrams/errors/cadence/mistakes/testing) |
+| Status | ✅ **DONE** · 8-panel renderer shipped with README pilot showing substantive content |
+| Component shipped | `<TechnicalRiskBrief tab proc />` in BankUseCasePage.jsx · 8 panels with DIFFERENT visual shapes (NOT another spec-card grid) |
+| 8 panel shapes | (1) Diagrams: mermaid code blocks in violet code-editor cards · (2) Challenges+Strategy: red/blue split-column compare · (3) Edge cases: amber alert grid · (4) Scale/Perf: 4-tile gauge (color-coded ok/warn/fail) · (5) Errors LOGGED: red 2-col table · (5b) Errors SILENT: purple 2-col table · (6) Cadence: 3-column timeline (amber daily / cyan weekly / violet monthly) · (7) Mistakes: red/purple user-vs-architect split · (8) Testing: 9-cell grid (one cell per category) |
+| README pilot content (verified by drill) | 3 mermaid diagrams · 4 challenge+strategy pairs · 5 edge cases · 4 scale/perf metrics · 4 errors-logged · 4 errors-silent · 3 daily / 3 weekly / 3 monthly cadence · 4 user mistakes · 4 architect mistakes · 9-category testing plan with 31 test items |
+| Drill shipped | `tests/drills/drill_tab_technical_brief.py` (10 steps · 5 negative) · locks panel count + content floor + 4 lens orders + 9 testing categories |
+| Wired in renderer | `sec.technicalBrief` consumed in all 4 lens orders (base · engineer · manager · business) · positioned after `outcomeScorecard` · before `kpiViz` |
+| Sister agent | sys_tab_monitor_agent (AGENT_ROSTER §11) extended ownership to include `TechnicalRiskBrief` + `tab-technical-brief.js` |
+| Pending follow-up | Catalog covers README only · 30 other tabs render "no brief registered" badge per §57.7 honest scaffold · operator can extend per-tab via next `fix all` |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |
