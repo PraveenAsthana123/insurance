@@ -361,9 +361,10 @@ def main():
     # acknowledges them as actionable instead of reporting "stable"
     # while real work sits uncommitted. Per §57.7 honest: a "stable"
     # status with uncommitted real-code is misleading.
+    extra_vitals: dict = {}
     try:
         from pending_topics_agent import extra_scans as _extra_scans
-        extra_findings, _extra_vitals = _extra_scans()
+        extra_findings, extra_vitals = _extra_scans()
         findings.extend(extra_findings)
     except Exception:
         pass  # best-effort · do not break dispatcher on extra_scans failure
@@ -373,6 +374,11 @@ def main():
     actionable = [f for f in findings if f["severity"] in sev_order]
     actionable.sort(key=lambda f: sev_order[f["severity"]])
 
+    # Iter 95.8 · surface extra_scans vitals in the dispatcher record so
+    # bash dispatcher (auto_next_dispatcher.sh) can echo
+    # `uncommitted_real_files` count for operator-readable log lines.
+    # Per §138.4 dim 4 + §57.7 honest: vitals carry truth even when
+    # findings count is 0.
     record = {
         "tick_id": tick_id, "started_at": started_at,
         "actor_user": ACTOR_USER, "actor_host": ACTOR_HOST,
@@ -380,6 +386,8 @@ def main():
         "tz_local": time.strftime("%Z"),
         "findings_total": len(findings),
         "p0_p1_p2_actionable": len(actionable),
+        "uncommitted_real_files": extra_vitals.get("uncommitted_real_files", 0),
+        "watchdog_1h": extra_vitals.get("watchdog_1h", 0),
     }
 
     if not actionable:

@@ -1,13 +1,13 @@
 {
-  "ts": "2026-06-13T15:30:01Z",
+  "ts": "2026-06-13T15:35:02Z",
   "cron_logs": {
     "agent_test_runner.log": {
-      "size": 170541,
-      "last_modified": "2026-06-13T15:00:04Z",
+      "size": 170756,
+      "last_modified": "2026-06-13T15:30:01Z",
       "tail": [
-        "2026-06-13T14:30:02Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260613T143002Z.json",
-        "2026-06-13T15:00:02Z | test-runner | api: 4 endpoints",
-        "2026-06-13T15:00:04Z | test-runner | api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260613T150001Z.json"
+        "2026-06-13T15:00:04Z | test-runner | api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260613T150001Z.json",
+        "2026-06-13T15:30:01Z | test-runner | TDD check: every feature must have a paired drill (\u00a743)",
+        "2026-06-13T15:30:01Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260613T153001Z.json"
       ]
     },
     "agentic_readiness_cron.log": {
@@ -46,12 +46,12 @@
       ]
     },
     "auto-next.log": {
-      "size": 159509,
-      "last_modified": "2026-06-13T15:30:01Z",
+      "size": 159910,
+      "last_modified": "2026-06-13T15:35:01Z",
       "tail": [
-        "[dispatcher] tick status: stable",
-        "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
-        "[dispatcher] 2026-06-13T15:30:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s"
+        "[dispatcher] cooldown \u00b7 stopping chain \u00b7 cron will fire again",
+        "[dispatcher] 2026-06-13T15:35:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] iter 1 \u00b7 elapsed 1s"
       ]
     },
     "auto_fix_loop.log": {
@@ -73,17 +73,17 @@
       ]
     },
     "backend.log": {
-      "size": 4000304,
-      "last_modified": "2026-06-13T15:25:06Z",
+      "size": 4001744,
+      "last_modified": "2026-06-13T15:33:41Z",
       "tail": [
-        "{\"timestamp\": \"2026-06-13T15:20:01.954249+00:00\", \"correlation_id\": \"b673fe25460d4b84\", \"event\": \"http.request\", \"path\": \"/bot/ask\", \"method\": \"POST\", \"status\": 404, \"latency_ms\": 6}",
-        "{\"timestamp\": \"2026-06-13T15:20:06.674925+00:00\", \"correlation_id\": \"4472d2aa7b3c4497\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4804}",
-        "{\"timestamp\": \"2026-06-13T15:25:06.460433+00:00\", \"correlation_id\": \"6bf1315a139947a9\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4063}"
+        "{\"timestamp\": \"2026-06-13T15:31:42.651661+00:00\", \"correlation_id\": \"d8e675068d344266\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 15}",
+        "{\"timestamp\": \"2026-06-13T15:33:41.484175+00:00\", \"correlation_id\": \"0a8ea946586d44a5\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 6914}",
+        "{\"timestamp\": \"2026-06-13T15:33:41.775063+00:00\", \"correlation_id\": \"e683c778d41e4cc6\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 8}"
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1067009,
-      "last_modified": "2026-06-13T15:30:01Z",
+      "size": 1067164,
+      "last_modified": "2026-06-13T15:35:02Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -109,8 +109,8 @@
       ]
     },
     "feature_backlog.cron.log": {
-      "size": 53818,
-      "last_modified": "2026-06-13T15:00:08Z",
+      "size": 55499,
+      "last_modified": "2026-06-13T15:30:05Z",
       "tail": [
         "  \u2705 F14  Embedding Playground UI          \u00b7 backend=\u2713 page=\u2713 route=\u2713",
         "  \u2705 F15  Webhook Receiver Debug UI        \u00b7 backend=\u2713 page=\u2713 route=\u2713",
@@ -127,21 +127,21 @@
       ]
     },
     "fix_all_pending.cron.log": {
-      "size": 39585,
+      "size": 40050,
       "last_modified": "2026-06-13T15:30:01Z",
       "tail": [
+        "[2026-06-13 09:30:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
         "/mnt/deepa/insur_project/scripts/fix_all_pending_loop.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
-        "  state[\"last_run_utc\"] = datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")",
-        "[2026-06-13 09:30:01 MDT] === fix_all_pending_loop \u00b7 tick start ==="
+        "  state[\"last_run_utc\"] = datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")"
       ]
     },
     "fix_all_pending.log": {
-      "size": 19107,
+      "size": 19233,
       "last_modified": "2026-06-13T15:30:01Z",
       "tail": [
-        "[2026-06-13 09:15:01 MDT] open tasks: 0 \u00b7 all tasks: 16",
-        "[2026-06-13 09:15:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
-        "[2026-06-13 09:30:01 MDT] === fix_all_pending_loop \u00b7 tick start ==="
+        "[2026-06-13 09:30:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
+        "[2026-06-13 09:30:01 MDT] open tasks: 0 \u00b7 all tasks: 16",
+        "[2026-06-13 09:30:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
       ]
     },
     "fix_all_quick.log": {
@@ -699,12 +699,12 @@
       ]
     },
     "pending_boot.log": {
-      "size": 56463,
-      "last_modified": "2026-06-13T15:30:01Z",
+      "size": 56529,
+      "last_modified": "2026-06-13T15:30:54Z",
       "tail": [
+        "[2026-06-13T15:30:01Z] verifying backend create_app()",
         "chroma connect failed: {\"detail\":\"Not Found\"}",
-        "BOOT_OK routes=1059",
-        "[2026-06-13T15:30:01Z] verifying backend create_app()"
+        "BOOT_OK routes=1059"
       ]
     },
     "pending_claude-md-drift.log": {
@@ -805,12 +805,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 44933,
-      "last_modified": "2026-06-13T15:28:02Z",
+      "size": 45122,
+      "last_modified": "2026-06-13T15:34:03Z",
       "tail": [
-        "[2026-06-13 09:24:01 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 09:26:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 09:28:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-13 09:30:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 09:32:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 09:34:03 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -841,12 +841,12 @@
       ]
     },
     "rag_chunking.log": {
-      "size": 46863,
-      "last_modified": "2026-06-13T15:05:09Z",
+      "size": 46909,
+      "last_modified": "2026-06-13T15:35:01Z",
       "tail": [
-        "chunked 4959 docs, wrote 0 new chunks",
         "[2026-06-13T15:05:01Z] running chunking sweep",
-        "chunked 4959 docs, wrote 0 new chunks"
+        "chunked 4959 docs, wrote 0 new chunks",
+        "[2026-06-13T15:35:01Z] running chunking sweep"
       ]
     },
     "rag_deepeval.log": {
@@ -922,21 +922,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 153333,
-      "last_modified": "2026-06-13T15:29:54Z",
+      "size": 153863,
+      "last_modified": "2026-06-13T15:34:54Z",
       "tail": [
-        "[2026-06-13 09:28:53 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:29:23 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:29:53 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 09:33:54 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:34:24 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:34:54 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 273331,
-      "last_modified": "2026-06-13T15:29:53Z",
+      "size": 273861,
+      "last_modified": "2026-06-13T15:34:54Z",
       "tail": [
-        "[2026-06-13 09:28:53 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:29:23 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:29:53 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 09:33:54 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:34:24 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:34:54 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -976,8 +976,8 @@
       ]
     },
     "work_tracker.log": {
-      "size": 349593,
-      "last_modified": "2026-06-13T15:25:02Z",
+      "size": 349698,
+      "last_modified": "2026-06-13T15:30:03Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=98, fleet=371)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=98, fleet=371)",

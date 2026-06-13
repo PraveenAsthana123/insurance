@@ -55,7 +55,13 @@ while [ $ITER -lt $MAX_ITERATIONS ]; do
   LATEST=$(ls -t jobs/reports/auto-next/run-*.json 2>/dev/null | head -1)
   if [ -n "$LATEST" ]; then
     STATUS=$(grep -m1 '"status"' "$LATEST" | head -1 | sed -E 's/.*"status"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/')
-    echo "[dispatcher] tick status: $STATUS"
+    # §138.4 dim 4 vital · honest signal of operator-quality work uncommitted
+    REAL_COUNT=$(grep -oE '"uncommitted_real_files":[[:space:]]*[0-9]+' "$LATEST" 2>/dev/null | head -1 | sed -E 's/.*:[[:space:]]*//')
+    if [ -n "$REAL_COUNT" ] && [ "$REAL_COUNT" -gt 0 ]; then
+      echo "[dispatcher] tick status: $STATUS (uncommitted_real=$REAL_COUNT)"
+    else
+      echo "[dispatcher] tick status: $STATUS"
+    fi
   else
     STATUS="unknown"
   fi
@@ -76,6 +82,13 @@ while [ $ITER -lt $MAX_ITERATIONS ]; do
       ;;
     "stable")
       echo "[dispatcher] platform stable · 0 actionable · stopping"
+      exit 30
+      ;;
+    "skipped")
+      # Iter 95.8 · handler refused (e.g., absence-mode found unsafe files
+      # in tree · or sentinel missing). Honest non-action · not an error.
+      # Cron will fire again at next 5-min tick.
+      echo "[dispatcher] handler skipped · cron will fire again"
       exit 30
       ;;
     "no-handler"|"error")
