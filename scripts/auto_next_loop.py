@@ -170,11 +170,150 @@ def act_stale_agents(finding: dict) -> dict:
             "sample": retired[:5] if retired else []}
 
 
+# Iter 95.7 · ABSENCE-MODE workflow hygiene handler.
+#
+# When operator is absent (sentinel file `.agent/absence-mode` exists),
+# the dispatcher will auto-commit parallel session edits that match the
+# SAFE pattern allowlist. §42 hard-gates ALL still apply: no force-push ·
+# no rm-rf · no prod-write · no external messages · no §103.5 high-risk.
+#
+# Safe patterns (auto-commit allowed during absence mode):
+#   - docs/*.md (documentation · low risk)
+#   - frontend/src/pages/bank/*.jsx (bank shell · §137-audit-gated)
+#   - frontend/src/pages/bank/tabs/*.jsx (bank tabs · §137 + drill gated)
+#
+# UNSAFE patterns (NEVER auto-commit even in absence mode):
+#   - backend/ (production code · operator review required)
+#   - scripts/ (operational code · operator review required)
+#   - tests/drills/ (regression tests · operator review required)
+#   - .github/workflows/ (CI infrastructure · operator review required)
+#   - any path containing 'secrets', 'credentials', '.env', '.key', '.pem'
+def act_absence_mode_hygiene(finding: dict) -> dict:
+    """Absence-mode auto-commit handler for uncommitted real-code.
+
+    Only fires when:
+      1. Sentinel file .agent/absence-mode exists
+      2. All uncommitted files match SAFE pattern allowlist
+      3. §137 audit STILL PASSES post-commit (no regression)
+    Per §57.7 honest: if any check fails, surface as no-handler · don't commit.
+    """
+    import subprocess
+    from pathlib import Path
+
+    sentinel = REPO / ".agent" / "absence-mode"
+    if not sentinel.exists():
+        return {"verdict": "skip",
+                "reason": "absence-mode sentinel not set · operator must opt-in"}
+
+    SAFE_PREFIXES = (
+        "docs/",
+        "frontend/src/pages/bank/",
+    )
+    UNSAFE_TOKENS = (
+        "backend/",
+        "scripts/",
+        "tests/drills/",
+        ".github/workflows/",
+        "secrets", "credentials", ".env", ".key", ".pem",
+        "Dockerfile", "docker-compose",
+    )
+
+    out = subprocess.run(["git", "diff", "--name-only", "HEAD"],
+                          cwd=str(REPO), capture_output=True, text=True, timeout=10)
+    if out.returncode != 0:
+        return {"verdict": "skip", "reason": f"git diff failed: {out.stderr[:200]}"}
+
+    candidates = [line.strip() for line in out.stdout.splitlines() if line.strip()]
+    # Filter runtime churn (same prefixes as pending_topics_agent finder)
+    runtime_prefixes = ("data/prompt-history.md", "data/work_tracker/",
+                        "data/registry/workforce_health.json", ".agent/",
+                        "jobs/", "data/insurance/", "config/")
+    real_changes = [f for f in candidates
+                    if not any(f.startswith(p) for p in runtime_prefixes)]
+
+    # Classify each real change
+    safe = []
+    unsafe = []
+    for f in real_changes:
+        # UNSAFE wins · check tokens first
+        if any(tok in f for tok in UNSAFE_TOKENS):
+            unsafe.append(f)
+            continue
+        if any(f.startswith(p) for p in SAFE_PREFIXES):
+            safe.append(f)
+        else:
+            unsafe.append(f)  # default-deny
+
+    if unsafe:
+        return {"verdict": "skip",
+                "reason": "unsafe files in working tree · absence-mode requires all-safe",
+                "unsafe_sample": unsafe[:3]}
+    if not safe:
+        return {"verdict": "skip",
+                "reason": "no safe files to commit"}
+
+    # Run §137 audit BEFORE commit (catch any dark-bg regression in safe files)
+    audit = subprocess.run(["bash", "scripts/audit_no_black_backgrounds.sh"],
+                            cwd=str(REPO), capture_output=True, text=True, timeout=30)
+    if audit.returncode != 0:
+        return {"verdict": "skip",
+                "reason": "§137 audit FAIL · absence-mode requires green audit",
+                "audit_tail": audit.stdout[-300:] + audit.stderr[-300:]}
+
+    # Stage SAFE files + runtime churn (the finder excludes runtime · we
+    # include it on auto-commit so the tree is clean post-commit).
+    to_stage = safe + [f for f in candidates
+                       if any(f.startswith(p) for p in runtime_prefixes)]
+    subprocess.run(["git", "add", "--"] + to_stage,
+                    cwd=str(REPO), check=True, timeout=10)
+
+    # Build §51 substrate commit message
+    ts_utc_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    ts_local_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S %Z")
+    msg = (
+        f"chore(insur): absence-mode auto-integrate {len(safe)} safe file(s)\n"
+        f"\n"
+        f"Why\n"
+        f"- Operator absent · .agent/absence-mode sentinel set\n"
+        f"- §138 sweep detected uncommitted real-code · all files matched\n"
+        f"  SAFE pattern allowlist (docs/ + frontend/src/pages/bank/)\n"
+        f"- §137 audit PASSES post-change · no regression\n"
+        f"\n"
+        f"Files committed ({len(safe)} safe · {len(to_stage) - len(safe)} runtime)\n"
+        + "\n".join(f"  - {f}" for f in safe[:10]) + "\n"
+        f"\n"
+        f"Forensic substrate\n"
+        f"- ts_utc:   {ts_utc_str}\n"
+        f"- ts_local: {ts_local_str}\n"
+        f"- host:     {ACTOR_HOST}\n"
+        f"- actor:    sys_auto_next_loop · absence-mode handler\n"
+        f"- approach: §138 dispatcher · §42 safe-allowlist · §57.7 honest\n"
+        f"- policies: §38.3 audit · §42 hard-gates respected · §51 substrate ·\n"
+        f"            §54 no trailer · §137 audit gated · §138.6 categorization\n"
+    )
+    commit_res = subprocess.run(
+        ["git", "commit", "-m", msg], cwd=str(REPO),
+        capture_output=True, text=True, timeout=20,
+    )
+    if commit_res.returncode != 0:
+        return {"verdict": "fail", "reason": "git commit failed",
+                "stderr": commit_res.stderr[:300]}
+
+    sha = subprocess.run(["git", "rev-parse", "HEAD"], cwd=str(REPO),
+                          capture_output=True, text=True).stdout.strip()
+    return {"verdict": "acted",
+            "sha": sha,
+            "n_safe": len(safe),
+            "n_runtime": len(to_stage) - len(safe),
+            "files": safe[:10]}
+
+
 # Action class router · category → handler
 ACTION_ROUTER = {
     "Agent gap": act_agent_gap,
     "Data health": act_approval_backlog,  # only handles approval_request backlog
     "Workforce hygiene": act_stale_agents,
+    "Workflow hygiene": act_absence_mode_hygiene,  # NEW · §138 absence-mode
 }
 
 GATED_CATEGORIES = {
@@ -298,6 +437,22 @@ def main():
 
     try:
         result = handler(top)
+        # Iter 95.7 · honor handler verdict · skip/fail don't count as 'acted'
+        verdict = (result or {}).get("verdict", "acted") if isinstance(result, dict) else "acted"
+        if verdict == "skip":
+            record["status"] = "skipped"
+            record["action_result"] = result
+            with (REPORT_DIR / f"run-{tick_id}.json").open("w") as f:
+                json.dump(record, f, indent=2)
+            print(f"[§106] {tick_id} · skipped · {result.get('reason','')[:80]}")
+            return
+        if verdict == "fail":
+            record["status"] = "error"
+            record["action_result"] = result
+            with (REPORT_DIR / f"run-{tick_id}.json").open("w") as f:
+                json.dump(record, f, indent=2)
+            print(f"[§106] {tick_id} · error · {result.get('reason','')[:80]}")
+            return
         record["status"] = "acted"
         record["action_result"] = result
     except Exception as e:
