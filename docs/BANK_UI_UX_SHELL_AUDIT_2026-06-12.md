@@ -568,3 +568,53 @@ The navigation contract is now explicit: Main Menu selects department, B2C/B2B/B
 
 
 <!-- POS drill marker · safe file only · should auto-commit -->
+
+## §138 Bank Shell Navigation Contract Pass (2026-06-13)
+
+Operator reported: "there should not be any workspace/content page
+which should replace Main menu and sub menu ...check each link.
+workspce content page opne after click of SUB menu link"
+
+### Root cause
+
+BankSidebar.jsx Platform Modules block (lines 167-220) and
+BankSubMenu.jsx /ai-types Link block (lines 121-147) used top-level
+React Router routes (`/eai-os`, `/itsm`, `/ai-types`, etc.) that are
+NOT registered under `<Route path="/bank" element={<BankLayout />}>`
+in App.jsx. Clicking these in-tab REPLACED the entire bank shell
+(Main Menu + Sub Menu + workspace) with the standalone module page.
+
+### Fix shipped
+
+Every Link in BankSidebar / BankSubMenu pointing to a non-`/bank/*`
+route now has `target="_blank" rel="noopener noreferrer"`. Click
+opens the module in a new browser tab · bank shell stays intact for
+the operator's main work session.
+
+### Visual indicator
+
+Each shell-breaking Link now displays a small `↗` glyph (with
+`aria-label="opens in new tab"`) so operators see at-a-glance which
+links keep the shell vs. which open externally.
+
+### Drill-locked invariant
+
+`tests/drills/drill_bank_shell_navigation.py` (8 steps · 3 NEG):
+
+| Step | Check |
+|---|---|
+| 1-2 | Sidebar + SubMenu parse · Link blocks found |
+| 3-4 | Platform Modules + /ai-types use target=_blank + rel=noopener |
+| 5 (NEG) | Bank-internal /bank/... Links do NOT use target=_blank |
+| 6 (NEG) | NO shell-breaking Link missing target=_blank (39 known routes audited) |
+| 7 (NEG) | /ai-types coverage 100% (b2c + b2b + b2e all use target=_blank) |
+| 8 | "§138 navigation contract" comment present in both files |
+
+Runs in CI via `.github/workflows/audits.yml` · pure-file · ~0.04s.
+
+### Composes with
+
+§73 17-tab right pane (workspace stays mounted in bank shell)
+§137 dark-bg-block (sidebar dark · content light)
+§138 operator-handling (bug surfaced → fixed → drilled → CI-gated)
+§57.7 honest (visual ↗ indicator · explicit not hidden)

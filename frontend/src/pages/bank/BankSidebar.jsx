@@ -206,14 +206,22 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/embeddings',     icon: '🔢', label: 'Embedding Playground (§F14)' },
           { to: '/vectors',        icon: '🗄', label: 'Vector DB Browser (§F08)' },
         ].map((m) => (
-          <Link key={m.to} to={m.to} style={{
-            display: 'flex', alignItems: 'center', gap: 8,
-            minHeight: 38,
-            padding: '8px 18px',
-            color: '#dbeafe', textDecoration: 'none',
-            fontSize: FS_LEAF_ROW,
-          }}>
+          // §138 navigation contract · platform modules open in NEW TAB
+          // so the bank shell (Main Menu · Sub Menu · workspace) stays
+          // intact for the operator. Top-level routes like /eai-os ·
+          // /itsm · /ai-types etc are NOT under <Route path="/bank">
+          // and would replace BankLayout if clicked in-tab.
+          <Link key={m.to} to={m.to}
+                target="_blank" rel="noopener noreferrer"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  minHeight: 38,
+                  padding: '8px 18px',
+                  color: '#dbeafe', textDecoration: 'none',
+                  fontSize: FS_LEAF_ROW,
+                }}>
             <span>{m.icon}</span><span style={{ flex: 1 }}>{m.label}</span>
+            <span style={{ fontSize: 10, color: '#93c5fd', opacity: 0.7 }} aria-label="opens in new tab">↗</span>
           </Link>
         ))}
       </details>

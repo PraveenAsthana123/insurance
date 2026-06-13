@@ -118,30 +118,39 @@ function MasterAiCatalogBlock() {
         fontSize: FS_SMALL_LABEL, fontWeight: 800,
         textTransform: 'uppercase', letterSpacing: '0.05em',
       }}>AI Types · Sub Menu Only</div>
-      <Link to="/ai-types" style={{
-        display: 'flex', alignItems: 'center', gap: 8, minHeight: 40, padding: '9px 18px',
-        color: '#fef3c7', textDecoration: 'none',
-        fontSize: FS_MID_ROW, fontWeight: 700,
-      }}>
+      {/* §138 navigation contract · /ai-types is a top-level route outside
+          /bank/* and would replace BankLayout. Open in new tab so the
+          bank shell (Main Menu · Sub Menu · workspace) stays intact. */}
+      <Link to="/ai-types"
+            target="_blank" rel="noopener noreferrer"
+            style={{
+              display: 'flex', alignItems: 'center', gap: 8, minHeight: 40, padding: '9px 18px',
+              color: '#fef3c7', textDecoration: 'none',
+              fontSize: FS_MID_ROW, fontWeight: 700,
+            }}>
         <span>AI</span><span style={{ flex: 1 }}>All 200 AI Types</span>
+        <span style={{ fontSize: 10, color: '#fcd34d', opacity: 0.8 }} aria-label="opens in new tab">↗</span>
       </Link>
       {[
         { domain: 'b2c', label: 'B2C · Consumer-facing AI' },
         { domain: 'b2b', label: 'B2B · Business partner AI' },
         { domain: 'b2e', label: 'B2E · Employee-facing AI' },
       ].map((d) => (
-        <Link key={d.domain} to={`/ai-types?domain=${d.domain}`} style={{
-          display: 'flex', alignItems: 'center', gap: 8,
-          minHeight: 38,
-          padding: '8px 30px',
-          color: '#fecaca', textDecoration: 'none',
-          fontSize: FS_MID_ROW,
-        }}>
+        <Link key={d.domain} to={`/ai-types?domain=${d.domain}`}
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                minHeight: 38,
+                padding: '8px 30px',
+                color: '#fecaca', textDecoration: 'none',
+                fontSize: FS_MID_ROW,
+              }}>
           <span style={{
             width: 7, height: 7, borderRadius: 999,
             background: d.domain === 'b2c' ? '#22c55e' : d.domain === 'b2b' ? '#a855f7' : '#3b82f6',
           }} />
           <span style={{ flex: 1 }}>{d.label}</span>
+          <span style={{ fontSize: 9, color: '#fda4af', opacity: 0.7 }} aria-label="opens in new tab">↗</span>
         </Link>
       ))}
     </div>

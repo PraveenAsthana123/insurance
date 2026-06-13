@@ -175,6 +175,9 @@ jobs:
       - name: DRILL · parallel-session lock contract (10 steps · 4 NEG · P2-g)
         run: python3 tests/drills/drill_parallel_lock.py
 
+      - name: DRILL · §138 bank shell navigation contract (8 steps · 3 NEG · operator-reported bug)
+        run: python3 tests/drills/drill_bank_shell_navigation.py
+
       # Iter 95.11 · P2-b · cache drills require running backend.
       # Start backend in background · probe :8001 · run 3 cache drills.
       # If backend won't start (deps missing in CI), gracefully SKIP per §57.7.
