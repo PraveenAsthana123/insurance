@@ -200,9 +200,44 @@ def health():
             "spec": "Per operator brief 2026-06-11 · gap-finder agent"}
 
 
+import os
+import time
+
+# Iter 95.5 · in-process TTL cache for /scan results.
+# The §106 dispatcher hits this endpoint every 5 min · scans 22 domains
+# + offices + blueprints + reads many DB tables · 4-5s per call.
+# Findings change at human pace (minutes-hours) · 60s TTL is honest.
+# Default: 60s · override via INSUR_ADVISOR_TTL env (set to 0 to disable).
+_SCAN_CACHE: dict = {"ts": 0.0, "result": None}
+
+
+def _ttl_seconds() -> int:
+    try:
+        return max(0, int(os.environ.get("INSUR_ADVISOR_TTL", "60")))
+    except (TypeError, ValueError):
+        return 60
+
+
 @router.post("/scan")
-def scan():
-    """Run all scanners · return prioritized findings list."""
+def scan(force: bool = False):
+    """Run all scanners · return prioritized findings list.
+
+    Caches the result for INSUR_ADVISOR_TTL seconds (default 60).
+    Set ?force=true (or env=0) to bypass cache.
+
+    Per §57.7 honest: cache hits include the cached `scanned_at`
+    timestamp (operator sees freshness) plus a `cache_age_s` field
+    so callers know whether they got fresh or cached data.
+    """
+    ttl = _ttl_seconds()
+    now = time.monotonic()
+    if (not force) and ttl > 0 and _SCAN_CACHE["result"] is not None \
+            and (now - _SCAN_CACHE["ts"]) < ttl:
+        cached = dict(_SCAN_CACHE["result"])
+        cached["cache_age_s"] = round(now - _SCAN_CACHE["ts"], 2)
+        cached["cache_hit"] = True
+        return cached
+
     findings = []
     findings.extend(_scan_governance_compliance())
     findings.extend(_scan_data_health())
@@ -222,14 +257,20 @@ def scan():
         "total":       len(findings),
     }
 
-    return {
+    result = {
         "agent": "sys_missing_items_advisor",
         "scanned_at": datetime.now(timezone.utc).isoformat(),
         "findings": findings,
         "summary": summary,
         "top_3_actions": [f["advice"] for f in findings[:3]],
         "spec_note": "P0 = release blocker · P1 = high · P2 = medium · P3 = low",
+        "cache_age_s": 0.0,
+        "cache_hit": False,
     }
+    if ttl > 0:
+        _SCAN_CACHE["ts"] = now
+        _SCAN_CACHE["result"] = result
+    return result
 
 
 @router.get("/advise/{focus}")
