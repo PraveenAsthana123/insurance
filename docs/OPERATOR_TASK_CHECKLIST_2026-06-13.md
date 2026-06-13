@@ -54,6 +54,19 @@
 | Required clarification | Where should the list appear? Which tab/sub-tab? What data series? |
 | Suggested next action | Pick interpretation (a/b/c) then build · OR operator names target location |
 
+### OP-7 · "are you showing what is goal of each tab and what is end conclusion or output dose these there on each tab" → "evaluate each tab for each component and score" → "fix all" → "10/10"
+
+| Field | Value |
+|---|---|
+| Operator quotes (11:12 MDT) | "are you showing what is goal of each tab and what is end conclusion or output" |
+| Operator quotes (11:14 MDT) | "evaluate each tab for each component and score ..goal vs final outcome score" |
+| Operator quotes (11:24 MDT) | "brutal feedback" + "top 1%" + "fix all" + "10/10" |
+| Status | ✅ **DONE** · 22/31 → 31/31 rich charter coverage · drill locks 100% |
+| Audit shipped | `docs/TAB_GOAL_OUTPUT_AUDIT.md` (commit `6b88482a`) · brutal corrected score 22/31 |
+| Close-list shipped | 9 new TAB_CHARTER entries: problem-as-is · to-be · ai-strategy · digital-transformation · manual-transaction · automatic-pipeline · accuracy-benchmarking · analytical-ai-process · ai-control-tower |
+| Drill shipped | `tests/drills/drill_tab_charter_coverage.py` (8 steps · 3 negative) · locks PROFILES ⊆ CHARTER + 8-field shape + objectives ≥ 3 |
+| §138.4 sweep miss caught | Working tree had uncommitted regression to BankSidebar (Link import removed) · reverted in this commit |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |
