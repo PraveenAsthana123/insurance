@@ -35,8 +35,12 @@ if [ ! -d "frontend/src" ]; then
   exit 2
 fi
 
-# Forbidden hex codes in content areas (§137.2)
-FORBIDDEN='#(000000?|0f172a|111827|181818|1a1a2e|1e293b|1f2937|212121|222222)'
+# Forbidden hex codes in content areas (§137.2).
+# Iter 95.9 · drill_no_black_bg_audit caught: short-hex '#000' was bypassing
+# the regex (000000? matches only 5-6 zeros). Added 3-zero form with
+# end-anchor [^0-9a-fA-F] so '#000abc' (dark blue · longer hex) doesn't
+# false-positive as black.
+FORBIDDEN='#(000[^0-9a-fA-F]|000000?|0f172a|111827|181818|1a1a2e|1e293b|1f2937|212121|222222)'
 
 # Find candidate files (jsx/tsx/js/ts/css) under content dirs
 mapfile -t FILES < <(find frontend/src/components frontend/src/pages \
@@ -64,7 +68,10 @@ for FILE in "${FILES[@]}"; do
       line = $0
       # Push current line into ring buffer BEFORE testing
       # Check for forbidden background pattern
-      if (line ~ ("background(-color)?:[ \t]*[\047\"]?" forbidden)) {
+      # Iter 95.9 · drill_no_black_bg_audit step 6 caught: JSX camelCase
+      # backgroundColor was bypassing the (-color)? alternation. Now
+      # matches background: AND background-color: AND backgroundColor:
+      if (line ~ ("background(-color|Color)?:[ \t]*[\047\"]?" forbidden)) {
         # Check the last 5 lines for chrome markers
         is_chrome = 0
         for (i = 0; i < 5; i++) {

@@ -160,6 +160,9 @@ jobs:
       - name: DRILL · §138 absence-mode classification contract (10 steps · 4 NEG · ADR-012)
         run: python3 tests/drills/drill_absence_mode.py
 
+      - name: DRILL · §137 audit regex correctness · meta-drill (10 steps · 4 NEG · §57.7 gap noted)
+        run: python3 tests/drills/drill_no_black_bg_audit.py
+
       # NOTE: drill_advisor_cache.py + drill_checklist_cache.py + drill_top1pct_cache.py
       # SKIPPED in CI · all require FastAPI backend running on :8001. Run locally
       # + after deploy. Future: spin up backend service container to gate them here too.
