@@ -404,22 +404,39 @@ User feedback: check other UI errors.
 The bank pages render non-blank and without React page errors. The bank AI catalog preview no longer depends on a live taxonomy endpoint for initial render.
 
 
-## Main Menu Workspace Stability Pass
 
-User feedback: clicking each main-menu link should not change the overall UI shell; all module content must render only in the content/workspace area, with one component per row.
+## Master B2C/B2B/B2E Visibility Pass
+
+User feedback: B2C, B2B, and B2E master links were not visible in the bank main menu after the revert.
 
 ### Changes Applied
 
 | Area | Change |
 |---|---|
-| Bank workspace route | Added `/bank/workspace?module=...` for platform and AI catalog entries that do not have a dedicated bank page. |
-| Main menu links | Repointed platform module and AI catalog links from top-level app routes to bank-workspace routes so the blue menu, maroon sub-menu, and workspace layout remain stable. |
-| Workspace component rows | Added a row-based module renderer with objective, horizontal Input -> Process -> Output -> Visualization flow, differentiated card colors, and active action controls. |
-| UI policy | Added the bank main-menu workspace navigation policy to prevent future links from replacing the shell. |
+| AI Catalog placement | Moved the existing master AI Catalog block above the long Platform Modules list so `All 200 AI Types`, `B2C`, `B2B`, and `B2E` are visible without deep sidebar scrolling. |
+| Route behavior | Preserved the master/global routes: `/ai-types`, `/ai-types?domain=b2c`, `/ai-types?domain=b2b`, and `/ai-types?domain=b2e`. |
 
 ### UX Verdict
 
-Main-menu clicks now update only the workspace content for platform/AI-catalog items. The bank shell remains fixed, and module content is displayed as one component per row instead of changing the whole application UI.
+The master B2C/B2B/B2E entries remain global links, but they are now visible near the top of the main menu instead of being buried below the platform-module list.
+
+
+
+## Main Menu And Sub Menu Label Pass
+
+User feedback: the bank shell must clearly show Main Menu and Sub Menu.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Blue navigation pane | Renamed the top label from `Business Hierarchy` to `Main Menu` and added the visible path hint: Department -> B2C/B2B/B2E -> Main Process -> AI. |
+| Maroon navigation pane | Added an explicit `Sub Menu` label in both empty and selected-process states. |
+| Master links | Kept B2C/B2B/B2E master AI Catalog links unchanged as `/ai-types?domain=...`. |
+
+### UX Verdict
+
+Operators can now see the two-pane contract immediately: the blue pane is the Main Menu and the maroon pane is the Sub Menu.
 
 
 

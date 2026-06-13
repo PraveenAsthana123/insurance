@@ -491,11 +491,6 @@ Every bank workspace tab must expose a visible component review before the detai
 Cards must identify whether they are `INFO`, `ACTION`, or `MIXED`, use light differentiated colors, include a two-line purpose/outcome summary, and show a compact Input -> Process -> Output flow. Action buttons must show active/running state, disable conflicting duplicate clicks while processing, and render completion status with timestamp in the space directly below the action controls.
 
 
-## Bank Main Menu Workspace Navigation Policy
-
-Bank main-menu links must keep the bank shell stable. Clicking any blue main-menu entry may update the route, query string, active state, and workspace content, but it must not navigate to a top-level route that replaces `BankLayout`, `BankSidebar`, or `BankSubMenu`. Platform modules and AI catalog entries should route through `/bank/workspace?module=...` unless they have a dedicated `/bank/...` workspace page.
-
-Workspace module pages must present one primary component per row. Each row must state the component purpose/current state/action/result area, use differentiated light card color, and keep action controls inside the content/workspace pane.
 
 ## Bank No Black Background Policy
 

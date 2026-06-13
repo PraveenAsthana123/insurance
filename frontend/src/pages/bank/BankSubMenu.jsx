@@ -1,7 +1,7 @@
 // Maroon process menu. Lists only metadata that exists on the selected process.
 
 import { useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { canonicalDomainId, domainMeta, slugOf } from '../../utils/insuranceNavigation';
 
 const FS_SECTION_HEADER = 14;
@@ -15,6 +15,45 @@ const KIND_TO_TAB = {
   app: 'operations',
   md: 'data',
 };
+
+
+function MasterAiCatalogBlock() {
+  return (
+    <div style={{ padding: '10px 0', borderBottom: '1px solid #991b1b' }}>
+      <div style={{
+        padding: '6px 18px 8px', color: '#fde68a',
+        fontSize: FS_SMALL_LABEL, fontWeight: 800,
+        textTransform: 'uppercase', letterSpacing: '0.05em',
+      }}>AI Types · Sub Menu Only</div>
+      <Link to="/ai-types" style={{
+        display: 'flex', alignItems: 'center', gap: 8, minHeight: 40, padding: '9px 18px',
+        color: '#fef3c7', textDecoration: 'none',
+        fontSize: FS_MID_ROW, fontWeight: 700,
+      }}>
+        <span>AI</span><span style={{ flex: 1 }}>All 200 AI Types</span>
+      </Link>
+      {[
+        { domain: 'b2c', label: 'B2C · Consumer-facing AI' },
+        { domain: 'b2b', label: 'B2B · Business partner AI' },
+        { domain: 'b2e', label: 'B2E · Employee-facing AI' },
+      ].map((d) => (
+        <Link key={d.domain} to={`/ai-types?domain=${d.domain}`} style={{
+          display: 'flex', alignItems: 'center', gap: 8,
+          minHeight: 38,
+          padding: '8px 30px',
+          color: '#fecaca', textDecoration: 'none',
+          fontSize: FS_MID_ROW,
+        }}>
+          <span style={{
+            width: 7, height: 7, borderRadius: 999,
+            background: d.domain === 'b2c' ? '#22c55e' : d.domain === 'b2b' ? '#a855f7' : '#3b82f6',
+          }} />
+          <span style={{ flex: 1 }}>{d.label}</span>
+        </Link>
+      ))}
+    </div>
+  );
+}
 
 function CategoryBlock({ icon, title, items, color, emptyLabel, kind, activeFocus, onClickItem }) {
   const [open, setOpen] = useState(true);
@@ -91,9 +130,22 @@ export function BankSubMenu({ bp }) {
       <aside style={{
         background: '#7f1d1d', color: '#fecaca',
         borderRight: '1px solid #991b1b',
-        padding: 16, fontSize: FS_MID_ROW, fontStyle: 'italic',
+        padding: 16,
       }}>
-        Pick a dept + B2C/B2B/B2E + Main Process from the dark blue menu.
+        <div style={{
+          color: '#fff',
+          fontSize: FS_SECTION_HEADER,
+          fontWeight: 800,
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          marginBottom: 8,
+        }}>
+          SUB MENU
+        </div>
+        <div style={{ fontSize: FS_MID_ROW, fontStyle: 'italic', lineHeight: 1.4, marginBottom: 12 }}>
+          Pick a dept + B2C/B2B/B2E + Main Process from the Main Menu.
+        </div>
+        <MasterAiCatalogBlock />
       </aside>
     );
   }
@@ -130,6 +182,16 @@ export function BankSubMenu({ bp }) {
         borderBottom: '2px solid #991b1b',
         background: '#991b1b',
       }}>
+        <div style={{
+          fontSize: FS_SMALL_LABEL,
+          color: '#fecaca',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          fontWeight: 800,
+          marginBottom: 4,
+        }}>
+          SUB MENU
+        </div>
         <strong style={{
           fontSize: FS_SECTION_HEADER, color: '#fff',
           textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -164,6 +226,8 @@ export function BankSubMenu({ bp }) {
           </div>
         )}
       </div>
+
+      <MasterAiCatalogBlock />
 
       {proc ? (
         <>
