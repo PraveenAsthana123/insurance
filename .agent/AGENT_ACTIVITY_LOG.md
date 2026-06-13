@@ -5483,3 +5483,26 @@ error: tests/drills/drill_holy_monitoring_federation.py: patch does not apply
 2026-06-13T06:05:59Z | auto-fix-worker | start        | T-loop-1781330757-3 | role=error target=jobs/logs/rag_cache.log
 2026-06-13T06:05:59Z | auto-fix-worker | classify     | T-loop-1781330757-3 | tier=small risk=low council=single
 2026-06-13T06:06:06Z | auto-fix-worker | validate     | T-loop-1781330757-3 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-13T06:08:06Z | auto-fix-worker | commit       | T-loop-1781330757-3 | ok sha=e8d66376203e77f61a5a8344fdb964827da11127
+2026-06-13T06:08:07Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-13T06:08:07Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2
+2026-06-13T07:00:01Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-13T07:00:01Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-13T07:00:02Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-13T07:00:18Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-13T07:00:18Z | auto-fix-loop | dispatch #1: T-loop-1781334018-1
+2026-06-13T07:00:19Z | auto-fix-worker | start        | T-loop-1781334018-1 | role=error target=jobs/logs/backend.log
+2026-06-13T07:00:19Z | auto-fix-worker | classify     | T-loop-1781334018-1 | tier=small risk=low council=single
+2026-06-13T07:00:50Z | auto-fix-worker | skip         | T-loop-1781334018-1 | model returned empty or NEEDS_HUMAN
+2026-06-13T07:00:50Z | auto-fix-loop |   → verdict=skip
+2026-06-13T07:00:50Z | auto-fix-loop | dispatch #2: T-loop-1781334050-2
+2026-06-13T07:00:50Z | auto-fix-worker | start        | T-loop-1781334050-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-13T07:00:50Z | auto-fix-worker | classify     | T-loop-1781334050-2 | tier=small risk=low council=single
+2026-06-13T07:00:55Z | auto-fix-worker | apply_check  | T-loop-1781334050-2 | FAIL: git apply --check failed: error: corrupt patch at line 18
+2026-06-13T07:00:55Z | auto-fix-loop |   → verdict=fail
+2026-06-13T07:00:55Z | auto-fix-loop | dispatch #3: T-loop-1781334055-3
+2026-06-13T07:00:55Z | auto-fix-worker | start        | T-loop-1781334055-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-13T07:00:55Z | auto-fix-worker | classify     | T-loop-1781334055-3 | tier=small risk=low council=single
+2026-06-13T07:01:00Z | auto-fix-worker | apply_check  | T-loop-1781334055-3 | FAIL: git apply --check failed: error: corrupt patch at line 6
+2026-06-13T07:01:00Z | auto-fix-loop |   → verdict=fail
+2026-06-13T07:01:00Z | auto-fix-loop | iteration done: ok=0 queued=0 fail=3

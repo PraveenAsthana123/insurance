@@ -388,3 +388,18 @@ User feedback: each card must use a different light color so the eye can separat
 
 Card groups now have soft visual separation without changing layout. White remains available for inner controls and readable sub-panels, but repeated cards use different light backgrounds.
 
+## UI Runtime Error Sweep Pass
+
+User feedback: check other UI errors.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Bank AI catalog | Replaced the live taxonomy fetch with a local §131 catalog preview so a down `/api/v1/ai-taxonomy/types` service does not create red console errors in the bank workspace. |
+| Runtime check | Swept bank shell, scorecard, agentic, BCM, prompts, README, Data, AI, Business Value, and the fairness focus deep link for console/page errors. |
+
+### UX Verdict
+
+The bank pages render non-blank and without React page errors. The bank AI catalog preview no longer depends on a live taxonomy endpoint for initial render.
+

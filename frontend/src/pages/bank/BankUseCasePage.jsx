@@ -1182,18 +1182,21 @@ function renderAnalyticsSubTab(subId) {
   }
 }
 
-// All 200 AI types from §131 catalog · same source as /ai-types page
-let AI_TYPES_CACHE = null;
+// §131 AI type catalog preview. Keep this local in the bank workspace so
+// a down taxonomy API does not create red console errors while the page renders.
+const AI_TYPES_CATALOG_PREVIEW = [
+  'Analytics AI', 'Predictive AI', 'Segmentation AI', 'Reporting AI',
+  'Pricing AI', 'Optimization AI', 'Recommendation AI', 'Personalization AI',
+  'Risk Scoring AI', 'Fraud Detection AI', 'Underwriting AI', 'Claims Triage AI',
+  'Document AI', 'OCR AI', 'NLP AI', 'RAG AI', 'Knowledge AI',
+  'Decision AI', 'Agentic AI', 'Autonomous AI', 'Explainable AI',
+  'Responsible AI', 'Compliance AI', 'Governance AI', 'Monitoring AI',
+  'Drift Detection AI', 'Simulation AI', 'Forecasting AI', 'Workflow AI',
+  'Customer Experience AI', 'Voice AI', 'Conversation AI',
+];
+
 function useAllAiTypes() {
-  const [types, setTypes] = useState(AI_TYPES_CACHE || []);
-  useEffect(() => {
-    if (AI_TYPES_CACHE) return;
-    fetch('http://localhost:8001/api/v1/ai-taxonomy/types')
-      .then(r => r.json())
-      .then(d => { AI_TYPES_CACHE = d.types || []; setTypes(AI_TYPES_CACHE); })
-      .catch(() => {});
-  }, []);
-  return types;
+  return AI_TYPES_CATALOG_PREVIEW;
 }
 
 // Capabilities view · injects all 200 AI types from §131 catalog
@@ -1201,9 +1204,9 @@ function CapabilitiesView({ ai }) {
   const allTypes = useAllAiTypes();
   return (
     <>
-      <DataSection title={`AI Type catalog · §131 (${allTypes.length} types from global catalog)`} color="#8b5cf6">
+      <DataSection title={`AI Type catalog · §131 preview (${allTypes.length} types)`} color="#8b5cf6">
         <ComponentGrid items={allTypes.length > 0 ? allTypes : [
-          'Loading from /api/v1/ai-taxonomy/types…',
+          'AI taxonomy preview unavailable',
         ]} />
       </DataSection>
       <DataSection title={`Usage mapping (${ai.length} mapped to this process)`} color="#3b82f6">
