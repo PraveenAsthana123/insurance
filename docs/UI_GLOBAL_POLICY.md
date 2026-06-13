@@ -470,3 +470,70 @@ Every bank workspace tab must expose a visible component review before the detai
 
 Cards must identify whether they are `INFO`, `ACTION`, or `MIXED`, use light differentiated colors, include a two-line purpose/outcome summary, and show a compact Input -> Process -> Output flow. Action buttons must show active/running state, disable conflicting duplicate clicks while processing, and render completion status with timestamp in the space directly below the action controls.
 
+## Bank No Black Background Policy
+
+Bank workspace, header, resize handles, modal backdrops, chat rails, and active toggle blocks must avoid black or near-black backgrounds. Use light slate surfaces for passive containers and blue-tinted states for active controls. Dark slate such as `#0f172a` is allowed for text or chart strokes only, not as a block/background surface in the bank UI.
+
+
+## §137 — No Black Background in Content / Workspace Areas (Global)
+
+Effective 2026-06-12 · operator directive `remove black colore from
+background ..block that: Create global policy to stop the black colore
+for using in blackground`. **Global policy at**
+`~/.claude/policies/no-black-content-background.md` · this section
+**enforces it for this project**.
+
+### Rule
+
+Content / workspace areas MUST use light backgrounds. Dark backgrounds
+are reserved for **navigation chrome** (sidebars, headers, channel-list
+asides, nav-rails).
+
+### Forbidden hex in `frontend/src/{pages,components}/`
+
+```
+#000000 · #0f172a · #111827 · #181818 · #1a1a2e · #1e293b · #1f2937
+#212121 · #222222 · (and CSS-var equivalents resolving to any of these)
+```
+
+### Permitted light palette
+
+```
+#ffffff   primary card
+#f8fafc   page background (slate-50)
+#f1f5f9   secondary surface (slate-100)
+#ecfdf5   success/positive (mint-50)
+#fef3c7   warning/action (amber-50)
+#fee2e2   error/destructive (red-50)
+#dbeafe   info (blue-50)
+border: '1px solid #e5e7eb' (slate-200)
+```
+
+### Where dark IS still allowed
+
+- `BankSidebar.jsx` (left main menu) · `BankHeader.jsx` (top bar)
+- `BankChatPage.jsx:54` channel-list `<aside>`
+- `HolyNavPage.css` sidebar variables
+- `AeoDepartmentPage` + `EaosDepartmentPage` main `<aside>` (department menu)
+
+### Audit (deterministic · cron-locked)
+
+```bash
+scripts/audit_no_black_backgrounds.sh
+```
+
+- Exit 0 = clean · Exit 1 = release blocker · Exit 2 = no frontend
+- Uses awk 5-line context window to exempt navigation chrome
+- Cron-installed at **09:00 + 21:00 daily** with tag `§137 NO-BLACK-CONTENT-BG`
+- Log: `jobs/logs/no_black_backgrounds_audit.log`
+
+### CI gate
+
+```yaml
+- name: §137 no-black-background audit
+  run: ./scripts/audit_no_black_backgrounds.sh
+```
+
+### Reference implementation
+
+Commit `fe713e95` (18 files dark→light · zero behavior change).
