@@ -532,4 +532,39 @@ The workspace now follows the requested operating sequence: understand current p
 
 
 
+## Sub Menu Workspace Dependency Pass
+
+User feedback: Main Menu nodes must not open workspace-specific AI/content views. B2C, B2B, and B2E must remain in the Main Menu, while Sub Menu links must drive the workspace tab/sub-tab dependency.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Main Menu | Kept `B2C`, `B2B`, and `B2E` under each department, and kept Main Process selection in the blue pane. Removed AI capability rows and AI counts from the Main Menu so it no longer acts as a workspace-tab launcher. |
+| Main Menu helper | Updated the path hint to state that workspace tabs open from the Sub Menu. |
+| Sub Menu operations | Added `Operations Data / Process Links` with Master Data Operation, Conditional Data Operation, Transaction Data Operation, and Process Dependency Operation. |
+| Master data links | Added Organization, Customer, Vendor, Employee, and Product master-data operation links that open `Data / Master Data`. |
+| Transaction links | Added manual transaction, automatic pipeline, and monitoring links that open the matching manual/automatic pipeline workspace tabs. |
+| Process dependency links | Added Independent Process and Dependent Process links that open the appropriate AS-IS/current-state and TO-BE/target-process workspace tabs. |
+| Workspace sync | Added a workspace-jump event bridge and URL-sync guard so Sub Menu clicks update the URL, active tab, active sub-tab, and focus together without stale tab/sub overwrites. |
+| Console cleanup | Removed a React `border`/`borderLeft` mixed-style warning in the ResourceCard surface seen during the dependency flow. |
+
+### Live Verification
+
+Checked with Playwright on `http://localhost:3210/bank/dept/10/b2c/experience-analysis`:
+
+- Main Menu contains `B2C`, `B2B`, and `B2E`.
+- Main Menu no longer shows process AI capability rows such as `Segmentation AI`.
+- Sub Menu contains `Operations Data / Process Links`, `AI Type Segmentation`, master data operations, conditional data operations, transaction data operations, and independent/dependent process links.
+- `Customer Master Data` opens `tab=data&sub=master-data&focus=md:Customer`.
+- `Automatic Transaction Pipeline` opens `tab=automatic-pipeline&sub=pipeline&focus=transaction:Automatic Pipeline`.
+- `Dependent Process` opens `tab=to-be&sub=target-process&focus=process:Dependent Process`.
+- No console warnings or page errors were observed during the checked flow.
+
+### UX Verdict
+
+The navigation contract is now explicit: Main Menu selects department, B2C/B2B/B2E, and main process; Sub Menu selects the operation/data/process/AI item and opens the correct workspace tab.
+
+
+
 <!-- POS drill marker · safe file only · should auto-commit -->

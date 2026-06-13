@@ -6691,7 +6691,8 @@ function ResourceCard({ resource, color, label, icon, ownership, index = 0 }) {
   return (
     <details style={{
       marginBottom: 6, background: tone.bg,
-      border: `1px solid ${tone.border}`, borderLeft: `4px solid ${color || tone.left}`,
+      borderTop: `1px solid ${tone.border}`, borderRight: `1px solid ${tone.border}`,
+      borderBottom: `1px solid ${tone.border}`, borderLeft: `4px solid ${color || tone.left}`,
       borderRadius: 4,
     }}>
       <summary style={{
@@ -6722,8 +6723,8 @@ function ResourceCard({ resource, color, label, icon, ownership, index = 0 }) {
         {ownership && (
           <div style={{
             marginBottom: 12, padding: '8px 10px',
-            background: '#f1f5f9', border: '1px solid #cbd5e1',
-            borderLeft: `4px solid ${color}`, borderRadius: 4,
+            background: '#f1f5f9', borderTop: '1px solid #cbd5e1', borderRight: '1px solid #cbd5e1',
+            borderBottom: '1px solid #cbd5e1', borderLeft: `4px solid ${color}`, borderRadius: 4,
           }}>
             <div style={{
               fontSize: 9, color, fontWeight: 700, textTransform: 'uppercase',
@@ -6745,7 +6746,8 @@ function ResourceCard({ resource, color, label, icon, ownership, index = 0 }) {
               ].map(([k, v, c]) => (
                 <div key={k} style={{
                   padding: '4px 6px', background: '#fff',
-                  border: `1px solid ${c}55`, borderLeft: `3px solid ${c}`,
+                  borderTop: `1px solid ${c}55`, borderRight: `1px solid ${c}55`,
+                  borderBottom: `1px solid ${c}55`, borderLeft: `3px solid ${c}`,
                   borderRadius: 3,
                 }}>
                   <div style={{
@@ -7584,6 +7586,8 @@ export function BankUseCasePage() {
   // Persist active tab/sub-tab to URL so refresh and shared links keep the exact view.
   useEffect(() => {
     const next = new URLSearchParams(searchParams);
+    const currentFocusForUrl = new URLSearchParams(window.location.search).get('focus');
+    if (currentFocusForUrl) next.set('focus', currentFocusForUrl);
     if (activeTabId) next.set('tab', activeTabId);
     else next.delete('tab');
 
