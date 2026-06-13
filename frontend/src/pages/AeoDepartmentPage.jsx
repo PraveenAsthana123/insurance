@@ -6,6 +6,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import PageHeaderFlow from '../components/PageHeaderFlow';
 import PageObjective from '../components/PageObjective';
 import ResizableSplitter, { useResizableWidth } from '../components/ResizableSplitter';
+import AeoSectionTab from '../components/AeoSectionTab';
 
 const API = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL)
   || 'http://localhost:8001';
@@ -463,7 +464,7 @@ export default function AeoDepartmentPage() {
           ))}
         </div>
 
-        <SectionContent section={section} tab={selectedTab} dashboard={dashboard} />
+        <AeoSectionTab section={section} tab={selectedTab} dashboard={dashboard} />
       </div>
     </div>
   );
