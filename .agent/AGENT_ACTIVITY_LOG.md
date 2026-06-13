@@ -5674,3 +5674,16 @@ error: tests/drills/drill_adapters_endpoint.py: patch does not apply
 2026-06-13T16:00:04Z | auto-fix-loop | discover: running insur_fleet (200 workers)
 2026-06-13T16:00:21Z | auto-fix-loop | picks: 3 issues queued for fix
 2026-06-13T16:00:21Z | auto-fix-loop | dispatch #1: T-loop-1781366421-1
+2026-06-13T16:00:23Z | auto-fix-worker | start        | T-loop-1781366421-1 | role=error target=jobs/logs/backend.log
+2026-06-13T16:00:23Z | auto-fix-worker | classify     | T-loop-1781366421-1 | tier=small risk=low council=single
+2026-06-13T16:01:01Z | auto-fix-worker | skip         | T-loop-1781366421-1 | model returned empty or NEEDS_HUMAN
+2026-06-13T16:01:01Z | auto-fix-loop |   → verdict=skip
+2026-06-13T16:01:01Z | auto-fix-loop | dispatch #2: T-loop-1781366461-2
+2026-06-13T16:01:02Z | auto-fix-worker | start        | T-loop-1781366461-2 | role=error target=jobs/logs/codex_approval_cron.log
+2026-06-13T16:01:02Z | auto-fix-worker | classify     | T-loop-1781366461-2 | tier=small risk=low council=single
+2026-06-13T16:04:02Z | auto-fix-worker | skip         | T-loop-1781366461-2 | model returned empty or NEEDS_HUMAN
+2026-06-13T16:04:03Z | auto-fix-loop |   → verdict=skip
+2026-06-13T16:04:03Z | auto-fix-loop | dispatch #3: T-loop-1781366643-3
+2026-06-13T16:04:03Z | auto-fix-worker | start        | T-loop-1781366643-3 | role=error target=jobs/logs/rag_cache.log
+2026-06-13T16:04:03Z | auto-fix-worker | classify     | T-loop-1781366643-3 | tier=small risk=low council=single
+2026-06-13T16:04:07Z | auto-fix-worker | validate     | T-loop-1781366643-3 | ok: no validator for jobs/logs/rag_cache.log
