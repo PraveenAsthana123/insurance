@@ -198,12 +198,36 @@ def main():
     started = time.perf_counter()
     started_at = datetime.now(timezone.utc).isoformat()
 
-    # Run advisor
-    from main import create_app
-    from fastapi.testclient import TestClient
-    c = TestClient(create_app())
-    advisor = c.post("/api/v1/missing-items-advisor/scan").json()
-    findings = advisor.get("findings", [])
+    # Run advisor (Iter 95.3 · prefer HTTP over TestClient init for speed)
+    import urllib.request, urllib.error
+    backend_url = os.environ.get("INSUR_BACKEND_URL", "http://localhost:8001")
+    try:
+        req = urllib.request.Request(
+            f"{backend_url}/api/v1/missing-items-advisor/scan",
+            method="POST", data=b"{}",
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            advisor = json.loads(resp.read().decode("utf-8"))
+    except (urllib.error.URLError, OSError, TimeoutError, json.JSONDecodeError):
+        # Cold boot / CI fallback per §57.7 honest
+        from main import create_app
+        from fastapi.testclient import TestClient
+        c = TestClient(create_app())
+        advisor = c.post("/api/v1/missing-items-advisor/scan").json()
+    findings = list(advisor.get("findings", []))
+
+    # Iter 95.4 · include pending_topics extra_scans (cron silent ·
+    # stale agents · UNCOMMITTED REAL-CODE) so the §106 dispatcher
+    # acknowledges them as actionable instead of reporting "stable"
+    # while real work sits uncommitted. Per §57.7 honest: a "stable"
+    # status with uncommitted real-code is misleading.
+    try:
+        from pending_topics_agent import extra_scans as _extra_scans
+        extra_findings, _extra_vitals = _extra_scans()
+        findings.extend(extra_findings)
+    except Exception:
+        pass  # best-effort · do not break dispatcher on extra_scans failure
 
     # Pick top-1 P0/P1/P2 (skip P3 by default · scaffold materializes on demand)
     sev_order = {"P0": 0, "P1": 1, "P2": 2}

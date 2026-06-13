@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-13T05:05:01Z",
+  "ts": "2026-06-13T05:15:01Z",
   "cron_logs": {
     "agent_test_runner.log": {
       "size": 163775,
@@ -46,11 +46,11 @@
       ]
     },
     "auto-next.log": {
-      "size": 125286,
-      "last_modified": "2026-06-13T05:05:01Z",
+      "size": 125810,
+      "last_modified": "2026-06-13T05:15:01Z",
       "tail": [
         "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
-        "[dispatcher] 2026-06-13T05:05:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] 2026-06-13T05:15:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
@@ -73,17 +73,17 @@
       ]
     },
     "backend.log": {
-      "size": 3347372,
-      "last_modified": "2026-06-13T05:04:54Z",
+      "size": 3359278,
+      "last_modified": "2026-06-13T05:14:57Z",
       "tail": [
         "INFO:     Waiting for application shutdown.",
-        "{\"timestamp\": \"2026-06-13T05:04:54.812160+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
+        "{\"timestamp\": \"2026-06-13T05:14:57.704336+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
         "INFO:     Application shutdown complete."
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1047634,
-      "last_modified": "2026-06-13T05:05:01Z",
+      "size": 1047944,
+      "last_modified": "2026-06-13T05:15:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -91,8 +91,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 13735477,
-      "last_modified": "2026-06-13T05:01:36Z",
+      "size": 13743692,
+      "last_modified": "2026-06-13T05:10:26Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -127,30 +127,30 @@
       ]
     },
     "fix_all_pending.cron.log": {
-      "size": 17622,
-      "last_modified": "2026-06-13T05:00:02Z",
+      "size": 18156,
+      "last_modified": "2026-06-13T05:15:01Z",
       "tail": [
-        "[2026-06-12 23:00:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
+        "[2026-06-12 23:15:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
         "/mnt/deepa/insur_project/scripts/fix_all_pending_loop.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  state[\"last_run_utc\"] = datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")"
       ]
     },
     "fix_all_pending.log": {
-      "size": 11043,
-      "last_modified": "2026-06-13T05:00:02Z",
+      "size": 11238,
+      "last_modified": "2026-06-13T05:15:01Z",
       "tail": [
-        "[2026-06-12 23:00:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
-        "[2026-06-12 23:00:02 MDT] open tasks: 0 \u00b7 all tasks: 16",
-        "[2026-06-12 23:00:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
+        "[2026-06-12 23:15:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
+        "[2026-06-12 23:15:01 MDT] open tasks: 0 \u00b7 all tasks: 16",
+        "[2026-06-12 23:15:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
       ]
     },
     "fix_all_quick.log": {
-      "size": 105600,
-      "last_modified": "2026-06-13T04:15:02Z",
+      "size": 105774,
+      "last_modified": "2026-06-13T05:15:02Z",
       "tail": [
-        "workforce: fleet+ollama \u2192 /mnt/deepa/insur_project/data/registry/workforce_health.json",
-        "[2026-06-13T04:15:01Z] \u2713 workforce",
-        "[2026-06-13T04:15:01Z] report \u2192 /mnt/deepa/insur_project/jobs/reports/fix_all_20260613T041501Z.md"
+        "entity_res: 8 unique \u00b7 0 dupes",
+        "[2026-06-13T05:15:01Z] \u2713 entity-res",
+        "[2026-06-13T05:15:01Z] \u25b6 workforce \u2014 workforce"
       ]
     },
     "fix_all_weekly.log": {
@@ -181,12 +181,12 @@
       ]
     },
     "insurance_alignment_cron.log": {
-      "size": 55534,
-      "last_modified": "2026-06-13T04:12:01Z",
+      "size": 55766,
+      "last_modified": "2026-06-13T05:12:01Z",
       "tail": [
         "Insurance alignment audit: 312 checks, 0 failed",
-        "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0412.md",
-        "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0412.json"
+        "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0512.md",
+        "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0512.json"
       ]
     },
     "insurance_audit_20260601T221059Z.log": {
@@ -559,8 +559,8 @@
       ]
     },
     "insurance_workforce_rollup_cron.log": {
-      "size": 47487,
-      "last_modified": "2026-06-13T04:13:01Z",
+      "size": 47687,
+      "last_modified": "2026-06-13T05:13:01Z",
       "tail": [
         "out: /mnt/deepa/insur_project/data/work_tracker/insurance_alignment.json",
         "insurance rollup: 262 caps \u00b7 1 maturity levels \u00b7 impl 0.0% \u00b7 audit green \u00b7 depts 21/22 (15 complete, 6 partial, 1 missing)",
@@ -744,12 +744,12 @@
       ]
     },
     "pending_push.log": {
-      "size": 181168,
-      "last_modified": "2026-06-13T05:00:02Z",
+      "size": 181337,
+      "last_modified": "2026-06-13T05:15:01Z",
       "tail": [
-        "[2026-06-13T05:00:02Z] push task",
-        "[2026-06-13T05:00:02Z] skip \u2014 no origin remote configured",
-        "[2026-06-13T05:00:02Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-13T05:15:01Z] push task",
+        "[2026-06-13T05:15:01Z] skip \u2014 no origin remote configured",
+        "[2026-06-13T05:15:01Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "pending_reports-cleanup.log": {
@@ -778,12 +778,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 24970,
-      "last_modified": "2026-06-13T05:04:02Z",
+      "size": 25285,
+      "last_modified": "2026-06-13T05:14:02Z",
       "tail": [
-        "[2026-06-12 23:00:04 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 23:02:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 23:04:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-12 23:10:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 23:12:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 23:14:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -814,12 +814,12 @@
       ]
     },
     "rag_chunking.log": {
-      "size": 45145,
-      "last_modified": "2026-06-13T05:05:01Z",
+      "size": 45183,
+      "last_modified": "2026-06-13T05:05:08Z",
       "tail": [
-        "[2026-06-13T04:35:01Z] running chunking sweep",
         "chunked 4959 docs, wrote 0 new chunks",
-        "[2026-06-13T05:05:01Z] running chunking sweep"
+        "[2026-06-13T05:05:01Z] running chunking sweep",
+        "chunked 4959 docs, wrote 0 new chunks"
       ]
     },
     "rag_deepeval.log": {
@@ -832,10 +832,10 @@
       ]
     },
     "rag_embedding.log": {
-      "size": 54080,
-      "last_modified": "2026-06-13T04:40:02Z",
+      "size": 54176,
+      "last_modified": "2026-06-13T05:10:02Z",
       "tail": [
-        "[2026-06-13T04:40:01Z] embedding sweep",
+        "[2026-06-13T05:10:01Z] embedding sweep",
         "chunks=33139 embedded=33139 todo=0",
         "embedded 0 new chunks"
       ]
@@ -859,11 +859,11 @@
       ]
     },
     "rag_token.log": {
-      "size": 22962,
-      "last_modified": "2026-06-13T04:15:02Z",
+      "size": 23048,
+      "last_modified": "2026-06-13T05:15:01Z",
       "tail": [
         "token usage: 2 models tallied for 2026-06-12",
-        "[2026-06-13T04:15:02Z] token usage tally",
+        "[2026-06-13T05:15:01Z] token usage tally",
         "token usage: 2 models tallied for 2026-06-12"
       ]
     },
@@ -895,21 +895,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 85494,
-      "last_modified": "2026-06-13T05:04:41Z",
+      "size": 87270,
+      "last_modified": "2026-06-13T05:14:45Z",
       "tail": [
-        "[2026-06-12 23:04:04 MDT] tick complete \u00b7 alive=2/3",
-        "[2026-06-12 23:04:34 MDT] backend DOWN port=8001 child_exit=1 restart_count=354",
-        "[2026-06-12 23:04:41 MDT] spawned backend pid=3752436 backoff=5s"
+        "[2026-06-12 23:14:08 MDT] tick complete \u00b7 alive=2/3",
+        "[2026-06-12 23:14:38 MDT] backend DOWN port=8001 child_exit=1 restart_count=363",
+        "[2026-06-12 23:14:45 MDT] spawned backend pid=413344 backoff=5s"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 198178,
-      "last_modified": "2026-06-13T05:04:41Z",
+      "size": 202816,
+      "last_modified": "2026-06-13T05:14:45Z",
       "tail": [
-        "[2026-06-12 23:04:04 MDT] tick complete \u00b7 alive=2/3",
-        "[2026-06-12 23:04:34 MDT] backend DOWN port=8001 child_exit=1 restart_count=354",
-        "[2026-06-12 23:04:41 MDT] spawned backend pid=3752436 backoff=5s"
+        "[2026-06-12 23:14:08 MDT] tick complete \u00b7 alive=2/3",
+        "[2026-06-12 23:14:38 MDT] backend DOWN port=8001 child_exit=1 restart_count=363",
+        "[2026-06-12 23:14:45 MDT] spawned backend pid=413344 backoff=5s"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -940,21 +940,21 @@
       ]
     },
     "vite_3210.log": {
-      "size": 88341,
-      "last_modified": "2026-06-13T05:00:03Z",
+      "size": 89116,
+      "last_modified": "2026-06-13T05:06:44Z",
       "tail": [
-        "11:00:03 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx",
-        "11:00:03 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx",
-        "11:00:03 PM [vite] hmr update /src/pages/Dashboard.jsx, /src/pages/InsuranceCatalogPage.jsx, /src/pages/DepartmentPage.jsx, /src/pages/ProcessPage.jsx, /src/pages/AdminPage.jsx, /src/pages/ManagerPage.jsx, /src/pages/ManagerArchetypePage.jsx, /src/pages/TesterPage.jsx, /src/pages/DepartmentDossierPage.jsx, /src/pages/DataFlowPage.jsx, /src/components/admin-tabs/ManagerArchetypesTab.jsx, /src/components/manager-tabs/DataFlowTab.jsx, /src/components/dossier/DataFlowsSection.jsx"
+        "11:06:44 PM [vite] hmr update /src/pages/Dashboard.jsx, /src/pages/InsuranceCatalogPage.jsx, /src/pages/DepartmentPage.jsx, /src/pages/ProcessPage.jsx, /src/pages/AdminPage.jsx, /src/pages/ManagerPage.jsx, /src/pages/ManagerArchetypePage.jsx, /src/pages/TesterPage.jsx, /src/pages/DepartmentDossierPage.jsx, /src/pages/DataFlowPage.jsx, /src/components/admin-tabs/ManagerArchetypesTab.jsx, /src/components/manager-tabs/DataFlowTab.jsx, /src/components/dossier/DataFlowsSection.jsx",
+        "11:06:44 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx",
+        "11:06:44 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx"
       ]
     },
     "work_tracker.log": {
-      "size": 336468,
-      "last_modified": "2026-06-13T05:00:10Z",
+      "size": 336678,
+      "last_modified": "2026-06-13T05:10:02Z",
       "tail": [
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)",
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)",
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=98, fleet=361)"
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=98, fleet=361)",
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=98, fleet=362)",
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=98, fleet=362)"
       ]
     }
   },
@@ -984,6 +984,6 @@
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 1306
+    "count": 1307
   }
 }
