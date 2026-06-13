@@ -403,3 +403,5 @@ User feedback: check other UI errors.
 
 The bank pages render non-blank and without React page errors. The bank AI catalog preview no longer depends on a live taxonomy endpoint for initial render.
 
+
+<!-- POS drill marker · safe file only · should auto-commit -->
