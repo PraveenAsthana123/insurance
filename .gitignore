@@ -217,3 +217,6 @@ data/work_tracker/insurance_alignment.json
 # Rotation script: scripts/rotate_work_tracker_history.sh
 data/work_tracker/history.jsonl
 data/work_tracker/archive/
+
+# §138 absence-mode sentinel · machine-local · should NEVER be tracked
+.agent/absence-mode
