@@ -212,3 +212,8 @@ data/work_tracker/insurance_alignment.json
 
 # VibeCheck-generated copilot instructions (output · not source)
 .github/copilot-instructions.md
+
+# 50 MB JSONL append-only audit (GitHub warning surfaced 2026-06-12 push)
+# Rotation script: scripts/rotate_work_tracker_history.sh
+data/work_tracker/history.jsonl
+data/work_tracker/archive/

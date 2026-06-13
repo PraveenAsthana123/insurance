@@ -4439,55 +4439,235 @@ function ModelDataAccuracyStrip({ tab, sub, proc, focusKind, focusLabel }) {
   );
 }
 
-// Mock series generator — deterministic per (tab, sub) so a refresh
-// gives the same chart. Hash → seed → seven 7-day points around a baseline.
-function makeSeries(seedKey, baseline = 50, jitter = 25) {
+// Deterministic chart generator. The chart plan is based on the active
+// tab/sub-tab/process so every workspace page has a distinct graph purpose.
+function seededRand(seedKey) {
   let h = 0;
   for (let i = 0; i < seedKey.length; i++) {
     h = ((h << 5) - h + seedKey.charCodeAt(i)) | 0;
   }
-  const rand = (n) => {
+  return (n) => {
     const x = Math.sin(h + n) * 10000;
     return x - Math.floor(x);
   };
-  return [
-    { day: 'Mon', value: Math.round(baseline + (rand(1) - 0.5) * jitter) },
-    { day: 'Tue', value: Math.round(baseline + (rand(2) - 0.5) * jitter) },
-    { day: 'Wed', value: Math.round(baseline + (rand(3) - 0.5) * jitter) },
-    { day: 'Thu', value: Math.round(baseline + (rand(4) - 0.5) * jitter) },
-    { day: 'Fri', value: Math.round(baseline + (rand(5) - 0.5) * jitter) },
-    { day: 'Sat', value: Math.round(baseline + (rand(6) - 0.5) * jitter) },
-    { day: 'Sun', value: Math.round(baseline + (rand(7) - 0.5) * jitter) },
-  ];
 }
 
-// Visualization slot — real recharts. When proc.visualization has structured
-// content, render it; otherwise render a deterministic mock series so the
-// operator sees a real chart, not an emoji.
+const CHART_PERIODS = {
+  week: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  month: ['W1', 'W2', 'W3', 'W4'],
+  quarter: ['M1', 'M2', 'M3'],
+  lifecycle: ['Input', 'Process', 'Model', 'Control', 'Output'],
+};
+
+const TAB_VISUALIZATION_PLANS = {
+  readme: {
+    primary: { title: 'Architecture artifact readiness', metric: 'Ready %', unit: '%', kind: 'bar', period: 'lifecycle', baseline: 58, jitter: 20, trend: 5 },
+    secondary: { title: 'Design evidence by artifact type', metric: 'Evidence count', labels: ['BRD', 'FRD', 'HLD', 'LLD', 'ADR'], baseline: 18, jitter: 12 },
+    intent: 'Shows whether the documentation set is complete enough for handoff and audit.',
+  },
+  overview: {
+    primary: { title: 'Process health trend', metric: 'Health score', unit: '/100', kind: 'area', period: 'week', baseline: 72, jitter: 16, trend: 2 },
+    secondary: { title: 'Work split by operating state', metric: 'Items', labels: ['Manual', 'Automated', 'HITL', 'Exception'], baseline: 34, jitter: 18 },
+    intent: 'Gives a 30-second operating view for the selected process.',
+  },
+  process: {
+    primary: { title: 'Cycle-time improvement', metric: 'Hours saved', unit: 'h', kind: 'line', period: 'week', baseline: 14, jitter: 8, trend: 1.5 },
+    secondary: { title: 'Bottleneck count by process stage', metric: 'Bottlenecks', labels: ['Intake', 'Validate', 'Decide', 'Approve', 'Close'], baseline: 7, jitter: 5 },
+    intent: 'Highlights where manual and automated workflow stages create delay.',
+  },
+  data: {
+    primary: { title: 'Data quality pass rate', metric: 'Quality %', unit: '%', kind: 'area', period: 'week', baseline: 76, jitter: 14, trend: 1.8 },
+    secondary: { title: 'Issue count by data dimension', metric: 'Issues', labels: ['Completeness', 'Freshness', 'Lineage', 'PII', 'Schema'], baseline: 13, jitter: 9 },
+    intent: 'Separates input trust from process performance.',
+  },
+  ai: {
+    primary: { title: 'Model confidence trend', metric: 'Confidence %', unit: '%', kind: 'line', period: 'week', baseline: 68, jitter: 18, trend: 2.2 },
+    secondary: { title: 'AI capability load', metric: 'Calls', labels: ['RAG', 'Prediction', 'Segmentation', 'Scoring', 'Routing'], baseline: 60, jitter: 30 },
+    intent: 'Shows AI runtime confidence and capability usage for this process.',
+  },
+  analytics: {
+    primary: { title: 'Analytical signal strength', metric: 'Signal score', unit: '/100', kind: 'area', period: 'month', baseline: 64, jitter: 12, trend: 4 },
+    secondary: { title: 'Driver contribution', metric: 'Contribution', labels: ['Volume', 'Risk', 'Cost', 'Quality', 'SLA'], baseline: 22, jitter: 15 },
+    intent: 'Focuses on measurement, drivers, and business signal quality.',
+  },
+  dashboard: {
+    primary: { title: 'Role KPI attainment', metric: 'Attainment %', unit: '%', kind: 'bar', period: 'month', baseline: 70, jitter: 15, trend: 3 },
+    secondary: { title: 'Dashboard drill-down usage', metric: 'Clicks', labels: ['Executive', 'Manager', 'Analyst', 'Ops', 'Risk'], baseline: 42, jitter: 24 },
+    intent: 'Shows dashboard value by role and drill-down behavior.',
+  },
+  'biz-value': {
+    primary: { title: 'ROI realization trend', metric: 'ROI %', unit: '%', kind: 'area', period: 'quarter', baseline: 28, jitter: 10, trend: 7 },
+    secondary: { title: 'Dollar impact mix', metric: '$K', labels: ['Revenue', 'Cost save', 'Risk avoid', 'Time save'], baseline: 420, jitter: 260 },
+    intent: 'Quantifies financial value rather than technical activity.',
+  },
+  'exp-ai': {
+    primary: { title: 'Explanation coverage', metric: 'Explained %', unit: '%', kind: 'line', period: 'week', baseline: 74, jitter: 12, trend: 1.6 },
+    secondary: { title: 'Explanation evidence sources', metric: 'Citations', labels: ['Features', 'Rules', 'RAG', 'Policy', 'History'], baseline: 24, jitter: 15 },
+    intent: 'Tracks whether AI outputs are explainable enough for users and auditors.',
+  },
+  'res-ai': {
+    primary: { title: 'Responsible AI risk trend', metric: 'Risk score', unit: '/100', kind: 'line', period: 'week', baseline: 36, jitter: 14, trend: -1.5 },
+    secondary: { title: 'Control checks by category', metric: 'Checks', labels: ['Fairness', 'Bias', 'Privacy', 'Safety', 'HITL'], baseline: 18, jitter: 10 },
+    intent: 'Shows safety, fairness, and human oversight posture.',
+  },
+  'gov-ai': {
+    primary: { title: 'Governance approval throughput', metric: 'Approvals', kind: 'bar', period: 'week', baseline: 22, jitter: 12, trend: 1 },
+    secondary: { title: 'Policy decision mix', metric: 'Decisions', labels: ['Allow', 'Review', 'Deny', 'Escalate'], baseline: 16, jitter: 9 },
+    intent: 'Tracks policy-control throughput and approval routing.',
+  },
+  'comp-ai': {
+    primary: { title: 'Compliance control pass rate', metric: 'Pass %', unit: '%', kind: 'area', period: 'week', baseline: 82, jitter: 10, trend: 1.2 },
+    secondary: { title: 'Regulatory evidence coverage', metric: 'Evidence', labels: ['SOC2', 'GDPR', 'Model Risk', 'Audit', 'Retention'], baseline: 21, jitter: 13 },
+    intent: 'Connects control testing to regulatory evidence.',
+  },
+  'inc-ai': {
+    primary: { title: 'Incident resolution velocity', metric: 'Resolved', kind: 'bar', period: 'week', baseline: 11, jitter: 7, trend: 1 },
+    secondary: { title: 'Incident root-cause mix', metric: 'Tickets', labels: ['Data', 'Model', 'Prompt', 'Tool', 'Policy'], baseline: 6, jitter: 5 },
+    intent: 'Shows failure triage and recovery performance.',
+  },
+  'meet-ai': {
+    primary: { title: 'Meeting-to-action conversion', metric: 'Actions', kind: 'line', period: 'week', baseline: 18, jitter: 8, trend: 1.3 },
+    secondary: { title: 'Action ownership by role', metric: 'Tasks', labels: ['Owner', 'SME', 'Risk', 'Tech', 'Ops'], baseline: 9, jitter: 7 },
+    intent: 'Tracks whether discussions turn into accountable work.',
+  },
+  'job-ai': {
+    primary: { title: 'Job success rate', metric: 'Success %', unit: '%', kind: 'area', period: 'week', baseline: 86, jitter: 8, trend: 0.7 },
+    secondary: { title: 'Batch workload by queue', metric: 'Jobs', labels: ['Ingest', 'Train', 'Eval', 'Report', 'Notify'], baseline: 40, jitter: 22 },
+    intent: 'Shows scheduled workload health and recovery pressure.',
+  },
+  'test-ai': {
+    primary: { title: 'Test pass-rate trend', metric: 'Pass %', unit: '%', kind: 'line', period: 'week', baseline: 78, jitter: 13, trend: 1.4 },
+    secondary: { title: 'Coverage by test family', metric: 'Coverage %', labels: ['Unit', 'API', 'UI', 'Data', 'Model'], baseline: 67, jitter: 18 },
+    intent: 'Separates quality evidence by test family.',
+  },
+  operations: {
+    primary: { title: 'SLA compliance trend', metric: 'SLA %', unit: '%', kind: 'area', period: 'week', baseline: 88, jitter: 8, trend: 0.8 },
+    secondary: { title: 'Operational event mix', metric: 'Events', labels: ['Alert', 'Retry', 'Rollback', 'Deploy', 'Scale'], baseline: 13, jitter: 10 },
+    intent: 'Focuses on day-2 production health.',
+  },
+  reports: {
+    primary: { title: 'Report delivery completion', metric: 'Delivered %', unit: '%', kind: 'bar', period: 'month', baseline: 81, jitter: 12, trend: 2 },
+    secondary: { title: 'Report usage by audience', metric: 'Views', labels: ['Exec', 'Manager', 'Ops', 'Risk', 'Audit'], baseline: 55, jitter: 35 },
+    intent: 'Tracks report production and consumption.',
+  },
+  'product-mgr': {
+    primary: { title: 'Roadmap burn-up', metric: 'Completed', kind: 'area', period: 'month', baseline: 18, jitter: 8, trend: 5 },
+    secondary: { title: 'Backlog by delivery lane', metric: 'Stories', labels: ['Discovery', 'Build', 'Test', 'Launch', 'Adopt'], baseline: 14, jitter: 8 },
+    intent: 'Shows product delivery flow instead of operational KPIs.',
+  },
+  'user-story': {
+    primary: { title: 'Acceptance criteria readiness', metric: 'Ready %', unit: '%', kind: 'bar', period: 'lifecycle', baseline: 61, jitter: 18, trend: 4 },
+    secondary: { title: 'Story coverage by persona', metric: 'Stories', labels: ['User', 'Manager', 'Ops', 'Risk', 'Admin'], baseline: 8, jitter: 6 },
+    intent: 'Shows whether business behavior is testable.',
+  },
+  'user-demo': {
+    primary: { title: 'Demo scenario readiness', metric: 'Ready %', unit: '%', kind: 'bar', period: 'lifecycle', baseline: 66, jitter: 16, trend: 4 },
+    secondary: { title: 'Demo evidence assets', metric: 'Assets', labels: ['Script', 'Data', 'Screen', 'Video', 'FAQ'], baseline: 7, jitter: 5 },
+    intent: 'Shows whether the demo can be run end-to-end.',
+  },
+  'note-ai': {
+    primary: { title: 'Knowledge capture freshness', metric: 'Fresh %', unit: '%', kind: 'area', period: 'week', baseline: 73, jitter: 14, trend: 1.1 },
+    secondary: { title: 'Knowledge object mix', metric: 'Objects', labels: ['Notes', 'Decisions', 'Risks', 'FAQs', 'Links'], baseline: 15, jitter: 10 },
+    intent: 'Shows whether process knowledge is current and reusable.',
+  },
+};
+
+function visualizationPlanFor(tab, sub, proc) {
+  const profile = TAB_PROFILES[tab?.id] || TAB_PROFILES.overview;
+  const fallback = TAB_VISUALIZATION_PLANS[profile.type === 'decision' ? 'gov-ai' : 'overview'];
+  const plan = TAB_VISUALIZATION_PLANS[tab?.id] || fallback;
+  const subLabel = sub?.label ? ` · ${sub.label}` : '';
+  const procLabel = proc?.name ? ` · ${proc.name}` : '';
+  return {
+    ...plan,
+    titleSuffix: `${subLabel}${procLabel}`,
+  };
+}
+
+function makePlannedSeries(seedKey, spec) {
+  const rnd = seededRand(seedKey);
+  const labels = CHART_PERIODS[spec.period] || CHART_PERIODS.week;
+  return labels.map((label, i) => ({
+    label,
+    [spec.metric]: Math.max(0, Math.round(spec.baseline + (spec.trend || 0) * i + (rnd(i + 1) - 0.5) * spec.jitter)),
+  }));
+}
+
+function makeCategorySeries(seedKey, spec) {
+  const rnd = seededRand(seedKey);
+  return (spec.labels || []).map((label, i) => ({
+    label,
+    [spec.metric]: Math.max(0, Math.round(spec.baseline + (rnd(i + 11) - 0.5) * spec.jitter)),
+  }));
+}
+
+function PlannedTrendChart({ spec, data, color }) {
+  const common = (
+    <>
+      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+      <XAxis dataKey="label" stroke="#64748b" fontSize={10} />
+      <YAxis stroke="#64748b" fontSize={10} />
+      <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
+    </>
+  );
+  if (spec.kind === 'bar') {
+    return (
+      <BarChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+        {common}
+        <Bar dataKey={spec.metric} fill={color} radius={[4, 4, 0, 0]} />
+      </BarChart>
+    );
+  }
+  if (spec.kind === 'line') {
+    return (
+      <LineChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+        {common}
+        <Line type="monotone" dataKey={spec.metric} stroke={color} strokeWidth={2} dot={{ r: 2 }} />
+      </LineChart>
+    );
+  }
+  return (
+    <AreaChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+      {common}
+      <Area type="monotone" dataKey={spec.metric} stroke={color}
+        fill={color} fillOpacity={0.18} strokeWidth={2} />
+    </AreaChart>
+  );
+}
+
+// Visualization slot — real recharts. Uses tab-specific chart plans so each
+// page communicates the correct business question instead of repeating one graph.
 function VisualizationSlot({ tab, sub, proc }) {
   const v = proc?.visualization || {};
   const primaryRaw = v.primary_chart;
   const primary = isOperatorPending(primaryRaw) ? null : primaryRaw;
-  const seedKey = `${proc?.name || 'proc'}|${tab.id}|${sub?.id || '_'}`;
-  const trendSeries = useMemo(() => makeSeries(seedKey, 60, 30), [seedKey]);
-  const distSeries = useMemo(() => makeSeries(seedKey + ':dist', 50, 40), [seedKey]);
-  const chartType = (typeof primary === 'string' && primary.toLowerCase().includes('bar')) ? 'bar' : 'line';
+  const plan = visualizationPlanFor(tab, sub, proc);
+  const seedKey = `${proc?.id || proc?.name || 'proc'}|${tab.id}|${sub?.id || '_'}|${plan.primary.title}`;
+  const trendSeries = useMemo(() => makePlannedSeries(seedKey, plan.primary), [seedKey, plan.primary]);
+  const categorySeries = useMemo(() => makeCategorySeries(seedKey + ':category', plan.secondary), [seedKey, plan.secondary]);
   return (
     <div>
+      <div style={{
+        marginBottom: 10, padding: '8px 10px',
+        background: `${tab.color}11`, border: `1px solid ${tab.color}33`,
+        borderRadius: 4, fontSize: 11, color: '#0f172a',
+      }}>
+        <strong>Chart intent:</strong> {plan.intent}{' '}
+        <span style={{ color: '#64748b' }}>Source path: tab={tab.id}{sub?.id ? ` / sub=${sub.id}` : ''}</span>
+      </div>
       {primary && (
         <div style={{
           marginBottom: 10, padding: '6px 10px',
-          background: `${tab.color}11`, border: `1px solid ${tab.color}33`,
+          background: '#f8fafc', border: '1px solid #e2e8f0',
           borderRadius: 4, fontSize: 11, color: '#0f172a',
         }}>
-          <strong>Primary chart spec:</strong> {primary}
+          <strong>Blueprint chart spec:</strong> {primary}
         </div>
       )}
       <div style={{
         display: 'grid', gap: 10, minWidth: 0,
         gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
       }}>
-        {/* Chart 1: 7-day trend (Line or Area) */}
         <div style={{
           padding: 12, background: '#fff',
           border: `1px solid ${tab.color}33`, borderRadius: 6,
@@ -4495,22 +4675,14 @@ function VisualizationSlot({ tab, sub, proc }) {
           <div style={{
             fontSize: 11, fontWeight: 700, color: tab.color, marginBottom: 6,
             textTransform: 'uppercase', letterSpacing: '0.05em',
-          }}>📈 7-day trend</div>
+          }}>{plan.primary.title}</div>
           <ResponsiveContainer width="100%" height={180}>
-            <AreaChart data={trendSeries} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="day" stroke="#64748b" fontSize={10} />
-              <YAxis stroke="#64748b" fontSize={10} />
-              <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
-              <Area type="monotone" dataKey="value" stroke={tab.color}
-                fill={tab.color} fillOpacity={0.18} strokeWidth={2} />
-            </AreaChart>
+            <PlannedTrendChart spec={plan.primary} data={trendSeries} color={tab.color} />
           </ResponsiveContainer>
           <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 4, fontStyle: 'italic' }}>
-            Mock data · seed: {seedKey.slice(0, 30)}…
+            Deterministic demo data · metric: {plan.primary.metric}{plan.primary.unit ? ` ${plan.primary.unit}` : ''}{plan.titleSuffix}
           </div>
         </div>
-        {/* Chart 2: Distribution (Bar) */}
         <div style={{
           padding: 12, background: '#fff',
           border: `1px solid ${tab.color}33`, borderRadius: 6,
@@ -4518,22 +4690,21 @@ function VisualizationSlot({ tab, sub, proc }) {
           <div style={{
             fontSize: 11, fontWeight: 700, color: tab.color, marginBottom: 6,
             textTransform: 'uppercase', letterSpacing: '0.05em',
-          }}>📊 Distribution</div>
+          }}>{plan.secondary.title}</div>
           <ResponsiveContainer width="100%" height={180}>
-            <BarChart data={distSeries} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
+            <BarChart data={categorySeries} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="day" stroke="#64748b" fontSize={10} />
+              <XAxis dataKey="label" stroke="#64748b" fontSize={10} />
               <YAxis stroke="#64748b" fontSize={10} />
               <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
-              <Bar dataKey="value" fill={tab.color} radius={[4, 4, 0, 0]} />
+              <Bar dataKey={plan.secondary.metric} fill={tab.color} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
           <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 4, fontStyle: 'italic' }}>
-            Mock data · awaiting backend wire-up
+            Deterministic demo data · metric: {plan.secondary.metric} · awaiting backend wire-up
           </div>
         </div>
       </div>
-      {/* Blueprint spec hints (collapsed) */}
       {(v.additional_charts || v.axes || v.drill_down || v.library) && (
         <details style={{ marginTop: 10 }}>
           <summary style={{

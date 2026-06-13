@@ -351,3 +351,21 @@ User feedback: workarea headers, table headers, and component headers still look
 
 The workspace can still use dark slate for readable labels, but black/near-black is no longer used as the visual brand for active headers, component headers, table headers, or primary chart/section accents.
 
+## Per-Tab Graph Differentiation Pass
+
+User feedback: all pages were using the same graph.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Visualization slot | Replaced the generic repeated trend/distribution pair with tab-specific chart plans. |
+| Chart intent | Added visible intent copy and source path for each chart surface. |
+| Metrics | Each tab now uses a different metric family: architecture readiness, process cycle time, data quality, AI confidence, ROI, explanation coverage, responsible-AI risk, governance approvals, incidents, jobs, testing, reports, demo readiness, and more. |
+| Data shape | Charts now vary by period/category, chart kind, baseline, trend, jitter, and metric name while remaining deterministic for the active process/tab/sub-tab. |
+| Policy | Added a global UI rule that shared chart components must still use page-specific data plans, labels, and explanatory copy. |
+
+### UX Verdict
+
+The graph section no longer looks copied across every page. Shared Recharts components remain, but each tab now answers a different business question with a different title, metric, category set, and chart intent.
+

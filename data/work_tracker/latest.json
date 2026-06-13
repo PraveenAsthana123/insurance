@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-13T04:50:02Z",
+  "ts": "2026-06-13T04:55:02Z",
   "cron_logs": {
     "agent_test_runner.log": {
       "size": 163600,
@@ -46,12 +46,12 @@
       ]
     },
     "auto-next.log": {
-      "size": 124500,
-      "last_modified": "2026-06-13T04:50:02Z",
+      "size": 124762,
+      "last_modified": "2026-06-13T04:55:02Z",
       "tail": [
         "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
-        "[dispatcher] 2026-06-13T04:50:02Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
-        "[dispatcher] iter 1 \u00b7 elapsed 0s"
+        "[dispatcher] 2026-06-13T04:55:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] iter 1 \u00b7 elapsed 1s"
       ]
     },
     "auto_fix_loop.log": {
@@ -73,17 +73,17 @@
       ]
     },
     "backend.log": {
-      "size": 3321145,
-      "last_modified": "2026-06-13T04:49:20Z",
+      "size": 3327110,
+      "last_modified": "2026-06-13T04:53:57Z",
       "tail": [
         "INFO:     Waiting for application shutdown.",
-        "{\"timestamp\": \"2026-06-13T04:49:20.781301+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
+        "{\"timestamp\": \"2026-06-13T04:53:57.671555+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
         "INFO:     Application shutdown complete."
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1047169,
-      "last_modified": "2026-06-13T04:50:02Z",
+      "size": 1047324,
+      "last_modified": "2026-06-13T04:55:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -91,8 +91,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 13719047,
-      "last_modified": "2026-06-13T04:43:55Z",
+      "size": 13727262,
+      "last_modified": "2026-06-13T04:52:46Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -778,12 +778,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 24529,
-      "last_modified": "2026-06-13T04:50:03Z",
+      "size": 24655,
+      "last_modified": "2026-06-13T04:54:03Z",
       "tail": [
-        "[2026-06-12 22:46:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 22:48:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 22:50:03 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-12 22:50:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 22:52:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 22:54:03 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -895,21 +895,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 82855,
-      "last_modified": "2026-06-13T04:50:01Z",
+      "size": 83712,
+      "last_modified": "2026-06-13T04:54:37Z",
       "tail": [
-        "[2026-06-12 22:49:01 MDT] spawned backend pid=2857629 backoff=5s",
-        "[2026-06-12 22:49:31 MDT] tick complete \u00b7 alive=2/3",
-        "[2026-06-12 22:50:01 MDT] backend DOWN port=8001 child_exit=1 restart_count=341"
+        "[2026-06-12 22:54:29 MDT] backend DOWN port=8001 child_exit=1 restart_count=345",
+        "[2026-06-12 22:54:37 MDT] spawned backend pid=3106193 backoff=5s",
+        "[2026-06-12 22:55:07 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 191405,
-      "last_modified": "2026-06-13T04:50:01Z",
+      "size": 193905,
+      "last_modified": "2026-06-13T04:55:07Z",
       "tail": [
+        "/mnt/deepa/insur_project/scripts/multi_supervisor.py:78: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  return datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")",
-        "[2026-06-12 22:49:31 MDT] tick complete \u00b7 alive=2/3",
-        "[2026-06-12 22:50:01 MDT] backend DOWN port=8001 child_exit=1 restart_count=341"
+        "[2026-06-12 22:55:07 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -940,17 +940,17 @@
       ]
     },
     "vite_3210.log": {
-      "size": 86914,
-      "last_modified": "2026-06-13T04:48:32Z",
+      "size": 87566,
+      "last_modified": "2026-06-13T04:52:49Z",
       "tail": [
-        "10:27:35 PM [vite] hmr update /src/App.jsx",
-        "10:48:02 PM [vite] hmr update /src/pages/AdminAuditPage.jsx",
-        "10:48:32 PM [vite] hmr update /src/pages/AdminAuditPage.jsx"
+        "10:52:49 PM [vite] hmr update /src/App.jsx",
+        "10:52:49 PM [vite] hmr invalidate /src/pages/bank/BankUseCasePage.jsx Could not Fast Refresh (\"apiProbe\" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports",
+        "10:52:49 PM [vite] hmr update /src/App.jsx"
       ]
     },
     "work_tracker.log": {
-      "size": 336153,
-      "last_modified": "2026-06-13T04:45:02Z",
+      "size": 336258,
+      "last_modified": "2026-06-13T04:50:08Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)",
