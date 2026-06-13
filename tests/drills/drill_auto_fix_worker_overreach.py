@@ -97,6 +97,15 @@ def main() -> int:
     step(4, has_overreach_marker,
          "source has overreach-prevention comment (audit trail)")
 
+    # ─── Step 4b · POS · parallel-lock check (Iter 95.12) ───────────
+    has_parallel_lock_check = (
+        "parallel_lock.py" in source
+        and "is_locked" in source
+        and "Iter 95.12" in source
+    )
+    step(4, has_parallel_lock_check,
+         "Iter 95.12 · parallel-lock check before staging (per-project · best-effort)")
+
     # ─── Step 5 · NEG empty diff → no paths ──────────────────────────
     step(5, _parse_touched("") == [],
          "NEG empty diff → 0 paths · worker would refuse to commit")
