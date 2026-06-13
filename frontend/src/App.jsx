@@ -86,6 +86,17 @@ import CommandCenterPage from './pages/CommandCenterPage';
 import PromptOpsPage from './pages/PromptOpsPage';
 import EvalOpsPage from './pages/EvalOpsPage';
 import EaosDepartmentPage from './pages/EaosDepartmentPage';
+import GovernanceOmPage from './pages/GovernanceOmPage';
+import AgentLifecyclePage from './pages/AgentLifecyclePage';
+import AuditExplorerPage from './pages/AuditExplorerPage';
+import CostOptimizerPage from './pages/CostOptimizerPage';
+import DriftMonitorPage from './pages/DriftMonitorPage';
+import PromptPlaygroundPage from './pages/PromptPlaygroundPage';
+import ModelComparePage from './pages/ModelComparePage';
+import DatasetUploadPage from './pages/DatasetUploadPage';
+import FineTuneUIPage from './pages/FineTuneUIPage';
+import WebhookDebugPage from './pages/WebhookDebugPage';
+import SseStreamPage from './pages/SseStreamPage';
 
 function PageLoader({ label }) {
   return (
@@ -264,6 +275,22 @@ export default function App() {
         <Route path="/eval-ops" element={<EvalOpsPage />} />
         <Route path="/eaos-dept" element={<EaosDepartmentPage />} />
         <Route path="/eaos-department" element={<EaosDepartmentPage />} />
+        <Route path="/governance-om" element={<GovernanceOmPage />} />
+        <Route path="/agent-lifecycle" element={<AgentLifecyclePage />} />
+        <Route path="/audit-explorer" element={<AuditExplorerPage />} />
+        <Route path="/cost" element={<CostOptimizerPage />} />
+        <Route path="/cost-optimizer" element={<CostOptimizerPage />} />
+        <Route path="/drift" element={<DriftMonitorPage />} />
+        <Route path="/drift-monitor" element={<DriftMonitorPage />} />
+        <Route path="/prompt-playground" element={<PromptPlaygroundPage />} />
+        <Route path="/model-compare" element={<ModelComparePage />} />
+        <Route path="/datasets" element={<DatasetUploadPage />} />
+        <Route path="/dataset-upload" element={<DatasetUploadPage />} />
+        <Route path="/finetune" element={<FineTuneUIPage />} />
+        <Route path="/fine-tune" element={<FineTuneUIPage />} />
+        <Route path="/webhook-debug" element={<WebhookDebugPage />} />
+        <Route path="/webhooks" element={<WebhookDebugPage />} />
+        <Route path="/sse-stream" element={<SseStreamPage />} />
       </Routes>
     </BrowserRouter>
   );

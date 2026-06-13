@@ -112,6 +112,17 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/command-center', icon: '🏛', label: 'Enterprise AI Command Center' },
           { to: '/promptops',    icon: '📝', label: 'PromptOps' },
           { to: '/evalops',      icon: '🧪', label: 'EvaluationOps' },
+          { to: '/governance-om',icon: '⚖️', label: 'Governance Operating Model (§EAOS-3)' },
+          { to: '/agent-lifecycle', icon: '🔁', label: 'Agent Lifecycle (§EAOS-5)' },
+          { to: '/audit-explorer', icon: '📜', label: 'Audit Log Explorer (§F04)' },
+          { to: '/cost',           icon: '💰', label: 'Cost Optimizer (§F05)' },
+          { to: '/drift',          icon: '📉', label: 'Drift Monitor (§F06)' },
+          { to: '/prompt-playground', icon: '🧪', label: 'Prompt Playground (§F07)' },
+          { to: '/model-compare',  icon: '🆚', label: 'Model Comparison (§F09)' },
+          { to: '/datasets',       icon: '📦', label: 'Datasets (§F13)' },
+          { to: '/finetune',       icon: '🛠', label: 'Fine-tune Jobs (§F12)' },
+          { to: '/webhook-debug',  icon: '🪝', label: 'Webhook Debug (§F15)' },
+          { to: '/sse-stream',     icon: '📡', label: 'SSE Stream (§F16)' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,
