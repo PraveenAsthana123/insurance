@@ -1,11 +1,10 @@
-// Dark blue main menu: Department -> Business Domain -> Main Process -> AI Capability.
+// Dark blue main menu: Department -> Business Domain -> Main Process.
 // Domain IDs are lowercase in URLs and uppercase only in labels.
 
 import { useState } from 'react';
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   CANONICAL_DOMAINS,
-  aiCapabilitiesOf,
   canonicalDomainId,
   processesForDomain,
   scenarioForDomain,
@@ -16,15 +15,47 @@ const FS_SECTION_HEADER = 15;
 const FS_TOP_ROW = 14;
 const FS_MID_ROW = 13;
 const FS_LEAF_ROW = 13;
-const FS_AI_CAPABILITY_ROW = 12;
 const FS_SMALL_LABEL = 11;
 const FS_TINY_LABEL = 11;
 
+const WORKSTREAMS = [
+  {
+    lane: 'ops',
+    field: 'brownfield',
+    label: 'Operations · Brownfield',
+    helper: 'Run, support, incidents, problem management, contact center support',
+    color: '#f59e0b',
+  },
+  {
+    lane: 'ops',
+    field: 'greenfield-request',
+    label: 'Operations · Greenfield Request',
+    helper: 'New business use case, enhancement ask, ROI and approval request',
+    color: '#10b981',
+  },
+  {
+    lane: 'it',
+    field: 'greenfield',
+    label: 'IT · Greenfield Build',
+    helper: 'New implementation, architecture, API, data, model, pipeline, deploy',
+    color: '#38bdf8',
+  },
+  {
+    lane: 'it',
+    field: 'brownfield',
+    label: 'IT · Brownfield Support',
+    helper: 'Application, integration, data, model, performance, security fixes',
+    color: '#a78bfa',
+  },
+];
+
 export function BankSidebar({ bp, collapsed, onToggle }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const params = useParams();
   const [searchParams] = useSearchParams();
-  const activeFocus = searchParams.get('focus') || '';
+  const activeLane = searchParams.get('lane') || 'ops';
+  const activeField = searchParams.get('field') || 'brownfield';
   const activeDomain = canonicalDomainId(params.domain);
   const [filter, setFilter] = useState('');
   const [openDepts, setOpenDepts] = useState(() =>
@@ -65,6 +96,13 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
   const toggleDept = (id) => setOpenDepts((p) => ({ ...p, [id]: !p[id] }));
   const toggleDomain = (key) => setOpenDomains((p) => ({ ...p, [key]: !p[key] }));
 
+  const setWorkstream = (lane, field) => {
+    const next = new URLSearchParams(searchParams);
+    next.set('lane', lane);
+    next.set('field', field);
+    navigate(`${location.pathname}?${next.toString()}`, { replace: false });
+  };
+
   return (
     <aside style={{
       background: '#1e3a8a', color: '#dbeafe',
@@ -92,22 +130,47 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         fontSize: FS_SMALL_LABEL,
         lineHeight: 1.35,
       }}>
-        Main Menu path: Department -&gt; B2C/B2B/B2E -&gt; Main Process
+        Main Menu path: Department -&gt; Owner Lane -&gt; Brownfield/Greenfield -&gt; B2C/B2B/B2E -&gt; Main Process. Workspace tabs open from the Sub Menu.
+      </div>
+
+      <div style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
+        <div style={{
+          padding: '6px 18px 8px', color: '#bfdbfe',
+          fontSize: FS_SMALL_LABEL, fontWeight: 800,
+          textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>Operating Model</div>
+        {WORKSTREAMS.map((item) => {
+          const active = activeLane === item.lane && activeField === item.field;
+          return (
+            <button key={`${item.lane}-${item.field}`} type="button" onClick={() => setWorkstream(item.lane, item.field)}
+              style={{
+                width: '100%', textAlign: 'left', minHeight: 48,
+                padding: '8px 18px', background: active ? '#1d4ed8' : 'transparent',
+                borderTop: 'none', borderRight: 'none', borderBottom: 'none',
+                borderLeft: `3px solid ${item.color}`,
+                color: active ? '#fff' : '#dbeafe', cursor: 'pointer', fontFamily: 'inherit',
+              }}>
+              <span style={{ display: 'block', fontSize: FS_MID_ROW, fontWeight: 800 }}>{item.label}</span>
+              <span style={{ display: 'block', marginTop: 2, color: active ? '#dbeafe' : '#93c5fd', fontSize: FS_SMALL_LABEL, lineHeight: 1.25 }}>
+                {item.helper}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {/* §147 Platform Modules · ALL new topics as departments */}
-      <div style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
-        <div style={{
+      <details style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
+        <summary style={{
           padding: '6px 18px 8px', color: '#10b981',
-          fontSize: FS_SMALL_LABEL, fontWeight: 700,
-          textTransform: 'uppercase', letterSpacing: '0.05em',
-        }}>Platform Modules</div>
+          fontSize: FS_SMALL_LABEL, fontWeight: 800,
+          textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer',
+        }}>Platform Modules</summary>
         {[
           { to: '/eai-os',    icon: '🏢', label: '§144 · Enterprise AI OS (9 layers)' },
           { to: '/itsm',       icon: '🎫', label: '§143 · ITSM (incidents · L2 RCA · P1)' },
           { to: '/prompts',    icon: '💬', label: '§145 · Conversation log' },
           { to: '/platform',   icon: '🗺️', label: '§147 · Platform Explorer (all APIs)' },
-          { to: '/ai-types',   icon: '🤖', label: '§148 · AI Types catalog (200)' },
           { to: '/processes',  icon: '🛡️', label: '§150 · Process Resilience (live)' },
           { to: '/chatgroup',  icon: '💬', label: 'ChatGroup · human + agent rooms' },
           { to: '/control-tower', icon: '🏗', label: '§144 · AI Control Tower (12 dashboards)' },
@@ -153,9 +216,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
             <span>{m.icon}</span><span style={{ flex: 1 }}>{m.label}</span>
           </Link>
         ))}
-      </div>
-
-
+      </details>
 
       <div style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
         {[
@@ -198,7 +259,7 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         padding: '10px 18px 6px', fontSize: FS_SMALL_LABEL,
         color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '0.06em',
       }}>
-        Dept &gt; Domain &gt; Main Process &gt; AI · {depts.length} dept{depts.length === 1 ? '' : 's'}
+        Dept &gt; B2C/B2B/B2E &gt; Main Process · {depts.length} dept{depts.length === 1 ? '' : 's'}
       </div>
 
       {depts.map((d) => {
@@ -276,7 +337,6 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                       && activeDomain === dom.id
                       && params.processId === procSlug;
                     const procOpen = openProcs[procKey] || !!q || isActive;
-                    const aiCaps = aiCapabilitiesOf(p);
                     return (
                       <div key={procSlug}>
                         <button
@@ -307,59 +367,16 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
                             UC-{d.id}.{i + 1}
                           </span>
                           <span style={{ flex: 1 }}>{p.name}</span>
-                          <span style={{ fontSize: FS_TINY_LABEL, opacity: 0.7 }}>({aiCaps.length})</span>
                         </button>
 
-                        {procOpen && aiCaps.length === 0 && (
+                        {procOpen && (
                           <div style={{
-                            padding: '4px 14px 6px 56px',
-                            color: '#94a3b8', fontSize: FS_AI_CAPABILITY_ROW, fontStyle: 'italic',
+                            padding: '5px 16px 8px 62px',
+                            color: '#93c5fd', fontSize: FS_TINY_LABEL, lineHeight: 1.3,
                           }}>
-                            (no AI capabilities on this process)
+                            Sub Menu opens workspace tabs: operations, data, AI types, applications, agents.
                           </div>
                         )}
-
-                        {procOpen && aiCaps.map((capability) => {
-                          const capabilityFocus = `ai:${capability.label}`;
-                          const capabilityActive = activeFocus === capabilityFocus || params.subProcessId === capability.id;
-                          return (
-                            <button
-                              key={capability.id}
-                              type="button"
-                              onClick={() => {
-                                const next = new URLSearchParams(searchParams);
-                                next.set('focus', capabilityFocus);
-                                next.set('tab', 'ai');
-                                next.delete('sub');
-                                navigate(`/bank/dept/${d.id}/${dom.id}/${procSlug}?${next.toString()}`);
-                              }}
-                              aria-current={capabilityActive ? 'true' : undefined}
-                              style={{
-                                width: '100%', textAlign: 'left',
-                                minHeight: 38,
-                                padding: '9px 16px 9px 62px',
-                                background: capabilityActive ? '#1d4ed8' : 'transparent',
-                                // Avoid border shorthand + borderLeft conflict.
-                                borderTop: 'none', borderRight: 'none', borderBottom: 'none',
-                                borderLeft: capabilityActive ? '3px solid #fff' : '3px solid transparent',
-                                color: capabilityActive ? '#fff' : '#bfdbfe',
-                                fontSize: FS_AI_CAPABILITY_ROW, fontWeight: capabilityActive ? 600 : 400,
-                                cursor: 'pointer',
-                                display: 'flex', alignItems: 'center', gap: 6,
-                              }}
-                            >
-                              <span style={{
-                                width: 4, height: 4, borderRadius: 4,
-                                background: capabilityActive ? '#fff' : '#3b82f6',
-                              }} />
-                              <span style={{ flex: 1 }}>{capability.label}</span>
-                              <span style={{
-                                fontSize: FS_TINY_LABEL, padding: '0 4px', borderRadius: 2,
-                                background: '#1e3a8a', color: '#dbeafe', fontWeight: 600,
-                              }}>{capability.kind}</span>
-                            </button>
-                          );
-                        })}
                       </div>
                     );
                   })}

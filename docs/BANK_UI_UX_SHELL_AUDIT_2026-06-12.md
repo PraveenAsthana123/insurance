@@ -448,13 +448,87 @@ User feedback: All AI Type links must be part of the Sub Menu only and must not 
 
 | Area | Change |
 |---|---|
-| Main Menu | Removed the master AI Catalog block from the blue Main Menu and shortened the path hint to Department -> B2C/B2B/B2E -> Main Process. |
+| Main Menu | Removed the master AI Catalog block and the Platform Modules AI Types shortcut from the blue Main Menu; shortened the path hint to Department -> B2C/B2B/B2E -> Main Process. |
 | Sub Menu | Added the AI Types block to the maroon Sub Menu in both empty and selected-process states. |
 | Routes | Preserved master/global routes for `/ai-types`, `/ai-types?domain=b2c`, `/ai-types?domain=b2b`, and `/ai-types?domain=b2e`. |
 
 ### UX Verdict
 
 AI Types are no longer Main Menu items. They are available only inside the Sub Menu while keeping their master route behavior.
+
+
+
+## AI Type Validation And Segmentation Pass
+
+User feedback: AI types were not validated against required operation scope. Conversation AI must show conversation-task scope only, and every AI type needs owner, reviewer, stakeholders, required tabs, operation list, quality checks, verification checks, testing coverage, and primary/secondary/third segmentation.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Sub Menu segmentation | Replaced the generic AI Capabilities bucket with `Primary AI Type`, `Secondary AI Type`, and `Third / Support AI Type` groups. |
+| Workspace validation | Added an AI-type validation panel under AI Logic with assigned owner, review job, segment, operation boundary, out-of-scope warning, stakeholders, operations, quality checks, and required workspace tabs/templates. |
+| Conversation AI scope | Added a conversation-specific template limiting Conversation AI to intake, intent routing, approved answer drafting, handoff, and transcript summary. |
+| Testing coverage | Required tabs now include Problem/AS-IS, TO-BE, Data, Manual process, Automatic pipeline, AI, Model, Accuracy, Responsible AI, Explainable AI, Control Tower, Governance, API/Data/Model/Load/Performance/Scale testing, and Reports. |
+
+### UX Verdict
+
+AI type selection now has validation context. The Sub Menu shows the AI type role in the process, and the workspace explains what must be planned, reviewed, tested, and governed before the AI type is treated as fit-for-purpose.
+
+
+
+## Main Menu And Sub Menu Operating Model Redesign Pass
+
+User feedback: redesign Main Menu and Sub Menu for every department where Operations and IT both participate, with Brownfield run/support and Greenfield request/build workstreams.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Main Menu | Added an Operating Model selector with `Operations · Brownfield`, `Operations · Greenfield Request`, `IT · Greenfield Build`, and `IT · Brownfield Support`. |
+| Main Menu hierarchy | Updated the path hint to Department -> Owner Lane -> Brownfield/Greenfield -> B2C/B2B/B2E -> Main Process. |
+| Platform modules | Collapsed Platform Modules by default so departments and workstream ownership stay visible. |
+| Sub Menu | Added workstream-specific checklists for operations incident/problem/contact-center support, business enhancement requests, IT implementation, and IT technical support. |
+| AI Type placement | Kept AI Types in the Sub Menu only and preserved Primary/Secondary/Third AI Type segmentation. |
+
+### UX Verdict
+
+The blue Main Menu now chooses ownership and workstream. The maroon Sub Menu now tells the operator what to validate and execute for that workstream before they work in the content area.
+
+
+
+## Workarea Tab-Level Operating Flow Pass
+
+User feedback: the workspace needs tab-level flow for Problem/AS-IS, TO-BE, AI Strategy, Digital Transformation, Data, manual transaction, automatic pipeline, accuracy, benchmarking, analytical AI, Responsible AI, Explainable AI, Governance AI, and AI Control Tower.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Workspace tabs | Added first-class tabs for `Problem / AS-IS`, `TO-BE`, `AI Strategy`, `Digital Transformation`, `Transaction - Manual`, `Transaction - Automatic Pipeline`, `Accuracy / Benchmarking`, `Analytical AI Process`, and `AI Control Tower`. |
+| Sub-tab templates | Added sub-tabs for current problem, pain, AS-IS flow, target process, AI fit, primary/secondary/third AI type, adoption, manual controls, pipeline orchestration, benchmarks, analytical insights, drift, incidents, approvals, and cost. |
+| Component expectations | Each new tab now has spec-driven components, KPIs, and visualization labels so the workspace shows input, process, output, evidence, controls, and monitoring expectations. |
+| Tab grouping | Added planning tabs to `Plan`, execution/pipeline/accuracy tabs to `Build`, and `AI Control Tower` to `Run`. |
+| Role visibility | Business, manager, analyst, security, and operations lenses now expose the relevant new tabs without moving AI Types back into the Main Menu. |
+
+### Live Verification
+
+Checked with Playwright on `http://localhost:3210` using the `AI Engineer` role:
+
+- `Problem / AS-IS` -> `AS-IS Process` -> `Current Manual Step`
+- `TO-BE` -> `Future State` -> `Target Experience`
+- `AI Strategy` -> `Primary / Secondary / Third` -> `Primary AI Type`
+- `Digital Transformation` -> `Capability` -> `Business Capability`
+- `Transaction - Manual` -> `User Steps` -> `User Task`
+- `Transaction - Automatic Pipeline` -> `Pipeline` -> `Ingestion`
+- `Accuracy / Benchmarking` -> `Benchmark` -> `Benchmark Dataset`
+- `Analytical AI Process` -> `Analysis` -> `EDA`
+- `AI Control Tower` -> `Health` -> `Model Health`
+- Existing `Responsible AI`, `Explainable AI`, and `Governance AI` routes still resolve.
+
+### UX Verdict
+
+The workspace now follows the requested operating sequence: understand current pain, define target state, select AI strategy, plan transformation, map manual work, map automated pipeline, measure accuracy/benchmarking, analyze decision support, and run AI control-tower governance.
 
 
 

@@ -17,6 +17,99 @@ const KIND_TO_TAB = {
 };
 
 
+const KIND_TO_WORKSPACE = {
+  sub: { tab: 'process', sub: 'workflow' },
+  ai: { tab: 'ai', sub: 'capabilities' },
+  agent: { tab: 'ai', sub: 'agents' },
+  app: { tab: 'operations', sub: 'monitoring' },
+  md: { tab: 'data', sub: 'master-data' },
+};
+
+const OPERATION_WORKSPACE_LINKS = [
+  {
+    group: 'Master Data Operation',
+    helper: 'Reference entities used by operations, analytics, and AI governance.',
+    color: '#10b981',
+    items: [
+      { label: 'Organization Master Data', focus: 'md:Organization', tab: 'data', sub: 'master-data' },
+      { label: 'Customer Master Data', focus: 'md:Customer', tab: 'data', sub: 'master-data' },
+      { label: 'Vendor Master Data', focus: 'md:Vendor', tab: 'data', sub: 'master-data' },
+      { label: 'Employee Master Data', focus: 'md:Employee', tab: 'data', sub: 'master-data' },
+      { label: 'Product Master Data', focus: 'md:Product', tab: 'data', sub: 'master-data' },
+    ],
+  },
+  {
+    group: 'Conditional Data Operation',
+    helper: 'Rules, conditions, eligibility, thresholds, exceptions, and policy gates.',
+    color: '#f59e0b',
+    items: [
+      { label: 'Condition / Rule Data', focus: 'condition:Rule Data', tab: 'data', sub: 'quality' },
+      { label: 'Eligibility / Threshold Data', focus: 'condition:Eligibility Threshold', tab: 'data', sub: 'preparation' },
+    ],
+  },
+  {
+    group: 'Transaction Data Operation',
+    helper: 'Event, request, case, claim, ticket, and interaction records produced by users or systems.',
+    color: '#38bdf8',
+    items: [
+      { label: 'Manual Transaction Input', focus: 'transaction:Manual Input', tab: 'manual-transaction', sub: 'inputs' },
+      { label: 'Automatic Transaction Pipeline', focus: 'transaction:Automatic Pipeline', tab: 'automatic-pipeline', sub: 'pipeline' },
+      { label: 'Transaction Monitoring', focus: 'transaction:Monitoring', tab: 'automatic-pipeline', sub: 'monitoring' },
+    ],
+  },
+  {
+    group: 'Process Dependency Operation',
+    helper: 'Clarifies whether this process can run alone or depends on upstream/downstream process handoffs.',
+    color: '#a78bfa',
+    items: [
+      { label: 'Independent Process', focus: 'process:Independent Process', tab: 'problem-as-is', sub: 'current-state' },
+      { label: 'Dependent Process', focus: 'process:Dependent Process', tab: 'to-be', sub: 'target-process' },
+    ],
+  },
+];
+
+
+const WORKSTREAM_DETAIL = {
+  'ops:brownfield': {
+    title: 'Operations Brownfield · Run / Support',
+    owner: 'Operations Team',
+    reviewer: 'Business Manager + Service Owner',
+    items: [
+      'Operations Incident Management', 'Problem Management', 'Contact Center Support',
+      'SLA / KPI Monitoring', 'Customer / Agent Impact', 'Manual Workaround',
+      'Root Cause', 'Resolution Plan', 'Closure / Lessons Learned',
+    ],
+  },
+  'ops:greenfield-request': {
+    title: 'Operations Greenfield · Business Request',
+    owner: 'Operations Product Owner',
+    reviewer: 'Business Sponsor + IT Intake',
+    items: [
+      'New Use Case Request', 'Enhancement Request', 'Problem / Pain', 'AS-IS Process',
+      'TO-BE Outcome', 'ROI / Dollar Impact', 'Stakeholder Approval', 'Handover to IT Delivery',
+    ],
+  },
+  'it:greenfield': {
+    title: 'IT Greenfield · Build / Enhance',
+    owner: 'IT Delivery Team',
+    reviewer: 'Architecture + Security + AI Governance',
+    items: [
+      'Requirement', 'Architecture', 'API / Integration', 'Data Design', 'Model / AI Type',
+      'Pipeline', 'Security / Access', 'Testing', 'Deployment', 'Monitoring', 'Handover to Operations',
+    ],
+  },
+  'it:brownfield': {
+    title: 'IT Brownfield · Technical Support',
+    owner: 'IT Run Team',
+    reviewer: 'SRE / Platform Owner',
+    items: [
+      'Application Incident', 'Integration / API Issue', 'Data Pipeline Issue', 'Model / AI Issue',
+      'Performance / Load Issue', 'Access / Security Issue', 'Release / Patch', 'Verification Evidence',
+    ],
+  },
+};
+
+
 function MasterAiCatalogBlock() {
   return (
     <div style={{ padding: '10px 0', borderBottom: '1px solid #991b1b' }}>
@@ -50,6 +143,174 @@ function MasterAiCatalogBlock() {
           }} />
           <span style={{ flex: 1 }}>{d.label}</span>
         </Link>
+      ))}
+    </div>
+  );
+}
+
+
+function aiTypeLabel(ai) {
+  return ai?.ai_type || ai?.name || String(ai || 'AI Type');
+}
+
+function classifyAiTypes(aiTypes) {
+  const list = (aiTypes || []).map((ai, index) => ({ ai, label: aiTypeLabel(ai), index }));
+  return [
+    { segment: 'Primary AI Type', note: 'Main automation fit for this process', items: list.slice(0, 1), color: '#fef3c7' },
+    { segment: 'Secondary AI Type', note: 'Supporting intelligence or guardrail', items: list.slice(1, 2), color: '#fee2e2' },
+    { segment: 'Third / Support AI Type', note: 'Auxiliary, monitoring, or governance AI', items: list.slice(2), color: '#fecaca' },
+  ];
+}
+
+function AiTypeSegmentBlock({ aiTypes, activeFocus, onClickItem }) {
+  const segments = classifyAiTypes(aiTypes);
+  return (
+    <div style={{ borderBottom: '1px solid #991b1b' }}>
+      <div style={{
+        padding: '10px 16px 6px',
+        color: '#fff',
+        fontSize: FS_MID_ROW,
+        fontWeight: 800,
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+      }}>
+        AI Type Segmentation
+      </div>
+      {segments.map((segment) => (
+        <div key={segment.segment} style={{ paddingBottom: 6 }}>
+          <div style={{
+            padding: '6px 18px 4px',
+            color: segment.color,
+            fontSize: FS_SMALL_LABEL,
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+          }}>
+            {segment.segment}
+          </div>
+          <div style={{ padding: '0 18px 4px', color: '#fecaca', fontSize: FS_SMALL_LABEL, lineHeight: 1.35 }}>
+            {segment.note}
+          </div>
+          {segment.items.length === 0 ? (
+            <div style={{ padding: '5px 30px 7px', fontSize: FS_SMALL_LABEL, color: '#fecaca99', fontStyle: 'italic' }}>
+              Not mapped for this process.
+            </div>
+          ) : segment.items.map(({ label }) => {
+            const isActive = activeFocus === `ai:${label}`;
+            return (
+              <button
+                key={`${segment.segment}-${label}`}
+                type="button"
+                aria-current={isActive ? 'true' : undefined}
+                onClick={() => onClickItem('ai', label)}
+                style={{
+                  width: '100%', textAlign: 'left',
+                  minHeight: 40,
+                  padding: '9px 16px 9px 34px',
+                  fontSize: FS_MID_ROW,
+                  color: isActive ? '#fff' : '#fecaca',
+                  background: isActive ? '#b91c1c' : 'transparent',
+                  border: 'none', borderLeft: '3px solid #8b5cf6',
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  fontWeight: isActive ? 700 : 500,
+                }}
+              >
+                <span style={{ display: 'block', fontSize: FS_SMALL_LABEL, color: isActive ? '#fff' : segment.color, fontWeight: 800 }}>
+                  {segment.segment}
+                </span>
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
+function OperationWorkspaceLinkBlock({ activeFocus, onOpenWorkspace }) {
+  return (
+    <div style={{ borderBottom: '1px solid #991b1b', padding: '10px 0' }}>
+      <div style={{
+        padding: '6px 18px 4px', color: '#fff',
+        fontSize: FS_MID_ROW, fontWeight: 800,
+        textTransform: 'uppercase', letterSpacing: '0.05em',
+      }}>
+        Operations Data / Process Links
+      </div>
+      <div style={{ padding: '0 18px 8px', color: '#fecaca', fontSize: FS_SMALL_LABEL, lineHeight: 1.35 }}>
+        Sub Menu links open workspace tabs. Main Menu selects department, B2C/B2B/B2E, and main process only.
+      </div>
+      {OPERATION_WORKSPACE_LINKS.map((group) => (
+        <div key={group.group} style={{ paddingBottom: 8 }}>
+          <div style={{
+            padding: '7px 18px 3px', color: '#fde68a',
+            fontSize: FS_SMALL_LABEL, fontWeight: 800,
+            textTransform: 'uppercase', letterSpacing: '0.05em',
+          }}>
+            {group.group}
+          </div>
+          <div style={{ padding: '0 18px 4px', color: '#fecaca', fontSize: FS_SMALL_LABEL, lineHeight: 1.3 }}>
+            {group.helper}
+          </div>
+          {group.items.map((item) => {
+            const active = activeFocus === item.focus;
+            return (
+              <button
+                key={item.focus}
+                type="button"
+                aria-current={active ? 'true' : undefined}
+                onClick={() => onOpenWorkspace(item)}
+                style={{
+                  width: '100%', textAlign: 'left',
+                  minHeight: 40,
+                  padding: '9px 16px 9px 34px',
+                  color: active ? '#fff' : '#fecaca',
+                  background: active ? '#b91c1c' : 'transparent',
+                  borderTop: 'none', borderRight: 'none', borderBottom: 'none',
+                  borderLeft: `3px solid ${group.color}`,
+                  cursor: 'pointer', fontFamily: 'inherit',
+                  fontSize: FS_MID_ROW, fontWeight: active ? 700 : 500,
+                }}
+              >
+                <span style={{ display: 'block' }}>{item.label}</span>
+                <span style={{ display: 'block', marginTop: 2, color: active ? '#fee2e2' : '#fecaca99', fontSize: FS_SMALL_LABEL }}>
+                  Opens {item.tab} / {item.sub}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
+function WorkstreamSupportBlock({ lane, field }) {
+  const detail = WORKSTREAM_DETAIL[`${lane}:${field}`] || WORKSTREAM_DETAIL['ops:brownfield'];
+  return (
+    <div style={{ borderBottom: '1px solid #991b1b', padding: '10px 0' }}>
+      <div style={{
+        padding: '6px 18px 8px', color: '#fff',
+        fontSize: FS_MID_ROW, fontWeight: 800,
+        textTransform: 'uppercase', letterSpacing: '0.05em',
+      }}>
+        {detail.title}
+      </div>
+      <div style={{ padding: '0 18px 8px', color: '#fecaca', fontSize: FS_SMALL_LABEL, lineHeight: 1.4 }}>
+        Owner: <strong>{detail.owner}</strong> · Review: <strong>{detail.reviewer}</strong>
+      </div>
+      {detail.items.map((item, index) => (
+        <div key={item} style={{
+          display: 'grid', gridTemplateColumns: '24px minmax(0, 1fr)', gap: 6,
+          padding: '6px 18px 6px 28px', color: '#fecaca', fontSize: FS_MID_ROW,
+          borderTop: index === 0 ? '1px solid #991b1b' : 'none',
+        }}>
+          <span style={{ color: '#fca5a5', fontWeight: 800 }}>{index + 1}</span>
+          <span>{item}</span>
+        </div>
       ))}
     </div>
   );
@@ -121,6 +382,8 @@ export function BankSubMenu({ bp }) {
   const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeFocus = searchParams.get('focus') || '';
+  const activeLane = searchParams.get('lane') || 'ops';
+  const activeField = searchParams.get('field') || 'brownfield';
   const activeDomain = canonicalDomainId(params.domain);
   const meta = domainMeta(activeDomain);
 
@@ -145,6 +408,7 @@ export function BankSubMenu({ bp }) {
         <div style={{ fontSize: FS_MID_ROW, fontStyle: 'italic', lineHeight: 1.4, marginBottom: 12 }}>
           Pick a dept + B2C/B2B/B2E + Main Process from the Main Menu.
         </div>
+        <WorkstreamSupportBlock lane={activeLane} field={activeField} />
         <MasterAiCatalogBlock />
       </aside>
     );
@@ -153,22 +417,27 @@ export function BankSubMenu({ bp }) {
   const proc = (dept.processes || []).find((p) => slugOf(p.name) === params.processId);
 
   const subProcesses = proc?.sub_processes?.map((s) => s.name || String(s)) || [];
-  const aiTypes = proc?.ai?.map((a) => a.ai_type).filter(Boolean) || [];
   const agents = proc?.agents?.map((a) => a.name || String(a)) || [];
   const apps = proc?.applications?.map((a) => a.name || String(a)) || [];
   const masterData = proc?.master_data?.map((m) => m.name || String(m)) || [];
 
-  const handleClickItem = (kind, label) => {
+  const openWorkspace = ({ focus, tab, sub }) => {
     const next = new URLSearchParams(searchParams);
-    const focusVal = `${kind}:${label}`;
-    if (activeFocus === focusVal) {
-      next.delete('focus');
-    } else {
-      next.set('focus', focusVal);
-      const targetTab = KIND_TO_TAB[kind];
-      if (targetTab) next.set('tab', targetTab);
-    }
+    if (focus) next.set('focus', focus);
+    else next.delete('focus');
+    if (tab) next.set('tab', tab);
+    if (sub) next.set('sub', sub);
+    else next.delete('sub');
     setSearchParams(next, { replace: false });
+    window.dispatchEvent(new CustomEvent('insur:workspace-jump', {
+      detail: { tab, sub, focus },
+    }));
+  };
+
+  const handleClickItem = (kind, label) => {
+    const focus = `${kind}:${label}`;
+    const target = KIND_TO_WORKSPACE[kind] || { tab: KIND_TO_TAB[kind] };
+    openWorkspace({ focus, tab: target.tab, sub: target.sub });
   };
 
   return (
@@ -227,7 +496,15 @@ export function BankSubMenu({ bp }) {
         )}
       </div>
 
+      <WorkstreamSupportBlock lane={activeLane} field={activeField} />
       <MasterAiCatalogBlock />
+
+      {proc && (
+        <OperationWorkspaceLinkBlock
+          activeFocus={activeFocus}
+          onOpenWorkspace={openWorkspace}
+        />
+      )}
 
       {proc ? (
         <>
@@ -235,10 +512,8 @@ export function BankSubMenu({ bp }) {
             color="#3b82f6"
             kind="sub" activeFocus={activeFocus} onClickItem={handleClickItem}
             emptyLabel="No real sub-processes in blueprint for this process." />
-          <CategoryBlock icon="AI" title="AI Capabilities" items={aiTypes}
-            color="#8b5cf6"
-            kind="ai" activeFocus={activeFocus} onClickItem={handleClickItem}
-            emptyLabel="No AI capabilities on this process yet." />
+          <AiTypeSegmentBlock aiTypes={proc?.ai || []}
+            activeFocus={activeFocus} onClickItem={handleClickItem} />
           <CategoryBlock icon="AG" title="Agents" items={agents}
             color="#ec4899"
             kind="agent" activeFocus={activeFocus} onClickItem={handleClickItem}

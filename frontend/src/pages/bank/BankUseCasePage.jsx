@@ -104,6 +104,68 @@ const TABS = [
     { id: 'cost',          label: 'Cost Analysis' },
   ]},
   { id: 'overview',     label: 'Overview',         color: '#475569', subTabs: [] },
+  { id: 'problem-as-is', label: 'Problem / AS-IS', color: '#ef4444', subTabs: [
+    { id: 'problem', label: 'Problem' },
+    { id: 'pain', label: 'Pain / Impact' },
+    { id: 'as-is', label: 'AS-IS Process' },
+    { id: 'current-state', label: 'Current State' },
+    { id: 'gap', label: 'Gap' },
+  ]},
+  { id: 'to-be', label: 'TO-BE', color: '#16a34a', subTabs: [
+    { id: 'future-state', label: 'Future State' },
+    { id: 'target-process', label: 'Target Process' },
+    { id: 'success', label: 'Success Outcome' },
+    { id: 'roadmap', label: 'Roadmap' },
+  ]},
+  { id: 'ai-strategy', label: 'AI Strategy', color: '#7c3aed', subTabs: [
+    { id: 'fit', label: 'AI Fit' },
+    { id: 'primary-secondary', label: 'Primary / Secondary / Third' },
+    { id: 'use-case', label: 'Use Case' },
+    { id: 'value', label: 'Value' },
+    { id: 'risk', label: 'Risk' },
+  ]},
+  { id: 'digital-transformation', label: 'Digital Transformation', color: '#0891b2', subTabs: [
+    { id: 'capability', label: 'Capability' },
+    { id: 'people-process-tech', label: 'People / Process / Tech' },
+    { id: 'adoption', label: 'Adoption' },
+    { id: 'change', label: 'Change Plan' },
+  ]},
+  { id: 'manual-transaction', label: 'Transaction · Manual', color: '#f97316', subTabs: [
+    { id: 'user-steps', label: 'User Steps' },
+    { id: 'inputs', label: 'Inputs' },
+    { id: 'controls', label: 'Controls' },
+    { id: 'handoffs', label: 'Handoffs' },
+    { id: 'exceptions', label: 'Exceptions' },
+  ]},
+  { id: 'automatic-pipeline', label: 'Transaction · Automatic Pipeline', color: '#0d9488', subTabs: [
+    { id: 'trigger', label: 'Trigger' },
+    { id: 'pipeline', label: 'Pipeline' },
+    { id: 'orchestration', label: 'Orchestration' },
+    { id: 'monitoring', label: 'Monitoring' },
+    { id: 'fallback', label: 'Fallback' },
+  ]},
+  { id: 'accuracy-benchmarking', label: 'Accuracy / Benchmarking', color: '#ca8a04', subTabs: [
+    { id: 'metrics', label: 'Metrics' },
+    { id: 'baseline', label: 'Baseline' },
+    { id: 'benchmark', label: 'Benchmark' },
+    { id: 'thresholds', label: 'Thresholds' },
+    { id: 'evidence', label: 'Evidence' },
+  ]},
+  { id: 'analytical-ai-process', label: 'Analytical AI Process', color: '#f59e0b', subTabs: [
+    { id: 'question', label: 'Analytical Question' },
+    { id: 'features', label: 'Features' },
+    { id: 'analysis', label: 'Analysis' },
+    { id: 'insight', label: 'Insight' },
+    { id: 'decision', label: 'Decision Support' },
+  ]},
+  { id: 'ai-control-tower', label: 'AI Control Tower', color: '#2563eb', subTabs: [
+    { id: 'health', label: 'Health' },
+    { id: 'alerts', label: 'Alerts' },
+    { id: 'drift', label: 'Drift' },
+    { id: 'cost', label: 'Cost' },
+    { id: 'incidents', label: 'Incidents' },
+    { id: 'approvals', label: 'Approvals' },
+  ]},
   // ----- Product Manager: stories + roadmap planning -----
   { id: 'product-mgr',  label: 'Product Manager',  color: '#7e22ce', subTabs: [
     { id: 'vision',      label: 'Vision' },
@@ -287,6 +349,25 @@ const TABS = [
 
 
 const TAB_QUERY_ALIASES = {
+  problem: 'problem-as-is',
+  'as-is': 'problem-as-is',
+  asis: 'problem-as-is',
+  tobe: 'to-be',
+  'to-be': 'to-be',
+  strategy: 'ai-strategy',
+  'ai-strategy': 'ai-strategy',
+  transformation: 'digital-transformation',
+  'digital-transformation': 'digital-transformation',
+  manual: 'manual-transaction',
+  'manual-transaction': 'manual-transaction',
+  automatic: 'automatic-pipeline',
+  pipeline: 'automatic-pipeline',
+  accuracy: 'accuracy-benchmarking',
+  benchmarking: 'accuracy-benchmarking',
+  analytical: 'analytical-ai-process',
+  'analytical-ai': 'analytical-ai-process',
+  controltower: 'ai-control-tower',
+  'control-tower': 'ai-control-tower',
   resai: 'res-ai',
   'res-ai': 'res-ai',
   expai: 'exp-ai',
@@ -327,9 +408,9 @@ function resolveDeepLinkTabId(tabId, subId) {
 //   🚀 Run   — production operations (read+monitor)
 // Each tab can belong to multiple groups; if not listed, falls under "All".
 const TAB_GROUPS = {
-  '📋 Plan':  ['readme', 'overview', 'product-mgr', 'user-story', 'user-demo', 'biz-value'],
-  '🛠 Build': ['process', 'data', 'analytics', 'ai', 'test-ai', 'job-ai', 'note-ai'],
-  '🚀 Run':   ['dashboard', 'operations', 'reports', 'meet-ai', 'inc-ai', 'exp-ai', 'res-ai', 'gov-ai', 'comp-ai'],
+  '📋 Plan':  ['readme', 'overview', 'problem-as-is', 'to-be', 'ai-strategy', 'digital-transformation', 'product-mgr', 'user-story', 'user-demo', 'biz-value'],
+  '🛠 Build': ['process', 'data', 'manual-transaction', 'automatic-pipeline', 'analytical-ai-process', 'analytics', 'ai', 'accuracy-benchmarking', 'test-ai', 'job-ai', 'note-ai'],
+  '🚀 Run':   ['dashboard', 'ai-control-tower', 'operations', 'reports', 'meet-ai', 'inc-ai', 'exp-ai', 'res-ai', 'gov-ai', 'comp-ai'],
 };
 
 // Role → visible tab IDs. Tech roles see all 22 tabs; non-tech roles see
@@ -337,30 +418,30 @@ const TAB_GROUPS = {
 const ROLE_VISIBLE_TABS = {
   // Business User — strategic + value lens, hides engineering depth
   'business user': new Set([
-    'readme', 'overview', 'product-mgr', 'user-story', 'user-demo',
+    'readme', 'overview', 'problem-as-is', 'to-be', 'ai-strategy', 'digital-transformation', 'product-mgr', 'user-story', 'user-demo',
     'biz-value', 'dashboard', 'reports',
     'res-ai', 'gov-ai', 'comp-ai',
   ]),
   // Manager — business + ops + governance, hides pure data/model details
   'manager': new Set([
-    'readme', 'overview', 'product-mgr', 'user-story', 'user-demo',
-    'process', 'biz-value', 'dashboard', 'operations', 'reports',
+    'readme', 'overview', 'problem-as-is', 'to-be', 'ai-strategy', 'digital-transformation', 'product-mgr', 'user-story', 'user-demo',
+    'process', 'manual-transaction', 'automatic-pipeline', 'biz-value', 'dashboard', 'operations', 'reports',
     'res-ai', 'gov-ai', 'comp-ai', 'inc-ai', 'meet-ai',
   ]),
   // Analyst — analytics + data + reports
   'analyst': new Set([
-    'readme', 'overview', 'data', 'analytics', 'biz-value',
+    'readme', 'overview', 'problem-as-is', 'to-be', 'data', 'analytics', 'analytical-ai-process', 'accuracy-benchmarking', 'biz-value',
     'dashboard', 'reports', 'exp-ai', 'res-ai',
   ]),
   // Security — gov / comp / inc / audit
   'security': new Set([
-    'readme', 'overview', 'data', 'operations',
+    'readme', 'overview', 'data', 'operations', 'ai-control-tower',
     'gov-ai', 'comp-ai', 'inc-ai', 'test-ai',
     'dashboard', 'reports',
   ]),
   // Operations — run+ship lens
   'operations': new Set([
-    'readme', 'overview', 'process', 'operations', 'job-ai', 'inc-ai',
+    'readme', 'overview', 'process', 'manual-transaction', 'automatic-pipeline', 'operations', 'ai-control-tower', 'job-ai', 'inc-ai',
     'meet-ai', 'note-ai', 'dashboard', 'reports',
   ]),
 };
@@ -415,6 +496,60 @@ function getVisibleSubTabsForRole(tabId, subTabs, role) {
 // Spec-driven so we never fabricate values — cards show field labels;
 // real values come from blueprint when the operator wires them.
 const TAB_SPEC = {
+  // ---- Workarea operating flow ----
+  'problem-as-is.problem':       { components: ['Problem Statement', 'Business Pain', 'Affected Stakeholder', 'Severity', 'Current Evidence'], kpis: ['Pain score', 'Incident count'], visuals: ['Problem heatmap'] },
+  'problem-as-is.pain':          { components: ['Customer Impact', 'Agent Impact', 'Operations Impact', 'Dollar Impact', 'Risk Impact'], kpis: ['Cost of pain', 'SLA breach rate'], visuals: ['Pain by stakeholder'] },
+  'problem-as-is.as-is':         { components: ['Current Manual Step', 'Current System Step', 'Current Handoff', 'Current Control', 'Known Defect'], kpis: ['Cycle time', 'Rework rate'], visuals: ['AS-IS flow'] },
+  'problem-as-is.current-state': { components: ['Current Data', 'Current Application', 'Current Team', 'Current SLA', 'Current Report'], kpis: ['Current SLA', 'Open backlog'], visuals: ['Current-state dashboard'] },
+  'problem-as-is.gap':           { components: ['Capability Gap', 'Data Gap', 'Process Gap', 'Technology Gap', 'Governance Gap'], kpis: ['Gap score', 'Closure effort'], visuals: ['Gap matrix'] },
+
+  'to-be.future-state':          { components: ['Target Experience', 'Target Process', 'Target Control', 'Target SLA', 'Target Outcome'], kpis: ['Target SLA', 'Expected ROI'], visuals: ['TO-BE blueprint'] },
+  'to-be.target-process':        { components: ['Future User Step', 'Future System Step', 'Automation Step', 'Approval Step', 'Exception Path'], kpis: ['Automation rate', 'Expected cycle time'], visuals: ['TO-BE process flow'] },
+  'to-be.success':               { components: ['Success Criteria', 'Acceptance Rule', 'Business Outcome', 'Operational Outcome', 'Technical Outcome'], kpis: ['Acceptance pass rate', 'Outcome score'], visuals: ['Outcome scorecard'] },
+  'to-be.roadmap':               { components: ['Phase 1', 'Phase 2', 'Phase 3', 'Dependency', 'Release Gate'], kpis: ['Milestone readiness', 'Dependency risk'], visuals: ['Roadmap'] },
+
+  'ai-strategy.fit':             { components: ['Business Problem', 'Primary AI Type', 'Secondary AI Type', 'Third AI Type', 'Why AI Is Needed'], kpis: ['AI fit score', 'Expected lift'], visuals: ['AI fit matrix'] },
+  'ai-strategy.primary-secondary': { components: ['Primary AI Type', 'Secondary AI Type', 'Third / Support AI Type', 'Operation Boundary', 'Out-of-scope Boundary'], kpis: ['Fit confidence', 'Governance readiness'], visuals: ['AI type segmentation'] },
+  'ai-strategy.use-case':        { components: ['Use Case Name', 'User Persona', 'Decision Point', 'Input / Output', 'Value Hypothesis'], kpis: ['Use-case readiness', 'Value confidence'], visuals: ['Use-case map'] },
+  'ai-strategy.value':           { components: ['Revenue Impact', 'Cost Impact', 'Productivity Impact', 'Risk Impact', 'Customer Impact'], kpis: ['ROI', 'Payback period'], visuals: ['Value waterfall'] },
+  'ai-strategy.risk':            { components: ['Model Risk', 'Data Risk', 'Process Risk', 'Compliance Risk', 'Human Oversight'], kpis: ['Risk score', 'Control coverage'], visuals: ['Risk matrix'] },
+
+  'digital-transformation.capability': { components: ['Business Capability', 'Digital Capability', 'Platform Capability', 'AI Capability', 'Operating Model Capability'], kpis: ['Capability maturity', 'Adoption readiness'], visuals: ['Capability map'] },
+  'digital-transformation.people-process-tech': { components: ['People Change', 'Process Change', 'Technology Change', 'Data Change', 'Governance Change'], kpis: ['Change readiness', 'Training coverage'], visuals: ['Transformation matrix'] },
+  'digital-transformation.adoption': { components: ['User Adoption', 'Training Plan', 'Comms Plan', 'Feedback Loop', 'Adoption Barrier'], kpis: ['Adoption rate', 'Active users'], visuals: ['Adoption curve'] },
+  'digital-transformation.change': { components: ['Change Request', 'Impact Assessment', 'Approval Plan', 'Rollout Plan', 'Hypercare Plan'], kpis: ['Change risk', 'Hypercare incidents'], visuals: ['Change journey'] },
+
+  'manual-transaction.user-steps': { components: ['User Task', 'Screen / Form', 'Manual Decision', 'Manual Handoff', 'Manual Approval'], kpis: ['Manual effort', 'Touch time'], visuals: ['Manual journey'] },
+  'manual-transaction.inputs':     { components: ['User Input', 'Document Input', 'System Input', 'Validation Rule', 'Missing Input'], kpis: ['Input completeness', 'Input error rate'], visuals: ['Input quality'] },
+  'manual-transaction.controls':   { components: ['Manual Control', 'Maker Checker', 'Policy Check', 'Audit Evidence', 'Exception Approval'], kpis: ['Control pass rate', 'Override rate'], visuals: ['Control map'] },
+  'manual-transaction.handoffs':   { components: ['Team Handoff', 'Queue Handoff', 'System Handoff', 'SLA Timer', 'Escalation'], kpis: ['Handoff delay', 'Queue age'], visuals: ['Handoff flow'] },
+  'manual-transaction.exceptions': { components: ['Exception Type', 'Manual Workaround', 'Escalation Path', 'Resolution Owner', 'Closure Evidence'], kpis: ['Exception rate', 'Mean time to resolve'], visuals: ['Exception trend'] },
+
+  'automatic-pipeline.trigger':       { components: ['Trigger Event', 'Trigger Source', 'Schedule', 'Idempotency Rule', 'Retry Rule'], kpis: ['Trigger success', 'Duplicate prevention'], visuals: ['Trigger map'] },
+  'automatic-pipeline.pipeline':      { components: ['Ingestion', 'Validation', 'Transformation', 'Inference / Rule Step', 'Output Publish'], kpis: ['Pipeline success', 'Latency'], visuals: ['Pipeline DAG'] },
+  'automatic-pipeline.orchestration': { components: ['Workflow Engine', 'Task Queue', 'Agent / Service', 'Dependency', 'State Transition'], kpis: ['Task success', 'Dependency health'], visuals: ['Orchestration flow'] },
+  'automatic-pipeline.monitoring':    { components: ['Health Check', 'Alert', 'Drift Signal', 'SLA Signal', 'Audit Signal'], kpis: ['Alert rate', 'SLA pass rate'], visuals: ['Monitoring panel'] },
+  'automatic-pipeline.fallback':      { components: ['Fallback Rule', 'Manual Takeover', 'Rollback', 'Retry', 'Customer Communication'], kpis: ['Fallback rate', 'Recovery time'], visuals: ['Fallback path'] },
+
+  'accuracy-benchmarking.metrics':    { components: ['Accuracy Metric', 'Quality Metric', 'Latency Metric', 'Cost Metric', 'Risk Metric'], kpis: ['Accuracy', 'P95 latency'], visuals: ['Metric trend'] },
+  'accuracy-benchmarking.baseline':   { components: ['Manual Baseline', 'Previous Model Baseline', 'Rule Baseline', 'Human Benchmark', 'Industry Benchmark'], kpis: ['Baseline delta', 'Lift'], visuals: ['Baseline comparison'] },
+  'accuracy-benchmarking.benchmark':  { components: ['Benchmark Dataset', 'Benchmark Run', 'Benchmark Result', 'Error Slice', 'Winner / Challenger'], kpis: ['Benchmark score', 'Error rate'], visuals: ['Benchmark leaderboard'] },
+  'accuracy-benchmarking.thresholds': { components: ['Pass Threshold', 'Warning Threshold', 'Fail Threshold', 'Escalation Threshold', 'Rollback Threshold'], kpis: ['Threshold pass rate', 'Breach count'], visuals: ['Threshold gauge'] },
+  'accuracy-benchmarking.evidence':   { components: ['Test Evidence', 'Metric Evidence', 'Data Evidence', 'Reviewer Evidence', 'Release Evidence'], kpis: ['Evidence completeness', 'Approval readiness'], visuals: ['Evidence checklist'] },
+
+  'analytical-ai-process.question': { components: ['Business Question', 'Analytical Hypothesis', 'Decision User', 'Time Horizon', 'Expected Action'], kpis: ['Question clarity', 'Decision value'], visuals: ['Question map'] },
+  'analytical-ai-process.features': { components: ['Feature Source', 'Feature Definition', 'Feature Quality', 'Feature Drift', 'Feature Importance'], kpis: ['Feature coverage', 'Feature stability'], visuals: ['Feature importance'] },
+  'analytical-ai-process.analysis': { components: ['EDA', 'Segmentation', 'Correlation', 'Trend', 'Anomaly'], kpis: ['Insight confidence', 'Anomaly count'], visuals: ['Analysis dashboard'] },
+  'analytical-ai-process.insight':  { components: ['Insight', 'Evidence', 'Recommendation', 'Limitation', 'Owner Action'], kpis: ['Insight adoption', 'Action conversion'], visuals: ['Insight cards'] },
+  'analytical-ai-process.decision': { components: ['Decision Option', 'Decision Criteria', 'Tradeoff', 'Recommendation', 'Approval'], kpis: ['Decision time', 'Decision accuracy'], visuals: ['Decision matrix'] },
+
+  'ai-control-tower.health':    { components: ['Model Health', 'Data Health', 'Pipeline Health', 'API Health', 'Business Health'], kpis: ['Health score', 'Availability'], visuals: ['Health dashboard'] },
+  'ai-control-tower.alerts':    { components: ['Alert Type', 'Severity', 'Owner', 'Runbook', 'SLA'], kpis: ['Open alerts', 'MTTA'], visuals: ['Alert queue'] },
+  'ai-control-tower.drift':     { components: ['Data Drift', 'Model Drift', 'Concept Drift', 'Population Stability', 'Retraining Trigger'], kpis: ['PSI', 'Drift rate'], visuals: ['Drift trend'] },
+  'ai-control-tower.cost':      { components: ['Token Cost', 'Compute Cost', 'Storage Cost', 'Run Cost', 'Optimization Action'], kpis: ['Cost per run', 'Monthly cost'], visuals: ['Cost dashboard'] },
+  'ai-control-tower.incidents': { components: ['Incident', 'Impact', 'Root Cause', 'Resolution', 'Postmortem'], kpis: ['Incident count', 'MTTR'], visuals: ['Incident timeline'] },
+  'ai-control-tower.approvals': { components: ['Approval Request', 'Approver', 'Policy Gate', 'Evidence', 'Decision'], kpis: ['Approval SLA', 'Pending approvals'], visuals: ['Approval board'] },
+
   // ---- User Story ----
   'user-story.business':    { components: ['Story ID', 'Epic', 'Feature', 'Business Goal', 'Business Value', 'Stakeholders', 'Priority'] },
   'user-story.functional':  { components: ['As a User', 'I Want', 'So That', 'Process Flow', 'Business Rules', 'Dependencies'] },
@@ -2722,6 +2857,15 @@ function renderSpecTab(tabId, subId, color, procKey) {
 //                (knowledge / kanban / dashboard / decision-support / none)
 // ────────────────────────────────────────────────────────────────────
 const TAB_PROFILES = {
+  'problem-as-is': { type: 'information',  info: 65, viz: 15, action: 20, primary_user: 'Operations Owner', intent: 'Frame the current problem, pain, AS-IS process, and gap before any solution work', emphasis: 'knowledge' },
+  'to-be':       { type: 'decision',     info: 45, viz: 20, action: 35, primary_user: 'Product Owner', intent: 'Define the future-state process, target outcome, roadmap, and success gate', emphasis: 'decision-support' },
+  'ai-strategy': { type: 'decision',     info: 40, viz: 20, action: 40, primary_user: 'AI Strategy Lead', intent: 'Select the right AI type and validate value, risk, and operating fit', emphasis: 'decision-support' },
+  'digital-transformation': { type: 'mixed', info: 35, viz: 25, action: 40, primary_user: 'Transformation Lead', intent: 'Map the people, process, technology, adoption, and change plan', emphasis: 'kanban' },
+  'manual-transaction': { type: 'action', info: 35, viz: 15, action: 50, primary_user: 'Operations Team', intent: 'Document the manual user transaction path, controls, handoffs, and exceptions', emphasis: 'kanban' },
+  'automatic-pipeline': { type: 'action', info: 30, viz: 20, action: 50, primary_user: 'IT Delivery Team', intent: 'Define the automatic pipeline trigger, orchestration, monitoring, and fallback', emphasis: 'kanban' },
+  'accuracy-benchmarking': { type: 'visualization', info: 30, viz: 50, action: 20, primary_user: 'Model Validator', intent: 'Compare accuracy, benchmarks, thresholds, and release evidence', emphasis: 'dashboard' },
+  'analytical-ai-process': { type: 'visualization', info: 35, viz: 45, action: 20, primary_user: 'Analyst', intent: 'Turn analytical questions, features, analysis, and insights into decisions', emphasis: 'dashboard' },
+  'ai-control-tower': { type: 'visualization', info: 25, viz: 50, action: 25, primary_user: 'AI Operations Lead', intent: 'Monitor AI health, alerts, drift, cost, incidents, and approvals', emphasis: 'dashboard' },
   // Pure-INFORMATION (60%+ info)
   'readme':       { type: 'information',  info: 70, viz: 15, action: 15, primary_user: 'Architect',         intent: 'Understand the architecture + decisions behind this process',                 emphasis: 'knowledge' },
   'overview':     { type: 'information',  info: 80, viz: 15, action:  5, primary_user: 'Executive',         intent: 'See this process at a glance in 30 seconds',                                  emphasis: 'none' },
@@ -4882,6 +5026,146 @@ function TabMetadataFooter({ tab, sub, proc, onAction }) {
 // ... click of them what should happen". Surfaces every proc.ai[] entry as
 // a clickable card that documents its on-click behavior and pushes
 // ?focus=ai:<type> into the URL so the workspace re-frames around it.
+
+function textIncludes(value, pattern) {
+  return String(value || '').toLowerCase().includes(pattern);
+}
+
+function aiTypeTemplate(aiType) {
+  const name = String(aiType || 'AI Type');
+  const lower = name.toLowerCase();
+  if (lower.includes('conversation') || lower.includes('conversational') || lower.includes('voice')) {
+    return {
+      family: 'Conversation task AI',
+      primaryOperation: 'Conversation tasks only: intake, intent routing, answer drafting, handoff, transcript summary.',
+      outOfScope: 'Pricing, underwriting decisions, autonomous approvals, and non-conversation analytics without a separate primary AI type.',
+      stakeholders: ['Customer/user', 'Contact center owner', 'Conversation designer', 'Compliance reviewer'],
+      operations: ['Capture utterance', 'Classify intent', 'Retrieve approved answer', 'Draft response', 'Escalate to human', 'Summarize conversation'],
+      qualityChecks: ['Intent accuracy', 'Response grounding', 'Toxicity/safety check', 'Handoff success', 'Transcript audit'],
+    };
+  }
+  if (lower.includes('segmentation') || lower.includes('personalization')) {
+    return {
+      family: 'Segmentation AI',
+      primaryOperation: 'Segment users/accounts and route the segment to offers, service journeys, or risk workflows.',
+      outOfScope: 'Final decisions without decision AI, direct outreach without campaign approval, and sensitive segmentation without RAI review.',
+      stakeholders: ['Business owner', 'Data scientist', 'Marketing/service owner', 'Responsible AI reviewer'],
+      operations: ['Define segment goal', 'Select features', 'Train/score segment', 'Validate drift/bias', 'Publish segment', 'Monitor lift'],
+      qualityChecks: ['Segment stability', 'Lift/ROI', 'Fairness parity', 'Data freshness', 'Explainability review'],
+    };
+  }
+  if (lower.includes('decision') || lower.includes('risk') || lower.includes('fraud') || lower.includes('underwriting')) {
+    return {
+      family: 'Decision / risk AI',
+      primaryOperation: 'Score, recommend, and route decisions with confidence bands and human approval boundaries.',
+      outOfScope: 'Unapproved autonomous decisions and policy exceptions without governance sign-off.',
+      stakeholders: ['Decision owner', 'Risk office', 'Model owner', 'Compliance reviewer'],
+      operations: ['Score input', 'Apply policy rules', 'Set confidence tier', 'Route decision', 'Capture override', 'Monitor outcome'],
+      qualityChecks: ['Accuracy/AUC/F1', 'Calibration', 'Override rate', 'Fairness gate', 'Policy audit'],
+    };
+  }
+  if (lower.includes('document') || lower.includes('ocr') || lower.includes('nlp') || lower.includes('rag') || lower.includes('knowledge')) {
+    return {
+      family: 'Knowledge / document AI',
+      primaryOperation: 'Extract, retrieve, cite, and summarize governed knowledge or document content.',
+      outOfScope: 'Decision approval without decision AI and unsupported claims without citation evidence.',
+      stakeholders: ['Knowledge owner', 'Data/document owner', 'Legal/compliance', 'Model owner'],
+      operations: ['Ingest document', 'Extract entities', 'Retrieve context', 'Generate answer', 'Attach citations', 'Review exceptions'],
+      qualityChecks: ['Extraction accuracy', 'Citation coverage', 'Hallucination check', 'PII redaction', 'Retrieval quality'],
+    };
+  }
+  return {
+    family: 'General AI capability',
+    primaryOperation: 'Define the process-specific input, pipeline, output, controls, and monitoring before promotion.',
+    outOfScope: 'Generic AI usage without owner, required tabs, quality gates, and testing evidence.',
+    stakeholders: ['Business owner', 'Product owner', 'Data owner', 'Model owner', 'AI governance reviewer'],
+    operations: ['Define problem', 'Map AS-IS/TO-BE', 'Validate data', 'Run pipeline', 'Evaluate output', 'Monitor controls'],
+    qualityChecks: ['Data quality', 'Model accuracy', 'Responsible AI', 'Explainability', 'Performance/load'],
+  };
+}
+
+function classifyAiEntry(proc, aiType) {
+  const aiList = Array.isArray(proc?.ai) ? proc.ai : [];
+  const index = aiList.findIndex((item) => (item.ai_type || item.name) === aiType);
+  if (index === 0) return 'Primary AI Type';
+  if (index === 1) return 'Secondary AI Type';
+  if (index >= 2) return 'Third / Support AI Type';
+  return 'Unmapped AI Type';
+}
+
+function AiTypeValidationPanel({ proc, focusKind, focusLabel }) {
+  const aiList = Array.isArray(proc?.ai) ? proc.ai : [];
+  const selected = focusKind === 'ai' && focusLabel
+    ? focusLabel
+    : (aiList[0]?.ai_type || aiList[0]?.name || 'Select an AI type');
+  const template = aiTypeTemplate(selected);
+  const segment = classifyAiEntry(proc, selected);
+  const requiredTabs = [
+    'Problem / AS-IS', 'TO-BE', 'Data', 'Manual user process', 'Automatic pipeline',
+    'AI', 'Model', 'Accuracy', 'Responsible AI', 'Explainable AI', 'AI Control Tower',
+    'AI Governance', 'Testing: API/Data/Model/Load/Performance/Scale', 'Reports',
+  ];
+  const validationRows = [
+    ['Assigned owner', 'AI validation lead + product owner'],
+    ['Review job', 'Validate plan, required tabs, operation scope, risks, and feedback before build/run'],
+    ['Primary fit', `${segment} / ${template.family}`],
+    ['Operation boundary', template.primaryOperation],
+    ['Not allowed', template.outOfScope],
+  ];
+  return (
+    <div style={{
+      border: '1px solid #c4b5fd',
+      background: '#faf5ff',
+      borderRadius: 8,
+      padding: 14,
+      marginTop: 12,
+    }}>
+      <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10, flexWrap: 'wrap' }}>
+        <span style={{
+          padding: '3px 8px', borderRadius: 999,
+          background: '#8b5cf6', color: '#fff',
+          fontSize: 11, fontWeight: 800, textTransform: 'uppercase',
+        }}>{segment}</span>
+        <strong style={{ color: '#4c1d95' }}>{selected}</strong>
+        <span style={{ fontSize: 12, color: '#64748b' }}>AI type validation, plan, review, feedback, and quality gate</span>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 10 }}>
+        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+          <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Validation rows</div>
+          {validationRows.map(([label, value]) => (
+            <div key={label} style={{ display: 'grid', gridTemplateColumns: '112px minmax(0, 1fr)', gap: 8, fontSize: 12, padding: '4px 0', borderTop: '1px solid #f3e8ff' }}>
+              <strong style={{ color: '#64748b' }}>{label}</strong>
+              <span style={{ color: '#1f2937' }}>{value}</span>
+            </div>
+          ))}
+        </div>
+        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+          <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Stakeholders</div>
+          {template.stakeholders.map((item) => <div key={item} style={{ fontSize: 12, padding: '3px 0', color: '#334155' }}>- {item}</div>)}
+        </div>
+        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+          <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Operations in this AI type</div>
+          {template.operations.map((item) => <div key={item} style={{ fontSize: 12, padding: '3px 0', color: '#334155' }}>- {item}</div>)}
+        </div>
+        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+          <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Quality / verification checks</div>
+          {template.qualityChecks.map((item) => <div key={item} style={{ fontSize: 12, padding: '3px 0', color: '#334155' }}>- {item}</div>)}
+        </div>
+      </div>
+      <div style={{ marginTop: 10, background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+        <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Required workspace tabs / templates</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          {requiredTabs.map((tab) => (
+            <span key={tab} style={{ padding: '4px 7px', borderRadius: 999, background: '#f3e8ff', color: '#581c87', fontSize: 11, fontWeight: 700 }}>
+              {tab}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AiTypeCatalog({ proc, dept, focusKind, focusLabel, onFocus }) {
   const aiList = Array.isArray(proc?.ai) ? proc.ai : [];
   if (aiList.length === 0) {
@@ -5293,6 +5577,10 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
       <SectionBlock key="aiLogic" title="AI Logic" icon="🤖" color={tab.color}>
         <ModelDataAccuracyStrip tab={tab} sub={sub} proc={proc}
           focusKind={focusKind} focusLabel={focusLabel} />
+        {(proc?.ai || []).length > 0 && (
+          <AiTypeValidationPanel proc={proc}
+            focusKind={focusKind} focusLabel={focusLabel} />
+        )}
         {(proc?.ai || []).length > 0 && (
           <div style={{ marginTop: 10 }}>
             <AiTypeCatalog proc={proc} dept={dept}
@@ -6962,6 +7250,9 @@ function renderContent({ tab, sub, proc, dept, bp, focusKind, focusLabel }) {
     );
   }
   if ([
+    'problem-as-is', 'to-be', 'ai-strategy', 'digital-transformation',
+    'manual-transaction', 'automatic-pipeline', 'accuracy-benchmarking',
+    'analytical-ai-process', 'ai-control-tower',
     'product-mgr', 'dashboard',
     'user-story',
     'comp-ai',
@@ -7204,6 +7495,26 @@ export function BankUseCasePage() {
     window.addEventListener('insur:role-changed', handler);
     return () => window.removeEventListener('insur:role-changed', handler);
   }, []);
+  useEffect(() => {
+    const handler = (event) => {
+      const { tab, sub, focus } = event.detail || {};
+      const targetTabId = normalizeTabId(tab);
+      const next = new URLSearchParams(window.location.search);
+      if (targetTabId) {
+        next.set('tab', targetTabId);
+        setActiveTabId(targetTabId);
+      }
+      if (sub) next.set('sub', sub);
+      else next.delete('sub');
+      if (focus) next.set('focus', focus);
+      setSearchParams(next, { replace: false });
+      if (sub) {
+        setTimeout(() => setActiveSubId(sub), 0);
+      }
+    };
+    window.addEventListener('insur:workspace-jump', handler);
+    return () => window.removeEventListener('insur:workspace-jump', handler);
+  }, [setSearchParams]);
   // Command palette — Cmd+K / Ctrl+K opens fuzzy jump
   const [paletteOpen, setPaletteOpen] = useState(false);
   // Keyboard help overlay — Cmd+/ shows all shortcuts
@@ -7275,12 +7586,21 @@ export function BankUseCasePage() {
     const next = new URLSearchParams(searchParams);
     if (activeTabId) next.set('tab', activeTabId);
     else next.delete('tab');
-    if (activeSubId) next.set('sub', activeSubId);
-    else next.delete('sub');
+
+    const activeTabForUrl = TABS.find((t) => t.id === activeTabId);
+    const validSubsForUrl = getVisibleSubTabsForRole(
+      activeTabForUrl?.id,
+      activeTabForUrl?.subTabs || [],
+      activeRole
+    );
+    const activeSubIsValid = !!activeSubId && validSubsForUrl.some((s) => s.id === activeSubId);
+    if (activeSubIsValid) next.set('sub', activeSubId);
+    else if (!activeSubId) next.delete('sub');
+
     if (next.toString() !== searchParams.toString()) {
       setSearchParams(next, { replace: true });
     }
-  }, [activeTabId, activeSubId, searchParams, setSearchParams]);
+  }, [activeTabId, activeSubId, activeRole, searchParams, setSearchParams]);
 
   const dept = bp.department_catalog?.find((d) => String(d.id) === params.deptId);
   const proc = dept?.processes?.find((p) => slug(p.name) === params.processId);
