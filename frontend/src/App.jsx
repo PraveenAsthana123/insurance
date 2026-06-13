@@ -97,6 +97,12 @@ import DatasetUploadPage from './pages/DatasetUploadPage';
 import FineTuneUIPage from './pages/FineTuneUIPage';
 import WebhookDebugPage from './pages/WebhookDebugPage';
 import SseStreamPage from './pages/SseStreamPage';
+import AeoDepartmentPage from './pages/AeoDepartmentPage';
+import ModelPortfolioPage from './pages/ModelPortfolioPage';
+import RiskPortfolioPage from './pages/RiskPortfolioPage';
+import CostPortfolioPage from './pages/CostPortfolioPage';
+import InvestmentPortfolioPage from './pages/InvestmentPortfolioPage';
+import DigitalTwinPage from './pages/DigitalTwinPage';
 
 function PageLoader({ label }) {
   return (
@@ -291,6 +297,14 @@ export default function App() {
         <Route path="/webhook-debug" element={<WebhookDebugPage />} />
         <Route path="/webhooks" element={<WebhookDebugPage />} />
         <Route path="/sse-stream" element={<SseStreamPage />} />
+        <Route path="/aeo" element={<AeoDepartmentPage />} />
+        <Route path="/aeo-dept" element={<AeoDepartmentPage />} />
+        <Route path="/layer-10" element={<AeoDepartmentPage />} />
+        <Route path="/model-portfolio" element={<ModelPortfolioPage />} />
+        <Route path="/risk-portfolio" element={<RiskPortfolioPage />} />
+        <Route path="/cost-portfolio" element={<CostPortfolioPage />} />
+        <Route path="/investment-portfolio" element={<InvestmentPortfolioPage />} />
+        <Route path="/digital-twin" element={<DigitalTwinPage />} />
       </Routes>
     </BrowserRouter>
   );

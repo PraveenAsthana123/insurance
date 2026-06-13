@@ -149,6 +149,9 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
 
     # -------- §EAOS Top-10 scoreboard --------
     ("GET",  re.compile(r"^/api/v1/eaos/scoreboard$"),                              _READ_ROLES),
+
+    # -------- §AEO Layer 10 · operator 2026-06-12 23-level brief --------
+    ("GET",  re.compile(r"^/api/v1/aeo/.*$"),                                       _READ_ROLES),
 ]
 
 # Backwards-compatible alias — earlier commits referenced SALES_PERMS.

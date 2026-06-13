@@ -123,6 +123,12 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/finetune',       icon: '🛠', label: 'Fine-tune Jobs (§F12)' },
           { to: '/webhook-debug',  icon: '🪝', label: 'Webhook Debug (§F15)' },
           { to: '/sse-stream',     icon: '📡', label: 'SSE Stream (§F16)' },
+          { to: '/aeo',            icon: '🧠', label: '🆕 AEO · Autonomous Enterprise Orchestrator (Layer 10)' },
+          { to: '/digital-twin',   icon: '🎮', label: 'Digital Twin (Layer 8)' },
+          { to: '/investment-portfolio', icon: '💎', label: 'Investment Portfolio (Layer 7)' },
+          { to: '/cost-portfolio', icon: '💰', label: 'Cost Portfolio (Layer 6)' },
+          { to: '/risk-portfolio', icon: '⚠️', label: 'Risk Portfolio (Layer 5)' },
+          { to: '/model-portfolio',icon: '🧠', label: 'Model Portfolio (Layer 4)' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,
