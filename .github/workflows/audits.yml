@@ -154,6 +154,9 @@ jobs:
       - name: DRILL · history.jsonl rotation (8 steps · 3 NEG · §70 cron audit)
         run: python3 tests/drills/drill_history_rotation.py
 
-      # NOTE: drill_advisor_cache.py SKIPPED in CI · requires FastAPI backend
-      # running on :8001. Runs locally + after deploy.
-      # Future: spin up backend service container to gate it here too.
+      - name: DRILL · bank CARD_GRID_LIGHTS palette §137.3 compliance (6 steps · 3 NEG)
+        run: python3 tests/drills/drill_bank_palette.py
+
+      # NOTE: drill_advisor_cache.py + drill_checklist_cache.py + drill_top1pct_cache.py
+      # SKIPPED in CI · all require FastAPI backend running on :8001. Run locally
+      # + after deploy. Future: spin up backend service container to gate them here too.
