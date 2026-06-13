@@ -67,12 +67,32 @@ SEV_STYLE = {
 
 
 def scan_via_advisor() -> dict:
-    """Run the advisor agent · returns its findings."""
-    from main import create_app
-    from fastapi.testclient import TestClient
-    c = TestClient(create_app())
-    r = c.post("/api/v1/missing-items-advisor/scan")
-    return r.json()
+    """Run the advisor agent · returns its findings.
+
+    Iter 95.3 · prefer HTTP against the already-running backend (5-6s) over
+    in-process TestClient (~18s · FastAPI app init at 1059 routes is the
+    expensive part). Falls back to TestClient if the backend is unreachable
+    so the agent still works during cold boot or in CI without a server.
+    """
+    import urllib.request
+    import urllib.error
+    import json as _json
+    backend_url = os.environ.get("INSUR_BACKEND_URL", "http://localhost:8001")
+    try:
+        req = urllib.request.Request(
+            f"{backend_url}/api/v1/missing-items-advisor/scan",
+            method="POST", data=b"{}",
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return _json.loads(resp.read().decode("utf-8"))
+    except (urllib.error.URLError, OSError, TimeoutError, _json.JSONDecodeError):
+        # Best-effort fallback for cold boot or CI · §57.7 honest
+        from main import create_app
+        from fastapi.testclient import TestClient
+        c = TestClient(create_app())
+        r = c.post("/api/v1/missing-items-advisor/scan")
+        return r.json()
 
 
 def extra_scans() -> list[dict]:

@@ -172,6 +172,15 @@ Graph node types should be standardized:
 - `user`
 - `external-system`
 
+
+## 5.1 Per-Page Graph Specificity Policy
+
+Do not reuse the same generic graph across every page, tab, or department workspace. Each chart must declare its business intent, metric, axis/category meaning, source path, and whether it is live, cached, deterministic demo, or pending backend wire-up.
+
+For process workspaces, graph plans must vary by active tab and sub-tab. For example, data tabs should visualize data quality or lineage, AI tabs should visualize model confidence or AI capability usage, business-value tabs should visualize ROI/dollar impact, governance tabs should visualize approvals or controls, and testing tabs should visualize pass rate or coverage.
+
+A shared chart component is allowed only when the data plan, title, metric, categories, and explanatory copy are page-specific.
+
 ## 6. Status And Health UI
 
 Every major app shell must expose service status.
