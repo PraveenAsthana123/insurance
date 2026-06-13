@@ -25,6 +25,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/BACKEND_GLOBAL_POLICY.md` | Repo-specific backend layering, API, database, service, observability, testing, and AI governance rules. |
 | `docs/GLOBAL_INPUT_PERSISTENCE_POLICY.md` | Mandatory policy for saving meaningful user inputs to `user_input_events` with tenant, audit, redaction, and downstream lineage. |
 | `docs/UI_GLOBAL_POLICY.md` | React/Next.js frontend policy: lazy loading, freshness, status, SEO, accessibility, debugability. |
+| `docs/NO_BLACK_BACKGROUND_GLOBAL_POLICY.md` | Global frontend policy blocking black/near-black backgrounds in content, workspace, card, table-header, component-header, dashboard, and modal surfaces. |
 | `docs/USER_APPROVAL_POLICY.md` | User standing all-approval policy for safe repo-local work; tool/platform approval only for hard gates. |
 | `docs/NO_APPROVAL_AUTONOMY_POLICY.md` | Agent autonomy policy: do safe repo-local work without asking; preserve only hard tool/platform gates. |
 | `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md` | Claude-specific safe local autonomy and approval policy. |
@@ -133,7 +134,7 @@ When behavior changes, update the matching docs:
 | Backend/API change | `docs/API_ENDPOINT_CATALOG.md`, `docs/API_CATALOG.json`, `docs/BACKEND_FILE_INVENTORY.md` |
 | User input persistence or capture behavior | `docs/GLOBAL_INPUT_PERSISTENCE_POLICY.md`, `docs/BACKEND_GLOBAL_POLICY.md`, `docs/UI_GLOBAL_POLICY.md`, API catalog + backend inventory when endpoints/files are added |
 | Service/database/model change | `docs/BACKEND_FILE_INVENTORY.md`, `docs/MODEL_CATALOG_FLOW.md` if model-related, migrations docs if schema changes |
-| Frontend behavior change | `docs/UI_GLOBAL_POLICY.md` if policy changes, README if setup changes |
+| Frontend behavior change | `docs/UI_GLOBAL_POLICY.md` if policy changes, `docs/NO_BLACK_BACKGROUND_GLOBAL_POLICY.md` for background/color policy, README if setup changes |
 | Agent/council/browser automation change | `docs/AGENT_COUNCIL_ARCHITECTURE.md`, `docs/AGENTIC_BROWSER_WIRING_STATUS.md`, `docs/AGENT_HARNESS_GUIDE.md` |
 | Tool adoption | `docs/AGENT_TOOL_SELECTION_MATRIX.md`, security notes, README |
 | Requirement/scope change | `docs/PROJECT_REQUIREMENTS.md`, `docs/STATUS.md` |

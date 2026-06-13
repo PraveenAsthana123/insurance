@@ -140,7 +140,64 @@ def extra_scans() -> list[dict]:
         ui_7d = cur.fetchone()[0]
 
     cx.close()
-    return findings, {"invocations_24h": n24, "watchdog_1h": wd, "ui_traces_7d": ui_7d}
+
+    # Uncommitted real-code changes · §106 auto-loop blind-spot closer.
+    # The auto-loop reports "stable · 0 actionable" by reading backend
+    # gap-finders only · it doesn't see git status. This scan adds:
+    #   - count of *real* code/doc files modified (excluding runtime churn)
+    #   - if > 0 · P2 finding so the operator (or §106) knows to commit
+    # Runtime churn exclusions:
+    #   data/prompt-history.md (§21 tracker), data/work_tracker/* (cron),
+    #   data/registry/workforce_health.json (cron-rollup),
+    #   .agent/* (§50 dispatcher audit append),
+    #   jobs/ (audit reports · mostly gitignored anyway),
+    #   data/insurance/*.docx (regen · same byte count),
+    #   config/*.json with only _generated timestamp delta.
+    import subprocess as _sp
+    uncommitted_count = 0
+    uncommitted_sample = []
+    try:
+        out = _sp.run(["git", "diff", "--name-only", "HEAD"],
+                       cwd=str(REPO), capture_output=True, text=True, timeout=10)
+        if out.returncode == 0:
+            churn_prefixes = (
+                "data/prompt-history.md",
+                "data/work_tracker/",
+                "data/registry/workforce_health.json",
+                ".agent/",
+                "jobs/",
+                "data/insurance/",
+                "config/",
+            )
+            for line in out.stdout.splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                if any(line.startswith(p) for p in churn_prefixes):
+                    continue
+                uncommitted_count += 1
+                if len(uncommitted_sample) < 5:
+                    uncommitted_sample.append(line)
+    except Exception:
+        pass  # best-effort · §57.7 honest (no fabrication)
+
+    if uncommitted_count > 0:
+        findings.append({
+            "severity": "P2",
+            "category": "Workflow hygiene",
+            "topic": "Uncommitted real-code changes",
+            "what_missing": f"{uncommitted_count} non-runtime file(s) modified but not committed",
+            "items": uncommitted_sample,
+            "advice": "Review with `git diff` then commit (or stash) — see §57.7 + §51",
+            "effort": "≤10min per file · usually parallel-session edits",
+        })
+
+    return findings, {
+        "invocations_24h": n24,
+        "watchdog_1h": wd,
+        "ui_traces_7d": ui_7d,
+        "uncommitted_real_files": uncommitted_count,
+    }
 
 
 def render_terminal(report: dict, sev_filter: set | None = None):

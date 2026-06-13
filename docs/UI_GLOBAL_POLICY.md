@@ -33,6 +33,17 @@ Process workspaces must show how the selected main-menu item, sub-menu focus, ac
 
 Operational process screens must also expose a compact quality check for objective, input, process, output, focus correlation, and content/data mapping. Manual execution views must identify the AS-IS human workflow; automatic execution views must identify the TO-BE automation workflow and HITL/governance boundary.
 
+
+## 1.3 No Black Background Global Policy
+
+Repository-wide frontend work must follow `docs/NO_BLACK_BACKGROUND_GLOBAL_POLICY.md`. Black and near-black colors must not be used as content/workspace backgrounds, table headers, component headers, active card backgrounds, dashboard panels, modal bodies, chart containers, or brand blocks. Dark slate remains allowed for readable text on light surfaces.
+
+Enforcement command:
+
+```bash
+./scripts/audit_no_black_backgrounds.sh
+```
+
 ## 2. Required Screen States
 
 Every route, tab, chart, table, drawer, and API-backed widget must implement these states:
@@ -477,11 +488,7 @@ Bank workspace, header, resize handles, modal backdrops, chat rails, active togg
 
 ## §137 — No Black Background in Content / Workspace Areas (Global)
 
-Effective 2026-06-12 · operator directive `remove black colore from
-background ..block that: Create global policy to stop the black colore
-for using in blackground`. **Global policy at**
-`~/.claude/policies/no-black-content-background.md` · this section
-**enforces it for this project**.
+Effective 2026-06-12 · operator directive `create global policy ...not to use black color as background`. Canonical project policy: `docs/NO_BLACK_BACKGROUND_GLOBAL_POLICY.md`. This section enforces it for this project.
 
 ### Rule
 

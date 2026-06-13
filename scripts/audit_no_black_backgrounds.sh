@@ -119,5 +119,5 @@ echo "  Add border for definition:"
 echo "    border: '1px solid #e5e7eb'"
 echo
 echo "Reference impl: insur_project commit fe713e95"
-echo "Policy file:    ~/.claude/policies/no-black-content-background.md"
+echo "Policy file:    docs/NO_BLACK_BACKGROUND_GLOBAL_POLICY.md"
 exit 1
