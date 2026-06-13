@@ -1,7 +1,0 @@
---- a/jobs/logs/rag_cache.log
-+++ b/jobs/logs/rag_cache.log
-@@ -10,7 +10,7 @@
-   File "<stdin>", line 10, in <module>
- sqlite3.OperationalError: cannot VACUUM from within a transaction
-
-- Needs human intervention to resolve the issue without additional context.

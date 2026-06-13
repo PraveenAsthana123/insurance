@@ -181,3 +181,11 @@ data/rag/*.db
 data/prompts.db
 data/prompts.db-shm
 data/prompts.db-wal
+
+# Tools cloned via integration sweeps (not part of insur source)
+ComfyUI/
+frontend/OmniParser/
+
+# Dispatcher pending-fix proposals (transient · archive only)
+.agent/pending_*.diff
+.agent/archive/

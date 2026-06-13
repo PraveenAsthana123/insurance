@@ -5379,3 +5379,6 @@ error: tests/drills/drill_master_data.py: patch does not apply
 2026-06-13T01:04:11Z | auto-fix-worker | start        | T-loop-1781312651-3 | role=error target=jobs/logs/rag_cache.log
 2026-06-13T01:04:11Z | auto-fix-worker | classify     | T-loop-1781312651-3 | tier=small risk=low council=single
 2026-06-13T01:04:14Z | auto-fix-worker | validate     | T-loop-1781312651-3 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-13T01:04:17Z | auto-fix-worker | commit       | T-loop-1781312651-3 | ok sha=51c73ff785c46ea6780b974071b90ae9dc794960
+2026-06-13T01:04:17Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-13T01:04:17Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2

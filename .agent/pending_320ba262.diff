@@ -1,7 +1,0 @@
---- a/jobs/logs/codex_approval_cron.log
-+++ b/jobs/logs/codex_approval_cron.log
-@@ -1,4 +1,5 @@
- No Archon workflow runs found.
-+Ensure 'archon' is installed and accessible in your PATH.
-
-No Archon workflow runs found.

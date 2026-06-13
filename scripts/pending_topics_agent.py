@@ -108,13 +108,17 @@ def extra_scans() -> list[dict]:
         """)
         n24 = cur.fetchone()[0]
 
-        # Stale agents (no invocations in 14 days but Active)
+        # Stale agents · was used historically · now silent 14d.
+        # Never-invoked rows excluded — those are §63/§64 org-structure
+        # scaffold seeded by global-ai-org generator · not operational stale.
         cur.execute("""
             SELECT ar.agent_id FROM agent_registry ar
-            WHERE ar.status='Active' AND NOT EXISTS (
-              SELECT 1 FROM agent_invocation ai
-              WHERE ai.agent_id=ar.agent_id AND ai.created_at > NOW() - INTERVAL '14 days'
-            )
+            WHERE ar.status='Active'
+              AND EXISTS (SELECT 1 FROM agent_invocation ai WHERE ai.agent_id=ar.agent_id)
+              AND NOT EXISTS (
+                SELECT 1 FROM agent_invocation ai
+                WHERE ai.agent_id=ar.agent_id AND ai.created_at > NOW() - INTERVAL '14 days'
+              )
             LIMIT 5
         """)
         stale_sample = [r[0] for r in cur.fetchall()]
@@ -122,7 +126,7 @@ def extra_scans() -> list[dict]:
             findings.append({
                 "severity": "P3", "category": "Workforce hygiene",
                 "topic": "Stale active agents",
-                "what_missing": f"≥{len(stale_sample)} Active agents · 0 invocations in 14d",
+                "what_missing": f"≥{len(stale_sample)} Active agents · used historically · silent 14d",
                 "items": stale_sample,
                 "advice": "Consider retiring or merging · per §103 workforce mgmt",
                 "effort": "Review · then bulk UPDATE status='Retired'",

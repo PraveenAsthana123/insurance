@@ -86,4 +86,21 @@ port_bound 3000 || restart_vite_3000
 check_ollama
 check_postgres
 
-echo "[$(stamp)] watchdog tick complete · ports: $(ss -tlnp 2>/dev/null | grep -cE ':(3000|3210|5434|8001|11434)\b')/5" >> "$LOG"
+PORT_COUNT=$(ss -tlnp 2>/dev/null | grep -cE ':(3000|3210|5434|8001|11434)\b')
+echo "[$(stamp)] watchdog tick complete · ports: ${PORT_COUNT}/5" >> "$LOG"
+
+# §150.3 — DB heartbeat so pending_topics agent counts watchdog ticks
+# (silent if backend / postgres unreachable — purely best-effort per §57.7)
+if port_bound 5434; then
+  PGPASSWORD="${BEV_POSTGRES_PASSWORD:-insur_secret_password}" psql \
+    -h "${BEV_POSTGRES_HOST:-localhost}" \
+    -p "${BEV_POSTGRES_PORT:-5434}" \
+    -U "${BEV_POSTGRES_USER:-insur_user}" \
+    -d "${BEV_POSTGRES_DB:-insur_analytics}" \
+    -c "INSERT INTO agent_invocation (invocation_id, agent_id, status, created_at, input_text)
+         VALUES ('watchdog-' || EXTRACT(EPOCH FROM NOW())::bigint,
+                 'sys_watchdog_agent', 'Success', NOW(),
+                 'ports=' || ${PORT_COUNT} || '/5')
+         ON CONFLICT DO NOTHING;" \
+    >/dev/null 2>&1 || true
+fi
