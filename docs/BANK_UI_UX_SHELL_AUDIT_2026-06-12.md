@@ -440,4 +440,22 @@ Operators can now see the two-pane contract immediately: the blue pane is the Ma
 
 
 
+## AI Types Sub Menu Placement Pass
+
+User feedback: All AI Type links must be part of the Sub Menu only and must not appear in the Main Menu.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Main Menu | Removed the master AI Catalog block from the blue Main Menu and shortened the path hint to Department -> B2C/B2B/B2E -> Main Process. |
+| Sub Menu | Added the AI Types block to the maroon Sub Menu in both empty and selected-process states. |
+| Routes | Preserved master/global routes for `/ai-types`, `/ai-types?domain=b2c`, `/ai-types?domain=b2b`, and `/ai-types?domain=b2e`. |
+
+### UX Verdict
+
+AI Types are no longer Main Menu items. They are available only inside the Sub Menu while keeping their master route behavior.
+
+
+
 <!-- POS drill marker · safe file only · should auto-commit -->

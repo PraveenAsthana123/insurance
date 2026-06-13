@@ -5669,3 +5669,8 @@ error: tests/drills/drill_adapters_endpoint.py: patch does not apply
 2026-06-13T15:03:46Z | auto-fix-worker | commit       | T-loop-1781363021-3 | ok sha=aa2f2963c72d4af10d1adc0f7966b299d520d25c
 2026-06-13T15:03:46Z | auto-fix-loop |   → verdict=auto_committed
 2026-06-13T15:03:46Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2
+2026-06-13T16:00:02Z | auto-fix-loop | === iteration start: apply=1 max_fixes=3 workers=2 ===
+2026-06-13T16:00:03Z | auto-fix-loop | discover: seeding insur_fleet tasks
+2026-06-13T16:00:04Z | auto-fix-loop | discover: running insur_fleet (200 workers)
+2026-06-13T16:00:21Z | auto-fix-loop | picks: 3 issues queued for fix
+2026-06-13T16:00:21Z | auto-fix-loop | dispatch #1: T-loop-1781366421-1

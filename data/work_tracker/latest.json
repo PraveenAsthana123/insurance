@@ -1,13 +1,13 @@
 {
-  "ts": "2026-06-13T15:55:02Z",
+  "ts": "2026-06-13T16:00:03Z",
   "cron_logs": {
     "agent_test_runner.log": {
-      "size": 170756,
-      "last_modified": "2026-06-13T15:30:01Z",
+      "size": 170810,
+      "last_modified": "2026-06-13T16:00:02Z",
       "tail": [
-        "2026-06-13T15:00:04Z | test-runner | api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260613T150001Z.json",
         "2026-06-13T15:30:01Z | test-runner | TDD check: every feature must have a paired drill (\u00a743)",
-        "2026-06-13T15:30:01Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260613T153001Z.json"
+        "2026-06-13T15:30:01Z | test-runner | tdd \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_tdd_20260613T153001Z.json",
+        "2026-06-13T16:00:02Z | test-runner | api: 4 endpoints"
       ]
     },
     "agentic_readiness_cron.log": {
@@ -46,21 +46,21 @@
       ]
     },
     "auto-next.log": {
-      "size": 161124,
-      "last_modified": "2026-06-13T15:55:01Z",
+      "size": 161455,
+      "last_modified": "2026-06-13T16:00:01Z",
       "tail": [
         "[dispatcher] handler skipped \u00b7 cron will fire again",
-        "[dispatcher] 2026-06-13T15:55:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] 2026-06-13T16:00:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
     "auto_fix_loop.log": {
-      "size": 530656,
-      "last_modified": "2026-06-13T15:03:46Z",
+      "size": 530980,
+      "last_modified": "2026-06-13T16:00:03Z",
       "tail": [
-        "2026-06-13T15:03:46Z | auto-fix-loop |   \u2192 verdict=auto_committed",
-        "\u001b[36m[2026-06-13T15:03:46Z]\u001b[0m iteration done: ok=1 queued=0 fail=2",
-        "2026-06-13T15:03:46Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2"
+        "Seeded 374 tasks \u2192 /mnt/deepa/insur_project/jobs/fleet/tasks.jsonl",
+        "\u001b[36m[2026-06-13T16:00:04Z]\u001b[0m discover: running insur_fleet (200 workers)",
+        "2026-06-13T16:00:04Z | auto-fix-loop | discover: running insur_fleet (200 workers)"
       ]
     },
     "automation_daily-health-voice-text.log": {
@@ -73,17 +73,17 @@
       ]
     },
     "backend.log": {
-      "size": 4007061,
-      "last_modified": "2026-06-13T15:50:06Z",
+      "size": 4010114,
+      "last_modified": "2026-06-13T16:00:04Z",
       "tail": [
-        "{\"timestamp\": \"2026-06-13T15:43:11.973159+00:00\", \"correlation_id\": \"9665f9609f404c1d\", \"event\": \"http.request\", \"path\": \"/api/v1/ai-type-impl/data-prep-pipeline\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 36}",
-        "{\"timestamp\": \"2026-06-13T15:45:06.825574+00:00\", \"correlation_id\": \"cadec7e71ad5497f\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4622}",
-        "{\"timestamp\": \"2026-06-13T15:50:06.861790+00:00\", \"correlation_id\": \"e5fbebebb6724051\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4589}"
+        "{\"timestamp\": \"2026-06-13T16:00:04.221494+00:00\", \"correlation_id\": \"ebfff5f596fc4de7\", \"event\": \"http.request\", \"path\": \"/bot/health\", \"method\": \"GET\", \"status\": 404, \"latency_ms\": 23}",
+        "{\"timestamp\": \"2026-06-13T16:00:04.306224+00:00\", \"correlation_id\": \"154d912c5a21493e\", \"event\": \"http.request\", \"path\": \"/bot/health\", \"method\": \"GET\", \"status\": 404, \"latency_ms\": 19}",
+        "{\"timestamp\": \"2026-06-13T16:00:04.681555+00:00\", \"correlation_id\": \"a53f431e15e14c50\", \"event\": \"http.request\", \"path\": \"/bot/health\", \"method\": \"GET\", \"status\": 404, \"latency_ms\": 13}"
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1067784,
-      "last_modified": "2026-06-13T15:55:01Z",
+      "size": 1067939,
+      "last_modified": "2026-06-13T16:00:02Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -91,8 +91,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 14335172,
-      "last_modified": "2026-06-13T15:46:39Z",
+      "size": 14343387,
+      "last_modified": "2026-06-13T15:55:29Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -127,21 +127,21 @@
       ]
     },
     "fix_all_pending.cron.log": {
-      "size": 40584,
-      "last_modified": "2026-06-13T15:45:01Z",
+      "size": 41118,
+      "last_modified": "2026-06-13T16:00:03Z",
       "tail": [
-        "[2026-06-13 09:45:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
+        "[2026-06-13 10:00:03 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
         "/mnt/deepa/insur_project/scripts/fix_all_pending_loop.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  state[\"last_run_utc\"] = datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")"
       ]
     },
     "fix_all_pending.log": {
-      "size": 19428,
-      "last_modified": "2026-06-13T15:45:01Z",
+      "size": 19623,
+      "last_modified": "2026-06-13T16:00:03Z",
       "tail": [
-        "[2026-06-13 09:45:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
-        "[2026-06-13 09:45:01 MDT] open tasks: 0 \u00b7 all tasks: 16",
-        "[2026-06-13 09:45:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
+        "[2026-06-13 10:00:02 MDT] === fix_all_pending_loop \u00b7 tick start ===",
+        "[2026-06-13 10:00:03 MDT] open tasks: 0 \u00b7 all tasks: 16",
+        "[2026-06-13 10:00:03 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
       ]
     },
     "fix_all_quick.log": {
@@ -442,12 +442,12 @@
       ]
     },
     "insurance_catalog_cron.log": {
-      "size": 80092,
-      "last_modified": "2026-06-13T15:00:04Z",
+      "size": 80409,
+      "last_modified": "2026-06-13T16:00:06Z",
       "tail": [
-        "[15:00:03] Running drill\u2026",
-        "[15:00:04] Drill OK",
-        "[15:00:04] Cycle complete \u00b7 audit appended."
+        "[16:00:04] Running drill\u2026",
+        "[16:00:05] Drill OK",
+        "[16:00:06] Cycle complete \u00b7 audit appended."
       ]
     },
     "insurance_data_refresh_auto_insurance_claims.log": {
@@ -613,13 +613,9 @@
       ]
     },
     "kpi-snapshot-20260613.log": {
-      "size": 332,
-      "last_modified": "2026-06-13T15:00:29Z",
-      "tail": [
-        "  2. persisted snapshot \u00b7 id=107",
-        "  3. total snapshots in DB                              | 107",
-        "  Reference: \u00a782.7 + T5.8"
-      ]
+      "size": 0,
+      "last_modified": "2026-06-13T16:00:02Z",
+      "tail": []
     },
     "local_backend.log": {
       "size": 0,
@@ -699,21 +695,21 @@
       ]
     },
     "pending_boot.log": {
-      "size": 56529,
-      "last_modified": "2026-06-13T15:30:54Z",
+      "size": 56583,
+      "last_modified": "2026-06-13T16:00:02Z",
       "tail": [
-        "[2026-06-13T15:30:01Z] verifying backend create_app()",
         "chroma connect failed: {\"detail\":\"Not Found\"}",
-        "BOOT_OK routes=1059"
+        "BOOT_OK routes=1059",
+        "[2026-06-13T16:00:02Z] verifying backend create_app()"
       ]
     },
     "pending_claude-md-drift.log": {
-      "size": 1808,
-      "last_modified": "2026-06-12T16:00:01Z",
+      "size": 1975,
+      "last_modified": "2026-06-13T16:00:02Z",
       "tail": [
-        "[2026-06-12T16:00:01Z] CLAUDE.md \u00a772 module-count drift check",
-        "[2026-06-12T16:00:01Z] stated=13  actual=26",
-        "[2026-06-12T16:00:01Z] DRIFT \u2014 \u00a772.2 says 13, dir has 26"
+        "[2026-06-13T16:00:02Z] CLAUDE.md \u00a772 module-count drift check",
+        "[2026-06-13T16:00:02Z] stated=13  actual=26",
+        "[2026-06-13T16:00:02Z] DRIFT \u2014 \u00a772.2 says 13, dir has 26"
       ]
     },
     "pending_data-manifest.log": {
@@ -771,12 +767,12 @@
       ]
     },
     "pending_push.log": {
-      "size": 188435,
-      "last_modified": "2026-06-13T15:45:01Z",
+      "size": 188604,
+      "last_modified": "2026-06-13T16:00:03Z",
       "tail": [
-        "[2026-06-13T15:45:01Z] push task",
-        "[2026-06-13T15:45:01Z] skip \u2014 no origin remote configured",
-        "[2026-06-13T15:45:01Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-13T16:00:02Z] push task",
+        "[2026-06-13T16:00:02Z] skip \u2014 no origin remote configured",
+        "[2026-06-13T16:00:02Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "pending_reports-cleanup.log": {
@@ -805,12 +801,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 45752,
-      "last_modified": "2026-06-13T15:54:02Z",
+      "size": 45941,
+      "last_modified": "2026-06-13T16:00:06Z",
       "tail": [
-        "[2026-06-13 09:50:05 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 09:52:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 09:54:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-13 09:56:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 09:58:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 10:00:06 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -868,11 +864,11 @@
       ]
     },
     "rag_guardrail.log": {
-      "size": 113496,
-      "last_modified": "2026-06-13T15:40:02Z",
+      "size": 113632,
+      "last_modified": "2026-06-13T16:00:08Z",
       "tail": [
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl",
-        "[2026-06-13T15:40:01Z] guardrail probes",
+        "[2026-06-13T16:00:02Z] guardrail probes",
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl"
       ]
     },
@@ -922,30 +918,30 @@
       ]
     },
     "supervisor.log": {
-      "size": 155983,
-      "last_modified": "2026-06-13T15:54:55Z",
+      "size": 156513,
+      "last_modified": "2026-06-13T15:59:55Z",
       "tail": [
-        "[2026-06-13 09:53:55 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:54:25 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:54:55 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 09:58:55 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:59:25 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:59:55 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 275981,
-      "last_modified": "2026-06-13T15:54:55Z",
+      "size": 276511,
+      "last_modified": "2026-06-13T15:59:55Z",
       "tail": [
-        "[2026-06-13 09:53:55 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:54:25 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 09:54:55 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 09:58:55 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:59:25 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 09:59:55 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "test_runner_api_hourly.log": {
-      "size": 40110,
-      "last_modified": "2026-06-13T15:00:04Z",
+      "size": 40257,
+      "last_modified": "2026-06-13T16:00:04Z",
       "tail": [
-        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260613T140001Z.json",
+        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260613T150001Z.json",
         "\u001b[36m[test-runner]\u001b[0m api: 4 endpoints",
-        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260613T150001Z.json"
+        "\u001b[36m[test-runner]\u001b[0m api \u2192 red \u00b7 /mnt/deepa/insur_project/jobs/reports/test_api_20260613T160002Z.json"
       ]
     },
     "test_runner_nightly.log": {
@@ -967,17 +963,17 @@
       ]
     },
     "vite_3210.log": {
-      "size": 120742,
-      "last_modified": "2026-06-13T15:52:08Z",
+      "size": 120864,
+      "last_modified": "2026-06-13T15:57:16Z",
       "tail": [
-        "9:49:55 AM [vite] page reload dist/index.html",
-        "9:52:08 AM [vite] hmr update /src/pages/bank/BankSidebar.jsx",
-        "9:52:08 AM [vite] hmr update /src/pages/bank/BankSubMenu.jsx"
+        "9:52:08 AM [vite] hmr update /src/pages/bank/BankSubMenu.jsx",
+        "9:57:16 AM [vite] hmr update /src/pages/bank/BankSidebar.jsx",
+        "9:57:16 AM [vite] hmr update /src/pages/bank/BankSubMenu.jsx"
       ]
     },
     "work_tracker.log": {
-      "size": 350118,
-      "last_modified": "2026-06-13T15:50:08Z",
+      "size": 350223,
+      "last_modified": "2026-06-13T15:55:08Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=371)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=371)",
@@ -1020,6 +1016,6 @@
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 1363
+    "count": 1364
   }
 }
