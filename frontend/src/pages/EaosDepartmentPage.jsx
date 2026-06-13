@@ -7,6 +7,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import PageHeaderFlow from '../components/PageHeaderFlow';
 import PageObjective from '../components/PageObjective';
 import ResizableSplitter, { useResizableWidth } from '../components/ResizableSplitter';
+import EaosSectionTab from '../components/EaosSectionTab';
 
 const API = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL)
   || 'http://localhost:8001';
@@ -445,7 +446,7 @@ export default function EaosDepartmentPage() {
           ))}
         </div>
 
-        <TabContent compId={selectedComp} tab={selectedTab} scoreboard={scoreboard} />
+        <EaosSectionTab component={comp} tab={selectedTab} scoreboard={scoreboard} />
       </div>
     </div>
   );
