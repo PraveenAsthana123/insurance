@@ -472,7 +472,7 @@ Cards must identify whether they are `INFO`, `ACTION`, or `MIXED`, use light dif
 
 ## Bank No Black Background Policy
 
-Bank workspace, header, resize handles, modal backdrops, chat rails, and active toggle blocks must avoid black or near-black backgrounds. Use light slate surfaces for passive containers and blue-tinted states for active controls. Dark slate such as `#0f172a` is allowed for text or chart strokes only, not as a block/background surface in the bank UI.
+Bank workspace, header, resize handles, modal backdrops, chat rails, active toggle blocks, table headers, component headers, section accents, chart primary strokes, and tab brand colors must avoid black or near-black treatments. Use light slate surfaces for passive containers and blue-tinted states for active controls. Dark slate such as `#0f172a` is allowed only for readable body text or labels, not as a brand/accent/header color in the bank UI.
 
 
 ## §137 — No Black Background in Content / Workspace Areas (Global)

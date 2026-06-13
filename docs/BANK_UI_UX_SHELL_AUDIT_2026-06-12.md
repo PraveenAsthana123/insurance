@@ -333,3 +333,21 @@ User feedback: main menu and sub-menu need resize features so the operator can g
 
 Operators can now decide whether they need wider navigation or more workspace. The shell supports both: resize between main/sub-menu, then resize the whole menu band to return space to content.
 
+## No Black Brand/Accent In Workarea Pass
+
+User feedback: workarea headers, table headers, and component headers still looked like they were using black as the brand color.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| README tab accent | Replaced the near-black README tab color with blue so downstream workspace/table/component headers no longer inherit a black brand accent. |
+| Workspace maturity accent | Replaced the highest maturity-level accent from near-black to blue. |
+| Audit trend chart | Replaced the primary pass-rate stroke from near-black to blue. |
+| Framework sections | Replaced near-black chip, section, capability, tier, and strategy accent colors with blue. |
+| UI policy | Tightened the bank no-black policy so near-black cannot be used for brand/accent/header/table/component-header treatments. |
+
+### UX Verdict
+
+The workspace can still use dark slate for readable labels, but black/near-black is no longer used as the visual brand for active headers, component headers, table headers, or primary chart/section accents.
+

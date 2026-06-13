@@ -155,7 +155,12 @@ CLAUDE.md
 __pycache__
 *.pyc
 .next
-.github
+# .github was fully ignored from initial scaffold 842fe473 — stale rule:
+# 3 workflows (audits.yml, contracts.yml, loadtest.yml) are already tracked.
+# Narrowed to ignore only secret-bearing patterns (per §47.6 + §4.6).
+.github/secrets/
+.github/credentials*
+.github/.env*
 
 # Project rename state (managed by scripts/rename_project.sh)
 .project-state

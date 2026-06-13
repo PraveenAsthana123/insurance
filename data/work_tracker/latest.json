@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-13T04:15:02Z",
+  "ts": "2026-06-13T04:25:01Z",
   "cron_logs": {
     "agent_test_runner.log": {
       "size": 163385,
@@ -46,11 +46,11 @@
       ]
     },
     "auto-next.log": {
-      "size": 122666,
-      "last_modified": "2026-06-13T04:15:02Z",
+      "size": 123190,
+      "last_modified": "2026-06-13T04:25:01Z",
       "tail": [
         "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
-        "[dispatcher] 2026-06-13T04:15:02Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] 2026-06-13T04:25:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
@@ -73,17 +73,17 @@
       ]
     },
     "backend.log": {
-      "size": 3270374,
-      "last_modified": "2026-06-13T04:14:28Z",
+      "size": 3286305,
+      "last_modified": "2026-06-13T04:24:34Z",
       "tail": [
         "INFO:     Waiting for application shutdown.",
-        "{\"timestamp\": \"2026-06-13T04:14:28.504483+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
+        "{\"timestamp\": \"2026-06-13T04:24:34.536914+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
         "INFO:     Application shutdown complete."
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1046084,
-      "last_modified": "2026-06-13T04:15:02Z",
+      "size": 1046394,
+      "last_modified": "2026-06-13T04:25:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -91,8 +91,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 13686187,
-      "last_modified": "2026-06-13T04:08:35Z",
+      "size": 13694402,
+      "last_modified": "2026-06-13T04:17:25Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -778,12 +778,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 23337,
-      "last_modified": "2026-06-13T04:14:01Z",
+      "size": 23652,
+      "last_modified": "2026-06-13T04:24:02Z",
       "tail": [
-        "[2026-06-12 22:10:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 22:12:01 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 22:14:01 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-12 22:20:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 22:22:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 22:24:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -841,11 +841,11 @@
       ]
     },
     "rag_guardrail.log": {
-      "size": 108736,
-      "last_modified": "2026-06-13T04:00:03Z",
+      "size": 108872,
+      "last_modified": "2026-06-13T04:20:02Z",
       "tail": [
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl",
-        "[2026-06-13T04:00:02Z] guardrail probes",
+        "[2026-06-13T04:20:01Z] guardrail probes",
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl"
       ]
     },
@@ -895,21 +895,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 76643,
-      "last_modified": "2026-06-13T04:14:48Z",
+      "size": 78419,
+      "last_modified": "2026-06-13T04:24:53Z",
       "tail": [
-        "[2026-06-12 22:14:11 MDT] backend DOWN port=8001 child_exit=1 restart_count=309",
-        "[2026-06-12 22:14:18 MDT] spawned backend pid=558781 backoff=5s",
-        "[2026-06-12 22:14:48 MDT] tick complete \u00b7 alive=2/3"
+        "[2026-06-12 22:24:16 MDT] backend DOWN port=8001 child_exit=1 restart_count=318",
+        "[2026-06-12 22:24:23 MDT] spawned backend pid=1211458 backoff=5s",
+        "[2026-06-12 22:24:53 MDT] tick complete \u00b7 alive=2/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 175335,
-      "last_modified": "2026-06-13T04:14:48Z",
+      "size": 179973,
+      "last_modified": "2026-06-13T04:24:53Z",
       "tail": [
         "/mnt/deepa/insur_project/scripts/multi_supervisor.py:78: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  return datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")",
-        "[2026-06-12 22:14:48 MDT] tick complete \u00b7 alive=2/3"
+        "[2026-06-12 22:24:53 MDT] tick complete \u00b7 alive=2/3"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -940,19 +940,19 @@
       ]
     },
     "vite_3210.log": {
-      "size": 84045,
-      "last_modified": "2026-06-13T04:12:50Z",
+      "size": 84106,
+      "last_modified": "2026-06-13T04:16:27Z",
       "tail": [
         "10:12:50 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx",
-        "10:12:50 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx",
-        "10:12:50 PM [vite] hmr update /src/pages/Dashboard.jsx, /src/pages/InsuranceCatalogPage.jsx, /src/pages/DepartmentPage.jsx, /src/pages/ProcessPage.jsx, /src/pages/AdminPage.jsx, /src/pages/ManagerPage.jsx, /src/pages/ManagerArchetypePage.jsx, /src/pages/TesterPage.jsx, /src/pages/DepartmentDossierPage.jsx, /src/pages/DataFlowPage.jsx, /src/components/admin-tabs/ManagerArchetypesTab.jsx, /src/components/manager-tabs/DataFlowTab.jsx, /src/components/dossier/DataFlowsSection.jsx"
+        "10:12:50 PM [vite] hmr update /src/pages/Dashboard.jsx, /src/pages/InsuranceCatalogPage.jsx, /src/pages/DepartmentPage.jsx, /src/pages/ProcessPage.jsx, /src/pages/AdminPage.jsx, /src/pages/ManagerPage.jsx, /src/pages/ManagerArchetypePage.jsx, /src/pages/TesterPage.jsx, /src/pages/DepartmentDossierPage.jsx, /src/pages/DataFlowPage.jsx, /src/components/admin-tabs/ManagerArchetypesTab.jsx, /src/components/manager-tabs/DataFlowTab.jsx, /src/components/dossier/DataFlowsSection.jsx",
+        "10:16:27 PM [vite] hmr update /src/pages/bank/BankLayout.jsx"
       ]
     },
     "work_tracker.log": {
-      "size": 335418,
-      "last_modified": "2026-06-13T04:10:02Z",
+      "size": 335628,
+      "last_modified": "2026-06-13T04:20:03Z",
       "tail": [
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=96, fleet=361)",
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)"
       ]
