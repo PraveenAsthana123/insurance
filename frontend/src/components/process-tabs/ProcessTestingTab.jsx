@@ -324,7 +324,7 @@ export default function ProcessTestingTab({ process }) {
             <span className="content-section-title">📝 Execution Log</span>
             <button onClick={() => setTestLog([])} style={{ fontSize: 'var(--font-size-xs)', border: 'none', background: 'none', color: 'var(--accent-primary)', cursor: 'pointer' }}>Clear</button>
           </div>
-          <div style={{ background: '#1a1a2e', borderRadius: 'var(--border-radius)', padding: 'var(--spacing-md)', maxHeight: 200, overflowY: 'auto', fontFamily: 'monospace', fontSize: 11 }}>
+          <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 'var(--border-radius)', padding: 'var(--spacing-md)', maxHeight: 200, overflowY: 'auto', fontFamily: 'monospace', fontSize: 11 }}>
             {testLog.map((log, i) => (
               <div key={i} style={{ color: log.type === 'success' ? '#10b981' : log.type === 'error' ? '#ef4444' : '#94a3b8', lineHeight: 1.8 }}>
                 <span style={{ color: '#64748b' }}>[{log.time}]</span> <span style={{ color: '#8b5cf6' }}>{log.name}</span> — {log.msg}

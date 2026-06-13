@@ -653,6 +653,20 @@ function classifyCard(label) {
   const firstWord = lower.split(/\s+/)[0];
   return ACTION_VERBS.includes(firstWord) ? 'action' : 'info';
 }
+
+function compactText(value, max = 118) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  return text.length > max ? `${text.slice(0, max - 1)}...` : text;
+}
+
+function componentPurposeLines(label, kind = 'info') {
+  const sem = componentSemantics(label);
+  const first = kind === 'action'
+    ? `Action component: ${compactText(sem.objective, 104)}`
+    : `Info component: ${compactText(sem.objective, 108)}`;
+  const second = `Output: ${compactText(sem.outcome, 118)}`;
+  return [first, second];
+}
 const CARD_LIST_PALETTE = [
   { bg: '#eff6ff', border: '#93c5fd', left: '#2563eb', chipBg: '#dbeafe', chipFg: '#1e40af' },
   { bg: '#f0fdf4', border: '#86efac', left: '#16a34a', chipBg: '#dcfce7', chipFg: '#166534' },
@@ -763,11 +777,36 @@ function CardKindLegend() {
 }
 
 function ComponentGrid({ items }) {
+  const [cardStatus, setCardStatus] = useState({});
   const cards = items.map((label, index) => {
     const kind = classifyCard(label);
     return { label, kind, kindStyle: CARD_KIND_STYLE[kind], tone: cardListTone(index), index };
   });
   const visibleKinds = [...new Set(cards.map((card) => card.kind))];
+  const handleCardAction = (card) => {
+    const actionLabel = card.kind === 'action' ? `Run ${card.label}` : `View ${card.label}`;
+    setCardStatus((prev) => ({
+      ...prev,
+      [card.label]: { state: 'processing', label: actionLabel, at: new Date() },
+    }));
+    saveAction(card.kind === 'action' ? 'action' : 'view', actionLabel, {
+      component: card.label,
+      card_kind: card.kind,
+    });
+    setTimeout(() => {
+      setCardStatus((prev) => ({
+        ...prev,
+        [card.label]: {
+          state: 'done',
+          label: actionLabel,
+          at: new Date(),
+          outcome: card.kind === 'action'
+            ? 'Task completed; audit row and downstream status are ready.'
+            : 'Detail opened logically; source, purpose, and evidence are available.',
+        },
+      }));
+    }, 900);
+  };
   return (
     <>
       <div style={{
@@ -791,11 +830,15 @@ function ComponentGrid({ items }) {
         })}
       </div>
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
         gap: 10,
       }}>
-      {cards.map(({ label, kind, kindStyle, tone, index }, i) => {
+      {cards.map((card, i) => {
+        const { label, kind, kindStyle, tone, index } = card;
         const isAction = kind === 'action';
+        const status = cardStatus[label];
+        const isBusy = status?.state === 'processing';
+        const purposeLines = componentPurposeLines(label, kind);
         return (
           <div
             key={i}
@@ -808,46 +851,89 @@ function ComponentGrid({ items }) {
               borderLeft: `6px solid ${tone.left}`,
               borderRadius: 8,
               fontSize: 13, color: '#0f172a',
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
-              boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+              display: 'flex', flexDirection: 'column', gap: 10,
+              boxShadow: isAction
+                ? `0 3px 10px ${tone.left}22`
+                : '0 1px 2px rgba(0,0,0,0.04)',
             }}
           >
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <CardKindBadge kind={kind} />
-                <span style={{
-                  padding: '2px 7px', borderRadius: 999,
-                  background: tone.chipBg, color: tone.chipFg,
-                  border: `1px solid ${tone.border}`,
-                  fontSize: 10, fontWeight: 900,
-                }}>#{index + 1}</span>
-                <strong style={{ fontSize: 14 }}>{label}</strong>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                  <CardKindBadge kind={kind} />
+                  <span style={{
+                    padding: '2px 7px', borderRadius: 999,
+                    background: tone.chipBg, color: tone.chipFg,
+                    border: `1px solid ${tone.border}`,
+                    fontSize: 10, fontWeight: 900,
+                  }}>#{index + 1}</span>
+                  <strong style={{ fontSize: 14 }}>{label}</strong>
+                </div>
+                <div style={{ marginTop: 6, display: 'grid', gap: 3 }}>
+                  {purposeLines.map((line) => (
+                    <div key={line} style={{ fontSize: 11, color: '#475569', lineHeight: 1.35 }}>
+                      {line}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, fontStyle: 'italic' }}>
-                {kindStyle.hint}
-              </div>
+              <button
+                type="button"
+                disabled={isBusy}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCardAction(card);
+                }}
+                style={{
+                  minHeight: 32,
+                  padding: '7px 12px', fontSize: 12, cursor: isBusy ? 'wait' : 'pointer', fontWeight: 800,
+                  background: isBusy ? '#f59e0b' : kindStyle.ctaBg,
+                  color: '#fff', border: 'none', borderRadius: 4,
+                  whiteSpace: 'nowrap',
+                  boxShadow: isAction ? `0 0 0 3px ${kindStyle.ctaBg}22` : 'none',
+                  opacity: isBusy ? 0.85 : 1,
+                }}>
+                {isBusy ? 'Working...' : isAction ? 'Run active' : 'View info'}
+              </button>
             </div>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                // Click → next-level navigation
-                if (isAction) {
-                  // Action → opens action runner page
-                  window.location.href = `/run/${encodeURIComponent(label)}`;
-                } else {
-                  // Info → opens detail page (AI type detail if matches)
-                  window.location.href = `/ai-types?type=${encodeURIComponent(label)}`;
-                }
-              }}
-              style={{
-                minHeight: 30,
-                padding: '6px 12px', fontSize: 12, cursor: 'pointer', fontWeight: 600,
-                background: kindStyle.ctaBg,
-                color: '#fff', border: 'none', borderRadius: 4,
-                whiteSpace: 'nowrap',
-              }}>
-              {isAction ? '⚡ Run →' : 'View detail →'}
-            </button>
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 18px 1fr 18px 1fr', gap: 4,
+              alignItems: 'stretch', fontSize: 10,
+            }}>
+              {[
+                ['INPUT', '#0ea5e9', 'source'],
+                ['PROCESS', '#8b5cf6', isAction ? 'execute' : 'inspect'],
+                ['OUTPUT', '#16a34a', isAction ? 'status' : 'detail'],
+              ].map(([phase, phaseColor, phaseText], idx) => (
+                <React.Fragment key={phase}>
+                  {idx > 0 && <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontWeight: 900 }}>{'>'}</div>}
+                  <div style={{
+                    padding: '5px 6px', background: '#fff', border: `1px solid ${phaseColor}44`,
+                    borderLeft: `3px solid ${phaseColor}`, borderRadius: 4,
+                  }}>
+                    <div style={{ color: phaseColor, fontSize: 8, fontWeight: 900 }}>{phase}</div>
+                    <div style={{ color: '#334155' }}>{phaseText}</div>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+            <div style={{
+              minHeight: 28,
+              padding: '6px 8px', background: status ? '#fff' : '#ffffff99',
+              border: `1px ${status ? 'solid' : 'dashed'} ${status?.state === 'done' ? '#86efac' : '#cbd5e1'}`,
+              borderRadius: 4,
+              fontSize: 10,
+              color: status ? '#0f172a' : '#64748b',
+            }}>
+              {status ? (
+                <span>
+                  <strong>{status.state === 'done' ? 'Done' : 'In progress'}:</strong> {status.label} · {status.at.toLocaleString()}
+                  {status.outcome ? ` · ${status.outcome}` : ' · Button stays active until completion.'}
+                </span>
+              ) : (
+                <span>Action/status space: click the button to see what happens and when it completes.</span>
+              )}
+            </div>
           </div>
         );
       })}
@@ -855,6 +941,7 @@ function ComponentGrid({ items }) {
     </>
   );
 }
+
 
 function ProcessModeBrief({ mode, proc }) {
   const isManual = mode === 'manual';
@@ -1737,6 +1824,7 @@ function SpecComponentCard({ label, color, onAction, phase, procKey, index = 0 }
   const [editValue, setEditValue] = useState(derived.value);
   // Op execution — hit backend stub; fall back to mock result if unreachable.
   const runOp = async (op, payload) => {
+    setOpen(true);
     if (op === 'Edit' && !payload) {
       // Open the edit form modal instead of immediately firing the request
       setEditValue(derived.value);
@@ -1908,37 +1996,100 @@ function SpecComponentCard({ label, color, onAction, phase, procKey, index = 0 }
           👆 {open ? 'collapse' : 'click for detail'}
         </span>
       </button>
+      <div style={{
+        margin: '0 12px 10px', padding: '8px 10px',
+        background: '#ffffffaa', border: '1px solid #e2e8f0', borderRadius: 4,
+        display: 'grid', gap: 6,
+      }}>
+        <div style={{ display: 'grid', gap: 3 }}>
+          {componentPurposeLines(label, 'operation').map((line) => (
+            <div key={line} style={{ fontSize: 11, color: '#475569', lineHeight: 1.35 }}>
+              {line}
+            </div>
+          ))}
+        </div>
+        <div style={{
+          display: 'grid', gridTemplateColumns: '1fr 18px 1fr 18px 1fr', gap: 4,
+          alignItems: 'stretch', fontSize: 10,
+        }}>
+          <div style={{ padding: '5px 6px', background: '#fff', border: '1px solid #0ea5e944', borderLeft: '3px solid #0ea5e9', borderRadius: 4 }}>
+            <div style={{ color: '#0ea5e9', fontSize: 8, fontWeight: 900 }}>INPUT</div>
+            <div style={{ color: '#334155' }}>trigger + payload</div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontWeight: 900 }}>{'>'}</div>
+          <div style={{ padding: '5px 6px', background: '#fff', border: '1px solid #8b5cf644', borderLeft: '3px solid #8b5cf6', borderRadius: 4 }}>
+            <div style={{ color: '#8b5cf6', fontSize: 8, fontWeight: 900 }}>PROCESS</div>
+            <div style={{ color: '#334155' }}>run / view / edit</div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontWeight: 900 }}>{'>'}</div>
+          <div style={{ padding: '5px 6px', background: '#fff', border: '1px solid #16a34a44', borderLeft: '3px solid #16a34a', borderRadius: 4 }}>
+            <div style={{ color: '#16a34a', fontSize: 8, fontWeight: 900 }}>OUTPUT</div>
+            <div style={{ color: '#334155' }}>status + audit</div>
+          </div>
+        </div>
+      </div>
       {/* Operation buttons (always visible) */}
       <div style={{
         display: 'flex', gap: 4, flexWrap: 'wrap',
         padding: '0 12px 10px',
       }}>
-        {ops.map((o) => (
+        {ops.map((o) => {
+          const isRunning = status.op === o.id && status.state === 'running';
+          const isDone = status.op === o.id && status.state === 'done';
+          const disabled = status.state === 'running';
+          const bg = isRunning ? '#f59e0b' : isDone ? '#16a34a' : '#fff';
+          const fg = isRunning || isDone ? '#fff' : CARD_KIND_STYLE.action.ctaBg;
+          return (
           <button key={o.id} type="button"
+            disabled={disabled}
             onClick={(e) => { e.stopPropagation(); runOp(o.id); }}
             title={o.what}
             onMouseEnter={(e) => {
+              if (disabled || isDone) return;
               e.currentTarget.style.background = CARD_KIND_STYLE.action.ctaBg;
               e.currentTarget.style.color = '#fff';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#fff';
-              e.currentTarget.style.color = CARD_KIND_STYLE.action.ctaBg;
+              e.currentTarget.style.background = bg;
+              e.currentTarget.style.color = fg;
             }}
             style={{
-              padding: '8px 12px', fontSize: 12, fontWeight: 700,
-              background: '#fff', color: CARD_KIND_STYLE.action.ctaBg,
-              border: `1.5px solid ${CARD_KIND_STYLE.action.border}`,
+              padding: '8px 12px', fontSize: 12, fontWeight: 800,
+              background: bg, color: fg,
+              border: `1.5px solid ${isDone ? '#16a34a' : CARD_KIND_STYLE.action.border}`,
               borderRadius: 4,
-              cursor: 'pointer',
-              boxShadow: `0 1px 0 ${color}33, inset 0 -1px 0 ${color}11`,
+              cursor: disabled ? 'wait' : 'pointer',
+              boxShadow: isRunning
+                ? '0 0 0 3px #f59e0b33'
+                : isDone
+                  ? '0 0 0 3px #16a34a22'
+                  : `0 1px 0 ${color}33, inset 0 -1px 0 ${color}11`,
               transition: 'all 0.15s',
               display: 'inline-flex', alignItems: 'center', gap: 4,
+              opacity: disabled && !isRunning ? 0.55 : 1,
             }}>
-            <span style={{ fontSize: 12 }}>{o.icon}</span> {o.id}
+            <span style={{ fontSize: 12 }}>{isRunning ? '...' : isDone ? '✓' : o.icon}</span> {isRunning ? `${o.id} active` : o.id}
           </button>
-        ))}
+          );
+        })}
       </div>
+      {(status.state !== 'idle' || lastResult) && (
+        <div style={{
+          margin: '0 12px 10px', padding: '8px 10px',
+          background: status.state === 'running' ? '#fffbeb' : lastResult?.ok ? '#f0fdf4' : '#f8fafc',
+          border: `1px solid ${status.state === 'running' ? '#fcd34d' : lastResult?.ok ? '#86efac' : '#cbd5e1'}`,
+          borderLeft: `4px solid ${status.state === 'running' ? '#f59e0b' : lastResult?.ok ? '#16a34a' : color}`,
+          borderRadius: 4,
+          fontSize: 11,
+          color: '#0f172a',
+        }}>
+          <strong>{status.state === 'running' ? 'Action running' : 'Action completed'}:</strong>{' '}
+          {status.op || lastResult?.outcome} · {new Date().toLocaleString()} ·{' '}
+          {status.state === 'running'
+            ? 'button remains active and other operations wait until completion.'
+            : `outcome saved to history/audit (${lastResult?.audit_row_id || 'local action log'}).`}
+        </div>
+      )}
       {/* Expanded detail: What happens / Journey / Flow / Objective */}
       {open && (
         <div style={{
@@ -3123,7 +3274,7 @@ function BlueprintField({ fieldKey, value, color }) {
       ) : isCodeLike ? (
         <pre style={{
           margin: 0, padding: 10,
-          background: '#0f172a', color: '#cbd5e1',
+          background: '#f8fafc', color: '#475569', border: '1px solid #e5e7eb',
           borderRadius: 4, fontSize: 11, fontFamily: 'monospace',
           overflow: 'auto', maxHeight: 360, whiteSpace: 'pre-wrap',
         }}>{String(value)}</pre>
@@ -3857,6 +4008,139 @@ function TopTodoSnapshot({ tab, sub, proc }) {
   );
 }
 
+function TabComponentSequenceReview({ tab, sub, proc }) {
+  const profile = TAB_PROFILES[tab.id] || TAB_PROFILES.overview;
+  const charter = TAB_CHARTER[tab.id];
+  const input = read(proc, 'data_process.input', 'manual_process.tools');
+  const process = read(proc, 'automatic_process.ai_workflow', 'automatic_process.summary', 'manual_process.summary');
+  const output = read(proc, 'data_process.output', 'output.artifacts');
+  const rows = [
+    {
+      task: '1. Objective', kind: 'info', status: !!charter,
+      component: 'Business Objective',
+      purpose: 'States why this tab exists and what user decision it supports.',
+      outcome: 'User knows the goal before reading cards or clicking actions.',
+    },
+    {
+      task: '2. Input', kind: 'info', status: !!input,
+      component: 'Input Source',
+      purpose: 'Shows source data, tool, payload, or manual input needed by the tab.',
+      outcome: 'User can verify the work starts from the right evidence.',
+    },
+    {
+      task: '3. Process', kind: profile.type === 'action' ? 'action' : 'mixed', status: !!process,
+      component: 'Process Logic',
+      purpose: 'Explains manual or automated work performed after input is selected.',
+      outcome: 'User sees what happens before output, approval, or escalation.',
+    },
+    {
+      task: '4. Workspace Cards', kind: 'mixed', status: true,
+      component: 'Operational Components',
+      purpose: 'Cards are ordered by journey and labeled INFO, ACTION, or MIXED.',
+      outcome: 'User can distinguish reading cards from executable cards quickly.',
+    },
+    {
+      task: '5. Output', kind: 'info', status: !!output,
+      component: 'Output Artifact',
+      purpose: 'Shows report, decision, model result, audit artifact, or downstream handoff.',
+      outcome: 'User knows what the tab produces and where it goes next.',
+    },
+    {
+      task: '6. Visualization', kind: 'visualization', status: true,
+      component: 'KPI / Graph Slot',
+      purpose: 'Turns status and metrics into a scan-friendly graph or fallback panel.',
+      outcome: 'User can judge health, trend, or impact without reading every row.',
+    },
+    {
+      task: '7. Actions', kind: 'action', status: true,
+      component: 'Action Table',
+      purpose: 'One row is one task; the button stays active until completion.',
+      outcome: 'User sees READY, ACTIVE, DONE, timestamp, and expected result.',
+    },
+    {
+      task: '8. Checklist + History', kind: 'mixed', status: true,
+      component: 'To-Do / Transaction History / Audit',
+      purpose: 'Captures readiness gaps, user actions, date/time stamp, and audit evidence.',
+      outcome: 'User can prove what happened, when, by whom, and what remains open.',
+    },
+  ];
+  const kindColor = {
+    info: '#0891b2',
+    action: '#dc2626',
+    visualization: '#16a34a',
+    mixed: '#475569',
+  };
+  const kindLabel = {
+    info: 'INFO COMPONENT',
+    action: 'ACTION COMPONENT',
+    visualization: 'VISUALIZATION',
+    mixed: 'MIXED COMPONENT',
+  };
+  return (
+    <div style={{
+      marginBottom: 12, padding: 12,
+      background: '#fff', border: '1px solid #cbd5e1', borderRadius: 6,
+      boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
+        <strong style={{ fontSize: 13, color: '#0f172a' }}>Tab component review</strong>
+        <span style={{
+          padding: '3px 9px', borderRadius: 999,
+          background: `${TYPE_META[profile.type]?.color || '#475569'}18`,
+          color: TYPE_META[profile.type]?.color || '#475569',
+          border: `1px solid ${(TYPE_META[profile.type]?.color || '#475569')}55`,
+          fontSize: 10, fontWeight: 900, textTransform: 'uppercase',
+        }}>{TYPE_META[profile.type]?.label || 'Mixed'} tab</span>
+        <span style={{ fontSize: 11, color: '#64748b' }}>
+          {tab.label}{sub ? ` / ${sub.label}` : ''}: sequence, purpose, type, and readiness from the user point of view.
+        </span>
+      </div>
+      <div style={{
+        marginBottom: 8, padding: '7px 9px', background: '#f8fafc',
+        border: '1px solid #e2e8f0', borderRadius: 4,
+        fontSize: 11, color: '#475569', lineHeight: 1.4,
+      }}>
+        <strong style={{ color: '#0f172a' }}>Card purpose rule:</strong> Info component: read, inspect, and understand evidence. Action component: click, run, approve, assign, or complete work with visible status.
+      </div>
+      <div style={{ display: 'grid', gap: 6, overflowX: 'auto', paddingBottom: 2 }}>
+        {rows.map((row, i) => {
+          const color = kindColor[row.kind] || '#475569';
+          const tone = cardListTone(i);
+          return (
+            <div key={row.task} style={{
+              display: 'grid',
+              gridTemplateColumns: '150px 150px minmax(220px, 1fr) minmax(220px, 1fr) 88px',
+              minWidth: 880,
+              gap: 8,
+              alignItems: 'center',
+              padding: '8px 10px',
+              background: tone.bg,
+              border: `1px solid ${tone.border}`,
+              borderLeft: `5px solid ${color}`,
+              borderRadius: 5,
+            }}>
+              <div style={{ fontSize: 11, fontWeight: 900, color: '#0f172a' }}>{row.task}</div>
+              <div>
+                <div style={{ fontSize: 10, color, fontWeight: 900, textTransform: 'uppercase' }}>{kindLabel[row.kind]}</div>
+                <div style={{ marginTop: 2, fontSize: 10, color: '#64748b' }}>{row.component}</div>
+              </div>
+              <div style={{ fontSize: 11, color: '#334155', lineHeight: 1.35 }}>{row.purpose}</div>
+              <div style={{ fontSize: 11, color: '#334155', lineHeight: 1.35 }}>{row.outcome}</div>
+              <span style={{
+                justifySelf: 'end', padding: '4px 8px', borderRadius: 999,
+                background: row.status ? '#dcfce7' : '#fef3c7',
+                color: row.status ? '#166534' : '#92400e',
+                border: `1px solid ${row.status ? '#86efac' : '#fcd34d'}`,
+                fontSize: 10, fontWeight: 900,
+              }}>{row.status ? 'OK' : 'PENDING'}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function TabHeaderRibbon({ tab, sub, proc, dept, focusKind, focusLabel }) {
   const profile = TAB_PROFILES[tab.id];
   const typeMeta = profile ? TYPE_META[profile.type] : null;
@@ -4300,7 +4584,7 @@ function FlowSlot({ tab, sub, proc }) {
       )}
       <pre style={{
         margin: 0, padding: 12,
-        background: '#0f172a', color: '#cbd5e1',
+        background: '#f8fafc', color: '#475569', border: '1px solid #e5e7eb',
         borderRadius: 6, fontSize: 11, fontFamily: 'monospace',
         overflow: 'auto', maxHeight: 400,
       }}>{typeof diagram === 'string' ? diagram : JSON.stringify(diagram, null, 2)}</pre>
@@ -4903,6 +5187,7 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
         focusKind={focusKind} focusLabel={focusLabel} />
       <TopHorizontalFlowStrip tab={tab} proc={proc} />
       <TopTodoSnapshot tab={tab} sub={sub} proc={proc} />
+      <TabComponentSequenceReview tab={tab} sub={sub} proc={proc} />
 
       {/* Lens-driven note (Mixed tabs only) */}
       {lensActive && (
@@ -5955,7 +6240,7 @@ function ResourceCard({ resource, color, label, icon, ownership }) {
         {ownership && (
           <span style={{
             padding: '0 6px', borderRadius: 2,
-            background: '#0f172a', color: '#fff',
+            background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
             fontSize: 9, fontWeight: 700,
           }}>👤 {ownership.owner}</span>
         )}
@@ -6335,63 +6620,116 @@ function DatabaseAndApiSection({ color, tab }) {
 }
 
 function ActionsPanel({ tab, sub, proc, onAction }) {
+  const [states, setStates] = useState({});
   const actions = [
-    { id: 'Run',         icon: '▶',  color: '#16a34a', what: 'Execute the workflow for this tab — creates a new execution + audit row.' },
-    { id: 'Export',      icon: '⤓',  color: '#0ea5e9', what: 'Generate PDF / Excel / Report — file downloads when ready.' },
-    { id: 'Approve',     icon: '✓',  color: '#16a34a', what: 'Approve the current AI recommendation — status changes + audit row.' },
-    { id: 'Reject',      icon: '✗',  color: '#dc2626', what: 'Reject the recommendation — opens escalation workflow.' },
-    { id: 'Assign',      icon: '👤', color: '#8b5cf6', what: 'Choose an owner for follow-up work — task assigned.' },
-    { id: 'Escalate',    icon: '⚠',  color: '#f59e0b', what: 'Send to supervisor — creates an incident in Incident AI tab.' },
-    { id: 'Create Test', icon: '🧪', color: '#0d9488', what: 'Generate a test case — Test AI workspace opens with the case populated.' },
-    { id: 'Compare',     icon: '⚖',  color: '#6366f1', what: 'Compare model versions — opens comparison dashboard.' },
+    { id: 'Run',         icon: '▶',  color: '#16a34a', what: 'Execute workflow', result: 'Creates execution, status, and audit row.' },
+    { id: 'Export',      icon: '⤓',  color: '#0ea5e9', what: 'Generate file', result: 'Produces PDF/Excel/report artifact and download event.' },
+    { id: 'Approve',     icon: '✓',  color: '#16a34a', what: 'Approve recommendation', result: 'Decision status changes and approval evidence is saved.' },
+    { id: 'Reject',      icon: '✗',  color: '#dc2626', what: 'Reject recommendation', result: 'Escalation or fallback workflow is opened.' },
+    { id: 'Assign',      icon: '👤', color: '#8b5cf6', what: 'Assign owner', result: 'Follow-up task receives owner, due date, and audit event.' },
+    { id: 'Escalate',    icon: '⚠',  color: '#f59e0b', what: 'Escalate issue', result: 'Incident task is created and supervisor queue is notified.' },
+    { id: 'Create Test', icon: '🧪', color: '#0d9488', what: 'Create test case', result: 'Test AI workspace receives a new case draft.' },
+    { id: 'Compare',     icon: '⚖',  color: '#6366f1', what: 'Compare versions', result: 'Comparison view opens with champion/challenger evidence.' },
   ];
   const tabLabel = `${tab.label}${sub ? `:${sub.label}` : ''}`;
+  const runAction = (a) => {
+    setStates((prev) => ({
+      ...prev,
+      [a.id]: { state: 'processing', at: new Date(), outcome: 'Running action; button stays active until completion.' },
+    }));
+    if (onAction) onAction(`${a.id} → ${tabLabel}`);
+    saveAction('action', `${a.id} → ${tabLabel}`, { tab: tab.id, sub: sub?.id, proc: proc?.id, action: a.id });
+    setTimeout(() => {
+      setStates((prev) => ({
+        ...prev,
+        [a.id]: { state: 'done', at: new Date(), outcome: a.result },
+      }));
+    }, 1100);
+  };
   return (
     <div>
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 8,
-        marginBottom: 10,
+        marginBottom: 10, padding: '8px 10px', background: '#f8fafc',
+        border: '1px solid #e2e8f0', borderRadius: 6,
+        fontSize: 11, color: '#475569', lineHeight: 1.4,
       }}>
-        {actions.map((a) => (
-          <button key={a.id} type="button"
-            onClick={() => onAction && onAction(`${a.id} → ${tabLabel}`)}
-            title={a.what}
-            onMouseEnter={(e) => { e.currentTarget.style.background = a.color; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = a.color; }}
-            style={{
-              padding: '8px 12px', fontSize: 12, fontWeight: 700,
-              background: '#fff', color: a.color,
-              border: `2px solid ${a.color}`, borderRadius: 4,
-              cursor: 'pointer',
-              boxShadow: `0 1px 0 ${a.color}33`,
-              transition: 'all 0.12s',
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 5,
-            }}>
-            <span style={{ fontSize: 14 }}>{a.icon}</span> {a.id}
-          </button>
-        ))}
+        <strong style={{ color: '#0f172a' }}>Action rule:</strong> one row is one task. Click the active button, watch the status cell until it reaches Done, then verify the history/audit row below.
       </div>
-      <details style={{ fontSize: 10, color: '#64748b' }}>
-        <summary style={{ cursor: 'pointer', fontWeight: 600, padding: 4 }}>
-          📋 What each button does (click to expand)
-        </summary>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 6 }}>
-          <tbody>
-            {actions.map((a) => (
-              <tr key={a.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                <td style={{
-                  padding: '4px 8px', whiteSpace: 'nowrap',
-                  fontSize: 11, fontWeight: 700, color: a.color,
-                }}>{a.icon} {a.id}</td>
-                <td style={{ padding: '4px 8px', color: '#475569', fontSize: 11 }}>{a.what}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </details>
+      <div style={{ display: 'grid', gap: 6, overflowX: 'auto', paddingBottom: 2 }}>
+        {actions.map((a, i) => {
+          const state = states[a.id];
+          const busy = state?.state === 'processing';
+          const done = state?.state === 'done';
+          const tone = cardListTone(i);
+          return (
+            <div key={a.id} style={{
+              display: 'grid',
+              gridTemplateColumns: '42px minmax(150px, 1fr) minmax(210px, 1.4fr) minmax(170px, 1fr)',
+              minWidth: 720,
+              gap: 8,
+              alignItems: 'center',
+              padding: '8px 10px',
+              background: tone.bg,
+              border: `1px solid ${tone.border}`,
+              borderLeft: `5px solid ${a.color}`,
+              borderRadius: 6,
+              boxShadow: busy ? `0 0 0 3px ${a.color}22` : '0 1px 2px rgba(15, 23, 42, 0.04)',
+            }}>
+              <div style={{
+                width: 28, height: 28, borderRadius: 999, background: a.color, color: '#fff',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900,
+              }}>{i + 1}</div>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                  <CardKindBadge kind="action" />
+                  <strong style={{ color: '#0f172a', fontSize: 12 }}>{a.icon} {a.id}</strong>
+                </div>
+                <div style={{ marginTop: 2, fontSize: 10, color: '#64748b' }}>{a.what}</div>
+              </div>
+              <div style={{ fontSize: 11, color: '#334155', lineHeight: 1.35 }}>
+                <strong>After click:</strong> {a.result}
+              </div>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'flex-end' }}>
+                <span style={{
+                  padding: '4px 8px', borderRadius: 999,
+                  background: busy ? '#fef3c7' : done ? '#dcfce7' : '#fff',
+                  color: busy ? '#92400e' : done ? '#166534' : '#64748b',
+                  border: `1px solid ${busy ? '#fcd34d' : done ? '#86efac' : '#cbd5e1'}`,
+                  fontSize: 10, fontWeight: 900,
+                  whiteSpace: 'nowrap',
+                }}>{busy ? 'ACTIVE' : done ? 'DONE' : 'READY'}</span>
+                <button type="button"
+                  disabled={busy}
+                  onClick={() => runAction(a)}
+                  style={{
+                    minHeight: 32,
+                    padding: '7px 12px', fontSize: 11, fontWeight: 900,
+                    background: busy ? '#f59e0b' : done ? '#16a34a' : a.color,
+                    color: '#fff', border: 'none', borderRadius: 4,
+                    cursor: busy ? 'wait' : 'pointer',
+                    boxShadow: `0 2px 8px ${a.color}33`,
+                    whiteSpace: 'nowrap',
+                  }}>
+                  {busy ? 'Running...' : done ? 'Run again' : 'Start'}
+                </button>
+              </div>
+              {state && (
+                <div style={{
+                  gridColumn: '2 / -1',
+                  padding: '6px 8px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 4,
+                  fontSize: 10, color: '#475569',
+                }}>
+                  <strong>{state.state === 'done' ? 'Completed' : 'In progress'}:</strong> {state.outcome} · {state.at.toLocaleString()}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
+
 
 // renderContent returns ONLY the sub-tab Components grid.
 // Everything else (header / IPO / AS-IS-TO-BE / Visualization / To-Do / etc.)
@@ -7468,7 +7806,7 @@ function WorkspaceWideAudit({ visibleTabs, proc, dept, onJump, activeTabId }) {
             title="Save this audit result so you can track pass-rate evolution"
             style={{
               padding: '8px 12px', fontSize: 12, fontWeight: 700,
-              background: '#0f172a', color: '#fff',
+              background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
               border: 'none', borderRadius: 3, cursor: 'pointer',
             }}>📸 Snapshot</button>
           <button type="button"
@@ -7951,7 +8289,7 @@ function KeyboardHelpOverlay({ open, onClose }) {
       >
         <div style={{
           padding: '14px 16px',
-          background: '#0f172a', color: '#fff',
+          background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
           display: 'flex', alignItems: 'center', gap: 10,
           borderTopLeftRadius: 10, borderTopRightRadius: 10,
         }}>

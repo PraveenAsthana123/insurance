@@ -279,8 +279,9 @@ export default function AiTypesPage() {
               {activeTab === 'model' && <ModelDetail />}
 
               {activeTab === 'raw' && (
-                <pre style={{ fontSize: 12, background: '#1f2937', color: '#a7f3d0',
-                                padding: 10, borderRadius: 5, overflow: 'auto', maxHeight: '55vh' }}>
+                <pre style={{ fontSize: 12, background: '#f8fafc', color: '#1f2937',
+                                padding: 10, borderRadius: 5, overflow: 'auto', maxHeight: '55vh',
+                                border: '1px solid #e5e7eb' }}>
                   {JSON.stringify(detail, null, 2)}
                 </pre>
               )}

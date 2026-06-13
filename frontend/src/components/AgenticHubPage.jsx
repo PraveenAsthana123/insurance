@@ -2071,7 +2071,7 @@ function TaskTracerView() {
           )}
           <details style={{ marginTop: 8 }}>
             <summary style={{ cursor: 'pointer', fontSize: 11, fontWeight: 700 }}>Raw plan + step results</summary>
-            <pre style={{ fontSize: 9, background: '#0f172a', color: '#e2e8f0', padding: 8, borderRadius: 4, marginTop: 4, overflowX: 'auto' }}>
+            <pre style={{ fontSize: 9, background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb', padding: 8, borderRadius: 4, marginTop: 4, overflowX: 'auto' }}>
               {JSON.stringify({ plan: result.plan, step_results: result.step_results }, null, 2)}
             </pre>
           </details>

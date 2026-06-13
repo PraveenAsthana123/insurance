@@ -318,9 +318,10 @@ export default function AdminAuditPage() {
                   </div>
                   <pre style={{
                     fontFamily: 'ui-monospace, monospace', fontSize: 11,
-                    background: '#0f172a', color: '#e2e8f0', padding: 12,
+                    background: '#f8fafc', color: '#1f2937', padding: 12,
                     borderRadius: 4, overflow: 'auto', maxHeight: '60vh',
                     margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+                    border: '1px solid #e5e7eb',
                   }}>
                     {report.content || '(empty)'}
                   </pre>

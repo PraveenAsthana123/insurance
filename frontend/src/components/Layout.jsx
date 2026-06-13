@@ -45,7 +45,7 @@ export default function Layout() {
           <BankSidebar bp={bp} collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
         ) : (
           <aside style={{
-            background: '#0f172a', color: '#cbd5e1',
+            background: '#f8fafc', color: '#475569', border: '1px solid #e5e7eb',
             borderRight: '1px solid #1e293b',
             padding: 16, fontSize: 12, fontStyle: 'italic',
           }}>

@@ -70,8 +70,8 @@ function AICapabilityChip({ capId }) {
         alignItems: 'center',
         gap: 4,
         padding: '2px 8px',
-        background: '#1e293b',
-        color: '#e2e8f0',
+        background: '#f1f5f9',
+        color: '#334155',
         borderRadius: 6,
         fontSize: 11,
         fontWeight: 500,
@@ -99,8 +99,8 @@ function DownloadMenu({ samples }) {
             alignItems: 'center',
             gap: 4,
             padding: '4px 8px',
-            background: '#0f172a',
-            color: '#f1f5f9',
+            background: '#f8fafc',
+            color: '#1f2937',
             borderRadius: 6,
             textDecoration: 'none',
             fontSize: 11,
@@ -294,8 +294,8 @@ function CatalogBot({ visible, onClose }) {
         bottom: 24,
         width: 360,
         maxHeight: '60vh',
-        background: '#0f172a',
-        color: '#f1f5f9',
+        background: '#f8fafc',
+        color: '#1f2937',
         borderRadius: 12,
         boxShadow: '0 12px 32px rgba(15,23,42,0.4)',
         overflow: 'hidden',
@@ -306,7 +306,7 @@ function CatalogBot({ visible, onClose }) {
     >
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '10px 14px', background: '#1e293b',
+        padding: '10px 14px', background: '#f1f5f9',
       }}>
         <span style={{ fontWeight: 700 }}>🤖 Catalog Bot</span>
         <button
@@ -329,7 +329,7 @@ function CatalogBot({ visible, onClose }) {
           placeholder="e.g. fraud detection in claims"
           style={{
             flex: 1, padding: 8, borderRadius: 6, border: '1px solid #334155',
-            background: '#1e293b', color: '#f1f5f9', fontSize: 12,
+            background: '#f1f5f9', color: '#1f2937', fontSize: 12,
           }}
         />
         <button
@@ -347,9 +347,9 @@ function CatalogBot({ visible, onClose }) {
               Top matches for <em>"{answer.q}"</em>:
             </div>
             {answer.hits?.length ? answer.hits.map((m) => (
-              <div key={m.dept.id} style={{ marginBottom: 8, padding: 8, background: '#1e293b', borderRadius: 6 }}>
+              <div key={m.dept.id} style={{ marginBottom: 8, padding: 8, background: '#f1f5f9', borderRadius: 6 }}>
                 <div style={{ fontWeight: 700 }}>{m.dept.icon} {m.dept.name}</div>
-                <div style={{ color: '#cbd5e1' }}>{m.dept.description}</div>
+                <div style={{ color: '#475569' }}>{m.dept.description}</div>
               </div>
             )) : (
               <div style={{ color: '#64748b' }}>No matches. Try a different term.</div>

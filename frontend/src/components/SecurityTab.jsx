@@ -257,8 +257,8 @@ const s = {
   severityBadge: { padding: '1px 6px', color: '#fff', borderRadius: 3, fontSize: 9, fontWeight: 600, textTransform: 'uppercase' },
   cweBadge: { padding: '1px 6px', background: '#1e3a8a', color: '#fff', borderRadius: 3, fontSize: 9, fontWeight: 600 },
   payloadBody: { marginBottom: 4 },
-  payloadCode: { display: 'block', padding: 6, background: '#1f2937', color: '#86efac', borderRadius: 3, fontSize: 11, fontFamily: 'monospace', wordBreak: 'break-all' },
-  payloadJson: { padding: 6, background: '#1f2937', color: '#d1d5db', borderRadius: 3, fontSize: 10, margin: 0 },
+  payloadCode: { display: 'block', padding: 6, background: '#ecfdf5', color: '#065f46', border: '1px solid #d1fae5', borderRadius: 3, fontSize: 11, fontFamily: 'monospace', wordBreak: 'break-all' },
+  payloadJson: { padding: 6, background: '#f8fafc', color: '#475569', border: '1px solid #e5e7eb', borderRadius: 3, fontSize: 10, margin: 0 },
   payloadReject: { fontSize: 10, color: '#666', borderTop: '1px dashed #ccc', paddingTop: 4 },
   footer: { fontSize: 10, color: '#888', textAlign: 'right', marginTop: 12 },
 };

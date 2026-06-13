@@ -76,11 +76,12 @@ function ChartCard({ title, subtitle, library, children, code }) {
           <pre
             style={{
               fontSize: 10,
-              background: '#0f172a',
-              color: '#e2e8f0',
+              background: '#f8fafc',
+              color: '#1f2937',
               padding: 12,
               borderRadius: 6,
               overflow: 'auto',
+              border: '1px solid #e5e7eb',
               margin: '6px 0 0 0',
             }}
           >

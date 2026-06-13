@@ -69,7 +69,7 @@ export default function KeyboardShortcuts() {
     return pendingG ? (
       <div style={{
         position: 'fixed', bottom: 20, left: 20, zIndex: 8000,
-        background: '#1e293b', color: '#fff',
+        background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
         padding: '6px 12px', borderRadius: 4, fontSize: 11, fontWeight: 700,
       }}>
         g + ? · h=home · d=audits · k=KPIs

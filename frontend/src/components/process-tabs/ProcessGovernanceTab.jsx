@@ -279,7 +279,7 @@ export default function ProcessGovernanceTab({ process, dept }) {
 
             {/* Decision Path Example */}
             <h4 style={{ margin: 'var(--spacing-lg) 0 var(--spacing-sm)' }}>Decision Path (XGBoost Tree #1)</h4>
-            <div style={{ background: '#1a1a2e', borderRadius: 'var(--border-radius)', padding: 'var(--spacing-md)', color: '#e2e8f0', fontFamily: 'monospace', fontSize: 12, lineHeight: 2, overflow: 'auto' }}>
+            <div style={{ background: '#f8fafc', borderRadius: 'var(--border-radius)', padding: 'var(--spacing-md)', color: '#e2e8f0', fontFamily: 'monospace', fontSize: 12, lineHeight: 2, overflow: 'auto' }}>
               <div>{'IF promo_flag == 1:'}</div>
               <div style={{ paddingLeft: 20 }}>{'IF lag_7 > 500:'}</div>
               <div style={{ paddingLeft: 40 }}>{'IF holiday == 1:'}</div>

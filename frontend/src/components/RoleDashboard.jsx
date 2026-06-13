@@ -300,7 +300,7 @@ const s = {
   chartTitle: { fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 6 },
   plotlyPlaceholder: { padding: 10, background: '#fff', borderRadius: 4, minHeight: 180, display: 'flex', flexDirection: 'column', gap: 6 },
   plotlyBadge: { alignSelf: 'flex-start', padding: '2px 8px', background: '#fef3c7', borderRadius: 10, fontSize: 9, fontWeight: 600, color: '#92400e' },
-  plotlyPre: { background: '#1f2937', color: '#d1d5db', padding: 6, borderRadius: 4, fontSize: 9, overflow: 'auto', maxHeight: 100 },
+  plotlyPre: { background: '#f8fafc', color: '#475569', border: '1px solid #e5e7eb', padding: 6, borderRadius: 4, fontSize: 9, overflow: 'auto', maxHeight: 100 },
   plotlyHint: { fontSize: 9, color: '#888', fontStyle: 'italic' },
   reportsSection: { marginTop: 12 },
   sectionTitle: { fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 6 },

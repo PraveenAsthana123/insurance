@@ -747,7 +747,7 @@ function TechStackTab() {
         <SectionHeader title="requirements.txt" subtitle="Pinned version ranges for reproducible builds" />
         <div style={{ position: 'relative' }}>
           <pre style={{
-            background: '#0f172a', color: '#e2e8f0', padding: '20px', borderRadius: 'var(--border-radius-lg)',
+            background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb', padding: '20px', borderRadius: 'var(--border-radius-lg)',
             fontSize: 12, lineHeight: 1.7, overflowX: 'auto',
             maxHeight: showFull ? 'none' : 340,
             overflow: showFull ? 'visible' : 'hidden',

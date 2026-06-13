@@ -121,12 +121,12 @@ export default function ProcessesPage() {
 
           {/* Watchdog log tail */}
           {data.watchdog_log_tail?.length > 0 && (
-            <div style={{ background: '#1f2937', color: '#e5e7eb', padding: 12, borderRadius: 6, fontFamily: 'monospace', fontSize: 11 }}>
-              <div style={{ fontWeight: 700, marginBottom: 6, color: '#9ca3af' }}>
+            <div style={{ background: '#f8fafc', color: '#334155', padding: 12, borderRadius: 6, fontFamily: 'monospace', fontSize: 11, border: '1px solid #e5e7eb' }}>
+              <div style={{ fontWeight: 700, marginBottom: 6, color: '#475569' }}>
                 Watchdog log tail (last {data.watchdog_log_tail.length} lines):
               </div>
               {data.watchdog_log_tail.map((line, i) => (
-                <div key={i} style={{ padding: '2px 0', borderBottom: '1px solid #374151' }}>{line}</div>
+                <div key={i} style={{ padding: '2px 0', borderBottom: '1px solid #e5e7eb' }}>{line}</div>
               ))}
             </div>
           )}

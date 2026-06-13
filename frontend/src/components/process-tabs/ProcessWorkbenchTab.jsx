@@ -146,7 +146,7 @@ function TwoCol({ left, right }) {
 /* ─── OUTPUT BOX ─── */
 function OutputBox({ lines }) {
   return (
-    <div style={{ background: '#0f172a', borderRadius: 8, padding: '12px 16px', marginTop: 10, fontFamily: 'monospace', fontSize: 12 }}>
+    <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 8, padding: '12px 16px', marginTop: 10, fontFamily: 'monospace', fontSize: 12 }}>
       {lines.map((l, i) => (
         <div key={i} style={{ color: l.startsWith('✓') ? '#34d399' : l.startsWith('⚠') ? '#fbbf24' : '#94a3b8', marginBottom: 2 }}>{l}</div>
       ))}
@@ -1202,14 +1202,14 @@ export default function ProcessWorkbenchTab() {
       ))}
 
       {/* ── TRANSACTION HISTORY ── */}
-      <div style={{ background: '#0f172a', borderRadius: 12, padding: 16, marginTop: 20 }}>
+      <div style={{ background: '#f8fafc', border: '1px solid #e5e7eb', borderRadius: 12, padding: 16, marginTop: 20 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
           <div style={{ color: '#94a3b8', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1 }}>
             ■ Transaction History
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
             <button onClick={() => setLog([])}
-              style={{ background: '#1e293b', color: '#64748b', border: '1px solid #334155', borderRadius: 6, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>
+              style={{ background: '#f1f5f9', color: '#475569', border: '1px solid #334155', borderRadius: 6, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>
               Clear Log
             </button>
             <button onClick={() => {

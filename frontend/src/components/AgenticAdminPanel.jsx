@@ -909,7 +909,7 @@ function AgenticAdminPanel() {
             {blueprint.process_summary}
           </div>
           <pre style={{
-            fontSize: 11, lineHeight: 1.6, background: '#0f172a', color: '#e2e8f0',
+            fontSize: 11, lineHeight: 1.6, background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
             padding: 12, borderRadius: 4, overflowX: 'auto', whiteSpace: 'pre-wrap',
           }}>{blueprint.flowchart_ascii}</pre>
         </Section>
@@ -918,7 +918,7 @@ function AgenticAdminPanel() {
     return (
       <Section title="Flowchart · execution graph" accent="#3b82f6">
         <pre style={{
-          fontSize: 10, lineHeight: 1.4, background: '#0f172a', color: '#e2e8f0',
+          fontSize: 10, lineHeight: 1.4, background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
           padding: 12, borderRadius: 4, overflowX: 'auto',
         }}>{`        ┌──────────────────┐
         │   User / Event   │
@@ -1354,7 +1354,7 @@ Guards: max_steps=${selectedAgent?.max_steps || 10} · timeout=${selectedAgent?.
       {toast && (
         <div style={{
           position: 'fixed', bottom: 20, right: 20, padding: 12,
-          background: '#1e293b', color: '#fff', fontSize: 12, borderRadius: 4,
+          background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb', fontSize: 12, borderRadius: 4,
           boxShadow: '0 4px 12px rgba(0,0,0,0.15)', zIndex: 1000,
         }}>{toast}</div>
       )}

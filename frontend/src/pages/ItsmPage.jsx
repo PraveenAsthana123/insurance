@@ -74,7 +74,8 @@ export default function ItsmPage() {
       }}>
         <h2 style={{ margin: '0 0 16px', fontSize: 18 }}>Review AI value</h2>
         <div style={{
-          background: '#1a1a2e', color: '#fff', borderRadius: 12, padding: 14,
+          background: '#ecfdf5', color: '#065f46',
+          borderLeft: '5px solid #10b981', borderRadius: 12, padding: 14,
           fontSize: 13, marginBottom: 18,
         }}>
           {perf

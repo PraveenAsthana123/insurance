@@ -452,7 +452,7 @@ function ObservabilitySection() {
       </div>
       {/* Architect flow diagram (ASCII) */}
       <div style={{
-        padding: 12, marginBottom: 10, background: '#0f172a', color: '#e2e8f0',
+        padding: 12, marginBottom: 10, background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
         borderRadius: 4, fontFamily: 'monospace', fontSize: 10, lineHeight: 1.5,
         whiteSpace: 'pre',
       }}>
@@ -722,7 +722,7 @@ function ForcedSequenceSection() {
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>🔐 The 16-field golden-rule audit row (§83.6 + §57.6.1)</div>
         <div style={{
-          padding: 10, background: '#0f172a', color: '#cbd5e1',
+          padding: 10, background: '#f8fafc', color: '#475569', border: '1px solid #e5e7eb',
           borderRadius: 4, fontFamily: 'monospace', fontSize: 10,
           display: 'flex', flexWrap: 'wrap', gap: 4,
         }}>
@@ -774,7 +774,7 @@ function FooterCatalog() {
   return (
     <div style={{
       marginTop: 16, padding: '10px 14px',
-      background: '#0f172a', color: '#cbd5e1',
+      background: '#f8fafc', color: '#475569', border: '1px solid #e5e7eb',
       borderRadius: 4, fontSize: 11,
     }}>
       <div style={{ fontWeight: 700, color: '#fff', marginBottom: 4 }}>
