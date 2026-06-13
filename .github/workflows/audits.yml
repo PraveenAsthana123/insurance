@@ -163,6 +163,15 @@ jobs:
       - name: DRILL · §137 audit regex correctness · meta-drill (10 steps · 4 NEG · §57.7 gap noted)
         run: python3 tests/drills/drill_no_black_bg_audit.py
 
+      - name: DRILL · auto-fix-worker 47-file overreach prevention (8 steps · 3 NEG · §50 + §55)
+        # Drills a global script · skipped when ~/.claude is not present in CI
+        run: |
+          if [ -f "$HOME/.claude/scripts/agent-auto-fix-worker.py" ]; then
+            python3 tests/drills/drill_auto_fix_worker_overreach.py
+          else
+            echo "SKIP · ~/.claude/scripts/agent-auto-fix-worker.py not present in CI runner"
+          fi
+
       # NOTE: drill_advisor_cache.py + drill_checklist_cache.py + drill_top1pct_cache.py
       # SKIPPED in CI · all require FastAPI backend running on :8001. Run locally
       # + after deploy. Future: spin up backend service container to gate them here too.
