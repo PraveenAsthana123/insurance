@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-13T19:35:01Z",
+  "ts": "2026-06-13T19:45:01Z",
   "cron_logs": {
     "advisor_cache_refresh.log": {
       "size": 1216,
@@ -53,11 +53,11 @@
       ]
     },
     "auto-next.log": {
-      "size": 174774,
-      "last_modified": "2026-06-13T19:35:01Z",
+      "size": 175298,
+      "last_modified": "2026-06-13T19:45:01Z",
       "tail": [
-        "[dispatcher] cooldown \u00b7 stopping chain \u00b7 cron will fire again",
-        "[dispatcher] 2026-06-13T19:35:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
+        "[dispatcher] 2026-06-13T19:45:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
@@ -80,17 +80,17 @@
       ]
     },
     "backend.log": {
-      "size": 4041581,
-      "last_modified": "2026-06-13T19:32:20Z",
+      "size": 4042741,
+      "last_modified": "2026-06-13T19:40:06Z",
       "tail": [
-        "{\"timestamp\": \"2026-06-13T19:30:24.537391+00:00\", \"correlation_id\": \"ee89d5b9923c477e\", \"event\": \"http.request\", \"path\": \"/api/v2/auth/identity\", \"method\": \"GET\", \"status\": 404, \"latency_ms\": 7}",
-        "{\"timestamp\": \"2026-06-13T19:32:20.090309+00:00\", \"correlation_id\": \"4a4234901922430b\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 3525}",
-        "{\"timestamp\": \"2026-06-13T19:32:20.219273+00:00\", \"correlation_id\": \"8404e07165a74140\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 3}"
+        "{\"timestamp\": \"2026-06-13T19:40:02.388336+00:00\", \"correlation_id\": \"da5d0c58a95b4685\", \"event\": \"http.request\", \"path\": \"/bot/ask\", \"method\": \"POST\", \"status\": 404, \"latency_ms\": 14}",
+        "{\"timestamp\": \"2026-06-13T19:40:02.405211+00:00\", \"correlation_id\": \"f8719ee09a1648e8\", \"event\": \"http.request\", \"path\": \"/bot/ask\", \"method\": \"POST\", \"status\": 404, \"latency_ms\": 10}",
+        "{\"timestamp\": \"2026-06-13T19:40:06.935064+00:00\", \"correlation_id\": \"5d0ded325bd74605\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4589}"
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1074604,
-      "last_modified": "2026-06-13T19:35:01Z",
+      "size": 1074914,
+      "last_modified": "2026-06-13T19:45:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -98,8 +98,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 14540547,
-      "last_modified": "2026-06-13T19:27:34Z",
+      "size": 14548762,
+      "last_modified": "2026-06-13T19:36:24Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -134,21 +134,21 @@
       ]
     },
     "fix_all_pending.cron.log": {
-      "size": 48594,
-      "last_modified": "2026-06-13T19:30:01Z",
+      "size": 49128,
+      "last_modified": "2026-06-13T19:45:02Z",
       "tail": [
-        "[2026-06-13 13:30:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
+        "[2026-06-13 13:45:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
         "/mnt/deepa/insur_project/scripts/fix_all_pending_loop.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  state[\"last_run_utc\"] = datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")"
       ]
     },
     "fix_all_pending.log": {
-      "size": 22353,
-      "last_modified": "2026-06-13T19:30:01Z",
+      "size": 22548,
+      "last_modified": "2026-06-13T19:45:02Z",
       "tail": [
-        "[2026-06-13 13:30:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
-        "[2026-06-13 13:30:01 MDT] open tasks: 0 \u00b7 all tasks: 16",
-        "[2026-06-13 13:30:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
+        "[2026-06-13 13:45:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
+        "[2026-06-13 13:45:02 MDT] open tasks: 0 \u00b7 all tasks: 16",
+        "[2026-06-13 13:45:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
       ]
     },
     "fix_all_quick.log": {
@@ -778,12 +778,12 @@
       ]
     },
     "pending_push.log": {
-      "size": 190970,
-      "last_modified": "2026-06-13T19:30:01Z",
+      "size": 191139,
+      "last_modified": "2026-06-13T19:45:01Z",
       "tail": [
-        "[2026-06-13T19:30:01Z] push task",
-        "[2026-06-13T19:30:01Z] skip \u2014 no origin remote configured",
-        "[2026-06-13T19:30:01Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-13T19:45:01Z] push task",
+        "[2026-06-13T19:45:01Z] skip \u2014 no origin remote configured",
+        "[2026-06-13T19:45:01Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "pending_reports-cleanup.log": {
@@ -812,12 +812,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 52740,
-      "last_modified": "2026-06-13T19:34:02Z",
+      "size": 53055,
+      "last_modified": "2026-06-13T19:44:02Z",
       "tail": [
-        "[2026-06-13 13:30:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 13:32:01 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 13:34:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-13 13:40:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 13:42:01 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 13:44:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -848,12 +848,12 @@
       ]
     },
     "rag_chunking.log": {
-      "size": 47581,
-      "last_modified": "2026-06-13T19:35:01Z",
+      "size": 47619,
+      "last_modified": "2026-06-13T19:35:04Z",
       "tail": [
-        "[2026-06-13T19:05:01Z] running chunking sweep",
         "chunked 4959 docs, wrote 0 new chunks",
-        "[2026-06-13T19:35:01Z] running chunking sweep"
+        "[2026-06-13T19:35:01Z] running chunking sweep",
+        "chunked 4959 docs, wrote 0 new chunks"
       ]
     },
     "rag_deepeval.log": {
@@ -866,20 +866,20 @@
       ]
     },
     "rag_embedding.log": {
-      "size": 56864,
-      "last_modified": "2026-06-13T19:10:04Z",
+      "size": 56960,
+      "last_modified": "2026-06-13T19:40:02Z",
       "tail": [
-        "[2026-06-13T19:10:02Z] embedding sweep",
+        "[2026-06-13T19:40:02Z] embedding sweep",
         "chunks=33139 embedded=33139 todo=0",
         "embedded 0 new chunks"
       ]
     },
     "rag_guardrail.log": {
-      "size": 114992,
-      "last_modified": "2026-06-13T19:20:01Z",
+      "size": 115128,
+      "last_modified": "2026-06-13T19:40:02Z",
       "tail": [
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl",
-        "[2026-06-13T19:20:01Z] guardrail probes",
+        "[2026-06-13T19:40:02Z] guardrail probes",
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl"
       ]
     },
@@ -929,21 +929,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 179250,
-      "last_modified": "2026-06-13T19:35:01Z",
+      "size": 180310,
+      "last_modified": "2026-06-13T19:45:01Z",
       "tail": [
-        "[2026-06-13 13:34:01 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:34:31 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:35:01 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 13:44:01 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:44:31 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:45:01 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 299248,
-      "last_modified": "2026-06-13T19:35:01Z",
+      "size": 300308,
+      "last_modified": "2026-06-13T19:45:01Z",
       "tail": [
-        "[2026-06-13 13:34:01 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:34:31 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:35:01 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 13:44:01 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:44:31 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:45:01 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -974,17 +974,17 @@
       ]
     },
     "vite_3210.log": {
-      "size": 126130,
-      "last_modified": "2026-06-13T19:11:21Z",
+      "size": 126252,
+      "last_modified": "2026-06-13T19:37:14Z",
       "tail": [
-        "1:07:22 PM [vite] hmr invalidate /src/pages/bank/BankUseCasePage.jsx Could not Fast Refresh (\"apiProbe\" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports",
-        "1:07:22 PM [vite] hmr update /src/App.jsx",
-        "1:11:21 PM [vite] page reload dist/index.html"
+        "1:11:21 PM [vite] page reload dist/index.html",
+        "1:36:45 PM [vite] hmr update /src/pages/bank/BankSidebar.jsx",
+        "1:37:14 PM [vite] hmr update /src/pages/bank/BankSubMenu.jsx"
       ]
     },
     "work_tracker.log": {
-      "size": 354738,
-      "last_modified": "2026-06-13T19:30:02Z",
+      "size": 354948,
+      "last_modified": "2026-06-13T19:40:02Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=375)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=375)",
