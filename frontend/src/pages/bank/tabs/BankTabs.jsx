@@ -99,16 +99,27 @@ function DataTable({ columns, rows, empty = '—' }) {
   );
 }
 
+const CARD_GRID_LIGHTS = [
+  { bg: '#eff6ff', border: '#93c5fd' },
+  { bg: '#f0fdf4', border: '#86efac' },
+  { bg: '#fffbeb', border: '#fcd34d' },
+  { bg: '#fdf2f8', border: '#f9a8d4' },
+  { bg: '#f5f3ff', border: '#c4b5fd' },
+  { bg: '#ecfeff', border: '#67e8f9' },
+];
+
 function CardGrid({ cards, onSelect, hubColor = '#3b82f6' }) {
   return (
     <div style={{
       display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12,
     }}>
-      {cards.map((c) => (
+      {cards.map((c, i) => {
+        const tone = CARD_GRID_LIGHTS[i % CARD_GRID_LIGHTS.length];
+        return (
         <button key={c.id} onClick={() => onSelect(c.id)}
           style={{
             padding: 14, textAlign: 'left', cursor: 'pointer',
-            background: '#fff', border: `2px solid ${c.color || hubColor}`,
+            background: tone.bg, border: `2px solid ${c.color || tone.border || hubColor}`,
             borderRadius: 10, transition: 'transform 0.15s, box-shadow 0.15s',
           }}
           onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; }}
@@ -118,7 +129,8 @@ function CardGrid({ cards, onSelect, hubColor = '#3b82f6' }) {
           <div style={{ fontWeight: 700, fontSize: 13, color: c.color || hubColor, marginBottom: 4 }}>{c.label}</div>
           {c.desc && <div style={{ fontSize: 11, color: '#64748b' }}>{c.desc}</div>}
         </button>
-      ))}
+        );
+      })}
     </div>
   );
 }

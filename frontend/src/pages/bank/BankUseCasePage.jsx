@@ -3135,7 +3135,8 @@ function TabCharter({ tab, color, proc, dept, focusKind, focusLabel }) {
             }}>{r.icon} {r.label}</div>
             <div style={{ color: '#0f172a', lineHeight: 1.5 }}>{r.text}</div>
           </div>
-        ))}
+          );
+        })}
         {/* Objectives & Goals — full-width row */}
         <div style={{
           gridColumn: '1 / -1',
@@ -4669,8 +4670,9 @@ function VisualizationSlot({ tab, sub, proc }) {
         gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
       }}>
         <div style={{
-          padding: 12, background: '#fff',
-          border: `1px solid ${tab.color}33`, borderRadius: 6,
+          padding: 12, background: cardListTone(0).bg,
+          border: `1px solid ${cardListTone(0).border}`, borderRadius: 6,
+          borderLeft: `4px solid ${tab.color}`,
         }}>
           <div style={{
             fontSize: 11, fontWeight: 700, color: tab.color, marginBottom: 6,
@@ -4684,8 +4686,9 @@ function VisualizationSlot({ tab, sub, proc }) {
           </div>
         </div>
         <div style={{
-          padding: 12, background: '#fff',
-          border: `1px solid ${tab.color}33`, borderRadius: 6,
+          padding: 12, background: cardListTone(1).bg,
+          border: `1px solid ${cardListTone(1).border}`, borderRadius: 6,
+          borderLeft: `4px solid ${tab.color}`,
         }}>
           <div style={{
             fontSize: 11, fontWeight: 700, color: tab.color, marginBottom: 6,
@@ -5938,10 +5941,12 @@ function DashboardGridSection({ color, proc, tab }) {
         display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 8,
         marginBottom: 10,
       }}>
-        {tiles.map((t) => (
+        {tiles.map((t, i) => {
+          const tone = cardListTone(i);
+          return (
           <div key={t.label} style={{
-            padding: 12, background: '#fff',
-            border: `1px solid ${t.color}55`,
+            padding: 12, background: tone.bg,
+            border: `1px solid ${tone.border}`,
             borderLeft: `4px solid ${t.color}`,
             borderRadius: 6,
           }}>
@@ -6389,18 +6394,20 @@ function endpointsFor(primary) {
 }
 
 // Renders database + API for a single resource (tab or runtime layer).
-function ResourceCard({ resource, color, label, icon, ownership }) {
+function ResourceCard({ resource, color, label, icon, ownership, index = 0 }) {
   if (!resource) return null;
+  const tone = cardListTone(index);
   return (
     <details style={{
-      marginBottom: 6, background: '#fff',
-      border: `1px solid ${color}33`, borderLeft: `4px solid ${color}`,
+      marginBottom: 6, background: tone.bg,
+      border: `1px solid ${tone.border}`, borderLeft: `4px solid ${color || tone.left}`,
       borderRadius: 4,
     }}>
       <summary style={{
         cursor: 'pointer', padding: '8px 10px',
         fontSize: 12, fontWeight: 700, color: '#0f172a',
         display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap',
+        background: tone.chipBg,
       }}>
         <span>{icon}</span>
         <strong>{label}</strong>
@@ -6753,6 +6760,7 @@ function DatabaseAndApiSection({ color, tab }) {
             label={tab.label + ' (primary)'}
             icon="📋"
             ownership={OWNERSHIP_MATRIX[tab.id]}
+            index={0}
           />
         </>
       )}
@@ -6763,7 +6771,7 @@ function DatabaseAndApiSection({ color, tab }) {
             fontSize: 10, color, fontWeight: 700, marginTop: 10, marginBottom: 6,
             textTransform: 'uppercase', letterSpacing: '0.05em',
           }}>⚙ Runtime-layer resources · {relevantLayers.length} relevant of 9</div>
-          {relevantLayers.map((l) => (
+          {relevantLayers.map((l, i) => (
             <ResourceCard
               key={l.id}
               resource={LAYER_DATABASE[l.id]}
@@ -6771,6 +6779,7 @@ function DatabaseAndApiSection({ color, tab }) {
               label={l.title}
               icon={l.icon}
               ownership={OWNERSHIP_MATRIX[l.id]}
+              index={i + 1}
             />
           ))}
         </>
