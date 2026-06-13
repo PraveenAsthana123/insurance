@@ -5666,3 +5666,6 @@ error: tests/drills/drill_adapters_endpoint.py: patch does not apply
 2026-06-13T15:03:42Z | auto-fix-worker | start        | T-loop-1781363021-3 | role=error target=jobs/logs/rag_cache.log
 2026-06-13T15:03:42Z | auto-fix-worker | classify     | T-loop-1781363021-3 | tier=small risk=low council=single
 2026-06-13T15:03:45Z | auto-fix-worker | validate     | T-loop-1781363021-3 | ok: no validator for jobs/logs/rag_cache.log
+2026-06-13T15:03:46Z | auto-fix-worker | commit       | T-loop-1781363021-3 | ok sha=aa2f2963c72d4af10d1adc0f7966b299d520d25c
+2026-06-13T15:03:46Z | auto-fix-loop |   → verdict=auto_committed
+2026-06-13T15:03:46Z | auto-fix-loop | iteration done: ok=1 queued=0 fail=2

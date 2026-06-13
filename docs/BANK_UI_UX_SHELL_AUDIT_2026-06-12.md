@@ -404,4 +404,23 @@ User feedback: check other UI errors.
 The bank pages render non-blank and without React page errors. The bank AI catalog preview no longer depends on a live taxonomy endpoint for initial render.
 
 
+## Main Menu Workspace Stability Pass
+
+User feedback: clicking each main-menu link should not change the overall UI shell; all module content must render only in the content/workspace area, with one component per row.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Bank workspace route | Added `/bank/workspace?module=...` for platform and AI catalog entries that do not have a dedicated bank page. |
+| Main menu links | Repointed platform module and AI catalog links from top-level app routes to bank-workspace routes so the blue menu, maroon sub-menu, and workspace layout remain stable. |
+| Workspace component rows | Added a row-based module renderer with objective, horizontal Input -> Process -> Output -> Visualization flow, differentiated card colors, and active action controls. |
+| UI policy | Added the bank main-menu workspace navigation policy to prevent future links from replacing the shell. |
+
+### UX Verdict
+
+Main-menu clicks now update only the workspace content for platform/AI-catalog items. The bank shell remains fixed, and module content is displayed as one component per row instead of changing the whole application UI.
+
+
+
 <!-- POS drill marker · safe file only · should auto-commit -->

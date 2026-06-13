@@ -45,6 +45,7 @@ import { BankScorecardPage } from './pages/bank/BankScorecardPage';
 import { BankAgenticPage } from './pages/bank/BankAgenticPage';
 import { BankPromptsPage } from './pages/bank/BankPromptsPage';
 import { BankFrameworkPage } from './pages/bank/BankFrameworkPage';
+import { BankWorkspaceModulePage } from './pages/bank/BankWorkspaceModulePage';
 
 // Lazy-load the heavy pages. ChartShowcase pulls Plotly+ECharts+Leaflet
 // (~6MB of vendor JS); PhaseDetailPage pulls jspdf+html2canvas on PDF
@@ -251,6 +252,7 @@ export default function App() {
           <Route path="agentic" element={<BankAgenticPage />} />
           <Route path="prompts" element={<BankPromptsPage />} />
           <Route path="framework" element={<BankFrameworkPage />} />
+          <Route path="workspace" element={<BankWorkspaceModulePage />} />
         </Route>
         <Route path="/itsm" element={<ItsmPage />} />
         <Route path="/eai-os" element={<EaiOsPage />} />
