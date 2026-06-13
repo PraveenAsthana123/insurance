@@ -26,6 +26,7 @@ This is the single entry point for project governance, architecture, testing, AP
 | `docs/GLOBAL_INPUT_PERSISTENCE_POLICY.md` | Mandatory policy for saving meaningful user inputs to `user_input_events` with tenant, audit, redaction, and downstream lineage. |
 | `docs/UI_GLOBAL_POLICY.md` | React/Next.js frontend policy: lazy loading, freshness, status, SEO, accessibility, debugability. |
 | `docs/NO_BLACK_BACKGROUND_GLOBAL_POLICY.md` | Global frontend policy blocking black/near-black backgrounds in content, workspace, card, table-header, component-header, dashboard, and modal surfaces. |
+| `docs/OPERATOR_NEXT_HANDLING_GLOBAL_POLICY.md` | Global §138 policy governing how Claude responds to operator-typed directives (`next` · `fix all` · `create plan and fix all` · `check all pending` · `push`). Mandates 10-dim sweep + plan + autonomous execution per §42 safe-allowlist + §138.8 report shape. |
 | `docs/USER_APPROVAL_POLICY.md` | User standing all-approval policy for safe repo-local work; tool/platform approval only for hard gates. |
 | `docs/NO_APPROVAL_AUTONOMY_POLICY.md` | Agent autonomy policy: do safe repo-local work without asking; preserve only hard tool/platform gates. |
 | `docs/CLAUDE_AUTONOMY_APPROVAL_POLICY.md` | Claude-specific safe local autonomy and approval policy. |
