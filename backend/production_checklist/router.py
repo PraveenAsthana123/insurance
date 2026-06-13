@@ -359,15 +359,68 @@ def health():
             "n_sections": 8}
 
 
+# Iter 95.6 · TTL cache · same pattern as missing-items-advisor (commit 67e2b211).
+# Sections are computed from static file scans · safe to cache 60s.
+# §138.11 perf budget: keep dispatcher tick under 30s sweep budget.
+import os as _os
+import time as _time
+
+_CHECKLIST_CACHE: dict = {"ts": 0.0, "full": None, "summary": None}
+
+
+def _checklist_ttl() -> int:
+    try:
+        return max(0, int(_os.environ.get("INSUR_CHECKLIST_TTL", "60")))
+    except (TypeError, ValueError):
+        return 60
+
+
 @router.get("/full")
-def full():
+def full(force: bool = False):
+    ttl = _checklist_ttl()
+    now = _time.monotonic()
+    if (not force) and ttl > 0 and _CHECKLIST_CACHE["full"] is not None \
+            and (now - _CHECKLIST_CACHE["ts"]) < ttl:
+        cached = dict(_CHECKLIST_CACHE["full"])
+        cached["cache_age_s"] = round(now - _CHECKLIST_CACHE["ts"], 2)
+        cached["cache_hit"] = True
+        return cached
+
     sections = all_sections()
-    summary = coverage_summary(sections)
-    return {"sections": sections, "summary": summary,
-            "spec": "Iter 60 · operator's 9-section multi-agent production checklist"}
+    summary_obj = coverage_summary(sections)
+    result = {"sections": sections, "summary": summary_obj,
+              "spec": "Iter 60 · operator's 9-section multi-agent production checklist",
+              "cache_age_s": 0.0, "cache_hit": False}
+    if ttl > 0:
+        _CHECKLIST_CACHE["ts"] = now
+        _CHECKLIST_CACHE["full"] = result
+        # /summary uses the same underlying data · cache it too
+        _CHECKLIST_CACHE["summary"] = {**summary_obj,
+                                       "cache_age_s": 0.0, "cache_hit": False}
+    return result
 
 
 @router.get("/summary")
-def summary():
+def summary(force: bool = False):
+    ttl = _checklist_ttl()
+    now = _time.monotonic()
+    if (not force) and ttl > 0 and _CHECKLIST_CACHE["summary"] is not None \
+            and (now - _CHECKLIST_CACHE["ts"]) < ttl:
+        cached = dict(_CHECKLIST_CACHE["summary"])
+        cached["cache_age_s"] = round(now - _CHECKLIST_CACHE["ts"], 2)
+        cached["cache_hit"] = True
+        return cached
+
     sections = all_sections()
-    return coverage_summary(sections)
+    summary_obj = coverage_summary(sections)
+    result = {**summary_obj, "cache_age_s": 0.0, "cache_hit": False}
+    if ttl > 0:
+        _CHECKLIST_CACHE["ts"] = now
+        _CHECKLIST_CACHE["summary"] = result
+        # Pre-warm /full too since they share the underlying scan
+        _CHECKLIST_CACHE["full"] = {
+            "sections": sections, "summary": summary_obj,
+            "spec": "Iter 60 · operator's 9-section multi-agent production checklist",
+            "cache_age_s": 0.0, "cache_hit": False,
+        }
+    return result

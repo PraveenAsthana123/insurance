@@ -355,12 +355,38 @@ def scoring():
     }
 
 
+# Iter 95.6 · TTL cache · same pattern as advisor + checklist.
+# Scores include in-memory perf snapshot · DB aggregates · file mtimes.
+# All change at minute-pace · 60s TTL is honest.
+import os as _os_tc
+import time as _time_tc
+
+_TOP1_CACHE: dict = {"ts": 0.0, "result": None}
+
+
+def _top1_ttl() -> int:
+    try:
+        return max(0, int(_os_tc.environ.get("INSUR_TOP1_TTL", "60")))
+    except (TypeError, ValueError):
+        return 60
+
+
 @router.get("/top-1pct-report")
-def top_1pct_report():
+def top_1pct_report(force: bool = False):
     """Compute a LIVE top-1% scorecard across all 11 dimensions.
 
     Pulls from existing endpoints + DB + falls back to scaffold per §57.7.
+    Cached 60s by default · ?force=true bypasses · INSUR_TOP1_TTL env override.
     """
+    ttl = _top1_ttl()
+    now = _time_tc.monotonic()
+    if (not force) and ttl > 0 and _TOP1_CACHE["result"] is not None \
+            and (now - _TOP1_CACHE["ts"]) < ttl:
+        cached = dict(_TOP1_CACHE["result"])
+        cached["cache_age_s"] = round(now - _TOP1_CACHE["ts"], 2)
+        cached["cache_hit"] = True
+        return cached
+
     import psycopg2.extras
     scores: list[dict] = []
 
@@ -600,7 +626,7 @@ def top_1pct_report():
     avg = round(sum(s["score"] for s in scores) / len(scores), 3)
     n_pass = sum(1 for s in scores if s["score"] >= 0.8)
 
-    return {
+    result = {
         "scorecard": scores,
         "summary": {
             "average_score": avg,
@@ -610,7 +636,13 @@ def top_1pct_report():
             "is_top_1_pct": avg >= 0.95,
         },
         "as_of": __import__("datetime").datetime.now().isoformat(),
+        "cache_age_s": 0.0,
+        "cache_hit": False,
     }
+    if ttl > 0:
+        _TOP1_CACHE["ts"] = now
+        _TOP1_CACHE["result"] = result
+    return result
 
 
 @router.get("/stats")
