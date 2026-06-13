@@ -145,3 +145,15 @@ jobs:
 
       - name: DATA PIPELINE · 5-phase per-process (11 assertions)
         run: python3 scripts/audit_data_pipeline.py
+
+      # ── DRILLS · §43 negative-assertion locked invariants ─────────
+
+      - name: DRILL · auto_next_loop wired to extra_scans (7 steps · 3 NEG · ADR-012)
+        run: python3 tests/drills/drill_auto_next_loop_wiring.py
+
+      - name: DRILL · history.jsonl rotation (8 steps · 3 NEG · §70 cron audit)
+        run: python3 tests/drills/drill_history_rotation.py
+
+      # NOTE: drill_advisor_cache.py SKIPPED in CI · requires FastAPI backend
+      # running on :8001. Runs locally + after deploy.
+      # Future: spin up backend service container to gate it here too.
