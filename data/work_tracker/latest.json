@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-13T04:10:01Z",
+  "ts": "2026-06-13T04:15:02Z",
   "cron_logs": {
     "agent_test_runner.log": {
       "size": 163385,
@@ -46,11 +46,11 @@
       ]
     },
     "auto-next.log": {
-      "size": 122404,
-      "last_modified": "2026-06-13T04:10:01Z",
+      "size": 122666,
+      "last_modified": "2026-06-13T04:15:02Z",
       "tail": [
         "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
-        "[dispatcher] 2026-06-13T04:10:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] 2026-06-13T04:15:02Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
@@ -73,17 +73,17 @@
       ]
     },
     "backend.log": {
-      "size": 3260382,
-      "last_modified": "2026-06-13T04:10:00Z",
+      "size": 3270374,
+      "last_modified": "2026-06-13T04:14:28Z",
       "tail": [
         "INFO:     Waiting for application shutdown.",
-        "{\"timestamp\": \"2026-06-13T04:10:00.357818+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
+        "{\"timestamp\": \"2026-06-13T04:14:28.504483+00:00\", \"level\": \"INFO\", \"logger\": \"main\", \"message\": \"Shutting down Insur Analytics Dashboard\", \"correlation_id\": \"\", \"taskName\": \"Task-2\"}",
         "INFO:     Application shutdown complete."
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1045929,
-      "last_modified": "2026-06-13T04:10:01Z",
+      "size": 1046084,
+      "last_modified": "2026-06-13T04:15:02Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -127,30 +127,30 @@
       ]
     },
     "fix_all_pending.cron.log": {
-      "size": 15486,
-      "last_modified": "2026-06-13T04:00:02Z",
+      "size": 16020,
+      "last_modified": "2026-06-13T04:15:02Z",
       "tail": [
-        "[2026-06-12 22:00:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
+        "[2026-06-12 22:15:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
         "/mnt/deepa/insur_project/scripts/fix_all_pending_loop.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  state[\"last_run_utc\"] = datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")"
       ]
     },
     "fix_all_pending.log": {
-      "size": 10263,
-      "last_modified": "2026-06-13T04:00:02Z",
+      "size": 10458,
+      "last_modified": "2026-06-13T04:15:02Z",
       "tail": [
-        "[2026-06-12 22:00:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
-        "[2026-06-12 22:00:02 MDT] open tasks: 0 \u00b7 all tasks: 16",
-        "[2026-06-12 22:00:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
+        "[2026-06-12 22:15:02 MDT] === fix_all_pending_loop \u00b7 tick start ===",
+        "[2026-06-12 22:15:02 MDT] open tasks: 0 \u00b7 all tasks: 16",
+        "[2026-06-12 22:15:02 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
       ]
     },
     "fix_all_quick.log": {
-      "size": 105200,
-      "last_modified": "2026-06-13T03:15:01Z",
+      "size": 105600,
+      "last_modified": "2026-06-13T04:15:02Z",
       "tail": [
         "workforce: fleet+ollama \u2192 /mnt/deepa/insur_project/data/registry/workforce_health.json",
-        "[2026-06-13T03:15:01Z] \u2713 workforce",
-        "[2026-06-13T03:15:01Z] report \u2192 /mnt/deepa/insur_project/jobs/reports/fix_all_20260613T031501Z.md"
+        "[2026-06-13T04:15:01Z] \u2713 workforce",
+        "[2026-06-13T04:15:01Z] report \u2192 /mnt/deepa/insur_project/jobs/reports/fix_all_20260613T041501Z.md"
       ]
     },
     "fix_all_weekly.log": {
@@ -181,12 +181,12 @@
       ]
     },
     "insurance_alignment_cron.log": {
-      "size": 55302,
-      "last_modified": "2026-06-13T03:12:01Z",
+      "size": 55534,
+      "last_modified": "2026-06-13T04:12:01Z",
       "tail": [
         "Insurance alignment audit: 312 checks, 0 failed",
-        "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0312.md",
-        "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0312.json"
+        "MD:   /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0412.md",
+        "JSON: /mnt/deepa/insur_project/jobs/reports/insurance/insurance_alignment_20260613_0412.json"
       ]
     },
     "insurance_audit_20260601T221059Z.log": {
@@ -559,8 +559,8 @@
       ]
     },
     "insurance_workforce_rollup_cron.log": {
-      "size": 47287,
-      "last_modified": "2026-06-13T03:13:01Z",
+      "size": 47487,
+      "last_modified": "2026-06-13T04:13:01Z",
       "tail": [
         "out: /mnt/deepa/insur_project/data/work_tracker/insurance_alignment.json",
         "insurance rollup: 262 caps \u00b7 1 maturity levels \u00b7 impl 0.0% \u00b7 audit green \u00b7 depts 21/22 (15 complete, 6 partial, 1 missing)",
@@ -744,12 +744,12 @@
       ]
     },
     "pending_push.log": {
-      "size": 180492,
-      "last_modified": "2026-06-13T04:00:02Z",
+      "size": 180661,
+      "last_modified": "2026-06-13T04:15:02Z",
       "tail": [
-        "[2026-06-13T04:00:02Z] push task",
-        "[2026-06-13T04:00:02Z] skip \u2014 no origin remote configured",
-        "[2026-06-13T04:00:02Z] to enable autopush: git remote add origin <your-url>"
+        "[2026-06-13T04:15:02Z] push task",
+        "[2026-06-13T04:15:02Z] skip \u2014 no origin remote configured",
+        "[2026-06-13T04:15:02Z] to enable autopush: git remote add origin <your-url>"
       ]
     },
     "pending_reports-cleanup.log": {
@@ -769,21 +769,21 @@
       ]
     },
     "process_watchdog.cron.log": {
-      "size": 1407,
-      "last_modified": "2026-06-13T01:18:40Z",
+      "size": 1758,
+      "last_modified": "2026-06-13T04:11:17Z",
       "tail": [
-        "/mnt/deepa/insur_project/scripts/process_watchdog.sh: line 42: 2455999 Killed                  BEV_CORS_ORIGINS=\"http://localhost:3000,http://localhost:3210,http://127.0.0.1:3000,http://127.0.0.1:3210\" INSUR_SKIP_MIGRATIONS=1 INSUR_DISABLE_PRESIDIO=1 TF_CPP_MIN_LOG_LEVEL=3 nohup \"$VENV\" scripts/launch_backend.py >> \"$ROOT/jobs/logs/backend.log\" 2>&1",
         "/mnt/deepa/insur_project/scripts/process_watchdog.sh: line 42: 583219 Killed                  BEV_CORS_ORIGINS=\"http://localhost:3000,http://localhost:3210,http://127.0.0.1:3000,http://127.0.0.1:3210\" INSUR_SKIP_MIGRATIONS=1 INSUR_DISABLE_PRESIDIO=1 TF_CPP_MIN_LOG_LEVEL=3 nohup \"$VENV\" scripts/launch_backend.py >> \"$ROOT/jobs/logs/backend.log\" 2>&1",
-        "/mnt/deepa/insur_project/scripts/process_watchdog.sh: line 42: 3661037 Killed                  BEV_CORS_ORIGINS=\"http://localhost:3000,http://localhost:3210,http://127.0.0.1:3000,http://127.0.0.1:3210\" INSUR_SKIP_MIGRATIONS=1 INSUR_DISABLE_PRESIDIO=1 TF_CPP_MIN_LOG_LEVEL=3 nohup \"$VENV\" scripts/launch_backend.py >> \"$ROOT/jobs/logs/backend.log\" 2>&1"
+        "/mnt/deepa/insur_project/scripts/process_watchdog.sh: line 42: 3661037 Killed                  BEV_CORS_ORIGINS=\"http://localhost:3000,http://localhost:3210,http://127.0.0.1:3000,http://127.0.0.1:3210\" INSUR_SKIP_MIGRATIONS=1 INSUR_DISABLE_PRESIDIO=1 TF_CPP_MIN_LOG_LEVEL=3 nohup \"$VENV\" scripts/launch_backend.py >> \"$ROOT/jobs/logs/backend.log\" 2>&1",
+        "/mnt/deepa/insur_project/scripts/process_watchdog.sh: line 42: 489496 Killed                  BEV_CORS_ORIGINS=\"http://localhost:3000,http://localhost:3210,http://127.0.0.1:3000,http://127.0.0.1:3210\" INSUR_SKIP_MIGRATIONS=1 INSUR_DISABLE_PRESIDIO=1 TF_CPP_MIN_LOG_LEVEL=3 nohup \"$VENV\" scripts/launch_backend.py >> \"$ROOT/jobs/logs/backend.log\" 2>&1"
       ]
     },
     "process_watchdog.log": {
-      "size": 23148,
-      "last_modified": "2026-06-13T04:08:02Z",
+      "size": 23337,
+      "last_modified": "2026-06-13T04:14:01Z",
       "tail": [
-        "[2026-06-12 22:04:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 22:06:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-12 22:08:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-12 22:10:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 22:12:01 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-12 22:14:01 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -832,12 +832,12 @@
       ]
     },
     "rag_embedding.log": {
-      "size": 53927,
-      "last_modified": "2026-06-13T04:10:01Z",
+      "size": 53984,
+      "last_modified": "2026-06-13T04:10:02Z",
       "tail": [
+        "[2026-06-13T04:10:01Z] embedding sweep",
         "chunks=33139 embedded=33139 todo=0",
-        "embedded 0 new chunks",
-        "[2026-06-13T04:10:01Z] embedding sweep"
+        "embedded 0 new chunks"
       ]
     },
     "rag_guardrail.log": {
@@ -859,11 +859,11 @@
       ]
     },
     "rag_token.log": {
-      "size": 22876,
-      "last_modified": "2026-06-13T03:15:01Z",
+      "size": 22962,
+      "last_modified": "2026-06-13T04:15:02Z",
       "tail": [
         "token usage: 2 models tallied for 2026-06-12",
-        "[2026-06-13T03:15:01Z] token usage tally",
+        "[2026-06-13T04:15:02Z] token usage tally",
         "token usage: 2 models tallied for 2026-06-12"
       ]
     },
@@ -895,21 +895,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 75802,
-      "last_modified": "2026-06-13T04:09:50Z",
+      "size": 76643,
+      "last_modified": "2026-06-13T04:14:48Z",
       "tail": [
-        "[2026-06-12 22:09:13 MDT] tick complete \u00b7 alive=2/3",
-        "[2026-06-12 22:09:43 MDT] backend DOWN port=8001 child_exit=1 restart_count=305",
-        "[2026-06-12 22:09:50 MDT] spawned backend pid=76006 backoff=5s"
+        "[2026-06-12 22:14:11 MDT] backend DOWN port=8001 child_exit=1 restart_count=309",
+        "[2026-06-12 22:14:18 MDT] spawned backend pid=558781 backoff=5s",
+        "[2026-06-12 22:14:48 MDT] tick complete \u00b7 alive=2/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 172904,
-      "last_modified": "2026-06-13T04:09:50Z",
+      "size": 175335,
+      "last_modified": "2026-06-13T04:14:48Z",
       "tail": [
-        "[2026-06-12 22:09:13 MDT] tick complete \u00b7 alive=2/3",
-        "[2026-06-12 22:09:43 MDT] backend DOWN port=8001 child_exit=1 restart_count=305",
-        "[2026-06-12 22:09:50 MDT] spawned backend pid=76006 backoff=5s"
+        "/mnt/deepa/insur_project/scripts/multi_supervisor.py:78: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  return datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")",
+        "[2026-06-12 22:14:48 MDT] tick complete \u00b7 alive=2/3"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -940,20 +940,20 @@
       ]
     },
     "vite_3210.log": {
-      "size": 83270,
-      "last_modified": "2026-06-13T04:02:29Z",
+      "size": 84045,
+      "last_modified": "2026-06-13T04:12:50Z",
       "tail": [
-        "10:00:25 PM [vite] hmr update /src/App.jsx",
-        "10:01:43 PM [vite] hmr update /src/pages/bank/BankChatPage.jsx",
-        "10:02:29 PM [vite] hmr update /src/pages/bank/BankHeader.jsx"
+        "10:12:50 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx",
+        "10:12:50 PM [vite] hmr update /src/pages/InsuranceCatalogPage.jsx, /src/components/GlobalCmdK.jsx",
+        "10:12:50 PM [vite] hmr update /src/pages/Dashboard.jsx, /src/pages/InsuranceCatalogPage.jsx, /src/pages/DepartmentPage.jsx, /src/pages/ProcessPage.jsx, /src/pages/AdminPage.jsx, /src/pages/ManagerPage.jsx, /src/pages/ManagerArchetypePage.jsx, /src/pages/TesterPage.jsx, /src/pages/DepartmentDossierPage.jsx, /src/pages/DataFlowPage.jsx, /src/components/admin-tabs/ManagerArchetypesTab.jsx, /src/components/manager-tabs/DataFlowTab.jsx, /src/components/dossier/DataFlowsSection.jsx"
       ]
     },
     "work_tracker.log": {
-      "size": 335313,
-      "last_modified": "2026-06-13T04:05:09Z",
+      "size": 335418,
+      "last_modified": "2026-06-13T04:10:02Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=96, fleet=361)",
-        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=96, fleet=361)",
+        "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=97, fleet=361)"
       ]
     }
@@ -984,6 +984,6 @@
     "latest": "e2e-20260602T013040Z-98243e"
   },
   "reports": {
-    "count": 1303
+    "count": 1304
   }
 }

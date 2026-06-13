@@ -34,6 +34,7 @@ function useBlueprint() {
 }
 
 const MAIN_MENU_WIDTH_KEY = 'bank.mainMenu.width';
+const NAV_BAND_WIDTH_KEY = 'bank.navBand.width';
 const SUB_MENU_HEIGHT_KEY = 'bank.subMenu.height';
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -52,26 +53,30 @@ function LayoutInner({ bp, collapsed, onToggle }) {
   const isTablet = width >= 700 && width < 1100;
   const effectiveCollapsed = isTablet ? true : collapsed;
   const [mainMenuWidth, setMainMenuWidth] = useState(() => readStoredNumber(MAIN_MENU_WIDTH_KEY, 320));
+  const [navBandWidth, setNavBandWidth] = useState(() => readStoredNumber(NAV_BAND_WIDTH_KEY, 628));
   const [subMenuHeight, setSubMenuHeight] = useState(() => readStoredNumber(SUB_MENU_HEIGHT_KEY, 220));
   const [resizing, setResizing] = useState(null);
 
   const resizeHandleSize = 8;
-  // Keep the workspace boundary fixed. Menu resizing only reallocates width
-  // inside this navigation band: main menu <-> sub-menu.
-  const navBandWidth = isTablet ? 384 : 628;
-  const minMainMenuWidth = effectiveCollapsed ? 72 : 240;
-  const maxMainMenuWidth = effectiveCollapsed ? 72 : Math.min(400, navBandWidth - resizeHandleSize - 240);
+  const defaultNavBandWidth = isTablet ? 384 : 628;
+  const minNavBandWidth = isTablet ? 320 : 420;
+  const maxNavBandWidth = Math.max(minNavBandWidth, width - (isTablet ? 420 : 560));
+  const clampedNavBandWidth = isTablet
+    ? clamp(navBandWidth, minNavBandWidth, maxNavBandWidth)
+    : clamp(navBandWidth, minNavBandWidth, maxNavBandWidth);
+  const minMainMenuWidth = effectiveCollapsed ? 72 : 220;
+  const maxMainMenuWidth = effectiveCollapsed ? 72 : Math.min(420, clampedNavBandWidth - resizeHandleSize - 180);
   const clampedMainMenuWidth = effectiveCollapsed
     ? 72
     : clamp(mainMenuWidth, minMainMenuWidth, maxMainMenuWidth);
-  const clampedSubMenuWidth = navBandWidth - clampedMainMenuWidth - resizeHandleSize;
+  const clampedSubMenuWidth = Math.max(160, clampedNavBandWidth - clampedMainMenuWidth - resizeHandleSize);
   const clampedSubMenuHeight = clamp(subMenuHeight, 160, 360);
 
   useEffect(() => {
     if (!resizing) return undefined;
     const previousCursor = document.body.style.cursor;
     const previousUserSelect = document.body.style.userSelect;
-    document.body.style.cursor = resizing === 'menuSplit' ? 'col-resize' : 'row-resize';
+    document.body.style.cursor = resizing === 'height' ? 'row-resize' : 'col-resize';
     document.body.style.userSelect = 'none';
 
     const onPointerMove = (event) => {
@@ -79,6 +84,10 @@ function LayoutInner({ bp, collapsed, onToggle }) {
         const next = clamp(event.clientX - (resizeHandleSize / 2), minMainMenuWidth, maxMainMenuWidth);
         setMainMenuWidth(next);
         try { localStorage.setItem(MAIN_MENU_WIDTH_KEY, String(Math.round(next))); } catch (e) { /* swallow */ }
+      } else if (resizing === 'navBand') {
+        const next = clamp(event.clientX - (resizeHandleSize / 2), minNavBandWidth, maxNavBandWidth);
+        setNavBandWidth(next);
+        try { localStorage.setItem(NAV_BAND_WIDTH_KEY, String(Math.round(next))); } catch (e) { /* swallow */ }
       } else {
         const headerHeight = 56;
         const mainMenuHeight = collapsed ? 64 : 260;
@@ -97,7 +106,7 @@ function LayoutInner({ bp, collapsed, onToggle }) {
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerup', onPointerUp);
     };
-  }, [collapsed, maxMainMenuWidth, minMainMenuWidth, resizeHandleSize, resizing]);
+  }, [collapsed, maxMainMenuWidth, maxNavBandWidth, minMainMenuWidth, minNavBandWidth, resizeHandleSize, resizing]);
 
   const shellGrid = isCompact
     ? {
@@ -105,7 +114,7 @@ function LayoutInner({ bp, collapsed, onToggle }) {
         gridTemplateRows: `${collapsed ? 64 : 260}px ${clampedSubMenuHeight}px 8px minmax(0, 1fr)`,
       }
     : {
-        gridTemplateColumns: `${navBandWidth}px minmax(0, 1fr)`,
+        gridTemplateColumns: `${clampedNavBandWidth}px ${resizeHandleSize}px minmax(0, 1fr)`,
         gridTemplateRows: 'minmax(0, 1fr)',
       };
 
@@ -158,40 +167,67 @@ function LayoutInner({ bp, collapsed, onToggle }) {
             </div>
           </>
         ) : (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: `${clampedMainMenuWidth}px ${resizeHandleSize}px ${clampedSubMenuWidth}px`,
-            gridTemplateRows: 'minmax(0, 1fr)',
-            minWidth: 0, minHeight: 0, overflow: 'hidden',
-          }}>
-            <BankSidebar bp={bp} collapsed={effectiveCollapsed} onToggle={onToggle} />
+          <>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: `${clampedMainMenuWidth}px ${resizeHandleSize}px ${clampedSubMenuWidth}px`,
+              gridTemplateRows: 'minmax(0, 1fr)',
+              minWidth: 0, minHeight: 0, overflow: 'hidden',
+            }}>
+              <BankSidebar bp={bp} collapsed={effectiveCollapsed} onToggle={onToggle} />
+              <div
+                role="separator"
+                aria-orientation="vertical"
+                aria-label="Resize main menu and sub-menu split"
+                title="Drag to resize main menu vs sub-menu"
+                onPointerDown={(event) => {
+                  event.preventDefault();
+                  setResizing('menuSplit');
+                }}
+                onDoubleClick={() => {
+                  setMainMenuWidth(isTablet ? 72 : 320);
+                  try { localStorage.setItem(MAIN_MENU_WIDTH_KEY, String(isTablet ? 72 : 320)); } catch (e) { /* swallow */ }
+                }}
+                style={{
+                  background: resizing === 'menuSplit' ? '#2563eb' : '#cbd5e1',
+                  cursor: 'col-resize', minWidth: resizeHandleSize, minHeight: 0,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  touchAction: 'none', zIndex: 2,
+                }}
+              >
+                <span style={{
+                  width: 3, height: 42, borderRadius: 999,
+                  background: resizing === 'menuSplit' ? '#fff' : '#64748b', opacity: 0.9,
+                }} />
+              </div>
+              <BankSubMenu bp={bp} />
+            </div>
             <div
               role="separator"
               aria-orientation="vertical"
-              aria-label="Resize main menu and sub-menu without changing workspace"
-              title="Drag to resize menu split; workspace stays fixed"
+              aria-label="Resize menu area and workspace"
+              title="Drag left to give workspace more space; drag right to widen menus"
               onPointerDown={(event) => {
                 event.preventDefault();
-                setResizing('menuSplit');
+                setResizing('navBand');
               }}
               onDoubleClick={() => {
-                setMainMenuWidth(isTablet ? 72 : 320);
-                try { localStorage.setItem(MAIN_MENU_WIDTH_KEY, String(isTablet ? 72 : 320)); } catch (e) { /* swallow */ }
+                setNavBandWidth(defaultNavBandWidth);
+                try { localStorage.setItem(NAV_BAND_WIDTH_KEY, String(defaultNavBandWidth)); } catch (e) { /* swallow */ }
               }}
               style={{
-                background: resizing ? '#2563eb' : '#cbd5e1',
+                background: resizing === 'navBand' ? '#2563eb' : '#cbd5e1',
                 cursor: 'col-resize', minWidth: resizeHandleSize, minHeight: 0,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 touchAction: 'none', zIndex: 2,
               }}
             >
               <span style={{
-                width: 3, height: 42, borderRadius: 999,
-                background: resizing ? '#fff' : '#64748b', opacity: 0.9,
+                width: 3, height: 56, borderRadius: 999,
+                background: resizing === 'navBand' ? '#fff' : '#64748b', opacity: 0.9,
               }} />
             </div>
-            <BankSubMenu bp={bp} />
-          </div>
+          </>
         )}
         <div data-workspace style={{ overflow: 'auto', padding: workspacePadding, minWidth: 0, minHeight: 0 }}>
           <Outlet context={{ bp }} />

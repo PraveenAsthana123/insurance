@@ -460,9 +460,9 @@ Required frontend behavior:
 - For critical inputs, show a clear error if persistence fails and the backend rejects processing.
 - Add E2E or component tests for high-value input surfaces such as Ask AI, chat, prompts, simulations, approvals, and feedback.
 
-## Bank Shell Fixed Workspace Resize Policy
+## Bank Shell Resizable Menu And Workspace Policy
 
-Menu resizing must not move or resize the workspace/content boundary. On desktop and tablet layouts, the blue main menu and maroon sub-menu resize inside a fixed navigation band; dragging the split reallocates width between those two menus only. The workspace column keeps the same x-position and width so charts, cards, flow, and forms do not reflow while the operator adjusts menu readability.
+Desktop and tablet bank layouts must provide two resize controls: an inner split handle between the blue main menu and maroon sub-menu, and an outer boundary handle between the full menu area and the workspace. Dragging the inner split reallocates width between menus. Dragging the outer boundary left gives more width to the workspace/content area; dragging it right widens the menus. Widths must persist in `localStorage` and stay clamped so the workspace remains usable.
 
 ## Bank Tab Component Review And Action Lifecycle Policy
 

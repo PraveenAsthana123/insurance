@@ -315,3 +315,21 @@ User feedback: remove black background blocks.
 
 The bank UI now avoids black/near-black background blocks while preserving readable dark text and clear blue active states.
 
+## Resizable Menu-To-Workspace Pass
+
+User feedback: main menu and sub-menu need resize features so the operator can give more space to the workspace/content side window.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Outer resize handle | Added a menu/workspace boundary handle; dragging left gives the workspace more width. |
+| Inner menu split | Kept the main-menu/sub-menu split handle so operators can rebalance blue vs maroon menu width. |
+| Persistence | Added `bank.navBand.width` to persist the full menu-area width alongside `bank.mainMenu.width`. |
+| Bounds | Added min/max clamps so the menu area can shrink for content focus without making navigation unusable. |
+| Reset | Double-clicking the outer boundary resets the menu area to the default width. |
+
+### UX Verdict
+
+Operators can now decide whether they need wider navigation or more workspace. The shell supports both: resize between main/sub-menu, then resize the whole menu band to return space to content.
+
