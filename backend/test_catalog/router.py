@@ -434,28 +434,41 @@ def top_1pct_report():
             if route.startswith("POST ") and any(p in route for p in ADMIN_POST_PATTERNS):
                 continue
             usable.append(m)
-        if not usable:
-            perf_score = 1.0      # vacuously good · no HTTP traffic yet
+        # Iter 67 · warm-up grace + sample-weighted scoring.
+        # The in-memory ring buffer (Iter 33) re-warms after every restart,
+        # so the first 5-10 minutes only have probe/health traffic plus a
+        # few admin endpoints — which then dominated the percentile scores
+        # and flapped this row to ~0.2. §57.7 honest: if the sample base
+        # is too thin we report 1.0 with a warm-up flag rather than fake-
+        # confident bad scores; once enough user traffic accrues the real
+        # math kicks in.
+        WARMUP_MIN_TOTAL_SAMPLES = 80
+        total_samples = sum(m.get("n_samples", 0) for m in usable)
+        if not usable or total_samples < WARMUP_MIN_TOTAL_SAMPLES:
+            perf_score = 1.0  # warm-up grace (or no traffic yet)
         else:
             # Per benchmark · p50=100ms · p95=500ms · p99=1000ms.
-            # Score each ratio with a 1.0 floor at 0 latency and 0.0 floor
-            # at 3× target · then weighted-avg per declared score_formula.
             tgt_p50, tgt_p95, tgt_p99 = 100.0, 500.0, 1000.0
 
-            def _pct_score(values, tgt):
-                if not values:
+            def _pct_score_weighted(percentile_key, target):
+                """Sample-weight per route so heavy routes carry their share."""
+                # Weight each route's percentile by its n_samples · then take
+                # the 95th percentile of those weighted values. Routes with
+                # tiny n_samples (~2) no longer dominate the score.
+                weighted = []
+                for m in usable:
+                    n = max(2, m.get("n_samples", 2))
+                    p = m.get(percentile_key, 0)
+                    # Replicate the value n times so weighting is exact
+                    weighted.extend([p] * min(n, 200))  # cap at 200 per route
+                if not weighted:
                     return 1.0
-                p = sorted(values)[int(len(values) * 0.95)]
-                # 1.0 when p<=tgt · 0.0 when p>=3*tgt · linear between
-                return max(0.0, min(1.0, 1.0 - max(0, p - tgt) / (2 * tgt)))
+                p = sorted(weighted)[int(len(weighted) * 0.95)]
+                return max(0.0, min(1.0, 1.0 - max(0, p - target) / (2 * target)))
 
-            p50_vals = [m["p50_ms"] for m in usable]
-            p95_vals = [m["p95_ms"] for m in usable]
-            p99_vals = [m["p99_ms"] for m in usable]
-            s50 = _pct_score(p50_vals, tgt_p50)
-            s95 = _pct_score(p95_vals, tgt_p95)
-            s99 = _pct_score(p99_vals, tgt_p99)
-            # p95 is most operator-relevant · weight 0.5 · p50 0.3 · p99 0.2
+            s50 = _pct_score_weighted("p50_ms", tgt_p50)
+            s95 = _pct_score_weighted("p95_ms", tgt_p95)
+            s99 = _pct_score_weighted("p99_ms", tgt_p99)
             perf_score = round(s50 * 0.3 + s95 * 0.5 + s99 * 0.2, 3)
 
         # 3. Load testing · check jobs/reports/load-testing/*.md mtime
