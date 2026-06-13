@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-13T19:20:01Z",
+  "ts": "2026-06-13T19:30:01Z",
   "cron_logs": {
     "advisor_cache_refresh.log": {
       "size": 1216,
@@ -53,11 +53,11 @@
       ]
     },
     "auto-next.log": {
-      "size": 173890,
-      "last_modified": "2026-06-13T19:20:01Z",
+      "size": 174463,
+      "last_modified": "2026-06-13T19:30:01Z",
       "tail": [
-        "[dispatcher] cooldown \u00b7 stopping chain \u00b7 cron will fire again",
-        "[dispatcher] 2026-06-13T19:20:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
+        "[dispatcher] 2026-06-13T19:30:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
@@ -80,17 +80,17 @@
       ]
     },
     "backend.log": {
-      "size": 4038569,
-      "last_modified": "2026-06-13T19:19:41Z",
+      "size": 4040564,
+      "last_modified": "2026-06-13T19:26:31Z",
       "tail": [
-        "{\"timestamp\": \"2026-06-13T19:15:07.760918+00:00\", \"correlation_id\": \"8eb4dfaf4f2d4c3f\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 6038}",
-        "{\"timestamp\": \"2026-06-13T19:19:41.586639+00:00\", \"correlation_id\": \"9752be23af5b4b20\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 5261}",
-        "{\"timestamp\": \"2026-06-13T19:19:41.739096+00:00\", \"correlation_id\": \"6b052da5e094437e\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 6}"
+        "{\"timestamp\": \"2026-06-13T19:25:05.590107+00:00\", \"correlation_id\": \"48b021030a6c4537\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4095}",
+        "{\"timestamp\": \"2026-06-13T19:26:31.829336+00:00\", \"correlation_id\": \"d0b8d3a10e2447a8\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 3560}",
+        "{\"timestamp\": \"2026-06-13T19:26:31.953316+00:00\", \"correlation_id\": \"bf2da7f011bd4152\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 5}"
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1074139,
-      "last_modified": "2026-06-13T19:20:01Z",
+      "size": 1074449,
+      "last_modified": "2026-06-13T19:30:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -98,8 +98,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 14532332,
-      "last_modified": "2026-06-13T19:18:44Z",
+      "size": 14540547,
+      "last_modified": "2026-06-13T19:27:34Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -134,21 +134,21 @@
       ]
     },
     "fix_all_pending.cron.log": {
-      "size": 48060,
-      "last_modified": "2026-06-13T19:15:01Z",
+      "size": 48594,
+      "last_modified": "2026-06-13T19:30:01Z",
       "tail": [
-        "[2026-06-13 13:15:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
+        "[2026-06-13 13:30:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean",
         "/mnt/deepa/insur_project/scripts/fix_all_pending_loop.py:79: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  state[\"last_run_utc\"] = datetime.utcnow().strftime(\"%Y-%m-%dT%H:%M:%SZ\")"
       ]
     },
     "fix_all_pending.log": {
-      "size": 22158,
-      "last_modified": "2026-06-13T19:15:01Z",
+      "size": 22353,
+      "last_modified": "2026-06-13T19:30:01Z",
       "tail": [
-        "[2026-06-13 13:15:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
-        "[2026-06-13 13:15:01 MDT] open tasks: 0 \u00b7 all tasks: 16",
-        "[2026-06-13 13:15:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
+        "[2026-06-13 13:30:01 MDT] === fix_all_pending_loop \u00b7 tick start ===",
+        "[2026-06-13 13:30:01 MDT] open tasks: 0 \u00b7 all tasks: 16",
+        "[2026-06-13 13:30:01 MDT] 0 open tasks \u00b7 loop idle \u00b7 exiting clean"
       ]
     },
     "fix_all_quick.log": {
@@ -812,12 +812,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 52236,
-      "last_modified": "2026-06-13T19:18:02Z",
+      "size": 52551,
+      "last_modified": "2026-06-13T19:28:02Z",
       "tail": [
-        "[2026-06-13 13:14:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 13:16:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 13:18:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-13 13:24:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 13:26:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 13:28:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -875,12 +875,12 @@
       ]
     },
     "rag_guardrail.log": {
-      "size": 114896,
+      "size": 114992,
       "last_modified": "2026-06-13T19:20:01Z",
       "tail": [
-        "[2026-06-13T19:00:01Z] guardrail probes",
         "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl",
-        "[2026-06-13T19:20:01Z] guardrail probes"
+        "[2026-06-13T19:20:01Z] guardrail probes",
+        "guardrail: 0/4 probes passed \u2192 /mnt/deepa/insur_project/jobs/reports/guardrail_20260613.jsonl"
       ]
     },
     "rag_ragas.log": {
@@ -929,21 +929,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 177660,
-      "last_modified": "2026-06-13T19:20:01Z",
+      "size": 178667,
+      "last_modified": "2026-06-13T19:29:31Z",
       "tail": [
-        "[2026-06-13 13:19:01 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:19:31 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:20:01 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 13:28:31 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:29:01 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:29:31 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 297658,
-      "last_modified": "2026-06-13T19:20:01Z",
+      "size": 298665,
+      "last_modified": "2026-06-13T19:29:31Z",
       "tail": [
-        "[2026-06-13 13:19:01 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:19:31 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:20:01 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 13:28:31 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:29:01 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:29:31 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -983,8 +983,8 @@
       ]
     },
     "work_tracker.log": {
-      "size": 354423,
-      "last_modified": "2026-06-13T19:15:02Z",
+      "size": 354633,
+      "last_modified": "2026-06-13T19:25:01Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=375)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=375)",

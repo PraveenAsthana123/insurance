@@ -205,6 +205,21 @@ def act_absence_mode_hygiene(finding: dict) -> dict:
         return {"verdict": "skip",
                 "reason": "absence-mode sentinel not set · operator must opt-in"}
 
+    # Iter 95.11 · parallel-session lock check (P2-g).
+    # Race observed earlier (commit c61c5abe): parallel coding session
+    # re-edited files between git add and git commit. Lock check prevents
+    # the autonomous handler from competing with active parallel work.
+    try:
+        sys.path.insert(0, str(REPO / "scripts"))
+        from parallel_lock import is_locked
+        locked, info = is_locked()
+        if locked:
+            holder = info.get("actor", "unknown") if info else "unknown"
+            return {"verdict": "skip",
+                    "reason": f"parallel-lock held by '{holder}' · cron fires again next tick"}
+    except (ImportError, Exception):
+        pass  # best-effort · don't break handler if lock module unavailable
+
     SAFE_PREFIXES = (
         "docs/",
         "frontend/src/pages/bank/",

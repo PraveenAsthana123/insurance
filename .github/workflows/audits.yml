@@ -172,6 +172,50 @@ jobs:
             echo "SKIP · ~/.claude/scripts/agent-auto-fix-worker.py not present in CI runner"
           fi
 
+      - name: DRILL · parallel-session lock contract (10 steps · 4 NEG · P2-g)
+        run: python3 tests/drills/drill_parallel_lock.py
+
+      # Iter 95.11 · P2-b · cache drills require running backend.
+      # Start backend in background · probe :8001 · run 3 cache drills.
+      # If backend won't start (deps missing in CI), gracefully SKIP per §57.7.
+      - name: Start backend service for cache drills (best-effort)
+        id: backend-start
+        continue-on-error: true
+        run: |
+          set +e
+          if [ -f scripts/launch_backend.py ]; then
+            INSUR_SKIP_MIGRATIONS=1 INSUR_DISABLE_PRESIDIO=1 TF_CPP_MIN_LOG_LEVEL=3 \
+              nohup python3 scripts/launch_backend.py > /tmp/backend.log 2>&1 &
+            echo "BACKEND_PID=$!" >> $GITHUB_ENV
+            # Wait up to 60s for :8001 to bind
+            for i in $(seq 1 30); do
+              if curl -sf --max-time 2 http://localhost:8001/api/v1/missing-items-advisor/health >/dev/null 2>&1; then
+                echo "backend ready after ${i}x2s"
+                echo "BACKEND_UP=1" >> $GITHUB_ENV
+                exit 0
+              fi
+              sleep 2
+            done
+            echo "backend did not bind in 60s · cache drills will SKIP"
+            tail -50 /tmp/backend.log || true
+          fi
+
+      - name: DRILL · advisor cache (8 steps · 3 NEG · skipped if backend down)
+        if: env.BACKEND_UP == '1'
+        run: python3 tests/drills/drill_advisor_cache.py
+
+      - name: DRILL · checklist cache (8 steps · 3 NEG · pre-warm pattern)
+        if: env.BACKEND_UP == '1'
+        run: python3 tests/drills/drill_checklist_cache.py
+
+      - name: DRILL · top-1pct cache (7 steps · 3 NEG · recursive scoring)
+        if: env.BACKEND_UP == '1'
+        run: python3 tests/drills/drill_top1pct_cache.py
+
+      - name: Stop backend (cleanup)
+        if: always() && env.BACKEND_PID != ''
+        run: kill ${BACKEND_PID} || true
+
       # NOTE: drill_advisor_cache.py + drill_checklist_cache.py + drill_top1pct_cache.py
       # SKIPPED in CI · all require FastAPI backend running on :8001. Run locally
       # + after deploy. Future: spin up backend service container to gate them here too.
