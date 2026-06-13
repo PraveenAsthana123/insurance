@@ -5082,6 +5082,150 @@ function SummaryAndOutcomeRow({ tab, sub, proc }) {
   );
 }
 
+// TopBriefStrip — operator 2026-06-13 13:40-13:53 MDT (12-message stack):
+//   "create core objective on top, to do list on top ...which must be align
+//    with tab or sub tab" + "every tab must have one agent which is monitoing"
+//   + "1-2 line text explain the objective" + "goal" + "to do list"
+//   + "they must be align Main menu department and sub menu AI type, process type"
+//   + "must on top"
+//
+// Consolidates 4 surfaces into ONE strip at the very top of every tab:
+//   1. Context path: dept (Main Menu) › process › tab › sub (Sub Menu)
+//   2. 1-line OBJECTIVE (from TAB_PROFILES.intent)
+//   3. 1-2 line GOAL (from TAB_CHARTER.why · trimmed)
+//   4. Top-3 to-do (from TAB_OBJECTIVE_EVIDENCE pending+failing)
+//   5. Monitor agent attribution + score band (sys_tab_monitor_agent)
+//
+// Composes with: §57.7 (honest · pulls from existing catalogs, doesn't fabricate)
+// · §73 (17-tab pane · this is the alignment piece) · §82 #14 (objectives ARE
+// hypotheses · top-3 todo is the "what to falsify next") · §117 (CHECKER role
+// for monitor agent) · §122 (top-1% means alignment at top, not buried 6 widgets
+// deep) · §138 (operator-handling · 12 stacked messages mapped 1:1).
+function TopBriefStrip({ tab, sub, proc, dept }) {
+  const profile = TAB_PROFILES[tab.id];
+  const charter = TAB_CHARTER[tab.id];
+  const score = scoreTab(tab.id, proc);
+  const objective = profile?.intent || 'Operator-pending · objective not yet defined for this tab';
+  const goalRaw = charter?.why || 'Goal pending TAB_CHARTER entry';
+  const goal = goalRaw.length > 200 ? goalRaw.slice(0, 197) + '…' : goalRaw;
+  const todos = (score.results || [])
+    .filter((r) => r.status === 'failing' || r.status === 'pending')
+    .slice(0, 3);
+  const bandColor =
+    score.band === 'failing'  ? '#dc2626' :
+    score.band === 'top-1pct' ? '#16a34a' :
+    score.band === 'ok'       ? '#0891b2' :
+    score.band === 'needs-work' ? '#f59e0b' : '#94a3b8';
+  const bandLabel =
+    score.band === 'failing'  ? 'FAILING' :
+    score.band === 'top-1pct' ? 'TOP-1%' :
+    score.band === 'ok'       ? 'OK' :
+    score.band === 'needs-work' ? 'NEEDS WORK' : 'NO RULES';
+  return (
+    <div style={{
+      marginBottom: 12, padding: 14,
+      background: 'linear-gradient(135deg, #fff 0%, #f0f9ff 100%)',
+      border: `2px solid ${tab.color}`,
+      borderLeft: `6px solid ${tab.color}`,
+      borderRadius: 8,
+      boxShadow: '0 2px 6px rgba(15, 23, 42, 0.08)',
+    }}>
+      {/* Row 1 · Context path (dept › process › tab › sub) + monitor agent */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        flexWrap: 'wrap', gap: 8, marginBottom: 10,
+        paddingBottom: 8, borderBottom: '1px dashed #cbd5e1',
+      }}>
+        <div style={{ fontSize: 11, color: '#475569', fontWeight: 600 }}>
+          <span style={{ color: '#94a3b8' }}>Main menu:</span>{' '}
+          <strong style={{ color: '#0f172a' }}>{dept?.name || '—'}</strong>
+          <span style={{ color: '#cbd5e1', margin: '0 6px' }}>›</span>
+          <strong style={{ color: '#0f172a' }}>{proc?.name || '—'}</strong>
+          <span style={{ color: '#cbd5e1', margin: '0 6px' }}>›</span>
+          <span style={{ color: '#94a3b8' }}>Tab:</span>{' '}
+          <strong style={{ color: tab.color }}>{tab.label}</strong>
+          {sub && (
+            <>
+              <span style={{ color: '#cbd5e1', margin: '0 6px' }}>›</span>
+              <span style={{ color: '#94a3b8' }}>Sub:</span>{' '}
+              <strong style={{ color: '#0f172a' }}>{sub.label}</strong>
+            </>
+          )}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 10 }}>
+          <span style={{
+            padding: '2px 6px', borderRadius: 3,
+            background: '#f1f5f9', color: '#0f172a', fontWeight: 700,
+            border: '1px solid #cbd5e1',
+          }}>👁 sys_tab_monitor_agent</span>
+          <span style={{
+            padding: '2px 8px', borderRadius: 3,
+            background: bandColor, color: '#fff', fontWeight: 800, letterSpacing: '0.04em',
+          }}>{bandLabel}</span>
+          <span style={{ color: '#64748b', fontFamily: 'monospace' }}>
+            {score.verified}✓ · {score.pending}🟡 · {score.failing}✗
+          </span>
+        </div>
+      </div>
+
+      {/* Row 2 · OBJECTIVE (1-line · prominent) */}
+      <div style={{ marginBottom: 8, lineHeight: 1.4 }}>
+        <span style={{
+          display: 'inline-block', padding: '2px 8px', borderRadius: 3,
+          background: '#7c3aed', color: '#fff', fontSize: 10, fontWeight: 800,
+          textTransform: 'uppercase', letterSpacing: '0.05em', marginRight: 8,
+        }}>🎯 Objective</span>
+        <span style={{ fontSize: 13, color: '#0f172a', fontWeight: 600 }}>{objective}</span>
+      </div>
+
+      {/* Row 3 · GOAL (1-2 lines · trimmed) */}
+      <div style={{ marginBottom: 10, lineHeight: 1.4 }}>
+        <span style={{
+          display: 'inline-block', padding: '2px 8px', borderRadius: 3,
+          background: '#0891b2', color: '#fff', fontSize: 10, fontWeight: 800,
+          textTransform: 'uppercase', letterSpacing: '0.05em', marginRight: 8,
+        }}>📌 Goal</span>
+        <span style={{ fontSize: 12, color: '#334155' }}>{goal}</span>
+      </div>
+
+      {/* Row 4 · Top 3 TO-DO (from evidence pending+failing) */}
+      <div>
+        <div style={{
+          fontSize: 10, fontWeight: 800, color: '#0f172a',
+          textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4,
+        }}>
+          ✅ Top to-do {todos.length > 0 ? `(${todos.length} of ${score.pending + score.failing} open)` : '· nothing pending'}
+        </div>
+        {todos.length === 0 ? (
+          <div style={{ fontSize: 11, color: '#16a34a', fontStyle: 'italic' }}>
+            ✨ All evidence rules verified. Nothing to do on this tab.
+          </div>
+        ) : (
+          <ol style={{ margin: 0, paddingLeft: 22 }}>
+            {todos.map((t, i) => (
+              <li key={i} style={{ marginBottom: 4, fontSize: 11, color: '#0f172a' }}>
+                <span style={{
+                  display: 'inline-block', minWidth: 14, color:
+                  t.status === 'failing' ? '#dc2626' : '#f59e0b',
+                  fontWeight: 800,
+                }}>{t.status === 'failing' ? '✗' : '🟡'}</span>
+                <strong>{t.label}</strong>
+                <span style={{ color: '#64748b', fontSize: 10 }}> — {t.evidence}</span>
+              </li>
+            ))}
+          </ol>
+        )}
+        <div style={{
+          marginTop: 6, fontSize: 9, color: '#64748b', fontStyle: 'italic',
+        }}>
+          Owned by <strong>sys_tab_monitor_agent</strong> (AGENT_ROSTER §11) · full scorecard
+          below in "Final outcome score" section.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // TabOutcomeScorecard — operator 2026-06-13 11:42 MDT: "fix all ..have agent
 // assign for this task" + "100% ..top 1". The §57.7 honest evaluator: per-tab
 // score from TAB_OBJECTIVE_EVIDENCE rules. Rules that need operator confirms
@@ -5918,6 +6062,10 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
   return (
     <>
       {/* 1. CONTEXT — Identity (always first; Lens chip lives inside) */}
+      {/* OP-10 (2026-06-13 13:53 MDT) · TopBriefStrip MUST be first ·
+          consolidates objective + goal + top-3 todo + monitor agent +
+          dept/process/tab/sub context. Operator 12-message stack. */}
+      <TopBriefStrip tab={tab} sub={sub} proc={proc} dept={dept} />
       <TabHeaderRibbon tab={tab} sub={sub} proc={proc} dept={dept}
         focusKind={focusKind} focusLabel={focusLabel} />
       <DependencyChainStrip tab={tab} sub={sub} proc={proc} dept={dept}

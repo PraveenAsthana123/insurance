@@ -135,6 +135,33 @@ Roll up per-tab scores into an aggregate workspace scorecard. Surface via `/api/
 
 ---
 
+## §11 · sys_tab_monitor_agent
+
+| Field | Value |
+|---|---|
+| **Role** | CHECKER + MONITOR (§117) — per-tab feedback agent |
+| **Owned artifact** | `frontend/src/pages/bank/BankUseCasePage.jsx::TopBriefStrip` + `tab-objective-evidence.js` |
+| **Responsibility** | For every (dept, process, tab, sub-tab) tuple in the bank workspace: surface a 1-line objective (from TAB_PROFILES.intent), 1-2 line goal (from TAB_CHARTER.why), top-3 todos (from TAB_OBJECTIVE_EVIDENCE pending+failing), monitor agent attribution, and band (TOP-1% / OK / NEEDS-WORK / FAILING). The strip MUST be the first render item in every tab body — no widget pushes it down. |
+| **Aligns with** | Main Menu (department) · Sub Menu (process / AI type / process-type) · §73 17-tab right pane |
+| **Trigger** | Every TopBriefStrip render (frontend reactive) · per drill_tab_outcome_evaluator (CI) |
+| **HITL** | Pending rules wait for §103.5 operator confirmation · failing rules block tab completion |
+| **Drilled by** | `tests/drills/drill_top_brief_strip.py` (new this iter) |
+| **Reports** | Per-tab band rendered live: TOP-1% (≥80% verified) · OK (60-79%) · NEEDS-WORK (<60%) · FAILING (any ✗) |
+| **Owner authority** | When operator says "this tab feels poor", check the strip — it surfaces objective + goal + todo + band. The strip IS the feedback channel. |
+| **Established** | 2026-06-13 13:53 MDT · per operator 12-message stack |
+
+### Why this agent exists
+
+Operator's recurring complaint pattern: "where is the goal" · "where is the objective" · "what's the to-do" · "who is monitoring this tab" — the answer was always "buried 6 widgets deep." sys_tab_monitor_agent fixes this by owning the TOP strip. If a tab lacks objective+goal+todo+band visible in the first 200px, the agent has failed and the drill catches it.
+
+### Composes with prior agents
+
+- **§7 sys_tab_outcome_scoring_agent**: provides the score that drives band + todo list
+- **§8 sys_charter_coverage_agent**: enforces TAB_CHARTER has the goal data sys_tab_monitor_agent reads from
+- **§4 sys_137_dark_bg_audit_agent**: ensures the strip doesn't get a dark background
+
+---
+
 ## §10 · sys_auto_fix_worker
 
 | Field | Value |

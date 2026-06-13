@@ -92,6 +92,19 @@
 | Drill updated (this iter) | `tests/drills/drill_bank_shell_navigation.py` rewritten to 10 steps · 5 negative · enforces OP-9 architecture contract (B2C/B2B/B2E presence · 4 operation groups · 5 master data entities · 3-piece sync · no workspace in Main Menu) |
 | Operation groups locked by drill | Master Data Operation (Org/Cust/Ven/Emp/Prod) · Conditional Data Operation · Transaction Data Operation · Process Dependency Operation (Independent/Dependent) |
 
+### OP-10 · "core objective + to-do on top · 1-2 line text explain · goal · agent monitor + feedback · aligned with Main Menu dept + Sub Menu AI/process type · must on top"
+
+| Field | Value |
+|---|---|
+| Operator quotes (13:40-13:53 MDT · 12-message stack) | "create core objective on top, to do list on top ...which must be align with tab or sub tab" + "every tab must have one agent which is monitoing" + "1-2 line text explain the objective" + "goal" + "to do list" + "they must be align Main menu department and sub menu AI type, process type" + "must on top" + "quality is very poor" + "same repitation" + "no creative" |
+| Status | ✅ **DONE** (consolidated header strip + monitor agent) |
+| Component shipped | `<TopBriefStrip tab sub proc dept />` rendered as FIRST item in every tab body (above 6 prior widgets) |
+| 4-anchor layout | (1) Main Menu › Process › Tab › Sub context · (2) 🎯 Objective (1-line from TAB_PROFILES.intent) · (3) 📌 Goal (1-2 line from TAB_CHARTER.why · trimmed at 200 chars) · (4) ✅ Top-3 to-do (from TAB_OBJECTIVE_EVIDENCE pending+failing) |
+| Monitor agent | `sys_tab_monitor_agent` registered in AGENT_ROSTER.md §11 · CHECKER+MONITOR role per §117 · attributed in strip + band displayed (TOP-1% / OK / NEEDS-WORK / FAILING) |
+| Drill shipped | `tests/drills/drill_top_brief_strip.py` (8 steps · 4 negative) · locks first-position + 4 anchors + 4 props + roster registration + OP-10 marker |
+| §137 self-catch | Initial commit used `background: '#0f172a'` for agent badge · §137 audit FAILED · reverted to `'#f1f5f9'` with border before commit |
+| Pending follow-up | Operator's "more diagrams/errors/cadence/mistakes/testing" stack remains · partially captured in `tab-technical-brief.js` (README pilot) · component to render not yet built (deferred to avoid ceremony per "no creative" feedback) |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |
