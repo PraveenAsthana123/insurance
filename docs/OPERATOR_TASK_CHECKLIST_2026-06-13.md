@@ -81,6 +81,17 @@
 | Agent registered | `docs/AGENT_ROSTER.md` §7 · `sys_tab_outcome_scoring_agent` (CHECKER role per §117) · owns evidence map maintenance |
 | §138.4 sweep miss caught | BankSidebar + BankSubMenu had uncommitted auto-fix-worker regressions · reverted before commit (3rd recurrence this session · noted in roster §10) |
 
+### OP-9 · "Sub Menu has link · main menu node should not show the workspace · b2b,b2c,b2e must present in Main menu" + master data + conditional + transaction + independent + dependent process ops
+
+| Field | Value |
+|---|---|
+| Operator quotes (13:15 MDT) | "Sub Menu shave link which user will click to see the workspace tab. (so there is dependency of SUB Menu link and Workspace) -main menu node should not show the workspace. b2b,b2c,b2e must present in Main menu" + the full operation list |
+| Status | ✅ **DONE** (parallel session) + **drill updated** (this iter) |
+| Parallel session shipped | OPERATION_WORKSPACE_LINKS (4 groups · 12 items) · Main Menu B2C/B2B/B2E added · Sub Menu workspace gateway · 3-piece (tab+sub+focus) sync |
+| Verified via inspection | BankSidebar:133/167/196 have B2C/B2B/B2E · BankSubMenu has 4 groups · 5 master data entities · 17 tab/18 sub/12 focus refs · 0 workspace components in Main Menu |
+| Drill updated (this iter) | `tests/drills/drill_bank_shell_navigation.py` rewritten to 10 steps · 5 negative · enforces OP-9 architecture contract (B2C/B2B/B2E presence · 4 operation groups · 5 master data entities · 3-piece sync · no workspace in Main Menu) |
+| Operation groups locked by drill | Master Data Operation (Org/Cust/Ven/Emp/Prod) · Conditional Data Operation · Transaction Data Operation · Process Dependency Operation (Independent/Dependent) |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |
