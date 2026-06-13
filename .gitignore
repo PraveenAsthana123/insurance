@@ -209,3 +209,6 @@ jobs/automation/plan-*.md
 
 # Hourly cron timestamp-only churn (per §57.7 · committed value = audit results in jobs/reports/insurance/)
 data/work_tracker/insurance_alignment.json
+
+# VibeCheck-generated copilot instructions (output · not source)
+.github/copilot-instructions.md

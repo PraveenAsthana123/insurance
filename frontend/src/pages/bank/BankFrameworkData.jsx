@@ -50,7 +50,7 @@ export const CAP_DOMAIN_COLOR = {
   'AI Platform': '#16a34a',
   'World Model': '#7c3aed',
   'Business':    '#f59e0b',
-  'Strategy':    '#0f172a',
+  'Strategy':    '#2563eb',
 };
 
 // ─────────────────────────────────────────────────────────────────────
@@ -290,7 +290,7 @@ export const BUILD_ORDER = [
     ],
   },
   {
-    id: 'autonomous', label: 'Autonomous Enterprise', tier: 5, color: '#0f172a',
+    id: 'autonomous', label: 'Autonomous Enterprise', tier: 5, color: '#2563eb',
     months: '24+',
     components: [
       { name: 'World Model',                present: false },
@@ -329,7 +329,7 @@ export const OPS_DOMAINS = [
 // 6. FINAL TOP-1% MENTAL MODEL (operator 2026-06-05 — 9-layer chain)
 // ─────────────────────────────────────────────────────────────────────
 export const MENTAL_MODEL = [
-  { id: 'strategyops',   label: 'StrategyOps',    color: '#0f172a', icon: '🎯', present: 'partial', why: 'Where the AI program is steered. OKRs, portfolio, value targets.' },
+  { id: 'strategyops',   label: 'StrategyOps',    color: '#2563eb', icon: '🎯', present: 'partial', why: 'Where the AI program is steered. OKRs, portfolio, value targets.' },
   { id: 'governanceops', label: 'GovernanceOps',  color: '#dc2626', icon: '⚖️', present: 'partial', why: 'Policies + risk + compliance + audit — automated, not manual.' },
   { id: 'knowledgeops',  label: 'KnowledgeOps',   color: '#0891b2', icon: '🧠', present: 'missing', why: 'Curate · classify · refresh · retire enterprise knowledge.' },
   { id: 'cognitiveops',  label: 'CognitiveOps',   color: '#8b5cf6', icon: '💭', present: 'missing', why: 'Monitor reasoning quality + planning depth + reflection ROI.' },

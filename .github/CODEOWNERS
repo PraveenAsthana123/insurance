@@ -1,0 +1,26 @@
+# Code owners for approval routing. Branch protection must enable
+# "Require review from Code Owners" for this to become an enforced gate.
+
+# Default owner
+* @PraveenAsthana123
+
+# Backend/API ownership
+/backend/ @PraveenAsthana123
+/docs/API_ENDPOINT_CATALOG.md @PraveenAsthana123
+/docs/API_CATALOG.json @PraveenAsthana123
+/docs/BACKEND_FILE_INVENTORY.md @PraveenAsthana123
+/docs/BACKEND_FILE_INVENTORY.json @PraveenAsthana123
+
+# Frontend ownership
+/frontend/ @PraveenAsthana123
+/docs/UI_GLOBAL_POLICY.md @PraveenAsthana123
+
+# Runtime, CI, and agent tooling ownership
+/.github/ @PraveenAsthana123
+/.archon/ @PraveenAsthana123
+/.claude/ @PraveenAsthana123
+/docker-compose.yml @PraveenAsthana123
+/scripts/ @PraveenAsthana123
+/docs/AGENT_TOOL_SELECTION_MATRIX.md @PraveenAsthana123
+/docs/AGENT_HARNESS_GUIDE.md @PraveenAsthana123
+/docs/AGENTIC_BROWSER_WIRING_STATUS.md @PraveenAsthana123

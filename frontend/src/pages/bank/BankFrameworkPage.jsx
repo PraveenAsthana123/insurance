@@ -33,7 +33,7 @@ const REL_COLOR = {
   SKIP: { bg: '#94a3b8', label: '🔴 SKIP' },
 };
 
-function Chip({ children, bg = '#0f172a', fg = '#fff', small }) {
+function Chip({ children, bg = '#2563eb', fg = '#fff', small }) {
   return (
     <span style={{
       display: 'inline-block',
@@ -91,7 +91,7 @@ function CapabilitiesSection() {
   const partial = TOP1_CAPABILITIES.filter((c) => c.status === 'partial').length;
   const missing = total - present - partial;
   return (
-    <Section id="cap" icon="🎯" title="Top-1% capabilities" color="#0f172a"
+    <Section id="cap" icon="🎯" title="Top-1% capabilities" color="#2563eb"
              subtitle={`20 rows · ${present}✓ · ${partial}◐ · ${missing}✗`}>
       <div style={{
         marginBottom: 10, padding: '6px 10px',
@@ -693,7 +693,7 @@ function ForcedSequenceSection() {
           const tierColor = step.n === 14 ? '#dc2626' :
                             step.n === 16 ? '#7c3aed' :
                             step.n === 17 ? '#f59e0b' :
-                            isGate ? '#0891b2' : '#0f172a';
+                            isGate ? '#0891b2' : '#2563eb';
           return (
             <div key={step.n} style={{
               display: 'flex', alignItems: 'center', gap: 8,
@@ -803,7 +803,7 @@ export function BankFrameworkPage() {
       <div style={{
         marginBottom: 14, padding: '12px 14px',
         background: '#fff', border: '1px solid #e2e8f0',
-        borderLeft: '4px solid #0f172a', borderRadius: 6,
+        borderLeft: '4px solid #2563eb', borderRadius: 6,
       }}>
         <h1 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#0f172a' }}>
           🏛 Top-1% Enterprise AI OS · Framework Reference

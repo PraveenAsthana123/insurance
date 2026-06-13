@@ -83,7 +83,7 @@ export async function apiProbe(method, path, body) {
 // Tab → Sub Tab → Components (max 3 levels).
 const TABS = [
   // ----- Architecture / planning entry-point -----
-  { id: 'readme',       label: 'README',           color: '#0f172a', subTabs: [
+  { id: 'readme',       label: 'README',           color: '#2563eb', subTabs: [
     { id: 'brd',           label: 'BRD' },
     { id: 'frd',           label: 'FRD' },
     { id: 'hld',           label: 'HLD' },
@@ -7658,7 +7658,7 @@ function maturityLevelFor(passRate, greenCount, totalTabs) {
     { max:  94, level: 12, label: 'Autonomous Enterprise',             color: '#0891b2' },
     { max:  97, level: 13, label: 'Cognitive Enterprise',              color: '#7c3aed' },
     { max:  99, level: 14, label: 'Self-Optimizing Enterprise',        color: '#7c3aed' },
-    { max: 999, level: 15, label: 'Adaptive Enterprise Ecosystem',     color: '#0f172a' },
+    { max: 999, level: 15, label: 'Adaptive Enterprise Ecosystem',     color: '#2563eb' },
   ];
   return bands.find((b) => score <= b.max) || bands[bands.length - 1];
 }
@@ -7864,7 +7864,7 @@ function WorkspaceWideAudit({ visibleTabs, proc, dept, onJump, activeTabId }) {
                   <YAxis stroke="#64748b" fontSize={10} domain={[0, 100]} />
                   <Tooltip contentStyle={{ fontSize: 11, borderRadius: 4 }} />
                   <Legend wrapperStyle={{ fontSize: 10 }} />
-                  <Line type="monotone" dataKey="rate"  stroke="#0f172a" strokeWidth={2} name="Pass %" />
+                  <Line type="monotone" dataKey="rate"  stroke="#2563eb" strokeWidth={2} name="Pass %" />
                   <Line type="monotone" dataKey="green" stroke="#16a34a" strokeWidth={1.5} name="Green tabs" />
                   <Line type="monotone" dataKey="red"   stroke="#dc2626" strokeWidth={1.5} name="Red tabs" />
                 </LineChart>

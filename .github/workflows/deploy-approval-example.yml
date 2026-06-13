@@ -1,0 +1,19 @@
+name: Deployment Approval Example
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Deployment target label
+        required: true
+        default: production
+
+jobs:
+  approval-gate:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Approval gate reached
+        run: |
+          echo "Deployment approval gate passed for ${{ inputs.target }}."
+          echo "This workflow is a no-op example; wire real deploy steps only after production deployment policy is finalized."
