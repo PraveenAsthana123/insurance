@@ -70,9 +70,20 @@ def main() -> int:
     has_export = "export const TAB_TECHNICAL_BRIEF" in brief_src
     step(1, has_export, f"TAB_TECHNICAL_BRIEF export present in {BRIEF.name}")
 
-    # Step 2 · readme pilot
-    has_readme = "'readme': {" in brief_src or "\"readme\": {" in brief_src
-    step(2, has_readme, f"README pilot entry exists: {has_readme}")
+    # Step 2 · ALL 31 tabs covered (operator "complete the full task")
+    import re
+    i = 0; entries = []
+    while True:
+        m = re.search(r"^  '([\w-]+)':\s*\{", brief_src[i:], re.MULTILINE)
+        if not m: break
+        tid = m.group(1); start = i + m.end() - 1; depth = 0; j = start
+        while j < len(brief_src):
+            if brief_src[j] == "{": depth += 1
+            elif brief_src[j] == "}": depth -= 1
+            if depth == 0 and j > start: break
+            j += 1
+        entries.append(tid); i = j + 1
+    step(2, len(entries) == 31, f"100% coverage · {len(entries)} entries (expect 31)")
 
     # Step 3 · JSX imports
     jsx_src = JSX.read_text(encoding="utf-8")

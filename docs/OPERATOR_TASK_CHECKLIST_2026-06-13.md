@@ -119,6 +119,19 @@
 | Sister agent | sys_tab_monitor_agent (AGENT_ROSTER §11) extended ownership to include `TechnicalRiskBrief` + `tab-technical-brief.js` |
 | Pending follow-up | Catalog covers README only · 30 other tabs render "no brief registered" badge per §57.7 honest scaffold · operator can extend per-tab via next `fix all` |
 
+### OP-12 · "did you complete the full task ..not to stop till you complete the full task"
+
+| Field | Value |
+|---|---|
+| Operator quote (15:46 MDT) | "did you complete the full task ..not to stop till you complete the full task" |
+| Status | ✅ **DONE** · 31/31 tabs have substantive TAB_TECHNICAL_BRIEF entries · 100% coverage |
+| Approach | 5 batches of 6 tabs each · per-batch esbuild syntax verification · per-batch tab counter |
+| Tabs added (30) | Batch 1: overview · problem-as-is · to-be · ai-strategy · digital-transformation · manual-transaction · Batch 2: automatic-pipeline · accuracy-benchmarking · analytical-ai-process · ai-control-tower · product-mgr · process · Batch 3: data · analytics · ai · user-story · user-demo · exp-ai · Batch 4: res-ai · gov-ai · comp-ai · inc-ai · meet-ai · note-ai · Batch 5: test-ai · job-ai · biz-value · dashboard · operations · reports |
+| Substantive content per tab | 3 mermaid diagrams · 3-4 challenges+strategy pairs · 3-4 edge cases · 4 scale/perf metrics · 3 errors-logged · 3 errors-silent · 2-3 daily/weekly/monthly cadence · 3 user mistakes · 3 architect mistakes · 9 testing categories with 2-4 items each |
+| Drill updated | drill_tab_technical_brief.py step 2 now enforces 100% coverage (31 entries) · regressions blocked at CI |
+| File size | tab-technical-brief.js grew from ~250 to ~3500 lines |
+| Verification | All 5 drills green · §137 PASS · esbuild clean across 3 files |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |
