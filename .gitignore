@@ -189,3 +189,15 @@ frontend/OmniParser/
 # Dispatcher pending-fix proposals (transient · archive only)
 .agent/pending_*.diff
 .agent/archive/
+
+# §50 dispatcher .py.txt backup mirrors (transient · audit logs only)
+*.py.txt
+
+# Runtime data dirs (transient state · not source)
+data/prompts/
+data/test_reports/
+
+# Runtime ML model weights + jobs state
+yolov8n.pt
+jobs/state/
+jobs/automation/plan-*.md
