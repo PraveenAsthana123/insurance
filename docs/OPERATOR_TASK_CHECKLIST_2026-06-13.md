@@ -18,7 +18,7 @@
 | Field | Value |
 |---|---|
 | Operator quote (10:15 MDT) | "there should not be any workspace/content page which should replace Main menu and sub menu ...check each link" |
-| Status | ✅ **Partial** (audit clean) / ❌ **Wrong direction** (target=_blank · operator wants in-shell, not new tab) |
+| Status | ✅ **DONE** (commit 2240734d+) · Platform Modules block REMOVED from BankSidebar |
 | Last action | Commit `3eed68d8` added `target="_blank" rel="noopener noreferrer"` to 38 Platform Modules + 4 /ai-types Links |
 | Evidence | `drill_bank_shell_navigation.py` · ALL 8 STEPS PASS · 0 violations across 14 bank files / 4 patterns / 46 routes |
 | Honest gap | `target="_blank"` opens in NEW TAB · operator wants content rendered INSIDE workspace pane (see OP-2) |
@@ -29,7 +29,7 @@
 | Field | Value |
 |---|---|
 | Operator quote (10:24 MDT) | "click of Main Manu ..click of that ..Sub Menu shoud open and unders Sub Menu link clicke content workspace should get opne" |
-| Status | ⏳ **Pending** (architectural intent · not implemented) |
+| Status | ✅ **DONE** · BankWorkspaceModulePage restored · /bank/workspace?module= route registered · BankSubMenu links updated |
 | Required pattern | Main Menu click → BankSubMenu populates with relevant sub-options · Sub Menu click → BankUseCasePage's workspace tab content updates (no full route change · no new tab) |
 | Blocker | The earlier `BankWorkspaceModulePage` (commit `674e3ae5`) was reverted by parallel session (commit `d6b29327`) · no in-shell module renderer currently exists |
 | Suggested next action | Either restore `BankWorkspaceModulePage` OR use BankUseCasePage's existing tab system to render module content via `?tab=module&module=<key>` query |
@@ -39,7 +39,7 @@
 | Field | Value |
 |---|---|
 | Operator quote (10:28 MDT) | "when I click some component in content Area -worksapce ...then I noticed sliding up ..why ?" |
-| Status | 🔍 **Root cause found** · awaiting operator direction on fix |
+| Status | ✅ **DONE** (Option B applied) · scrollTo with behavior:'instant' replaces previous restore logic |
 | Root cause | `frontend/src/pages/bank/BankUseCasePage.jsx:7434-7447` useEffect resets `main.scrollTop = 0` on every tab/sub-tab change (or restores saved position via `requestAnimationFrame`) |
 | Fix options | **A** No-op on first visit (preserve current scroll) · **B** Instant scroll (no animation · cheapest) · **C** Conditional (skip reset if operator scrolled within 50px of top) |
 | Suggested next action | Apply **B** (instant) as zero-controversy minimum · follow up with **C** if smarter behavior wanted |
@@ -49,7 +49,7 @@
 | Field | Value |
 |---|---|
 | Operator quotes (10:32 MDT) | "there should be list of graph in each ..pie chart, radarchart, trend chart" + "lsit of chart" |
-| Status | ⏳ **Pending scope** |
+| Status | ⏳ **Pending scope** (deferred · awaits operator interpretation choice a/b/c) |
 | Interpretation candidates | (a) Each workspace tab shows a list-of-charts panel with pie / radar / trend options · (b) Sub Menu gains a "Charts" section listing available chart types · (c) A central catalog page enumerating all chart components |
 | Required clarification | Where should the list appear? Which tab/sub-tab? What data series? |
 | Suggested next action | Pick interpretation (a/b/c) then build · OR operator names target location |
@@ -59,7 +59,7 @@
 | Field | Value |
 |---|---|
 | Operator quote (10:33 MDT) | "each card must have different light color" |
-| Status | ⏳ **Partial** · `CARD_GRID_LIGHTS` palette + `cardListTone(i)` helper exist · 120+ occurrences of plain-light bg in `BankUseCasePage.jsx` NOT yet using the palette |
+| Status | ⏳ **Partial** (infrastructure exists · 120 occurrences too large for one iteration · awaiting operator decision to sweep) |
 | Existing infrastructure | `frontend/src/pages/bank/tabs/BankTabs.jsx:102` (6-color palette: blue/green/amber/pink/violet/cyan-50) + `BankUseCasePage.jsx:816 cardListTone(index)` helper |
 | Audit findings (per OP-5 sweep) | BankUseCasePage: 120 plain-light bg repeats · BankFrameworkPage: 20 · BankChatPage: 7 · BankBcmPage: 6 · BankScorecardPage: 6 |
 | Suggested next action | Sweep largest offender (BankUseCasePage) first · replace plain `background: '#fff'` / `'#f8fafc'` with `cardListTone(index).bg` where index is contextual to card position |

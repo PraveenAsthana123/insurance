@@ -1,5 +1,5 @@
 {
-  "ts": "2026-06-13T19:45:01Z",
+  "ts": "2026-06-13T19:50:01Z",
   "cron_logs": {
     "advisor_cache_refresh.log": {
       "size": 1216,
@@ -53,11 +53,11 @@
       ]
     },
     "auto-next.log": {
-      "size": 175298,
-      "last_modified": "2026-06-13T19:45:01Z",
+      "size": 175560,
+      "last_modified": "2026-06-13T19:50:01Z",
       "tail": [
         "[dispatcher] platform stable \u00b7 0 actionable \u00b7 stopping",
-        "[dispatcher] 2026-06-13T19:45:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
+        "[dispatcher] 2026-06-13T19:50:01Z \u00b7 starting \u00b7 max_iter=10 \u00b7 max_wall=90s",
         "[dispatcher] iter 1 \u00b7 elapsed 0s"
       ]
     },
@@ -80,17 +80,17 @@
       ]
     },
     "backend.log": {
-      "size": 4042741,
-      "last_modified": "2026-06-13T19:40:06Z",
+      "size": 4042953,
+      "last_modified": "2026-06-13T19:45:05Z",
       "tail": [
-        "{\"timestamp\": \"2026-06-13T19:40:02.388336+00:00\", \"correlation_id\": \"da5d0c58a95b4685\", \"event\": \"http.request\", \"path\": \"/bot/ask\", \"method\": \"POST\", \"status\": 404, \"latency_ms\": 14}",
         "{\"timestamp\": \"2026-06-13T19:40:02.405211+00:00\", \"correlation_id\": \"f8719ee09a1648e8\", \"event\": \"http.request\", \"path\": \"/bot/ask\", \"method\": \"POST\", \"status\": 404, \"latency_ms\": 10}",
-        "{\"timestamp\": \"2026-06-13T19:40:06.935064+00:00\", \"correlation_id\": \"5d0ded325bd74605\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4589}"
+        "{\"timestamp\": \"2026-06-13T19:40:06.935064+00:00\", \"correlation_id\": \"5d0ded325bd74605\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 4589}",
+        "{\"timestamp\": \"2026-06-13T19:45:05.747475+00:00\", \"correlation_id\": \"6ca666c959124a87\", \"event\": \"http.request\", \"path\": \"/api/v1/missing-items-advisor/scan\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 3602}"
       ]
     },
     "codex_approval_cron.log": {
-      "size": 1074914,
-      "last_modified": "2026-06-13T19:45:01Z",
+      "size": 1075069,
+      "last_modified": "2026-06-13T19:50:01Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -98,8 +98,8 @@
       ]
     },
     "codex_approval_watch.log": {
-      "size": 14548762,
-      "last_modified": "2026-06-13T19:36:24Z",
+      "size": 14556977,
+      "last_modified": "2026-06-13T19:45:14Z",
       "tail": [
         "No Archon workflow runs found.",
         "No Archon workflow runs found.",
@@ -812,12 +812,12 @@
       ]
     },
     "process_watchdog.log": {
-      "size": 53055,
-      "last_modified": "2026-06-13T19:44:02Z",
+      "size": 53181,
+      "last_modified": "2026-06-13T19:48:02Z",
       "tail": [
-        "[2026-06-13 13:40:03 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 13:42:01 MDT] watchdog tick complete \u00b7 ports: 7/5",
-        "[2026-06-13 13:44:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
+        "[2026-06-13 13:44:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 13:46:02 MDT] watchdog tick complete \u00b7 ports: 7/5",
+        "[2026-06-13 13:48:02 MDT] watchdog tick complete \u00b7 ports: 7/5"
       ]
     },
     "prompt_tracker_stats.log": {
@@ -929,21 +929,21 @@
       ]
     },
     "supervisor.log": {
-      "size": 180310,
-      "last_modified": "2026-06-13T19:45:01Z",
+      "size": 180840,
+      "last_modified": "2026-06-13T19:50:01Z",
       "tail": [
-        "[2026-06-13 13:44:01 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:44:31 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:45:01 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 13:49:01 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:49:31 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:50:01 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "supervisor_systemd.log": {
-      "size": 300308,
-      "last_modified": "2026-06-13T19:45:01Z",
+      "size": 300838,
+      "last_modified": "2026-06-13T19:50:01Z",
       "tail": [
-        "[2026-06-13 13:44:01 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:44:31 MDT] tick complete \u00b7 alive=3/3",
-        "[2026-06-13 13:45:01 MDT] tick complete \u00b7 alive=3/3"
+        "[2026-06-13 13:49:01 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:49:31 MDT] tick complete \u00b7 alive=3/3",
+        "[2026-06-13 13:50:01 MDT] tick complete \u00b7 alive=3/3"
       ]
     },
     "test_runner_api_hourly.log": {
@@ -974,17 +974,17 @@
       ]
     },
     "vite_3210.log": {
-      "size": 126252,
-      "last_modified": "2026-06-13T19:37:14Z",
+      "size": 126960,
+      "last_modified": "2026-06-13T19:49:34Z",
       "tail": [
-        "1:11:21 PM [vite] page reload dist/index.html",
-        "1:36:45 PM [vite] hmr update /src/pages/bank/BankSidebar.jsx",
-        "1:37:14 PM [vite] hmr update /src/pages/bank/BankSubMenu.jsx"
+        "1:48:57 PM [vite] hmr invalidate /src/pages/bank/BankUseCasePage.jsx Could not Fast Refresh (\"apiProbe\" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports",
+        "1:48:57 PM [vite] hmr update /src/App.jsx",
+        "1:49:34 PM [vite] hmr update /src/pages/bank/BankSidebar.jsx"
       ]
     },
     "work_tracker.log": {
-      "size": 354948,
-      "last_modified": "2026-06-13T19:40:02Z",
+      "size": 355053,
+      "last_modified": "2026-06-13T19:45:02Z",
       "tail": [
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=375)",
         "snapshot written \u2192 /mnt/deepa/insur_project/data/work_tracker/latest.json (cron_entries=99, fleet=375)",

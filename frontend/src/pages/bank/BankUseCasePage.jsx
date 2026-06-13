@@ -7430,19 +7430,24 @@ export function BankUseCasePage() {
       clearTimeout(timeout);
     };
   }, [scrollKey, scrollSlot]);
-  // Restore when (tab, sub) changes
+  // Restore when (tab, sub) changes · OP-3 B fix (2026-06-13): force
+  // instant scroll (no animation) so operator doesn't see the "sliding
+  // up" sensation when clicking different tabs/sub-tabs. The smooth
+  // scroll animation made the viewport visibly slide; instant snap is
+  // crisp and predictable.
   useEffect(() => {
     const main = document.querySelector('main');
     if (!main) return;
     try {
       const stored = JSON.parse(localStorage.getItem(scrollKey) || '{}');
       const saved = stored[scrollSlot];
-      if (typeof saved === 'number') {
-        // Defer until layout settles
-        requestAnimationFrame(() => { main.scrollTop = saved; });
-      } else {
-        main.scrollTop = 0;
-      }
+      const target = typeof saved === 'number' ? saved : 0;
+      // Defer until layout settles
+      requestAnimationFrame(() => {
+        // Use scrollTo with behavior:'instant' to bypass any CSS
+        // scroll-behavior:smooth that may be in effect.
+        main.scrollTo({ top: target, left: 0, behavior: 'instant' });
+      });
     } catch (e) { /* swallow */ }
   }, [scrollSlot, scrollKey]);
 

@@ -6,15 +6,19 @@ Operator reported (2026-06-13): "there should not be any workspace/content
 page which should replace Main menu and sub menu ...check each link.
 workspce content page opne after click of SUB menu link"
 
-Root cause: BankSidebar Platform Modules + BankSubMenu /ai-types links
-were pointing at top-level routes (`/eai-os`, `/ai-types`, etc.) that
-are NOT under <Route path="/bank" element={<BankLayout />}> in App.jsx ·
-clicking them REPLACED the entire bank shell instead of updating
-workspace state.
+Architecture (current · iter 95.13 · OP-1 + OP-2 shipped):
+  Main Menu (BankSidebar) · ONLY bank-specific items
+    - Department / domain / process selectors (in-shell · /bank/dept/...)
+    - Bank tools (/bank/prompts · /bank/agentic · etc · in-shell)
+    - Platform Modules block REMOVED (OP-1) · those belong in global Layout sidebar
 
-Fix shipped: those Link components now have target="_blank"
-rel="noopener noreferrer" so they open in a new tab, preserving the
-bank shell for the operator's session.
+  Sub Menu (BankSubMenu) · workspace navigation
+    - AI Types links → /bank/workspace?module=ai-types (IN-SHELL via OP-2)
+    - Per-process options also in-shell
+
+  Workspace · rendered inside BankLayout
+    - BankUseCasePage (when dept/domain/process selected)
+    - BankWorkspaceModulePage (when ?module=<key> · OP-2 restored)
 
 This drill locks the contract:
   - Any Link in bank/* whose `to` starts with `/` AND doesn't start
@@ -137,22 +141,26 @@ def main() -> int:
     step(2, len(submenu_links) > 0,
          f"BankSubMenu parses · {len(submenu_links)} <Link> blocks found")
 
-    # ─── Step 3 · sidebar Platform Module Link uses target=_blank ────
-    # Find any Link with `to={m.to}` (object-form map) · must have target=_blank
-    sidebar_module_pattern = (
-        'target="_blank"' in sidebar_src
-        and 'rel="noopener noreferrer"' in sidebar_src
+    # ─── Step 3 · BankSidebar has NO Platform Modules block (OP-1) ────
+    # Platform Modules were top-level routes that replaced the bank shell.
+    # OP-1 fix REMOVED them entirely (they're in the global Layout sidebar).
+    no_platform_modules = (
+        "Platform Modules</summary>" not in sidebar_src
+        and "'/eai-os'" not in sidebar_src
+        and "'/itsm'" not in sidebar_src
     )
-    step(3, sidebar_module_pattern,
-         f"BankSidebar has target=_blank + rel=noopener (Platform Modules in new tab)")
+    step(3, no_platform_modules,
+         "BankSidebar · Platform Modules block REMOVED (OP-1)")
 
-    # ─── Step 4 · submenu /ai-types Links use target=_blank ──────────
-    submenu_aitypes_blank = (
-        'target="_blank"' in submenu_src
-        and 'rel="noopener noreferrer"' in submenu_src
+    # ─── Step 4 · submenu /ai-types Links use /bank/workspace?module= (OP-2) ──
+    # The previous target=_blank pattern (commit 3eed68d8) was wrong direction.
+    # OP-2 fix: route via /bank/workspace?module=ai-types so content opens
+    # IN-SHELL inside BankWorkspaceModulePage rendered in BankLayout outlet.
+    has_in_shell_aitypes = (
+        '/bank/workspace?module=ai-types' in submenu_src
     )
-    step(4, submenu_aitypes_blank,
-         "BankSubMenu has target=_blank + rel=noopener (/ai-types in new tab)")
+    step(4, has_in_shell_aitypes,
+         "BankSubMenu · /ai-types → /bank/workspace?module=ai-types (IN-SHELL · OP-2)")
 
     # ─── Step 5 · NEG · bank-internal Links must NOT use target=_blank ──
     # Find any Link to /bank/... · verify it does NOT have target=_blank
@@ -177,23 +185,26 @@ def main() -> int:
          f"NEG shell-breaking Links: all have target=_blank · violations: "
          f"{bad_links[:5] if bad_links else 'NONE'}")
 
-    # ─── Step 7 · NEG · ALL /ai-types references use target=_blank ──
-    # Not just the first one · the b2c/b2b/b2e variants too
-    ai_types_count = sum(1 for to_val, has_target, _ in submenu_links
-                         if to_val.startswith("/ai-types"))
-    ai_types_blank = sum(1 for to_val, has_target, _ in submenu_links
-                         if to_val.startswith("/ai-types") and has_target)
-    step(7, ai_types_count > 0 and ai_types_count == ai_types_blank,
-         f"NEG /ai-types coverage: {ai_types_blank}/{ai_types_count} have target=_blank "
-         f"(must be 100%)")
-
-    # ─── Step 8 · §138 navigation contract comment present ──────────
-    has_contract_marker = (
-        "§138 navigation contract" in sidebar_src
-        and "§138 navigation contract" in submenu_src
+    # ─── Step 7 · NEG · ALL /ai-types references route through /bank/workspace ──
+    # OP-2 contract: every /ai-types link in BankSubMenu uses the in-shell route.
+    legacy_aitypes = sum(
+        1 for to_val, _, _ in submenu_links
+        if to_val.startswith("/ai-types")
     )
-    step(8, has_contract_marker,
-         "§138 navigation contract comment present in both files")
+    in_shell_aitypes = sum(
+        1 for to_val, _, _ in submenu_links
+        if to_val.startswith("/bank/workspace?module=ai-types")
+    )
+    step(7, legacy_aitypes == 0 and in_shell_aitypes > 0,
+         f"NEG /ai-types in-shell coverage: legacy={legacy_aitypes} "
+         f"in-shell={in_shell_aitypes} (legacy must be 0)")
+
+    # ─── Step 8 · OP-1/OP-2 audit markers present ──────────
+    # Track that the architectural changes are documented inline.
+    has_op1_marker = "OP-1" in sidebar_src
+    has_op2_marker = "OP-2" in submenu_src
+    step(8, has_op1_marker and has_op2_marker,
+         f"OP-1 marker in BankSidebar: {has_op1_marker} · OP-2 marker in BankSubMenu: {has_op2_marker}")
 
     print()
     print("ALL 8 STEPS PASSED")

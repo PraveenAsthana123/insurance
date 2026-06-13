@@ -159,72 +159,12 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
         })}
       </div>
 
-      {/* §147 Platform Modules · ALL new topics as departments */}
-      <details style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
-        <summary style={{
-          padding: '6px 18px 8px', color: '#10b981',
-          fontSize: FS_SMALL_LABEL, fontWeight: 800,
-          textTransform: 'uppercase', letterSpacing: '0.05em', cursor: 'pointer',
-        }}>Platform Modules</summary>
-        {[
-          { to: '/eai-os',    icon: '🏢', label: '§144 · Enterprise AI OS (9 layers)' },
-          { to: '/itsm',       icon: '🎫', label: '§143 · ITSM (incidents · L2 RCA · P1)' },
-          { to: '/prompts',    icon: '💬', label: '§145 · Conversation log' },
-          { to: '/platform',   icon: '🗺️', label: '§147 · Platform Explorer (all APIs)' },
-          { to: '/processes',  icon: '🛡️', label: '§150 · Process Resilience (live)' },
-          { to: '/chatgroup',  icon: '💬', label: 'ChatGroup · human + agent rooms' },
-          { to: '/control-tower', icon: '🏗', label: '§144 · AI Control Tower (12 dashboards)' },
-          { to: '/stt',        icon: '🎙', label: 'Speech-to-Text · audio + video' },
-          { to: '/tts',        icon: '🔊', label: 'Text-to-Speech (§F01)' },
-          { to: '/notifications', icon: '🔔', label: 'Notification Center (§F02)' },
-          { to: '/feature-flags', icon: '🎛', label: 'Feature Flags (§F03)' },
-          { to: '/workspace-demo', icon: '🧪', label: '§149.2 Layout Demo (drag · glass · flow)' },
-          { to: '/eaos-dept',    icon: '🏢', label: '🆕 EAOS Department (10 sub-menu · 12 tabs each)' },
-          { to: '/eaos',         icon: '🏢', label: '§EAOS Top-10 Scoreboard' },
-          { to: '/command-center', icon: '🏛', label: 'Enterprise AI Command Center' },
-          { to: '/promptops',    icon: '📝', label: 'PromptOps' },
-          { to: '/evalops',      icon: '🧪', label: 'EvaluationOps' },
-          { to: '/governance-om',icon: '⚖️', label: 'Governance Operating Model (§EAOS-3)' },
-          { to: '/agent-lifecycle', icon: '🔁', label: 'Agent Lifecycle (§EAOS-5)' },
-          { to: '/audit-explorer', icon: '📜', label: 'Audit Log Explorer (§F04)' },
-          { to: '/cost',           icon: '💰', label: 'Cost Optimizer (§F05)' },
-          { to: '/drift',          icon: '📉', label: 'Drift Monitor (§F06)' },
-          { to: '/prompt-playground', icon: '🧪', label: 'Prompt Playground (§F07)' },
-          { to: '/model-compare',  icon: '🆚', label: 'Model Comparison (§F09)' },
-          { to: '/datasets',       icon: '📦', label: 'Datasets (§F13)' },
-          { to: '/finetune',       icon: '🛠', label: 'Fine-tune Jobs (§F12)' },
-          { to: '/webhook-debug',  icon: '🪝', label: 'Webhook Debug (§F15)' },
-          { to: '/sse-stream',     icon: '📡', label: 'SSE Stream (§F16)' },
-          { to: '/aeo',            icon: '🧠', label: '🆕 AEO · Autonomous Enterprise Orchestrator (Layer 10)' },
-          { to: '/digital-twin',   icon: '🎮', label: 'Digital Twin (Layer 8)' },
-          { to: '/investment-portfolio', icon: '💎', label: 'Investment Portfolio (Layer 7)' },
-          { to: '/cost-portfolio', icon: '💰', label: 'Cost Portfolio (Layer 6)' },
-          { to: '/risk-portfolio', icon: '⚠️', label: 'Risk Portfolio (Layer 5)' },
-          { to: '/model-portfolio',icon: '🧠', label: 'Model Portfolio (Layer 4)' },
-          { to: '/translate',      icon: '🌐', label: 'Translation (§F10)' },
-          { to: '/ocr',            icon: '👁', label: 'Functional OCR (§F11)' },
-          { to: '/embeddings',     icon: '🔢', label: 'Embedding Playground (§F14)' },
-          { to: '/vectors',        icon: '🗄', label: 'Vector DB Browser (§F08)' },
-        ].map((m) => (
-          // §138 navigation contract · platform modules open in NEW TAB
-          // so the bank shell (Main Menu · Sub Menu · workspace) stays
-          // intact for the operator. Top-level routes like /eai-os ·
-          // /itsm · /ai-types etc are NOT under <Route path="/bank">
-          // and would replace BankLayout if clicked in-tab.
-          <Link key={m.to} to={m.to}
-                target="_blank" rel="noopener noreferrer"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  minHeight: 38,
-                  padding: '8px 18px',
-                  color: '#dbeafe', textDecoration: 'none',
-                  fontSize: FS_LEAF_ROW,
-                }}>
-            <span>{m.icon}</span><span style={{ flex: 1 }}>{m.label}</span>
-            <span style={{ fontSize: 10, color: '#93c5fd', opacity: 0.7 }} aria-label="opens in new tab">↗</span>
-          </Link>
-        ))}
-      </details>
+      {/* OP-1 (2026-06-13): Platform Modules block REMOVED from bank Main Menu.
+          These were top-level routes (/eai-os · /itsm · /ai-types · etc.) NOT
+          registered under <Route path="/bank">. They belong in the global
+          Layout sidebar (where they're still accessible), not in the
+          bank-specific shell. Per operator intent: bank Main Menu = bank-
+          specific selectors only (departments · B2C/B2B/B2E · bank tools). */}
 
       <div style={{ padding: '10px 0', borderBottom: '1px solid #1e40af', marginBottom: 10 }}>
         {[
