@@ -129,6 +129,10 @@ export function BankSidebar({ bp, collapsed, onToggle }) {
           { to: '/cost-portfolio', icon: '💰', label: 'Cost Portfolio (Layer 6)' },
           { to: '/risk-portfolio', icon: '⚠️', label: 'Risk Portfolio (Layer 5)' },
           { to: '/model-portfolio',icon: '🧠', label: 'Model Portfolio (Layer 4)' },
+          { to: '/translate',      icon: '🌐', label: 'Translation (§F10)' },
+          { to: '/ocr',            icon: '👁', label: 'Functional OCR (§F11)' },
+          { to: '/embeddings',     icon: '🔢', label: 'Embedding Playground (§F14)' },
+          { to: '/vectors',        icon: '🗄', label: 'Vector DB Browser (§F08)' },
         ].map((m) => (
           <Link key={m.to} to={m.to} style={{
             display: 'flex', alignItems: 'center', gap: 8,

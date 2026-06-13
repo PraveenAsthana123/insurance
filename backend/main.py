@@ -204,6 +204,9 @@ def create_app() -> FastAPI:
     from voice_ai_tts.router import router as tts_router  # /api/v1/voice-ai TTS POST — §F01
     from eaos_scoreboard.router import router as eaos_router  # /api/v1/eaos — EAOS Top-10
     from aeo.router import router as aeo_router  # /api/v1/aeo — Layer 10 Autonomous Enterprise Orchestrator
+    from ai_runtime_endpoints.router import (
+        translate_router, ocr_router, embed_router, vector_router,
+    )  # F08+F10+F11+F14
     from agentic_ops.router import router as agentic_ops_router  # /api/v1/agentic-ops — Iter 38
     from enterprise_governance.router import router as governance_router  # /api/v1/governance — Iter 39
     from risk_incident_learning.router import router as ril_router  # /api/v1/ril — Iter 40
@@ -370,6 +373,10 @@ def create_app() -> FastAPI:
     app.include_router(tts_router)                 # /api/v1/voice-ai TTS POST — §F01
     app.include_router(eaos_router)                # /api/v1/eaos — EAOS Top-10 scoreboard
     app.include_router(aeo_router)                 # /api/v1/aeo — Layer 10 AEO
+    app.include_router(translate_router)          # /api/v1/translate — §F10
+    app.include_router(ocr_router)                # /api/v1/image-clean — §F11
+    app.include_router(embed_router)              # /api/v1/embeddings — §F14
+    app.include_router(vector_router)             # /api/v1/vector-browser — §F08
     app.include_router(agentic_ops_router)         # /api/v1/agentic-ops — Iter 38
     app.include_router(governance_router)          # /api/v1/governance — Iter 39
     app.include_router(ril_router)                 # /api/v1/ril — Iter 40

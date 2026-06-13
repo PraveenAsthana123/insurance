@@ -103,6 +103,10 @@ import RiskPortfolioPage from './pages/RiskPortfolioPage';
 import CostPortfolioPage from './pages/CostPortfolioPage';
 import InvestmentPortfolioPage from './pages/InvestmentPortfolioPage';
 import DigitalTwinPage from './pages/DigitalTwinPage';
+import TranslatePage from './pages/TranslatePage';
+import OcrPage from './pages/OcrPage';
+import EmbeddingPlaygroundPage from './pages/EmbeddingPlaygroundPage';
+import VectorBrowserPage from './pages/VectorBrowserPage';
 
 function PageLoader({ label }) {
   return (
@@ -305,6 +309,11 @@ export default function App() {
         <Route path="/cost-portfolio" element={<CostPortfolioPage />} />
         <Route path="/investment-portfolio" element={<InvestmentPortfolioPage />} />
         <Route path="/digital-twin" element={<DigitalTwinPage />} />
+        <Route path="/translate" element={<TranslatePage />} />
+        <Route path="/ocr" element={<OcrPage />} />
+        <Route path="/embeddings" element={<EmbeddingPlaygroundPage />} />
+        <Route path="/vectors" element={<VectorBrowserPage />} />
+        <Route path="/vector-browser" element={<VectorBrowserPage />} />
       </Routes>
     </BrowserRouter>
   );

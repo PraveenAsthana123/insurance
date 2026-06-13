@@ -152,6 +152,14 @@ PERMS_MATRIX: list[tuple[str, re.Pattern, set[str]]] = [
 
     # -------- §AEO Layer 10 · operator 2026-06-12 23-level brief --------
     ("GET",  re.compile(r"^/api/v1/aeo/.*$"),                                       _READ_ROLES),
+
+    # -------- F10 Translate / F11 OCR / F14 Embed / F08 VectorBrowser --------
+    ("GET",  re.compile(r"^/api/v1/translate/languages$"),                          _READ_ROLES),
+    ("POST", re.compile(r"^/api/v1/translate/run$"),                                {"manager", "tester"}),
+    ("POST", re.compile(r"^/api/v1/image-clean/ocr$"),                              {"manager", "tester"}),
+    ("GET",  re.compile(r"^/api/v1/embeddings/health$"),                            _READ_ROLES),
+    ("POST", re.compile(r"^/api/v1/embeddings/run$"),                               {"manager", "tester"}),
+    ("GET",  re.compile(r"^/api/v1/vector-browser/.*$"),                            _READ_ROLES),
 ]
 
 # Backwards-compatible alias — earlier commits referenced SALES_PERMS.
