@@ -297,3 +297,21 @@ User feedback: each tab needed a deeper check for component correctness, importa
 
 Every tab now explains its own component sequence from the user point of view before the user reaches the detailed workspace. Cards are more self-describing, action cards are visually distinct, and button clicks produce visible in-place progress and completion feedback.
 
+## No Black Background Pass
+
+User feedback: remove black background blocks.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Header | Replaced black header with a light slate header and light input/select controls. |
+| Resize handles | Replaced black active resize-handle color with blue active state. |
+| Modals | Replaced dark modal backdrops with light translucent slate overlays. |
+| Active toggles | Replaced black active toggle backgrounds with light blue active state. |
+| Chat rail | Replaced black chat channel rail with a light rail and dark readable text. |
+
+### UX Verdict
+
+The bank UI now avoids black/near-black background blocks while preserving readable dark text and clear blue active states.
+

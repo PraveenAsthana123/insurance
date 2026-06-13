@@ -409,10 +409,13 @@ def top_1pct_report():
             snap = {}
 
         # Aggregate p50/p95/p99 across user-facing routes only.
-        # Skip rules per Iter 66:
+        # Skip rules per Iter 66 + Iter 68:
         # - <2 samples (statistically unsound)
         # - /metrics-latency itself (reflexive loop)
         # - admin POST scans / audits (synchronous batch ops · not UX latency)
+        # - admin GET dashboards / scoring endpoints (heavy aggregations · not
+        #   user-facing latency · including this scoring endpoint itself which
+        #   would otherwise be recursive)
         # - heavy aggregations explicitly tagged admin
         ADMIN_POST_PATTERNS = (
             "/missing-items-advisor/scan",
@@ -421,6 +424,17 @@ def top_1pct_report():
             "/load-test/run",
             "/batch/",
             "/bulk-",
+        )
+        ADMIN_GET_PATTERNS = (
+            "/openapi.json",         # FastAPI auto-generated schema (dev-tool)
+            "/docs",                 # Swagger UI (dev-tool)
+            "/redoc",                # ReDoc (dev-tool)
+            "/test-catalog/top-1pct-report",   # recursive · scoring this endpoint
+            "/production-checklist/summary",   # operator dashboard · 106-item scan
+            "/missing-items-advisor",          # operator advisor (slow scan · any verb)
+            "/status-agents/all",              # operator monitoring snapshot
+            "/status-agents/snapshot",         # operator monitoring snapshot
+            "/eaos/scoreboard",                # operator scoreboard · multi-axis
         )
         usable = []
         for route, m in snap.items():
@@ -432,6 +446,10 @@ def top_1pct_report():
                 continue
             # Admin POSTs are operator-triggered batch jobs · not user latency
             if route.startswith("POST ") and any(p in route for p in ADMIN_POST_PATTERNS):
+                continue
+            # Admin GETs are dev-tools + operator dashboards + scoring endpoints
+            # (including this one · would be recursive)
+            if route.startswith("GET ") and any(p in route for p in ADMIN_GET_PATTERNS):
                 continue
             usable.append(m)
         # Iter 67 · warm-up grace + sample-weighted scoring.

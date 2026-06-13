@@ -145,7 +145,7 @@ function LayoutInner({ bp, collapsed, onToggle }) {
                 try { localStorage.setItem(SUB_MENU_HEIGHT_KEY, '220'); } catch (e) { /* swallow */ }
               }}
               style={{
-                background: resizing ? '#0f172a' : '#cbd5e1',
+                background: resizing ? '#2563eb' : '#cbd5e1',
                 cursor: 'row-resize', minWidth: 0, minHeight: resizeHandleSize,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 touchAction: 'none', zIndex: 2,
@@ -179,7 +179,7 @@ function LayoutInner({ bp, collapsed, onToggle }) {
                 try { localStorage.setItem(MAIN_MENU_WIDTH_KEY, String(isTablet ? 72 : 320)); } catch (e) { /* swallow */ }
               }}
               style={{
-                background: resizing ? '#0f172a' : '#cbd5e1',
+                background: resizing ? '#2563eb' : '#cbd5e1',
                 cursor: 'col-resize', minWidth: resizeHandleSize, minHeight: 0,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 touchAction: 'none', zIndex: 2,

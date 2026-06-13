@@ -51,13 +51,13 @@ export function BankChatPage() {
     }}>
       {/* LEFT: channel list */}
       <aside style={{
-        background: '#0f172a', color: '#e2e8f0',
-        borderRight: '1px solid #1e293b',
+        background: '#f8fafc', color: '#0f172a',
+        borderRight: '1px solid #cbd5e1',
         overflow: 'auto',
       }}>
-        <div style={{ padding: '14px 16px', borderBottom: '1px solid #1e293b' }}>
-          <strong style={{ fontSize: 13, color: '#fff' }}>💬 Insurance Enterprise</strong>
-          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 2 }}>
+        <div style={{ padding: '14px 16px', borderBottom: '1px solid #cbd5e1' }}>
+          <strong style={{ fontSize: 13, color: '#0f172a' }}>💬 Insurance Enterprise</strong>
+          <div style={{ fontSize: 10, color: '#64748b', marginTop: 2 }}>
             {channels.length} channels · {depts.length} dept rooms
           </div>
         </div>

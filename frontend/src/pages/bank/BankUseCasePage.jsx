@@ -2321,7 +2321,7 @@ function SpecComponentCard({ label, color, onAction, phase, procKey, index = 0 }
         onClick={() => setEditOpen(false)}
         style={{
           position: 'fixed', inset: 0,
-          background: 'rgba(15, 23, 42, 0.55)',
+          background: 'rgba(226, 232, 240, 0.78)',
           zIndex: 9998,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: 16,
@@ -3403,7 +3403,7 @@ function BizValueExecHeader({ activeSubId }) {
               {c.label}
               <div style={{
                 fontSize: 16, marginTop: 4,
-                color: isActive ? '#fff' : '#0f172a',
+                color: isActive ? '#1d4ed8' : '#0f172a',
               }}>—</div>
             </div>
           );
@@ -4751,7 +4751,7 @@ function AiTypeCatalog({ proc, dept, focusKind, focusLabel, onFocus }) {
                 textAlign: 'left',
                 padding: 12,
                 background: isActive ? '#8b5cf6' : '#fff',
-                color: isActive ? '#fff' : '#0f172a',
+                color: isActive ? '#1d4ed8' : '#0f172a',
                 border: `2px solid ${isActive ? '#7c3aed' : '#8b5cf655'}`,
                 borderRadius: 8,
                 cursor: 'pointer',
@@ -4772,7 +4772,7 @@ function AiTypeCatalog({ proc, dept, focusKind, focusLabel, onFocus }) {
               </div>
               <div style={{
                 fontSize: 14, fontWeight: 800,
-                color: isActive ? '#fff' : '#0f172a',
+                color: isActive ? '#1d4ed8' : '#0f172a',
                 marginBottom: 8,
               }}>{aiType}</div>
               {detailRows.length > 0 && (
@@ -4784,7 +4784,7 @@ function AiTypeCatalog({ proc, dept, focusKind, focusLabel, onFocus }) {
                   {detailRows.slice(0, 2).map(([k, v]) => (
                     <div key={k}>
                       <strong style={{
-                        color: isActive ? '#fff' : '#0f172a',
+                        color: isActive ? '#1d4ed8' : '#0f172a',
                         textTransform: 'capitalize',
                       }}>{k.replace(/_/g, ' ')}:</strong>{' '}
                       {renderValue(v)}
@@ -4842,7 +4842,7 @@ function CommandPalette({ open, onClose, onJump }) {
       onClick={onClose}
       style={{
         position: 'fixed', inset: 0,
-        background: 'rgba(15, 23, 42, 0.55)',
+        background: 'rgba(226, 232, 240, 0.78)',
         zIndex: 9999,
         display: 'flex', justifyContent: 'center', alignItems: 'flex-start',
         paddingTop: '12vh',
@@ -5620,7 +5620,7 @@ function KnowledgeRepositorySection({ color, proc }) {
               style={{
                 padding: 12, textAlign: 'left',
                 background: isActive ? color : '#fff',
-                color: isActive ? '#fff' : '#0f172a',
+                color: isActive ? '#1d4ed8' : '#0f172a',
                 border: `1px solid ${color}55`, borderLeft: `4px solid ${color}`,
                 borderRadius: 6, cursor: 'pointer', font: 'inherit',
                 transition: 'background 0.15s',
@@ -7353,9 +7353,9 @@ export function BankUseCasePage() {
               style={{
                 minHeight: 30,
                 padding: '6px 10px', fontSize: 11, fontWeight: 700,
-                background: isActive ? '#0f172a' : '#fff',
-                color: isActive ? '#fff' : '#475569',
-                border: '1px solid ' + (isActive ? '#0f172a' : '#cbd5e1'),
+                background: isActive ? '#dbeafe' : '#fff',
+                color: isActive ? '#1d4ed8' : '#475569',
+                border: '1px solid ' + (isActive ? '#2563eb' : '#cbd5e1'),
                 borderRadius: 4, cursor: 'pointer',
               }}>{g.label}</button>
           );
@@ -7813,9 +7813,9 @@ function WorkspaceWideAudit({ visibleTabs, proc, dept, onJump, activeTabId }) {
             onClick={() => setShowTrend((v) => !v)}
             style={{
               padding: '8px 12px', fontSize: 12, fontWeight: 700,
-              background: showTrend ? '#0f172a' : '#fff',
-              color: showTrend ? '#fff' : '#475569',
-              border: '1px solid ' + (showTrend ? '#0f172a' : '#cbd5e1'),
+              background: showTrend ? '#dbeafe' : '#fff',
+              color: showTrend ? '#1d4ed8' : '#475569',
+              border: '1px solid ' + (showTrend ? '#2563eb' : '#cbd5e1'),
               borderRadius: 3, cursor: 'pointer',
             }}>📈 Trend ({auditLog.length})</button>
           {auditLog.length > 0 && (
@@ -8100,7 +8100,7 @@ function FiveSecRuleOverlay({ open, onClose, tab, sub, proc, dept, profile, visi
       onClick={onClose}
       style={{
         position: 'fixed', inset: 0,
-        background: 'rgba(15, 23, 42, 0.55)',
+        background: 'rgba(226, 232, 240, 0.78)',
         zIndex: 9999,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: 16,
@@ -8152,9 +8152,9 @@ function FiveSecRuleOverlay({ open, onClose, tab, sub, proc, dept, profile, visi
                 onClick={() => setMode(m.id)}
                 style={{
                   padding: '8px 12px', fontSize: 12, fontWeight: 700,
-                  background: active ? '#0f172a' : '#fff',
-                  color: active ? '#fff' : '#475569',
-                  border: '1px solid ' + (active ? '#0f172a' : '#cbd5e1'),
+                  background: active ? '#dbeafe' : '#fff',
+                  color: active ? '#1d4ed8' : '#475569',
+                  border: '1px solid ' + (active ? '#2563eb' : '#cbd5e1'),
                   borderRadius: 4, cursor: 'pointer',
                 }}>{m.label}</button>
             );
@@ -8273,7 +8273,7 @@ function KeyboardHelpOverlay({ open, onClose }) {
       onClick={onClose}
       style={{
         position: 'fixed', inset: 0,
-        background: 'rgba(15, 23, 42, 0.55)',
+        background: 'rgba(226, 232, 240, 0.78)',
         zIndex: 9999,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: 16,

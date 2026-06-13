@@ -67,9 +67,9 @@ export function BankHeader() {
   return (
     <header style={{
       height: 56, padding: '0 16px',
-      background: '#0f172a', color: '#fff',
+      background: '#f8fafc', color: '#0f172a',
       display: 'flex', alignItems: 'center', gap: 12,
-      borderBottom: '1px solid #1e293b',
+      borderBottom: '1px solid #cbd5e1',
     }}>
       {/* Brand */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 240 }}>
@@ -87,8 +87,8 @@ export function BankHeader() {
           placeholder="🔍 Global search — depts · processes · models · agents..."
           style={{
             width: '100%', padding: '6px 10px 6px 10px', fontSize: 12,
-            background: '#1e293b', color: '#fff',
-            border: '1px solid #334155', borderRadius: 6, outline: 'none',
+            background: '#fff', color: '#0f172a',
+            border: '1px solid #cbd5e1', borderRadius: 6, outline: 'none',
           }}
         />
       </div>
@@ -132,8 +132,8 @@ export function BankHeader() {
         onChange={(e) => setRole(e.target.value)}
         style={{
           padding: '4px 8px', fontSize: 11,
-          background: '#1e293b', color: '#fff',
-          border: '1px solid #334155', borderRadius: 4, cursor: 'pointer',
+          background: '#fff', color: '#0f172a',
+          border: '1px solid #cbd5e1', borderRadius: 4, cursor: 'pointer',
         }}
         title="Role"
       >
