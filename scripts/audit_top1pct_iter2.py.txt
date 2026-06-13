@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter2.py
-# auto-generated explainer · 2026-06-12T10:00:13Z
+# auto-generated explainer · 2026-06-13T10:00:19Z
 
 ## Purpose
 Top-1% Iteration 2-6 audit · charts + actions + scaffold.

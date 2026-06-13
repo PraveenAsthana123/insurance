@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_postings_executor.py
-# auto-generated explainer · 2026-06-12T10:00:21Z
+# auto-generated explainer · 2026-06-13T10:00:28Z
 
 ## Purpose
 Content posting scheduler audit · validates the */30 cron loop.

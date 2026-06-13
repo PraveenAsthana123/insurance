@@ -1733,6 +1733,34 @@
         "title": "AuditEvent",
         "type": "object"
       },
+      "Body_audio_to_text_run_api_v1_video_intel_audio_to_text_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_audio_to_text_run_api_v1_video_intel_audio_to_text_post",
+        "type": "object"
+      },
+      "Body_ocr_run_api_v1_image_clean_ocr_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_ocr_run_api_v1_image_clean_ocr_post",
+        "type": "object"
+      },
       "Body_upload_dataset_api_v1_datasets__dataset_id__upload_post": {
         "properties": {
           "file": {
@@ -1745,6 +1773,20 @@
           "file"
         ],
         "title": "Body_upload_dataset_api_v1_datasets__dataset_id__upload_post",
+        "type": "object"
+      },
+      "Body_video_to_text_run_api_v1_video_intel_video_to_text_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_video_to_text_run_api_v1_video_intel_video_to_text_post",
         "type": "object"
       },
       "BrutalFeedbackBody": {
@@ -4073,6 +4115,26 @@
         "title": "ETAResponse",
         "type": "object"
       },
+      "EmbedRequest": {
+        "properties": {
+          "model": {
+            "default": "bge-m3",
+            "title": "Model",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "EmbedRequest",
+        "type": "object"
+      },
       "EnqueueRequest": {
         "properties": {
           "kind": {
@@ -4966,6 +5028,55 @@
         "title": "GoalRequest",
         "type": "object"
       },
+      "GroupCreate": {
+        "properties": {
+          "department_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Department Id"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "group_id": {
+            "maxLength": 100,
+            "minLength": 3,
+            "title": "Group Id",
+            "type": "string"
+          },
+          "group_name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Group Name",
+            "type": "string"
+          },
+          "visibility": {
+            "default": "public",
+            "title": "Visibility",
+            "type": "string"
+          }
+        },
+        "required": [
+          "group_id",
+          "group_name"
+        ],
+        "title": "GroupCreate",
+        "type": "object"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -5499,6 +5610,35 @@
           "created_at"
         ],
         "title": "InputEventResponse",
+        "type": "object"
+      },
+      "InvocationDecision": {
+        "properties": {
+          "decided_by": {
+            "default": "operator",
+            "title": "Decided By",
+            "type": "string"
+          },
+          "decision": {
+            "title": "Decision",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "required": [
+          "decision"
+        ],
+        "title": "InvocationDecision",
         "type": "object"
       },
       "InvokeRequest": {
@@ -6108,6 +6248,31 @@
         "title": "MappingCreate",
         "type": "object"
       },
+      "MemberAdd": {
+        "properties": {
+          "member_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Member Id",
+            "type": "string"
+          },
+          "member_kind": {
+            "default": "human",
+            "title": "Member Kind",
+            "type": "string"
+          },
+          "role": {
+            "default": "member",
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "member_id"
+        ],
+        "title": "MemberAdd",
+        "type": "object"
+      },
       "MemoryWriteBody": {
         "properties": {
           "content": {
@@ -6129,6 +6294,50 @@
           "content"
         ],
         "title": "MemoryWriteBody",
+        "type": "object"
+      },
+      "MessagePost": {
+        "properties": {
+          "attachments": {
+            "default": [],
+            "items": {},
+            "title": "Attachments",
+            "type": "array"
+          },
+          "content": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Content",
+            "type": "string"
+          },
+          "parent_message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Message Id"
+          },
+          "sender_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Sender Id",
+            "type": "string"
+          },
+          "sender_kind": {
+            "default": "human",
+            "title": "Sender Kind",
+            "type": "string"
+          }
+        },
+        "required": [
+          "content",
+          "sender_id"
+        ],
+        "title": "MessagePost",
         "type": "object"
       },
       "ModelBody": {
@@ -11046,6 +11255,46 @@
         "title": "T2SBody",
         "type": "object"
       },
+      "TTSRequest": {
+        "properties": {
+          "format": {
+            "default": "wav",
+            "pattern": "^(wav|mp3)$",
+            "title": "Format",
+            "type": "string"
+          },
+          "speed": {
+            "default": 1.0,
+            "maximum": 2.0,
+            "minimum": 0.5,
+            "title": "Speed",
+            "type": "number"
+          },
+          "text": {
+            "maxLength": 5000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "voice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "default",
+            "title": "Voice"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "TTSRequest",
+        "type": "object"
+      },
       "TagBody": {
         "properties": {
           "actor": {
@@ -11915,6 +12164,31 @@
         "title": "TraceCall",
         "type": "object"
       },
+      "TranslateRequest": {
+        "properties": {
+          "source_lang": {
+            "default": "auto",
+            "title": "Source Lang",
+            "type": "string"
+          },
+          "target_lang": {
+            "default": "en",
+            "title": "Target Lang",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "TranslateRequest",
+        "type": "object"
+      },
       "TurnRequest": {
         "properties": {
           "session_id": {
@@ -12344,6 +12618,115 @@
           "value_stream_name"
         ],
         "title": "ValueStream",
+        "type": "object"
+      },
+      "VerifyRequest": {
+        "properties": {
+          "bias": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bias"
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confidence"
+          },
+          "cost_usd": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cost Usd"
+          },
+          "invocation_id": {
+            "title": "Invocation Id",
+            "type": "string"
+          },
+          "is_reversible_action": {
+            "default": false,
+            "title": "Is Reversible Action",
+            "type": "boolean"
+          },
+          "output": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output"
+          },
+          "output_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output Text"
+          },
+          "rollback_plan": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rollback Plan"
+          },
+          "tenant_id": {
+            "default": "default",
+            "title": "Tenant Id",
+            "type": "string"
+          },
+          "tokens_in": {
+            "default": 0,
+            "title": "Tokens In",
+            "type": "integer"
+          },
+          "tokens_out": {
+            "default": 0,
+            "title": "Tokens Out",
+            "type": "integer"
+          },
+          "trace_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trace Id"
+          }
+        },
+        "required": [
+          "invocation_id"
+        ],
+        "title": "VerifyRequest",
         "type": "object"
       },
       "Vital": {
@@ -14808,6 +15191,282 @@
         "summary": "List tenants",
         "tags": [
           "admin"
+        ]
+      }
+    },
+    "/api/v1/aeo/actions": {
+      "get": {
+        "operationId": "actions_api_v1_aeo_actions_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Actions",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/autonomy": {
+      "get": {
+        "operationId": "autonomy_api_v1_aeo_autonomy_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 30,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Autonomy",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/constraints": {
+      "get": {
+        "operationId": "constraints_api_v1_aeo_constraints_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Constraints",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/dashboard": {
+      "get": {
+        "description": "Top-of-pyramid KPIs \u00b7 all engines roll up here.",
+        "operationId": "dashboard_api_v1_aeo_dashboard_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Dashboard",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/decisions": {
+      "get": {
+        "operationId": "decisions_api_v1_aeo_decisions_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Decisions",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/goals": {
+      "get": {
+        "operationId": "goals_api_v1_aeo_goals_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Goals",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/health": {
+      "get": {
+        "operationId": "health_api_v1_aeo_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/objectives": {
+      "get": {
+        "operationId": "objectives_api_v1_aeo_objectives_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Objectives",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/policies": {
+      "get": {
+        "operationId": "policies_api_v1_aeo_policies_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Policies",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/scenarios": {
+      "get": {
+        "operationId": "scenarios_api_v1_aeo_scenarios_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Scenarios",
+        "tags": [
+          "aeo"
+        ]
+      }
+    },
+    "/api/v1/aeo/trust": {
+      "get": {
+        "operationId": "trust_api_v1_aeo_trust_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Trust",
+        "tags": [
+          "aeo"
         ]
       }
     },
@@ -18493,6 +19152,57 @@
         ]
       }
     },
+    "/api/v1/agentic/invocations/{invocation_id}/decide": {
+      "post": {
+        "description": "\u00a7A1 \u00b7 intervention decision endpoint.\n\nPer PENDING_TASKS_PLAN A1: operator can approve/reject pending agent\ninvocations from the UI. Idempotent \u00b7 second call returns existing state.\nWrites audit row \u00b7 emits trace event \u00b7 updates status to Success/Cancelled.",
+        "operationId": "decide_invocation_api_v1_agentic_invocations__invocation_id__decide_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "invocation_id",
+            "required": true,
+            "schema": {
+              "title": "Invocation Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvocationDecision"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Decide Invocation",
+        "tags": [
+          "agentic"
+        ]
+      }
+    },
     "/api/v1/agentic/invocations/{invocation_id}/trace": {
       "get": {
         "description": "Iter 43 \u00b7 Tier-1 #4 \u00b7 OpenTelemetry-style trace events for one invocation.",
@@ -18608,6 +19318,141 @@
           }
         },
         "summary": "Create Mapping",
+        "tags": [
+          "agentic"
+        ]
+      }
+    },
+    "/api/v1/agentic/mcp-servers": {
+      "get": {
+        "description": "\u00a7D1 \u00b7 list registered MCP servers with optional live reachability check.\n\nPer PENDING_TASKS_PLAN D1 review gate: returns \u22651 row \u00b7 slack_mcp\nvisible. Composes with \u00a7147 Platform Explorer (operators can see\nevery registered MCP) + \u00a752 brutal tool review (per-MCP reachable\nflag is honest scaffold per \u00a757.7).",
+        "operationId": "list_mcp_servers_api_v1_agentic_mcp_servers_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "risk_level",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Risk Level"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tenant_id",
+            "required": false,
+            "schema": {
+              "default": "default",
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_reachability",
+            "required": false,
+            "schema": {
+              "default": true,
+              "title": "Include Reachability",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Mcp Servers",
+        "tags": [
+          "agentic"
+        ]
+      }
+    },
+    "/api/v1/agentic/mcp-servers/{mcp_id}": {
+      "get": {
+        "description": "\u00a7D1 \u00b7 single MCP server detail \u00b7 with reachability probe.",
+        "operationId": "get_mcp_server_api_v1_agentic_mcp_servers__mcp_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mcp_id",
+            "required": true,
+            "schema": {
+              "title": "Mcp Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tenant_id",
+            "required": false,
+            "schema": {
+              "default": "default",
+              "title": "Tenant Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Mcp Server",
         "tags": [
           "agentic"
         ]
@@ -21645,6 +22490,328 @@
         ]
       }
     },
+    "/api/v1/chatgroup/groups": {
+      "get": {
+        "operationId": "list_groups_api_v1_chatgroup_groups_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "department_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Department Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Groups",
+        "tags": [
+          "chatgroup"
+        ]
+      },
+      "post": {
+        "operationId": "create_group_api_v1_chatgroup_groups_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Group",
+        "tags": [
+          "chatgroup"
+        ]
+      }
+    },
+    "/api/v1/chatgroup/groups/{group_id}": {
+      "get": {
+        "operationId": "get_group_api_v1_chatgroup_groups__group_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "title": "Group Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Group",
+        "tags": [
+          "chatgroup"
+        ]
+      }
+    },
+    "/api/v1/chatgroup/groups/{group_id}/members": {
+      "post": {
+        "operationId": "add_member_api_v1_chatgroup_groups__group_id__members_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "title": "Group Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberAdd"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add Member",
+        "tags": [
+          "chatgroup"
+        ]
+      }
+    },
+    "/api/v1/chatgroup/groups/{group_id}/messages": {
+      "get": {
+        "operationId": "list_messages_api_v1_chatgroup_groups__group_id__messages_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "title": "Group Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Messages",
+        "tags": [
+          "chatgroup"
+        ]
+      },
+      "post": {
+        "operationId": "post_message_api_v1_chatgroup_groups__group_id__messages_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "title": "Group Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessagePost"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Message",
+        "tags": [
+          "chatgroup"
+        ]
+      }
+    },
+    "/api/v1/chatgroup/health": {
+      "get": {
+        "description": "Operator-readable health \u00b7 sanity-check counts.",
+        "operationId": "health_api_v1_chatgroup_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "chatgroup"
+        ]
+      }
+    },
     "/api/v1/comments": {
       "post": {
         "operationId": "post_comment_api_v1_comments_post",
@@ -24413,6 +25580,49 @@
         ]
       }
     },
+    "/api/v1/eai-os/control-tower": {
+      "get": {
+        "description": "\u00a7144 Layer-15 AI Control Tower \u00b7 12 dashboards in one view.\n\nAggregates: agent \u00b7 model \u00b7 prompt \u00b7 workflow \u00b7 execution \u00b7 risk \u00b7 cost \u00b7\ncompliance \u00b7 capability \u00b7 digital-twin \u00b7 process \u00b7 observability surfaces.\nOperator-readable summary counts + recent rows per dashboard.\n\n\u00a757.7 honest: counts are live from DB \u00b7 NEVER fabricated. Missing tables\nare reported as 'n_a' rather than zero (zero would imply success).",
+        "operationId": "ai_control_tower_api_v1_eai_os_control_tower_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 25,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ai Control Tower",
+        "tags": [
+          "enterprise-ai-os",
+          "autonomous-incident"
+        ]
+      }
+    },
     "/api/v1/eai-os/ct/compliance": {
       "get": {
         "operationId": "ct_compliance_api_v1_eai_os_ct_compliance_get",
@@ -26557,6 +27767,85 @@
         "tags": [
           "enterprise-ai-os",
           "autonomous-incident"
+        ]
+      }
+    },
+    "/api/v1/eaos/scoreboard": {
+      "get": {
+        "description": "\u00a7EAOS-Top10 \u00b7 live presence + score per component.",
+        "operationId": "scoreboard_api_v1_eaos_scoreboard_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Scoreboard",
+        "tags": [
+          "eaos"
+        ]
+      }
+    },
+    "/api/v1/embeddings/health": {
+      "get": {
+        "operationId": "embed_health_api_v1_embeddings_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Embed Health",
+        "tags": [
+          "embeddings"
+        ]
+      }
+    },
+    "/api/v1/embeddings/run": {
+      "post": {
+        "description": "F14 \u00b7 Get embedding vector via Ollama (bge-m3 / nomic-embed / etc).",
+        "operationId": "embed_run_api_v1_embeddings_run_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmbedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Embed Run",
+        "tags": [
+          "embeddings"
         ]
       }
     },
@@ -30472,6 +31761,46 @@
         "tags": [
           "text2sql",
           "finetune"
+        ]
+      }
+    },
+    "/api/v1/image-clean/ocr": {
+      "post": {
+        "description": "F11 \u00b7 OCR an image file \u00b7 returns extracted text + per-region boxes.",
+        "operationId": "ocr_run_api_v1_image_clean_ocr_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_ocr_run_api_v1_image_clean_ocr_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ocr Run",
+        "tags": [
+          "image-clean"
         ]
       }
     },
@@ -39933,8 +41262,20 @@
     },
     "/api/v1/missing-items-advisor/scan": {
       "post": {
-        "description": "Run all scanners \u00b7 return prioritized findings list.",
+        "description": "Run all scanners \u00b7 return prioritized findings list.\n\nCaches the result for INSUR_ADVISOR_TTL seconds (default 60).\nSet ?force=true (or env=0) to bypass cache.\n\nPer \u00a757.7 honest: cache hits include the cached `scanned_at`\ntimestamp (operator sees freshness) plus a `cache_age_s` field\nso callers know whether they got fresh or cached data.",
         "operationId": "scan_api_v1_missing_items_advisor_scan_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "force",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Force",
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -39943,6 +41284,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
         "summary": "Scan",
@@ -43388,6 +44739,18 @@
     "/api/v1/production-checklist/full": {
       "get": {
         "operationId": "full_api_v1_production_checklist_full_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "force",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Force",
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -43396,6 +44759,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
         "summary": "Full",
@@ -43426,6 +44799,18 @@
     "/api/v1/production-checklist/summary": {
       "get": {
         "operationId": "summary_api_v1_production_checklist_summary_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "force",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Force",
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -43434,6 +44819,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
         "summary": "Summary",
@@ -46674,6 +48069,26 @@
         ]
       }
     },
+    "/api/v1/service-health/processes": {
+      "get": {
+        "description": "\u00a7150 \u00b7 live status of every supervised process.\n\nReads jobs/state/supervisor.json written by scripts/multi_supervisor.py.\nAugments each entry with a live port-bound check so the response is\naccurate even between supervisor ticks (\u00a757.7 honest scaffold).",
+        "operationId": "supervised_processes_api_v1_service_health_processes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Supervised Processes",
+        "tags": [
+          "service-health"
+        ]
+      }
+    },
     "/api/v1/service-registry": {
       "get": {
         "description": "List every registered route + tag + module \u00b7 for ops audit.",
@@ -48122,8 +49537,20 @@
     },
     "/api/v1/test-catalog/top-1pct-report": {
       "get": {
-        "description": "Compute a LIVE top-1% scorecard across all 11 dimensions.\n\nPulls from existing endpoints + DB + falls back to scaffold per \u00a757.7.",
+        "description": "Compute a LIVE top-1% scorecard across all 11 dimensions.\n\nPulls from existing endpoints + DB + falls back to scaffold per \u00a757.7.\nCached 60s by default \u00b7 ?force=true bypasses \u00b7 INSUR_TOP1_TTL env override.",
         "operationId": "top_1pct_report_api_v1_test_catalog_top_1pct_report_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "force",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Force",
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -48132,6 +49559,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
         "summary": "Top 1Pct Report",
@@ -48316,6 +49753,65 @@
         "tags": [
           "text2sql",
           "finetune"
+        ]
+      }
+    },
+    "/api/v1/translate/languages": {
+      "get": {
+        "operationId": "translate_languages_api_v1_translate_languages_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Translate Languages",
+        "tags": [
+          "translate"
+        ]
+      }
+    },
+    "/api/v1/translate/run": {
+      "post": {
+        "description": "F10 \u00b7 Translate text from source_lang to target_lang.",
+        "operationId": "translate_run_api_v1_translate_run_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranslateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Translate Run",
+        "tags": [
+          "translate"
         ]
       }
     },
@@ -48676,6 +50172,146 @@
         ]
       }
     },
+    "/api/v1/vector-browser/collections": {
+      "get": {
+        "description": "List collections from Chroma + Qdrant if reachable \u00b7 \u00a757.7 honest scaffold otherwise.",
+        "operationId": "vector_collections_api_v1_vector_browser_collections_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Vector Collections",
+        "tags": [
+          "vector-browser"
+        ]
+      }
+    },
+    "/api/v1/vector-browser/collections/{name}": {
+      "get": {
+        "description": "Get details + sample 5 rows from one collection \u00b7 works for either backend.",
+        "operationId": "vector_collection_detail_api_v1_vector_browser_collections__name__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "title": "Name",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Vector Collection Detail",
+        "tags": [
+          "vector-browser"
+        ]
+      }
+    },
+    "/api/v1/vector-browser/health": {
+      "get": {
+        "operationId": "vector_health_api_v1_vector_browser_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Vector Health",
+        "tags": [
+          "vector-browser"
+        ]
+      }
+    },
+    "/api/v1/verification/gates": {
+      "get": {
+        "description": "List the 9 gates the engine runs \u00b7 informational.",
+        "operationId": "list_gates_api_v1_verification_gates_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Gates",
+        "tags": [
+          "verification"
+        ]
+      }
+    },
+    "/api/v1/verification/run": {
+      "post": {
+        "description": "Run all 9 verification gates against an invocation payload.\n\nEmits one row to agent_trace_event per gate \u00b7 returns aggregated\nverdicts. \u00a757.7 honest: failed gates land as failed (not silently\npromoted) and run.summary.overall is 'fail' if any gate failed.",
+        "operationId": "run_gates_api_v1_verification_run_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Gates",
+        "tags": [
+          "verification"
+        ]
+      }
+    },
     "/api/v1/video-intel/agents": {
       "get": {
         "operationId": "agents_api_v1_video_intel_agents_get",
@@ -48710,6 +50346,44 @@
           }
         },
         "summary": "Audio To Text",
+        "tags": [
+          "video-intel"
+        ]
+      },
+      "post": {
+        "description": "\u00a7STT Stage-1 \u00b7 POST audio file \u00b7 returns transcript shape.\n\nHonest scaffold: when no ASR library is installed (faster-whisper /\nopenai-whisper), returns a structured placeholder with `scaffold: true`\nAND the same response shape a real transcript would have. UI can stay\nstable; production wiring is a single pip-install away.",
+        "operationId": "audio_to_text_run_api_v1_video_intel_audio_to_text_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_audio_to_text_run_api_v1_video_intel_audio_to_text_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Audio To Text Run",
         "tags": [
           "video-intel"
         ]
@@ -48901,6 +50575,46 @@
           }
         },
         "summary": "Use Cases",
+        "tags": [
+          "video-intel"
+        ]
+      }
+    },
+    "/api/v1/video-intel/video-to-text": {
+      "post": {
+        "description": "\u00a7STT Stage-1 \u00b7 POST video file \u00b7 extract audio track \u2192 transcript.\n\nStage-1 implementation re-uses the audio-to-text path after a best-\neffort audio extraction. Without ffmpeg available the endpoint still\nreturns a structured scaffold response per \u00a757.7 honest.",
+        "operationId": "video_to_text_run_api_v1_video_intel_video_to_text_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_video_to_text_run_api_v1_video_intel_video_to_text_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Video To Text Run",
         "tags": [
           "video-intel"
         ]
@@ -49753,6 +51467,66 @@
           }
         },
         "summary": "Session Turn",
+        "tags": [
+          "voice-ai"
+        ]
+      }
+    },
+    "/api/v1/voice-ai/text-to-speech": {
+      "post": {
+        "description": "\u00a7F01 \u00b7 Generate audio from text \u00b7 returns base64 WAV/MP3.",
+        "operationId": "text_to_speech_api_v1_voice_ai_text_to_speech_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TTSRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Text To Speech",
+        "tags": [
+          "voice-ai"
+        ]
+      }
+    },
+    "/api/v1/voice-ai/text-to-speech/voices": {
+      "get": {
+        "description": "List supported voices \u00b7 informational.",
+        "operationId": "list_voices_api_v1_voice_ai_text_to_speech_voices_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Voices",
         "tags": [
           "voice-ai"
         ]

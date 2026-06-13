@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_multi_cohort_fairness.py
-# auto-generated explainer · 2026-06-12T10:00:20Z
+# auto-generated explainer · 2026-06-13T10:00:27Z
 
 ## Purpose
 Multi-cohort fairness audit · validates the §76 RAI gate actually fires.

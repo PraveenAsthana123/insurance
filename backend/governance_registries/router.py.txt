@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/governance_registries/router.py
-# auto-generated explainer · 2026-06-12T10:01:52Z
+# auto-generated explainer · 2026-06-13T10:03:09Z
 
 ## Purpose
 /api/v1/governance-registries/* · Iter 68 · 6 registries + DLQ + kill_switch + ABAC.

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/agent_token_logger.py
-# auto-generated explainer · 2026-06-12T10:00:19Z
+# auto-generated explainer · 2026-06-13T10:00:27Z
 
 ## Purpose
 agent_token_logger — wrap every Ollama call with token + purpose accounting.

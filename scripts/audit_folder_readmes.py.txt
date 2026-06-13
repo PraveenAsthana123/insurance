@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_folder_readmes.py
-# auto-generated explainer · 2026-06-12T10:00:19Z
+# auto-generated explainer · 2026-06-13T10:00:26Z
 
 ## Purpose
 §58 + §63 audit · verify every ai-agents/<tool>/ has README + DEEP_DIVE + install.sh.

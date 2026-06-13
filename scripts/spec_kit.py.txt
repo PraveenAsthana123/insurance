@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/spec_kit.py
-# auto-generated explainer · 2026-06-12T10:00:31Z
+# auto-generated explainer · 2026-06-13T10:01:10Z
 
 ## Purpose
 Repo-local Spec Kit: create governed specs and route them into BMAD/OpenClaw.

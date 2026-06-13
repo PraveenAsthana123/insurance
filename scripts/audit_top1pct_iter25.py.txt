@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter25.py
-# auto-generated explainer · 2026-06-12T10:00:15Z
+# auto-generated explainer · 2026-06-13T10:00:22Z
 
 ## Purpose
 Iter 25 audit · idempotency + vuln tracker + empty-state + grafana + universal-errorboundary.

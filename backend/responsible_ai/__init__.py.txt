@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/responsible_ai/__init__.py
-# auto-generated explainer · 2026-06-12T10:01:53Z
+# auto-generated explainer · 2026-06-13T10:03:10Z
 
 ## Purpose
 Responsible AI module · 12-lens structure for ResAI tab.

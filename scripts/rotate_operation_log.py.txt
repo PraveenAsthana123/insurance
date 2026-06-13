@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/rotate_operation_log.py
-# auto-generated explainer · 2026-06-12T10:00:28Z
+# auto-generated explainer · 2026-06-13T10:01:10Z
 
 ## Purpose
 Operation log rotation · §38.3 retention compliance · T3.3.

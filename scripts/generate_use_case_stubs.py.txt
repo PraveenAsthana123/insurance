@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/generate_use_case_stubs.py
-# auto-generated explainer · 2026-06-12T10:00:21Z
+# auto-generated explainer · 2026-06-13T10:00:28Z
 
 ## Purpose
 generate_use_case_stubs.py — drop 48 per-use-case stub directories under docs/use-cases/.

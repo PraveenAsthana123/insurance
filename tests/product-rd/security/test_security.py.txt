@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # tests/product-rd/security/test_security.py
-# auto-generated explainer · 2026-06-12T10:01:50Z
+# auto-generated explainer · 2026-06-13T10:03:07Z
 
 ## Purpose
 Tier 11-12 — Security tests for product-rd.

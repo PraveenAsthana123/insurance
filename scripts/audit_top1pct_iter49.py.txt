@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter49.py
-# auto-generated explainer · 2026-06-12T10:00:19Z
+# auto-generated explainer · 2026-06-13T10:00:27Z
 
 ## Purpose
 Iter 49 · Slack integration · webhook + slash + ask-agent + MCP registration.

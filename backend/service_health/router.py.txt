@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/service_health/router.py
-# auto-generated explainer · 2026-06-12T10:01:52Z
+# auto-generated explainer · 2026-06-13T10:03:10Z
 
 ## Purpose
 /api/v1/service-health · Iter 29 · aggregated probe across all modules.
@@ -19,6 +19,10 @@
 - `_probe_redis()`: (no docstring)
 - `_probe_library(name)`: (no docstring)
 - `aggregate()`: (no docstring)
+- `supervised_processes()`: §150 · live status of every supervised process.
+- `_supervisor_alive()`: (no docstring)
+- `_watchdog_cron()`: (no docstring)
+- `_watchdog_tail(n)`: (no docstring)
 
 ## Outputs
 - Return values from functions above
@@ -26,3 +30,5 @@
 ## Notable inline comments
 - Iter 29 fix: catch ALL exceptions · presidio raises RuntimeError due
 - to transformers/protobuf incompat · not ImportError.
+- === §150 process supervision endpoint ===
+- Override `alive` with live check + ensure all canonical ports are present

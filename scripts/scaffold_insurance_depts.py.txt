@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/scaffold_insurance_depts.py
-# auto-generated explainer · 2026-06-12T10:00:33Z
+# auto-generated explainer · 2026-06-13T10:01:11Z
 
 ## Purpose
 Insurance departments scaffolder (project-local, MDD per global §59).

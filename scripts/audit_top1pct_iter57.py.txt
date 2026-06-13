@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter57.py
-# auto-generated explainer · 2026-06-12T10:00:16Z
+# auto-generated explainer · 2026-06-13T10:00:22Z
 
 ## Purpose
 Iter 57 · RAGAS + DeepEval + 5-OS + canonical pattern agents + global policy.

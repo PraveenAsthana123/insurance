@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/agentic_core/router.py
-# auto-generated explainer · 2026-06-12T10:01:55Z
+# auto-generated explainer · 2026-06-13T10:03:12Z
 
 ## Purpose
 /api/v1/agentic/* · Iter 37 · agent + skill + tool registries + invocation.
@@ -14,7 +14,7 @@
 - from `fastapi` import APIRouter, Depends, HTTPException
 - from `pydantic` import BaseModel
 - from `core.config` import get_settings
-- from `core.role_dependency` import require_admin
+- from `core.role_dependency` import require_admin, require_manager_or_above
 
 ## Inputs
 (no CLI / env inputs — library module or implicit)
@@ -26,6 +26,7 @@
 - `ToolCreate`: (no docstring)
 - `MappingCreate`: (no docstring)
 - `InvokeRequest`: (no docstring)
+- `InvocationDecision`: (no docstring)
 ### Functions
 - `_conn()`: (no docstring)
 - `health()`: (no docstring)

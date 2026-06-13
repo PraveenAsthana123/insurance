@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter26.py
-# auto-generated explainer · 2026-06-12T10:00:22Z
+# auto-generated explainer · 2026-06-13T10:00:28Z
 
 ## Purpose
 Iter 26 audit · idempotency fix + pagination + PII + k6 + RBAC role-dep.

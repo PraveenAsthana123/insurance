@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/core/insur_audit.py
-# auto-generated explainer · 2026-06-12T10:01:52Z
+# auto-generated explainer · 2026-06-13T10:03:10Z
 
 ## Purpose
 Shared §38.3 audit-trail helper for INSUR/* routers under §64.43 #7 federation.

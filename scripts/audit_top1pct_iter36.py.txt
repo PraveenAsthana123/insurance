@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter36.py
-# auto-generated explainer · 2026-06-12T10:00:13Z
+# auto-generated explainer · 2026-06-13T10:00:19Z
 
 ## Purpose
 Iter 36 audit · httpx hook + heatmap + well-known + cron registry + body size.

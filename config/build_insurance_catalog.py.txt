@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # config/build_insurance_catalog.py
-# auto-generated explainer · 2026-06-12T10:00:04Z
+# auto-generated explainer · 2026-06-13T10:00:11Z
 
 ## Purpose
 build_insurance_catalog.py — single editable source for the insurance catalog.

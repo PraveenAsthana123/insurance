@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/langsmith_adapter/__init__.py
-# auto-generated explainer · 2026-06-12T10:01:54Z
+# auto-generated explainer · 2026-06-13T10:03:11Z
 
 ## Purpose
 LangSmith adapter · Iter 88 · §56 Stage-1 opt-in · §57.7 honest scaffold.

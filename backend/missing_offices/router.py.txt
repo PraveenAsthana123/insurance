@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/missing_offices/router.py
-# auto-generated explainer · 2026-06-12T10:01:56Z
+# auto-generated explainer · 2026-06-13T10:03:13Z
 
 ## Purpose
 /api/v1/missing-offices/* · Iter 79 · §104 20 offices + 6 dimensions per topic.

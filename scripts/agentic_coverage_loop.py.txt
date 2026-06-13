@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/agentic_coverage_loop.py
-# auto-generated explainer · 2026-06-12T10:00:16Z
+# auto-generated explainer · 2026-06-13T10:00:23Z
 
 ## Purpose
 Cron-driven agentic coverage loop · Iter 45.

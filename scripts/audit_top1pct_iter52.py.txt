@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter52.py
-# auto-generated explainer · 2026-06-12T10:00:40Z
+# auto-generated explainer · 2026-06-13T10:01:12Z
 
 ## Purpose
 Iter 52 · 9 watchdog agents + Live Activity tab + cron.

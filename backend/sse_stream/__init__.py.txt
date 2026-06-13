@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/sse_stream/__init__.py
-# auto-generated explainer · 2026-06-12T10:01:51Z
+# auto-generated explainer · 2026-06-13T10:03:08Z
 
 ## Purpose
 SSE stream · Iter 66 · §102.8.2.

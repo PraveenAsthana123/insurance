@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/download_insurance_datasets.py
-# auto-generated explainer · 2026-06-12T10:00:42Z
+# auto-generated explainer · 2026-06-13T10:01:13Z
 
 ## Purpose
 Insurance dataset downloader — pulls Kaggle datasets per dept's

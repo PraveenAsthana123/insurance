@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # backend/services/pii_inventory_service.py
-# auto-generated explainer · 2026-06-12T10:01:55Z
+# auto-generated explainer · 2026-06-13T10:03:12Z
 
 ## Purpose
 §68.6 PII inventory — answers "where does PII live? what's redacted?"

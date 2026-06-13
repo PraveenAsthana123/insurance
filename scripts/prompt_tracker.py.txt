@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/prompt_tracker.py
-# auto-generated explainer · 2026-06-12T10:00:12Z
+# auto-generated explainer · 2026-06-13T10:00:17Z
 
 ## Purpose
 prompt_tracker.py — Per §21 prompt tracking system.

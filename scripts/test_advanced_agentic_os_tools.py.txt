@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/test_advanced_agentic_os_tools.py
-# auto-generated explainer · 2026-06-12T10:00:39Z
+# auto-generated explainer · 2026-06-13T10:01:12Z
 
 ## Purpose
 Readiness tests for the Advanced Agentic OS maturity ladder.

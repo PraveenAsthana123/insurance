@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/export_pydantic_schemas.py
-# auto-generated explainer · 2026-06-12T10:00:10Z
+# auto-generated explainer · 2026-06-13T10:00:14Z
 
 ## Purpose
 Export Pydantic JSON schemas from agentic routers · Iter 44 · Tier-1 #5.

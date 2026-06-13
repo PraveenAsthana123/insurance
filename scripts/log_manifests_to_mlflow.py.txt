@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/log_manifests_to_mlflow.py
-# auto-generated explainer · 2026-06-12T10:00:22Z
+# auto-generated explainer · 2026-06-13T10:00:30Z
 
 ## Purpose
 Back-fill MLflow with the manifest.json files already on disk.

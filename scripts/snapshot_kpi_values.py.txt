@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/snapshot_kpi_values.py
-# auto-generated explainer · 2026-06-12T10:00:23Z
+# auto-generated explainer · 2026-06-13T10:00:38Z
 
 ## Purpose
 KPI values snapshot · T5.8 · hourly cron.

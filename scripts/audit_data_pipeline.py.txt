@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_data_pipeline.py
-# auto-generated explainer · 2026-06-12T10:00:26Z
+# auto-generated explainer · 2026-06-13T10:01:05Z
 
 ## Purpose
 Data Pipeline structure audit · 5-phase per-process.

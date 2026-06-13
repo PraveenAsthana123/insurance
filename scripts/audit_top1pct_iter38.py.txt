@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/audit_top1pct_iter38.py
-# auto-generated explainer · 2026-06-12T10:00:19Z
+# auto-generated explainer · 2026-06-13T10:00:27Z
 
 ## Purpose
 Iter 38 audit · 7 agentic ops tables + endpoints + UI tabs.

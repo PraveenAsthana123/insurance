@@ -1,369 +1,371 @@
-{"task_id": "err-ccf8183c", "role": "error", "target": "jobs/logs/log-rotation-20260609.log"}
-{"task_id": "err-33fafb4e", "role": "error", "target": "jobs/logs/backend.log"}
-{"task_id": "err-fb01ac16", "role": "error", "target": "jobs/logs/pending_reports-cleanup.log"}
-{"task_id": "err-5932f82a", "role": "error", "target": "jobs/logs/insurance_data_refresh_auto_insurance_claims.log"}
-{"task_id": "err-88380444", "role": "error", "target": "jobs/logs/kpi-snapshot-20260613.log"}
-{"task_id": "err-66e27c1f", "role": "error", "target": "jobs/logs/insurance_audit_20260608T150003Z.log"}
-{"task_id": "err-392f3b10", "role": "error", "target": "jobs/logs/pending_voice-prune.log"}
-{"task_id": "err-de4dccb7", "role": "error", "target": "jobs/logs/pending_boot.log"}
-{"task_id": "err-8fa94808", "role": "error", "target": "jobs/logs/test_runner_nightly.log"}
-{"task_id": "err-f638db9e", "role": "error", "target": "jobs/logs/pending_openapi.log"}
-{"task_id": "err-33f3b53c", "role": "error", "target": "jobs/logs/test_runner_tdd_hourly.log"}
-{"task_id": "err-6acc64cc", "role": "error", "target": "jobs/logs/supervisor.log"}
-{"task_id": "err-b0e574c4", "role": "error", "target": "jobs/logs/insurance_audit_20260612T030001Z.log"}
-{"task_id": "err-12d3006b", "role": "error", "target": "jobs/logs/insurance_audit_20260604T030001Z.log"}
-{"task_id": "err-23fecaf3", "role": "error", "target": "jobs/logs/insurance_audit_20260607T044848Z.log"}
-{"task_id": "err-c0b04b35", "role": "error", "target": "jobs/logs/kpi-snapshot-20260609.log"}
-{"task_id": "err-7fd8e716", "role": "error", "target": "jobs/logs/insurance_audit_20260605T150002Z.log"}
-{"task_id": "err-d9176f1c", "role": "error", "target": "jobs/logs/insurance_audit_20260602T030001Z.log"}
-{"task_id": "err-0297e9ab", "role": "error", "target": "jobs/logs/rag_chunking.log"}
-{"task_id": "err-5b4443a7", "role": "error", "target": "jobs/logs/insurance_data_refresh_auto_insurance_underwriting.log"}
-{"task_id": "err-6176eb30", "role": "error", "target": "jobs/logs/agent_test_runner.log"}
-{"task_id": "err-3115daf7", "role": "error", "target": "jobs/logs/insurance_workforce_rollup_cron.log"}
-{"task_id": "err-fa742812", "role": "error", "target": "jobs/logs/auto_fix_loop.log"}
-{"task_id": "err-749d3e0c", "role": "error", "target": "jobs/logs/codex_approval_watch.log"}
-{"task_id": "err-00cb51fb", "role": "error", "target": "jobs/logs/insurance_audit_20260605T030001Z.log"}
-{"task_id": "err-a80ecb6d", "role": "error", "target": "jobs/logs/kpi-snapshot-20260611.log"}
-{"task_id": "err-36784c66", "role": "error", "target": "jobs/logs/insurance_data_refresh_customer_complaints.log"}
-{"task_id": "err-9d85acb2", "role": "error", "target": "jobs/logs/insurance_data_refresh_health_insurance_claims.log"}
-{"task_id": "err-98b87117", "role": "error", "target": "jobs/logs/insurance_audit_20260606T150001Z.log"}
-{"task_id": "err-14a30fc8", "role": "error", "target": "jobs/logs/insurance_audit_20260611T150001Z.log"}
-{"task_id": "err-a08dd095", "role": "error", "target": "jobs/logs/kpi-snapshot-20260610.log"}
-{"task_id": "err-4bf04c71", "role": "error", "target": "jobs/logs/test_runner_api_hourly.log"}
-{"task_id": "err-a6eaf356", "role": "error", "target": "jobs/logs/local_backend.log"}
-{"task_id": "err-1cd34f0e", "role": "error", "target": "jobs/logs/insurance_data_refresh_customer_churn.log"}
-{"task_id": "err-3f8dbcbc", "role": "error", "target": "jobs/logs/architecture_docs_check.log"}
-{"task_id": "err-ca783f68", "role": "error", "target": "jobs/logs/codex_approval_cron.log"}
-{"task_id": "err-e3502d67", "role": "error", "target": "jobs/logs/insurance_audit_20260601T223416Z.log"}
-{"task_id": "err-07c610d1", "role": "error", "target": "jobs/logs/insurance_audit_20260610T150001Z.log"}
-{"task_id": "err-c7a30651", "role": "error", "target": "jobs/logs/no_black_backgrounds_audit.log"}
-{"task_id": "err-2684c2ee", "role": "error", "target": "jobs/logs/auto-next.log"}
-{"task_id": "err-2a8f05c9", "role": "error", "target": "jobs/logs/pending_data-manifest.log"}
-{"task_id": "err-7d2ddfab", "role": "error", "target": "jobs/logs/insur_preflight.log"}
-{"task_id": "err-895dfae7", "role": "error", "target": "jobs/logs/kpi-snapshot-20260612.log"}
-{"task_id": "err-a82981c8", "role": "error", "target": "jobs/logs/agentic_readiness_cron.log"}
-{"task_id": "err-62ace2c1", "role": "error", "target": "jobs/logs/insurance_audit_20260611T030002Z.log"}
-{"task_id": "err-683dadc4", "role": "error", "target": "jobs/logs/rag_deepeval.log"}
-{"task_id": "err-2d973c9a", "role": "error", "target": "jobs/logs/rag_cache.log"}
-{"task_id": "err-11264d55", "role": "error", "target": "jobs/logs/rag_token.log"}
-{"task_id": "err-a3be7062", "role": "error", "target": "jobs/logs/insurance_audit_cron.log"}
-{"task_id": "err-fca81251", "role": "error", "target": "jobs/logs/insurance_data_refresh_life_insurance_data.log"}
-{"task_id": "err-2dd06bcf", "role": "error", "target": "jobs/logs/rag_guardrail.log"}
-{"task_id": "err-524f21a5", "role": "error", "target": "jobs/logs/work_tracker.log"}
-{"task_id": "err-c5836a34", "role": "error", "target": "jobs/logs/insurance_audit_20260601T221059Z.log"}
-{"task_id": "err-1d8897a9", "role": "error", "target": "jobs/logs/automation_daily-health-voice-text.log"}
-{"task_id": "err-ec8c5c15", "role": "error", "target": "jobs/logs/insurance_data_refresh_creditcard_fraud.log"}
-{"task_id": "err-24ea4b66", "role": "error", "target": "jobs/logs/insurance_audit_20260612T150002Z.log"}
-{"task_id": "err-9b8d45e4", "role": "error", "target": "jobs/logs/fix_all_nightly.log"}
-{"task_id": "err-c2991742", "role": "error", "target": "jobs/logs/setup_ai_agent_stack.log"}
-{"task_id": "err-fc9eb23a", "role": "error", "target": "jobs/logs/insurance_audit_20260609T150003Z.log"}
-{"task_id": "err-148e0c80", "role": "error", "target": "jobs/logs/insurance_audit_20260603T150002Z.log"}
-{"task_id": "err-807ec47c", "role": "error", "target": "jobs/logs/insurance_audit_20260607T030002Z.log"}
-{"task_id": "err-30bcde70", "role": "error", "target": "jobs/logs/process_watchdog.log"}
-{"task_id": "err-66d5d87f", "role": "error", "target": "jobs/logs/prompt_tracker_stats.log"}
-{"task_id": "err-6a4a389a", "role": "error", "target": "jobs/logs/insurance_audit_20260602T150002Z.log"}
-{"task_id": "err-2489abb4", "role": "error", "target": "jobs/logs/insurance_data_refresh_property_claims.log"}
-{"task_id": "err-c6456958", "role": "error", "target": "jobs/logs/share_folder_drift.log"}
-{"task_id": "err-0fbc6f27", "role": "error", "target": "jobs/logs/log-rotation-20260611.log"}
-{"task_id": "err-d2100b58", "role": "error", "target": "jobs/logs/rag_embedding.log"}
-{"task_id": "err-70d005ef", "role": "error", "target": "jobs/logs/eaos_top10.cron.log"}
-{"task_id": "err-1b9e945e", "role": "error", "target": "jobs/logs/api_audit.log"}
-{"task_id": "err-57ddee7c", "role": "error", "target": "jobs/logs/pending_push.log"}
-{"task_id": "err-dd25ccb5", "role": "error", "target": "jobs/logs/pending_prod-aggregate.log"}
-{"task_id": "err-4644d008", "role": "error", "target": "jobs/logs/setup.log"}
-{"task_id": "err-fd4ffd18", "role": "error", "target": "jobs/logs/insurance_audit_20260608T030001Z.log"}
-{"task_id": "err-813de960", "role": "error", "target": "jobs/logs/insurance_audit_20260606T030001Z.log"}
-{"task_id": "err-2d913cb5", "role": "error", "target": "jobs/logs/fix_all_quick.log"}
-{"task_id": "err-523e6ff6", "role": "error", "target": "jobs/logs/log-rotation-20260612.log"}
-{"task_id": "err-b338f5d2", "role": "error", "target": "jobs/logs/fix_all_weekly.log"}
-{"task_id": "err-8bafc98a", "role": "error", "target": "jobs/logs/fix_all_pending.log"}
-{"task_id": "err-c5683bab", "role": "error", "target": "jobs/logs/insurance_audit_20260603T030003Z.log"}
-{"task_id": "err-9ebc00c6", "role": "error", "target": "jobs/logs/insurance_data_refresh_medical_cost.log"}
-{"task_id": "err-6e23fd77", "role": "error", "target": "jobs/logs/insurance_data_refresh_vehicle_claim_fraud.log"}
-{"task_id": "err-e09b50c4", "role": "error", "target": "jobs/logs/insurance_data_refresh_call_center_data.log"}
-{"task_id": "err-dd092cbd", "role": "error", "target": "jobs/logs/opa_test.log"}
-{"task_id": "err-cad17c91", "role": "error", "target": "jobs/logs/process_watchdog.cron.log"}
-{"task_id": "err-215b8218", "role": "error", "target": "jobs/logs/supervisor_systemd.log"}
-{"task_id": "err-d5a66d3e", "role": "error", "target": "jobs/logs/log-rotation-20260610.log"}
-{"task_id": "err-a729a16e", "role": "error", "target": "jobs/logs/insurance_audit_20260610T030001Z.log"}
-{"task_id": "err-46440722", "role": "error", "target": "jobs/logs/py_sidecar.log"}
-{"task_id": "err-ba77ced5", "role": "error", "target": "jobs/logs/insur_bot.log"}
-{"task_id": "err-c1695597", "role": "error", "target": "jobs/logs/ollama.log"}
-{"task_id": "err-b10c83ff", "role": "error", "target": "jobs/logs/pending_push-hint.log"}
-{"task_id": "err-eaaf35b1", "role": "error", "target": "jobs/logs/pending_claude-md-drift.log"}
-{"task_id": "err-f6cf30d2", "role": "error", "target": "jobs/logs/auto-next-daemon.log"}
-{"task_id": "err-bf17ba5c", "role": "error", "target": "jobs/logs/feature_backlog.cron.log"}
-{"task_id": "err-d9c7f94a", "role": "error", "target": "jobs/logs/pending_drill.log"}
-{"task_id": "err-bc254312", "role": "error", "target": "jobs/logs/insurance_audit_20260609T030001Z.log"}
-{"task_id": "err-b7ef36cf", "role": "error", "target": "jobs/logs/insurance_data_refresh_auto_insurance_fraud.log"}
-{"task_id": "err-c8c5811a", "role": "error", "target": "jobs/logs/insurance_alignment_cron.log"}
-{"task_id": "err-71b87c5d", "role": "error", "target": "jobs/logs/vite_3210.log"}
-{"task_id": "err-d0452327", "role": "error", "target": "jobs/logs/pending_module-sync.log"}
-{"task_id": "err-1e683c1d", "role": "error", "target": "jobs/logs/insurance_audit_20260604T150001Z.log"}
-{"task_id": "err-3347b766", "role": "error", "target": "jobs/logs/rag_ragas.log"}
-{"task_id": "err-3b60550f", "role": "error", "target": "jobs/logs/insurance_catalog_cron.log"}
-{"task_id": "err-e3ce76d6", "role": "error", "target": "jobs/logs/insurance_audit_20260613T030001Z.log"}
-{"task_id": "err-4bc10125", "role": "error", "target": "jobs/logs/insurance_audit_20260601T221625Z.log"}
-{"task_id": "err-22974949", "role": "error", "target": "jobs/logs/fix_all_pending.cron.log"}
-{"task_id": "err-c7150c84", "role": "error", "target": "jobs/logs/insurance_data_refresh_vehicle_insurance_fraud.log"}
-{"task_id": "sw-e2694e55", "role": "missing_software", "kind": "binary", "name": "docker"}
-{"task_id": "sw-147f3ea4", "role": "missing_software", "kind": "binary", "name": "redis-cli"}
-{"task_id": "sw-e2e95b9a", "role": "missing_software", "kind": "binary", "name": "psql"}
-{"task_id": "sw-e2ccf90a", "role": "missing_software", "kind": "binary", "name": "ollama"}
-{"task_id": "sw-2a1ed597", "role": "missing_software", "kind": "binary", "name": "curl"}
-{"task_id": "sw-ed292ed0", "role": "missing_software", "kind": "binary", "name": "jq"}
-{"task_id": "sw-44acbd89", "role": "missing_software", "kind": "binary", "name": "git"}
-{"task_id": "sw-48a089ea", "role": "missing_software", "kind": "binary", "name": "espeak"}
-{"task_id": "sw-aafdf049", "role": "missing_software", "kind": "binary", "name": "sqlite3"}
-{"task_id": "sw-f50826be", "role": "missing_software", "kind": "pypkg", "name": "fastapi"}
-{"task_id": "sw-105b87f9", "role": "missing_software", "kind": "pypkg", "name": "uvicorn"}
-{"task_id": "sw-425e4ee9", "role": "missing_software", "kind": "pypkg", "name": "pydantic"}
-{"task_id": "sw-0cd2939d", "role": "missing_software", "kind": "pypkg", "name": "psycopg"}
-{"task_id": "sw-84128ceb", "role": "missing_software", "kind": "pypkg", "name": "redis"}
-{"task_id": "sw-e4d2ef7c", "role": "missing_software", "kind": "pypkg", "name": "chromadb"}
-{"task_id": "sw-1ad0dd80", "role": "missing_software", "kind": "pypkg", "name": "rank_bm25"}
-{"task_id": "sw-454ced41", "role": "missing_software", "kind": "pypkg", "name": "networkx"}
-{"task_id": "sw-44df7c8c", "role": "missing_software", "kind": "pypkg", "name": "sklearn"}
-{"task_id": "sw-3c3b6542", "role": "missing_software", "kind": "pypkg", "name": "xgboost"}
-{"task_id": "sw-6ac576be", "role": "missing_software", "kind": "pypkg", "name": "requests"}
-{"task_id": "sw-f8a6658d", "role": "missing_software", "kind": "pypkg", "name": "ragas"}
-{"task_id": "sw-93a3bd68", "role": "missing_software", "kind": "pypkg", "name": "deepeval"}
-{"task_id": "tst-6b05b379", "role": "testing", "target": "tests/drills/drill_fraud_lifecycle.py"}
-{"task_id": "tst-6c4f5ced", "role": "testing", "target": "tests/drills/drill_logging_config.py"}
-{"task_id": "tst-15fa9107", "role": "testing", "target": "tests/drills/drill_adapters_endpoint.py"}
-{"task_id": "tst-c7f37aee", "role": "testing", "target": "tests/drills/drill_simulation_engine.py"}
-{"task_id": "tst-20cda4e8", "role": "testing", "target": "tests/drills/drill_openclaw_paperclip_federation.py"}
-{"task_id": "tst-0de123bd", "role": "testing", "target": "tests/drills/drill_bank_palette.py"}
-{"task_id": "tst-09067409", "role": "testing", "target": "tests/drills/drill_observability_hub.py"}
-{"task_id": "tst-3051e959", "role": "testing", "target": "tests/drills/drill_frd_brd.py"}
-{"task_id": "tst-6ccda12a", "role": "testing", "target": "tests/drills/drill_tenant_activity.py"}
-{"task_id": "tst-5ea9a7ae", "role": "testing", "target": "tests/drills/drill_graph_ai.py"}
-{"task_id": "tst-90766871", "role": "testing", "target": "tests/drills/drill_exceptions.py"}
-{"task_id": "tst-3655ddc0", "role": "testing", "target": "tests/drills/drill_middleware.py"}
-{"task_id": "tst-b11c2e67", "role": "testing", "target": "tests/drills/drill_attack_simulators.py"}
-{"task_id": "tst-d5b52f17", "role": "testing", "target": "tests/drills/drill_insurance_alignment.py"}
-{"task_id": "tst-9654dee7", "role": "testing", "target": "tests/drills/drill_holy_monitoring_federation.py"}
-{"task_id": "tst-2393a502", "role": "testing", "target": "tests/drills/drill_cua_idempotency_persistence.py"}
-{"task_id": "tst-904fb9c6", "role": "testing", "target": "tests/drills/drill_cua_idempotency.py"}
-{"task_id": "tst-38a4af4c", "role": "testing", "target": "tests/drills/drill_run_drills.py"}
-{"task_id": "tst-e5b12a5d", "role": "testing", "target": "tests/drills/drill_tenant_id_federation.py"}
-{"task_id": "tst-f99fb1e4", "role": "testing", "target": "tests/drills/drill_test_tier_dispatch.py"}
-{"task_id": "tst-459a8794", "role": "testing", "target": "tests/drills/drill_error_handlers.py"}
-{"task_id": "tst-a2a76fe8", "role": "testing", "target": "tests/drills/drill_dbviewer.py"}
-{"task_id": "tst-b3c29b85", "role": "testing", "target": "tests/drills/drill_reports_catalog.py"}
-{"task_id": "tst-2227f955", "role": "testing", "target": "tests/drills/drill_generic_idempotency.py"}
-{"task_id": "tst-e12af9c2", "role": "testing", "target": "tests/drills/drill_admin_cua_audit.py"}
-{"task_id": "tst-8a4566d7", "role": "testing", "target": "tests/drills/drill_cv_lifecycle.py"}
-{"task_id": "tst-75078e6c", "role": "testing", "target": "tests/drills/drill_dependencies.py"}
-{"task_id": "tst-e3926619", "role": "testing", "target": "tests/drills/drill_full_lifecycle.py"}
-{"task_id": "tst-0c40bbda", "role": "testing", "target": "tests/drills/drill_bmad_installed.py"}
-{"task_id": "tst-19250d8b", "role": "testing", "target": "tests/drills/drill_checklist_cache.py"}
-{"task_id": "tst-1531e229", "role": "testing", "target": "tests/drills/drill_role_dashboards.py"}
-{"task_id": "tst-782f5ebd", "role": "testing", "target": "tests/drills/drill_agentops_adapter.py"}
-{"task_id": "tst-4f41a379", "role": "testing", "target": "tests/drills/drill_dl_lifecycle.py"}
-{"task_id": "tst-c9904878", "role": "testing", "target": "tests/drills/drill_per_dept_artifacts.py"}
-{"task_id": "tst-8e92605f", "role": "testing", "target": "tests/drills/drill_master_data.py"}
-{"task_id": "tst-88144522", "role": "testing", "target": "tests/drills/drill_approval_broker.py"}
-{"task_id": "tst-64309f47", "role": "testing", "target": "tests/drills/drill_evals_functional.py"}
-{"task_id": "tst-566adc2a", "role": "testing", "target": "tests/drills/drill_agent_platform_cua.py"}
-{"task_id": "tst-d517c89a", "role": "testing", "target": "tests/drills/drill_data_downloads.py"}
-{"task_id": "tst-a380f2ab", "role": "testing", "target": "tests/drills/drill_monitoring_ai.py"}
-{"task_id": "tst-77cbd663", "role": "testing", "target": "tests/drills/drill_config.py"}
-{"task_id": "tst-df2d86d4", "role": "testing", "target": "tests/drills/drill_pipelines.py"}
-{"task_id": "tst-0f1d013e", "role": "testing", "target": "tests/drills/drill_rbac_middleware.py"}
-{"task_id": "tst-95905018", "role": "testing", "target": "tests/drills/drill_litellm_gateway.py"}
-{"task_id": "tst-2b08a137", "role": "testing", "target": "tests/drills/drill_itsm_grade.py"}
-{"task_id": "tst-17ef797b", "role": "testing", "target": "tests/drills/drill_blackboard.py"}
-{"task_id": "tst-f25a5dde", "role": "testing", "target": "tests/drills/drill_advisor_cache.py"}
-{"task_id": "tst-d07e00c5", "role": "testing", "target": "tests/drills/drill_agentic_stack.py"}
-{"task_id": "tst-e98f0a74", "role": "testing", "target": "tests/drills/drill_sequence_flow.py"}
-{"task_id": "tst-9843f381", "role": "testing", "target": "tests/drills/drill_security_posture.py"}
-{"task_id": "tst-a05fb2e6", "role": "testing", "target": "tests/drills/drill_noise_ensemble.py"}
-{"task_id": "tst-dfbab9c5", "role": "testing", "target": "tests/drills/drill_pii_inventory.py"}
-{"task_id": "tst-917b620d", "role": "testing", "target": "tests/drills/drill_operator_readiness.py"}
-{"task_id": "tst-89194e50", "role": "testing", "target": "tests/drills/drill_history_rotation.py"}
-{"task_id": "tst-44e448d4", "role": "testing", "target": "tests/drills/drill_auto_next_loop_wiring.py"}
-{"task_id": "tst-cb758baa", "role": "testing", "target": "tests/drills/drill_frontend_consoles.py"}
-{"task_id": "tst-7b182368", "role": "testing", "target": "tests/drills/drill_idempotency_compaction.py"}
-{"task_id": "tst-d376609f", "role": "testing", "target": "tests/drills/drill_insurance_dept_artifacts.py"}
-{"task_id": "tst-f4dd96cc", "role": "testing", "target": "tests/drills/drill_health_aliases.py"}
-{"task_id": "tst-4229f7b1", "role": "testing", "target": "tests/drills/drill_cua_audit_readback.py"}
-{"task_id": "tst-d3168554", "role": "testing", "target": "tests/drills/drill_voice_pipeline.py"}
-{"task_id": "tst-7f4eed28", "role": "testing", "target": "tests/drills/drill_ai_agent_tools_installed.py"}
-{"task_id": "tst-310369e1", "role": "testing", "target": "tests/drills/drill_recommendation_lifecycle.py"}
-{"task_id": "tst-5d3f88f7", "role": "testing", "target": "tests/drills/drill_insurance_catalog.py"}
-{"task_id": "tst-81d823d1", "role": "testing", "target": "tests/drills/drill_transactions.py"}
-{"task_id": "tst-2577837f", "role": "testing", "target": "tests/drills/drill_celery_beat.py"}
-{"task_id": "tst-62710fe1", "role": "testing", "target": "tests/drills/drill_evals_safety.py"}
-{"task_id": "tst-5b116e3d", "role": "testing", "target": "tests/drills/drill_evals_model_compare.py"}
-{"task_id": "tst-bba9c11b", "role": "testing", "target": "tests/drills/drill_guardrails.py"}
-{"task_id": "tst-ba1c751b", "role": "testing", "target": "tests/drills/drill_demo_stories.py"}
-{"task_id": "tst-4eda3c2a", "role": "testing", "target": "tests/drills/drill_structured_logger.py"}
-{"task_id": "tst-e653dcf9", "role": "testing", "target": "tests/drills/drill_agent_orchestration.py"}
-{"task_id": "tst-85c9e59c", "role": "testing", "target": "tests/drills/drill_typed_council.py"}
-{"task_id": "tst-26b92e7b", "role": "testing", "target": "tests/drills/drill_dspy_optimizer.py"}
-{"task_id": "tst-0dbe4f64", "role": "testing", "target": "tests/drills/drill_top1pct_cache.py"}
-{"task_id": "tst-bb502529", "role": "testing", "target": "tests/drills/drill_anomaly_lifecycle.py"}
-{"task_id": "tst-fff1151c", "role": "testing", "target": "tests/drills/drill_evals_cost.py"}
-{"task_id": "tst-3d69af0d", "role": "testing", "target": "tests/drills/drill_holy_audit.py"}
-{"task_id": "tst-9ea3c90d", "role": "testing", "target": "tests/drills/drill_fleet_throughput.py"}
-{"task_id": "tst-74794f9f", "role": "testing", "target": "tests/drills/drill_holy_routers_federation.py"}
-{"task_id": "tst-0ae7f472", "role": "testing", "target": "tests/drills/drill_brand_config.py"}
-{"task_id": "tst-a44d94eb", "role": "testing", "target": "tests/drills/drill_council_and_hitl.py"}
-{"task_id": "tst-cb1022bf", "role": "testing", "target": "tests/drills/drill_audit_compact.py"}
-{"task_id": "tst-6fec2844", "role": "testing", "target": "tests/drills/drill_utils.py"}
-{"task_id": "tst-9bc27a90", "role": "testing", "target": "tests/drills/drill_security_api.py"}
-{"task_id": "api-a989e6ab", "role": "api", "url": "http://localhost:8000/api/health", "expect": 200}
-{"task_id": "api-be1b3d39", "role": "api", "url": "http://localhost:8000/api/v1/insurance/depts", "expect": 200}
-{"task_id": "api-f211c587", "role": "api", "url": "http://localhost:8000/docs", "expect": 200}
-{"task_id": "api-2bb20cbb", "role": "api", "url": "http://localhost:8000/api/v1/health", "expect": 200}
-{"task_id": "be-222f623f", "role": "backend", "target": "backend/routers/tenants_admin.py"}
-{"task_id": "be-5db1599e", "role": "backend", "target": "backend/routers/datasets.py"}
-{"task_id": "be-a34041db", "role": "backend", "target": "backend/routers/pipelines.py"}
-{"task_id": "be-48ec9fbe", "role": "backend", "target": "backend/routers/catalogs.py"}
-{"task_id": "be-b644b4b5", "role": "backend", "target": "backend/routers/evals_model_compare.py"}
-{"task_id": "be-ba2efa03", "role": "backend", "target": "backend/routers/__init__.py"}
-{"task_id": "be-0850c04b", "role": "backend", "target": "backend/routers/jobs.py"}
-{"task_id": "be-28b6ca5e", "role": "backend", "target": "backend/routers/evals_safety.py"}
-{"task_id": "be-d1522d33", "role": "backend", "target": "backend/routers/reports.py"}
-{"task_id": "be-dba6f4c3", "role": "backend", "target": "backend/routers/insurance.py"}
-{"task_id": "be-d6c1aaf0", "role": "backend", "target": "backend/routers/dbviewer.py"}
-{"task_id": "be-5f768f2e", "role": "backend", "target": "backend/routers/customer.py"}
-{"task_id": "be-9d2764ac", "role": "backend", "target": "backend/routers/supply_chain.py"}
-{"task_id": "be-3dbf3905", "role": "backend", "target": "backend/routers/paperclip.py"}
-{"task_id": "be-57af89b6", "role": "backend", "target": "backend/routers/openclaw.py"}
-{"task_id": "be-d88a5ec7", "role": "backend", "target": "backend/routers/departments.py"}
-{"task_id": "be-70c2e2cf", "role": "backend", "target": "backend/routers/agent_platform.py"}
-{"task_id": "be-f68a5f1c", "role": "backend", "target": "backend/routers/guardrails.py"}
-{"task_id": "be-89b60ecb", "role": "backend", "target": "backend/routers/ai_explain.py"}
-{"task_id": "be-2c9d5517", "role": "backend", "target": "backend/routers/security.py"}
-{"task_id": "be-aac469e3", "role": "backend", "target": "backend/routers/sales.py"}
-{"task_id": "be-838fc421", "role": "backend", "target": "backend/routers/transactions.py"}
-{"task_id": "be-3abf9973", "role": "backend", "target": "backend/routers/evals_functional.py"}
-{"task_id": "be-a8bcfd34", "role": "backend", "target": "backend/routers/evals_cost.py"}
-{"task_id": "be-740c8c1a", "role": "backend", "target": "backend/routers/master_data.py"}
-{"task_id": "be-9bf319dc", "role": "backend", "target": "backend/routers/input_events.py"}
-{"task_id": "be-6cd9496d", "role": "backend", "target": "backend/routers/insur.py"}
-{"task_id": "be-99034c9d", "role": "backend", "target": "backend/routers/admin_feedback.py"}
-{"task_id": "be-1ddd163b", "role": "backend", "target": "backend/routers/holy_components.py"}
-{"task_id": "be-761663b7", "role": "backend", "target": "backend/routers/health.py"}
-{"task_id": "be-d958c49d", "role": "backend", "target": "backend/routers/admin.py"}
-{"task_id": "be-970a9727", "role": "backend", "target": "backend/routers/downloads.py"}
-{"task_id": "be-3a66f47f", "role": "backend", "target": "backend/routers/observability_hub.py"}
-{"task_id": "be-dacce272", "role": "backend", "target": "backend/routers/pii.py"}
-{"task_id": "be-1ea2c3de", "role": "backend", "target": "backend/routers/agent_supervisor.py"}
-{"task_id": "be-1d9560ac", "role": "backend", "target": "backend/routers/monitoring.py"}
-{"task_id": "be-1723ea4c", "role": "backend", "target": "backend/routers/processes.py"}
-{"task_id": "be-be8a83eb", "role": "backend", "target": "backend/routers/graph.py"}
-{"task_id": "be-784617c3", "role": "backend", "target": "backend/routers/audit.py"}
-{"task_id": "be-7dfa299b", "role": "backend", "target": "backend/routers/models.py"}
-{"task_id": "be-6e016a96", "role": "backend", "target": "backend/routers/demo_stories.py"}
-{"task_id": "be-10a933ef", "role": "backend", "target": "backend/services/dbviewer_service.py"}
-{"task_id": "be-f6e03f00", "role": "backend", "target": "backend/services/dlp_presidio.py"}
-{"task_id": "be-8d5cb95a", "role": "backend", "target": "backend/services/eta_service.py"}
-{"task_id": "be-4be872ba", "role": "backend", "target": "backend/services/__init__.py"}
-{"task_id": "be-1eaf4763", "role": "backend", "target": "backend/services/job_service.py"}
-{"task_id": "be-abd246ec", "role": "backend", "target": "backend/services/typed_council.py"}
-{"task_id": "be-54fedcad", "role": "backend", "target": "backend/services/model_compare_service.py"}
-{"task_id": "be-9affa554", "role": "backend", "target": "backend/services/security_posture_service.py"}
-{"task_id": "be-94b966ae", "role": "backend", "target": "backend/services/rag_service.py"}
-{"task_id": "be-4f275caf", "role": "backend", "target": "backend/services/openclaw_gateway_service.py"}
-{"task_id": "be-7d23abd0", "role": "backend", "target": "backend/services/cost_eval_service.py"}
-{"task_id": "be-b4151df3", "role": "backend", "target": "backend/services/simulation_service.py"}
-{"task_id": "be-d41d0792", "role": "backend", "target": "backend/services/supplier_score_service.py"}
-{"task_id": "be-02c16c09", "role": "backend", "target": "backend/services/ml_service.py"}
-{"task_id": "be-4295737b", "role": "backend", "target": "backend/services/observability_hub_service.py"}
-{"task_id": "be-e006982a", "role": "backend", "target": "backend/services/guardrails_service.py"}
-{"task_id": "be-c3c0e4c1", "role": "backend", "target": "backend/services/process_service.py"}
-{"task_id": "be-7cf4589a", "role": "backend", "target": "backend/services/paperclip_service.py"}
-{"task_id": "be-26a7ce66", "role": "backend", "target": "backend/services/churn_model_service.py"}
-{"task_id": "be-b06c5101", "role": "backend", "target": "backend/services/agent_platform_service.py"}
-{"task_id": "be-05c2c192", "role": "backend", "target": "backend/services/self_healing.py"}
-{"task_id": "be-f1509a77", "role": "backend", "target": "backend/services/llm_gateway.py"}
-{"task_id": "be-3846975e", "role": "backend", "target": "backend/services/supply_chain_simulation_service.py"}
-{"task_id": "be-1ff58d74", "role": "backend", "target": "backend/services/safety_eval_service.py"}
-{"task_id": "be-c973123c", "role": "backend", "target": "backend/services/forecast_service.py"}
-{"task_id": "be-e12a2900", "role": "backend", "target": "backend/services/functional_eval_service.py"}
-{"task_id": "be-dfd0abd9", "role": "backend", "target": "backend/services/dataset_service.py"}
-{"task_id": "be-d63358c8", "role": "backend", "target": "backend/services/pii_inventory_service.py"}
-{"task_id": "be-d0def914", "role": "backend", "target": "backend/services/dspy_optimizer.py"}
-{"task_id": "be-e6adc37c", "role": "backend", "target": "backend/services/department_service.py"}
-{"task_id": "be-e783ad64", "role": "backend", "target": "backend/services/stockout_service.py"}
-{"task_id": "be-7f2a74a8", "role": "backend", "target": "backend/services/external_feeds/__init__.py"}
-{"task_id": "be-5e570018", "role": "backend", "target": "backend/services/external_feeds/ehr.py"}
-{"task_id": "be-9381c1ed", "role": "backend", "target": "backend/services/external_feeds/clue.py"}
-{"task_id": "be-90c2114a", "role": "backend", "target": "backend/services/external_feeds/kyc.py"}
-{"task_id": "be-cf667c47", "role": "backend", "target": "backend/services/external_feeds/nicb.py"}
-{"task_id": "be-4db8ef58", "role": "backend", "target": "backend/repositories/job_repo.py"}
-{"task_id": "be-95d3dc72", "role": "backend", "target": "backend/repositories/__init__.py"}
-{"task_id": "be-1731388e", "role": "backend", "target": "backend/repositories/supply_chain_repo.py"}
-{"task_id": "be-9cf80df6", "role": "backend", "target": "backend/repositories/department_repo.py"}
-{"task_id": "be-81b7b879", "role": "backend", "target": "backend/repositories/catalogs_repo.py"}
-{"task_id": "be-034a14f7", "role": "backend", "target": "backend/repositories/tenants_repo.py"}
-{"task_id": "be-8dcd9dca", "role": "backend", "target": "backend/repositories/sales_repo.py"}
-{"task_id": "be-d8bee1d8", "role": "backend", "target": "backend/repositories/base.py"}
-{"task_id": "be-3b1f9cda", "role": "backend", "target": "backend/repositories/dataset_repo.py"}
-{"task_id": "be-5269e3ec", "role": "backend", "target": "backend/repositories/process_repo.py"}
-{"task_id": "be-45092738", "role": "backend", "target": "backend/repositories/input_events_repo.py"}
-{"task_id": "be-3db1b610", "role": "backend", "target": "backend/repositories/customer_repo.py"}
-{"task_id": "be-fdb5411f", "role": "backend", "target": "backend/repositories/model_repo.py"}
-{"task_id": "pr-d9fdf47b", "role": "process", "dept": "claims", "artifact": "INSUR_DEMO_STORY.md"}
-{"task_id": "pr-3ee454d3", "role": "process", "dept": "claims", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
-{"task_id": "pr-79402698", "role": "process", "dept": "claims", "artifact": "INSUR_DT_STRATEGY.md"}
-{"task_id": "pr-8647323b", "role": "process", "dept": "claims", "artifact": "INSUR_CONTACT_CENTER.md"}
-{"task_id": "pr-9156ef4c", "role": "process", "dept": "claims", "artifact": "INSUR_INCIDENT_MGMT.md"}
-{"task_id": "pr-61b12815", "role": "process", "dept": "claims", "artifact": "INSUR_MEETING_COMMS.md"}
-{"task_id": "pr-4e2b9328", "role": "process", "dept": "claims", "artifact": "INSUR_PROCESS_MGMT.md"}
-{"task_id": "pr-1f9e78ee", "role": "process", "dept": "claims", "artifact": "INSUR_DATA_MGMT.md"}
-{"task_id": "pr-13c99449", "role": "process", "dept": "claims", "artifact": "INSUR_RECOMMENDATION.md"}
-{"task_id": "pr-36985794", "role": "process", "dept": "claims", "artifact": "INSUR_ANOMALY.md"}
-{"task_id": "pr-c199b4ed", "role": "process", "dept": "claims", "artifact": "INSUR_FRAUD.md"}
-{"task_id": "pr-68b8f317", "role": "process", "dept": "claims", "artifact": "INSUR_CONTACTS.md"}
-{"task_id": "pr-267dc668", "role": "process", "dept": "claims", "artifact": "INSUR_FLOW.md"}
-{"task_id": "pr-aec1f65a", "role": "process", "dept": "claims", "artifact": "INSUR_SECURITY.md"}
-{"task_id": "pr-2ebbeae8", "role": "process", "dept": "claims", "artifact": "INSUR_SIMULATION.md"}
-{"task_id": "pr-c0599435", "role": "process", "dept": "underwriting", "artifact": "INSUR_DEMO_STORY.md"}
-{"task_id": "pr-134a3b8b", "role": "process", "dept": "underwriting", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
-{"task_id": "pr-fc848068", "role": "process", "dept": "underwriting", "artifact": "INSUR_DT_STRATEGY.md"}
-{"task_id": "pr-a05ef4d6", "role": "process", "dept": "underwriting", "artifact": "INSUR_CONTACT_CENTER.md"}
-{"task_id": "pr-4fb803a9", "role": "process", "dept": "underwriting", "artifact": "INSUR_INCIDENT_MGMT.md"}
-{"task_id": "pr-09798ac4", "role": "process", "dept": "underwriting", "artifact": "INSUR_MEETING_COMMS.md"}
-{"task_id": "pr-b1f30566", "role": "process", "dept": "underwriting", "artifact": "INSUR_PROCESS_MGMT.md"}
-{"task_id": "pr-854a467f", "role": "process", "dept": "underwriting", "artifact": "INSUR_DATA_MGMT.md"}
-{"task_id": "pr-c249c76f", "role": "process", "dept": "underwriting", "artifact": "INSUR_RECOMMENDATION.md"}
-{"task_id": "pr-ef2fbd6d", "role": "process", "dept": "underwriting", "artifact": "INSUR_ANOMALY.md"}
-{"task_id": "pr-9257d67d", "role": "process", "dept": "underwriting", "artifact": "INSUR_FRAUD.md"}
-{"task_id": "pr-f86f335b", "role": "process", "dept": "underwriting", "artifact": "INSUR_CONTACTS.md"}
-{"task_id": "pr-d98791ab", "role": "process", "dept": "underwriting", "artifact": "INSUR_FLOW.md"}
-{"task_id": "pr-e6681498", "role": "process", "dept": "underwriting", "artifact": "INSUR_SECURITY.md"}
-{"task_id": "pr-255dffc8", "role": "process", "dept": "underwriting", "artifact": "INSUR_SIMULATION.md"}
-{"task_id": "pr-6aaea8f5", "role": "process", "dept": "customer-service", "artifact": "INSUR_DEMO_STORY.md"}
-{"task_id": "pr-75123e5d", "role": "process", "dept": "customer-service", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
-{"task_id": "pr-325259c3", "role": "process", "dept": "customer-service", "artifact": "INSUR_DT_STRATEGY.md"}
-{"task_id": "pr-084b79b7", "role": "process", "dept": "customer-service", "artifact": "INSUR_CONTACT_CENTER.md"}
-{"task_id": "pr-dda771b6", "role": "process", "dept": "customer-service", "artifact": "INSUR_INCIDENT_MGMT.md"}
-{"task_id": "pr-16c0d4de", "role": "process", "dept": "customer-service", "artifact": "INSUR_MEETING_COMMS.md"}
-{"task_id": "pr-8d348ee0", "role": "process", "dept": "customer-service", "artifact": "INSUR_PROCESS_MGMT.md"}
-{"task_id": "pr-522dbf18", "role": "process", "dept": "customer-service", "artifact": "INSUR_DATA_MGMT.md"}
-{"task_id": "pr-8e1a9e2e", "role": "process", "dept": "customer-service", "artifact": "INSUR_RECOMMENDATION.md"}
-{"task_id": "pr-09b956e4", "role": "process", "dept": "customer-service", "artifact": "INSUR_ANOMALY.md"}
-{"task_id": "pr-37b71f1b", "role": "process", "dept": "customer-service", "artifact": "INSUR_FRAUD.md"}
-{"task_id": "pr-261d9423", "role": "process", "dept": "customer-service", "artifact": "INSUR_CONTACTS.md"}
-{"task_id": "pr-0f2fb2ac", "role": "process", "dept": "customer-service", "artifact": "INSUR_FLOW.md"}
-{"task_id": "pr-c5ae8fe8", "role": "process", "dept": "customer-service", "artifact": "INSUR_SECURITY.md"}
-{"task_id": "pr-c2e38ffb", "role": "process", "dept": "customer-service", "artifact": "INSUR_SIMULATION.md"}
-{"task_id": "pr-b977bb98", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_DEMO_STORY.md"}
-{"task_id": "pr-1dba9730", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
-{"task_id": "pr-66cde0d3", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_DT_STRATEGY.md"}
-{"task_id": "pr-ecf55df4", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_CONTACT_CENTER.md"}
-{"task_id": "pr-9152c51c", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_INCIDENT_MGMT.md"}
-{"task_id": "pr-fe69d90b", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_MEETING_COMMS.md"}
-{"task_id": "pr-bb31b498", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_PROCESS_MGMT.md"}
-{"task_id": "pr-e68422da", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_DATA_MGMT.md"}
-{"task_id": "pr-0d7d5d99", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_RECOMMENDATION.md"}
-{"task_id": "pr-3186a98d", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_ANOMALY.md"}
-{"task_id": "pr-0dafbdb7", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_FRAUD.md"}
-{"task_id": "pr-bdbeeef4", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_CONTACTS.md"}
-{"task_id": "pr-236a9fe7", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_FLOW.md"}
-{"task_id": "pr-af967575", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_SECURITY.md"}
-{"task_id": "pr-75c52350", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_SIMULATION.md"}
+{"task_id": "err-bf195445", "role": "error", "target": "jobs/logs/log-rotation-20260609.log"}
+{"task_id": "err-829c7dd5", "role": "error", "target": "jobs/logs/backend.log"}
+{"task_id": "err-386dd5cb", "role": "error", "target": "jobs/logs/pending_reports-cleanup.log"}
+{"task_id": "err-be18b54d", "role": "error", "target": "jobs/logs/insurance_data_refresh_auto_insurance_claims.log"}
+{"task_id": "err-ac41962e", "role": "error", "target": "jobs/logs/kpi-snapshot-20260613.log"}
+{"task_id": "err-0c0158d5", "role": "error", "target": "jobs/logs/insurance_audit_20260608T150003Z.log"}
+{"task_id": "err-7ef87402", "role": "error", "target": "jobs/logs/pending_voice-prune.log"}
+{"task_id": "err-801f91eb", "role": "error", "target": "jobs/logs/pending_boot.log"}
+{"task_id": "err-c01d4d6f", "role": "error", "target": "jobs/logs/test_runner_nightly.log"}
+{"task_id": "err-1176e36d", "role": "error", "target": "jobs/logs/pending_openapi.log"}
+{"task_id": "err-b015e8ae", "role": "error", "target": "jobs/logs/test_runner_tdd_hourly.log"}
+{"task_id": "err-0b7422a5", "role": "error", "target": "jobs/logs/supervisor.log"}
+{"task_id": "err-6d5b73ac", "role": "error", "target": "jobs/logs/insurance_audit_20260612T030001Z.log"}
+{"task_id": "err-91ff9b52", "role": "error", "target": "jobs/logs/insurance_audit_20260604T030001Z.log"}
+{"task_id": "err-9fddc46f", "role": "error", "target": "jobs/logs/insurance_audit_20260607T044848Z.log"}
+{"task_id": "err-e795b697", "role": "error", "target": "jobs/logs/kpi-snapshot-20260609.log"}
+{"task_id": "err-b4dd16af", "role": "error", "target": "jobs/logs/insurance_audit_20260605T150002Z.log"}
+{"task_id": "err-dd590d48", "role": "error", "target": "jobs/logs/insurance_audit_20260602T030001Z.log"}
+{"task_id": "err-c6769605", "role": "error", "target": "jobs/logs/rag_chunking.log"}
+{"task_id": "err-588acae2", "role": "error", "target": "jobs/logs/insurance_data_refresh_auto_insurance_underwriting.log"}
+{"task_id": "err-f4aac4b6", "role": "error", "target": "jobs/logs/agent_test_runner.log"}
+{"task_id": "err-860120f5", "role": "error", "target": "jobs/logs/insurance_workforce_rollup_cron.log"}
+{"task_id": "err-ef299eca", "role": "error", "target": "jobs/logs/auto_fix_loop.log"}
+{"task_id": "err-5fdf8110", "role": "error", "target": "jobs/logs/codex_approval_watch.log"}
+{"task_id": "err-1d9788a9", "role": "error", "target": "jobs/logs/insurance_audit_20260605T030001Z.log"}
+{"task_id": "err-d060b8da", "role": "error", "target": "jobs/logs/kpi-snapshot-20260611.log"}
+{"task_id": "err-b1fb66ea", "role": "error", "target": "jobs/logs/insurance_data_refresh_customer_complaints.log"}
+{"task_id": "err-35e515e9", "role": "error", "target": "jobs/logs/insurance_data_refresh_health_insurance_claims.log"}
+{"task_id": "err-0a9e4d43", "role": "error", "target": "jobs/logs/insurance_audit_20260606T150001Z.log"}
+{"task_id": "err-b9983cdd", "role": "error", "target": "jobs/logs/insurance_audit_20260611T150001Z.log"}
+{"task_id": "err-3fc659c3", "role": "error", "target": "jobs/logs/kpi-snapshot-20260610.log"}
+{"task_id": "err-276942a9", "role": "error", "target": "jobs/logs/test_runner_api_hourly.log"}
+{"task_id": "err-fe1f3e2c", "role": "error", "target": "jobs/logs/local_backend.log"}
+{"task_id": "err-dc3cad87", "role": "error", "target": "jobs/logs/insurance_data_refresh_customer_churn.log"}
+{"task_id": "err-3eaf2f0b", "role": "error", "target": "jobs/logs/architecture_docs_check.log"}
+{"task_id": "err-41d404f6", "role": "error", "target": "jobs/logs/codex_approval_cron.log"}
+{"task_id": "err-1096a9d6", "role": "error", "target": "jobs/logs/insurance_audit_20260601T223416Z.log"}
+{"task_id": "err-58444d7b", "role": "error", "target": "jobs/logs/insurance_audit_20260610T150001Z.log"}
+{"task_id": "err-989de178", "role": "error", "target": "jobs/logs/no_black_backgrounds_audit.log"}
+{"task_id": "err-601c6559", "role": "error", "target": "jobs/logs/auto-next.log"}
+{"task_id": "err-6bcad581", "role": "error", "target": "jobs/logs/pending_data-manifest.log"}
+{"task_id": "err-6df6d3a6", "role": "error", "target": "jobs/logs/insur_preflight.log"}
+{"task_id": "err-52874c9b", "role": "error", "target": "jobs/logs/kpi-snapshot-20260612.log"}
+{"task_id": "err-3587cee3", "role": "error", "target": "jobs/logs/agentic_readiness_cron.log"}
+{"task_id": "err-07c81c36", "role": "error", "target": "jobs/logs/insurance_audit_20260611T030002Z.log"}
+{"task_id": "err-5ec99dad", "role": "error", "target": "jobs/logs/rag_deepeval.log"}
+{"task_id": "err-a8b6c0cd", "role": "error", "target": "jobs/logs/rag_cache.log"}
+{"task_id": "err-1359cc40", "role": "error", "target": "jobs/logs/rag_token.log"}
+{"task_id": "err-614cbb04", "role": "error", "target": "jobs/logs/insurance_audit_cron.log"}
+{"task_id": "err-52c27e46", "role": "error", "target": "jobs/logs/insurance_data_refresh_life_insurance_data.log"}
+{"task_id": "err-21994465", "role": "error", "target": "jobs/logs/rag_guardrail.log"}
+{"task_id": "err-2bc6f732", "role": "error", "target": "jobs/logs/work_tracker.log"}
+{"task_id": "err-2c4c99ef", "role": "error", "target": "jobs/logs/insurance_audit_20260601T221059Z.log"}
+{"task_id": "err-3188d1a6", "role": "error", "target": "jobs/logs/automation_daily-health-voice-text.log"}
+{"task_id": "err-abb77893", "role": "error", "target": "jobs/logs/insurance_data_refresh_creditcard_fraud.log"}
+{"task_id": "err-616c65a6", "role": "error", "target": "jobs/logs/insurance_audit_20260612T150002Z.log"}
+{"task_id": "err-f9d46537", "role": "error", "target": "jobs/logs/fix_all_nightly.log"}
+{"task_id": "err-451f6973", "role": "error", "target": "jobs/logs/setup_ai_agent_stack.log"}
+{"task_id": "err-175349d2", "role": "error", "target": "jobs/logs/insurance_audit_20260609T150003Z.log"}
+{"task_id": "err-815e0f2e", "role": "error", "target": "jobs/logs/insurance_audit_20260603T150002Z.log"}
+{"task_id": "err-95e96f89", "role": "error", "target": "jobs/logs/insurance_audit_20260607T030002Z.log"}
+{"task_id": "err-a9c02539", "role": "error", "target": "jobs/logs/process_watchdog.log"}
+{"task_id": "err-f38e78ef", "role": "error", "target": "jobs/logs/prompt_tracker_stats.log"}
+{"task_id": "err-fb9b002d", "role": "error", "target": "jobs/logs/insurance_audit_20260602T150002Z.log"}
+{"task_id": "err-ad6a9d9e", "role": "error", "target": "jobs/logs/insurance_data_refresh_property_claims.log"}
+{"task_id": "err-d6f5479e", "role": "error", "target": "jobs/logs/share_folder_drift.log"}
+{"task_id": "err-cf9376de", "role": "error", "target": "jobs/logs/log-rotation-20260611.log"}
+{"task_id": "err-82bc71ae", "role": "error", "target": "jobs/logs/rag_embedding.log"}
+{"task_id": "err-b6c0230f", "role": "error", "target": "jobs/logs/work_tracker_history_rotate.log"}
+{"task_id": "err-65d86050", "role": "error", "target": "jobs/logs/eaos_top10.cron.log"}
+{"task_id": "err-92088a05", "role": "error", "target": "jobs/logs/api_audit.log"}
+{"task_id": "err-74cae6db", "role": "error", "target": "jobs/logs/pending_push.log"}
+{"task_id": "err-0bc7b7dd", "role": "error", "target": "jobs/logs/pending_prod-aggregate.log"}
+{"task_id": "err-5b137c2b", "role": "error", "target": "jobs/logs/setup.log"}
+{"task_id": "err-5efd5517", "role": "error", "target": "jobs/logs/insurance_audit_20260608T030001Z.log"}
+{"task_id": "err-bf4a6425", "role": "error", "target": "jobs/logs/insurance_audit_20260606T030001Z.log"}
+{"task_id": "err-fa974f76", "role": "error", "target": "jobs/logs/fix_all_quick.log"}
+{"task_id": "err-68dfc057", "role": "error", "target": "jobs/logs/log-rotation-20260612.log"}
+{"task_id": "err-b9e0d5e8", "role": "error", "target": "jobs/logs/fix_all_weekly.log"}
+{"task_id": "err-285dc34e", "role": "error", "target": "jobs/logs/fix_all_pending.log"}
+{"task_id": "err-3da38b19", "role": "error", "target": "jobs/logs/insurance_audit_20260603T030003Z.log"}
+{"task_id": "err-447e96a5", "role": "error", "target": "jobs/logs/insurance_data_refresh_medical_cost.log"}
+{"task_id": "err-b656cc8c", "role": "error", "target": "jobs/logs/insurance_data_refresh_vehicle_claim_fraud.log"}
+{"task_id": "err-29c8b416", "role": "error", "target": "jobs/logs/insurance_data_refresh_call_center_data.log"}
+{"task_id": "err-fd34524b", "role": "error", "target": "jobs/logs/opa_test.log"}
+{"task_id": "err-bf1b70ac", "role": "error", "target": "jobs/logs/process_watchdog.cron.log"}
+{"task_id": "err-7013b7ab", "role": "error", "target": "jobs/logs/supervisor_systemd.log"}
+{"task_id": "err-7a21a06d", "role": "error", "target": "jobs/logs/log-rotation-20260610.log"}
+{"task_id": "err-834dede2", "role": "error", "target": "jobs/logs/insurance_audit_20260610T030001Z.log"}
+{"task_id": "err-fded749b", "role": "error", "target": "jobs/logs/py_sidecar.log"}
+{"task_id": "err-cc03f425", "role": "error", "target": "jobs/logs/insur_bot.log"}
+{"task_id": "err-8e3f3ab2", "role": "error", "target": "jobs/logs/ollama.log"}
+{"task_id": "err-a942c122", "role": "error", "target": "jobs/logs/pending_push-hint.log"}
+{"task_id": "err-dc90c2de", "role": "error", "target": "jobs/logs/pending_claude-md-drift.log"}
+{"task_id": "err-5337982d", "role": "error", "target": "jobs/logs/auto-next-daemon.log"}
+{"task_id": "err-095d9c2b", "role": "error", "target": "jobs/logs/feature_backlog.cron.log"}
+{"task_id": "err-dc9601fe", "role": "error", "target": "jobs/logs/pending_drill.log"}
+{"task_id": "err-d32f43fb", "role": "error", "target": "jobs/logs/insurance_audit_20260609T030001Z.log"}
+{"task_id": "err-48edabbe", "role": "error", "target": "jobs/logs/log-rotation-20260613.log"}
+{"task_id": "err-3aa5ff84", "role": "error", "target": "jobs/logs/insurance_data_refresh_auto_insurance_fraud.log"}
+{"task_id": "err-e2928d0c", "role": "error", "target": "jobs/logs/insurance_alignment_cron.log"}
+{"task_id": "err-68d94b06", "role": "error", "target": "jobs/logs/vite_3210.log"}
+{"task_id": "err-ce8d9c0c", "role": "error", "target": "jobs/logs/pending_module-sync.log"}
+{"task_id": "err-424ad79f", "role": "error", "target": "jobs/logs/insurance_audit_20260604T150001Z.log"}
+{"task_id": "err-a9582c71", "role": "error", "target": "jobs/logs/rag_ragas.log"}
+{"task_id": "err-0152bc9d", "role": "error", "target": "jobs/logs/insurance_catalog_cron.log"}
+{"task_id": "err-66848df3", "role": "error", "target": "jobs/logs/insurance_audit_20260613T030001Z.log"}
+{"task_id": "err-fe063280", "role": "error", "target": "jobs/logs/insurance_audit_20260601T221625Z.log"}
+{"task_id": "err-c7c12c33", "role": "error", "target": "jobs/logs/fix_all_pending.cron.log"}
+{"task_id": "err-bcd7854d", "role": "error", "target": "jobs/logs/insurance_data_refresh_vehicle_insurance_fraud.log"}
+{"task_id": "sw-6862e180", "role": "missing_software", "kind": "binary", "name": "docker"}
+{"task_id": "sw-b319f767", "role": "missing_software", "kind": "binary", "name": "redis-cli"}
+{"task_id": "sw-66539352", "role": "missing_software", "kind": "binary", "name": "psql"}
+{"task_id": "sw-69992cf6", "role": "missing_software", "kind": "binary", "name": "ollama"}
+{"task_id": "sw-10a5fae8", "role": "missing_software", "kind": "binary", "name": "curl"}
+{"task_id": "sw-dec6facf", "role": "missing_software", "kind": "binary", "name": "jq"}
+{"task_id": "sw-c5185e6b", "role": "missing_software", "kind": "binary", "name": "git"}
+{"task_id": "sw-4ff59da5", "role": "missing_software", "kind": "binary", "name": "espeak"}
+{"task_id": "sw-98ab25ea", "role": "missing_software", "kind": "binary", "name": "sqlite3"}
+{"task_id": "sw-037dbf62", "role": "missing_software", "kind": "pypkg", "name": "fastapi"}
+{"task_id": "sw-a694a34e", "role": "missing_software", "kind": "pypkg", "name": "uvicorn"}
+{"task_id": "sw-f7d208b6", "role": "missing_software", "kind": "pypkg", "name": "pydantic"}
+{"task_id": "sw-5cc5e93f", "role": "missing_software", "kind": "pypkg", "name": "psycopg"}
+{"task_id": "sw-ed7f364b", "role": "missing_software", "kind": "pypkg", "name": "redis"}
+{"task_id": "sw-22332ba7", "role": "missing_software", "kind": "pypkg", "name": "chromadb"}
+{"task_id": "sw-cb7e5018", "role": "missing_software", "kind": "pypkg", "name": "rank_bm25"}
+{"task_id": "sw-3276f050", "role": "missing_software", "kind": "pypkg", "name": "networkx"}
+{"task_id": "sw-8ca65306", "role": "missing_software", "kind": "pypkg", "name": "sklearn"}
+{"task_id": "sw-693020be", "role": "missing_software", "kind": "pypkg", "name": "xgboost"}
+{"task_id": "sw-49e7afa2", "role": "missing_software", "kind": "pypkg", "name": "requests"}
+{"task_id": "sw-b6244b17", "role": "missing_software", "kind": "pypkg", "name": "ragas"}
+{"task_id": "sw-a4198960", "role": "missing_software", "kind": "pypkg", "name": "deepeval"}
+{"task_id": "tst-4fdaa8f9", "role": "testing", "target": "tests/drills/drill_fraud_lifecycle.py"}
+{"task_id": "tst-fd1a83f2", "role": "testing", "target": "tests/drills/drill_logging_config.py"}
+{"task_id": "tst-b8261381", "role": "testing", "target": "tests/drills/drill_adapters_endpoint.py"}
+{"task_id": "tst-6cc184ac", "role": "testing", "target": "tests/drills/drill_simulation_engine.py"}
+{"task_id": "tst-4251bfbb", "role": "testing", "target": "tests/drills/drill_openclaw_paperclip_federation.py"}
+{"task_id": "tst-e984d3d8", "role": "testing", "target": "tests/drills/drill_bank_palette.py"}
+{"task_id": "tst-1e7d232c", "role": "testing", "target": "tests/drills/drill_observability_hub.py"}
+{"task_id": "tst-cf2eecb9", "role": "testing", "target": "tests/drills/drill_frd_brd.py"}
+{"task_id": "tst-9bd4b909", "role": "testing", "target": "tests/drills/drill_tenant_activity.py"}
+{"task_id": "tst-d3226534", "role": "testing", "target": "tests/drills/drill_graph_ai.py"}
+{"task_id": "tst-807d083d", "role": "testing", "target": "tests/drills/drill_exceptions.py"}
+{"task_id": "tst-8349122f", "role": "testing", "target": "tests/drills/drill_middleware.py"}
+{"task_id": "tst-4477760c", "role": "testing", "target": "tests/drills/drill_attack_simulators.py"}
+{"task_id": "tst-e35d9877", "role": "testing", "target": "tests/drills/drill_insurance_alignment.py"}
+{"task_id": "tst-6e099a05", "role": "testing", "target": "tests/drills/drill_holy_monitoring_federation.py"}
+{"task_id": "tst-ff75813d", "role": "testing", "target": "tests/drills/drill_cua_idempotency_persistence.py"}
+{"task_id": "tst-c21e9378", "role": "testing", "target": "tests/drills/drill_cua_idempotency.py"}
+{"task_id": "tst-f21dfe97", "role": "testing", "target": "tests/drills/drill_run_drills.py"}
+{"task_id": "tst-6667a7d4", "role": "testing", "target": "tests/drills/drill_tenant_id_federation.py"}
+{"task_id": "tst-900e3171", "role": "testing", "target": "tests/drills/drill_test_tier_dispatch.py"}
+{"task_id": "tst-ce9cabc1", "role": "testing", "target": "tests/drills/drill_error_handlers.py"}
+{"task_id": "tst-920ff383", "role": "testing", "target": "tests/drills/drill_dbviewer.py"}
+{"task_id": "tst-6fe3a77e", "role": "testing", "target": "tests/drills/drill_reports_catalog.py"}
+{"task_id": "tst-ff24ccc1", "role": "testing", "target": "tests/drills/drill_generic_idempotency.py"}
+{"task_id": "tst-6c6d11db", "role": "testing", "target": "tests/drills/drill_admin_cua_audit.py"}
+{"task_id": "tst-7548730a", "role": "testing", "target": "tests/drills/drill_cv_lifecycle.py"}
+{"task_id": "tst-8f63296f", "role": "testing", "target": "tests/drills/drill_dependencies.py"}
+{"task_id": "tst-c9c7ee6e", "role": "testing", "target": "tests/drills/drill_full_lifecycle.py"}
+{"task_id": "tst-3475aa19", "role": "testing", "target": "tests/drills/drill_bmad_installed.py"}
+{"task_id": "tst-35f2c88f", "role": "testing", "target": "tests/drills/drill_checklist_cache.py"}
+{"task_id": "tst-24003136", "role": "testing", "target": "tests/drills/drill_role_dashboards.py"}
+{"task_id": "tst-abc671a3", "role": "testing", "target": "tests/drills/drill_agentops_adapter.py"}
+{"task_id": "tst-40a949c4", "role": "testing", "target": "tests/drills/drill_dl_lifecycle.py"}
+{"task_id": "tst-26c0a94d", "role": "testing", "target": "tests/drills/drill_per_dept_artifacts.py"}
+{"task_id": "tst-003279d3", "role": "testing", "target": "tests/drills/drill_master_data.py"}
+{"task_id": "tst-b0024a49", "role": "testing", "target": "tests/drills/drill_approval_broker.py"}
+{"task_id": "tst-5ec8cf38", "role": "testing", "target": "tests/drills/drill_evals_functional.py"}
+{"task_id": "tst-8b4625ab", "role": "testing", "target": "tests/drills/drill_agent_platform_cua.py"}
+{"task_id": "tst-232900d0", "role": "testing", "target": "tests/drills/drill_data_downloads.py"}
+{"task_id": "tst-c5881b3c", "role": "testing", "target": "tests/drills/drill_monitoring_ai.py"}
+{"task_id": "tst-7521f25b", "role": "testing", "target": "tests/drills/drill_config.py"}
+{"task_id": "tst-e00aae99", "role": "testing", "target": "tests/drills/drill_pipelines.py"}
+{"task_id": "tst-0134a098", "role": "testing", "target": "tests/drills/drill_rbac_middleware.py"}
+{"task_id": "tst-318b33f6", "role": "testing", "target": "tests/drills/drill_litellm_gateway.py"}
+{"task_id": "tst-07b29989", "role": "testing", "target": "tests/drills/drill_itsm_grade.py"}
+{"task_id": "tst-68279996", "role": "testing", "target": "tests/drills/drill_blackboard.py"}
+{"task_id": "tst-4eddd04d", "role": "testing", "target": "tests/drills/drill_advisor_cache.py"}
+{"task_id": "tst-6c251682", "role": "testing", "target": "tests/drills/drill_agentic_stack.py"}
+{"task_id": "tst-fdb24826", "role": "testing", "target": "tests/drills/drill_sequence_flow.py"}
+{"task_id": "tst-70de6363", "role": "testing", "target": "tests/drills/drill_security_posture.py"}
+{"task_id": "tst-1fb21130", "role": "testing", "target": "tests/drills/drill_noise_ensemble.py"}
+{"task_id": "tst-63112fd0", "role": "testing", "target": "tests/drills/drill_pii_inventory.py"}
+{"task_id": "tst-88db63db", "role": "testing", "target": "tests/drills/drill_operator_readiness.py"}
+{"task_id": "tst-e7d109e8", "role": "testing", "target": "tests/drills/drill_history_rotation.py"}
+{"task_id": "tst-4d7e4a9c", "role": "testing", "target": "tests/drills/drill_auto_next_loop_wiring.py"}
+{"task_id": "tst-270d21ff", "role": "testing", "target": "tests/drills/drill_frontend_consoles.py"}
+{"task_id": "tst-dfff3dcd", "role": "testing", "target": "tests/drills/drill_idempotency_compaction.py"}
+{"task_id": "tst-8f0286d1", "role": "testing", "target": "tests/drills/drill_insurance_dept_artifacts.py"}
+{"task_id": "tst-2aecd444", "role": "testing", "target": "tests/drills/drill_health_aliases.py"}
+{"task_id": "tst-8a611b22", "role": "testing", "target": "tests/drills/drill_cua_audit_readback.py"}
+{"task_id": "tst-cf618677", "role": "testing", "target": "tests/drills/drill_voice_pipeline.py"}
+{"task_id": "tst-cbd5c3be", "role": "testing", "target": "tests/drills/drill_ai_agent_tools_installed.py"}
+{"task_id": "tst-d00e9fd8", "role": "testing", "target": "tests/drills/drill_recommendation_lifecycle.py"}
+{"task_id": "tst-6d06b100", "role": "testing", "target": "tests/drills/drill_insurance_catalog.py"}
+{"task_id": "tst-fea5363e", "role": "testing", "target": "tests/drills/drill_transactions.py"}
+{"task_id": "tst-54f6a2f6", "role": "testing", "target": "tests/drills/drill_celery_beat.py"}
+{"task_id": "tst-394f027d", "role": "testing", "target": "tests/drills/drill_evals_safety.py"}
+{"task_id": "tst-c34a8877", "role": "testing", "target": "tests/drills/drill_evals_model_compare.py"}
+{"task_id": "tst-61a8d53e", "role": "testing", "target": "tests/drills/drill_guardrails.py"}
+{"task_id": "tst-c077aa6f", "role": "testing", "target": "tests/drills/drill_demo_stories.py"}
+{"task_id": "tst-8553f1f8", "role": "testing", "target": "tests/drills/drill_structured_logger.py"}
+{"task_id": "tst-904e9f05", "role": "testing", "target": "tests/drills/drill_agent_orchestration.py"}
+{"task_id": "tst-07dc5627", "role": "testing", "target": "tests/drills/drill_typed_council.py"}
+{"task_id": "tst-73dc8dbd", "role": "testing", "target": "tests/drills/drill_dspy_optimizer.py"}
+{"task_id": "tst-e3da2f47", "role": "testing", "target": "tests/drills/drill_top1pct_cache.py"}
+{"task_id": "tst-72300e1f", "role": "testing", "target": "tests/drills/drill_anomaly_lifecycle.py"}
+{"task_id": "tst-3bcbd67b", "role": "testing", "target": "tests/drills/drill_evals_cost.py"}
+{"task_id": "tst-53669f56", "role": "testing", "target": "tests/drills/drill_holy_audit.py"}
+{"task_id": "tst-982a3773", "role": "testing", "target": "tests/drills/drill_fleet_throughput.py"}
+{"task_id": "tst-473670d0", "role": "testing", "target": "tests/drills/drill_holy_routers_federation.py"}
+{"task_id": "tst-b8384ea0", "role": "testing", "target": "tests/drills/drill_brand_config.py"}
+{"task_id": "tst-7e1129a6", "role": "testing", "target": "tests/drills/drill_council_and_hitl.py"}
+{"task_id": "tst-af7022bd", "role": "testing", "target": "tests/drills/drill_audit_compact.py"}
+{"task_id": "tst-55b29491", "role": "testing", "target": "tests/drills/drill_utils.py"}
+{"task_id": "tst-83207e7d", "role": "testing", "target": "tests/drills/drill_security_api.py"}
+{"task_id": "api-5e337c24", "role": "api", "url": "http://localhost:8000/api/health", "expect": 200}
+{"task_id": "api-1d0aef7a", "role": "api", "url": "http://localhost:8000/api/v1/insurance/depts", "expect": 200}
+{"task_id": "api-1ee63106", "role": "api", "url": "http://localhost:8000/docs", "expect": 200}
+{"task_id": "api-7e04adab", "role": "api", "url": "http://localhost:8000/api/v1/health", "expect": 200}
+{"task_id": "be-c2f0b038", "role": "backend", "target": "backend/routers/tenants_admin.py"}
+{"task_id": "be-cd5d5276", "role": "backend", "target": "backend/routers/datasets.py"}
+{"task_id": "be-57e085ee", "role": "backend", "target": "backend/routers/pipelines.py"}
+{"task_id": "be-a62b0dd4", "role": "backend", "target": "backend/routers/catalogs.py"}
+{"task_id": "be-acd0f357", "role": "backend", "target": "backend/routers/evals_model_compare.py"}
+{"task_id": "be-3876a915", "role": "backend", "target": "backend/routers/__init__.py"}
+{"task_id": "be-ddc77f9a", "role": "backend", "target": "backend/routers/jobs.py"}
+{"task_id": "be-d078833c", "role": "backend", "target": "backend/routers/evals_safety.py"}
+{"task_id": "be-3984bbec", "role": "backend", "target": "backend/routers/reports.py"}
+{"task_id": "be-90b3af37", "role": "backend", "target": "backend/routers/insurance.py"}
+{"task_id": "be-cf7e441c", "role": "backend", "target": "backend/routers/dbviewer.py"}
+{"task_id": "be-e26bf0a2", "role": "backend", "target": "backend/routers/customer.py"}
+{"task_id": "be-50df5bd8", "role": "backend", "target": "backend/routers/supply_chain.py"}
+{"task_id": "be-00420716", "role": "backend", "target": "backend/routers/paperclip.py"}
+{"task_id": "be-068bad1f", "role": "backend", "target": "backend/routers/openclaw.py"}
+{"task_id": "be-dcb1ef08", "role": "backend", "target": "backend/routers/departments.py"}
+{"task_id": "be-f2558aed", "role": "backend", "target": "backend/routers/agent_platform.py"}
+{"task_id": "be-15540f60", "role": "backend", "target": "backend/routers/guardrails.py"}
+{"task_id": "be-d76b46a6", "role": "backend", "target": "backend/routers/ai_explain.py"}
+{"task_id": "be-df444dbd", "role": "backend", "target": "backend/routers/security.py"}
+{"task_id": "be-73499ddb", "role": "backend", "target": "backend/routers/sales.py"}
+{"task_id": "be-9c04879b", "role": "backend", "target": "backend/routers/transactions.py"}
+{"task_id": "be-efe59af9", "role": "backend", "target": "backend/routers/evals_functional.py"}
+{"task_id": "be-c677cc94", "role": "backend", "target": "backend/routers/evals_cost.py"}
+{"task_id": "be-2d1927fa", "role": "backend", "target": "backend/routers/master_data.py"}
+{"task_id": "be-d32083cc", "role": "backend", "target": "backend/routers/input_events.py"}
+{"task_id": "be-f177a994", "role": "backend", "target": "backend/routers/insur.py"}
+{"task_id": "be-4379b003", "role": "backend", "target": "backend/routers/admin_feedback.py"}
+{"task_id": "be-0e9d0b3f", "role": "backend", "target": "backend/routers/holy_components.py"}
+{"task_id": "be-57d120eb", "role": "backend", "target": "backend/routers/health.py"}
+{"task_id": "be-4bdcc677", "role": "backend", "target": "backend/routers/admin.py"}
+{"task_id": "be-aa46f36f", "role": "backend", "target": "backend/routers/downloads.py"}
+{"task_id": "be-1e522e67", "role": "backend", "target": "backend/routers/observability_hub.py"}
+{"task_id": "be-58727d24", "role": "backend", "target": "backend/routers/pii.py"}
+{"task_id": "be-3f6e82dc", "role": "backend", "target": "backend/routers/agent_supervisor.py"}
+{"task_id": "be-c7a49278", "role": "backend", "target": "backend/routers/monitoring.py"}
+{"task_id": "be-24a92424", "role": "backend", "target": "backend/routers/processes.py"}
+{"task_id": "be-846adcfa", "role": "backend", "target": "backend/routers/graph.py"}
+{"task_id": "be-e60319a5", "role": "backend", "target": "backend/routers/audit.py"}
+{"task_id": "be-86bce1a6", "role": "backend", "target": "backend/routers/models.py"}
+{"task_id": "be-1f8258fa", "role": "backend", "target": "backend/routers/demo_stories.py"}
+{"task_id": "be-727a35bf", "role": "backend", "target": "backend/services/dbviewer_service.py"}
+{"task_id": "be-02574e54", "role": "backend", "target": "backend/services/dlp_presidio.py"}
+{"task_id": "be-1f0a566c", "role": "backend", "target": "backend/services/eta_service.py"}
+{"task_id": "be-2d13b400", "role": "backend", "target": "backend/services/__init__.py"}
+{"task_id": "be-bb31f5af", "role": "backend", "target": "backend/services/job_service.py"}
+{"task_id": "be-32189629", "role": "backend", "target": "backend/services/typed_council.py"}
+{"task_id": "be-bcbdc3a1", "role": "backend", "target": "backend/services/model_compare_service.py"}
+{"task_id": "be-7619b331", "role": "backend", "target": "backend/services/security_posture_service.py"}
+{"task_id": "be-acf288a4", "role": "backend", "target": "backend/services/rag_service.py"}
+{"task_id": "be-9b173fe9", "role": "backend", "target": "backend/services/openclaw_gateway_service.py"}
+{"task_id": "be-aa0255a0", "role": "backend", "target": "backend/services/cost_eval_service.py"}
+{"task_id": "be-1f7050b3", "role": "backend", "target": "backend/services/simulation_service.py"}
+{"task_id": "be-15958e2c", "role": "backend", "target": "backend/services/supplier_score_service.py"}
+{"task_id": "be-02ccf0a6", "role": "backend", "target": "backend/services/ml_service.py"}
+{"task_id": "be-2a440c97", "role": "backend", "target": "backend/services/observability_hub_service.py"}
+{"task_id": "be-c09ad2ae", "role": "backend", "target": "backend/services/guardrails_service.py"}
+{"task_id": "be-42c418d5", "role": "backend", "target": "backend/services/process_service.py"}
+{"task_id": "be-f8de13b0", "role": "backend", "target": "backend/services/paperclip_service.py"}
+{"task_id": "be-ff17e866", "role": "backend", "target": "backend/services/churn_model_service.py"}
+{"task_id": "be-504bdcee", "role": "backend", "target": "backend/services/agent_platform_service.py"}
+{"task_id": "be-c6c2c021", "role": "backend", "target": "backend/services/self_healing.py"}
+{"task_id": "be-a0ab9c31", "role": "backend", "target": "backend/services/llm_gateway.py"}
+{"task_id": "be-aacfcbc4", "role": "backend", "target": "backend/services/supply_chain_simulation_service.py"}
+{"task_id": "be-66784d34", "role": "backend", "target": "backend/services/safety_eval_service.py"}
+{"task_id": "be-0b8e5c86", "role": "backend", "target": "backend/services/forecast_service.py"}
+{"task_id": "be-5bfa5e22", "role": "backend", "target": "backend/services/functional_eval_service.py"}
+{"task_id": "be-6b11ddc3", "role": "backend", "target": "backend/services/dataset_service.py"}
+{"task_id": "be-fa19e4e5", "role": "backend", "target": "backend/services/pii_inventory_service.py"}
+{"task_id": "be-e052787c", "role": "backend", "target": "backend/services/dspy_optimizer.py"}
+{"task_id": "be-41e9ccb9", "role": "backend", "target": "backend/services/department_service.py"}
+{"task_id": "be-324e1dae", "role": "backend", "target": "backend/services/stockout_service.py"}
+{"task_id": "be-fe73a07c", "role": "backend", "target": "backend/services/external_feeds/__init__.py"}
+{"task_id": "be-2185ebd5", "role": "backend", "target": "backend/services/external_feeds/ehr.py"}
+{"task_id": "be-ee396599", "role": "backend", "target": "backend/services/external_feeds/clue.py"}
+{"task_id": "be-d54d0a59", "role": "backend", "target": "backend/services/external_feeds/kyc.py"}
+{"task_id": "be-49950de8", "role": "backend", "target": "backend/services/external_feeds/nicb.py"}
+{"task_id": "be-28da3d68", "role": "backend", "target": "backend/repositories/job_repo.py"}
+{"task_id": "be-40690a07", "role": "backend", "target": "backend/repositories/__init__.py"}
+{"task_id": "be-2a1cc26a", "role": "backend", "target": "backend/repositories/supply_chain_repo.py"}
+{"task_id": "be-3180ad72", "role": "backend", "target": "backend/repositories/department_repo.py"}
+{"task_id": "be-06ff1b23", "role": "backend", "target": "backend/repositories/catalogs_repo.py"}
+{"task_id": "be-14b87c0e", "role": "backend", "target": "backend/repositories/tenants_repo.py"}
+{"task_id": "be-f49204bc", "role": "backend", "target": "backend/repositories/sales_repo.py"}
+{"task_id": "be-c4763876", "role": "backend", "target": "backend/repositories/base.py"}
+{"task_id": "be-3a272caf", "role": "backend", "target": "backend/repositories/dataset_repo.py"}
+{"task_id": "be-0087cd16", "role": "backend", "target": "backend/repositories/process_repo.py"}
+{"task_id": "be-4b80e41b", "role": "backend", "target": "backend/repositories/input_events_repo.py"}
+{"task_id": "be-cc7c0b0a", "role": "backend", "target": "backend/repositories/customer_repo.py"}
+{"task_id": "be-12d7fd9c", "role": "backend", "target": "backend/repositories/model_repo.py"}
+{"task_id": "pr-b2515bb0", "role": "process", "dept": "claims", "artifact": "INSUR_DEMO_STORY.md"}
+{"task_id": "pr-d5e21a11", "role": "process", "dept": "claims", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
+{"task_id": "pr-57eed9ae", "role": "process", "dept": "claims", "artifact": "INSUR_DT_STRATEGY.md"}
+{"task_id": "pr-f81d7c7c", "role": "process", "dept": "claims", "artifact": "INSUR_CONTACT_CENTER.md"}
+{"task_id": "pr-616cab2e", "role": "process", "dept": "claims", "artifact": "INSUR_INCIDENT_MGMT.md"}
+{"task_id": "pr-8f1e2ac6", "role": "process", "dept": "claims", "artifact": "INSUR_MEETING_COMMS.md"}
+{"task_id": "pr-014589f7", "role": "process", "dept": "claims", "artifact": "INSUR_PROCESS_MGMT.md"}
+{"task_id": "pr-7550b874", "role": "process", "dept": "claims", "artifact": "INSUR_DATA_MGMT.md"}
+{"task_id": "pr-0957bfe6", "role": "process", "dept": "claims", "artifact": "INSUR_RECOMMENDATION.md"}
+{"task_id": "pr-660a30df", "role": "process", "dept": "claims", "artifact": "INSUR_ANOMALY.md"}
+{"task_id": "pr-99833809", "role": "process", "dept": "claims", "artifact": "INSUR_FRAUD.md"}
+{"task_id": "pr-24eb3775", "role": "process", "dept": "claims", "artifact": "INSUR_CONTACTS.md"}
+{"task_id": "pr-d33e26a0", "role": "process", "dept": "claims", "artifact": "INSUR_FLOW.md"}
+{"task_id": "pr-65b163e3", "role": "process", "dept": "claims", "artifact": "INSUR_SECURITY.md"}
+{"task_id": "pr-f4597627", "role": "process", "dept": "claims", "artifact": "INSUR_SIMULATION.md"}
+{"task_id": "pr-127cca05", "role": "process", "dept": "underwriting", "artifact": "INSUR_DEMO_STORY.md"}
+{"task_id": "pr-6358b413", "role": "process", "dept": "underwriting", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
+{"task_id": "pr-b9bf360e", "role": "process", "dept": "underwriting", "artifact": "INSUR_DT_STRATEGY.md"}
+{"task_id": "pr-85303173", "role": "process", "dept": "underwriting", "artifact": "INSUR_CONTACT_CENTER.md"}
+{"task_id": "pr-d205acc3", "role": "process", "dept": "underwriting", "artifact": "INSUR_INCIDENT_MGMT.md"}
+{"task_id": "pr-65f494f9", "role": "process", "dept": "underwriting", "artifact": "INSUR_MEETING_COMMS.md"}
+{"task_id": "pr-38446621", "role": "process", "dept": "underwriting", "artifact": "INSUR_PROCESS_MGMT.md"}
+{"task_id": "pr-37b3250c", "role": "process", "dept": "underwriting", "artifact": "INSUR_DATA_MGMT.md"}
+{"task_id": "pr-5f49b9a1", "role": "process", "dept": "underwriting", "artifact": "INSUR_RECOMMENDATION.md"}
+{"task_id": "pr-62de984b", "role": "process", "dept": "underwriting", "artifact": "INSUR_ANOMALY.md"}
+{"task_id": "pr-5801c2ee", "role": "process", "dept": "underwriting", "artifact": "INSUR_FRAUD.md"}
+{"task_id": "pr-d7ca2f7e", "role": "process", "dept": "underwriting", "artifact": "INSUR_CONTACTS.md"}
+{"task_id": "pr-f8d46ab2", "role": "process", "dept": "underwriting", "artifact": "INSUR_FLOW.md"}
+{"task_id": "pr-d5f46f8a", "role": "process", "dept": "underwriting", "artifact": "INSUR_SECURITY.md"}
+{"task_id": "pr-da343660", "role": "process", "dept": "underwriting", "artifact": "INSUR_SIMULATION.md"}
+{"task_id": "pr-d2068a49", "role": "process", "dept": "customer-service", "artifact": "INSUR_DEMO_STORY.md"}
+{"task_id": "pr-a96e8e92", "role": "process", "dept": "customer-service", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
+{"task_id": "pr-4a149303", "role": "process", "dept": "customer-service", "artifact": "INSUR_DT_STRATEGY.md"}
+{"task_id": "pr-d33067d3", "role": "process", "dept": "customer-service", "artifact": "INSUR_CONTACT_CENTER.md"}
+{"task_id": "pr-84bdc6d2", "role": "process", "dept": "customer-service", "artifact": "INSUR_INCIDENT_MGMT.md"}
+{"task_id": "pr-50765ad6", "role": "process", "dept": "customer-service", "artifact": "INSUR_MEETING_COMMS.md"}
+{"task_id": "pr-195a2ad9", "role": "process", "dept": "customer-service", "artifact": "INSUR_PROCESS_MGMT.md"}
+{"task_id": "pr-eb7189c3", "role": "process", "dept": "customer-service", "artifact": "INSUR_DATA_MGMT.md"}
+{"task_id": "pr-f3a54d55", "role": "process", "dept": "customer-service", "artifact": "INSUR_RECOMMENDATION.md"}
+{"task_id": "pr-203b1593", "role": "process", "dept": "customer-service", "artifact": "INSUR_ANOMALY.md"}
+{"task_id": "pr-0969825b", "role": "process", "dept": "customer-service", "artifact": "INSUR_FRAUD.md"}
+{"task_id": "pr-a6e5ddfa", "role": "process", "dept": "customer-service", "artifact": "INSUR_CONTACTS.md"}
+{"task_id": "pr-223f1248", "role": "process", "dept": "customer-service", "artifact": "INSUR_FLOW.md"}
+{"task_id": "pr-2cc68c19", "role": "process", "dept": "customer-service", "artifact": "INSUR_SECURITY.md"}
+{"task_id": "pr-7407946e", "role": "process", "dept": "customer-service", "artifact": "INSUR_SIMULATION.md"}
+{"task_id": "pr-23dd29d6", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_DEMO_STORY.md"}
+{"task_id": "pr-3e1e0b2a", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_ASIS_ASSESSMENT.md"}
+{"task_id": "pr-43a741b2", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_DT_STRATEGY.md"}
+{"task_id": "pr-c3c2064d", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_CONTACT_CENTER.md"}
+{"task_id": "pr-cab679dd", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_INCIDENT_MGMT.md"}
+{"task_id": "pr-bdcbde0a", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_MEETING_COMMS.md"}
+{"task_id": "pr-26519a60", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_PROCESS_MGMT.md"}
+{"task_id": "pr-c508e667", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_DATA_MGMT.md"}
+{"task_id": "pr-a3f50ea6", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_RECOMMENDATION.md"}
+{"task_id": "pr-0f50a03d", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_ANOMALY.md"}
+{"task_id": "pr-82ae124e", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_FRAUD.md"}
+{"task_id": "pr-189f1b4c", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_CONTACTS.md"}
+{"task_id": "pr-314e2a40", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_FLOW.md"}
+{"task_id": "pr-fe9f4108", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_SECURITY.md"}
+{"task_id": "pr-2c671e36", "role": "process", "dept": "fraud-siu", "artifact": "INSUR_SIMULATION.md"}

@@ -1,6 +1,6 @@
 <!-- agent-py-sidecar: auto-generated; do not delete this line to allow refresh -->
 # scripts/scaffold_recommendation_files.py
-# auto-generated explainer · 2026-06-12T10:00:29Z
+# auto-generated explainer · 2026-06-13T10:01:10Z
 
 ## Purpose
 Scaffold 21 HOLY_RECOMMENDATION.md per-dept files from the canonical catalog.
