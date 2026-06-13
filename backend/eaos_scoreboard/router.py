@@ -24,6 +24,7 @@ router = APIRouter(prefix="/api/v1/eaos", tags=["eaos"])
 
 ROOT = Path("/mnt/deepa/insur_project")
 PAGES = ROOT / "frontend/src/pages"
+COMPONENTS_DIR = ROOT / "frontend/src/components"
 APP_JSX = ROOT / "frontend/src/App.jsx"
 
 
@@ -41,7 +42,10 @@ def _safe_count(table: str) -> int | None:
 
 
 def _page_exists(name: str) -> bool:
-    return (PAGES / name).exists()
+    """§EAOS UI-score · search BOTH pages/ AND components/ so component-housed
+    page modules (e.g. AgenticHubPage which lives in components/) count as
+    present. §57.7 honest: still returns False when neither holds the file."""
+    return (PAGES / name).exists() or (COMPONENTS_DIR / name).exists()
 
 
 def _route_in_app(route: str) -> bool:

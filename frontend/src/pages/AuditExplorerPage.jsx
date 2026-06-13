@@ -8,7 +8,7 @@ export default function AuditExplorerPage() {
       title="Audit Log Explorer"
       icon="📜"
       subtitle="Every action · every actor · §38.3 audit row schema"
-      endpoint="/api/v1/audit-search/recent?limit=200"
+      endpoint="/api/v1/audit-chain/recent?limit=200"
       flowActive="audit"
       storageKey="audit-explorer"
       objective="Drill into the last 200 audit rows · filter by actor / action / resource · §57.7 honest no fabrication."

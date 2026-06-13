@@ -8,7 +8,7 @@ export default function CostOptimizerPage() {
       title="Cost Optimizer"
       icon="💰"
       subtitle="Token + dollar spend per tenant · agent · model · recommendations"
-      endpoint="/api/v1/eai-os/cost?limit=200"
+      endpoint="/api/v1/agent-kernel/cost/usage"
       flowActive="output"
       storageKey="cost-optimizer"
       objective="Surface the top 200 cost-driving requests · rule-based recommendations to cut spend."

@@ -287,9 +287,9 @@ Each row in original brutal list now has the 7-stage template. Same pattern.
 # How operator marks done
 
 When a task moves to ✅:
-1. Edit this file · change ⏳ → ✅
+1. Edit this file · change [pending-marker] → ✅
 2. Run `./scripts/insur audit` · verify no regression
-3. If audit fails · revert · keep ⏳
+3. If audit fails · revert · keep [pending-marker]
 4. Commit with reference to this file
 
 ---
