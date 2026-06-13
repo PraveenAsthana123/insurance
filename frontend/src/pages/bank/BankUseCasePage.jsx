@@ -18,6 +18,7 @@ import {
   TAB_FRAMEWORK_MAP, SDLC_BY_ID, OPS_BY_ID, TIER_BY_ID,
 } from './BankFrameworkData';
 import { canonicalDomainId, domainMeta } from '../../utils/insuranceNavigation';
+import { TAB_OBJECTIVE_EVIDENCE, scoreTab, evaluateObjective } from './tabs/tab-objective-evidence';
 
 // ─────────────────────────────────────────────────────────────────────
 // Operator 2026-06-05: "save all input prompt and show on UI".
@@ -5081,6 +5082,119 @@ function SummaryAndOutcomeRow({ tab, sub, proc }) {
   );
 }
 
+// TabOutcomeScorecard — operator 2026-06-13 11:42 MDT: "fix all ..have agent
+// assign for this task" + "100% ..top 1". The §57.7 honest evaluator: per-tab
+// score from TAB_OBJECTIVE_EVIDENCE rules. Rules that need operator confirms
+// render as 🟡 pending (HITL · §103.5) — NEVER fake-✓. Auto-checkable rules
+// resolve against proc.* paths.
+// Owned by: sys_tab_outcome_scoring_agent (see docs/AGENT_ROSTER.md §7).
+function TabOutcomeScorecard({ tab, proc }) {
+  const score = scoreTab(tab.id, proc);
+  if (!score.total) {
+    return (
+      <div style={{
+        padding: 10, background: '#fef3c7',
+        border: '1px solid #fcd34d', borderRadius: 6, fontSize: 11, color: '#78350f',
+      }}>
+        ⚠ No evidence rules registered for <code>{tab.id}</code> in TAB_OBJECTIVE_EVIDENCE.
+        Owner: <strong>sys_tab_outcome_scoring_agent</strong>.
+      </div>
+    );
+  }
+  const bandColor =
+    score.band === 'failing'   ? '#dc2626' :
+    score.band === 'top-1pct'  ? '#16a34a' :
+    score.band === 'ok'        ? '#0891b2' : '#f59e0b';
+  const bandLabel =
+    score.band === 'failing'   ? 'FAILING · close ✗ rules first' :
+    score.band === 'top-1pct'  ? 'TOP-1% · ≥80% verified' :
+    score.band === 'ok'        ? 'OK · 60-79% verified' : 'NEEDS WORK · <60% verified';
+
+  return (
+    <div>
+      {/* Aggregate band header */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        flexWrap: 'wrap', gap: 8,
+        marginBottom: 10, padding: '10px 12px',
+        background: '#fff', border: `2px solid ${bandColor}`,
+        borderLeft: `6px solid ${bandColor}`, borderRadius: 6,
+      }}>
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 800, color: bandColor, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            🏁 Final outcome score
+          </div>
+          <div style={{ fontSize: 13, color: '#0f172a', marginTop: 2 }}>
+            <strong>{score.verified}/{score.total}</strong> verified · {score.pending} pending · {score.failing} failing
+            {' '}<span style={{ color: '#64748b' }}>({score.pct}%)</span>
+          </div>
+        </div>
+        <span style={{
+          padding: '4px 10px', borderRadius: 999, background: bandColor, color: '#fff',
+          fontSize: 11, fontWeight: 900, letterSpacing: '0.05em',
+        }}>
+          {bandLabel}
+        </span>
+      </div>
+
+      {/* Per-objective rows */}
+      <div style={{ display: 'grid', gap: 4 }}>
+        {score.results.map((r, idx) => {
+          const tone = cardListTone(idx);
+          const statusColor =
+            r.status === 'verified' ? '#16a34a' :
+            r.status === 'failing'  ? '#dc2626' :
+            r.status === 'pending'  ? '#f59e0b' : '#64748b';
+          const statusIcon =
+            r.status === 'verified' ? '✓' :
+            r.status === 'failing'  ? '✗' :
+            r.status === 'pending'  ? '🟡' : '?';
+          const statusLabel =
+            r.status === 'verified' ? 'verified' :
+            r.status === 'failing'  ? 'failing' :
+            r.status === 'pending'  ? 'pending'  : 'unknown';
+          return (
+            <div key={idx} style={{
+              display: 'grid',
+              gridTemplateColumns: '34px minmax(0, 1fr) minmax(180px, auto)',
+              gap: 10, alignItems: 'center',
+              padding: '8px 10px',
+              background: tone.bg, border: `1px solid ${tone.border}`,
+              borderLeft: `3px solid ${statusColor}`,
+              borderRadius: 4,
+              fontSize: 12,
+            }}>
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: 26, height: 26, borderRadius: '50%',
+                background: statusColor, color: '#fff', fontWeight: 800, fontSize: 13,
+              }}>{statusIcon}</span>
+              <div>
+                <div style={{ fontWeight: 700, color: '#0f172a' }}>{r.label}</div>
+                <div style={{ fontSize: 10, color: '#64748b', marginTop: 2 }}>{r.evidence}</div>
+              </div>
+              <span style={{
+                padding: '2px 8px', borderRadius: 3, background: statusColor, color: '#fff',
+                fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em',
+                justifySelf: 'end',
+              }}>{statusLabel}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{
+        marginTop: 8, padding: '6px 10px',
+        background: '#f8fafc', border: '1px dashed #cbd5e1', borderRadius: 4,
+        fontSize: 10, color: '#475569', fontStyle: 'italic',
+      }}>
+        Owned by <strong>sys_tab_outcome_scoring_agent</strong> · evidence rules in
+        <code> tab-objective-evidence.js</code> · drill locks 100% coverage ·
+        🟡 pending rules wait for HITL operator confirmation (§103.5).
+      </div>
+    </div>
+  );
+}
+
 // Button-press status panel — operator 2026-06-05: "what is happen each
 // button press .. must be clear as well". Every clickable action surfaces
 // here with lifecycle: pressed → processing → done.
@@ -5751,6 +5865,11 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
         <SummaryAndOutcomeRow tab={tab} sub={sub} proc={proc} />
       </SectionBlock>
     ),
+    outcomeScorecard: (
+      <SectionBlock key="outcomeScorecard" title="Final outcome score" icon="🏁" color={tab.color}>
+        <TabOutcomeScorecard tab={tab} proc={proc} />
+      </SectionBlock>
+    ),
     kpiViz:    (
       <SectionBlock key="kpiViz" title="KPI · Success metrics + Visualization" icon="📊" color={tab.color}>
         <VisualizationSlot tab={tab} sub={sub} proc={proc} />
@@ -5778,20 +5897,20 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
   // Compute section order by tab type + lens (operator §74.6 + 74.6e).
   // `runtime` (TechnicalRuntimeSection) lives right after Components — surfaces
   // the §76 9-runtime-layers relevance check on every tab.
-  const baseOrder = ['objective', 'asIsToBe', 'process', 'ipo', 'aiLogic', 'output', 'kpiViz', 'components', 'runtime', 'database', 'prompts', 'emphasis', 'actions'];
+  const baseOrder = ['objective', 'asIsToBe', 'process', 'ipo', 'aiLogic', 'output', 'outcomeScorecard', 'kpiViz', 'components', 'runtime', 'database', 'prompts', 'emphasis', 'actions'];
   let order;
   if (promoteActions) {
     // Action tabs: Actions section lifted ABOVE KPI+Viz
     order = ['objective', 'asIsToBe', 'process', 'ipo', 'aiLogic', 'output', 'actions', 'kpiViz', 'components', 'runtime', 'database', 'prompts', 'emphasis'];
   } else if (lensActive && lens === 'engineer') {
     // Engineer lens: technical details first (runtime promoted up to position 4)
-    order = ['objective', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'ipo', 'process', 'output', 'asIsToBe', 'kpiViz', 'emphasis', 'actions'];
+    order = ['objective', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'ipo', 'process', 'output', 'outcomeScorecard', 'asIsToBe', 'kpiViz', 'emphasis', 'actions'];
   } else if (lensActive && lens === 'manager') {
     // Manager lens: KPIs, Actions, ROI first
-    order = ['objective', 'kpiViz', 'actions', 'asIsToBe', 'output', 'process', 'ipo', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'emphasis'];
+    order = ['objective', 'kpiViz', 'actions', 'asIsToBe', 'output', 'outcomeScorecard', 'process', 'ipo', 'aiLogic', 'components', 'runtime', 'database', 'prompts', 'emphasis'];
   } else if (lensActive && lens === 'business') {
     // Business lens: value first, technical details demoted (runtime moved last)
-    order = ['objective', 'asIsToBe', 'output', 'kpiViz', 'process', 'actions', 'ipo', 'aiLogic', 'components', 'emphasis', 'runtime', 'database', 'prompts'];
+    order = ['objective', 'asIsToBe', 'output', 'outcomeScorecard', 'kpiViz', 'process', 'actions', 'ipo', 'aiLogic', 'components', 'emphasis', 'runtime', 'database', 'prompts'];
   } else {
     order = baseOrder;
   }
@@ -7671,8 +7790,13 @@ export function BankUseCasePage() {
         next.set('tab', targetTabId);
         setActiveTabId(targetTabId);
       }
-      if (sub) next.set('sub', sub);
-      else next.delete('sub');
+      if (sub) {
+        next.set('sub', sub);
+        setActiveSubId(sub);
+      } else {
+        next.delete('sub');
+        setActiveSubId(null);
+      }
       if (focus) next.set('focus', focus);
       setSearchParams(next, { replace: false });
       if (sub) {

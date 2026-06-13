@@ -67,6 +67,20 @@
 | Drill shipped | `tests/drills/drill_tab_charter_coverage.py` (8 steps · 3 negative) · locks PROFILES ⊆ CHARTER + 8-field shape + objectives ≥ 3 |
 | §138.4 sweep miss caught | Working tree had uncommitted regression to BankSidebar (Link import removed) · reverted in this commit |
 
+### OP-8 · "how do you evalute the final outcome of each tab" → "fix all ..have agent assign for this task" → "100% ..top 1"
+
+| Field | Value |
+|---|---|
+| Operator quotes (11:37 MDT) | "how do you evalute the final outcome of each tab" |
+| Operator quotes (11:42 MDT) | "fix all ..have agent assign for this task" + "100% ..top 1" |
+| Status | ✅ **DONE** · 115/115 evidence rules · 100% coverage · drill-locked |
+| Component shipped | `<TabOutcomeScorecard>` renders per-objective ✓/🟡/✗ + aggregate band (top-1pct / ok / needs-work / failing) |
+| Evidence file | `frontend/src/pages/bank/tabs/tab-objective-evidence.js` · 115 rules · 105 auto + 10 operator_confirms |
+| Wired in renderer | `sec.outcomeScorecard` added · 4 lens orders updated (base · engineer · manager · business) |
+| Drill shipped | `tests/drills/drill_tab_outcome_evaluator.py` (8 steps · 4 negative) · locks 100% coverage |
+| Agent registered | `docs/AGENT_ROSTER.md` §7 · `sys_tab_outcome_scoring_agent` (CHECKER role per §117) · owns evidence map maintenance |
+| §138.4 sweep miss caught | BankSidebar + BankSubMenu had uncommitted auto-fix-worker regressions · reverted before commit (3rd recurrence this session · noted in roster §10) |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |
