@@ -606,18 +606,36 @@ function PendingSection({ tab, sub }) {
 }
 
 // Atoms re-used by Data sub-tab renderer
-function DataSection({ title, color, children }) {
+function DataSection({ title, color, description, quality = 'Component group', children }) {
   return (
     <div style={{
       marginBottom: 16, border: `1px solid ${color}33`, borderRadius: 8,
       overflow: 'hidden', background: '#fff',
     }}>
       <div style={{
-        padding: '10px 14px', background: `${color}11`,
+        padding: '12px 14px', background: `${color}11`,
         borderBottom: `1px solid ${color}33`,
-        fontSize: 13, fontWeight: 700, color: '#0f172a',
-      }}>{title}</div>
-      <div style={{ padding: 12 }}>{children}</div>
+        color: '#0f172a',
+      }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
+          fontSize: 14, fontWeight: 800,
+        }}>
+          <span>{title}</span>
+          <span style={{
+            padding: '2px 8px', borderRadius: 999,
+            background: '#fff', border: `1px solid ${color}55`, color,
+            fontSize: 10, fontWeight: 800, textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+          }}>{quality}</span>
+        </div>
+        {description && (
+          <div style={{ marginTop: 4, fontSize: 12, color: '#475569', lineHeight: 1.45 }}>
+            {description}
+          </div>
+        )}
+      </div>
+      <div style={{ padding: 16 }}>{children}</div>
     </div>
   );
 }
@@ -635,41 +653,178 @@ function classifyCard(label) {
   const firstWord = lower.split(/\s+/)[0];
   return ACTION_VERBS.includes(firstWord) ? 'action' : 'info';
 }
+const CARD_LIST_PALETTE = [
+  { bg: '#eff6ff', border: '#93c5fd', left: '#2563eb', chipBg: '#dbeafe', chipFg: '#1e40af' },
+  { bg: '#f0fdf4', border: '#86efac', left: '#16a34a', chipBg: '#dcfce7', chipFg: '#166534' },
+  { bg: '#fffbeb', border: '#fcd34d', left: '#d97706', chipBg: '#fef3c7', chipFg: '#92400e' },
+  { bg: '#fdf2f8', border: '#f9a8d4', left: '#db2777', chipBg: '#fce7f3', chipFg: '#9d174d' },
+  { bg: '#f5f3ff', border: '#c4b5fd', left: '#7c3aed', chipBg: '#ede9fe', chipFg: '#5b21b6' },
+  { bg: '#ecfeff', border: '#67e8f9', left: '#0891b2', chipBg: '#cffafe', chipFg: '#155e75' },
+  { bg: '#fff7ed', border: '#fdba74', left: '#ea580c', chipBg: '#ffedd5', chipFg: '#9a3412' },
+  { bg: '#f8fafc', border: '#cbd5e1', left: '#475569', chipBg: '#e2e8f0', chipFg: '#334155' },
+];
 
-function ComponentGrid({ items }) {
+function cardListTone(index) {
+  return CARD_LIST_PALETTE[index % CARD_LIST_PALETTE.length];
+}
+
+const CARD_KIND_STYLE = {
+  info: {
+    label: 'INFO',
+    intent: 'Read / inspect',
+    bg: '#ffffff',
+    border: '#cbd5e1',
+    left: '#64748b',
+    badgeBg: '#f1f5f9',
+    badgeFg: '#334155',
+    ctaBg: '#475569',
+    hint: 'Reference content',
+  },
+  action: {
+    label: 'ACTION',
+    intent: 'Click / execute',
+    bg: '#fffbeb',
+    border: '#f59e0b',
+    left: '#d97706',
+    badgeBg: '#fef3c7',
+    badgeFg: '#92400e',
+    ctaBg: '#d97706',
+    hint: 'Runs or changes state',
+  },
+  operation: {
+    label: 'MIXED',
+    intent: 'Inspect + operate',
+    bg: '#eff6ff',
+    border: '#93c5fd',
+    left: '#2563eb',
+    badgeBg: '#dbeafe',
+    badgeFg: '#1e40af',
+    ctaBg: '#2563eb',
+    hint: 'Header reads; buttons act',
+  },
+};
+
+function CardKindBadge({ kind }) {
+  const style = CARD_KIND_STYLE[kind] || CARD_KIND_STYLE.info;
+  return (
+    <span style={{
+      padding: '3px 8px',
+      borderRadius: 999,
+      background: style.badgeBg,
+      color: style.badgeFg,
+      border: `1px solid ${style.border}66`,
+      fontSize: 10,
+      fontWeight: 800,
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em',
+      whiteSpace: 'nowrap',
+    }}>
+      {style.label}
+    </span>
+  );
+}
+
+function CardKindLegend() {
   return (
     <div style={{
-      display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-      gap: 10,
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 8,
+      marginBottom: 12,
+      padding: '10px 12px',
+      background: '#f8fafc',
+      border: '1px solid #e2e8f0',
+      borderRadius: 6,
+      fontSize: 11,
+      color: '#475569',
     }}>
-      {items.map((label, i) => {
-        const kind = classifyCard(label);
+      <strong style={{ color: '#0f172a' }}>Card meaning:</strong>
+      {['info', 'action', 'operation'].map((kind) => {
+        const style = CARD_KIND_STYLE[kind];
+        return (
+          <span key={kind} style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '4px 8px',
+            background: style.bg,
+            border: `1px solid ${style.border}`,
+            borderLeft: `4px solid ${style.left}`,
+            borderRadius: 4,
+            color: '#0f172a',
+          }}>
+            <CardKindBadge kind={kind} />
+            <span>{style.intent}</span>
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+function ComponentGrid({ items }) {
+  const cards = items.map((label, index) => {
+    const kind = classifyCard(label);
+    return { label, kind, kindStyle: CARD_KIND_STYLE[kind], tone: cardListTone(index), index };
+  });
+  const visibleKinds = [...new Set(cards.map((card) => card.kind))];
+  return (
+    <>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        flexWrap: 'wrap',
+        marginBottom: 8,
+        fontSize: 11,
+        color: '#64748b',
+      }}>
+        <strong style={{ color: '#0f172a' }}>Card type:</strong>
+        {visibleKinds.map((kind) => {
+          const style = CARD_KIND_STYLE[kind];
+          return (
+            <span key={kind} style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+              <CardKindBadge kind={kind} />
+              <span>{style.intent}</span>
+            </span>
+          );
+        })}
+      </div>
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        gap: 10,
+      }}>
+      {cards.map(({ label, kind, kindStyle, tone, index }, i) => {
         const isAction = kind === 'action';
         return (
-          <div key={i} style={{
-            padding: '14px 16px',
-            background: isAction ? '#ecfdf5' : '#faf5ff',   // light mint vs light lavender
-            border: `1px solid ${isAction ? '#a7f3d0' : '#e9d5ff'}`,
-            borderLeft: `5px solid ${isAction ? '#10b981' : '#a855f7'}`,
-            borderRadius: 8,
-            fontSize: 13, color: '#0f172a',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
-            boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
-          }}>
+          <div
+            key={i}
+            data-card-kind={kind}
+            aria-label={`${kindStyle.label} card: ${label}`}
+            style={{
+              padding: '14px 16px',
+              background: tone.bg,
+              border: `1px solid ${tone.border}`,
+              borderLeft: `6px solid ${tone.left}`,
+              borderRadius: 8,
+              fontSize: 13, color: '#0f172a',
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
+              boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+            }}
+          >
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <CardKindBadge kind={kind} />
                 <span style={{
-                  padding: '2px 8px', borderRadius: 4,
-                  background: isAction ? '#10b981' : '#a855f7',
-                  color: '#fff', fontSize: 11, fontWeight: 700,
-                  textTransform: 'uppercase', letterSpacing: 0.5,
-                }}>
-                  {isAction ? '⚡ Action' : 'ℹ️ Info'}
-                </span>
+                  padding: '2px 7px', borderRadius: 999,
+                  background: tone.chipBg, color: tone.chipFg,
+                  border: `1px solid ${tone.border}`,
+                  fontSize: 10, fontWeight: 900,
+                }}>#{index + 1}</span>
                 <strong style={{ fontSize: 14 }}>{label}</strong>
               </div>
-              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4, fontStyle: 'italic' }}>
-                {isAction ? 'Click to trigger' : 'Reference content'}
+              <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, fontStyle: 'italic' }}>
+                {kindStyle.hint}
               </div>
             </div>
             <button
@@ -687,7 +842,7 @@ function ComponentGrid({ items }) {
               style={{
                 minHeight: 30,
                 padding: '6px 12px', fontSize: 12, cursor: 'pointer', fontWeight: 600,
-                background: isAction ? '#10b981' : '#a855f7',
+                background: kindStyle.ctaBg,
                 color: '#fff', border: 'none', borderRadius: 4,
                 whiteSpace: 'nowrap',
               }}>
@@ -696,6 +851,49 @@ function ComponentGrid({ items }) {
           </div>
         );
       })}
+      </div>
+    </>
+  );
+}
+
+function ProcessModeBrief({ mode, proc }) {
+  const isManual = mode === 'manual';
+  const source = isManual ? proc?.manual_process : proc?.automatic_process;
+  const color = isManual ? '#f59e0b' : '#10b981';
+  const title = isManual ? 'Manual execution lens' : 'Automatic execution lens';
+  const objective = isManual
+    ? 'Show what people select, review, and run today before automation.'
+    : 'Show what the system can execute end-to-end with governance and HITL controls.';
+  const summary = read(source, 'summary', 'current_pain', 'ai_workflow') || 'Operator-pending process narrative';
+  const checks = isManual
+    ? ['Human actor is visible', 'Manual input is visible', 'Pain or delay is visible', 'Run controls are separated']
+    : ['Automation trigger is visible', 'AI workflow is visible', 'HITL boundary is visible', 'Scope grant is visible'];
+  return (
+    <div style={{
+      marginBottom: 12, padding: 12,
+      background: `${color}10`, border: `1px solid ${color}55`,
+      borderLeft: `4px solid ${color}`, borderRadius: 6,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
+        <strong style={{ fontSize: 14, color: '#0f172a' }}>{title}</strong>
+        <span style={{
+          padding: '2px 8px', borderRadius: 999, background: '#fff',
+          border: `1px solid ${color}66`, color, fontSize: 10,
+          fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>{isManual ? 'AS-IS' : 'TO-BE'}</span>
+      </div>
+      <div style={{ fontSize: 12, color: '#334155', lineHeight: 1.45, marginBottom: 8 }}>
+        <strong>Objective:</strong> {objective} <span style={{ color: '#64748b' }}>Source:</span> {renderValue(summary)}
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        {checks.map((check) => (
+          <span key={check} style={{
+            padding: '4px 8px', background: '#fff',
+            border: '1px solid #e2e8f0', borderRadius: 4,
+            fontSize: 11, color: '#0f172a',
+          }}>✓ {check}</span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -708,10 +906,20 @@ function renderProcessSubTab(subId, proc, dept) {
     case 'workflow':
       return (
         <>
-          <DataSection title="Workflow diagram" color="#3b82f6">
+          <DataSection
+            title="Workflow diagram"
+            color="#3b82f6"
+            quality="Flow journey"
+            description="Shows the process journey from trigger to hand-off. INFO cards explain steps; ACTION cards show executable steps."
+          >
             <ComponentGrid items={['Trigger', 'Decide', 'Act', 'Persist', 'Audit', 'Hand-off']} />
           </DataSection>
-          <DataSection title="Workflow controls" color="#8b5cf6">
+          <DataSection
+            title="Workflow controls"
+            color="#8b5cf6"
+            quality="Control checklist"
+            description="Confirms ownership, branches, loops, retries, and SLA controls for this process."
+          >
             <ComponentGrid items={['Step list', 'Decision branches', 'Loops + retries', 'SLA per step', 'Owner per step']} />
           </DataSection>
         </>
@@ -719,17 +927,33 @@ function renderProcessSubTab(subId, proc, dept) {
     case 'manual':
       return (
         <>
-          <DataSection title="Manual execution components" color="#f59e0b">
+          <ProcessModeBrief mode="manual" proc={proc} />
+          <DataSection
+            title="Manual execution components"
+            color="#f59e0b"
+            quality="AS-IS manual"
+            description="Captures the human-driven workflow: selections, inputs, model choices, thresholds, and pain points before automation."
+          >
             <ComponentGrid items={[
               'Dataset Selection', 'Feature Selection', 'Model Selection',
               'Hyperparameter Selection', 'Loss Function Selection', 'Optimizer Selection',
               'Epoch', 'Batch Size', 'Threshold',
             ]} />
           </DataSection>
-          <DataSection title="Run controls" color="#dc2626">
+          <DataSection
+            title="Run controls"
+            color="#dc2626"
+            quality="Action controls"
+            description="These are ACTION cards. They run, pause, reset, or compare the manual execution path."
+          >
             <ComponentGrid items={['Run Step', 'Pause', 'Rollback', 'Reset', 'Compare to baseline']} />
           </DataSection>
-          <DataSection title="Actors + tools" color="#3b82f6">
+          <DataSection
+            title="Actors + tools"
+            color="#3b82f6"
+            quality="Ownership"
+            description="Shows who performs the manual process and which tools or systems are touched."
+          >
             <ComponentGrid items={(m.actor_archetypes || []).concat(m.tools || [])} />
           </DataSection>
         </>
@@ -737,13 +961,29 @@ function renderProcessSubTab(subId, proc, dept) {
     case 'automatic':
       return (
         <>
-          <DataSection title="Automatic execution components" color="#10b981">
+          <ProcessModeBrief mode="automatic" proc={proc} />
+          <DataSection
+            title="Automatic execution components"
+            color="#10b981"
+            quality="TO-BE automation"
+            description="Shows the automation-ready path: dataset, target, business goal, and full pipeline execution."
+          >
             <ComponentGrid items={['Dataset Selection', 'Target Variable', 'Business Goal', 'Run Full Pipeline']} />
           </DataSection>
-          <DataSection title="AI workflow (live)" color="#8b5cf6">
+          <DataSection
+            title="AI workflow (live)"
+            color="#8b5cf6"
+            quality="AI process"
+            description="Maps the automated decision flow or AI workflow that replaces or assists manual work."
+          >
             <ComponentGrid items={a.ai_workflow || ['Operator-pending']} />
           </DataSection>
-          <DataSection title="HITL + scope" color="#dc2626">
+          <DataSection
+            title="HITL + scope"
+            color="#dc2626"
+            quality="Governance"
+            description="Shows where human approval, confidence thresholds, and tenant-scoped policy boundaries apply."
+          >
             <ComponentGrid items={[a.human_in_the_loop || 'HITL on confidence < 0.7', a.scope_grants || 'Tenant-scoped policy']} />
           </DataSection>
         </>
@@ -1460,7 +1700,7 @@ function componentDerivedValue(label, procKey) {
   return { value: fmt(v, {}), delta: '—', up: null };
 }
 
-function SpecComponentCard({ label, color, onAction, phase, procKey }) {
+function SpecComponentCard({ label, color, onAction, phase, procKey, index = 0 }) {
   const sem = componentSemantics(label);
   const derived = componentDerivedValue(label, procKey);
   const editor = componentEditorType(label);
@@ -1484,11 +1724,11 @@ function SpecComponentCard({ label, color, onAction, phase, procKey }) {
   // Card backgrounds tinted by phase so the operator can SEE this is a card,
   // not the surrounding panel. Operator 2026-06-05: "all background white ..
   // then not clear .. which one is card which one is what?".
-  const cardBg = phase
-    ? `${phase.color}1a`   // ~10% opacity tint — clearly visible
-    : '#f1f5f9';
-  const cardBorder = phase ? `${phase.color}88` : `${color}55`;
-  const cardLeftBorder = phase ? phase.color : color;
+  const cardKindStyle = CARD_KIND_STYLE.operation;
+  const listTone = cardListTone(index);
+  const cardBg = listTone.bg;
+  const cardBorder = listTone.border;
+  const cardLeftBorder = phase ? phase.color : listTone.left;
   const [status, setStatus] = useState({ op: null, state: 'idle' });
   const [open, setOpen] = useState(false);
   const [lastResult, setLastResult] = useState(null);
@@ -1560,27 +1800,37 @@ function SpecComponentCard({ label, color, onAction, phase, procKey }) {
   ];
   return (
     <>
-    <div style={{
-      background: cardBg,
-      border: `1px solid ${cardBorder}`,
-      borderLeft: `4px solid ${cardLeftBorder}`,
-      borderRadius: 6,
-      fontSize: 12, color: '#0f172a',
-      boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)',
-    }}>
+    <div
+      data-card-kind="operation"
+      aria-label={`MIXED operation card: ${label}`}
+      style={{
+        background: cardBg,
+        border: `1px solid ${cardBorder}`,
+        borderLeft: `4px solid ${cardLeftBorder}`,
+        borderRadius: 6,
+        fontSize: 12, color: '#0f172a',
+        boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)',
+      }}
+    >
       {/* "CARD" type indicator — operator: "something card is present for
           message or operation .. that must be clear" */}
       <div style={{
-        padding: '3px 10px',
-        background: `${cardLeftBorder}22`,
-        borderBottom: `1px solid ${cardLeftBorder}33`,
-        fontSize: 8, fontWeight: 700, color: cardLeftBorder,
-        textTransform: 'uppercase', letterSpacing: '0.08em',
-        display: 'flex', alignItems: 'center', gap: 6,
+        padding: '6px 10px',
+        background: listTone.chipBg,
+        borderBottom: `1px solid ${listTone.border}`,
+        display: 'flex', alignItems: 'center', gap: 8,
       }}>
-        <span>🟦 OPERATION CARD</span>
-        <span style={{ marginLeft: 'auto', color: '#94a3b8', fontWeight: 600 }}>
-          click header to expand · 4 ops available
+        <CardKindBadge kind="operation" />
+        <span style={{
+          padding: '2px 7px', borderRadius: 999, background: '#fff',
+          border: `1px solid ${listTone.border}`, color: listTone.chipFg,
+          fontSize: 10, fontWeight: 900,
+        }}>#{index + 1}</span>
+        <span style={{ fontSize: 11, fontWeight: 700, color: listTone.chipFg }}>
+          Info header + action buttons
+        </span>
+        <span style={{ marginLeft: 'auto', color: '#64748b', fontSize: 10, fontWeight: 600 }}>
+          click header to expand · buttons execute
         </span>
       </div>
       {/* Card header (clickable — toggles expanded panel) */}
@@ -1668,17 +1918,17 @@ function SpecComponentCard({ label, color, onAction, phase, procKey }) {
             onClick={(e) => { e.stopPropagation(); runOp(o.id); }}
             title={o.what}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = color;
+              e.currentTarget.style.background = CARD_KIND_STYLE.action.ctaBg;
               e.currentTarget.style.color = '#fff';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = '#fff';
-              e.currentTarget.style.color = color;
+              e.currentTarget.style.color = CARD_KIND_STYLE.action.ctaBg;
             }}
             style={{
               padding: '8px 12px', fontSize: 12, fontWeight: 700,
-              background: '#fff', color,
-              border: `1.5px solid ${color}`,
+              background: '#fff', color: CARD_KIND_STYLE.action.ctaBg,
+              border: `1.5px solid ${CARD_KIND_STYLE.action.border}`,
               borderRadius: 4,
               cursor: 'pointer',
               boxShadow: `0 1px 0 ${color}33, inset 0 -1px 0 ${color}11`,
@@ -2111,6 +2361,7 @@ function renderSpecTab(tabId, subId, color, procKey) {
         </div>
       )}
       <SpecSection title="Components" color={color}>
+        <CardKindLegend />
         {/* Operator 2026-06-05: "one component talk about one thing ... there
             must be theme base component ... one row" + "logical sequence based
             on journey flow" + "input, process, output".
@@ -2164,7 +2415,7 @@ function renderSpecTab(tabId, subId, color, procKey) {
                     }}>{phase.icon}<br />{phase.label}</span>
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <SpecComponentCard label={c} color={color} phase={phase} procKey={procKey} />
+                    <SpecComponentCard label={c} color={color} phase={phase} procKey={procKey} index={i} />
                   </div>
                 </div>
               </div>
@@ -2706,7 +2957,7 @@ function TabCharter({ tab, color, proc, dept, focusKind, focusLabel }) {
       borderRadius: 8, padding: 14,
     }}>
       <div style={{
-        fontSize: 11, fontWeight: 800, color,
+        fontSize: 13, fontWeight: 900, color,
         textTransform: 'uppercase', letterSpacing: '0.08em',
         marginBottom: 10,
         display: 'flex', alignItems: 'center', gap: 6,
@@ -3118,6 +3369,25 @@ function renderValue(v) {
   return String(v);
 }
 
+function RibbonHeading({ title, subtitle, color }) {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap',
+      margin: '4px 0 8px',
+    }}>
+      <div style={{
+        fontSize: 12, fontWeight: 900, color,
+        textTransform: 'uppercase', letterSpacing: '0.07em',
+      }}>{title}</div>
+      {subtitle && (
+        <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.35 }}>
+          {subtitle}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Render a slot — value if present, otherwise a "Complete this field" CTA
 // (role-aware: business users see friendly text, engineers see the JSON path).
 function Slot({ label, value, bindPath, accent }) {
@@ -3126,14 +3396,16 @@ function Slot({ label, value, bindPath, accent }) {
   const showTech = isTechRole(role);
   return (
     <div style={{
-      padding: 10, background: '#fff',
+      padding: '13px 14px', background: '#fff',
       border: `1px solid ${pending ? '#e2e8f0' : `${accent}55`}`,
-      borderLeft: `3px solid ${accent}`,
-      borderRadius: 6,
-      fontSize: 11,
+      borderLeft: `5px solid ${accent}`,
+      borderRadius: 8,
+      fontSize: 12,
+      minHeight: 96,
+      boxShadow: '0 1px 2px rgba(15, 23, 42, 0.05)',
     }}>
       <div style={{
-        fontSize: 9, color: accent, fontWeight: 700,
+        fontSize: 11, color: accent, fontWeight: 900,
         textTransform: 'uppercase', letterSpacing: '0.05em',
         marginBottom: 4,
         display: 'flex', alignItems: 'center', gap: 6,
@@ -3141,19 +3413,19 @@ function Slot({ label, value, bindPath, accent }) {
         <span>{label}</span>
         {pending && (
           <span style={{
-            padding: '0 5px', fontSize: 8, fontWeight: 700,
+            padding: '2px 7px', fontSize: 9, fontWeight: 800,
             background: '#fef3c7', color: '#b45309', borderRadius: 2,
             textTransform: 'uppercase', letterSpacing: '0.05em',
           }}>Pending</span>
         )}
       </div>
       {!pending ? (
-        <div style={{ fontSize: 12, color: '#0f172a', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 13, color: '#0f172a', lineHeight: 1.5, fontWeight: 600 }}>
           {renderValue(value)}
         </div>
       ) : (
         <div style={{
-          padding: '4px 8px',
+          padding: '8px 10px',
           background: '#fffbeb',
           border: '1px dashed #fcd34d',
           borderRadius: 4,
@@ -3362,6 +3634,229 @@ function FrameworkChips({ tabId }) {
   );
 }
 
+function DependencyChainStrip({ tab, sub, proc, dept, focusKind, focusLabel }) {
+  const chain = [
+    { label: 'Main menu', value: `${dept?.name || 'Department'} / ${proc?.name || 'Process'}`, color: '#1d4ed8' },
+    { label: 'Sub-menu focus', value: focusLabel || sub?.label || 'No focus selected', color: focusLabel ? (KIND_COLOR[focusKind] || '#7f1d1d') : '#64748b' },
+    { label: 'Workspace', value: `${tab.label}${sub ? ` / ${sub.label}` : ''}`, color: tab.color },
+    { label: 'Content source', value: `proc.${tab.id}${sub?.id ? `.${sub.id}` : ''}`, color: '#0f766e' },
+  ];
+  return (
+    <div style={{
+      marginBottom: 12, padding: '10px 12px',
+      background: '#ffffff', border: '1px solid #cbd5e1',
+      borderLeft: `4px solid ${tab.color}`, borderRadius: 6,
+    }}>
+      <div style={{
+        fontSize: 11, fontWeight: 800, color: '#0f172a',
+        textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8,
+      }}>Navigation dependency: menu to sub-menu to workspace</div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+        gap: 8,
+      }}>
+        {chain.map((item, i) => (
+          <div key={item.label} style={{ display: 'flex', gap: 8, alignItems: 'stretch' }}>
+            <div style={{
+              flex: 1, padding: '8px 10px', background: `${item.color}0f`,
+              border: `1px solid ${item.color}44`, borderLeft: `4px solid ${item.color}`,
+              borderRadius: 5, minWidth: 0,
+            }}>
+              <div style={{ fontSize: 10, color: item.color, fontWeight: 800, textTransform: 'uppercase' }}>
+                {i + 1}. {item.label}
+              </div>
+              <div style={{ marginTop: 3, fontSize: 12, color: '#0f172a', fontWeight: 700, wordBreak: 'break-word' }}>
+                {item.value}
+              </div>
+            </div>
+            {i < chain.length - 1 && (
+              <div style={{ alignSelf: 'center', color: '#94a3b8', fontSize: 16 }}>{'>'}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function WorkspaceQualityChecklist({ tab, sub, proc, focusKind, focusLabel }) {
+  const checks = [
+    { label: 'Objective', ok: !!TAB_CHARTER[tab.id], detail: 'Tab objective and business value visible' },
+    { label: 'Main/sub dependency', ok: !!proc && !!tab, detail: `${proc?.name || 'Process'} / ${tab.label}${sub ? ` / ${sub.label}` : ''}` },
+    { label: 'Focus correlation', ok: !focusLabel || !!focusKind, detail: focusLabel || 'No sub-menu focus selected' },
+    { label: 'Input', ok: !!read(proc, 'data_process.input', 'manual_process.tools'), detail: 'Input data or manual tools mapped' },
+    { label: 'Process', ok: !!read(proc, 'automatic_process.ai_workflow', 'automatic_process.summary', 'manual_process.summary'), detail: 'Manual/automatic process source mapped' },
+    { label: 'Output', ok: !!read(proc, 'data_process.output', 'output.artifacts'), detail: 'Output artifact mapped' },
+    { label: 'Cards', ok: true, detail: 'INFO, ACTION, and MIXED meaning labels plus list colors visible' },
+    { label: 'Buttons', ok: true, detail: 'Run, export, approve, assign, and test actions grouped in Actions' },
+    { label: 'Headings', ok: true, detail: 'Objective, transformation, IPO, process, AI, output, KPI, and components labeled' },
+    { label: 'Visualization', ok: true, detail: 'KPI and visualization section always present, with fallback when data is pending' },
+    { label: 'To-Do', ok: true, detail: 'Top snapshot visible and full role checklist expanded below' },
+  ];
+  const score = Math.round((checks.filter((c) => c.ok).length / checks.length) * 100);
+  return (
+    <div style={{
+      marginBottom: 12, padding: 12,
+      background: '#fff', border: '1px solid #cbd5e1',
+      borderRadius: 6,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 8 }}>
+        <strong style={{ fontSize: 13, color: '#0f172a' }}>Workspace quality check</strong>
+        <span style={{
+          padding: '3px 10px', borderRadius: 999,
+          background: score >= 80 ? '#dcfce7' : '#fef3c7',
+          color: score >= 80 ? '#166534' : '#92400e',
+          border: `1px solid ${score >= 80 ? '#86efac' : '#fcd34d'}`,
+          fontSize: 11, fontWeight: 800,
+        }}>{score}/100</span>
+        <span style={{ fontSize: 11, color: '#64748b' }}>Checks dependency, objective, headings, cards, buttons, input, process, output, visualization, and to-do readiness.</span>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 6 }}>
+        {checks.map((check) => (
+          <div key={check.label} style={{
+            padding: '7px 9px',
+            background: check.ok ? '#f0fdf4' : '#fffbeb',
+            border: `1px solid ${check.ok ? '#bbf7d0' : '#fde68a'}`,
+            borderLeft: `4px solid ${check.ok ? '#16a34a' : '#f59e0b'}`,
+            borderRadius: 4,
+          }}>
+            <div style={{ fontSize: 11, color: '#0f172a', fontWeight: 800 }}>
+              {check.ok ? '✓' : '!'} {check.label}
+            </div>
+            <div style={{ marginTop: 2, fontSize: 10, color: '#64748b', lineHeight: 1.35 }}>
+              {check.detail}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TopHorizontalFlowStrip({ tab, proc }) {
+  const charter = TAB_CHARTER[tab.id];
+  const input = read(proc, 'data_process.input', 'manual_process.tools');
+  const process = read(proc, 'automatic_process.ai_workflow', 'automatic_process.summary', 'manual_process.summary');
+  const output = read(proc, 'data_process.output', 'output.artifacts');
+  const visualization = read(proc, 'visualization', 'dashboard', 'smart_kpi', 'as_is_to_be.deltas');
+  const steps = [
+    { label: 'Objective', value: charter?.why || 'Objective pending', color: '#2563eb', ok: !!charter },
+    { label: 'Input', value: input || 'Input mapping pending', color: '#0284c7', ok: !!input },
+    { label: 'Process', value: process || 'Manual/automatic process pending', color: '#7c3aed', ok: !!process },
+    { label: 'Output', value: output || 'Output artifact pending', color: '#16a34a', ok: !!output },
+    { label: 'Visualization', value: visualization || 'Visualization uses fallback until source data is wired', color: '#d97706', ok: true },
+    { label: 'To-Do', value: 'Role checklist tracks missing objective, data, process, output, evidence, and approval gaps', color: '#dc2626', ok: true },
+  ];
+  return (
+    <div style={{
+      marginBottom: 12, padding: 12,
+      background: '#fff', border: '1px solid #cbd5e1', borderRadius: 6,
+      boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)',
+    }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10,
+        flexWrap: 'wrap', marginBottom: 10,
+      }}>
+        <div style={{
+          fontSize: 12, fontWeight: 900, color: '#0f172a',
+          textTransform: 'uppercase', letterSpacing: '0.07em',
+        }}>Top horizontal flow: objective to visualization to to-do</div>
+        <span style={{ fontSize: 11, color: '#64748b', fontWeight: 700 }}>
+          Always visible journey map for the active workspace
+        </span>
+      </div>
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 8,
+      }}>
+        {steps.map((step, i) => (
+          <div key={step.label} style={{ display: 'flex', gap: 8, alignItems: 'stretch', minWidth: 0 }}>
+            <div style={{
+              flex: 1, minWidth: 0, padding: '9px 10px',
+              background: `${step.color}0f`, border: `1px solid ${step.color}44`,
+              borderLeft: `4px solid ${step.color}`, borderRadius: 5,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                <span style={{
+                  width: 19, height: 19, borderRadius: 999,
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  background: step.color, color: '#fff', fontSize: 10, fontWeight: 900,
+                }}>{i + 1}</span>
+                <span style={{ fontSize: 10, color: step.color, fontWeight: 900, textTransform: 'uppercase' }}>
+                  {step.label}
+                </span>
+                <span style={{ marginLeft: 'auto', fontSize: 9, color: step.ok ? '#166534' : '#92400e', fontWeight: 900 }}>
+                  {step.ok ? 'OK' : 'PENDING'}
+                </span>
+              </div>
+              <div style={{
+                fontSize: 11, color: '#0f172a', lineHeight: 1.35,
+                display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+              }} title={typeof step.value === 'string' ? step.value : renderValue(step.value)}>
+                {renderValue(step.value)}
+              </div>
+            </div>
+            {i < steps.length - 1 && (
+              <div style={{ alignSelf: 'center', color: '#94a3b8', fontSize: 16, fontWeight: 900 }}>{'>'}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TopTodoSnapshot({ tab, sub, proc }) {
+  const charter = TAB_CHARTER[tab.id];
+  const items = [
+    { label: 'Objective visible', ok: !!charter, detail: charter ? 'Business objective is mapped to this tab' : 'Add TAB_CHARTER entry' },
+    { label: 'Input mapped', ok: !!read(proc, 'data_process.input', 'manual_process.tools'), detail: 'Source data, tool, or manual input identified' },
+    { label: 'Process mapped', ok: !!read(proc, 'automatic_process.ai_workflow', 'automatic_process.summary', 'manual_process.summary'), detail: 'Manual and/or automatic workflow visible' },
+    { label: 'Output mapped', ok: !!read(proc, 'data_process.output', 'output.artifacts'), detail: 'Artifact, decision, or report output identified' },
+    { label: 'Visualization present', ok: true, detail: 'Dashboard slot remains visible even when source data is pending' },
+    { label: 'Action controls present', ok: true, detail: 'Run, export, approve, assign, test, and compare controls live in Actions' },
+  ];
+  const done = items.filter((item) => item.ok).length;
+  return (
+    <div style={{
+      marginBottom: 12, padding: 12,
+      background: '#f8fafc', border: '1px solid #cbd5e1', borderLeft: `4px solid ${tab.color}`,
+      borderRadius: 6,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 8 }}>
+        <strong style={{ fontSize: 13, color: '#0f172a' }}>To-do snapshot</strong>
+        <span style={{
+          padding: '3px 10px', borderRadius: 999,
+          background: done === items.length ? '#dcfce7' : '#fef3c7',
+          color: done === items.length ? '#166534' : '#92400e',
+          border: `1px solid ${done === items.length ? '#86efac' : '#fcd34d'}`,
+          fontSize: 11, fontWeight: 900,
+        }}>{done}/{items.length} ready</span>
+        <span style={{ fontSize: 11, color: '#64748b' }}>
+          Path: {tab.label}{sub ? ` / ${sub.label}` : ''}; full role checklist is expanded below.
+        </span>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(185px, 1fr))', gap: 6 }}>
+        {items.map((item) => (
+          <div key={item.label} style={{
+            padding: '7px 9px', background: item.ok ? '#ffffff' : '#fffbeb',
+            border: `1px solid ${item.ok ? '#dbeafe' : '#fde68a'}`,
+            borderLeft: `4px solid ${item.ok ? tab.color : '#f59e0b'}`,
+            borderRadius: 4,
+          }}>
+            <div style={{ fontSize: 11, color: '#0f172a', fontWeight: 900 }}>
+              {item.ok ? '✓' : '!'} {item.label}
+            </div>
+            <div style={{ marginTop: 2, fontSize: 10, color: '#64748b', lineHeight: 1.35 }}>
+              {item.detail}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function TabHeaderRibbon({ tab, sub, proc, dept, focusKind, focusLabel }) {
   const profile = TAB_PROFILES[tab.id];
   const typeMeta = profile ? TYPE_META[profile.type] : null;
@@ -3532,7 +4027,7 @@ function TabHeaderRibbon({ tab, sub, proc, dept, focusKind, focusLabel }) {
             🔎 {KIND_LABEL[focusKind]} detail
           </div>
           <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 6,
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10,
           }}>
             {Object.entries(focusEntry)
               .filter(([k, v]) => k !== 'name' && k !== 'ai_type' && v != null && v !== '')
@@ -3574,14 +4069,21 @@ function AsIsToBeRibbon({ tab, sub, proc }) {
     'readme.ai_strategy', 'as_is_to_be.strategy');
 
   return (
-    <div style={{
-      display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(${minCol}, 1fr))`,
-      gap: 8, marginBottom: 12,
-    }}>
-      <Slot label="AS-IS problem"   value={asIs}     bindPath="proc.as_is_to_be.as_is_summary"   accent="#dc2626" />
-      <Slot label="TO-BE solution"  value={toBe}     bindPath="proc.as_is_to_be.to_be_summary"  accent="#16a34a" />
-      <Slot label="ROI / Cost / Impact / Value" value={roi} bindPath="proc.as_is_to_be.roi_estimate" accent="#f59e0b" />
-      <Slot label="Strategy"        value={strategy} bindPath="proc.readme.ai_strategy"          accent="#6366f1" />
+    <div style={{ marginBottom: 16 }}>
+      <RibbonHeading
+        title="Business transformation"
+        subtitle="AS-IS problem, TO-BE solution, value impact, and AI strategy for the selected process."
+        color={tab.color}
+      />
+      <div style={{
+        display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(${minCol}, 1fr))`,
+        gap: 10,
+      }}>
+        <Slot label="AS-IS problem"   value={asIs}     bindPath="proc.as_is_to_be.as_is_summary"   accent="#dc2626" />
+        <Slot label="TO-BE solution"  value={toBe}     bindPath="proc.as_is_to_be.to_be_summary"  accent="#16a34a" />
+        <Slot label="ROI / Cost / Impact / Value" value={roi} bindPath="proc.as_is_to_be.roi_estimate" accent="#f59e0b" />
+        <Slot label="Strategy"        value={strategy} bindPath="proc.readme.ai_strategy"          accent="#6366f1" />
+      </div>
     </div>
   );
 }
@@ -3599,22 +4101,28 @@ function IpoRibbon({ tab, sub, proc }) {
     'data_process.output', 'output.artifacts');
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: (isTablet || isCompact) ? '1fr' : '1fr 24px 1fr 24px 1fr',
-      gap: (isTablet || isCompact) ? 8 : 4,
-      alignItems: 'stretch',
-      marginBottom: 12,
-    }}>
-      <Slot label="📥 INPUT"   value={input}   bindPath="proc.data_process.input"           accent="#0ea5e9" />
-      {!(isTablet || isCompact) && (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: '#94a3b8' }}>→</div>
-      )}
-      <Slot label="⚙ PROCESS" value={process} bindPath="proc.automatic_process.ai_workflow" accent="#8b5cf6" />
-      {!(isTablet || isCompact) && (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, color: '#94a3b8' }}>→</div>
-      )}
-      <Slot label="📤 OUTPUT"  value={output}  bindPath="proc.data_process.output"          accent="#16a34a" />
+    <div style={{ marginBottom: 16 }}>
+      <RibbonHeading
+        title="Input / Process / Output"
+        subtitle="Data and execution path used by the active tab; missing fields are marked pending."
+        color={tab.color}
+      />
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: (isTablet || isCompact) ? '1fr' : '1fr 32px 1fr 32px 1fr',
+        gap: (isTablet || isCompact) ? 10 : 6,
+        alignItems: 'stretch',
+      }}>
+        <Slot label="INPUT"   value={input}   bindPath="proc.data_process.input"           accent="#0ea5e9" />
+        {!(isTablet || isCompact) && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, color: '#64748b', fontWeight: 800 }}>→</div>
+        )}
+        <Slot label="PROCESS" value={process} bindPath="proc.automatic_process.ai_workflow" accent="#8b5cf6" />
+        {!(isTablet || isCompact) && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, color: '#64748b', fontWeight: 800 }}>→</div>
+        )}
+        <Slot label="OUTPUT"  value={output}  bindPath="proc.data_process.output"          accent="#16a34a" />
+      </div>
     </div>
   );
 }
@@ -4389,6 +4897,12 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
       {/* 1. CONTEXT — Identity (always first; Lens chip lives inside) */}
       <TabHeaderRibbon tab={tab} sub={sub} proc={proc} dept={dept}
         focusKind={focusKind} focusLabel={focusLabel} />
+      <DependencyChainStrip tab={tab} sub={sub} proc={proc} dept={dept}
+        focusKind={focusKind} focusLabel={focusLabel} />
+      <WorkspaceQualityChecklist tab={tab} sub={sub} proc={proc}
+        focusKind={focusKind} focusLabel={focusLabel} />
+      <TopHorizontalFlowStrip tab={tab} proc={proc} />
+      <TopTodoSnapshot tab={tab} sub={sub} proc={proc} />
 
       {/* Lens-driven note (Mixed tabs only) */}
       {lensActive && (
@@ -4417,7 +4931,17 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
       {order.map((k) => sec[k])}
 
       {/* 11. TO-DO (collapsible) */}
-      <TabSection title="To-Do" icon="✅" color={tab.color} defaultOpen={false}>
+      <TabSection title="To-Do · role checklist" icon="✅" color={tab.color} defaultOpen>
+        <div style={{
+          marginBottom: 10, padding: '8px 10px',
+          background: '#f8fafc', border: '1px solid #e2e8f0',
+          borderLeft: `4px solid ${tab.color}`, borderRadius: 4,
+          fontSize: 12, color: '#475569', lineHeight: 1.45,
+        }}>
+          This checklist is tied to the active workspace path: <strong style={{ color: '#0f172a' }}>{tab.label}</strong>
+          {sub ? <> / <strong style={{ color: '#0f172a' }}>{sub.label}</strong></> : null}.
+          Use it to close missing objective, data, process, output, approval, and evidence gaps before demo or production review.
+        </div>
         <TabTodoByRole tabName={tabName} proc={proc} />
       </TabSection>
 
@@ -4458,21 +4982,22 @@ function TabFrame({ tab, sub, proc, dept, focusKind, focusLabel, allTabs, onJump
 function SectionBlock({ title, icon, color, children }) {
   return (
     <div style={{
-      marginBottom: 12,
+      marginBottom: 16,
       background: '#fff',
       border: `1px solid ${color}33`,
-      borderLeft: `4px solid ${color}`,
-      borderRadius: 6,
+      borderLeft: `5px solid ${color}`,
+      borderRadius: 8,
       overflow: 'hidden',
+      boxShadow: '0 1px 3px rgba(15, 23, 42, 0.06)',
     }}>
       <div style={{
-        padding: '8px 14px',
+        padding: '12px 16px',
         background: `${color}11`,
         borderBottom: `1px solid ${color}22`,
-        fontSize: 11, fontWeight: 800, color,
-        textTransform: 'uppercase', letterSpacing: '0.08em',
+        fontSize: 13, fontWeight: 900, color,
+        textTransform: 'uppercase', letterSpacing: '0.07em',
       }}>{icon} {title}</div>
-      <div style={{ padding: 12 }}>{children}</div>
+      <div style={{ padding: 16 }}>{children}</div>
     </div>
   );
 }
@@ -4489,28 +5014,29 @@ function BusinessObjectiveSection({ tab, color, proc, dept }) {
     .replace(/this department/g, deptName);
   return (
     <div style={{
-      marginBottom: 12,
+      marginBottom: 16,
       background: '#fff',
       border: `1px solid ${color}33`,
-      borderLeft: `4px solid ${color}`,
-      borderRadius: 6,
-      padding: 12,
+      borderLeft: `5px solid ${color}`,
+      borderRadius: 8,
+      padding: 16,
+      boxShadow: '0 1px 3px rgba(15, 23, 42, 0.06)',
     }}>
       <div style={{
-        fontSize: 11, fontWeight: 800, color,
-        textTransform: 'uppercase', letterSpacing: '0.08em',
-        marginBottom: 6,
+        fontSize: 13, fontWeight: 900, color,
+        textTransform: 'uppercase', letterSpacing: '0.07em',
+        marginBottom: 8,
       }}>🎯 Business Objective</div>
-      <div style={{ fontSize: 13, color: '#0f172a', lineHeight: 1.5, marginBottom: 8 }}>
+      <div style={{ fontSize: 15, color: '#0f172a', lineHeight: 1.55, marginBottom: 12, fontWeight: 600 }}>
         {personalize(c.why)}
       </div>
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 6,
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10,
       }}>
         <div style={{
-          padding: '6px 10px', background: '#f8fafc',
-          border: '1px solid #e2e8f0', borderRadius: 4,
-          fontSize: 11,
+          padding: '10px 12px', background: '#f8fafc',
+          border: '1px solid #e2e8f0', borderRadius: 6,
+          fontSize: 12,
         }}>
           <div style={{
             fontSize: 9, fontWeight: 700, color, textTransform: 'uppercase',
@@ -6658,11 +7184,11 @@ export function BankUseCasePage() {
       {/* ROW 4+: Content body — subtle slate-50 background so cards/ribbons
           inside it have a clearly different surface than the page itself. */}
       <div style={{
-        background: '#f1f5f9',
+        background: '#eef2f7',
         border: '1px solid #cbd5e1',
         borderTop: 'none',
-        borderBottomLeftRadius: 6, borderBottomRightRadius: 6,
-        padding: 20,
+        borderBottomLeftRadius: 8, borderBottomRightRadius: 8,
+        padding: isCompact ? 16 : 24,
       }}>
         {/* All universal pieces (Identity banner · alignment trail · chips · focus detail ·
             AS-IS/TO-BE/ROI · IPO · Model/Data/Accuracy · Journey · Visualization · Flow ·

@@ -17,6 +17,22 @@ Every production screen must make it clear:
 
 Blank screens, silent failures, hidden loading states, and unexplained placeholder content are not allowed.
 
+## 1.1 Card Meaning Policy
+
+Operational cards must make their intent visible without relying on surrounding copy. Use a consistent card-kind treatment:
+
+- `INFO`: read-only or reference content; neutral/white surface, slate badge, and read/inspect CTA.
+- `ACTION`: executes a workflow or changes state; amber-tinted surface, strong left rail, action badge, and verb CTA.
+- `MIXED`: contains both read-only header/details and executable buttons; blue-tinted surface, mixed badge, and action buttons separately styled as actions.
+
+Do not use the same visual treatment for passive information and executable operations. Every clickable card must expose its kind through visible label text and accessible metadata such as `aria-label` or `data-card-kind`.
+
+## 1.2 Navigation Dependency And Workspace Quality
+
+Process workspaces must show how the selected main-menu item, sub-menu focus, active tab/sub-tab, and content source relate to each other. A user should not need to infer whether the content belongs to the selected department, process, AI focus, or tab.
+
+Operational process screens must also expose a compact quality check for objective, input, process, output, focus correlation, and content/data mapping. Manual execution views must identify the AS-IS human workflow; automatic execution views must identify the TO-BE automation workflow and HITL/governance boundary.
+
 ## 2. Required Screen States
 
 Every route, tab, chart, table, drawer, and API-backed widget must implement these states:
