@@ -7807,7 +7807,7 @@ function WorkspaceWideAudit({ visibleTabs, proc, dept, onJump, activeTabId }) {
             style={{
               padding: '8px 12px', fontSize: 12, fontWeight: 700,
               background: '#f8fafc', color: '#1f2937', border: '1px solid #e5e7eb',
-              border: 'none', borderRadius: 3, cursor: 'pointer',
+              borderRadius: 3, cursor: 'pointer',
             }}>📸 Snapshot</button>
           <button type="button"
             onClick={() => setShowTrend((v) => !v)}

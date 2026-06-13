@@ -603,12 +603,14 @@ export default function AeoSectionTab({ section, tab, dashboard }) {
         <strong>📊 Visualization · {section.label}</strong>
         <div style={{ marginTop: 12 }}>
           {viz === 'tree' && rows.length > 0 && (
-            <TreeView root={`${rows.length} active goals`}
-                      children={rows.slice(0, 8).map(r => `${r.goal_id} · ${r.goal} · ${r.owner}`)} />
+            <TreeView root={`${rows.length} active goals`}>
+              {rows.slice(0, 8).map(r => `${r.goal_id} · ${r.goal} · ${r.owner}`)}
+            </TreeView>
           )}
           {viz === 'goalTree' && rows.length > 0 && (
-            <TreeView root="Goal → Objective hierarchy"
-                      children={rows.slice(0, 8).map(r => `${r.objective_id} → ${r.parent_goal || r.goal_id} · ${r.owner}`)} />
+            <TreeView root="Goal → Objective hierarchy">
+              {rows.slice(0, 8).map(r => `${r.objective_id} → ${r.parent_goal || r.goal_id} · ${r.owner}`)}
+            </TreeView>
           )}
           {viz === 'categoryBar' && rows.length > 0 && (
             <BarChart data={deep.kpis(rows)} />

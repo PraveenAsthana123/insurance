@@ -8,7 +8,7 @@ import React from 'react';
 // BarChart · horizontal · single-series
 // data = [{label, value, color?}, ...]
 export function BarChart({ data, max, width = 480, barH = 22, gap = 6, formatValue }) {
-  const peak = max ?? Math.max(...data.map(d => Number(d.value) || 0), 0) || 1;
+  const peak = (max ?? Math.max(...data.map(d => Number(d.value) || 0), 0)) || 1;
   const fmt = formatValue || (v => v);
   return (
     <svg width="100%" viewBox={`0 0 ${width} ${data.length * (barH + gap)}`}
