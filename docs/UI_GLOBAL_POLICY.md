@@ -460,3 +460,13 @@ Required frontend behavior:
 - For critical inputs, show a clear error if persistence fails and the backend rejects processing.
 - Add E2E or component tests for high-value input surfaces such as Ask AI, chat, prompts, simulations, approvals, and feedback.
 
+## Bank Shell Fixed Workspace Resize Policy
+
+Menu resizing must not move or resize the workspace/content boundary. On desktop and tablet layouts, the blue main menu and maroon sub-menu resize inside a fixed navigation band; dragging the split reallocates width between those two menus only. The workspace column keeps the same x-position and width so charts, cards, flow, and forms do not reflow while the operator adjusts menu readability.
+
+## Bank Tab Component Review And Action Lifecycle Policy
+
+Every bank workspace tab must expose a visible component review before the detailed tab body. The review must use one row per task and show sequence, component type, purpose, expected outcome, and readiness for Objective, Input, Process, Workspace Cards, Output, Visualization, Actions, Checklist, History, and Audit.
+
+Cards must identify whether they are `INFO`, `ACTION`, or `MIXED`, use light differentiated colors, include a two-line purpose/outcome summary, and show a compact Input -> Process -> Output flow. Action buttons must show active/running state, disable conflicting duplicate clicks while processing, and render completion status with timestamp in the space directly below the action controls.
+
