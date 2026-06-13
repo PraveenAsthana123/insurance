@@ -369,3 +369,22 @@ User feedback: all pages were using the same graph.
 
 The graph section no longer looks copied across every page. Shared Recharts components remain, but each tab now answers a different business question with a different title, metric, category set, and chart intent.
 
+## Differentiated Light Card Color Pass
+
+User feedback: each card must use a different light color so the eye can separate cards quickly.
+
+### Changes Applied
+
+| Area | Change |
+|---|---|
+| Operation cards | Preserved the existing indexed light palette and strengthened its use across visible operation cards. |
+| Visualization cards | Changed the primary and secondary chart cards from white to distinct light palette surfaces. |
+| Dashboard KPI tiles | Changed dashboard KPI tiles from all-white cards to indexed light card colors. |
+| Database/API resource cards | Added indexed light card colors to tab-level and runtime-layer resource cards. |
+| Shared tab card grid | Added a light color cycle for shared bank tab hub cards. |
+| UI policy | Updated the card policy: repeated card collections must not use the same white surface for every card. |
+
+### UX Verdict
+
+Card groups now have soft visual separation without changing layout. White remains available for inner controls and readable sub-panels, but repeated cards use different light backgrounds.
+

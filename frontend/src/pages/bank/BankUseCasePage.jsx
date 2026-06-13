@@ -3135,8 +3135,7 @@ function TabCharter({ tab, color, proc, dept, focusKind, focusLabel }) {
             }}>{r.icon} {r.label}</div>
             <div style={{ color: '#0f172a', lineHeight: 1.5 }}>{r.text}</div>
           </div>
-          );
-        })}
+        ))}
         {/* Objectives & Goals — full-width row */}
         <div style={{
           gridColumn: '1 / -1',
@@ -5962,7 +5961,8 @@ function DashboardGridSection({ color, proc, tab }) {
               }}>{t.up ? '▲' : '▼'} {t.delta}</span>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
       {/* Trend chart */}
       <div style={{

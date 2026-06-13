@@ -21,11 +21,11 @@ Blank screens, silent failures, hidden loading states, and unexplained placehold
 
 Operational cards must make their intent visible without relying on surrounding copy. Use a consistent card-kind treatment:
 
-- `INFO`: read-only or reference content; neutral/white surface, slate badge, and read/inspect CTA.
-- `ACTION`: executes a workflow or changes state; amber-tinted surface, strong left rail, action badge, and verb CTA.
-- `MIXED`: contains both read-only header/details and executable buttons; blue-tinted surface, mixed badge, and action buttons separately styled as actions.
+- `INFO`: read-only or reference content; light neutral/blue/green/pink/slate surface, slate badge, and read/inspect CTA.
+- `ACTION`: executes a workflow or changes state; light amber/orange surface, strong left rail, action badge, and verb CTA.
+- `MIXED`: contains both read-only header/details and executable buttons; light blue/teal/indigo surface, mixed badge, and action buttons separately styled as actions.
 
-Do not use the same visual treatment for passive information and executable operations. Every clickable card must expose its kind through visible label text and accessible metadata such as `aria-label` or `data-card-kind`.
+Repeated card collections must cycle through different light background colors so adjacent cards are visually separable. Do not render a full card grid where every card uses the same white surface. Do not use the same visual treatment for passive information and executable operations. Every clickable card must expose its kind through visible label text and accessible metadata such as `aria-label` or `data-card-kind`.
 
 ## 1.2 Navigation Dependency And Workspace Quality
 
