@@ -59,10 +59,11 @@
 | Field | Value |
 |---|---|
 | Operator quote (10:33 MDT) | "each card must have different light color" |
-| Status | ⏳ **Partial** (infrastructure exists · 120 occurrences too large for one iteration · awaiting operator decision to sweep) |
-| Existing infrastructure | `frontend/src/pages/bank/tabs/BankTabs.jsx:102` (6-color palette: blue/green/amber/pink/violet/cyan-50) + `BankUseCasePage.jsx:816 cardListTone(index)` helper |
-| Audit findings (per OP-5 sweep) | BankUseCasePage: 120 plain-light bg repeats · BankFrameworkPage: 20 · BankChatPage: 7 · BankBcmPage: 6 · BankScorecardPage: 6 |
-| Suggested next action | Sweep largest offender (BankUseCasePage) first · replace plain `background: '#fff'` / `'#f8fafc'` with `cardListTone(index).bg` where index is contextual to card position |
+| Status | ⏳ **Iter 2 partial** · 7 high-impact card-in-list patterns swept in BankUseCasePage (sibling-card grid + map() loops) · 27 strict candidates remain |
+| Existing infrastructure | `frontend/src/pages/bank/tabs/BankTabs.jsx:102` (6-color palette) + `BankUseCasePage.jsx:816 cardListTone(index)` helper |
+| Audit findings | Originally 120 plain-light bg occurrences · sweep filtered to 34 STRICT card-in-list candidates (excludes chips/badges/phase-colored IPO indicators) · 7 closed this iter · 27 remain |
+| Iter 2 swept (commit pending) | 5132 (AI-type validation 4-sibling grid · sibling 0/1/2/3) · 2279 ops.map (add idx) · 5916 entries.map · 6180 items.map (kanban) · 2819 visuals.map · 4471 focusEntry.entries.map · 5209 aiList.map |
+| Suggested next action | Pick up 27 remaining strict candidates in next iter · OR move to BankFrameworkPage (20 occurrences) |
 
 ### OP-6 · "same all these prompt in checklist of task"
 

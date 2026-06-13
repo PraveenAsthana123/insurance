@@ -2276,10 +2276,12 @@ function SpecComponentCard({ label, color, onAction, phase, procKey, index = 0 }
               display: 'grid', gap: 4,
               gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
             }}>
-              {ops.map((o) => (
+              {ops.map((o, idx) => {
+                const tone = cardListTone(idx);
+                return (
                 <div key={o.id} style={{
-                  padding: '6px 8px', background: '#fff',
-                  border: '1px solid #e2e8f0', borderRadius: 4,
+                  padding: '6px 8px', background: tone.bg,
+                  border: `1px solid ${tone.border}`, borderRadius: 4,
                   fontSize: 11,
                 }}>
                   <strong style={{ color }}>{o.icon} {o.id}</strong>
@@ -2287,7 +2289,8 @@ function SpecComponentCard({ label, color, onAction, phase, procKey, index = 0 }
                     {o.what}
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
           {/* 2. Journey map */}
@@ -2813,10 +2816,12 @@ function renderSpecTab(tabId, subId, color, procKey) {
           <div style={{
             display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8,
           }}>
-            {spec.visuals.map((v) => (
+            {spec.visuals.map((v, idx) => {
+              const tone = cardListTone(idx);
+              return (
               <div key={v} style={{
-                padding: 14, background: '#f8fafc',
-                border: '1px dashed #cbd5e1', borderRadius: 6,
+                padding: 14, background: tone.bg,
+                border: `1px dashed ${tone.border}`, borderRadius: 6,
                 fontSize: 12, color: '#475569', textAlign: 'center',
               }}>
                 <div style={{ fontSize: 22, marginBottom: 4 }}>📊</div>
@@ -2825,7 +2830,8 @@ function renderSpecTab(tabId, subId, color, procKey) {
                   Visualization placeholder — wire to live data
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </SpecSection>
       )}
@@ -4462,10 +4468,12 @@ function TabHeaderRibbon({ tab, sub, proc, dept, focusKind, focusLabel }) {
           }}>
             {Object.entries(focusEntry)
               .filter(([k, v]) => k !== 'name' && k !== 'ai_type' && v != null && v !== '')
-              .map(([k, v]) => (
+              .map(([k, v], idx) => {
+                const tone = cardListTone(idx);
+                return (
                 <div key={k} style={{
-                  padding: '6px 8px', background: '#fff',
-                  border: '1px solid #e2e8f0', borderRadius: 4,
+                  padding: '6px 8px', background: tone.bg,
+                  border: `1px solid ${tone.border}`, borderRadius: 4,
                   fontSize: 11,
                 }}>
                   <div style={{
@@ -4474,7 +4482,8 @@ function TabHeaderRibbon({ tab, sub, proc, dept, focusKind, focusLabel }) {
                   }}>{k.replace(/_/g, ' ')}</div>
                   <div style={{ color: '#0f172a' }}>{renderValue(v)}</div>
                 </div>
-              ))}
+                );
+              })}
           </div>
         </div>
       )}
@@ -5129,8 +5138,10 @@ function AiTypeValidationPanel({ proc, focusKind, focusLabel }) {
         <strong style={{ color: '#4c1d95' }}>{selected}</strong>
         <span style={{ fontSize: 12, color: '#64748b' }}>AI type validation, plan, review, feedback, and quality gate</span>
       </div>
+      {/* OP-5 (2026-06-13): 4 sibling cards in same grid · use cardListTone(0..3)
+          for per-card light differentiation. Brand border (#e9d5ff) preserved. */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 10 }}>
-        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+        <div style={{ background: cardListTone(0).bg, border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
           <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Validation rows</div>
           {validationRows.map(([label, value]) => (
             <div key={label} style={{ display: 'grid', gridTemplateColumns: '112px minmax(0, 1fr)', gap: 8, fontSize: 12, padding: '4px 0', borderTop: '1px solid #f3e8ff' }}>
@@ -5139,15 +5150,15 @@ function AiTypeValidationPanel({ proc, focusKind, focusLabel }) {
             </div>
           ))}
         </div>
-        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+        <div style={{ background: cardListTone(1).bg, border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
           <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Stakeholders</div>
           {template.stakeholders.map((item) => <div key={item} style={{ fontSize: 12, padding: '3px 0', color: '#334155' }}>- {item}</div>)}
         </div>
-        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+        <div style={{ background: cardListTone(2).bg, border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
           <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Operations in this AI type</div>
           {template.operations.map((item) => <div key={item} style={{ fontSize: 12, padding: '3px 0', color: '#334155' }}>- {item}</div>)}
         </div>
-        <div style={{ background: '#fff', border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
+        <div style={{ background: cardListTone(3).bg, border: '1px solid #e9d5ff', borderRadius: 6, padding: 10 }}>
           <div style={{ fontSize: 11, color: '#6d28d9', fontWeight: 800, textTransform: 'uppercase', marginBottom: 6 }}>Quality / verification checks</div>
           {template.qualityChecks.map((item) => <div key={item} style={{ fontSize: 12, padding: '3px 0', color: '#334155' }}>- {item}</div>)}
         </div>
@@ -5195,11 +5206,12 @@ function AiTypeCatalog({ proc, dept, focusKind, focusLabel, onFocus }) {
       <div style={{
         display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 8,
       }}>
-        {aiList.map((ai) => {
+        {aiList.map((ai, idx) => {
           const aiType = ai.ai_type || ai.name || '—';
           const isActive = focusKind === 'ai' && focusLabel === aiType;
           const detailRows = Object.entries(ai)
             .filter(([k, v]) => k !== 'ai_type' && k !== 'name' && v != null && v !== '');
+          const tone = cardListTone(idx);
           return (
             <button
               key={aiType}
@@ -5210,7 +5222,7 @@ function AiTypeCatalog({ proc, dept, focusKind, focusLabel, onFocus }) {
               style={{
                 textAlign: 'left',
                 padding: 12,
-                background: isActive ? '#8b5cf6' : '#fff',
+                background: isActive ? '#8b5cf6' : tone.bg,
                 color: isActive ? '#1d4ed8' : '#0f172a',
                 border: `2px solid ${isActive ? '#7c3aed' : '#8b5cf655'}`,
                 borderRadius: 8,
@@ -5916,10 +5928,11 @@ function KnowledgeDrawer({ color, category, categoryLabel, entries, onClose }) {
         {entries.map((title, i) => {
           const isOpen = activeIdx === i;
           const d = isOpen ? detailFor(i, title) : null;
+          const tone = cardListTone(i);
           return (
             <li key={i} style={{
               marginBottom: 4,
-              background: '#fff', border: `1px solid ${isOpen ? color + '88' : '#e2e8f0'}`, borderRadius: 4,
+              background: tone.bg, border: `1px solid ${isOpen ? color + '88' : tone.border}`, borderRadius: 4,
               overflow: 'hidden',
             }}>
               <button type="button"
@@ -6177,10 +6190,12 @@ function IncidentKanbanSection({ color, proc, tab }) {
                   background: col.color, color: '#fff', fontSize: 9,
                 }}>{col.count}</span>
               </div>
-              {items.map((it, i) => (
+              {items.map((it, i) => {
+                const tone = cardListTone(i);
+                return (
                 <div key={i} style={{
                   marginBottom: 4, padding: '6px 8px',
-                  background: '#fff', border: '1px solid #e2e8f0', borderRadius: 3,
+                  background: tone.bg, border: `1px solid ${tone.border}`, borderRadius: 3,
                   fontSize: 11, color: '#0f172a', lineHeight: 1.3,
                 }}>
                   <div style={{ display: 'flex', gap: 4, marginBottom: 3 }}>
@@ -6193,7 +6208,8 @@ function IncidentKanbanSection({ color, proc, tab }) {
                   </div>
                   <div>{it.title}</div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           );
         })}
