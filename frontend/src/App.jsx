@@ -77,6 +77,7 @@ import EaiOsPage from './pages/EaiOsPage';
 import PromptsPage from './pages/PromptsPage';
 import PlatformExplorerPage from './pages/PlatformExplorerPage';
 import AiTypesPage from './pages/AiTypesPage';
+import { AiTypesShellRedirect } from './pages/AiTypesShellRedirect';
 import ProcessesPage from './pages/ProcessesPage';
 import ChatGroupPage from './pages/ChatGroupPage';
 import ControlTowerPage from './pages/ControlTowerPage';
@@ -274,8 +275,12 @@ export default function App() {
         <Route path="/platform" element={<PlatformExplorerPage />} />
         <Route path="/explorer" element={<PlatformExplorerPage />} />
         <Route path="/all" element={<PlatformExplorerPage />} />
-        <Route path="/ai-types" element={<AiTypesPage />} />
-        <Route path="/ai-taxonomy" element={<AiTypesPage />} />
+        {/* OP-20 (2026-06-14): operator brutal "each UI page must have Main + Sub Menu · only content /workspace area".
+            /ai-types and /ai-taxonomy routes used to render AiTypesPage standalone (no shell).
+            Now redirect to /bank/workspace?module=ai-types with query params preserved so the
+            bank shell (Main Menu + Sub Menu) stays mounted and only the workspace area changes. */}
+        <Route path="/ai-types" element={<AiTypesShellRedirect />} />
+        <Route path="/ai-taxonomy" element={<AiTypesShellRedirect />} />
         <Route path="/types" element={<AiTypesPage />} />
         <Route path="/processes" element={<ProcessesPage />} />
         <Route path="/health/processes" element={<ProcessesPage />} />
