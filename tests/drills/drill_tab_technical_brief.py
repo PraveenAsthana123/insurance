@@ -83,7 +83,7 @@ def main() -> int:
             if depth == 0 and j > start: break
             j += 1
         entries.append(tid); i = j + 1
-    step(2, len(entries) == 31, f"100% coverage · {len(entries)} entries (expect 31)")
+    step(2, len(entries) == 32, f"100% coverage · {len(entries)} entries (expect 32 incl. manual-explore)")
 
     # Step 3 · JSX imports
     jsx_src = JSX.read_text(encoding="utf-8")

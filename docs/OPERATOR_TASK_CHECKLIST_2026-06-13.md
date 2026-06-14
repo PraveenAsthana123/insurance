@@ -132,6 +132,23 @@
 | File size | tab-technical-brief.js grew from ~250 to ~3500 lines |
 | Verification | All 5 drills green · §137 PASS · esbuild clean across 3 files |
 
+### OP-13 · "create one new tab where I want to explore other layout · left and right side layout with component approach" + "manual process tab: I need left side list of sequence and right side list of operation"
+
+| Field | Value |
+|---|---|
+| Operator quotes (16:02-16:04 MDT) | "for manual proces ...tab: I need lieft side list of sequence and right sider list of operation" + "create one new tab" + "where I want to explore other layout ..left and rigth side layout with component apporch" |
+| Status | ✅ **DONE** · new tab `manual-explore` shipped · 3 layout variants · custom renderer · all 4 catalogs + 3 drills updated |
+| New top-level tab | `manual-explore` (color `#ea580c` · 3 sub-tabs: Sequence + Ops · Split Canvas · Compare Layouts) |
+| New component | `<SequenceOpsLayout tab sub proc />` with 3 variant sub-components: SeqOpsTwoColumn · SeqOpsSplitCanvas · SeqOpsCompare |
+| Variant 1 (Sequence + Ops) | LEFT: numbered sequence cards (actor + step + time) · RIGHT: operation buttons (icon + label + desc · click marks done) |
+| Variant 2 (Split Canvas) | Center divider · LEFT sequence with circle-numbered badges · RIGHT operations with bullet list |
+| Variant 3 (Compare) | Side-by-side cards with summary banner · operator picks winner |
+| §57.7 fallback | Fixture data when `proc.manual_process.steps` / `.operations` absent · yellow banner explicit |
+| Custom renderer dispatch | `tab.id === 'manual-explore'` returns SequenceOpsLayout (NOT renderSpecTab) per §73 per-tab uniqueness |
+| Catalog entries added | TAB_PROFILES + TAB_CHARTER (8 fields · 4 objectives) + TAB_OBJECTIVE_EVIDENCE (4 rules) + TAB_TECHNICAL_BRIEF (3 diagrams · 3 challenges · 4 edges · 4 scale/perf · 3 logged · 3 silent · 6 cadence · 6 mistakes · 9 testing) |
+| Drills updated | 3 drills: drill_tab_charter_coverage (31→32) · drill_tab_outcome_evaluator (31→32) · drill_tab_technical_brief (31→32) |
+| Verification | esbuild clean · §137 PASS · all 5 drills green |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |

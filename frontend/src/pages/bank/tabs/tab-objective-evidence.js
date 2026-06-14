@@ -66,6 +66,12 @@ export const TAB_OBJECTIVE_EVIDENCE = {
     { kind: 'exists', path: 'adoption.metric', label: 'Adoption metric defined' },
     { kind: 'exists', path: 'change.budget', label: 'Reskilling / org-change budget' },
   ],
+  'manual-explore': [
+    { kind: 'operator_confirms', label: 'Surface 3 distinct layout variants for review' },
+    { kind: 'operator_confirms', label: 'Each variant uses identical data · only chrome differs' },
+    { kind: 'exists', path: 'manual_process.steps', label: 'Render even when proc has no manual_process · honest fallback (§57.7)' },
+    { kind: 'operator_confirms', label: 'Locked by drill_tab_charter_coverage · cannot ship without 8 fields' },
+  ],
   'manual-transaction': [
     { kind: 'count_at_least:1', path: 'manual_process.actors', label: 'Every actor named' },
     { kind: 'exists', path: 'manual_process.step_times', label: 'Step times measured' },

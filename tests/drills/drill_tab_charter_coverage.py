@@ -125,8 +125,8 @@ def main() -> int:
     profile_keys = set(re.findall(r"^\s*'([\w-]+)':", profiles_block, re.MULTILINE))
     step(
         2,
-        len(profile_keys) >= 30,
-        f"TAB_PROFILES parses · {len(profile_keys)} entries",
+        len(profile_keys) >= 32,
+        f"TAB_PROFILES parses · {len(profile_keys)} entries (expect ≥ 32 incl. manual-explore)",
     )
 
     # Step 3 · TAB_CHARTER block
@@ -136,8 +136,8 @@ def main() -> int:
     )
     step(
         3,
-        len(charter_keys) >= 30,
-        f"TAB_CHARTER parses · {len(charter_keys)} entries",
+        len(charter_keys) >= 32,
+        f"TAB_CHARTER parses · {len(charter_keys)} entries (expect ≥ 32 incl. manual-explore)",
     )
 
     # Step 4 · NEG · every profile has a charter

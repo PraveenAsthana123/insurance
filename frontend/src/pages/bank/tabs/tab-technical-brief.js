@@ -578,6 +578,75 @@ export const TAB_TECHNICAL_BRIEF = {
     },
   },
 
+  'manual-explore': {
+    diagrams: [
+      { title: 'Layout variant decision', mermaid: `flowchart LR\n  Goal[Reading manual process] -->|persona| P1[UX designer]\n  P1 -->|prefers| V1[2-col Sequence+Ops]\n  Goal -->|persona| P2[Process designer]\n  P2 -->|prefers| V2[Split canvas]\n  Goal -->|persona| P3[Ops lead]\n  P3 -->|prefers| V3[Compare side-by-side]`, whyItMatters: 'Different personas need different layouts · this tab proves we have 3.' },
+      { title: 'Data source flow', mermaid: `flowchart LR\n  proc[proc.manual_process] -->|steps| Layout\n  proc -->|operations| Layout\n  Layout -->|3 variants| UI\n  UI -->|operator| Decision[Pick winner]`, whyItMatters: 'Identical data through 3 chromes · operator picks winner.' },
+      { title: 'Variant lifecycle', mermaid: `stateDiagram-v2\n  [*] --> Variant1\n  Variant1 --> Variant2\n  Variant2 --> Variant3\n  Variant3 --> Picked\n  Picked --> [*]`, whyItMatters: 'Explore → pick → ship lifecycle.' },
+    ],
+    challengesStrategy: [
+      { challenge: 'Layout decisions live in slides not code', strategy: 'Sandbox tab in production · operator clicks · feedback in-context', impact: 'P2 design rot' },
+      { challenge: 'Pick winner without measuring', strategy: 'Per-variant time-to-task metric · A/B with operators', impact: 'P2 pick wrong winner' },
+      { challenge: 'Sandbox bloat (variants accumulate)', strategy: 'Cap at 3 variants · sunset losers after pick', impact: 'P3 tab clutter' },
+    ],
+    edgeCases: [
+      { case: 'proc.manual_process empty', handling: '§57.7 fixture with yellow banner · operator sees layout without real data' },
+      { case: 'Steps > 20 (long sequence)', handling: 'Vertical scroll · per-step collapse · do not auto-truncate' },
+      { case: 'Operations > 30', handling: 'Group by category · filter input · keyboard nav' },
+      { case: 'Operator picks variant but doesn\'t commit', handling: 'Sandbox stays · production tabs unchanged · explicit "promote" action' },
+    ],
+    scalePerf: [
+      { metric: 'Layout render p95', target: '< 200ms', actual: '~80ms (3 variants)', status: 'ok' },
+      { metric: 'Variant count', target: '≤ 3 active', actual: '3', status: 'ok' },
+      { metric: 'Operator decision time', target: '< 5 min', actual: 'TBD', status: 'warn' },
+      { metric: 'Fallback fixture detection', target: 'always banner', actual: 'always banner', status: 'ok' },
+    ],
+    errorsLogged: [
+      { error: 'Layout component crash', handling: 'React error boundary · fallback to text · log' },
+      { error: 'Fixture load fail', handling: 'Hardcoded fallback · log warning' },
+      { error: 'Op button-press state corrupt', handling: 'Reset local state · log' },
+    ],
+    errorsSilent: [
+      { error: 'Operator picks variant but never tells team', implementWhat: 'Promote action + comms · forces team alignment' },
+      { error: 'Variant scores well in test but fails ops', implementWhat: 'Post-pick monitoring · operator survey at week 2' },
+      { error: 'Fixture diverges from real data', implementWhat: 'Auto-refresh fixture from sampled prod monthly' },
+    ],
+    issueCadence: {
+      daily: [
+        { issue: 'Operator clicks logged · which variant gets traffic', action: 'PM reviews · prioritize winning chrome' },
+        { issue: 'Fixture freshness', action: 'Ops · refresh from prod sample' },
+      ],
+      weekly: [
+        { issue: 'Variant performance compare', action: 'PM + UX · pick favorite' },
+        { issue: 'Sandbox cleanup (remove losers)', action: 'PM + eng' },
+      ],
+      monthly: [
+        { issue: 'Layout decision retrospective', action: 'Cross-team review' },
+        { issue: 'Promote winner to manual-transaction tab', action: 'Eng implements' },
+      ],
+    },
+    mistakesUser: [
+      { mistake: 'Picks variant based on aesthetics not task-time', prevention: 'PM enforces task-time metric · not "looks nice"' },
+      { mistake: 'Forgets to test with real persona', prevention: 'Per-variant persona checklist · UX validates' },
+      { mistake: 'Mixes layout variants in production', prevention: 'Sandbox isolated · explicit promote step' },
+    ],
+    mistakesArchitect: [
+      { mistake: 'Adds 4th variant before sunsetting 1st', prevention: 'Cap drill · max 3 active · CI gate' },
+      { mistake: 'Variants share no data source (apples-to-oranges)', prevention: 'All variants take same data prop · drill enforces' },
+      { mistake: 'No §57.7 fallback (variant breaks with empty data)', prevention: 'Fixture mandatory · drill verifies' },
+    ],
+    testingPlan: {
+      positive: ['Each variant renders', 'Fallback fixture used when data absent', 'Op button click logs to local state'],
+      negative: ['Empty steps → fixture', 'Bad op shape → render skip', 'No proc → fallback'],
+      api: ['No backend API · pure client component', 'No external calls', 'Read proc from context'],
+      data: ['Step shape: {actor, step, time_min?}', 'Op shape: {id, label, icon?, desc?}', 'Shape-tolerant rendering'],
+      model: ['N/A · pure layout'],
+      accuracy: ['All steps + ops rendered in correct order', 'No silent drops'],
+      security: ['No PII in fixture · all synthesized', 'No external data leak'],
+      admin: ['Operator can pick variant · log local decision', 'PM can promote variant code'],
+      mlops: ['N/A · no model · variant choice is human'],
+    },
+  },
   'manual-transaction': {
     diagrams: [
       { title: 'Manual swimlane', mermaid: `flowchart LR\n  subgraph Customer\n    C1[Submit form]\n  end\n  subgraph Agent\n    A1[Receive] --> A2[Validate]\n    A2 --> A3[Process]\n  end\n  subgraph System\n    S1[Store]\n  end\n  C1 --> A1\n  A3 --> S1`, whyItMatters: 'Names every actor + handoff so manual time can be measured.' },

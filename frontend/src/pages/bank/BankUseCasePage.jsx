@@ -139,6 +139,16 @@ const TABS = [
     { id: 'handoffs', label: 'Handoffs' },
     { id: 'exceptions', label: 'Exceptions' },
   ]},
+  // OP-13 (2026-06-14): operator "create one new tab where I want to explore
+  // other layout · left and right side layout with component approach".
+  // Manual Explore is a sandbox tab for the SEQUENCE+OPERATIONS side-by-side
+  // layout (LEFT: numbered sequence steps · RIGHT: operation buttons).
+  // Renders via custom branch — does NOT fall through to renderSpecTab.
+  { id: 'manual-explore', label: 'Manual · Explore Layout', color: '#ea580c', subTabs: [
+    { id: 'sequence-ops', label: 'Sequence + Ops' },
+    { id: 'split-canvas', label: 'Split Canvas' },
+    { id: 'compare', label: 'Compare Layouts' },
+  ]},
   { id: 'automatic-pipeline', label: 'Transaction · Automatic Pipeline', color: '#0d9488', subTabs: [
     { id: 'trigger', label: 'Trigger' },
     { id: 'pipeline', label: 'Pipeline' },
@@ -2870,6 +2880,7 @@ const TAB_PROFILES = {
   'ai-strategy': { type: 'decision',     info: 40, viz: 20, action: 40, primary_user: 'AI Strategy Lead', intent: 'Select the right AI type and validate value, risk, and operating fit', emphasis: 'decision-support' },
   'digital-transformation': { type: 'mixed', info: 35, viz: 25, action: 40, primary_user: 'Transformation Lead', intent: 'Map the people, process, technology, adoption, and change plan', emphasis: 'kanban' },
   'manual-transaction': { type: 'action', info: 35, viz: 15, action: 50, primary_user: 'Operations Team', intent: 'Document the manual user transaction path, controls, handoffs, and exceptions', emphasis: 'kanban' },
+  'manual-explore':     { type: 'action', info: 30, viz: 30, action: 40, primary_user: 'UX + Process Designer', intent: 'Explore layout variants (left sequence + right operations) for the manual process before committing to one', emphasis: 'kanban' },
   'automatic-pipeline': { type: 'action', info: 30, viz: 20, action: 50, primary_user: 'IT Delivery Team', intent: 'Define the automatic pipeline trigger, orchestration, monitoring, and fallback', emphasis: 'kanban' },
   'accuracy-benchmarking': { type: 'visualization', info: 30, viz: 50, action: 20, primary_user: 'Model Validator', intent: 'Compare accuracy, benchmarks, thresholds, and release evidence', emphasis: 'dashboard' },
   'analytical-ai-process': { type: 'visualization', info: 35, viz: 45, action: 20, primary_user: 'Analyst', intent: 'Turn analytical questions, features, analysis, and insights into decisions', emphasis: 'dashboard' },
@@ -3294,6 +3305,21 @@ const TAB_CHARTER = {
     ],
     scope: 'Cross-cutting transformation plan.',
     out_of_scope: 'Per-step process detail (→ manual/automatic), runtime ops (→ operations).',
+  },
+  'manual-explore': {
+    what: 'A sandbox tab for prototyping layouts of the manual process · 3 variants ship today: 2-column (left sequence · right ops), split-canvas, and side-by-side compare.',
+    why: 'Different stakeholders read the manual process differently · UX designers, process designers, and operations leads need to see options before locking a layout.',
+    addresses: 'What layout best surfaces sequence vs operations · which variant helps which persona · what the operator clicks vs reads.',
+    how: 'Pulls proc.manual_process.steps + .operations · falls back to fixture per §57.7. Renders via custom SequenceOpsLayout (NOT renderSpecTab) so layout decisions live in code, not blueprint.',
+    navigate: 'Sub-tab Sequence + Ops (default) → Split Canvas → Compare. Click ops to mark complete (state local · session only).',
+    objectives: [
+      'Surface 3 distinct layout variants for review',
+      'Each variant uses identical data (sequence + ops) · only chrome differs',
+      'Render even when proc has no manual_process · honest fallback (§57.7)',
+      'Locked by drill_tab_charter_coverage · cannot ship without 8 fields',
+    ],
+    scope: 'Layout exploration only · no business logic.',
+    out_of_scope: 'Operational manual workflow (→ manual-transaction tab), automated path (→ automatic-pipeline).',
   },
   'manual-transaction': {
     what: 'The current human-driven workflow — actors, manual steps, controls, handoffs between roles, and exception paths.',
@@ -5068,6 +5094,289 @@ function FlowSlot({ tab, sub, proc }) {
 }
 
 // Summary note + Outcome — narrative slots, pull from REAL blueprint fields.
+// SequenceOpsLayout — operator 2026-06-14 16:04 MDT: "create one new tab where
+// I want to explore other layout · left and right side layout with component
+// approach" + (prior) "manual process tab: I need left side list of sequence
+// and right side list of operation".
+//
+// 2-column experimental layout for the manual-explore tab:
+//   LEFT  · numbered SEQUENCE list (vertical · ordered · step + actor + time)
+//   RIGHT · OPERATIONS list (action buttons · component-based · per-op detail)
+//
+// Each side is component-based and reusable. Data pulled from proc.manual_process
+// (steps[] + operations[]) with §57.7 honest fallback fixture when absent.
+//
+// Composes with: §43 (drill enforces presence) · §57.7 (fallback fixture clearly
+// labeled · NOT silent) · §73 (per-tab differentiation · OP-13 dedicates a tab
+// to layout exploration) · §93 (sequence IS the IPO chain) · §137 (light bg).
+function SequenceOpsLayout({ tab, sub, proc }) {
+  // Sequence steps from proc.manual_process.steps OR fixture
+  const stepsRaw = read(proc, 'manual_process.steps', 'manual_process.user_steps');
+  const opsRaw = read(proc, 'manual_process.operations', 'automatic_process.operations');
+
+  const fallbackSteps = [
+    { actor: 'Customer', step: 'Submit form via portal', time_min: 5 },
+    { actor: 'Agent · Intake', step: 'Receive + validate fields', time_min: 12 },
+    { actor: 'Agent · Intake', step: 'Resolve missing data via phone', time_min: 18 },
+    { actor: 'Underwriter', step: 'Review underwriting rules', time_min: 25 },
+    { actor: 'Underwriter', step: 'Decision · approve / decline / refer', time_min: 8 },
+    { actor: 'System', step: 'Persist decision + audit row', time_min: 1 },
+    { actor: 'Customer', step: 'Receive decision notification', time_min: 2 },
+  ];
+  const fallbackOps = [
+    { id: 'validate', label: 'Validate input', icon: '✓', desc: 'Run field-level rules · highlight bad' },
+    { id: 'lookup', label: 'Customer lookup', icon: '🔍', desc: 'Resolve customer by ID / SSN · pull history' },
+    { id: 'score', label: 'Risk score', icon: '📊', desc: 'Compute risk band · UW reference' },
+    { id: 'check-policy', label: 'Policy check', icon: '📋', desc: 'Apply UW rules · note exceptions' },
+    { id: 'request-doc', label: 'Request document', icon: '📎', desc: 'Email customer for missing docs' },
+    { id: 'route-uw', label: 'Route to UW', icon: '↪', desc: 'Send to underwriter queue · SLA timer starts' },
+    { id: 'approve', label: 'Approve', icon: '✅', desc: 'Mark approved · trigger downstream' },
+    { id: 'decline', label: 'Decline', icon: '❌', desc: 'Mark declined · capture reason · audit' },
+    { id: 'refer', label: 'Refer to senior', icon: '⬆', desc: 'Escalate to L2 · attach context' },
+    { id: 'audit', label: 'Open audit trail', icon: '🔒', desc: 'View timeline · who/what/when' },
+  ];
+  const steps = Array.isArray(stepsRaw) && stepsRaw.length > 0 ? stepsRaw : fallbackSteps;
+  const ops = Array.isArray(opsRaw) && opsRaw.length > 0 ? opsRaw : fallbackOps;
+  const usingFallback = !(Array.isArray(stepsRaw) && stepsRaw.length > 0);
+
+  const isSequenceOps = !sub || sub.id === 'sequence-ops';
+  const isSplitCanvas = sub?.id === 'split-canvas';
+  const isCompare = sub?.id === 'compare';
+
+  return (
+    <div>
+      {usingFallback && (
+        <div style={{
+          marginBottom: 10, padding: '6px 10px',
+          background: '#fef3c7', border: '1px solid #fcd34d', borderLeft: '4px solid #f59e0b',
+          borderRadius: 4, fontSize: 11, color: '#78350f',
+        }}>
+          🟡 §57.7 honest fallback · proc.manual_process.steps / .operations not populated.
+          Showing fixture so layout is reviewable.
+        </div>
+      )}
+
+      {/* Sub-tab dispatch */}
+      {isSequenceOps && <SeqOpsTwoColumn steps={steps} ops={ops} color={tab.color} />}
+      {isSplitCanvas && <SeqOpsSplitCanvas steps={steps} ops={ops} color={tab.color} />}
+      {isCompare && <SeqOpsCompare steps={steps} ops={ops} color={tab.color} />}
+    </div>
+  );
+}
+
+// 2-column layout — LEFT sequence (numbered · ordered) · RIGHT operations (action buttons)
+function SeqOpsTwoColumn({ steps, ops, color }) {
+  const [pressed, setPressed] = useState({});
+  const handleOp = (opId) => {
+    setPressed((p) => ({ ...p, [opId]: { at: new Date(), state: 'done' } }));
+  };
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 14,
+    }}>
+      {/* LEFT · SEQUENCE */}
+      <div style={{
+        background: '#fff', border: '2px solid #cbd5e1', borderTop: `5px solid ${color}`,
+        borderRadius: 8, padding: 14,
+      }}>
+        <div style={{
+          fontSize: 13, fontWeight: 800, color, marginBottom: 10,
+          textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>
+          ☰ Sequence ({steps.length} steps)
+        </div>
+        <ol style={{ margin: 0, paddingLeft: 0, listStyle: 'none' }}>
+          {steps.map((s, i) => {
+            const tone = cardListTone(i);
+            return (
+              <li key={i} style={{
+                position: 'relative',
+                marginBottom: 6, padding: '10px 12px',
+                background: tone.bg, border: `1px solid ${tone.border}`,
+                borderLeft: `4px solid ${color}`, borderRadius: 6,
+                fontSize: 12,
+              }}>
+                <div style={{
+                  position: 'absolute', top: 8, right: 10,
+                  fontSize: 9, color: '#94a3b8', fontFamily: 'monospace',
+                }}>STEP {i + 1}</div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: '#64748b', marginBottom: 3 }}>
+                  {typeof s === 'object' ? (s.actor || 'Actor') : 'Actor'}
+                </div>
+                <div style={{ color: '#0f172a', fontWeight: 600 }}>
+                  {typeof s === 'object' ? (s.step || s.label || JSON.stringify(s)) : String(s)}
+                </div>
+                {typeof s === 'object' && s.time_min != null && (
+                  <div style={{ marginTop: 3, fontSize: 10, color: '#64748b' }}>
+                    ⏱ {s.time_min} min
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+
+      {/* RIGHT · OPERATIONS */}
+      <div style={{
+        background: '#fff', border: '2px solid #cbd5e1', borderTop: '5px solid #16a34a',
+        borderRadius: 8, padding: 14,
+      }}>
+        <div style={{
+          fontSize: 13, fontWeight: 800, color: '#16a34a', marginBottom: 10,
+          textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>
+          ⚡ Operations ({ops.length} available)
+        </div>
+        <div style={{ display: 'grid', gap: 6 }}>
+          {ops.map((o, i) => {
+            const tone = cardListTone(i);
+            const opId = typeof o === 'object' ? (o.id || o.label || `op${i}`) : `op${i}`;
+            const opLabel = typeof o === 'object' ? (o.label || o.id || 'Op') : String(o);
+            const opIcon = typeof o === 'object' ? (o.icon || '•') : '•';
+            const opDesc = typeof o === 'object' ? o.desc : null;
+            const isPressed = !!pressed[opId];
+            return (
+              <button key={opId} type="button"
+                onClick={(e) => { e.stopPropagation(); handleOp(opId); }}
+                style={{
+                  textAlign: 'left', padding: '8px 10px',
+                  background: isPressed ? '#dcfce7' : tone.bg,
+                  border: `1px solid ${isPressed ? '#16a34a' : tone.border}`,
+                  borderLeft: `4px solid ${isPressed ? '#16a34a' : '#475569'}`,
+                  borderRadius: 6, fontSize: 12, cursor: 'pointer', font: 'inherit',
+                  transition: 'background 0.12s',
+                }}>
+                <div style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  marginBottom: opDesc ? 3 : 0,
+                }}>
+                  <span style={{ color: '#0f172a', fontWeight: 700 }}>
+                    {opIcon} {opLabel}
+                  </span>
+                  {isPressed && (
+                    <span style={{
+                      padding: '1px 6px', borderRadius: 3, background: '#16a34a',
+                      color: '#fff', fontSize: 9, fontWeight: 700,
+                    }}>✓ DONE</span>
+                  )}
+                </div>
+                {opDesc && (
+                  <div style={{ fontSize: 10, color: '#475569', lineHeight: 1.35 }}>
+                    {opDesc}
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Variant 2 · split canvas with center divider · same data, different chrome
+function SeqOpsSplitCanvas({ steps, ops, color }) {
+  return (
+    <div style={{
+      position: 'relative',
+      background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8,
+      padding: 16,
+    }}>
+      <div style={{
+        display: 'grid', gridTemplateColumns: '1fr 2px 1fr', gap: 12,
+      }}>
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 800, color: '#7c3aed', marginBottom: 10 }}>
+            🧭 SEQUENCE (the path)
+          </div>
+          {steps.map((s, i) => (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              padding: '6px 0', borderBottom: '1px dashed #cbd5e1',
+            }}>
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: 24, height: 24, borderRadius: '50%',
+                background: color, color: '#fff', fontSize: 11, fontWeight: 800,
+              }}>{i + 1}</span>
+              <span style={{ fontSize: 12, color: '#0f172a' }}>
+                {typeof s === 'object' ? s.step : String(s)}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div style={{ background: '#cbd5e1' }} />
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 800, color: '#16a34a', marginBottom: 10 }}>
+            🧰 OPERATIONS (the tools)
+          </div>
+          {ops.map((o, i) => (
+            <div key={i} style={{
+              padding: '6px 0', borderBottom: '1px dashed #cbd5e1',
+              fontSize: 12, color: '#0f172a',
+            }}>
+              {typeof o === 'object' ? `${o.icon || '•'} ${o.label}` : String(o)}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Variant 3 · side-by-side compare with summary
+function SeqOpsCompare({ steps, ops, color }) {
+  return (
+    <div>
+      <div style={{
+        marginBottom: 12, padding: 10,
+        background: '#dbeafe', border: '1px solid #93c5fd', borderRadius: 6,
+        fontSize: 12, color: '#0f172a',
+      }}>
+        <strong>Compare:</strong> {steps.length} sequence steps vs {ops.length} operations.
+        Each step may invoke 1+ operations. Use this to spot ops without a corresponding
+        step (orphans) and steps without ops (manual-only stages).
+      </div>
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14,
+      }}>
+        <div style={{
+          background: '#fff', border: `2px solid ${color}`, borderRadius: 8, padding: 12,
+        }}>
+          <div style={{
+            fontSize: 12, fontWeight: 800, color, marginBottom: 8,
+            textTransform: 'uppercase', letterSpacing: '0.05em',
+          }}>Sequence · {steps.length}</div>
+          <ol style={{ margin: 0, paddingLeft: 20, fontSize: 12, color: '#0f172a' }}>
+            {steps.map((s, i) => (
+              <li key={i} style={{ marginBottom: 5 }}>
+                <strong>{typeof s === 'object' ? s.actor : ''}:</strong>{' '}
+                {typeof s === 'object' ? s.step : String(s)}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div style={{
+          background: '#fff', border: '2px solid #16a34a', borderRadius: 8, padding: 12,
+        }}>
+          <div style={{
+            fontSize: 12, fontWeight: 800, color: '#16a34a', marginBottom: 8,
+            textTransform: 'uppercase', letterSpacing: '0.05em',
+          }}>Operations · {ops.length}</div>
+          <ul style={{ margin: 0, paddingLeft: 20, fontSize: 12, color: '#0f172a' }}>
+            {ops.map((o, i) => (
+              <li key={i} style={{ marginBottom: 5 }}>
+                {typeof o === 'object' ? `${o.icon || '•'} ${o.label}` : String(o)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SummaryAndOutcomeRow({ tab, sub, proc }) {
   const summary = read(proc,
     'readme.executive_summary', 'demo_story.pitch', 'manual_process.summary');
@@ -8035,6 +8344,10 @@ function renderContent({ tab, sub, proc, dept, bp, focusKind, focusLabel }) {
         </div>
       </>
     );
+  }
+  // OP-13 (2026-06-14): custom render for manual-explore tab · NOT renderSpecTab
+  if (tab.id === 'manual-explore') {
+    return <SequenceOpsLayout tab={tab} sub={sub} proc={proc} />;
   }
   if (tab.id === 'res-ai')   return renderResAiSubTab(subId, proc, tab.color);
   if (tab.id === 'exp-ai')   return renderExpAiSubTab(subId, proc, tab.color);

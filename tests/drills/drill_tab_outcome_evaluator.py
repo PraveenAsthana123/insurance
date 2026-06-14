@@ -124,8 +124,8 @@ def main() -> int:
     evidence = _parse_evidence_entries(ev_src)
     step(
         2,
-        len(evidence) == 31,
-        f"TAB_OBJECTIVE_EVIDENCE has {len(evidence)} entries (expect 31)",
+        len(evidence) == 32,
+        f"TAB_OBJECTIVE_EVIDENCE has {len(evidence)} entries (expect 32 incl. manual-explore)",
     )
 
     # Step 3 · NEG · charter ⊆ evidence
