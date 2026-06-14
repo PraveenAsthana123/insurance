@@ -113,6 +113,7 @@ def main():
     print("ALL 10 STEPS PASSED")
     print()
     print("Contract verified:")
+    assert total_dashboards >= 200, f"totalDefined < 200 · found: {total_dashboards}"
     print(f"  - 5 phases · {phase_ids_unique}")
     print(f"  - per-phase categories: {cat_counts}")
     print(f"  - total dashboard entries: {total_dashboards}")
