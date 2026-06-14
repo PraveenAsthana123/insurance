@@ -50,6 +50,15 @@ Verify any claim above with `./scripts/project_doctor.sh` · `bash scripts/archi
 | Test (E2E) | Playwright | latest | Browser flows |
 | Monitoring | OpenTelemetry · Prometheus · Grafana | — | Observability |
 | Architecture standards | C4 · ADR · §47.2 · §58 folder READMEs | — | Documentation |
+| **Observability** | OpenTelemetry · Prometheus · Grafana · Langfuse · LangSmith · Phoenix · AgentOps · Loguru | All 8 installed | See [BACKEND_OBSERVABILITY_AGENTS_SPEC.md](docs/BACKEND_OBSERVABILITY_AGENTS_SPEC.md) |
+| **Agents** | base · orchestration · planner · architect · developer · qa · security · compliance · reviewer · evaluation · rag · memory · monitoring · deployment | Spec'd · 0/16 built at canonical `backend/agents/` path | See [BACKEND_OBSERVABILITY_AGENTS_STATUS.md](docs/BACKEND_OBSERVABILITY_AGENTS_STATUS.md) |
+
+### Observability + Agents layers
+
+- **Observability spec** · 12 core files + 9 extended · see [docs/BACKEND_OBSERVABILITY_AGENTS_SPEC.md §1](docs/BACKEND_OBSERVABILITY_AGENTS_SPEC.md#-1--observability--production-architecture-checklist-12-files--9-extended)
+- **Agents spec** · 16 core files + 12 missing · standard 8 decorators · forced sequence flow · see [docs/BACKEND_OBSERVABILITY_AGENTS_SPEC.md §2-3](docs/BACKEND_OBSERVABILITY_AGENTS_SPEC.md#-2--agents--principal-architect-production-matrix-16-core--12-missing)
+- **Status** · brutal audit · 6 dimensions · 0/28 files at canonical paths · see [docs/BACKEND_OBSERVABILITY_AGENTS_STATUS.md](docs/BACKEND_OBSERVABILITY_AGENTS_STATUS.md)
+- **Golden Rule** · every API/agent/tool/LLM call carries `request_id + trace_id + span_id + tenant_id + service_name`
 
 ---
 

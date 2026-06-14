@@ -183,6 +183,21 @@
 | §138.4 sweep miss | 9th auto-fix-worker tampering reverted before commit |
 | Total drills | 7 of 7 green |
 
+### OP-16 · Operator dumped 50K char spec for `observability/` + `agents/` → "check readme/backend/architect/components/install/global"
+
+| Field | Value |
+|---|---|
+| Operator quote (16:50 MDT) | 50K char spec for backend/observability/ (12 core + 9 ext) + backend/agents/ (16 core + 12 missing) · Forced Sequence Flow · Golden Rule fields · 8 mandatory decorators · standard 12-step agent sequence |
+| Operator quote (16:54 MDT) | "check these if readme file has been align, backend code, architect align, all the component working, all of them installed, all of them part of global and shared" |
+| §122 brutal audit · 6 dim | (1) README ⚠ partial (no obs/agent refs before) · (2) backend/observability/ ❌ MISSING · (2b) backend/agents/ ❌ MISSING · (3) packages ✅ 8/8 installed · (4) arch docs ✅ 10+ exist · (5) global templates ❌ MISSING · (6) backend ✅ LIVE |
+| Status | ✅ **DONE** (audit + spec + status + drill shipped · 0/28 files honestly named) |
+| SPEC doc | `docs/BACKEND_OBSERVABILITY_AGENTS_SPEC.md` (~480 LOC) · captures full 12+9 observability files + 16+12 agent files + YAML config + Forced Sequence + Golden Rule + Compatibility |
+| STATUS doc | `docs/BACKEND_OBSERVABILITY_AGENTS_STATUS.md` (~220 LOC) · 6-dim matrix · per-file gap list (28 missing) · existing infrastructure inventory · 160-180hr roadmap to closure |
+| README update | Added Observability + Agents rows to Tech Stack table · 4-bullet section linking spec + status + Golden Rule |
+| Drill shipped | `drill_observability_agents_spec.py` (8 steps · 4 negative) · locks spec presence (12+16 files named) · status brutal phrasing · README refs · packages installed · existing infra named |
+| Honest closure | 0 of 28 files exist at canonical paths · existing agent infra (12 folders: agent_kernel · agent_workflow · agent_tools · agentic_*/aeo · ai_*) could refactor into canonical · operator decides direction |
+| Total drills | 8 of 8 green |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |
