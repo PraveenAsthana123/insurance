@@ -279,10 +279,10 @@ function OperationWorkspaceLinkBlock({ activeFocus, onOpenWorkspace }) {
                   fontSize: FS_MID_ROW, fontWeight: active ? 700 : 500,
                 }}
               >
+                {/* OP-22 (2026-06-14): operator "Sub Menu :show link which user click then
+                    workspace/content area get open with all the tab" · per-item info subtext
+                    ("Opens {tab}/{sub}") REMOVED · Sub Menu is now pure clickable label list. */}
                 <span style={{ display: 'block' }}>{item.label}</span>
-                <span style={{ display: 'block', marginTop: 2, color: active ? '#fee2e2' : '#fecaca99', fontSize: FS_SMALL_LABEL }}>
-                  Opens {item.tab} / {item.sub}
-                </span>
               </button>
             );
           })}
