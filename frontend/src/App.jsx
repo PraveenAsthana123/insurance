@@ -9,6 +9,7 @@ import AIToolLandscapePage from './pages/AIToolLandscapePage';
 import AutonomousAgentPage from './pages/AutonomousAgentPage';
 import AutonomousDeptFrameworkPage from './pages/AutonomousDeptFrameworkPage';
 import AdminAuditPage from './pages/AdminAuditPage';
+import { AdminObservabilityPlatform } from './pages/admin/AdminObservabilityPlatform';
 import { lazy, Suspense } from 'react';
 const AgenticHubPage = lazy(() => import('./components/AgenticHubPage'));
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
@@ -156,6 +157,8 @@ export default function App() {
           <Route path="/autonomous-agent" element={<AutonomousAgentPage />} />
           <Route path="/autonomous-dept-framework" element={<AutonomousDeptFrameworkPage />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
+          {/* OP-14 (2026-06-14): Admin observability platform catalog · 300+ dashboards · 5 phases */}
+          <Route path="/admin/observability" element={<AdminObservabilityPlatform />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/data-flow" element={<DataFlowPage />} />
           <Route path="/insur" element={<HolyNavPage />} />

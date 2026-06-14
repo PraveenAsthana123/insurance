@@ -149,6 +149,26 @@
 | Drills updated | 3 drills: drill_tab_charter_coverage (31→32) · drill_tab_outcome_evaluator (31→32) · drill_tab_technical_brief (31→32) |
 | Verification | esbuild clean · §137 PASS · all 5 drills green |
 
+### OP-14 · "haveyou build thse dashboard for Admin?" + Phase 1-5 spec dump (300+ dashboards)
+
+| Field | Value |
+|---|---|
+| Operator quote (16:12 MDT) | Pasted Phase 1-5 spec for enterprise AI observability platform (Executive · LLMOps · RAG · Agentic · MCP) · 300+ target dashboards · then asked "haveyou build thse dashboard for Admin?" |
+| §122 brutal answer | NO · zero of the 300+ admin observability dashboards were built before this iter |
+| Status this iter | ✅ **SCAFFOLD SHIPPED** · 325 catalog entries across 5 phases · functional dashboards pending operator priority |
+| Files shipped | `frontend/src/pages/admin/observability-dashboards-catalog.js` (catalog · ~1100 lines) + `AdminObservabilityPlatform.jsx` (component · ~250 lines) + `App.jsx` route + drill |
+| Phase 1 · Executive | 6 categories · ~22 dashboards (Executive · Governance · Financial · Business KPI · Adoption · Risk) |
+| Phase 2 · LLM Ops | 8 categories · ~40 dashboards (Model Usage · Cost/FinOps · Prompts · Quality · Drift · Eval/Bench · Routing · Inference) |
+| Phase 3 · RAG | 11 categories · ~140 dashboards (Retrieval · Search · Vector DB · Embeddings · Chunking · Re-ranker · Citation · KG · Freshness · Documents/Eval) |
+| Phase 4 · Agentic | 10 categories · ~80 dashboards (Overview · Reasoning · Multi-Agent · Tools · Memory · HITL · Safety · LangGraph · Eval · Top-1% Missing) |
+| Phase 5 · MCP/Tooling | 9 categories · ~80 dashboards (MCP Exec · Server · Tool Registry · Tool Exec · Tool Selection · API · Enterprise Apps · Workflow/LangGraph · Events/Queues) |
+| Each catalog card | name · purpose · keyMetrics · viz spec · frequency · audience |
+| Reference tables | VIZ_MAPPING (26 viz types) + LAYER_VIZ (10 layers) |
+| Route | `/admin/observability` · phase tabs · category pills · search · cards |
+| Drill | `drill_admin_observability_catalog.py` (10 steps · 5 negative) · locks 5 phases · ≥3 categories/phase · ≥200 total entries · route present · honest banner |
+| §57.7 honest banner | Yellow-state "🟡 Scaffold · functional impl pending operator priority" per card · banner explains 300+ functional dashboards = incremental scope |
+| Auto-fix-worker noise | 7th detection: drill_top_brief_strip step 4 was failing because worker renamed "Top to-do" → "Aligned Top To-Do" (case shift) · drill updated to case-insensitive |
+
 ### OP-5 · "each card must have different light color"
 
 | Field | Value |

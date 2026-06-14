@@ -90,7 +90,9 @@ def main() -> int:
     body = body_m.group(1) if body_m else ""
     has_objective_label = "🎯 Objective" in body or "Objective" in body
     has_goal_label = "📌 Goal" in body or "Goal" in body
-    has_todo_label = "Top to-do" in body or "To-do" in body or "to-do" in body
+    # Case-insensitive match: "to-do" / "To-Do" / "To-do" all OK
+    body_lower = body.lower()
+    has_todo_label = "to-do" in body_lower
     has_agent_label = "sys_tab_monitor_agent" in body
     step(
         4,
