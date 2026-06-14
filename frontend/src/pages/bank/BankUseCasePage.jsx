@@ -4300,7 +4300,7 @@ function TopTodoSnapshot({ tab, sub, proc }) {
       borderRadius: 6,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 8 }}>
-        <strong style={{ fontSize: 13, color: '#0f172a' }}>To-do snapshot</strong>
+        <strong style={{ fontSize: 13, color: '#0f172a' }}>Aligned to-do snapshot</strong>
         <span style={{
           padding: '3px 10px', borderRadius: 999,
           background: done === items.length ? '#dcfce7' : '#fef3c7',
@@ -4309,7 +4309,7 @@ function TopTodoSnapshot({ tab, sub, proc }) {
           fontSize: 11, fontWeight: 900,
         }}>{done}/{items.length} ready</span>
         <span style={{ fontSize: 11, color: '#64748b' }}>
-          Path: {tab.label}{sub ? ` / ${sub.label}` : ''}; full role checklist is expanded below.
+          Path: {tab.label}{sub ? ` / ${sub.label}` : ''}; top tasks align to this tab/sub-tab; full role checklist is expanded below.
         </span>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(185px, 1fr))', gap: 6 }}>
@@ -5433,10 +5433,12 @@ function TechnicalRiskBrief({ tab, proc }) {
       <Panel title="Technical diagrams" accent="#7c3aed" icon="📐"
              tagline={`${brief.diagrams.length} diagrams · architecture / sequence / C4`}>
         <div style={{ display: 'grid', gap: 10 }}>
-          {brief.diagrams.map((d, i) => (
+          {brief.diagrams.map((d, i) => {
+            const tone = cardListTone(i);
+            return (
             <div key={i} style={{
               padding: 12,
-              background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: 6,
+              background: tone.bg, border: `1px solid ${tone.border}`, borderRadius: 6,
             }}>
               <div style={{ fontSize: 11, fontWeight: 800, color: '#7c3aed', marginBottom: 6 }}>
                 📐 {d.title}
@@ -5451,7 +5453,8 @@ function TechnicalRiskBrief({ tab, proc }) {
                 <strong>Why it matters:</strong> {d.whyItMatters}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </Panel>
 
@@ -5782,7 +5785,7 @@ function TopBriefStrip({ tab, sub, proc, dept }) {
   const profile = TAB_PROFILES[tab.id];
   const charter = TAB_CHARTER[tab.id];
   const score = scoreTab(tab.id, proc);
-  const objective = profile?.intent || 'Operator-pending · objective not yet defined for this tab';
+  const objective = profile?.intent || 'Operator-pending · core objective not yet defined for this tab';
   const goalRaw = charter?.why || 'Goal pending TAB_CHARTER entry';
   const goal = goalRaw.length > 200 ? goalRaw.slice(0, 197) + '…' : goalRaw;
   const todos = (score.results || [])
@@ -5851,7 +5854,7 @@ function TopBriefStrip({ tab, sub, proc, dept }) {
           display: 'inline-block', padding: '2px 8px', borderRadius: 3,
           background: '#7c3aed', color: '#fff', fontSize: 10, fontWeight: 800,
           textTransform: 'uppercase', letterSpacing: '0.05em', marginRight: 8,
-        }}>🎯 Objective</span>
+        }}>Core Objective</span>
         <span style={{ fontSize: 13, color: '#0f172a', fontWeight: 600 }}>{objective}</span>
       </div>
 
@@ -5861,7 +5864,7 @@ function TopBriefStrip({ tab, sub, proc, dept }) {
           display: 'inline-block', padding: '2px 8px', borderRadius: 3,
           background: '#0891b2', color: '#fff', fontSize: 10, fontWeight: 800,
           textTransform: 'uppercase', letterSpacing: '0.05em', marginRight: 8,
-        }}>📌 Goal</span>
+        }}>Tab/Sub-Tab Goal</span>
         <span style={{ fontSize: 12, color: '#334155' }}>{goal}</span>
       </div>
 
@@ -5871,11 +5874,11 @@ function TopBriefStrip({ tab, sub, proc, dept }) {
           fontSize: 10, fontWeight: 800, color: '#0f172a',
           textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4,
         }}>
-          ✅ Top to-do {todos.length > 0 ? `(${todos.length} of ${score.pending + score.failing} open)` : '· nothing pending'}
+          Aligned Top To-Do · {tab.label}{sub ? ` / ${sub.label}` : ''} {todos.length > 0 ? `(${todos.length} of ${score.pending + score.failing} open)` : '· nothing pending'}
         </div>
         {todos.length === 0 ? (
           <div style={{ fontSize: 11, color: '#16a34a', fontStyle: 'italic' }}>
-            ✨ All evidence rules verified. Nothing to do on this tab.
+            All evidence rules verified for this tab/sub-tab. Nothing to do on this workspace path.
           </div>
         ) : (
           <ol style={{ margin: 0, paddingLeft: 22 }}>

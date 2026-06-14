@@ -258,17 +258,31 @@ function pillStyle(isActive, color) {
   };
 }
 
+// Map of dashboard name → functional route (OP-15 pilot wires Executive AI)
+const FUNCTIONAL_ROUTES = {
+  'Executive AI Dashboard': '/admin/observability/executive-ai',
+};
+
 function DashboardCard({ d, category, color }) {
+  const functionalRoute = FUNCTIONAL_ROUTES[d.name];
   return (
     <div style={{
       padding: 12,
       background: '#fff',
-      border: '1px solid #cbd5e1', borderTop: `4px solid ${color}`,
+      border: functionalRoute ? `2px solid #16a34a` : '1px solid #cbd5e1',
+      borderTop: `4px solid ${color}`,
       borderRadius: 8,
       boxShadow: '0 1px 3px rgba(15, 23, 42, 0.05)',
     }}>
       <div style={{ fontSize: 9, color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', marginBottom: 4 }}>
         {category}
+        {functionalRoute && (
+          <span style={{
+            marginLeft: 8, padding: '1px 6px', borderRadius: 3,
+            background: '#16a34a', color: '#fff', fontSize: 9, fontWeight: 700,
+            letterSpacing: '0.04em',
+          }}>✓ FUNCTIONAL</span>
+        )}
       </div>
       <div style={{ fontSize: 13, color: '#0f172a', fontWeight: 800, marginBottom: 6 }}>
         📊 {d.name}
@@ -302,9 +316,21 @@ function DashboardCard({ d, category, color }) {
       <div style={{
         marginTop: 8, paddingTop: 6,
         borderTop: '1px dashed #cbd5e1',
-        fontSize: 9, color: '#94a3b8', fontStyle: 'italic',
+        fontSize: 9,
       }}>
-        🟡 Scaffold · functional impl pending operator priority
+        {functionalRoute ? (
+          <a href={functionalRoute} style={{
+            display: 'inline-block', padding: '4px 8px', borderRadius: 3,
+            background: '#16a34a', color: '#fff', textDecoration: 'none',
+            fontWeight: 700, letterSpacing: '0.04em',
+          }}>
+            ✓ Open functional dashboard →
+          </a>
+        ) : (
+          <span style={{ color: '#94a3b8', fontStyle: 'italic' }}>
+            🟡 Scaffold · functional impl pending operator priority
+          </span>
+        )}
       </div>
     </div>
   );

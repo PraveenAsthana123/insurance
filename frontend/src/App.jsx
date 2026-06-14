@@ -10,6 +10,7 @@ import AutonomousAgentPage from './pages/AutonomousAgentPage';
 import AutonomousDeptFrameworkPage from './pages/AutonomousDeptFrameworkPage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { AdminObservabilityPlatform } from './pages/admin/AdminObservabilityPlatform';
+import { ExecutiveAIDashboard } from './pages/admin/dashboards/ExecutiveAIDashboard';
 import { lazy, Suspense } from 'react';
 const AgenticHubPage = lazy(() => import('./components/AgenticHubPage'));
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
@@ -159,6 +160,8 @@ export default function App() {
           <Route path="/admin/audit" element={<AdminAuditPage />} />
           {/* OP-14 (2026-06-14): Admin observability platform catalog · 300+ dashboards · 5 phases */}
           <Route path="/admin/observability" element={<AdminObservabilityPlatform />} />
+          {/* OP-15 (2026-06-14): pilot functional dashboard · Executive AI · §57.7 placeholder data */}
+          <Route path="/admin/observability/executive-ai" element={<ExecutiveAIDashboard />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/data-flow" element={<DataFlowPage />} />
           <Route path="/insur" element={<HolyNavPage />} />
