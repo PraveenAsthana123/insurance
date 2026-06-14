@@ -250,15 +250,14 @@ function OperationWorkspaceLinkBlock({ activeFocus, onOpenWorkspace }) {
       </div>
       {OPERATION_WORKSPACE_LINKS.map((group) => (
         <div key={group.group} style={{ paddingBottom: 8 }}>
+          {/* OP-21 (2026-06-14): operator "no need of information point of you any node in SUB Menu" ·
+              helper description per group REMOVED · Sub Menu now clean group-title + clickable items only */}
           <div style={{
-            padding: '7px 18px 3px', color: '#fde68a',
+            padding: '7px 18px 5px', color: '#fde68a',
             fontSize: FS_SMALL_LABEL, fontWeight: 800,
             textTransform: 'uppercase', letterSpacing: '0.05em',
           }}>
             {group.group}
-          </div>
-          <div style={{ padding: '0 18px 4px', color: '#fecaca', fontSize: FS_SMALL_LABEL, lineHeight: 1.3 }}>
-            {group.helper}
           </div>
           {group.items.map((item) => {
             const active = activeFocus === item.focus;
