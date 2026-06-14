@@ -19,6 +19,7 @@ import {
   VIZ_MAPPING,
   LAYER_VIZ,
 } from './observability-dashboards-catalog';
+import { ComponentInfo } from '../../components/ComponentInfo';
 
 export function AdminObservabilityPlatform() {
   const [activePhaseId, setActivePhaseId] = useState('phase-1');
@@ -39,6 +40,13 @@ export function AdminObservabilityPlatform() {
     <div style={{
       padding: 24, background: '#f8fafc', minHeight: '100vh',
     }}>
+      {/* OP-18 (2026-06-14): mandatory 1-2 liner per component */}
+      <ComponentInfo
+        title="Admin Observability Platform Catalog"
+        description="Browsable catalog of 325 enterprise AI observability dashboards across 5 phases (Executive · LLM Ops · RAG · Agentic · MCP) · pick which dashboard to make functional next · 1 of 325 currently functional (Executive AI Dashboard)."
+        icon="🏛"
+        accent="#7c3aed"
+      />
       {/* Header banner · honest scaffold */}
       <div style={{
         marginBottom: 16, padding: 14,

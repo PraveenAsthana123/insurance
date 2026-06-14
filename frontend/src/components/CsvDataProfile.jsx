@@ -30,6 +30,7 @@ import {
   PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, CartesianGrid,
 } from 'recharts';
+import { ComponentInfo, ComponentInfoInline } from './ComponentInfo';
 
 const DTYPE_ICONS = {
   int: '#️⃣', integer: '#️⃣',
@@ -95,6 +96,13 @@ export function CsvDataProfile({
 
   return (
     <div>
+      {/* OP-18 (2026-06-14): mandatory 1-2 liner per component */}
+      <ComponentInfo
+        title="CSV Data Profile"
+        description="Column-by-column data inspection with BEFORE/AFTER state per column · CSV-style table layout · 5 view tabs (Summary · Before · After · Diff · Per-Column Viz) · per §64.6 mandatory."
+        icon="📋"
+        accent="#0891b2"
+      />
       {/* §57.7 honest fixture banner */}
       {usingFixture && (
         <div style={{
@@ -646,6 +654,10 @@ export function DataSummaryReport({ columns, rowCount }) {
       <div style={{ fontSize: 11, fontWeight: 800, color: '#0891b2', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         📋 Data Summary Report (§64.6 mandatory)
       </div>
+      {/* OP-18 (2026-06-14): mandatory 1-2 liner per component */}
+      <ComponentInfoInline
+        description="Dataset health snapshot · composite score 0-100 + rows/cols/missing/imbalance KPIs + top 3 issues + 4-row mandatory analysis checklist (bias · outlier · balance · summary)."
+      />
       <div style={{
         display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 10, marginTop: 10,
       }}>

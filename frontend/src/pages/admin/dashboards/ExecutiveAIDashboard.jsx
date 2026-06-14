@@ -28,6 +28,7 @@ import {
   AreaChart, Area,
   XAxis, YAxis, Tooltip, CartesianGrid, Legend,
 } from 'recharts';
+import { ComponentInfoInline } from '../../../components/ComponentInfo';
 
 export function ExecutiveAIDashboard() {
   // §57.7 honest: deterministic placeholder data · clearly labeled
@@ -36,11 +37,16 @@ export function ExecutiveAIDashboard() {
   const adoptionByDept = useMemo(() => seedAdoptionByDept(), []);
 
   // KPI tile values · placeholder (clearly stamped)
+  // Per operator OP-18 (2026-06-14): every KPI tile must have 1-2 liner description
   const kpis = [
-    { label: 'Total AI Requests (30d)', value: '2.4M',  delta: '+18%', deltaUp: true,  accent: '#7c3aed', icon: '⚡' },
-    { label: 'Active Users (DAU)',      value: '4,182', delta: '+12%', deltaUp: true,  accent: '#0891b2', icon: '👥' },
-    { label: 'Monthly Cost',            value: '$84.2k', delta: '-3%', deltaUp: false, accent: '#16a34a', icon: '💰' },
-    { label: 'ROI',                     value: '3.4×',  delta: '+0.6×', deltaUp: true, accent: '#dc2626', icon: '📈' },
+    { label: 'Total AI Requests (30d)', value: '2.4M',  delta: '+18%', deltaUp: true,  accent: '#7c3aed', icon: '⚡',
+      info: 'Aggregate inference calls across all models and tenants · proxy for AI adoption velocity.' },
+    { label: 'Active Users (DAU)',      value: '4,182', delta: '+12%', deltaUp: true,  accent: '#0891b2', icon: '👥',
+      info: 'Unique users invoking AI in the last 24 hours · DAU/MAU ratio reveals stickiness.' },
+    { label: 'Monthly Cost',            value: '$84.2k', delta: '-3%', deltaUp: false, accent: '#16a34a', icon: '💰',
+      info: 'Inference + embedding + API spend this month · negative delta means cost-out trend.' },
+    { label: 'ROI',                     value: '3.4×',  delta: '+0.6×', deltaUp: true, accent: '#dc2626', icon: '📈',
+      info: 'Value created / cost invested · finance-validated · multi-quarter realized + projected.' },
   ];
 
   return (
@@ -104,6 +110,8 @@ export function ExecutiveAIDashboard() {
             }}>
               {k.deltaUp ? '↑' : '↓'} {k.delta} <span style={{ color: '#94a3b8' }}>vs last 30d</span>
             </div>
+            {/* OP-18 (2026-06-14): mandatory 1-2 liner per component */}
+            {k.info && <ComponentInfoInline description={k.info} />}
           </div>
         ))}
       </div>
@@ -114,7 +122,8 @@ export function ExecutiveAIDashboard() {
         gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
       }}>
         {/* Trend: AI requests over 30 days */}
-        <ChartCard title="📈 AI Requests · 30-day trend" accent="#7c3aed">
+        <ChartCard title="📈 AI Requests · 30-day trend" accent="#7c3aed"
+          description="Daily request volume across all AI models · spot week-over-week growth or sudden drops · click any day to drill into per-model breakdown.">
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={trendData} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
               <defs>
@@ -134,7 +143,8 @@ export function ExecutiveAIDashboard() {
         </ChartCard>
 
         {/* Cost by model · bar chart */}
-        <ChartCard title="💰 Cost by Model · monthly" accent="#16a34a">
+        <ChartCard title="💰 Cost by Model · monthly" accent="#16a34a"
+          description="Monthly cost attribution per model · helps CFO identify highest-spend models and FinOps optimization opportunities.">
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={costByModel} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -147,7 +157,8 @@ export function ExecutiveAIDashboard() {
         </ChartCard>
 
         {/* Adoption by department · stacked bar */}
-        <ChartCard title="👥 Adoption by Department" accent="#0891b2">
+        <ChartCard title="👥 Adoption by Department" accent="#0891b2"
+          description="Active vs inactive users per department · shows where AI adoption is strong vs where change-management investment is needed.">
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={adoptionByDept} layout="vertical"
               margin={{ top: 5, right: 10, left: 60, bottom: 0 }}>
@@ -163,7 +174,8 @@ export function ExecutiveAIDashboard() {
         </ChartCard>
 
         {/* ROI trend · simple line */}
-        <ChartCard title="📈 ROI · 12-month trend" accent="#dc2626">
+        <ChartCard title="📈 ROI · 12-month trend" accent="#dc2626"
+          description="Return on AI investment over 12 months · expressed as multiplier (1.5× = recovered 1.5× the spend) · feeds CFO and board reporting.">
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={trendData.slice(0, 12).map((d, i) => ({ month: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i], roi: 1.5 + i * 0.18 + Math.sin(i) * 0.15 }))}
               margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
@@ -193,7 +205,7 @@ export function ExecutiveAIDashboard() {
   );
 }
 
-function ChartCard({ title, accent, children }) {
+function ChartCard({ title, accent, description, children }) {
   return (
     <div style={{
       background: '#fff', border: '1px solid #e2e8f0',
@@ -201,12 +213,13 @@ function ChartCard({ title, accent, children }) {
       boxShadow: '0 1px 3px rgba(15, 23, 42, 0.05)',
     }}>
       <div style={{
-        fontSize: 12, fontWeight: 800, color: accent, marginBottom: 10,
+        fontSize: 12, fontWeight: 800, color: accent,
         textTransform: 'uppercase', letterSpacing: '0.04em',
       }}>
         {title}
       </div>
-      {children}
+      {description && <ComponentInfoInline description={description} />}
+      <div style={{ marginTop: 8 }}>{children}</div>
     </div>
   );
 }
