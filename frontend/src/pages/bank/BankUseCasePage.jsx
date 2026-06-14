@@ -4217,12 +4217,12 @@ function TopHorizontalFlowStrip({ tab, proc }) {
   const output = read(proc, 'data_process.output', 'output.artifacts');
   const visualization = read(proc, 'visualization', 'dashboard', 'smart_kpi', 'as_is_to_be.deltas');
   const steps = [
-    { label: 'Objective', value: charter?.why || 'Objective pending', color: '#2563eb', ok: !!charter },
+    { label: 'Core Objective', value: charter?.why || 'Objective pending', color: '#2563eb', ok: !!charter },
     { label: 'Input', value: input || 'Input mapping pending', color: '#0284c7', ok: !!input },
     { label: 'Process', value: process || 'Manual/automatic process pending', color: '#7c3aed', ok: !!process },
     { label: 'Output', value: output || 'Output artifact pending', color: '#16a34a', ok: !!output },
     { label: 'Visualization', value: visualization || 'Visualization uses fallback until source data is wired', color: '#d97706', ok: true },
-    { label: 'To-Do', value: 'Role checklist tracks missing objective, data, process, output, evidence, and approval gaps', color: '#dc2626', ok: true },
+    { label: 'Top To-Do', value: 'Role checklist tracks missing objective, data, process, output, evidence, and approval gaps', color: '#dc2626', ok: true },
   ];
   return (
     <div style={{
@@ -4237,7 +4237,7 @@ function TopHorizontalFlowStrip({ tab, proc }) {
         <div style={{
           fontSize: 12, fontWeight: 900, color: '#0f172a',
           textTransform: 'uppercase', letterSpacing: '0.07em',
-        }}>Top horizontal flow: objective to visualization to to-do</div>
+        }}>Top horizontal flow: core objective to visualization to top to-do</div>
         <span style={{ fontSize: 11, color: '#64748b', fontWeight: 700 }}>
           Always visible journey map for the active workspace
         </span>
