@@ -473,10 +473,11 @@ function PerColumnViz({ col }) {
         </span>
       </div>
 
-      {/* Before / After side-by-side mini viz */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        <MiniViz label="🔴 BEFORE" state={col.before} attrType={col.attr_type} accent="#dc2626" />
-        <MiniViz label="🟢 AFTER"  state={col.after}  attrType={col.attr_type} accent="#16a34a" />
+      {/* OP-19 (2026-06-14): 3-stage lifecycle viz per column · AS-IS → Processed → Final Viz */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+        <MiniViz label="📥 AS-IS · raw"        state={col.before} attrType={col.attr_type} accent="#dc2626" stage="raw" />
+        <MiniViz label="⚙️ PROCESSED · cleaned" state={col.after}  attrType={col.attr_type} accent="#0891b2" stage="processed" />
+        <MiniViz label="🎨 FINAL VIZ · ready"   state={col.after}  attrType={col.attr_type} accent="#16a34a" stage="final" />
       </div>
 
       {/* Transform applied */}

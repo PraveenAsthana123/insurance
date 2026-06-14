@@ -17,6 +17,7 @@
 // banner explicit. Real data wiring = pass `columns` prop from backend.
 import React from 'react';
 import CsvDataProfile, { DataSummaryReport } from '../../../components/CsvDataProfile';
+import DataPipelineProvenance from '../../../components/DataPipelineProvenance';
 
 export function DataProfileDemo() {
   return (
@@ -40,13 +41,18 @@ export function DataProfileDemo() {
         </div>
       </div>
 
-      {/* Summary Report (top · most important) */}
+      {/* § 1 · DATA PIPELINE PROVENANCE (OP-19: where data comes from, types detected, paths, viz registry) */}
+      <div style={{ marginBottom: 16 }}>
+        <DataPipelineProvenance />
+      </div>
+
+      {/* § 2 · Summary Report */}
       <div style={{ marginBottom: 16 }}>
         <DataSummaryReport />
       </div>
 
-      {/* Full CSV Data Profile */}
-      <CsvDataProfile title="🔬 Column-by-column inspection · click 🎨 Per-Column Viz tab for EDA graphs" />
+      {/* § 3 · Full CSV Data Profile (5 view tabs · click 🎨 Per-Column Viz for AS-IS → Processed → Final Viz) */}
+      <CsvDataProfile title="🔬 Column-by-column inspection · click 🎨 Per-Column Viz tab for AS-IS → Processed → Final Viz" />
     </div>
   );
 }
